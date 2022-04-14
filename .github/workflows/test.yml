@@ -1,0 +1,32 @@
+#
+# Run unit tests.
+#
+name: Tests
+
+on:
+  - push
+
+jobs:
+  static-check:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version:
+          - "2.6"
+          - "2.7"
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: set up Ruby ${{ matrix.python-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+
+    - name: Install dependencies
+      run: |
+        bundle install
+
+    - name: Run Rspec
+      run: |
+        bundle exec rspec ./spec/*
