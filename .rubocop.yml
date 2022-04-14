@@ -1,0 +1,41 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'bin/*'
+  TargetRubyVersion: 2.7
+  SuggestExtensions: false
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 20
+
+Style/RegexpLiteral:
+  EnforcedStyle: percent_r
+
+#
+# ¡¡¡ REMOVE !!!
+#
+Style/Documentation:
+  Enabled: false
