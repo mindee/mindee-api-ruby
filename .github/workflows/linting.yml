@@ -1,0 +1,30 @@
+#
+# Run static code analysis.
+#
+name: Static Analysis
+
+on:
+  - push
+
+jobs:
+  static-check:
+    name: Run Static Analysis
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ["2.7"]
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: set up Ruby ${{ matrix.python-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+
+    - name: Install dependencies
+      run: |
+        bundle install
+
+    - name: Analysing the code with Rubocop
+      run: |
+        bundle exec rubocop ./lib
