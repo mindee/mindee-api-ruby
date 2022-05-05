@@ -24,7 +24,6 @@ module Mindee
       @version = version
       @api_key = api_key unless api_key.nil?
       @url_root = "#{MINDEE_API_URL}/products/#{@owner}/#{@url_name}/v#{@version}"
-      puts @url_root
     end
 
     def predict_request(input_doc, include_words: false)
@@ -33,7 +32,7 @@ module Mindee
       req['Authorization'] = @api_key
 
       params = [
-        ['document', read_document(input_doc)],
+        ['document', input_doc.read_document],
       ]
       params.push ['include_mvision', 'true'] if include_words
 
@@ -44,12 +43,6 @@ module Mindee
       end
       puts res
       res
-    end
-
-    private
-
-    def read_document(input_doc)
-      input_doc.file_object.to_base64
     end
   end
 

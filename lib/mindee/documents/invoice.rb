@@ -24,7 +24,6 @@ module Mindee
     def initialize(response)
       super()
       prediction = response['document']['inference']['prediction']
-      # puts prediction
       @locale = Locale.new(prediction['locale'])
       @total_incl = Field.new(prediction['total_incl'])
       @total_excl = Field.new(prediction['total_excl'])

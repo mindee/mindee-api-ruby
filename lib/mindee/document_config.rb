@@ -55,7 +55,7 @@ module Mindee
         InvoiceEndpoint.new(invoice_api_key),
         InvoiceEndpoint.new(receipt_api_key),
       ]
-      super(FinancialDoc, 'financial_doc', 'financial_doc', 'financial_doc', endpoints)
+      super(FinancialDocument, 'financial_doc', 'financial_doc', 'financial_doc', endpoints)
     end
   end
 end

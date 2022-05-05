@@ -47,8 +47,18 @@ module Mindee
       DocumentClient.new(doc, @doc_configs, @raise_on_error)
     end
 
+    def doc_from_bytes(input_bytes, filename, cut_pdf: true, n_pdf_pages: 3)
+      doc = BytesDocument.new(input_bytes, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
+      DocumentClient.new(doc, @doc_configs, @raise_on_error)
+    end
+
     def doc_from_b64string(base64_string, filename, cut_pdf: true, n_pdf_pages: 3)
       doc = Base64Document.new(base64_string, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
+      DocumentClient.new(doc, @doc_configs, @raise_on_error)
+    end
+
+    def doc_from_file(input_file, filename, cut_pdf: true, n_pdf_pages: 3)
+      doc = FileDocument.new(input_file, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
       DocumentClient.new(doc, @doc_configs, @raise_on_error)
     end
   end
