@@ -2,6 +2,10 @@
 
 module Mindee
   class Document
-    attr_reader :type
+    attr_reader :document_type
+
+    def initialize(document_type)
+      @document_type = document_type
+    end
   end
 end

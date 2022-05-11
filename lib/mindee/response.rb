@@ -13,5 +13,9 @@ module Mindee
       @document = document
       @pages = pages
     end
+
+    def to_s
+      inspect
+    end
   end
 end

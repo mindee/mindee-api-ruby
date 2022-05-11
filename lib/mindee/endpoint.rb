@@ -63,4 +63,10 @@ module Mindee
       super('mindee', PASSPORT_URL_NAME, PASSPORT_VERSION, api_key)
     end
   end
+
+  class CustomEndpoint < Endpoint
+    def initialize(document_type, account_name, version, api_key)
+      super(account_name, document_type, version, api_key)
+    end
+  end
 end

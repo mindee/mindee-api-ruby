@@ -4,6 +4,7 @@ require 'json'
 
 require_relative 'endpoint'
 require_relative 'documents'
+require_relative 'response'
 
 module Mindee
   class DocumentConfig
@@ -22,9 +23,18 @@ module Mindee
       JSON.parse(response.body, object_class: Hash)
     end
 
+    def build_result(response)
+      document = @doc_class.new(response['document']['inference']['prediction'], nil)
+      pages = []
+      response['document']['inference']['pages'].each do |page|
+        pages.push(@doc_class.new(page['prediction'], page['id']))
+      end
+      DocumentResponse.new(response, @document_type, document, pages)
+    end
+
     def predict(input_doc, include_words)
       response = predict_request(input_doc, include_words)
-      @doc_class.new(response)
+      build_result(response)
     end
   end
 
@@ -53,9 +63,28 @@ module Mindee
     def initialize(invoice_api_key, receipt_api_key)
       endpoints = [
         InvoiceEndpoint.new(invoice_api_key),
-        InvoiceEndpoint.new(receipt_api_key),
+        ReceiptEndpoint.new(receipt_api_key),
       ]
-      super(FinancialDocument, 'financial_doc', 'financial_doc', 'financial_doc', endpoints)
+      super(
+        FinancialDocument,
+        'financial_doc',
+        'financial_doc',
+        'financial_doc',
+        endpoints,
+      )
+    end
+
+    def predict_request(input_doc, include_words)
+      endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
+      response = endpoint.predict_request(input_doc, include_words: include_words)
+      JSON.parse(response.body, object_class: Hash)
+    end
+  end
+
+  class CustomDocConfig < DocumentConfig
+    def initialize(document_type, account_name, singular_name, plural_name, version, api_key)
+      endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
+      super(Passport, document_type, singular_name, plural_name, endpoints)
     end
   end
 end

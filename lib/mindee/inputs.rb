@@ -54,7 +54,11 @@ module Mindee
         raise "File type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}"
       end
 
-      merge_pdf_pages(n_pdf_pages) if cut_pdf && @file_mimetype == 'application/pdf'
+      merge_pdf_pages(n_pdf_pages) if cut_pdf && pdf?
+    end
+
+    def pdf?
+      @file_mimetype == 'application/pdf'
     end
 
     def read_document(close: true)
