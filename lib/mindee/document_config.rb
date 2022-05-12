@@ -33,29 +33,59 @@ module Mindee
     end
 
     def predict(input_doc, include_words)
+      check_api_keys
       response = predict_request(input_doc, include_words)
       build_result(response)
+    end
+
+    private
+
+    def check_api_keys
+      @endpoints.each do |endpoint|
+        if endpoint.api_key.nil? || endpoint.api_key.empty?
+          raise "Missing API key for '#{@document_type}', " \
+                "check your Client Configuration.\n"
+        end
+      end
     end
   end
 
   class InvoiceConfig < DocumentConfig
     def initialize(api_key)
       endpoints = [InvoiceEndpoint.new(api_key)]
-      super(Invoice, 'invoice', 'invoice', 'invoices', endpoints)
+      super(
+        Invoice,
+        'invoice',
+        'invoice',
+        'invoices',
+        endpoints
+      )
     end
   end
 
   class ReceiptConfig < DocumentConfig
     def initialize(api_key)
-      endpoints = [InvoiceEndpoint.new(api_key)]
-      super(Receipt, 'receipt', 'receipt', 'receipts', endpoints)
+      endpoints = [ReceiptEndpoint.new(api_key)]
+      super(
+        Receipt,
+        'receipt',
+        'receipt',
+        'receipts',
+        endpoints
+      )
     end
   end
 
   class PassportConfig < DocumentConfig
     def initialize(api_key)
-      endpoints = [InvoiceEndpoint.new(api_key)]
-      super(Passport, 'passport', 'passport', 'passports', endpoints)
+      endpoints = [PassportEndpoint.new(api_key)]
+      super(
+        Passport,
+        'passport',
+        'passport',
+        'passports',
+        endpoints
+      )
     end
   end
 
@@ -84,7 +114,13 @@ module Mindee
   class CustomDocConfig < DocumentConfig
     def initialize(document_type, account_name, singular_name, plural_name, version, api_key)
       endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
-      super(Passport, document_type, singular_name, plural_name, endpoints)
+      super(
+        Passport,
+        document_type,
+        singular_name,
+        plural_name,
+        endpoints
+      )
     end
   end
 end

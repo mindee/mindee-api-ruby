@@ -18,6 +18,8 @@ module Mindee
 
   # Generic API endpoint for a product.
   class Endpoint
+    attr_reader :api_key
+
     def initialize(owner, url_name, version, api_key)
       @owner = owner
       @url_name = url_name
@@ -38,11 +40,9 @@ module Mindee
 
       req.set_form(params, 'multipart/form-data')
 
-      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(req)
       end
-      puts res
-      res
     end
   end
 
