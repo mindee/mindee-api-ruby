@@ -48,7 +48,22 @@ def ots_subcommand(command, options)
   end
 end
 
-def new_client(options, command)
+def custom_subcommand(options)
+  OptionParser.new do |opt|
+    opt.banner = "Usage: custom [options] DOC_TYPE FILE"
+    opt.on('-w', '--with-words', 'Include words in response') do |v|
+      options[:include_words] = v
+    end
+    opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
+      options[:api_key] = v
+    end
+    opt.on('-u USER', '--user USER', 'API account name for the endpoint') do |v|
+      options[:user] = v
+    end
+  end
+end
+
+def new_ots_client(options, command)
   raise_on_error = options[:no_raise_errors].nil? ? true : false
   mindee_client = Mindee::Client.new(raise_on_error: raise_on_error)
   info = DOCUMENTS[command]
@@ -62,6 +77,18 @@ def new_client(options, command)
     kwargs[:api_key] = options["#{info[:required_keys][0]}_api_key"]
   end
   mindee_client.send("config_#{info[:doc_type]}", **kwargs)
+end
+
+def new_custom_client(options, doc_type)
+  raise_on_error = options[:no_raise_errors].nil? ? true : false
+  mindee_client = Mindee::Client.new(raise_on_error: raise_on_error)
+  mindee_client.config_custom_doc(
+    options[:user],
+    doc_type,
+    doc_type,
+    doc_type + 's',
+    api_key: options[:api_key]
+  )
 end
 
 global_parser = OptionParser.new do |opt|
@@ -79,6 +106,8 @@ subcommands = {
   'invoice' => ots_subcommand('invoice', options),
   'receipt' => ots_subcommand('receipt', options),
   'passport' => ots_subcommand('passport', options),
+  'financial' => ots_subcommand('financial', options),
+  'custom' => custom_subcommand(options),
 }
 
 
@@ -91,15 +120,23 @@ rescue NoMethodError => e
   exit(1)
 end
 
-unless ARGV.length == 1
-  $stderr.puts 'No file specified'
-  exit(1)
+if command == 'custom'
+  if ARGV.length != 2
+    $stderr.puts "The 'custom' command requires both DOC_TYPE and FILE arguments."
+    exit(1)
+  end
+  doc_type = ARGV[0]
+  file_path = ARGV[1]
+  mindee_client = new_custom_client(options, doc_type)
+else
+  if ARGV.length != 1
+    $stderr.puts 'No file specified.'
+    exit(1)
+  end
+  mindee_client = new_ots_client(options, command)
+  doc_type = command
+  file_path = ARGV[0]
 end
 
-# puts "Command: #{command}"
-# puts "Options: #{options}"
-
-mindee_client = new_client(options, command)
-file_path = ARGV[0]
 doc = mindee_client.doc_from_path(file_path)
-puts doc.parse(command).document
+puts doc.parse(doc_type).document

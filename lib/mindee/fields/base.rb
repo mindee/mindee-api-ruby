@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
+  # Base field object.
   class Field
     attr_reader :value,
                 :confidence,
@@ -33,6 +34,7 @@ module Mindee
       product.to_f
     end
 
+    # Add all the Mindee::Field values in the array.
     def self.array_sum(field_array)
       arr_sum = 0
       field_array.each do |field|

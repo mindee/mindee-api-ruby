@@ -115,12 +115,25 @@ module Mindee
     def initialize(document_type, account_name, singular_name, plural_name, version, api_key)
       endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
       super(
-        Passport,
+        CustomDocument,
         document_type,
         singular_name,
         plural_name,
         endpoints
       )
+    end
+
+    def build_result(response)
+      document = CustomDocument.new(
+        @document_type,
+        response['document']['inference']['prediction'],
+        nil
+      )
+      pages = []
+      response['document']['inference']['pages'].each do |page|
+        pages.push(CustomDocument.new(@document_type, page['prediction'], page['id']))
+      end
+      DocumentResponse.new(response, @document_type, document, pages)
     end
   end
 end

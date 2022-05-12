@@ -20,7 +20,8 @@ module Mindee
       end
       raise "Document type not configured: #{document_type}" if found.empty?
 
-      doc_config = @doc_configs[['mindee', document_type]]
+      config_key = found[0]
+      doc_config = @doc_configs[config_key]
       doc_config.predict(@input_doc, include_words)
     end
   end
@@ -70,6 +71,7 @@ module Mindee
         version,
         api_key
       )
+      self
     end
 
     def doc_from_path(input_path, cut_pdf: true, n_pdf_pages: 3)

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
+  # Base document object.
   class Document
     attr_reader :document_type
 
