@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mrz'
+
 require_relative '../fields'
 require_relative 'base'
 
@@ -35,8 +37,9 @@ module Mindee
       prediction['given_names'].each do |item|
         @given_names.push(Field.new(item, page_id))
       end
-      @full_name = make_full_name(page_id)
-      @mrz = make_mrz(page_id)
+      @full_name = construct_full_name(page_id)
+      @mrz = construct_mrz(page_id)
+      check_mrz
     end
 
     def to_s
@@ -64,11 +67,40 @@ module Mindee
 
     private
 
-    def make_full_name(page_id)
+    def check_mrz
+      return false unless @mrz&.value
+
+      mrz = MRZ.parse([@mrz1.value, @mrz2.value])
+      @checks << [
+        mrz.valid?,
+        valid_birth_date?(mrz),
+        valid_expiry_date?(mrz),
+        valid_id_number?(mrz),
+      ]
+    end
+
+    def valid_birth_date?(mrz)
+      @birth_date.confidence = 1.0 if mrz.valid_birth_date? &&
+                                      mrz.birth_date == @birth_date.date_object
+      mrz.valid_birth_date?
+    end
+
+    def valid_expiry_date?(mrz)
+      @expiry_date.confidence = 1.0 if mrz.valid_expiration_date? &&
+                                       mrz.expiration_date == @expiry_date.date_object
+      mrz.valid_expiration_date?
+    end
+
+    def valid_id_number?(mrz)
+      @id_number.confidence = 1.0 if mrz.valid_document_number? &&
+                                     mrz.document_number == @id_number.value
+      mrz.valid_document_number?
+    end
+
+    def construct_full_name(page_id)
       return unless @surname.value &&
                     !@given_names.empty? &&
-                    @given_names[0].value &&
-                    !@full_name&.value
+                    @given_names[0].value
 
       full_name = {
         'value' => "#{@given_names[0].value} #{@surname.value}",
@@ -77,10 +109,9 @@ module Mindee
       Field.new(full_name, page_id, constructed: true)
     end
 
-    def make_mrz(page_id)
+    def construct_mrz(page_id)
       return unless @mrz1.value &&
-                    @mrz2.value &&
-                    !@mrz&.value
+                    @mrz2.value
 
       mrz = {
         'value' => @mrz1.value + @mrz2.value,

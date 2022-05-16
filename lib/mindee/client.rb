@@ -13,14 +13,25 @@ module Mindee
       @raise_on_error = raise_on_error
     end
 
-    def parse(document_type, include_words: false)
+    def parse(document_type, username: nil, include_words: false)
       found = []
       @doc_configs.each_key do |conf|
         found.push(conf) if conf[1] == document_type
       end
       raise "Document type not configured: #{document_type}" if found.empty?
 
-      config_key = found[0]
+      if username
+        config_key = [username, document_type]
+      elsif found.length == 1
+        config_key = found[0]
+      else
+        usernames = found.map { |conf| conf[0] }
+        raise "Duplicate configuration detected.\n" \
+              "You specified a document_type '#{document_type}' in your custom config.\n" \
+              "To avoid confusion, please add the 'account_name' attribute to " \
+              "the parse method, one of #{usernames}."
+      end
+
       doc_config = @doc_configs[config_key]
       doc_config.predict(@input_doc, include_words)
     end

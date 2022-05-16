@@ -7,6 +7,11 @@ module Mindee
 
     def initialize(document_type)
       @document_type = document_type
+      @checks = []
+    end
+
+    def all_checks
+      @checks.all? { |value| value == true }
     end
   end
 end

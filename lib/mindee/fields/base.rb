@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
+require_relative '../geometry'
+
 module Mindee
   # Base field object.
   class Field
     attr_reader :value,
-                :confidence,
                 :bbox,
                 :polygon,
                 :page_id,
                 :constructed
+    attr_accessor :confidence
 
     def initialize(prediction, page_id, constructed: false)
       @value = prediction['value']
       @confidence = prediction['confidence']
-      @bbox = prediction['polygon']
       @polygon = prediction['polygon']
+      @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
       @page_id = page_id
       @constructed = constructed
     end
@@ -23,7 +25,7 @@ module Mindee
       @value ? @value.to_s : ''
     end
 
-    # Multiply confidence of all Mindee::Field in the array.
+    # Multiply all the Mindee::Field confidences in the array.
     def self.array_confidence(field_array)
       product = 1
       field_array.each do |field|

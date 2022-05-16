@@ -10,8 +10,8 @@ module Mindee
     def initialize(prediction)
       @content = prediction['content']
       @confidence = prediction['confidence']
-      @bbox = prediction['polygon']
       @polygon = prediction['polygon']
+      @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
     end
   end
 

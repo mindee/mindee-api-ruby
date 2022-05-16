@@ -53,7 +53,7 @@ module Mindee
         @company_number.push(Field.new(item, page_id))
       end
 
-      @total_tax = make_total_tax(page_id)
+      @total_tax = construct_total_tax(page_id)
     end
 
     def to_s
@@ -82,7 +82,7 @@ module Mindee
 
     private
 
-    def make_total_tax(page_id)
+    def construct_total_tax(page_id)
       return unless @taxes
 
       total_tax = {
