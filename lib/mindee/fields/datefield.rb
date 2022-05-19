@@ -5,6 +5,7 @@ require 'date'
 require_relative 'base'
 
 module Mindee
+  # Represents a date.
   class DateField < Field
     attr_reader :date_object
 

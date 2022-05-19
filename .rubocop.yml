@@ -28,6 +28,9 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 30
 
+Metrics/ClassLength:
+  Max: 200
+
 Metrics/ParameterLists:
   Max: 7
 
@@ -36,9 +39,3 @@ Metrics/AbcSize:
 
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
-
-#
-# ¡¡¡ REMOVE !!!
-#
-Style/Documentation:
-  Enabled: false

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
+  # Represents locale information
   class Locale
     attr_reader :confidence,
                 :language,

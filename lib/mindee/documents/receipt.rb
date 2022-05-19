@@ -4,6 +4,7 @@ require_relative '../fields'
 require_relative 'base'
 
 module Mindee
+  # Receipt document.
   class Receipt < Document
     attr_reader :locale,
                 :total_incl,

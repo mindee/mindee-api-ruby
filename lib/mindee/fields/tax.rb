@@ -3,6 +3,7 @@
 require_relative 'base'
 
 module Mindee
+  # Represents tax information.
   class Tax < Field
     attr_reader :rate,
                 :code

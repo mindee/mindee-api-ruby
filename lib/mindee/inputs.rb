@@ -4,6 +4,7 @@ require 'stringio'
 require 'origami'
 require 'marcel'
 
+# Monkey-patching for Origami
 module PDFTools
   def to_io_stream(params = {})
     options = {
@@ -42,6 +43,7 @@ module Mindee
     'application/pdf',
   ].freeze
 
+  # Base class for loading documents.
   class InputDocument
     attr_reader :filename,
                 :filepath,
@@ -83,6 +85,7 @@ module Mindee
     end
   end
 
+  # Load a document from a path.
   class PathDocument < InputDocument
     def initialize(filepath, cut_pdf, n_pdf_pages: 3)
       puts "opening #{filepath}"
@@ -92,6 +95,7 @@ module Mindee
     end
   end
 
+  # Load a document from a base64 string.
   class Base64Document < InputDocument
     def initialize(base64_string, filename, cut_pdf, n_pdf_pages: 3)
       @io_stream = StringIO.new(base64_string.unpack1('m*'))
@@ -101,6 +105,7 @@ module Mindee
     end
   end
 
+  # Load a document from raw bytes.
   class BytesDocument < InputDocument
     def initialize(raw_bytes, filename, cut_pdf, n_pdf_pages: 3)
       @io_stream = StringIO.new(raw_bytes)
@@ -110,6 +115,7 @@ module Mindee
     end
   end
 
+  # Load a document from a file handle.
   class FileDocument < InputDocument
     def initialize(file_handle, filename, cut_pdf, n_pdf_pages: 3)
       @io_stream = file_handle

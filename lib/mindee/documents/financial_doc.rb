@@ -6,6 +6,7 @@ require_relative 'invoice'
 require_relative 'receipt'
 
 module Mindee
+  # Union of `Invoice` and `Receipt`.
   class FinancialDocument < Document
     attr_reader :locale,
                 :total_incl,

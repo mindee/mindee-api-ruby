@@ -6,6 +6,7 @@ require_relative '../fields'
 require_relative 'base'
 
 module Mindee
+  # Passport document.
   class Passport < Document
     attr_reader :country,
                 :id_number,
@@ -68,33 +69,54 @@ module Mindee
     private
 
     def check_mrz
-      return false unless @mrz&.value
+      return unless @mrz&.value
 
       mrz = MRZ.parse([@mrz1.value, @mrz2.value])
-      @checks << [
-        mrz.valid?,
-        valid_birth_date?(mrz),
-        valid_expiry_date?(mrz),
-        valid_id_number?(mrz),
-      ]
+      checks = {
+        mrz_valid: valid_mrz?(mrz),
+        mrz_valid_birth_date: valid_birth_date?(mrz),
+        mrz_valid_expiry_date: valid_expiry_date?(mrz),
+        mrz_valid_id_number: valid_id_number?(mrz),
+        mrz_valid_surname: valid_surname?(mrz),
+        mrz_valid_country: valid_country?(mrz),
+      }
+      @checklist.merge!(checks)
+    end
+
+    def valid_mrz?(mrz)
+      check = mrz.valid?
+      @mrz.confidence = 1.0 if check
+      check
     end
 
     def valid_birth_date?(mrz)
-      @birth_date.confidence = 1.0 if mrz.valid_birth_date? &&
-                                      mrz.birth_date == @birth_date.date_object
-      mrz.valid_birth_date?
+      check = mrz.valid_birth_date? && mrz.birth_date == @birth_date.date_object
+      @birth_date.confidence = 1.0 if check
+      check
     end
 
     def valid_expiry_date?(mrz)
-      @expiry_date.confidence = 1.0 if mrz.valid_expiration_date? &&
-                                       mrz.expiration_date == @expiry_date.date_object
-      mrz.valid_expiration_date?
+      check = mrz.valid_expiration_date? && mrz.expiration_date == @expiry_date.date_object
+      @expiry_date.confidence = 1.0 if check
+      check
     end
 
     def valid_id_number?(mrz)
-      @id_number.confidence = 1.0 if mrz.valid_document_number? &&
-                                     mrz.document_number == @id_number.value
-      mrz.valid_document_number?
+      check = mrz.valid_document_number? && mrz.document_number == @id_number.value
+      @id_number.confidence = 1.0 if check
+      check
+    end
+
+    def valid_surname?(mrz)
+      check = mrz.last_name == @surname.value
+      @surname.confidence = 1.0 if check
+      check
+    end
+
+    def valid_country?(mrz)
+      check = mrz.nationality == @country.value
+      @country.confidence = 1.0 if check
+      check
     end
 
     def construct_full_name(page_id)

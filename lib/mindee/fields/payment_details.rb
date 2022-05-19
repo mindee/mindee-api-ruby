@@ -3,6 +3,7 @@
 require_relative 'base'
 
 module Mindee
+  # Represents payment details for invoices and receipts
   class PaymentDetails < Field
     attr_reader :account_number,
                 :iban,

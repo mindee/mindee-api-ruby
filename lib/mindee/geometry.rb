@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Mindee
-  class Geometry
+  # Various helper functions for geometry.
+  module Geometry
     def self.get_bbox(vertices)
       x_min = vertices.map { |v| v[0] }.min
       x_max = vertices.map { |v| v[0] }.max

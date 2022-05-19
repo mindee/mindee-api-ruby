@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
+  # Field in a list.
   class ListFieldItem
     attr_reader :confidence,
                 :content,
@@ -15,6 +16,7 @@ module Mindee
     end
   end
 
+  # Field where actual values are kept in a list (custom docs).
   class ListField
     attr_reader :confidence,
                 :values,

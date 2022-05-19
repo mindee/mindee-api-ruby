@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
+  # Represents page orientation.
   class Orientation
     attr_reader :degrees,
                 :confidence,

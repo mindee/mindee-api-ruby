@@ -6,6 +6,8 @@ require_relative 'base'
 module Mindee
   # Custom document object.
   class CustomDocument < Document
+    # All fields in the document
+    # @return [Hash<Symbol, Mindee::ListField>]
     attr_reader :fields
 
     def initialize(document_type, prediction, page_id)
@@ -28,7 +30,7 @@ module Mindee
       out_str = String.new
       out_str << "----- #{@document_type} -----\n"
       @fields.each do |name, info|
-        out_str << "#{name}: #{info}\n"
+        out_str << "#{name}: #{info}".strip << "\n"
       end
       out_str << '----------------------'
       out_str
