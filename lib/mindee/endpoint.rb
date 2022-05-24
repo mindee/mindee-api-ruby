@@ -29,7 +29,11 @@ module Mindee
       @url_root = "#{MINDEE_API_URL}/products/#{@owner}/#{@url_name}/v#{@version}"
     end
 
-    def predict_request(input_doc, include_words: false)
+    # @param input_doc [Mindee::InputDocument]
+    # @param include_words [Boolean]
+    # @param close_file [Boolean]
+    # @return [Net::HTTPResponse]
+    def predict_request(input_doc, include_words: false, close_file: true)
       uri = URI("#{@url_root}/predict")
       headers = {
         'Authorization' => "Token #{@api_key}",
@@ -37,9 +41,9 @@ module Mindee
       }
       req = Net::HTTP::Post.new(uri, headers)
 
-      params = [
-        ['document', input_doc.read_document],
-      ]
+      params = {
+        'document' => input_doc.read_document(close: close_file),
+      }
       params.push ['include_mvision', 'true'] if include_words
 
       req.set_form(params, 'multipart/form-data')

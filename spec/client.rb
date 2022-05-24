@@ -72,7 +72,25 @@ describe Mindee::Client do
     it 'should not open an invalid file' do
       expect do
         mindee_client.doc_from_path('/tmp/i-dont-exist')
-      end.to raise_error
+      end.to raise_error Errno::ENOENT
+    end
+
+    it 'should make an invalid API call raising an exception' do
+      mindee_client1 = Mindee::Client.new.config_invoice(api_key: 'invalid-api-key')
+      file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
+      doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
+      expect do
+        doc.parse('invoice', include_words: false, close_file: true)
+      end.to raise_error Net::HTTPError
+    end
+
+    it 'should make an invalid API call not raising an exception' do
+      mindee_client1 = Mindee::Client.new(raise_on_error: false).config_invoice(api_key: 'invalid-api-key')
+      file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
+      doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
+      response = doc.parse('invoice', include_words: false, close_file: true)
+      expect(response.document_type).to eq('invoice')
+      expect(response.http_response).to have_key('api_request')
     end
   end
 end

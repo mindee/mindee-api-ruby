@@ -9,19 +9,18 @@ module Mindee
   class DocumentClient
     # @param input_doc [Mindee::InputDocument]
     # @param doc_configs [Hash]
-    # @param raise_on_error [Boolean]
-    def initialize(input_doc, doc_configs, raise_on_error)
+    def initialize(input_doc, doc_configs)
       @input_doc = input_doc
       @doc_configs = doc_configs
-      @raise_on_error = raise_on_error
     end
 
     # Call prediction API on the document and parse the results.
     # @param document_type [String] Document type to parse
     # @param username [String] API username, the endpoint owner
     # @param include_words [Boolean] Include all the words of the document in the response
+    # @param close_file [Boolean] Whether to close the file after parsing it.
     # @return [Mindee::DocumentResponse]
-    def parse(document_type, username: '', include_words: false)
+    def parse(document_type, username: '', include_words: false, close_file: true)
       found = []
       @doc_configs.each_key do |conf|
         found.push(conf) if conf[1] == document_type
@@ -41,13 +40,14 @@ module Mindee
       end
 
       doc_config = @doc_configs[config_key]
-      doc_config.predict(@input_doc, include_words)
+      doc_config.predict(@input_doc, include_words, close_file)
     end
   end
 
   # Mindee API Client.
   # See: https://developers.mindee.com/docs/
   class Client
+    # @param raise_on_error [Boolean]
     def initialize(raise_on_error: true)
       @raise_on_error = raise_on_error
       @doc_configs = {}
@@ -57,7 +57,7 @@ module Mindee
     # @param api_key [String] Invoice API key
     # @return [Mindee::Client]
     def config_invoice(api_key: '')
-      @doc_configs[['mindee', 'invoice']] = InvoiceConfig.new(api_key)
+      @doc_configs[['mindee', 'invoice']] = InvoiceConfig.new(api_key, @raise_on_error)
       self
     end
 
@@ -65,7 +65,7 @@ module Mindee
     # @param api_key [String] Passport API key
     # @return [Mindee::Client]
     def config_receipt(api_key: '')
-      @doc_configs[['mindee', 'receipt']] = ReceiptConfig.new(api_key)
+      @doc_configs[['mindee', 'receipt']] = ReceiptConfig.new(api_key, @raise_on_error)
       self
     end
 
@@ -73,7 +73,7 @@ module Mindee
     # @param api_key [String] Your API key for the endpoint
     # @return [Mindee::Client]
     def config_passport(api_key: '')
-      @doc_configs[['mindee', 'passport']] = PassportConfig.new(api_key)
+      @doc_configs[['mindee', 'passport']] = PassportConfig.new(api_key, @raise_on_error)
       self
     end
 
@@ -83,7 +83,7 @@ module Mindee
     # @return [Mindee::Client]
     def config_financial_doc(invoice_api_key: '', receipt_api_key: '')
       @doc_configs[['mindee', 'financial_doc']] = FinancialDocConfig.new(
-        invoice_api_key, receipt_api_key
+        invoice_api_key, receipt_api_key, @raise_on_error
       )
       self
     end
@@ -108,7 +108,8 @@ module Mindee
         singular_name,
         plural_name,
         version,
-        api_key
+        api_key,
+        @raise_on_error
       )
       self
     end
@@ -120,7 +121,7 @@ module Mindee
     # @return [Mindee::DocumentClient]
     def doc_from_path(input_path, cut_pdf: true, n_pdf_pages: 3)
       doc = PathDocument.new(input_path, cut_pdf, n_pdf_pages: n_pdf_pages)
-      DocumentClient.new(doc, @doc_configs, @raise_on_error)
+      DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from raw bytes.
@@ -131,7 +132,7 @@ module Mindee
     # @return [Mindee::DocumentClient]
     def doc_from_bytes(input_bytes, filename, cut_pdf: true, n_pdf_pages: 3)
       doc = BytesDocument.new(input_bytes, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
-      DocumentClient.new(doc, @doc_configs, @raise_on_error)
+      DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from a base64 encoded string.
@@ -142,7 +143,7 @@ module Mindee
     # @return [Mindee::DocumentClient]
     def doc_from_b64string(base64_string, filename, cut_pdf: true, n_pdf_pages: 3)
       doc = Base64Document.new(base64_string, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
-      DocumentClient.new(doc, @doc_configs, @raise_on_error)
+      DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from a normal Ruby `File`.
@@ -153,7 +154,7 @@ module Mindee
     # @return [Mindee::DocumentClient]
     def doc_from_file(input_file, filename, cut_pdf: true, n_pdf_pages: 3)
       doc = FileDocument.new(input_file, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
-      DocumentClient.new(doc, @doc_configs, @raise_on_error)
+      DocumentClient.new(doc, @doc_configs)
     end
   end
 end

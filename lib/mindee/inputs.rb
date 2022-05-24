@@ -45,10 +45,15 @@ module Mindee
 
   # Base class for loading documents.
   class InputDocument
-    attr_reader :filename,
-                :filepath,
-                :file_mimetype
+    # @return [String]
+    attr_reader :filename
+    # @return [String]
+    attr_reader :filepath
+    # @return [String]
+    attr_reader :file_mimetype
 
+    # @param cut_pdf [Boolean]
+    # @param n_pdf_pages [Integer]
     def initialize(cut_pdf, n_pdf_pages)
       @file_mimetype = Marcel::MimeType.for @io_stream, name: @filename
 
@@ -63,6 +68,7 @@ module Mindee
       @file_mimetype == 'application/pdf'
     end
 
+    # @param close [Boolean]
     def read_document(close: true)
       @io_stream.seek(0)
       data = @io_stream.read
@@ -70,6 +76,9 @@ module Mindee
       [data].pack('m')
     end
 
+    private
+
+    # @param n_pdf_pages [Integer]
     def merge_pdf_pages(n_pdf_pages)
       pdf_parser = Origami::PDF::LinearParser.new({})
       cur_pdf = pdf_parser.parse(@io_stream)

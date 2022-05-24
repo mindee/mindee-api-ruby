@@ -12,6 +12,7 @@ module Mindee
     # @return [Array<Mindee::Document>]
     attr_reader :pages
 
+    # @param http_response [Hash]
     def initialize(http_response, document_type, document, pages)
       @http_response = http_response
       @document_type = document_type

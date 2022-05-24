@@ -16,12 +16,14 @@ module Mindee
     # @param doc_class [Class<Mindee::Document>]
     # @param document_type [String]
     # @param endpoints [Array<Mindee::Endpoint>]
-    def initialize(doc_class, document_type, singular_name, plural_name, endpoints)
+    # @param raise_on_error [Boolean]
+    def initialize(doc_class, document_type, singular_name, plural_name, endpoints, raise_on_error)
       @doc_class = doc_class
       @document_type = document_type
       @singular_name = singular_name
       @plural_name = plural_name
       @endpoints = endpoints
+      @raise_on_error = raise_on_error
     end
 
     # Parse a prediction API result.
@@ -39,21 +41,39 @@ module Mindee
     # Call the prediction API.
     # @param input_doc [Mindee::InputDocument]
     # @param include_words [Boolean]
+    # @param close_file [Boolean]
     # @return [Mindee::DocumentResponse]
-    def predict(input_doc, include_words)
+    def predict(input_doc, include_words, close_file)
       check_api_keys
-      response = predict_request(input_doc, include_words)
-      build_predict_result(response)
+      response = predict_request(input_doc, include_words, close_file)
+      parse_response(response)
     end
 
     private
 
+    # @param response [Net::HTTPResponse]
+    # @return [Mindee::DocumentResponse]
+    def parse_response(response)
+      hashed_response = JSON.parse(response.body, object_class: Hash)
+      unless (200..299).include?(response.code.to_i)
+        if @raise_on_error
+          raise Net::HTTPError.new(
+            "API #{response.code} HTTP error: #{hashed_response}", response
+          )
+        end
+        return DocumentResponse.new(
+          hashed_response, @document_type, {}, []
+        )
+      end
+      build_predict_result(hashed_response)
+    end
+
     # @param input_doc [Mindee::InputDocument]
     # @param include_words [Boolean]
-    # @return [Hash]
-    def predict_request(input_doc, include_words)
-      response = @endpoints[0].predict_request(input_doc, include_words: include_words)
-      JSON.parse(response.body, object_class: Hash)
+    # @param close_file [Boolean]
+    # @return [Net::HTTPResponse]
+    def predict_request(input_doc, include_words, close_file)
+      @endpoints[0].predict_request(input_doc, include_words: include_words, close_file: close_file)
     end
 
     def check_api_keys
@@ -70,49 +90,52 @@ module Mindee
 
   # Client for Invoice documents
   class InvoiceConfig < DocumentConfig
-    def initialize(api_key)
+    def initialize(api_key, raise_on_error)
       endpoints = [InvoiceEndpoint.new(api_key)]
       super(
         Invoice,
         'invoice',
         'invoice',
         'invoices',
-        endpoints
+        endpoints,
+        raise_on_error
       )
     end
   end
 
   # Client for Receipt documents
   class ReceiptConfig < DocumentConfig
-    def initialize(api_key)
+    def initialize(api_key, raise_on_error)
       endpoints = [ReceiptEndpoint.new(api_key)]
       super(
         Receipt,
         'receipt',
         'receipt',
         'receipts',
-        endpoints
+        endpoints,
+        raise_on_error
       )
     end
   end
 
   # Client for Passport documents
   class PassportConfig < DocumentConfig
-    def initialize(api_key)
+    def initialize(api_key, raise_on_error)
       endpoints = [PassportEndpoint.new(api_key)]
       super(
         Passport,
         'passport',
         'passport',
         'passports',
-        endpoints
+        endpoints,
+        raise_on_error
       )
     end
   end
 
   # Client for Financial documents
   class FinancialDocConfig < DocumentConfig
-    def initialize(invoice_api_key, receipt_api_key)
+    def initialize(invoice_api_key, receipt_api_key, raise_on_error)
       endpoints = [
         InvoiceEndpoint.new(invoice_api_key),
         ReceiptEndpoint.new(receipt_api_key),
@@ -123,6 +146,7 @@ module Mindee
         'financial_doc',
         'financial_doc',
         endpoints,
+        raise_on_error
       )
     end
 
@@ -130,24 +154,25 @@ module Mindee
 
     def predict_request(input_doc, include_words)
       endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
-      response = endpoint.predict_request(input_doc, include_words: include_words)
-      JSON.parse(response.body, object_class: Hash)
+      endpoint.predict_request(input_doc, include_words: include_words)
     end
   end
 
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
-    def initialize(document_type, account_name, singular_name, plural_name, version, api_key)
+    def initialize(document_type, account_name, singular_name, plural_name, version, api_key, raise_on_error)
       endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
       super(
         CustomDocument,
         document_type,
         singular_name,
         plural_name,
-        endpoints
+        endpoints,
+        raise_on_error
       )
     end
 
+    # @param response [Hash]
     def build_predict_result(response)
       document = CustomDocument.new(
         @document_type,
