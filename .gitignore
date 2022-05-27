@@ -60,3 +60,10 @@ Gemfile.lock
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 .rubocop-https?--*
+
+# Mac OS
+.DS_Store
+
+# Temp files
+*.swp
+*-swp
