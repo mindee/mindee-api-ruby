@@ -42,8 +42,8 @@ require 'mindee'
 
 # Init a new client and configure your custom document
 mindee_client = Mindee::Client.new.config_custom_doc(
-  'pikachu',
   'pokemon-card',
+  'pikachu',
   api_key: 'pokemon-card-api-key'
 )
 

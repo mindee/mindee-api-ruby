@@ -95,8 +95,8 @@ module Mindee
     # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
     # @return [Mindee::Client]
     def config_custom_doc(
-      account_name,
       document_name,
+      account_name,
       api_key: '',
       version: '1'
     )

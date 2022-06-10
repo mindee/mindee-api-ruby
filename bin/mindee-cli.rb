@@ -57,6 +57,9 @@ def custom_subcommand(options)
     opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
       options[:api_key] = v
     end
+    opt.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
+      options[:version] = v
+    end
     opt.on('-u USER', '--user USER', 'API account name for the endpoint') do |v|
       options[:user] = v
     end
@@ -83,9 +86,10 @@ def new_custom_client(options, doc_type)
   raise_on_error = options[:no_raise_errors].nil? ? true : false
   mindee_client = Mindee::Client.new(raise_on_error: raise_on_error)
   mindee_client.config_custom_doc(
-    options[:user],
     doc_type,
-    api_key: options[:api_key]
+    options[:user],
+    api_key: options[:api_key],
+    version: options[:version] || '1'
   )
 end
 
