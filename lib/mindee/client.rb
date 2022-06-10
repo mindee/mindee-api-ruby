@@ -15,26 +15,26 @@ module Mindee
     end
 
     # Call prediction API on the document and parse the results.
-    # @param document_type [String] Document type to parse
+    # @param document_name [String] Document name (type) to parse
     # @param username [String] API username, the endpoint owner
     # @param include_words [Boolean] Include all the words of the document in the response
     # @param close_file [Boolean] Whether to close the file after parsing it.
     # @return [Mindee::DocumentResponse]
-    def parse(document_type, username: '', include_words: false, close_file: true)
+    def parse(document_name, username: '', include_words: false, close_file: true)
       found = []
       @doc_configs.each_key do |conf|
-        found.push(conf) if conf[1] == document_type
+        found.push(conf) if conf[1] == document_name
       end
-      raise "Document type not configured: #{document_type}" if found.empty?
+      raise "Document type not configured: #{document_name}" if found.empty?
 
       if !username.empty?
-        config_key = [username, document_type]
+        config_key = [username, document_name]
       elsif found.length == 1
         config_key = found[0]
       else
         usernames = found.map { |conf| conf[0] }
         raise "Duplicate configuration detected.\n" \
-              "You specified a document_type '#{document_type}' in your custom config.\n" \
+              "You specified the document '#{document_name}' in your custom config.\n" \
               "To avoid confusion, please add the 'account_name' attribute to " \
               "the parse method, one of #{usernames}."
       end
@@ -90,18 +90,18 @@ module Mindee
 
     # Configure a custom document using the 'Mindee API Builder'.
     # @param account_name [String] Your organization's username on the API Builder
-    # @param document_type [String] The "document type" field in the "Settings" page of the API Builder
+    # @param document_name [String] The "API name" field in the "Settings" page of the API Builder
     # @param api_key [String] Your API key for the endpoint
     # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
     # @return [Mindee::Client]
     def config_custom_doc(
       account_name,
-      document_type,
+      document_name,
       api_key: '',
       version: '1'
     )
-      @doc_configs[[account_name, document_type]] = CustomDocConfig.new(
-        document_type,
+      @doc_configs[[account_name, document_name]] = CustomDocConfig.new(
+        document_name,
         account_name,
         version,
         api_key,
