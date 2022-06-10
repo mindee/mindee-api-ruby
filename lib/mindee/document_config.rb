@@ -17,11 +17,9 @@ module Mindee
     # @param document_type [String]
     # @param endpoints [Array<Mindee::Endpoint>]
     # @param raise_on_error [Boolean]
-    def initialize(doc_class, document_type, singular_name, plural_name, endpoints, raise_on_error)
+    def initialize(doc_class, document_type, endpoints, raise_on_error)
       @doc_class = doc_class
       @document_type = document_type
-      @singular_name = singular_name
-      @plural_name = plural_name
       @endpoints = endpoints
       @raise_on_error = raise_on_error
     end
@@ -95,8 +93,6 @@ module Mindee
       super(
         Invoice,
         'invoice',
-        'invoice',
-        'invoices',
         endpoints,
         raise_on_error
       )
@@ -110,8 +106,6 @@ module Mindee
       super(
         Receipt,
         'receipt',
-        'receipt',
-        'receipts',
         endpoints,
         raise_on_error
       )
@@ -125,8 +119,6 @@ module Mindee
       super(
         Passport,
         'passport',
-        'passport',
-        'passports',
         endpoints,
         raise_on_error
       )
@@ -143,8 +135,6 @@ module Mindee
       super(
         FinancialDocument,
         'financial_doc',
-        'financial_doc',
-        'financial_doc',
         endpoints,
         raise_on_error
       )
@@ -160,13 +150,11 @@ module Mindee
 
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
-    def initialize(document_type, account_name, singular_name, plural_name, version, api_key, raise_on_error)
+    def initialize(document_type, account_name, version, api_key, raise_on_error)
       endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
       super(
         CustomDocument,
         document_type,
-        singular_name,
-        plural_name,
         endpoints,
         raise_on_error
       )

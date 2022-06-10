@@ -19,8 +19,6 @@ describe Mindee::Client do
                    .config_custom_doc(
                      'dummy',
                      'dummy',
-                     'dummy',
-                     'dummies',
                      api_key: 'invalid-api-key'
                    )
     end

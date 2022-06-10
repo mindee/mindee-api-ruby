@@ -97,16 +97,12 @@ module Mindee
     def config_custom_doc(
       account_name,
       document_type,
-      singular_name,
-      plural_name,
       api_key: '',
       version: '1'
     )
       @doc_configs[[account_name, document_type]] = CustomDocConfig.new(
         document_type,
         account_name,
-        singular_name,
-        plural_name,
         version,
         api_key,
         @raise_on_error

@@ -85,8 +85,6 @@ def new_custom_client(options, doc_type)
   mindee_client.config_custom_doc(
     options[:user],
     doc_type,
-    doc_type,
-    doc_type + 's',
     api_key: options[:api_key]
   )
 end
