@@ -14,6 +14,11 @@ module Mindee
       @polygon = prediction['polygon']
       @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
     end
+
+    # @return [String]
+    def to_s
+      @content.to_s
+    end
   end
 
   # Field where actual values are kept in a list (custom docs).
@@ -34,8 +39,19 @@ module Mindee
       end
     end
 
+    # @return [Array]
+    def contents_list
+      @values.map(&:content)
+    end
+
+    # @return [String]
+    def contents_str(separator: ' ')
+      @values.map(&:to_s).join(separator)
+    end
+
+    # @return [String]
     def to_s
-      @values.map(&:content).join(' ')
+      contents_str(separator: ' ')
     end
   end
 end

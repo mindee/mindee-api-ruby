@@ -135,6 +135,8 @@ describe Mindee::Invoice do
       prediction = response['document']['inference']['prediction']
       document = Mindee::CustomDocument.new('field_test', prediction, nil)
       expect(document.to_s).to eq(to_string)
+      expect(document.string_all.contents_str).to eq('Mindee is awesome')
+      expect(document.string_all.contents_list).to eq(['Mindee', 'is', 'awesome'])
     end
 
     it 'should load a complete page 0 prediction' do
@@ -143,6 +145,8 @@ describe Mindee::Invoice do
       page_data = response['document']['inference']['pages'][0]
       document = Mindee::CustomDocument.new('field_test', page_data['prediction'], page_data['id'])
       expect(document.to_s).to eq(to_string)
+      expect(document.string_all.contents_str(separator: '_')).to eq('Jenny_is_great')
+      expect(document.string_all.contents_list).to eq(['Jenny', 'is', 'great'])
     end
 
     it 'should load a complete page 1 prediction' do
