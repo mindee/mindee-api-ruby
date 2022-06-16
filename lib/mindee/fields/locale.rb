@@ -10,7 +10,7 @@ module Mindee
 
     def initialize(prediction)
       @confidence = prediction['confidence']
-      @value = prediction['value']
+      @value = prediction['language']
       @language = prediction['language']
       @country = prediction['country']
       @currency = prediction['currency']
