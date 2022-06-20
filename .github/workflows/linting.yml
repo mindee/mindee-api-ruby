@@ -27,4 +27,4 @@ jobs:
 
     - name: Analyse the code with Rubocop
       run: |
-        bundle exec rubocop ./lib ./spec ./bin
+        bundle exec rubocop ./

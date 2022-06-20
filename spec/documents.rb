@@ -6,7 +6,7 @@ require 'mindee/documents'
 
 DATA_DIR = File.join(__dir__, 'data').freeze
 
-describe Mindee::Invoice do
+describe Mindee::Document do
   def load_json(file_path)
     file_data = File.read(File.join(DATA_DIR, file_path))
     JSON.parse(file_data)

@@ -112,44 +112,44 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @param cut_pdf [Boolean] Automatically reconstruct a PDF with more than 4 pages
-    # @param n_pdf_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a PDF with.
+    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_path(input_path, cut_pdf: true, n_pdf_pages: 3)
-      doc = PathDocument.new(input_path, cut_pdf, n_pdf_pages: n_pdf_pages)
+    def doc_from_path(input_path, cut_pages: true, max_pages: 3)
+      doc = PathDocument.new(input_path, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pdf [Boolean] Automatically reconstruct a PDF with more than 4 pages
-    # @param n_pdf_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a PDF with.
+    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_bytes(input_bytes, filename, cut_pdf: true, n_pdf_pages: 3)
-      doc = BytesDocument.new(input_bytes, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
+    def doc_from_bytes(input_bytes, filename, cut_pages: true, max_pages: 3)
+      doc = BytesDocument.new(input_bytes, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pdf [Boolean] Automatically reconstruct a PDF with more than 4 pages
-    # @param n_pdf_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a PDF with.
+    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_b64string(base64_string, filename, cut_pdf: true, n_pdf_pages: 3)
-      doc = Base64Document.new(base64_string, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
+    def doc_from_b64string(base64_string, filename, cut_pages: true, max_pages: 3)
+      doc = Base64Document.new(base64_string, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pdf [Boolean] Automatically reconstruct a PDF with more than 4 pages
-    # @param n_pdf_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a PDF with.
+    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_file(input_file, filename, cut_pdf: true, n_pdf_pages: 3)
-      doc = FileDocument.new(input_file, filename, cut_pdf, n_pdf_pages: n_pdf_pages)
+    def doc_from_file(input_file, filename, cut_pages: true, max_pages: 3)
+      doc = FileDocument.new(input_file, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
   end

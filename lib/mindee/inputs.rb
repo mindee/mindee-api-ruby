@@ -36,12 +36,15 @@ Origami::PDF.class_eval { include PDFTools }
 
 module Mindee
   ALLOWED_MIME_TYPES = [
-    'image/png',
-    'image/jpg',
-    'image/jpeg',
-    'image/webp',
     'application/pdf',
+    'image/heic',
+    'image/png',
+    'image/jpeg',
+    'image/tiff',
+    'image/webp',
   ].freeze
+
+  MAX_DOC_PAGES = 3
 
   # Base class for loading documents.
   class InputDocument
@@ -52,16 +55,16 @@ module Mindee
     # @return [String]
     attr_reader :file_mimetype
 
-    # @param cut_pdf [Boolean]
-    # @param n_pdf_pages [Integer]
-    def initialize(cut_pdf, n_pdf_pages)
+    # @param cut_pages [Boolean]
+    # @param max_pages [Integer]
+    def initialize(cut_pages, max_pages)
       @file_mimetype = Marcel::MimeType.for @io_stream, name: @filename
 
       unless ALLOWED_MIME_TYPES.include? @file_mimetype
         raise "File type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}"
       end
 
-      merge_pdf_pages(n_pdf_pages) if cut_pdf && pdf?
+      merge_pdf_pages(max_pages) if cut_pages && pdf?
     end
 
     def pdf?
@@ -78,16 +81,16 @@ module Mindee
 
     private
 
-    # @param n_pdf_pages [Integer]
-    def merge_pdf_pages(n_pdf_pages)
+    # @param max_pages [Integer]
+    def merge_pdf_pages(max_pages)
       pdf_parser = Origami::PDF::LinearParser.new({})
       cur_pdf = pdf_parser.parse(@io_stream)
 
-      return if cur_pdf.pages.size > 3
+      return if cur_pdf.pages.size <= MAX_DOC_PAGES
 
       new_pdf = Origami::PDF.new
 
-      cur_pdf.pages[0, n_pdf_pages].each_with_index do |page, idx|
+      cur_pdf.pages[0, max_pages].each_with_index do |page, idx|
         new_pdf.insert_page(idx, page)
       end
       @io_stream = new_pdf.to_io_stream
@@ -96,40 +99,40 @@ module Mindee
 
   # Load a document from a path.
   class PathDocument < InputDocument
-    def initialize(filepath, cut_pdf, n_pdf_pages: 3)
+    def initialize(filepath, cut_pages, max_pages: 3)
       puts "opening #{filepath}"
       @io_stream = File.open(filepath, 'rb')
       @filepath = filepath
-      super(cut_pdf, n_pdf_pages)
+      super(cut_pages, max_pages)
     end
   end
 
   # Load a document from a base64 string.
   class Base64Document < InputDocument
-    def initialize(base64_string, filename, cut_pdf, n_pdf_pages: 3)
+    def initialize(base64_string, filename, cut_pages, max_pages: 3)
       @io_stream = StringIO.new(base64_string.unpack1('m*'))
       @io_stream.set_encoding Encoding::BINARY
       @filename = filename
-      super(cut_pdf, n_pdf_pages)
+      super(cut_pages, max_pages)
     end
   end
 
   # Load a document from raw bytes.
   class BytesDocument < InputDocument
-    def initialize(raw_bytes, filename, cut_pdf, n_pdf_pages: 3)
+    def initialize(raw_bytes, filename, cut_pages, max_pages: 3)
       @io_stream = StringIO.new(raw_bytes)
       @io_stream.set_encoding Encoding::BINARY
       @filename = filename
-      super(cut_pdf, n_pdf_pages)
+      super(cut_pages, max_pages)
     end
   end
 
   # Load a document from a file handle.
   class FileDocument < InputDocument
-    def initialize(file_handle, filename, cut_pdf, n_pdf_pages: 3)
+    def initialize(file_handle, filename, cut_pages, max_pages: 3)
       @io_stream = file_handle
       @filename = filename
-      super(cut_pdf, n_pdf_pages)
+      super(cut_pages, max_pages)
     end
   end
 end
