@@ -5,7 +5,7 @@ require_relative 'version'
 
 module Mindee
   MINDEE_API_URL = 'https://api.mindee.net/v1'
-  USER_AGENT = "mindee-api-ruby@#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
+  USER_AGENT = "mindee-api-ruby@v#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
 
   INVOICE_VERSION = '3'
   INVOICE_URL_NAME = 'invoices'

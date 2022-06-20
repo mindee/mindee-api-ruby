@@ -115,7 +115,7 @@ module Mindee
     # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_path(input_path, cut_pages: true, max_pages: 3)
+    def doc_from_path(input_path, cut_pages: true, max_pages: MAX_DOC_PAGES)
       doc = PathDocument.new(input_path, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
@@ -126,7 +126,7 @@ module Mindee
     # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_bytes(input_bytes, filename, cut_pages: true, max_pages: 3)
+    def doc_from_bytes(input_bytes, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
       doc = BytesDocument.new(input_bytes, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
@@ -137,7 +137,7 @@ module Mindee
     # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_b64string(base64_string, filename, cut_pages: true, max_pages: 3)
+    def doc_from_b64string(base64_string, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
       doc = Base64Document.new(base64_string, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end
@@ -148,7 +148,7 @@ module Mindee
     # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_file(input_file, filename, cut_pages: true, max_pages: 3)
+    def doc_from_file(input_file, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
       doc = FileDocument.new(input_file, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
     end

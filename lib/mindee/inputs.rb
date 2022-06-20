@@ -71,6 +71,15 @@ module Mindee
       @file_mimetype == 'application/pdf'
     end
 
+    # @return [Integer]
+    def page_count
+      if pdf?
+        current_pdf = open_pdf
+        return current_pdf.pages.size
+      end
+      1
+    end
+
     # @param close [Boolean]
     def read_document(close: true)
       @io_stream.seek(0)
@@ -83,23 +92,29 @@ module Mindee
 
     # @param max_pages [Integer]
     def merge_pdf_pages(max_pages)
-      pdf_parser = Origami::PDF::LinearParser.new({})
-      cur_pdf = pdf_parser.parse(@io_stream)
-
-      return if cur_pdf.pages.size <= MAX_DOC_PAGES
+      current_pdf = open_pdf
+      return if current_pdf.pages.size <= MAX_DOC_PAGES
 
       new_pdf = Origami::PDF.new
 
-      cur_pdf.pages[0, max_pages].each_with_index do |page, idx|
+      to_insert = [current_pdf.pages[0], current_pdf.pages[-2], current_pdf.pages[-1]].take(max_pages)
+      to_insert.each_with_index do |page, idx|
         new_pdf.insert_page(idx, page)
       end
       @io_stream = new_pdf.to_io_stream
+    end
+
+    # @return [Origami::PDF]
+    def open_pdf
+      pdf_parser = Origami::PDF::LinearParser.new({})
+      @io_stream.seek(0)
+      pdf_parser.parse(@io_stream)
     end
   end
 
   # Load a document from a path.
   class PathDocument < InputDocument
-    def initialize(filepath, cut_pages, max_pages: 3)
+    def initialize(filepath, cut_pages, max_pages: MAX_DOC_PAGES)
       puts "opening #{filepath}"
       @io_stream = File.open(filepath, 'rb')
       @filepath = filepath
@@ -119,7 +134,7 @@ module Mindee
 
   # Load a document from raw bytes.
   class BytesDocument < InputDocument
-    def initialize(raw_bytes, filename, cut_pages, max_pages: 3)
+    def initialize(raw_bytes, filename, cut_pages, max_pages: MAX_DOC_PAGES)
       @io_stream = StringIO.new(raw_bytes)
       @io_stream.set_encoding Encoding::BINARY
       @filename = filename
@@ -129,7 +144,7 @@ module Mindee
 
   # Load a document from a file handle.
   class FileDocument < InputDocument
-    def initialize(file_handle, filename, cut_pages, max_pages: 3)
+    def initialize(file_handle, filename, cut_pages, max_pages: MAX_DOC_PAGES)
       @io_stream = file_handle
       @filename = filename
       super(cut_pages, max_pages)
