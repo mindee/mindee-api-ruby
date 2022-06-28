@@ -115,7 +115,6 @@ module Mindee
   # Load a document from a path.
   class PathDocument < InputDocument
     def initialize(filepath, cut_pages, max_pages: MAX_DOC_PAGES)
-      puts "opening #{filepath}"
       @io_stream = File.open(filepath, 'rb')
       @filepath = filepath
       super(cut_pages, max_pages)

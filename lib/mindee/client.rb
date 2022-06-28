@@ -112,7 +112,7 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
     def doc_from_path(input_path, cut_pages: true, max_pages: MAX_DOC_PAGES)
@@ -123,7 +123,7 @@ module Mindee
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
     def doc_from_bytes(input_bytes, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
@@ -134,7 +134,7 @@ module Mindee
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
     def doc_from_b64string(base64_string, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
@@ -145,7 +145,7 @@ module Mindee
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pdf [Boolean] Automatically reconstruct a multi-page document.
+    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
     # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
     def doc_from_file(input_file, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)

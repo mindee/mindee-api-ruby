@@ -45,19 +45,22 @@ module Mindee
 
     def to_s
       given_names = @given_names.join(' ')
-      "-----Passport data-----\n" \
-        "Full name: #{@full_name}\n" \
-        "Given names: #{given_names}\n" \
-        "Surname: #{@surname}\n" \
-        "Country: #{@country}\n" \
-        "ID Number: #{@id_number}\n" \
-        "Issuance date: #{@issuance_date}\n" \
-        "Birth date: #{@birth_date}\n" \
-        "Expiry date: #{@expiry_date}\n" \
-        "MRZ 1: #{@mrz1}\n" \
-        "MRZ 2: #{@mrz2}\n" \
-        "MRZ: #{@mrz}\n" \
-        '----------------------'
+      out_str = String.new
+      out_str << '-----Passport data-----'
+      out_str << "\nFilename: #{@filename}".rstrip
+      out_str << "\nFull name: #{@full_name}".rstrip
+      out_str << "\nGiven names: #{given_names}".rstrip
+      out_str << "\nSurname: #{@surname}".rstrip
+      out_str << "\nCountry: #{@country}".rstrip
+      out_str << "\nID Number: #{@id_number}".rstrip
+      out_str << "\nIssuance date: #{@issuance_date}".rstrip
+      out_str << "\nBirth date: #{@birth_date}".rstrip
+      out_str << "\nExpiry date: #{@expiry_date}".rstrip
+      out_str << "\nMRZ 1: #{@mrz1}".rstrip
+      out_str << "\nMRZ 2: #{@mrz2}".rstrip
+      out_str << "\nMRZ: #{@mrz}".rstrip
+      out_str << "\n----------------------"
+      out_str
     end
 
     def expired?
@@ -128,7 +131,7 @@ module Mindee
         'value' => "#{@given_names[0].value} #{@surname.value}",
         'confidence' => Field.array_confidence([@surname, @given_names[0]]),
       }
-      Field.new(full_name, page_id, constructed: true)
+      Field.new(full_name, page_id, reconstructed: true)
     end
 
     def construct_mrz(page_id)
@@ -139,7 +142,7 @@ module Mindee
         'value' => @mrz1.value + @mrz2.value,
         'confidence' => Field.array_confidence([@mrz1, @mrz2]),
       }
-      Field.new(mrz, page_id, constructed: true)
+      Field.new(mrz, page_id, reconstructed: true)
     end
   end
 end

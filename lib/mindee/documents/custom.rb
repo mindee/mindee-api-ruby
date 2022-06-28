@@ -28,11 +28,12 @@ module Mindee
 
     def to_s
       out_str = String.new
-      out_str << "----- #{@document_type} -----\n"
+      out_str << "----- #{@document_type} -----"
+      out_str << "\nFilename: #{@filename}".rstrip
       @fields.each do |name, info|
-        out_str << "#{name}: #{info}".strip << "\n"
+        out_str << "\n#{name}: #{info}".rstrip
       end
-      out_str << '----------------------'
+      out_str << "\n----------------------"
       out_str
     end
   end

@@ -26,11 +26,14 @@ module Mindee
     end
 
     def to_s
-      "-----Financial Document data-----\n"\
-        "Invoice number: #{@invoice_number}\n" \
-        "Total amount including taxes: #{@total_incl}\n" \
-        "Total amount excluding taxes: #{@total_excl}\n" \
-        '----------------------'
+      out_str = String.new
+      out_str << '-----Financial Document data-----'
+      out_str << "\nFilename: #{@filename}".rstrip
+      out_str << "\nInvoice number: #{@invoice_number}".rstrip
+      out_str << "\nTotal amount including taxes: #{@total_incl}".rstrip
+      out_str << "\nTotal amount excluding taxes: #{@total_excl}".rstrip
+      out_str << "\n----------------------"
+      out_str
     end
 
     private

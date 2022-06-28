@@ -26,13 +26,13 @@ module Mindee
     attr_reader :confidence,
                 :values,
                 :page_id,
-                :constructed
+                :reconstructed
 
-    def initialize(prediction, page_id, constructed: false)
+    def initialize(prediction, page_id, reconstructed: false)
       @values = []
       @confidence = prediction['confidence']
       @page_id = page_id
-      @constructed = constructed
+      @reconstructed = reconstructed
 
       prediction['values'].each do |field|
         @values.push(ListFieldItem.new(field))

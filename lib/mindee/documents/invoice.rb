@@ -62,23 +62,26 @@ module Mindee
       payments = @payment_details.map(&:to_s).join(' ')
       company_number = @company_number.map(&:to_s).join('; ')
       taxes = @taxes.join(' ')
-      "-----Invoice data-----\n" \
-        "Invoice number: #{@invoice_number}\n" \
-        "Total amount including taxes: #{@total_incl}\n" \
-        "Total amount excluding taxes: #{@total_excl}\n" \
-        "Invoice date: #{@invoice_date}\n" \
-        "Invoice due date: #{@due_date}\n" \
-        "Supplier name: #{@supplier}\n" \
-        "Supplier address: #{@supplier_address}\n" \
-        "Customer name: #{@customer_name}\n" \
-        "Customer company registration: #{customer_company_registration}\n" \
-        "Customer address: #{@customer_address}\n" \
-        "Payment details: #{payments}\n" \
-        "Company numbers: #{company_number}\n" \
-        "Taxes: #{taxes}\n" \
-        "Total taxes: #{@total_tax}\n" \
-        "Locale: #{@locale}\n" \
-        '----------------------'
+      out_str = String.new
+      out_str << '-----Invoice data-----'
+      out_str << "\nFilename: #{@filename}".rstrip
+      out_str << "\nInvoice number: #{@invoice_number}".rstrip
+      out_str << "\nTotal amount including taxes: #{@total_incl}".rstrip
+      out_str << "\nTotal amount excluding taxes: #{@total_excl}".rstrip
+      out_str << "\nInvoice date: #{@invoice_date}".rstrip
+      out_str << "\nInvoice due date: #{@due_date}".rstrip
+      out_str << "\nSupplier name: #{@supplier}".rstrip
+      out_str << "\nSupplier address: #{@supplier_address}".rstrip
+      out_str << "\nCustomer name: #{@customer_name}".rstrip
+      out_str << "\nCustomer company registration: #{customer_company_registration}".rstrip
+      out_str << "\nCustomer address: #{@customer_address}".rstrip
+      out_str << "\nPayment details: #{payments}".rstrip
+      out_str << "\nCompany numbers: #{company_number}".rstrip
+      out_str << "\nTaxes: #{taxes}".rstrip
+      out_str << "\nTotal taxes: #{@total_tax}".rstrip
+      out_str << "\nLocale: #{@locale}".rstrip
+      out_str << "\n----------------------"
+      out_str
     end
 
     private
@@ -90,7 +93,7 @@ module Mindee
         'value' => @taxes.map(&:value).sum,
         'confidence' => Field.array_confidence(@taxes),
       }
-      Field.new(total_tax, page_id, constructed: true)
+      Field.new(total_tax, page_id, reconstructed: true)
     end
   end
 end

@@ -9,6 +9,9 @@ module Mindee
     # Validation checks for the document
     # @return [Hash<Symbol, Boolean>]
     attr_reader :checklist
+    # Original filename of the document
+    # @return [String]
+    attr_reader :filename
 
     # @param document_type [String]
     def initialize(document_type)

@@ -36,17 +36,20 @@ module Mindee
 
     def to_s
       taxes = @taxes.join(' ')
-      "-----Receipt data-----\n" \
-        "Total amount including taxes: #{@total_incl}\n" \
-        "Total amount excluding taxes: #{@total_excl}\n" \
-        "Date: #{@date}\n" \
-        "Category: #{@category}\n" \
-        "Time: #{@time}\n" \
-        "Merchant name: #{@merchant_name}\n" \
-        "Taxes: #{taxes}\n" \
-        "Total taxes: #{@total_tax}\n" \
-        "Locale: #{@locale}\n" \
-        '----------------------'
+      out_str = String.new
+      out_str << '-----Receipt data-----'
+      out_str << "\nFilename: #{@filename}".rstrip
+      out_str << "\nTotal amount including taxes: #{@total_incl}".rstrip
+      out_str << "\nTotal amount excluding taxes: #{@total_excl}".rstrip
+      out_str << "\nDate: #{@date}".rstrip
+      out_str << "\nCategory: #{@category}".rstrip
+      out_str << "\nTime: #{@time}".rstrip
+      out_str << "\nMerchant name: #{@merchant_name}".rstrip
+      out_str << "\nTaxes: #{taxes}".rstrip
+      out_str << "\nTotal taxes: #{@total_tax}".rstrip
+      out_str << "\nLocale: #{@locale}".rstrip
+      out_str << "\n----------------------"
+      out_str
     end
 
     private
@@ -59,7 +62,7 @@ module Mindee
         'value' => @taxes.map(&:value).sum,
         'confidence' => Field.array_confidence(@taxes),
       }
-      Field.new(total_tax, page_id, constructed: true)
+      Field.new(total_tax, page_id, reconstructed: true)
     end
 
     def make_total_excl(page_id)
@@ -70,7 +73,7 @@ module Mindee
         'value' => @total_incl.value - Field.array_sum(@taxes),
         'confidence' => Field.array_confidence(@taxes) * @total_incl.confidence,
       }
-      Field.new(total_excl, page_id, constructed: true)
+      Field.new(total_excl, page_id, reconstructed: true)
     end
   end
 end

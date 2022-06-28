@@ -9,16 +9,16 @@ module Mindee
                 :bbox,
                 :polygon,
                 :page_id,
-                :constructed
+                :reconstructed
     attr_accessor :confidence
 
-    def initialize(prediction, page_id, constructed: false)
+    def initialize(prediction, page_id, reconstructed: false)
       @value = prediction['value']
       @confidence = prediction['confidence']
       @polygon = prediction['polygon']
       @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
       @page_id = page_id
-      @constructed = constructed
+      @constructed = reconstructed
     end
 
     def to_s
