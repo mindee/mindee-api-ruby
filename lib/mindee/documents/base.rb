@@ -10,12 +10,20 @@ module Mindee
     # @return [Hash<Symbol, Boolean>]
     attr_reader :checklist
     # Original filename of the document
-    # @return [String]
+    # @return [String, nil]
     attr_reader :filename
+    # Detected MIME type of the document
+    # @return [String, nil]
+    attr_reader :file_mimetype
 
+    # @param input_file [Mindee::InputDocument]
     # @param document_type [String]
-    def initialize(document_type)
+    def initialize(document_type, input_file: nil)
       @document_type = document_type
+      if input_file
+        @filename = input_file.filename
+        @file_mimetype = input_file.file_mimetype
+      end
       @checklist = {}
     end
 

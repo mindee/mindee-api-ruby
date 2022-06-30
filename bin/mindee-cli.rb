@@ -44,6 +44,9 @@ def ots_subcommand(command, options)
       opt.on('-w', '--with-words', 'Include words in response') do |v|
         options[:include_words] = v
       end
+      opt.on('-C', '--no-cut-pages', "Don't cut document pages") do |v|
+        options[:include_words] = v
+      end
     end
   end
 end
@@ -52,6 +55,9 @@ def custom_subcommand(options)
   OptionParser.new do |opt|
     opt.banner = "Usage: custom [options] DOC_TYPE FILE"
     opt.on('-w', '--with-words', 'Include words in response') do |v|
+      options[:include_words] = v
+    end
+    opt.on('-C', '--no-cut-pages', "Don't cut document pages") do |v|
       options[:include_words] = v
     end
     opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
@@ -140,5 +146,6 @@ else
   file_path = ARGV[0]
 end
 
-doc = mindee_client.doc_from_path(file_path)
+cut_pages = options[:no_cut_pages].nil? ? false : true
+doc = mindee_client.doc_from_path(file_path, cut_pages: cut_pages)
 puts doc.parse(doc_type).document

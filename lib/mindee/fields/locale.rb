@@ -9,8 +9,13 @@ module Mindee
                 :currency
 
     def initialize(prediction)
+      value_key = if prediction.include? 'value'
+                    'value'
+                  else
+                    'language'
+                  end
       @confidence = prediction['confidence']
-      @value = prediction['language']
+      @value = prediction[value_key]
       @language = prediction['language']
       @country = prediction['country']
       @currency = prediction['currency']

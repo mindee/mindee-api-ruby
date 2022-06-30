@@ -5,6 +5,15 @@ require 'mrz'
 require_relative '../fields'
 require_relative 'base'
 
+# We need to do this disgusting thing to avoid the following error message:
+# td3 line one does not match the required format (MRZ::InvalidFormatError)
+#
+# See:
+# https://github.com/streetspotr/mrz/issues/2
+# https://github.com/streetspotr/mrz/pull/3
+#
+MRZ::TD3Parser::FORMAT_ONE = %r{\A(.{2})(.{3})([^<]+)<(.*)\z}.freeze
+
 module Mindee
   # Passport document.
   class Passport < Document
@@ -22,8 +31,11 @@ module Mindee
                 :mrz2,
                 :mrz
 
-    def initialize(prediction, page_id)
-      super('passport')
+    # @param prediction [Hash]
+    # @param input_file [Mindee::InputDocument]
+    # @param page_id [Integer]
+    def initialize(prediction, input_file: nil, page_id: nil)
+      super('passport', input_file: input_file)
       @country = Field.new(prediction['country'], page_id)
       @id_number = Field.new(prediction['id_number'], page_id)
       @birth_date = DateField.new(prediction['birth_date'], page_id)
@@ -63,6 +75,7 @@ module Mindee
       out_str
     end
 
+    # @return [Boolean]
     def expired?
       return true unless @expiry_date.date_object
 
@@ -72,7 +85,7 @@ module Mindee
     private
 
     def check_mrz
-      return unless @mrz&.value
+      return if @mrz1.value.nil? || @mrz2.value.nil?
 
       mrz = MRZ.parse([@mrz1.value, @mrz2.value])
       checks = {
@@ -135,8 +148,7 @@ module Mindee
     end
 
     def construct_mrz(page_id)
-      return unless @mrz1.value &&
-                    @mrz2.value
+      return if @mrz1.value.nil? || @mrz2.value.nil?
 
       mrz = {
         'value' => @mrz1.value + @mrz2.value,

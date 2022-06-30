@@ -6,15 +6,23 @@ require_relative 'base'
 module Mindee
   # Invoice document.
   class Invoice < Document
-    attr_reader :locale,
-                :total_incl,
-                :total_excl,
-                :invoice_date,
-                :invoice_number,
-                :due_date,
-                :taxes,
-                :total_tax,
-                :supplier,
+    # @return [Mindee::Locale]
+    attr_reader :locale
+    # @return [Mindee::Amount]
+    attr_reader :total_incl
+    # @return [Mindee::Amount]
+    attr_reader :total_excl
+    # @return [Mindee::Amount]
+    attr_reader :total_tax
+    # @return [Mindee::DateField]
+    attr_reader :date
+    # @return [Mindee::Field]
+    attr_reader :invoice_number
+    # @return [Mindee::DateField]
+    attr_reader :due_date
+    # @return [Array]
+    attr_reader :taxes
+    attr_reader :supplier,
                 :supplier_address,
                 :customer_name,
                 :customer_address,
@@ -23,15 +31,18 @@ module Mindee
                 :company_number,
                 :orientation
 
-    def initialize(prediction, page_id)
-      super('invoice')
+    # @param prediction [Hash]
+    # @param input_file [Mindee::InputDocument]
+    # @param page_id [Integer]
+    def initialize(prediction, input_file: nil, page_id: nil)
+      super('invoice', input_file: input_file)
       @orientation = Orientation.new(prediction['orientation'], page_id) if page_id
       @locale = Locale.new(prediction['locale'])
-      @total_incl = Field.new(prediction['total_incl'], page_id)
-      @total_excl = Field.new(prediction['total_excl'], page_id)
+      @total_incl = Amount.new(prediction['total_incl'], page_id)
+      @total_excl = Amount.new(prediction['total_excl'], page_id)
       @customer_address = Field.new(prediction['customer_address'], page_id)
       @customer_name = Field.new(prediction['customer'], page_id)
-      @invoice_date = DateField.new(prediction['date'], page_id)
+      @date = DateField.new(prediction['date'], page_id)
       @due_date = DateField.new(prediction['due_date'], page_id)
       @invoice_number = Field.new(prediction['invoice_number'], page_id)
       @supplier = Field.new(prediction['supplier'], page_id)
@@ -54,28 +65,31 @@ module Mindee
         @company_number.push(Field.new(item, page_id))
       end
 
-      @total_tax = construct_total_tax(page_id)
+      @total_tax = Amount.new(
+        { value: nil, confidence: 0.0 }, page_id
+      )
+      reconstruct(page_id)
     end
 
     def to_s
       customer_company_registration = @customer_company_registration.map(&:value).join('; ')
-      payments = @payment_details.map(&:to_s).join(' ')
+      payment_details = @payment_details.map(&:to_s).join("\n                 ")
       company_number = @company_number.map(&:to_s).join('; ')
-      taxes = @taxes.join(' ')
+      taxes = @taxes.join("\n       ")
       out_str = String.new
       out_str << '-----Invoice data-----'
       out_str << "\nFilename: #{@filename}".rstrip
       out_str << "\nInvoice number: #{@invoice_number}".rstrip
       out_str << "\nTotal amount including taxes: #{@total_incl}".rstrip
       out_str << "\nTotal amount excluding taxes: #{@total_excl}".rstrip
-      out_str << "\nInvoice date: #{@invoice_date}".rstrip
+      out_str << "\nInvoice date: #{@date}".rstrip
       out_str << "\nInvoice due date: #{@due_date}".rstrip
       out_str << "\nSupplier name: #{@supplier}".rstrip
       out_str << "\nSupplier address: #{@supplier_address}".rstrip
       out_str << "\nCustomer name: #{@customer_name}".rstrip
       out_str << "\nCustomer company registration: #{customer_company_registration}".rstrip
       out_str << "\nCustomer address: #{@customer_address}".rstrip
-      out_str << "\nPayment details: #{payments}".rstrip
+      out_str << "\nPayment details: #{payment_details}".rstrip
       out_str << "\nCompany numbers: #{company_number}".rstrip
       out_str << "\nTaxes: #{taxes}".rstrip
       out_str << "\nTotal taxes: #{@total_tax}".rstrip
@@ -86,14 +100,55 @@ module Mindee
 
     private
 
-    def construct_total_tax(page_id)
-      return unless @taxes
+    def reconstruct(page_id)
+      construct_total_tax_from_taxes(page_id)
+      construct_total_excl_from_tcc_and_taxes(page_id)
+      construct_total_incl_from_taxes_plus_excl(page_id)
+      construct_total_tax_from_totals(page_id)
+    end
+
+    def construct_total_excl_from_tcc_and_taxes(page_id)
+      return if @total_incl.value.nil? || taxes.empty? || !@total_excl.value.nil?
+
+      total_excl = {
+        'value' => @total_incl.value - @taxes.map(&:value).sum,
+        'confidence' => Field.array_confidence(@taxes) * @total_incl.confidence,
+      }
+      @total_excl = Amount.new(total_excl, page_id, reconstructed: true)
+    end
+
+    def construct_total_incl_from_taxes_plus_excl(page_id)
+      return if @total_excl.value.nil? || @taxes.empty? || !@total_incl.value.nil?
+
+      total_incl = {
+        'value' => @taxes.map(&:value).sum + @total_excl.value,
+        'confidence' => Field.array_confidence(@taxes) * @total_excl.confidence,
+      }
+      @total_incl = Amount.new(total_incl, page_id, reconstructed: true)
+    end
+
+    def construct_total_tax_from_taxes(page_id)
+      return if @taxes.empty?
 
       total_tax = {
         'value' => @taxes.map(&:value).sum,
         'confidence' => Field.array_confidence(@taxes),
       }
-      Field.new(total_tax, page_id, reconstructed: true)
+      return unless total_tax['value'].positive?
+
+      @total_tax = Amount.new(total_tax, page_id, reconstructed: true)
+    end
+
+    def construct_total_tax_from_totals(page_id)
+      return if !@total_tax.value.nil? || @total_incl.value.nil? || @total_excl.value.nil?
+
+      total_tax = {
+        'value' => @total_incl.value - @total_excl.value,
+        'confidence' => Field.array_confidence(@taxes),
+      }
+      return unless total_tax['value'] >= 0
+
+      @total_tax = Amount.new(total_tax, page_id, reconstructed: true)
     end
   end
 end

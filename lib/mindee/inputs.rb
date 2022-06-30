@@ -117,6 +117,7 @@ module Mindee
     def initialize(filepath, cut_pages, max_pages: MAX_DOC_PAGES)
       @io_stream = File.open(filepath, 'rb')
       @filepath = filepath
+      @filename = File.basename(filepath)
       super(cut_pages, max_pages)
     end
   end

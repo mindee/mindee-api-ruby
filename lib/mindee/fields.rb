@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'fields/amount'
 require_relative 'fields/base'
 require_relative 'fields/datefield'
 require_relative 'fields/locale'

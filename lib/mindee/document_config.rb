@@ -25,13 +25,24 @@ module Mindee
     end
 
     # Parse a prediction API result.
+    # @param input_doc [Mindee::InputDocument]
     # @param response [Hash]
     # @return [Mindee::DocumentResponse]
-    def build_predict_result(response)
-      document = @doc_class.new(response['document']['inference']['prediction'], nil)
+    def build_predict_result(input_doc, response)
+      document = @doc_class.new(
+        response['document']['inference']['prediction'],
+        input_file: input_doc,
+        page_id: nil
+      )
       pages = []
       response['document']['inference']['pages'].each do |page|
-        pages.push(@doc_class.new(page['prediction'], page['id']))
+        pages.push(
+          @doc_class.new(
+            page['prediction'],
+            input_file: input_doc,
+            page_id: page['id']
+          )
+        )
       end
       DocumentResponse.new(response, @document_type, document, pages)
     end
@@ -44,14 +55,15 @@ module Mindee
     def predict(input_doc, include_words, close_file)
       check_api_keys
       response = predict_request(input_doc, include_words, close_file)
-      parse_response(response)
+      parse_response(input_doc, response)
     end
 
     private
 
+    # @param input_doc [Mindee::InputDocument]
     # @param response [Net::HTTPResponse]
     # @return [Mindee::DocumentResponse]
-    def parse_response(response)
+    def parse_response(input_doc, response)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       unless (200..299).include?(response.code.to_i)
         if @raise_on_error
@@ -63,7 +75,7 @@ module Mindee
           hashed_response, @document_type, {}, []
         )
       end
-      build_predict_result(hashed_response)
+      build_predict_result(input_doc, hashed_response)
     end
 
     # @param input_doc [Mindee::InputDocument]
@@ -160,16 +172,27 @@ module Mindee
       )
     end
 
+    # Parse a prediction API result.
+    # @param input_doc [Mindee::InputDocument]
     # @param response [Hash]
-    def build_predict_result(response)
+    # @return [Mindee::DocumentResponse]
+    def build_predict_result(input_doc, response)
       document = CustomDocument.new(
         @document_type,
         response['document']['inference']['prediction'],
-        nil
+        input_file: input_doc,
+        page_id: nil
       )
       pages = []
       response['document']['inference']['pages'].each do |page|
-        pages.push(CustomDocument.new(@document_type, page['prediction'], page['id']))
+        pages.push(
+          CustomDocument.new(
+            @document_type,
+            page['prediction'],
+            input_file: input_doc,
+            page_id: page['id']
+          )
+        )
       end
       DocumentResponse.new(response, @document_type, document, pages)
     end

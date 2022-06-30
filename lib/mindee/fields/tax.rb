@@ -5,12 +5,20 @@ require_relative 'base'
 module Mindee
   # Represents tax information.
   class Tax < Field
-    attr_reader :rate,
-                :code
+    # Tax value as 3 decimal float
+    # @return [Float]
+    attr_reader :value
+    # Tax rate percentage
+    # @return [Float]
+    attr_reader :rate
+    # Tax code
+    # @return [String]
+    attr_reader :code
 
     def initialize(prediction, page_id)
       super
-      @rate = prediction['rate']
+      @value = @value.round(3) unless @value.nil?
+      @rate = prediction['rate'].to_f unless prediction['rate'].nil?
       @code = prediction['code'] unless prediction['code'] == 'None'
     end
 
