@@ -21,7 +21,9 @@ module Mindee
     attr_reader :invoice_number,
                 :orientation
 
-    # @param input_file [Mindee::InputDocument]
+    # @param prediction [Hash]
+    # @param input_file [Mindee::InputDocument, nil]
+    # @param page_id [Integer, nil]
     def initialize(prediction, input_file: nil, page_id: nil)
       super('financial_doc', input_file: input_file)
       @locale = Locale.new(prediction['locale'])

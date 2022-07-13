@@ -15,6 +15,8 @@ module Mindee
     # @return [String]
     attr_reader :code
 
+    # @param prediction [Hash]
+    # @param page_id [Integer, nil]
     def initialize(prediction, page_id)
       super
       @value = @value.round(3) unless @value.nil?

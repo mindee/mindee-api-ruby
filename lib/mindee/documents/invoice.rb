@@ -20,20 +20,23 @@ module Mindee
     attr_reader :invoice_number
     # @return [Mindee::DateField]
     attr_reader :due_date
-    # @return [Array]
+    # @return [Array<Mindee::Tax>]
     attr_reader :taxes
+    # @return [Array<Mindee::Field>]
+    attr_reader :customer_company_registration
+    # @return [Array<Mindee::PaymentDetails>]
+    attr_reader :payment_details
+    # @return [Array<Mindee::Field>]
+    attr_reader :company_number
     attr_reader :supplier,
                 :supplier_address,
                 :customer_name,
                 :customer_address,
-                :customer_company_registration,
-                :payment_details,
-                :company_number,
                 :orientation
 
     # @param prediction [Hash]
-    # @param input_file [Mindee::InputDocument]
-    # @param page_id [Integer]
+    # @param input_file [Mindee::InputDocument, nil]
+    # @param page_id [Integer, nil]
     def initialize(prediction, input_file: nil, page_id: nil)
       super('invoice', input_file: input_file)
       @orientation = Orientation.new(prediction['orientation'], page_id) if page_id

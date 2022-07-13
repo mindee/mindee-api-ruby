@@ -8,6 +8,7 @@ module Mindee
                 :polygon,
                 :bbox
 
+    # @param prediction [Hash]
     def initialize(prediction)
       @content = prediction['content']
       @confidence = prediction['confidence']
@@ -23,11 +24,20 @@ module Mindee
 
   # Field where actual values are kept in a list (custom docs).
   class ListField
-    attr_reader :confidence,
-                :values,
-                :page_id,
-                :reconstructed
+    # @return [Array<Mindee::ListFieldItem>]
+    attr_reader :values
+    # @return [Integer, nil]
+    attr_reader :page_id
+    # true if the field was reconstructed or computed using other fields.
+    # @return [Boolean]
+    attr_reader :reconstructed
+    # The confidence score, value will be between 0.0 and 1.0
+    # @return [Float]
+    attr_accessor :confidence
 
+    # @param prediction [Hash]
+    # @param page_id [Integer, nil]
+    # @param reconstructed [Boolean]
     def initialize(prediction, page_id, reconstructed: false)
       @values = []
       @confidence = prediction['confidence']

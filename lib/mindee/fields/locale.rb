@@ -8,6 +8,7 @@ module Mindee
                 :country,
                 :currency
 
+    # @param prediction [Hash]
     def initialize(prediction)
       value_key = if prediction.include? 'value'
                     'value'

@@ -20,7 +20,7 @@ describe Mindee::Document do
       expect(document.invoice_number.value).to be_nil
       expect(document.invoice_number.polygon).to be_empty
       expect(document.invoice_number.bbox).to be_nil
-      expect(document.invoice_date.value).to be_nil
+      expect(document.date.value).to be_nil
     end
 
     it 'should load a complete document prediction' do

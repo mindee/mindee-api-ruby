@@ -11,7 +11,9 @@ module Mindee
     attr_reader :fields
 
     # @param document_type [String]
-    # @param input_file [Mindee::InputDocument]
+    # @param prediction [Hash]
+    # @param input_file [Mindee::InputDocument, nil]
+    # @param page_id [Integer, nil]
     def initialize(document_type, prediction, input_file: nil, page_id: nil)
       super(document_type, input_file: input_file)
       @fields = {}

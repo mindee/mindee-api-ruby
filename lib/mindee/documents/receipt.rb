@@ -23,8 +23,8 @@ module Mindee
                 :orientation
 
     # @param prediction [Hash]
-    # @param input_file [Mindee::InputDocument]
-    # @param page_id [Integer]
+    # @param input_file [Mindee::InputDocument, nil]
+    # @param page_id [Integer, nil]
     def initialize(prediction, input_file: nil, page_id: nil)
       super('receipt', input_file: input_file)
       @orientation = Orientation.new(prediction['orientation'], page_id) if page_id

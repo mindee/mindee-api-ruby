@@ -32,8 +32,8 @@ module Mindee
                 :mrz
 
     # @param prediction [Hash]
-    # @param input_file [Mindee::InputDocument]
-    # @param page_id [Integer]
+    # @param input_file [Mindee::InputDocument, nil]
+    # @param page_id [Integer, nil]
     def initialize(prediction, input_file: nil, page_id: nil)
       super('passport', input_file: input_file)
       @country = Field.new(prediction['country'], page_id)

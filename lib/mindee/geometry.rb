@@ -3,6 +3,7 @@
 module Mindee
   # Various helper functions for geometry.
   module Geometry
+    # @return [Array<Float>]
     def self.get_bbox(vertices)
       x_min = vertices.map { |v| v[0] }.min
       x_max = vertices.map { |v| v[0] }.max
@@ -11,6 +12,7 @@ module Mindee
       [x_min, y_min, x_max, y_max]
     end
 
+    # @return [Array<Array<Float>>]
     def self.get_bbox_as_polygon(vertices)
       x_min, y_min, x_max, y_max = get_bbox(vertices)
       [[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]]

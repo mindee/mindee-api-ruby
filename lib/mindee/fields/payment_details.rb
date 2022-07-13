@@ -10,7 +10,10 @@ module Mindee
                 :routing_number,
                 :swift
 
-    def initialize(prediction, page_id, reconstructed: nil)
+    # @param prediction [Hash]
+    # @param page_id [Integer, nil]
+    # @param reconstructed [Boolean]
+    def initialize(prediction, page_id, reconstructed: false)
       super
       @account_number = prediction['account_number']
       @iban = prediction['iban']

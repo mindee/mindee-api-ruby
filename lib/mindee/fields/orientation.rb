@@ -7,6 +7,8 @@ module Mindee
                 :confidence,
                 :page_id
 
+    # @param prediction [Hash]
+    # @param page_id [Integer]
     def initialize(prediction, page_id)
       @degrees = prediction['degrees']
       @confidence = prediction['confidence']

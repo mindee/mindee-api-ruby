@@ -5,20 +5,31 @@ require_relative '../geometry'
 module Mindee
   # Base field object.
   class Field
-    attr_reader :value,
-                :bbox,
-                :polygon,
-                :page_id,
-                :reconstructed
+    # @return [String, Float, Integer, Boolean]
+    attr_reader :value
+    # @return [Array<Array<Float>>]
+    attr_reader :bbox
+    # @return [Array<Array<Float>>]
+    attr_reader :polygon
+    # @return [Integer, nil]
+    attr_reader :page_id
+    # true if the field was reconstructed or computed using other fields.
+    # @return [Boolean]
+    attr_reader :reconstructed
+    # The confidence score, value will be between 0.0 and 1.0
+    # @return [Float]
     attr_accessor :confidence
 
+    # @param prediction [Hash]
+    # @param page_id [Integer, nil]
+    # @param reconstructed [Boolean]
     def initialize(prediction, page_id, reconstructed: false)
       @value = prediction['value']
       @confidence = prediction['confidence']
       @polygon = prediction['polygon']
       @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
       @page_id = page_id
-      @constructed = reconstructed
+      @reconstructed = reconstructed
     end
 
     def to_s

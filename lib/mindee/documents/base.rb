@@ -16,11 +16,11 @@ module Mindee
     # @return [String, nil]
     attr_reader :file_mimetype
 
-    # @param input_file [Mindee::InputDocument]
+    # @param input_file [Mindee::InputDocument, nil]
     # @param document_type [String]
     def initialize(document_type, input_file: nil)
       @document_type = document_type
-      if input_file
+      unless input_file.nil?
         @filename = input_file.filename
         @file_mimetype = input_file.file_mimetype
       end
