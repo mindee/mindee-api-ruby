@@ -20,14 +20,14 @@ module Mindee
     attr_reader :invoice_number
     # @return [Mindee::DateField]
     attr_reader :due_date
-    # @return [Array<Mindee::Tax>]
+    # @return [Array<Mindee::TaxField>]
     attr_reader :taxes
-    # @return [Array<Mindee::Field>]
+    # @return [Array<Mindee::CompanyRegistration>]
     attr_reader :customer_company_registration
     # @return [Array<Mindee::PaymentDetails>]
     attr_reader :payment_details
-    # @return [Array<Mindee::Field>]
-    attr_reader :company_number
+    # @return [Array<Mindee::CompanyRegistration>]
+    attr_reader :company_registration
     attr_reader :supplier,
                 :supplier_address,
                 :customer_name,
@@ -53,19 +53,19 @@ module Mindee
 
       @customer_company_registration = []
       prediction['customer_company_registration'].each do |item|
-        @customer_company_registration.push(Field.new(item, page_id))
+        @customer_company_registration.push(CompanyRegistration.new(item, page_id))
       end
       @taxes = []
       prediction['taxes'].each do |item|
-        @taxes.push(Tax.new(item, page_id))
+        @taxes.push(TaxField.new(item, page_id))
       end
       @payment_details = []
       prediction['payment_details'].each do |item|
         @payment_details.push(PaymentDetails.new(item, page_id))
       end
-      @company_number = []
+      @company_registration = []
       prediction['company_registration'].each do |item|
-        @company_number.push(Field.new(item, page_id))
+        @company_registration.push(CompanyRegistration.new(item, page_id))
       end
 
       @total_tax = Amount.new(
@@ -77,7 +77,7 @@ module Mindee
     def to_s
       customer_company_registration = @customer_company_registration.map(&:value).join('; ')
       payment_details = @payment_details.map(&:to_s).join("\n                 ")
-      company_number = @company_number.map(&:to_s).join('; ')
+      company_registration = @company_registration.map(&:to_s).join('; ')
       taxes = @taxes.join("\n       ")
       out_str = String.new
       out_str << '-----Invoice data-----'
@@ -93,7 +93,7 @@ module Mindee
       out_str << "\nCustomer company registration: #{customer_company_registration}".rstrip
       out_str << "\nCustomer address: #{@customer_address}".rstrip
       out_str << "\nPayment details: #{payment_details}".rstrip
-      out_str << "\nCompany numbers: #{company_number}".rstrip
+      out_str << "\nCompany numbers: #{company_registration}".rstrip
       out_str << "\nTaxes: #{taxes}".rstrip
       out_str << "\nTotal taxes: #{@total_tax}".rstrip
       out_str << "\nLocale: #{@locale}".rstrip

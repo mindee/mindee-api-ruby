@@ -4,7 +4,7 @@ require_relative 'base'
 
 module Mindee
   # Represents tax information.
-  class Tax < Field
+  class TaxField < Field
     # Tax value as 3 decimal float
     # @return [Float]
     attr_reader :value

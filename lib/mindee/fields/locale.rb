@@ -3,8 +3,10 @@
 module Mindee
   # Represents locale information
   class Locale
-    attr_reader :confidence,
-                :language,
+    # The confidence score, value will be between 0.0 and 1.0
+    # @return [Float]
+    attr_reader :confidence
+    attr_reader :language,
                 :country,
                 :currency
 

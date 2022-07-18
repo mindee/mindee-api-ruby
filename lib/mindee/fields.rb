@@ -2,6 +2,7 @@
 
 require_relative 'fields/amount'
 require_relative 'fields/base'
+require_relative 'fields/company_registration'
 require_relative 'fields/datefield'
 require_relative 'fields/locale'
 require_relative 'fields/orientation'

@@ -16,9 +16,10 @@ module Mindee
     attr_reader :total_tax
     # @return [Mindee::DateField]
     attr_reader :date
+    # @return [Mindee::Field]
+    attr_reader :supplier
     attr_reader :time,
                 :category,
-                :merchant_name,
                 :taxes,
                 :orientation
 
@@ -32,11 +33,11 @@ module Mindee
       @total_incl = Amount.new(prediction['total_incl'], page_id)
       @date = DateField.new(prediction['date'], page_id)
       @category = Field.new(prediction['category'], page_id)
-      @merchant_name = Field.new(prediction['supplier'], page_id)
+      @supplier = Field.new(prediction['supplier'], page_id)
       @time = Field.new(prediction['time'], page_id)
       @taxes = []
       prediction['taxes'].each do |item|
-        @taxes.push(Tax.new(item, page_id))
+        @taxes.push(TaxField.new(item, page_id))
       end
 
       @total_tax = Amount.new(
@@ -58,7 +59,7 @@ module Mindee
       out_str << "\nDate: #{@date}".rstrip
       out_str << "\nCategory: #{@category}".rstrip
       out_str << "\nTime: #{@time}".rstrip
-      out_str << "\nMerchant name: #{@merchant_name}".rstrip
+      out_str << "\nMerchant name: #{@supplier}".rstrip
       out_str << "\nTaxes: #{taxes}".rstrip
       out_str << "\nTotal taxes: #{@total_tax}".rstrip
       out_str << "\nLocale: #{@locale}".rstrip

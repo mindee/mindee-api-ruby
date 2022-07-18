@@ -58,9 +58,4 @@ module Mindee
       arr_sum.to_f
     end
   end
-
-  # Field with a type (not a Ruby type)
-  class TypedField < Field
-    attr_reader :type
-  end
 end
