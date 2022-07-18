@@ -28,11 +28,16 @@ module Mindee
     attr_reader :payment_details
     # @return [Array<Mindee::CompanyRegistration>]
     attr_reader :company_registration
-    attr_reader :supplier,
-                :supplier_address,
-                :customer_name,
-                :customer_address,
-                :orientation
+    # @return [Mindee::Field]
+    attr_reader :customer_name
+    # @return [Mindee::Field]
+    attr_reader :supplier
+    # @return [Mindee::Field]
+    attr_reader :supplier_address
+    # @return [Mindee::Field]
+    attr_reader :customer_address
+    # @return [Mindee::Orientation]
+    attr_reader :orientation
 
     # @param prediction [Hash]
     # @param input_file [Mindee::InputDocument, nil]

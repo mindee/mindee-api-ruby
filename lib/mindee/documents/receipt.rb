@@ -18,10 +18,14 @@ module Mindee
     attr_reader :date
     # @return [Mindee::Field]
     attr_reader :supplier
-    attr_reader :time,
-                :category,
-                :taxes,
-                :orientation
+    # @return [Array<Mindee::TaxField>]
+    attr_reader :taxes
+    # @return [Mindee::Orientation]
+    attr_reader :orientation
+    # @return [Mindee::Field]
+    attr_reader :time
+    # @return [Mindee::Field]
+    attr_reader :category
 
     # @param prediction [Hash]
     # @param input_file [Mindee::InputDocument, nil]

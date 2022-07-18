@@ -68,7 +68,8 @@ module Mindee
 
     # Set the endpoint's API key from an environment variable, if present.
     def set_api_key_from_env
-      env_key = ENV.fetch(envvar_key_name, nil)
+      env_key = ENV.fetch('MINDEE_API_KEY', nil)
+      env_key = ENV.fetch(envvar_key_name, nil) if env_key.nil?
       @api_key = env_key if env_key
     end
   end

@@ -4,7 +4,7 @@ Quickly and easily connect to Mindee's API services using Ruby.
 ## Quick Start
 Here's the TL;DR of getting started.
 
-First, get an [API Key](https://developers.mindee.com/docs/make-your-first-request#create-an-api-key)
+First, get an [API Key](https://developers.mindee.com/docs/create-api-key)
 
 Install by adding this line to your application's Gemfile:
 
@@ -27,7 +27,7 @@ Finally, Ruby away!
 require 'mindee'
 
 # Init a new client and configure the Invoice API
-mindee_client = Mindee::Client.new.config_invoice(api_key: 'my-invoice-api-key')
+mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_invoice
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path("/path/to/the/invoice.pdf").parse("invoice")
@@ -41,10 +41,9 @@ puts api_response.document
 require 'mindee'
 
 # Init a new client and configure your custom document
-mindee_client = Mindee::Client.new.config_custom_doc(
+mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_custom_doc(
   'pokemon-card',
-  'pikachu',
-  api_key: 'pokemon-card-api-key'
+  'pikachu'
 )
 
 # Load a file from disk and parse it

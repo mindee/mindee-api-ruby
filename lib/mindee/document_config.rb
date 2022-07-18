@@ -139,10 +139,10 @@ module Mindee
 
   # Client for Financial documents
   class FinancialDocConfig < DocumentConfig
-    def initialize(invoice_api_key, receipt_api_key, raise_on_error)
+    def initialize(api_key, raise_on_error)
       endpoints = [
-        InvoiceEndpoint.new(invoice_api_key),
-        ReceiptEndpoint.new(receipt_api_key),
+        InvoiceEndpoint.new(api_key),
+        ReceiptEndpoint.new(api_key),
       ]
       super(
         FinancialDocument,
@@ -154,9 +154,9 @@ module Mindee
 
     private
 
-    def predict_request(input_doc, include_words)
+    def predict_request(input_doc, include_words, close_file)
       endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
-      endpoint.predict_request(input_doc, include_words: include_words)
+      endpoint.predict_request(input_doc, include_words: include_words, close_file: close_file)
     end
   end
 

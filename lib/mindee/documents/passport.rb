@@ -17,6 +17,8 @@ MRZ::TD3Parser::FORMAT_ONE = %r{\A(.{2})(.{3})([^<]+)<(.*)\z}.freeze
 module Mindee
   # Passport document.
   class Passport < Document
+    # @return [Mindee::Orientation]
+    attr_reader :orientation
     attr_reader :country,
                 :id_number,
                 :expiry_date,
@@ -36,6 +38,7 @@ module Mindee
     # @param page_id [Integer, nil]
     def initialize(prediction, input_file: nil, page_id: nil)
       super('passport', input_file: input_file)
+      @orientation = Orientation.new(prediction['orientation'], page_id) if page_id
       @country = Field.new(prediction['country'], page_id)
       @id_number = Field.new(prediction['id_number'], page_id)
       @birth_date = DateField.new(prediction['birth_date'], page_id)

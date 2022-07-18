@@ -48,42 +48,52 @@ module Mindee
   # See: https://developers.mindee.com/docs/
   class Client
     # @param raise_on_error [Boolean]
-    def initialize(raise_on_error: true)
+    def initialize(api_key: nil, raise_on_error: true)
       @raise_on_error = raise_on_error
       @doc_configs = {}
+      @api_key = api_key
     end
 
     # Configure a 'Mindee Invoice' document.
-    # @param api_key [String] Invoice API key
+    # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
-    def config_invoice(api_key: '')
-      @doc_configs[['mindee', 'invoice']] = InvoiceConfig.new(api_key, @raise_on_error)
+    def config_invoice(api_key: nil)
+      @doc_configs[['mindee', 'invoice']] = InvoiceConfig.new(
+        api_key || @api_key,
+        @raise_on_error
+      )
       self
     end
 
     # Configure a 'Mindee Expense Receipts' document.
-    # @param api_key [String] Passport API key
+    # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
-    def config_receipt(api_key: '')
-      @doc_configs[['mindee', 'receipt']] = ReceiptConfig.new(api_key, @raise_on_error)
+    def config_receipt(api_key: nil)
+      @doc_configs[['mindee', 'receipt']] = ReceiptConfig.new(
+        api_key || @api_key,
+        @raise_on_error
+      )
       self
     end
 
     # Configure a 'Mindee Passport' document.
-    # @param api_key [String] Your API key for the endpoint
+    # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
-    def config_passport(api_key: '')
-      @doc_configs[['mindee', 'passport']] = PassportConfig.new(api_key, @raise_on_error)
+    def config_passport(api_key: nil)
+      @doc_configs[['mindee', 'passport']] = PassportConfig.new(
+        api_key || @api_key,
+        @raise_on_error
+      )
       self
     end
 
     # Configure a 'Mindee Financial document'. Uses 'Invoice' and 'Expense Receipt' internally.
-    # @param receipt_api_key [String] Expense Receipt API key
-    # @param invoice_api_key [String] Invoice API key
+    # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
-    def config_financial_doc(invoice_api_key: '', receipt_api_key: '')
+    def config_financial_doc(api_key: nil)
       @doc_configs[['mindee', 'financial_doc']] = FinancialDocConfig.new(
-        invoice_api_key, receipt_api_key, @raise_on_error
+        api_key || @api_key,
+        @raise_on_error
       )
       self
     end
@@ -91,20 +101,20 @@ module Mindee
     # Configure a custom document using the 'Mindee API Builder'.
     # @param account_name [String] Your organization's username on the API Builder
     # @param document_name [String] The "API name" field in the "Settings" page of the API Builder
-    # @param api_key [String] Your API key for the endpoint
+    # @param api_key [String]  Override the client API key for this endpoint
     # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
     # @return [Mindee::Client]
     def config_custom_doc(
       document_name,
       account_name,
-      api_key: '',
+      api_key: nil,
       version: '1'
     )
       @doc_configs[[account_name, document_name]] = CustomDocConfig.new(
         document_name,
         account_name,
         version,
-        api_key,
+        api_key || @api_key,
         @raise_on_error
       )
       self

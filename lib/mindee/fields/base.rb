@@ -28,7 +28,7 @@ module Mindee
       @confidence = prediction['confidence']
       @polygon = prediction['polygon']
       @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
-      @page_id = page_id
+      @page_id = page_id || prediction['page_id']
       @reconstructed = reconstructed
     end
 

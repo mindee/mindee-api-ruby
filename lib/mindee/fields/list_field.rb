@@ -41,7 +41,7 @@ module Mindee
     def initialize(prediction, page_id, reconstructed: false)
       @values = []
       @confidence = prediction['confidence']
-      @page_id = page_id
+      @page_id = page_id || prediction['page_id']
       @reconstructed = reconstructed
 
       prediction['values'].each do |field|

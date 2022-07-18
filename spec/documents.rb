@@ -21,6 +21,7 @@ describe Mindee::Document do
       expect(document.invoice_number.polygon).to be_empty
       expect(document.invoice_number.bbox).to be_nil
       expect(document.date.value).to be_nil
+      expect(document.date.page_id).to be_nil
     end
 
     it 'should load a complete document prediction' do
@@ -32,6 +33,7 @@ describe Mindee::Document do
       expect(document.to_s).to eq(to_string)
       expect(document.date.raw).to be_nil
       expect(document.due_date.raw).to eq('2020-02-17')
+      expect(document.due_date.page_id).to eq(0)
     end
 
     it 'should load a complete page 0 prediction' do
@@ -40,6 +42,7 @@ describe Mindee::Document do
       page_data = response['document']['inference']['pages'][0]
       document = Mindee::Invoice.new(page_data['prediction'], page_id: page_data['id'])
       expect(document.orientation.degrees).to eq(0)
+      expect(document.due_date.page_id).to eq(0)
       expect(document.to_s).to eq(to_string)
     end
   end
@@ -50,6 +53,7 @@ describe Mindee::Document do
       document = Mindee::Receipt.new(response['document']['inference']['prediction'])
       expect(document.document_type).to eq('receipt')
       expect(document.date.value).to be_nil
+      expect(document.date.page_id).to be_nil
       expect(document.time.value).to be_nil
     end
 
@@ -57,8 +61,9 @@ describe Mindee::Document do
       to_string = File.read(File.join(DATA_DIR, 'receipt/response/doc_to_string.txt')).strip
       response = load_json('receipt/response/complete.json')
       document = Mindee::Receipt.new(response['document']['inference']['prediction'])
-      expect(document.to_s).to eq(to_string)
+      expect(document.date.page_id).to eq(0)
       expect(document.date.raw).to eq('26-Feb-2016')
+      expect(document.to_s).to eq(to_string)
     end
 
     it 'should load a complete page 0 prediction' do
@@ -67,6 +72,7 @@ describe Mindee::Document do
       page_data = response['document']['inference']['pages'][0]
       document = Mindee::Receipt.new(page_data['prediction'], page_id: page_data['id'])
       expect(document.orientation.degrees).to eq(0)
+      expect(document.date.page_id).to eq(0)
       expect(document.to_s).to eq(to_string)
     end
   end
