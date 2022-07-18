@@ -30,6 +30,8 @@ describe Mindee::Document do
       expect(document.orientation).to be_nil
       expect(document.invoice_number.bbox).to eq(document.invoice_number.polygon)
       expect(document.to_s).to eq(to_string)
+      expect(document.date.raw).to be_nil
+      expect(document.due_date.raw).to eq('2020-02-17')
     end
 
     it 'should load a complete page 0 prediction' do
@@ -56,6 +58,7 @@ describe Mindee::Document do
       response = load_json('receipt/response/complete.json')
       document = Mindee::Receipt.new(response['document']['inference']['prediction'])
       expect(document.to_s).to eq(to_string)
+      expect(document.date.raw).to eq('26-Feb-2016')
     end
 
     it 'should load a complete page 0 prediction' do
