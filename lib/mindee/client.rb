@@ -47,6 +47,11 @@ module Mindee
   # Mindee API Client.
   # See: https://developers.mindee.com/docs/
   class Client
+    DOC_TYPE_INVOICE = 'invoice'
+    DOC_TYPE_RECEIPT = 'receipt'
+    DOC_TYPE_PASSPORT = 'passport'
+    DOC_TYPE_FINANCIAL = 'financial_doc'
+
     # @param raise_on_error [Boolean]
     def initialize(api_key: nil, raise_on_error: true)
       @raise_on_error = raise_on_error
@@ -58,7 +63,7 @@ module Mindee
     # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
     def config_invoice(api_key: nil)
-      @doc_configs[['mindee', 'invoice']] = InvoiceConfig.new(
+      @doc_configs[['mindee', DOC_TYPE_INVOICE]] = InvoiceConfig.new(
         api_key || @api_key,
         @raise_on_error
       )
@@ -69,7 +74,7 @@ module Mindee
     # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
     def config_receipt(api_key: nil)
-      @doc_configs[['mindee', 'receipt']] = ReceiptConfig.new(
+      @doc_configs[['mindee', DOC_TYPE_RECEIPT]] = ReceiptConfig.new(
         api_key || @api_key,
         @raise_on_error
       )
@@ -80,7 +85,7 @@ module Mindee
     # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
     def config_passport(api_key: nil)
-      @doc_configs[['mindee', 'passport']] = PassportConfig.new(
+      @doc_configs[['mindee', DOC_TYPE_PASSPORT]] = PassportConfig.new(
         api_key || @api_key,
         @raise_on_error
       )
@@ -91,7 +96,7 @@ module Mindee
     # @param api_key [String] Override the client API key for this endpoint
     # @return [Mindee::Client]
     def config_financial_doc(api_key: nil)
-      @doc_configs[['mindee', 'financial_doc']] = FinancialDocConfig.new(
+      @doc_configs[['mindee', DOC_TYPE_FINANCIAL]] = FinancialDocConfig.new(
         api_key || @api_key,
         @raise_on_error
       )

@@ -8,19 +8,19 @@ require 'mindee'
 DOCUMENTS = {
   "invoice" => {
     help: 'Invoice',
-    doc_type: "invoice",
+    doc_type: Mindee::Client::DOC_TYPE_INVOICE,
   },
   "receipt" => {
     help: "Expense Receipt",
-    doc_type: "receipt",
+    doc_type: Mindee::Client::DOC_TYPE_RECEIPT,
   },
   "passport" => {
     help: "Passport",
-    doc_type: "passport",
+    doc_type: Mindee::Client::DOC_TYPE_PASSPORT,
   },
   "financial" => {
     help: "Financial Document (receipt or invoice)",
-    doc_type: "financial_doc",
+    doc_type: Mindee::Client::DOC_TYPE_FINANCIAL,
   },
   "custom" => {
     help: "Custom document type from API builder",
