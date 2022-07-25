@@ -6,9 +6,18 @@ module Mindee
     # The confidence score, value will be between 0.0 and 1.0
     # @return [Float]
     attr_reader :confidence
-    attr_reader :language,
-                :country,
-                :currency
+    #  Language code in ISO 639-1 format.
+    # @return [String]
+    attr_reader :language
+    # Country code in ISO 3166-1 alpha-2 format.
+    # @return [String, nil]
+    attr_reader :country
+    # Currency code in ISO 4217 format.
+    # @return [String]
+    attr_reader :currency
+    # Language code, with country code when available.
+    # @return [String]
+    attr_reader :value
 
     # @param prediction [Hash]
     def initialize(prediction)

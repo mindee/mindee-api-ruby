@@ -3,10 +3,14 @@
 module Mindee
   # Field in a list.
   class ListFieldItem
-    attr_reader :confidence,
-                :content,
-                :polygon,
-                :bbox
+    # The confidence score, value will be between 0.0 and 1.0
+    # @return [Float]
+    attr_accessor :confidence
+    # @return [Array<Array<Float>>]
+    attr_reader :bbox
+    # @return [Array<Array<Float>>]
+    attr_reader :polygon
+    attr_reader :content
 
     # @param prediction [Hash]
     def initialize(prediction)
