@@ -8,23 +8,19 @@ require 'mindee'
 DOCUMENTS = {
   "invoice" => {
     help: 'Invoice',
-    required_keys: ["invoice"],
-    doc_type: "invoice",
+    doc_type: Mindee::Client::DOC_TYPE_INVOICE,
   },
   "receipt" => {
     help: "Expense Receipt",
-    required_keys: ["receipt"],
-    doc_type: "receipt",
+    doc_type: Mindee::Client::DOC_TYPE_RECEIPT,
   },
   "passport" => {
     help: "Passport",
-    required_keys: ["passport"],
-    doc_type: "passport",
+    doc_type: Mindee::Client::DOC_TYPE_PASSPORT,
   },
   "financial" => {
     help: "Financial Document (receipt or invoice)",
-    required_keys: ["invoice", "receipt"],
-    doc_type: "financial_doc",
+    doc_type: Mindee::Client::DOC_TYPE_FINANCIAL,
   },
   "custom" => {
     help: "Custom document type from API builder",
@@ -35,15 +31,15 @@ options = {}
 
 def ots_subcommand(command, options)
   OptionParser.new do |opt|
-    info = DOCUMENTS[command]
     opt.banner = "Usage: #{command} [options] FILE"
-    info[:required_keys].each do |key_name|
-      opt.on("--#{key_name}-key [KEY]", "API key for #{key_name} document endpoint") do |v|
-        options["#{key_name}_api_key"] = v
-      end
-      opt.on('-w', '--with-words', 'Include words in response') do |v|
-        options[:include_words] = v
-      end
+    opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
+      options[:api_key] = v
+    end
+    opt.on('-w', '--with-words', 'Include words in response') do |v|
+      options[:include_words] = v
+    end
+    opt.on('-C', '--no-cut-pages', "Don't cut document pages") do |v|
+      options[:include_words] = v
     end
   end
 end
@@ -54,8 +50,14 @@ def custom_subcommand(options)
     opt.on('-w', '--with-words', 'Include words in response') do |v|
       options[:include_words] = v
     end
+    opt.on('-C', '--no-cut-pages', "Don't cut document pages") do |v|
+      options[:include_words] = v
+    end
     opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
       options[:api_key] = v
+    end
+    opt.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
+      options[:version] = v
     end
     opt.on('-u USER', '--user USER', 'API account name for the endpoint') do |v|
       options[:user] = v
@@ -65,29 +67,22 @@ end
 
 def new_ots_client(options, command)
   raise_on_error = options[:no_raise_errors].nil? ? true : false
-  mindee_client = Mindee::Client.new(raise_on_error: raise_on_error)
+  mindee_client = Mindee::Client.new(
+    api_key: options[:api_key], raise_on_error: raise_on_error
+  )
   info = DOCUMENTS[command]
-  kwargs = {}
-  if info[:required_keys].length > 1
-    info[:required_keys].each do |key|
-      key_name = "#{key}_api_key"
-      kwargs[key_name.to_sym] = options[key_name]
-    end
-  else
-    kwargs[:api_key] = options["#{info[:required_keys][0]}_api_key"]
-  end
-  mindee_client.send("config_#{info[:doc_type]}", **kwargs)
+  mindee_client.send("config_#{info[:doc_type]}")
 end
 
 def new_custom_client(options, doc_type)
   raise_on_error = options[:no_raise_errors].nil? ? true : false
-  mindee_client = Mindee::Client.new(raise_on_error: raise_on_error)
+  mindee_client = Mindee::Client.new(
+    api_key: options[:api_key], raise_on_error: raise_on_error
+  )
   mindee_client.config_custom_doc(
+    doc_type,
     options[:user],
-    doc_type,
-    doc_type,
-    doc_type + 's',
-    api_key: options[:api_key]
+    version: options[:version] || '1'
   )
 end
 
@@ -100,7 +95,6 @@ global_parser = OptionParser.new do |opt|
     options[:no_raise_errors] = true
     end
 end
-#end.parse!
 
 subcommands = {
   'invoice' => ots_subcommand('invoice', options),
@@ -134,9 +128,10 @@ else
     exit(1)
   end
   mindee_client = new_ots_client(options, command)
-  doc_type = command
+  doc_type = DOCUMENTS[command][:doc_type]
   file_path = ARGV[0]
 end
 
-doc = mindee_client.doc_from_path(file_path)
+cut_pages = options[:no_cut_pages].nil? ? false : true
+doc = mindee_client.doc_from_path(file_path, cut_pages: cut_pages)
 puts doc.parse(doc_type).document

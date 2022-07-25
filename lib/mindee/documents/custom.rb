@@ -10,8 +10,12 @@ module Mindee
     # @return [Hash<Symbol, Mindee::ListField>]
     attr_reader :fields
 
-    def initialize(document_type, prediction, page_id)
-      super(document_type)
+    # @param document_type [String]
+    # @param prediction [Hash]
+    # @param input_file [Mindee::InputDocument, nil]
+    # @param page_id [Integer, nil]
+    def initialize(document_type, prediction, input_file: nil, page_id: nil)
+      super(document_type, input_file: input_file)
       @fields = {}
       prediction.each do |field_name, field_prediction|
         field_sym = field_name.to_sym
@@ -28,11 +32,12 @@ module Mindee
 
     def to_s
       out_str = String.new
-      out_str << "----- #{@document_type} -----\n"
+      out_str << "----- #{@document_type} -----"
+      out_str << "\nFilename: #{@filename}".rstrip
       @fields.each do |name, info|
-        out_str << "#{name}: #{info}".strip << "\n"
+        out_str << "\n#{name}: #{info}".rstrip
       end
-      out_str << '----------------------'
+      out_str << "\n----------------------"
       out_str
     end
   end

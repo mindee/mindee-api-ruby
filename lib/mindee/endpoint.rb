@@ -5,7 +5,7 @@ require_relative 'version'
 
 module Mindee
   MINDEE_API_URL = 'https://api.mindee.net/v1'
-  USER_AGENT = "mindee-api-ruby@#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
+  USER_AGENT = "mindee-api-ruby@v#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
 
   INVOICE_VERSION = '3'
   INVOICE_URL_NAME = 'invoices'
@@ -68,7 +68,8 @@ module Mindee
 
     # Set the endpoint's API key from an environment variable, if present.
     def set_api_key_from_env
-      env_key = ENV.fetch('MINDEE_INVOICE_API_KEY', nil)
+      env_key = ENV.fetch('MINDEE_API_KEY', nil)
+      env_key = ENV.fetch(envvar_key_name, nil) if env_key.nil?
       @api_key = env_key if env_key
     end
   end

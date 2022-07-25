@@ -17,23 +17,32 @@ module Mindee
     # @param document_type [String]
     # @param endpoints [Array<Mindee::Endpoint>]
     # @param raise_on_error [Boolean]
-    def initialize(doc_class, document_type, singular_name, plural_name, endpoints, raise_on_error)
+    def initialize(doc_class, document_type, endpoints, raise_on_error)
       @doc_class = doc_class
       @document_type = document_type
-      @singular_name = singular_name
-      @plural_name = plural_name
       @endpoints = endpoints
       @raise_on_error = raise_on_error
     end
 
     # Parse a prediction API result.
+    # @param input_doc [Mindee::InputDocument]
     # @param response [Hash]
     # @return [Mindee::DocumentResponse]
-    def build_predict_result(response)
-      document = @doc_class.new(response['document']['inference']['prediction'], nil)
+    def build_predict_result(input_doc, response)
+      document = @doc_class.new(
+        response['document']['inference']['prediction'],
+        input_file: input_doc,
+        page_id: nil
+      )
       pages = []
       response['document']['inference']['pages'].each do |page|
-        pages.push(@doc_class.new(page['prediction'], page['id']))
+        pages.push(
+          @doc_class.new(
+            page['prediction'],
+            input_file: input_doc,
+            page_id: page['id']
+          )
+        )
       end
       DocumentResponse.new(response, @document_type, document, pages)
     end
@@ -46,14 +55,15 @@ module Mindee
     def predict(input_doc, include_words, close_file)
       check_api_keys
       response = predict_request(input_doc, include_words, close_file)
-      parse_response(response)
+      parse_response(input_doc, response)
     end
 
     private
 
+    # @param input_doc [Mindee::InputDocument]
     # @param response [Net::HTTPResponse]
     # @return [Mindee::DocumentResponse]
-    def parse_response(response)
+    def parse_response(input_doc, response)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       unless (200..299).include?(response.code.to_i)
         if @raise_on_error
@@ -65,7 +75,7 @@ module Mindee
           hashed_response, @document_type, {}, []
         )
       end
-      build_predict_result(hashed_response)
+      build_predict_result(input_doc, hashed_response)
     end
 
     # @param input_doc [Mindee::InputDocument]
@@ -95,8 +105,6 @@ module Mindee
       super(
         Invoice,
         'invoice',
-        'invoice',
-        'invoices',
         endpoints,
         raise_on_error
       )
@@ -110,8 +118,6 @@ module Mindee
       super(
         Receipt,
         'receipt',
-        'receipt',
-        'receipts',
         endpoints,
         raise_on_error
       )
@@ -125,8 +131,6 @@ module Mindee
       super(
         Passport,
         'passport',
-        'passport',
-        'passports',
         endpoints,
         raise_on_error
       )
@@ -135,15 +139,13 @@ module Mindee
 
   # Client for Financial documents
   class FinancialDocConfig < DocumentConfig
-    def initialize(invoice_api_key, receipt_api_key, raise_on_error)
+    def initialize(api_key, raise_on_error)
       endpoints = [
-        InvoiceEndpoint.new(invoice_api_key),
-        ReceiptEndpoint.new(receipt_api_key),
+        InvoiceEndpoint.new(api_key),
+        ReceiptEndpoint.new(api_key),
       ]
       super(
         FinancialDocument,
-        'financial_doc',
-        'financial_doc',
         'financial_doc',
         endpoints,
         raise_on_error
@@ -152,36 +154,45 @@ module Mindee
 
     private
 
-    def predict_request(input_doc, include_words)
+    def predict_request(input_doc, include_words, close_file)
       endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
-      endpoint.predict_request(input_doc, include_words: include_words)
+      endpoint.predict_request(input_doc, include_words: include_words, close_file: close_file)
     end
   end
 
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
-    def initialize(document_type, account_name, singular_name, plural_name, version, api_key, raise_on_error)
+    def initialize(document_type, account_name, version, api_key, raise_on_error)
       endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
       super(
         CustomDocument,
         document_type,
-        singular_name,
-        plural_name,
         endpoints,
         raise_on_error
       )
     end
 
+    # Parse a prediction API result.
+    # @param input_doc [Mindee::InputDocument]
     # @param response [Hash]
-    def build_predict_result(response)
+    # @return [Mindee::DocumentResponse]
+    def build_predict_result(input_doc, response)
       document = CustomDocument.new(
         @document_type,
         response['document']['inference']['prediction'],
-        nil
+        input_file: input_doc,
+        page_id: nil
       )
       pages = []
       response['document']['inference']['pages'].each do |page|
-        pages.push(CustomDocument.new(@document_type, page['prediction'], page['id']))
+        pages.push(
+          CustomDocument.new(
+            @document_type,
+            page['prediction'],
+            input_file: input_doc,
+            page_id: page['id']
+          )
+        )
       end
       DocumentResponse.new(response, @document_type, document, pages)
     end

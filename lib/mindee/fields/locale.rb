@@ -3,14 +3,22 @@
 module Mindee
   # Represents locale information
   class Locale
-    attr_reader :confidence,
-                :language,
+    # The confidence score, value will be between 0.0 and 1.0
+    # @return [Float]
+    attr_reader :confidence
+    attr_reader :language,
                 :country,
                 :currency
 
+    # @param prediction [Hash]
     def initialize(prediction)
+      value_key = if prediction.include? 'value'
+                    'value'
+                  else
+                    'language'
+                  end
       @confidence = prediction['confidence']
-      @value = prediction['value']
+      @value = prediction[value_key]
       @language = prediction['language']
       @country = prediction['country']
       @currency = prediction['currency']

@@ -7,7 +7,7 @@ on:
   - push
 
 jobs:
-  static-check:
+  linting:
     name: Run Static Analysis
     runs-on: ubuntu-latest
     strategy:
@@ -27,4 +27,4 @@ jobs:
 
     - name: Analyse the code with Rubocop
       run: |
-        bundle exec rubocop ./lib ./spec ./bin
+        bundle exec rubocop ./

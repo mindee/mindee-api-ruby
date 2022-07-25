@@ -6,21 +6,18 @@ DATA_DIR = File.join(__dir__, 'data').freeze
 
 describe Mindee::Client do
   context 'A client' do
-    mindee_client = Mindee::Client.new
+    mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
 
     it 'should be configurable' do
       mindee_client.config_invoice(api_key: 'invalid-api-key')
                    .config_receipt(api_key: 'invalid-api-key')
                    .config_passport(api_key: 'invalid-api-key')
                    .config_financial_doc(
-                     invoice_api_key: 'invalid-api-key',
-                     receipt_api_key: 'invalid-api-key'
+                     api_key: 'invalid-api-key'
                    )
                    .config_custom_doc(
                      'dummy',
                      'dummy',
-                     'dummy',
-                     'dummies',
                      api_key: 'invalid-api-key'
                    )
     end

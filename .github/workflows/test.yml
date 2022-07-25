@@ -7,7 +7,7 @@ on:
   - push
 
 jobs:
-  static-check:
+  tests:
     name: Run Tests
     runs-on: ubuntu-latest
     strategy:

@@ -6,7 +6,7 @@ AllCops:
     - 'tmp/**/*'
     - '.git/**/*'
     - 'bin/*'
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 2.6
   SuggestExtensions: false
 
 Style/TrailingCommaInHashLiteral:
@@ -26,7 +26,7 @@ Metrics/BlockLength:
     - '**/*.gemspec'
 
 Metrics/MethodLength:
-  Max: 30
+  Max: 35
 
 Metrics/ClassLength:
   Max: 200
