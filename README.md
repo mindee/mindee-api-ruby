@@ -58,7 +58,7 @@ There's more to it than that for those that need more features, or want to
 customize the experience.
 
 All the juicy details are described in the
-**[Official Documentation](https://developers.mindee.com/docs/getting-started)**.
+**[Official Documentation](https://developers.mindee.com/docs/ruby-getting-started)**.
 
 ## License
 Copyright © Mindee
