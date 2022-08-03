@@ -7,7 +7,7 @@ module Mindee
   # Custom document object.
   class CustomDocument < Document
     # All fields in the document
-    # @return [Hash<Symbol, Mindee::ListField>]
+    # @return [Hash<Symbol, Mindee::ListField | Mindee::ClassificationField>]
     attr_reader :fields
 
     # @param document_type [String]
@@ -19,7 +19,7 @@ module Mindee
       @fields = {}
       prediction.each do |field_name, field_prediction|
         field_sym = field_name.to_sym
-        complete_field = ListField.new(field_prediction, page_id)
+        complete_field = build_field(field_prediction, page_id)
 
         # Add the field to the `fields` array
         @fields[field_sym] = complete_field
@@ -39,6 +39,18 @@ module Mindee
       end
       out_str << "\n----------------------"
       out_str
+    end
+
+    private
+
+    def build_field(field_prediction, page_id)
+      # Currently two types of fields possible in a custom API response:
+      # fields having a list of values, and classification fields.
+      # Here we use the fact that only value lists have the 'values' attribute.
+
+      return ListField.new(field_prediction, page_id) if field_prediction['values']
+
+      ClassificationField.new(field_prediction)
     end
   end
 end

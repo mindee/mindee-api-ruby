@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 module Mindee
+  # Document classification (custom docs)
+  class ClassificationField
+    # @param prediction [Hash]
+    def initialize(prediction)
+      @value = prediction['value']
+      @confidence = prediction['confidence']
+    end
+
+    def to_s
+      @value
+    end
+  end
+
   # Field in a list.
   class ListFieldItem
     # The confidence score, value will be between 0.0 and 1.0
