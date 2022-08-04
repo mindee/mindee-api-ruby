@@ -135,7 +135,8 @@ describe Mindee::Document do
       prediction = response['document']['inference']['prediction']
       document = Mindee::CustomDocument.new('field_test', prediction)
       expect(document.document_type).to eq('field_test')
-      expect(document.fields.length).to eq(11)
+      expect(document.fields.length).to eq(10)
+      expect(document.classifications.length).to eq(1)
     end
 
     it 'should load a complete document prediction' do
