@@ -145,8 +145,14 @@ describe Mindee::Document do
       prediction = response['document']['inference']['prediction']
       document = Mindee::CustomDocument.new('field_test', prediction)
       expect(document.to_s).to eq(to_string)
+
+      expect(document.fields[:string_all].values.size).to eq(3)
+      expect(document.fields['string_all']).to be_nil
       expect(document.string_all.contents_str).to eq('Mindee is awesome')
       expect(document.string_all.contents_list).to eq(['Mindee', 'is', 'awesome'])
+
+      expect(document.classifications[:doc_type].value).to eq('type_b')
+      expect(document.doc_type.value).to eq('type_b')
     end
 
     it 'should load a complete page 0 prediction' do
