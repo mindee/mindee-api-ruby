@@ -2,7 +2,7 @@
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
-The following is a set of guidelines for contributing to mindee-api-python which are hosted on GitHub.
+The following is a set of guidelines for contributing to mindee-api-ruby which are hosted on GitHub.
 These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Code of Conduct
@@ -35,7 +35,7 @@ To help maintainers and the community to be efficient, follow these guidelines:
 
 Include details about your configuration and environment:
 
-* **Which version of  mindee-api-python are you using?**
+* **Which version of  mindee-api-ruby are you using?**
 * **What's the name and version of the browser you're using, on which OS**?
 
 ### Suggesting Enhancements
@@ -49,7 +49,7 @@ Make sure to provide the following information:
 * **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
 * **Include screenshots and animated GIFs** which help you demonstrate the steps or point out the part of the sdk which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
-* **Specify which version of  mindee-api-python you're using.**
+* **Specify which version of  mindee-api-ruby you're using.**
 * **Specify the name and version of the browser and OS you're using.**
 
 ### Pull Requests
