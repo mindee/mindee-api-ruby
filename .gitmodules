@@ -1,0 +1,3 @@
+[submodule "spec/data"]
+	path = spec/data
+	url = git@github.com:mindee/client-lib-test-data.git

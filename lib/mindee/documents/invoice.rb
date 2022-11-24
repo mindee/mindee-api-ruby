@@ -85,7 +85,7 @@ module Mindee
       company_registration = @company_registration.map(&:to_s).join('; ')
       taxes = @taxes.join("\n       ")
       out_str = String.new
-      out_str << '-----Invoice data-----'
+      out_str << '----- Invoice V3 -----'
       out_str << "\nFilename: #{@filename}".rstrip
       out_str << "\nInvoice number: #{@invoice_number}".rstrip
       out_str << "\nTotal amount including taxes: #{@total_incl}".rstrip
