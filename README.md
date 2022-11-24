@@ -30,7 +30,8 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_invoice
 
 # Load a file from disk and parse it
-api_response = mindee_client.doc_from_path("/path/to/the/invoice.pdf").parse("invoice")
+api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
+  .parse('invoice')
 
 # Print a brief summary of the parsed data
 puts api_response.document
@@ -47,7 +48,8 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_custom_doc(
 )
 
 # Load a file from disk and parse it
-api_response = mindee_client.doc_from_path("/path/to/the/card.jpg").parse("pokemon-card")
+api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
+  .parse('pokemon-card')
 
 # Print a brief summary of the parsed data
 puts api_response.document
