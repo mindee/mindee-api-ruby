@@ -98,8 +98,8 @@ module Mindee
       new_pdf = Origami::PDF.new
 
       to_insert = [current_pdf.pages[0], current_pdf.pages[-2], current_pdf.pages[-1]].take(max_pages)
-      to_insert.each_with_index do |page, idx|
-        new_pdf.insert_page(idx, page)
+      to_insert.each do |page|
+        new_pdf.append_page(page)
       end
       @io_stream = new_pdf.to_io_stream
     end
