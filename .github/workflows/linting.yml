@@ -10,22 +10,16 @@ jobs:
   linting:
     name: Run Static Analysis
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ["2.7"]
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    - name: set up Ruby ${{ matrix.ruby-version }}
+    - name: set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby-version }}
-
-    - name: Install dependencies
-      run: |
-        bundle install
+        ruby-version: "2.7"
+        bundler-cache: true
 
     - name: Analyse the code with Rubocop
       run: |

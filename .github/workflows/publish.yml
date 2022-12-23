@@ -1,0 +1,35 @@
+name: Publish
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  linting:
+    name: Publish to Rubygems
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "2.7"
+        bundler-cache: true
+
+    - name: Set credentials
+      env:
+        RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      run: |
+        echo -e "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}" > ~/.gem/credentials
+        chmod 600 ~/.gem/credentials
+
+    - name: Build the Gem
+      run: |
+        gem build --strict --output mindee.gem
+
+    - name: Publish the Gem
+      run: |
+        gem push mindee.gem

@@ -2,7 +2,7 @@
 
 # Mindee
 module Mindee
-  VERSION = '1.1.1'
+  VERSION = '1.1.2'
 
   def self.find_platform
     host = RbConfig::CONFIG['host_os']

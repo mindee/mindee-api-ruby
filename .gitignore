@@ -1,6 +1,7 @@
 # IDE
 .vscode/
-.idea
+.idea/
+*.iml
 
 # Ruby
 *.gem
