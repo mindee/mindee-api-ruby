@@ -18,7 +18,7 @@ jobs:
       with:
         submodules: recursive
 
-    - name: set up Ruby ${{ matrix.python-version }}
+    - name: set up Ruby ${{ matrix.ruby-version }}
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
