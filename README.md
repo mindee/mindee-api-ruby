@@ -1,3 +1,8 @@
+[![License: MIT](https://img.shields.io/github/license/mindee/mindee-api-ruby)](https://opensource.org/licenses/MIT)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mindee/mindee-api-ruby/test.yml)](https://github.com/mindee/mindee-api-ruby)
+[![Gem Version](https://img.shields.io/gem/v/mindee)](https://rubygems.org/gems/mindee)
+[![Downloads](https://img.shields.io/gem/dt/mindee.svg)](https://rubygems.org/gems/mindee)
+
 # Mindee API Helper Library for Ruby
 Quickly and easily connect to Mindee's API services using Ruby.
 
