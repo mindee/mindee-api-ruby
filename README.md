@@ -24,10 +24,6 @@ And then execute:
 
     $ bundle install
 
-Or install it yourself as:
-
-    $ gem install mindee
-
 Finally, Ruby away!
 
 ### Off-the-Shelf Document
@@ -35,11 +31,11 @@ Finally, Ruby away!
 require 'mindee'
 
 # Init a new client and configure the Invoice API
-mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_invoice
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse('invoice')
+  .parse(Mindee::InvoiceV3)
 
 # Print a brief summary of the parsed data
 puts api_response.document
@@ -50,14 +46,14 @@ puts api_response.document
 require 'mindee'
 
 # Init a new client and configure your custom document
-mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_custom_doc(
+mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
   'john',
   'wnine'
 )
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse('wnine')
+  .parse(Mindee::CustomV1, 'wnine')
 
 # Print a brief summary of the parsed data
 puts api_response.document

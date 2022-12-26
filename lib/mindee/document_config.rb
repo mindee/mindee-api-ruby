@@ -2,9 +2,9 @@
 
 require 'json'
 
-require_relative 'endpoint'
+require_relative 'api/endpoint'
+require_relative 'api/response'
 require_relative 'documents'
-require_relative 'response'
 
 module Mindee
   # Specific client for sending a document to the API.
@@ -51,10 +51,11 @@ module Mindee
     # @param input_doc [Mindee::InputDocument]
     # @param include_words [Boolean]
     # @param close_file [Boolean]
+    # @param cropper [Boolean]
     # @return [Mindee::DocumentResponse]
-    def predict(input_doc, include_words, close_file)
+    def predict(input_doc, include_words, close_file, cropper)
       check_api_keys
-      response = predict_request(input_doc, include_words, close_file)
+      response = predict_request(input_doc, include_words, close_file, cropper)
       parse_response(input_doc, response)
     end
 
@@ -81,9 +82,10 @@ module Mindee
     # @param input_doc [Mindee::InputDocument]
     # @param include_words [Boolean]
     # @param close_file [Boolean]
+    # # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
-    def predict_request(input_doc, include_words, close_file)
-      @endpoints[0].predict_request(input_doc, include_words: include_words, close_file: close_file)
+    def predict_request(input_doc, include_words, close_file, cropper)
+      @endpoints[0].predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
     end
 
     def check_api_keys
@@ -95,45 +97,6 @@ module Mindee
               'You can set this using the ' \
               "'#{endpoint.envvar_key_name}' environment variable."
       end
-    end
-  end
-
-  # Client for Invoice documents
-  class InvoiceConfig < DocumentConfig
-    def initialize(api_key, raise_on_error)
-      endpoints = [InvoiceEndpoint.new(api_key)]
-      super(
-        Invoice,
-        'invoice',
-        endpoints,
-        raise_on_error
-      )
-    end
-  end
-
-  # Client for Receipt documents
-  class ReceiptConfig < DocumentConfig
-    def initialize(api_key, raise_on_error)
-      endpoints = [ReceiptEndpoint.new(api_key)]
-      super(
-        Receipt,
-        'receipt',
-        endpoints,
-        raise_on_error
-      )
-    end
-  end
-
-  # Client for Passport documents
-  class PassportConfig < DocumentConfig
-    def initialize(api_key, raise_on_error)
-      endpoints = [PassportEndpoint.new(api_key)]
-      super(
-        Passport,
-        'passport',
-        endpoints,
-        raise_on_error
-      )
     end
   end
 
@@ -154,19 +117,24 @@ module Mindee
 
     private
 
+    # @param input_doc [Mindee::InputDocument]
+    # @param include_words [Boolean]
+    # @param close_file [Boolean]
+    # # @param cropper [Boolean]
+    # @return [Net::HTTPResponse]
     def predict_request(input_doc, include_words, close_file)
       endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
-      endpoint.predict_request(input_doc, include_words: include_words, close_file: close_file)
+      endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
     end
   end
 
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
-    def initialize(document_type, account_name, version, api_key, raise_on_error)
-      endpoints = [CustomEndpoint.new(document_type, account_name, version, api_key)]
+    def initialize(account_name, endpoint_name, version, api_key, raise_on_error)
+      endpoints = [CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
       super(
-        CustomDocument,
-        document_type,
+        CustomV1,
+        endpoint_name,
         endpoints,
         raise_on_error
       )
@@ -177,7 +145,7 @@ module Mindee
     # @param response [Hash]
     # @return [Mindee::DocumentResponse]
     def build_predict_result(input_doc, response)
-      document = CustomDocument.new(
+      document = CustomV1.new(
         @document_type,
         response['document']['inference']['prediction'],
         input_file: input_doc,
@@ -186,7 +154,7 @@ module Mindee
       pages = []
       response['document']['inference']['pages'].each do |page|
         pages.push(
-          CustomDocument.new(
+          CustomV1.new(
             @document_type,
             page['prediction'],
             input_file: input_doc,

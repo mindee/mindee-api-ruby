@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../fields'
-require_relative 'base'
+require_relative 'fields'
+require_relative '../base'
 
 module Mindee
   # Custom document object.
-  class CustomDocument < Document
+  class CustomV1 < Document
     # All value fields in the document
     # @return [Hash<Symbol, Mindee::ListField>]
     attr_reader :fields

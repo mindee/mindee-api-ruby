@@ -9,17 +9,7 @@ describe Mindee::Client do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
 
     it 'should be configurable' do
-      mindee_client.config_invoice(api_key: 'invalid-api-key')
-                   .config_receipt(api_key: 'invalid-api-key')
-                   .config_passport(api_key: 'invalid-api-key')
-                   .config_financial_doc(
-                     api_key: 'invalid-api-key'
-                   )
-                   .config_custom_doc(
-                     'dummy',
-                     'dummy',
-                     api_key: 'invalid-api-key'
-                   )
+      mindee_client.add_endpoint('dummy', 'dummy')
     end
 
     it 'should open PDF files from a path' do
@@ -73,19 +63,19 @@ describe Mindee::Client do
     end
 
     it 'should make an invalid API call raising an exception' do
-      mindee_client1 = Mindee::Client.new.config_invoice(api_key: 'invalid-api-key')
+      mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
       doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
       expect do
-        doc.parse('invoice', include_words: false, close_file: true)
+        doc.parse(Mindee::InvoiceV3, include_words: false, close_file: true)
       end.to raise_error Net::HTTPError
     end
 
     it 'should make an invalid API call not raising an exception' do
-      mindee_client1 = Mindee::Client.new(raise_on_error: false).config_invoice(api_key: 'invalid-api-key')
+      mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key', raise_on_error: false)
       file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
       doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
-      response = doc.parse('invoice', include_words: false, close_file: true)
+      response = doc.parse(Mindee::InvoiceV3, include_words: false, close_file: true)
       expect(response.document_type).to eq('invoice')
       expect(response.http_response).to have_key('api_request')
     end

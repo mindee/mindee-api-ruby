@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'mindee/inputs'
+require 'mindee/input'
 
 DATA_DIR = File.join(__dir__, 'data').freeze
 

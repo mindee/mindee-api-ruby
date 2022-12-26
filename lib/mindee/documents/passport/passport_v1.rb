@@ -2,8 +2,8 @@
 
 require 'mrz'
 
-require_relative '../fields'
-require_relative 'base'
+require_relative '../../fields'
+require_relative '../base'
 
 # We need to do this disgusting thing to avoid the following error message:
 # td3 line one does not match the required format (MRZ::InvalidFormatError)
@@ -16,7 +16,7 @@ MRZ::TD3Parser::FORMAT_ONE = %r{\A(.{2})(.{3})([^<]+)<(.*)\z}.freeze
 
 module Mindee
   # Passport document.
-  class Passport < Document
+  class PassportV1 < Document
     # @return [Mindee::Orientation]
     attr_reader :orientation
     attr_reader :country,
