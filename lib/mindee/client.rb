@@ -15,20 +15,34 @@ module Mindee
     end
 
     # Call prediction API on the document and parse the results.
+    #
     # @param document_class [Class]
+    #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.
+    #
     # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
     #  This is normally not required unless you have a custom endpoint which has the
     #  same name as standard (off the shelf) endpoint.
     #  Do not set for standard (off the shelf) endpoints.
+    #
     # @param include_words [Boolean] Whether to include the full text for each page.
     #  This performs a full OCR operation on the server and will increase response time.
-    # @param close_file [Boolean] Whether to ``close()`` the file after parsing it.
-    #  Set to ``false`` if you need to access the file after this operation.
-    # @param page_options [PageOptions]
+    #
+    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
+    #  Set to false if you need to access the file after this operation.
+    #
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #      * `:REMOVE` - remove the specified pages, and keep all others.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    #
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
+    #
     # @return [Mindee::DocumentResponse]
     def parse(
       document_class,
@@ -36,14 +50,26 @@ module Mindee
       account_name: '',
       include_words: false,
       close_file: true,
-      page_options: {},
+      page_options: nil,
       cropper: false
     )
-      if document_class.name != CustomV1.name
-        endpoint_name = document_class.name
-      elsif endpoint_name.empty?
-        raise "endpoint_name is required when using #{document_class.name} class"
-      end
+      doc_config = find_doc_config(document_class, endpoint_name, account_name)
+      @input_doc.process_pdf(page_options) if !page_options.nil? && @input_doc.pdf?
+      doc_config.predict(@input_doc, include_words, close_file, cropper)
+    end
+
+    private
+
+    def determine_endpoint_name(document_class, endpoint_name)
+      return document_class.name if document_class.name != CustomV1.name
+
+      raise "endpoint_name is required when using #{document_class.name} class" if endpoint_name.empty?
+
+      endpoint_name
+    end
+
+    def find_doc_config(document_class, endpoint_name, account_name)
+      endpoint_name = determine_endpoint_name(document_class, endpoint_name)
 
       found = []
       @doc_configs.each_key do |conf|
@@ -63,8 +89,7 @@ module Mindee
               "the parse method, one of #{usernames}."
       end
 
-      doc_config = @doc_configs[config_key]
-      doc_config.predict(@input_doc, include_words, close_file, cropper)
+      @doc_configs[config_key]
     end
   end
 
@@ -101,44 +126,36 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
-    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_path(input_path, cut_pages: true, max_pages: MAX_DOC_PAGES)
-      doc = PathDocument.new(input_path, cut_pages, max_pages: max_pages)
+    def doc_from_path(input_path)
+      doc = Input::PathDocument.new(input_path)
       DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
-    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_bytes(input_bytes, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
-      doc = BytesDocument.new(input_bytes, filename, cut_pages, max_pages: max_pages)
+    def doc_from_bytes(input_bytes, filename)
+      doc = Input::BytesDocument.new(input_bytes, filename)
       DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
-    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_b64string(base64_string, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
-      doc = Base64Document.new(base64_string, filename, cut_pages, max_pages: max_pages)
+    def doc_from_b64string(base64_string, filename)
+      doc = Input::Base64Document.new(base64_string, filename)
       DocumentClient.new(doc, @doc_configs)
     end
 
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @param cut_pages [Boolean] Automatically reconstruct a multi-page document.
-    # @param max_pages [Integer] Number (between 1 and 3 incl.) of pages to reconstruct a document.
     # @return [Mindee::DocumentClient]
-    def doc_from_file(input_file, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
-      doc = FileDocument.new(input_file, filename, cut_pages, max_pages: max_pages)
+    def doc_from_file(input_file, filename)
+      doc = Input::FileDocument.new(input_file, filename)
       DocumentClient.new(doc, @doc_configs)
     end
 
@@ -148,19 +165,19 @@ module Mindee
       @doc_configs[['mindee', InvoiceV3.name]] = DocumentConfig.new(
         InvoiceV3,
         'invoice',
-        [InvoiceEndpoint.new(@api_key)],
+        [API::InvoiceEndpoint.new(@api_key)],
         @raise_on_error
       )
       @doc_configs[['mindee', ReceiptV3.name]] = DocumentConfig.new(
         ReceiptV3,
         'receipt',
-        [ReceiptEndpoint.new(@api_key)],
+        [API::ReceiptEndpoint.new(@api_key)],
         @raise_on_error
       )
       @doc_configs[['mindee', PassportV1.name]] = DocumentConfig.new(
         PassportV1,
         'passport',
-        [PassportEndpoint.new(@api_key)],
+        [API::PassportEndpoint.new(@api_key)],
         @raise_on_error
       )
       @doc_configs[['mindee', FinancialDocument.name]] = FinancialDocConfig.new(
