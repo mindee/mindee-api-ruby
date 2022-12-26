@@ -8,13 +8,19 @@ on:
 
 jobs:
   tests:
-    name: Run Tests
-    runs-on: ubuntu-latest
+    name: Test ${{ matrix.os }}, Ruby ${{ matrix.ruby }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os:
+          - "ubuntu-22.04"
+          - "ubuntu-20.04"
+          - "macos-latest"
         ruby:
           - "2.6"
           - "2.7"
+          - "3.0"
+          - "3.1"
     steps:
     - uses: actions/checkout@v3
       with:
@@ -28,4 +34,4 @@ jobs:
 
     - name: Run Rspec
       run: |
-        bundle exec rspec ./spec/*
+        bundle exec rake spec
