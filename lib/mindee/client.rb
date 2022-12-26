@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'inputs'
+require_relative 'input'
 require_relative 'document_config'
-require_relative 'endpoint'
+require_relative 'api/endpoint'
 
 module Mindee
   # General client for sending a document to the API.
@@ -15,111 +15,85 @@ module Mindee
     end
 
     # Call prediction API on the document and parse the results.
-    # @param document_name [String] Document name (type) to parse
-    # @param username [String] API username, the endpoint owner
-    # @param include_words [Boolean] Include all the words of the document in the response
-    # @param close_file [Boolean] Whether to close the file after parsing it.
+    # @param document_class [Class]
+    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
+    #  API Builder. Do not set for standard (off the shelf) endpoints.
+    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
+    #  This is normally not required unless you have a custom endpoint which has the
+    #  same name as standard (off the shelf) endpoint.
+    #  Do not set for standard (off the shelf) endpoints.
+    # @param include_words [Boolean] Whether to include the full text for each page.
+    #  This performs a full OCR operation on the server and will increase response time.
+    # @param close_file [Boolean] Whether to ``close()`` the file after parsing it.
+    #  Set to ``false`` if you need to access the file after this operation.
+    # @param page_options [PageOptions]
+    # @param cropper [Boolean] Whether to include cropper results for each page.
+    #  This performs a cropping operation on the server and will increase response time.
     # @return [Mindee::DocumentResponse]
-    def parse(document_name, username: '', include_words: false, close_file: true)
+    def parse(
+      document_class,
+      endpoint_name: '',
+      account_name: '',
+      include_words: false,
+      close_file: true,
+      page_options: {},
+      cropper: false
+    )
+      if document_class.name != CustomV1.name
+        endpoint_name = document_class.name
+      elsif endpoint_name.empty?
+        raise "endpoint_name is required when using #{document_class.name} class"
+      end
+
       found = []
       @doc_configs.each_key do |conf|
-        found.push(conf) if conf[1] == document_name
+        found.push(conf) if conf[1] == endpoint_name
       end
-      raise "Document type not configured: #{document_name}" if found.empty?
+      raise "Endpoint not configured: #{endpoint_name}" if found.empty?
 
-      if !username.empty?
-        config_key = [username, document_name]
+      if !account_name.empty?
+        config_key = [account_name, endpoint_name]
       elsif found.length == 1
         config_key = found[0]
       else
         usernames = found.map { |conf| conf[0] }
         raise "Duplicate configuration detected.\n" \
-              "You specified the document '#{document_name}' in your custom config.\n" \
+              "You specified the document '#{endpoint_name}' in your custom config.\n" \
               "To avoid confusion, please add the 'account_name' attribute to " \
               "the parse method, one of #{usernames}."
       end
 
       doc_config = @doc_configs[config_key]
-      doc_config.predict(@input_doc, include_words, close_file)
+      doc_config.predict(@input_doc, include_words, close_file, cropper)
     end
   end
 
   # Mindee API Client.
   # See: https://developers.mindee.com/docs/
   class Client
-    DOC_TYPE_INVOICE = 'invoice'
-    DOC_TYPE_RECEIPT = 'receipt'
-    DOC_TYPE_PASSPORT = 'passport'
-    DOC_TYPE_FINANCIAL = 'financial_doc'
-
     # @param raise_on_error [Boolean]
     def initialize(api_key: nil, raise_on_error: true)
       @raise_on_error = raise_on_error
       @doc_configs = {}
       @api_key = api_key
-    end
-
-    # Configure a 'Mindee Invoice' document.
-    # @param api_key [String] Override the client API key for this endpoint
-    # @return [Mindee::Client]
-    def config_invoice(api_key: nil)
-      @doc_configs[['mindee', DOC_TYPE_INVOICE]] = InvoiceConfig.new(
-        api_key || @api_key,
-        @raise_on_error
-      )
-      self
-    end
-
-    # Configure a 'Mindee Expense Receipts' document.
-    # @param api_key [String] Override the client API key for this endpoint
-    # @return [Mindee::Client]
-    def config_receipt(api_key: nil)
-      @doc_configs[['mindee', DOC_TYPE_RECEIPT]] = ReceiptConfig.new(
-        api_key || @api_key,
-        @raise_on_error
-      )
-      self
-    end
-
-    # Configure a 'Mindee Passport' document.
-    # @param api_key [String] Override the client API key for this endpoint
-    # @return [Mindee::Client]
-    def config_passport(api_key: nil)
-      @doc_configs[['mindee', DOC_TYPE_PASSPORT]] = PassportConfig.new(
-        api_key || @api_key,
-        @raise_on_error
-      )
-      self
-    end
-
-    # Configure a 'Mindee Financial document'. Uses 'Invoice' and 'Expense Receipt' internally.
-    # @param api_key [String] Override the client API key for this endpoint
-    # @return [Mindee::Client]
-    def config_financial_doc(api_key: nil)
-      @doc_configs[['mindee', DOC_TYPE_FINANCIAL]] = FinancialDocConfig.new(
-        api_key || @api_key,
-        @raise_on_error
-      )
-      self
+      init_default_endpoints
     end
 
     # Configure a custom document using the 'Mindee API Builder'.
     # @param account_name [String] Your organization's username on the API Builder
-    # @param document_name [String] The "API name" field in the "Settings" page of the API Builder
-    # @param api_key [String]  Override the client API key for this endpoint
+    # @param endpoint_name [String] The "API name" field in the "Settings" page of the API Builder
     # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
     # @return [Mindee::Client]
-    def config_custom_doc(
-      document_name,
+    def add_endpoint(
       account_name,
-      api_key: nil,
+      endpoint_name,
       version: '1'
     )
-      @doc_configs[[account_name, document_name]] = CustomDocConfig.new(
-        document_name,
+      @doc_configs[[account_name, endpoint_name]] = CustomDocConfig.new(
         account_name,
+        endpoint_name,
         version,
-        api_key || @api_key,
+        @api_key,
         @raise_on_error
       )
       self
@@ -166,6 +140,34 @@ module Mindee
     def doc_from_file(input_file, filename, cut_pages: true, max_pages: MAX_DOC_PAGES)
       doc = FileDocument.new(input_file, filename, cut_pages, max_pages: max_pages)
       DocumentClient.new(doc, @doc_configs)
+    end
+
+    private
+
+    def init_default_endpoints
+      @doc_configs[['mindee', InvoiceV3.name]] = DocumentConfig.new(
+        InvoiceV3,
+        'invoice',
+        [InvoiceEndpoint.new(@api_key)],
+        @raise_on_error
+      )
+      @doc_configs[['mindee', ReceiptV3.name]] = DocumentConfig.new(
+        ReceiptV3,
+        'receipt',
+        [ReceiptEndpoint.new(@api_key)],
+        @raise_on_error
+      )
+      @doc_configs[['mindee', PassportV1.name]] = DocumentConfig.new(
+        PassportV1,
+        'passport',
+        [PassportEndpoint.new(@api_key)],
+        @raise_on_error
+      )
+      @doc_configs[['mindee', FinancialDocument.name]] = FinancialDocConfig.new(
+        @api_key,
+        @raise_on_error
+      )
+      self
     end
   end
 end

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../fields'
-require_relative 'base'
+require_relative '../../fields'
+require_relative '../base'
 
 module Mindee
   # Invoice document.
-  class Invoice < Document
+  class InvoiceV3 < Document
     # @return [Mindee::Locale]
     attr_reader :locale
     # @return [Mindee::Amount]

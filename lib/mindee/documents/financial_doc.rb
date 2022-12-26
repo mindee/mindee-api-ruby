@@ -2,8 +2,8 @@
 
 require_relative '../fields'
 require_relative 'base'
-require_relative 'invoice'
-require_relative 'receipt'
+require_relative 'invoice/invoice_v3'
+require_relative 'receipt/receipt_v3'
 
 module Mindee
   # Union of `Invoice` and `Receipt`.
