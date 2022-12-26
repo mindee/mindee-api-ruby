@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rake'
+require 'rspec/core/rake_task'
+require 'yard'
 
 begin
   require 'bundler/setup'
@@ -11,5 +13,8 @@ end
 
 task default: :spec
 
-require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
+
+YARD::Rake::YardocTask.new do |task|
+  task.files   = ['lib/**/*.rb']
+end
