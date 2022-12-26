@@ -2,7 +2,7 @@
 
 require 'mindee/client'
 
-DATA_DIR = File.join(__dir__, 'data').freeze
+require_relative 'data'
 
 describe Mindee::Client do
   context 'A client' do

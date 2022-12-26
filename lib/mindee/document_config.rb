@@ -3,8 +3,8 @@
 require 'json'
 
 require_relative 'api/endpoint'
-require_relative 'api/response'
 require_relative 'documents'
+require_relative 'response'
 
 module Mindee
   # Specific client for sending a document to the API.
@@ -104,8 +104,8 @@ module Mindee
   class FinancialDocConfig < DocumentConfig
     def initialize(api_key, raise_on_error)
       endpoints = [
-        InvoiceEndpoint.new(api_key),
-        ReceiptEndpoint.new(api_key),
+        API::InvoiceEndpoint.new(api_key),
+        API::ReceiptEndpoint.new(api_key),
       ]
       super(
         FinancialDocument,
@@ -131,7 +131,7 @@ module Mindee
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
     def initialize(account_name, endpoint_name, version, api_key, raise_on_error)
-      endpoints = [CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
+      endpoints = [API::CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
       super(
         CustomV1,
         endpoint_name,

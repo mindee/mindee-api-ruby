@@ -16,5 +16,5 @@ task default: :spec
 RSpec::Core::RakeTask.new(:spec)
 
 YARD::Rake::YardocTask.new do |task|
-  task.files   = ['lib/**/*.rb']
+  task.files = ['lib/**/*.rb']
 end
