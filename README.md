@@ -6,6 +6,9 @@
 # Mindee API Helper Library for Ruby
 Quickly and easily connect to Mindee's API services using Ruby.
 
+## Requirements
+The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1
+
 ## Quick Start
 Here's the TL;DR of getting started.
 
@@ -48,13 +51,13 @@ require 'mindee'
 
 # Init a new client and configure your custom document
 mindee_client = Mindee::Client.new(api_key: 'my-api-key').config_custom_doc(
-  'pokemon-card',
-  'pikachu'
+  'john',
+  'wnine'
 )
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse('pokemon-card')
+  .parse('wnine')
 
 # Print a brief summary of the parsed data
 puts api_response.document
@@ -68,6 +71,6 @@ All the juicy details are described in the
 **[Official Documentation](https://developers.mindee.com/docs/ruby-getting-started)**.
 
 ## License
-Copyright © Mindee
+Copyright © Mindee, SA
 
 Available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

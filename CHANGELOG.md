@@ -1,5 +1,9 @@
 # Mindee Ruby API Library Changelog
 
+## v1.2.0 - 2022-12-26
+### Changes
+* :arrow_up: switch to origamindee => adds support for Ruby 3
+
 ## v1.1.2 - 2022-12-23
 ### Changes
 * :recycle: use of `append_page` is better for adding pages to a new PDF
