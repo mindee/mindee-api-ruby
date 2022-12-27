@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative '../fields'
+require_relative 'common_fields'
 require_relative 'base'
 require_relative 'invoice/invoice_v3'
 require_relative 'receipt/receipt_v3'
 
 module Mindee
   # Union of `Invoice` and `Receipt`.
-  class FinancialDocument < Document
+  class FinancialDocument < Prediction
     # @return [Mindee::Locale]
     attr_reader :locale
     # @return [Mindee::Amount]
@@ -47,7 +47,7 @@ module Mindee
     # @param input_file [Mindee::InputDocument, nil]
     # @param page_id [Integer, nil]
     def initialize(prediction, input_file: nil, page_id: nil)
-      super('financial_doc', input_file: input_file)
+      super()
       @locale = Locale.new(prediction['locale'])
       if prediction.include? 'invoice_number'
         build_from_invoice(
@@ -93,7 +93,6 @@ module Mindee
 
     # @param invoice [Mindee::Invoice]
     def build_from_invoice(invoice)
-      @orientation = invoice.orientation
       @category = empty_field
       @total_incl = invoice.total_incl
       @total_excl = invoice.total_excl
@@ -112,7 +111,6 @@ module Mindee
 
     # @param receipt [Mindee::Receipt]
     def build_from_receipt(receipt)
-      @orientation = receipt.orientation
       @category = receipt.category
       @total_incl = receipt.total_incl
       @total_excl = receipt.total_excl

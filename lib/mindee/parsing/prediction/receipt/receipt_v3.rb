@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../../fields'
+require_relative '../common_fields'
 require_relative '../base'
 
 module Mindee
   # Receipt document.
-  class ReceiptV3 < Document
+  class ReceiptV3 < Prediction
     # @return [Mindee::Locale]
     attr_reader :locale
     # @return [Mindee::Amount]
@@ -28,11 +28,9 @@ module Mindee
     attr_reader :category
 
     # @param prediction [Hash]
-    # @param input_file [Mindee::InputDocument, nil]
     # @param page_id [Integer, nil]
-    def initialize(prediction, input_file: nil, page_id: nil)
-      super('receipt', input_file: input_file)
-      @orientation = Orientation.new(prediction['orientation'], page_id) if page_id
+    def initialize(prediction, page_id)
+      super()
       @locale = Locale.new(prediction['locale'])
       @total_incl = Amount.new(prediction['total_incl'], page_id)
       @date = DateField.new(prediction['date'], page_id)

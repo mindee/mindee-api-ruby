@@ -5,7 +5,7 @@ require_relative '../base'
 
 module Mindee
   # Custom document object.
-  class CustomV1 < Document
+  class CustomV1 < Prediction
     # All value fields in the document
     # @return [Hash<Symbol, Mindee::ListField>]
     attr_reader :fields
@@ -13,21 +13,15 @@ module Mindee
     # @return [Hash<Symbol, Mindee::ClassificationField>]
     attr_reader :classifications
 
-    # @param document_type [String]
     # @param prediction [Hash]
-    # @param input_file [Mindee::InputDocument, nil]
     # @param page_id [Integer, nil]
-    def initialize(document_type, prediction, input_file: nil, page_id: nil)
-      super(document_type, input_file: input_file)
+    def initialize(prediction, page_id)
+      super()
       @fields = {}
       @classifications = {}
       prediction.each do |field_name, field_prediction|
         field_sym = field_name.to_sym
-        complete_field = set_field(field_sym, field_prediction, page_id)
-
-        # Create a dynamic accessor function for the field
-        singleton_class.module_eval { attr_accessor field_sym }
-        send("#{field_sym}=", complete_field)
+        set_field(field_sym, field_prediction, page_id)
       end
     end
 
