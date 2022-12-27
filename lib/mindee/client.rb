@@ -2,7 +2,7 @@
 
 require_relative 'input'
 require_relative 'document_config'
-require_relative 'api/endpoint'
+require_relative 'http/endpoint'
 
 module Mindee
   # General client for sending a document to the API.
@@ -165,19 +165,19 @@ module Mindee
       @doc_configs[['mindee', InvoiceV3.name]] = DocumentConfig.new(
         InvoiceV3,
         'invoice',
-        [API::InvoiceEndpoint.new(@api_key)],
+        [HTTP::InvoiceEndpoint.new(@api_key)],
         @raise_on_error
       )
       @doc_configs[['mindee', ReceiptV3.name]] = DocumentConfig.new(
         ReceiptV3,
         'receipt',
-        [API::ReceiptEndpoint.new(@api_key)],
+        [HTTP::ReceiptEndpoint.new(@api_key)],
         @raise_on_error
       )
       @doc_configs[['mindee', PassportV1.name]] = DocumentConfig.new(
         PassportV1,
         'passport',
-        [API::PassportEndpoint.new(@api_key)],
+        [HTTP::PassportEndpoint.new(@api_key)],
         @raise_on_error
       )
       @doc_configs[['mindee', FinancialDocument.name]] = FinancialDocConfig.new(

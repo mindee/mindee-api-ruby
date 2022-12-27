@@ -2,9 +2,9 @@
 
 require 'json'
 
-require_relative 'api/endpoint'
-require_relative 'documents'
-require_relative 'response'
+require_relative 'http/endpoint'
+require_relative 'parsing/document'
+require_relative 'parsing/prediction'
 
 module Mindee
   # Specific client for sending a document to the API.
@@ -29,22 +29,7 @@ module Mindee
     # @param response [Hash]
     # @return [Mindee::DocumentResponse]
     def build_predict_result(input_doc, response)
-      document = @doc_class.new(
-        response['document']['inference']['prediction'],
-        input_file: input_doc,
-        page_id: nil
-      )
-      pages = []
-      response['document']['inference']['pages'].each do |page|
-        pages.push(
-          @doc_class.new(
-            page['prediction'],
-            input_file: input_doc,
-            page_id: page['id']
-          )
-        )
-      end
-      DocumentResponse.new(response, @document_type, document, pages)
+      Document.new(@doc_class, response)
     end
 
     # Call the prediction API.
@@ -72,9 +57,7 @@ module Mindee
             "API #{response.code} HTTP error: #{hashed_response}", response
           )
         end
-        return DocumentResponse.new(
-          hashed_response, @document_type, {}, []
-        )
+        return Document.new(@doc_class, hashed_response)
       end
       build_predict_result(input_doc, hashed_response)
     end
@@ -104,8 +87,8 @@ module Mindee
   class FinancialDocConfig < DocumentConfig
     def initialize(api_key, raise_on_error)
       endpoints = [
-        API::InvoiceEndpoint.new(api_key),
-        API::ReceiptEndpoint.new(api_key),
+        HTTP::InvoiceEndpoint.new(api_key),
+        HTTP::ReceiptEndpoint.new(api_key),
       ]
       super(
         FinancialDocument,
@@ -131,7 +114,7 @@ module Mindee
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
     def initialize(account_name, endpoint_name, version, api_key, raise_on_error)
-      endpoints = [API::CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
+      endpoints = [HTTP::CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
       super(
         CustomV1,
         endpoint_name,
@@ -162,7 +145,7 @@ module Mindee
           )
         )
       end
-      DocumentResponse.new(response, @document_type, document, pages)
+      Document.new(response, @document_type, document, pages)
     end
   end
 end

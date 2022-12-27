@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../geometry'
+require_relative '../../../geometry'
 
 module Mindee
   # Base field object.

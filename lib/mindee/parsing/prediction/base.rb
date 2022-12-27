@@ -2,7 +2,7 @@
 
 module Mindee
   # Base document object.
-  class Document
+  class Prediction
     # document type
     # @return [String]
     attr_reader :document_type
@@ -16,14 +16,7 @@ module Mindee
     # @return [String, nil]
     attr_reader :file_mimetype
 
-    # @param input_file [Mindee::InputDocument, nil]
-    # @param document_type [String]
-    def initialize(document_type, input_file: nil)
-      @document_type = document_type
-      unless input_file.nil?
-        @filename = input_file.filename
-        @file_mimetype = input_file.file_mimetype
-      end
+    def initialize
       @checklist = {}
     end
 

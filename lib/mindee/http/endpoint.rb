@@ -4,7 +4,7 @@ require 'net/http'
 require_relative '../version'
 
 module Mindee
-  module API
+  module HTTP
     API_KEY_ENV_NAME = 'MINDEE_API_KEY'
     API_KEY_DEFAULT = nil
 
