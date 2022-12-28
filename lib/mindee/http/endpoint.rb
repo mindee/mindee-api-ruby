@@ -16,24 +16,14 @@ module Mindee
 
     USER_AGENT = "mindee-api-ruby@v#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
 
-    INVOICE_VERSION = '3'
-    INVOICE_URL_NAME = 'invoices'
-
-    RECEIPT_VERSION = '3'
-    RECEIPT_URL_NAME = 'expense_receipts'
-
-    PASSPORT_VERSION = '1'
-    PASSPORT_URL_NAME = 'passport'
-
     # Generic API endpoint for a product.
     class Endpoint
       attr_reader :api_key
 
-      def initialize(owner, url_name, version, key_name: nil, api_key: nil)
+      def initialize(owner, url_name, version, api_key: nil)
         @owner = owner
         @url_name = url_name
         @version = version
-        @key_name = key_name || url_name
         @api_key = api_key || set_api_key_from_env
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
@@ -79,21 +69,21 @@ module Mindee
     # Invoice API endpoint
     class InvoiceEndpoint < Endpoint
       def initialize(api_key)
-        super('mindee', INVOICE_URL_NAME, INVOICE_VERSION, key_name: 'invoice', api_key: api_key)
+        super('mindee', 'invoices', '3', api_key: api_key)
       end
     end
 
     # Receipt API endpoint
     class ReceiptEndpoint < Endpoint
       def initialize(api_key)
-        super('mindee', RECEIPT_URL_NAME, RECEIPT_VERSION, key_name: 'receipt', api_key: api_key)
+        super('mindee', 'expense_receipts', '3', api_key: api_key)
       end
     end
 
     # Passport API endpoint
     class PassportEndpoint < Endpoint
       def initialize(api_key)
-        super('mindee', PASSPORT_URL_NAME, PASSPORT_VERSION, api_key: api_key)
+        super('mindee', 'passport', '1', api_key: api_key)
       end
     end
 

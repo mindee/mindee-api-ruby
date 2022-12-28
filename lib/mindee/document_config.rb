@@ -95,16 +95,4 @@ module Mindee
       endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
     end
   end
-
-  # Client for Custom (constructed) documents
-  class CustomDocConfig < DocumentConfig
-    def initialize(account_name, endpoint_name, version, api_key)
-      endpoints = [HTTP::CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
-      super(
-        CustomV1,
-        endpoint_name,
-        endpoints
-      )
-    end
-  end
 end

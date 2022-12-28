@@ -114,11 +114,10 @@ module Mindee
       endpoint_name,
       version: '1'
     )
-      @doc_configs[[account_name, endpoint_name]] = CustomDocConfig.new(
-        account_name,
+      @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
+        CustomV1,
         endpoint_name,
-        version,
-        @api_key
+        [HTTP::CustomEndpoint.new(endpoint_name, account_name, version, @api_key)]
       )
       self
     end
