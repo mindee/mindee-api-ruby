@@ -14,7 +14,6 @@ module Mindee
     # @return [String]
     attr_reader :id
 
-
     # @param prediction_class [Class<Mindee::Prediction>]
     # @param http_response [Hash]
     def initialize(prediction_class, http_response)

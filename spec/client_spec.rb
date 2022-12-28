@@ -9,7 +9,7 @@ describe Mindee::Client do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
 
     it 'should be configurable' do
-      mindee_client.add_endpoint('dummy', 'dummy')
+      mindee_client.add_endpoint('dummy', 'dummy', version: '1')
     end
 
     it 'should open PDF files from a path' do
@@ -68,16 +68,7 @@ describe Mindee::Client do
       doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
       expect do
         doc.parse(Mindee::InvoiceV3, include_words: false, close_file: true)
-      end.to raise_error Net::HTTPError
-    end
-
-    it 'should make an invalid API call not raising an exception' do
-      mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key', raise_on_error: false)
-      file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
-      doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
-      response = doc.parse(Mindee::InvoiceV3, include_words: false, close_file: true)
-      expect(response.document_type).to eq('invoice')
-      expect(response.http_response).to have_key('api_request')
+      end.to raise_error Mindee::Parsing::Error
     end
   end
 end

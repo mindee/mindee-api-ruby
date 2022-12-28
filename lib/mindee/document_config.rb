@@ -4,32 +4,23 @@ require 'json'
 
 require_relative 'http/endpoint'
 require_relative 'parsing/document'
+require_relative 'parsing/error'
 require_relative 'parsing/prediction'
 
 module Mindee
   # Specific client for sending a document to the API.
   class DocumentConfig
     # Array of possible Mindee::Endpoint to be used.
-    # @return [Array<Mindee::Endpoint>]
+    # @return [Array<Mindee::HTTP::Endpoint>]
     attr_reader :endpoints
 
-    # @param doc_class [Class<Mindee::Document>]
+    # @param prediction_class [Class<Mindee::Prediction>]
     # @param document_type [String]
-    # @param endpoints [Array<Mindee::Endpoint>]
-    # @param raise_on_error [Boolean]
-    def initialize(doc_class, document_type, endpoints, raise_on_error)
-      @doc_class = doc_class
+    # @param endpoints [Array<Mindee::HTTP::Endpoint>]
+    def initialize(prediction_class, document_type, endpoints)
+      @prediction_class = prediction_class
       @document_type = document_type
       @endpoints = endpoints
-      @raise_on_error = raise_on_error
-    end
-
-    # Parse a prediction API result.
-    # @param input_doc [Mindee::InputDocument]
-    # @param response [Hash]
-    # @return [Mindee::DocumentResponse]
-    def build_predict_result(input_doc, response)
-      Document.new(@doc_class, response)
     end
 
     # Call the prediction API.
@@ -51,15 +42,10 @@ module Mindee
     # @return [Mindee::DocumentResponse]
     def parse_response(input_doc, response)
       hashed_response = JSON.parse(response.body, object_class: Hash)
-      unless (200..299).include?(response.code.to_i)
-        if @raise_on_error
-          raise Net::HTTPError.new(
-            "API #{response.code} HTTP error: #{hashed_response}", response
-          )
-        end
-        return Document.new(@doc_class, hashed_response)
-      end
-      build_predict_result(input_doc, hashed_response)
+      return Document.new(@prediction_class, hashed_response) if (200..299).include?(response.code.to_i)
+
+      error = Parsing::Error.new(hashed_response['api_request']['error'])
+      raise error
     end
 
     # @param input_doc [Mindee::InputDocument]
@@ -78,14 +64,14 @@ module Mindee
         raise "Missing API key for '#{@document_type}', " \
               "check your Client Configuration.\n" \
               'You can set this using the ' \
-              "'#{endpoint.envvar_key_name}' environment variable."
+              "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end
   end
 
   # Client for Financial documents
   class FinancialDocConfig < DocumentConfig
-    def initialize(api_key, raise_on_error)
+    def initialize(api_key)
       endpoints = [
         HTTP::InvoiceEndpoint.new(api_key),
         HTTP::ReceiptEndpoint.new(api_key),
@@ -93,8 +79,7 @@ module Mindee
       super(
         FinancialDocument,
         'financial_doc',
-        endpoints,
-        raise_on_error
+        endpoints
       )
     end
 
@@ -105,7 +90,7 @@ module Mindee
     # @param close_file [Boolean]
     # # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
-    def predict_request(input_doc, include_words, close_file)
+    def predict_request(input_doc, include_words, close_file, cropper)
       endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
       endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
     end
@@ -113,39 +98,13 @@ module Mindee
 
   # Client for Custom (constructed) documents
   class CustomDocConfig < DocumentConfig
-    def initialize(account_name, endpoint_name, version, api_key, raise_on_error)
+    def initialize(account_name, endpoint_name, version, api_key)
       endpoints = [HTTP::CustomEndpoint.new(endpoint_name, account_name, version, api_key)]
       super(
         CustomV1,
         endpoint_name,
-        endpoints,
-        raise_on_error
+        endpoints
       )
-    end
-
-    # Parse a prediction API result.
-    # @param input_doc [Mindee::InputDocument]
-    # @param response [Hash]
-    # @return [Mindee::DocumentResponse]
-    def build_predict_result(input_doc, response)
-      document = CustomV1.new(
-        @document_type,
-        response['document']['inference']['prediction'],
-        input_file: input_doc,
-        page_id: nil
-      )
-      pages = []
-      response['document']['inference']['pages'].each do |page|
-        pages.push(
-          CustomV1.new(
-            @document_type,
-            page['prediction'],
-            input_file: input_doc,
-            page_id: page['id']
-          )
-        )
-      end
-      Document.new(response, @document_type, document, pages)
     end
   end
 end
