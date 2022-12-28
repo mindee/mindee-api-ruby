@@ -18,13 +18,17 @@ module Mindee
 
     # Generic API endpoint for a product.
     class Endpoint
+      # @return [String]
       attr_reader :api_key
+      # @return [Integer]
+      attr_reader :request_timeout
 
       def initialize(owner, url_name, version, api_key: nil)
         @owner = owner
         @url_name = url_name
         @version = version
-        @api_key = api_key || set_api_key_from_env
+        @request_timeout = ENV.fetch(REQUEST_TIMEOUT_ENV_NAME, TIMEOUT_DEFAULT)
+        @api_key = api_key || ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT)
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
@@ -53,16 +57,9 @@ module Mindee
 
         req.set_form(form_data, 'multipart/form-data')
 
-        Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
           http.request(req)
         end
-      end
-
-      # Set the endpoint's API key from an environment variable, if present.
-      # We look first for the specific key, if not set, we'll use the generic key
-      def set_api_key_from_env
-        env_key = ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT)
-        @api_key = env_key if env_key
       end
     end
 
