@@ -118,8 +118,7 @@ module Mindee
         account_name,
         endpoint_name,
         version,
-        @api_key,
-        @raise_on_error
+        @api_key
       )
       self
     end
@@ -165,24 +164,20 @@ module Mindee
       @doc_configs[['mindee', InvoiceV3.name]] = DocumentConfig.new(
         InvoiceV3,
         'invoice',
-        [HTTP::InvoiceEndpoint.new(@api_key)],
-        @raise_on_error
+        [HTTP::InvoiceEndpoint.new(@api_key)]
       )
       @doc_configs[['mindee', ReceiptV3.name]] = DocumentConfig.new(
         ReceiptV3,
         'receipt',
-        [HTTP::ReceiptEndpoint.new(@api_key)],
-        @raise_on_error
+        [HTTP::ReceiptEndpoint.new(@api_key)]
       )
       @doc_configs[['mindee', PassportV1.name]] = DocumentConfig.new(
         PassportV1,
         'passport',
-        [HTTP::PassportEndpoint.new(@api_key)],
-        @raise_on_error
+        [HTTP::PassportEndpoint.new(@api_key)]
       )
       @doc_configs[['mindee', FinancialDocument.name]] = FinancialDocConfig.new(
-        @api_key,
-        @raise_on_error
+        @api_key
       )
       self
     end
