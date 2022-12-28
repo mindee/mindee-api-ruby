@@ -161,7 +161,7 @@ module Mindee
 
     def init_default_endpoints
       @doc_configs[['mindee', InvoiceV3.name]] = DocumentConfig.new(
-        InvoiceV3,
+        InvoiceV4,
         'invoice',
         [HTTP::InvoiceEndpoint.new(@api_key)]
       )

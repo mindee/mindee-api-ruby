@@ -3,8 +3,6 @@
 require_relative 'inference'
 
 module Mindee
-
-
   # Stores all response attributes.
   class Document
     # @return [Mindee::Inference]
@@ -23,7 +21,11 @@ module Mindee
     end
 
     def to_s
-      inspect
+      out_str = String.new
+      out_str << "########\nDocument\n########"
+      out_str << "\n:Mindee ID: #{@id}"
+      out_str << "\n:Filename: #{@name}"
+      out_str << "\n\n#{@inference}"
     end
   end
 end

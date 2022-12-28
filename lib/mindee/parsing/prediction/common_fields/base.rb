@@ -8,7 +8,7 @@ module Mindee
     # @return [String, Float, Integer, Boolean]
     attr_reader :value
     # @return [Array<Array<Float>>]
-    attr_reader :bbox
+    attr_reader :bounding_box
     # @return [Array<Array<Float>>]
     attr_reader :polygon
     # @return [Integer, nil]
@@ -27,7 +27,7 @@ module Mindee
       @value = prediction['value']
       @confidence = prediction['confidence']
       @polygon = prediction['polygon']
-      @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
+      @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
       @page_id = page_id || prediction['page_id']
       @reconstructed = reconstructed
     end
@@ -56,6 +56,17 @@ module Mindee
         arr_sum += field.value
       end
       arr_sum.to_f
+    end
+
+    # @param value [Float]
+    # @param min_precision [Integer]
+    def self.float_to_string(value, min_precision = 2)
+      return String.new if value.nil?
+
+      precision = value.to_f.to_s.split('.')[1].size
+      precision = [precision, min_precision].max
+      format_string = "%.#{precision}f"
+      format(format_string, value)
     end
   end
 end

@@ -16,7 +16,7 @@ module Mindee
     # @return [String, nil]
     attr_reader :file_mimetype
 
-    def initialize
+    def initialize(_prediction, _page_id)
       @checklist = {}
     end
 

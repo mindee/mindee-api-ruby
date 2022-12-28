@@ -13,5 +13,9 @@ module Mindee
       super
       @value = @value.round(3) unless @value.nil?
     end
+
+    def to_s
+      Field.float_to_string(@value)
+    end
   end
 end

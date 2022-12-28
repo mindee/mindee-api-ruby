@@ -40,7 +40,7 @@ module Mindee
     # @param input_doc [Mindee::InputDocument]
     # @param response [Net::HTTPResponse]
     # @return [Mindee::DocumentResponse]
-    def parse_response(input_doc, response)
+    def parse_response(_input_doc, response)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       return Document.new(@prediction_class, hashed_response) if (200..299).include?(response.code.to_i)
 

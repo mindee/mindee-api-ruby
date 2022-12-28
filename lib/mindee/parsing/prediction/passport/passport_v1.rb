@@ -36,7 +36,7 @@ module Mindee
     # @param prediction [Hash]
     # @param page_id [Integer, nil]
     def initialize(prediction, page_id)
-      super()
+      super
       @country = Field.new(prediction['country'], page_id)
       @id_number = Field.new(prediction['id_number'], page_id)
       @birth_date = DateField.new(prediction['birth_date'], page_id)
@@ -59,21 +59,18 @@ module Mindee
     def to_s
       given_names = @given_names.join(' ')
       out_str = String.new
-      out_str << '-----Passport data-----'
-      out_str << "\nFilename: #{@filename}".rstrip
-      out_str << "\nFull name: #{@full_name}".rstrip
-      out_str << "\nGiven names: #{given_names}".rstrip
-      out_str << "\nSurname: #{@surname}".rstrip
-      out_str << "\nCountry: #{@country}".rstrip
-      out_str << "\nID Number: #{@id_number}".rstrip
-      out_str << "\nIssuance date: #{@issuance_date}".rstrip
-      out_str << "\nBirth date: #{@birth_date}".rstrip
-      out_str << "\nExpiry date: #{@expiry_date}".rstrip
-      out_str << "\nMRZ 1: #{@mrz1}".rstrip
-      out_str << "\nMRZ 2: #{@mrz2}".rstrip
-      out_str << "\nMRZ: #{@mrz}".rstrip
-      out_str << "\n----------------------"
-      out_str
+      out_str << "\n:Full name: #{@full_name}".rstrip
+      out_str << "\n:Given names: #{given_names}".rstrip
+      out_str << "\n:Surname: #{@surname}".rstrip
+      out_str << "\n:Country: #{@country}".rstrip
+      out_str << "\n:ID Number: #{@id_number}".rstrip
+      out_str << "\n:Issuance date: #{@issuance_date}".rstrip
+      out_str << "\n:Birth date: #{@birth_date}".rstrip
+      out_str << "\n:Expiry date: #{@expiry_date}".rstrip
+      out_str << "\n:MRZ 1: #{@mrz1}".rstrip
+      out_str << "\n:MRZ 2: #{@mrz2}".rstrip
+      out_str << "\n:MRZ: #{@mrz}".rstrip
+      out_str[1..].to_s
     end
 
     # @return [Boolean]

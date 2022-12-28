@@ -30,7 +30,7 @@ module Mindee
     # @param prediction [Hash]
     # @param page_id [Integer, nil]
     def initialize(prediction, page_id)
-      super()
+      super
       @locale = Locale.new(prediction['locale'])
       @total_incl = Amount.new(prediction['total_incl'], page_id)
       @date = DateField.new(prediction['date'], page_id)

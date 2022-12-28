@@ -24,10 +24,15 @@ module Mindee
       @code = prediction['code'] unless prediction['code'] == 'None'
     end
 
+    # @param value [Float]
+    def print_float(value)
+      format('%.2f', value)
+    end
+
     def to_s
       out_str = String.new
-      out_str << "#{@value} " if @value
-      out_str << "#{@rate}% " if @rate
+      out_str << "#{print_float(@value)} " if @value
+      out_str << "#{print_float(@rate)}% " if @rate
       out_str << "#{@code} " if @code
       out_str.strip
     end

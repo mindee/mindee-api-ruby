@@ -3,10 +3,9 @@
 require_relative 'page'
 
 module Mindee
+  # Product information
   class Product
-    attr_reader :name
-    attr_reader :type
-    attr_reader :version
+    attr_reader :name, :type, :version
 
     # @param http_response [Hash]
     def initialize(http_response)
@@ -16,6 +15,7 @@ module Mindee
     end
   end
 
+  # Inference holds all predictions
   class Inference
     # @return [Boolean]
     attr_reader :is_rotation_applied
@@ -36,6 +36,18 @@ module Mindee
       http_response['pages'].each do |page|
         @pages.push(Page.new(prediction_class, page))
       end
+    end
+
+    def to_s
+      is_rotation_applied = @is_rotation_applied ? 'Yes' : 'No'
+      out_str = String.new
+      out_str << "Inference\n#########"
+      out_str << "\n:Product: #{@product.name} v#{@product.version}"
+      out_str << "\n:Rotation applied: #{is_rotation_applied}"
+      out_str << "\n\nPrediction\n=========="
+      out_str << "\n#{@prediction}"
+      out_str << "\n\nPage Predictions\n================\n\n"
+      out_str << @pages.map(&:to_s).join("\n\n")
     end
   end
 end

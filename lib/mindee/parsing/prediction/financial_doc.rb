@@ -46,8 +46,8 @@ module Mindee
     # @param prediction [Hash]
     # @param input_file [Mindee::InputDocument, nil]
     # @param page_id [Integer, nil]
-    def initialize(prediction, input_file: nil, page_id: nil)
-      super()
+    def initialize(prediction, page_id)
+      super
       @locale = Locale.new(prediction['locale'])
       if prediction.include? 'invoice_number'
         build_from_invoice(
