@@ -37,7 +37,7 @@ module Mindee
       @content = prediction['content']
       @confidence = prediction['confidence']
       @polygon = prediction['polygon']
-      @bbox = Geometry.get_bbox_as_polygon(@polygon) unless @polygon.nil? || @polygon.empty?
+      @bbox = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
     end
 
     # @return [String]

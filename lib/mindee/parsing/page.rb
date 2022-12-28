@@ -36,7 +36,11 @@ module Mindee
     end
 
     def to_s
-      inspect
+      out_str = String.new
+      title = "Page #{@id}"
+      out_str << "#{title}\n"
+      out_str << ('-' * title.size)
+      out_str << "\n#{@prediction}"
     end
   end
 end

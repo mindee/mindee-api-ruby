@@ -1,0 +1,183 @@
+# frozen_string_literal: true
+
+require_relative '../common_fields'
+require_relative 'invoice_line_item'
+require_relative '../base'
+
+module Mindee
+  # Invoice document.
+  class InvoiceV4 < Prediction
+    # @return [Mindee::Locale]
+    attr_reader :locale
+    # @return [Mindee::Amount]
+    attr_reader :total_amount
+    # @return [Mindee::Amount]
+    attr_reader :total_net
+    # @return [Mindee::Amount]
+    attr_reader :total_tax
+    # @return [Mindee::DateField]
+    attr_reader :date
+    # @return [Mindee::Field]
+    attr_reader :invoice_number
+    # @return [Mindee::DateField]
+    attr_reader :due_date
+    # @return [Array<Mindee::TaxField>]
+    attr_reader :taxes
+    # @return [Mindee::Field]
+    attr_reader :customer_name
+    # @return [Mindee::Field]
+    attr_reader :customer_address
+    # @return [Array<Mindee::CompanyRegistration>]
+    attr_reader :customer_company_registrations
+    # @return [Mindee::Field]
+    attr_reader :supplier_name
+    # @return [Mindee::Field]
+    attr_reader :supplier_address
+    # @return [Mindee::Orientation]
+    # @return [Array<Mindee::PaymentDetails>]
+    attr_reader :supplier_payment_details
+    # @return [Array<Mindee::CompanyRegistration>]
+    attr_reader :supplier_company_registrations
+    # @return [Array<Mindee::InvoiceLineItem>]
+    attr_reader :line_items
+
+    # @param prediction [Hash]
+    # @param page_id [Integer, nil]
+    def initialize(prediction, page_id)
+      super
+      @locale = Locale.new(prediction['locale'])
+      @total_amount = Amount.new(prediction['total_amount'], page_id)
+      @total_net = Amount.new(prediction['total_net'], page_id)
+      @customer_address = Field.new(prediction['customer_address'], page_id)
+      @customer_name = Field.new(prediction['customer_name'], page_id)
+      @date = DateField.new(prediction['date'], page_id)
+      @due_date = DateField.new(prediction['due_date'], page_id)
+      @invoice_number = Field.new(prediction['invoice_number'], page_id)
+      @supplier_name = Field.new(prediction['supplier_name'], page_id)
+      @supplier_address = Field.new(prediction['supplier_address'], page_id)
+
+      @customer_company_registrations = []
+      prediction['customer_company_registrations'].each do |item|
+        @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
+      end
+      @taxes = []
+      prediction['taxes'].each do |item|
+        @taxes.push(TaxField.new(item, page_id))
+      end
+      @supplier_payment_details = []
+      prediction['supplier_payment_details'].each do |item|
+        @supplier_payment_details.push(PaymentDetails.new(item, page_id))
+      end
+      @supplier_company_registrations = []
+      prediction['supplier_company_registrations'].each do |item|
+        @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
+      end
+
+      @total_tax = Amount.new(
+        { value: nil, confidence: 0.0 }, page_id
+      )
+
+      @line_items = []
+      prediction['line_items'].each do |item|
+        @line_items.push(InvoiceLineItem.new(item, page_id))
+      end
+      reconstruct(page_id)
+    end
+
+    def to_s
+      customer_company_registrations = @customer_company_registrations.map(&:value).join('; ')
+      supplier_payment_details = @supplier_payment_details.map(&:to_s).join("\n                 ")
+      supplier_company_registrations = @supplier_company_registrations.map(&:to_s).join('; ')
+      taxes = @taxes.join("\n       ")
+      out_str = String.new
+      out_str << "\n:Locale: #{@locale}".rstrip
+      out_str << "\n:Invoice number: #{@invoice_number}".rstrip
+      out_str << "\n:Invoice date: #{@date}".rstrip
+      out_str << "\n:Invoice due date: #{@due_date}".rstrip
+
+      out_str << "\n:Supplier name: #{@supplier_name}".rstrip
+      out_str << "\n:Supplier address: #{@supplier_address}".rstrip
+      out_str << "\n:Supplier company registrations: #{supplier_company_registrations}".rstrip
+      out_str << "\n:Supplier payment details: #{supplier_payment_details}".rstrip
+
+      out_str << "\n:Customer name: #{@customer_name}".rstrip
+      out_str << "\n:Customer address: #{@customer_address}".rstrip
+      out_str << "\n:Customer company registrations: #{customer_company_registrations}".rstrip
+
+      out_str << "\n:Taxes: #{taxes}".rstrip
+      out_str << "\n:Total net: #{@total_net}".rstrip
+      out_str << "\n:Total taxes: #{@total_tax}".rstrip
+      out_str << "\n:Total amount: #{@total_amount}".rstrip
+      out_str << line_items_to_s
+
+      out_str[1..].to_s
+    end
+
+    private
+
+    def line_items_to_s
+      line_item_separator = "#{'=' * 22} #{'=' * 8} #{'=' * 9} #{'=' * 10} #{'=' * 18} #{'=' * 36}"
+      line_items = @line_items.map(&:to_s).join("\n")
+      out_str = String.new
+      out_str << "\n\n:Line Items:"
+      out_str << "\n#{line_item_separator}"
+      out_str << "\nCode                   QTY      Price     Amount     Tax (Rate)         Description"
+      out_str << "\n#{line_item_separator}"
+      out_str << "\n#{line_items}"
+      out_str << "\n#{line_item_separator}" unless line_items.empty?
+    end
+
+    def reconstruct(page_id)
+      construct_total_tax_from_taxes(page_id)
+      return unless page_id.nil?
+
+      construct_total_excl_from_tcc_and_taxes(page_id)
+      construct_total_incl_from_taxes_plus_excl(page_id)
+      construct_total_tax_from_totals(page_id)
+    end
+
+    def construct_total_excl_from_tcc_and_taxes(page_id)
+      return if @total_amount.value.nil? || taxes.empty? || !@total_net.value.nil?
+
+      total_excl = {
+        'value' => @total_amount.value - @taxes.map(&:value).sum,
+        'confidence' => Field.array_confidence(@taxes) * @total_amount.confidence,
+      }
+      @total_net = Amount.new(total_excl, page_id, reconstructed: true)
+    end
+
+    def construct_total_incl_from_taxes_plus_excl(page_id)
+      return if @total_net.value.nil? || @taxes.empty? || !@total_amount.value.nil?
+
+      total_incl = {
+        'value' => @taxes.map(&:value).sum + @total_net.value,
+        'confidence' => Field.array_confidence(@taxes) * @total_net.confidence,
+      }
+      @total_amount = Amount.new(total_incl, page_id, reconstructed: true)
+    end
+
+    def construct_total_tax_from_taxes(page_id)
+      return if @taxes.empty?
+
+      total_tax = {
+        'value' => @taxes.map(&:value).sum,
+        'confidence' => Field.array_confidence(@taxes),
+      }
+      return unless total_tax['value'].positive?
+
+      @total_tax = Amount.new(total_tax, page_id, reconstructed: true)
+    end
+
+    def construct_total_tax_from_totals(page_id)
+      return if !@total_tax.value.nil? || @total_amount.value.nil? || @total_net.value.nil?
+
+      total_tax = {
+        'value' => @total_amount.value - @total_net.value,
+        'confidence' => Field.array_confidence(@taxes),
+      }
+      return unless total_tax['value'] >= 0
+
+      @total_tax = Amount.new(total_tax, page_id, reconstructed: true)
+    end
+  end
+end

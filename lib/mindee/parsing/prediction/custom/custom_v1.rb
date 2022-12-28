@@ -16,7 +16,7 @@ module Mindee
     # @param prediction [Hash]
     # @param page_id [Integer, nil]
     def initialize(prediction, page_id)
-      super()
+      super
       @fields = {}
       @classifications = {}
       prediction.each do |field_name, field_prediction|
@@ -27,16 +27,13 @@ module Mindee
 
     def to_s
       out_str = String.new
-      out_str << "----- #{@document_type} -----"
-      out_str << "\nFilename: #{@filename}".rstrip
       @classifications.each do |name, info|
-        out_str << "\n#{name}: #{info}".rstrip
+        out_str << "\n:#{name}: #{info}".rstrip
       end
       @fields.each do |name, info|
-        out_str << "\n#{name}: #{info}".rstrip
+        out_str << "\n:#{name}: #{info}".rstrip
       end
-      out_str << "\n----------------------"
-      out_str
+      out_str[1..].to_s
     end
 
     private

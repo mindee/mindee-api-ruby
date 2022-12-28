@@ -13,7 +13,7 @@ module Mindee
     end
 
     # @return [Array<Array<Float>>]
-    def self.get_bbox_as_polygon(vertices)
+    def self.get_bounding_box(vertices)
       x_min, y_min, x_max, y_max = get_bbox(vertices)
       [[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]]
     end
