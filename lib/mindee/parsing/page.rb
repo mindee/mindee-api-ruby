@@ -9,7 +9,7 @@ module Mindee
     #   * 0 degrees: the page is already upright
     #   * 90 degrees: the page must be rotated clockwise to be upright
     #   * 270 degrees: the page must be rotated counterclockwise to be upright
-    # @return [Integer]
+    # @return [Integer, nil]
     attr_reader :value
 
     # @param prediction [Hash]
