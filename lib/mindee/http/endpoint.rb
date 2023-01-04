@@ -63,31 +63,17 @@ module Mindee
       end
     end
 
-    # Invoice API endpoint
-    class InvoiceEndpoint < Endpoint
-      def initialize(api_key)
-        super('mindee', 'invoices', '3', api_key: api_key)
-      end
-    end
-
     # Receipt API endpoint
-    class ReceiptEndpoint < Endpoint
-      def initialize(api_key)
-        super('mindee', 'expense_receipts', '3', api_key: api_key)
-      end
-    end
-
-    # Passport API endpoint
-    class PassportEndpoint < Endpoint
-      def initialize(api_key)
-        super('mindee', 'passport', '1', api_key: api_key)
+    class StandardEndpoint < Endpoint
+      def initialize(endpoint_name, version, api_key)
+        super('mindee', endpoint_name, version, api_key: api_key)
       end
     end
 
     # Custom (constructed) API endpoint
     class CustomEndpoint < Endpoint
-      def initialize(document_type, account_name, version, api_key)
-        super(account_name, document_type, version, api_key: api_key)
+      def initialize(account_name, endpoint_name, version, api_key)
+        super(account_name, endpoint_name, version, api_key: api_key)
       end
     end
   end

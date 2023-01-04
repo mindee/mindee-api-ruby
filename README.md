@@ -35,7 +35,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::InvoiceV3)
+  .parse(Mindee::Prediction::InvoiceV4)
 
 # Print a brief summary of the parsed data
 puts api_response.document
@@ -53,7 +53,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::CustomV1, 'wnine')
+  .parse(Mindee::Prediction::CustomV1, 'wnine')
 
 # Print a brief summary of the parsed data
 puts api_response.document
