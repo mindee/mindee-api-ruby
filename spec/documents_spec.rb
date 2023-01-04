@@ -19,7 +19,7 @@ describe Mindee::Document do
   context 'An Invoice V4' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_INVOICE_V4, 'empty.json')
-      document = Mindee::Document.new(Mindee::InvoiceV4, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::InvoiceV4, response['document'])
       expect(document.inference.product.type).to eq('standard')
       prediction = document.inference.prediction
       expect(prediction.invoice_number.value).to be_nil
@@ -32,7 +32,7 @@ describe Mindee::Document do
     it 'should load a complete document prediction' do
       to_string = read_file(DIR_INVOICE_V4, 'summary_full.rst')
       response = load_json(DIR_INVOICE_V4, 'complete.json')
-      document = Mindee::Document.new(Mindee::InvoiceV4, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::InvoiceV4, response['document'])
       prediction = document.inference.prediction
       expect(prediction.invoice_number.bounding_box).to eq(prediction.invoice_number.polygon)
       expect(prediction.date.value).to eq('2020-02-17')
@@ -44,7 +44,7 @@ describe Mindee::Document do
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_INVOICE_V4, 'summary_page0.rst')
       response = load_json(DIR_INVOICE_V4, 'complete.json')
-      document = Mindee::Document.new(Mindee::InvoiceV4, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::InvoiceV4, response['document'])
       page = document.inference.pages[0]
       expect(page.orientation.value).to eq(0)
       expect(page.prediction.due_date.page_id).to eq(0)
@@ -55,7 +55,7 @@ describe Mindee::Document do
   context 'A Receipt V4' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_RECEIPT_V4, 'empty.json')
-      inference = Mindee::Document.new(Mindee::ReceiptV4, response['document']).inference
+      inference = Mindee::Document.new(Mindee::Prediction::ReceiptV4, response['document']).inference
       expect(inference.product.type).to eq('standard')
       expect(inference.prediction.date.value).to be_nil
       expect(inference.prediction.date.page_id).to be_nil
@@ -65,7 +65,7 @@ describe Mindee::Document do
     it 'should load a complete document prediction' do
       to_string = read_file(DIR_RECEIPT_V4, 'summary_full.rst')
       response = load_json(DIR_RECEIPT_V4, 'complete.json')
-      document = Mindee::Document.new(Mindee::ReceiptV4, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::ReceiptV4, response['document'])
       expect(document.inference.prediction.date.page_id).to eq(0)
       expect(document.inference.prediction.date.value).to eq('2014-07-07')
       expect(document.to_s).to eq(to_string)
@@ -74,7 +74,7 @@ describe Mindee::Document do
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_RECEIPT_V4, 'summary_page0.rst')
       response = load_json(DIR_RECEIPT_V4, 'complete.json')
-      document = Mindee::Document.new(Mindee::ReceiptV4, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::ReceiptV4, response['document'])
       page = document.inference.pages[0]
       expect(page.orientation.value).to eq(0)
       expect(page.prediction.date.page_id).to eq(0)
@@ -85,7 +85,7 @@ describe Mindee::Document do
   context 'A Passport V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_PASSPORT_V1, 'empty.json')
-      inference = Mindee::Document.new(Mindee::PassportV1, response['document']).inference
+      inference = Mindee::Document.new(Mindee::Prediction::PassportV1, response['document']).inference
       expect(inference.product.type).to eq('standard')
       expect(inference.prediction.expired?).to eq(true)
       expect(inference.prediction.surname.value).to be_nil
@@ -97,7 +97,7 @@ describe Mindee::Document do
     it 'should load a complete document prediction' do
       to_string = read_file(DIR_PASSPORT_V1, 'summary_full.rst')
       response = load_json(DIR_PASSPORT_V1, 'complete.json')
-      document = Mindee::Document.new(Mindee::PassportV1, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::PassportV1, response['document'])
       prediction = document.inference.prediction
       expect(prediction.all_checks).to eq(false)
 
@@ -126,7 +126,7 @@ describe Mindee::Document do
     it 'should load a complete page prediction' do
       to_string = read_file(DIR_PASSPORT_V1, 'summary_page0.rst')
       response = load_json(DIR_PASSPORT_V1, 'complete.json')
-      document = Mindee::Document.new(Mindee::PassportV1, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::PassportV1, response['document'])
       page = document.inference.pages[0]
       expect(page.prediction.all_checks).to eq(false)
       expect(page.prediction.expired?).to eq(false)
@@ -134,10 +134,37 @@ describe Mindee::Document do
     end
   end
 
+  context 'A License Plate V1' do
+    it 'should load an empty document prediction' do
+      response = load_json(DIR_EU_LICENSE_PLATE_V1, 'empty.json')
+      inference = Mindee::Document.new(Mindee::Prediction::EU::LicensePlateV1, response['document']).inference
+      expect(inference.product.type).to eq('standard')
+      expect(inference.prediction.license_plates.size).to eq(2)
+    end
+
+    it 'should load a complete document prediction' do
+      to_string = read_file(DIR_EU_LICENSE_PLATE_V1, 'summary_full.rst')
+      response = load_json(DIR_EU_LICENSE_PLATE_V1, 'complete.json')
+      document = Mindee::Document.new(Mindee::Prediction::EU::LicensePlateV1, response['document'])
+      inference = document.inference
+      expect(inference.prediction.license_plates.size).to eq(2)
+      expect(document.to_s).to eq(to_string)
+    end
+
+    it 'should load a complete page 0 prediction' do
+      to_string = read_file(DIR_EU_LICENSE_PLATE_V1, 'summary_page0.rst')
+      response = load_json(DIR_EU_LICENSE_PLATE_V1, 'complete.json')
+      document = Mindee::Document.new(Mindee::Prediction::EU::LicensePlateV1, response['document'])
+      page = document.inference.pages[0]
+      expect(page.prediction.license_plates.size).to eq(2)
+      expect(page.to_s).to eq(to_string)
+    end
+  end
+
   context 'A custom document V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_CUSTOM_V1, 'empty.json')
-      inference = Mindee::Document.new(Mindee::CustomV1, response['document']).inference
+      inference = Mindee::Document.new(Mindee::Prediction::CustomV1, response['document']).inference
       expect(inference.product.type).to eq('constructed')
       expect(inference.prediction.fields.length).to eq(10)
       expect(inference.prediction.classifications.length).to eq(1)
@@ -146,7 +173,7 @@ describe Mindee::Document do
     it 'should load a complete document prediction' do
       to_string = read_file(DIR_CUSTOM_V1, 'summary_full.rst')
       response = load_json(DIR_CUSTOM_V1, 'complete.json')
-      document = Mindee::Document.new(Mindee::CustomV1, response['document'])
+      document = Mindee::Document.new(Mindee::Prediction::CustomV1, response['document'])
       expect(document.to_s).to eq(to_string)
       prediction = document.inference.prediction
 
@@ -161,7 +188,7 @@ describe Mindee::Document do
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_CUSTOM_V1, 'summary_page0.rst')
       response = load_json(DIR_CUSTOM_V1, 'complete.json')
-      inference = Mindee::Document.new(Mindee::CustomV1, response['document']).inference
+      inference = Mindee::Document.new(Mindee::Prediction::CustomV1, response['document']).inference
       expect(inference.pages[0].prediction.fields[:string_all].contents_str(separator: '_')).to eq('Jenny_is_great')
       expect(inference.pages[0].prediction.fields[:string_all].contents_list).to eq(['Jenny', 'is', 'great'])
       expect(inference.pages[0].to_s).to eq(to_string)
@@ -170,7 +197,7 @@ describe Mindee::Document do
     it 'should load a complete page 1 prediction' do
       to_string = read_file(DIR_CUSTOM_V1, 'summary_page1.rst')
       response = load_json(DIR_CUSTOM_V1, 'complete.json')
-      inference = Mindee::Document.new(Mindee::CustomV1, response['document']).inference
+      inference = Mindee::Document.new(Mindee::Prediction::CustomV1, response['document']).inference
       expect(inference.pages[1].to_s).to eq(to_string)
     end
   end

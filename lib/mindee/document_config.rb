@@ -14,7 +14,7 @@ module Mindee
     # @return [Array<Mindee::HTTP::Endpoint>]
     attr_reader :endpoints
 
-    # @param prediction_class [Class<Mindee::Prediction>]
+    # @param prediction_class [Class<Mindee::Prediction::Prediction>]
     # @param document_type [String]
     # @param endpoints [Array<Mindee::HTTP::Endpoint>]
     def initialize(prediction_class, document_type, endpoints)

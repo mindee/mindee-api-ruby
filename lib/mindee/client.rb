@@ -3,6 +3,7 @@
 require_relative 'input'
 require_relative 'document_config'
 require_relative 'http/endpoint'
+require_relative 'parsing/prediction'
 
 module Mindee
   # General client for sending a document to the API.
@@ -16,7 +17,7 @@ module Mindee
 
     # Call prediction API on the document and parse the results.
     #
-    # @param document_class [Class]
+    # @param document_class [Mindee::Prediction::Prediction]
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.
@@ -60,14 +61,19 @@ module Mindee
 
     private
 
+    # @param document_class [Mindee::Prediction::Prediction]
+    # @param endpoint_name [String]
     def determine_endpoint_name(document_class, endpoint_name)
-      return document_class.name if document_class.name != CustomV1.name
+      return document_class.name if document_class.name != Prediction::CustomV1.name
 
       raise "endpoint_name is required when using #{document_class.name} class" if endpoint_name.empty?
 
       endpoint_name
     end
 
+    # @param document_class [Mindee::Prediction::Prediction]
+    # @param endpoint_name [String]
+    # @param account_name [String]
     def find_doc_config(document_class, endpoint_name, account_name)
       endpoint_name = determine_endpoint_name(document_class, endpoint_name)
 
@@ -115,9 +121,9 @@ module Mindee
       version: '1'
     )
       @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
-        CustomV1,
+        Prediction::CustomV1,
         endpoint_name,
-        [HTTP::CustomEndpoint.new(endpoint_name, account_name, version, @api_key)]
+        [HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)]
       )
       self
     end
@@ -160,20 +166,25 @@ module Mindee
     private
 
     def init_default_endpoints
-      @doc_configs[['mindee', InvoiceV4.name]] = DocumentConfig.new(
-        InvoiceV4,
+      @doc_configs[['mindee', Prediction::InvoiceV4.name]] = DocumentConfig.new(
+        Prediction::InvoiceV4,
         'invoice',
-        [HTTP::InvoiceEndpoint.new(@api_key)]
+        [HTTP::StandardEndpoint.new('invoices', '4', api_key: @api_key)]
       )
-      @doc_configs[['mindee', ReceiptV4.name]] = DocumentConfig.new(
-        ReceiptV4,
+      @doc_configs[['mindee', Prediction::ReceiptV4.name]] = DocumentConfig.new(
+        Prediction::ReceiptV4,
         'receipt',
-        [HTTP::ReceiptEndpoint.new(@api_key)]
+        [HTTP::StandardEndpoint.new('expense_receipts', '4', api_key: @api_key)]
       )
-      @doc_configs[['mindee', PassportV1.name]] = DocumentConfig.new(
-        PassportV1,
+      @doc_configs[['mindee', Prediction::PassportV1.name]] = DocumentConfig.new(
+        Prediction::PassportV1,
         'passport',
-        [HTTP::PassportEndpoint.new(@api_key)]
+        [HTTP::StandardEndpoint.new('passport', '1', api_key: @api_key)]
+      )
+      @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = DocumentConfig.new(
+        Prediction::EU::LicensePlateV1,
+        'license_plate',
+        [HTTP::StandardEndpoint.new('license_plates', '1', api_key: @api_key)]
       )
       self
     end
