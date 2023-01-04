@@ -160,13 +160,13 @@ module Mindee
     private
 
     def init_default_endpoints
-      @doc_configs[['mindee', InvoiceV3.name]] = DocumentConfig.new(
+      @doc_configs[['mindee', InvoiceV4.name]] = DocumentConfig.new(
         InvoiceV4,
         'invoice',
         [HTTP::InvoiceEndpoint.new(@api_key)]
       )
-      @doc_configs[['mindee', ReceiptV3.name]] = DocumentConfig.new(
-        ReceiptV3,
+      @doc_configs[['mindee', ReceiptV4.name]] = DocumentConfig.new(
+        ReceiptV4,
         'receipt',
         [HTTP::ReceiptEndpoint.new(@api_key)]
       )
@@ -174,9 +174,6 @@ module Mindee
         PassportV1,
         'passport',
         [HTTP::PassportEndpoint.new(@api_key)]
-      )
-      @doc_configs[['mindee', FinancialDocument.name]] = FinancialDocConfig.new(
-        @api_key
       )
       self
     end
