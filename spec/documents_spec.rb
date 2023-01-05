@@ -177,6 +177,12 @@ describe Mindee::Document do
       expect(document.to_s).to eq(to_string)
       prediction = document.inference.prediction
 
+      prediction.fields.each do |field_name, field_data|
+        expect(field_name).to be_kind_of(Symbol)
+        expect(field_data.values).to be_kind_of(Array)
+        expect(field_data.contents_str).to be_kind_of(String)
+      end
+
       expect(prediction.fields[:string_all].values.size).to eq(3)
       expect(prediction.fields['string_all']).to be_nil
       expect(prediction.fields[:string_all].contents_str).to eq('Mindee is awesome')
