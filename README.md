@@ -26,18 +26,35 @@ And then execute:
 
 Finally, Ruby away!
 
-### Off-the-Shelf Document
+### Loading a File and Parsing It
+
+#### Global Documents
 ```ruby
 require 'mindee'
 
-# Init a new client and configure the Invoice API
+# Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::InvoiceV4)
 
-# Print a brief summary of the parsed data
+# Print a brief summary of all the parsed data
+puts api_response.document
+```
+
+#### Region-Specific Documents
+```ruby
+require 'mindee'
+
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
+# Load a file from disk and parse it
+api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
+  .parse(Mindee::Prediction::EU::LicensePlateV1)
+
+# Print a brief summary of all the parsed data
 puts api_response.document
 ```
 
@@ -55,8 +72,15 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
 api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::CustomV1, 'wnine')
 
-# Print a brief summary of the parsed data
+# Print a brief summary of all the parsed data
 puts api_response.document
+
+# Looping over all prediction values
+prediction.fields.each do |field_name, field_data|
+  puts field_name
+  puts field_data.values
+  puts field_data.to_s
+end
 ```
 
 ## Further Reading
