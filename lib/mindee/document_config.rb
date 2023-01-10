@@ -15,11 +15,9 @@ module Mindee
     attr_reader :endpoints
 
     # @param prediction_class [Class<Mindee::Prediction::Prediction>]
-    # @param document_type [String]
     # @param endpoints [Array<Mindee::HTTP::Endpoint>]
-    def initialize(prediction_class, document_type, endpoints)
+    def initialize(prediction_class, endpoints)
       @prediction_class = prediction_class
-      @document_type = document_type
       @endpoints = endpoints
     end
 
@@ -66,33 +64,6 @@ module Mindee
               'You can set this using the ' \
               "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
-    end
-  end
-
-  # Client for Financial documents
-  class FinancialDocConfig < DocumentConfig
-    def initialize(api_key)
-      endpoints = [
-        HTTP::InvoiceEndpoint.new(api_key),
-        HTTP::ReceiptEndpoint.new(api_key),
-      ]
-      super(
-        FinancialDocument,
-        'financial_doc',
-        endpoints
-      )
-    end
-
-    private
-
-    # @param input_doc [Mindee::InputDocument]
-    # @param include_words [Boolean]
-    # @param close_file [Boolean]
-    # # @param cropper [Boolean]
-    # @return [Net::HTTPResponse]
-    def predict_request(input_doc, include_words, close_file, cropper)
-      endpoint = input_doc.pdf? ? @endpoints[0] : @endpoints[1]
-      endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
     end
   end
 end
