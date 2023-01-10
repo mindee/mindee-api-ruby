@@ -122,7 +122,6 @@ module Mindee
     )
       @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
         Prediction::CustomV1,
-        endpoint_name,
         [HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)]
       )
       self
@@ -168,23 +167,23 @@ module Mindee
     def init_default_endpoints
       @doc_configs[['mindee', Prediction::InvoiceV4.name]] = DocumentConfig.new(
         Prediction::InvoiceV4,
-        'invoice',
         [HTTP::StandardEndpoint.new('invoices', '4', api_key: @api_key)]
       )
       @doc_configs[['mindee', Prediction::ReceiptV4.name]] = DocumentConfig.new(
         Prediction::ReceiptV4,
-        'receipt',
         [HTTP::StandardEndpoint.new('expense_receipts', '4', api_key: @api_key)]
       )
       @doc_configs[['mindee', Prediction::PassportV1.name]] = DocumentConfig.new(
         Prediction::PassportV1,
-        'passport',
         [HTTP::StandardEndpoint.new('passport', '1', api_key: @api_key)]
       )
       @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = DocumentConfig.new(
         Prediction::EU::LicensePlateV1,
-        'license_plate',
         [HTTP::StandardEndpoint.new('license_plates', '1', api_key: @api_key)]
+      )
+      @doc_configs[['mindee', Prediction::ShippingContainer.name]] = DocumentConfig.new(
+        Prediction::ShippingContainer,
+        [HTTP::StandardEndpoint.new('shipping_containers', '1', api_key: @api_key)]
       )
       self
     end
