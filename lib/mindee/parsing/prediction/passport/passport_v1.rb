@@ -38,19 +38,19 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super
-        @country = Field.new(prediction['country'], page_id)
-        @id_number = Field.new(prediction['id_number'], page_id)
+        @country = TextField.new(prediction['country'], page_id)
+        @id_number = TextField.new(prediction['id_number'], page_id)
         @birth_date = DateField.new(prediction['birth_date'], page_id)
         @expiry_date = DateField.new(prediction['expiry_date'], page_id)
         @issuance_date = DateField.new(prediction['issuance_date'], page_id)
-        @birth_place = Field.new(prediction['birth_place'], page_id)
-        @gender = Field.new(prediction['gender'], page_id)
-        @surname = Field.new(prediction['surname'], page_id)
-        @mrz1 = Field.new(prediction['mrz1'], page_id)
-        @mrz2 = Field.new(prediction['mrz2'], page_id)
+        @birth_place = TextField.new(prediction['birth_place'], page_id)
+        @gender = TextField.new(prediction['gender'], page_id)
+        @surname = TextField.new(prediction['surname'], page_id)
+        @mrz1 = TextField.new(prediction['mrz1'], page_id)
+        @mrz2 = TextField.new(prediction['mrz2'], page_id)
         @given_names = []
         prediction['given_names'].each do |item|
-          @given_names.push(Field.new(item, page_id))
+          @given_names.push(TextField.new(item, page_id))
         end
         @full_name = construct_full_name(page_id)
         @mrz = construct_mrz(page_id)
@@ -141,9 +141,9 @@ module Mindee
 
         full_name = {
           'value' => "#{@given_names[0].value} #{@surname.value}",
-          'confidence' => Field.array_confidence([@surname, @given_names[0]]),
+          'confidence' => TextField.array_confidence([@surname, @given_names[0]]),
         }
-        Field.new(full_name, page_id, reconstructed: true)
+        TextField.new(full_name, page_id, reconstructed: true)
       end
 
       def construct_mrz(page_id)
@@ -151,9 +151,9 @@ module Mindee
 
         mrz = {
           'value' => @mrz1.value + @mrz2.value,
-          'confidence' => Mindee::Field.array_confidence([@mrz1, @mrz2]),
+          'confidence' => Mindee::TextField.array_confidence([@mrz1, @mrz2]),
         }
-        Field.new(mrz, page_id, reconstructed: true)
+        TextField.new(mrz, page_id, reconstructed: true)
       end
     end
   end

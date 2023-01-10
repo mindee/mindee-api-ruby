@@ -15,7 +15,7 @@ module Mindee
     end
 
     def to_s
-      Field.float_to_string(@value)
+      TextField.float_to_string(@value)
     end
   end
 end

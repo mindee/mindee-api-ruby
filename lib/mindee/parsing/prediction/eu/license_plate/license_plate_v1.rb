@@ -5,7 +5,7 @@ module Mindee
     module EU
       # License plate prediction.
       class LicensePlateV1 < Prediction
-        # @return [Array<Mindee::Field>]
+        # @return [Array<Mindee::TextField>]
         attr_reader :license_plates
 
         # @param prediction [Hash]
@@ -14,7 +14,7 @@ module Mindee
           super
           @license_plates = []
           prediction['license_plates'].each do |item|
-            @license_plates.push(Field.new(item, page_id))
+            @license_plates.push(TextField.new(item, page_id))
           end
         end
 

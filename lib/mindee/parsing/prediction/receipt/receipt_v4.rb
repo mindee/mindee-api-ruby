@@ -17,14 +17,18 @@ module Mindee
       attr_reader :total_tax
       # @return [Mindee::DateField]
       attr_reader :date
-      # @return [Mindee::Field]
+      # @return [Mindee::TextField]
       attr_reader :supplier
       # @return [Array<Mindee::TaxField>]
       attr_reader :taxes
-      # @return [Mindee::Field]
+      # @return [Mindee::TextField]
       attr_reader :time
-      # @return [Mindee::Field]
+      # @return [Mindee::TextField]
       attr_reader :category
+      # @return [Mindee::TextField]
+      attr_reader :subcategory
+      # @return [Mindee::TextField]
+      attr_reader :document_type
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
@@ -36,9 +40,11 @@ module Mindee
         @total_tax = Amount.new(prediction['total_tax'], page_id)
         @tip = Amount.new(prediction['tip'], page_id)
         @date = DateField.new(prediction['date'], page_id)
-        @category = Field.new(prediction['category'], page_id)
-        @supplier = Field.new(prediction['supplier'], page_id)
-        @time = Field.new(prediction['time'], page_id)
+        @category = TextField.new(prediction['category'], page_id)
+        @subcategory = TextField.new(prediction['subcategory'], page_id)
+        @document_type = TextField.new(prediction['document_type'], page_id)
+        @supplier = TextField.new(prediction['supplier'], page_id)
+        @time = TextField.new(prediction['time'], page_id)
         @taxes = []
         prediction['taxes'].each do |item|
           @taxes.push(TaxField.new(item, page_id))
@@ -51,6 +57,8 @@ module Mindee
         out_str << "\n:Locale: #{@locale}".rstrip
         out_str << "\n:Date: #{@date}".rstrip
         out_str << "\n:Category: #{@category}".rstrip
+        out_str << "\n:Subcategory: #{@subcategory}".rstrip
+        out_str << "\n:Document type: #{@document_type}".rstrip
         out_str << "\n:Time: #{@time}".rstrip
         out_str << "\n:Supplier name: #{@supplier}".rstrip
         out_str << "\n:Taxes: #{taxes}".rstrip
