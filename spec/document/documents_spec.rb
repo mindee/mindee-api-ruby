@@ -4,7 +4,7 @@ require 'json'
 
 require 'mindee/parsing'
 
-require_relative 'data'
+require_relative '../data'
 
 describe Mindee::Document do
   def load_json(dir_path, file_name)

@@ -189,6 +189,18 @@ module Mindee
         Prediction::US::BankCheckV1,
         [HTTP::StandardEndpoint.new('bank_check', '1', api_key: @api_key)]
       )
+      @doc_configs[['mindee', Prediction::FR::BankAccountDetailsV1.name]] = DocumentConfig.new(
+        Prediction::FR::BankAccountDetailsV1,
+        [HTTP::StandardEndpoint.new('bank_account_details', '1', api_key: @api_key)]
+      )
+      @doc_configs[['mindee', Prediction::FR::CarteVitaleV1.name]] = DocumentConfig.new(
+        Prediction::FR::CarteVitaleV1,
+        [HTTP::StandardEndpoint.new('carte_vitale', '1', api_key: @api_key)]
+      )
+      @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = DocumentConfig.new(
+        Prediction::FR::IdCardV1,
+        [HTTP::StandardEndpoint.new('idcard_fr', '1', api_key: @api_key)]
+      )
       self
     end
   end

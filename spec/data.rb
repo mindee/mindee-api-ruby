@@ -9,5 +9,5 @@ DIR_EU_LICENSE_PLATE_V1 = File.join(DATA_DIR, 'eu', 'license_plate', 'response_v
 DIR_SHIPPING_CONTAINER_V1 = File.join(DATA_DIR, 'shipping_container', 'response_v1').freeze
 DIR_US_BANK_CHECK_V1 = File.join(DATA_DIR, 'us', 'bank_check', 'response_v1').freeze
 DIR_FR_BANK_ACCOUNT_DETAILS_V1 = File.join(DATA_DIR, 'fr', 'bank_account_details', 'response_v1').freeze
-DIR_FR_CARTE_VITALE_CARD_V1 = File.join(DATA_DIR, 'fr', 'carte_vitale', 'response_v1').freeze
+DIR_FR_CARTE_VITALE_V1 = File.join(DATA_DIR, 'fr', 'carte_vitale', 'response_v1').freeze
 DIR_FR_ID_CARD_V1 = File.join(DATA_DIR, 'fr', 'id_card', 'response_v1').freeze
