@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'marcel', '~> 1.0.2'
   spec.add_runtime_dependency 'mrz', '~> 0.2'
-  spec.add_runtime_dependency 'origamindee', '~> 3.0'
+  spec.add_runtime_dependency 'origamindee', '~> 3.1'
 
   spec.add_development_dependency 'rake', '~> 12.3.1'
   spec.add_development_dependency 'rspec', '~> 3.11'

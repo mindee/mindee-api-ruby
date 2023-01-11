@@ -6,7 +6,7 @@ require_relative '../base'
 module Mindee
   module Prediction
     # License plate prediction.
-    class ShippingContainer < Prediction
+    class ShippingContainerV1 < Prediction
       # ISO 6346 code for container owner prefix + equipment identifier.
       # @return [Array<Mindee::TextField>]
       attr_reader :owner

@@ -70,11 +70,11 @@ describe Mindee::Input do
       expect(new_pdf.pages.size).to eq(1)
     end
 
-    it 'Should grab the first and last two pages' do
+    it 'Should grab the first 2, and the last page' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
       options = {
-        page_indexes: [0, -1, -2],
+        page_indexes: [0, 1, -1],
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }

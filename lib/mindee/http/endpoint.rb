@@ -23,12 +23,12 @@ module Mindee
       # @return [Integer]
       attr_reader :request_timeout
 
-      def initialize(owner, url_name, version, api_key: nil)
+      def initialize(owner, url_name, version, api_key: '')
         @owner = owner
         @url_name = url_name
         @version = version
         @request_timeout = ENV.fetch(REQUEST_TIMEOUT_ENV_NAME, TIMEOUT_DEFAULT)
-        @api_key = api_key || ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT)
+        @api_key = api_key.nil? || api_key.empty? ? ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT) : api_key
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 

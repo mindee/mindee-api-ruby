@@ -5,17 +5,17 @@ module Mindee
     # API Error
     class Error < StandardError
       # @return [String]
-      attr_reader :code
+      attr_reader :api_code
       # @return [String]
-      attr_reader :details
+      attr_reader :api_details
       # @return [String]
-      attr_reader :message
+      attr_reader :api_message
 
       def initialize(error)
-        @code = error['code']
-        @details = error['details']
-        @message = error['message']
-        super("#{@code}: #{@details} - #{@message}")
+        @api_code = error['code']
+        @api_details = error['details']
+        @api_message = error['message']
+        super("#{@api_code}: #{@api_details} - #{@api_message}")
       end
     end
   end
