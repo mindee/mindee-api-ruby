@@ -18,21 +18,45 @@ module Mindee
   module Prediction
     # Passport document.
     class PassportV1 < Prediction
-      # @return [Mindee::Orientation]
-      attr_reader :orientation
-      attr_reader :country,
-                  :id_number,
-                  :expiry_date,
-                  :issuance_date,
-                  :surname,
-                  :given_names,
-                  :full_name,
-                  :birth_date,
-                  :birth_place,
-                  :gender,
-                  :mrz1,
-                  :mrz2,
-                  :mrz
+      # The country of issue.
+      # @return [Mindee::TextField]
+      attr_reader :country
+      # The passport number.
+      # @return [Mindee::TextField]
+      attr_reader :id_number
+      # The expiration date of the passport.
+      # @return [Mindee::DateField]
+      attr_reader :expiry_date
+      # The issuance date of the passport.
+      # @return [Mindee::DateField]
+      attr_reader :issuance_date
+      # The surname (last name) of the passport holder.
+      # @return [Mindee::TextField]
+      attr_reader :surname
+      # List of first (given) names of the passport holder.
+      # @return [Mindee::TextField]
+      attr_reader :given_names
+      # The full name of the passport holder.
+      # @return [Array<Mindee::TextField>]
+      attr_reader :full_name
+      # The date of birth of the passport holder.
+      # @return [Mindee::DateField]
+      attr_reader :birth_date
+      # The place of birth of the passport holder.
+      # @return [Mindee::TextField]
+      attr_reader :birth_place
+      # The sex or gender of the passport holder.
+      # @return [Mindee::TextField]
+      attr_reader :gender
+      # The value of the first MRZ line.
+      # @return [Mindee::TextField]
+      attr_reader :mrz1
+      # The value of the second MRZ line.
+      # @return [Mindee::TextField]
+      attr_reader :mrz2
+      # All the MRZ values combined.
+      # @return [Mindee::TextField]
+      attr_reader :mrz
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]

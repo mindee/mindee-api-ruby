@@ -8,20 +8,28 @@ module Mindee
     module US
       # License plate prediction.
       class BankCheckV1 < Prediction
+        # Payer's bank account number.
         # @return [Array<Mindee::TextField>]
         attr_reader :account_number
+        # Amount to be paid.
         # @return [Array<Mindee::AmountField>]
         attr_reader :amount
+        # The check number.
         # @return [Mindee::TextField]
         attr_reader :check_number
+        # Payer's bank account routing number.
         # @return [Mindee::TextField]
         attr_reader :routing_number
+        # Date the check was issued.
         # @return [Mindee::DateField]
         attr_reader :date
+        # The positions of the signatures on the image.
         # @return [Array<Mindee::PositionField>]
         attr_reader :signatures_positions
+        # Check's position in the image.
         # @return [Mindee::PositionField]
         attr_reader :check_position
+        # List of payees (full name or company name).
         # @return [Array<Mindee::TextField>]
         attr_reader :payees
 
