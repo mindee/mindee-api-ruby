@@ -5,6 +5,7 @@ module Mindee
     module EU
       # License plate prediction.
       class LicensePlateV1 < Prediction
+        # A list of license plates.
         # @return [Array<Mindee::TextField>]
         attr_reader :license_plates
 

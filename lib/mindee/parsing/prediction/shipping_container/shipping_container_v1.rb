@@ -7,10 +7,13 @@ module Mindee
   module Prediction
     # License plate prediction.
     class ShippingContainer < Prediction
+      # ISO 6346 code for container owner prefix + equipment identifier.
       # @return [Array<Mindee::TextField>]
       attr_reader :owner
+      # ISO 6346 code for container serial number (6+1 digits).
       # @return [Array<Mindee::TextField>]
       attr_reader :serial_number
+      # ISO 6346 code for container length, height and type.
       # @return [Array<Mindee::TextField>]
       attr_reader :size_type
 

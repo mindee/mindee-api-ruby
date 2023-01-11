@@ -7,26 +7,37 @@ module Mindee
   module Prediction
     # Receipt document.
     class ReceiptV4 < Prediction
+      # Where the purchase was made, the language, and the currency.
       # @return [Mindee::Locale]
       attr_reader :locale
+      # Total including taxes
       # @return [Mindee::AmountField]
       attr_reader :total_amount
+      # Total amount of the purchase excluding taxes.
       # @return [Mindee::AmountField]
       attr_reader :total_net
+      # Total tax amount of the purchase.
       # @return [Mindee::AmountField]
       attr_reader :total_tax
+      # The purchase date.
       # @return [Mindee::DateField]
       attr_reader :date
+      # The name of the supplier or merchant, as seen on the receipt.
       # @return [Mindee::TextField]
       attr_reader :supplier
+      # List of taxes detected on the receipt.
       # @return [Array<Mindee::TaxField>]
       attr_reader :taxes
+      # Time as seen on the receipt in HH:MM format.
       # @return [Mindee::TextField]
       attr_reader :time
+      # The receipt category among predefined classes.
       # @return [Mindee::TextField]
       attr_reader :category
+      # The receipt sub-category among predefined classes.
       # @return [Mindee::TextField]
       attr_reader :subcategory
+      # Whether the document is an expense receipt or a credit card receipt.
       # @return [Mindee::TextField]
       attr_reader :document_type
 

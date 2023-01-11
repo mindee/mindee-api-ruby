@@ -8,39 +8,58 @@ module Mindee
   module Prediction
     # Invoice document.
     class InvoiceV4 < Prediction
+      # Locale information.
       # @return [Mindee::Locale]
       attr_reader :locale
+      # The nature of the invoice.
+      # @return [Mindee::TextField]
+      attr_reader :document_type
+      # The total amount with tax included.
       # @return [Mindee::AmountField]
       attr_reader :total_amount
+      # The total amount without the tax value.
       # @return [Mindee::AmountField]
       attr_reader :total_net
+      # The total tax.
       # @return [Mindee::AmountField]
       attr_reader :total_tax
+      # The creation date of the invoice.
       # @return [Mindee::DateField]
       attr_reader :date
+      # The invoice number.
       # @return [Mindee::TextField]
       attr_reader :invoice_number
+      # List of Reference numbers including PO number.
       # @return [Mindee::TextField]
       attr_reader :reference_numbers
+      # The due date of the invoice.
       # @return [Mindee::DateField]
       attr_reader :due_date
+      # The list of taxes.
       # @return [Array<Mindee::TaxField>]
       attr_reader :taxes
+      # The name of the customer.
       # @return [Mindee::TextField]
       attr_reader :customer_name
+      # The address of the customer.
       # @return [Mindee::TextField]
       attr_reader :customer_address
+      # The company registration information for the customer.
       # @return [Array<Mindee::CompanyRegistration>]
       attr_reader :customer_company_registrations
+      # The supplier's name.
       # @return [Mindee::TextField]
       attr_reader :supplier_name
+      # The supplier's address.
       # @return [Mindee::TextField]
       attr_reader :supplier_address
-      # @return [Mindee::Orientation]
+      # The payment information.
       # @return [Array<Mindee::PaymentDetails>]
       attr_reader :supplier_payment_details
+      # The supplier's company registration information.
       # @return [Array<Mindee::CompanyRegistration>]
       attr_reader :supplier_company_registrations
+      # Line items details.
       # @return [Array<Mindee::InvoiceLineItem>]
       attr_reader :line_items
 
@@ -49,6 +68,7 @@ module Mindee
       def initialize(prediction, page_id)
         super
         @locale = Locale.new(prediction['locale'])
+        @document_type = TextField.new(prediction['document_type'], page_id)
         @total_amount = AmountField.new(prediction['total_amount'], page_id)
         @total_net = AmountField.new(prediction['total_net'], page_id)
         @customer_address = TextField.new(prediction['customer_address'], page_id)
@@ -99,6 +119,7 @@ module Mindee
         taxes = @taxes.join("\n       ")
         out_str = String.new
         out_str << "\n:Locale: #{@locale}".rstrip
+        out_str << "\n:Document type: #{@document_type}".rstrip
         out_str << "\n:Invoice number: #{@invoice_number}".rstrip
         out_str << "\n:Reference numbers: #{reference_numbers}".rstrip
         out_str << "\n:Invoice date: #{@date}".rstrip
