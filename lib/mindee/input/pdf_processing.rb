@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'set'
+require 'origami'
 
 # Monkey-patching for Origami
 module PDFTools
@@ -55,42 +56,48 @@ module Mindee
 
         case options[:operation]
         when :KEEP_ONLY
-          pages_to_keep = Set.new
-          options[:page_indexes].each do |idx|
-            pages_to_keep << all_pages[idx]
-          end
+          pages_to_remove = indexes_from_keep(options[:page_indexes], all_pages)
         when :REMOVE
-          pages_to_remove = Set.new
-          options[:page_indexes].each do |idx|
-            pages_to_remove << all_pages[idx]
-          end
-          pages_to_keep = all_pages.to_set - pages_to_remove
+          pages_to_remove = indexes_from_remove(options[:page_indexes], all_pages)
         else
           raise "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{behavior}'"
         end
 
-        grab_pages(current_pdf, pages_to_keep.to_a)
+        current_pdf.delete_pages_at(pages_to_remove) if pages_to_remove.to_a != all_pages.to_a
+        current_pdf.to_io_stream
       end
 
-      # @param current_pdf [Origami::PDF]
-      # @param page_numbers [Array]
-      def self.grab_pages(current_pdf, page_numbers)
-        new_pdf = Origami::PDF.new
+      # @param page_indexes [Array]
+      # @param all_pages [Array]
+      def self.indexes_from_keep(page_indexes, all_pages)
+        pages_to_keep = Set.new
+        page_indexes.each do |idx|
+          idx = (all_pages.length - (idx + 2)) if idx.negative?
+          page = all_pages[idx]
+          next if page.nil?
 
-        to_insert = []
-        page_numbers.each do |idx|
-          to_insert.append(current_pdf.pages[idx])
+          pages_to_keep << page
         end
-        to_insert.each do |page|
-          new_pdf.append_page(page)
+        all_pages.to_set - pages_to_keep
+      end
+
+      # @param page_indexes [Array]
+      # @param all_pages [Array]
+      def self.indexes_from_remove(page_indexes, all_pages)
+        pages_to_remove = Set.new
+        page_indexes.each do |idx|
+          idx = (all_pages.length - (idx + 2)) if idx.negative?
+          page = all_pages[idx]
+          next if page.nil?
+
+          pages_to_remove << page
         end
-        new_pdf.to_io_stream
       end
 
       # @param io_stream [StringIO]
       # @return [Origami::PDF]
       def self.open_pdf(io_stream)
-        pdf_parser = Origami::PDF::LinearParser.new({})
+        pdf_parser = Origami::PDF::LinearParser.new({ verbosity: Origami::Parser::VERBOSE_QUIET })
         io_stream.seek(0)
         pdf_parser.parse(io_stream)
       end

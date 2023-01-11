@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'stringio'
-require 'origami'
 require 'marcel'
+
+require_relative 'pdf_processing'
 
 module Mindee
   module Input
@@ -39,7 +40,7 @@ module Mindee
         @file_mimetype == 'application/pdf'
       end
 
-      def process_pdf(options: {})
+      def process_pdf(options)
         @io_stream.seek(0)
         @io_stream = PdfProcessor.parse(@io_stream, options)
       end

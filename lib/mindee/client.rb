@@ -17,7 +17,7 @@ module Mindee
 
     # Call prediction API on the document and parse the results.
     #
-    # @param document_class [Mindee::Prediction::Prediction]
+    # @param prediction_class [Mindee::Prediction::Prediction]
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.
@@ -46,7 +46,7 @@ module Mindee
     #
     # @return [Mindee::DocumentResponse]
     def parse(
-      document_class,
+      prediction_class,
       endpoint_name: '',
       account_name: '',
       include_words: false,
@@ -54,7 +54,7 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      doc_config = find_doc_config(document_class, endpoint_name, account_name)
+      doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       @input_doc.process_pdf(page_options) if !page_options.nil? && @input_doc.pdf?
       doc_config.predict(@input_doc, include_words, close_file, cropper)
     end
@@ -103,7 +103,7 @@ module Mindee
   # See: https://developers.mindee.com/docs/
   class Client
     # @param raise_on_error [Boolean]
-    def initialize(api_key: nil, raise_on_error: true)
+    def initialize(api_key: '', raise_on_error: true)
       @raise_on_error = raise_on_error
       @doc_configs = {}
       @api_key = api_key
@@ -167,39 +167,39 @@ module Mindee
     def init_default_endpoints
       @doc_configs[['mindee', Prediction::InvoiceV4.name]] = DocumentConfig.new(
         Prediction::InvoiceV4,
-        [HTTP::StandardEndpoint.new('invoices', '4', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('invoices', '4', @api_key)]
       )
       @doc_configs[['mindee', Prediction::ReceiptV4.name]] = DocumentConfig.new(
         Prediction::ReceiptV4,
-        [HTTP::StandardEndpoint.new('expense_receipts', '4', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('expense_receipts', '4', @api_key)]
       )
       @doc_configs[['mindee', Prediction::PassportV1.name]] = DocumentConfig.new(
         Prediction::PassportV1,
-        [HTTP::StandardEndpoint.new('passport', '1', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('passport', '1', @api_key)]
       )
       @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = DocumentConfig.new(
         Prediction::EU::LicensePlateV1,
         [HTTP::StandardEndpoint.new('license_plates', '1', api_key: @api_key)]
       )
-      @doc_configs[['mindee', Prediction::ShippingContainer.name]] = DocumentConfig.new(
-        Prediction::ShippingContainer,
-        [HTTP::StandardEndpoint.new('shipping_containers', '1', api_key: @api_key)]
+      @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = DocumentConfig.new(
+        Prediction::ShippingContainerV1,
+        [HTTP::StandardEndpoint.new('shipping_containers', '1', @api_key)]
       )
       @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = DocumentConfig.new(
         Prediction::US::BankCheckV1,
-        [HTTP::StandardEndpoint.new('bank_check', '1', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('bank_check', '1', @api_key)]
       )
       @doc_configs[['mindee', Prediction::FR::BankAccountDetailsV1.name]] = DocumentConfig.new(
         Prediction::FR::BankAccountDetailsV1,
-        [HTTP::StandardEndpoint.new('bank_account_details', '1', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('bank_account_details', '1', @api_key)]
       )
       @doc_configs[['mindee', Prediction::FR::CarteVitaleV1.name]] = DocumentConfig.new(
         Prediction::FR::CarteVitaleV1,
-        [HTTP::StandardEndpoint.new('carte_vitale', '1', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('carte_vitale', '1', @api_key)]
       )
       @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = DocumentConfig.new(
         Prediction::FR::IdCardV1,
-        [HTTP::StandardEndpoint.new('idcard_fr', '1', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('idcard_fr', '1', @api_key)]
       )
       self
     end

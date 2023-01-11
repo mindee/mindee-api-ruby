@@ -30,17 +30,16 @@ module Mindee
     def predict(input_doc, include_words, close_file, cropper)
       check_api_keys
       response = predict_request(input_doc, include_words, close_file, cropper)
-      parse_response(input_doc, response)
+      parse_response(response)
     end
 
     private
 
-    # @param input_doc [Mindee::InputDocument]
     # @param response [Net::HTTPResponse]
     # @return [Mindee::DocumentResponse]
-    def parse_response(_input_doc, response)
+    def parse_response(response)
       hashed_response = JSON.parse(response.body, object_class: Hash)
-      return Document.new(@prediction_class, hashed_response) if (200..299).include?(response.code.to_i)
+      return Document.new(@prediction_class, hashed_response['document']) if (200..299).include?(response.code.to_i)
 
       error = Parsing::Error.new(hashed_response['api_request']['error'])
       raise error

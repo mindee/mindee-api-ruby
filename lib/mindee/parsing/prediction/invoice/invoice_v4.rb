@@ -146,6 +146,8 @@ module Mindee
       private
 
       def line_items_to_s
+        return '' if @line_items.empty?
+
         line_item_separator = "#{'=' * 22} #{'=' * 8} #{'=' * 9} #{'=' * 10} #{'=' * 18} #{'=' * 36}"
         line_items = @line_items.map(&:to_s).join("\n")
         out_str = String.new
