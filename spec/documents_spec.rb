@@ -34,7 +34,7 @@ describe Mindee::Document do
       response = load_json(DIR_INVOICE_V4, 'complete.json')
       document = Mindee::Document.new(Mindee::Prediction::InvoiceV4, response['document'])
       prediction = document.inference.prediction
-      expect(prediction.invoice_number.bounding_box).to eq(prediction.invoice_number.polygon)
+      expect(prediction.invoice_number.bounding_box.top_left.x).to eq(prediction.invoice_number.polygon[0][0])
       expect(prediction.date.value).to eq('2020-02-17')
       expect(prediction.due_date.value).to eq('2020-02-17')
       expect(prediction.due_date.page_id).to eq(0)
@@ -174,7 +174,7 @@ describe Mindee::Document do
       response = load_json(DIR_SHIPPING_CONTAINER_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Prediction::ShippingContainer, response['document'])
       inference = document.inference
-      expect(inference.prediction.owner.value).to eq("MMAU")
+      expect(inference.prediction.owner.value).to eq('MMAU')
       expect(document.to_s).to eq(to_string)
     end
 
@@ -183,7 +183,44 @@ describe Mindee::Document do
       response = load_json(DIR_SHIPPING_CONTAINER_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Prediction::ShippingContainer, response['document'])
       page = document.inference.pages[0]
-      expect(page.prediction.owner.value).to eq("MMAU")
+      expect(page.prediction.owner.value).to eq('MMAU')
+      expect(page.to_s).to eq(to_string)
+    end
+  end
+
+  context 'A US Bank Check V1' do
+    it 'should load an empty document prediction' do
+      response = load_json(DIR_US_BANK_CHECK_V1, 'empty.json')
+      inference = Mindee::Document.new(Mindee::Prediction::US::BankCheckV1, response['document']).inference
+      expect(inference.product.type).to eq('standard')
+      expect(inference.prediction.account_number.value).to be_nil
+    end
+
+    it 'should load a complete document prediction' do
+      to_string = read_file(DIR_US_BANK_CHECK_V1, 'summary_full.rst')
+      response = load_json(DIR_US_BANK_CHECK_V1, 'complete.json')
+      document = Mindee::Document.new(Mindee::Prediction::US::BankCheckV1, response['document'])
+      inference = document.inference
+      expect(inference.prediction.account_number.value).to eq('12345678910')
+      expect(inference.prediction.check_position.rectangle.top_left.y).to eq(0.129)
+      expect(inference.prediction.check_position.rectangle[0][1]).to eq(0.129)
+      inference.prediction.signatures_positions.each do |pos|
+        expect(pos).to be_a_kind_of(Mindee::PositionField)
+      end
+      expect(document.to_s).to eq(to_string)
+    end
+
+    it 'should load a complete page 0 prediction' do
+      to_string = read_file(DIR_US_BANK_CHECK_V1, 'summary_page0.rst')
+      response = load_json(DIR_US_BANK_CHECK_V1, 'complete.json')
+      document = Mindee::Document.new(Mindee::Prediction::US::BankCheckV1, response['document'])
+      page = document.inference.pages[0]
+      expect(page.prediction.account_number.value).to eq('12345678910')
+      expect(page.prediction.check_position.rectangle.top_left.y).to eq(0.129)
+      expect(page.prediction.check_position.rectangle[0][1]).to eq(0.129)
+      page.prediction.signatures_positions.each do |pos|
+        expect(pos).to be_a_kind_of(Mindee::PositionField)
+      end
       expect(page.to_s).to eq(to_string)
     end
   end

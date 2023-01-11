@@ -9,11 +9,11 @@ module Mindee
     class ReceiptV4 < Prediction
       # @return [Mindee::Locale]
       attr_reader :locale
-      # @return [Mindee::Amount]
+      # @return [Mindee::AmountField]
       attr_reader :total_amount
-      # @return [Mindee::Amount]
+      # @return [Mindee::AmountField]
       attr_reader :total_net
-      # @return [Mindee::Amount]
+      # @return [Mindee::AmountField]
       attr_reader :total_tax
       # @return [Mindee::DateField]
       attr_reader :date
@@ -35,10 +35,10 @@ module Mindee
       def initialize(prediction, page_id)
         super
         @locale = Locale.new(prediction['locale'])
-        @total_amount = Amount.new(prediction['total_amount'], page_id)
-        @total_net = Amount.new(prediction['total_net'], page_id)
-        @total_tax = Amount.new(prediction['total_tax'], page_id)
-        @tip = Amount.new(prediction['tip'], page_id)
+        @total_amount = AmountField.new(prediction['total_amount'], page_id)
+        @total_net = AmountField.new(prediction['total_net'], page_id)
+        @total_tax = AmountField.new(prediction['total_tax'], page_id)
+        @tip = AmountField.new(prediction['tip'], page_id)
         @date = DateField.new(prediction['date'], page_id)
         @category = TextField.new(prediction['category'], page_id)
         @subcategory = TextField.new(prediction['subcategory'], page_id)

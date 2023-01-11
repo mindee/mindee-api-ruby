@@ -9,7 +9,7 @@ module Mindee
     attr_reader :value
     # @return [Array<Array<Float>>]
     attr_reader :bounding_box
-    # @return [Array<Array<Float>>]
+    # @return [Mindee::Geometry::Polygon]
     attr_reader :polygon
     # @return [Integer, nil]
     attr_reader :page_id
@@ -26,7 +26,7 @@ module Mindee
     def initialize(prediction, page_id, reconstructed: false)
       @value = prediction['value']
       @confidence = prediction['confidence']
-      @polygon = prediction['polygon']
+      @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
       @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
       @page_id = page_id || prediction['page_id']
       @reconstructed = reconstructed

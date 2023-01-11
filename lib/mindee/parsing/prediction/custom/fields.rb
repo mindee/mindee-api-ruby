@@ -26,9 +26,9 @@ module Mindee
     # The confidence score, value will be between 0.0 and 1.0
     # @return [Float]
     attr_accessor :confidence
-    # @return [Array<Array<Float>>]
-    attr_reader :bbox
-    # @return [Array<Array<Float>>]
+    # @return [Mindee::Geometry::Quadrilateral]
+    attr_reader :bounding_box
+    # @return [Mindee::Geometry::Polygon]
     attr_reader :polygon
     attr_reader :content
 
@@ -36,8 +36,8 @@ module Mindee
     def initialize(prediction)
       @content = prediction['content']
       @confidence = prediction['confidence']
-      @polygon = prediction['polygon']
-      @bbox = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
+      @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
+      @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
     end
 
     # @return [String]
