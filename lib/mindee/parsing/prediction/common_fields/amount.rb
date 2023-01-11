@@ -4,7 +4,7 @@ require_relative 'base'
 
 module Mindee
   # Represents tax information.
-  class Amount < Field
+  class AmountField < Field
     # Amount value as 3 decimal float
     # @return [Float, nil]
     attr_reader :value
@@ -15,7 +15,7 @@ module Mindee
     end
 
     def to_s
-      TextField.float_to_string(@value)
+      Field.float_to_string(@value)
     end
   end
 end

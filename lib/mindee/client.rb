@@ -185,6 +185,10 @@ module Mindee
         Prediction::ShippingContainer,
         [HTTP::StandardEndpoint.new('shipping_containers', '1', api_key: @api_key)]
       )
+      @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = DocumentConfig.new(
+        Prediction::US::BankCheckV1,
+        [HTTP::StandardEndpoint.new('bank_check', '1', api_key: @api_key)]
+      )
       self
     end
   end
