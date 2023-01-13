@@ -6,8 +6,8 @@ You can view the source code on [GitHub](https://github.com/mindee/mindee-api-ru
 
 ## Installation
 
-### Prerequisites
-The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1
+### Requirements
+The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2
 
 ### Standard Installation
 To quickly get started with the Ruby OCR SDK, Install by adding this line to your application's Gemfile:
