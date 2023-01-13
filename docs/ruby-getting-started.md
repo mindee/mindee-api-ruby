@@ -92,12 +92,19 @@ The following environment variable will set the global API key:
 ```shell
 MINDEE_API_KEY=my-api-key
 ```
-
+ 
 Then in your code:
 ```ruby
 # Init a new client without an API key
 mindee_client = Mindee::Client.new
 ```
+
+### Setting the Request Timeout
+The request timeout can be set using an environment variable:
+```shell
+MINDEE_REQUEST_TIMEOUT=200
+```
+
 
 ## Loading a Document File
 Before being able to send a document to the API, it must first be loaded.

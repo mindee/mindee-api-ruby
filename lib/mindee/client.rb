@@ -102,9 +102,8 @@ module Mindee
   # Mindee API Client.
   # See: https://developers.mindee.com/docs/
   class Client
-    # @param raise_on_error [Boolean]
-    def initialize(api_key: '', raise_on_error: true)
-      @raise_on_error = raise_on_error
+    # @param api_key [String]
+    def initialize(api_key: '')
       @doc_configs = {}
       @api_key = api_key
       init_default_endpoints
