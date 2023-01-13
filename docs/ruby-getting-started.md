@@ -45,7 +45,7 @@ cd mindee-api-ruby
 bundle install
 ```
 
-## Updating the Library
+### Updating the Library
 It is important to always check the version of the Mindee OCR SDK you are using, as new and updated
 features won’t work on older versions.
 

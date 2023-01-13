@@ -19,7 +19,7 @@ puts result.inference.prediction
 ```
 
 Output:
-```shell
+```
 :Locale: en-US; en; US; USD;
 :Date: 2014-07-07
 :Category: food

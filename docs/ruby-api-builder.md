@@ -1,34 +1,32 @@
-The Ruby  OCR SDK supports [custom-built API](https://developers.mindee.com/docs/build-your-first-document-parsing-api)
-from the API Builder.
+The Ruby  OCR SDK supports [custom-built API](https://developers.mindee.com/docs/build-your-first-document-parsing-api) from the API Builder.
 
 If your document isn't covered by one of Mindee's Off-the-Shelf APIs, you can create your own API using the
 [API Builder](https://developers.mindee.com/docs/overview).
 
-For the following examples, we are using our own [W9s custom API](https://developers.mindee.com/docs/w9-forms-ocr)
+For the following examples, we are using our own [W9s custom API](https://developers.mindee.com/docs/w9-forms-ocr),
 created with the [API Builder](https://developers.mindee.com/docs/overview).
 
 > 📘 **Info**
 >
-> We used a data model that may be different from yours. To modify this to your own custom API,
-> change the `config_custom_doc` call with your own parameters.
+> We used a data model that will be different from yours.
+> To modify this to your own custom API, change the `add_endpoint` call with your own parameters.
 
 ```ruby
 require 'mindee'
 
 # Init a new client and configure your custom document
-mindee_client = Mindee::Client.new(
-  api_key: 'my-api-key', # optional, can be set in environment
-).config_custom_doc(
-  'wsnine',
+mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
   'john',
+  'wnine',
   version: '1.1' # optional, if not set, use the latest version of the model
 )
 
 # Load a file from disk and parse it
-w9_data = mindee_client.doc_from_path('/path/to/file.pdf').parse('wsnine')
+result = mindee_client.doc_from_path('/path/to/file.ext')
+  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
 
-# Print a brief summary of the parsed data
-puts w9_data.document.to_s
+# Print a summary of the document prediction in RST format
+puts result
 ```
 
 If the `version` argument is set, you'll be required to update it every time a new model is trained.
@@ -39,7 +37,8 @@ The client calls the `parse` method when parsing your custom document, which wil
 The document type must be specified when calling the parse method.
 
 ```ruby
-result = mindee_client.doc_from_path('/path/to/custom_file').parse('wsnine')
+result = mindee_client.doc_from_path('/path/to/custom_file')
+  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
 puts result
 ```
 
@@ -49,13 +48,13 @@ puts result
 > you **must** specify your account name when calling the `parse` method:
 
 ```ruby
-mindee_client = Mindee::Client.new.config_custom_doc(
+mindee_client = Mindee::Client.new.add_endpoint(
   'receipt',
   'john'
 )
 
 result = mindee_client.doc_from_path('/path/to/receipt.jpg')
-  .parse('receipt', username: 'john')
+  .parse(Mindee::Prediction::CustomV1, account_name: 'john')
 ```
 
 ## Document Fields
@@ -64,64 +63,58 @@ All the fields defined in the API builder when creating your custom document are
 In custom documents, each field will hold an array of all the words in the document which are related to that field.
 Each word is an object that has the text content, geometry information, and confidence score.
 
-Value fields can be accessed either via the `fields` attribute, or as their own attributes set at run-time.
+Value fields can be accessed via the `fields` attribute.
 
-Classification fields can be accessed either via the `classifications` attribute, or as their own attributes set at run-time.
+Classification fields can be accessed via the `classifications` attribute.
 
 > 📘 **Info**
 >
 > Both document level and page level objects work in the same way.
 
-### Run-time Attributes
-Individual field values can be accessed simply by using the field's API name, in the examples below we'll use the `address` field.
+### Fields Attribute
+The `fields` attribute is a hashmap with the following structure:
 
-```ruby
-# raw data, list of each word object
-puts w9_data.document.address.values
-
-# list of all values
-puts w9_data.document.address.contents_list
-
-# default string representation
-puts w9_data.document.address.to_s
-
-# custom string representation
-puts w9_data.document.address.contents_str(separator: '_')
-```
-
-### Fields property
-In addition to accessing a value field directly, it's possible to access it through the `fields` attribute.
-It's a hashmap with the following structure:
 * key: the API name of the field, as a `symbol`
 * value: a `ListField` object which has a `values` attribute, containing a list of all values found for the field.
 
+Individual field values can be accessed by using the field's API name, in the examples below we'll use the `address` field.
+
 ```ruby
 # raw data, list of each word object
-puts w9_data.document.fields[:address].values
+pp result.inference.prediction.fields[:address].values
+
+# list of all values
+puts result.inference.prediction.fields[:address].contents_list
+
+# default string representation
+puts result.inference.prediction.fields[:address].to_s
+
+# custom string representation
+puts result.inference.prediction.fields[:address].contents_str(separator: '_')
 ```
 
-This makes it simple to iterate over all the fields:
+To iterate over all the fields:
 ```ruby
-w9_data.document.fields.each do |name, info|
+result.inference.prediction.fields.each do |name, info|
   puts name
   puts info.values
 end
 ```
 
-### Classifications property
-In addition to accessing a classification field directly, it's possible to access it through the `classifications` attribute.
-It's a hashmap with the following structure:
+### Classifications Attribute
+The `classifications` attribute is a hashmap with the following structure:
+
 * key: the API name of the field, as a `symbol`
 * value: a `ClassificationField` object which has a `value` attribute, containing a string representation of the detected classification.
 
 ```ruby
 # raw data, list of each word object
-puts w9_data.document.classifications[:doc_type].value
+puts result.document.classifications[:doc_type].value
 ```
 
-This makes it simple to iterate over all the fields:
+To iterate over all the classifications:
 ```ruby
-w9_data.document.classifications.each do |name, info|
+result.document.classifications.each do |name, info|
   puts name
   puts info.value
 end

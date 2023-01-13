@@ -19,7 +19,7 @@ puts result.inference.prediction
 ```
 
 Output:
-```shell
+```
 :Locale: en; en; CAD;
 :Document type: INVOICE
 :Invoice number: 14
@@ -48,8 +48,10 @@ Code                   QTY      Price     Amount     Tax (Rate)         Descript
 ====================== ======== ========= ========== ================== ====================================
 ```
 
-**Note:** Line item descriptions are truncated here only for display purposes.
-The full text is available in the [details](#line-items).
+> 📘 **Info**
+>
+> Line item descriptions are truncated here only for display purposes.
+> The full text is available in the [details](#line-items).
 
 ## Fields
 Each prediction object contains a set of different fields.
@@ -91,11 +93,12 @@ puts result.inference.prediction.customer_name.value
 puts result.inference.prediction.customer_address.value
 ```
 
-**`customer_company_registration`** (Array<CompanyRegistration>): Customer's company registration
+**`customer_company_registrations`** (Array<CompanyRegistration>): Customer's company registration
 
 ```ruby
 result.inference.prediction.customer_company_registrations.each do |registration|
-  puts registration
+  puts registration.value
+  puts registration.type
 end
 ```
 
@@ -184,14 +187,10 @@ Each object in the list contains an extra attribute:
 
 * `type` (String): Type of company registration number among predefined categories.
 ```ruby
-# Show the type of the first registration
-puts result.inference.prediction.supplier_company_registrations[0].type
-```
-
-* `value` (String): Value of the company identifier
-```ruby
-# Show the value of the first registration
-puts result.inference.prediction.supplier_company_registrations[0].value
+result.inference.prediction.supplier_company_registrations.each do |registration|
+  puts registration.value
+  puts registration.type
+end
 ```
 
 ### Taxes

@@ -19,7 +19,7 @@ puts result.inference.prediction
 ```
 
 Output:
-```shell
+```
 :Full name: HENERT PUDARSAN
 :Given names: HENERT
 :Surname: PUDARSAN
