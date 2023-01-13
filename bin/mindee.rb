@@ -50,7 +50,6 @@ DOCUMENTS = {
 
 options = {
   api_key: '',
-  raise_on_error: true,
   print_full: false,
 }
 
@@ -95,9 +94,6 @@ global_parser = OptionParser.new do |opt|
   opt.separator('')
   opt.separator("subcommands: #{DOCUMENTS.keys.join(', ')}")
   opt.separator('')
-  opt.on('-E', '--no-raise-errors', "raise errors behavior") do |v|
-    options[:raise_on_error] = false
-  end
   opt.on('-f', '--full', "Print the full data, including pages") do |v|
     options[:print_full] = true
   end
@@ -114,9 +110,7 @@ else
   exit(1)
 end
 
-mindee_client = Mindee::Client.new(
-  api_key: options[:api_key], raise_on_error: options[:raise_on_error]
-)
+mindee_client = Mindee::Client.new(api_key: options[:api_key])
 
 if command == 'custom'
   if ARGV.length != 2
