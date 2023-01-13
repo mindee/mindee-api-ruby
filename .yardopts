@@ -1,1 +1,4 @@
 --markup markdown
+--main README.md
+--files docs/ruby-getting-started.md,docs/ruby-invoice-ocr.md,docs/ruby-passport-ocr.md,docs/ruby-receipt-ocr.md
+--output-dir docs/_build

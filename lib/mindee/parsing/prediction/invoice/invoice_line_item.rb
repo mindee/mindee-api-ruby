@@ -5,11 +5,27 @@ require_relative '../common_fields/base'
 module Mindee
   # Line items for invoices
   class InvoiceLineItem
-    attr_reader :product_code, :description, :quantity, :unit_price, :total_amount, :tax_rate, :tax_amount,
-                :confidence, :page_id
-    # @return [Array<Array<Float>>]
+    # @return [String] The product code referring to the item.
+    attr_reader :product_code
+    # @return [String]
+    attr_reader :description
+    # @return [Float]
+    attr_reader :quantity
+    # @return [Float]
+    attr_reader :unit_price
+    # @return [Float]
+    attr_reader :total_amount
+    # @return [Float] The item tax rate percentage.
+    attr_reader :tax_rate
+    # @return [Float]
+    attr_reader :tax_amount
+    # @return [Float]
+    attr_reader :confidence
+    # @return [Integer]
+    attr_reader :page_id
+    # @return [Mindee::Geometry::Quadrilateral]
     attr_reader :bounding_box
-    # @return [Array<Array<Float>>]
+    # @return [Array<Mindee::Geometry::Polygon>]
     attr_reader :polygon
 
     def initialize(prediction, page_id)

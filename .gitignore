@@ -42,7 +42,7 @@ build-iPhoneSimulator/
 ## Documentation cache and generated files:
 /.yardoc/
 /_yardoc/
-/doc/
+/docs/_build/
 /rdoc/
 
 ## Environment normalization:

@@ -1,7 +1,4 @@
-[![License: MIT](https://img.shields.io/github/license/mindee/mindee-api-ruby)](https://opensource.org/licenses/MIT)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mindee/mindee-api-ruby/test.yml)](https://github.com/mindee/mindee-api-ruby)
-[![Gem Version](https://img.shields.io/gem/v/mindee)](https://rubygems.org/gems/mindee)
-[![Downloads](https://img.shields.io/gem/dt/mindee.svg)](https://rubygems.org/gems/mindee)
+[![License: MIT](https://img.shields.io/github/license/mindee/mindee-api-ruby)](https://opensource.org/licenses/MIT) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mindee/mindee-api-ruby/test.yml)](https://github.com/mindee/mindee-api-ruby) [![Gem Version](https://img.shields.io/gem/v/mindee)](https://rubygems.org/gems/mindee) [![Downloads](https://img.shields.io/gem/dt/mindee.svg)](https://rubygems.org/gems/mindee)
 
 # Mindee API Helper Library for Ruby
 Quickly and easily connect to Mindee's API services using Ruby.
@@ -36,11 +33,11 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
+result = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::InvoiceV4)
 
-# Print a brief summary of all the parsed data
-puts api_response.document
+# Print a full summary of the parsed data in RST format
+puts result
 ```
 
 #### Region-Specific Documents
@@ -51,11 +48,11 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
+result = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::EU::LicensePlateV1)
 
-# Print a brief summary of all the parsed data
-puts api_response.document
+# Print a full summary of the parsed data in RST format
+puts result.document
 ```
 
 ### Custom Document (API Builder)
@@ -69,14 +66,14 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
 )
 
 # Load a file from disk and parse it
-api_response = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::Prediction::CustomV1, 'wnine')
+result = mindee_client.doc_from_path('/path/to/the/file.ext')
+  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
 
-# Print a brief summary of all the parsed data
-puts api_response.document
+# Print a full summary of the parsed data in RST format
+puts result
 
 # Looping over all prediction values
-prediction.fields.each do |field_name, field_data|
+result.inference.prediction.fields.each do |field_name, field_data|
   puts field_name
   puts field_data.values
   puts field_data.to_s
@@ -87,10 +84,16 @@ end
 There's more to it than that for those that need more features, or want to
 customize the experience.
 
-All the juicy details are described in the
-**[Official Documentation](https://developers.mindee.com/docs/ruby-getting-started)**.
+- [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
+- [Ruby Custom APIs OCR](https://developers.mindee.com/docs/ruby-api-builder)
+- [Ruby invoices OCR](https://developers.mindee.com/docs/ruby-invoice-ocr)
+- [Ruby receipts OCR](https://developers.mindee.com/docs/ruby-receipt-ocr)
+- [Ruby passports OCR](https://developers.mindee.com/docs/ruby-passport-ocr)
 
 ## License
 Copyright © Mindee, SA
 
 Available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Questions?
+[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)
