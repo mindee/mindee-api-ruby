@@ -56,7 +56,7 @@ module Mindee
 
     # Load a document from a path.
     class PathDocument < InputDocument
-      # @param [String]
+      # @param filepath [String]
       def initialize(filepath)
         io_stream = File.open(filepath, 'rb')
         super(io_stream, File.basename(filepath))

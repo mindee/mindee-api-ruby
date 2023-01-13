@@ -7,9 +7,9 @@ module Mindee
   class Document
     # @return [Mindee::Inference]
     attr_reader :inference
-    # @return [String]
+    # @return [String] Filename sent to the API
     attr_reader :name
-    # @return [String]
+    # @return [String] Mindee ID of the document
     attr_reader :id
 
     # @param prediction_class [Class<Mindee::Prediction::Prediction>]

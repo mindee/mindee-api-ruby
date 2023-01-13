@@ -51,6 +51,7 @@ DOCUMENTS = {
 options = {
   api_key: '',
   raise_on_error: true,
+  print_full: false,
 }
 
 def ots_subcommand(command, options)
@@ -96,7 +97,10 @@ global_parser = OptionParser.new do |opt|
   opt.separator('')
   opt.on('-E', '--no-raise-errors', "raise errors behavior") do |v|
     options[:raise_on_error] = false
-    end
+  end
+  opt.on('-f', '--full', "Print the full data, including pages") do |v|
+    options[:print_full] = true
+  end
 end
 
 global_parser.order!
@@ -140,5 +144,9 @@ default_cutting = {
 }
 page_options = options[:cut_pages].nil? ? nil : default_cutting
 doc = mindee_client.doc_from_path(file_path)
-resp = doc.parse(DOCUMENTS[command][:prediction], endpoint_name: doc_type, page_options: page_options)
-puts resp
+result = doc.parse(DOCUMENTS[command][:prediction], endpoint_name: doc_type, page_options: page_options)
+if options[:print_full]
+  puts result
+else
+  puts result.inference.prediction
+end
