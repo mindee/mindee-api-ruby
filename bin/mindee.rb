@@ -6,28 +6,52 @@ require 'optparse'
 require 'mindee'
 
 DOCUMENTS = {
+  "custom" => {
+    help: "Custom document type from API builder",
+    prediction: Mindee::Prediction::CustomV1,
+  },
   "invoice" => {
     help: 'Invoice',
-    doc_type: Mindee::Client::DOC_TYPE_INVOICE,
+    prediction: Mindee::Prediction::InvoiceV4,
   },
   "receipt" => {
     help: "Expense Receipt",
-    doc_type: Mindee::Client::DOC_TYPE_RECEIPT,
+    prediction: Mindee::Prediction::ReceiptV4,
   },
   "passport" => {
     help: "Passport",
-    doc_type: Mindee::Client::DOC_TYPE_PASSPORT,
+    prediction: Mindee::Prediction::PassportV1,
   },
-  "financial" => {
-    help: "Financial Document (receipt or invoice)",
-    doc_type: Mindee::Client::DOC_TYPE_FINANCIAL,
+  "shipping-container" => {
+    help: "Shipping Container",
+    prediction: Mindee::Prediction::ShippingContainerV1,
   },
-  "custom" => {
-    help: "Custom document type from API builder",
+  "eu-license-plate" => {
+    help: "EU License Plate",
+    prediction: Mindee::Prediction::EU::LicensePlateV1,
+  },
+  "fr-bank-account-details" => {
+    help: "FR Bank Account Details",
+    prediction: Mindee::Prediction::FR::BankAccountDetailsV1,
+  },
+  "fr-carte-vitale" => {
+    help: "FR Carte Vitale",
+    prediction: Mindee::Prediction::FR::CarteVitaleV1,
+  },
+  "fr-id-card" => {
+    help: "FR ID Card",
+    prediction: Mindee::Prediction::FR::IdCardV1,
+  },
+  "us-bank-check" => {
+    help: "US Bank Check",
+    prediction: Mindee::Prediction::US::BankCheckV1,
   },
 }
 
-options = {}
+options = {
+  api_key: '',
+  raise_on_error: true,
+}
 
 def ots_subcommand(command, options)
   OptionParser.new do |opt|
@@ -38,20 +62,20 @@ def ots_subcommand(command, options)
     opt.on('-w', '--with-words', 'Include words in response') do |v|
       options[:include_words] = v
     end
-    opt.on('-C', '--no-cut-pages', "Don't cut document pages") do |v|
-      options[:include_words] = v
+    opt.on('-c', '--cut-pages', "Cut document pages") do |v|
+      options[:cut_pages] = v
     end
   end
 end
 
 def custom_subcommand(options)
   OptionParser.new do |opt|
-    opt.banner = "Usage: custom [options] DOC_TYPE FILE"
+    opt.banner = "Usage: custom [options] ENDPOINT_NAME FILE"
     opt.on('-w', '--with-words', 'Include words in response') do |v|
       options[:include_words] = v
     end
-    opt.on('-C', '--no-cut-pages', "Don't cut document pages") do |v|
-      options[:include_words] = v
+    opt.on('-c', '--cut-pages', "Don't cut document pages") do |v|
+      options[:cut_pages] = v
     end
     opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
       options[:api_key] = v
@@ -59,31 +83,10 @@ def custom_subcommand(options)
     opt.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
       options[:version] = v
     end
-    opt.on('-u USER', '--user USER', 'API account name for the endpoint') do |v|
-      options[:user] = v
+    opt.on('-a ACCOUNT_NAME', '--account ACCOUNT_NAME', 'API account name for the endpoint') do |v|
+      options[:account_name] = v
     end
   end
-end
-
-def new_ots_client(options, command)
-  raise_on_error = options[:no_raise_errors].nil? ? true : false
-  mindee_client = Mindee::Client.new(
-    api_key: options[:api_key], raise_on_error: raise_on_error
-  )
-  info = DOCUMENTS[command]
-  mindee_client.send("config_#{info[:doc_type]}")
-end
-
-def new_custom_client(options, doc_type)
-  raise_on_error = options[:no_raise_errors].nil? ? true : false
-  mindee_client = Mindee::Client.new(
-    api_key: options[:api_key], raise_on_error: raise_on_error
-  )
-  mindee_client.config_custom_doc(
-    doc_type,
-    options[:user],
-    version: options[:version] || '1'
-  )
 end
 
 global_parser = OptionParser.new do |opt|
@@ -92,46 +95,50 @@ global_parser = OptionParser.new do |opt|
   opt.separator("subcommands: #{DOCUMENTS.keys.join(', ')}")
   opt.separator('')
   opt.on('-E', '--no-raise-errors', "raise errors behavior") do |v|
-    options[:no_raise_errors] = true
+    options[:raise_on_error] = false
     end
 end
 
-subcommands = {
-  'invoice' => ots_subcommand('invoice', options),
-  'receipt' => ots_subcommand('receipt', options),
-  'passport' => ots_subcommand('passport', options),
-  'financial' => ots_subcommand('financial', options),
-  'custom' => custom_subcommand(options),
-}
-
-
-begin
-  global_parser.order!
-  command = ARGV.shift
-  subcommands[command].order!
-rescue NoMethodError => e
+global_parser.order!
+command = ARGV.shift
+if command == 'custom'
+  custom_subcommand(options).order!
+elsif DOCUMENTS.keys.include? command || ''
+  ots_subcommand(command, options).order!
+else
   $stderr.puts global_parser
   exit(1)
 end
 
+mindee_client = Mindee::Client.new(
+  api_key: options[:api_key], raise_on_error: options[:raise_on_error]
+)
+
 if command == 'custom'
   if ARGV.length != 2
-    $stderr.puts "The 'custom' command requires both DOC_TYPE and FILE arguments."
+    $stderr.puts "The 'custom' command requires both ENDPOINT_NAME and FILE arguments."
     exit(1)
   end
   doc_type = ARGV[0]
   file_path = ARGV[1]
-  mindee_client = new_custom_client(options, doc_type)
+  mindee_client.add_endpoint(
+    options[:account_name], doc_type, version: options[:version] || '1',
+  )
 else
   if ARGV.length != 1
     $stderr.puts 'No file specified.'
     exit(1)
   end
-  mindee_client = new_ots_client(options, command)
-  doc_type = DOCUMENTS[command][:doc_type]
+  doc_type = ''
   file_path = ARGV[0]
 end
 
-cut_pages = options[:no_cut_pages].nil? ? false : true
-doc = mindee_client.doc_from_path(file_path, cut_pages: cut_pages)
-puts doc.parse(doc_type).document
+default_cutting = {
+  page_indexes: [0, 1, 2, 3, 4],
+  operation: :KEEP_ONLY,
+  on_min_pages: 0,
+}
+page_options = options[:cut_pages].nil? ? nil : default_cutting
+doc = mindee_client.doc_from_path(file_path)
+resp = doc.parse(DOCUMENTS[command][:prediction], endpoint_name: doc_type, page_options: page_options)
+puts resp

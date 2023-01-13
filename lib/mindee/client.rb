@@ -179,7 +179,7 @@ module Mindee
       )
       @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = DocumentConfig.new(
         Prediction::EU::LicensePlateV1,
-        [HTTP::StandardEndpoint.new('license_plates', '1', api_key: @api_key)]
+        [HTTP::StandardEndpoint.new('license_plates', '1', @api_key)]
       )
       @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = DocumentConfig.new(
         Prediction::ShippingContainerV1,
