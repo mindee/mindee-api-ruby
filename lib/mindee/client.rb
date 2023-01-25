@@ -164,6 +164,10 @@ module Mindee
     private
 
     def init_default_endpoints
+      @doc_configs[['mindee', Prediction::FinancialDocumentV1.name]] = DocumentConfig.new(
+        Prediction::FinancialDocumentV1,
+        [HTTP::StandardEndpoint.new('financial_document', '1', @api_key)]
+      )
       @doc_configs[['mindee', Prediction::InvoiceV4.name]] = DocumentConfig.new(
         Prediction::InvoiceV4,
         [HTTP::StandardEndpoint.new('invoices', '4', @api_key)]
