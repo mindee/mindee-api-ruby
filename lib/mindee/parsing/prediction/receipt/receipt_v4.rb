@@ -40,6 +40,9 @@ module Mindee
       # Whether the document is an expense receipt or a credit card receipt.
       # @return [Mindee::TextField]
       attr_reader :document_type
+      # Total amount of tip and gratuity. Both typed and handwritten characters are supported.
+      # @return [Mindee::AmountField]
+      attr_reader :tip
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
