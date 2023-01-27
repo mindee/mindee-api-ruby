@@ -27,7 +27,7 @@ describe Mindee::Document do
         expect(prediction.invoice_number.polygon).to be_empty
         expect(prediction.invoice_number.bounding_box).to be_nil
         expect(prediction.date.value).to be_nil
-        expect(prediction.date.page_id).to eq(0)
+        expect(prediction.date.page_id).to be_nil
       end
 
       it 'should load a complete document prediction' do
@@ -59,7 +59,7 @@ describe Mindee::Document do
         inference = Mindee::Document.new(Mindee::Prediction::FinancialDocumentV1, response['document']).inference
         expect(inference.product.type).to eq('standard')
         expect(inference.prediction.date.value).to be_nil
-        expect(inference.prediction.date.page_id).to eq(0)
+        expect(inference.prediction.date.page_id).to be_nil
         expect(inference.prediction.time.value).to be_nil
       end
 

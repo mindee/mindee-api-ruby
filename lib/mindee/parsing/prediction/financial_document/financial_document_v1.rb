@@ -81,10 +81,8 @@ module Mindee
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
-      # rubocop:todo Metrics/MethodLength
-      def initialize(prediction, page_id) # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
+      def initialize(prediction, page_id) # rubocop:todo Metrics/AbcSize
         super
-        prediction = fix_api_incosistencies(prediction)
 
         @time = TextField.new(prediction['time'], page_id)
         @category = TextField.new(prediction['category'], page_id)
@@ -134,7 +132,6 @@ module Mindee
         end
         reconstruct(page_id)
       end
-      # rubocop:enable Metrics/MethodLength
 
       def to_s
         customer_company_registrations = @customer_company_registrations.map(&:value).join('; ')
@@ -174,27 +171,6 @@ module Mindee
       end
 
       private
-
-      def fix_api_incosistencies(prediction)
-        # The API seems to have a typo on these fields, returns them in singular instead of plural
-        prediction['customer_company_registrations'] = prediction['customer_company_registration'] || []
-        prediction['supplier_company_registrations'] = prediction['supplier_company_registration'] || []
-
-        # The API can return this field as nil
-        prediction['supplier_payment_details'] ||= []
-
-        # The API seems to return { 'confidence' => [], 'polygon' => [], 'value' => [] }
-        # instead of { 'confidence' => nil, 'polygon' => [], 'value' => nil }
-        if prediction.dig('tip', 'value').is_a?(Array)
-          prediction['tip'] = { 'confidence' => nil, 'polygon' => [], 'value' => nil }
-        end
-
-        if prediction.dig('time', 'value').is_a?(Array)
-          prediction['time'] = { 'confidence' => nil, 'polygon' => [], 'value' => nil }
-        end
-
-        prediction
-      end
 
       def line_items_to_s
         line_item_separator = "#{'=' * 22} #{'=' * 8} #{'=' * 9} #{'=' * 10} #{'=' * 18} #{'=' * 36}"
