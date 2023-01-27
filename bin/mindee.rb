@@ -10,6 +10,10 @@ DOCUMENTS = {
     help: "Custom document type from API builder",
     prediction: Mindee::Prediction::CustomV1,
   },
+  "financial-document" => {
+    help: 'Financial Document',
+    prediction: Mindee::Prediction::FinancialDocumentV1,
+  },
   "invoice" => {
     help: 'Invoice',
     prediction: Mindee::Prediction::InvoiceV4,
