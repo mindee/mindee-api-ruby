@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v2.1.0 - 2023-01-30
+### Changes
+* :sparkles: Add financial document v1 support (Co-authored-by: Oriol Gual)
+* :sparkles: Add Proof of Address v1 support
+
 ## v2.0.0 - 2023-01-13
 ### ¡Breaking Changes!
 * :sparkles: add improved PDF merge system
