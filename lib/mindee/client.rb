@@ -164,6 +164,10 @@ module Mindee
     private
 
     def init_default_endpoints
+      @doc_configs[['mindee', Prediction::ProofOfAddressV1.name]] = DocumentConfig.new(
+        Prediction::ProofOfAddressV1,
+        [HTTP::StandardEndpoint.new('proof_of_address', '1', @api_key)]
+      )
       @doc_configs[['mindee', Prediction::FinancialDocumentV1.name]] = DocumentConfig.new(
         Prediction::FinancialDocumentV1,
         [HTTP::StandardEndpoint.new('financial_document', '1', @api_key)]

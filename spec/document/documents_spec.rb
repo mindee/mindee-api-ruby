@@ -16,6 +16,33 @@ describe Mindee::Document do
     File.read(File.join(dir_path, file_name)).strip
   end
 
+  context 'A Proof of Address' do
+    it 'should load an empty document prediction' do
+      response = load_json(DIR_PROOF_OF_ADDRESS_V1, 'empty.json')
+      inference = Mindee::Document.new(Mindee::Prediction::ProofOfAddressV1, response['document']).inference
+      expect(inference.product.type).to eq('standard')
+      expect(inference.prediction.dates.size).to eq(0)
+    end
+
+    it 'should load a complete document prediction' do
+      to_string = read_file(DIR_PROOF_OF_ADDRESS_V1, 'summary_full.rst')
+      response = load_json(DIR_PROOF_OF_ADDRESS_V1, 'complete.json')
+      document = Mindee::Document.new(Mindee::Prediction::ProofOfAddressV1, response['document'])
+      inference = document.inference
+      expect(inference.prediction.dates.size).to eq(12)
+      expect(document.to_s).to eq(to_string)
+    end
+
+    it 'should load a complete page 0 prediction' do
+      to_string = read_file(DIR_PROOF_OF_ADDRESS_V1, 'summary_page0.rst')
+      response = load_json(DIR_PROOF_OF_ADDRESS_V1, 'complete.json')
+      document = Mindee::Document.new(Mindee::Prediction::ProofOfAddressV1, response['document'])
+      page = document.inference.pages[0]
+      expect(page.prediction.dates.size).to eq(12)
+      expect(page.to_s).to eq(to_string)
+    end
+  end
+
   context 'A FinancialDocumentV1' do
     context 'when processing an invoice' do
       it 'should load an empty document prediction' do
