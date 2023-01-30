@@ -23,8 +23,8 @@ module Mindee
     #  API Builder. Do not set for standard (off the shelf) endpoints.
     #
     # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
-    #  This is normally not required unless you have a custom endpoint which has the
-    #  same name as standard (off the shelf) endpoint.
+    #  This is normally not required unless you have a custom endpoint which has the same name as a
+    #  standard (off the shelf) endpoint.
     #  Do not set for standard (off the shelf) endpoints.
     #
     # @param include_words [Boolean] Whether to include the full text for each page.
@@ -121,7 +121,7 @@ module Mindee
     )
       @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
         Prediction::CustomV1,
-        [HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)]
+        HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)
       )
       self
     end
@@ -163,50 +163,46 @@ module Mindee
 
     private
 
+    def standard_document_config(prediction_class, endpoint_name, version)
+      DocumentConfig.new(
+        prediction_class,
+        HTTP::StandardEndpoint.new(endpoint_name, version, @api_key)
+      )
+    end
+
     def init_default_endpoints
-      @doc_configs[['mindee', Prediction::ProofOfAddressV1.name]] = DocumentConfig.new(
-        Prediction::ProofOfAddressV1,
-        [HTTP::StandardEndpoint.new('proof_of_address', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::ProofOfAddressV1.name]] = standard_document_config(
+        Prediction::ProofOfAddressV1, 'proof_of_address', '1'
       )
-      @doc_configs[['mindee', Prediction::FinancialDocumentV1.name]] = DocumentConfig.new(
-        Prediction::FinancialDocumentV1,
-        [HTTP::StandardEndpoint.new('financial_document', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::FinancialDocumentV1.name]] = standard_document_config(
+        Prediction::FinancialDocumentV1, 'financial_document', '1'
       )
-      @doc_configs[['mindee', Prediction::InvoiceV4.name]] = DocumentConfig.new(
-        Prediction::InvoiceV4,
-        [HTTP::StandardEndpoint.new('invoices', '4', @api_key)]
+      @doc_configs[['mindee', Prediction::InvoiceV4.name]] = standard_document_config(
+        Prediction::InvoiceV4, 'invoices', '4'
       )
-      @doc_configs[['mindee', Prediction::ReceiptV4.name]] = DocumentConfig.new(
-        Prediction::ReceiptV4,
-        [HTTP::StandardEndpoint.new('expense_receipts', '4', @api_key)]
+      @doc_configs[['mindee', Prediction::ReceiptV4.name]] = standard_document_config(
+        Prediction::ReceiptV4, 'expense_receipts', '4'
       )
-      @doc_configs[['mindee', Prediction::PassportV1.name]] = DocumentConfig.new(
-        Prediction::PassportV1,
-        [HTTP::StandardEndpoint.new('passport', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::PassportV1.name]] = standard_document_config(
+        Prediction::PassportV1, 'passport', '1'
       )
-      @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = DocumentConfig.new(
-        Prediction::EU::LicensePlateV1,
-        [HTTP::StandardEndpoint.new('license_plates', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = standard_document_config(
+        Prediction::EU::LicensePlateV1, 'license_plates', '1'
       )
-      @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = DocumentConfig.new(
-        Prediction::ShippingContainerV1,
-        [HTTP::StandardEndpoint.new('shipping_containers', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = standard_document_config(
+        Prediction::ShippingContainerV1, 'shipping_containers', '1'
       )
-      @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = DocumentConfig.new(
-        Prediction::US::BankCheckV1,
-        [HTTP::StandardEndpoint.new('bank_check', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = standard_document_config(
+        Prediction::US::BankCheckV1, 'bank_check', '1'
       )
-      @doc_configs[['mindee', Prediction::FR::BankAccountDetailsV1.name]] = DocumentConfig.new(
-        Prediction::FR::BankAccountDetailsV1,
-        [HTTP::StandardEndpoint.new('bank_account_details', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::FR::BankAccountDetailsV1.name]] = standard_document_config(
+        Prediction::FR::BankAccountDetailsV1, 'bank_account_details', '1'
       )
-      @doc_configs[['mindee', Prediction::FR::CarteVitaleV1.name]] = DocumentConfig.new(
-        Prediction::FR::CarteVitaleV1,
-        [HTTP::StandardEndpoint.new('carte_vitale', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::FR::CarteVitaleV1.name]] = standard_document_config(
+        Prediction::FR::CarteVitaleV1, 'carte_vitale', '1'
       )
-      @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = DocumentConfig.new(
-        Prediction::FR::IdCardV1,
-        [HTTP::StandardEndpoint.new('idcard_fr', '1', @api_key)]
+      @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = standard_document_config(
+        Prediction::FR::IdCardV1, 'idcard_fr', '1'
       )
       self
     end

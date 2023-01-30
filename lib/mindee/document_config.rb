@@ -11,14 +11,14 @@ module Mindee
   # Specific client for sending a document to the API.
   class DocumentConfig
     # Array of possible Mindee::Endpoint to be used.
-    # @return [Array<Mindee::HTTP::Endpoint>]
-    attr_reader :endpoints
+    # @return [Mindee::HTTP::Endpoint]
+    attr_reader :endpoint
 
     # @param prediction_class [Class<Mindee::Prediction::Prediction>]
-    # @param endpoints [Array<Mindee::HTTP::Endpoint>]
-    def initialize(prediction_class, endpoints)
+    # @param endpoint [Mindee::HTTP::Endpoint]
+    def initialize(prediction_class, endpoint)
       @prediction_class = prediction_class
-      @endpoints = endpoints
+      @endpoint = endpoint
     end
 
     # Call the prediction API.
@@ -28,16 +28,8 @@ module Mindee
     # @param cropper [Boolean]
     # @return [Mindee::DocumentResponse]
     def predict(input_doc, include_words, close_file, cropper)
-      check_api_keys
+      check_api_key
       response = predict_request(input_doc, include_words, close_file, cropper)
-      parse_response(response)
-    end
-
-    private
-
-    # @param response [Net::HTTPResponse]
-    # @return [Mindee::DocumentResponse]
-    def parse_response(response)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       return Document.new(@prediction_class, hashed_response['document']) if (200..299).include?(response.code.to_i)
 
@@ -45,24 +37,24 @@ module Mindee
       raise error
     end
 
+    private
+
     # @param input_doc [Mindee::InputDocument]
     # @param include_words [Boolean]
     # @param close_file [Boolean]
     # # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
     def predict_request(input_doc, include_words, close_file, cropper)
-      @endpoints[0].predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
+      @endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
     end
 
-    def check_api_keys
-      @endpoints.each do |endpoint|
-        next unless endpoint.api_key.nil? || endpoint.api_key.empty?
+    def check_api_key
+      return unless @endpoint.api_key.nil? || @endpoint.api_key.empty?
 
-        raise "Missing API key for '#{@document_type}', " \
-              "check your Client Configuration.\n" \
-              'You can set this using the ' \
-              "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
-      end
+      raise "Missing API key for '#{@document_type}', " \
+            "check your Client Configuration.\n" \
+            'You can set this using the ' \
+            "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
     end
   end
 end
