@@ -11,7 +11,7 @@ module Mindee
       # Locale information.
       # @return [Mindee::Locale]
       attr_reader :locale
-      # The nature of the invoice.
+      # The nature of the document.
       # @return [Mindee::TextField]
       attr_reader :document_type
       # The total amount with tax included.
@@ -23,7 +23,7 @@ module Mindee
       # The total tax.
       # @return [Mindee::AmountField]
       attr_reader :total_tax
-      # The creation date of the invoice.
+      # The creation date of the document.
       # @return [Mindee::DateField]
       attr_reader :date
       # The invoice number.
@@ -53,7 +53,7 @@ module Mindee
       # The supplier's address.
       # @return [Mindee::TextField]
       attr_reader :supplier_address
-      # The payment information.
+      # The supplier's payment information.
       # @return [Array<Mindee::PaymentDetails>]
       attr_reader :supplier_payment_details
       # The supplier's company registration information.
@@ -65,14 +65,14 @@ module Mindee
       # Time as seen on the receipt in HH:MM format.
       # @return [Mindee::TextField]
       attr_reader :time
-      # The receipt category among predefined classes.
+      # The invoice or receipt category among predefined classes.
       # @return [Mindee::TextField]
       attr_reader :category
-      # The receipt sub-category among predefined classes.
+      # The invoice or receipt sub-category among predefined classes.
       # @return [Mindee::TextField]
       attr_reader :subcategory
-      # A classification field, that can return 4 values : 'EXPENSE RECEIPT' ,
-      # 'CREDIT CARD RECEIPT', 'INVOICE', 'CREDIT NOTE'
+      # A classification field, that can return 4 values:
+      # `EXPENSE RECEIPT`, `CREDIT CARD RECEIPT`, `INVOICE`, `CREDIT NOTE`
       # @return [Mindee::TextField]
       attr_reader :document_type # rubocop:todo Lint/DuplicateMethods
       # Total amount of tip and gratuity. Both typed and handwritten characters are supported.
