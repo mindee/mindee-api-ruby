@@ -33,8 +33,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'mrz', '~> 0.2'
   spec.add_runtime_dependency 'origamindee', '~> 3.1'
 
-  spec.add_development_dependency 'rake', '~> 12.3.1'
+  spec.add_development_dependency 'rake', '~> 12.3'
   spec.add_development_dependency 'rspec', '~> 3.11'
   spec.add_development_dependency 'rubocop', '~> 1.41'
-  spec.add_development_dependency 'yard', '0.9.28'
+  spec.add_development_dependency 'yard', '~> 0.9'
 end

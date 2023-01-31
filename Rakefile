@@ -15,6 +15,7 @@ task default: :spec
 
 RSpec::Core::RakeTask.new(:spec)
 
-YARD::Rake::YardocTask.new do |task|
+desc 'Generate documentation'
+YARD::Rake::YardocTask.new(:doc) do |task|
   task.files = ['lib/**/*.rb']
 end
