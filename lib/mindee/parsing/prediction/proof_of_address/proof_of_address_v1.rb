@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mrz'
-
 require_relative '../common_fields'
 require_relative '../base'
 

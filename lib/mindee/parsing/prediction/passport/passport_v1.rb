@@ -1,18 +1,7 @@
 # frozen_string_literal: true
 
-require 'mrz'
-
 require_relative '../common_fields'
 require_relative '../base'
-
-# We need to do this disgusting thing to avoid the following error message:
-# td3 line one does not match the required format (MRZ::InvalidFormatError)
-#
-# See:
-# https://github.com/streetspotr/mrz/issues/2
-# https://github.com/streetspotr/mrz/pull/3
-#
-MRZ::TD3Parser::FORMAT_ONE = %r{\A(.{2})(.{3})([^<]+)<(.*)\z}.freeze
 
 module Mindee
   module Prediction
@@ -78,7 +67,6 @@ module Mindee
         end
         @full_name = construct_full_name(page_id)
         @mrz = construct_mrz(page_id)
-        check_mrz
       end
 
       def to_s
@@ -106,57 +94,6 @@ module Mindee
       end
 
       private
-
-      def check_mrz
-        return if @mrz1.value.nil? || @mrz2.value.nil?
-
-        mrz = MRZ.parse([@mrz1.value, @mrz2.value])
-        checks = {
-          mrz_valid: valid_mrz?(mrz),
-          mrz_valid_birth_date: valid_birth_date?(mrz),
-          mrz_valid_expiry_date: valid_expiry_date?(mrz),
-          mrz_valid_id_number: valid_id_number?(mrz),
-          mrz_valid_surname: valid_surname?(mrz),
-          mrz_valid_country: valid_country?(mrz),
-        }
-        @checklist.merge!(checks)
-      end
-
-      def valid_mrz?(mrz)
-        check = mrz.valid?
-        @mrz.confidence = 1.0 if check
-        check
-      end
-
-      def valid_birth_date?(mrz)
-        check = mrz.valid_birth_date? && mrz.birth_date == @birth_date.date_object
-        @birth_date.confidence = 1.0 if check
-        check
-      end
-
-      def valid_expiry_date?(mrz)
-        check = mrz.valid_expiration_date? && mrz.expiration_date == @expiry_date.date_object
-        @expiry_date.confidence = 1.0 if check
-        check
-      end
-
-      def valid_id_number?(mrz)
-        check = mrz.valid_document_number? && mrz.document_number == @id_number.value
-        @id_number.confidence = 1.0 if check
-        check
-      end
-
-      def valid_surname?(mrz)
-        check = mrz.last_name == @surname.value
-        @surname.confidence = 1.0 if check
-        check
-      end
-
-      def valid_country?(mrz)
-        check = mrz.nationality == @country.value
-        @country.confidence = 1.0 if check
-        check
-      end
 
       def construct_full_name(page_id)
         return unless @surname.value &&
