@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: ruby-receipt-ocr
+  
+    &mdash; Documentation by YARD 0.9.34
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ruby-receipt-ocr";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: ruby-receipt-ocr</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<p>The Ruby OCR SDK supports the <a href="https://developers.mindee.com/docs/receipt-ocr">receipt API</a> for extracting data from receipts.</p>
+
+<p>Using this sample below, we are going to illustrate how to extract the data that we want using the OCR SDK.</p>
+
+<p><img src="https://raw.githubusercontent.com/mindee/client-lib-test-data/main/receipt/receipt-with-tip.jpg"></p>
+
+<h2 id="label-Quick+Start">Quick Start</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mindee</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># Init a new client, specifying an API key
+</span><span class='id identifier rubyid_mindee_client'>mindee_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Client.html" title="Mindee::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Mindee/Client.html#initialize-instance_method" title="Mindee::Client#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-api-key</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># Send the file
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_doc_from_path'>doc_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/ReceiptV4.html" title="Mindee::Prediction::ReceiptV4 (class)">ReceiptV4</a></span></span><span class='rparen'>)</span>
+
+<span class='comment'># Print a summary of the document prediction in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span>
+</code></pre>
+
+<p>Output:</p>
+
+<pre class="code ruby"><code class="ruby">:Locale: en-US; en; US; USD;
+:Date: 2014-07-07
+:Category: food
+:Subcategory: restaurant
+:Document type: EXPENSE RECEIPT
+:Time: 20:20
+:Supplier name: LOGANS
+:Taxes: 3.34 TAX
+:Total net: 40.48
+:Total taxes: 3.34
+:Tip: 10.00
+:Total amount: 53.8
+</code></pre>
+
+<h2 id="label-Fields">Fields</h2>
+
+<p>Each prediction object contains a set of different fields. Each <code>Field</code> object contains at a minimum the following attributes:</p>
+<ul><li>
+<p><code>value</code> (String or Float depending on the field type): corresponds to the field value. Can be <code>nil</code> if no value was extracted.</p>
+</li><li>
+<p><code>confidence</code> (Float): the confidence score of the field prediction.</p>
+</li><li>
+<p><code>bounding_box</code> (Array&lt; Array&lt; Float &gt; &gt;): contains exactly 4 relative vertices coordinates (points) of a right rectangle containing the field in the document.</p>
+</li><li>
+<p><code>polygon</code> (Array&lt; Array&lt; Float &gt; &gt;): contains the relative vertices coordinates (points) of a polygon containing the field in the image.</p>
+</li><li>
+<p><code>reconstructed</code> (Boolean): True if the field was reconstructed or computed using other fields.</p>
+</li></ul>
+
+<h2 id="label-Attributes">Attributes</h2>
+
+<p>Depending on the field type specified, additional attributes can be extracted in the <code>Receipt</code> object.</p>
+
+<p>Using the above sample, the following are the basic fields that can be extracted:</p>
+<ul><li>
+<p><a href="#orientation">Orientation</a></p>
+</li><li>
+<p><a href="#category">Category</a></p>
+</li><li>
+<p><a href="#date">Date</a></p>
+</li><li>
+<p><a href="#locale">Locale</a></p>
+</li><li>
+<p><a href="#supplier-information">Supplier Information</a></p>
+</li><li>
+<p><a href="#taxes">Taxes</a></p>
+</li><li>
+<p><a href="#time">Time</a></p>
+</li><li>
+<p><a href="#totals">Totals</a></p>
+</li></ul>
+
+<h3 id="label-Category">Category</h3>
+<ul><li>
+<p><strong><code>category</code></strong> (Field): Receipt category as seen on the receipt.  The following categories are supported: toll, food, parking, transport, accommodation, gasoline, miscellaneous.</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_category'>category</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+
+<h3 id="label-Date">Date</h3>
+
+<p>Date fields:</p>
+<ul><li>
+<p>contain the <code>date_object</code> attribute, which is a standard Ruby <a href="https://ruby-doc.org/stdlib-2.7.1/libdoc/date/rdoc/Date.html">date object</a></p>
+</li><li>
+<p>have a <code>value</code> attribute which is the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> representation of the date.</p>
+</li></ul>
+
+<p>The following date fields are available:</p>
+<ul><li>
+<p><strong><code>date</code></strong>: Date the receipt was issued</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_date'>date</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+
+<h3 id="label-Locale">Locale</h3>
+
+<p><strong><code>locale</code></strong> (Locale): Locale information.</p>
+<ul><li>
+<p><code>locale.value</code> (String): Locale with country and language codes.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_locale'>locale</span>
+</code></pre>
+</li><li>
+<p><code>locale.language</code> (String): Language code in <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a> format as seen on the document.</p>
+</li></ul>
+
+<p>*</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_locale'>locale</span><span class='period'>.</span><span class='id identifier rubyid_language'>language</span>
+</code></pre>
+<ul><li>
+<p><code>locale.currency</code> (String): Currency code in <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> format as seen on the document.</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_locale'>locale</span><span class='period'>.</span><span class='id identifier rubyid_currency'>currency</span>
+</code></pre>
+<ul><li>
+<p><code>locale.country</code> (String): Country code in <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a> alpha-2 format as seen on the document.</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_locale'>locale</span><span class='period'>.</span><span class='id identifier rubyid_country'>country</span>
+</code></pre>
+
+<h3 id="label-Supplier+Information">Supplier Information</h3>
+<ul><li>
+<p><strong><code>supplier_name</code></strong> (Field): Supplier name as written in the receipt.</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_supplier_name'>supplier_name</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+
+<h3 id="label-Taxes">Taxes</h3>
+
+<p><strong><code>taxes</code></strong> (Array&lt; TaxField &gt;): Contains tax fields as seen on the receipt.</p>
+<ul><li>
+<p><code>value</code> (Float): The tax amount.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Show the amount of the first tax
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_taxes'>taxes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+</li><li>
+<p><code>code</code> (String): The tax code (HST, GST… for Canadian; City Tax, State tax for US, etc..).</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Show the code of the first tax
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_taxes'>taxes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span>
+</code></pre>
+</li><li>
+<p><code>rate</code> (Float): The tax rate.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Show the rate of the first tax
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_taxes'>taxes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_rate'>rate</span>
+</code></pre>
+</li></ul>
+
+<h3 id="label-Time">Time</h3>
+<ul><li>
+<p><strong><code>time</code></strong>: Time of purchase as seen on the receipt</p>
+<ul><li>
+<p><code>value</code> (string): Time of purchase with 24 hours formatting (hh:mm).</p>
+</li></ul>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+
+<h3 id="label-Totals">Totals</h3>
+<ul><li>
+<p><strong><code>total_amount</code></strong> (Field): Total amount including taxes</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_total_amount'>total_amount</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+<ul><li>
+<p><strong><code>total_net</code></strong> (Field): Total amount paid excluding taxes</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_total_net'>total_net</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+<ul><li>
+<p><strong><code>total_tax</code></strong> (Field): Total tax value from tax lines</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_total_tax'>total_tax</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+</code></pre>
+
+<h2 id="label-Questions-3F">Questions?</h2>
+
+<p><a href="https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw">Join our Slack</a></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Fri Apr 21 10:20:36 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.1.4).
+</div>
+
+    </div>
+  </body>
+</html>

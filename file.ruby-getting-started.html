@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: ruby-getting-started
+  
+    &mdash; Documentation by YARD 0.9.34
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ruby-getting-started";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: ruby-getting-started</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<p>This guide will help you get started with the Mindee Ruby OCR SDK to easily extract data from your documents.</p>
+
+<p>The Ruby client supports <a href="https://developers.mindee.com/docs/ruby-invoice-ocr">Invoice</a>, <a href="https://developers.mindee.com/docs/ruby-receipt-ocr">receipt</a>, <a href="https://developers.mindee.com/docs/ruby-passport-ocr">passport</a>, OCR APIs and <a href="https://developers.mindee.com/docs/ruby-api-builder">custom-built API</a> from the API Builder.</p>
+
+<p>You can view the source code on <a href="https://github.com/mindee/mindee-api-ruby">GitHub</a>.</p>
+
+<h2 id="label-Installation">Installation</h2>
+
+<h3 id="label-Requirements">Requirements</h3>
+
+<p>The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2</p>
+
+<h3 id="label-Standard+Installation">Standard Installation</h3>
+
+<p>To quickly get started with the Ruby OCR SDK, Install by adding this line to your application’s Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mindee</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+</code></pre>
+
+<p>Or you can install it like this:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_mindee'>mindee</span>
+</code></pre>
+
+<p>Finally, Ruby away!</p>
+
+<h3 id="label-Development+Installation">Development Installation</h3>
+
+<p>If you’ll be modifying the source code, you’ll need to install the required libraries to get started.</p>
+
+<p>We recommend using <a href="https://bundler.io/">Bundler</a>.</p>
+<ol><li>
+<p>First clone the repo.</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_git'>git</span> <span class='id identifier rubyid_clone'>clone</span> <span class='id identifier rubyid_git'>git</span><span class='ivar'>@github</span><span class='period'>.</span><span class='id identifier rubyid_com'>com</span><span class='symbol'>:mindee</span><span class='op'>/</span><span class='id identifier rubyid_mindee'>mindee</span><span class='op'>-</span><span class='id identifier rubyid_api'>api</span><span class='op'>-</span><span class='id identifier rubyid_ruby'>ruby</span><span class='period'>.</span><span class='id identifier rubyid_git'>git</span>
+</code></pre>
+<ol><li>
+<p>Navigate to the cloned directory and install all required libraries.</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_cd'>cd</span> <span class='id identifier rubyid_mindee'>mindee</span><span class='op'>-</span><span class='id identifier rubyid_api'>api</span><span class='op'>-</span><span class='id identifier rubyid_ruby'>ruby</span>
+<span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+</code></pre>
+
+<h3 id="label-Updating+the+Library">Updating the Library</h3>
+
+<p>It is important to always check the version of the Mindee OCR SDK you are using, as new and updated features won’t work on older versions.</p>
+
+<p>To get the latest version of your OCR SDK:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_mindee'>mindee</span>
+</code></pre>
+
+<p>To install a specific version of Mindee:</p>
+
+<pre class="code ruby"><code class="ruby">gem install mindee@&lt;version&gt;
+</code></pre>
+
+<h2 id="label-Usage">Usage</h2>
+
+<p>Using Mindee’s APIs can be broken down into the following steps:</p>
+<ol><li>
+<p>a <code>Client</code><a href="#initializing-the-client"></a></p>
+</li><li>
+<p><a href="#loading-a-document-file">Load a File</a></p>
+</li><li>
+<p><a href="#sending-a-file">Send the File</a> to Mindee’s API</p>
+</li><li>
+<p><a href="#process-the-result">Process the Result</a> in some way</p>
+</li></ol>
+
+<p>Let’s take a deep dive into how this works.</p>
+
+<h2 id="label-Initializing+the+Client">Initializing the Client</h2>
+
+<p>The <code>Client</code> centralizes document configurations in a single object.</p>
+
+<p>The <code>Client</code> requires your <a href="https://developers.mindee.com/docs/make-your-first-request#create-an-api-key">API key</a>.</p>
+
+<p>You can either pass these directly to the constructor or through environment variables.</p>
+
+<h3 id="label-Pass+the+API+key+directly">Pass the API key directly</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Init a new client and passing the key directly
+</span><span class='id identifier rubyid_mindee_client'>mindee_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Client.html" title="Mindee::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Mindee/Client.html#initialize-instance_method" title="Mindee::Client#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-api-key</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<h3 id="label-Set+the+API+key+in+the+environment">Set the API key in the environment</h3>
+
+<p>API keys should be set as environment variables, especially for any production deployment.</p>
+
+<p>The following environment variable will set the global API key:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>MINDEE_API_KEY</span><span class='op'>=</span><span class='id identifier rubyid_my'>my</span><span class='op'>-</span><span class='id identifier rubyid_api'>api</span><span class='op'>-</span><span class='id identifier rubyid_key'>key</span>
+</code></pre>
+
+<p>Then in your code:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Init a new client without an API key
+</span><span class='id identifier rubyid_mindee_client'>mindee_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Client.html" title="Mindee::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Mindee/Client.html#initialize-instance_method" title="Mindee::Client#initialize (method)">new</a></span></span>
+</code></pre>
+
+<h3 id="label-Setting+the+Request+Timeout">Setting the Request Timeout</h3>
+
+<p>The request timeout can be set using an environment variable:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>MINDEE_REQUEST_TIMEOUT</span><span class='op'>=</span><span class='int'>200</span>
+</code></pre>
+
+<h2 id="label-Loading+a+Document+File">Loading a Document File</h2>
+
+<p>Before being able to send a document to the API, it must first be loaded.</p>
+
+<p>You don’t need to worry about different MIME types, the library will take care of handling all supported types automatically.</p>
+
+<p>Once a document is loaded, interacting with it is done in exactly the same way, regardless of how it was loaded.</p>
+
+<p>There are a few different ways of loading a document file, depending on your use case:</p>
+<ul><li>
+<p><a href="#path">Path</a></p>
+</li><li>
+<p><a href="#file-object">File Object</a></p>
+</li><li>
+<p><a href="#base64">Base64</a></p>
+</li><li>
+<p><a href="#bytes">Bytes</a></p>
+</li></ul>
+
+<h3 id="label-Path">Path</h3>
+
+<p>Load from a file directly from disk. Requires an absolute path, as a string.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_doc_from_path'>doc_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/the/invoice.jpg</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/InvoiceV4.html" title="Mindee::Prediction::InvoiceV4 (class)">InvoiceV4</a></span></span><span class='rparen'>)</span>
+
+<span class='comment'># Print a full summary of the parsed data in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span>
+</code></pre>
+
+<h3 id="label-File+Object">File Object</h3>
+
+<p>A normal Ruby file object with a path. Must be in binary mode.</p>
+
+<p><strong>Note</strong>: The original filename is required when calling the method.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='const'>INVOICE_FILE</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rb</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fo'>fo</span><span class='op'>|</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_doc_from_file'>doc_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_fo'>fo</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invoice.jpg</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/InvoiceV4.html" title="Mindee::Prediction::InvoiceV4 (class)">InvoiceV4</a></span></span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Print a full summary of the parsed data in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span>
+</code></pre>
+
+<h3 id="label-Base64">Base64</h3>
+
+<p>Load file contents from a base64-encoded string.</p>
+
+<p><strong>Note</strong>: The original filename is required when calling the method.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_b64_string'>b64_string</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD....</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_doc_from_b64string'>doc_from_b64string</span><span class='lparen'>(</span><span class='id identifier rubyid_b64_string'>b64_string</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>receipt.jpg</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/ReceiptV4.html" title="Mindee::Prediction::ReceiptV4 (class)">ReceiptV4</a></span></span><span class='rparen'>)</span>
+
+<span class='comment'># Print a full summary of the parsed data in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span>
+</code></pre>
+
+<h3 id="label-Bytes">Bytes</h3>
+
+<p>Requires raw bytes.</p>
+
+<p><strong>Note</strong>: The original filename is required when calling the method.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_raw_bytes'>raw_bytes</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_doc_from_bytes'>doc_from_bytes</span><span class='lparen'>(</span><span class='id identifier rubyid_raw_bytes'>raw_bytes</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invoice.pdf</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/InvoiceV4.html" title="Mindee::Prediction::InvoiceV4 (class)">InvoiceV4</a></span></span><span class='rparen'>)</span>
+
+<span class='comment'># Print a full summary of the parsed data in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span>
+</code></pre>
+
+<h2 id="label-Sending+a+File">Sending a File</h2>
+
+<p>To send a file to the API, we need to specify how to process the document. This will determine which API endpoint is used and how the API return will be handled internally by the library.</p>
+
+<p>More specifically, we need to set a <code>Mindee::Prediction</code> class as the first parameter of the <code>parse</code> method.</p>
+
+<p>This is because the <code>parse</code> method’s’ return type depends on its first argument.</p>
+
+<p>Each document type available in the library has its corresponding class, which inherit from the base <code>Mindee::Prediction</code> class. This is detailed in each document-specific guide.</p>
+
+<h3 id="label-Off-the-Shelf+Documents">Off-the-Shelf Documents</h3>
+
+<p>Simply setting the correct class is enough:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_doc'>doc</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/InvoiceV4.html" title="Mindee::Prediction::InvoiceV4 (class)">InvoiceV4</a></span></span><span class='rparen'>)</span>
+</code></pre>
+
+<h3 id="label-Custom+Documents">Custom Documents</h3>
+
+<p>The endpoint to use must also be set, this is done in the second argument of the <code>parse</code> method:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_doc'>doc</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/CustomV1.html" title="Mindee::Prediction::CustomV1 (class)">CustomV1</a></span></span><span class='comma'>,</span> <span class='label'>endpoint_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>wnine</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>This is because the <code>CustomV1</code> class is enough to handle the return processing, but the actual endpoint needs to be specified.</p>
+
+<h2 id="label-Process+the+Result">Process the Result</h2>
+
+<p>The response object is common to all documents, including custom documents. The main properties are:</p>
+<ul><li>
+<p><code>id</code> — Mindee ID of the document</p>
+</li><li>
+<p><code>name</code> — Filename sent to the API</p>
+</li><li>
+<p><code>inference</code> — <a href="#inference">Inference</a></p>
+</li></ul>
+
+<h3 id="label-Inference">Inference</h3>
+
+<p>Regroups the predictions at the page level, as well as predictions for the entire document.</p>
+<ul><li>
+<p><code>prediction</code> — <a href="#document-level-prediction">Document level prediction</a></p>
+</li><li>
+<p><code>pages</code> — <a href="#page-level-prediction">Page level prediction</a></p>
+</li></ul>
+
+<h4 id="label-Document+level+prediction">Document level prediction</h4>
+
+<p>The <code>prediction</code> attribute is a <code>Prediction</code> object specific to the type of document being processed. It contains the data extracted from the entire document, all pages combined.</p>
+
+<p>It’s possible to have the same field in various pages, but at the document level, only the highest confidence field data will be shown (this is all done automatically at the API level).</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># as an object, complete
+</span><span class='id identifier rubyid_pp'>pp</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span>
+
+<span class='comment'># as a string, summary in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span>
+</code></pre>
+
+<h4 id="label-Page+level+prediction">Page level prediction</h4>
+
+<p>The <code>pages</code> attribute is a list of <code>Prediction</code> objects.</p>
+
+<p>Each page element contains the data extracted for a particular page of the document. The order of the elements in the array matches the order of the pages in the document.</p>
+
+<p>All response objects have this property, regardless of the number of pages. Single page documents will have a single entry.</p>
+
+<p>Iteration is done like any Ruby array:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
+    <span class='comment'># as an object, complete
+</span>    <span class='id identifier rubyid_pp'>pp</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span>
+
+    <span class='comment'># as a string, summary in RST format
+</span>    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h4 id="label-Page+Orientation">Page Orientation</h4>
+
+<p>The orientation field is only available at the page level as it describes whether the page image should be rotated to be upright.</p>
+
+<p>If the page requires rotation for correct display, the orientation field gives a prediction among these 3 possible outputs:</p>
+<ul><li>
+<p>0 degrees: the page is already upright</p>
+</li><li>
+<p>90 degrees: the page must be rotated clockwise to be upright</p>
+</li><li>
+<p>270 degrees: the page must be rotated counterclockwise to be upright</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_orientation'>orientation</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2 id="label-Questions-3F">Questions?</h2>
+
+<p><a href="https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw">Join our Slack</a></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Fri Apr 21 10:20:35 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.1.4).
+</div>
+
+    </div>
+  </body>
+</html>
