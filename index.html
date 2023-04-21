@@ -124,13 +124,13 @@
 
 <span class='comment'># Init a new client and configure your custom document
 </span><span class='id identifier rubyid_mindee_client'>mindee_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Client.html" title="Mindee::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Mindee/Client.html#initialize-instance_method" title="Mindee::Client#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-api-key</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_add_endpoint'><span class='object_link'><a href="Mindee/Client.html#add_endpoint-instance_method" title="Mindee::Client#add_endpoint (method)">add_endpoint</a></span></span><span class='lparen'>(</span>
-  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>john</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>wnine</span><span class='tstring_end'>&#39;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-account</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-endpoint</span><span class='tstring_end'>&#39;</span></span>
 <span class='rparen'>)</span>
 
 <span class='comment'># Load a file from disk and parse it
 </span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_doc_from_path'>doc_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-  <span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/CustomV1.html" title="Mindee::Prediction::CustomV1 (class)">CustomV1</a></span></span><span class='comma'>,</span> <span class='label'>endpoint_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>wnine</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+                      <span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Prediction/CustomV1.html" title="Mindee::Prediction::CustomV1 (class)">CustomV1</a></span></span><span class='comma'>,</span> <span class='label'>endpoint_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-endpoint</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># Print a full summary of the parsed data in RST format
 </span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span>
@@ -158,6 +158,8 @@
 <p><a href="https://developers.mindee.com/docs/ruby-passport-ocr">Ruby passports OCR</a></p>
 </li></ul>
 
+<p>You can also take a look at the <strong>Documentation[https://mindee.github.io/mindee-api-ruby/]</strong>.</p>
+
 <h2 id="label-License">License</h2>
 
 <p>Copyright © Mindee, SA</p>
@@ -170,7 +172,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Fri Apr 21 10:20:35 2023 by
+  Generated on Fri Apr 21 11:05:39 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

@@ -1,0 +1,21 @@
+require 'mindee'
+
+# Init a new client and configure your custom document
+mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
+  'my-account',
+  'my-endpoint'
+)
+
+# Load a file from disk and parse it
+result = mindee_client.doc_from_path('/path/to/the/file.ext')
+  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'my-endpoint')
+
+# Print a full summary of the parsed data in RST format
+puts result
+
+# Looping over all prediction values
+result.inference.prediction.fields.each do |field_name, field_data|
+  puts field_name
+  puts field_data.values
+  puts field_data.to_s
+end
