@@ -8,4 +8,4 @@ result = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::EU::LicensePlateV1)
 
 # Print a full summary of the parsed data in RST format
-puts result.document
+puts result
