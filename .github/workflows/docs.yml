@@ -1,7 +1,6 @@
 name: Publish Documentation
 
 on:
-  push:
   release:
     types: [ published ]
 

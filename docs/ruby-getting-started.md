@@ -64,7 +64,7 @@ gem install mindee@<version>
 ## Usage
 Using Mindee's APIs can be broken down into the following steps:
 
-1. [Initialize a `Client`](#initializing-the-client)
+1. [Initialize a Client](#initializing-the-client)
 2. [Load a File](#loading-a-document-file)
 3. [Send the File](#sending-a-file) to Mindee's API
 4. [Process the Result](#process-the-result) in some way

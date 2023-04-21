@@ -52,7 +52,7 @@ result = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::EU::LicensePlateV1)
 
 # Print a full summary of the parsed data in RST format
-puts result.document
+puts result
 ```
 
 ### Custom Document (API Builder)
@@ -61,13 +61,13 @@ require 'mindee'
 
 # Init a new client and configure your custom document
 mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
-  'john',
-  'wnine'
+  'my-account',
+  'my-endpoint'
 )
 
 # Load a file from disk and parse it
 result = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
+  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'my-endpoint')
 
 # Print a full summary of the parsed data in RST format
 puts result
@@ -84,11 +84,15 @@ end
 There's more to it than that for those that need more features, or want to
 customize the experience.
 
-- [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-- [Ruby Custom APIs OCR](https://developers.mindee.com/docs/ruby-api-builder)
-- [Ruby invoices OCR](https://developers.mindee.com/docs/ruby-invoice-ocr)
-- [Ruby receipts OCR](https://developers.mindee.com/docs/ruby-receipt-ocr)
-- [Ruby passports OCR](https://developers.mindee.com/docs/ruby-passport-ocr)
+* [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
+* [Ruby Custom APIs OCR](https://developers.mindee.com/docs/ruby-api-builder)
+* [Ruby invoices OCR](https://developers.mindee.com/docs/ruby-invoice-ocr)
+* [Ruby receipts OCR](https://developers.mindee.com/docs/ruby-receipt-ocr)
+* [Ruby passports OCR](https://developers.mindee.com/docs/ruby-passport-ocr)
+
+You can also take a look at the
+[Reference Documentation](https://mindee.github.io/mindee-api-ruby/).
+
 
 ## License
 Copyright © Mindee, SA
