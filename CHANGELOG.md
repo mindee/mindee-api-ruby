@@ -1,9 +1,18 @@
 # Mindee Ruby API Library Changelog
 
+## v2.1.1 - 2023-04-21
+### Changes
+* :memo: minor docstring improvements
+* :coffin: remove redundant local checks
+* :memo: publish documentation
+* :memo: add code samples
+
+
 ## v2.1.0 - 2023-01-30
 ### Changes
 * :sparkles: Add financial document v1 support (Co-authored-by: Oriol Gual)
 * :sparkles: Add Proof of Address v1 support
+
 
 ## v2.0.0 - 2023-01-13
 ### ¡Breaking Changes!
@@ -21,6 +30,7 @@
 * :memo: Add YARD for generating docs
 * :white_check_mark: add testing on Ruby 3.2
 * :sparkles: allow setting the request timeout from env
+
 
 ## v1.2.0 - 2022-12-26
 ### Changes
