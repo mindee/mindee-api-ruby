@@ -19,3 +19,10 @@ desc 'Generate documentation'
 YARD::Rake::YardocTask.new(:doc) do |task|
   task.files = ['lib/**/*.rb']
 end
+
+Rake::Task[:doc].enhance do
+  FileUtils.cp_r(
+    File.join('docs', 'code_samples'),
+    File.join('docs', '_build')
+  )
+end
