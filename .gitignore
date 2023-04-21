@@ -15,6 +15,7 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/vendor
 /mindee-*/
 
 # Used by dotenv library to load environment variables.
