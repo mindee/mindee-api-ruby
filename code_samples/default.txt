@@ -1,0 +1,20 @@
+# tested with Ruby 2.5
+
+require 'uri'
+require 'net/http'
+require 'net/https'
+require 'mime/types'
+
+
+url = URI('https://api.mindee.net/v1/products/mindee/my-endpoint/my-version/predict')
+file = '/path/to/your/file.png'
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request['Authorization'] = 'Token my-api-key'
+request.set_form([['document', File.open(file)]], 'multipart/form-data')
+
+response = http.request(request)
+puts response.read_body
