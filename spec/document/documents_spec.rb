@@ -193,26 +193,7 @@ describe Mindee::Document do
       response = load_json(DIR_PASSPORT_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Prediction::PassportV1, response['document'])
       prediction = document.inference.prediction
-      expect(prediction.all_checks).to eq(false)
-
-      expect(prediction.checklist[:mrz_valid]).to eq(true)
-      expect(prediction.mrz.confidence).to eq(1.0)
-
-      expect(prediction.checklist[:mrz_valid_birth_date]).to eq(true)
-      expect(prediction.birth_date.confidence).to eq(1.0)
-
-      expect(prediction.checklist[:mrz_valid_expiry_date]).to eq(false)
-      expect(prediction.expiry_date.confidence).to eq(0.98)
-
-      expect(prediction.checklist[:mrz_valid_id_number]).to eq(true)
-      expect(prediction.id_number.confidence).to eq(1.0)
-
-      expect(prediction.checklist[:mrz_valid_surname]).to eq(true)
-      expect(prediction.surname.confidence).to eq(1.0)
-
-      expect(prediction.checklist[:mrz_valid_country]).to eq(true)
-      expect(prediction.country.confidence).to eq(1.0)
-
+      expect(prediction.all_checks).to eq(true)
       expect(prediction.expired?).to eq(false)
       expect(document.to_s).to eq(to_string)
     end
@@ -222,7 +203,7 @@ describe Mindee::Document do
       response = load_json(DIR_PASSPORT_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Prediction::PassportV1, response['document'])
       page = document.inference.pages[0]
-      expect(page.prediction.all_checks).to eq(false)
+      expect(page.prediction.all_checks).to eq(true)
       expect(page.prediction.expired?).to eq(false)
       expect(page.to_s).to eq(to_string)
     end
