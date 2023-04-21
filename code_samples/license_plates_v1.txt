@@ -9,3 +9,6 @@ result = mindee_client.doc_from_path('/path/to/the/file.ext')
 
 # Print a full summary of the parsed data in RST format
 puts result
+
+# Print the document-level parsed data
+# puts result.inference.prediction

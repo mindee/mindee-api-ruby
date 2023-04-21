@@ -1,11 +1,9 @@
-# tested with Ruby 2.5
 require 'uri'
 require 'net/http'
 require 'net/https'
-require 'mime/types'
 
 url = URI('https://api.mindee.net/v1/products/mindee/my-endpoint/my-version/predict')
-file = '/path/to/your/file.png'
+file = '/path/to/the/file.ext'
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true

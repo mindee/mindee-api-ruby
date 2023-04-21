@@ -13,6 +13,9 @@ result = mindee_client.doc_from_path('/path/to/the/file.ext')
 # Print a full summary of the parsed data in RST format
 puts result
 
+# Print the document-level parsed data
+# puts result.inference.prediction
+
 # Looping over all prediction values
 result.inference.prediction.fields.each do |field_name, field_data|
   puts field_name
