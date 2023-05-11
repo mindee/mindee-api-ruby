@@ -4,7 +4,7 @@ require_relative '../common_fields/base'
 
 module Mindee
   # Line items for invoices
-  class FinancialDocumentLineItem
+  class InvoiceV4LineItem
     # @return [String] The product code referring to the item.
     attr_reader :product_code
     # @return [String]
@@ -39,6 +39,7 @@ module Mindee
       @page_id = page_id
     end
 
+    # @return String
     def to_s
       tax = Field.float_to_string(@tax_amount)
       tax << " (#{Field.float_to_string(@tax_rate)}%)" unless @tax_rate.nil?
@@ -50,7 +51,8 @@ module Mindee
       out_str << " #{format('| %- 7s', Field.float_to_string(@unit_price))}"
       out_str << " #{format('| %- 8s', Field.float_to_string(@total_amount))}"
       out_str << " #{format('| %- 16s', tax)}"
-      out_str << " #{format('| %- 37s|', description)}"
+      out_str << " #{format('| %- 37s', description)}"
+      out_str << '|'
     end
   end
 end

@@ -2,7 +2,7 @@ The Ruby  OCR SDK supports the [receipt API](https://developers.mindee.com/docs/
 
 Using this sample below, we are going to illustrate how to extract the data that we want using the OCR SDK.
 
-![sample receipt](https://raw.githubusercontent.com/mindee/client-lib-test-data/main/receipt/receipt-with-tip.jpg)
+![sample receipt](https://raw.githubusercontent.com/mindee/client-lib-test-data/main/receipt/receipt.jpg)
 
 ## Quick Start
 ```ruby
@@ -11,27 +11,41 @@ require 'mindee'
 # Init a new client, specifying an API key
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
-# Send the file
-result = mindee_client.doc_from_path('/path/to/the/file.ext').parse(Mindee::Prediction::ReceiptV4)
+# Load a file from disk and parse it
+result = mindee_client.doc_from_path('/path/to/the/file.ext')
+                      .parse(Mindee::Prediction::ReceiptV5)
 
-# Print a summary of the document prediction in RST format
+# Print a full summary of the parsed data in RST format
+# puts result
+
+# Print the document-level parsed data
 puts result.inference.prediction
 ```
 
 Output:
 ```
-:Locale: en-US; en; US; USD;
-:Date: 2014-07-07
-:Category: food
-:Subcategory: restaurant
-:Document type: EXPENSE RECEIPT
-:Time: 20:20
-:Supplier name: LOGANS
-:Taxes: 3.34 TAX
-:Total net: 40.48
-:Total taxes: 3.34
-:Tip: 10.00
-:Total amount: 53.8
+:Expense Locale: en-GB; en; GB; GBP;
+:Expense Category: food
+:Expense Sub Category: restaurant
+:Document Type: EXPENSE RECEIPT
+:Purchase Date: 2016-02-26
+:Purchase Time: 15:20
+:Total Amount: 10.20
+:Total Excluding Taxes: 8.50
+:Total Tax: 1.70
+:Tip and Gratuity:
+:Taxes: 1.70 20.00% VAT
+:Supplier Name: CLACHAN
+:Supplier Company Registrations: 232153895
+                                 232153895
+:Supplier Address: 34 kingley street w1b 5qh
+:Supplier Phone Number: 02074940834
+:Line Items:
+  +--------------------------------------+----------+--------------+------------+
+  | Description                          | Quantity | Total Amount | Unit Price |
+  +======================================+==========+==============+============+
+  | Meantime Pale                        | 2.00     | 10.20        |            |
+  +--------------------------------------+----------+--------------+------------+
 ```
 
 ## Fields
@@ -50,7 +64,6 @@ Depending on the field type specified, additional attributes can be extracted in
 
 Using the above sample, the following are the basic fields that can be extracted:
 
-- [Orientation](#orientation)
 - [Category](#category)
 - [Date](#date)
 - [Locale](#locale)
