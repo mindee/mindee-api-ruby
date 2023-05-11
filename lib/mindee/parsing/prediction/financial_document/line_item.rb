@@ -4,7 +4,7 @@ require_relative '../common_fields/base'
 
 module Mindee
   # Line items for invoices
-  class InvoiceLineItem
+  class FinancialDocumentLineItem
     # @return [String] The product code referring to the item.
     attr_reader :product_code
     # @return [String]
@@ -42,17 +42,15 @@ module Mindee
     def to_s
       tax = Field.float_to_string(@tax_amount)
       tax << " (#{Field.float_to_string(@tax_rate)}%)" unless @tax_rate.nil?
-
       description = @description.nil? ? '' : @description
       description = "#{description[0..32]}..." if description.size > 35
-
       out_str = String.new
-      out_str << format('%- 22s', @product_code)
-      out_str << " #{format('%- 8s', Field.float_to_string(@quantity))}"
-      out_str << " #{format('%- 9s', Field.float_to_string(@unit_price))}"
-      out_str << " #{format('%- 10s', Field.float_to_string(@total_amount))}"
-      out_str << " #{format('%- 18s', tax)}"
-      out_str << " #{description}"
+      out_str << format('| %- 20s', @product_code)
+      out_str << " #{format('| %- 7s', Field.float_to_string(@quantity))}"
+      out_str << " #{format('| %- 7s', Field.float_to_string(@unit_price))}"
+      out_str << " #{format('| %- 8s', Field.float_to_string(@total_amount))}"
+      out_str << " #{format('| %- 16s', tax)}"
+      out_str << " #{format('| %- 37s|', description)}"
     end
   end
 end

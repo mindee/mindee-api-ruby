@@ -6,9 +6,9 @@ require_relative '../../base'
 module Mindee
   module Prediction
     module EU
-      # License plate prediction.
+      # License Plate v1 prediction results.
       class LicensePlateV1 < Prediction
-        # A list of license plates.
+        # List of all license plates found in the image.
         # @return [Array<Mindee::TextField>]
         attr_reader :license_plates
 
@@ -23,9 +23,9 @@ module Mindee
         end
 
         def to_s
-          license_plates = @license_plates.map(&:value).join(', ')
+          license_plates = @license_plates.join("\n #{' ' * 16}")
           out_str = String.new
-          out_str << "\n:License plates: #{license_plates}".rstrip
+          out_str << "\n:License Plates: #{license_plates}".rstrip
           out_str[1..].to_s
         end
       end

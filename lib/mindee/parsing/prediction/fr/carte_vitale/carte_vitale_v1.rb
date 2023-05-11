@@ -6,18 +6,18 @@ require_relative '../../base'
 module Mindee
   module Prediction
     module FR
-      # French Carte Vitale
+      # Carte Vitale v1 prediction results.
       class CarteVitaleV1 < Prediction
-        # List of given (first) names of the cardholder.
+        # The given name(s) of the card holder.
         # @return [Array<Mindee::TextField>]
         attr_reader :given_names
-        # The surname (last name) of the cardholder.
+        # The surname of the card holder.
         # @return [Mindee::TextField]
         attr_reader :surname
-        # The social security number of the cardholder.
+        # The Social Security Number (Numéro de Sécurité Sociale) of the card holder
         # @return [Mindee::TextField]
         attr_reader :social_security
-        # The issuance date of the card.
+        # The date the card was issued.
         # @return [Mindee::DateField]
         attr_reader :issuance_date
 
@@ -35,12 +35,12 @@ module Mindee
         end
 
         def to_s
-          given_names = @given_names.map(&:value).join(', ')
+          given_names = @given_names.join("\n #{' ' * 15}")
           out_str = String.new
-          out_str << "\n:Given names: #{given_names}".rstrip
+          out_str << "\n:Given Name(s): #{given_names}".rstrip
           out_str << "\n:Surname: #{@surname}".rstrip
           out_str << "\n:Social Security Number: #{@social_security}".rstrip
-          out_str << "\n:Issuance date: #{@issuance_date}".rstrip
+          out_str << "\n:Issuance Date: #{@issuance_date}".rstrip
           out_str[1..].to_s
         end
       end

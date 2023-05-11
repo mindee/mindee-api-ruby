@@ -29,8 +29,8 @@ module Mindee
       def to_s
         out_str = String.new
         out_str << "\n:Owner: #{@owner}".rstrip
-        out_str << "\n:Serial number: #{@serial_number}".rstrip
-        out_str << "\n:Size and type: #{@size_type}".rstrip
+        out_str << "\n:Serial Number: #{@serial_number}".rstrip
+        out_str << "\n:Size and Type: #{@size_type}".rstrip
         out_str[1..].to_s
       end
     end
