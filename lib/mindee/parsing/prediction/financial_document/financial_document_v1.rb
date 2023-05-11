@@ -2,7 +2,7 @@
 
 require_relative '../common_fields'
 require_relative '../base'
-require_relative 'invoice_line_item'
+require_relative 'line_item'
 
 module Mindee
   module Prediction
@@ -60,7 +60,7 @@ module Mindee
       # @return [Array<Mindee::CompanyRegistration>]
       attr_reader :supplier_company_registrations
       # Line items details.
-      # @return [Array<Mindee::InvoiceLineItem>]
+      # @return [Array<Mindee::FinancialDocumentLineItem>]
       attr_reader :line_items
       # Time as seen on the receipt in HH:MM format.
       # @return [Mindee::TextField]
@@ -83,7 +83,6 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id) # rubocop:todo Metrics/AbcSize
         super
-
         @time = TextField.new(prediction['time'], page_id)
         @category = TextField.new(prediction['category'], page_id)
         @subcategory = TextField.new(prediction['subcategory'], page_id)
@@ -100,7 +99,6 @@ module Mindee
         @invoice_number = TextField.new(prediction['invoice_number'], page_id)
         @supplier_name = TextField.new(prediction['supplier_name'], page_id)
         @supplier_address = TextField.new(prediction['supplier_address'], page_id)
-
         @reference_numbers = []
         prediction['reference_numbers'].each do |item|
           @reference_numbers.push(TextField.new(item, page_id))
@@ -121,14 +119,12 @@ module Mindee
         prediction['supplier_company_registrations'].each do |item|
           @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
         end
-
         @total_tax = AmountField.new(
           { value: nil, confidence: 0.0 }, page_id
         )
-
         @line_items = []
         prediction['line_items'].each do |item|
-          @line_items.push(InvoiceLineItem.new(item, page_id))
+          @line_items.push(FinancialDocumentLineItem.new(item, page_id))
         end
         reconstruct(page_id)
       end
@@ -153,39 +149,35 @@ module Mindee
         out_str << "\n:Supplier address: #{@supplier_address}".rstrip
         out_str << "\n:Supplier company registrations: #{supplier_company_registrations}".rstrip
         out_str << "\n:Supplier payment details: #{supplier_payment_details}".rstrip
-
         out_str << "\n:Customer name: #{@customer_name}".rstrip
         out_str << "\n:Customer address: #{@customer_address}".rstrip
         out_str << "\n:Customer company registrations: #{customer_company_registrations}".rstrip
-
         out_str << "\n:Tip: #{@tip}".rstrip
-
         out_str << "\n:Taxes: #{taxes}".rstrip
         out_str << "\n:Total taxes: #{@total_tax}".rstrip
         out_str << "\n:Total net: #{@total_net}".rstrip
         out_str << "\n:Total amount: #{@total_amount}".rstrip
-
+        out_str << "\n:Line Items:"
         out_str << line_items_to_s
-
         out_str[1..].to_s
       end
 
       private
 
+      def line_item_separator(char)
+        "  +#{char * 22}+#{char * 9}+#{char * 9}+#{char * 10}+#{char * 18}+#{char * 38}+"
+      end
+
       def line_items_to_s
-        line_item_separator = "#{'=' * 22} #{'=' * 8} #{'=' * 9} #{'=' * 10} #{'=' * 18} #{'=' * 36}"
-        line_items = @line_items.map(&:to_s).join("\n")
+        return '' if @line_items.empty?
 
+        line_items = @line_items.map(&:to_s).join("\n#{line_item_separator('-')}\n  ")
         out_str = String.new
-        out_str << "\n\n:Line Items:"
-
-        return out_str if line_items.empty?
-
-        out_str << "\n#{line_item_separator}"
-        out_str << "\nCode                   QTY      Price     Amount     Tax (Rate)         Description"
-        out_str << "\n#{line_item_separator}"
-        out_str << "\n#{line_items}"
-        out_str << "\n#{line_item_separator}"
+        out_str << "\n#{line_item_separator('-')}"
+        out_str << "\n  | Code#{' ' * 17}| QTY     | Price   | Amount   | Tax (Rate)       | Description#{' ' * 26}|"
+        out_str << "\n#{line_item_separator('=')}"
+        out_str << "\n  #{line_items}"
+        out_str << "\n#{line_item_separator('-')}"
       end
 
       def reconstruct(page_id)

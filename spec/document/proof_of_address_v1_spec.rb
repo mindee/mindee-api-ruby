@@ -8,7 +8,7 @@ require_relative '../data'
 DIR_PROOF_OF_ADDRESS_V1 = File.join(DATA_DIR, 'proof_of_address', 'response_v1').freeze
 
 describe Mindee::Prediction::ProofOfAddressV1 do
-  context 'A Proof of Address' do
+  context 'A Proof of Address V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_PROOF_OF_ADDRESS_V1, 'empty.json')
       inference = Mindee::Document.new(Mindee::Prediction::ProofOfAddressV1, response['document']).inference

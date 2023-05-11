@@ -20,7 +20,7 @@ module Mindee
     attr_reader :value
 
     # @param prediction [Hash]
-    def initialize(prediction)
+    def initialize(prediction, _page_id = nil)
       value_key = if prediction.include? 'value'
                     'value'
                   else

@@ -6,15 +6,15 @@ require_relative '../../base'
 module Mindee
   module Prediction
     module FR
-      # French bank account information (RIB)
+      # Bank Account Details v1 prediction results.
       class BankAccountDetailsV1 < Prediction
-        # The account's IBAN.
+        # The International Bank Account Number (IBAN).
         # @return [Mindee::TextField]
         attr_reader :iban
-        # The account holder's name.
+        # The name of the account holder as seen on the document.
         # @return [Mindee::TextField]
         attr_reader :account_holder_name
-        # The bank's SWIFT code.
+        # The bank's SWIFT Business Identifier Code (BIC).
         # @return [Mindee::TextField]
         attr_reader :swift
 
@@ -30,8 +30,8 @@ module Mindee
         def to_s
           out_str = String.new
           out_str << "\n:IBAN: #{@iban}".rstrip
-          out_str << "\n:Account holder name: #{@account_holder_name}".rstrip
-          out_str << "\n:SWIFT: #{@swift}".rstrip
+          out_str << "\n:Account Holder's Name: #{@account_holder_name}".rstrip
+          out_str << "\n:SWIFT Code: #{@swift}".rstrip
           out_str[1..].to_s
         end
       end
