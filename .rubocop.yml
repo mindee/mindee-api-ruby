@@ -9,6 +9,9 @@ AllCops:
   TargetRubyVersion: 2.6
   SuggestExtensions: false
 
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
+
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 
