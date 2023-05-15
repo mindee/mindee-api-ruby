@@ -30,10 +30,10 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new('>= 2.6')
 
   spec.add_runtime_dependency 'marcel', '~> 1.0.2'
-  spec.add_runtime_dependency 'origamindee', '~> 3.1'
+  spec.add_runtime_dependency 'origamindee', '~> 3.1.0'
 
-  spec.add_development_dependency 'rake', '~> 12.3'
-  spec.add_development_dependency 'rspec', '~> 3.11'
-  spec.add_development_dependency 'rubocop', '~> 1.41'
-  spec.add_development_dependency 'yard', '~> 0.9'
+  spec.add_development_dependency 'rake', '~> 12.3.3'
+  spec.add_development_dependency 'rspec', '~> 3.12.0'
+  spec.add_development_dependency 'rubocop', '~> 1.49.0'
+  spec.add_development_dependency 'yard', '~> 0.9.34'
 end
