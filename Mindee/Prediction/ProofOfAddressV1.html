@@ -104,7 +104,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Passport document.</p>
+<p>Proof of Address v1 prediction results.</p>
 
 
   </div>
@@ -142,7 +142,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>ISO date yyyy-mm-dd.</p>
+<p>The date the document was issued.</p>
 </div></span>
   
 </li>
@@ -171,7 +171,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>All extracted ISO date yyyy-mm-dd.</p>
+<p>List of dates found on the document.</p>
 </div></span>
   
 </li>
@@ -200,7 +200,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Address of the document’s issuer.</p>
+<p>The address of the document’s issuer.</p>
 </div></span>
   
 </li>
@@ -209,7 +209,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#issuer_company_registration-instance_method" title="#issuer_company_registration (instance method)">#<strong>issuer_company_registration</strong>  &#x21d2; Array&lt;Mindee::CompanyRegistration&gt; </a>
+      <a href="#issuer_company_registration-instance_method" title="#issuer_company_registration (instance method)">#<strong>issuer_company_registration</strong>  &#x21d2; Array&lt;Mindee::CompanyRegistrationField&gt; </a>
     
 
     
@@ -229,7 +229,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Generic: VAT NUMBER, TAX ID, COMPANY REGISTRATION NUMBER or country specific.</p>
+<p>List of company registrations found for the issuer.</p>
 </div></span>
   
 </li>
@@ -258,7 +258,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Name of the person or company issuing the document.</p>
+<p>The name of the person or company issuing the document.</p>
 </div></span>
   
 </li>
@@ -287,7 +287,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>ISO 639-1 code, works best with ca, de, en, es, fr, it, nl and pt.</p>
+<p>The locale detected on the document.</p>
 </div></span>
   
 </li>
@@ -316,7 +316,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Address of the recipient.</p>
+<p>The address of the recipient.</p>
 </div></span>
   
 </li>
@@ -325,7 +325,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#recipient_company_registration-instance_method" title="#recipient_company_registration (instance method)">#<strong>recipient_company_registration</strong>  &#x21d2; Array&lt;Mindee::CompanyRegistration&gt; </a>
+      <a href="#recipient_company_registration-instance_method" title="#recipient_company_registration (instance method)">#<strong>recipient_company_registration</strong>  &#x21d2; Array&lt;Mindee::CompanyRegistrationField&gt; </a>
     
 
     
@@ -345,7 +345,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Generic: VAT NUMBER, TAX ID, COMPANY REGISTRATION NUMBER or country specific.</p>
+<p>List of company registrations found for the recipient.</p>
 </div></span>
   
 </li>
@@ -374,7 +374,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Name of the document’s recipient.</p>
+<p>The name of the person or company receiving the document.</p>
 </div></span>
   
 </li>
@@ -542,24 +542,24 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
-  <span class='ivar'>@locale</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Locale.html" title="Mindee::Locale (class)">Locale</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Locale.html#initialize-instance_method" title="Mindee::Locale#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>locale</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
-  <span class='ivar'>@date</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../DateField.html" title="Mindee::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../DateField.html#initialize-instance_method" title="Mindee::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>date</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@dates</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dates</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
-    <span class='ivar'>@dates</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../DateField.html" title="Mindee::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../DateField.html#initialize-instance_method" title="Mindee::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='ivar'>@locale</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Locale.html" title="Mindee::Locale (class)">Locale</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Locale.html#initialize-instance_method" title="Mindee::Locale#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>locale</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@issuer_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TextField.html" title="Mindee::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Field.html#initialize-instance_method" title="Mindee::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>issuer_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@issuer_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TextField.html" title="Mindee::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Field.html#initialize-instance_method" title="Mindee::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>issuer_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@issuer_company_registration</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>issuer_company_registration</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
     <span class='ivar'>@issuer_company_registration</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../CompanyRegistration.html" title="Mindee::CompanyRegistration (class)">CompanyRegistration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../CompanyRegistration.html#initialize-instance_method" title="Mindee::CompanyRegistration#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
+  <span class='ivar'>@issuer_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TextField.html" title="Mindee::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Field.html#initialize-instance_method" title="Mindee::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>issuer_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@recipient_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TextField.html" title="Mindee::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Field.html#initialize-instance_method" title="Mindee::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>recipient_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@recipient_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TextField.html" title="Mindee::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Field.html#initialize-instance_method" title="Mindee::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>recipient_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@recipient_company_registration</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>recipient_company_registration</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
     <span class='ivar'>@recipient_company_registration</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../CompanyRegistration.html" title="Mindee::CompanyRegistration (class)">CompanyRegistration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../CompanyRegistration.html#initialize-instance_method" title="Mindee::CompanyRegistration#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
+  <span class='ivar'>@recipient_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TextField.html" title="Mindee::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Field.html#initialize-instance_method" title="Mindee::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>recipient_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@dates</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dates</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@dates</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../DateField.html" title="Mindee::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../DateField.html#initialize-instance_method" title="Mindee::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@date</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../DateField.html" title="Mindee::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../DateField.html#initialize-instance_method" title="Mindee::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>date</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -585,7 +585,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>ISO date yyyy-mm-dd. Works both for European and US dates.</p>
+<p>The date the document was issued.</p>
 
 
   </div>
@@ -612,12 +612,12 @@
       <pre class="lines">
 
 
-15
-16
-17</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_date'>date</span>
   <span class='ivar'>@date</span>
@@ -641,7 +641,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>All extracted ISO date yyyy-mm-dd. Works both for European and US dates.</p>
+<p>List of dates found on the document.</p>
 
 
   </div>
@@ -668,12 +668,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dates'>dates</span>
   <span class='ivar'>@dates</span>
@@ -697,7 +697,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Address of the document’s issuer.</p>
+<p>The address of the document’s issuer.</p>
 
 
   </div>
@@ -744,7 +744,7 @@
       <div class="method_details ">
   <h3 class="signature " id="issuer_company_registration-instance_method">
   
-    #<strong>issuer_company_registration</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../CompanyRegistration.html" title="Mindee::CompanyRegistration (class)">Mindee::CompanyRegistration</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+    #<strong>issuer_company_registration</strong>  &#x21d2; <tt>Array&lt;Mindee::CompanyRegistrationField&gt;</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -753,7 +753,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Generic: VAT NUMBER, TAX ID, COMPANY REGISTRATION NUMBER or country specific.</p>
+<p>List of company registrations found for the issuer.</p>
 
 
   </div>
@@ -766,7 +766,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../CompanyRegistration.html" title="Mindee::CompanyRegistration (class)">Mindee::CompanyRegistration</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Mindee::CompanyRegistrationField&gt;</tt>)</span>
       
       
       
@@ -780,12 +780,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_issuer_company_registration'>issuer_company_registration</span>
   <span class='ivar'>@issuer_company_registration</span>
@@ -809,7 +809,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Name of the person or company issuing the document.</p>
+<p>The name of the person or company issuing the document.</p>
 
 
   </div>
@@ -836,12 +836,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_issuer_name'>issuer_name</span>
   <span class='ivar'>@issuer_name</span>
@@ -865,7 +865,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>ISO 639-1 code, works best with ca, de, en, es, fr, it, nl and pt.</p>
+<p>The locale detected on the document.</p>
 
 
   </div>
@@ -921,7 +921,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Address of the recipient.</p>
+<p>The address of the recipient.</p>
 
 
   </div>
@@ -968,7 +968,7 @@
       <div class="method_details ">
   <h3 class="signature " id="recipient_company_registration-instance_method">
   
-    #<strong>recipient_company_registration</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../CompanyRegistration.html" title="Mindee::CompanyRegistration (class)">Mindee::CompanyRegistration</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+    #<strong>recipient_company_registration</strong>  &#x21d2; <tt>Array&lt;Mindee::CompanyRegistrationField&gt;</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -977,7 +977,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Generic: VAT NUMBER, TAX ID, COMPANY REGISTRATION NUMBER or country specific.</p>
+<p>List of company registrations found for the recipient.</p>
 
 
   </div>
@@ -990,7 +990,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../CompanyRegistration.html" title="Mindee::CompanyRegistration (class)">Mindee::CompanyRegistration</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Mindee::CompanyRegistrationField&gt;</tt>)</span>
       
       
       
@@ -1004,12 +1004,12 @@
       <pre class="lines">
 
 
-33
-34
-35</pre>
+27
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recipient_company_registration'>recipient_company_registration</span>
   <span class='ivar'>@recipient_company_registration</span>
@@ -1033,7 +1033,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Name of the document’s recipient.</p>
+<p>The name of the person or company receiving the document.</p>
 
 
   </div>
@@ -1060,12 +1060,12 @@
       <pre class="lines">
 
 
-36
-37
-38</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recipient_name'>recipient_name</span>
   <span class='ivar'>@recipient_name</span>
@@ -1118,19 +1118,19 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/proof_of_address/proof_of_address_v1.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
-  <span class='id identifier rubyid_recipient_company_registrations'>recipient_company_registrations</span> <span class='op'>=</span> <span class='ivar'>@recipient_company_registration</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_issuer_company_registrations'>issuer_company_registrations</span> <span class='op'>=</span> <span class='ivar'>@issuer_company_registration</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_dates'>dates</span> <span class='op'>=</span> <span class='ivar'>@dates</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n        </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_issuer_company_registration'>issuer_company_registration</span> <span class='op'>=</span> <span class='ivar'>@issuer_company_registration</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>30</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_recipient_company_registration'>recipient_company_registration</span> <span class='op'>=</span> <span class='ivar'>@recipient_company_registration</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>33</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_dates'>dates</span> <span class='op'>=</span> <span class='ivar'>@dates</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>7</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Locale: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@locale</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuer name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@issuer_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuer Name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@issuer_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuer Company Registrations: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_issuer_company_registration'>issuer_company_registration</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuer Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@issuer_address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuer Company Registrations: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_issuer_company_registrations'>issuer_company_registrations</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Recipient name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@recipient_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Recipient Name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@recipient_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Recipient Company Registrations: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_recipient_company_registration'>recipient_company_registration</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Recipient Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@recipient_address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Recipient Company Registrations: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_recipient_company_registrations'>recipient_company_registrations</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuance date: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Dates: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_dates'>dates</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Date of Issue: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1143,7 +1143,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Apr 21 14:30:29 2023 by
+  Generated on Tue May 16 11:47:01 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

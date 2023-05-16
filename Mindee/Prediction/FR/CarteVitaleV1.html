@@ -104,7 +104,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>French Carte Vitale</p>
+<p>Carte Vitale v1 prediction results.</p>
 
 
   </div>
@@ -142,7 +142,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of given (first) names of the cardholder.</p>
+<p>The given name(s) of the card holder.</p>
 </div></span>
   
 </li>
@@ -171,7 +171,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The issuance date of the card.</p>
+<p>The date the card was issued.</p>
 </div></span>
   
 </li>
@@ -200,7 +200,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The social security number of the cardholder.</p>
+<p>The Social Security Number (Numéro de Sécurité Sociale) of the card holder.</p>
 </div></span>
   
 </li>
@@ -229,7 +229,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The surname (last name) of the cardholder.</p>
+<p>The surname of the card holder.</p>
 </div></span>
   
 </li>
@@ -418,7 +418,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of given (first) names of the cardholder.</p>
+<p>The given name(s) of the card holder.</p>
 
 
   </div>
@@ -474,7 +474,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The issuance date of the card.</p>
+<p>The date the card was issued.</p>
 
 
   </div>
@@ -530,7 +530,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The social security number of the cardholder.</p>
+<p>The Social Security Number (Numéro de Sécurité Sociale) of the card holder</p>
 
 
   </div>
@@ -586,7 +586,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The surname (last name) of the cardholder.</p>
+<p>The surname of the card holder.</p>
 
 
   </div>
@@ -664,12 +664,12 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/parsing/prediction/fr/carte_vitale/carte_vitale_v1.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
-  <span class='id identifier rubyid_given_names'>given_names</span> <span class='op'>=</span> <span class='ivar'>@given_names</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:value</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>, </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_given_names'>given_names</span> <span class='op'>=</span> <span class='ivar'>@given_names</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>15</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Given names: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_given_names'>given_names</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Given Name(s): </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_given_names'>given_names</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Surname: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@surname</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Social Security Number: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@social_security</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuance date: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@issuance_date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Issuance Date: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@issuance_date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -682,7 +682,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Apr 21 14:30:29 2023 by
+  Generated on Tue May 16 11:47:01 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
