@@ -183,6 +183,9 @@ module Mindee
       @doc_configs[['mindee', Prediction::ReceiptV4.name]] = standard_document_config(
         Prediction::ReceiptV4, 'expense_receipts', '4'
       )
+      @doc_configs[['mindee', Prediction::ReceiptV5.name]] = standard_document_config(
+        Prediction::ReceiptV5, 'expense_receipts', '5'
+      )
       @doc_configs[['mindee', Prediction::PassportV1.name]] = standard_document_config(
         Prediction::PassportV1, 'passport', '1'
       )

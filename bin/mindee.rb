@@ -24,7 +24,7 @@ DOCUMENTS = {
   },
   "receipt" => {
     help: "Expense Receipt",
-    prediction: Mindee::Prediction::ReceiptV4,
+    prediction: Mindee::Prediction::ReceiptV5,
   },
   "passport" => {
     help: "Passport",

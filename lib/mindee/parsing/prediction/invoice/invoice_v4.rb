@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative '../common_fields'
-require_relative 'line_item'
 require_relative '../base'
+require_relative 'invoice_v4_line_item'
 
 module Mindee
   module Prediction
@@ -60,7 +60,7 @@ module Mindee
       # @return [Array<Mindee::CompanyRegistration>]
       attr_reader :supplier_company_registrations
       # Line items details.
-      # @return [Array<Mindee::InvoiceLineItem>]
+      # @return [Array<Mindee::InvoiceV4LineItem>]
       attr_reader :line_items
 
       # @param prediction [Hash]
@@ -103,7 +103,7 @@ module Mindee
         )
         @line_items = []
         prediction['line_items'].each do |item|
-          @line_items.push(InvoiceLineItem.new(item, page_id))
+          @line_items.push(InvoiceV4LineItem.new(item, page_id))
         end
         reconstruct(page_id)
       end
@@ -149,7 +149,7 @@ module Mindee
         line_items = @line_items.map(&:to_s).join("\n#{line_item_separator('-')}\n  ")
         out_str = String.new
         out_str << "\n#{line_item_separator('-')}"
-        out_str << "\n  | Code#{' ' * 17}| QTY     | Price   | Amount   | Tax (Rate)       | Description#{' ' * 26}|"
+        out_str << "\n  | Code#{' ' * 17}| QTY     | Price   | Amount   | Tax (Rate)       | Description #{' ' * 25}|"
         out_str << "\n#{line_item_separator('=')}"
         out_str << "\n  #{line_items}"
         out_str << "\n#{line_item_separator('-')}"

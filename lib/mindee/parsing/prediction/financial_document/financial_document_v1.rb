@@ -2,7 +2,7 @@
 
 require_relative '../common_fields'
 require_relative '../base'
-require_relative 'line_item'
+require_relative 'financial_document_v1_line_item'
 
 module Mindee
   module Prediction
@@ -60,7 +60,7 @@ module Mindee
       # @return [Array<Mindee::CompanyRegistration>]
       attr_reader :supplier_company_registrations
       # Line items details.
-      # @return [Array<Mindee::FinancialDocumentLineItem>]
+      # @return [Array<Mindee::FinancialDocumentV1LineItem>]
       attr_reader :line_items
       # Time as seen on the receipt in HH:MM format.
       # @return [Mindee::TextField]
@@ -124,7 +124,7 @@ module Mindee
         )
         @line_items = []
         prediction['line_items'].each do |item|
-          @line_items.push(FinancialDocumentLineItem.new(item, page_id))
+          @line_items.push(FinancialDocumentV1LineItem.new(item, page_id))
         end
         reconstruct(page_id)
       end
