@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v2.2.0 - 2023-05-16
+### Changes
+* :sparkles: add support for Receipts v5
+
+
 ## v2.1.1 - 2023-04-21
 ### Changes
 * :memo: minor docstring improvements
