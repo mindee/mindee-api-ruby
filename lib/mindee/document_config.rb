@@ -65,6 +65,21 @@ module Mindee
       raise error
     end
 
+
+    # Call the prediction API.
+    # @param input_doc [Mindee::InputDocument]
+    # @param cropper [Boolean]
+    # @return [Mindee::DocumentResponse]
+    def predict_async(input_doc, include_words, cropper)
+      check_api_key
+      response = predict_async_request(input_doc, include_words, cropper)
+      hashed_response = JSON.parse(response.body, object_class: Hash)
+      return Document.new(@prediction_class, hashed_response['document']) if (200..299).include?(response.code.to_i)
+
+      error = Parsing::Error.new(hashed_response['api_request']['error'])
+      raise error
+    end
+
     private
 
     # @param input_doc [Mindee::LocalInputSource]
