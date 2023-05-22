@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v2.2.1 - 2023-05-22
+### Fixes
+* :bug: added base attribute to tax field
+
+
 ## v2.2.0 - 2023-05-16
 ### Changes
 * :sparkles: add support for Receipts v5
