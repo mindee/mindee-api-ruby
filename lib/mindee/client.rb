@@ -15,7 +15,59 @@ module Mindee
       @doc_configs = doc_configs
     end
 
-    # Call prediction API on the document and parse the results.
+    private
+
+    # @param document_class [Mindee::Prediction::Prediction]
+    # @param endpoint_name [String]
+    def determine_endpoint_name(document_class, endpoint_name)
+      return document_class.name if document_class.name != Prediction::CustomV1.name
+
+      raise "endpoint_name is required when using #{document_class.name} class" if endpoint_name.empty?
+
+      endpoint_name
+    end
+
+    # @param document_class [Mindee::Prediction::Prediction]
+    # @param endpoint_name [String]
+    # @param account_name [String]
+    def find_doc_config(document_class, endpoint_name, account_name)
+      endpoint_name = determine_endpoint_name(document_class, endpoint_name)
+
+      found = []
+      doc_configs.each_key do |conf|
+        found.push(conf) if conf[1] == endpoint_name
+      end
+      raise "Endpoint not configured: #{endpoint_name}" if found.empty?
+
+      if !account_name.empty?
+        config_key = [account_name, endpoint_name]
+      elsif found.length == 1
+        config_key = found[0]
+      else
+        usernames = found.map { |conf| conf[0] }
+        raise "Duplicate configuration detected.\n" \
+              "You specified the document '#{endpoint_name}' in your custom config.\n" \
+              "To avoid confusion, please add the 'account_name' attribute to " \
+              "the parse method, one of #{usernames}."
+      end
+
+      doc_configs[config_key]
+    end
+  end
+
+  # Mindee API Client.
+  # See: https://developers.mindee.com/docs/
+  class Client
+    # @param api_key [String]
+    def initialize(api_key: '')
+      @doc_configs = {}
+      @api_key = api_key
+      init_default_endpoints
+    end
+
+    # Call prediction API on a document and parse the results.
+    #
+    # @param input_doc [Mindee::DocumentClient]
     #
     # @param prediction_class [Mindee::Prediction::Prediction]
     #
@@ -46,6 +98,7 @@ module Mindee
     #
     # @return [Mindee::DocumentResponse]
     def parse(
+      input_doc,
       prediction_class,
       endpoint_name: '',
       account_name: '',
@@ -54,61 +107,27 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
-      @input_doc.process_pdf(page_options) if !page_options.nil? && @input_doc.pdf?
-      doc_config.predict(@input_doc, include_words, close_file, cropper)
+      doc_config = DocumentClient::find_doc_config(prediction_class, endpoint_name, account_name)
+      input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
+      doc_config.predict(input_doc, include_words, close_file, cropper)
     end
 
-    private
-
-    # @param document_class [Mindee::Prediction::Prediction]
-    # @param endpoint_name [String]
-    def determine_endpoint_name(document_class, endpoint_name)
-      return document_class.name if document_class.name != Prediction::CustomV1.name
-
-      raise "endpoint_name is required when using #{document_class.name} class" if endpoint_name.empty?
-
-      endpoint_name
+    def enqueue(
+      input_doc,
+      prediction_class,
+      endpoint_name: '',
+      account_name: '',
+      include_words: false,
+      page_options: nil,
+      cropper: false
+    )
+      doc_config = DocumentClient::find_doc_config(prediction_class, endpoint_name, account_name)
+      input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
+      doc_config.predict_async(input_doc, include_words, cropper)
     end
 
-    # @param document_class [Mindee::Prediction::Prediction]
-    # @param endpoint_name [String]
-    # @param account_name [String]
-    def find_doc_config(document_class, endpoint_name, account_name)
-      endpoint_name = determine_endpoint_name(document_class, endpoint_name)
 
-      found = []
-      @doc_configs.each_key do |conf|
-        found.push(conf) if conf[1] == endpoint_name
-      end
-      raise "Endpoint not configured: #{endpoint_name}" if found.empty?
-
-      if !account_name.empty?
-        config_key = [account_name, endpoint_name]
-      elsif found.length == 1
-        config_key = found[0]
-      else
-        usernames = found.map { |conf| conf[0] }
-        raise "Duplicate configuration detected.\n" \
-              "You specified the document '#{endpoint_name}' in your custom config.\n" \
-              "To avoid confusion, please add the 'account_name' attribute to " \
-              "the parse method, one of #{usernames}."
-      end
-
-      @doc_configs[config_key]
-    end
-  end
-
-  # Mindee API Client.
-  # See: https://developers.mindee.com/docs/
-  class Client
-    # @param api_key [String]
-    def initialize(api_key: '')
-      @doc_configs = {}
-      @api_key = api_key
-      init_default_endpoints
-    end
-
+    
     # Configure a custom document using the 'Mindee API Builder'.
     # @param account_name [String] Your organization's username on the API Builder
     # @param endpoint_name [String] The "API name" field in the "Settings" page of the API Builder
@@ -128,10 +147,9 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::PathDocument]
     def doc_from_path(input_path)
-      doc = Input::PathDocument.new(input_path)
-      DocumentClient.new(doc, @doc_configs)
+      Input::PathDocument.new(input_path)
     end
 
     # Load a document from raw bytes.
@@ -206,6 +224,9 @@ module Mindee
       )
       @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = standard_document_config(
         Prediction::FR::IdCardV1, 'idcard_fr', '1'
+      )
+      @doc_configs[['mindee', Prediction::InvoiceSplitterV1.name]] = standard_document_config(
+        Prediction::InvoiceSplitterV1, 'invoice_splitter', '1'
       )
       self
     end

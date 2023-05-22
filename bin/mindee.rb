@@ -54,6 +54,10 @@ DOCUMENTS = {
     help: "US Bank Check",
     prediction: Mindee::Prediction::US::BankCheckV1,
   },
+  "invoice-splitter" => {
+    help: "US Bank Check",
+    prediction: Mindee::Prediction::InvoiceSplitterV1,
+  },
 }
 
 options = {
