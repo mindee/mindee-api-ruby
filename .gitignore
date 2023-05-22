@@ -15,6 +15,7 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+_test.rb
 /vendor
 /mindee-*/
 
