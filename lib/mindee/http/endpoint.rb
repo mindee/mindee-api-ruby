@@ -61,6 +61,56 @@ module Mindee
           http.request(req)
         end
       end
+
+
+      # @param input_doc [Mindee::InputDocument]
+      # @param include_words [Boolean]
+      # @param cropper [Boolean]
+      # @return [Net::HTTPResponse]
+      def predict_async_req_post(input_doc, include_words:false, cropper: false)
+        uri = URI("#{@url_root}/predict_async")
+
+        params = {}
+        params[:cropper] = 'true' if cropper
+        uri.query = URI.encode_www_form(params)
+
+        headers = {
+          'Authorization' => "Token #{@api_key}",
+          'User-Agent' => USER_AGENT,
+        }
+        req = Net::HTTP::Post.new(uri, headers)
+
+        form_data = {
+          'document' => input_doc.read_document(close: close_file),
+        }
+        form_data.push ['include_mvision', 'true'] if include_words
+
+        req.set_form(form_data, 'multipart/form-data')
+
+        Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
+          http.request(req)
+        end
+      end
+
+
+      # @param job_id [String]
+      # @return [Net::HTTPResponse]
+      def document_queue_req_get(job_id)
+        uri = URI("#{@url_root}/queue/#{queue_id}")
+
+        params = {}
+        uri.query = URI.encode_www_form(params)
+
+        headers = {
+          'Authorization' => "Token #{@api_key}",
+          'User-Agent' => USER_AGENT,
+        }
+        req = Net::HTTP::Get.new(uri, headers)
+
+        Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
+          http.request(req)
+        end
+      end
     end
 
     # Receipt API endpoint
