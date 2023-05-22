@@ -3,10 +3,10 @@
 require_relative 'base'
 
 module Mindee
-  # Represents basic text information.
-  class TextField < Field
+  # Represents a classifier value.
+  class ClassificationField < Field
     # Value as String
-    # @return [String, nil]
+    # @return [String]
     attr_reader :value
   end
 end

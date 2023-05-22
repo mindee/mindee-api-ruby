@@ -12,13 +12,13 @@ module Mindee
       # @return [Mindee::Locale]
       attr_reader :locale
       # The receipt category among predefined classes.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :category
       # The receipt sub category among predefined classes for transport and food.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :subcategory
       # Whether the document is an expense receipt or a credit card receipt.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :document_type
       # The date the purchase was made.
       # @return [Mindee::DateField]
@@ -62,9 +62,9 @@ module Mindee
       def initialize(prediction, page_id)
         super
         @locale = Locale.new(prediction['locale'], page_id)
-        @category = TextField.new(prediction['category'], page_id)
-        @subcategory = TextField.new(prediction['subcategory'], page_id)
-        @document_type = TextField.new(prediction['document_type'], page_id)
+        @category = ClassificationField.new(prediction['category'], page_id)
+        @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
+        @document_type = ClassificationField.new(prediction['document_type'], page_id)
         @date = DateField.new(prediction['date'], page_id)
         @time = TextField.new(prediction['time'], page_id)
         @total_amount = AmountField.new(prediction['total_amount'], page_id)

@@ -32,13 +32,13 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :time
       # The receipt category among predefined classes.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :category
       # The receipt sub-category among predefined classes.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :subcategory
       # Whether the document is an expense receipt or a credit card receipt.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :document_type
       # Total amount of tip and gratuity. Both typed and handwritten characters are supported.
       # @return [Mindee::AmountField]
@@ -54,9 +54,9 @@ module Mindee
         @total_tax = AmountField.new(prediction['total_tax'], page_id)
         @tip = AmountField.new(prediction['tip'], page_id)
         @date = DateField.new(prediction['date'], page_id)
-        @category = TextField.new(prediction['category'], page_id)
-        @subcategory = TextField.new(prediction['subcategory'], page_id)
-        @document_type = TextField.new(prediction['document_type'], page_id)
+        @category = ClassificationField.new(prediction['category'], page_id)
+        @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
+        @document_type = ClassificationField.new(prediction['document_type'], page_id)
         @supplier = TextField.new(prediction['supplier'], page_id)
         @time = TextField.new(prediction['time'], page_id)
         @taxes = []
