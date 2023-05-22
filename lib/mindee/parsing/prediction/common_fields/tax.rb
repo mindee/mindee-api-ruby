@@ -14,6 +14,9 @@ module Mindee
     # Tax code
     # @return [String]
     attr_reader :code
+    # Tax base
+    # @return [Float]
+    attr_reader :base
 
     # @param prediction [Hash]
     # @param page_id [Integer, nil]
@@ -21,6 +24,7 @@ module Mindee
       super
       @value = @value.round(3) unless @value.nil?
       @rate = prediction['rate'].to_f unless prediction['rate'].nil?
+      @base = prediction['base'].to_f unless prediction['base'].nil?
       @code = prediction['code'] unless prediction['code'] == 'None'
     end
 
