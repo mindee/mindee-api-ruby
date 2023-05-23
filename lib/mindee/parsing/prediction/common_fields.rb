@@ -2,6 +2,7 @@
 
 require_relative 'common_fields/amount'
 require_relative 'common_fields/base'
+require_relative 'common_fields/classification'
 require_relative 'common_fields/company_registration'
 require_relative 'common_fields/date'
 require_relative 'common_fields/locale'

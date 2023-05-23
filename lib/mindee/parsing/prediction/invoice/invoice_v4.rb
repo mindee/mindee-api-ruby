@@ -12,7 +12,7 @@ module Mindee
       # @return [Mindee::Locale]
       attr_reader :locale
       # The nature of the invoice.
-      # @return [Mindee::TextField]
+      # @return [Mindee::ClassificationField]
       attr_reader :document_type
       # The total amount with tax included.
       # @return [Mindee::AmountField]
@@ -68,7 +68,7 @@ module Mindee
       def initialize(prediction, page_id)
         super
         @locale = Locale.new(prediction['locale'])
-        @document_type = TextField.new(prediction['document_type'], page_id)
+        @document_type = ClassificationField.new(prediction['document_type'], page_id)
         @total_amount = AmountField.new(prediction['total_amount'], page_id)
         @total_net = AmountField.new(prediction['total_net'], page_id)
         @customer_address = TextField.new(prediction['customer_address'], page_id)

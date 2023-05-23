@@ -8,10 +8,10 @@ module Mindee
     # Custom document object.
     class CustomV1 < Prediction
       # All value fields in the document
-      # @return [Hash<Symbol, Mindee::ListField>]
+      # @return [Hash<Symbol, Mindee::Custom::ListField>]
       attr_reader :fields
       # All classifications in the document
-      # @return [Hash<Symbol, Mindee::ClassificationField>]
+      # @return [Hash<Symbol, Mindee::Custom::ClassificationField>]
       attr_reader :classifications
 
       # @param prediction [Hash]
@@ -46,9 +46,9 @@ module Mindee
         # Here we use the fact that only value lists have the 'values' attribute.
 
         if field_prediction.key? 'values'
-          @fields[field_sym] = ListField.new(field_prediction, page_id)
+          @fields[field_sym] = Custom::ListField.new(field_prediction, page_id)
         elsif field_prediction.key? 'value'
-          @classifications[field_sym] = ClassificationField.new(field_prediction)
+          @classifications[field_sym] = Custom::ClassificationField.new(field_prediction)
         else
           throw 'Unknown API field type'
         end
