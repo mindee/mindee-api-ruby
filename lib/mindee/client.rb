@@ -4,6 +4,8 @@ require_relative 'input'
 require_relative 'document_config'
 require_relative 'http/endpoint'
 require_relative 'parsing/prediction'
+require_relative 'parsing/api_response'
+
 
 module Mindee
   # Mindee API Client.
@@ -60,7 +62,7 @@ module Mindee
     )
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
-      @doc_config.predict(input_doc, include_words, close_file, cropper)
+      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
     end
 
     # @return [Mindee::ApiResponse]
@@ -75,10 +77,22 @@ module Mindee
     )
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
-      @doc_config.predict_async(input_doc, include_words, cropper)
+      Mindee::ApiResponse.new(prediction_class, @doc_config.predict_async(input_doc, include_words, cropper))
     end
 
-
+    # @return [Mindee::ApiResponse]
+    def parse_queued(
+      prediction_class,
+      job_id,
+      endpoint_name: '',
+      account_name: '',
+      include_words: false,
+      page_options: nil,
+      cropper: false
+    )
+      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
+      Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
+    end
     
     # Configure a custom document using the 'Mindee API Builder'.
     # @param account_name [String] Your organization's username on the API Builder
@@ -113,7 +127,7 @@ module Mindee
     # @param document_class [Mindee::Prediction::Prediction]
     # @param endpoint_name [String]
     # @param account_name [String]
-    # @return [Mindee::PathDocument]
+    # @return [Mindee::PathInputSource]
     def find_doc_config(document_class, endpoint_name, account_name)
       endpoint_name = determine_endpoint_name(document_class, endpoint_name)
 
@@ -138,12 +152,11 @@ module Mindee
       @doc_configs[config_key]
     end
 
-    # TODO: rename (by yeeting the "Document" from the name) to avoid confusion, as it's an Input::PathDocument
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @return [Mindee::PathDocument]
+    # @return [Mindee::PathInputSource]
     def doc_from_path(input_path)
-      Input::PathDocument.new(input_path)
+      Input::PathInputSource.new(input_path)
     end
 
     # Load a document from raw bytes.
@@ -151,7 +164,7 @@ module Mindee
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::DocumentClient]
     def doc_from_bytes(input_bytes, filename)
-      doc = Input::BytesDocument.new(input_bytes, filename)
+      doc = Input::BytesInputSource.new(input_bytes, filename)
       DocumentClient.new(doc, @doc_configs)
     end
 
@@ -160,7 +173,7 @@ module Mindee
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::DocumentClient]
     def doc_from_b64string(base64_string, filename)
-      doc = Input::Base64Document.new(base64_string, filename)
+      doc = Input::Base64InputSource.new(base64_string, filename)
       DocumentClient.new(doc, @doc_configs)
     end
 
@@ -169,7 +182,7 @@ module Mindee
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::DocumentClient]
     def doc_from_file(input_file, filename)
-      doc = Input::FileDocument.new(input_file, filename)
+      doc = Input::FileInputSource.new(input_file, filename)
       DocumentClient.new(doc, @doc_configs)
     end
 
