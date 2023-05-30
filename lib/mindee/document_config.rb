@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-
 require_relative 'http/endpoint'
 require_relative 'parsing/document'
 require_relative 'parsing/error'
@@ -26,12 +25,12 @@ module Mindee
     # @param include_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
-    # @return [Mindee::DocumentResponse]
+    # @return [Hash]
     def predict(input_doc, include_words, close_file, cropper)
       check_api_key
       response = predict_request(input_doc, include_words, close_file, cropper)
       hashed_response = JSON.parse(response.body, object_class: Hash)
-      return Document.new(@prediction_class, hashed_response['document']) if (200..299).include?(response.code.to_i)
+      return hashed_response if (200..299).include?(response.code.to_i)
 
       error = Parsing::Error.new(hashed_response['api_request']['error'])
       raise error
@@ -41,12 +40,26 @@ module Mindee
     # Call the prediction API.
     # @param input_doc [Mindee::LocalInputSource]
     # @param cropper [Boolean]
-    # @return [Mindee::DocumentResponse]
+    # @return [Hash]
     def predict_async(input_doc, include_words, cropper)
       check_api_key
       response = predict_async_request(input_doc, include_words, cropper)
       hashed_response = JSON.parse(response.body, object_class: Hash)
-      return Document.new(@prediction_class, hashed_response['job']) if (200..299).include?(response.code.to_i)
+      return hashed_response if (200..299).include?(response.code.to_i)
+
+      error = Parsing::Error.new(hashed_response['api_request']['error'])
+      raise error
+    end
+
+
+    # Calls the parsed async doc.
+    # @param job_id [String]
+    # @return [Hash]
+    def parse_async(job_id)
+      check_api_key
+      response = document_queue_request(job_id)
+      hashed_response = JSON.parse(response.body, object_class: Hash)
+      return hashed_response if (200..299).include?(response.code.to_i)
 
       error = Parsing::Error.new(hashed_response['api_request']['error'])
       raise error

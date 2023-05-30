@@ -11,18 +11,19 @@ module Mindee
       # @return[Array<Integer>]
       attr_reader :page_indexes
 
-      # @return[Float]
+      # @return[Float, nil]
       attr_reader :confidence
 
       # @param prediction[Hash]
-      def initialize(prediction, confidence)
+      def initialize(prediction)
         @page_indexes = prediction["page_indexes"]
         !!@confidence = Float(prediction["confidence"]) rescue @confidence = 0.0
       end
 
       def to_s
         out_str = String.new
-        out_str << @page_indexes.map(&:to_s).join(", ")
+        out_str << "page indexes: #{@page_indexes.join(", ")}"
+        out_str
       end
     end
 
@@ -35,25 +36,23 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super
-        construct_invoice_page_groups_from_prediction(prediction["prediction"])
+        construct_invoice_page_groups_from_prediction(prediction)
       end
 
       def construct_invoice_page_groups_from_prediction(prediction)
-        if prediction["invoice_page_groups"].any?
-          prediction["invoice_page_groups"].each() do 
-            |page_group_prediction| PageGroup.new(page_group_prediction) 
-          end
-        else
-          @invoice_page_groups = []
+        @invoice_page_groups = []
+        if prediction.key?("invoice_page_groups") && prediction["invoice_page_groups"].any?
+          prediction["invoice_page_groups"].each{ 
+            |page_group_prediction| @invoice_page_groups.append(PageGroup.new(page_group_prediction))}
         end
       end
 
       def to_s
         out_str = String.new
-        out_str << "----- Invoice Splitter V1 -----\n"
-        out_str << "Filename: #{@filename || ''}".rstrip
-        out_str << "Invoice Page Groups: #{@invoice_page_groups}".rstrip
-        out_str
+        out_str << "\nFilename: #{@filename || ''}".rstrip
+        out_str << "\nInvoice Page Groups:"
+        out_str << "\n#{@invoice_page_groups == nil || !@invoice_page_groups.any? ? "" : "  "+@invoice_page_groups.map{|page| page.to_s}.join("\n  ")}".rstrip
+        out_str[1..].to_s
       end
     end
   end

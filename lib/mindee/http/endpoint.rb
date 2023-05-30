@@ -96,21 +96,27 @@ module Mindee
       # @param job_id [String]
       # @return [Net::HTTPResponse]
       def document_queue_req_get(job_id)
-        uri = URI("#{@url_root}/queue/#{queue_id}")
-
-        params = {}
-        uri.query = URI.encode_www_form(params)
+        uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
         headers = {
           'Authorization' => "Token #{@api_key}",
           'User-Agent' => USER_AGENT,
         }
+
         req = Net::HTTP::Get.new(uri, headers)
 
-        Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
+        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
           http.request(req)
         end
-      end
+
+        if response.code.to_i >299 && response.code.to_i<400
+          req = Net::HTTP::Get.new(response['location'], headers)
+          response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
+            http.request(req)
+          end
+        end
+        response
+        end
     end
 
     # Receipt API endpoint

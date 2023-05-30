@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+
+require_relative 'document'
+
 module Mindee
 
-  module REQUESTSTATUS # TODO: check if frozen hash might not be a better implementation
+  module REQUESTSTATUS
     FAILURE = 'failure'
     SUCCESS = 'success'
   end
@@ -14,13 +17,20 @@ module Mindee
     attr_reader :issued_at
     # @return [Mindee::DateField, nil]
     attr_reader :available_at
-    # @return [Integer]
-    attr_reader :available_at
+    # @return [String]
+    attr_reader :status
+    # @return [Integer, nil]
+    attr_reader :millisecs_taken
 
     # @param http_response [Hash]
     def initialize(http_response)
-      @issued_at = DateField.new(http_response['issued_at']) # check second arg in case of issue
-      @available_at = DateField.new(http_response['available_at']) unless !http_response.key?('available_at')
+      @id = http_response['id']
+      @issued_at = DateField.new(http_response['issued_at'], http_response['page_id']) # check second arg in case of issue
+      if http_response.key?('available_at') && http_response['available_at'] != nil
+        @available_at = DateField.new(http_response['available_at'], http_response['page_id'])
+        @millisecs_taken = 1000 * (@available_at.date_object.to_f - @issued_at.date_object.to_f)
+      end
+      @status = http_response['status']
     end
   end
 
@@ -47,7 +57,7 @@ module Mindee
   end  
 
   class ApiResponse
-    # @return [Mindee::DocumentResponse, nil]
+    # @return [Mindee::Document, nil]
     attr_reader :document
     # @return [Mindee::Job, nil]
     attr_reader :job
@@ -58,9 +68,9 @@ module Mindee
     # @param http_response [Hash]
     def initialize(prediction_class, http_response)
       if http_response.key?('document') && (!http_response.key?('job') || http_response['job']['status']=='completed')
-        @document = Mindee.Document.new(prediction_class, http_response['document'])
+        @document = Mindee::Document.new(prediction_class, http_response['document'])
       end
-      @job = Mindee.Job.new(http_response['job']) unless !http_response.key?('job')
+      @job = Mindee::Job.new(http_response['job']) unless !http_response.key?('job')
     end
   end
 end
