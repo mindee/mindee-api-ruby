@@ -17,7 +17,7 @@ module Mindee
     ].freeze
 
     # Base class for loading documents.
-    class InputDocument
+    class LocalInputSource
       # @return [String]
       attr_reader :filename
       # @return [String]
@@ -55,7 +55,7 @@ module Mindee
     end
 
     # Load a document from a path.
-    class PathDocument < InputDocument
+    class PathDocument < LocalInputSource
       # @param filepath [String]
       def initialize(filepath)
         io_stream = File.open(filepath, 'rb')
@@ -64,7 +64,7 @@ module Mindee
     end
 
     # Load a document from a base64 string.
-    class Base64Document < InputDocument
+    class Base64Document < LocalInputSource
       # @param base64_string [String]
       # @param filename [String]
       def initialize(base64_string, filename)
@@ -75,7 +75,7 @@ module Mindee
     end
 
     # Load a document from raw bytes.
-    class BytesDocument < InputDocument
+    class BytesDocument < LocalInputSource
       # @param raw_bytes [String]
       # @param filename [String]
       def initialize(raw_bytes, filename)
@@ -86,7 +86,7 @@ module Mindee
     end
 
     # Load a document from a file handle.
-    class FileDocument < InputDocument
+    class FileDocument < LocalInputSource
       # @param filename [String]
       def initialize(file_handle, filename)
         io_stream = file_handle

@@ -32,7 +32,7 @@ module Mindee
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
-      # @param input_doc [Mindee::InputDocument]
+      # @param input_doc [Mindee::LocalInputSource]
       # @param include_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -63,11 +63,11 @@ module Mindee
       end
 
 
-      # @param input_doc [Mindee::InputDocument]
+      # @param input_doc [Mindee::LocalInputSource]
       # @param include_words [Boolean]
       # @param cropper [Boolean]
       # @return [Net::HTTPResponse]
-      def predict_async_req_post(input_doc, include_words:false, cropper: false)
+      def predict_async_req_post(input_doc, include_words, cropper)
         uri = URI("#{@url_root}/predict_async")
 
         params = {}
@@ -81,7 +81,7 @@ module Mindee
         req = Net::HTTP::Post.new(uri, headers)
 
         form_data = {
-          'document' => input_doc.read_document(close: close_file),
+          'document' => input_doc.read_document(),
         }
         form_data.push ['include_mvision', 'true'] if include_words
 
