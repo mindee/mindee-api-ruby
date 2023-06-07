@@ -20,7 +20,6 @@ module Mindee
 
     # Call prediction API on a document and parse the results.
     #
-    # @param input_doc [Mindee::DocumentClient]
     #
     # @param prediction_class [Mindee::Prediction::Prediction]
     #
@@ -162,28 +161,25 @@ module Mindee
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::BytesInputSource]
     def doc_from_bytes(input_bytes, filename)
-      doc = Input::BytesInputSource.new(input_bytes, filename)
-      DocumentClient.new(doc, @doc_configs)
+      Input::BytesInputSource.new(input_bytes, filename)
     end
 
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::Base64InputSource]
     def doc_from_b64string(base64_string, filename)
-      doc = Input::Base64InputSource.new(base64_string, filename)
-      DocumentClient.new(doc, @doc_configs)
+      Input::Base64InputSource.new(base64_string, filename)
     end
 
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::FileInputSource]
     def doc_from_file(input_file, filename)
-      doc = Input::FileInputSource.new(input_file, filename)
-      DocumentClient.new(doc, @doc_configs)
+      Input::FileInputSource.new(input_file, filename)
     end
 
     private

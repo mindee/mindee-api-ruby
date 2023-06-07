@@ -5,7 +5,12 @@ require_relative 'document'
 
 module Mindee
 
-  module REQUESTSTATUS
+  module JOB_STATUS
+    FAILURE = 'failure'
+    SUCCESS = 'success'
+  end
+
+  module REQUEST_STATUS
     FAILURE = 'failure'
     SUCCESS = 'success'
   end
@@ -17,7 +22,7 @@ module Mindee
     attr_reader :issued_at
     # @return [Mindee::DateField, nil]
     attr_reader :available_at
-    # @return [String]
+    # @return [JOB_STATUS]
     attr_reader :status
     # @return [Integer, nil]
     attr_reader :millisecs_taken
@@ -40,7 +45,7 @@ module Mindee
     attr_reader :error
     # @return [Array<String>]
     attr_reader :ressources
-    # @return [String]
+    # @return [REQUEST_STATUS]
     attr_reader :status
     # @return [Integer]
     attr_reader :status_code
@@ -61,7 +66,7 @@ module Mindee
     attr_reader :document
     # @return [Mindee::Job, nil]
     attr_reader :job
-    # @return [Mindee::REQUESTSTATUS]
+    # @return [Mindee::ApiRequest]
     attr_reader :api_request
 
     # @param prediction_class [Class<Mindee::Prediction::Prediction>]
