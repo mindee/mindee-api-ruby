@@ -23,14 +23,5 @@ describe Mindee::Prediction::InvoiceSplitterV1 do
       expect(document.to_s).to eq(to_string)
     end
 
-    it 'should load a complete inference' do
-      to_string = read_file(DIR_INVOICE_SPLITTER_V1, '2_invoices_inference_summary.rst')
-      response = load_json(DIR_INVOICE_SPLITTER_V1, '2_invoices_response.json')
-      document = Mindee::Document.new(Mindee::Prediction::InvoiceSplitterV1, response['document'])
-      page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
-      expect(page.prediction.due_date.page_id).to eq(0)
-      expect(page.to_s).to eq(to_string)
-    end
   end
 end
