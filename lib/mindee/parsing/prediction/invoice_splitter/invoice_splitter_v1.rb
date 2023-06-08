@@ -50,8 +50,8 @@ module Mindee
       def to_s
         out_str = String.new
         out_str << "\n:Invoice Page Groups:"
-        out_str << "#{@invoice_page_groups == nil || !@invoice_page_groups.any? ? "" : "\n  "+@invoice_page_groups.map{|page| page.to_s}.join("\n  ")}"
-        out_str[1..].to_s.rstrip
+        out_str << "#{@invoice_page_groups == nil || !@invoice_page_groups.any? ? "" : "\n  "+@invoice_page_groups.map{|page| page.to_s}.join("\n  ")}".rstrip
+        out_str[1..].to_s
       end
     end
   end
