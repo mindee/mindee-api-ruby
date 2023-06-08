@@ -1,14 +1,13 @@
 require_relative 'lib/mindee'
 
 # Init a new client
-$mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk
-input_doc = $mindee_client.doc_from_path('/path/to/the/file.ext')
+input_doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
 # Put the document class in a local variable to keep the code DRY
-
-$doc_class = Mindee::Prediction::InvoiceSplitterV1
+doc_class = Mindee::Prediction::InvoiceSplitterV1
 
 # Limit the amount of API calls to retrieve your document
 MAX_RETRIES = 10
@@ -20,9 +19,9 @@ INTERVAL_SECS = 6
 times_tried = 1
 
 
-queue_result = $mindee_client.enqueue(
+queue_result = mindee_client.enqueue(
   input_doc,
-  $doc_class
+  doc_class
 )
 
 # Get the id of the queue (job)
@@ -30,30 +29,39 @@ queue_id = queue_result.job.id
 
 # Recursive function that tries to retrieve the completed document.
 # If the document is not "complete", try again
-def get_doc_from_async_queue(queue_id, times_tried=0)
-
+def get_doc_from_async_queue(
+    queue_id,
+    mindee_client,
+    doc_class,
+    times_tried=0,
+    interval_secs=INTERVAL_SECS,
+    max_retries=MAX_RETRIES
+  )
     # Have we exceeded our retry count?
-    if times_tried >= MAX_RETRIES
+    if times_tried >= max_retries
       raise "Maximum retries reached #{times_tried}"
     end
 
     # Wait for a few seconds before fetching
-    sleep INTERVAL_SECS
+    sleep interval_secs
 
     # Fetch and parse the result, using the same type
-    parsed_result = $mindee_client.parse_queued($doc_class, queue_id)
+    parsed_result = mindee_client.parse_queued(doc_class, queue_id)
 
     # Check whether the result is ready
     if parsed_result.job.status == "completed"
         # Print a brief summary of the parsed data
         puts parsed_result.document
         return
-
     # Otherwise, try again...
     else
-        get_doc_from_async_queue(queue_id, times_tried+1)
+      get_doc_from_async_queue(
+        queue_id, mindee_client,
+        doc_class,
+        times_tried+1
+      )
     end
 end
 
 # Start the recursion...
-get_doc_from_async_queue(queue_id)
+get_doc_from_async_queue(queue_id, mindee_client, doc_class)
