@@ -22,7 +22,7 @@ module Mindee
 
       def to_s
         out_str = String.new
-        out_str << "page indexes: #{@page_indexes.join(", ")}"
+        out_str << ":Page indexes: #{@page_indexes.join(", ")}"
         out_str
       end
     end
@@ -49,10 +49,9 @@ module Mindee
 
       def to_s
         out_str = String.new
-        out_str << "\nFilename: #{@filename || ''}".rstrip
-        out_str << "\nInvoice Page Groups:"
-        out_str << "\n#{@invoice_page_groups == nil || !@invoice_page_groups.any? ? "" : "  "+@invoice_page_groups.map{|page| page.to_s}.join("\n  ")}".rstrip
-        out_str[1..].to_s
+        out_str << "\n:Invoice Page Groups:"
+        out_str << "#{@invoice_page_groups == nil || !@invoice_page_groups.any? ? "" : "\n  "+@invoice_page_groups.map{|page| page.to_s}.join("\n  ")}"
+        out_str[1..].to_s.rstrip
       end
     end
   end
