@@ -8,6 +8,8 @@ module Mindee
     module FR
       # Carte Nationale d'Identité v1 prediction results.
       class IdCardV1 < Prediction
+        @endpoint_name = "idcard_fr"
+        @version = "1"
         # The side of the document which is visible.
         # @return [Mindee::TextField]
         attr_reader :document_side

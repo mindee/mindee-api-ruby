@@ -8,6 +8,8 @@ module Mindee
     module US
       # License plate prediction.
       class BankCheckV1 < Prediction
+        @@endpoint_name = "bank_check"
+        @@version = "1"
         # Payer's bank account number.
         # @return [Array<Mindee::TextField>]
         attr_reader :account_number

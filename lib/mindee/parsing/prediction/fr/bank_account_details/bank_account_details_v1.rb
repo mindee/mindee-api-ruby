@@ -8,6 +8,8 @@ module Mindee
     module FR
       # Bank Account Details v1 prediction results.
       class BankAccountDetailsV1 < Prediction
+        @@endpoint_name = "bank_account_details"
+        @@version = "1"
         # The International Bank Account Number (IBAN).
         # @return [Mindee::TextField]
         attr_reader :iban

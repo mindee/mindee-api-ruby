@@ -7,6 +7,8 @@ module Mindee
   module Prediction
     # Receipt document.
     class ReceiptV4 < Prediction
+      @endpoint_name = "expense_receipts"
+      @version = "4"
       # Where the purchase was made, the language, and the currency.
       # @return [Mindee::Locale]
       attr_reader :locale

@@ -7,6 +7,8 @@ module Mindee
   module Prediction
     # Passport document.
     class PassportV1 < Prediction
+      @endpoint_name = "passport"
+      @version = "1"
       # The country of issue.
       # @return [Mindee::TextField]
       attr_reader :country

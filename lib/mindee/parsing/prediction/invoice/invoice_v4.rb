@@ -8,6 +8,8 @@ module Mindee
   module Prediction
     # Invoice document.
     class InvoiceV4 < Prediction
+      @endpoint_name = "invoices"
+      @version = "4"
       # Locale information.
       # @return [Mindee::Locale]
       attr_reader :locale

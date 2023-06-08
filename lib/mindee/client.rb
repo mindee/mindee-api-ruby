@@ -192,45 +192,52 @@ module Mindee
     end
 
     def init_default_endpoints
-      @doc_configs[['mindee', Prediction::ProofOfAddressV1.name]] = standard_document_config(
-        Prediction::ProofOfAddressV1, 'proof_of_address', '1'
-      )
-      @doc_configs[['mindee', Prediction::FinancialDocumentV1.name]] = standard_document_config(
-        Prediction::FinancialDocumentV1, 'financial_document', '1'
-      )
-      @doc_configs[['mindee', Prediction::InvoiceV4.name]] = standard_document_config(
-        Prediction::InvoiceV4, 'invoices', '4'
-      )
-      @doc_configs[['mindee', Prediction::ReceiptV4.name]] = standard_document_config(
-        Prediction::ReceiptV4, 'expense_receipts', '4'
-      )
-      @doc_configs[['mindee', Prediction::ReceiptV5.name]] = standard_document_config(
-        Prediction::ReceiptV5, 'expense_receipts', '5'
-      )
-      @doc_configs[['mindee', Prediction::PassportV1.name]] = standard_document_config(
-        Prediction::PassportV1, 'passport', '1'
-      )
-      @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = standard_document_config(
-        Prediction::EU::LicensePlateV1, 'license_plates', '1'
-      )
-      @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = standard_document_config(
-        Prediction::ShippingContainerV1, 'shipping_containers', '1'
-      )
-      @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = standard_document_config(
-        Prediction::US::BankCheckV1, 'bank_check', '1'
-      )
-      @doc_configs[['mindee', Prediction::FR::BankAccountDetailsV1.name]] = standard_document_config(
-        Prediction::FR::BankAccountDetailsV1, 'bank_account_details', '1'
-      )
-      @doc_configs[['mindee', Prediction::FR::CarteVitaleV1.name]] = standard_document_config(
-        Prediction::FR::CarteVitaleV1, 'carte_vitale', '1'
-      )
-      @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = standard_document_config(
-        Prediction::FR::IdCardV1, 'idcard_fr', '1'
-      )
-      @doc_configs[['mindee', Prediction::InvoiceSplitterV1.name]] = standard_document_config(
-        Prediction::InvoiceSplitterV1, 'invoice_splitter', '1'
-      )
+      # @doc_configs[['mindee', Prediction::ProofOfAddressV1.name]] = standard_document_config(
+      #   Prediction::ProofOfAddressV1, 'proof_of_address', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::FinancialDocumentV1.name]] = standard_document_config(
+      #   Prediction::FinancialDocumentV1, 'financial_document', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::InvoiceV4.name]] = standard_document_config(
+      #   Prediction::InvoiceV4, 'invoices', '4'
+      # )
+      # @doc_configs[['mindee', Prediction::ReceiptV4.name]] = standard_document_config(
+      #   Prediction::ReceiptV4, 'expense_receipts', '4'
+      # )
+      # @doc_configs[['mindee', Prediction::ReceiptV5.name]] = standard_document_config(
+      #   Prediction::ReceiptV5, 'expense_receipts', '5'
+      # )
+      # @doc_configs[['mindee', Prediction::PassportV1.name]] = standard_document_config(
+      #   Prediction::PassportV1, 'passport', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = standard_document_config(
+      #   Prediction::EU::LicensePlateV1, 'license_plates', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = standard_document_config(
+      #   Prediction::ShippingContainerV1, 'shipping_containers', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = standard_document_config(
+      #   Prediction::US::BankCheckV1, 'bank_check', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::FR::BankAccountDetailsV1.name]] = standard_document_config(
+      #   Prediction::FR::BankAccountDetailsV1, 'bank_account_details', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::FR::CarteVitaleV1.name]] = standard_document_config(
+      #   Prediction::FR::CarteVitaleV1, 'carte_vitale', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = standard_document_config(
+      #   Prediction::FR::IdCardV1, 'idcard_fr', '1'
+      # )
+      # @doc_configs[['mindee', Prediction::InvoiceSplitterV1.name]] = standard_document_config(
+      #   Prediction::InvoiceSplitterV1, 'invoice_splitter', '1'
+      # )
+      Prediction::Prediction.descendants.each do |prediction_type|
+        # puts "#{prediction_type.to_s} =>"
+        if prediction_type!=Prediction::CustomV1
+          @doc_configs[['mindee', prediction_type.to_s]] = prediction_type.standard_document_config(@api_key) 
+        end
+        # @doc_configs[['mindee', prediction_type.name]] = prediction_type.standard_document_config(@api_key)
+      end
       self
     end
   end

@@ -7,6 +7,8 @@ module Mindee
   module Prediction
     # Proof of Address v1 prediction results.
     class ProofOfAddressV1 < Prediction
+      @endpoint_name = "proof_of_adress"
+      @version = "1"
       # The locale detected on the document.
       # @return [Mindee::Locale]
       attr_reader :locale

@@ -7,6 +7,8 @@ module Mindee
   module Prediction
     # License plate prediction.
     class ShippingContainerV1 < Prediction
+      @@endpoint_name = "shipping_containers"
+      @@version = "1"
       # ISO 6346 code for container owner prefix + equipment identifier.
       # @return [Array<Mindee::TextField>]
       attr_reader :owner

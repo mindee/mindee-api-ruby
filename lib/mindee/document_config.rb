@@ -70,7 +70,7 @@ module Mindee
     # @param input_doc [Mindee::LocalInputSource]
     # @param include_words [Boolean]
     # @param close_file [Boolean]
-    # # @param cropper [Boolean]
+    # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
     def predict_request(input_doc, include_words, close_file, cropper)
       @endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
