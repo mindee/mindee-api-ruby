@@ -30,10 +30,10 @@ module Mindee
     # @param http_response [Hash]
     def initialize(http_response)
       @id = http_response['id']
-      @issued_at = DateField.new(http_response['issued_at'], http_response['page_id']) # check second arg in case of issue
+      @issued_at = DateTime.iso8601(http_response['issued_at'])
       if http_response.key?('available_at') && http_response['available_at'] != nil
-        @available_at = DateField.new(http_response['available_at'], http_response['page_id'])
-        @millisecs_taken = 1000 * (@available_at.date_object.to_f - @issued_at.date_object.to_f)
+        @available_at = DateTime.iso8601(http_response['available_at'])
+        @millisecs_taken = 1000 * (@available_at.to_time - @issued_at.to_time).to_f
       end
       @status = http_response['status']
     end
@@ -76,6 +76,7 @@ module Mindee
         @document = Mindee::Document.new(prediction_class, http_response['document'])
       end
       @job = Mindee::Job.new(http_response['job']) unless !http_response.key?('job')
+      @api_request = Mindee::ApiRequest.new(http_response['api_request']) unless !http_response.key?('api_request')
     end
   end
 end
