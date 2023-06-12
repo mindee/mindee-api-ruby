@@ -2,6 +2,7 @@
 
 
 require_relative 'document'
+require 'time'
 
 module Mindee
 
@@ -30,9 +31,9 @@ module Mindee
     # @param http_response [Hash]
     def initialize(http_response)
       @id = http_response['id']
-      @issued_at = DateTime.iso8601(http_response['issued_at'])
+      @issued_at = Time.iso8601(http_response['issued_at'])
       if http_response.key?('available_at') && http_response['available_at'] != nil
-        @available_at = DateTime.iso8601(http_response['available_at'])
+        @available_at = Time.iso8601(http_response['available_at'])
         @millisecs_taken = 1000 * (@available_at.to_time - @issued_at.to_time).to_f
       end
       @status = http_response['status']
