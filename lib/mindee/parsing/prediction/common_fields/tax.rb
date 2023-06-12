@@ -34,11 +34,68 @@ module Mindee
     end
 
     def to_s
+      printable = printable_values()
       out_str = String.new
-      out_str << "#{print_float(@value)} " if @value
-      out_str << "#{print_float(@rate)}% " if @rate
-      out_str << "#{@code} " if @code
+      out_str << "Base: " + printable[:base]
+      out_str << ", Code: " + printable[:code]
+      out_str << ", Rate (%): " + printable[:rate]
+      out_str << ", Amount: " + printable[:value]
       out_str.strip
     end
+
+    def printable_values
+      out_h = Hash.new
+      out_h[:code] = @code.nil? ? "" : @code
+      out_h[:base] = @base.nil? ? "" : @base.to_s
+      out_h[:rate] = @rate.nil? ? "" : print_float(@rate).to_s
+      out_h[:value] = @value.nil? ? "" : print_float(@value).to_s
+      out_h
+    end
+    
+    def to_table_line
+        printable = self.printable_values
+        out_str = String.new
+        out_str << "| " + printable[:base].ljust(13, " ")
+        out_str << " | " + printable[:code].ljust(6, " ")
+        out_str << " | " + printable[:rate].ljust(8, " ")
+        out_str << " | " + printable[:value].ljust(13, " ") + " |"
+        out_str.strip
+    end
+  end
+
+  class Taxes < Array
+    # @param prediction [Hash]
+    # @param page_id [Integer, nil]
+    def initialize(prediction, page_id)
+      prediction.each do |entry|
+        self.push(TaxField.new(entry, page_id))
+      end
+      self
+    end
+
+    # @param char [String]
+    def line_separator(char)
+      out_str = String.new
+      out_str << "  "
+      out_str << "+#{char * 15}"
+      out_str << "+#{char * 8}"
+      out_str << "+#{char * 10}"
+      out_str << "+#{char * 15}"
+      out_str << "+"
+      out_str
+    end
+
+    def to_s()
+      out_str = String.new
+      out_str << "\n"+self.line_separator("-")
+      out_str << "\n  | Base          | Code   | Rate (%) | Amount        |"
+      out_str << "\n#{self.line_separator("=")}"
+      self.each do |entry|
+        out_str << "\n  #{entry.to_table_line}\n#{self.line_separator("-")}"
+      end
+      out_str
+    end
+    
+
   end
 end

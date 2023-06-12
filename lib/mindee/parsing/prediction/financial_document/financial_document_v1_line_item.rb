@@ -39,20 +39,44 @@ module Mindee
       @page_id = page_id
     end
 
+    def printable_values
+        printable = Hash.new
+        printable[:description] = @description.nil? ? "" : @description
+        printable[:product_code] = @product_code.nil? ? "" : @product_code
+        printable[:quantity] = @quantity.nil? ? "" : Field.float_to_string(@quantity)
+        printable[:tax_amount] = @tax_amount.nil? ? "" : Field.float_to_string(@tax_amount)
+        printable[:tax_rate] = @tax_rate.nil? ? "" : Field.float_to_string(@tax_rate)
+        printable[:total_amount] = @total_amount.nil? ? "" : Field.float_to_string(@total_amount)
+        printable[:unit_price] = @unit_price.nil? ? "" : Field.float_to_string(@unit_price)
+        printable
+    end
+
     # @return String
     def to_s
-      tax = Field.float_to_string(@tax_amount)
-      tax << " (#{Field.float_to_string(@tax_rate)}%)" unless @tax_rate.nil?
-      description = @description.nil? ? '' : @description
-      description = "#{description[0..32]}..." if description.size > 35
+      printable = self.printable_values
       out_str = String.new
-      out_str << format('| %- 20s', @product_code)
-      out_str << " #{format('| %- 7s', Field.float_to_string(@quantity))}"
-      out_str << " #{format('| %- 7s', Field.float_to_string(@unit_price))}"
-      out_str << " #{format('| %- 8s', Field.float_to_string(@total_amount))}"
-      out_str << " #{format('| %- 16s', tax)}"
-      out_str << " #{format('| %- 37s', description)}"
-      out_str << '|'
+      out_str << "Description: #{printable[:description][0..33]}" + ((printable[:description].length<=33) ? "" : "...")
+      out_str << "Product code: #{printable[:product_code]}"
+      out_str << "Quantity: #{printable[:quantity]}"
+      out_str << "Tax Amount: #{printable[:tax_amount]}"
+      out_str << "Tax Rate (%): #{printable[:tax_rate]}"
+      out_str << "Total Amount: #{printable[:total_amount]}"
+      out_str << "Unit Price: #{printable[:unit_price]}"
+      out_str.strip
+    end
+
+    # @return String
+    def to_table_line
+      printable = self.printable_values
+      out_str = String.new
+      out_str << "| " + printable[:description].ljust(36, " ")
+      out_str << " | " + printable[:product_code].ljust(12, " ")
+      out_str << " | " + printable[:quantity].ljust(8, " ")
+      out_str << " | " + printable[:tax_amount].ljust(10, " ")
+      out_str << " | " + printable[:tax_rate].ljust(12, " ") 
+      out_str << " | " + printable[:total_amount].ljust(12, " ") 
+      out_str << " | " + printable[:unit_price].ljust(10, " ") + " |"
+      out_str.rstrip
     end
   end
 end

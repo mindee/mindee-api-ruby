@@ -36,7 +36,7 @@ module Mindee
       # @return [Mindee::DateField]
       attr_reader :due_date
       # The list of taxes.
-      # @return [Array<Mindee::TaxField>]
+      # @return [Array<Mindee::Taxes>]
       attr_reader :taxes
       # The name of the customer.
       # @return [Mindee::TextField]
@@ -59,6 +59,9 @@ module Mindee
       # The supplier's company registration information.
       # @return [Array<Mindee::CompanyRegistration>]
       attr_reader :supplier_company_registrations
+      # The phone number of the supplier or merchant.
+      # @return [Array<Mindee::TextField>]
+      attr_reader :supplier_phone_number
       # Line items details.
       # @return [Array<Mindee::FinancialDocumentV1LineItem>]
       attr_reader :line_items
@@ -99,6 +102,7 @@ module Mindee
         @invoice_number = TextField.new(prediction['invoice_number'], page_id)
         @supplier_name = TextField.new(prediction['supplier_name'], page_id)
         @supplier_address = TextField.new(prediction['supplier_address'], page_id)
+        @supplier_phone_number = TextField.new(prediction['supplier_phone_number'], page_id)
         @reference_numbers = []
         prediction['reference_numbers'].each do |item|
           @reference_numbers.push(TextField.new(item, page_id))
@@ -107,10 +111,11 @@ module Mindee
         prediction['customer_company_registrations'].each do |item|
           @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
         end
-        @taxes = []
-        prediction['taxes'].each do |item|
-          @taxes.push(TaxField.new(item, page_id))
-        end
+        # @taxes = []
+        # prediction['taxes'].each do |item|
+        #   @taxes.push(TaxField.new(item, page_id))
+        # end
+        @taxes = Taxes.new(prediction['taxes'], page_id)
         @supplier_payment_details = []
         prediction['supplier_payment_details'].each do |item|
           @supplier_payment_details.push(PaymentDetails.new(item, page_id))
@@ -134,29 +139,30 @@ module Mindee
         supplier_payment_details = @supplier_payment_details.map(&:to_s).join("\n                 ")
         supplier_company_registrations = @supplier_company_registrations.map(&:to_s).join('; ')
         reference_numbers = @reference_numbers.map(&:to_s).join(', ')
-        taxes = @taxes.join("\n       ")
+        # taxes = @taxes.join("\n       ")
         out_str = String.new
-        out_str << "\n:Document type: #{@document_type}".rstrip
-        out_str << "\n:Category: #{@category}".rstrip
-        out_str << "\n:Subcategory: #{@subcategory}".rstrip
         out_str << "\n:Locale: #{@locale}".rstrip
-        out_str << "\n:Date: #{@date}".rstrip
-        out_str << "\n:Due date: #{@due_date}".rstrip
-        out_str << "\n:Time: #{@time}".rstrip
-        out_str << "\n:Number: #{@invoice_number}".rstrip
-        out_str << "\n:Reference numbers: #{reference_numbers}".rstrip
+        out_str << "\n:Invoice Number: #{@invoice_number}".rstrip
+        out_str << "\n:Reference Numbers: #{reference_numbers}".rstrip
+        out_str << "\n:Purchase Date: #{@date}".rstrip
+        out_str << "\n:Due Date: #{@due_date}".rstrip
+        out_str << "\n:Total Net: #{@total_net}".rstrip
+        out_str << "\n:Total Amount: #{@total_amount}".rstrip
+        out_str << "\n:Taxes:#{@taxes}".rstrip # Note: adding a space inbetween the title and the content seems to break the tests, despite it being present in other SDKs
+        out_str << "\n:Supplier Payment Details: #{supplier_payment_details}".rstrip
         out_str << "\n:Supplier name: #{@supplier_name}".rstrip
-        out_str << "\n:Supplier address: #{@supplier_address}".rstrip
-        out_str << "\n:Supplier company registrations: #{supplier_company_registrations}".rstrip
-        out_str << "\n:Supplier payment details: #{supplier_payment_details}".rstrip
+        out_str << "\n:Supplier Company Registrations: #{supplier_company_registrations}".rstrip
+        out_str << "\n:Supplier Address: #{@supplier_address}".rstrip
+        out_str << "\n:Supplier Phone Number: #{@supplier_phone_number}".rstrip
         out_str << "\n:Customer name: #{@customer_name}".rstrip
-        out_str << "\n:Customer address: #{@customer_address}".rstrip
-        out_str << "\n:Customer company registrations: #{customer_company_registrations}".rstrip
-        out_str << "\n:Tip: #{@tip}".rstrip
-        out_str << "\n:Taxes: #{taxes}".rstrip
-        out_str << "\n:Total taxes: #{@total_tax}".rstrip
-        out_str << "\n:Total net: #{@total_net}".rstrip
-        out_str << "\n:Total amount: #{@total_amount}".rstrip
+        out_str << "\n:Customer Company Registrations: #{customer_company_registrations}".rstrip
+        out_str << "\n:Customer Address: #{@customer_address}".rstrip
+        out_str << "\n:Document Type: #{@document_type}".rstrip
+        out_str << "\n:Purchase Subcategory: #{@subcategory}".rstrip
+        out_str << "\n:Purchase Category: #{@category}".rstrip
+        out_str << "\n:Total Tax: #{@total_tax}".rstrip
+        out_str << "\n:Tip and Gratuity: #{@tip}".rstrip
+        out_str << "\n:Purchase Time: #{@time}".rstrip
         out_str << "\n:Line Items:"
         out_str << line_items_to_s
         out_str[1..].to_s
@@ -165,19 +171,20 @@ module Mindee
       private
 
       def line_item_separator(char)
-        "  +#{char * 22}+#{char * 9}+#{char * 9}+#{char * 10}+#{char * 18}+#{char * 38}+"
+        "  +#{char * 38}+#{char * 14}+#{char * 10}+#{char * 12}+#{char * 14}+#{char * 14}+#{char*12}+"
       end
 
       def line_items_to_s
         return '' if @line_items.empty?
-
-        line_items = @line_items.map(&:to_s).join("\n#{line_item_separator('-')}\n  ")
         out_str = String.new
         out_str << "\n#{line_item_separator('-')}"
-        out_str << "\n  | Code#{' ' * 17}| QTY     | Price   | Amount   | Tax (Rate)       | Description#{' ' * 26}|"
+        out_str << "\n  | Description#{' ' * 25} | Product code | Quantity | Tax Amount | Tax Rate (%) | Total Amount | Unit Price |"
         out_str << "\n#{line_item_separator('=')}"
-        out_str << "\n  #{line_items}"
-        out_str << "\n#{line_item_separator('-')}"
+        @line_items.each do |line_item|
+          out_str << "\n  #{line_item.to_table_line}"
+          out_str << "\n#{line_item_separator('-')}"
+        end
+        out_str
       end
 
       def reconstruct(page_id)
