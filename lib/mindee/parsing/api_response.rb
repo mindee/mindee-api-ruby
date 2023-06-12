@@ -34,7 +34,7 @@ module Mindee
       @issued_at = Time.iso8601(http_response['issued_at'])
       if http_response.key?('available_at') && http_response['available_at'] != nil
         @available_at = Time.iso8601(http_response['available_at'])
-        @millisecs_taken = 1000 * (@available_at.to_time - @issued_at.to_time).to_f
+        @millisecs_taken = (1000 * (@available_at.to_time - @issued_at.to_time).to_f).to_i
       end
       @status = http_response['status']
     end

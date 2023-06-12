@@ -13,6 +13,8 @@ describe Mindee::ApiResponse do
       parsed_response = Mindee::ApiResponse.new(Mindee::Prediction::InvoiceSplitterV1, response)
       expect(parsed_response.job.status).to eq("waiting")
       expect(parsed_response.job.id).to eq("76c90710-3a1b-4b91-8a39-31a6543e347c")
+      expect(parsed_response.job.status).to_not respond_to(:available_at)
+      expect(parsed_response.job.status).to_not respond_to(:millisecs_taken)
       expect(parsed_response.api_request.error).to eq({})
     end
 
@@ -21,6 +23,8 @@ describe Mindee::ApiResponse do
       parsed_response = Mindee::ApiResponse.new(Mindee::Prediction::InvoiceSplitterV1, response)
       expect(parsed_response.job.status).to be(nil)
       expect(parsed_response.job.id).to be(nil)
+      expect(parsed_response.job.status).to_not respond_to(:available_at)
+      expect(parsed_response.job.status).to_not respond_to(:millisecs_taken)
       expect(parsed_response.api_request.error['code']).to eq("Forbidden")
     end
 
@@ -31,6 +35,7 @@ describe Mindee::ApiResponse do
       expect(parsed_response.job.status).to eq("processing")
       expect(parsed_response.job.id).to eq("76c90710-3a1b-4b91-8a39-31a6543e347c")
       expect(parsed_response.job.status).to_not respond_to(:available_at)
+      expect(parsed_response.job.status).to_not respond_to(:millisecs_taken)
       expect(parsed_response.api_request.error['code']).to eq(nil)
     end
 
@@ -42,6 +47,7 @@ describe Mindee::ApiResponse do
       expect(parsed_response.job.status).to eq("completed")
       expect(parsed_response.job.id).to eq("b6caf9e8-9bcc-4412-bcb7-f5b416678f0d")
       expect(parsed_response.job.available_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')).to eq("2023-03-21T13:53:00.990339")
+      expect(parsed_response.job.millisecs_taken).to eq(4664)
       expect(parsed_response.document).to_not be(nil)
       expect(parsed_response.api_request.error['code']).to eq(nil)
     end
