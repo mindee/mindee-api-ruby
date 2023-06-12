@@ -3,7 +3,6 @@
 require 'json'
 require 'mindee'
 require_relative 'data'
-DIR_INVOICE_SPLITTER_V1 = File.join(DATA_DIR, 'invoice_splitter', 'response_v1').freeze
 DIR_ASYNC = File.join(DATA_DIR, 'async').freeze
 
 
