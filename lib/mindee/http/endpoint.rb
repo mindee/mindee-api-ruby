@@ -62,7 +62,6 @@ module Mindee
         end
       end
 
-
       # @param input_doc [Mindee::LocalInputSource]
       # @param include_words [Boolean]
       # @param cropper [Boolean]
@@ -81,7 +80,7 @@ module Mindee
         req = Net::HTTP::Post.new(uri, headers)
 
         form_data = {
-          'document' => input_doc.read_document(),
+          'document' => input_doc.read_document,
         }
         form_data.push ['include_mvision', 'true'] if include_words
 
@@ -91,7 +90,6 @@ module Mindee
           http.request(req)
         end
       end
-
 
       # @param job_id [String]
       # @return [Net::HTTPResponse]
@@ -109,14 +107,14 @@ module Mindee
           http.request(req)
         end
 
-        if response.code.to_i >299 && response.code.to_i<400
+        if response.code.to_i > 299 && response.code.to_i < 400
           req = Net::HTTP::Get.new(response['location'], headers)
           response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
             http.request(req)
           end
         end
         response
-        end
+      end
     end
 
     # Receipt API endpoint

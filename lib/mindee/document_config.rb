@@ -36,7 +36,6 @@ module Mindee
       raise error
     end
 
-
     # Call the prediction API.
     # @param input_doc [Mindee::LocalInputSource]
     # @param cropper [Boolean]
@@ -51,7 +50,6 @@ module Mindee
       raise error
     end
 
-
     # Calls the parsed async doc.
     # @param job_id [String]
     # @return [Hash]
@@ -64,7 +62,6 @@ module Mindee
       error = Parsing::Error.new(hashed_response['api_request']['error'])
       raise error
     end
-
 
     # Call the prediction API.
     # @param input_doc [Mindee::InputDocument]
@@ -98,7 +95,6 @@ module Mindee
     def predict_async_request(input_doc, include_words, cropper)
       @endpoint.predict_async_req_post(input_doc, include_words, cropper)
     end
-
 
     # @param job_id [String]
     # @return [Net::HTTPResponse]

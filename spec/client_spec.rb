@@ -71,7 +71,6 @@ describe Mindee::Client do
       end.to raise_error Mindee::Parsing::Error
     end
 
-
     it 'should make an invalid API async enqueue call raising an exception' do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{DATA_DIR}/invoice_splitter/2_invoices.pdf", 'rb')
@@ -85,11 +84,8 @@ describe Mindee::Client do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{DATA_DIR}/invoice_splitter/2_invoices.pdf", 'rb')
       expect do
-        mindee_client1.parse_queued( Mindee::Prediction::InvoiceSplitterV1, "invalid-job-id")
+        mindee_client1.parse_queued(Mindee::Prediction::InvoiceSplitterV1, 'invalid-job-id')
       end.to raise_error Mindee::Parsing::Error
     end
-
-
-
   end
 end

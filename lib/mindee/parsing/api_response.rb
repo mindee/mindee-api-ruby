@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-
 require_relative 'document'
 require 'time'
 
 module Mindee
-
   module JOB_STATUS
     FAILURE = 'failure'
     SUCCESS = 'success'
@@ -32,7 +30,7 @@ module Mindee
     def initialize(http_response)
       @id = http_response['id']
       @issued_at = Time.iso8601(http_response['issued_at'])
-      if http_response.key?('available_at') && http_response['available_at'] != nil
+      if http_response.key?('available_at') && !http_response['available_at'].nil?
         @available_at = Time.iso8601(http_response['available_at'])
         @millisecs_taken = (1000 * (@available_at.to_time - @issued_at.to_time).to_f).to_i
       end
@@ -41,7 +39,6 @@ module Mindee
   end
 
   class ApiRequest
-
     # @return [Hash]
     attr_reader :error
     # @return [Array<String>]
@@ -50,7 +47,7 @@ module Mindee
     attr_reader :status
     # @return [Integer]
     attr_reader :status_code
-    #@ url: [String]
+    # @ url: [String]
     attr_reader :url
 
     def initialize(server_response)
@@ -60,7 +57,7 @@ module Mindee
       @status_code = server_response['status_code']
       @url = server_response['url']
     end
-  end  
+  end
 
   class ApiResponse
     # @return [Mindee::Document, nil]
@@ -73,11 +70,11 @@ module Mindee
     # @param prediction_class [Class<Mindee::Prediction::Prediction>]
     # @param http_response [Hash]
     def initialize(prediction_class, http_response)
-      if http_response.key?('document') && (!http_response.key?('job') || http_response['job']['status']=='completed')
+      if http_response.key?('document') && (!http_response.key?('job') || http_response['job']['status'] == 'completed')
         @document = Mindee::Document.new(prediction_class, http_response['document'])
       end
-      @job = Mindee::Job.new(http_response['job']) unless !http_response.key?('job')
-      @api_request = Mindee::ApiRequest.new(http_response['api_request']) unless !http_response.key?('api_request')
+      @job = Mindee::Job.new(http_response['job']) if http_response.key?('job')
+      @api_request = Mindee::ApiRequest.new(http_response['api_request']) if http_response.key?('api_request')
     end
   end
 end

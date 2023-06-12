@@ -22,6 +22,5 @@ describe Mindee::Prediction::InvoiceSplitterV1 do
       document = Mindee::Document.new(Mindee::Prediction::InvoiceSplitterV1, response['document'])
       expect(document.to_s).to eq(to_string)
     end
-
   end
 end

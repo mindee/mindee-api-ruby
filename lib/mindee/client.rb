@@ -6,7 +6,6 @@ require_relative 'http/endpoint'
 require_relative 'parsing/prediction'
 require_relative 'parsing/api_response'
 
-
 module Mindee
   # Mindee API Client.
   # See: https://developers.mindee.com/docs/
@@ -92,7 +91,7 @@ module Mindee
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
     end
-    
+
     # Configure a custom document using the 'Mindee API Builder'.
     # @param account_name [String] Your organization's username on the API Builder
     # @param endpoint_name [String] The "API name" field in the "Settings" page of the API Builder
@@ -110,7 +109,6 @@ module Mindee
       self
     end
 
-
     # @param document_class [Mindee::Prediction::Prediction]
     # @param endpoint_name [String]
     # @return [String]
@@ -121,7 +119,6 @@ module Mindee
 
       endpoint_name
     end
-
 
     # @param document_class [Mindee::Prediction::Prediction]
     # @param endpoint_name [String]
