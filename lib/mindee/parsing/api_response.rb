@@ -4,16 +4,17 @@ require_relative 'document'
 require 'time'
 
 module Mindee
-  module JOB_STATUS
+  module JobStatus
     FAILURE = 'failure'
     SUCCESS = 'success'
   end
 
-  module REQUEST_STATUS
+  module RequestStatus
     FAILURE = 'failure'
     SUCCESS = 'success'
   end
 
+  # Job (queue) information on async parsing.
   class Job
     # @return [String] Mindee ID of the document
     attr_reader :id
@@ -21,7 +22,7 @@ module Mindee
     attr_reader :issued_at
     # @return [Mindee::DateField, nil]
     attr_reader :available_at
-    # @return [JOB_STATUS]
+    # @return [JobStatus]
     attr_reader :status
     # @return [Integer, nil]
     attr_reader :millisecs_taken
@@ -38,12 +39,13 @@ module Mindee
     end
   end
 
+  # HTTP request response.
   class ApiRequest
     # @return [Hash]
     attr_reader :error
     # @return [Array<String>]
     attr_reader :ressources
-    # @return [REQUEST_STATUS]
+    # @return [RequestStatus]
     attr_reader :status
     # @return [Integer]
     attr_reader :status_code
@@ -59,6 +61,7 @@ module Mindee
     end
   end
 
+  # Wrapper class for all predictions (synchronous and asynchronous)
   class ApiResponse
     # @return [Mindee::Document, nil]
     attr_reader :document

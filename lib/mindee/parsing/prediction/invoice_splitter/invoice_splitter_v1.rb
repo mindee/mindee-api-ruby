@@ -16,11 +16,7 @@ module Mindee
       # @param prediction[Hash]
       def initialize(prediction)
         @page_indexes = prediction['page_indexes']
-        !!@confidence = begin
-          Float(prediction['confidence'])
-        rescue StandardError
-          @confidence = 0.0
-        end
+        @confidence = prediction['confidence'].nil? ? 0.0 : Float(prediction['confidence'])
       end
 
       def to_s
@@ -54,13 +50,11 @@ module Mindee
       def to_s
         out_str = String.new
         out_str << "\n:Invoice Page Groups:"
-        out_str << "#{if @invoice_page_groups.nil? || !@invoice_page_groups.any?
-                        ''
-                      else
-                        "\n  " + @invoice_page_groups.map do |page|
-                                   page.to_s
-                                 end.join("\n  ")
-                      end}".rstrip
+        if !@invoice_page_groups.nil? && @invoice_page_groups.any?
+          @invoice_page_groups.map do |page|
+            out_str << "\n  #{page}"
+          end
+        end
         out_str[1..].to_s
       end
     end

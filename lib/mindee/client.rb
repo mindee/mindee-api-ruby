@@ -19,6 +19,7 @@ module Mindee
 
     # Call prediction API on a document and parse the results.
     #
+    # @param input_doc [Mindee::Input::LocalInputSource]
     #
     # @param prediction_class [Mindee::Prediction::Prediction]
     #
@@ -51,43 +52,87 @@ module Mindee
     def parse(
       input_doc,
       prediction_class,
-      endpoint_name: '',
-      account_name: '',
-      include_words: false,
-      close_file: true,
-      page_options: nil,
-      cropper: false
+      **params
     )
+      endpoint_name = params.fetch(:endpoint_name, '')
+      account_name = params.fetch(:account_name, '')
+      include_words = params.fetch(:include_words, false)
+      close_file = params.fetch(:close_file, true)
+      page_options = params.fetch(:page_options, nil)
+      cropper = params.fetch(:cropper, false)
+
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
     end
 
+    # Enqueue a document for async parsing
+    #
+    # @param input_doc [Mindee::Input::LocalInputSource]
+    #
+    # @param prediction_class [Mindee::Prediction::Prediction]
+    #
+    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
+    #  API Builder. Do not set for standard (off the shelf) endpoints.
+    #
+    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
+    #  This is normally not required unless you have a custom endpoint which has the same name as a
+    #  standard (off the shelf) endpoint.
+    #  Do not set for standard (off the shelf) endpoints.
+    #
+    # @param include_words [Boolean] Whether to include the full text for each page.
+    #  This performs a full OCR operation on the server and will increase response time.
+    #
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #      * `:REMOVE` - remove the specified pages, and keep all others.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    #
+    # @param cropper [Boolean] Whether to include cropper results for each page.
+    #  This performs a cropping operation on the server and will increase response time.
+    #
     # @return [Mindee::ApiResponse]
     def enqueue(
       input_doc,
       prediction_class,
-      endpoint_name: '',
-      account_name: '',
-      include_words: false,
-      page_options: nil,
-      cropper: false
+      **params
     )
+      endpoint_name = params.fetch(:endpoint_name, '')
+      account_name = params.fetch(:account_name, '')
+      include_words = params.fetch(:include_words, false)
+      page_options = params.fetch(:page_options, nil)
+      cropper = params.fetch(:cropper, false)
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class, @doc_config.predict_async(input_doc, include_words, cropper))
     end
 
+    # Parses a queued document
+    #
+    # @param prediction_class [Mindee::Prediction::Prediction]
+    #
+    # @param job_id [String] Id of the job (queue) to poll from
+    #
+    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
+    #  API Builder. Do not set for standard (off the shelf) endpoints.
+    #
+    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
+    #  This is normally not required unless you have a custom endpoint which has the same name as a
+    #  standard (off the shelf) endpoint.
+    #  Do not set for standard (off the shelf) endpoints.
+    #
     # @return [Mindee::ApiResponse]
     def parse_queued(
       prediction_class,
       job_id,
-      endpoint_name: '',
-      account_name: '',
-      include_words: false,
-      page_options: nil,
-      cropper: false
+      **params
     )
+      endpoint_name = params.fetch(:endpoint_name, '')
+      account_name = params.fetch(:account_name, '')
+
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
     end
