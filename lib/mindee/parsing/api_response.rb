@@ -5,13 +5,14 @@ require 'time'
 
 module Mindee
   module JobStatus
-    FAILURE = 'failure'
-    SUCCESS = 'success'
+    WAITING = :waiting
+    PROCESSING = :processing
+    COMPLETED = :completed
   end
 
   module RequestStatus
-    FAILURE = 'failure'
-    SUCCESS = 'success'
+    FAILURE = :failure
+    SUCCESS = :success
   end
 
   # Job (queue) information on async parsing.
@@ -35,7 +36,14 @@ module Mindee
         @available_at = Time.iso8601(http_response['available_at'])
         @millisecs_taken = (1000 * (@available_at.to_time - @issued_at.to_time).to_f).to_i
       end
-      @status = http_response['status']
+      case http_response['status']
+      when 'waiting'
+        @status = JobStatus::WAITING
+      when 'processing'
+        @status = JobStatus::PROCESSING
+      when 'completed'
+        @status = JobStatus::COMPLETED
+      end
     end
   end
 
@@ -55,7 +63,12 @@ module Mindee
     def initialize(server_response)
       @error = server_response['error']
       @ressources = server_response['ressources']
-      @status = server_response['status']
+
+      if server_response['status'] == 'failure'
+        @status = RequestStatus::FAILURE
+      elsif server_response['status'] == 'success'
+        @status = RequestStatus::SUCCESS
+      end
       @status_code = server_response['status_code']
       @url = server_response['url']
     end
