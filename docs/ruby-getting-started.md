@@ -220,7 +220,7 @@ only the highest confidence field data will be shown (this is all done automatic
 
 ```ruby
 # as an object, complete
-pp result.inference.prediction
+pp result.document.inference.prediction
 
 # as a string, summary in RST format
 puts result.document.inference.prediction
@@ -237,7 +237,7 @@ Single page documents will have a single entry.
 
 Iteration is done like any Ruby array:
 ```ruby
-response.inference.pages.each do |page|
+response.document.inference.pages.each do |page|
     # as an object, complete
     pp page.prediction
 
@@ -256,7 +256,7 @@ If the page requires rotation for correct display, the orientation field gives a
 * 270 degrees: the page must be rotated counterclockwise to be upright
 
 ```ruby
-response.inference.pages.each do |page|
+response.document.inference.pages.each do |page|
   puts page.orientation.value
 end
 ```

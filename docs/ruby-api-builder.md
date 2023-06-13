@@ -81,7 +81,7 @@ Individual field values can be accessed by using the field's API name, in the ex
 
 ```ruby
 # raw data, list of each word object
-pp result.inference.prediction.fields[:address].values
+pp result.document.inference.prediction.fields[:address].values
 
 # list of all values
 puts result.document.inference.prediction.fields[:address].contents_list
@@ -95,7 +95,7 @@ puts result.document.inference.prediction.fields[:address].contents_str(separato
 
 To iterate over all the fields:
 ```ruby
-result.inference.prediction.fields.each do |name, info|
+result.document.inference.prediction.fields.each do |name, info|
   puts name
   puts info.values
 end
