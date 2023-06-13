@@ -15,7 +15,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 result = mindee_client.doc_from_path('/path/to/the/file.ext').parse(Mindee::Prediction::PassportV1)
 
 # Print a summary of the document prediction in RST format
-puts result.inference.prediction
+puts result.document.inference.prediction
 ```
 
 Output:
@@ -49,29 +49,31 @@ Depending on the field type specified, additional attributes can be extracted fr
 
 Using the above sample, the following are the basic fields that can be extracted:
 
-- [Orientation](#orientation)
-- [Birth Place](#birth-place)
-- [Country](#country)
-- [Dates (Expiry, Issuance, Birth)](#dates)
-- [Gender](#gender)
-- [Given Names](#given-names)
-- [ID Number](#id)
-- [Machine Readable Zone](#machine-readable-zone)
-- [Surname](#surname)
+- [Quick Start](#quick-start)
+- [Fields](#fields)
+- [Attributes](#attributes)
+  - [Birth Place](#birth-place)
+  - [Country](#country)
+  - [Dates](#dates)
+  - [Gender](#gender)
+  - [Names](#names)
+  - [ID](#id)
+  - [Machine-Readable Zone](#machine-readable-zone)
+- [Questions?](#questions)
 
 ### Birth Place
 
 **`birth_place`** (Field): Passport owner birthplace.
 
 ```ruby
-puts result.inference.prediction.birth_place.value
+puts result.document.inference.prediction.birth_place.value
 ```
 
 ### Country
 **`country`** (Field): Passport country in [ISO 3166-1 alpha-3 code format](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) (3-letter code).
 
 ```ruby
-puts result.inference.prediction.country.value
+puts result.document.inference.prediction.country.value
 ```
 
 ### Dates
@@ -85,19 +87,19 @@ The following date fields are available:
 **`expiry_date`**: Passport expiry date.
 
 ```ruby
-puts result.inference.prediction.expiry_date.value
+puts result.document.inference.prediction.expiry_date.value
 ```
 
 **`issuance_date`**: Passport date of issuance.
 
 ```ruby
-puts result.inference.prediction.issuance_date.value
+puts result.document.inference.prediction.issuance_date.value
 ```
 
 **`birth_date`**: Passport's owner date of birth.
 
 ```ruby
-puts result.inference.prediction.birth_date.value
+puts result.document.inference.prediction.birth_date.value
 ```
 
 ### Gender
@@ -105,7 +107,7 @@ puts result.inference.prediction.birth_date.value
 **`gender`** (Field): Passport owner's gender (M / F).
 
 ```ruby
-puts result.inference.prediction.gender.value
+puts result.document.inference.prediction.gender.value
 ```
 
 ### Names
@@ -113,7 +115,7 @@ puts result.inference.prediction.gender.value
 **`given_names`** (Array< Field >): List of passport owner's given names.
 
 ```ruby
-result.inference.prediction.given_names.each do |name|
+result.document.inference.prediction.given_names.each do |name|
   puts name
 end
 ```
@@ -121,7 +123,7 @@ end
 **`surname`** (Field): Passport's owner surname.
 
 ```ruby
-puts result.inference.prediction.surname.value
+puts result.document.inference.prediction.surname.value
 ```
 
 ### ID
@@ -129,7 +131,7 @@ puts result.inference.prediction.surname.value
 **`id_number`** (Field): Passport identification number.
 
 ```ruby
-puts result.inference.prediction.id_number.value
+puts result.document.inference.prediction.id_number.value
 ```
 
 ### Machine-Readable Zone
@@ -137,19 +139,19 @@ puts result.inference.prediction.id_number.value
 **`mrz1`** (Field): Passport first line of machine-readable zone.
 
 ```ruby
-puts result.inference.prediction.mrz1.value
+puts result.document.inference.prediction.mrz1.value
 ```
 
 **`mrz2`** (Field): Passport second line of machine-readable zone.
 
 ```ruby
-puts result.inference.prediction.mrz2.value
+puts result.document.inference.prediction.mrz2.value
 ```
 
 **`mrz`** (Field): Reconstructed passport full machine-readable zone from mrz1 and mrz2.
 
 ```ruby
-puts result.inference.prediction.mrz.value
+puts result.document.inference.prediction.mrz.value
 ```
 
 ## Questions?

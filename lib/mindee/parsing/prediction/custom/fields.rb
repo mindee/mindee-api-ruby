@@ -18,7 +18,7 @@ module Mindee
       end
 
       def to_s
-        @value
+        @value.nil? ? '' : @value
       end
     end
 

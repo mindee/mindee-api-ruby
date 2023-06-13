@@ -26,7 +26,7 @@ result = mindee_client.doc_from_path('/path/to/file.ext')
   .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
 
 # Print a summary of the document prediction in RST format
-puts result
+puts result.document
 ```
 
 If the `version` argument is set, you'll be required to update it every time a new model is trained.
@@ -39,7 +39,7 @@ The document type must be specified when calling the parse method.
 ```ruby
 result = mindee_client.doc_from_path('/path/to/custom_file')
   .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
-puts result
+puts result.document
 ```
 
 > 📘 **Info**
@@ -81,21 +81,21 @@ Individual field values can be accessed by using the field's API name, in the ex
 
 ```ruby
 # raw data, list of each word object
-pp result.inference.prediction.fields[:address].values
+pp result.document.inference.prediction.fields[:address].values
 
 # list of all values
-puts result.inference.prediction.fields[:address].contents_list
+puts result.document.inference.prediction.fields[:address].contents_list
 
 # default string representation
-puts result.inference.prediction.fields[:address].to_s
+puts result.document.inference.prediction.fields[:address].to_s
 
 # custom string representation
-puts result.inference.prediction.fields[:address].contents_str(separator: '_')
+puts result.document.inference.prediction.fields[:address].contents_str(separator: '_')
 ```
 
 To iterate over all the fields:
 ```ruby
-result.inference.prediction.fields.each do |name, info|
+result.document.inference.prediction.fields.each do |name, info|
   puts name
   puts info.values
 end

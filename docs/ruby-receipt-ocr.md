@@ -19,7 +19,7 @@ result = mindee_client.doc_from_path('/path/to/the/file.ext')
 # puts result
 
 # Print the document-level parsed data
-puts result.inference.prediction
+puts result.document.inference.prediction
 ```
 
 Output:
@@ -78,7 +78,7 @@ Using the above sample, the following are the basic fields that can be extracted
   The following categories are supported: toll, food, parking, transport, accommodation, gasoline, miscellaneous.
 
 ```ruby
-puts result.inference.prediction.category.value
+puts result.document.inference.prediction.category.value
 ```
 
 
@@ -93,7 +93,7 @@ The following date fields are available:
 * **`date`**: Date the receipt was issued
 
 ```ruby
-puts result.inference.prediction.date.value
+puts result.document.inference.prediction.date.value
 ```
 
 
@@ -102,32 +102,32 @@ puts result.inference.prediction.date.value
 
 * `locale.value` (String): Locale with country and language codes.
 ```ruby
-puts result.inference.prediction.locale
+puts result.document.inference.prediction.locale
 ```
 
 * `locale.language` (String): Language code in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format as seen on the document.
 * 
 ```ruby
-puts result.inference.prediction.locale.language
+puts result.document.inference.prediction.locale.language
 ```
 
 * `locale.currency` (String): Currency code in [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format as seen on the document.
 
 ```ruby
-puts result.inference.prediction.locale.currency
+puts result.document.inference.prediction.locale.currency
 ```
 
 * `locale.country` (String): Country code in [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) alpha-2 format as seen on the document.
 
 ```ruby
-puts result.inference.prediction.locale.country
+puts result.document.inference.prediction.locale.country
 ```
 
 ### Supplier Information
 * **`supplier_name`** (Field): Supplier name as written in the receipt.
 
 ```ruby
-puts result.inference.prediction.supplier_name.value
+puts result.document.inference.prediction.supplier_name.value
 ```
 
 
@@ -137,19 +137,19 @@ puts result.inference.prediction.supplier_name.value
 * `value` (Float): The tax amount.
 ```ruby
 # Show the amount of the first tax
-puts result.inference.prediction.taxes[0].value
+puts result.document.inference.prediction.taxes[0].value
 ```
 
 * `code` (String): The tax code (HST, GST... for Canadian; City Tax, State tax for US, etc..).
 ```ruby
 # Show the code of the first tax
-puts result.inference.prediction.taxes[0].code
+puts result.document.inference.prediction.taxes[0].code
 ```
 
 * `rate` (Float): The tax rate.
 ```ruby
 # Show the rate of the first tax
-puts result.inference.prediction.taxes[0].rate
+puts result.document.inference.prediction.taxes[0].rate
 ```
 
 ### Time
@@ -157,26 +157,26 @@ puts result.inference.prediction.taxes[0].rate
     * `value` (string): Time of purchase with 24 hours formatting (hh:mm).
 
 ```ruby
-puts result.inference.prediction.time.value
+puts result.document.inference.prediction.time.value
 ```
 
 ### Totals
 * **`total_amount`** (Field): Total amount including taxes
 
 ```ruby
-puts result.inference.prediction.total_amount.value
+puts result.document.inference.prediction.total_amount.value
 ```
 
 * **`total_net`** (Field): Total amount paid excluding taxes
 
 ```ruby
-puts result.inference.prediction.total_net.value
+puts result.document.inference.prediction.total_net.value
 ```
 
 * **`total_tax`** (Field): Total tax value from tax lines
 
 ```ruby
-puts result.inference.prediction.total_tax.value
+puts result.document.inference.prediction.total_tax.value
 ```
 
 ## Questions?
