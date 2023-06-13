@@ -31,7 +31,7 @@ module Mindee
     #  standard (off the shelf) endpoint.
     #  Do not set for standard (off the shelf) endpoints.
     #
-    # @param include_words [Boolean] Whether to include the full text for each page.
+    # @param all_words [Boolean] Whether to include the full text for each page.
     #  This performs a full OCR operation on the server and will increase response time.
     #
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
@@ -55,7 +55,7 @@ module Mindee
       prediction_class,
       endpoint_name: '',
       account_name: '',
-      include_words: false,
+      all_words: false,
       close_file: true,
       page_options: nil,
       cropper: false
@@ -63,7 +63,7 @@ module Mindee
 
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
-      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
+      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, all_words, close_file, cropper))
     end
 
     # Enqueue a document for async parsing
@@ -80,7 +80,7 @@ module Mindee
     #  standard (off the shelf) endpoint.
     #  Do not set for standard (off the shelf) endpoints.
     #
-    # @param include_words [Boolean] Whether to include the full text for each page.
+    # @param all_words [Boolean] Whether to extract all the words on each page.
     #  This performs a full OCR operation on the server and will increase response time.
     #
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
@@ -103,7 +103,7 @@ module Mindee
       prediction_class,
       endpoint_name: '',
       account_name: '',
-      include_words: false,
+      all_words: false,
       close_file: true,
       page_options: nil,
       cropper: false
@@ -111,7 +111,7 @@ module Mindee
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class,
-                              @doc_config.predict_async(input_doc, include_words, close_file, cropper))
+                              @doc_config.predict_async(input_doc, all_words, close_file, cropper))
     end
     # rubocop:enable Metrics/ParameterLists
 

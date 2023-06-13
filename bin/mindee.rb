@@ -71,8 +71,8 @@ def ots_subcommand(command, options)
     opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
       options[:api_key] = v
     end
-    opt.on('-w', '--with-words', 'Include words in response') do |v|
-      options[:include_words] = v
+    opt.on('-w', '--all-words', 'Include words in response') do |v|
+      options[:all_words] = v
     end
     opt.on('-c', '--cut-pages', "Cut document pages") do |v|
       options[:cut_pages] = v
@@ -83,8 +83,8 @@ end
 def custom_subcommand(options)
   OptionParser.new do |opt|
     opt.banner = "Usage: custom [options] ENDPOINT_NAME FILE"
-    opt.on('-w', '--with-words', 'Include words in response') do |v|
-      options[:include_words] = v
+    opt.on('-w', '--all-words', 'Include words in response') do |v|
+      options[:all_words] = v
     end
     opt.on('-c', '--cut-pages', "Don't cut document pages") do |v|
       options[:cut_pages] = v

@@ -67,7 +67,7 @@ describe Mindee::Client do
       file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
       doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
       expect do
-        mindee_client1.parse(doc, Mindee::Prediction::ReceiptV4, include_words: false, close_file: true)
+        mindee_client1.parse(doc, Mindee::Prediction::ReceiptV4, all_words: false, close_file: true)
       end.to raise_error Mindee::Parsing::Error
     end
 

@@ -33,11 +33,11 @@ module Mindee
       end
 
       # @param input_doc [Mindee::LocalInputSource]
-      # @param include_words [Boolean]
+      # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
       # @return [Net::HTTPResponse]
-      def predict_req_post(input_doc, include_words: false, close_file: true, cropper: false)
+      def predict_req_post(input_doc, all_words: false, close_file: true, cropper: false)
         uri = URI("#{@url_root}/predict")
 
         params = {}
@@ -53,7 +53,7 @@ module Mindee
         form_data = {
           'document' => input_doc.read_document(close: close_file),
         }
-        form_data.push ['include_mvision', 'true'] if include_words
+        form_data.push ['include_mvision', 'true'] if all_words
 
         req.set_form(form_data, 'multipart/form-data')
 
@@ -63,11 +63,11 @@ module Mindee
       end
 
       # @param input_doc [Mindee::LocalInputSource]
-      # @param include_words [Boolean]
+      # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
       # @return [Net::HTTPResponse]
-      def predict_async_req_post(input_doc, include_words, close_file, cropper)
+      def predict_async_req_post(input_doc, all_words, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
 
         params = {}
@@ -83,7 +83,7 @@ module Mindee
         form_data = {
           'document' => input_doc.read_document(close: close_file),
         }
-        form_data.push ['include_mvision', 'true'] if include_words
+        form_data.push ['include_mvision', 'true'] if all_words
 
         req.set_form(form_data, 'multipart/form-data')
 
