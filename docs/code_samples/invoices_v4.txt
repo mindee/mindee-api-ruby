@@ -8,7 +8,7 @@ doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 result = mindee_client.parse(doc, Mindee::Prediction::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 
 # Print the document-level parsed data
-# puts result.inference.prediction
+# puts result.document.inference.prediction

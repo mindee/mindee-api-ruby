@@ -49,6 +49,7 @@ module Mindee
     #  This performs a cropping operation on the server and will increase response time.
     #
     # @return [Mindee::ApiResponse]
+    # rubocop:disable Metrics/ParameterLists
     def parse(
       input_doc,
       prediction_class,
@@ -59,10 +60,12 @@ module Mindee
       page_options: nil,
       cropper: false
     )
+
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
     end
+    # rubocop:enable Metrics/ParameterLists
 
     # Enqueue a document for async parsing
     #
@@ -128,6 +131,7 @@ module Mindee
       endpoint_name: '',
       account_name: ''
     )
+
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
     end

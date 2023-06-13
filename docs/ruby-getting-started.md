@@ -129,7 +129,7 @@ Load from a file directly from disk. Requires an absolute path, as a string.
 result = mindee_client.doc_from_path("/path/to/the/invoice.jpg").parse(Mindee::Prediction::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 ```
 
 ### File Object
@@ -144,7 +144,7 @@ File.open(INVOICE_FILE, 'rb') do |fo|
 end
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 ```
 
 ### Base64
@@ -157,7 +157,7 @@ b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
 result = mindee_client.doc_from_b64string(b64_string, "receipt.jpg").parse(Mindee::Prediction::ReceiptV4)
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 ```
 
 ### Bytes
@@ -170,7 +170,7 @@ raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
 result = mindee_client.doc_from_bytes(raw_bytes, "invoice.pdf").parse(Mindee::Prediction::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 ```
 
 ## Sending a File
@@ -223,7 +223,7 @@ only the highest confidence field data will be shown (this is all done automatic
 pp result.inference.prediction
 
 # as a string, summary in RST format
-puts result.inference.prediction
+puts result.document.inference.prediction
 ```
 
 #### Page level prediction
