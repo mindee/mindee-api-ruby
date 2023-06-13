@@ -52,15 +52,13 @@ module Mindee
     def parse(
       input_doc,
       prediction_class,
-      **params
+      endpoint_name: '',
+      account_name: '',
+      include_words: false,
+      close_file: true,
+      page_options: nil,
+      cropper: false
     )
-      endpoint_name = params.fetch(:endpoint_name, '')
-      account_name = params.fetch(:account_name, '')
-      include_words = params.fetch(:include_words, false)
-      close_file = params.fetch(:close_file, true)
-      page_options = params.fetch(:page_options, nil)
-      cropper = params.fetch(:cropper, false)
-
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
@@ -98,13 +96,12 @@ module Mindee
     def enqueue(
       input_doc,
       prediction_class,
-      **params
+      endpoint_name: '',
+      account_name: '',
+      include_words: false,
+      page_options: nil,
+      cropper: false
     )
-      endpoint_name = params.fetch(:endpoint_name, '')
-      account_name = params.fetch(:account_name, '')
-      include_words = params.fetch(:include_words, false)
-      page_options = params.fetch(:page_options, nil)
-      cropper = params.fetch(:cropper, false)
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class, @doc_config.predict_async(input_doc, include_words, cropper))
@@ -128,11 +125,9 @@ module Mindee
     def parse_queued(
       prediction_class,
       job_id,
-      **params
+      endpoint_name: '',
+      account_name: ''
     )
-      endpoint_name = params.fetch(:endpoint_name, '')
-      account_name = params.fetch(:account_name, '')
-
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
     end
