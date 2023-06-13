@@ -38,11 +38,12 @@ module Mindee
 
     # Call the prediction API.
     # @param input_doc [Mindee::LocalInputSource]
+    # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Hash]
-    def predict_async(input_doc, include_words, cropper)
+    def predict_async(input_doc, include_words, close_file, cropper)
       check_api_key
-      response = predict_async_request(input_doc, include_words, cropper)
+      response = predict_async_request(input_doc, include_words, close_file, cropper)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       return hashed_response if (200..299).include?(response.code.to_i)
 
@@ -68,7 +69,7 @@ module Mindee
     # @param input_doc [Mindee::LocalInputSource]
     # @param include_words [Boolean]
     # @param close_file [Boolean]
-    # # @param cropper [Boolean]
+    # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
     def predict_request(input_doc, include_words, close_file, cropper)
       @endpoint.predict_req_post(input_doc, include_words: include_words, close_file: close_file, cropper: cropper)
@@ -76,10 +77,11 @@ module Mindee
 
     # @param input_doc [Mindee::LocalInputSource]
     # @param include_words [Boolean]
+    # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
-    def predict_async_request(input_doc, include_words, cropper)
-      @endpoint.predict_async_req_post(input_doc, include_words, cropper)
+    def predict_async_request(input_doc, include_words, close_file, cropper)
+      @endpoint.predict_async_req_post(input_doc, include_words, close_file, cropper)
     end
 
     # @param job_id [String]

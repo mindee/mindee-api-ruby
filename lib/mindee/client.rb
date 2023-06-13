@@ -65,7 +65,6 @@ module Mindee
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
       Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
     end
-    # rubocop:enable Metrics/ParameterLists
 
     # Enqueue a document for async parsing
     #
@@ -83,6 +82,9 @@ module Mindee
     #
     # @param include_words [Boolean] Whether to include the full text for each page.
     #  This performs a full OCR operation on the server and will increase response time.
+    #
+    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
+    #  Set to false if you need to access the file after this operation.
     #
     # @param page_options [Hash, nil] Page cutting/merge options:
     #
@@ -102,13 +104,16 @@ module Mindee
       endpoint_name: '',
       account_name: '',
       include_words: false,
+      close_file: true,
       page_options: nil,
       cropper: false
     )
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
       input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
-      Mindee::ApiResponse.new(prediction_class, @doc_config.predict_async(input_doc, include_words, cropper))
+      Mindee::ApiResponse.new(prediction_class,
+                              @doc_config.predict_async(input_doc, include_words, close_file, cropper))
     end
+    # rubocop:enable Metrics/ParameterLists
 
     # Parses a queued document
     #
