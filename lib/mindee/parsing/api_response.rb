@@ -23,7 +23,7 @@ module Mindee
     attr_reader :issued_at
     # @return [Mindee::DateField, nil]
     attr_reader :available_at
-    # @return [JobStatus]
+    # @return [JobStatus, Symbol]
     attr_reader :status
     # @return [Integer, nil]
     attr_reader :millisecs_taken
@@ -36,14 +36,16 @@ module Mindee
         @available_at = Time.iso8601(http_response['available_at'])
         @millisecs_taken = (1000 * (@available_at.to_time - @issued_at.to_time).to_f).to_i
       end
-      case http_response['status']
-      when 'waiting'
-        @status = JobStatus::WAITING
-      when 'processing'
-        @status = JobStatus::PROCESSING
-      when 'completed'
-        @status = JobStatus::COMPLETED
-      end
+      @status = case http_response['status']
+                when 'waiting'
+                  JobStatus::WAITING
+                when 'processing'
+                  JobStatus::PROCESSING
+                when 'completed'
+                  JobStatus::COMPLETED
+                else
+                  http_response['status']&.to_sym
+                end
     end
   end
 
@@ -53,7 +55,7 @@ module Mindee
     attr_reader :error
     # @return [Array<String>]
     attr_reader :ressources
-    # @return [RequestStatus]
+    # @return [RequestStatus, Symbol]
     attr_reader :status
     # @return [Integer]
     attr_reader :status_code
@@ -64,11 +66,13 @@ module Mindee
       @error = server_response['error']
       @ressources = server_response['ressources']
 
-      if server_response['status'] == 'failure'
-        @status = RequestStatus::FAILURE
-      elsif server_response['status'] == 'success'
-        @status = RequestStatus::SUCCESS
-      end
+      @status = if server_response['status'] == 'failure'
+                  RequestStatus::FAILURE
+                elsif server_response['status'] == 'success'
+                  RequestStatus::SUCCESS
+                else
+                  server_response['status']&.to_sym
+                end
       @status_code = server_response['status_code']
       @url = server_response['url']
     end
