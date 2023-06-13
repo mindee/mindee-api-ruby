@@ -54,6 +54,10 @@ DOCUMENTS = {
     help: "US Bank Check",
     prediction: Mindee::Prediction::US::BankCheckV1,
   },
+  "invoice-splitter" => {
+    help: "US Bank Check",
+    prediction: Mindee::Prediction::InvoiceSplitterV1,
+  },
 }
 
 options = {
@@ -148,7 +152,7 @@ page_options = options[:cut_pages].nil? ? nil : default_cutting
 doc = mindee_client.doc_from_path(file_path)
 result = doc.parse(DOCUMENTS[command][:prediction], endpoint_name: doc_type, page_options: page_options)
 if options[:print_full]
-  puts result
+  puts result.document
 else
-  puts result.inference.prediction
+  puts result.document.inference.prediction
 end

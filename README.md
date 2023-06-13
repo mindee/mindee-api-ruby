@@ -37,7 +37,7 @@ result = mindee_client.doc_from_path('/path/to/the/file.ext')
   .parse(Mindee::Prediction::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 ```
 
 #### Region-Specific Documents
@@ -48,11 +48,11 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-result = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::Prediction::EU::LicensePlateV1)
+doc = mindee_client.doc_from_path('/path/to/the/file.ext')
+result = doc.parse(Mindee::Prediction::EU::LicensePlateV1)
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 ```
 
 ### Custom Document (API Builder)
@@ -66,14 +66,14 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
 )
 
 # Load a file from disk and parse it
-result = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'my-endpoint')
+doc = mindee_client.doc_from_path('/path/to/the/file.ext')
+result = mindee_client.parse(doc, Mindee::Prediction::CustomV1, endpoint_name: 'my-endpoint')
 
 # Print a full summary of the parsed data in RST format
-puts result
+puts result.document
 
 # Looping over all prediction values
-result.inference.prediction.fields.each do |field_name, field_data|
+result.document.inference.prediction.fields.each do |field_name, field_data|
   puts field_name
   puts field_data.values
   puts field_data.to_s

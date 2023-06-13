@@ -15,7 +15,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 result = mindee_client.doc_from_path('/path/to/the/file.ext').parse(Mindee::Prediction::InvoiceV4)
 
 # Print a summary of the document prediction in RST format
-puts result.inference.prediction
+puts result.document.inference.prediction
 ```
 
 Output:
@@ -69,34 +69,36 @@ Depending on the field type, there might be additional attributes that will be e
 
 Using the above sample, the following are the basic fields that can be extracted:
 
-- [Orientation](#orientation)
-- [Customer Information](#customer-information)
-- [Dates](#dates)
-- [Locale and Currency](#locale)
-- [Payment Information](#payment-information)
-- [Supplier Information](#supplier-information)
-- [Taxes](#taxes)
-- [Totals](#totals)
-- [Line Items](#line-items)
+- [Quick Start](#quick-start)
+- [Fields](#fields)
+- [Attributes](#attributes)
+  - [Customer Information](#customer-information)
+  - [Dates](#dates)
+  - [Locale](#locale)
+  - [Supplier Information](#supplier-information)
+  - [Taxes](#taxes)
+  - [Totals](#totals)
+  - [Line items](#line-items)
+- [Questions?](#questions)
 
 
 ### Customer Information
 **`customer_name`** (Field): Customer's name
 
 ```ruby
-puts result.inference.prediction.customer_name.value
+puts result.document.inference.prediction.customer_name.value
 ```
 
 **`customer_address`** (Field): Customer's postal address
 
 ```ruby
-puts result.inference.prediction.customer_address.value
+puts result.document.inference.prediction.customer_address.value
 ```
 
 **`customer_company_registrations`** (Array<CompanyRegistration>): Customer's company registration
 
 ```ruby
-result.inference.prediction.customer_company_registrations.each do |registration|
+result.document.inference.prediction.customer_company_registrations.each do |registration|
   puts registration.value
   puts registration.type
 end
@@ -113,13 +115,13 @@ The following date fields are available:
 **`date`**: Date the invoice was issued
 
 ```ruby
-puts result.inference.prediction.date.value
+puts result.document.inference.prediction.date.value
 ```
 
 **`due_date`**: Payment due date of the invoice.
 
 ```ruby
-puts result.inference.prediction.due_date.value
+puts result.document.inference.prediction.due_date.value
 ```
 
 ### Locale
@@ -127,17 +129,17 @@ puts result.inference.prediction.due_date.value
 
 * `locale.language` (String): Language code in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format as seen on the document.
 ```ruby
-puts result.inference.prediction.locale.language
+puts result.document.inference.prediction.locale.language
 ```
 
 * `locale.currency` (String): Currency code in [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format as seen on the document.
 ```ruby
-puts result.inference.prediction.locale.currency
+puts result.document.inference.prediction.locale.currency
 ```
 
 * `locale.country` (String): Country code in [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) alpha-2 format as seen on the document.
 ```ruby
-puts result.inference.prediction.locale.country
+puts result.document.inference.prediction.locale.country
 ```
 
 ### Supplier Information
@@ -145,13 +147,13 @@ puts result.inference.prediction.locale.country
 **`supplier_name`**: Supplier name as written in the invoice (logo or supplier Info).
 
 ```ruby
-puts result.inference.prediction.supplier_name.value
+puts result.document.inference.prediction.supplier_name.value
 ```
 
 **`supplier_address`**: Supplier address as written in the invoice.
 
 ```ruby
-puts result.inference.prediction.supplier_address.value
+puts result.document.inference.prediction.supplier_address.value
 ```
 
 **`supplier__payment_details`** (Array< PaymentDetails >): List of invoice's supplier payment details.
@@ -160,25 +162,25 @@ Each object in the list contains extra attributes:
 * `iban` (String)
 ```ruby
 # Show the IBAN of the first payment
-puts result.inference.prediction.supplier_payment_details[0].iban
+puts result.document.inference.prediction.supplier_payment_details[0].iban
 ```
 
 * `swift` (String)
 ```ruby
 # Show the SWIFT of the first payment
-puts result.inference.prediction.supplier_payment_details[0].swift
+puts result.document.inference.prediction.supplier_payment_details[0].swift
 ```
 
 * `routing_number` (String)
 ```ruby
 # Show the routing number of the first payment
-puts result.inference.prediction.supplier_payment_details[0].routing_number
+puts result.document.inference.prediction.supplier_payment_details[0].routing_number
 ```
 
 * `account_number` (String)
 ```ruby
 # Show the account number of the first payment
-puts result.inference.prediction.supplier_payment_details[0].account_number
+puts result.document.inference.prediction.supplier_payment_details[0].account_number
 ```
 
 **`supplier_company_registrations`** (Array< CompanyRegistration >):
@@ -187,7 +189,7 @@ Each object in the list contains an extra attribute:
 
 * `type` (String): Type of company registration number among predefined categories.
 ```ruby
-result.inference.prediction.supplier_company_registrations.each do |registration|
+result.document.inference.prediction.supplier_company_registrations.each do |registration|
   puts registration.value
   puts registration.type
 end
@@ -199,19 +201,19 @@ end
 * `value` (Float): The tax amount.
 ```ruby
 # Show the amount of the first tax
-puts result.inference.prediction.taxes[0].value
+puts result.document.inference.prediction.taxes[0].value
 ```
 
 * `code` (String): The tax code (HST, GST... for Canadian; City Tax, State tax for US, etc..).
 ```ruby
 # Show the code of the first tax
-puts result.inference.prediction.taxes[0].code
+puts result.document.inference.prediction.taxes[0].code
 ```
 
 * `rate` (Float): The tax rate.
 ```ruby
 # Show the rate of the first tax
-puts result.inference.prediction.taxes[0].rate
+puts result.document.inference.prediction.taxes[0].rate
 ```
 
 ### Totals
@@ -219,19 +221,19 @@ puts result.inference.prediction.taxes[0].rate
 **`total_amount`** (Field): Total amount including taxes.
 
 ```ruby
-puts result.inference.prediction.total_amount.value
+puts result.document.inference.prediction.total_amount.value
 ```
 
 **`total_net`** (Field): Total amount excluding taxes.
 
 ```ruby
-puts result.inference.prediction.total_net.value
+puts result.document.inference.prediction.total_net.value
 ```
 
 **`total_tax`** (Field): Total tax value from tax lines.
 
 ```ruby
-puts result.inference.prediction.total_tax.value
+puts result.document.inference.prediction.total_tax.value
 ```
 
 ### Line items
@@ -251,7 +253,7 @@ Each object in the list contains:
 * `polygon` (Polygon)
 
 ```ruby
-result.inference.prediction.line_items.each do |line_item|
+result.document.inference.prediction.line_items.each do |line_item|
   pp line_item
 end
 ```

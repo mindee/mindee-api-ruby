@@ -4,18 +4,22 @@ require_relative 'input'
 require_relative 'document_config'
 require_relative 'http/endpoint'
 require_relative 'parsing/prediction'
+require_relative 'parsing/api_response'
 
 module Mindee
-  # General client for sending a document to the API.
-  class DocumentClient
-    # @param input_doc [Mindee::InputDocument]
-    # @param doc_configs [Hash]
-    def initialize(input_doc, doc_configs)
-      @input_doc = input_doc
-      @doc_configs = doc_configs
+  # Mindee API Client.
+  # See: https://developers.mindee.com/docs/
+  class Client
+    # @param api_key [String]
+    def initialize(api_key: '')
+      @doc_configs = {}
+      @api_key = api_key
+      init_default_endpoints
     end
 
-    # Call prediction API on the document and parse the results.
+    # Call prediction API on a document and parse the results.
+    #
+    # @param input_doc [Mindee::Input::LocalInputSource]
     #
     # @param prediction_class [Mindee::Prediction::Prediction]
     #
@@ -44,8 +48,10 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
-    # @return [Mindee::DocumentResponse]
+    # @return [Mindee::ApiResponse]
+    # rubocop:disable Metrics/ParameterLists
     def parse(
+      input_doc,
       prediction_class,
       endpoint_name: '',
       account_name: '',
@@ -54,15 +60,107 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
-      @input_doc.process_pdf(page_options) if !page_options.nil? && @input_doc.pdf?
-      doc_config.predict(@input_doc, include_words, close_file, cropper)
+
+      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
+      input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
+      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, include_words, close_file, cropper))
     end
 
-    private
+    # Enqueue a document for async parsing
+    #
+    # @param input_doc [Mindee::Input::LocalInputSource]
+    #
+    # @param prediction_class [Mindee::Prediction::Prediction]
+    #
+    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
+    #  API Builder. Do not set for standard (off the shelf) endpoints.
+    #
+    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
+    #  This is normally not required unless you have a custom endpoint which has the same name as a
+    #  standard (off the shelf) endpoint.
+    #  Do not set for standard (off the shelf) endpoints.
+    #
+    # @param include_words [Boolean] Whether to include the full text for each page.
+    #  This performs a full OCR operation on the server and will increase response time.
+    #
+    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
+    #  Set to false if you need to access the file after this operation.
+    #
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #      * `:REMOVE` - remove the specified pages, and keep all others.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    #
+    # @param cropper [Boolean] Whether to include cropper results for each page.
+    #  This performs a cropping operation on the server and will increase response time.
+    #
+    # @return [Mindee::ApiResponse]
+    def enqueue(
+      input_doc,
+      prediction_class,
+      endpoint_name: '',
+      account_name: '',
+      include_words: false,
+      close_file: true,
+      page_options: nil,
+      cropper: false
+    )
+      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
+      input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
+      Mindee::ApiResponse.new(prediction_class,
+                              @doc_config.predict_async(input_doc, include_words, close_file, cropper))
+    end
+    # rubocop:enable Metrics/ParameterLists
+
+    # Parses a queued document
+    #
+    # @param prediction_class [Mindee::Prediction::Prediction]
+    #
+    # @param job_id [String] Id of the job (queue) to poll from
+    #
+    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
+    #  API Builder. Do not set for standard (off the shelf) endpoints.
+    #
+    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
+    #  This is normally not required unless you have a custom endpoint which has the same name as a
+    #  standard (off the shelf) endpoint.
+    #  Do not set for standard (off the shelf) endpoints.
+    #
+    # @return [Mindee::ApiResponse]
+    def parse_queued(
+      prediction_class,
+      job_id,
+      endpoint_name: '',
+      account_name: ''
+    )
+
+      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
+      Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
+    end
+
+    # Configure a custom document using the 'Mindee API Builder'.
+    # @param account_name [String] Your organization's username on the API Builder
+    # @param endpoint_name [String] The "API name" field in the "Settings" page of the API Builder
+    # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
+    # @return [Mindee::Client]
+    def add_endpoint(
+      account_name,
+      endpoint_name,
+      version: '1'
+    )
+      @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
+        Prediction::CustomV1,
+        HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)
+      )
+      self
+    end
 
     # @param document_class [Mindee::Prediction::Prediction]
     # @param endpoint_name [String]
+    # @return [String]
     def determine_endpoint_name(document_class, endpoint_name)
       return document_class.name if document_class.name != Prediction::CustomV1.name
 
@@ -74,6 +172,7 @@ module Mindee
     # @param document_class [Mindee::Prediction::Prediction]
     # @param endpoint_name [String]
     # @param account_name [String]
+    # @return [Mindee::PathInputSource]
     def find_doc_config(document_class, endpoint_name, account_name)
       endpoint_name = determine_endpoint_name(document_class, endpoint_name)
 
@@ -97,68 +196,36 @@ module Mindee
 
       @doc_configs[config_key]
     end
-  end
-
-  # Mindee API Client.
-  # See: https://developers.mindee.com/docs/
-  class Client
-    # @param api_key [String]
-    def initialize(api_key: '')
-      @doc_configs = {}
-      @api_key = api_key
-      init_default_endpoints
-    end
-
-    # Configure a custom document using the 'Mindee API Builder'.
-    # @param account_name [String] Your organization's username on the API Builder
-    # @param endpoint_name [String] The "API name" field in the "Settings" page of the API Builder
-    # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
-    # @return [Mindee::Client]
-    def add_endpoint(
-      account_name,
-      endpoint_name,
-      version: '1'
-    )
-      @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
-        Prediction::CustomV1,
-        HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)
-      )
-      self
-    end
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::PathInputSource]
     def doc_from_path(input_path)
-      doc = Input::PathDocument.new(input_path)
-      DocumentClient.new(doc, @doc_configs)
+      Input::PathInputSource.new(input_path)
     end
 
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::BytesInputSource]
     def doc_from_bytes(input_bytes, filename)
-      doc = Input::BytesDocument.new(input_bytes, filename)
-      DocumentClient.new(doc, @doc_configs)
+      Input::BytesInputSource.new(input_bytes, filename)
     end
 
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::Base64InputSource]
     def doc_from_b64string(base64_string, filename)
-      doc = Input::Base64Document.new(base64_string, filename)
-      DocumentClient.new(doc, @doc_configs)
+      Input::Base64InputSource.new(base64_string, filename)
     end
 
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::DocumentClient]
+    # @return [Mindee::FileInputSource]
     def doc_from_file(input_file, filename)
-      doc = Input::FileDocument.new(input_file, filename)
-      DocumentClient.new(doc, @doc_configs)
+      Input::FileInputSource.new(input_file, filename)
     end
 
     private
@@ -206,6 +273,9 @@ module Mindee
       )
       @doc_configs[['mindee', Prediction::FR::IdCardV1.name]] = standard_document_config(
         Prediction::FR::IdCardV1, 'idcard_fr', '1'
+      )
+      @doc_configs[['mindee', Prediction::InvoiceSplitterV1.name]] = standard_document_config(
+        Prediction::InvoiceSplitterV1, 'invoice_splitter', '1'
       )
       self
     end
