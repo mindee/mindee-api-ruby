@@ -40,22 +40,22 @@ module Mindee
     end
 
     def printable_values
-        printable = Hash.new
-        printable[:description] = @description.nil? ? "" : @description
-        printable[:product_code] = @product_code.nil? ? "" : @product_code
-        printable[:quantity] = @quantity.nil? ? "" : Field.float_to_string(@quantity)
-        printable[:tax_amount] = @tax_amount.nil? ? "" : Field.float_to_string(@tax_amount)
-        printable[:tax_rate] = @tax_rate.nil? ? "" : Field.float_to_string(@tax_rate)
-        printable[:total_amount] = @total_amount.nil? ? "" : Field.float_to_string(@total_amount)
-        printable[:unit_price] = @unit_price.nil? ? "" : Field.float_to_string(@unit_price)
-        printable
+      printable = {}
+      printable[:description] = @description.nil? ? '' : @description
+      printable[:product_code] = @product_code.nil? ? '' : @product_code
+      printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
+      printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
+      printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
+      printable[:total_amount] = @total_amount.nil? ? '' : Field.float_to_string(@total_amount)
+      printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+      printable
     end
 
     # @return String
     def to_s
-      printable = self.printable_values
+      printable = printable_values
       out_str = String.new
-      out_str << "Description: #{printable[:description][0..33]}" + ((printable[:description].length<=33) ? "" : "...")
+      out_str << ("Description: #{printable[:description][0..33]}" + (printable[:description].length <= 33 ? '' : '...'))
       out_str << "Product code: #{printable[:product_code]}"
       out_str << "Quantity: #{printable[:quantity]}"
       out_str << "Tax Amount: #{printable[:tax_amount]}"
@@ -67,15 +67,15 @@ module Mindee
 
     # @return String
     def to_table_line
-      printable = self.printable_values
+      printable = printable_values
       out_str = String.new
-      out_str << "| " + printable[:description].ljust(36, " ")
-      out_str << " | " + printable[:product_code].ljust(12, " ")
-      out_str << " | " + printable[:quantity].ljust(8, " ")
-      out_str << " | " + printable[:tax_amount].ljust(10, " ")
-      out_str << " | " + printable[:tax_rate].ljust(12, " ") 
-      out_str << " | " + printable[:total_amount].ljust(12, " ") 
-      out_str << " | " + printable[:unit_price].ljust(10, " ") + " |"
+      out_str << ("| #{printable[:description].ljust(36, ' ')}")
+      out_str << (" | #{printable[:product_code].ljust(12, ' ')}")
+      out_str << (" | #{printable[:quantity].ljust(8, ' ')}")
+      out_str << (" | #{printable[:tax_amount].ljust(10, ' ')}")
+      out_str << (" | #{printable[:tax_rate].ljust(12, ' ')}")
+      out_str << (" | #{printable[:total_amount].ljust(12, ' ')}")
+      out_str << (" | #{printable[:unit_price].ljust(10, ' ')} |")
       out_str.rstrip
     end
   end

@@ -36,7 +36,7 @@ module Mindee
       # @return [Mindee::DateField]
       attr_reader :due_date
       # The list of taxes.
-      # @return [Array<Mindee::Taxes>]
+      # @return <Mindee::Taxes>
       attr_reader :taxes
       # The name of the customer.
       # @return [Mindee::TextField]
@@ -148,7 +148,7 @@ module Mindee
         out_str << "\n:Due Date: #{@due_date}".rstrip
         out_str << "\n:Total Net: #{@total_net}".rstrip
         out_str << "\n:Total Amount: #{@total_amount}".rstrip
-        out_str << "\n:Taxes:#{@taxes}".rstrip # Note: adding a space inbetween the title and the content seems to break the tests, despite it being present in other SDKs
+        out_str << "\n:Taxes:#{@taxes}".rstrip
         out_str << "\n:Supplier Payment Details: #{supplier_payment_details}".rstrip
         out_str << "\n:Supplier name: #{@supplier_name}".rstrip
         out_str << "\n:Supplier Company Registrations: #{supplier_company_registrations}".rstrip
@@ -171,11 +171,12 @@ module Mindee
       private
 
       def line_item_separator(char)
-        "  +#{char * 38}+#{char * 14}+#{char * 10}+#{char * 12}+#{char * 14}+#{char * 14}+#{char*12}+"
+        "  +#{char * 38}+#{char * 14}+#{char * 10}+#{char * 12}+#{char * 14}+#{char * 14}+#{char * 12}+"
       end
 
       def line_items_to_s
         return '' if @line_items.empty?
+
         out_str = String.new
         out_str << "\n#{line_item_separator('-')}"
         out_str << "\n  | Description#{' ' * 25} | Product code | Quantity | Tax Amount | Tax Rate (%) | Total Amount | Unit Price |"
