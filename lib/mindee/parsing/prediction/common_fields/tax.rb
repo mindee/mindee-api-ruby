@@ -46,7 +46,7 @@ module Mindee
     def printable_values
       out_h = {}
       out_h[:code] = @code.nil? ? '' : @code
-      out_h[:base] = @base.nil? ? '' : @base.to_s
+      out_h[:base] = @base.nil? ? '' : print_float(@base)
       out_h[:rate] = @rate.nil? ? '' : print_float(@rate).to_s
       out_h[:value] = @value.nil? ? '' : print_float(@value).to_s
       out_h
