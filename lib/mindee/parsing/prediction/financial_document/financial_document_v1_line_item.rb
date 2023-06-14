@@ -46,19 +46,20 @@ module Mindee
 
     # Format strings for display by shortening long strings and assigning empty ones.
     # @param input_str [String, nil]
-    # @param max_size [int]
+    # @param max_col_size [int, nil]
     # @return [String]
-    def format_for_display(in_str, max_size)
+    def format_for_display(in_str, max_col_size=nil)
       return '' if in_str.nil?
+      return in_str if max_col_size.nil?
 
-      in_str.length < max_size ? in_str : "#{in_str[0..max_size - 3]}..."
+      in_str.length < max_col_size ? in_str : "#{in_str[0..max_col_size - 3]}..."
     end
 
     # @return [Hash]
     def printable_values
       printable = {}
       printable[:description] = format_for_display(@description, 36)
-      printable[:product_code] = format_for_display(@product_code, 12)
+      printable[:product_code] = format_for_display(@product_code, )
       printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
       printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
       printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)

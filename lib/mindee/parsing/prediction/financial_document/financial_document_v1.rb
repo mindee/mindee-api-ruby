@@ -60,7 +60,7 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :supplier_phone_number
       # List of tax lines information.
-      # @return [Taxes]
+      # @return [Mindee::Taxes]
       attr_reader :taxes
       # The time the purchase was made.
       # @return [Mindee::TextField]
