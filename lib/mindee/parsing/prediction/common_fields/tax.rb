@@ -84,6 +84,8 @@ module Mindee
     end
 
     def to_s
+      return '' if self.nil? || self.empty?
+
       out_str = String.new
       out_str << ("\n#{line_separator('-')}")
       out_str << "\n  | Base          | Code   | Rate (%) | Amount        |"
