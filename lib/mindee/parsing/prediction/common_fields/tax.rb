@@ -84,7 +84,7 @@ module Mindee
     end
 
     def to_s
-      return '' if self.nil? || self.empty?
+      return '' if nil? || empty?
 
       out_str = String.new
       out_str << ("\n#{line_separator('-')}")
