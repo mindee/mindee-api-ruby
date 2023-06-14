@@ -3,6 +3,23 @@
 module Mindee
   # Various helper functions for geometry.
   module Geometry
+    # A set of minimum and maximum values.
+    class MinMax
+      # Minimum
+      # @return [Float]
+      attr_reader :min
+      # Maximum
+      # @return [Float]
+      attr_reader :max
+
+      # @param min [Float]
+      # @param max [Float]
+      def initialize(min, max)
+        @min = min
+        @max = max
+      end
+    end
+
     # A relative set of coordinates (X, Y) on the document.
     class Point
       # @return [Float]
@@ -71,7 +88,20 @@ module Mindee
       end
     end
 
+    # Contains any number of vertex coordinates (Points).
     class Polygon < Array
+      # Get the central point (centroid) of the polygon.
+      def centroid
+        get_centroid(self)
+      end
+
+      # Determine if the Point is in the Polygon's Y-axis.
+      # @param point [Mindee::Geometry::Point]
+      # @return [Boolean]
+      def point_in_y?(point)
+        min_max = get_min_max_y(polygon)
+        min_max.min <= point.y && point.y <= min_max.max
+      end
     end
 
     # Transform a prediction into a Quadrilateral.
@@ -113,6 +143,32 @@ module Mindee
         Point.new(x_max, y_max),
         Point.new(x_min, y_max)
       )
+    end
+
+    # Get the central point (centroid) given a sequence of points.
+    # @param points [Array<Mindee::Geometry::Point>]
+    # @return [Mindee::Geometry::Point]
+    def self.get_centroid(points)
+      vertices_count = points.size
+      x_sum = points.map(&:x).sum
+      y_sum = points.map(&:y).sum
+      Point.new(x_sum / vertices_count, y_sum / vertices_count)
+    end
+
+    # Get the maximum and minimum Y value given a sequence of points.
+    # @param points [Array<Mindee::Geometry::Point>]
+    # @return [Mindee::Geometry::MinMax]
+    def self.get_min_max_y(points)
+      coords = points.map(&:y)
+      MinMax.new(coords.min, coords.max)
+    end
+
+    # Get the maximum and minimum X value given a sequence of points.
+    # @param points [Array<Mindee::Geometry::Point>]
+    # @return [Mindee::Geometry::MinMax]
+    def self.get_min_max_x(points)
+      coords = points.map(&:x)
+      MinMax.new(coords.min, coords.max)
     end
   end
 end
