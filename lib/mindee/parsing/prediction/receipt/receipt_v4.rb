@@ -26,7 +26,7 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :supplier
       # List of taxes detected on the receipt.
-      # @return [Array<Mindee::TaxField>]
+      # @return [Mindee::Taxes]
       attr_reader :taxes
       # Time as seen on the receipt in HH:MM format.
       # @return [Mindee::TextField]
@@ -59,14 +59,10 @@ module Mindee
         @document_type = ClassificationField.new(prediction['document_type'], page_id)
         @supplier = TextField.new(prediction['supplier'], page_id)
         @time = TextField.new(prediction['time'], page_id)
-        @taxes = []
-        prediction['taxes'].each do |item|
-          @taxes.push(TaxField.new(item, page_id))
-        end
+        @taxes = Taxes.new(prediction['taxes'], page_id)
       end
 
       def to_s
-        taxes = @taxes.join("\n       ")
         out_str = String.new
         out_str << "\n:Locale: #{@locale}".rstrip
         out_str << "\n:Date: #{@date}".rstrip
@@ -75,9 +71,9 @@ module Mindee
         out_str << "\n:Document type: #{@document_type}".rstrip
         out_str << "\n:Time: #{@time}".rstrip
         out_str << "\n:Supplier name: #{@supplier}".rstrip
-        out_str << "\n:Taxes: #{taxes}".rstrip
+        out_str << "\n:Taxes:#{@taxes}".rstrip
         out_str << "\n:Total net: #{@total_net}".rstrip
-        out_str << "\n:Total taxes: #{@total_tax}".rstrip
+        out_str << "\n:Total tax: #{@total_tax}".rstrip
         out_str << "\n:Tip: #{@tip}".rstrip
         out_str << "\n:Total amount: #{@total_amount}".rstrip
         out_str[1..].to_s
