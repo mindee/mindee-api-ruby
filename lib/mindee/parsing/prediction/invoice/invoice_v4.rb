@@ -36,7 +36,7 @@ module Mindee
       # @return [Mindee::DateField]
       attr_reader :due_date
       # The list of taxes.
-      # @return [Array<Mindee::TaxField>]
+      # @return [Mindee::Taxes]
       attr_reader :taxes
       # The name of the customer.
       # @return [Mindee::TextField]
@@ -86,10 +86,7 @@ module Mindee
         prediction['customer_company_registrations'].each do |item|
           @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
         end
-        @taxes = []
-        prediction['taxes'].each do |item|
-          @taxes.push(TaxField.new(item, page_id))
-        end
+        @taxes = Taxes.new(prediction['taxes'], page_id)
         @supplier_payment_details = []
         prediction['supplier_payment_details'].each do |item|
           @supplier_payment_details.push(PaymentDetails.new(item, page_id))
@@ -113,7 +110,6 @@ module Mindee
         supplier_payment_details = @supplier_payment_details.map(&:to_s).join("\n                 ")
         supplier_company_registrations = @supplier_company_registrations.map(&:to_s).join('; ')
         reference_numbers = @reference_numbers.map(&:to_s).join(', ')
-        taxes = @taxes.join("\n       ")
         out_str = String.new
         out_str << "\n:Locale: #{@locale}".rstrip
         out_str << "\n:Document type: #{@document_type}".rstrip
@@ -128,9 +124,9 @@ module Mindee
         out_str << "\n:Customer name: #{@customer_name}".rstrip
         out_str << "\n:Customer address: #{@customer_address}".rstrip
         out_str << "\n:Customer company registrations: #{customer_company_registrations}".rstrip
-        out_str << "\n:Taxes: #{taxes}".rstrip
+        out_str << "\n:Taxes:#{@taxes}".rstrip
         out_str << "\n:Total net: #{@total_net}".rstrip
-        out_str << "\n:Total taxes: #{@total_tax}".rstrip
+        out_str << "\n:Total tax: #{@total_tax}".rstrip
         out_str << "\n:Total amount: #{@total_amount}".rstrip
         out_str << "\n:Line Items:"
         out_str << line_items_to_s
