@@ -32,7 +32,7 @@ module Mindee
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
-      # @param input_doc [Mindee::LocalInputSource]
+      # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -49,10 +49,15 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-
-        form_data = {
-          'document' => input_doc.read_document(close: close_file),
-        }
+        form_data = if input_doc.is_a?(Mindee::Input::UrlInputSource)
+                      {
+                        'document' => input_doc.url,
+                      }
+                    else
+                      {
+                        'document' => input_doc.read_document(close: close_file),
+                      }
+                    end
         form_data.push ['include_mvision', 'true'] if all_words
 
         req.set_form(form_data, 'multipart/form-data')
@@ -62,7 +67,7 @@ module Mindee
         end
       end
 
-      # @param input_doc [Mindee::LocalInputSource]
+      # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -79,10 +84,15 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-
-        form_data = {
-          'document' => input_doc.read_document(close: close_file),
-        }
+        form_data = if input_doc.is_a?(Mindee::Input::UrlInputSource)
+                      {
+                        'document' => input_doc.url,
+                      }
+                    else
+                      {
+                        'document' => input_doc.read_document(close: close_file),
+                      }
+                    end
         form_data.push ['include_mvision', 'true'] if all_words
 
         req.set_form(form_data, 'multipart/form-data')

@@ -21,7 +21,7 @@ module Mindee
     end
 
     # Call the prediction API.
-    # @param input_doc [Mindee::LocalInputSource]
+    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param all_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
@@ -37,7 +37,7 @@ module Mindee
     end
 
     # Call the prediction API.
-    # @param input_doc [Mindee::LocalInputSource]
+    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Hash]
@@ -66,7 +66,7 @@ module Mindee
 
     private
 
-    # @param input_doc [Mindee::LocalInputSource]
+    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param all_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
@@ -75,7 +75,7 @@ module Mindee
       @endpoint.predict_req_post(input_doc, all_words: all_words, close_file: close_file, cropper: cropper)
     end
 
-    # @param input_doc [Mindee::LocalInputSource]
+    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param all_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
