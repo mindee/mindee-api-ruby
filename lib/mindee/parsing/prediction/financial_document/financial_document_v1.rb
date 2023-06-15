@@ -80,7 +80,6 @@ module Mindee
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
-      # rubocop:disable Metrics/AbcSize
       def initialize(prediction, page_id)
         super
         @category = ClassificationField.new(prediction['category'], page_id)
@@ -122,7 +121,6 @@ module Mindee
         @total_net = AmountField.new(prediction['total_net'], page_id)
         @total_tax = AmountField.new(prediction['total_tax'], page_id)
       end
-      # rubocop:enable Metrics/AbcSize
 
       # @return String
       def to_s
