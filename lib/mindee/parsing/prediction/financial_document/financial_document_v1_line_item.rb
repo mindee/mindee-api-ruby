@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative '../base'
+
 module Mindee
   # List of line item details.
-  class FinancialDocumentV1LineItem
+  class FinancialDocumentV1LineItem < FeatureField
     # The item description.
     # @return [String]
     attr_reader :description
@@ -24,16 +26,9 @@ module Mindee
     # The item unit price.
     # @return [Float]
     attr_reader :unit_price
-    # @return [Float]
-    attr_reader :confidence
-    # @return [Integer]
-    attr_reader :page_id
-    # @return [Mindee::Geometry::Quadrilateral]
-    attr_reader :bounding_box
-    # @return [Array<Mindee::Geometry::Polygon>]
-    attr_reader :polygon
 
     def initialize(prediction, page_id)
+      super(prediction, page_id)
       @description = prediction['description']
       @product_code = prediction['product_code']
       @quantity = prediction['quantity']
@@ -44,22 +39,11 @@ module Mindee
       @page_id = page_id
     end
 
-    # Format strings for display by shortening long strings and assigning empty ones.
-    # @param input_str [String, nil]
-    # @param max_col_size [int, nil]
-    # @return [String]
-    def format_for_display(in_str, max_col_size=nil)
-      return '' if in_str.nil?
-      return in_str if max_col_size.nil?
-
-      in_str.length < max_col_size ? in_str : "#{in_str[0..max_col_size - 3]}..."
-    end
-
     # @return [Hash]
     def printable_values
       printable = {}
       printable[:description] = format_for_display(@description, 36)
-      printable[:product_code] = format_for_display(@product_code, )
+      printable[:product_code] = format_for_display(@product_code, nil)
       printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
       printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
       printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
