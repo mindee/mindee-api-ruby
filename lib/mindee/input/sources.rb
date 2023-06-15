@@ -94,4 +94,13 @@ module Mindee
       end
     end
   end
+
+    # Load a remote document from a file url.
+  class URLInputSource < LocalInputSource
+    # @param url [String]
+    def initialize(url)
+      io_stream = file_handle
+      super(io_stream, filename)
+    end
+  end
 end
