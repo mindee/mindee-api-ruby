@@ -19,7 +19,7 @@ module Mindee
 
     # Call prediction API on a document and parse the results.
     #
-    # @param input_doc [Mindee::Input::LocalInputSource]
+    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     #
     # @param prediction_class [Mindee::Prediction::Prediction]
     #
@@ -51,7 +51,7 @@ module Mindee
     # @return [Mindee::ApiResponse]
     # rubocop:disable Metrics/ParameterLists
     def parse(
-      input_doc,
+      input_source,
       prediction_class,
       endpoint_name: '',
       account_name: '',
@@ -62,13 +62,15 @@ module Mindee
     )
 
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
-      input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
-      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_doc, all_words, close_file, cropper))
+      if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
+        input_source.process_pdf(page_options)
+      end
+      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_source, all_words, close_file, cropper))
     end
 
     # Enqueue a document for async parsing
     #
-    # @param input_doc [Mindee::Input::LocalInputSource]
+    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     #
     # @param prediction_class [Mindee::Prediction::Prediction]
     #
@@ -99,7 +101,7 @@ module Mindee
     #
     # @return [Mindee::ApiResponse]
     def enqueue(
-      input_doc,
+      input_source,
       prediction_class,
       endpoint_name: '',
       account_name: '',
@@ -109,9 +111,11 @@ module Mindee
       cropper: false
     )
       @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
-      input_doc.process_pdf(page_options) if !page_options.nil? && input_doc.pdf?
+      if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
+        input_source.process_pdf(page_options)
+      end
       Mindee::ApiResponse.new(prediction_class,
-                              @doc_config.predict_async(input_doc, all_words, close_file, cropper))
+                              @doc_config.predict_async(input_source, all_words, close_file, cropper))
     end
     # rubocop:enable Metrics/ParameterLists
 
@@ -226,6 +230,13 @@ module Mindee
     # @return [Mindee::FileInputSource]
     def doc_from_file(input_file, filename)
       Input::FileInputSource.new(input_file, filename)
+    end
+
+    # Load a document from a secure remote source (HTTPS).
+    # @param url [String] Url of the file
+    # @return [Mindee::UrlInputSource]
+    def doc_from_url(url)
+      Input::UrlInputSource.new(url)
     end
 
     private
