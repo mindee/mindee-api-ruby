@@ -50,4 +50,16 @@ describe Mindee::Input::LocalInputSource do
       expect(input.pdf?).to eq(true)
     end
   end
+
+  context 'A remote url file' do
+    it 'should not send an invalid URL' do
+      expect do
+        input = Mindee::Input::UrlInputSource.new('http://invalid-url')
+      end.to raise_error 'URL must be HTTPS'
+    end
+    it 'should send a valid URL' do
+      input = Mindee::Input::UrlInputSource.new('https://platform.mindee.com')
+      expect(input.url).to eq('https://platform.mindee.com')
+    end
+  end
 end
