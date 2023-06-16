@@ -21,14 +21,14 @@ module Mindee
     end
 
     # Call the prediction API.
-    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param all_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Hash]
-    def predict(input_doc, all_words, close_file, cropper)
+    def predict(input_source, all_words, close_file, cropper)
       check_api_key
-      response = predict_request(input_doc, all_words, close_file, cropper)
+      response = predict_request(input_source, all_words, close_file, cropper)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       return hashed_response if (200..299).include?(response.code.to_i)
 
@@ -37,13 +37,13 @@ module Mindee
     end
 
     # Call the prediction API.
-    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Hash]
-    def predict_async(input_doc, all_words, close_file, cropper)
+    def predict_async(input_source, all_words, close_file, cropper)
       check_api_key
-      response = predict_async_request(input_doc, all_words, close_file, cropper)
+      response = predict_async_request(input_source, all_words, close_file, cropper)
       hashed_response = JSON.parse(response.body, object_class: Hash)
       return hashed_response if (200..299).include?(response.code.to_i)
 
@@ -66,22 +66,22 @@ module Mindee
 
     private
 
-    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param all_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
-    def predict_request(input_doc, all_words, close_file, cropper)
-      @endpoint.predict_req_post(input_doc, all_words: all_words, close_file: close_file, cropper: cropper)
+    def predict_request(input_source, all_words, close_file, cropper)
+      @endpoint.predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
     end
 
-    # @param input_doc [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     # @param all_words [Boolean]
     # @param close_file [Boolean]
     # @param cropper [Boolean]
     # @return [Net::HTTPResponse]
-    def predict_async_request(input_doc, all_words, close_file, cropper)
-      @endpoint.predict_async_req_post(input_doc, all_words, close_file, cropper)
+    def predict_async_request(input_source, all_words, close_file, cropper)
+      @endpoint.predict_async_req_post(input_source, all_words, close_file, cropper)
     end
 
     # @param job_id [String]
