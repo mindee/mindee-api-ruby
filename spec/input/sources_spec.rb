@@ -54,7 +54,7 @@ describe Mindee::Input::LocalInputSource do
   context 'A remote url file' do
     it 'should not send an invalid URL' do
       expect do
-        input = Mindee::Input::UrlInputSource.new('http://invalid-url')
+        Mindee::Input::UrlInputSource.new('http://invalid-url')
       end.to raise_error 'URL must be HTTPS'
     end
     it 'should send a valid URL' do
