@@ -32,8 +32,8 @@ module Mindee
       # @param prediction [Hash, nil]
       # @param array [Array, nil]
       # @param page_id [Integer, nil]
-      def initialize(prediction=nil, from_array=nil)
-        if !prediction.nil? 
+      def initialize(prediction = nil, from_array = nil)
+        if !prediction.nil?
           super(prediction.map { |word_prediction| OcrWord.new(word_prediction) })
         elsif !from_array.nil?
           super(from_array)
@@ -42,8 +42,10 @@ module Mindee
 
       # Sort the words on the line from left to right.
       def sort_on_x
-        from_array = sort { |word1, word2| Geometry.get_min_max_x(word1.polygon).min <=> Geometry.get_min_max_x(word2.polygon).min }
-        OcrLine.new(prediction=nil, from_array=from_array)
+        from_array = sort do |word1, word2|
+          Geometry.get_min_max_x(word1.polygon).min <=> Geometry.get_min_max_x(word2.polygon).min
+        end
+        OcrLine.new(nil, from_array)
       end
 
       def to_s
@@ -61,11 +63,10 @@ module Mindee
 
       def initialize(prediction)
         @lines = []
-        all_words = []
-        prediction["all_words"].each do |word_prediction|
-          all_words.push(OcrWord.new(word_prediction))
+        @all_words = []
+        prediction['all_words'].each do |word_prediction|
+          @all_words.push(OcrWord.new(word_prediction))
         end
-        @all_words = all_words
       end
 
       # All the words on the page, ordered in lines.
@@ -81,12 +82,35 @@ module Mindee
 
         out_str = String.new
         lines.map do |line|
-          out_str << "#{line.to_s}\n" unless line.to_s.strip.empty?
+          out_str << "#{line}\n" unless line.to_s.strip.empty?
         end
         out_str.strip
       end
 
       private
+
+      # Helper function that iterates through all the words and compares them to a candidate
+      # @param sorted_words [Array<OcrWord>]
+      # @param current [OcrWord]
+      # @param indexes [Array<Integer>]
+      # @param current [Array<OcrLine>]
+      def parse_one(sorted_words, current, indexes, lines)
+        line = OcrLine.new([])
+        sorted_words.each_with_index do |word, idx|
+          next if indexes.include?(idx)
+
+          if current.nil?
+            current = word
+            indexes.push(idx)
+            line = OcrLine.new([])
+            line.push(word)
+          elsif words_on_same_line?(current, word)
+            line.push(word)
+            indexes.push(idx)
+          end
+        end
+        lines.push(line.sort_on_x) if line.any?
+      end
 
       # Order all the words on the page into lines.
       # @param current [OcrWord, nil]
@@ -99,28 +123,10 @@ module Mindee
         lines = []
 
         # make sure words are sorted from top to bottom
-        @all_words = all_words.sort_by { |word| Geometry.get_min_max_y(word.polygon).min }
-        @all_words.each do
-          line = OcrLine.new([])
-          @all_words.each_with_index do |word, idx|
-            if indexes.include?(idx)
-              next
-            elsif current.nil?
-              current = word
-              indexes.push(idx)
-              line = OcrLine.new([])
-              line.push(word)
-            else
-              if words_on_same_line?(current, word)
-                line.push(word)
-                indexes.push(idx)
-              end
-            end
-          end
+        all_words = @all_words.sort_by { |word| Geometry.get_min_max_y(word.polygon).min }
+        all_words.each do
+          parse_one(all_words, current, indexes, lines)
           current = nil
-          if line.any?
-            lines.push(line.sort_on_x)
-          end
         end
         lines
       end
@@ -134,7 +140,6 @@ module Mindee
         next_in_current = next_word.polygon.point_in_y?(current_word.polygon.centroid)
         current_in_next || next_in_current
       end
-
     end
 
     # Mindee Vision V1.
@@ -144,12 +149,10 @@ module Mindee
       attr_reader :pages
 
       def initialize(prediction)
-        pages = []
-        prediction["pages"].each do |page_prediction|
-          pages.push(OcrPage.new(page_prediction))
+        @pages = []
+        prediction['pages'].each do |page_prediction|
+          @pages.push(OcrPage.new(page_prediction))
         end
-        @pages = pages
-        # @pages = prediction["pages"].each { |page_prediction| OcrPage.new(page_prediction) }
       end
 
       def to_s
@@ -169,7 +172,7 @@ module Mindee
       attr_reader :mvision_v1
 
       def initialize(prediction)
-        @mvision_v1 = MVisionV1.new(prediction["mvision-v1"])
+        @mvision_v1 = MVisionV1.new(prediction['mvision-v1'])
       end
 
       def to_s

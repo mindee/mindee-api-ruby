@@ -91,7 +91,10 @@ module Mindee
     # @param http_response [Hash]
     def initialize(prediction_class, http_response)
       @api_request = Mindee::ApiRequest.new(http_response['api_request']) if http_response.key?('api_request')
-      if http_response.key?('document') && (!http_response.key?('job') || http_response['job']['status'] == 'completed') && @api_request.status == RequestStatus::SUCCESS
+      if http_response.key?('document') &&
+         (!http_response.key?('job') ||
+         http_response['job']['status'] == 'completed') &&
+         @api_request.status == RequestStatus::SUCCESS
         @document = Mindee::Document.new(prediction_class, http_response['document'])
       end
       @job = Mindee::Job.new(http_response['job']) if http_response.key?('job')
