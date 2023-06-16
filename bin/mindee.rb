@@ -30,10 +30,6 @@ DOCUMENTS = {
     help: "Passport",
     prediction: Mindee::Prediction::PassportV1,
   },
-  "shipping-container" => {
-    help: "Shipping Container",
-    prediction: Mindee::Prediction::ShippingContainerV1,
-  },
   "eu-license-plate" => {
     help: "EU License Plate",
     prediction: Mindee::Prediction::EU::LicensePlateV1,

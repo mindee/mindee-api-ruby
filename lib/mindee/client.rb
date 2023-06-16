@@ -270,9 +270,6 @@ module Mindee
       @doc_configs[['mindee', Prediction::EU::LicensePlateV1.name]] = standard_document_config(
         Prediction::EU::LicensePlateV1, 'license_plates', '1'
       )
-      @doc_configs[['mindee', Prediction::ShippingContainerV1.name]] = standard_document_config(
-        Prediction::ShippingContainerV1, 'shipping_containers', '1'
-      )
       @doc_configs[['mindee', Prediction::US::BankCheckV1.name]] = standard_document_config(
         Prediction::US::BankCheckV1, 'bank_check', '1'
       )
