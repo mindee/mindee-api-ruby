@@ -14,22 +14,22 @@ module Mindee
     # @return [Mindee::Ocr::Ocr, nil]
     attr_reader :ocr
 
+    # @param http_response [Hash]
+    # @return [Mindee::Ocr::Ocr]
+    def self.load_ocr(http_response)
+      ocr_prediction = http_response["document"].fetch("ocr", nil)
+      return nil if ocr_prediction.nil? || ocr_prediction.fetch("mvision-v1", nil).nil?
+
+      Ocr(ocr_prediction)
+    end
+
     # @param prediction_class [Class<Mindee::Prediction::Prediction>]
     # @param http_response [Hash]
     def initialize(prediction_class, http_response)
       @id = http_response['id']
       @name = http_response['name']
       @inference = Mindee::Inference.new(prediction_class, http_response['inference'])
-      @ocr = load_ocr(http_response)
-    end
-
-    # @param http_response [Hash]
-    # @return [Mindee::Ocr::Ocr]
-    def self.load_ocr(http_response):
-        ocr_prediction = http_response["document"].fetch("ocr", nil)
-        return nil if ocr_prediction.nil? || ocr_prediction.fetch("mvision-v1", nil).nil?
-
-        Ocr(ocr_prediction)
+      @ocr = self.class.load_ocr(http_response)
     end
 
     def to_s
