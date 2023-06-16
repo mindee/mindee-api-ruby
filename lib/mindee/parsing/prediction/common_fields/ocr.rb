@@ -23,7 +23,7 @@ module Mindee
       end
 
       def to_s
-        @text
+        @text.to_s
       end
     end
 
@@ -41,7 +41,7 @@ module Mindee
       end
 
       def to_s
-        each {|word| word.to_s}.join(' ')
+        each(&:to_s).join(' ')
       end
     end
 
@@ -53,9 +53,9 @@ module Mindee
       # @param lines [Array<OcrLines>]
       attr_reader :lines
 
-      def initialize
+      def initialize(prediction)
         @lines = []
-        @all_words = prediction["all_words"].each { |word_prediction| OcrWord?.new(word_prediction) }
+        @all_words = prediction["all_words"].each { |word_prediction| OcrWord.new(word_prediction) }
       end
 
       # All the words on the page, ordered in lines.
@@ -63,6 +63,10 @@ module Mindee
       def all_lines
         @lines = to_lines if @lines.empty?
         @lines
+      end
+
+      def to_s
+        all_lines.each(&:to_s).join('\n')
       end
 
       private
@@ -112,6 +116,7 @@ module Mindee
         next_in_current = next_word.polygon.point_in_y?(current_word.polygon.centroid)
         current_in_next || next_in_current
       end
+
     end
 
     # Mindee Vision V1.
@@ -140,7 +145,7 @@ module Mindee
       end
 
       def to_s
-        @mvision_v1
+        @mvision_v1.to_s
       end
     end
   end
