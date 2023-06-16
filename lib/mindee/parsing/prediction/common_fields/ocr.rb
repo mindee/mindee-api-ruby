@@ -33,11 +33,12 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction)
         super(prediction.map { |word_prediction| OcrWord.new(word_prediction) })
+        # super(prediction.map { |entry| TaxField.new(entry, page_id) })
       end
 
       # Sort the words on the line from left to right.
       def sort_on_x
-        sort_by { |word| word.polygon.get_min_max_x.min}
+        sort_by { |word| Geometry.get_min_max_x(word.polygon).min}
       end
 
       def to_s
@@ -55,18 +56,22 @@ module Mindee
 
       def initialize(prediction)
         @lines = []
-        @all_words = prediction["all_words"].each { |word_prediction| OcrWord.new(word_prediction) }
+        all_words = []
+        prediction["all_words"].each do |word_prediction|
+          all_words.push(OcrWord.new(word_prediction))
+        end
+        @all_words = all_words
       end
 
       # All the words on the page, ordered in lines.
-      # @return [OcrLine]
+      # @return [Array<OcrLine>]
       def all_lines
         @lines = to_lines if @lines.empty?
         @lines
       end
 
       def to_s
-        all_lines.each(&:to_s).join('\n')
+        all_lines.each(&:to_s).join("\n")
       end
 
       private
@@ -81,9 +86,9 @@ module Mindee
         lines = []
 
         # make sure words are sorted from top to bottom
-        @all_words = all_words.sort_by { |word| word.polygon.get_max_y.min }
+        @all_words = all_words.sort_by { |word| Geometry.get_min_max_y(word.polygon).min }
         @all_words.each do
-          line = OcrLine.new
+          line = OcrLine.new([])
           @all_words.each_with_index do |word, idx|
             if idx in indexes
               next
@@ -126,11 +131,21 @@ module Mindee
       attr_reader :pages
 
       def initialize(prediction)
-        @pages = prediction["pages"].each { |page_prediction| OcrPage.new(page_prediction) }
+        pages = []
+        prediction["pages"].each do |page_prediction|
+          pages.push(OcrPage.new(page_prediction))
+        end
+        @pages = pages
+        # @pages = prediction["pages"].each { |page_prediction| OcrPage.new(page_prediction) }
       end
 
       def to_s
-        @pages.each {|page| page.to_s}.join('\n')
+        out_str = String.new
+        @pages.map do |page|
+          out_str << "\n"
+          out_str << page.to_s
+        end
+        out_str
       end
     end
 
