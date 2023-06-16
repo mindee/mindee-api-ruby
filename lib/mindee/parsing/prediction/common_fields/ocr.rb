@@ -29,16 +29,21 @@ module Mindee
 
     # A list of words which are on the same line.
     class OcrLine < Array
-      # @param prediction [Hash]
+      # @param prediction [Hash, nil]
+      # @param array [Array, nil]
       # @param page_id [Integer, nil]
-      def initialize(prediction)
-        super(prediction.map { |word_prediction| OcrWord.new(word_prediction) })
-        # super(prediction.map { |entry| TaxField.new(entry, page_id) })
+      def initialize(prediction=nil, from_array=nil)
+        if !prediction.nil? 
+          super(prediction.map { |word_prediction| OcrWord.new(word_prediction) })
+        elsif !from_array.nil?
+          super(from_array)
+        end
       end
 
       # Sort the words on the line from left to right.
       def sort_on_x
-        sort_by { |word| Geometry.get_min_max_x(word.polygon).min}
+        from_array = sort { |word1, word2| Geometry.get_min_max_x(word1.polygon).min <=> Geometry.get_min_max_x(word2.polygon).min }
+        OcrLine.new(prediction=nil, from_array=from_array)
       end
 
       def to_s
@@ -71,7 +76,14 @@ module Mindee
       end
 
       def to_s
-        all_lines.each(&:to_s).join("\n")
+        lines = all_lines
+        return '' if lines.empty?
+
+        out_str = String.new
+        lines.map do |line|
+          out_str << "#{line.to_s}\n" unless line.to_s.strip.empty?
+        end
+        out_str.strip
       end
 
       private
@@ -79,7 +91,8 @@ module Mindee
       # Order all the words on the page into lines.
       # @param current [OcrWord, nil]
       # @param indexes [Array<Integer>]
-      # @param current [Array<OcrLine>]
+      # @param lines [Array<OcrLine>]
+      # @return [Array<OcrLine>]
       def to_lines
         current = nil
         indexes = []
@@ -90,13 +103,13 @@ module Mindee
         @all_words.each do
           line = OcrLine.new([])
           @all_words.each_with_index do |word, idx|
-            if idx in indexes
+            if indexes.include?(idx)
               next
             elsif current.nil?
               current = word
               indexes.push(idx)
-              line = OcrLine.new
-              line.append(word)
+              line = OcrLine.new([])
+              line.push(word)
             else
               if words_on_same_line?(current, word)
                 line.push(word)
@@ -106,10 +119,10 @@ module Mindee
           end
           current = nil
           if line.any?
-            line.sort_on_x
-            lines.append(line)
+            lines.push(line.sort_on_x)
           end
         end
+        lines
       end
 
       # Determine if two words are on the same line.
@@ -145,7 +158,7 @@ module Mindee
           out_str << "\n"
           out_str << page.to_s
         end
-        out_str
+        out_str.strip
       end
     end
 
