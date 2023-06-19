@@ -32,8 +32,7 @@ module Mindee
         # A list of words which are on the same line.
         class OcrLine < Array
           # @param prediction [Hash, nil]
-          # @param array [Array, nil]
-          # @param page_id [Integer, nil]
+          # @param from_array [Array, nil]
           def initialize(prediction = nil, from_array = nil)
             if !prediction.nil?
               super(prediction.map { |word_prediction| OcrWord.new(word_prediction) })
@@ -58,11 +57,12 @@ module Mindee
         # OCR extraction for a single page.
         class OcrPage
           # All the words on the page, in semi-random order.
-          # @param all_words [Array<OcrWord>]
+          # @return [Array<OcrWord>]
           attr_reader :all_words
-          # @param lines [Array<OcrLines>]
+          # @return [Array<OcrLines>]
           attr_reader :lines
 
+          # @param prediction [Hash]
           def initialize(prediction)
             @lines = []
             @all_words = []
@@ -95,7 +95,7 @@ module Mindee
           # @param sorted_words [Array<OcrWord>]
           # @param current [OcrWord]
           # @param indexes [Array<Integer>]
-          # @param current [Array<OcrLine>]
+          # @param lines [Array<OcrLine>]
           def parse_one(sorted_words, current, indexes, lines)
             line = OcrLine.new([])
             sorted_words.each_with_index do |word, idx|
@@ -115,10 +115,6 @@ module Mindee
           end
 
           # Order all the words on the page into lines.
-          # @param current [OcrWord, nil]
-          # @param indexes [Array<Integer>]
-          # @param lines [Array<OcrLine>]
-          # @return [Array<OcrLine>]
           def to_lines
             current = nil
             indexes = []
@@ -147,9 +143,10 @@ module Mindee
         # Mindee Vision V1.
         class MVisionV1
           # List of pages.
-          # @param pages [Array<OcrPage>]
+          # @return [Array<OcrPage>]
           attr_reader :pages
 
+          # @param prediction [Hash]
           def initialize(prediction)
             @pages = []
             prediction['pages'].each do |page_prediction|
@@ -173,6 +170,7 @@ module Mindee
           # @return [Mindee::Ocr::MVisionV1]
           attr_reader :mvision_v1
 
+          # @param prediction [Hash]
           def initialize(prediction)
             @mvision_v1 = MVisionV1.new(prediction['mvision-v1'])
           end

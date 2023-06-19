@@ -31,7 +31,7 @@ module Mindee
       attr_reader :invoice_page_groups
 
       # @param prediction [Hash]
-      # @param page_id [Integer, nil]
+      # @param _page_id [Integer, nil]
       def initialize(prediction, _page_id)
         construct_invoice_page_groups_from_prediction(prediction)
       end
