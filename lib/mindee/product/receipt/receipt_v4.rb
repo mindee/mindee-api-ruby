@@ -6,6 +6,9 @@ module Mindee
   module Product
     # Receipt document.
     class ReceiptV4
+      @endpoint_name = 'expense_receipts'
+      @endpoint_version = '4'
+
       # Where the purchase was made, the language, and the currency.
       # @return [Mindee::Locale]
       attr_reader :locale

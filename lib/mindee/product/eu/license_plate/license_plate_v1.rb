@@ -7,9 +7,8 @@ module Mindee
     module EU
       # License Plate v1 prediction results.
       class LicensePlateV1
-        
-        @@endpoint_name = 'license_plates'
-        @@endpoint_version = '1'
+        @endpoint_name = 'license_plates'
+        @endpoint_version = '1'
 
         # List of all license plates found in the image.
         # @return [Array<Mindee::TextField>]

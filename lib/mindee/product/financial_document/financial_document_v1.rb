@@ -7,6 +7,9 @@ module Mindee
   module Product
     # Financial Document v1 prediction results.
     class FinancialDocumentV1
+      @endpoint_name = 'financial_document'
+      @endpoint_version = '1'
+
       # The purchase category among predefined classes.
       # @return [Mindee::ClassificationField]
       attr_reader :category

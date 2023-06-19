@@ -7,6 +7,9 @@ module Mindee
   module Product
     # Invoice document.
     class InvoiceV4
+      @endpoint_name = 'invoices'
+      @endpoint_version = '4'
+
       # Locale information.
       # @return [Mindee::Locale]
       attr_reader :locale

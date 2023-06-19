@@ -7,6 +7,9 @@ module Mindee
     module FR
       # Carte Vitale v1 prediction results.
       class CarteVitaleV1
+        @endpoint_name = 'carte_vitale'
+        @endpoint_version = '1'
+
         # The given name(s) of the card holder.
         # @return [Array<Mindee::TextField>]
         attr_reader :given_names

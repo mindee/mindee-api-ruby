@@ -6,6 +6,9 @@ module Mindee
   module Product
     # Page Group for Invoice Splitter class
     class PageGroup
+      @endpoint_name = 'invoice_splitter'
+      @endpoint_version = '1'
+
       # @return[Array<Integer>]
       attr_reader :page_indexes
 

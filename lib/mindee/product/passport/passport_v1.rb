@@ -6,6 +6,9 @@ module Mindee
   module Product
     # Passport document.
     class PassportV1
+      @endpoint_name = 'passport'
+      @endpoint_version = '1'
+
       # The country of issue.
       # @return [Mindee::TextField]
       attr_reader :country

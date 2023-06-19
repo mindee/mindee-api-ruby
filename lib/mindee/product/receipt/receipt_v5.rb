@@ -7,6 +7,9 @@ module Mindee
   module Product
     # Expense Receipt v5 prediction results.
     class ReceiptV5
+      @endpoint_name = 'expense_receipts'
+      @endpoint_version = '5'
+
       # The purchase category among predefined classes.
       # @return [Mindee::ClassificationField]
       attr_reader :category
