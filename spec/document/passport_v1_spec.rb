@@ -25,7 +25,6 @@ describe Mindee::Product::PassportV1 do
       response = load_json(DIR_PASSPORT_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Product::PassportV1, response['document'])
       prediction = document.inference.prediction
-      expect(prediction.all_checks).to eq(true)
       expect(prediction.expired?).to eq(false)
       expect(document.to_s).to eq(to_string)
     end
@@ -35,7 +34,6 @@ describe Mindee::Product::PassportV1 do
       response = load_json(DIR_PASSPORT_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Product::PassportV1, response['document'])
       page = document.inference.pages[0]
-      expect(page.prediction.all_checks).to eq(true)
       expect(page.prediction.expired?).to eq(false)
       expect(page.to_s).to eq(to_string)
     end

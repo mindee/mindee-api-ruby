@@ -45,9 +45,6 @@ module Mindee
       # All the MRZ values combined.
       # @return [Mindee::TextField]
       attr_reader :mrz
-      # Validation checks for the document
-      # @return [Hash<Symbol, Boolean>]
-      attr_reader :checklist
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
@@ -68,7 +65,6 @@ module Mindee
         end
         @full_name = construct_full_name(page_id)
         @mrz = construct_mrz(page_id)
-        @checklist = {}
       end
 
       def to_s
@@ -93,11 +89,6 @@ module Mindee
         return true unless @expiry_date.date_object
 
         @expiry_date.date_object < Date.today
-      end
-
-      # @return [Boolean]
-      def all_checks
-        @checklist.all? { |_, value| value == true }
       end
 
       private
