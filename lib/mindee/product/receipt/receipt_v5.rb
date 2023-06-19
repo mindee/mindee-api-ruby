@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common/fields'
-require_relative '../../parsing/common/base'
+require_relative '../../parsing/common'
 require_relative 'receipt_v5_line_item'
 
 module Mindee
   module Product
     # Expense Receipt v5 prediction results.
-    class ReceiptV5 < Product
+    class ReceiptV5
       # The purchase category among predefined classes.
       # @return [Mindee::ClassificationField]
       attr_reader :category

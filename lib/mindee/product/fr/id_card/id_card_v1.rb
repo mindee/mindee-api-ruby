@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing/common/fields'
-require_relative '../../../parsing/common/base'
+require_relative '../../../parsing/common'
 
 module Mindee
   module Product
     module FR
       # Carte Nationale d'Identité v1 prediction results.
-      class IdCardV1 < Product
+      class IdCardV1
         # The side of the document which is visible.
         # @return [Mindee::TextField]
         attr_reader :document_side

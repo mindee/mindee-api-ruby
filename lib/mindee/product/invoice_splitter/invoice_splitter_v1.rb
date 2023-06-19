@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common/fields'
-require_relative '../../parsing/common/base'
+require_relative '../../parsing/common'
 
 module Mindee
   module Product
@@ -27,7 +26,7 @@ module Mindee
     end
 
     # Invoice Splitter prediction.
-    class InvoiceSplitterV1 < Product
+    class InvoiceSplitterV1
       # @return[Array<PageGroup>]
       attr_reader :invoice_page_groups
 

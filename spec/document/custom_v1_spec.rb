@@ -7,7 +7,7 @@ require_relative '../data'
 
 DIR_CUSTOM_V1 = File.join(DATA_DIR, 'custom', 'response_v1').freeze
 
-describe Mindee::Prediction::CustomV1 do
+describe Mindee::Product::CustomV1 do
   context 'A custom document V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_CUSTOM_V1, 'empty.json')

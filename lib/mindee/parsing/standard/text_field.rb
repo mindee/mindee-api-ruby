@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'base_product'
+require_relative 'base_field'
 
 module Mindee
   # Represents basic text information.

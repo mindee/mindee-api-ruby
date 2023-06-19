@@ -13,10 +13,10 @@ module Mindee
     # @return [Mindee::HTTP::Endpoint]
     attr_reader :endpoint
 
-    # @param prediction_class [Class<Mindee::Prediction::Prediction>]
+    # @param product_class [Class<Mindee::Product>]
     # @param endpoint [Mindee::HTTP::Endpoint]
-    def initialize(prediction_class, endpoint)
-      @prediction_class = prediction_class
+    def initialize(product_class, endpoint)
+      @product_class = product_class
       @endpoint = endpoint
     end
 

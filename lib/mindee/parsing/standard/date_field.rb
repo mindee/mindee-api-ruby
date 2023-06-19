@@ -2,7 +2,7 @@
 
 require 'date'
 
-require_relative 'base_product'
+require_relative 'base_field'
 
 module Mindee
   # Represents a date.

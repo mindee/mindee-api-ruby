@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common/base'
+require_relative '../../parsing/common'
 
 module Mindee
   # List of line item details.

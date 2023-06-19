@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'mindee/parsing'
+require 'mindee/product'
 
 require_relative '../../data'
 
 DIR_FR_CARTE_VITALE_V1 = File.join(DATA_DIR, 'fr', 'carte_vitale', 'response_v1').freeze
 
-describe Mindee::Prediction::FR::CarteVitaleV1 do
+describe Mindee::Product::FR::CarteVitaleV1 do
   context 'A Carte Vitale V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_FR_CARTE_VITALE_V1, 'empty.json')

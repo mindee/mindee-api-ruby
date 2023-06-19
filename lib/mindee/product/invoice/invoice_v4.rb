@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common/fields'
-require_relative '../../parsing/common/base'
+require_relative '../../parsing/common'
 require_relative 'invoice_v4_line_item'
 
 module Mindee
   module Product
     # Invoice document.
-    class InvoiceV4 < Product
+    class InvoiceV4
       # Locale information.
       # @return [Mindee::Locale]
       attr_reader :locale

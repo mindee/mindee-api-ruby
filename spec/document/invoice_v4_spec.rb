@@ -7,7 +7,7 @@ require_relative '../data'
 
 DIR_INVOICE_V4 = File.join(DATA_DIR, 'invoice', 'response_v4').freeze
 
-describe Mindee::Prediction::InvoiceV4 do
+describe Mindee::Product::InvoiceV4 do
   context 'An Invoice V4' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_INVOICE_V4, 'empty.json')

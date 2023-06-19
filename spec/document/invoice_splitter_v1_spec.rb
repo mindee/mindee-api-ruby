@@ -7,7 +7,7 @@ require_relative '../data'
 
 DIR_INVOICE_SPLITTER_V1 = File.join(DATA_DIR, 'invoice_splitter', 'response_v1').freeze
 
-describe Mindee::Prediction::InvoiceSplitterV1 do
+describe Mindee::Product::InvoiceSplitterV1 do
   context 'An Invoice Splitter V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_INVOICE_SPLITTER_V1, 'empty.json')

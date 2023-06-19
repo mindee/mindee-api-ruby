@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common/fields'
-require_relative '../../parsing/common/base'
+require_relative '../../parsing/common'
 
 module Mindee
   module Product
     # Passport document.
-    class PassportV1 < Product
+    class PassportV1
       # The country of issue.
       # @return [Mindee::TextField]
       attr_reader :country

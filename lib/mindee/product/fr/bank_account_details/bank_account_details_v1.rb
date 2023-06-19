@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing/common/fields'
-require_relative '../../../parsing/common/base'
+require_relative '../../../parsing/common'
 
 module Mindee
   module Product
     module FR
       # Bank Account Details v1 prediction results.
-      class BankAccountDetailsV1 < Product
+      class BankAccountDetailsV1
         # The International Bank Account Number (IBAN).
         # @return [Mindee::TextField]
         attr_reader :iban

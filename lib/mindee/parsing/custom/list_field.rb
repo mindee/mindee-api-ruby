@@ -2,23 +2,28 @@
 
 module Mindee
   module Custom
-    # Document classification (custom docs)
-    class ClassificationField
-      # The classification value
-      # @return [String]
-      attr_reader :value
+    # Field in a list.
+    class ListFieldItem
       # The confidence score, value will be between 0.0 and 1.0
       # @return [Float]
       attr_accessor :confidence
+      # @return [Mindee::Geometry::Quadrilateral]
+      attr_reader :bounding_box
+      # @return [Mindee::Geometry::Polygon]
+      attr_reader :polygon
+      attr_reader :content
 
       # @param prediction [Hash]
       def initialize(prediction)
-        @value = prediction['value']
+        @content = prediction['content']
         @confidence = prediction['confidence']
+        @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
+        @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
       end
 
+      # @return [String]
       def to_s
-        @value.nil? ? '' : @value
+        @content.to_s
       end
     end
 

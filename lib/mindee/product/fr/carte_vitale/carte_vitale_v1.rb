@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing/common/fields'
-require_relative '../../../parsing/common/base'
+require_relative '../../../parsing/common'
 
 module Mindee
   module Product
     module FR
       # Carte Vitale v1 prediction results.
-      class CarteVitaleV1 < Product
+      class CarteVitaleV1
         # The given name(s) of the card holder.
         # @return [Array<Mindee::TextField>]
         attr_reader :given_names

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'parsing/prediction'
-require_relative 'parsing/document'
-require_relative 'parsing/api_response'
+require_relative 'parsing/standard'
+require_relative 'parsing/custom'
+require_relative 'parsing/common'

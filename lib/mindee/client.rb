@@ -21,7 +21,7 @@ module Mindee
     #
     # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     #
-    # @param prediction_class [Mindee::Prediction::Prediction]
+    # @param product_class [Mindee::Product]
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.
@@ -52,7 +52,7 @@ module Mindee
     # rubocop:disable Metrics/ParameterLists
     def parse(
       input_source,
-      prediction_class,
+      product_class,
       endpoint_name: '',
       account_name: '',
       all_words: false,
@@ -61,18 +61,18 @@ module Mindee
       cropper: false
     )
 
-      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
+      @doc_config = find_doc_config(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::ApiResponse.new(prediction_class, @doc_config.predict(input_source, all_words, close_file, cropper))
+      Mindee::ApiResponse.new(product_class, @doc_config.predict(input_source, all_words, close_file, cropper))
     end
 
     # Enqueue a document for async parsing
     #
     # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     #
-    # @param prediction_class [Mindee::Prediction::Prediction]
+    # @param product_class [Mindee::Product]
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.
@@ -102,7 +102,7 @@ module Mindee
     # @return [Mindee::ApiResponse]
     def enqueue(
       input_source,
-      prediction_class,
+      product_class,
       endpoint_name: '',
       account_name: '',
       all_words: false,
@@ -110,18 +110,18 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
+      @doc_config = find_doc_config(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::ApiResponse.new(prediction_class,
+      Mindee::ApiResponse.new(product_class,
                               @doc_config.predict_async(input_source, all_words, close_file, cropper))
     end
     # rubocop:enable Metrics/ParameterLists
 
     # Parses a queued document
     #
-    # @param prediction_class [Mindee::Prediction::Prediction]
+    # @param product_class [Mindee::Product]
     #
     # @param job_id [String] Id of the job (queue) to poll from
     #
@@ -135,14 +135,14 @@ module Mindee
     #
     # @return [Mindee::ApiResponse]
     def parse_queued(
-      prediction_class,
+      product_class,
       job_id,
       endpoint_name: '',
       account_name: ''
     )
 
-      @doc_config = find_doc_config(prediction_class, endpoint_name, account_name)
-      Mindee::ApiResponse.new(prediction_class, @doc_config.parse_async(job_id))
+      @doc_config = find_doc_config(product_class, endpoint_name, account_name)
+      Mindee::ApiResponse.new(product_class, @doc_config.parse_async(job_id))
     end
 
     # Configure a custom document using the 'Mindee API Builder'.
@@ -162,7 +162,7 @@ module Mindee
       self
     end
 
-    # @param document_class [Mindee::Prediction::Prediction]
+    # @param document_class [Mindee::Product]
     # @param endpoint_name [String]
     # @return [String]
     def determine_endpoint_name(document_class, endpoint_name)
@@ -173,7 +173,7 @@ module Mindee
       endpoint_name
     end
 
-    # @param document_class [Mindee::Prediction::Prediction]
+    # @param document_class [Mindee::Product]
     # @param endpoint_name [String]
     # @param account_name [String]
     # @return [Mindee::PathInputSource]
@@ -241,9 +241,9 @@ module Mindee
 
     private
 
-    def standard_document_config(prediction_class, endpoint_name, version)
+    def standard_document_config(product_class, endpoint_name, version)
       DocumentConfig.new(
-        prediction_class,
+        product_class,
         HTTP::StandardEndpoint.new(endpoint_name, version, @api_key)
       )
     end

@@ -8,51 +8,51 @@ require 'mindee'
 DOCUMENTS = {
   "custom" => {
     help: "Custom document type from API builder",
-    prediction: Mindee::Prediction::CustomV1,
+    prediction: Mindee::Product::CustomV1,
   },
   "proof-of-address" => {
     help: 'Proof of Address',
-    prediction: Mindee::Prediction::ProofOfAddressV1,
+    prediction: Mindee::Product::ProofOfAddressV1,
   },
   "financial-document" => {
     help: 'Financial Document',
-    prediction: Mindee::Prediction::FinancialDocumentV1,
+    prediction: Mindee::Product::FinancialDocumentV1,
   },
   "invoice" => {
     help: 'Invoice',
-    prediction: Mindee::Prediction::InvoiceV4,
+    prediction: Mindee::Product::InvoiceV4,
   },
   "receipt" => {
     help: "Expense Receipt",
-    prediction: Mindee::Prediction::ReceiptV5,
+    prediction: Mindee::Product::ReceiptV5,
   },
   "passport" => {
     help: "Passport",
-    prediction: Mindee::Prediction::PassportV1,
+    prediction: Mindee::Product::PassportV1,
   },
   "eu-license-plate" => {
     help: "EU License Plate",
-    prediction: Mindee::Prediction::EU::LicensePlateV1,
+    prediction: Mindee::Product::EU::LicensePlateV1,
   },
   "fr-bank-account-details" => {
     help: "FR Bank Account Details",
-    prediction: Mindee::Prediction::FR::BankAccountDetailsV1,
+    prediction: Mindee::Product::FR::BankAccountDetailsV1,
   },
   "fr-carte-vitale" => {
     help: "FR Carte Vitale",
-    prediction: Mindee::Prediction::FR::CarteVitaleV1,
+    prediction: Mindee::Product::FR::CarteVitaleV1,
   },
   "fr-id-card" => {
     help: "FR ID Card",
-    prediction: Mindee::Prediction::FR::IdCardV1,
+    prediction: Mindee::Product::FR::IdCardV1,
   },
   "us-bank-check" => {
     help: "US Bank Check",
-    prediction: Mindee::Prediction::US::BankCheckV1,
+    prediction: Mindee::Product::US::BankCheckV1,
   },
   "invoice-splitter" => {
     help: "US Bank Check",
-    prediction: Mindee::Prediction::InvoiceSplitterV1,
+    prediction: Mindee::Product::InvoiceSplitterV1,
   },
 }
 

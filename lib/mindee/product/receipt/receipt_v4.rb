@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common/fields'
-require_relative '../../parsing/common/base'
+require_relative '../../parsing/common'
 
 module Mindee
   module Product
     # Receipt document.
-    class ReceiptV4 < Product
+    class ReceiptV4
       # Where the purchase was made, the language, and the currency.
       # @return [Mindee::Locale]
       attr_reader :locale

@@ -7,7 +7,7 @@ require_relative '../data'
 
 DIR_FINANCIAL_DOCUMENT_V1 = File.join(DATA_DIR, 'financial_document', 'response_v1').freeze
 
-describe Mindee::Prediction::FinancialDocumentV1 do
+describe Mindee::Product::FinancialDocumentV1 do
   context 'A FinancialDocumentV1' do
     context 'when processing an invoice' do
       it 'should load an empty document prediction' do
