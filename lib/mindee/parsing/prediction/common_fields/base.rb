@@ -5,7 +5,7 @@ require_relative '../../../geometry'
 module Mindee
   # Base Field object, upon which fields and feature fields are built
   class AbstractField
-    # @return [Array<Array<Float>>]
+    # @return [Mindee::Geometry::Quadrilateral]
     attr_reader :bounding_box
     # @return [Mindee::Geometry::Polygon]
     attr_reader :polygon
