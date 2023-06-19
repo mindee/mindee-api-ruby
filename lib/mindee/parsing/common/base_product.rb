@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+module Mindee
+  module Product
+    # Base document object.
+    class Product
+      # document type
+      # @return [String]
+      attr_reader :document_type
+      # Validation checks for the document
+      # @return [Hash<Symbol, Boolean>]
+      attr_reader :checklist
+      # Original filename of the document
+      # @return [String, nil]
+      attr_reader :filename
+      # Detected MIME type of the document
+      # @return [String, nil]
+      attr_reader :file_mimetype
+
+      def initialize(_prediction, _page_id)
+        @checklist = {}
+      end
+
+      # @return [Boolean]
+      def all_checks
+        @checklist.all? { |_, value| value == true }
+      end
+    end
+  end
+end
