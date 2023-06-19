@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common'
+require_relative '../../parsing'
 
 module Mindee
   module Product
@@ -45,11 +45,13 @@ module Mindee
       # All the MRZ values combined.
       # @return [Mindee::TextField]
       attr_reader :mrz
+      # Validation checks for the document
+      # @return [Hash<Symbol, Boolean>]
+      attr_reader :checklist
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
-        super
         @country = TextField.new(prediction['country'], page_id)
         @id_number = TextField.new(prediction['id_number'], page_id)
         @birth_date = DateField.new(prediction['birth_date'], page_id)
@@ -66,6 +68,7 @@ module Mindee
         end
         @full_name = construct_full_name(page_id)
         @mrz = construct_mrz(page_id)
+        @checklist = {}
       end
 
       def to_s
@@ -92,6 +95,11 @@ module Mindee
         @expiry_date.date_object < Date.today
       end
 
+      # @return [Boolean]
+      def all_checks
+        @checklist.all? { |_, value| value == true }
+      end
+      
       private
 
       def construct_full_name(page_id)

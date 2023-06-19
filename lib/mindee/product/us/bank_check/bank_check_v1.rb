@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common'
+require_relative '../../../parsing'
 
 module Mindee
   module Product
@@ -35,7 +35,6 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super
           @account_number = TextField.new(prediction['account_number'], page_id)
           @amount = AmountField.new(prediction['amount'], page_id)
           @check_number = TextField.new(prediction['check_number'], page_id)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common'
+require_relative '../../parsing'
 
 module Mindee
   module Product
@@ -37,7 +37,6 @@ module Mindee
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
-        super
         @locale = Locale.new(prediction['locale'], page_id)
         @issuer_name = TextField.new(prediction['issuer_name'], page_id)
         @issuer_company_registration = []

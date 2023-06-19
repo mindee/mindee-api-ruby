@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing/common'
+require_relative '../../parsing'
 
 module Mindee
   # Line items for invoices

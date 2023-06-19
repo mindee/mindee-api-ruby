@@ -11,21 +11,21 @@ describe Mindee::Product::FR::IdCardV1 do
   context 'A Carte Nationale d\'Identité V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_FR_ID_CARD_V1, 'empty.json')
-      inference = Mindee::Document.new(Mindee::Prediction::FR::IdCardV1, response['document']).inference
+      inference = Mindee::Document.new(Mindee::Product::FR::IdCardV1, response['document']).inference
       expect(inference.product.type).to eq('standard')
     end
 
     it 'should load a complete document prediction' do
       to_string = read_file(DIR_FR_ID_CARD_V1, 'summary_full.rst')
       response = load_json(DIR_FR_ID_CARD_V1, 'complete.json')
-      document = Mindee::Document.new(Mindee::Prediction::FR::IdCardV1, response['document'])
+      document = Mindee::Document.new(Mindee::Product::FR::IdCardV1, response['document'])
       expect(document.to_s).to eq(to_string)
     end
 
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_FR_ID_CARD_V1, 'summary_page0.rst')
       response = load_json(DIR_FR_ID_CARD_V1, 'complete.json')
-      document = Mindee::Document.new(Mindee::Prediction::FR::IdCardV1, response['document'])
+      document = Mindee::Document.new(Mindee::Product::FR::IdCardV1, response['document'])
       page = document.inference.pages[0]
       expect(page.to_s).to eq(to_string)
     end

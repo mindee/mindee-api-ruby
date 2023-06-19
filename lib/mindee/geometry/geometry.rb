@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'quadrilateral'
+require_relative 'polygon'
+require_relative 'point'
+require_relative 'utils'
+
 module Mindee
   # Various helper functions & classes for geometry.
   module Geometry

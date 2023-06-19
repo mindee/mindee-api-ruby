@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing/common'
+require_relative '../../../parsing'
 
 module Mindee
   module Product
@@ -23,7 +23,6 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super
           @given_names = []
           prediction['given_names'].each do |item|
             @given_names.push(TextField.new(item, page_id))

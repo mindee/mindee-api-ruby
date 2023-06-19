@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../geometry'
+require_relative '../../geometry'
 
 module Mindee
   # Base Field object, upon which fields and feature fields are built

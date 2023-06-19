@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common'
+require_relative '../../parsing'
 require_relative 'receipt_v5_line_item'
 
 module Mindee
@@ -38,7 +38,7 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :supplier_phone_number
       # List of tax lines information.
-      # @return [Mindee::Taxes]
+      # @return [Mindee::Parsing::Standard::Taxes]
       attr_reader :taxes
       # The time the purchase was made.
       # @return [Mindee::TextField]
@@ -59,7 +59,6 @@ module Mindee
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
-        super
         @category = ClassificationField.new(prediction['category'], page_id)
         @date = DateField.new(prediction['date'], page_id)
         @document_type = ClassificationField.new(prediction['document_type'], page_id)

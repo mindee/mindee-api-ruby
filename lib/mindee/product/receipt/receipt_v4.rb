@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../parsing/common'
+require_relative '../../parsing'
 
 module Mindee
   module Product
@@ -25,7 +25,7 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :supplier
       # List of taxes detected on the receipt.
-      # @return [Mindee::Taxes]
+      # @return [Mindee::Parsing::Standard::Taxes]
       attr_reader :taxes
       # Time as seen on the receipt in HH:MM format.
       # @return [Mindee::TextField]
@@ -46,7 +46,6 @@ module Mindee
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
-        super
         @locale = Locale.new(prediction['locale'])
         @total_amount = AmountField.new(prediction['total_amount'], page_id)
         @total_net = AmountField.new(prediction['total_net'], page_id)

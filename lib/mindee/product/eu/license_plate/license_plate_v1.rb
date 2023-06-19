@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing/common'
+require_relative '../../../parsing'
 
 module Mindee
   module Product
     module EU
       # License Plate v1 prediction results.
-      class LicensePlateV1 < Procut
+      class LicensePlateV1
         # List of all license plates found in the image.
         # @return [Array<Mindee::TextField>]
         attr_reader :license_plates
@@ -14,7 +14,6 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super
           @license_plates = []
           prediction['license_plates'].each do |item|
             @license_plates.push(TextField.new(item, page_id))

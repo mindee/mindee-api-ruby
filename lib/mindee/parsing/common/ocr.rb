@@ -184,4 +184,6 @@ module Mindee
       end
     end
   end
+  class Ocr < Mindee::Parsing::Common::Ocr::Ocr
+  end
 end
