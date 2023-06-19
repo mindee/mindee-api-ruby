@@ -4,7 +4,6 @@ require_relative 'document'
 require 'time'
 
 module Mindee
-  
   module JobStatus
     WAITING = :waiting
     PROCESSING = :processing
@@ -95,9 +94,9 @@ module Mindee
         def initialize(product_class, http_response)
           @api_request = Mindee::ApiRequest.new(http_response['api_request']) if http_response.key?('api_request')
           if http_response.key?('document') &&
-            (!http_response.key?('job') ||
-            http_response['job']['status'] == 'completed') &&
-            @api_request.status == RequestStatus::SUCCESS
+             (!http_response.key?('job') ||
+             http_response['job']['status'] == 'completed') &&
+             @api_request.status == RequestStatus::SUCCESS
             @document = Mindee::Document.new(product_class, http_response['document'])
           end
           @job = Mindee::Job.new(http_response['job']) if http_response.key?('job')
@@ -105,10 +104,13 @@ module Mindee
       end
     end
   end
+
   class ApiResponse < Mindee::Parsing::Common::ApiResponse
   end
+
   class ApiRequest < Mindee::Parsing::Common::ApiRequest
   end
+
   class Job < Mindee::Parsing::Common::Job
   end
 end

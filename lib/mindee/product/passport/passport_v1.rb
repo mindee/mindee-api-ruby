@@ -99,7 +99,7 @@ module Mindee
       def all_checks
         @checklist.all? { |_, value| value == true }
       end
-      
+
       private
 
       def construct_full_name(page_id)

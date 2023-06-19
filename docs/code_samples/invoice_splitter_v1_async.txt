@@ -7,7 +7,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.doc_from_path('/path/to/the/file.ext')
 
 # Put the document class in a local variable to keep the code DRY
-doc_class = Mindee::Prediction::InvoiceSplitterV1
+doc_class = Mindee::Product::InvoiceSplitterV1
 
 # Limit the amount of API calls to retrieve your document
 MAX_RETRIES = 10

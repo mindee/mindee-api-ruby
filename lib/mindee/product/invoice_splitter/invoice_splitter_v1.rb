@@ -32,7 +32,7 @@ module Mindee
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
-      def initialize(prediction, page_id)
+      def initialize(prediction, _page_id)
         construct_invoice_page_groups_from_prediction(prediction)
       end
 

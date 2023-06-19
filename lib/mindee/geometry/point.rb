@@ -33,4 +33,3 @@ module Mindee
     end
   end
 end
-  

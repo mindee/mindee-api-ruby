@@ -27,31 +27,6 @@ module Mindee
       end
     end
 
-    # Field in a list.
-    class ListFieldItem
-      # The confidence score, value will be between 0.0 and 1.0
-      # @return [Float]
-      attr_accessor :confidence
-      # @return [Mindee::Geometry::Quadrilateral]
-      attr_reader :bounding_box
-      # @return [Mindee::Geometry::Polygon]
-      attr_reader :polygon
-      attr_reader :content
-
-      # @param prediction [Hash]
-      def initialize(prediction)
-        @content = prediction['content']
-        @confidence = prediction['confidence']
-        @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
-        @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
-      end
-
-      # @return [String]
-      def to_s
-        @content.to_s
-      end
-    end
-
     # Field where actual values are kept in a list (custom docs).
     class ListField
       # @return [Array<Mindee::ListFieldItem>]

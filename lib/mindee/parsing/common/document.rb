@@ -44,6 +44,7 @@ module Mindee
       end
     end
   end
+
   class Document < Mindee::Parsing::Common::Document
   end
 end
