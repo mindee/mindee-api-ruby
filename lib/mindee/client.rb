@@ -196,6 +196,10 @@ module Mindee
     private
 
     def create_config(account_name, product_class, endpoint_name)
+      if endpoint_name.empty? && product_class == Mindee::CustomV1
+        raise 'endpoint_name is required when using custom class'
+      end
+
       version = if product_class.endpoint_version.nil?
                   '1'
                 else

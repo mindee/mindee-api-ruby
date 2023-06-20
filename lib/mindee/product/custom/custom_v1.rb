@@ -6,6 +6,9 @@ module Mindee
   module Product
     # Custom document object.
     class CustomV1
+      @endpoint_name = ''
+      @endpoint_version = '1'
+
       # All value fields in the document
       # @return [Hash<Symbol, Mindee::Custom::ListField>]
       attr_reader :fields
@@ -50,6 +53,10 @@ module Mindee
         else
           throw 'Unknown API field type'
         end
+      end
+
+      class << self
+        attr_reader :endpoint_name, :endpoint_version
       end
     end
   end
