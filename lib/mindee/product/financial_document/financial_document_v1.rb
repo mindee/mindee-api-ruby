@@ -182,6 +182,10 @@ module Mindee
         out_str << "\n  #{line_items}"
         out_str << "\n#{line_items_separator('-')}"
       end
+
+      class << self
+        attr_reader :endpoint_name, :endpoint_version
+      end
     end
   end
 end

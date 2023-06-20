@@ -8,10 +8,6 @@ describe Mindee::Client do
   context 'A client' do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
 
-    it 'should be configurable' do
-      mindee_client.add_endpoint('dummy', 'dummy', version: '1')
-    end
-
     it 'should open PDF files from a path' do
       doc = mindee_client.doc_from_path("#{DATA_DIR}/invoice/invoice.pdf")
       expect(doc).to respond_to(:read_document)

@@ -14,7 +14,6 @@ module Mindee
     def initialize(api_key: '')
       @doc_configs = {}
       @api_key = api_key
-      init_default_endpoints
     end
 
     # Call prediction API on a document and parse the results.
@@ -60,7 +59,6 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-
       @doc_config = find_doc_config(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
@@ -140,63 +138,19 @@ module Mindee
       endpoint_name: '',
       account_name: ''
     )
-
       @doc_config = find_doc_config(product_class, endpoint_name, account_name)
       Mindee::ApiResponse.new(product_class, @doc_config.parse_async(job_id))
     end
 
-    # Configure a custom document using the 'Mindee API Builder'.
-    # @param account_name [String] Your organization's username on the API Builder
-    # @param endpoint_name [String] The "API name" field in the "Settings" page of the API Builder
-    # @param version [String] Specify the version of the model to use. If not set, use the latest version of the model.
-    # @return [Mindee::Client]
-    def add_endpoint(
-      account_name,
-      endpoint_name,
-      version: '1'
-    )
-      @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
-        Product::CustomV1,
-        HTTP::CustomEndpoint.new(account_name, endpoint_name, version, @api_key)
-      )
-      self
-    end
-
-    # @param document_class [Mindee::Product]
-    # @param endpoint_name [String]
-    # @return [String]
-    def determine_endpoint_name(document_class, endpoint_name)
-      return document_class.name if document_class.name != Product::CustomV1.name
-
-      raise "endpoint_name is required when using #{document_class.name} class" if endpoint_name.empty?
-
-      endpoint_name
-    end
-
-    # @param document_class [Mindee::Product]
+    # @param product_class [Mindee::Product]
     # @param endpoint_name [String]
     # @param account_name [String]
     # @return [Mindee::PathInputSource]
-    def find_doc_config(document_class, endpoint_name, account_name)
-      endpoint_name = determine_endpoint_name(document_class, endpoint_name)
-
-      found = []
-      @doc_configs.each_key do |conf|
-        found.push(conf) if conf[1] == endpoint_name
-      end
-      raise "Endpoint not configured: #{endpoint_name}" if found.empty?
-
-      if !account_name.empty?
-        config_key = [account_name, endpoint_name]
-      elsif found.length == 1
-        config_key = found[0]
-      else
-        usernames = found.map { |conf| conf[0] }
-        raise "Duplicate configuration detected.\n" \
-              "You specified the document '#{endpoint_name}' in your custom config.\n" \
-              "To avoid confusion, please add the 'account_name' attribute to " \
-              "the parse method, one of #{usernames}."
-      end
+    def find_doc_config(product_class, endpoint_name, account_name)
+      account_name = 'mindee' if account_name.nil? || account_name.empty?
+      endpoint_name = product_class.endpoint_name if endpoint_name.nil? || endpoint_name.empty?
+      create_config(account_name, product_class, endpoint_name)
+      config_key = [account_name, endpoint_name]
 
       @doc_configs[config_key]
     end
@@ -241,51 +195,16 @@ module Mindee
 
     private
 
-    def standard_document_config(product_class, endpoint_name, version)
-      DocumentConfig.new(
+    def create_config(account_name, product_class, endpoint_name)
+      version = if product_class.endpoint_version.nil?
+                  '1'
+                else
+                  product_class.endpoint_version
+                end
+      @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
         product_class,
-        HTTP::StandardEndpoint.new(endpoint_name, version, @api_key)
+        HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
       )
-    end
-
-    def init_default_endpoints
-      @doc_configs[['mindee', Product::ProofOfAddressV1.name]] = standard_document_config(
-        Product::ProofOfAddressV1, 'proof_of_address', '1'
-      )
-      @doc_configs[['mindee', Product::FinancialDocumentV1.name]] = standard_document_config(
-        Product::FinancialDocumentV1, 'financial_document', '1'
-      )
-      @doc_configs[['mindee', Product::InvoiceV4.name]] = standard_document_config(
-        Product::InvoiceV4, 'invoices', '4'
-      )
-      @doc_configs[['mindee', Product::ReceiptV4.name]] = standard_document_config(
-        Product::ReceiptV4, 'expense_receipts', '4'
-      )
-      @doc_configs[['mindee', Product::ReceiptV5.name]] = standard_document_config(
-        Product::ReceiptV5, 'expense_receipts', '5'
-      )
-      @doc_configs[['mindee', Product::PassportV1.name]] = standard_document_config(
-        Product::PassportV1, 'passport', '1'
-      )
-      @doc_configs[['mindee', Product::EU::LicensePlateV1.name]] = standard_document_config(
-        Product::EU::LicensePlateV1, 'license_plates', '1'
-      )
-      @doc_configs[['mindee', Product::US::BankCheckV1.name]] = standard_document_config(
-        Product::US::BankCheckV1, 'bank_check', '1'
-      )
-      @doc_configs[['mindee', Product::FR::BankAccountDetailsV1.name]] = standard_document_config(
-        Product::FR::BankAccountDetailsV1, 'bank_account_details', '1'
-      )
-      @doc_configs[['mindee', Product::FR::CarteVitaleV1.name]] = standard_document_config(
-        Product::FR::CarteVitaleV1, 'carte_vitale', '1'
-      )
-      @doc_configs[['mindee', Product::FR::IdCardV1.name]] = standard_document_config(
-        Product::FR::IdCardV1, 'idcard_fr', '1'
-      )
-      @doc_configs[['mindee', Product::InvoiceSplitterV1.name]] = standard_document_config(
-        Product::InvoiceSplitterV1, 'invoice_splitter', '1'
-      )
-      self
     end
   end
 end

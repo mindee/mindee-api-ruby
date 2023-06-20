@@ -127,9 +127,6 @@ if command == 'custom'
   end
   doc_type = ARGV[0]
   file_path = ARGV[1]
-  mindee_client.add_endpoint(
-    options[:account_name], doc_type, version: options[:version] || '1',
-  )
 else
   if ARGV.length != 1
     $stderr.puts 'No file specified.'

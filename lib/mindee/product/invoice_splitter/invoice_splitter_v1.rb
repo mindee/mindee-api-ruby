@@ -6,9 +6,6 @@ module Mindee
   module Product
     # Page Group for Invoice Splitter class
     class PageGroup
-      @endpoint_name = 'invoice_splitter'
-      @endpoint_version = '1'
-
       # @return[Array<Integer>]
       attr_reader :page_indexes
 
@@ -30,6 +27,8 @@ module Mindee
 
     # Invoice Splitter prediction.
     class InvoiceSplitterV1
+      @endpoint_name = 'invoice_splitter'
+      @endpoint_version = '1'
       # @return[Array<PageGroup>]
       attr_reader :invoice_page_groups
 
@@ -57,6 +56,10 @@ module Mindee
           end
         end
         out_str[1..].to_s
+      end
+
+      class << self
+        attr_reader :endpoint_name, :endpoint_version
       end
     end
   end

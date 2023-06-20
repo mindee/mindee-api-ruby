@@ -80,6 +80,10 @@ module Mindee
           out_str << "\n:MRZ Line 2: #{@mrz2}".rstrip
           out_str[1..].to_s
         end
+
+        class << self
+          attr_reader :endpoint_name, :endpoint_version
+        end
       end
     end
   end

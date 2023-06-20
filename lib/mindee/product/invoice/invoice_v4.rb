@@ -204,6 +204,10 @@ module Mindee
 
         @total_tax = AmountField.new(total_tax, page_id, reconstructed: true)
       end
+
+      class << self
+        attr_reader :endpoint_name, :endpoint_version
+      end
     end
   end
 end

@@ -44,6 +44,10 @@ module Mindee
           out_str << "\n:Issuance Date: #{@issuance_date}".rstrip
           out_str[1..].to_s
         end
+
+        class << self
+          attr_reader :endpoint_name, :endpoint_version
+        end
       end
     end
   end

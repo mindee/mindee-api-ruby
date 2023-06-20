@@ -128,13 +128,6 @@ module Mindee
       end
     end
 
-    # Receipt API endpoint
-    class StandardEndpoint < Endpoint
-      def initialize(endpoint_name, version, api_key)
-        super('mindee', endpoint_name, version, api_key: api_key)
-      end
-    end
-
     # Custom (constructed) API endpoint
     class CustomEndpoint < Endpoint
       def initialize(account_name, endpoint_name, version, api_key)

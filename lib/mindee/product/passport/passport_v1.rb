@@ -117,6 +117,10 @@ module Mindee
         }
         TextField.new(mrz, page_id, reconstructed: true)
       end
+
+      class << self
+        attr_reader :endpoint_name, :endpoint_version
+      end
     end
   end
 end

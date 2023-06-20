@@ -35,6 +35,10 @@ module Mindee
           out_str << "\n:SWIFT Code: #{@swift}".rstrip
           out_str[1..].to_s
         end
+
+        class << self
+          attr_reader :endpoint_name, :endpoint_version
+        end
       end
     end
   end
