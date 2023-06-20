@@ -26,7 +26,7 @@ module Mindee
       class Page
         # @return [Integer]
         attr_reader :id
-        # @return [Mindee::Prediction]
+        # @return [Mindee::Product]
         attr_reader :prediction
         # @return [Mindee::Orientation]
         attr_reader :orientation

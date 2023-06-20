@@ -12,9 +12,9 @@ module Mindee
         attr_reader :is_rotation_applied
         # @return [Array<Mindee::Page>]
         attr_reader :pages
-        # @return [Mindee::Prediction]
-        attr_reader :prediction
         # @return [Mindee::Product]
+        attr_reader :prediction
+        # @return [Mindee::Parsing::Common::Product]
         attr_reader :product
 
         # @param product_class [Class<Mindee::Product>]
