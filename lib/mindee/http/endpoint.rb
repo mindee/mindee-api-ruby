@@ -127,12 +127,5 @@ module Mindee
         response
       end
     end
-
-    # Custom (constructed) API endpoint
-    class CustomEndpoint < Endpoint
-      def initialize(account_name, endpoint_name, version, api_key)
-        super(account_name, endpoint_name, version, api_key: api_key)
-      end
-    end
   end
 end

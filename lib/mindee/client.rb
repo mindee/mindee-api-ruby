@@ -12,7 +12,6 @@ module Mindee
   class Client
     # @param api_key [String]
     def initialize(api_key: '')
-      @doc_configs = {}
       @api_key = api_key
     end
 
@@ -59,11 +58,11 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      @doc_config = find_doc_config(product_class, endpoint_name, account_name)
+      doc_config = find_doc_config(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::ApiResponse.new(product_class, @doc_config.predict(input_source, all_words, close_file, cropper))
+      Mindee::ApiResponse.new(product_class, doc_config.predict(input_source, all_words, close_file, cropper))
     end
 
     # Enqueue a document for async parsing
@@ -108,12 +107,12 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      @doc_config = find_doc_config(product_class, endpoint_name, account_name)
+      doc_config = find_doc_config(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       Mindee::ApiResponse.new(product_class,
-                              @doc_config.predict_async(input_source, all_words, close_file, cropper))
+                              doc_config.predict_async(input_source, all_words, close_file, cropper))
     end
     # rubocop:enable Metrics/ParameterLists
 
@@ -138,21 +137,8 @@ module Mindee
       endpoint_name: '',
       account_name: ''
     )
-      @doc_config = find_doc_config(product_class, endpoint_name, account_name)
-      Mindee::ApiResponse.new(product_class, @doc_config.parse_async(job_id))
-    end
-
-    # @param product_class [Mindee::Product]
-    # @param endpoint_name [String]
-    # @param account_name [String]
-    # @return [Mindee::PathInputSource]
-    def find_doc_config(product_class, endpoint_name, account_name)
-      account_name = 'mindee' if account_name.nil? || account_name.empty?
-      endpoint_name = product_class.endpoint_name if endpoint_name.nil? || endpoint_name.empty?
-      create_config(account_name, product_class, endpoint_name)
-      config_key = [account_name, endpoint_name]
-
-      @doc_configs[config_key]
+      doc_config = find_doc_config(product_class, endpoint_name, account_name)
+      Mindee::ApiResponse.new(product_class, doc_config.parse_async(job_id))
     end
 
     # Load a document from an absolute path, as a string.
@@ -195,7 +181,9 @@ module Mindee
 
     private
 
-    def create_config(account_name, product_class, endpoint_name)
+    def find_doc_config(product_class, endpoint_name, account_name)
+      account_name = 'mindee' if account_name.nil? || account_name.empty?
+      endpoint_name = product_class.endpoint_name if endpoint_name.nil? || endpoint_name.empty?
       if endpoint_name.empty? && product_class == Mindee::CustomV1
         raise 'endpoint_name is required when using custom class'
       end
@@ -205,7 +193,7 @@ module Mindee
                 else
                   product_class.endpoint_version
                 end
-      @doc_configs[[account_name, endpoint_name]] = DocumentConfig.new(
+      DocumentConfig.new(
         product_class,
         HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
       )

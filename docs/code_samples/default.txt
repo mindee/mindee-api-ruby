@@ -13,4 +13,7 @@ request['Authorization'] = 'Token my-api-key'
 request.set_form([['document', File.open(file)]], 'multipart/form-data')
 
 response = http.request(request)
+if !(200..399).include?(response.code)
+  raise response.msg
+end
 puts response.read_body
