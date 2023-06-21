@@ -4,8 +4,8 @@ require_relative '../../parsing'
 
 module Mindee
   module Product
-    # Custom document object.
-    class CustomV1Document
+    # Entire Custom document object.
+    class CustomV1Document < Prediction
       # All value fields in the document
       # @return [Hash<Symbol, Mindee::Custom::ListField>]
       attr_reader :fields

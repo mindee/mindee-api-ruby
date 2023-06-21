@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_check_v1'
 
 module Mindee
   module Product
     module US
       # License plate prediction.
-      class BankCheckV1Document
+      class BankCheckV1Document < Prediction
         # Payer's bank account number.
         # @return [Array<Mindee::TextField>]
         attr_reader :account_number

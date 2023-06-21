@@ -6,7 +6,7 @@ module Mindee
   module Product
     module FR
       # Carte Nationale d'Identité v1 prediction results.
-      class IdCardV1Document
+      class IdCardV1Document < Prediction
         # The side of the document which is visible.
         # @return [Mindee::TextField]
         attr_reader :id_number

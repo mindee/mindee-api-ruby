@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     # Passport document.
-    class PassportV1Document
+    class PassportV1Document < Prediction
       # The country of issue.
       # @return [Mindee::TextField]
       attr_reader :country

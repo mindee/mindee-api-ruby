@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     # Financial Document v1 prediction results.
-    class FinancialDocumentV1Document
+    class FinancialDocumentV1Document < Prediction
       # The purchase category among predefined classes.
       # @return [Mindee::ClassificationField]
       attr_reader :category

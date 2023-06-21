@@ -6,7 +6,7 @@ require_relative 'receipt_v5_line_item'
 module Mindee
   module Product
     # Expense Receipt v5 prediction results.
-    class ReceiptV5Document
+    class ReceiptV5Document < Prediction
       # The purchase category among predefined classes.
       # @return [Mindee::ClassificationField]
       attr_reader :category

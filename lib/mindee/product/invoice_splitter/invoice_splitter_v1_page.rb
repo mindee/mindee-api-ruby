@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'custom_v1_document'
+require_relative '../../parsing'
+require_relative 'invoice_splitter_v1_document'
 
 module Mindee
   module Product
-    # Custom document object page.
-    class CustomV1Page < CustomV1Document
+    # Carte Nationale d'Identité v1 prediction results.
+    class InvoiceSplitterV1Page < InvoiceSplitterV1Document
       # @return [Integer]
       attr_reader :page_id
       # @return [Mindee::Orientation]
@@ -19,10 +20,11 @@ module Mindee
 
       def to_s
         out_str = String.new
-        @fields.each do |name, info|
-          out_str << "\n:#{name}: #{info}".rstrip
-        end
-        out_str[1..].to_s
+        title = "Page #{@page_id}"
+        out_str << "#{title}\n"
+        out_str << ('-' * title.size)
+        out_str << "\n#{super}"
+        out_str
       end
     end
   end

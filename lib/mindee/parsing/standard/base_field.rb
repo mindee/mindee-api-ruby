@@ -5,21 +5,21 @@ require_relative '../../geometry'
 module Mindee
   # Base Field object, upon which fields and feature fields are built
   class AbstractField
-    # @return [Mindee::Geometry::Quadrilateral]
+    # @return [Mindee::Geometry::Quadrilateral, nil]
     attr_reader :bounding_box
-    # @return [Mindee::Geometry::Polygon]
+    # @return [Mindee::Geometry::Polygon, nil]
     attr_reader :polygon
     # @return [Integer, nil]
     attr_reader :page_id
     # The confidence score, value will be between 0.0 and 1.0
-    # @return [Float]
+    # @return [Float, nil]
     attr_accessor :confidence
 
     # @param prediction [Hash]
     # @param page_id [Integer, nil]
     def initialize(prediction, page_id)
-      @confidence = prediction['confidence']
-      @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
+      @confidence = prediction['confidence'] if prediction.key?('confidence')
+      @polygon = Geometry.polygon_from_prediction(prediction['polygon']) if prediction.key?('polygon')
       @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
       @page_id = page_id || prediction['page_id']
     end

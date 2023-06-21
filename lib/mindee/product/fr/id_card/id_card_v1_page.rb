@@ -15,11 +15,12 @@ module Mindee
         # The identification card number.
         # @return [Mindee::TextField]
 
-        # @param prediction [Hash]
+        # @param http_response [Hash]
         # @param page_id [Integer, nil]
-        def initialize(prediction, page_id)
-          super(prediction, page_id)
-          @document_side = TextField.new(prediction['document_side'], page_id) if page_id
+        def initialize(http_response)
+          @document_side = TextField.new(http_response['document_side'], @page_id) unless @page_id.nil? || @page_id.empty?
+          @page_id = http_response['id']
+          super(http_response['prediction'], @page_id)
         end
 
         def to_s

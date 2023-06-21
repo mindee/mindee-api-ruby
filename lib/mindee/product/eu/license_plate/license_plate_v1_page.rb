@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_account_details_v1_document'
+require_relative 'license_plate_v1_document'
 
 module Mindee
   module Product
-    module FR
-      class BankAccountDetailsV1Page < BankAccountDetailsV1Document
+    module EU
+      # License Plate v1 prediction results.
+      class LicensePlateV1Page < LicensePlateV1Document
         # @return [Integer]
         attr_reader :page_id
         # @return [Mindee::Orientation]

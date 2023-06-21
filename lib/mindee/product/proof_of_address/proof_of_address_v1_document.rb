@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     # Proof of Address v1 prediction results.
-    class ProofOfAddressV1Document
+    class ProofOfAddressV1Document < Prediction
       # The locale detected on the document.
       # @return [Mindee::Locale]
       attr_reader :locale

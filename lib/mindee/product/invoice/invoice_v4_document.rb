@@ -6,7 +6,7 @@ require_relative 'invoice_v4_line_item'
 module Mindee
   module Product
     # Invoice document.
-    class InvoiceV4Document
+    class InvoiceV4Document < Prediction
       # Locale information.
       # @return [Mindee::Locale]
       attr_reader :locale

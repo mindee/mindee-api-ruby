@@ -16,7 +16,7 @@ module Mindee
           super
           @prediction = BankAccountDetailsV1Document.new(http_response['prediction'], nil)
           @pages = []
-          http_response['pages'].each_with_index do |page|
+          http_response['pages'].each do |page|
             @pages.push(BankAccountDetailsV1Page.new(page))
           end
         end

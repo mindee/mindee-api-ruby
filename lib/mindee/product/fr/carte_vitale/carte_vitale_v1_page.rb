@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_account_details_v1_document'
+require_relative 'carte_vitale_v1_document'
 
 module Mindee
   module Product
     module FR
-      class BankAccountDetailsV1Page < BankAccountDetailsV1Document
-        # @return [Integer]
-        attr_reader :page_id
-        # @return [Mindee::Orientation]
-        attr_reader :orientation
+      # License Plate v1 prediction results.
+      class CarteVitaleV1Page < CarteVitaleV1Document
+        # List of all license plates found in the image.
+        # @return [Array<Mindee::TextField>]
+        attr_reader :license_plates
 
         def initialize(http_response)
           @page_id = http_response['id']

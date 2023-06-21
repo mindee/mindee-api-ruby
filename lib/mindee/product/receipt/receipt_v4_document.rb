@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     # Receipt document.
-    class ReceiptV4Document
+    class ReceiptV4Document < Prediction
       # Where the purchase was made, the language, and the currency.
       # @return [Mindee::Locale]
       attr_reader :locale

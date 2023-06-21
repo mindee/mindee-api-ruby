@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'custom_v1_document'
+require_relative '../../parsing'
+require_relative 'receipt_v5_document'
 
 module Mindee
   module Product
-    # Custom document object page.
-    class CustomV1Page < CustomV1Document
+    class ReceiptV5Page < ReceiptV5Document
       # @return [Integer]
       attr_reader :page_id
       # @return [Mindee::Orientation]
@@ -19,10 +19,11 @@ module Mindee
 
       def to_s
         out_str = String.new
-        @fields.each do |name, info|
-          out_str << "\n:#{name}: #{info}".rstrip
-        end
-        out_str[1..].to_s
+        title = "Page #{@page_id}"
+        out_str << "#{title}\n"
+        out_str << ('-' * title.size)
+        out_str << "\n#{super}"
+        out_str
       end
     end
   end

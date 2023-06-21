@@ -6,7 +6,7 @@ module Mindee
   module Product
     module EU
       # License Plate v1 prediction results.
-      class LicensePlateV1Document
+      class LicensePlateV1Document < Prediction
         # List of all license plates found in the image.
         # @return [Array<Mindee::TextField>]
         attr_reader :license_plates

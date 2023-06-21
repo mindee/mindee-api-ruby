@@ -71,7 +71,7 @@ module Mindee
       # @return [Hash]
       def parse_async(job_id)
         check_api_key
-        response = parse_async(job_id)
+        response = parse_async_req_get(job_id)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return hashed_response if (200..299).include?(response.code.to_i)
 
@@ -153,7 +153,7 @@ module Mindee
 
       # @param job_id [String]
       # @return [Net::HTTPResponse]
-      def parse_async(job_id)
+      def parse_async_req_get(job_id)
         uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
         headers = {

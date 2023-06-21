@@ -26,7 +26,7 @@ module Mindee
     end
 
     # Invoice Splitter prediction.
-    class InvoiceSplitterV1Document
+    class InvoiceSplitterV1Document < Prediction
       # @return[Array<PageGroup>]
       attr_reader :invoice_page_groups
 

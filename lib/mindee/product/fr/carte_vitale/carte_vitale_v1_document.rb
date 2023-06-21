@@ -6,7 +6,7 @@ module Mindee
   module Product
     module FR
       # Carte Vitale v1 prediction results.
-      class CarteVitaleV1Document
+      class CarteVitaleV1Document < Prediction
         # The given name(s) of the card holder.
         # @return [Array<Mindee::TextField>]
         attr_reader :given_names
