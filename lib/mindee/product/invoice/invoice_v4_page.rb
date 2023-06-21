@@ -5,6 +5,7 @@ require_relative 'invoice_v4_document'
 
 module Mindee
   module Product
+    # Invoice V4 prediction page.
     class InvoiceV4Page < InvoiceV4Document
       # @return [Integer]
       attr_reader :page_id

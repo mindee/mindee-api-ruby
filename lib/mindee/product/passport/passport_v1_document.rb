@@ -49,6 +49,7 @@ module Mindee
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
+        super()
         @country = TextField.new(prediction['country'], page_id)
         @id_number = TextField.new(prediction['id_number'], page_id)
         @birth_date = DateField.new(prediction['birth_date'], page_id)

@@ -16,7 +16,6 @@ module Mindee
         # @return [Mindee::TextField]
 
         # @param http_response [Hash]
-        # @param page_id [Integer, nil]
         def initialize(http_response)
           @document_side = TextField.new(http_response['prediction']['document_side'], nil)
           @page_id = http_response['id']

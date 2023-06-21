@@ -23,6 +23,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
+          super()
           @given_names = []
           prediction['given_names'].each do |item|
             @given_names.push(TextField.new(item, page_id))

@@ -12,7 +12,6 @@ module Mindee
       # @return [Mindee::Orientation]
       attr_reader :orientation
 
-
       def initialize(http_response)
         @page_id = http_response['id']
         @orientation = Mindee::Parsing::Common::Orientation.new(http_response['orientation'], @page_id)

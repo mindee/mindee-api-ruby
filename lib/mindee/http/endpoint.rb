@@ -33,8 +33,6 @@ module Mindee
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
-
-
       # Call the prediction API.
       # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
       # @param all_words [Boolean]
@@ -176,7 +174,6 @@ module Mindee
         response
       end
 
-      # @param document_type [String]
       def check_api_key
         return unless @api_key.nil? || @api_key.empty?
 

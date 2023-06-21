@@ -181,15 +181,29 @@ module Mindee
 
     private
 
+    def fix_endpoint_name(product_class, endpoint_name)
+      return product_class.endpoint_name if endpoint_name.nil? || endpoint_name.empty?
+
+      endpoint_name
+    end
+
+    def fix_account_name(_product_class, account_name)
+      return 'mindee' if account_name.nil? || account_name.empty?
+
+      account_name
+    end
+
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
     # @param product_class [Mindee::Product] class of the product
     # @param endpoint_name [String, nil]
     # @param account_name [String, nil]
     def create_endpoint(product_class, endpoint_name, account_name)
-      raise 'Missing argument endpoint_name when using custom class' if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::CustomV1
+      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::CustomV1
+        raise 'Missing argument endpoint_name when using custom class'
+      end
 
-      account_name = 'mindee' if account_name.nil? || account_name.empty?
-      endpoint_name = product_class.endpoint_name if endpoint_name.nil? || endpoint_name.empty?
+      endpoint_name = fix_endpoint_name(product_class, endpoint_name)
+      account_name = fix_account_name(product_class, account_name)
       version = if product_class.endpoint_version.nil?
                   '1'
                 else

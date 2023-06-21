@@ -5,6 +5,7 @@ require_relative 'financial_document_v1_document'
 
 module Mindee
   module Product
+    # Financial Document V1 prediction page.
     class FinancialDocumentV1Page < FinancialDocumentV1Document
       # @return [Integer]
       attr_reader :page_id

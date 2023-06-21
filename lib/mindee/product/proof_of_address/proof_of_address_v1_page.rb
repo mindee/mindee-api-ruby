@@ -5,6 +5,7 @@ require_relative 'proof_of_address_v1_document'
 
 module Mindee
   module Product
+    # Proof of adress prediction page
     class ProofOfAddressV1Page < ProofOfAddressV1Document
       # @return [Integer]
       attr_reader :page_id

@@ -11,7 +11,6 @@ module Mindee
       @endpoint_name = 'proof_of_address'
       @endpoint_version = '1'
 
-
       def initialize(http_response)
         super
         @prediction = ProofOfAddressV1Document.new(http_response['prediction'], nil)

@@ -41,6 +41,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
+          super()
           @authority = TextField.new(prediction['authority'], page_id)
           @id_number = TextField.new(prediction['id_number'], page_id)
           @given_names = []

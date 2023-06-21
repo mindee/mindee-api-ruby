@@ -6,6 +6,7 @@ require_relative 'bank_account_details_v1_document'
 module Mindee
   module Product
     module FR
+      # Bank Account details page
       class BankAccountDetailsV1Page < BankAccountDetailsV1Document
         # @return [Integer]
         attr_reader :page_id

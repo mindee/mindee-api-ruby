@@ -59,6 +59,7 @@ module Mindee
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
+        super()
         @category = ClassificationField.new(prediction['category'], page_id)
         @date = DateField.new(prediction['date'], page_id)
         @document_type = ClassificationField.new(prediction['document_type'], page_id)

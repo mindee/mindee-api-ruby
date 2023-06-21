@@ -5,6 +5,7 @@ require_relative 'receipt_v4_document'
 
 module Mindee
   module Product
+    # Receipt V4 Prediction page
     class ReceiptV4Page < ReceiptV4Document
       # @return [Integer]
       attr_reader :page_id
