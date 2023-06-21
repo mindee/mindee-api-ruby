@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'net/http'
 require_relative '../version'
 
@@ -31,6 +32,54 @@ module Mindee
         @api_key = api_key.nil? || api_key.empty? ? ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT) : api_key
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
+
+
+
+      # Call the prediction API.
+      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param all_words [Boolean]
+      # @param close_file [Boolean]
+      # @param cropper [Boolean]
+      # @return [Hash]
+      def predict(input_source, all_words, close_file, cropper)
+        check_api_key
+        response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
+        hashed_response = JSON.parse(response.body, object_class: Hash)
+        return hashed_response if (200..299).include?(response.code.to_i)
+
+        error = Parsing::Common::Error.new(hashed_response['api_request']['error'])
+        raise error
+      end
+
+      # Call the prediction API.
+      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param close_file [Boolean]
+      # @param cropper [Boolean]
+      # @return [Hash]
+      def predict_async(input_source, all_words, close_file, cropper)
+        check_api_key
+        response = predict_async_req_post(input_source, all_words, close_file, cropper)
+        hashed_response = JSON.parse(response.body, object_class: Hash)
+        return hashed_response if (200..299).include?(response.code.to_i)
+
+        error = Parsing::Common::Error.new(hashed_response['api_request']['error'])
+        raise error
+      end
+
+      # Calls the parsed async doc.
+      # @param job_id [String]
+      # @return [Hash]
+      def parse_async(job_id)
+        check_api_key
+        response = parse_async(job_id)
+        hashed_response = JSON.parse(response.body, object_class: Hash)
+        return hashed_response if (200..299).include?(response.code.to_i)
+
+        error = Parsing::Common::Error.new(hashed_response['api_request']['error'])
+        raise error
+      end
+
+      private
 
       # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
       # @param all_words [Boolean]
@@ -104,7 +153,7 @@ module Mindee
 
       # @param job_id [String]
       # @return [Net::HTTPResponse]
-      def document_queue_req_get(job_id)
+      def parse_async(job_id)
         uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
         headers = {
@@ -125,6 +174,16 @@ module Mindee
           end
         end
         response
+      end
+
+      # @param document_type [String]
+      def check_api_key
+        return unless @api_key.nil? || @api_key.empty?
+
+        raise "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
+              "check your Client Configuration.\n" \
+              'You can set this using the ' \
+              "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end
   end

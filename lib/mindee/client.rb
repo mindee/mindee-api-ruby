@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'input'
-require_relative 'document_config'
 require_relative 'http'
 require_relative 'product'
 require_relative 'parsing/common/api_response'
@@ -58,11 +57,11 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      doc_config = find_doc_config(product_class, endpoint_name, account_name)
+    endpoint = create_endpoint(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::ApiResponse.new(product_class, doc_config.predict(input_source, all_words, close_file, cropper))
+      Mindee::ApiResponse.new(product_class, endpoint.predict(input_source, all_words, close_file, cropper))
     end
 
     # Enqueue a document for async parsing
@@ -107,12 +106,12 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      doc_config = find_doc_config(product_class, endpoint_name, account_name)
+    endpoint = create_endpoint(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       Mindee::ApiResponse.new(product_class,
-                              doc_config.predict_async(input_source, all_words, close_file, cropper))
+                              endpoint.predict_async(input_source, all_words, close_file, cropper))
     end
     # rubocop:enable Metrics/ParameterLists
 
@@ -137,8 +136,8 @@ module Mindee
       endpoint_name: '',
       account_name: ''
     )
-      doc_config = find_doc_config(product_class, endpoint_name, account_name)
-      Mindee::ApiResponse.new(product_class, doc_config.parse_async(job_id))
+      endpoint = create_endpoint(product_class, endpoint_name, account_name)
+      Mindee::ApiResponse.new(product_class, endpoint.parse_async(job_id))
     end
 
     # Load a document from an absolute path, as a string.
@@ -181,22 +180,21 @@ module Mindee
 
     private
 
-    def find_doc_config(product_class, endpoint_name, account_name)
+    # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
+    # @param product_class [Mindee::Product] class of the product
+    # @param endpoint_name [String, nil]
+    # @param account_name [String, nil]
+    def create_endpoint(product_class, endpoint_name, account_name)
+      raise 'Missing argument endpoint_name when using custom class' if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::CustomV1
+
       account_name = 'mindee' if account_name.nil? || account_name.empty?
       endpoint_name = product_class.endpoint_name if endpoint_name.nil? || endpoint_name.empty?
-      if endpoint_name.empty? && product_class == Mindee::CustomV1
-        raise 'endpoint_name is required when using custom class'
-      end
-
       version = if product_class.endpoint_version.nil?
                   '1'
                 else
                   product_class.endpoint_version
                 end
-      DocumentConfig.new(
-        product_class,
-        HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
-      )
+      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
     end
   end
 end
