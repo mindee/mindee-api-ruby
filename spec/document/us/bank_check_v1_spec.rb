@@ -35,10 +35,10 @@ describe Mindee::Product::US::BankCheckV1 do
       response = load_json(DIR_US_BANK_CHECK_V1, 'complete.json')
       document = Mindee::Document.new(Mindee::Product::US::BankCheckV1, response['document'])
       page = document.inference.pages[0]
-      expect(page.prediction.account_number.value).to eq('12345678910')
-      expect(page.prediction.check_position.rectangle.top_left.y).to eq(0.129)
-      expect(page.prediction.check_position.rectangle[0][1]).to eq(0.129)
-      page.prediction.signatures_positions.each do |pos|
+      expect(page.account_number.value).to eq('12345678910')
+      expect(page.check_position.rectangle.top_left.y).to eq(0.129)
+      expect(page.check_position.rectangle[0][1]).to eq(0.129)
+      page.signatures_positions.each do |pos|
         expect(pos).to be_a_kind_of(Mindee::PositionField)
       end
       expect(page.to_s).to eq(to_string)

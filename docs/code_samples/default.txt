@@ -19,7 +19,6 @@ request.set_form([['document', File.open(file)]], 'multipart/form-data')
 
 response = http.request(request)
 if !response.kind_of? Net::HTTPSuccess
-  puts "response: #{response.code_type}"
   raise response.msg
 end
 puts response.read_body

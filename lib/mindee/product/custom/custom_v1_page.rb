@@ -19,10 +19,11 @@ module Mindee
 
       def to_s
         out_str = String.new
-        @fields.each do |name, info|
-          out_str << "\n:#{name}: #{info}".rstrip
-        end
-        out_str[1..].to_s
+        title = "Page #{@page_id}"
+        out_str << "#{title}\n"
+        out_str << ('-' * title.size)
+        out_str << "\n#{super}"
+        out_str
       end
     end
   end

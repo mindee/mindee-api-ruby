@@ -18,16 +18,19 @@ module Mindee
         # @param http_response [Hash]
         # @param page_id [Integer, nil]
         def initialize(http_response)
-          @document_side = TextField.new(http_response['document_side'], @page_id) unless @page_id.nil? || @page_id.empty?
+          @document_side = TextField.new(http_response['prediction']['document_side'], nil)
           @page_id = http_response['id']
           super(http_response['prediction'], @page_id)
         end
 
         def to_s
           out_str = String.new
-          out_str << "\n:Document Side: #{@document_side}".rstrip if @document_side
-          out_str << super
-          out_str[1..].to_s
+          title = "Page #{@page_id}"
+          out_str << "#{title}\n"
+          out_str << ('-' * title.size)
+          out_str << "\n:Document Side: #{@document_side}".rstrip
+          out_str << "\n#{super}"
+          out_str
         end
       end
     end

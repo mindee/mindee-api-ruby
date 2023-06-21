@@ -33,7 +33,7 @@ describe Mindee::Product::ReceiptV4 do
       document = Mindee::Document.new(Mindee::Product::ReceiptV4, response['document'])
       page = document.inference.pages[0]
       expect(page.orientation.value).to eq(0)
-      expect(page.prediction.date.page_id).to eq(0)
+      expect(page.date.page_id).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end

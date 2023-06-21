@@ -70,7 +70,7 @@ module Mindee
           out_str << "\n:Gender: #{@gender}".rstrip
           out_str << "\n:MRZ Line 1: #{@mrz1}".rstrip
           out_str << "\n:MRZ Line 2: #{@mrz2}".rstrip
-          out_str
+          out_str[1..]
         end
       end
     end

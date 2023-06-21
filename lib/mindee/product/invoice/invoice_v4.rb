@@ -11,6 +11,15 @@ module Mindee
       @endpoint_name = 'invoices'
       @endpoint_version = '4'
 
+      def initialize(http_response)
+        super
+        @prediction = InvoiceV4Document.new(http_response['prediction'], nil)
+        @pages = []
+        http_response['pages'].each do |page|
+          @pages.push(InvoiceV4Page.new(page))
+        end
+      end
+
       class << self
         attr_reader :endpoint_name, :endpoint_version
       end
