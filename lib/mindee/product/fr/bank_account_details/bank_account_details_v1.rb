@@ -1,14 +1,25 @@
 # frozen_string_literal: true
 
+require_relative '../../../parsing'
 require_relative 'bank_account_details_v1_document'
+require_relative 'bank_account_details_v1_page'
 
 module Mindee
   module Product
     module FR
       # Bank Account Details v1 prediction results.
-      class BankAccountDetailsV1 < BankAccountDetailsV1Document
+      class BankAccountDetailsV1 < Inference
         @endpoint_name = 'bank_account_details'
         @endpoint_version = '1'
+
+        def initialize(http_response)
+          super
+          @prediction = BankAccountDetailsV1Document.new(http_response['prediction'], nil)
+          @pages = []
+          http_response['pages'].each_with_index do |page|
+            @pages.push(BankAccountDetailsV1Page.new(page))
+          end
+        end
 
         class << self
           attr_reader :endpoint_name, :endpoint_version

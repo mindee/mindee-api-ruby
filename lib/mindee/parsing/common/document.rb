@@ -30,7 +30,7 @@ module Mindee
         def initialize(product_class, http_response)
           @id = http_response['id']
           @name = http_response['name']
-          @inference = Mindee::Inference.new(product_class, http_response['inference'])
+          @inference = product_class.new(http_response['inference'])
           @ocr = self.class.load_ocr(http_response)
         end
 

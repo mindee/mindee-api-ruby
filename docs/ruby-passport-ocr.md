@@ -12,7 +12,7 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Send the file
-result = mindee_client.doc_from_path('/path/to/the/file.ext').parse(Mindee::Prediction::PassportV1)
+result = mindee_client.doc_from_path('/path/to/the/file.ext').parse(Mindee::Product::PassportV1)
 
 # Print a summary of the document prediction in RST format
 puts result.document.inference.prediction

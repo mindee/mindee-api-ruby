@@ -57,11 +57,12 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-    endpoint = create_endpoint(product_class, endpoint_name, account_name)
+      endpoint = create_endpoint(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::ApiResponse.new(product_class, endpoint.predict(input_source, all_words, close_file, cropper))
+      prediction = endpoint.predict(input_source, all_words, close_file, cropper)
+      Mindee::ApiResponse.new(product_class, prediction)
     end
 
     # Enqueue a document for async parsing
@@ -106,7 +107,7 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-    endpoint = create_endpoint(product_class, endpoint_name, account_name)
+      endpoint = create_endpoint(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end

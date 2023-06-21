@@ -13,7 +13,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
 result = mindee_client.doc_from_path('/path/to/the/file.ext')
-                      .parse(Mindee::Prediction::ReceiptV5)
+                      .parse(Mindee::Product::ReceiptV5)
 
 # Print a full summary of the parsed data in RST format
 # puts result

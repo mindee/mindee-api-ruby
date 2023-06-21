@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'page'
 require_relative 'product'
 
 module Mindee
@@ -10,23 +9,18 @@ module Mindee
       class Inference
         # @return [Boolean]
         attr_reader :is_rotation_applied
-        # @return [Array<Mindee::Page>]
+        # @return [Array<Mindee::ProductPrediction>]
         attr_reader :pages
-        # @return [Mindee::Product]
+        # @return [Mindee::ProductPrediction]
         attr_reader :prediction
         # @return [Mindee::Parsing::Common::Product]
         attr_reader :product
 
-        # @param product_class [Class<Mindee::Product>]
         # @param http_response [Hash]
-        def initialize(product_class, http_response)
+        def initialize(http_response)
           @is_rotation_applied = http_response['is_rotation_applied']
-          @prediction = product_class.new(http_response['prediction'], nil)
           @product = Product.new(http_response['product'])
           @pages = []
-          http_response['pages'].each do |page|
-            @pages.push(Page.new(product_class, page))
-          end
         end
 
         def to_s

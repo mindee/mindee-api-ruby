@@ -6,7 +6,7 @@ module Mindee
   module Product
     module FR
       # Bank Account Details v1 prediction results.
-      class BankAccountDetailsV1Document
+      class BankAccountDetailsV1Document < Prediction
         # The International Bank Account Number (IBAN).
         # @return [Mindee::TextField]
         attr_reader :iban
