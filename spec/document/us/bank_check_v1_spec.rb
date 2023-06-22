@@ -25,7 +25,7 @@ describe Mindee::Product::US::BankCheckV1 do
       expect(inference.prediction.check_position.rectangle.top_left.y).to eq(0.129)
       expect(inference.prediction.check_position.rectangle[0][1]).to eq(0.129)
       inference.prediction.signatures_positions.each do |pos|
-        expect(pos).to be_a_kind_of(Mindee::PositionField)
+        expect(pos).to be_a_kind_of(Mindee::Parsing::Standard::PositionField)
       end
       expect(document.to_s).to eq(to_string)
     end
@@ -39,7 +39,7 @@ describe Mindee::Product::US::BankCheckV1 do
       expect(page.check_position.rectangle.top_left.y).to eq(0.129)
       expect(page.check_position.rectangle[0][1]).to eq(0.129)
       page.signatures_positions.each do |pos|
-        expect(pos).to be_a_kind_of(Mindee::PositionField)
+        expect(pos).to be_a_kind_of(Mindee::Parsing::Standard::PositionField)
       end
       expect(page.to_s).to eq(to_string)
     end

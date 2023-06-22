@@ -8,25 +8,25 @@ module Mindee
     # Financial Document v1 prediction results.
     class FinancialDocumentV1Document < Prediction
       # The purchase category among predefined classes.
-      # @return [Mindee::ClassificationField]
+      # @return [Mindee::Parsing::Standard::ClassificationField]
       attr_reader :category
       # The address of the customer.
       # @return [Mindee::TextField]
       attr_reader :customer_address
       # List of company registrations associated to the customer.
-      # @return [Array<Mindee::CompanyRegistration>]
+      # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
       attr_reader :customer_company_registrations
       # The name of the customer.
       # @return [Mindee::TextField]
       attr_reader :customer_name
       # The date the purchase was made.
-      # @return [Mindee::DateField]
+      # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :date
       # One of: 'INVOICE', 'CREDIT NOTE', 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
-      # @return [Mindee::ClassificationField]
+      # @return [Mindee::Parsing::Standard::ClassificationField]
       attr_reader :document_type
       # The date on which the payment is due.
-      # @return [Mindee::DateField]
+      # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :due_date
       # The invoice number or identifier.
       # @return [Mindee::TextField]
@@ -35,90 +35,90 @@ module Mindee
       # @return [Array<Mindee::FinancialDocumentV1LineItem>]
       attr_reader :line_items
       # The locale detected on the document.
-      # @return [Mindee::Locale]
+      # @return [Mindee::Parsing::Standard::Locale]
       attr_reader :locale
       # List of Reference numbers, including PO number.
       # @return [Array<Mindee::TextField>]
       attr_reader :reference_numbers
       # The purchase subcategory among predefined classes for transport and food.
-      # @return [Mindee::ClassificationField]
+      # @return [Mindee::Parsing::Standard::ClassificationField]
       attr_reader :subcategory
       # The address of the supplier or merchant.
       # @return [Mindee::TextField]
       attr_reader :supplier_address
       # List of company registrations associated to the supplier.
-      # @return [Array<Mindee::CompanyRegistration>]
+      # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
       attr_reader :supplier_company_registrations
       # The name of the supplier or merchant.
       # @return [Mindee::TextField]
       attr_reader :supplier_name
       # List of payment details associated to the supplier.
-      # @return [Array<Mindee::PaymentDetails>]
+      # @return [Array<Mindee::Parsing::Standard::PaymentDetails>]
       attr_reader :supplier_payment_details
       # The phone number of the supplier or merchant.
       # @return [Mindee::TextField]
       attr_reader :supplier_phone_number
       # List of tax lines information.
-      # @return [Mindee::Parsing::Standard::Taxes]
+      # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
       attr_reader :taxes
       # The time the purchase was made.
       # @return [Mindee::TextField]
       attr_reader :time
       # The total amount of tip and gratuity
-      # @return [Mindee::AmountField]
+      # @return [Mindee::Parsing::Standard::AmountField]
       attr_reader :tip
       # The total amount paid: includes taxes, tips, fees, and other charges.
-      # @return [Mindee::AmountField]
+      # @return [Mindee::Parsing::Standard::AmountField]
       attr_reader :total_amount
       # The net amount paid: does not include taxes, fees, and discounts.
-      # @return [Mindee::AmountField]
+      # @return [Mindee::Parsing::Standard::AmountField]
       attr_reader :total_net
       # The total amount of taxes.
-      # @return [Mindee::AmountField]
+      # @return [Mindee::Parsing::Standard::AmountField]
       attr_reader :total_tax
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super()
-        @category = ClassificationField.new(prediction['category'], page_id)
-        @customer_address = TextField.new(prediction['customer_address'], page_id)
+        @category = Parsing::Standard::ClassificationField.new(prediction['category'], page_id)
+        @customer_address = Parsing::Standard::TextField.new(prediction['customer_address'], page_id)
         @customer_company_registrations = []
         prediction['customer_company_registrations'].each do |item|
-          @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
+          @customer_company_registrations.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
         end
-        @customer_name = TextField.new(prediction['customer_name'], page_id)
-        @date = DateField.new(prediction['date'], page_id)
-        @document_type = ClassificationField.new(prediction['document_type'], page_id)
-        @due_date = DateField.new(prediction['due_date'], page_id)
-        @invoice_number = TextField.new(prediction['invoice_number'], page_id)
+        @customer_name = Parsing::Standard::TextField.new(prediction['customer_name'], page_id)
+        @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
+        @document_type = Parsing::Standard::ClassificationField.new(prediction['document_type'], page_id)
+        @due_date = Parsing::Standard::DateField.new(prediction['due_date'], page_id)
+        @invoice_number = Parsing::Standard::TextField.new(prediction['invoice_number'], page_id)
         @line_items = []
         prediction['line_items'].each do |item|
           @line_items.push(FinancialDocumentV1LineItem.new(item, page_id))
         end
-        @locale = Locale.new(prediction['locale'], page_id)
+        @locale = Parsing::Standard::Locale.new(prediction['locale'], page_id)
         @reference_numbers = []
         prediction['reference_numbers'].each do |item|
-          @reference_numbers.push(TextField.new(item, page_id))
+          @reference_numbers.push(Parsing::Standard::TextField.new(item, page_id))
         end
-        @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
-        @supplier_address = TextField.new(prediction['supplier_address'], page_id)
+        @subcategory = Parsing::Standard::ClassificationField.new(prediction['subcategory'], page_id)
+        @supplier_address = Parsing::Standard::TextField.new(prediction['supplier_address'], page_id)
         @supplier_company_registrations = []
         prediction['supplier_company_registrations'].each do |item|
-          @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
+          @supplier_company_registrations.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
         end
-        @supplier_name = TextField.new(prediction['supplier_name'], page_id)
+        @supplier_name = Parsing::Standard::TextField.new(prediction['supplier_name'], page_id)
         @supplier_payment_details = []
         prediction['supplier_payment_details'].each do |item|
-          @supplier_payment_details.push(PaymentDetails.new(item, page_id))
+          @supplier_payment_details.push(Parsing::Standard::PaymentDetails.new(item, page_id))
         end
-        @supplier_phone_number = TextField.new(prediction['supplier_phone_number'], page_id)
-        @taxes = Taxes.new(prediction['taxes'], page_id)
-        @time = TextField.new(prediction['time'], page_id)
-        @tip = AmountField.new(prediction['tip'], page_id)
-        @total_amount = AmountField.new(prediction['total_amount'], page_id)
-        @total_net = AmountField.new(prediction['total_net'], page_id)
-        @total_tax = AmountField.new(prediction['total_tax'], page_id)
+        @supplier_phone_number = Parsing::Standard::TextField.new(prediction['supplier_phone_number'], page_id)
+        @taxes = Parsing::Standard::Taxes.new(prediction['taxes'], page_id)
+        @time = Parsing::Standard::TextField.new(prediction['time'], page_id)
+        @tip = Parsing::Standard::AmountField.new(prediction['tip'], page_id)
+        @total_amount = Parsing::Standard::AmountField.new(prediction['total_amount'], page_id)
+        @total_net = Parsing::Standard::AmountField.new(prediction['total_net'], page_id)
+        @total_tax = Parsing::Standard::AmountField.new(prediction['total_tax'], page_id)
       end
 
       # @return String

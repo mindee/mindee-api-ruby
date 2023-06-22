@@ -17,7 +17,7 @@ module Mindee
 
         # @param http_response [Hash]
         def initialize(http_response)
-          @document_side = TextField.new(http_response['prediction']['document_side'], nil)
+          @document_side = Parsing::Standard::TextField.new(http_response['prediction']['document_side'], nil)
           @page_id = http_response['id']
           super(http_response['prediction'], @page_id)
         end

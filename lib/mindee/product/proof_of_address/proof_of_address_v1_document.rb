@@ -7,7 +7,7 @@ module Mindee
     # Proof of Address v1 prediction results.
     class ProofOfAddressV1Document < Prediction
       # The locale detected on the document.
-      # @return [Mindee::Locale]
+      # @return [Mindee::Parsing::Standard::Locale]
       attr_reader :locale
       # The name of the person or company issuing the document.
       # @return [Mindee::TextField]
@@ -28,34 +28,34 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :recipient_address
       # List of dates found on the document.
-      # @return [Array<Mindee::DateField>]
+      # @return [Array<Mindee::Parsing::Standard::DateField>]
       attr_reader :dates
       # The date the document was issued.
-      # @return [Mindee::DateField]
+      # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :date
 
       # @param prediction [Hash]
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super()
-        @locale = Locale.new(prediction['locale'], page_id)
-        @issuer_name = TextField.new(prediction['issuer_name'], page_id)
+        @locale = Parsing::Standard::Locale.new(prediction['locale'], page_id)
+        @issuer_name = Parsing::Standard::TextField.new(prediction['issuer_name'], page_id)
         @issuer_company_registration = []
         prediction['issuer_company_registration'].each do |item|
-          @issuer_company_registration.push(CompanyRegistration.new(item, page_id))
+          @issuer_company_registration.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
         end
-        @issuer_address = TextField.new(prediction['issuer_address'], page_id)
-        @recipient_name = TextField.new(prediction['recipient_name'], page_id)
+        @issuer_address = Parsing::Standard::TextField.new(prediction['issuer_address'], page_id)
+        @recipient_name = Parsing::Standard::TextField.new(prediction['recipient_name'], page_id)
         @recipient_company_registration = []
         prediction['recipient_company_registration'].each do |item|
-          @recipient_company_registration.push(CompanyRegistration.new(item, page_id))
+          @recipient_company_registration.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
         end
-        @recipient_address = TextField.new(prediction['recipient_address'], page_id)
+        @recipient_address = Parsing::Standard::TextField.new(prediction['recipient_address'], page_id)
         @dates = []
         prediction['dates'].each do |item|
-          @dates.push(DateField.new(item, page_id))
+          @dates.push(Parsing::Standard::DateField.new(item, page_id))
         end
-        @date = DateField.new(prediction['date'], page_id)
+        @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
       end
 
       def to_s

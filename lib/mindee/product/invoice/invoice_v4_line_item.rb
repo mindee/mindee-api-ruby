@@ -41,15 +41,15 @@ module Mindee
 
     # @return String
     def to_s
-      tax = Field.float_to_string(@tax_amount)
-      tax << " (#{Field.float_to_string(@tax_rate)}%)" unless @tax_rate.nil?
+      tax = Parsing::Standard::Field.float_to_string(@tax_amount)
+      tax << " (#{Parsing::Standard::Field.float_to_string(@tax_rate)}%)" unless @tax_rate.nil?
       description = @description.nil? ? '' : @description
       description = "#{description[0..32]}..." if description.size > 35
       out_str = String.new
       out_str << format('| %- 20s', @product_code)
-      out_str << " #{format('| %- 7s', Field.float_to_string(@quantity))}"
-      out_str << " #{format('| %- 7s', Field.float_to_string(@unit_price))}"
-      out_str << " #{format('| %- 8s', Field.float_to_string(@total_amount))}"
+      out_str << " #{format('| %- 7s', Parsing::Standard::Field.float_to_string(@quantity))}"
+      out_str << " #{format('| %- 7s', Parsing::Standard::Field.float_to_string(@unit_price))}"
+      out_str << " #{format('| %- 8s', Parsing::Standard::Field.float_to_string(@total_amount))}"
       out_str << " #{format('| %- 16s', tax)}"
       out_str << " #{format('| %- 37s', description)}"
       out_str << '|'

@@ -17,7 +17,7 @@ module Mindee
         # @return [Mindee::TextField]
         attr_reader :social_security
         # The date the card was issued.
-        # @return [Mindee::DateField]
+        # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :issuance_date
 
         # @param prediction [Hash]
@@ -26,11 +26,11 @@ module Mindee
           super()
           @given_names = []
           prediction['given_names'].each do |item|
-            @given_names.push(TextField.new(item, page_id))
+            @given_names.push(Parsing::Standard::TextField.new(item, page_id))
           end
-          @surname = TextField.new(prediction['surname'], page_id)
-          @social_security = TextField.new(prediction['social_security'], page_id)
-          @issuance_date = DateField.new(prediction['issuance_date'], page_id)
+          @surname = Parsing::Standard::TextField.new(prediction['surname'], page_id)
+          @social_security = Parsing::Standard::TextField.new(prediction['social_security'], page_id)
+          @issuance_date = Parsing::Standard::DateField.new(prediction['issuance_date'], page_id)
         end
 
         def to_s

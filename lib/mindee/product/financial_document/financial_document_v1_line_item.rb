@@ -4,7 +4,7 @@ require_relative '../../parsing'
 
 module Mindee
   # List of line item details.
-  class FinancialDocumentV1LineItem < FeatureField
+  class FinancialDocumentV1LineItem < Parsing::Standard::FeatureField
     # The item description.
     # @return [String]
     attr_reader :description
@@ -44,11 +44,11 @@ module Mindee
       printable = {}
       printable[:description] = format_for_display(@description, 36)
       printable[:product_code] = format_for_display(@product_code, nil)
-      printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
-      printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
-      printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
-      printable[:total_amount] = @total_amount.nil? ? '' : Field.float_to_string(@total_amount)
-      printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+      printable[:quantity] = @quantity.nil? ? '' : Parsing::Standard::Field.float_to_string(@quantity)
+      printable[:tax_amount] = @tax_amount.nil? ? '' : Parsing::Standard::Field.float_to_string(@tax_amount)
+      printable[:tax_rate] = @tax_rate.nil? ? '' : Parsing::Standard::Field.float_to_string(@tax_rate)
+      printable[:total_amount] = @total_amount.nil? ? '' : Parsing::Standard::Field.float_to_string(@total_amount)
+      printable[:unit_price] = @unit_price.nil? ? '' : Parsing::Standard::Field.float_to_string(@unit_price)
       printable
     end
 

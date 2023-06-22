@@ -10,7 +10,7 @@ module Mindee
       # @return [Hash<Symbol, Mindee::Custom::ListField>]
       attr_reader :fields
       # All classifications in the document
-      # @return [Hash<Symbol, Mindee::Custom::ClassificationField>]
+      # @return [Hash<Symbol, Mindee::Custom::Parsing::Standard::ClassificationField>]
       attr_reader :classifications
 
       # @param prediction [Hash]

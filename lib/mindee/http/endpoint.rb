@@ -45,7 +45,7 @@ module Mindee
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return hashed_response if (200..299).include?(response.code.to_i)
 
-        error = Parsing::Common::Error.new(hashed_response['api_request']['error'])
+        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
         raise error
       end
 
@@ -60,7 +60,7 @@ module Mindee
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return hashed_response if (200..299).include?(response.code.to_i)
 
-        error = Parsing::Common::Error.new(hashed_response['api_request']['error'])
+        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
         raise error
       end
 
@@ -69,11 +69,11 @@ module Mindee
       # @return [Hash]
       def parse_async(job_id)
         check_api_key
-        response = parse_async_req_get(job_id)
+        response = document_queue_req(job_id)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return hashed_response if (200..299).include?(response.code.to_i)
 
-        error = Parsing::Common::Error.new(hashed_response['api_request']['error'])
+        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
         raise error
       end
 
@@ -151,7 +151,7 @@ module Mindee
 
       # @param job_id [String]
       # @return [Net::HTTPResponse]
-      def parse_async_req_get(job_id)
+      def document_queue_req(job_id)
         uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
         headers = {

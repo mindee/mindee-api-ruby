@@ -4,7 +4,7 @@ require_relative '../../parsing'
 
 module Mindee
   # List of line item details.
-  class ReceiptV5LineItem < FeatureField
+  class ReceiptV5LineItem < Parsing::Standard::FeatureField
     # The item description.
     # @return [String]
     attr_reader :description
@@ -31,9 +31,9 @@ module Mindee
     def printable_values
       printable = {}
       printable[:description] = format_for_display(@description, 36)
-      printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
-      printable[:total_amount] = @total_amount.nil? ? '' : Field.float_to_string(@total_amount)
-      printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+      printable[:quantity] = @quantity.nil? ? '' : Parsing::Standard::Field.float_to_string(@quantity)
+      printable[:total_amount] = @total_amount.nil? ? '' : Parsing::Standard::Field.float_to_string(@total_amount)
+      printable[:unit_price] = @unit_price.nil? ? '' : Parsing::Standard::Field.float_to_string(@unit_price)
       printable
     end
 

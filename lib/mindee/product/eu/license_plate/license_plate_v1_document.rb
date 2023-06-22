@@ -17,7 +17,7 @@ module Mindee
           super()
           @license_plates = []
           prediction['license_plates'].each do |item|
-            @license_plates.push(TextField.new(item, page_id))
+            @license_plates.push(Parsing::Standard::TextField.new(item, page_id))
           end
         end
 

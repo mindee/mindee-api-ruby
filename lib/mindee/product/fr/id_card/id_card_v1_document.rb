@@ -17,13 +17,13 @@ module Mindee
         # @return [Mindee::TextField]
         attr_reader :surname
         # The date of birth of the card holder.
-        # @return [Mindee::DateField]
+        # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :birth_date
         # The place of birth of the card holder.
         # @return [Mindee::TextField]
         attr_reader :birth_place
         # The expiry date of the identification card.
-        # @return [Mindee::DateField]
+        # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :expiry_date
         # The name of the issuing authority.
         # @return [Mindee::TextField]
@@ -42,20 +42,20 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
-          @authority = TextField.new(prediction['authority'], page_id)
-          @id_number = TextField.new(prediction['id_number'], page_id)
+          @authority = Parsing::Standard::TextField.new(prediction['authority'], page_id)
+          @id_number = Parsing::Standard::TextField.new(prediction['id_number'], page_id)
           @given_names = []
           prediction['given_names'].each do |item|
-            @given_names.push(TextField.new(item, page_id))
+            @given_names.push(Parsing::Standard::TextField.new(item, page_id))
           end
-          @surname = TextField.new(prediction['surname'], page_id)
-          @birth_date = DateField.new(prediction['birth_date'], page_id)
-          @birth_place = TextField.new(prediction['birth_place'], page_id)
-          @expiry_date = DateField.new(prediction['expiry_date'], page_id)
-          @authority = TextField.new(prediction['authority'], page_id)
-          @gender = TextField.new(prediction['gender'], page_id)
-          @mrz1 = TextField.new(prediction['mrz1'], page_id)
-          @mrz2 = TextField.new(prediction['mrz2'], page_id)
+          @surname = Parsing::Standard::TextField.new(prediction['surname'], page_id)
+          @birth_date = Parsing::Standard::DateField.new(prediction['birth_date'], page_id)
+          @birth_place = Parsing::Standard::TextField.new(prediction['birth_place'], page_id)
+          @expiry_date = Parsing::Standard::DateField.new(prediction['expiry_date'], page_id)
+          @authority = Parsing::Standard::TextField.new(prediction['authority'], page_id)
+          @gender = Parsing::Standard::TextField.new(prediction['gender'], page_id)
+          @mrz1 = Parsing::Standard::TextField.new(prediction['mrz1'], page_id)
+          @mrz2 = Parsing::Standard::TextField.new(prediction['mrz2'], page_id)
         end
 
         def to_s

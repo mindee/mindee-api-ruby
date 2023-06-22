@@ -13,10 +13,10 @@ module Mindee
       # @return [Mindee::TextField]
       attr_reader :id_number
       # The expiration date of the passport.
-      # @return [Mindee::DateField]
+      # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :expiry_date
       # The issuance date of the passport.
-      # @return [Mindee::DateField]
+      # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :issuance_date
       # The surname (last name) of the passport holder.
       # @return [Mindee::TextField]
@@ -28,7 +28,7 @@ module Mindee
       # @return [Array<Mindee::TextField>]
       attr_reader :full_name
       # The date of birth of the passport holder.
-      # @return [Mindee::DateField]
+      # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :birth_date
       # The place of birth of the passport holder.
       # @return [Mindee::TextField]
@@ -50,19 +50,19 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super()
-        @country = TextField.new(prediction['country'], page_id)
-        @id_number = TextField.new(prediction['id_number'], page_id)
-        @birth_date = DateField.new(prediction['birth_date'], page_id)
-        @expiry_date = DateField.new(prediction['expiry_date'], page_id)
-        @issuance_date = DateField.new(prediction['issuance_date'], page_id)
-        @birth_place = TextField.new(prediction['birth_place'], page_id)
-        @gender = TextField.new(prediction['gender'], page_id)
-        @surname = TextField.new(prediction['surname'], page_id)
-        @mrz1 = TextField.new(prediction['mrz1'], page_id)
-        @mrz2 = TextField.new(prediction['mrz2'], page_id)
+        @country = Parsing::Standard::TextField.new(prediction['country'], page_id)
+        @id_number = Parsing::Standard::TextField.new(prediction['id_number'], page_id)
+        @birth_date = Parsing::Standard::DateField.new(prediction['birth_date'], page_id)
+        @expiry_date = Parsing::Standard::DateField.new(prediction['expiry_date'], page_id)
+        @issuance_date = Parsing::Standard::DateField.new(prediction['issuance_date'], page_id)
+        @birth_place = Parsing::Standard::TextField.new(prediction['birth_place'], page_id)
+        @gender = Parsing::Standard::TextField.new(prediction['gender'], page_id)
+        @surname = Parsing::Standard::TextField.new(prediction['surname'], page_id)
+        @mrz1 = Parsing::Standard::TextField.new(prediction['mrz1'], page_id)
+        @mrz2 = Parsing::Standard::TextField.new(prediction['mrz2'], page_id)
         @given_names = []
         prediction['given_names'].each do |item|
-          @given_names.push(TextField.new(item, page_id))
+          @given_names.push(Parsing::Standard::TextField.new(item, page_id))
         end
         @full_name = construct_full_name(page_id)
         @mrz = construct_mrz(page_id)
@@ -101,9 +101,9 @@ module Mindee
 
         full_name = {
           'value' => "#{@given_names[0].value} #{@surname.value}",
-          'confidence' => TextField.array_confidence([@surname, @given_names[0]]),
+          'confidence' => Parsing::Standard::TextField.array_confidence([@surname, @given_names[0]]),
         }
-        TextField.new(full_name, page_id, reconstructed: true)
+        Parsing::Standard::TextField.new(full_name, page_id, reconstructed: true)
       end
 
       def construct_mrz(page_id)
@@ -111,9 +111,9 @@ module Mindee
 
         mrz = {
           'value' => @mrz1.value + @mrz2.value,
-          'confidence' => Mindee::TextField.array_confidence([@mrz1, @mrz2]),
+          'confidence' => Parsing::Standard::TextField.array_confidence([@mrz1, @mrz2]),
         }
-        TextField.new(mrz, page_id, reconstructed: true)
+        Parsing::Standard::TextField.new(mrz, page_id, reconstructed: true)
       end
     end
   end

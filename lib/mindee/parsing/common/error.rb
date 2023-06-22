@@ -3,8 +3,8 @@
 module Mindee
   module Parsing
     module Common
-      # API Error
-      class Error < StandardError
+      # API HttpError
+      class HttpError < StandardError
         # @return [String]
         attr_reader :api_code
         # @return [String]
