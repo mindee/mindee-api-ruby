@@ -4,6 +4,8 @@ require_relative '../../parsing'
 require_relative 'proof_of_address_v1_document'
 require_relative 'proof_of_address_v1_page'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
     # Proof of Address v1 prediction results.

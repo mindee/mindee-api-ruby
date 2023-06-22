@@ -4,10 +4,12 @@ require_relative '../../../parsing'
 require_relative 'bank_account_details_v1_document'
 require_relative 'bank_account_details_v1_page'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
     module FR
-      # Bank Account Details v1 prediction results.
+      # Bank Account Details v1 prediction inference.
       class BankAccountDetailsV1 < Inference
         @endpoint_name = 'bank_account_details'
         @endpoint_version = '1'

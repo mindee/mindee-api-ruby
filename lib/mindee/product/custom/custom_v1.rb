@@ -4,9 +4,11 @@ require_relative '../../parsing'
 require_relative 'custom_v1_page'
 require_relative 'custom_v1_document'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
-    # Custom document object.
+    # Custom document V1 prediction inference.
     class CustomV1 < Inference
       @endpoint_name = ''
       @endpoint_version = ''

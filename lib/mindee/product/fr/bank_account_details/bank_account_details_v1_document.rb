@@ -2,28 +2,31 @@
 
 require_relative '../../../parsing'
 
+include Mindee::Parsing::Common
+include Mindee::Parsing::Standard
+
 module Mindee
   module Product
     module FR
-      # Bank Account Details v1 prediction results.
+      # Bank Account Details v1 document prediction.
       class BankAccountDetailsV1Document < Prediction
         # The International Bank Account Number (IBAN).
-        # @return [Mindee::TextField]
+        # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :iban
         # The name of the account holder as seen on the document.
-        # @return [Mindee::TextField]
+        # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :account_holder_name
         # The bank's SWIFT Business Identifier Code (BIC).
-        # @return [Mindee::TextField]
+        # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :swift
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
-          @iban = Parsing::Standard::TextField.new(prediction['iban'], page_id)
-          @account_holder_name = Parsing::Standard::TextField.new(prediction['account_holder_name'], page_id)
-          @swift = Parsing::Standard::TextField.new(prediction['swift'], page_id)
+          @iban = TextField.new(prediction['iban'], page_id)
+          @account_holder_name = TextField.new(prediction['account_holder_name'], page_id)
+          @swift = TextField.new(prediction['swift'], page_id)
         end
 
         def to_s

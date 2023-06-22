@@ -4,10 +4,12 @@ require_relative '../../../parsing'
 require_relative 'carte_vitale_v1_document'
 require_relative 'carte_vitale_v1_page'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
     module FR
-      # Carte Vitale v1 prediction results.
+      # Carte Vitale v1 prediction inference.
       class CarteVitaleV1 < Inference
         @endpoint_name = 'carte_vitale'
         @endpoint_version = '1'

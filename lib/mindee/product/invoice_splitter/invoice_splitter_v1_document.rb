@@ -2,6 +2,9 @@
 
 require_relative '../../parsing'
 
+include Mindee::Prediction::Common
+include Mindee::Prediction::Standard
+
 module Mindee
   module Product
     # Page Group for Invoice Splitter class
@@ -25,9 +28,9 @@ module Mindee
       end
     end
 
-    # Invoice Splitter prediction.
+    # Invoice Splitter V1 document prediction.
     class InvoiceSplitterV1Document < Prediction
-      # @return[Array<PageGroup>]
+      # @return[Array<Mindee::Product::PageGroup>]
       attr_reader :invoice_page_groups
 
       # @param prediction [Hash]

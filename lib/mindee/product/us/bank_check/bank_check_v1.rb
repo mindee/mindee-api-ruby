@@ -4,10 +4,12 @@ require_relative '../../../parsing'
 require_relative 'bank_check_v1_document'
 require_relative 'bank_check_v1_page'
 
+import Mindee::Parsing::Common
+
 module Mindee
   module Product
     module US
-      # License plate prediction.
+      # Bank Check Inference
       class BankCheckV1 < Inference
         @endpoint_name = 'bank_check'
         @endpoint_version = '1'

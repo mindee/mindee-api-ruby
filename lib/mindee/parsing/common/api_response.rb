@@ -104,13 +104,4 @@ module Mindee
       end
     end
   end
-
-  class ApiResponse < Mindee::Parsing::Common::ApiResponse
-  end
-
-  class ApiRequest < Mindee::Parsing::Common::ApiRequest
-  end
-
-  class Job < Mindee::Parsing::Common::Job
-  end
 end

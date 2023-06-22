@@ -4,9 +4,11 @@ require_relative '../../parsing'
 require_relative 'invoice_splitter_v1_document'
 require_relative 'invoice_splitter_v1_page'
 
+include Mindee::Prediction::Common
+
 module Mindee
   module Product
-    # Invoice Splitter prediction.
+    # Invoice Splitter V1 prediction inference.
     class InvoiceSplitterV1 < Inference
       @endpoint_name = 'invoice_splitter'
       @endpoint_version = '1'

@@ -2,13 +2,16 @@
 
 require_relative '../../../parsing'
 
+include Mindee::Parsing::Standard
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
     module EU
-      # License Plate v1 prediction results.
+      # License Plate V1 document prediction.
       class LicensePlateV1Document < Prediction
         # List of all license plates found in the image.
-        # @return [Array<Mindee::TextField>]
+        # @return [Array<Mindee::Parsing::Standard::TextField>]
         attr_reader :license_plates
 
         # @param prediction [Hash]
@@ -17,7 +20,7 @@ module Mindee
           super()
           @license_plates = []
           prediction['license_plates'].each do |item|
-            @license_plates.push(Parsing::Standard::TextField.new(item, page_id))
+            @license_plates.push(TextField.new(item, page_id))
           end
         end
 

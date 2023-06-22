@@ -4,7 +4,7 @@ require_relative '../../parsing'
 
 module Mindee
   module Product
-    # Receipt document.
+    # Expense Receipt V4 document prediction.
     class ReceiptV4Document < Prediction
       # Where the purchase was made, the language, and the currency.
       # @return [Mindee::Parsing::Standard::Locale]
@@ -22,13 +22,13 @@ module Mindee
       # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :date
       # The name of the supplier or merchant, as seen on the receipt.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :supplier
       # List of taxes detected on the receipt.
       # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
       attr_reader :taxes
       # Time as seen on the receipt in HH:MM format.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :time
       # The receipt category among predefined classes.
       # @return [Mindee::Parsing::Standard::ClassificationField]

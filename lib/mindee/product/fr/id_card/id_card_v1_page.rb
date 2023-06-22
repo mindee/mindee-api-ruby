@@ -3,21 +3,23 @@
 require_relative '../../../parsing'
 require_relative 'id_card_v1_document'
 
+include Mindee::Parsing::Standard
+
 module Mindee
   module Product
     module FR
-      # Carte Nationale d'Identité v1 prediction results.
+      # French National ID Card V1 page prediction.
       class IdCardV1Page < IdCardV1Document
         # The side of the document which is visible.
-        # @return [Mindee::TextField]
+        # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :document_side
-
+        require_relative '../../../parsing'
         # The identification card number.
-        # @return [Mindee::TextField]
+        # @return [Mindee::Parsing::Standard::TextField]
 
         # @param http_response [Hash]
         def initialize(http_response)
-          @document_side = Parsing::Standard::TextField.new(http_response['prediction']['document_side'], nil)
+          @document_side = TextField.new(http_response['prediction']['document_side'], nil)
           @page_id = http_response['id']
           super(http_response['prediction'], @page_id)
         end

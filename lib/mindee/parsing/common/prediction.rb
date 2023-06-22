@@ -11,7 +11,4 @@ module Mindee
       end
     end
   end
-
-  class Prediction < Mindee::Parsing::Common::Prediction
-  end
 end

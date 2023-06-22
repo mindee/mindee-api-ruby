@@ -26,6 +26,7 @@ module Mindee
       polygon
     end
 
+    # @param vertices [Array<Mindee::Geometry::Point>]
     # @return [Array<Float>]
     def self.get_bbox(vertices)
       x_coords = vertices.map(&:x)
@@ -33,6 +34,7 @@ module Mindee
       [x_coords.min, y_coords.min, x_coords.max, y_coords.max]
     end
 
+    # @param vertices [Array<Mindee::Geometry::Point>]
     # @return [Mindee::Geometry::Quadrilateral]
     def self.get_bounding_box(vertices)
       x_min, y_min, x_max, y_max = get_bbox(vertices)

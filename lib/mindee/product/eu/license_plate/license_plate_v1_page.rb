@@ -3,19 +3,21 @@
 require_relative '../../../parsing'
 require_relative 'license_plate_v1_document'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
     module EU
-      # License Plate v1 prediction results.
+      # License Plate v1 page prediction.
       class LicensePlateV1Page < LicensePlateV1Document
         # @return [Integer]
         attr_reader :page_id
-        # @return [Mindee::Orientation]
+        # @return [Mindee::Parsing::Common::Orentation]
         attr_reader :orientation
 
         def initialize(http_response)
           @page_id = http_response['id']
-          @orientation = Mindee::Parsing::Common::Orientation.new(http_response['orientation'], @page_id)
+          @orientation = Orientation.new(http_response['orientation'], @page_id)
           super(http_response['prediction'], @page_id)
         end
 

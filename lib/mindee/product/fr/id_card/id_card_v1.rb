@@ -4,10 +4,12 @@ require_relative '../../../parsing'
 require_relative 'id_card_v1_document'
 require_relative 'id_card_v1_page'
 
+include Mindee::Prediction::Common
+
 module Mindee
   module Product
     module FR
-      # Carte Nationale d'Identité v1 prediction results.
+      # French National ID Card V1 prediction inference.
       class IdCardV1 < Inference
         @endpoint_name = 'idcard_fr'
         @endpoint_version = '1'

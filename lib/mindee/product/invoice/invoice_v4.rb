@@ -4,6 +4,8 @@ require_relative '../../parsing'
 require_relative 'invoice_v4_document'
 require_relative 'invoice_v4_page'
 
+include Mindee::Prediction::Common
+
 module Mindee
   module Product
     # Invoice document.

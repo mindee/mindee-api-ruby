@@ -3,9 +3,11 @@
 require_relative '../../parsing'
 require_relative 'receipt_v5_line_item'
 
+include Mindee::Parsing::Standard
+
 module Mindee
   module Product
-    # Expense Receipt v5 prediction results.
+    # Expense Receipt V5 document prediction.
     class ReceiptV5Document < Prediction
       # The purchase category among predefined classes.
       # @return [Mindee::Parsing::Standard::ClassificationField]
@@ -26,22 +28,22 @@ module Mindee
       # @return [Mindee::Parsing::Standard::ClassificationField]
       attr_reader :subcategory
       # The address of the supplier or merchant.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :supplier_address
       # List of company registrations associated to the supplier.
       # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
       attr_reader :supplier_company_registrations
       # The name of the supplier or merchant.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :supplier_name
       # The phone number of the supplier or merchant.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :supplier_phone_number
       # List of tax lines information.
       # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
       attr_reader :taxes
       # The time the purchase was made.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :time
       # The total amount of tip and gratuity.
       # @return [Mindee::Parsing::Standard::AmountField]
@@ -60,28 +62,28 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super()
-        @category = Parsing::Standard::ClassificationField.new(prediction['category'], page_id)
-        @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
-        @document_type = Parsing::Standard::ClassificationField.new(prediction['document_type'], page_id)
+        @category = ClassificationField.new(prediction['category'], page_id)
+        @date = DateField.new(prediction['date'], page_id)
+        @document_type = ClassificationField.new(prediction['document_type'], page_id)
         @line_items = []
         prediction['line_items'].each do |item|
           @line_items.push(ReceiptV5LineItem.new(item, page_id))
         end
-        @locale = Parsing::Standard::Locale.new(prediction['locale'], page_id)
-        @subcategory = Parsing::Standard::ClassificationField.new(prediction['subcategory'], page_id)
-        @supplier_address = Parsing::Standard::TextField.new(prediction['supplier_address'], page_id)
+        @locale = Locale.new(prediction['locale'], page_id)
+        @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
+        @supplier_address = TextField.new(prediction['supplier_address'], page_id)
         @supplier_company_registrations = []
         prediction['supplier_company_registrations'].each do |item|
-          @supplier_company_registrations.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
+          @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
         end
-        @supplier_name = Parsing::Standard::TextField.new(prediction['supplier_name'], page_id)
-        @supplier_phone_number = Parsing::Standard::TextField.new(prediction['supplier_phone_number'], page_id)
-        @taxes = Parsing::Standard::Taxes.new(prediction['taxes'], page_id)
-        @time = Parsing::Standard::TextField.new(prediction['time'], page_id)
-        @tip = Parsing::Standard::AmountField.new(prediction['tip'], page_id)
-        @total_amount = Parsing::Standard::AmountField.new(prediction['total_amount'], page_id)
-        @total_net = Parsing::Standard::AmountField.new(prediction['total_net'], page_id)
-        @total_tax = Parsing::Standard::AmountField.new(prediction['total_tax'], page_id)
+        @supplier_name = TextField.new(prediction['supplier_name'], page_id)
+        @supplier_phone_number = TextField.new(prediction['supplier_phone_number'], page_id)
+        @taxes = Taxes.new(prediction['taxes'], page_id)
+        @time = TextField.new(prediction['time'], page_id)
+        @tip = AmountField.new(prediction['tip'], page_id)
+        @total_amount = AmountField.new(prediction['total_amount'], page_id)
+        @total_net = AmountField.new(prediction['total_net'], page_id)
+        @total_tax = AmountField.new(prediction['total_tax'], page_id)
       end
 
       # @return String

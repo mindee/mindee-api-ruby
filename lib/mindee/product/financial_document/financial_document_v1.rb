@@ -4,9 +4,11 @@ require_relative '../../parsing'
 require_relative 'financial_document_v1_document'
 require_relative 'financial_document_v1_page'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
-    # Financial Document v1 prediction results.
+    # Financial Document v1 prediction inference.
     class FinancialDocumentV1 < Inference
       @endpoint_name = 'financial_document'
       @endpoint_version = '1'

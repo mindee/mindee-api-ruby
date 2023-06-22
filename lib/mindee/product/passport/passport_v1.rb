@@ -4,9 +4,11 @@ require_relative '../../parsing'
 require_relative 'passport_v1_document'
 require_relative 'passport_v1_page'
 
+include Mindee::Prediction::Common
+
 module Mindee
   module Product
-    # Passport document.
+    # Passport V1 prediction inference.
     class PassportV1 < Inference
       @endpoint_name = 'passport'
       @endpoint_version = '1'

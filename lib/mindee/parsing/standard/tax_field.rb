@@ -100,7 +100,4 @@ module Mindee
       end
     end
   end
-
-  class Taxes < Mindee::Parsing::Standard::Taxes
-  end
 end

@@ -3,18 +3,20 @@
 require_relative '../../parsing'
 require_relative 'receipt_v4_document'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
-    # Receipt V4 Prediction page
+    # Expense Receipt V4 page prediction.
     class ReceiptV4Page < ReceiptV4Document
       # @return [Integer]
       attr_reader :page_id
-      # @return [Mindee::Orientation]
+      # @return [Mindee::Parsing::Common::Orentation]
       attr_reader :orientation
 
       def initialize(http_response)
         @page_id = http_response['id']
-        @orientation = Mindee::Parsing::Common::Orientation.new(http_response['orientation'], @page_id)
+        @orientation = Orientation.new(http_response['orientation'], @page_id)
         super(http_response['prediction'], @page_id)
       end
 

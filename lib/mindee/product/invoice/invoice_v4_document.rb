@@ -3,11 +3,14 @@
 require_relative '../../parsing'
 require_relative 'invoice_v4_line_item'
 
+include Mindee::Parsing::Standard
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
-    # Invoice document.
+    # Invoice V4 document prediction.
     class InvoiceV4Document < Prediction
-      # Parsing::Standard::Locale information.
+      # Locale information.
       # @return [Mindee::Parsing::Standard::Locale]
       attr_reader :locale
       # The nature of the invoice.
@@ -26,10 +29,10 @@ module Mindee
       # @return [Mindee::Parsing::Standard::DateField]
       attr_reader :date
       # The invoice number.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :invoice_number
       # List of Reference numbers including PO number.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :reference_numbers
       # The due date of the invoice.
       # @return [Mindee::Parsing::Standard::DateField]
@@ -38,19 +41,19 @@ module Mindee
       # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
       attr_reader :taxes
       # The name of the customer.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :customer_name
       # The address of the customer.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :customer_address
       # The company registration information for the customer.
       # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
       attr_reader :customer_company_registrations
       # The supplier's name.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :supplier_name
       # The supplier's address.
-      # @return [Mindee::TextField]
+      # @return [Mindee::Parsing::Standard::TextField]
       attr_reader :supplier_address
       # The payment information.
       # @return [Array<Mindee::Parsing::Standard::PaymentDetails>]
@@ -66,35 +69,35 @@ module Mindee
       # @param page_id [Integer, nil]
       def initialize(prediction, page_id)
         super()
-        @locale = Parsing::Standard::Locale.new(prediction['locale'])
-        @document_type = Parsing::Standard::ClassificationField.new(prediction['document_type'], page_id)
-        @total_amount = Parsing::Standard::AmountField.new(prediction['total_amount'], page_id)
-        @total_net = Parsing::Standard::AmountField.new(prediction['total_net'], page_id)
-        @customer_address = Parsing::Standard::TextField.new(prediction['customer_address'], page_id)
-        @customer_name = Parsing::Standard::TextField.new(prediction['customer_name'], page_id)
-        @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
-        @due_date = Parsing::Standard::DateField.new(prediction['due_date'], page_id)
-        @invoice_number = Parsing::Standard::TextField.new(prediction['invoice_number'], page_id)
-        @supplier_name = Parsing::Standard::TextField.new(prediction['supplier_name'], page_id)
-        @supplier_address = Parsing::Standard::TextField.new(prediction['supplier_address'], page_id)
+        @locale = Locale.new(prediction['locale'])
+        @document_type = ClassificationField.new(prediction['document_type'], page_id)
+        @total_amount = AmountField.new(prediction['total_amount'], page_id)
+        @total_net = AmountField.new(prediction['total_net'], page_id)
+        @customer_address = TextField.new(prediction['customer_address'], page_id)
+        @customer_name = TextField.new(prediction['customer_name'], page_id)
+        @date = DateField.new(prediction['date'], page_id)
+        @due_date = DateField.new(prediction['due_date'], page_id)
+        @invoice_number = TextField.new(prediction['invoice_number'], page_id)
+        @supplier_name = TextField.new(prediction['supplier_name'], page_id)
+        @supplier_address = TextField.new(prediction['supplier_address'], page_id)
         @reference_numbers = []
         prediction['reference_numbers'].each do |item|
-          @reference_numbers.push(Parsing::Standard::TextField.new(item, page_id))
+          @reference_numbers.push(TextField.new(item, page_id))
         end
         @customer_company_registrations = []
         prediction['customer_company_registrations'].each do |item|
-          @customer_company_registrations.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
+          @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
         end
-        @taxes = Parsing::Standard::Taxes.new(prediction['taxes'], page_id)
+        @taxes = Taxes.new(prediction['taxes'], page_id)
         @supplier_payment_details = []
         prediction['supplier_payment_details'].each do |item|
-          @supplier_payment_details.push(Parsing::Standard::PaymentDetails.new(item, page_id))
+          @supplier_payment_details.push(PaymentDetails.new(item, page_id))
         end
         @supplier_company_registrations = []
         prediction['supplier_company_registrations'].each do |item|
-          @supplier_company_registrations.push(Parsing::Standard::CompanyRegistration.new(item, page_id))
+          @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
         end
-        @total_tax = Parsing::Standard::AmountField.new(
+        @total_tax = AmountField.new(
           { value: nil, confidence: 0.0 }, page_id
         )
         @line_items = []
@@ -164,9 +167,9 @@ module Mindee
 
         total_excl = {
           'value' => @total_amount.value - @taxes.map(&:value).sum,
-          'confidence' => Parsing::Standard::TextField.array_confidence(@taxes) * @total_amount.confidence,
+          'confidence' => TextField.array_confidence(@taxes) * @total_amount.confidence,
         }
-        @total_net = Parsing::Standard::AmountField.new(total_excl, page_id, reconstructed: true)
+        @total_net = AmountField.new(total_excl, page_id, reconstructed: true)
       end
 
       def construct_total_incl_from_taxes_plus_excl(page_id)
@@ -174,9 +177,9 @@ module Mindee
 
         total_incl = {
           'value' => @taxes.map(&:value).sum + @total_net.value,
-          'confidence' => Parsing::Standard::TextField.array_confidence(@taxes) * @total_net.confidence,
+          'confidence' => TextField.array_confidence(@taxes) * @total_net.confidence,
         }
-        @total_amount = Parsing::Standard::AmountField.new(total_incl, page_id, reconstructed: true)
+        @total_amount = AmountField.new(total_incl, page_id, reconstructed: true)
       end
 
       def construct_total_tax_from_taxes(page_id)
@@ -184,11 +187,11 @@ module Mindee
 
         total_tax = {
           'value' => @taxes.map(&:value).sum,
-          'confidence' => Parsing::Standard::TextField.array_confidence(@taxes),
+          'confidence' => TextField.array_confidence(@taxes),
         }
         return unless total_tax['value'].positive?
 
-        @total_tax = Parsing::Standard::AmountField.new(total_tax, page_id, reconstructed: true)
+        @total_tax = AmountField.new(total_tax, page_id, reconstructed: true)
       end
 
       def construct_total_tax_from_totals(page_id)
@@ -196,11 +199,11 @@ module Mindee
 
         total_tax = {
           'value' => @total_amount.value - @total_net.value,
-          'confidence' => Parsing::Standard::TextField.array_confidence(@taxes),
+          'confidence' => TextField.array_confidence(@taxes),
         }
         return unless total_tax['value'] >= 0
 
-        @total_tax = Parsing::Standard::AmountField.new(total_tax, page_id, reconstructed: true)
+        @total_tax = AmountField.new(total_tax, page_id, reconstructed: true)
       end
     end
   end

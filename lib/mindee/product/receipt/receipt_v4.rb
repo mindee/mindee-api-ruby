@@ -4,9 +4,11 @@ require_relative '../../parsing'
 require_relative 'receipt_v4_document'
 require_relative 'receipt_v4_page'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
-    # Receipt document.
+    # Expense Receipt V4 prediction inference.
     class ReceiptV4 < Inference
       @endpoint_name = 'expense_receipts'
       @endpoint_version = '4'

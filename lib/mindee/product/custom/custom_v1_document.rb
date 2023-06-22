@@ -2,9 +2,12 @@
 
 require_relative '../../parsing'
 
+include Mindee::Parsing::Common
+include Mindee::Custom
+
 module Mindee
   module Product
-    # Entire Custom document object.
+    # Custom document V1 prediction
     class CustomV1Document < Prediction
       # All value fields in the document
       # @return [Hash<Symbol, Mindee::Custom::ListField>]
@@ -45,9 +48,9 @@ module Mindee
         # Here we use the fact that only value lists have the 'values' attribute.
 
         if field_prediction.key? 'values'
-          @fields[field_sym] = Custom::ListField.new(field_prediction, page_id)
+          @fields[field_sym] = ListField.new(field_prediction, page_id)
         elsif field_prediction.key? 'value'
-          @classifications[field_sym] = Custom::ClassificationField.new(field_prediction)
+          @classifications[field_sym] = ClassificationField.new(field_prediction)
         else
           throw 'Unknown API field type'
         end

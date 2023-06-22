@@ -37,7 +37,4 @@ module Mindee
       end
     end
   end
-
-  class Inference < Mindee::Parsing::Common::Inference
-  end
 end

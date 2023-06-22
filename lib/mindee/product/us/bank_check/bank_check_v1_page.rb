@@ -3,18 +3,16 @@
 require_relative '../../../parsing'
 require_relative 'bank_check_v1_document'
 
+import Mindee::Parsing::Common
+
 module Mindee
   module Product
     module US
-      # License Plate v1 prediction results.
+      # Bank Check V1 page prediction.
       class BankCheckV1Page < BankCheckV1Document
-        # List of all license plates found in the image.
-        # @return [Array<Mindee::TextField>]
-        attr_reader :license_plates
-
         def initialize(http_response)
           @page_id = http_response['id']
-          @orientation = Mindee::Parsing::Common::Orientation.new(http_response['orientation'], @page_id)
+          @orientation = Orientation.new(http_response['orientation'], @page_id)
           super(http_response['prediction'], @page_id)
         end
 

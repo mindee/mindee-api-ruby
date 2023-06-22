@@ -3,18 +3,20 @@
 require_relative '../../parsing'
 require_relative 'proof_of_address_v1_document'
 
+include Mindee::Parsing::Common
+
 module Mindee
   module Product
-    # Proof of adress prediction page
+    # Proof of Address V1 document prediction.
     class ProofOfAddressV1Page < ProofOfAddressV1Document
       # @return [Integer]
       attr_reader :page_id
-      # @return [Mindee::Orientation]
+      # @return [Mindee::Parsing::Common::Orentation]
       attr_reader :orientation
 
       def initialize(http_response)
         @page_id = http_response['id']
-        @orientation = Mindee::Parsing::Common::Orientation.new(http_response['orientation'], @page_id)
+        @orientation = Orientation.new(http_response['orientation'], @page_id)
         super(http_response['prediction'], @page_id)
       end
 
