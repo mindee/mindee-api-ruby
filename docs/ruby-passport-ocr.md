@@ -1,4 +1,4 @@
-The Ruby  OCR SDK supports the [passport API](https://developers.mindee.com/docs/passport-ocr) for extracting data from passports.
+The Ruby OCR SDK supports the [passport API](https://developers.mindee.com/docs/passport-ocr) for extracting data from passports.
 
 Using the sample below, we are going to illustrate how to extract the data that we want using the  OCR SDK.
 
@@ -6,31 +6,40 @@ Using the sample below, we are going to illustrate how to extract the data that 
 
 ## Quick Start
 ```ruby
-require 'mindee'
-
-# Init a new client, specifying an API key
+# Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
-# Send the file
-result = mindee_client.doc_from_path('/path/to/the/file.ext').parse(Mindee::Product::Passport::PassportV1)
+# Load a file from disk and parse it
+doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
-# Print a summary of the document prediction in RST format
-puts result.document.inference.prediction
+# Keep the product's class in a variable to keep the code DRY
+doc_class = Mindee::Product::Passport::PassportV1
+# Initialize an endpoint for this product
+endpoint = mindee_client.create_endpoint(doc_class)
+
+# Send our document
+result = mindee_client.parse(doc, endpoint)
+
+# Print a full summary of the parsed data in RST format
+puts result.document
 ```
 
 Output:
 ```
-:Full name: HENERT PUDARSAN
-:Given names: HENERT
-:Surname: PUDARSAN
-:Country: GBR
-:ID Number: 707797979
-:Issuance date: 2012-04-22
-:Birth date: 1995-05-20
-:Expiry date: 2017-04-22
-:MRZ 1: P<GBRPUDARSAN<<HENERT<<<<<<<<<<<<<<<<<<<<<<<
-:MRZ 2: 7077979792GBR9505209M1704224<<<<<<<<<<<<<<00
-:MRZ: P<GBRPUDARSAN<<HENERT<<<<<<<<<<<<<<<<<<<<<<<7077979792GBR9505209M1704224<<<<<<<<<<<<<<00
+----- Passport V1 -----
+Filename:
+Full name: HENERT PUDARSAN
+Given names: HENERT
+Surname: PUDARSAN
+Country: GBR
+ID Number: 707797979
+Issuance date: 2012-04-22
+Birth date: 1995-05-20
+Expiry date: 2057-04-22
+MRZ 1: P<GBRPUDARSAN<<HENERT<<<<<<<<<<<<<<<<<<<<<<<
+MRZ 2: 7077979792GBR9505209M1704224<<<<<<<<<<<<<<00
+MRZ: P<GBRPUDARSAN<<HENERT<<<<<<<<<<<<<<<<<<<<<<<7077979792GBR9505209M1704224<<<<<<<<<<<<<<00
+----------------------
 ```
 
 ## Fields

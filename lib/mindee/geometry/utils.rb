@@ -4,6 +4,8 @@ module Mindee
   # Various helper functions for geometry.
   module Geometry
     # Transform a prediction into a Quadrilateral.
+    # @param prediction [Hash]
+    # @return [Mindee::Geometry::Quadrilateral]
     def self.quadrilateral_from_prediction(prediction)
       throw "Prediction must have exactly 4 points, found #{prediction.size}" if prediction.size != 4
 
@@ -16,6 +18,8 @@ module Mindee
     end
 
     # Transform a prediction into a Polygon.
+    # @param prediction [Hash]
+    # @return [Mindee::Geometry::Polyon]
     def self.polygon_from_prediction(prediction)
       polygon = Polygon.new
       return polygon if prediction.nil?
@@ -26,6 +30,7 @@ module Mindee
       polygon
     end
 
+    # Gets the points of a bounding box for a given set of points
     # @param vertices [Array<Mindee::Geometry::Point>]
     # @return [Array<Float>]
     def self.get_bbox(vertices)
@@ -34,6 +39,7 @@ module Mindee
       [x_coords.min, y_coords.min, x_coords.max, y_coords.max]
     end
 
+    # Creates the bounding bounding box for a given set of points
     # @param vertices [Array<Mindee::Geometry::Point>]
     # @return [Mindee::Geometry::Quadrilateral]
     def self.get_bounding_box(vertices)

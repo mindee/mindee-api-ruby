@@ -59,7 +59,7 @@ module Mindee
       # @return [Hash]
       def predict_async(input_source, all_words, close_file, cropper)
         check_api_key
-        response = predict_async_req_post(input_source, all_words, close_file, cropper)
+        response = document_queue_req_get(input_source, all_words, close_file, cropper)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return hashed_response if (200..299).include?(response.code.to_i)
 
@@ -122,7 +122,7 @@ module Mindee
       # @param close_file [Boolean]
       # @param cropper [Boolean]
       # @return [Net::HTTPResponse]
-      def predict_async_req_post(input_source, all_words, close_file, cropper)
+      def document_queue_req_get(input_source, all_words, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
 
         params = {}

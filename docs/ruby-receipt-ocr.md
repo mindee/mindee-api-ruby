@@ -8,22 +8,29 @@ Using this sample below, we are going to illustrate how to extract the data that
 ```ruby
 require 'mindee'
 
-# Init a new client, specifying an API key
+# Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-result = mindee_client.doc_from_path('/path/to/the/file.ext')
-                      .parse(Mindee::Product::Receipt::ReceiptV5)
+doc = mindee_client.doc_from_path('/path/to/the/file.ext')
+
+# Keep the product's class in a variable to keep the code DRY
+doc_class = Mindee::Product::Receipt::ReceiptV5
+# Initialize an endpoint for this product
+endpoint = mindee_client.create_endpoint(doc_class)
+
+# Send our document
+result = mindee_client.parse(doc, endpoint)
 
 # Print a full summary of the parsed data in RST format
-# puts result
-
-# Print the document-level parsed data
-puts result.document.inference.prediction
+puts result.document
 ```
 
 Output:
 ```
+Receipt V5 Prediction
+=====================
+:Filename:
 :Expense Locale: en-GB; en; GB; GBP;
 :Expense Category: food
 :Expense Sub Category: restaurant
@@ -34,17 +41,21 @@ Output:
 :Total Excluding Taxes: 8.50
 :Total Tax: 1.70
 :Tip and Gratuity:
-:Taxes: 1.70 20.00% VAT
+:Taxes:
+  +---------------+--------+----------+---------------+
+  | Base          | Code   | Rate (%) | Amount        |
+  +===============+========+==========+===============+
+  | 8.50          | VAT    | 20.00    | 1.70          |
+  +---------------+--------+----------+---------------+
 :Supplier Name: CLACHAN
 :Supplier Company Registrations: 232153895
-                                 232153895
 :Supplier Address: 34 kingley street w1b 5qh
 :Supplier Phone Number: 02074940834
 :Line Items:
   +--------------------------------------+----------+--------------+------------+
   | Description                          | Quantity | Total Amount | Unit Price |
   +======================================+==========+==============+============+
-  | Meantime Pale                        | 2.00     | 10.20        |            |
+  | meantime pale                        | 2.00     | 10.20        |            |
   +--------------------------------------+----------+--------------+------------+
 ```
 
@@ -64,13 +75,17 @@ Depending on the field type specified, additional attributes can be extracted in
 
 Using the above sample, the following are the basic fields that can be extracted:
 
-- [Category](#category)
-- [Date](#date)
-- [Locale](#locale)
-- [Supplier Information](#supplier-information)
-- [Taxes](#taxes)
-- [Time](#time)
-- [Totals](#totals)
+- [Quick Start](#quick-start)
+- [Fields](#fields)
+- [Attributes](#attributes)
+  - [Category](#category)
+  - [Date](#date)
+  - [Locale](#locale)
+  - [Supplier Information](#supplier-information)
+  - [Taxes](#taxes)
+  - [Time](#time)
+  - [Totals](#totals)
+- [Questions?](#questions)
 
 
 ### Category

@@ -155,18 +155,14 @@ module Mindee
     #  standard (off the shelf) endpoint.
     #  Do not set for standard (off the shelf) endpoints.
     # @return [Mindee::HTTP::Endpoint]
-    def create_endpoint(product_class, endpoint_name: '', account_name: '')
+    def create_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
       if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Custom::CustomV1
         raise 'Missing argument endpoint_name when using custom class'
       end
 
       endpoint_name = fix_endpoint_name(product_class, endpoint_name)
-      account_name = fix_account_name(product_class, account_name)
-      version = if product_class.endpoint_version.nil?
-                  '1'
-                else
-                  product_class.endpoint_version
-                end
+      account_name = fix_account_name(account_name)
+      version = fix_version(product_class, version)
       HTTP::Endpoint.new(product_class, account_name, endpoint_name, version, api_key: @api_key)
     end
 
@@ -178,10 +174,17 @@ module Mindee
       endpoint_name
     end
 
-    def fix_account_name(_product_class, account_name)
+    def fix_account_name(account_name)
       return 'mindee' if account_name.nil? || account_name.empty?
 
       account_name
+    end
+
+    def fix_version(product_class, version)
+      return version unless version.nil? || version.empty?
+      return '1' if product_class.endpoint_version.nil? || product_class.endpoint_version.empty?
+
+      product_class.endpoint_version
     end
   end
 end
