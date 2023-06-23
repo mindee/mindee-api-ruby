@@ -82,24 +82,26 @@ module Mindee
 
       # Wrapper class for all predictions (synchronous and asynchronous)
       class ApiResponse
-        # @return [Mindee::Document, nil]
+        # @return [Mindee::Parsing::Common::Document, nil]
         attr_reader :document
-        # @return [Mindee::Job, nil]
+        # @return [Mindee::Parsing::Common::Job, nil]
         attr_reader :job
-        # @return [Mindee::ApiRequest]
+        # @return [Mindee::Parsing::Common::ApiRequest]
         attr_reader :api_request
 
         # @param product_class [Class<Mindee::Product>]
         # @param http_response [Hash]
         def initialize(product_class, http_response)
-          @api_request = Mindee::ApiRequest.new(http_response['api_request']) if http_response.key?('api_request')
+          if http_response.key?('api_request')
+            @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
+          end
           if http_response.key?('document') &&
              (!http_response.key?('job') ||
              http_response['job']['status'] == 'completed') &&
              @api_request.status == RequestStatus::SUCCESS
-            @document = Mindee::Document.new(product_class, http_response['document'])
+            @document = Mindee::Parsing::Common::Document.new(product_class, http_response['document'])
           end
-          @job = Mindee::Job.new(http_response['job']) if http_response.key?('job')
+          @job = Mindee::Parsing::Common::Job.new(http_response['job']) if http_response.key?('job')
         end
       end
     end

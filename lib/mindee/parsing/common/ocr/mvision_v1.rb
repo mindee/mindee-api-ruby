@@ -3,7 +3,7 @@
 module Mindee
   module Parsing
     module Common
-      module Ocr
+      module OcrExtraction
         # Mindee Vision V1.
         class MVisionV1
           # List of pages.

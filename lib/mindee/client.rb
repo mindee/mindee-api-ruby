@@ -45,7 +45,7 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
-    # @return [Mindee::ApiResponse]
+    # @return [Mindee::Parsing::Common::ApiResponse]
     # rubocop:disable Metrics/ParameterLists
     def parse(
       input_source,
@@ -62,7 +62,7 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       prediction = endpoint.predict(input_source, all_words, close_file, cropper)
-      Mindee::ApiResponse.new(product_class, prediction)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction)
     end
 
     # Enqueue a document for async parsing
@@ -96,7 +96,7 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
-    # @return [Mindee::ApiResponse]
+    # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(
       input_source,
       product_class,
@@ -111,8 +111,8 @@ module Mindee
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::ApiResponse.new(product_class,
-                              endpoint.predict_async(input_source, all_words, close_file, cropper))
+      Mindee::Parsing::Common::ApiResponse.new(product_class,
+                                               endpoint.predict_async(input_source, all_words, close_file, cropper))
     end
     # rubocop:enable Metrics/ParameterLists
 
@@ -130,7 +130,7 @@ module Mindee
     #  standard (off the shelf) endpoint.
     #  Do not set for standard (off the shelf) endpoints.
     #
-    # @return [Mindee::ApiResponse]
+    # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_queued(
       product_class,
       job_id,
@@ -138,7 +138,7 @@ module Mindee
       account_name: ''
     )
       endpoint = create_endpoint(product_class, endpoint_name, account_name)
-      Mindee::ApiResponse.new(product_class, endpoint.parse_async(job_id))
+      Mindee::Parsing::Common::ApiResponse.new(product_class, endpoint.parse_async(job_id))
     end
 
     # Load a document from an absolute path, as a string.
@@ -198,7 +198,7 @@ module Mindee
     # @param endpoint_name [String, nil]
     # @param account_name [String, nil]
     def create_endpoint(product_class, endpoint_name, account_name)
-      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::CustomV1
+      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Custom::CustomV1
         raise 'Missing argument endpoint_name when using custom class'
       end
 

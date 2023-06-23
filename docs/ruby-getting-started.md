@@ -127,7 +127,7 @@ There are a few different ways of loading a document file, depending on your use
 Load from a file directly from disk. Requires an absolute path, as a string.
 
 ```ruby
-result = mindee_client.doc_from_path("/path/to/the/invoice.jpg").parse(Mindee::Product::InvoiceV4)
+result = mindee_client.doc_from_path("/path/to/the/invoice.jpg").parse(Mindee::Product::Invoice::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -141,7 +141,7 @@ A normal Ruby file object with a path. Must be in binary mode.
 ```ruby
 result = nil
 File.open(INVOICE_FILE, 'rb') do |fo|
-  result = mindee_client.doc_from_file(fo, "invoice.jpg").parse(Mindee::Product::InvoiceV4)
+  result = mindee_client.doc_from_file(fo, "invoice.jpg").parse(Mindee::Product::Invoice::InvoiceV4)
 end
 
 # Print a full summary of the parsed data in RST format
@@ -155,7 +155,7 @@ Load file contents from a base64-encoded string.
 
 ```ruby
 b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
-result = mindee_client.doc_from_b64string(b64_string, "receipt.jpg").parse(Mindee::Product::ReceiptV4)
+result = mindee_client.doc_from_b64string(b64_string, "receipt.jpg").parse(Mindee::Product::Receipt::ReceiptV4)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -168,7 +168,7 @@ Requires raw bytes.
 
 ```ruby
 raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
-result = mindee_client.doc_from_bytes(raw_bytes, "invoice.pdf").parse(Mindee::Product::InvoiceV4)
+result = mindee_client.doc_from_bytes(raw_bytes, "invoice.pdf").parse(Mindee::Product::Invoice::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -180,7 +180,7 @@ Requires an url as a String.
 **Note**: the url must start with `https://`.
 ```ruby
 doc = mindee_client.doc_from_url("https://www.example.com/invoice.pdf")
-result = mindee_client.parse(doc, Mindee::Product::InvoiceV4)
+result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -203,13 +203,13 @@ This is detailed in each document-specific guide.
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
 ```ruby
-result = doc.parse(Mindee::Product::InvoiceV4)
+result = doc.parse(Mindee::Product::Invoice::InvoiceV4)
 ```
 
 ### Custom Documents
 The endpoint to use must also be set, this is done in the second argument of the `parse` method:
 ```ruby
-result = doc.parse(Mindee::Product::CustomV1, endpoint_name: 'wnine')
+result = doc.parse(Mindee::Product::Custom::CustomV1, endpoint_name: 'wnine')
 ```
 
 This is because the `CustomV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.

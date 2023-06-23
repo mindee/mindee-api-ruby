@@ -23,7 +23,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
 
 # Load a file from disk and parse it
 result = mindee_client.doc_from_path('/path/to/file.ext')
-  .parse(Mindee::Product::CustomV1, endpoint_name: 'wnine')
+  .parse(Mindee::Product::Custom::CustomV1, endpoint_name: 'wnine')
 
 # Print a summary of the document prediction in RST format
 puts result.document
@@ -38,7 +38,7 @@ The document type must be specified when calling the parse method.
 
 ```ruby
 result = mindee_client.doc_from_path('/path/to/custom_file')
-  .parse(Mindee::Product::CustomV1, endpoint_name: 'wnine')
+  .parse(Mindee::Product::Custom::CustomV1, endpoint_name: 'wnine')
 puts result.document
 ```
 
@@ -54,7 +54,7 @@ mindee_client = Mindee::Client.new.add_endpoint(
 )
 
 result = mindee_client.doc_from_path('/path/to/receipt.jpg')
-  .parse(Mindee::Product::CustomV1, account_name: 'john')
+  .parse(Mindee::Product::Custom::CustomV1, account_name: 'john')
 ```
 
 ## Document Fields

@@ -63,7 +63,7 @@ describe Mindee::Client do
       file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
       doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
       expect do
-        mindee_client1.parse(doc, Mindee::Product::ReceiptV4, all_words: false, close_file: true)
+        mindee_client1.parse(doc, Mindee::Product::Receipt::ReceiptV4, all_words: false, close_file: true)
       end.to raise_error Mindee::Parsing::Common::HttpError
     end
 
@@ -72,14 +72,14 @@ describe Mindee::Client do
       file = File.open("#{DATA_DIR}/invoice_splitter/2_invoices.pdf", 'rb')
       doc = mindee_client1.doc_from_file(file, '2_invoices.pdf')
       expect do
-        mindee_client1.enqueue(doc, Mindee::Product::InvoiceSplitterV1)
+        mindee_client1.enqueue(doc, Mindee::Product::InvoiceSplitter::InvoiceSplitterV1)
       end.to raise_error Mindee::Parsing::Common::HttpError
     end
 
     it 'should make an invalid API async parse call raising an exception' do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
       expect do
-        mindee_client1.parse_queued(Mindee::Product::InvoiceSplitterV1, 'invalid-job-id')
+        mindee_client1.parse_queued(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1, 'invalid-job-id')
       end.to raise_error Mindee::Parsing::Common::HttpError
     end
   end
