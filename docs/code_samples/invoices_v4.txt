@@ -5,7 +5,13 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
-result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
+
+# Keep the product's class in a variable to keep the code DRY
+doc_class = Mindee::Product::Invoice::InvoiceV4
+# Initialize an endpoint for this product
+endpoint = mindee_client.create_endpoint(doc_class)
+
+result = mindee_client.parse(doc, endpoint)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

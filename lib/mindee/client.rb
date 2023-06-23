@@ -18,15 +18,7 @@ module Mindee
     #
     # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     #
-    # @param product_class [Mindee::Product]
-    #
-    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
-    #  API Builder. Do not set for standard (off the shelf) endpoints.
-    #
-    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
-    #  This is normally not required unless you have a custom endpoint which has the same name as a
-    #  standard (off the shelf) endpoint.
-    #  Do not set for standard (off the shelf) endpoints.
+    # @param endpoint [HTTP::Endpoint] Endpoint of the API
     #
     # @param all_words [Boolean] Whether to include the full text for each page.
     #  This performs a full OCR operation on the server and will increase response time.
@@ -46,38 +38,26 @@ module Mindee
     #  This performs a cropping operation on the server and will increase response time.
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
-    # rubocop:disable Metrics/ParameterLists
     def parse(
       input_source,
-      product_class,
-      endpoint_name: '',
-      account_name: '',
+      endpoint,
       all_words: false,
       close_file: true,
       page_options: nil,
       cropper: false
     )
-      endpoint = create_endpoint(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       prediction = endpoint.predict(input_source, all_words, close_file, cropper)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction)
+      Mindee::Parsing::Common::ApiResponse.new(endpoint.product_class, prediction)
     end
 
     # Enqueue a document for async parsing
     #
     # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
     #
-    # @param product_class [Mindee::Product]
-    #
-    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
-    #  API Builder. Do not set for standard (off the shelf) endpoints.
-    #
-    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
-    #  This is normally not required unless you have a custom endpoint which has the same name as a
-    #  standard (off the shelf) endpoint.
-    #  Do not set for standard (off the shelf) endpoints.
+    # @param endpoint [HTTP::Endpoint] Endpoint of the API
     #
     # @param all_words [Boolean] Whether to extract all the words on each page.
     #  This performs a full OCR operation on the server and will increase response time.
@@ -99,46 +79,31 @@ module Mindee
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(
       input_source,
-      product_class,
-      endpoint_name: '',
-      account_name: '',
+      endpoint,
       all_words: false,
       close_file: true,
       page_options: nil,
       cropper: false
     )
-      endpoint = create_endpoint(product_class, endpoint_name, account_name)
       if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      Mindee::Parsing::Common::ApiResponse.new(product_class,
+      Mindee::Parsing::Common::ApiResponse.new(endpoint.product_class,
                                                endpoint.predict_async(input_source, all_words, close_file, cropper))
     end
-    # rubocop:enable Metrics/ParameterLists
 
     # Parses a queued document
     #
-    # @param product_class [Mindee::Product]
+    # @param endpoint [HTTP::Endpoint] Endpoint of the API
     #
     # @param job_id [String] Id of the job (queue) to poll from
     #
-    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
-    #  API Builder. Do not set for standard (off the shelf) endpoints.
-    #
-    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
-    #  This is normally not required unless you have a custom endpoint which has the same name as a
-    #  standard (off the shelf) endpoint.
-    #  Do not set for standard (off the shelf) endpoints.
-    #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_queued(
-      product_class,
       job_id,
-      endpoint_name: '',
-      account_name: ''
+      endpoint
     )
-      endpoint = create_endpoint(product_class, endpoint_name, account_name)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, endpoint.parse_async(job_id))
+      Mindee::Parsing::Common::ApiResponse.new(endpoint.product_class, endpoint.parse_async(job_id))
     end
 
     # Load a document from an absolute path, as a string.
@@ -179,6 +144,32 @@ module Mindee
       Input::UrlInputSource.new(url)
     end
 
+    # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
+    # @param product_class [Mindee::Product] class of the product
+    #
+    # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
+    #  API Builder. Do not set for standard (off the shelf) endpoints.
+    #
+    # @param account_name [String] For custom endpoints, your account or organization username on the API Builder.
+    #  This is normally not required unless you have a custom endpoint which has the same name as a
+    #  standard (off the shelf) endpoint.
+    #  Do not set for standard (off the shelf) endpoints.
+    # @return [Mindee::HTTP::Endpoint]
+    def create_endpoint(product_class, endpoint_name: '', account_name: '')
+      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Custom::CustomV1
+        raise 'Missing argument endpoint_name when using custom class'
+      end
+
+      endpoint_name = fix_endpoint_name(product_class, endpoint_name)
+      account_name = fix_account_name(product_class, account_name)
+      version = if product_class.endpoint_version.nil?
+                  '1'
+                else
+                  product_class.endpoint_version
+                end
+      HTTP::Endpoint.new(product_class, account_name, endpoint_name, version, api_key: @api_key)
+    end
+
     private
 
     def fix_endpoint_name(product_class, endpoint_name)
@@ -191,25 +182,6 @@ module Mindee
       return 'mindee' if account_name.nil? || account_name.empty?
 
       account_name
-    end
-
-    # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
-    # @param product_class [Mindee::Product] class of the product
-    # @param endpoint_name [String, nil]
-    # @param account_name [String, nil]
-    def create_endpoint(product_class, endpoint_name, account_name)
-      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Custom::CustomV1
-        raise 'Missing argument endpoint_name when using custom class'
-      end
-
-      endpoint_name = fix_endpoint_name(product_class, endpoint_name)
-      account_name = fix_account_name(product_class, account_name)
-      version = if product_class.endpoint_version.nil?
-                  '1'
-                else
-                  product_class.endpoint_version
-                end
-      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
     end
   end
 end
