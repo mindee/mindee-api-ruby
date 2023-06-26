@@ -1,3 +1,4 @@
 --markup markdown
 --main README.md
+--fail-on-warning
 --output-dir docs/_build
