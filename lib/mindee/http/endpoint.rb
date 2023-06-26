@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'net/http'
 require_relative '../version'
 
@@ -32,7 +33,53 @@ module Mindee
         @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
-      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # Call the prediction API.
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+      # @param all_words [Boolean]
+      # @param close_file [Boolean]
+      # @param cropper [Boolean]
+      # @return [Hash]
+      def predict(input_source, all_words, close_file, cropper)
+        check_api_key
+        response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
+        hashed_response = JSON.parse(response.body, object_class: Hash)
+        return hashed_response if (200..299).include?(response.code.to_i)
+
+        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
+        raise error
+      end
+
+      # Call the prediction API.
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+      # @param close_file [Boolean]
+      # @param cropper [Boolean]
+      # @return [Hash]
+      def predict_async(input_source, all_words, close_file, cropper)
+        check_api_key
+        response = document_queue_req_get(input_source, all_words, close_file, cropper)
+        hashed_response = JSON.parse(response.body, object_class: Hash)
+        return hashed_response if (200..299).include?(response.code.to_i)
+
+        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
+        raise error
+      end
+
+      # Calls the parsed async doc.
+      # @param job_id [String]
+      # @return [Hash]
+      def parse_async(job_id)
+        check_api_key
+        response = document_queue_req(job_id)
+        hashed_response = JSON.parse(response.body, object_class: Hash)
+        return hashed_response if (200..299).include?(response.code.to_i)
+
+        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
+        raise error
+      end
+
+      private
+
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -49,7 +96,7 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::UrlInputSource)
+        form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       {
                         'document' => input_source.url,
                       }
@@ -67,12 +114,12 @@ module Mindee
         end
       end
 
-      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
       # @return [Net::HTTPResponse]
-      def predict_async_req_post(input_source, all_words, close_file, cropper)
+      def document_queue_req_get(input_source, all_words, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
 
         params = {}
@@ -84,7 +131,7 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::UrlInputSource)
+        form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       {
                         'document' => input_source.url,
                       }
@@ -104,7 +151,7 @@ module Mindee
 
       # @param job_id [String]
       # @return [Net::HTTPResponse]
-      def document_queue_req_get(job_id)
+      def document_queue_req(job_id)
         uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
         headers = {
@@ -126,19 +173,14 @@ module Mindee
         end
         response
       end
-    end
 
-    # Receipt API endpoint
-    class StandardEndpoint < Endpoint
-      def initialize(endpoint_name, version, api_key)
-        super('mindee', endpoint_name, version, api_key: api_key)
-      end
-    end
+      def check_api_key
+        return unless @api_key.nil? || @api_key.empty?
 
-    # Custom (constructed) API endpoint
-    class CustomEndpoint < Endpoint
-      def initialize(account_name, endpoint_name, version, api_key)
-        super(account_name, endpoint_name, version, api_key: api_key)
+        raise "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
+              "check your Client Configuration.\n" \
+              'You can set this using the ' \
+              "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end
   end

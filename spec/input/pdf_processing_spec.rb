@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'mindee/input/pdf_processing'
+require 'mindee/pdf'
 
 require_relative '../data'
 
-describe Mindee::Input do
+describe Mindee::PDF do
   def open_pdf(io_stream)
     pdf_parser = Origami::PDF::LinearParser.new({})
     io_stream.seek(0)
@@ -22,7 +22,7 @@ describe Mindee::Input do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -35,7 +35,7 @@ describe Mindee::Input do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -52,7 +52,7 @@ describe Mindee::Input do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -65,7 +65,7 @@ describe Mindee::Input do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -78,7 +78,7 @@ describe Mindee::Input do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(3)
     end
@@ -91,7 +91,7 @@ describe Mindee::Input do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(5)
     end
@@ -104,7 +104,7 @@ describe Mindee::Input do
         operation: :REMOVE,
         on_min_pages: 0,
       }
-      new_stream = Mindee::Input::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(9)
     end

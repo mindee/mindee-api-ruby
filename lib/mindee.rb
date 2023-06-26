@@ -3,6 +3,6 @@
 require 'mindee/client'
 
 module Mindee
-  class Error < StandardError
+  class HttpError < StandardError
   end
 end

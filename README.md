@@ -33,8 +33,11 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-result = mindee_client.doc_from_path('/path/to/the/file.ext')
-  .parse(Mindee::Prediction::InvoiceV4)
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -48,8 +51,12 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-doc = mindee_client.doc_from_path('/path/to/the/file.ext')
-result = doc.parse(Mindee::Prediction::EU::LicensePlateV1)
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::EU::LicensePlate::LicensePlateV1
+)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -60,14 +67,20 @@ puts result.document
 require 'mindee'
 
 # Init a new client and configure your custom document
-mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
-  'my-account',
-  'my-endpoint'
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+endpoint = mindee_client.create_endpoint(
+  endpoint_name: 'my-endpoint',
+  account_name: 'my-account'
 )
 
 # Load a file from disk and parse it
-doc = mindee_client.doc_from_path('/path/to/the/file.ext')
-result = mindee_client.parse(doc, Mindee::Prediction::CustomV1, endpoint_name: 'my-endpoint')
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Custom::CustomV1,
+  endpoint: endpoint
+)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

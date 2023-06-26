@@ -72,7 +72,7 @@ Using Mindee's APIs can be broken down into the following steps:
 Let's take a deep dive into how this works.
 
 ## Initializing the Client
-The `Client` centralizes document configurations in a single object.
+The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for Custom APIs).
 
 The `Client` requires your [API key](https://developers.mindee.com/docs/make-your-first-request#create-an-api-key).
 
@@ -121,13 +121,23 @@ There are a few different ways of loading a document file, depending on your use
 * [File Object](#file-object)
 * [Base64](#base64)
 * [Bytes](#bytes)
+* [Urls](#url)
 
 ### Path
 Load from a file directly from disk. Requires an absolute path, as a string.
 
 ```ruby
-result = mindee_client.doc_from_path("/path/to/the/invoice.jpg").parse(Mindee::Prediction::InvoiceV4)
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
+# Load a file from disk and parse it
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+# Parse the file
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 # Print a full summary of the parsed data in RST format
 puts result.document
 ```
@@ -138,13 +148,14 @@ A normal Ruby file object with a path. Must be in binary mode.
 **Note**: The original filename is required when calling the method.
 
 ```ruby
-result = nil
 File.open(INVOICE_FILE, 'rb') do |fo|
-  result = mindee_client.doc_from_file(fo, "invoice.jpg").parse(Mindee::Prediction::InvoiceV4)
+  input_source = mindee_client.source_from_file(fo, "invoice.jpg")
 end
 
-# Print a full summary of the parsed data in RST format
-puts result.document
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
 
 ### Base64
@@ -154,10 +165,13 @@ Load file contents from a base64-encoded string.
 
 ```ruby
 b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
-result = mindee_client.doc_from_b64string(b64_string, "receipt.jpg").parse(Mindee::Prediction::ReceiptV4)
 
-# Print a full summary of the parsed data in RST format
-puts result.document
+input_source = mindee_client.source_from_b64string(b64_string, "receipt.jpg")
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Receipt::ReceiptV5
+)
 ```
 
 ### Bytes
@@ -167,33 +181,60 @@ Requires raw bytes.
 
 ```ruby
 raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
-result = mindee_client.doc_from_bytes(raw_bytes, "invoice.pdf").parse(Mindee::Prediction::InvoiceV4)
+input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
 
-# Print a full summary of the parsed data in RST format
-puts result.document
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
+
+### URL
+Requires an url as a String.
+
+**Note**: the url must start with `https://`.
+```ruby
+input_source = mindee_client.source_from_url("https://www.example.com/invoice.pdf")
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
+```
+
 
 ## Sending a File
 To send a file to the API, we need to specify how to process the document.
 This will determine which API endpoint is used and how the API return will be handled internally by the library.
 
-More specifically, we need to set a `Mindee::Prediction` class as the first parameter of the `parse` method.
+More specifically, we need to set a `Mindee::Product` class as the first parameter of the `create_endpoint` method.
 
-This is because the `parse` method's' return type depends on its first argument.
+This is because the `Endpoint`'s urls will be set according to it
 
-Each document type available in the library has its corresponding class, which inherit from the base `Mindee::Prediction` class.
+Each document type available in the library has its corresponding class, which inherit from the base `Mindee::Parsing::Common::Predict` class.
 This is detailed in each document-specific guide.
 
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
 ```ruby
-result = doc.parse(Mindee::Prediction::InvoiceV4)
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
 
 ### Custom Documents
-The endpoint to use must also be set, this is done in the second argument of the `parse` method:
+For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
+
 ```ruby
-result = doc.parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
+endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine')
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Custom::CustomV1,
+  endpoint: endpoint
+)
 ```
 
 This is because the `CustomV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.

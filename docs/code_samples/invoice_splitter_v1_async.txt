@@ -1,13 +1,13 @@
-require_relative 'lib/mindee'
+require 'mindee'
 
 # Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk
-input_source = mindee_client.doc_from_path('/path/to/the/file.ext')
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Put the document class in a local variable to keep the code DRY
-doc_class = Mindee::Prediction::InvoiceSplitterV1
+doc_class = Mindee::Product::InvoiceSplitter::InvoiceSplitterV1
 
 # Limit the amount of API calls to retrieve your document
 MAX_RETRIES = 10
@@ -17,7 +17,6 @@ INTERVAL_SECS = 6
 
 # Counter to keep track of how many times we try to retrieve the document
 times_tried = 1
-
 
 queue_result = mindee_client.enqueue(
   input_source,
@@ -46,7 +45,7 @@ def get_doc_from_async_queue(
     sleep interval_secs
 
     # Fetch and parse the result, using the same type
-    parsed_result = mindee_client.parse_queued(doc_class, queue_id)
+    parsed_result = mindee_client.parse_queued(queue_id, doc_class)
 
     # Check whether the result is ready
     if parsed_result.job.status == Mindee::JobStatus::COMPLETED
