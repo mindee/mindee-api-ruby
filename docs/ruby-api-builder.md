@@ -9,52 +9,51 @@ created with the [API Builder](https://developers.mindee.com/docs/overview).
 > 📘 **Info**
 >
 > We used a data model that will be different from yours.
-> To modify this to your own custom API, change the `add_endpoint` call with your own parameters.
+> To modify this to your own custom API, change the `mindee_client.create_endpoint` call with your own parameters.
 
 ```ruby
 require 'mindee'
 
 # Init a new client and configure your custom document
-mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
-  'john',
-  'wnine',
-  version: '1.1' # optional, if not set, use the latest version of the model
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
+# Create an endpoint for your custom product
+custom_endpoint = mindee_client.create_endpoint(
+  account_name: 'john',
+  endpoint_name: 'wnine',
+  version: '1.1' # optional, if not set, uses the latest version of the model
+)
+```
+
+> **Note:** If the `version` argument is set, you'll be required to update it every time a new model is trained.
+> This is probably not needed for development but essential for production use.
+
+## Parsing Documents
+The client calls the `parse` method when parsing your custom document, which will return an object that you can send to the API.
+If your document is not an OTS API, the document's endpoint must be specified when calling the `parse` method.
+
+```ruby
+mindee_client.parse(
+  input_source,
+  Mindee::Product::Custom::CustomV1,
+  endpoint: custom_endpoint
 )
 
-# Load a file from disk and parse it
-result = mindee_client.doc_from_path('/path/to/file.ext')
-  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
 
 # Print a summary of the document prediction in RST format
 puts result.document
 ```
 
-If the `version` argument is set, you'll be required to update it every time a new model is trained.
-This is probably not needed for development but essential for production use.
-
-## Parsing Documents
-The client calls the `parse` method when parsing your custom document, which will return an object that you can send to the API.
-The document type must be specified when calling the parse method.
-
-```ruby
-result = mindee_client.doc_from_path('/path/to/custom_file')
-  .parse(Mindee::Prediction::CustomV1, endpoint_name: 'wnine')
-puts result.document
-```
-
 > 📘 **Info**
 >
-> If your custom document has the same name as an [off-the-shelf APIs](https://developers.mindee.com/docs/what-is-off-the-shelf-api) document,
-> you **must** specify your account name when calling the `parse` method:
+> If your custom document has the same name as one of the [off-the-shelf APIs](https://developers.mindee.com/docs/what-is-off-the-shelf-api) document,
+> you **must** specify your account name when creating the `create_endpoint` method:
 
 ```ruby
-mindee_client = Mindee::Client.new.add_endpoint(
-  'receipt',
-  'john'
+custom_endpoint = mindee_client.create_endpoint(
+  endpoint_name: 'receipt',
+  account_name: 'john'
 )
-
-result = mindee_client.doc_from_path('/path/to/receipt.jpg')
-  .parse(Mindee::Prediction::CustomV1, account_name: 'john')
 ```
 
 ## Document Fields
