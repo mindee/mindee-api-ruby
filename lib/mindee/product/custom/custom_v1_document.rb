@@ -26,6 +26,7 @@ module Mindee
           end
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           @classifications.each do |name, info|

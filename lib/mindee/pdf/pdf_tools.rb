@@ -4,6 +4,7 @@ module Mindee
   module PDF
     # Monkey-patching for Origami
     module PDFTools
+      # @return [StringIO]
       def to_io_stream(params = {})
         options = {
           delinearize: true,

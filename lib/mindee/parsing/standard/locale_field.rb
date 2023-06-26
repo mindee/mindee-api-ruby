@@ -35,6 +35,7 @@ module Mindee
           @currency = prediction['currency']
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << "#{@value}; " if @value

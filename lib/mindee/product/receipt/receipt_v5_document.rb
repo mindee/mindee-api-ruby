@@ -87,7 +87,7 @@ module Mindee
           @total_tax = AmountField.new(prediction['total_tax'], page_id)
         end
 
-        # @return String
+        # @return [String]
         def to_s
           supplier_company_registrations = @supplier_company_registrations.join("\n #{' ' * 32}")
           line_items = line_items_to_s

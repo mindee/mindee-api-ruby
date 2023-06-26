@@ -6,6 +6,7 @@ module Mindee
     # Contains any number of vertex coordinates (Points).
     class Polygon < Array
       # Get the central point (centroid) of the polygon.
+      # @return [Mindee::Geometry::Point]
       def centroid
         Geometry.get_centroid(self)
       end

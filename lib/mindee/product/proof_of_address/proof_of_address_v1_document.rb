@@ -61,6 +61,7 @@ module Mindee
           @date = DateField.new(prediction['date'], page_id)
         end
 
+        # @return [String]
         def to_s
           issuer_company_registration = @issuer_company_registration.join("\n #{' ' * 30}")
           recipient_company_registration = @recipient_company_registration.join("\n #{' ' * 33}")

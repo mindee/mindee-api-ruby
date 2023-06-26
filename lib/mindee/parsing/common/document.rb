@@ -34,6 +34,7 @@ module Mindee
           @ocr = self.class.load_ocr(http_response)
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << "########\nDocument\n########"

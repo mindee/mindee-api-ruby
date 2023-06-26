@@ -71,6 +71,7 @@ module Mindee
           @mrz = construct_mrz(page_id)
         end
 
+        # @return [String]
         def to_s
           given_names = @given_names.join(' ')
           out_str = String.new

@@ -18,6 +18,7 @@ module Mindee
           @confidence = prediction['confidence']
         end
 
+        # @return [String]
         def to_s
           @value.nil? ? '' : @value
         end

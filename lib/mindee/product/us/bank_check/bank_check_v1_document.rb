@@ -55,6 +55,7 @@ module Mindee
             end
           end
 
+          # @return [String]
           def to_s
             payees = @payees.map(&:value).join(', ')
             out_str = String.new

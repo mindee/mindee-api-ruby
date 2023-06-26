@@ -21,6 +21,7 @@ module Mindee
             super(http_response['prediction'], @page_id)
           end
 
+          # @return [String]
           def to_s
             out_str = String.new
             title = "Page #{@page_id}"

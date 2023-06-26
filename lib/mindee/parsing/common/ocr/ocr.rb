@@ -26,6 +26,7 @@ module Mindee
             @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
           end
 
+          # @return [String]
           def to_s
             @text.to_s
           end
@@ -44,6 +45,7 @@ module Mindee
           end
 
           # Sort the words on the line from left to right.
+          # @return [OcrLine]
           def sort_on_x
             from_array = sort do |word1, word2|
               Geometry.get_min_max_x(word1.polygon).min <=> Geometry.get_min_max_x(word2.polygon).min
@@ -51,6 +53,7 @@ module Mindee
             OcrLine.new(nil, from_array)
           end
 
+          # @return [String]
           def to_s
             each(&:to_s).join(' ')
           end
@@ -80,6 +83,7 @@ module Mindee
             @lines
           end
 
+          # @return [String]
           def to_s
             lines = all_lines
             return '' if lines.empty?
@@ -117,6 +121,7 @@ module Mindee
           end
 
           # Order all the words on the page into lines.
+          # @return [Array<OcrLine>]
           def to_lines
             current = nil
             indexes = []
@@ -134,7 +139,7 @@ module Mindee
           # Determine if two words are on the same line.
           # @param current_word [Mindee::Parsing::Common::Ocr::OcrWord]
           # @param next_word [Mindee::Parsing::Common::Ocr::OcrWord]
-          # @return Boolean
+          # @return [Boolean]
           def words_on_same_line?(current_word, next_word)
             current_in_next = current_word.polygon.point_in_y?(next_word.polygon.centroid)
             next_in_current = next_word.polygon.point_in_y?(current_word.polygon.centroid)
@@ -153,6 +158,7 @@ module Mindee
             @mvision_v1 = MVisionV1.new(prediction['mvision-v1'])
           end
 
+          # @return [String]
           def to_s
             @mvision_v1.to_s
           end

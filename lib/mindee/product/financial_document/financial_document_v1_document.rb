@@ -124,7 +124,7 @@ module Mindee
           @total_tax = AmountField.new(prediction['total_tax'], page_id)
         end
 
-        # @return String
+        # @return [String]
         def to_s
           reference_numbers = @reference_numbers.join("\n #{' ' * 19}")
           supplier_payment_details = @supplier_payment_details.join("\n #{' ' * 26}")

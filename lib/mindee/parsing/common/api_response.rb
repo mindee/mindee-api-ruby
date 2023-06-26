@@ -61,7 +61,7 @@ module Mindee
         attr_reader :status
         # @return [Integer]
         attr_reader :status_code
-        # @ url: [String]
+        # @return [String]
         attr_reader :url
 
         def initialize(server_response)

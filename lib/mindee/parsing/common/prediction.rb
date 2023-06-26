@@ -5,6 +5,7 @@ module Mindee
     module Common
       # Abstract class for all predictions
       class Prediction
+        # @return [String]
         def to_s
           ''
         end

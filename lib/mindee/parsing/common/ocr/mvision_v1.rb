@@ -18,6 +18,7 @@ module Mindee
             end
           end
 
+          # @return [String]
           def to_s
             out_str = String.new
             @pages.map do |page|

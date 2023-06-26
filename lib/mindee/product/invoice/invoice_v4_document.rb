@@ -107,6 +107,7 @@ module Mindee
           reconstruct(page_id)
         end
 
+        # @return [String]
         def to_s
           customer_company_registrations = @customer_company_registrations.map(&:value).join('; ')
           supplier_payment_details = @supplier_payment_details.map(&:to_s).join("\n                 ")

@@ -36,6 +36,7 @@ module Mindee
             @issuance_date = DateField.new(prediction['issuance_date'], page_id)
           end
 
+          # @return [String]
           def to_s
             given_names = @given_names.join("\n #{' ' * 15}")
             out_str = String.new

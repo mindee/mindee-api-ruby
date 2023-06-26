@@ -12,6 +12,7 @@ module Mindee
         attr_reader :bounding_box
         # @return [Mindee::Geometry::Polygon]
         attr_reader :polygon
+        # @return [Array, Hash, String, nil]
         attr_reader :content
 
         # @param prediction [Hash]

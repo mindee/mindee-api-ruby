@@ -43,7 +43,7 @@ module Mindee
           @page_id = page_id
         end
 
-        # @return String
+        # @return [String]
         def to_s
           tax = Field.float_to_string(@tax_amount)
           tax << " (#{Field.float_to_string(@tax_rate)}%)" unless @tax_rate.nil?

@@ -64,6 +64,7 @@ module Mindee
           @taxes = Taxes.new(prediction['taxes'], page_id)
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << "\n:Locale: #{@locale}".rstrip

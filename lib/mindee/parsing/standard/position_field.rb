@@ -27,6 +27,7 @@ module Mindee
           @value = @polygon
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << "Polygon with #{@polygon.size} points."

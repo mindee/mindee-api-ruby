@@ -24,6 +24,7 @@ module Mindee
             end
           end
 
+          # @return [String]
           def to_s
             license_plates = @license_plates.join("\n #{' ' * 16}")
             out_str = String.new

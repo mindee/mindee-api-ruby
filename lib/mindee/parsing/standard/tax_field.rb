@@ -35,6 +35,7 @@ module Mindee
           format('%.2f', value)
         end
 
+        # @return [String]
         def to_s
           printable = printable_values
           out_str = String.new
@@ -45,6 +46,7 @@ module Mindee
           out_str.strip
         end
 
+        # @return [Hash]
         def printable_values
           out_h = {}
           out_h[:code] = @code.nil? ? '' : @code
@@ -54,6 +56,7 @@ module Mindee
           out_h
         end
 
+        # @return [String]
         def to_table_line
           printable = printable_values
           out_str = String.new
@@ -86,6 +89,7 @@ module Mindee
           out_str
         end
 
+        # @return [String]
         def to_s
           return '' if nil? || empty?
 

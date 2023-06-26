@@ -25,6 +25,7 @@ module Mindee
           @pages = []
         end
 
+        # @return [String]
         def to_s
           is_rotation_applied = @is_rotation_applied ? 'Yes' : 'No'
           out_str = String.new

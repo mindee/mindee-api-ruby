@@ -61,6 +61,7 @@ module Mindee
             @mrz2 = TextField.new(prediction['mrz2'], page_id)
           end
 
+          # @return [String]
           def to_s
             given_names = @given_names.join("\n #{' ' * 15}")
             out_str = String.new

@@ -7,10 +7,14 @@ module Mindee
     module Standard
       # Represents payment details for invoices and receipts
       class PaymentDetails < Field
-        attr_reader :account_number,
-                    :iban,
-                    :routing_number,
-                    :swift
+        # @return [String, nil]
+        attr_reader :account_number
+        # @return [String, nil]
+        attr_reader :iban
+        # @return [String, nil]
+        attr_reader :routing_number
+        # @return [String, nil]
+        attr_reader :swift
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
@@ -23,6 +27,7 @@ module Mindee
           @swift = prediction['swift']
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << "#{@account_number}; " if @account_number

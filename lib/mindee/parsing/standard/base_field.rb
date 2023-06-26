@@ -26,11 +26,13 @@ module Mindee
           @page_id = page_id || prediction['page_id']
         end
 
+        # @return [String]
         def to_s
           @value ? @value.to_s : ''
         end
 
-        # Multiply all the Mindee::Field confidences in the array.
+        # Multiply all the Mindee::Parsing::Standard::Field confidences in the array.
+        # @return [Float]
         def self.array_confidence(field_array)
           product = 1
           field_array.each do |field|
@@ -41,7 +43,8 @@ module Mindee
           product.to_f
         end
 
-        # Add all the Mindee::Field values in the array.
+        # Add all the Mindee::Parsing::Standard::Field values in the array.
+        # @return [Float]
         def self.array_sum(field_array)
           arr_sum = 0
           field_array.each do |field|
@@ -54,6 +57,7 @@ module Mindee
 
         # @param value [Float]
         # @param min_precision [Integer]
+        # @return [String]
         def self.float_to_string(value, min_precision = 2)
           return String.new if value.nil?
 

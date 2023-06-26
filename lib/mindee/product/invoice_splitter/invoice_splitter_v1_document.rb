@@ -19,6 +19,7 @@ module Mindee
           @confidence = prediction['confidence'].nil? ? 0.0 : Float(prediction['confidence'])
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << ":Page indexes: #{@page_indexes.join(', ')}"
@@ -47,6 +48,7 @@ module Mindee
           end
         end
 
+        # @return [String]
         def to_s
           out_str = String.new
           out_str << "\n:Invoice Page Groups:"

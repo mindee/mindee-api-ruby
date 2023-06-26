@@ -29,6 +29,7 @@ module Mindee
             @swift = TextField.new(prediction['swift'], page_id)
           end
 
+          # @return [String]
           def to_s
             out_str = String.new
             out_str << "\n:IBAN: #{@iban}".rstrip
