@@ -49,7 +49,11 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
-result = doc.parse(Mindee::Product::EU::LicensePlate::LicensePlateV1)
+
+# Keep the product's class in a variable to keep the code DRY
+doc_class = Mindee::Product::EU::LicensePlate::LicensePlateV1
+
+result = mindee_client.parse(doc, doc_class)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -60,14 +64,19 @@ puts result.document
 require 'mindee'
 
 # Init a new client and configure your custom document
-mindee_client = Mindee::Client.new(api_key: 'my-api-key').add_endpoint(
-  'my-account',
-  'my-endpoint'
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+endpoint = mindee_client.create_endpoint(
+  endpoint_name: 'my-endpoint',
+  account_name: 'my-account'
 )
 
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
-result = mindee_client.parse(doc, Mindee::Product::Custom::CustomV1, endpoint_name: 'my-endpoint')
+
+# Keep the product's class in a variable to keep the code DRY
+doc_class = Mindee::Product::Custom::CustomV1
+
+result = mindee_client.parse(doc, doc_class, endpoint: endpoint)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

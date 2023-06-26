@@ -14,11 +14,9 @@ doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
 # Keep the product's class in a variable to keep the code DRY
 doc_class = Mindee::Product::Passport::PassportV1
-# Initialize an endpoint for this product
-endpoint = mindee_client.create_endpoint(doc_class)
 
 # Send our document
-result = mindee_client.parse(doc, endpoint)
+result = mindee_client.parse(doc, doc_class)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

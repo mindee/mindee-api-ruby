@@ -16,9 +16,9 @@ require 'mindee'
 
 # Init a new client and configure your custom document
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
 # Create an endpoint for your custom product
-endpoint = mindee_client.create_endpoint(
-  Mindee::Product::Custom::CustomV1,
+custom_endpoint = mindee_client.create_endpoint(
   account_name: 'john',
   endpoint_name: 'wnine',
   version: '1.1' # optional, if not set, uses the latest version of the model
@@ -30,10 +30,10 @@ endpoint = mindee_client.create_endpoint(
 
 ## Parsing Documents
 The client calls the `parse` method when parsing your custom document, which will return an object that you can send to the API.
-The document's endpoint must be specified when calling the parse method.
+If your document is not an OTS API, the document's endpoint must be specified when calling the `parse` method.
 
 ```ruby
-mindee_client.parse(doc, endpoint)
+mindee_client.parse(doc, doc_class, endpoint: custom_endpoint)
 
 
 # Print a summary of the document prediction in RST format
@@ -46,8 +46,7 @@ puts result.document
 > you **must** specify your account name when creating the `create_endpoint` method:
 
 ```ruby
-endpoint = mindee_client.create_endpoint(
-  Mindee::Product::Custom::CustomV1
+custom_endpoint = mindee_client.create_endpoint(
   endpoint_name: 'receipt',
   account_name: 'john'
 )

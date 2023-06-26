@@ -62,9 +62,9 @@ describe Mindee::Client do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{DATA_DIR}/receipt/receipt.jpg", 'rb')
       doc = mindee_client1.doc_from_file(file, 'receipt.jpg')
-      endpoint = mindee_client1.create_endpoint(Mindee::Product::Receipt::ReceiptV4)
+      doc_class = Mindee::Product::Receipt::ReceiptV5
       expect do
-        mindee_client1.parse(doc, endpoint, all_words: false, close_file: true)
+        mindee_client1.parse(doc, doc_class, all_words: false, close_file: true)
       end.to raise_error Mindee::Parsing::Common::HttpError
     end
 
@@ -72,17 +72,17 @@ describe Mindee::Client do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{DATA_DIR}/invoice_splitter/2_invoices.pdf", 'rb')
       doc = mindee_client1.doc_from_file(file, '2_invoices.pdf')
-      endpoint = mindee_client1.create_endpoint(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1)
+      doc_class = Mindee::Product::Invoice::InvoiceV4
       expect do
-        mindee_client1.enqueue(doc, endpoint)
+        mindee_client1.enqueue(doc, doc_class)
       end.to raise_error Mindee::Parsing::Common::HttpError
     end
 
     it 'should make an invalid API async parse call raising an exception' do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
-      endpoint = mindee_client1.create_endpoint(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1)
+      doc_class = Mindee::Product::InvoiceSplitter::InvoiceSplitterV1
       expect do
-        mindee_client1.parse_queued('invalid-job-id', endpoint)
+        mindee_client1.parse_queued('invalid-job-id', doc_class)
       end.to raise_error Mindee::Parsing::Common::HttpError
     end
   end

@@ -18,12 +18,9 @@ INTERVAL_SECS = 6
 # Counter to keep track of how many times we try to retrieve the document
 times_tried = 1
 
-# Initialize an endpoint for this product
-endpoint = mindee_client.create_endpoint(doc_class)
-
 queue_result = mindee_client.enqueue(
   doc,
-  endpoint
+  doc_class
 )
 
 # Get the id of the queue (job)
@@ -34,7 +31,7 @@ queue_id = queue_result.job.id
 def get_doc_from_async_queue(
     queue_id,
     mindee_client,
-    endpoint,
+    doc_class,
     times_tried=0,
     interval_secs=INTERVAL_SECS,
     max_retries=MAX_RETRIES
@@ -48,7 +45,7 @@ def get_doc_from_async_queue(
     sleep interval_secs
 
     # Fetch and parse the result, using the same type
-    parsed_result = mindee_client.parse_queued(queue_id, endpoint)
+    parsed_result = mindee_client.parse_queued(queue_id, doc_class)
 
     # Check whether the result is ready
     if parsed_result.job.status == Mindee::JobStatus::COMPLETED
@@ -59,11 +56,11 @@ def get_doc_from_async_queue(
     else
       get_doc_from_async_queue(
         queue_id, mindee_client,
-        endpoint,
+        doc_class,
         times_tried+1
       )
     end
 end
 
 # Start the recursion...
-get_doc_from_async_queue(queue_id, mindee_client, endpoint)
+get_doc_from_async_queue(queue_id, mindee_client, doc_class)

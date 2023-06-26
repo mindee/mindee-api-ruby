@@ -23,11 +23,8 @@ module Mindee
       attr_reader :api_key
       # @return [Integer]
       attr_reader :request_timeout
-      # @return [Mindee::Parsing::Common::Prediction]
-      attr_reader :product_class
 
-      def initialize(product_class, owner, url_name, version, api_key: '')
-        @product_class = product_class
+      def initialize(owner, url_name, version, api_key: '')
         @owner = owner
         @url_name = url_name
         @version = version
