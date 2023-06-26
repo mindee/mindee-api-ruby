@@ -34,7 +34,7 @@ module Mindee
       end
 
       # Call the prediction API.
-      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -50,7 +50,7 @@ module Mindee
       end
 
       # Call the prediction API.
-      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
       # @return [Hash]
@@ -79,7 +79,7 @@ module Mindee
 
       private
 
-      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -96,7 +96,7 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::UrlInputSource)
+        form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       {
                         'document' => input_source.url,
                       }
@@ -114,7 +114,7 @@ module Mindee
         end
       end
 
-      # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
@@ -131,7 +131,7 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::UrlInputSource)
+        form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       {
                         'document' => input_source.url,
                       }

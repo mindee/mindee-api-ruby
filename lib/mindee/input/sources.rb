@@ -3,7 +3,7 @@
 require 'stringio'
 require 'marcel'
 
-require_relative 'pdf_processing'
+require_relative '../pdf'
 
 module Mindee
   module Input

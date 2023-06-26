@@ -16,7 +16,7 @@ module Mindee
 
     # Call prediction API on a document and parse the results.
     #
-    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     #
     # @param endpoint [HTTP::Endpoint] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
@@ -48,7 +48,7 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
@@ -58,7 +58,7 @@ module Mindee
 
     # Enqueue a document for async parsing
     #
-    # @param input_source [Mindee::Input::LocalInputSource, Mindee::Input::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     #
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     # Doesn't need to be set in the case of OTS APIs.
@@ -90,7 +90,7 @@ module Mindee
       page_options: nil,
       cropper: false
     )
-      if input_source.is_a?(Mindee::Input::LocalInputSource) && !page_options.nil? && input_source.pdf?
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
@@ -119,7 +119,7 @@ module Mindee
     # @param input_path [String] Path of file to open
     # @return [Mindee::Input::Source::PathInputSource]
     def doc_from_path(input_path)
-      Input::PathInputSource.new(input_path)
+      Input::Source::PathInputSource.new(input_path)
     end
 
     # Load a document from raw bytes.
@@ -127,7 +127,7 @@ module Mindee
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::Input::Source::BytesInputSource]
     def doc_from_bytes(input_bytes, filename)
-      Input::BytesInputSource.new(input_bytes, filename)
+      Input::Source::BytesInputSource.new(input_bytes, filename)
     end
 
     # Load a document from a base64 encoded string.
@@ -135,7 +135,7 @@ module Mindee
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::Input::Source::Base64InputSource]
     def doc_from_b64string(base64_string, filename)
-      Input::Base64InputSource.new(base64_string, filename)
+      Input::Source::Base64InputSource.new(base64_string, filename)
     end
 
     # Load a document from a normal Ruby `File`.
@@ -143,19 +143,18 @@ module Mindee
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::Input::Source::FileInputSource]
     def doc_from_file(input_file, filename)
-      Input::FileInputSource.new(input_file, filename)
+      Input::Source::FileInputSource.new(input_file, filename)
     end
 
     # Load a document from a secure remote source (HTTPS).
     # @param url [String] Url of the file
     # @return [Mindee::Input::Source::UrlInputSource]
     def doc_from_url(url)
-      Input::UrlInputSource.new(url)
+      Input::Source::UrlInputSource.new(url)
     end
 
     # Creates a custom endpoint with the given values.
     # Do not set for standard (off the shelf) endpoints.
-    # @param product_class [Mindee::Product] class of the product
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.

@@ -13,11 +13,11 @@ module Mindee
         attr_reader :name
         # @return [String] Mindee ID of the document
         attr_reader :id
-        # @return [Mindee::Parsing::Ocr::Ocr, nil]
+        # @return [Mindee::Parsing::Common::Ocr::Ocr, nil]
         attr_reader :ocr
 
         # @param http_response [Hash]
-        # @return [Mindee::Parsing::Ocr::Ocr]
+        # @return [Mindee::Parsing::Common::Ocr::Ocr]
         def self.load_ocr(http_response)
           ocr_prediction = http_response.fetch('ocr', nil)
           return nil if ocr_prediction.nil? || ocr_prediction.fetch('mvision-v1', nil).nil?
