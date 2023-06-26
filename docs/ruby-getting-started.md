@@ -152,7 +152,10 @@ File.open(INVOICE_FILE, 'rb') do |fo|
   input_source = mindee_client.source_from_file(fo, "invoice.jpg")
 end
 
-result = mindee_client.parse(input_source, Mindee::Product::Invoice::InvoiceV4)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
 
 ### Base64
@@ -165,7 +168,10 @@ b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
 
 input_source = mindee_client.source_from_b64string(b64_string, "receipt.jpg")
 
-result = mindee_client.parse(input_source, Mindee::Product::Receipt::ReceiptV5)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Receipt::ReceiptV5
+)
 ```
 
 ### Bytes
@@ -177,7 +183,10 @@ Requires raw bytes.
 raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
 input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
 
-result = mindee_client.parse(input_source, Mindee::Product::Invoice::InvoiceV4)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
 
 ### URL
@@ -187,7 +196,10 @@ Requires an url as a String.
 ```ruby
 input_source = mindee_client.source_from_url("https://www.example.com/invoice.pdf")
 
-result = mindee_client.parse(input_source, Mindee::Product::Invoice::InvoiceV4)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
 
 
@@ -206,7 +218,10 @@ This is detailed in each document-specific guide.
 Simply setting the correct class is enough:
 ```ruby
 
-result = mindee_client.parse(input_source, Mindee::Product::Invoice::InvoiceV4)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
 ```
 
 ### Custom Documents
@@ -215,7 +230,11 @@ For custom documents, the endpoint to use must also be set, and it must take in 
 ```ruby
 endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine')
 
-result = mindee_client.parse(input_source, Mindee::Product::Custom::CustomV1, endpoint: endpoint)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Custom::CustomV1,
+  endpoint: endpoint
+)
 ```
 
 This is because the `CustomV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.
