@@ -7,10 +7,17 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Initialize a custom endpoint for this product
-custom_endpoint = mindee_client.create_endpoint(account_name: 'my-account', endpoint_name: 'my-endpoint')
+custom_endpoint = mindee_client.create_endpoint(
+  account_name: 'my-account',
+  endpoint_name: 'my-endpoint'
+)
 
 # Send our document
-result = mindee_client.parse(input_source, Mindee::Product::Custom::CustomV1, endpoint: custom_endpoint)
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Custom::CustomV1,
+  endpoint: custom_endpoint
+)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
