@@ -12,10 +12,10 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk and parse it
-doc = mindee_client.doc_from_path('/path/to/the/file.ext')
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Send our document
-result = mindee_client.parse(doc, Mindee::Product::Receipt::ReceiptV5)
+result = mindee_client.parse(input_source, Mindee::Product::Receipt::ReceiptV5)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

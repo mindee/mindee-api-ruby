@@ -4,7 +4,7 @@ require 'mindee'
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk
-doc = mindee_client.doc_from_path('/path/to/the/file.ext')
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Put the document class in a local variable to keep the code DRY
 doc_class = Mindee::Product::InvoiceSplitter::InvoiceSplitterV1
@@ -19,7 +19,7 @@ INTERVAL_SECS = 6
 times_tried = 1
 
 queue_result = mindee_client.enqueue(
-  doc,
+  input_source,
   doc_class
 )
 

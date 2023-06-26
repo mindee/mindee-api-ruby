@@ -142,8 +142,8 @@ default_cutting = {
   on_min_pages: 0,
 }
 page_options = options[:cut_pages].nil? ? nil : default_cutting
-doc = mindee_client.doc_from_path(file_path)
-result = mindee_client.parse(doc, DOCUMENTS[command][:prediction], page_options: page_options)
+input_source = mindee_client.source_from_path(file_path)
+result = mindee_client.parse(input_source, DOCUMENTS[command][:prediction], page_options: page_options)
 if options[:print_full]
   puts result.document
 else

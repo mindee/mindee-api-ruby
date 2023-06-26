@@ -118,7 +118,7 @@ module Mindee
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
     # @return [Mindee::Input::Source::PathInputSource]
-    def doc_from_path(input_path)
+    def source_from_path(input_path)
       Input::Source::PathInputSource.new(input_path)
     end
 
@@ -126,7 +126,7 @@ module Mindee
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::Input::Source::BytesInputSource]
-    def doc_from_bytes(input_bytes, filename)
+    def source_from_bytes(input_bytes, filename)
       Input::Source::BytesInputSource.new(input_bytes, filename)
     end
 
@@ -134,7 +134,7 @@ module Mindee
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::Input::Source::Base64InputSource]
-    def doc_from_b64string(base64_string, filename)
+    def source_from_b64string(base64_string, filename)
       Input::Source::Base64InputSource.new(base64_string, filename)
     end
 
@@ -142,14 +142,14 @@ module Mindee
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
     # @return [Mindee::Input::Source::FileInputSource]
-    def doc_from_file(input_file, filename)
+    def source_from_file(input_file, filename)
       Input::Source::FileInputSource.new(input_file, filename)
     end
 
     # Load a document from a secure remote source (HTTPS).
     # @param url [String] Url of the file
     # @return [Mindee::Input::Source::UrlInputSource]
-    def doc_from_url(url)
+    def source_from_url(url)
       Input::Source::UrlInputSource.new(url)
     end
 
