@@ -19,7 +19,7 @@ module Mindee
 
     # Transform a prediction into a Polygon.
     # @param prediction [Hash]
-    # @return [Mindee::Geometry::Polyon]
+    # @return [Mindee::Geometry::Polygon]
     def self.polygon_from_prediction(prediction)
       polygon = Polygon.new
       return polygon if prediction.nil?

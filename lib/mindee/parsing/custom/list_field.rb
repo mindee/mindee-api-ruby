@@ -30,7 +30,7 @@ module Mindee
 
       # Field where actual values are kept in a list (custom docs).
       class ListField
-        # @return [Array<Mindee::ListFieldItem>]
+        # @return [Array<Mindee::Parsing::Custom::ListFieldItem>]
         attr_reader :values
         # @return [Integer, nil]
         attr_reader :page_id

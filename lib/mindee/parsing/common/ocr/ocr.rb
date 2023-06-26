@@ -61,7 +61,7 @@ module Mindee
           # All the words on the page, in semi-random order.
           # @return [Array<OcrWord>]
           attr_reader :all_words
-          # @return [Array<OcrLines>]
+          # @return [Array<OcrLine>]
           attr_reader :lines
 
           # @param prediction [Hash]
@@ -132,8 +132,8 @@ module Mindee
           end
 
           # Determine if two words are on the same line.
-          # @param current_word [Mindee::Ocr::OcrWord]
-          # @param next_word [Mindee::Ocr::OcrWord]
+          # @param current_word [Mindee::Parsing::Common::Ocr::OcrWord]
+          # @param next_word [Mindee::Parsing::Common::Ocr::OcrWord]
           # @return Boolean
           def words_on_same_line?(current_word, next_word)
             current_in_next = current_word.polygon.point_in_y?(next_word.polygon.centroid)
@@ -145,7 +145,7 @@ module Mindee
         # OCR extraction from the entire document.
         class Ocr
           # Mindee Vision v1 results.
-          # @return [Mindee::Ocr::MVisionV1]
+          # @return [Mindee::Parsing::Common::Ocr::MVisionV1]
           attr_reader :mvision_v1
 
           # @param prediction [Hash]

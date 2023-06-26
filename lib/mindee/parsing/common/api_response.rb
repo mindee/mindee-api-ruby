@@ -21,9 +21,9 @@ module Mindee
       class Job
         # @return [String] Mindee ID of the document
         attr_reader :id
-        # @return [Mindee::DateField]
+        # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :issued_at
-        # @return [Mindee::DateField, nil]
+        # @return [Mindee::Parsing::Standard::DateField, nil]
         attr_reader :available_at
         # @return [JobStatus, Symbol]
         attr_reader :status
