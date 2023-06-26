@@ -50,10 +50,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
-# Keep the product's class in a variable to keep the code DRY
-doc_class = Mindee::Product::EU::LicensePlate::LicensePlateV1
-
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::EU::LicensePlate::LicensePlateV1)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -73,10 +70,7 @@ endpoint = mindee_client.create_endpoint(
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
-# Keep the product's class in a variable to keep the code DRY
-doc_class = Mindee::Product::Custom::CustomV1
-
-result = mindee_client.parse(doc, doc_class, endpoint: endpoint)
+result = mindee_client.parse(doc, Mindee::Product::Custom::CustomV1, endpoint: endpoint)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

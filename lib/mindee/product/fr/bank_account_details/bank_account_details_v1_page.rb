@@ -12,7 +12,7 @@ module Mindee
           include Mindee::Parsing::Common
           # @return [Integer]
           attr_reader :page_id
-          # @return [Mindee::Parsing::Common::Orentation]
+          # @return [Mindee::Parsing::Common::Orientation]
           attr_reader :orientation
 
           def initialize(http_response)

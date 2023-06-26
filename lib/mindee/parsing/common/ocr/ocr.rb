@@ -5,7 +5,7 @@ require_relative 'mvision_v1'
 module Mindee
   module Parsing
     module Common
-      module OcrExtraction
+      module Ocr
         # A single word.
         class OcrWord
           # The confidence score, value will be between 0.0 and 1.0
@@ -141,21 +141,21 @@ module Mindee
             current_in_next || next_in_current
           end
         end
-      end
 
-      # OCR extraction from the entire document.
-      class Ocr
-        # Mindee Vision v1 results.
-        # @return [Mindee::Ocr::MVisionV1]
-        attr_reader :mvision_v1
+        # OCR extraction from the entire document.
+        class Ocr
+          # Mindee Vision v1 results.
+          # @return [Mindee::Ocr::MVisionV1]
+          attr_reader :mvision_v1
 
-        # @param prediction [Hash]
-        def initialize(prediction)
-          @mvision_v1 = OcrExtraction::MVisionV1.new(prediction['mvision-v1'])
-        end
+          # @param prediction [Hash]
+          def initialize(prediction)
+            @mvision_v1 = MVisionV1.new(prediction['mvision-v1'])
+          end
 
-        def to_s
-          @mvision_v1.to_s
+          def to_s
+            @mvision_v1.to_s
+          end
         end
       end
     end

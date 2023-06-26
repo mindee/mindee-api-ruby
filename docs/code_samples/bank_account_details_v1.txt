@@ -6,11 +6,8 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
-# Keep the product's class in a variable to keep the code DRY
-doc_class = Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV1
-
 # Send our document
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV1)
 
 # Print a full summary of the parsed data in RST format
 puts result.document

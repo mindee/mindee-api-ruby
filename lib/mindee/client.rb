@@ -7,7 +7,7 @@ require_relative 'parsing/common/api_response'
 
 module Mindee
   # Mindee API Client.
-  # See: https://developers.mindee.com/docs/
+  # See: https://developers.mindee.com/docs
   class Client
     # @param api_key [String]
     def initialize(api_key: '')
@@ -117,7 +117,7 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @return [Mindee::PathInputSource]
+    # @return [Mindee::Input::Source::PathInputSource]
     def doc_from_path(input_path)
       Input::PathInputSource.new(input_path)
     end
@@ -125,7 +125,7 @@ module Mindee
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::BytesInputSource]
+    # @return [Mindee::Input::Source::BytesInputSource]
     def doc_from_bytes(input_bytes, filename)
       Input::BytesInputSource.new(input_bytes, filename)
     end
@@ -133,7 +133,7 @@ module Mindee
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::Base64InputSource]
+    # @return [Mindee::Input::Source::Base64InputSource]
     def doc_from_b64string(base64_string, filename)
       Input::Base64InputSource.new(base64_string, filename)
     end
@@ -141,14 +141,14 @@ module Mindee
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @return [Mindee::FileInputSource]
+    # @return [Mindee::Input::Source::FileInputSource]
     def doc_from_file(input_file, filename)
       Input::FileInputSource.new(input_file, filename)
     end
 
     # Load a document from a secure remote source (HTTPS).
     # @param url [String] Url of the file
-    # @return [Mindee::UrlInputSource]
+    # @return [Mindee::Input::Source::UrlInputSource]
     def doc_from_url(url)
       Input::UrlInputSource.new(url)
     end

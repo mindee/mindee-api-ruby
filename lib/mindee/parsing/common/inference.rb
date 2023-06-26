@@ -5,13 +5,14 @@ require_relative 'product'
 module Mindee
   module Parsing
     module Common
-      # Inference holds all predictions
+      # Abstract class for prediction Inferences
+      # Holds prediction for a page or entire document.
       class Inference
         # @return [Boolean]
         attr_reader :is_rotation_applied
-        # @return [Array<Mindee::ProductPrediction>]
+        # @return [Array<Mindee::Mindee::Parsing::Common::Prediction>]
         attr_reader :pages
-        # @return [Mindee::ProductPrediction]
+        # @return [Mindee::Parsing::Common::Prediction]
         attr_reader :prediction
         # @return [Mindee::Parsing::Common::Product]
         attr_reader :product

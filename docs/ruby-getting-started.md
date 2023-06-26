@@ -133,12 +133,8 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 # Load a file from disk and parse it
 doc = mindee_client.doc_from_path('/path/to/the/file.ext')
 
-# Keep the product's class in a variable to keep the code DRY
-doc_class = Mindee::Product::Invoice::InvoiceV4
-# Initialize an endpoint for this product
-
 # Send our document
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
 
 # Print a full summary of the parsed data in RST format
 puts result.document
@@ -154,7 +150,7 @@ File.open(INVOICE_FILE, 'rb') do |fo|
   doc = mindee_client.doc_from_file(fo, "invoice.jpg")
 end
 
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
 ```
 
 ### Base64
@@ -167,7 +163,7 @@ b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
 
 doc = mindee_client.doc_from_b64string(b64_string, "receipt.jpg")
 
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::Receipt::ReceiptV5)
 ```
 
 ### Bytes
@@ -179,7 +175,7 @@ Requires raw bytes.
 raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
 doc = mindee_client.doc_from_bytes(raw_bytes, "invoice.pdf")
 
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
 ```
 
 ### URL
@@ -189,7 +185,7 @@ Requires an url as a String.
 ```ruby
 doc = mindee_client.doc_from_url("https://www.example.com/invoice.pdf")
 
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
 ```
 
 
@@ -207,20 +203,17 @@ This is detailed in each document-specific guide.
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
 ```ruby
-doc_class = Mindee::Product::Invoice::InvoiceV4
 
-result = mindee_client.parse(doc, doc_class)
+result = mindee_client.parse(doc, Mindee::Product::Invoice::InvoiceV4)
 ```
 
 ### Custom Documents
 For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
 
 ```ruby
-doc_class = Mindee::Product::Custom::CustomV1
-
 endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine')
 
-result = mindee_client.parse(doc, doc_class, endpoint: endpoint)
+result = mindee_client.parse(doc, Mindee::Product::Custom::CustomV1, endpoint: endpoint)
 ```
 
 This is because the `CustomV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.

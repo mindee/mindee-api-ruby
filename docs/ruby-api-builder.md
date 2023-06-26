@@ -33,7 +33,7 @@ The client calls the `parse` method when parsing your custom document, which wil
 If your document is not an OTS API, the document's endpoint must be specified when calling the `parse` method.
 
 ```ruby
-mindee_client.parse(doc, doc_class, endpoint: custom_endpoint)
+mindee_client.parse(doc, Mindee::Product::Custom::CustomV1, endpoint: custom_endpoint)
 
 
 # Print a summary of the document prediction in RST format
