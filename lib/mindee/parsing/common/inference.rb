@@ -4,6 +4,7 @@ require_relative 'product'
 
 module Mindee
   module Parsing
+    # Common fields used for most documents.
     module Common
       # Abstract class for prediction Inferences
       # Holds prediction for a page or entire document.

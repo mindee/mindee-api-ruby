@@ -74,6 +74,7 @@ module Mindee
         end
 
         # @param char [String]
+        # @return [String]
         def line_separator(char)
           out_str = String.new
           out_str << '  '

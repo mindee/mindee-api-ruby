@@ -22,7 +22,12 @@ module Mindee
         end
 
         class << self
-          attr_reader :endpoint_name, :endpoint_version
+          # Name of the endpoint for this product.
+          # @return [String]
+          attr_reader :endpoint_name
+          # Version for this product.
+          # @return [String]
+          attr_reader :endpoint_version
         end
       end
     end
