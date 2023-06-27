@@ -16,4 +16,4 @@ result = mindee_client.parse(
 puts result.document
 
 # Print the document-level parsed data
-# puts result.inference.prediction
+# puts result.document.inference.prediction

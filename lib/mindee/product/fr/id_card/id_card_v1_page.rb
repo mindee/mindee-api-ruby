@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module IdCard
-        # French National ID Card V1 page prediction.
+        # Carte Nationale d'Identité V1 page prediction.
         class IdCardV1Page < IdCardV1Document
           include Mindee::Parsing::Common
 
@@ -18,13 +18,14 @@ module Mindee
           # @return [Mindee::Parsing::Common::Orientation]
           attr_reader :orientation
           # The side of the document which is visible.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::ClassificationField]
           attr_reader :document_side
 
           # @param prediction [Hash]
           def initialize(prediction)
-            @document_side = TextField.new(prediction['prediction']['document_side'], nil)
             @page_id = prediction['id']
+            @orientation = Orientation.new(prediction['orientation'], @page_id)
+            @document_side = ClassificationField.new(prediction['prediction']['document_side'], page_id)
             super(prediction['prediction'], @page_id)
           end
 
