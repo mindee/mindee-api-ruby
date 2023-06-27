@@ -9,7 +9,6 @@ require_relative '../data'
 DIR_PASSPORT_V1 = File.join(DATA_DIR, 'passport', 'response_v1').freeze
 
 describe Mindee::Product::Passport::PassportV1 do
-  include Mindee::Parsing::Common
   context 'A Passport V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_PASSPORT_V1, 'empty.json')

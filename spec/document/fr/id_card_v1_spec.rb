@@ -9,7 +9,6 @@ require_relative '../../data'
 DIR_FR_ID_CARD_V1 = File.join(DATA_DIR, 'fr', 'id_card', 'response_v1').freeze
 
 describe Mindee::Product::FR::IdCard::IdCardV1 do
-  include Mindee::Parsing::Common
   context 'A Carte Nationale d\'Identité V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_FR_ID_CARD_V1, 'empty.json')
