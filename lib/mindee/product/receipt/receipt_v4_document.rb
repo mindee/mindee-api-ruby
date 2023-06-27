@@ -45,8 +45,6 @@ module Mindee
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :tip
 
-        # @param prediction [Hash]
-        # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @locale = Locale.new(prediction['locale'])
