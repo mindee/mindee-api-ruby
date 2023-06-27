@@ -8,7 +8,6 @@ module Mindee
       module CarteVitale
         # Carte Vitale V1 document prediction.
         class CarteVitaleV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Common
           include Mindee::Parsing::Standard
           # The given name(s) of the card holder.
           # @return [Array<Mindee::Parsing::Standard::TextField>]

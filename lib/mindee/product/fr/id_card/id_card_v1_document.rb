@@ -8,7 +8,6 @@ module Mindee
       module IdCard
         # French National ID Card V1 document prediction.
         class IdCardV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Common
           include Mindee::Parsing::Standard
           # The side of the document which is visible.
           # @return [Mindee::Parsing::Standard::TextField]

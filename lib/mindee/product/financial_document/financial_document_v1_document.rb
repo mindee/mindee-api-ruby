@@ -8,7 +8,6 @@ module Mindee
     module FinancialDocument
       # Financial Document v1 document prediction.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
         # The purchase category among predefined classes.
         # @return [Mindee::Parsing::Standard::ClassificationField]
@@ -62,7 +61,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :supplier_phone_number
         # List of tax lines information.
-        # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
+        # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The time the purchase was made.
         # @return [Mindee::Parsing::Standard::TextField]

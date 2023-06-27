@@ -13,12 +13,6 @@ module Mindee
           @endpoint_name = 'idcard_fr'
           @endpoint_version = '1'
 
-          # @return [Array<Mindee::Product::FR::IdCard::IdCardV1Page>]
-          attr_reader :pages
-
-          # @return [Mindee::Product::FR::IdCard::IdCardV1Document]
-          attr_reader :prediction
-
           def initialize(http_response)
             super
             @prediction = IdCardV1Document.new(http_response['prediction'], nil)

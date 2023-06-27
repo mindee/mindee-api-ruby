@@ -7,7 +7,6 @@ module Mindee
     module ProofOfAddress
       # Proof of Address V1 document prediction.
       class ProofOfAddressV1Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::Locale]

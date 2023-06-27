@@ -7,7 +7,6 @@ module Mindee
     module Receipt
       # Expense Receipt V4 document prediction.
       class ReceiptV4Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
         # Where the purchase was made, the language, and the currency.
         # @return [Mindee::Parsing::Standard::Locale]
@@ -28,7 +27,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :supplier
         # List of taxes detected on the receipt.
-        # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
+        # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # Time as seen on the receipt in HH:MM format.
         # @return [Mindee::Parsing::Standard::TextField]

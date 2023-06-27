@@ -8,7 +8,6 @@ module Mindee
       module BankAccountDetails
         # Bank Account Details v1 document prediction.
         class BankAccountDetailsV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Common
           include Mindee::Parsing::Standard
           # The International Bank Account Number (IBAN).
           # @return [Mindee::Parsing::Standard::TextField]

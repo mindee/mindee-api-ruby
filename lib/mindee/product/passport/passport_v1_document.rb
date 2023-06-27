@@ -7,7 +7,6 @@ module Mindee
     module Passport
       # Passport V1 document prediction.
       class PassportV1Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
         # The country of issue.
         # @return [Mindee::Parsing::Standard::TextField]
