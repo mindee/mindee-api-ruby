@@ -6,15 +6,15 @@ module Mindee
   module Product
     module FR
       module BankAccountDetails
-        # Bank Account Details v1 document prediction.
+        # Bank Account Details V1 document prediction.
         class BankAccountDetailsV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
-          # The International Bank Account Number (IBAN).
-          # @return [Mindee::Parsing::Standard::TextField]
-          attr_reader :iban
           # The name of the account holder as seen on the document.
           # @return [Mindee::Parsing::Standard::TextField]
           attr_reader :account_holder_name
+          # The International Bank Account Number (IBAN).
+          # @return [Mindee::Parsing::Standard::TextField]
+          attr_reader :iban
           # The bank's SWIFT Business Identifier Code (BIC).
           # @return [Mindee::Parsing::Standard::TextField]
           attr_reader :swift
@@ -23,8 +23,8 @@ module Mindee
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super()
-            @iban = TextField.new(prediction['iban'], page_id)
             @account_holder_name = TextField.new(prediction['account_holder_name'], page_id)
+            @iban = TextField.new(prediction['iban'], page_id)
             @swift = TextField.new(prediction['swift'], page_id)
           end
 

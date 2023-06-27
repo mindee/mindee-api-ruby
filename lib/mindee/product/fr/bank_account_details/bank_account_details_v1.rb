@@ -8,7 +8,7 @@ module Mindee
   module Product
     module FR
       module BankAccountDetails
-        # Bank Account Details v1 prediction inference.
+        # Bank Account Details V1 prediction inference.
         class BankAccountDetailsV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'bank_account_details'
           @endpoint_version = '1'

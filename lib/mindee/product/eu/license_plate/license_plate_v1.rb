@@ -8,7 +8,7 @@ module Mindee
   module Product
     module EU
       module LicensePlate
-        # License Plate v1 prediction inference.
+        # License Plate V1 prediction inference.
         class LicensePlateV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'license_plates'
           @endpoint_version = '1'

@@ -8,7 +8,7 @@ module Mindee
   module Product
     module FR
       module CarteVitale
-        # Carte Vitale v1 prediction inference.
+        # Carte Vitale V1 prediction inference.
         class CarteVitaleV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'carte_vitale'
           @endpoint_version = '1'

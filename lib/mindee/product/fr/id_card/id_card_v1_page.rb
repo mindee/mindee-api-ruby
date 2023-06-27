@@ -14,23 +14,20 @@ module Mindee
             @prediction = IdCardV1PagePrediction.new(
               prediction['prediction'],
               prediction['id']
-            )
+            ) 
           end
         end
 
         # Carte Nationale d'Identité V1 page prediction.
         class IdCardV1PagePrediction < IdCardV1Document
-          include Mindee::Parsing::Common
           include Mindee::Parsing::Standard
-
-          # Id of the page (as given by the API).
-          # @return [Integer]
-          attr_reader :page_id
-          # Orientation of the page.
-          # @return [Mindee::Parsing::Common::Orientation]
+          
+          # The side of the document which is visible.
+          # @return [Mindee::Parsing::Standard::ClassificationField]
           attr_reader :document_side
 
           # @param prediction [Hash]
+          # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             @document_side = ClassificationField.new(prediction['document_side'], page_id)
             super(prediction, page_id)

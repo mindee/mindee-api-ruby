@@ -9,6 +9,7 @@ module Mindee
       # Invoice V4 document prediction.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
+
         # Locale information.
         # @return [Mindee::Parsing::Standard::Locale]
         attr_reader :locale
