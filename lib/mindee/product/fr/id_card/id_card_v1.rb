@@ -8,7 +8,7 @@ module Mindee
   module Product
     module FR
       module IdCard
-        # French National ID Card V1 prediction inference.
+        # Carte Nationale d'Identité V1 prediction inference.
         class IdCardV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'idcard_fr'
           @endpoint_version = '1'
