@@ -3,7 +3,7 @@ require 'mindee'
 # Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
-# Load a file from disk and parse it
+# Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Initialize a custom endpoint for this product
@@ -12,7 +12,7 @@ custom_endpoint = mindee_client.create_endpoint(
   endpoint_name: 'my-endpoint'
 )
 
-# Send our document
+# Parse the file
 result = mindee_client.parse(
   input_source,
   Mindee::Product::Custom::CustomV1,
