@@ -11,17 +11,17 @@ module Mindee
       class Inference
         # @return [Boolean]
         attr_reader :is_rotation_applied
-        # @return [Array<Mindee::Parsing::Common::Prediction>]
+        # @return [Array<Mindee::Parsing::Common::Pages>]
         attr_reader :pages
         # @return [Mindee::Parsing::Common::Prediction]
         attr_reader :prediction
         # @return [Mindee::Parsing::Common::Product]
         attr_reader :product
 
-        # @param prediction [Hash]
-        def initialize(prediction)
-          @is_rotation_applied = prediction['is_rotation_applied']
-          @product = Product.new(prediction['product'])
+        # @param raw_prediction [Hash]
+        def initialize(raw_prediction)
+          @is_rotation_applied = raw_prediction['is_rotation_applied']
+          @product = Product.new(raw_prediction['product'])
           @pages = []
         end
 
