@@ -13,11 +13,12 @@ module Mindee
           @endpoint_name = 'bank_check'
           @endpoint_version = '1'
 
-          def initialize(http_response)
+          # @param prediction [Hash]
+          def initialize(prediction)
             super
-            @prediction = BankCheckV1Document.new(http_response['prediction'], nil)
+            @prediction = BankCheckV1Document.new(prediction['prediction'], nil)
             @pages = []
-            http_response['pages'].each do |page|
+            prediction['pages'].each do |page|
               @pages.push(BankCheckV1Page.new(page))
             end
           end

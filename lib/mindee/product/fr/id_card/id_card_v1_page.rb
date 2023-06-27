@@ -10,18 +10,22 @@ module Mindee
         # French National ID Card V1 page prediction.
         class IdCardV1Page < IdCardV1Document
           include Mindee::Parsing::Common
+
+          # Id of the page (as given by the API).
+          # @return [Integer]
+          attr_reader :page_id
+          # Orientation of the page.
+          # @return [Mindee::Parsing::Common::Orientation]
+          attr_reader :orientation
           # The side of the document which is visible.
           # @return [Mindee::Parsing::Standard::TextField]
           attr_reader :document_side
 
-          # The identification card number.
-          # @return [Mindee::Parsing::Standard::TextField]
-
-          # @param http_response [Hash]
-          def initialize(http_response)
-            @document_side = TextField.new(http_response['prediction']['document_side'], nil)
-            @page_id = http_response['id']
-            super(http_response['prediction'], @page_id)
+          # @param prediction [Hash]
+          def initialize(prediction)
+            @document_side = TextField.new(prediction['prediction']['document_side'], nil)
+            @page_id = prediction['id']
+            super(prediction['prediction'], @page_id)
           end
 
           # @return [String]

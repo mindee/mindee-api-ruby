@@ -30,6 +30,8 @@ module Mindee
         # @return [Float]
         attr_reader :unit_price
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super(prediction, page_id)
           @description = prediction['description']

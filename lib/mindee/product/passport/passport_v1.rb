@@ -12,11 +12,12 @@ module Mindee
         @endpoint_name = 'passport'
         @endpoint_version = '1'
 
-        def initialize(http_response)
+        # @param prediction [Hash]
+        def initialize(prediction)
           super
-          @prediction = PassportV1Document.new(http_response['prediction'], nil)
+          @prediction = PassportV1Document.new(prediction['prediction'], nil)
           @pages = []
-          http_response['pages'].each do |page|
+          prediction['pages'].each do |page|
             @pages.push(PassportV1Page.new(page))
           end
         end

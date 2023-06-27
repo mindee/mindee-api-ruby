@@ -36,6 +36,8 @@ module Mindee
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @locale = Locale.new(prediction['locale'], page_id)

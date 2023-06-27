@@ -18,10 +18,10 @@ module Mindee
         # @return [Mindee::Parsing::Common::Product]
         attr_reader :product
 
-        # @param http_response [Hash]
-        def initialize(http_response)
-          @is_rotation_applied = http_response['is_rotation_applied']
-          @product = Product.new(http_response['product'])
+        # @param prediction [Hash]
+        def initialize(prediction)
+          @is_rotation_applied = prediction['is_rotation_applied']
+          @product = Product.new(prediction['product'])
           @pages = []
         end
 

@@ -48,6 +48,8 @@ module Mindee
         # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :mrz
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @country = TextField.new(prediction['country'], page_id)

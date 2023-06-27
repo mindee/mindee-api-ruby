@@ -13,11 +13,12 @@ module Mindee
           @endpoint_name = 'carte_vitale'
           @endpoint_version = '1'
 
-          def initialize(http_response)
+          # @param prediction [Hash]
+          def initialize(prediction)
             super
-            @prediction = CarteVitaleV1Document.new(http_response['prediction'], nil)
+            @prediction = CarteVitaleV1Document.new(prediction['prediction'], nil)
             @pages = []
-            http_response['pages'].each do |page|
+            prediction['pages'].each do |page|
               @pages.push(CarteVitaleV1Page.new(page))
             end
           end

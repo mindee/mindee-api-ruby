@@ -13,11 +13,12 @@ module Mindee
           @endpoint_name = 'idcard_fr'
           @endpoint_version = '1'
 
-          def initialize(http_response)
+          # @param prediction [Hash]
+          def initialize(prediction)
             super
-            @prediction = IdCardV1Document.new(http_response['prediction'], nil)
+            @prediction = IdCardV1Document.new(prediction['prediction'], nil)
             @pages = []
-            http_response['pages'].each do |page|
+            prediction['pages'].each do |page|
               @pages.push(IdCardV1Page.new(page))
             end
           end

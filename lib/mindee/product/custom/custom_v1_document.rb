@@ -14,6 +14,8 @@ module Mindee
         # @return [Hash<Symbol, Mindee::Parsing::Custom::ClassificationField>]
         attr_reader :classifications
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @fields = {}

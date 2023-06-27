@@ -64,6 +64,8 @@ module Mindee
         # @return [Array<Mindee::InvoiceV4LineItem>]
         attr_reader :line_items
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @locale = Locale.new(prediction['locale'])

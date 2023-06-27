@@ -32,6 +32,8 @@ module Mindee
         # @return [Array<Mindee::Geometry::Polygon>]
         attr_reader :polygon
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           @product_code = prediction['product_code']
           @quantity = prediction['quantity']

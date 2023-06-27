@@ -79,6 +79,8 @@ module Mindee
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_tax
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @category = ClassificationField.new(prediction['category'], page_id)

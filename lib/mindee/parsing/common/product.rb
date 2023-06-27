@@ -7,11 +7,11 @@ module Mindee
       class Product
         attr_reader :name, :type, :version
 
-        # @param http_response [Hash]
-        def initialize(http_response)
-          @name = http_response['name']
-          @type = http_response['type']
-          @version = http_response['version']
+        # @param prediction [Hash]
+        def initialize(prediction)
+          @name = prediction['name']
+          @type = prediction['type']
+          @version = prediction['version']
         end
       end
     end

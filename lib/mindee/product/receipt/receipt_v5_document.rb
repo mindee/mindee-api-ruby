@@ -19,7 +19,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # List of line item details.
-        # @return [Array<Mindee::ReceiptV5LineItem>]
+        # @return [Array<Mindee::Product::Receipt::ReceiptV5LineItem>]
         attr_reader :line_items
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::Locale]
@@ -58,6 +58,8 @@ module Mindee
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_tax
 
+        # @param prediction [Hash]
+        # @page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @category = ClassificationField.new(prediction['category'], page_id)
