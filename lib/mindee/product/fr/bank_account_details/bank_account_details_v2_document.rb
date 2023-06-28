@@ -46,6 +46,7 @@ module Mindee
           end
 
           private
+
           def bban_to_s
             @bban.to_s
           end
