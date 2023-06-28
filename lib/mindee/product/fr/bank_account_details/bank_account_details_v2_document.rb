@@ -47,6 +47,7 @@ module Mindee
 
           private
 
+          # @return [String]
           def bban_to_s
             @bban.to_s
           end
