@@ -58,11 +58,11 @@ module Mindee
           def to_s
             printable = printable_values
             out_str = String.new
-            out_str << printable[:bban_bank_code]
-            out_str << printable[:bban_branch_code]
-            out_str << printable[:bban_key]
-            out_str << printable[:bban_number]
-            out_str.strip
+            out_str << "\n  :Bank Code: #{printable[:bban_bank_code]}"
+            out_str << "\n  :Branch Code: #{printable[:bban_branch_code]}"
+            out_str << "\n  :Key: #{printable[:bban_key]}"
+            out_str << "\n  :Account Number: #{printable[:bban_number]}"
+            out_str
           end
         end
       end
