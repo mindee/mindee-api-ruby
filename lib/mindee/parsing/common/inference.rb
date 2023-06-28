@@ -11,7 +11,7 @@ module Mindee
       class Inference
         # @return [Boolean]
         attr_reader :is_rotation_applied
-        # @return [Array<Mindee::Parsing::Common::Pages>]
+        # @return [Array<Mindee::Parsing::Common::Page>]
         attr_reader :pages
         # @return [Mindee::Parsing::Common::Prediction]
         attr_reader :prediction

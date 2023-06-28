@@ -6,7 +6,7 @@ require_relative 'custom_v1_page'
 module Mindee
   module Product
     module Custom
-      # Custom document V1 prediction inference.
+      # Custom Document V1 prediction inference.
       class CustomV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = ''
         @endpoint_version = ''

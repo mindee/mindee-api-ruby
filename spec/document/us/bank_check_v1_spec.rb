@@ -39,10 +39,10 @@ describe Mindee::Product::US::BankCheck::BankCheckV1 do
       document = Mindee::Parsing::Common::Document.new(Mindee::Product::US::BankCheck::BankCheckV1,
                                                        response['document'])
       page = document.inference.pages[0]
-      expect(page.account_number.value).to eq('12345678910')
-      expect(page.check_position.rectangle.top_left.y).to eq(0.129)
-      expect(page.check_position.rectangle[0][1]).to eq(0.129)
-      page.signatures_positions.each do |pos|
+      expect(page.prediction.account_number.value).to eq('12345678910')
+      expect(page.prediction.check_position.rectangle.top_left.y).to eq(0.129)
+      expect(page.prediction.check_position.rectangle[0][1]).to eq(0.129)
+      page.prediction.signatures_positions.each do |pos|
         expect(pos).to be_a_kind_of(Mindee::Parsing::Standard::PositionField)
       end
       expect(page.to_s).to eq(to_string)

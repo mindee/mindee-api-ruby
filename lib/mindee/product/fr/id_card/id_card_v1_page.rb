@@ -7,6 +7,7 @@ module Mindee
   module Product
     module FR
       module IdCard
+        # Carte Nationale d'Identité V1 page.
         class IdCardV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
@@ -14,14 +15,14 @@ module Mindee
             @prediction = IdCardV1PagePrediction.new(
               prediction['prediction'],
               prediction['id']
-            ) 
+            )
           end
         end
 
         # Carte Nationale d'Identité V1 page prediction.
         class IdCardV1PagePrediction < IdCardV1Document
           include Mindee::Parsing::Standard
-          
+
           # The side of the document which is visible.
           # @return [Mindee::Parsing::Standard::ClassificationField]
           attr_reader :document_side

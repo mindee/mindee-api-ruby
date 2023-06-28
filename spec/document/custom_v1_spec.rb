@@ -45,8 +45,8 @@ describe Mindee::Product::Custom::CustomV1 do
       response = load_json(DIR_CUSTOM_V1, 'complete.json')
       inference = Mindee::Parsing::Common::Document.new(Mindee::Product::Custom::CustomV1,
                                                         response['document']).inference
-      expect(inference.pages[0].fields[:string_all].contents_str(separator: '_')).to eq('Jenny_is_great')
-      expect(inference.pages[0].fields[:string_all].contents_list).to eq(['Jenny', 'is', 'great'])
+      expect(inference.pages[0].prediction.fields[:string_all].contents_str(separator: '_')).to eq('Jenny_is_great')
+      expect(inference.pages[0].prediction.fields[:string_all].contents_list).to eq(['Jenny', 'is', 'great'])
       expect(inference.pages[0].to_s).to eq(to_string)
     end
 

@@ -6,6 +6,7 @@ require_relative 'invoice_splitter_v1_document'
 module Mindee
   module Product
     module InvoiceSplitter
+      # Invoice Splitter V1 page.
       class InvoiceSplitterV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
@@ -13,19 +14,12 @@ module Mindee
           @prediction = InvoiceSplitterV1PagePrediction.new(
             prediction['prediction'],
             prediction['id']
-          ) 
+          )
         end
       end
 
       # Invoice Splitter V1 page prediction.
       class InvoiceSplitterV1PagePrediction < InvoiceSplitterV1Document
-
-        # @param prediction [Hash]
-        # @param page_id [Integer, nil]
-        def initialize(prediction, page_id)
-          super(prediction, page_id)
-        end
-
         # @return [String]
         def to_s
           out_str = String.new

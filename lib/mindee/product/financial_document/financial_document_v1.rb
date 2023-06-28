@@ -7,7 +7,7 @@ require_relative 'financial_document_v1_page'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document v1 prediction inference.
+      # Financial Document V1 prediction inference.
       class FinancialDocumentV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'financial_document'
         @endpoint_version = '1'

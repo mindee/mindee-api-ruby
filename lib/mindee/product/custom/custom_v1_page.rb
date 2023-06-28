@@ -6,30 +6,23 @@ require_relative 'custom_v1_document'
 module Mindee
   module Product
     module Custom
-      # Custom document V1 page prediction.
-      class CustomV1Page < CustomV1Document
-        include Mindee::Parsing::Common
-
-        # Id of the page (as given by the API).
-        # @return [Integer]
-        attr_reader :page_id
-        # Orientation of the page.
-        # @return [Mindee::Parsing::Common::Orientation]
-        attr_reader :orientation
-
+      # Custom Document V1 page.
+      class CustomV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          @page_id = prediction['id']
-          @orientation = Orientation.new(prediction['orientation'], @page_id)
-          super(prediction['prediction'], @page_id)
+          super(prediction)
+          @prediction = CustomV1PagePrediction.new(
+            prediction['prediction'],
+            prediction['id']
+          )
         end
+      end
 
+      # Custom Document V1 page prediction.
+      class CustomV1PagePrediction < CustomV1Document
         # @return [String]
         def to_s
           out_str = String.new
-          title = "Page #{@page_id}"
-          out_str << "#{title}\n"
-          out_str << ('-' * title.size)
           out_str << "\n#{super}"
           out_str
         end

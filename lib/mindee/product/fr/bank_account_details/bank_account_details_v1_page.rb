@@ -7,6 +7,7 @@ module Mindee
   module Product
     module FR
       module BankAccountDetails
+        # Bank Account Details V1 page.
         class BankAccountDetailsV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
@@ -14,19 +15,12 @@ module Mindee
             @prediction = BankAccountDetailsV1PagePrediction.new(
               prediction['prediction'],
               prediction['id']
-            ) 
+            )
           end
         end
 
         # Bank Account Details V1 page prediction.
         class BankAccountDetailsV1PagePrediction < BankAccountDetailsV1Document
-
-          # @param prediction [Hash]
-          # @param page_id [Integer, nil]
-          def initialize(prediction, page_id)
-            super(prediction, page_id)
-          end
-
           # @return [String]
           def to_s
             out_str = String.new

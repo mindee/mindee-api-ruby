@@ -40,7 +40,7 @@ module Mindee
           out_str << "########\nDocument\n########"
           out_str << "\n:Mindee ID: #{@id}"
           out_str << "\n:Filename: #{@name}"
-          out_str << "\n\n#{@inference.to_s}"
+          out_str << "\n\n#{@inference}"
         end
       end
     end

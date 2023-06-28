@@ -7,7 +7,7 @@ require_relative 'proof_of_address_v1_page'
 module Mindee
   module Product
     module ProofOfAddress
-      # Proof of Address v1 prediction results.
+      # Proof of Address V1 prediction inference.
       class ProofOfAddressV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'proof_of_address'
         @endpoint_version = '1'

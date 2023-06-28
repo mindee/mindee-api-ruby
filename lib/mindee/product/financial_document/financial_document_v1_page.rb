@@ -6,30 +6,23 @@ require_relative 'financial_document_v1_document'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document V1 page prediction.
-      class FinancialDocumentV1Page < FinancialDocumentV1Document
-        include Mindee::Parsing::Common
-
-        # Id of the page (as given by the API).
-        # @return [Integer]
-        attr_reader :page_id
-        # Orientation of the page.
-        # @return [Mindee::Parsing::Common::Orientation]
-        attr_reader :orientation
-
+      # Financial Document V1 page.
+      class FinancialDocumentV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          @page_id = prediction['id']
-          @orientation = Orientation.new(prediction['orientation'], @page_id)
-          super(prediction['prediction'], @page_id)
+          super(prediction)
+          @prediction = FinancialDocumentV1PagePrediction.new(
+            prediction['prediction'],
+            prediction['id']
+          )
         end
+      end
 
+      # Financial Document V1 page prediction.
+      class FinancialDocumentV1PagePrediction < FinancialDocumentV1Document
         # @return [String]
         def to_s
           out_str = String.new
-          title = "Page #{@page_id}"
-          out_str << "#{title}\n"
-          out_str << ('-' * title.size)
           out_str << "\n#{super}"
           out_str
         end

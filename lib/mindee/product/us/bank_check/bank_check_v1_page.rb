@@ -7,30 +7,23 @@ module Mindee
   module Product
     module US
       module BankCheck
-        # Bank Check V1 page prediction.
-        class BankCheckV1Page < BankCheckV1Document
-          include Mindee::Parsing::Common
-
-          # Id of the page (as given by the API).
-          # @return [Integer]
-          attr_reader :page_id
-          # Orientation of the page.
-          # @return [Mindee::Parsing::Common::Orientation]
-          attr_reader :orientation
-
+        # Bank Check V1 page.
+        class BankCheckV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            @page_id = prediction['id']
-            @orientation = Orientation.new(prediction['orientation'], @page_id)
-            super(prediction['prediction'], @page_id)
+            super(prediction)
+            @prediction = BankCheckV1PagePrediction.new(
+              prediction['prediction'],
+              prediction['id']
+            )
           end
+        end
 
+        # Bank Check V1 page prediction.
+        class BankCheckV1PagePrediction < BankCheckV1Document
           # @return [String]
           def to_s
             out_str = String.new
-            title = "Page #{@page_id}"
-            out_str << "#{title}\n"
-            out_str << ('-' * title.size)
             out_str << "\n#{super}"
             out_str
           end
