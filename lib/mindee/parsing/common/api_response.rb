@@ -4,19 +4,19 @@ require_relative 'document'
 require 'time'
 
 module Mindee
-  module JobStatus
-    WAITING = :waiting
-    PROCESSING = :processing
-    COMPLETED = :completed
-  end
-
-  module RequestStatus
-    FAILURE = :failure
-    SUCCESS = :success
-  end
-
   module Parsing
     module Common
+      module JobStatus
+        WAITING = :waiting
+        PROCESSING = :processing
+        COMPLETED = :completed
+      end
+
+      module RequestStatus
+        FAILURE = :failure
+        SUCCESS = :success
+      end
+
       # Job (queue) information on async parsing.
       class Job
         # @return [String] Mindee ID of the document
