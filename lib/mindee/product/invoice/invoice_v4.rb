@@ -13,11 +13,12 @@ module Mindee
         @endpoint_name = 'invoices'
         @endpoint_version = '4'
 
-        def initialize(http_response)
+        # @param prediction [Hash]
+        def initialize(prediction)
           super
-          @prediction = InvoiceV4Document.new(http_response['prediction'], nil)
+          @prediction = InvoiceV4Document.new(prediction['prediction'], nil)
           @pages = []
-          http_response['pages'].each do |page|
+          prediction['pages'].each do |page|
             @pages.push(InvoiceV4Page.new(page))
           end
         end

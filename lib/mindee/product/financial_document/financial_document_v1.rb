@@ -7,16 +7,17 @@ require_relative 'financial_document_v1_page'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document v1 prediction inference.
+      # Financial Document V1 prediction inference.
       class FinancialDocumentV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'financial_document'
         @endpoint_version = '1'
 
-        def initialize(http_response)
+        # @param prediction [Hash]
+        def initialize(prediction)
           super
-          @prediction = FinancialDocumentV1Document.new(http_response['prediction'], nil)
+          @prediction = FinancialDocumentV1Document.new(prediction['prediction'], nil)
           @pages = []
-          http_response['pages'].each do |page|
+          prediction['pages'].each do |page|
             @pages.push(FinancialDocumentV1Page.new(page))
           end
         end

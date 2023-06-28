@@ -7,29 +7,36 @@ module Mindee
   module Product
     module FR
       module IdCard
-        # French National ID Card V1 page prediction.
-        class IdCardV1Page < IdCardV1Document
-          include Mindee::Parsing::Common
+        # Carte Nationale d'Identité V1 page.
+        class IdCardV1Page < Mindee::Parsing::Common::Page
+          # @param prediction [Hash]
+          def initialize(prediction)
+            super(prediction)
+            @prediction = IdCardV1PagePrediction.new(
+              prediction['prediction'],
+              prediction['id']
+            )
+          end
+        end
+
+        # Carte Nationale d'Identité V1 page prediction.
+        class IdCardV1PagePrediction < IdCardV1Document
+          include Mindee::Parsing::Standard
+
           # The side of the document which is visible.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::ClassificationField]
           attr_reader :document_side
 
-          # The identification card number.
-          # @return [Mindee::Parsing::Standard::TextField]
-
-          # @param http_response [Hash]
-          def initialize(http_response)
-            @document_side = TextField.new(http_response['prediction']['document_side'], nil)
-            @page_id = http_response['id']
-            super(http_response['prediction'], @page_id)
+          # @param prediction [Hash]
+          # @param page_id [Integer, nil]
+          def initialize(prediction, page_id)
+            @document_side = ClassificationField.new(prediction['document_side'], page_id)
+            super(prediction, page_id)
           end
 
           # @return [String]
           def to_s
             out_str = String.new
-            title = "Page #{@page_id}"
-            out_str << "#{title}\n"
-            out_str << ('-' * title.size)
             out_str << "\n:Document Side: #{@document_side}".rstrip
             out_str << "\n#{super}"
             out_str

@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Custom
-      # Custom document V1 prediction
+      # Custom Document V1 prediction
       class CustomV1Document < Mindee::Parsing::Common::Prediction
         # All value fields in the document
         # @return [Hash<Symbol, Mindee::Parsing::Custom::ListField>]

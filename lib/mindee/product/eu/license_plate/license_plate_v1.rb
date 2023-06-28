@@ -8,16 +8,17 @@ module Mindee
   module Product
     module EU
       module LicensePlate
-        # License Plate v1 prediction inference.
+        # License Plate V1 prediction inference.
         class LicensePlateV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'license_plates'
           @endpoint_version = '1'
 
-          def initialize(http_response)
+          # @param prediction [Hash]
+          def initialize(prediction)
             super
-            @prediction = LicensePlateV1Document.new(http_response['prediction'], nil)
+            @prediction = LicensePlateV1Document.new(prediction['prediction'], nil)
             @pages = []
-            http_response['pages'].each do |page|
+            prediction['pages'].each do |page|
               @pages.push(LicensePlateV1Page.new(page))
             end
           end

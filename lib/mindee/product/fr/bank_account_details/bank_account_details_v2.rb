@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_account_details_v1_document'
-require_relative 'bank_account_details_v1_page'
+require_relative 'bank_account_details_v2_document'
+require_relative 'bank_account_details_v2_page'
 
 module Mindee
   module Product
     module FR
       module BankAccountDetails
-        # Bank Account Details V1 prediction inference.
-        class BankAccountDetailsV1 < Mindee::Parsing::Common::Inference
+        # Bank Account Details V2 prediction inference.
+        class BankAccountDetailsV2 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'bank_account_details'
-          @endpoint_version = '1'
+          @endpoint_version = '2'
 
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = BankAccountDetailsV1Document.new(prediction['prediction'], nil)
+            @prediction = BankAccountDetailsV2Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              @pages.push(BankAccountDetailsV1Page.new(page))
+              @pages.push(BankAccountDetailsV2Page.new(page))
             end
           end
 

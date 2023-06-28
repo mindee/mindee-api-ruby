@@ -8,7 +8,6 @@ module Mindee
       module LicensePlate
         # License Plate V1 document prediction.
         class LicensePlateV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Common
           include Mindee::Parsing::Standard
           # List of all license plates found in the image.
           # @return [Array<Mindee::Parsing::Standard::TextField>]

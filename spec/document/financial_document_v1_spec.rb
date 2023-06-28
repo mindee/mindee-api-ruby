@@ -8,7 +8,6 @@ require_relative '../data'
 DIR_FINANCIAL_DOCUMENT_V1 = File.join(DATA_DIR, 'financial_document', 'response_v1').freeze
 
 describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
-  include Mindee::Parsing::Common
   context 'A FinancialDocumentV1' do
     context 'when processing an invoice' do
       it 'should load an empty document prediction' do
@@ -44,7 +43,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
                                                          response['document'])
         page = document.inference.pages[0]
         expect(page.orientation.value).to eq(0)
-        expect(page.due_date.page_id).to eq(0)
+        expect(page.prediction.due_date.page_id).to eq(0)
         expect(page.to_s).to eq(to_string)
       end
     end
@@ -77,7 +76,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
                                                          response['document'])
         page = document.inference.pages[0]
         expect(page.orientation.value).to eq(0)
-        expect(page.date.page_id).to eq(0)
+        expect(page.prediction.date.page_id).to eq(0)
         expect(page.to_s).to eq(to_string)
       end
     end

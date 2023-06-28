@@ -7,16 +7,17 @@ require_relative 'receipt_v5_page'
 module Mindee
   module Product
     module Receipt
-      # Expense Receipt V5 prediction infrence.
+      # Expense Receipt V5 prediction inference.
       class ReceiptV5 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'expense_receipts'
         @endpoint_version = '5'
 
-        def initialize(http_response)
+        # @param prediction [Hash]
+        def initialize(prediction)
           super
-          @prediction = ReceiptV5Document.new(http_response['prediction'], nil)
+          @prediction = ReceiptV5Document.new(prediction['prediction'], nil)
           @pages = []
-          http_response['pages'].each do |page|
+          prediction['pages'].each do |page|
             @pages.push(ReceiptV5Page.new(page))
           end
         end

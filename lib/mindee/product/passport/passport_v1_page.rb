@@ -6,26 +6,23 @@ require_relative 'passport_v1_document'
 module Mindee
   module Product
     module Passport
-      # Passport V1 page prediction.
-      class PassportV1Page < PassportV1Document
-        include Mindee::Parsing::Common
-        # @return [Integer]
-        attr_reader :page_id
-        # @return [Mindee::Parsing::Common::Orientation]
-        attr_reader :orientation
-
-        def initialize(http_response)
-          @page_id = http_response['id']
-          @orientation = Orientation.new(http_response['orientation'], @page_id)
-          super(http_response['prediction'], @page_id)
+      # International Passport V1 page.
+      class PassportV1Page < Mindee::Parsing::Common::Page
+        # @param prediction [Hash]
+        def initialize(prediction)
+          super(prediction)
+          @prediction = PassportV1PagePrediction.new(
+            prediction['prediction'],
+            prediction['id']
+          )
         end
+      end
 
+      # International Passport V1 page prediction.
+      class PassportV1PagePrediction < PassportV1Document
         # @return [String]
         def to_s
           out_str = String.new
-          title = "Page #{@page_id}"
-          out_str << "#{title}\n"
-          out_str << ('-' * title.size)
           out_str << "\n#{super}"
           out_str
         end
