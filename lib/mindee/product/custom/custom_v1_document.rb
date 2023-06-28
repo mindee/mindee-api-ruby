@@ -15,7 +15,7 @@ module Mindee
         attr_reader :classifications
 
         # @param prediction [Hash]
-        # @page_id [Integer, nil]
+        # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @fields = {}

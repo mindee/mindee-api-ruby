@@ -66,7 +66,7 @@ module Mindee
         attr_reader :line_items
 
         # @param prediction [Hash]
-        # @page_id [Integer, nil]
+        # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
           @locale = Locale.new(prediction['locale'])
