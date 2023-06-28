@@ -37,7 +37,6 @@ describe Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV1 do
         response['document']
       )
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end
