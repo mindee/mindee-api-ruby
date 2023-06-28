@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Receipt
-      # Receipt V5 Line Item field.
+      # List of line item details.
       class ReceiptV5LineItem < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
         # The item description.
@@ -21,6 +21,8 @@ module Mindee
         # @return [Float]
         attr_reader :unit_price
 
+        # @param prediction [Hash]
+        # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super(prediction, page_id)
           @description = prediction['description']

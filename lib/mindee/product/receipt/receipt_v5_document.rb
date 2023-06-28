@@ -8,7 +8,6 @@ module Mindee
     module Receipt
       # Expense Receipt V5 document prediction.
       class ReceiptV5Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
         # The purchase category among predefined classes.
         # @return [Mindee::Parsing::Standard::ClassificationField]
@@ -20,7 +19,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # List of line item details.
-        # @return [Array<Mindee::ReceiptV5LineItem>]
+        # @return [Array<Mindee::Product::Receipt::ReceiptV5LineItem>]
         attr_reader :line_items
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::Locale]
@@ -41,7 +40,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :supplier_phone_number
         # List of tax lines information.
-        # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
+        # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The time the purchase was made.
         # @return [Mindee::Parsing::Standard::TextField]

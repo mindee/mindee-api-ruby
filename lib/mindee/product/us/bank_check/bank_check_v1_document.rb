@@ -8,7 +8,6 @@ module Mindee
       module BankCheck
         # Bank Check V1 document prediction.
         class BankCheckV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Common
           include Mindee::Parsing::Standard
           # Payer's bank account number.
           # @return [Array<Mindee::Parsing::Standard::TextField>]

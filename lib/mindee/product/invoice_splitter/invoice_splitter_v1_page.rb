@@ -6,26 +6,23 @@ require_relative 'invoice_splitter_v1_document'
 module Mindee
   module Product
     module InvoiceSplitter
-      # Invoice Splitter V1 page prediction.
-      class InvoiceSplitterV1Page < InvoiceSplitterV1Document
-        include Mindee::Parsing::Common
-        # @return [Integer]
-        attr_reader :page_id
-        # @return [Mindee::Parsing::Common::Orientation]
-        attr_reader :orientation
-
-        def initialize(http_response)
-          @page_id = http_response['id']
-          @orientation = Orientation.new(http_response['orientation'], @page_id)
-          super(http_response['prediction'], @page_id)
+      # Invoice Splitter V1 page.
+      class InvoiceSplitterV1Page < Mindee::Parsing::Common::Page
+        # @param prediction [Hash]
+        def initialize(prediction)
+          super(prediction)
+          @prediction = InvoiceSplitterV1PagePrediction.new(
+            prediction['prediction'],
+            prediction['id']
+          )
         end
+      end
 
+      # Invoice Splitter V1 page prediction.
+      class InvoiceSplitterV1PagePrediction < InvoiceSplitterV1Document
         # @return [String]
         def to_s
           out_str = String.new
-          title = "Page #{@page_id}"
-          out_str << "#{title}\n"
-          out_str << ('-' * title.size)
           out_str << "\n#{super}"
           out_str
         end

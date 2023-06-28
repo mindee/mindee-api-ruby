@@ -8,22 +8,17 @@ module Mindee
   module Product
     module FR
       module IdCard
-        # French National ID Card V1 prediction inference.
+        # Carte Nationale d'Identité V1 prediction inference.
         class IdCardV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'idcard_fr'
           @endpoint_version = '1'
 
-          # @return [Array<Mindee::Product::FR::IdCard::IdCardV1Page>]
-          attr_reader :pages
-
-          # @return [Mindee::Product::FR::IdCard::IdCardV1Document]
-          attr_reader :prediction
-
-          def initialize(http_response)
+          # @param prediction [Hash]
+          def initialize(prediction)
             super
-            @prediction = IdCardV1Document.new(http_response['prediction'], nil)
+            @prediction = IdCardV1Document.new(prediction['prediction'], nil)
             @pages = []
-            http_response['pages'].each do |page|
+            prediction['pages'].each do |page|
               @pages.push(IdCardV1Page.new(page))
             end
           end

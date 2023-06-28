@@ -130,7 +130,7 @@ Load from a file directly from disk. Requires an absolute path, as a string.
 # Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
-# Load a file from disk and parse it
+# Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Parse the file

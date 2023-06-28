@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_check_v1_document'
+require_relative 'bank_account_details_v2_document'
 
 module Mindee
   module Product
-    module US
-      module BankCheck
-        # Bank Check V1 page.
-        class BankCheckV1Page < Mindee::Parsing::Common::Page
+    module FR
+      module BankAccountDetails
+        # Bank Account Details V2 page.
+        class BankAccountDetailsV2Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super(prediction)
-            @prediction = BankCheckV1PagePrediction.new(
+            @prediction = BankAccountDetailsV2PagePrediction.new(
               prediction['prediction'],
               prediction['id']
             )
           end
         end
 
-        # Bank Check V1 page prediction.
-        class BankCheckV1PagePrediction < BankCheckV1Document
+        # Bank Account Details V2 page prediction.
+        class BankAccountDetailsV2PagePrediction < BankAccountDetailsV2Document
           # @return [String]
           def to_s
             out_str = String.new

@@ -8,8 +8,8 @@ module Mindee
     module Invoice
       # Invoice V4 document prediction.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
+
         # Locale information.
         # @return [Mindee::Parsing::Standard::Locale]
         attr_reader :locale
@@ -38,7 +38,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :due_date
         # The list of taxes.
-        # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
+        # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The name of the customer.
         # @return [Mindee::Parsing::Standard::TextField]

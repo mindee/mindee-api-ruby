@@ -7,16 +7,17 @@ require_relative 'proof_of_address_v1_page'
 module Mindee
   module Product
     module ProofOfAddress
-      # Proof of Address v1 prediction results.
+      # Proof of Address V1 prediction inference.
       class ProofOfAddressV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'proof_of_address'
         @endpoint_version = '1'
 
-        def initialize(http_response)
+        # @param prediction [Hash]
+        def initialize(prediction)
           super
-          @prediction = ProofOfAddressV1Document.new(http_response['prediction'], nil)
+          @prediction = ProofOfAddressV1Document.new(prediction['prediction'], nil)
           @pages = []
-          http_response['pages'].each do |page|
+          prediction['pages'].each do |page|
             @pages.push(ProofOfAddressV1Page.new(page))
           end
         end

@@ -9,7 +9,6 @@ require_relative '../data'
 DIR_RECEIPT_V4 = File.join(DATA_DIR, 'receipt', 'response_v4').freeze
 
 describe Mindee::Product::Receipt::ReceiptV4 do
-  include Mindee::Parsing::Common
   context 'A Receipt V4' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_RECEIPT_V4, 'empty.json')
@@ -36,7 +35,7 @@ describe Mindee::Product::Receipt::ReceiptV4 do
       document = Mindee::Parsing::Common::Document.new(Mindee::Product::Receipt::ReceiptV4, response['document'])
       page = document.inference.pages[0]
       expect(page.orientation.value).to eq(0)
-      expect(page.date.page_id).to eq(0)
+      expect(page.prediction.date.page_id).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end

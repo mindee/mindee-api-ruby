@@ -9,10 +9,10 @@ Using this sample below, we are going to illustrate how to extract the data that
 # Init a new client
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
-# Load a file from disk and parse it
+# Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
-# Send our document
+# Parse the file
 result = mindee_client.parse(
   input_source,
   Mindee::Product::Invoice::InvoiceV4

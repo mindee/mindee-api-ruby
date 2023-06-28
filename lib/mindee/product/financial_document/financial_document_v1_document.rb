@@ -6,9 +6,8 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document v1 document prediction.
+      # Financial Document V1 document prediction.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
-        include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
         # The purchase category among predefined classes.
         # @return [Mindee::Parsing::Standard::ClassificationField]
@@ -35,7 +34,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :invoice_number
         # List of line item details.
-        # @return [Array<Mindee::FinancialDocumentV1LineItem>]
+        # @return [Array<Mindee::Product::FinancialDocument::FinancialDocumentV1LineItem>]
         attr_reader :line_items
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::Locale]
@@ -62,7 +61,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::TextField]
         attr_reader :supplier_phone_number
         # List of tax lines information.
-        # @return [Mindee::Parsing::Standard::Parsing::Standard::Taxes]
+        # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The time the purchase was made.
         # @return [Mindee::Parsing::Standard::TextField]
