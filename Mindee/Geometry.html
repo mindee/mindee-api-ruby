@@ -78,7 +78,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/geometry.rb</dd>
+    <dd>lib/mindee/geometry/point.rb<span class="defines">,<br />
+  lib/mindee/geometry/utils.rb,<br /> lib/mindee/geometry/min_max.rb,<br /> lib/mindee/geometry/polygon.rb,<br /> lib/mindee/geometry/quadrilateral.rb</span>
+</dd>
   </dl>
   
 </div>
@@ -86,7 +88,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Various helper functions for geometry.</p>
+<p>Various helper functions &amp; classes for geometry.</p>
 
 
   </div>
@@ -100,7 +102,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Point</a></span>, <span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Polygon</a></span>, <span class='object_link'><a href="Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Quadrilateral</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">MinMax</a></span>, <span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Point</a></span>, <span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Polygon</a></span>, <span class='object_link'><a href="Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Quadrilateral</a></span>
     
   
 </p>
@@ -136,7 +138,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the points of a bounding box for a given set of points.</p>
+</div></span>
   
 </li>
 
@@ -158,7 +162,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates the bounding bounding box for a given set of points.</p>
+</div></span>
   
 </li>
 
@@ -166,7 +172,79 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#polygon_from_prediction-class_method" title="polygon_from_prediction (class method)">.<strong>polygon_from_prediction</strong>(prediction)  &#x21d2; Object </a>
+      <a href="#get_centroid-class_method" title="get_centroid (class method)">.<strong>get_centroid</strong>(points)  &#x21d2; Mindee::Geometry::Point </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the central point (centroid) given a sequence of points.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_min_max_x-class_method" title="get_min_max_x (class method)">.<strong>get_min_max_x</strong>(points)  &#x21d2; Mindee::Geometry::MinMax </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the maximum and minimum X value given a sequence of points.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_min_max_y-class_method" title="get_min_max_y (class method)">.<strong>get_min_max_y</strong>(points)  &#x21d2; Mindee::Geometry::MinMax </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the maximum and minimum Y value given a sequence of points.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#polygon_from_prediction-class_method" title="polygon_from_prediction (class method)">.<strong>polygon_from_prediction</strong>(prediction)  &#x21d2; Mindee::Geometry::Polygon </a>
     
 
     
@@ -190,7 +268,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#quadrilateral_from_prediction-class_method" title="quadrilateral_from_prediction (class method)">.<strong>quadrilateral_from_prediction</strong>(prediction)  &#x21d2; Object </a>
+      <a href="#quadrilateral_from_prediction-class_method" title="quadrilateral_from_prediction (class method)">.<strong>quadrilateral_from_prediction</strong>(prediction)  &#x21d2; Mindee::Geometry::Quadrilateral </a>
     
 
     
@@ -232,11 +310,28 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Gets the points of a bounding box for a given set of points</p>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>vertices</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -257,14 +352,14 @@
       <pre class="lines">
 
 
-101
-102
-103
-104
-105</pre>
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_bbox'>get_bbox</span><span class='lparen'>(</span><span class='id identifier rubyid_vertices'>vertices</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x_coords'>x_coords</span> <span class='op'>=</span> <span class='id identifier rubyid_vertices'>vertices</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:x</span><span class='rparen'>)</span>
@@ -288,11 +383,28 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Creates the bounding bounding box for a given set of points</p>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>vertices</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -313,18 +425,18 @@
       <pre class="lines">
 
 
-108
-109
-110
-111
-112
-113
-114
-115
-116</pre>
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_bounding_box'>get_bounding_box</span><span class='lparen'>(</span><span class='id identifier rubyid_vertices'>vertices</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x_min'>x_min</span><span class='comma'>,</span> <span class='id identifier rubyid_y_min'>y_min</span><span class='comma'>,</span> <span class='id identifier rubyid_x_max'>x_max</span><span class='comma'>,</span> <span class='id identifier rubyid_y_max'>y_max</span> <span class='op'>=</span> <span class='id identifier rubyid_get_bbox'>get_bbox</span><span class='lparen'>(</span><span class='id identifier rubyid_vertices'>vertices</span><span class='rparen'>)</span>
@@ -341,9 +453,226 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="get_centroid-class_method">
+  
+    .<strong>get_centroid</strong>(points)  &#x21d2; <tt><span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the central point (centroid) given a sequence of points.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>points</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_centroid'>get_centroid</span><span class='lparen'>(</span><span class='id identifier rubyid_points'>points</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_vertices_count'>vertices_count</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
+  <span class='id identifier rubyid_x_sum'>x_sum</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:x</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_sum'>sum</span>
+  <span class='id identifier rubyid_y_sum'>y_sum</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:y</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_sum'>sum</span>
+  <span class='const'><span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Point</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Geometry/Point.html#initialize-instance_method" title="Mindee::Geometry::Point#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_x_sum'>x_sum</span> <span class='op'>/</span> <span class='id identifier rubyid_vertices_count'>vertices_count</span><span class='comma'>,</span> <span class='id identifier rubyid_y_sum'>y_sum</span> <span class='op'>/</span> <span class='id identifier rubyid_vertices_count'>vertices_count</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_min_max_x-class_method">
+  
+    .<strong>get_min_max_x</strong>(points)  &#x21d2; <tt><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">Mindee::Geometry::MinMax</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the maximum and minimum X value given a sequence of points.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>points</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">Mindee::Geometry::MinMax</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_x'>get_min_max_x</span><span class='lparen'>(</span><span class='id identifier rubyid_points'>points</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_coords'>coords</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:x</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">MinMax</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Geometry/MinMax.html#initialize-instance_method" title="Mindee::Geometry::MinMax#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_coords'>coords</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='comma'>,</span> <span class='id identifier rubyid_coords'>coords</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_min_max_y-class_method">
+  
+    .<strong>get_min_max_y</strong>(points)  &#x21d2; <tt><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">Mindee::Geometry::MinMax</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the maximum and minimum Y value given a sequence of points.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>points</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">Mindee::Geometry::MinMax</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_y'>get_min_max_y</span><span class='lparen'>(</span><span class='id identifier rubyid_points'>points</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_coords'>coords</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:y</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">MinMax</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Geometry/MinMax.html#initialize-instance_method" title="Mindee::Geometry::MinMax#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_coords'>coords</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='comma'>,</span> <span class='id identifier rubyid_coords'>coords</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="polygon_from_prediction-class_method">
   
-    .<strong>polygon_from_prediction</strong>(prediction)  &#x21d2; <tt>Object</tt> 
+    .<strong>polygon_from_prediction</strong>(prediction)  &#x21d2; <tt><span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span></tt> 
   
 
   
@@ -358,7 +687,35 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>prediction</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -366,18 +723,18 @@
       <pre class="lines">
 
 
-90
-91
-92
-93
-94
-95
-96
-97
-98</pre>
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_polygon_from_prediction'>polygon_from_prediction</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_polygon'>polygon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Polygon</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -396,7 +753,7 @@
       <div class="method_details ">
   <h3 class="signature " id="quadrilateral_from_prediction-class_method">
   
-    .<strong>quadrilateral_from_prediction</strong>(prediction)  &#x21d2; <tt>Object</tt> 
+    .<strong>quadrilateral_from_prediction</strong>(prediction)  &#x21d2; <tt><span class='object_link'><a href="Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Mindee::Geometry::Quadrilateral</a></span></tt> 
   
 
   
@@ -411,7 +768,35 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>prediction</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Mindee::Geometry::Quadrilateral</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -419,19 +804,19 @@
       <pre class="lines">
 
 
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87</pre>
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_quadrilateral_from_prediction'>quadrilateral_from_prediction</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_throw'>throw</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Prediction must have exactly 4 points, found </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>!=</span> <span class='int'>4</span>
@@ -453,7 +838,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon May 22 08:56:19 2023 by
+  Generated on Thu Jun 29 09:09:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

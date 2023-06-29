@@ -102,7 +102,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Mindee API Client. See: <a href="https://developers.mindee.com/docs">developers.mindee.com/docs</a>/</p>
+<p>Mindee API Client. See: <a href="https://developers.mindee.com/docs">developers.mindee.com/docs</a></p>
 
 
   </div>
@@ -128,7 +128,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#add_endpoint-instance_method" title="#add_endpoint (instance method)">#<strong>add_endpoint</strong>(account_name, endpoint_name, version: &#39;1&#39;)  &#x21d2; Mindee::Client </a>
+      <a href="#create_endpoint-instance_method" title="#create_endpoint (instance method)">#<strong>create_endpoint</strong>(endpoint_name: &#39;&#39;, account_name: &#39;&#39;, version: &#39;&#39;)  &#x21d2; Mindee::HTTP::Endpoint </a>
     
 
     
@@ -143,7 +143,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Configure a custom document using the ‘Mindee API Builder’.</p>
+<p>Creates a custom endpoint with the given values.</p>
 </div></span>
   
 </li>
@@ -152,7 +152,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#doc_from_b64string-instance_method" title="#doc_from_b64string (instance method)">#<strong>doc_from_b64string</strong>(base64_string, filename)  &#x21d2; Mindee::DocumentClient </a>
+      <a href="#enqueue-instance_method" title="#enqueue (instance method)">#<strong>enqueue</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false)  &#x21d2; Mindee::Parsing::Common::ApiResponse </a>
     
 
     
@@ -167,79 +167,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Load a document from a base64 encoded string.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#doc_from_bytes-instance_method" title="#doc_from_bytes (instance method)">#<strong>doc_from_bytes</strong>(input_bytes, filename)  &#x21d2; Mindee::DocumentClient </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Load a document from raw bytes.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#doc_from_file-instance_method" title="#doc_from_file (instance method)">#<strong>doc_from_file</strong>(input_file, filename)  &#x21d2; Mindee::DocumentClient </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Load a document from a normal Ruby <code>File</code>.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#doc_from_path-instance_method" title="#doc_from_path (instance method)">#<strong>doc_from_path</strong>(input_path)  &#x21d2; Mindee::DocumentClient </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Load a document from an absolute path, as a string.</p>
+<p>Enqueue a document for async parsing.</p>
 </div></span>
   
 </li>
@@ -266,6 +194,174 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>A new instance of Client.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse-instance_method" title="#parse (instance method)">#<strong>parse</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false)  &#x21d2; Mindee::Parsing::Common::ApiResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Call prediction API on a document and parse the results.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_queued-instance_method" title="#parse_queued (instance method)">#<strong>parse_queued</strong>(job_id, product_class, endpoint: nil)  &#x21d2; Mindee::Parsing::Common::ApiResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Parses a queued document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_from_b64string-instance_method" title="#source_from_b64string (instance method)">#<strong>source_from_b64string</strong>(base64_string, filename)  &#x21d2; Mindee::Input::Source::Base64InputSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load a document from a base64 encoded string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_from_bytes-instance_method" title="#source_from_bytes (instance method)">#<strong>source_from_bytes</strong>(input_bytes, filename)  &#x21d2; Mindee::Input::Source::BytesInputSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load a document from raw bytes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_from_file-instance_method" title="#source_from_file (instance method)">#<strong>source_from_file</strong>(input_file, filename)  &#x21d2; Mindee::Input::Source::FileInputSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load a document from a normal Ruby <code>File</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_from_path-instance_method" title="#source_from_path (instance method)">#<strong>source_from_path</strong>(input_path)  &#x21d2; Mindee::Input::Source::PathInputSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load a document from an absolute path, as a string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_from_url-instance_method" title="#source_from_url (instance method)">#<strong>source_from_url</strong>(url)  &#x21d2; Mindee::Input::Source::UrlInputSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load a document from a secure remote source (HTTPS).</p>
 </div></span>
   
 </li>
@@ -320,19 +416,15 @@
       <pre class="lines">
 
 
-106
-107
-108
-109
-110</pre>
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-  <span class='ivar'>@doc_configs</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='ivar'>@api_key</span> <span class='op'>=</span> <span class='id identifier rubyid_api_key'>api_key</span>
-  <span class='id identifier rubyid_init_default_endpoints'>init_default_endpoints</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -347,9 +439,9 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="add_endpoint-instance_method">
+  <h3 class="signature first" id="create_endpoint-instance_method">
   
-    #<strong>add_endpoint</strong>(account_name, endpoint_name, version: &#39;1&#39;)  &#x21d2; <tt><span class='object_link'><a href="" title="Mindee::Client (class)">Mindee::Client</a></span></tt> 
+    #<strong>create_endpoint</strong>(endpoint_name: &#39;&#39;, account_name: &#39;&#39;, version: &#39;&#39;)  &#x21d2; <tt><span class='object_link'><a href="HTTP/Endpoint.html" title="Mindee::HTTP::Endpoint (class)">Mindee::HTTP::Endpoint</a></span></tt> 
   
 
   
@@ -358,7 +450,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Configure a custom document using the ‘Mindee API Builder’.</p>
+<p>Creates a custom endpoint with the given values. Do not set for standard (off the shelf) endpoints.</p>
 
 
   </div>
@@ -369,32 +461,36 @@
   
     <li>
       
-        <span class='name'>account_name</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Your organization’s username on the API Builder</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
         <span class='name'>endpoint_name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
       
       
+        <em class="default">(defaults to: <tt>&#39;&#39;</tt>)</em>
+      
       
         &mdash;
         <div class='inline'>
-<p>The “API name” field in the “Settings” page of the API Builder</p>
+<p>For custom endpoints, the “API name” field in the “Settings” page of the API Builder. Do not set for standard (off the shelf) endpoints.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>account_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>For custom endpoints, your account or organization username on the API Builder. This is normally not required unless you have a custom endpoint which has the same name as a standard (off the shelf) endpoint.</p>
 </div>
       
     </li>
@@ -407,12 +503,12 @@
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>&#39;1&#39;</tt>)</em>
+        <em class="default">(defaults to: <tt>&#39;&#39;</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>Specify the version of the model to use. If not set, use the latest version of the model.</p>
+<p>For custom endpoints, version of the product</p>
 </div>
       
     </li>
@@ -425,7 +521,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="" title="Mindee::Client (class)">Mindee::Client</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="HTTP/Endpoint.html" title="Mindee::HTTP::Endpoint (class)">Mindee::HTTP::Endpoint</a></span></tt>)</span>
       
       
       
@@ -439,31 +535,17 @@
       <pre class="lines">
 
 
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127</pre>
+167
+168
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 167</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_add_endpoint'>add_endpoint</span><span class='lparen'>(</span>
-  <span class='id identifier rubyid_account_name'>account_name</span><span class='comma'>,</span>
-  <span class='id identifier rubyid_endpoint_name'>endpoint_name</span><span class='comma'>,</span>
-  <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1</span><span class='tstring_end'>&#39;</span></span>
-<span class='rparen'>)</span>
-  <span class='ivar'>@doc_configs</span><span class='lbracket'>[</span><span class='lbracket'>[</span><span class='id identifier rubyid_account_name'>account_name</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint_name'>endpoint_name</span><span class='rbracket'>]</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="DocumentConfig.html" title="Mindee::DocumentConfig (class)">DocumentConfig</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="DocumentConfig.html#initialize-instance_method" title="Mindee::DocumentConfig#initialize (method)">new</a></span></span><span class='lparen'>(</span>
-    <span class='const'><span class='object_link'><a href="Prediction.html" title="Mindee::Prediction (module)">Prediction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Prediction/CustomV1.html" title="Mindee::Prediction::CustomV1 (class)">CustomV1</a></span></span><span class='comma'>,</span>
-    <span class='const'><span class='object_link'><a href="HTTP.html" title="Mindee::HTTP (module)">HTTP</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="HTTP/CustomEndpoint.html" title="Mindee::HTTP::CustomEndpoint (class)">CustomEndpoint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="HTTP/CustomEndpoint.html#initialize-instance_method" title="Mindee::HTTP::CustomEndpoint#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_account_name'>account_name</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint_name'>endpoint_name</span><span class='comma'>,</span> <span class='id identifier rubyid_version'>version</span><span class='comma'>,</span> <span class='ivar'>@api_key</span><span class='rparen'>)</span>
-  <span class='rparen'>)</span>
-  <span class='kw'>self</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_endpoint'>create_endpoint</span><span class='lparen'>(</span><span class='label'>endpoint_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>account_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Product/Custom.html" title="Mindee::Product::Custom (module)">Custom</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Product/Custom/CustomV1.html" title="Mindee::Product::Custom::CustomV1 (class)">CustomV1</a></span></span><span class='comma'>,</span> <span class='label'>endpoint_name:</span> <span class='id identifier rubyid_endpoint_name'>endpoint_name</span><span class='comma'>,</span> <span class='label'>account_name:</span> <span class='id identifier rubyid_account_name'>account_name</span><span class='comma'>,</span>
+                                                         <span class='label'>version:</span> <span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -471,9 +553,511 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="doc_from_b64string-instance_method">
+  <h3 class="signature " id="enqueue-instance_method">
   
-    #<strong>doc_from_b64string</strong>(base64_string, filename)  &#x21d2; <tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt> 
+    #<strong>enqueue</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Enqueue a document for async parsing</p>
+
+<p>Doesn’t need to be set in the case of OTS APIs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>endpoint</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HTTP/Endpoint.html" title="Mindee::HTTP::Endpoint (class)">HTTP::Endpoint</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Endpoint of the API.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>all_words</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to extract all the words on each page. This performs a full OCR operation on the server and will increase response time.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>close_file</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to <code>close()</code> the file after parsing it. Set to false if you need to access the file after this operation.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Page cutting/merge options:</p>
+<ul><li>
+<p><code>:page_indexes</code> Zero-based list of page indexes.</p>
+</li><li>
+<p><code>:operation</code> Operation to apply on the document, given the ‘page_indexes specified:</p>
+<ul><li>
+<p><code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.</p>
+</li><li>
+<p><code>:REMOVE</code> - remove the specified pages, and keep all others.</p>
+</li></ul>
+</li><li>
+<p><code>:on_min_pages</code> Apply the operation only if document has at least this many pages.</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cropper</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to include cropper results for each page. This performs a cropping operation on the server and will increase response time.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span>
+  <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+  <span class='label'>all_words:</span> <span class='kw'>false</span><span class='comma'>,</span>
+  <span class='label'>close_file:</span> <span class='kw'>true</span><span class='comma'>,</span>
+  <span class='label'>page_options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+  <span class='label'>cropper:</span> <span class='kw'>false</span>
+<span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">LocalInputSource</a></span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_page_options'>page_options</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_pdf?'>pdf?</span>
+    <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_process_pdf'>process_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_page_options'>page_options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span>
+                                           <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parse-instance_method">
+  
+    #<strong>parse</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Call prediction API on a document and parse the results.</p>
+
+<p>Doesn’t need to be set in the case of OTS APIs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>endpoint</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HTTP/Endpoint.html" title="Mindee::HTTP::Endpoint (class)">HTTP::Endpoint</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Endpoint of the API</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>all_words</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to include the full text for each page. This performs a full OCR operation on the server and will increase response time.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>close_file</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to <code>close()</code> the file after parsing it. Set to false if you need to access the file after this operation.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Page cutting/merge options:</p>
+<ul><li>
+<p><code>:page_indexes</code> Zero-based list of page indexes.</p>
+</li><li>
+<p><code>:operation</code> Operation to apply on the document, given the ‘page_indexes specified:</p>
+<ul><li>
+<p><code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.</p>
+</li><li>
+<p><code>:REMOVE</code> - remove the specified pages, and keep all others.</p>
+</li></ul>
+</li><li>
+<p><code>:on_min_pages</code> Apply the operation only if document has at least this many pages.</p>
+</li></ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cropper</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to include cropper results for each page. This performs a cropping operation on the server and will increase response time.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span>
+  <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+  <span class='label'>all_words:</span> <span class='kw'>false</span><span class='comma'>,</span>
+  <span class='label'>close_file:</span> <span class='kw'>true</span><span class='comma'>,</span>
+  <span class='label'>page_options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+  <span class='label'>cropper:</span> <span class='kw'>false</span>
+<span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">LocalInputSource</a></span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_page_options'>page_options</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_pdf?'>pdf?</span>
+    <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_process_pdf'>process_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_page_options'>page_options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_prediction'>prediction</span> <span class='op'>=</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_predict'>predict</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parse_queued-instance_method">
+  
+    #<strong>parse_queued</strong>(job_id, product_class, endpoint: nil)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Parses a queued document</p>
+
+<p>Doesn’t need to be set in the case of OTS APIs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>endpoint</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HTTP/Endpoint.html" title="Mindee::HTTP::Endpoint (class)">HTTP::Endpoint</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Endpoint of the API</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>job_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Id of the job (queue) to poll from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parse_queued'>parse_queued</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span>
+  <span class='label'>endpoint:</span> <span class='kw'>nil</span>
+<span class='rparen'>)</span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_from_b64string-instance_method">
+  
+    #<strong>source_from_b64string</strong>(base64_string, filename)  &#x21d2; <tt><span class='object_link'><a href="Input/Source/Base64InputSource.html" title="Mindee::Input::Source::Base64InputSource (class)">Mindee::Input::Source::Base64InputSource</a></span></tt> 
   
 
   
@@ -531,7 +1115,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/Base64InputSource.html" title="Mindee::Input::Source::Base64InputSource (class)">Mindee::Input::Source::Base64InputSource</a></span></tt>)</span>
       
       
       
@@ -545,17 +1129,15 @@
       <pre class="lines">
 
 
-150
-151
-152
-153</pre>
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 150</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 137</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_doc_from_b64string'>doc_from_b64string</span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_doc'>doc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Base64Document.html" title="Mindee::Input::Base64Document (class)">Base64Document</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Base64Document.html#initialize-instance_method" title="Mindee::Input::Base64Document#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">DocumentClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="DocumentClient.html#initialize-instance_method" title="Mindee::DocumentClient#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='ivar'>@doc_configs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_source_from_b64string'>source_from_b64string</span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/Base64InputSource.html" title="Mindee::Input::Source::Base64InputSource (class)">Base64InputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/Base64InputSource.html#initialize-instance_method" title="Mindee::Input::Source::Base64InputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -563,9 +1145,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="doc_from_bytes-instance_method">
+  <h3 class="signature " id="source_from_bytes-instance_method">
   
-    #<strong>doc_from_bytes</strong>(input_bytes, filename)  &#x21d2; <tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt> 
+    #<strong>source_from_bytes</strong>(input_bytes, filename)  &#x21d2; <tt><span class='object_link'><a href="Input/Source/BytesInputSource.html" title="Mindee::Input::Source::BytesInputSource (class)">Mindee::Input::Source::BytesInputSource</a></span></tt> 
   
 
   
@@ -623,7 +1205,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/BytesInputSource.html" title="Mindee::Input::Source::BytesInputSource (class)">Mindee::Input::Source::BytesInputSource</a></span></tt>)</span>
       
       
       
@@ -637,17 +1219,15 @@
       <pre class="lines">
 
 
-141
-142
-143
-144</pre>
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 129</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_doc_from_bytes'>doc_from_bytes</span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_doc'>doc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/BytesDocument.html" title="Mindee::Input::BytesDocument (class)">BytesDocument</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/BytesDocument.html#initialize-instance_method" title="Mindee::Input::BytesDocument#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">DocumentClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="DocumentClient.html#initialize-instance_method" title="Mindee::DocumentClient#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='ivar'>@doc_configs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_source_from_bytes'>source_from_bytes</span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/BytesInputSource.html" title="Mindee::Input::Source::BytesInputSource (class)">BytesInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/BytesInputSource.html#initialize-instance_method" title="Mindee::Input::Source::BytesInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -655,9 +1235,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="doc_from_file-instance_method">
+  <h3 class="signature " id="source_from_file-instance_method">
   
-    #<strong>doc_from_file</strong>(input_file, filename)  &#x21d2; <tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt> 
+    #<strong>source_from_file</strong>(input_file, filename)  &#x21d2; <tt><span class='object_link'><a href="Input/Source/FileInputSource.html" title="Mindee::Input::Source::FileInputSource (class)">Mindee::Input::Source::FileInputSource</a></span></tt> 
   
 
   
@@ -715,7 +1295,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/FileInputSource.html" title="Mindee::Input::Source::FileInputSource (class)">Mindee::Input::Source::FileInputSource</a></span></tt>)</span>
       
       
       
@@ -729,17 +1309,15 @@
       <pre class="lines">
 
 
-159
-160
-161
-162</pre>
+145
+146
+147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 145</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_doc_from_file'>doc_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_doc'>doc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/FileDocument.html" title="Mindee::Input::FileDocument (class)">FileDocument</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/FileDocument.html#initialize-instance_method" title="Mindee::Input::FileDocument#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">DocumentClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="DocumentClient.html#initialize-instance_method" title="Mindee::DocumentClient#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='ivar'>@doc_configs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_source_from_file'>source_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/FileInputSource.html" title="Mindee::Input::Source::FileInputSource (class)">FileInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/FileInputSource.html#initialize-instance_method" title="Mindee::Input::Source::FileInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -747,9 +1325,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="doc_from_path-instance_method">
+  <h3 class="signature " id="source_from_path-instance_method">
   
-    #<strong>doc_from_path</strong>(input_path)  &#x21d2; <tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt> 
+    #<strong>source_from_path</strong>(input_path)  &#x21d2; <tt><span class='object_link'><a href="Input/Source/PathInputSource.html" title="Mindee::Input::Source::PathInputSource (class)">Mindee::Input::Source::PathInputSource</a></span></tt> 
   
 
   
@@ -791,7 +1369,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">Mindee::DocumentClient</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/PathInputSource.html" title="Mindee::Input::Source::PathInputSource (class)">Mindee::Input::Source::PathInputSource</a></span></tt>)</span>
       
       
       
@@ -805,17 +1383,89 @@
       <pre class="lines">
 
 
-132
-133
-134
-135</pre>
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 121</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_doc_from_path'>doc_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_doc'>doc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/PathDocument.html" title="Mindee::Input::PathDocument (class)">PathDocument</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/PathDocument.html#initialize-instance_method" title="Mindee::Input::PathDocument#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="DocumentClient.html" title="Mindee::DocumentClient (class)">DocumentClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="DocumentClient.html#initialize-instance_method" title="Mindee::DocumentClient#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='ivar'>@doc_configs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/PathInputSource.html" title="Mindee::Input::Source::PathInputSource (class)">PathInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/PathInputSource.html#initialize-instance_method" title="Mindee::Input::Source::PathInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_from_url-instance_method">
+  
+    #<strong>source_from_url</strong>(url)  &#x21d2; <tt><span class='object_link'><a href="Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Load a document from a secure remote source (HTTPS).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Url of the file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+152
+153
+154</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 152</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_from_url'>source_from_url</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">UrlInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/UrlInputSource.html#initialize-instance_method" title="Mindee::Input::Source::UrlInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -827,7 +1477,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon May 22 08:56:19 2023 by
+  Generated on Thu Jun 29 09:09:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

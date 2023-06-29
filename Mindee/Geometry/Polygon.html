@@ -96,13 +96,23 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/geometry.rb</dd>
+    <dd>lib/mindee/geometry/polygon.rb</dd>
   </dl>
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Contains any number of vertex coordinates (Points).</p>
 
 
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -110,11 +120,202 @@
 
 
   
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#centroid-instance_method" title="#centroid (instance method)">#<strong>centroid</strong>  &#x21d2; Mindee::Geometry::Point </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the central point (centroid) of the polygon.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#point_in_y%3F-instance_method" title="#point_in_y? (instance method)">#<strong>point_in_y?</strong>(point)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determine if the Point is in the Polygon’s Y-axis.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="centroid-instance_method">
+  
+    #<strong>centroid</strong>  &#x21d2; <tt><span class='object_link'><a href="Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the central point (centroid) of the polygon.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/polygon.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_centroid'>centroid</span>
+  <span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_centroid'><span class='object_link'><a href="../Geometry.html#get_centroid-class_method" title="Mindee::Geometry.get_centroid (method)">get_centroid</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="point_in_y?-instance_method">
+  
+    #<strong>point_in_y?</strong>(point)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determine if the Point is in the Polygon’s Y-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Mindee::Geometry::Point (class)">Mindee::Geometry::Point</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/polygon.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_point_in_y?'>point_in_y?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_min_max'>min_max</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_y'><span class='object_link'><a href="../Geometry.html#get_min_max_y-class_method" title="Mindee::Geometry.get_min_max_y (method)">get_min_max_y</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_min_max'>min_max</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_min_max'>min_max</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon May 22 08:56:19 2023 by
+  Generated on Thu Jun 29 09:09:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

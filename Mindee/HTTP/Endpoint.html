@@ -110,11 +110,7 @@
 <div class="tags">
   
 
-</div><div id="subclasses">
-  <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="CustomEndpoint.html" title="Mindee::HTTP::CustomEndpoint (class)">CustomEndpoint</a></span>, <span class='object_link'><a href="StandardEndpoint.html" title="Mindee::HTTP::StandardEndpoint (class)">StandardEndpoint</a></span></p>
 </div>
-
 
 
 
@@ -217,7 +213,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#predict_req_post-instance_method" title="#predict_req_post (instance method)">#<strong>predict_req_post</strong>(input_doc, include_words: false, close_file: true, cropper: false)  &#x21d2; Net::HTTPResponse </a>
+      <a href="#parse_async-instance_method" title="#parse_async (instance method)">#<strong>parse_async</strong>(job_id)  &#x21d2; Hash </a>
     
 
     
@@ -231,7 +227,57 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Calls the parsed async doc.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#predict-instance_method" title="#predict (instance method)">#<strong>predict</strong>(input_source, all_words, close_file, cropper)  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Call the prediction API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#predict_async-instance_method" title="#predict_async (instance method)">#<strong>predict_async</strong>(input_source, all_words, close_file, cropper)  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Call the prediction API.</p>
+</div></span>
   
 </li>
 
@@ -268,17 +314,17 @@
       <pre class="lines">
 
 
-26
 27
 28
 29
 30
 31
 32
-33</pre>
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_owner'>owner</span><span class='comma'>,</span> <span class='id identifier rubyid_url_name'>url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_version'>version</span><span class='comma'>,</span> <span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@owner</span> <span class='op'>=</span> <span class='id identifier rubyid_owner'>owner</span>
@@ -337,12 +383,12 @@
       <pre class="lines">
 
 
-22
 23
-24</pre>
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_api_key'>api_key</span>
   <span class='ivar'>@api_key</span>
@@ -391,12 +437,12 @@
       <pre class="lines">
 
 
-24
 25
-26</pre>
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_request_timeout'>request_timeout</span>
   <span class='ivar'>@request_timeout</span>
@@ -414,9 +460,9 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="predict_req_post-instance_method">
+  <h3 class="signature first" id="parse_async-instance_method">
   
-    #<strong>predict_req_post</strong>(input_doc, include_words: false, close_file: true, cropper: false)  &#x21d2; <tt>Net::HTTPResponse</tt> 
+    #<strong>parse_async</strong>(job_id)  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -425,6 +471,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Calls the parsed async doc.</p>
+
 
   </div>
 </div>
@@ -434,50 +482,11 @@
   
     <li>
       
-        <span class='name'>input_doc</span>
+        <span class='name'>job_id</span>
       
       
-        <span class='type'>(<tt>Mindee::InputDocument</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>include_words</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>false</tt>)</em>
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>close_file</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>true</tt>)</em>
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>cropper</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>false</tt>)</em>
       
       
     </li>
@@ -490,7 +499,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Net::HTTPResponse</tt>)</span>
+        <span class='type'>(<tt>Hash</tt>)</span>
       
       
       
@@ -504,8 +513,120 @@
       <pre class="lines">
 
 
-40
-41
+70
+71
+72
+73
+74
+75
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_check_api_key'>check_api_key</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_document_queue_req'>document_queue_req</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='int'>200</span><span class='op'>..</span><span class='int'>299</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common/HttpError.html" title="Mindee::Parsing::Common::HttpError (class)">HttpError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Parsing/Common/HttpError.html#initialize-instance_method" title="Mindee::Parsing::Common::HttpError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_error'>error</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="predict-instance_method">
+  
+    #<strong>predict</strong>(input_source, all_words, close_file, cropper)  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Call the prediction API.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="../Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>all_words</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>close_file</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cropper</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
 42
 43
 44
@@ -514,47 +635,122 @@
 47
 48
 49
-50
-51
-52
-53
-54
-55
-56
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_predict'>predict</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_check_api_key'>check_api_key</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_predict_req_post'>predict_req_post</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='label'>all_words:</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='label'>close_file:</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='label'>cropper:</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='int'>200</span><span class='op'>..</span><span class='int'>299</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common/HttpError.html" title="Mindee::Parsing::Common::HttpError (class)">HttpError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Parsing/Common/HttpError.html#initialize-instance_method" title="Mindee::Parsing::Common::HttpError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_error'>error</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="predict_async-instance_method">
+  
+    #<strong>predict_async</strong>(input_source, all_words, close_file, cropper)  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Call the prediction API.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="../Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>close_file</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cropper</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
 57
 58
 59
 60
 61
 62
-63</pre>
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 57</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_predict_req_post'>predict_req_post</span><span class='lparen'>(</span><span class='id identifier rubyid_input_doc'>input_doc</span><span class='comma'>,</span> <span class='label'>include_words:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>close_file:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>cropper:</span> <span class='kw'>false</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@url_root</span><span class='embexpr_end'>}</span><span class='tstring_content'>/predict</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_check_api_key'>check_api_key</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_document_queue_req_get'>document_queue_req_get</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='int'>200</span><span class='op'>..</span><span class='int'>299</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:cropper</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_cropper'>cropper</span>
-  <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Authorization</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Token </span><span class='embexpr_beg'>#{</span><span class='ivar'>@api_key</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>User-Agent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../HTTP.html#USER_AGENT-constant" title="Mindee::HTTP::USER_AGENT (constant)">USER_AGENT</a></span></span><span class='comma'>,</span>
-  <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTP</span><span class='op'>::</span><span class='const'>Post</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='comma'>,</span> <span class='id identifier rubyid_headers'>headers</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_form_data'>form_data</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>document</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_input_doc'>input_doc</span><span class='period'>.</span><span class='id identifier rubyid_read_document'>read_document</span><span class='lparen'>(</span><span class='label'>close:</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='rparen'>)</span><span class='comma'>,</span>
-  <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_form_data'>form_data</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>include_mvision</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_include_words'>include_words</span>
-
-  <span class='id identifier rubyid_req'>req</span><span class='period'>.</span><span class='id identifier rubyid_set_form'>set_form</span><span class='lparen'>(</span><span class='id identifier rubyid_form_data'>form_data</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>multipart/form-data</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-
-  <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_hostname'>hostname</span><span class='comma'>,</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='comma'>,</span> <span class='label'>use_ssl:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>read_timeout:</span> <span class='ivar'>@request_timeout</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_http'>http</span><span class='op'>|</span>
-    <span class='id identifier rubyid_http'>http</span><span class='period'>.</span><span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common/HttpError.html" title="Mindee::Parsing::Common::HttpError (class)">HttpError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Parsing/Common/HttpError.html#initialize-instance_method" title="Mindee::Parsing::Common::HttpError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_error'>error</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -566,7 +762,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon May 22 08:56:19 2023 by
+  Generated on Thu Jun 29 09:09:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

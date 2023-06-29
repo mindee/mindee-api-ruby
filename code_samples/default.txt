@@ -2,15 +2,23 @@ require 'uri'
 require 'net/http'
 require 'net/https'
 
-url = URI('https://api.mindee.net/v1/products/mindee/my-endpoint/my-version/predict')
+api_key = "my-api-key"
+account = "my-account"
+endpoint = "my-endpoint"
+version = "my-version"
+
+url = URI("https://api.mindee.net/v1/products/#{account}/#{endpoint}/v#{version}/predict")
 file = '/path/to/the/file.ext'
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 
 request = Net::HTTP::Post.new(url)
-request['Authorization'] = 'Token my-api-key'
+request['Authorization'] = "Token #{api_key}"
 request.set_form([['document', File.open(file)]], 'multipart/form-data')
 
 response = http.request(request)
+if !response.kind_of? Net::HTTPSuccess
+  raise response.msg
+end
 puts response.read_body
