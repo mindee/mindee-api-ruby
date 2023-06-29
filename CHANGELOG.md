@@ -1,5 +1,36 @@
 # Mindee Ruby API Library Changelog
 
+## v3.0.0 - 2023-06-29
+### ¡Breaking Changes!
+
+* :boom: update `Client` creation & document upload
+* :boom: update custom `Endpoint` creation syntax
+* :art: improve product class syntax & structure
+* :recycle: harmonize naming with other client libraries
+* :art: moved most parsing modules into their own respective modules
+* :art: separated common, standard & custom parsing features into their own modules
+
+### Changes
+
+* :sparkles: add support for asynchronous endpoints
+* :sparkles: add support for Invoice Splitter V1
+* :sparkles: add support for OCR Full-text parsing on compatible APIs
+* :sparkles: add support for FR Bank Account Details V2
+* :sparkles: allow for the implementation of pages to differ from main document
+* :sparkles: add url input source
+* :coffin: remove Shipping Containers
+* :recycle: moved all products into the `Product` module (from `Parsing`)
+* :recycle: better implementation of geometric operations
+* :pencil2: document all previously non-documented class
+* :recycle: match file hierarchy with module nesting
+* :recycle: rewrite tutorials to match new syntax
+
+### Fixes
+
+* :bug: fix: pages now use the proper `orientation` property
+* :zap: optimize: only a single endpoint is now created on document upload
+
+
 ## v2.2.1 - 2023-05-22
 ### Fixes
 * :bug: added base attribute to tax field

@@ -2,7 +2,7 @@
 
 # Mindee
 module Mindee
-  VERSION = '2.2.1'
+  VERSION = '3.0.0'
 
   # @return [String]
   def self.find_platform
