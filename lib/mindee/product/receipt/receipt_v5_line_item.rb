@@ -57,11 +57,11 @@ module Mindee
         def to_s
           printable = printable_values
           out_str = String.new
-          out_str << printable[:description]
-          out_str << printable[:quantity]
-          out_str << printable[:total_amount]
-          out_str << printable[:unit_price]
-          out_str.strip
+          out_str << "\n  :Description: #{printable[:description]}"
+          out_str << "\n  :Quantity: #{printable[:quantity]}"
+          out_str << "\n  :Total Amount: #{printable[:total_amount]}"
+          out_str << "\n  :Unit Price: #{printable[:unit_price]}"
+          out_str
         end
       end
     end

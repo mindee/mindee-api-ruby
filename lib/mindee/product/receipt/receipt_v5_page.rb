@@ -6,7 +6,7 @@ require_relative 'receipt_v5_document'
 module Mindee
   module Product
     module Receipt
-      # Expense Receipt V5 page.
+      # Receipt V5 page.
       class ReceiptV5Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
@@ -18,7 +18,7 @@ module Mindee
         end
       end
 
-      # Expense Receipt V5 page prediction.
+      # Receipt V5 page prediction.
       class ReceiptV5PagePrediction < ReceiptV5Document
         # @return [String]
         def to_s

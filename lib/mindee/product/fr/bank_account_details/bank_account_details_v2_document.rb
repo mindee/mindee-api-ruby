@@ -35,7 +35,7 @@ module Mindee
 
           # @return [String]
           def to_s
-            bban = bban_to_s
+            bban = @bban.to_s
             out_str = String.new
             out_str << "\n:Account Holder's Names: #{@account_holders_names}".rstrip
             out_str << "\n:Basic Bank Account Number:"
@@ -43,13 +43,6 @@ module Mindee
             out_str << "\n:IBAN: #{@iban}".rstrip
             out_str << "\n:SWIFT Code: #{@swift_code}".rstrip
             out_str[1..].to_s
-          end
-
-          private
-
-          # @return [String]
-          def bban_to_s
-            @bban.to_s
           end
         end
       end
