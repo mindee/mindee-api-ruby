@@ -7,7 +7,7 @@ require_relative 'receipt_v5_page'
 module Mindee
   module Product
     module Receipt
-      # Expense Receipt V5 prediction inference.
+      # Receipt V5 prediction inference.
       class ReceiptV5 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'expense_receipts'
         @endpoint_version = '5'
