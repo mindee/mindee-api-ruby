@@ -99,7 +99,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
                     else
-                      [['document', input_source.read_document(close: close_file)]]
+                      [input_source.read_document(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
 
@@ -130,7 +130,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
                     else
-                      [['document', input_source.read_document(close: close_file)]]
+                      [input_source.read_document(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
 

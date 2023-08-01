@@ -49,9 +49,13 @@ module Mindee
         # @param close [Boolean]
         def read_document(close: true)
           @io_stream.seek(0)
+          # Avoids needlessly re-packing some files
+          immediate = (Marcel::MimeType.for @io_stream).to_s == 'application/pdf'
           data = @io_stream.read
           @io_stream.close if close
-          [data].pack('m')
+          return ['document', data, { filename: @filename }] if immediate
+
+          ['document', [data].pack('m'), { filename: @filename }]
         end
       end
 
