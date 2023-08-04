@@ -7,7 +7,7 @@ require_relative 'passport_v1_page'
 module Mindee
   module Product
     module Passport
-      # International Passport V1 prediction inference.
+      # Passport V1 prediction inference.
       class PassportV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'passport'
         @endpoint_version = '1'

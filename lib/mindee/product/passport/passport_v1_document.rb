@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Passport
-      # International Passport V1 document prediction.
+      # Passport V1 document prediction.
       class PassportV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The date of birth of the passport holder.

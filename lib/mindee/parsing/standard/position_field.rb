@@ -19,7 +19,9 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          @polygon = Geometry.polygon_from_prediction(prediction['polygon']) unless prediction['polygon'].empty?
+          unless prediction['polygon'].nil? || prediction['polygon'].empty?
+            @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
+          end
           @quadrangle = to_quadrilateral(prediction, 'quadrangle')
           @rectangle = to_quadrilateral(prediction, 'rectangle')
           @bounding_box = to_quadrilateral(prediction, 'bounding_box')
@@ -37,7 +39,7 @@ module Mindee
         private
 
         def to_quadrilateral(prediction, key)
-          Geometry.quadrilateral_from_prediction(prediction[key]) unless prediction[key].empty?
+          Geometry.quadrilateral_from_prediction(prediction[key]) unless prediction[key].nil? || prediction[key].empty?
         end
       end
     end

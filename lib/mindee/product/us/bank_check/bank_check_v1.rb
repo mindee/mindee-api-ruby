@@ -8,7 +8,7 @@ module Mindee
   module Product
     module US
       module BankCheck
-        # Bank Checks (beta) V1 prediction inference.
+        # Bank Check V1 prediction inference.
         class BankCheckV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'bank_check'
           @endpoint_version = '1'

@@ -6,7 +6,7 @@ require_relative 'passport_v1_document'
 module Mindee
   module Product
     module Passport
-      # International Passport V1 page.
+      # Passport V1 page.
       class PassportV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
@@ -18,7 +18,7 @@ module Mindee
         end
       end
 
-      # International Passport V1 page prediction.
+      # Passport V1 page prediction.
       class PassportV1PagePrediction < PassportV1Document
         # @return [String]
         def to_s
