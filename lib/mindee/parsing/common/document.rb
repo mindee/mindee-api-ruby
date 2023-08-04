@@ -22,7 +22,7 @@ module Mindee
           ocr_prediction = http_response.fetch('ocr', nil)
           return nil if ocr_prediction.nil? || ocr_prediction.fetch('mvision-v1', nil).nil?
 
-          Ocr(ocr_prediction)
+          Ocr::Ocr.new(ocr_prediction)
         end
 
         # @param product_class [Class<Mindee::Product>]
