@@ -75,14 +75,14 @@ module Mindee
         def to_s
           printable = printable_values
           out_str = String.new
-          out_str << printable[:description]
-          out_str << printable[:product_code]
-          out_str << printable[:quantity]
-          out_str << printable[:tax_amount]
-          out_str << printable[:tax_rate]
-          out_str << printable[:total_amount]
-          out_str << printable[:unit_price]
-          out_str.strip
+          out_str << "\n  :Description: #{printable[:description]}"
+          out_str << "\n  :Product code: #{printable[:product_code]}"
+          out_str << "\n  :Quantity: #{printable[:quantity]}"
+          out_str << "\n  :Tax Amount: #{printable[:tax_amount]}"
+          out_str << "\n  :Tax Rate (%): #{printable[:tax_rate]}"
+          out_str << "\n  :Total Amount: #{printable[:total_amount]}"
+          out_str << "\n  :Unit Price: #{printable[:unit_price]}"
+          out_str
         end
       end
     end

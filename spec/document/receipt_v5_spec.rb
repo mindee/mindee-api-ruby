@@ -9,7 +9,7 @@ require_relative '../data'
 DIR_RECEIPT_V5 = File.join(DATA_DIR, 'receipt', 'response_v5').freeze
 
 describe Mindee::Product::Receipt::ReceiptV5 do
-  context 'A Expense Receipt V5' do
+  context 'A Receipt V5' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_RECEIPT_V5, 'empty.json')
       inference = Mindee::Parsing::Common::Document.new(

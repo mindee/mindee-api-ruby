@@ -160,10 +160,23 @@ module Mindee
 
         private
 
+        # @param char [String]
+        # @return [String]
         def line_items_separator(char)
-          "  +#{char * 38}+#{char * 14}+#{char * 10}+#{char * 12}+#{char * 14}+#{char * 14}+#{char * 12}+"
+          out_str = String.new
+          out_str << '  '
+          out_str << "+#{char * 38}"
+          out_str << "+#{char * 14}"
+          out_str << "+#{char * 10}"
+          out_str << "+#{char * 12}"
+          out_str << "+#{char * 14}"
+          out_str << "+#{char * 14}"
+          out_str << "+#{char * 12}"
+          out_str << '+'
+          out_str
         end
 
+        # @return [String]
         def line_items_to_s
           return '' if @line_items.empty?
 
@@ -181,6 +194,7 @@ module Mindee
           out_str << "\n#{line_items_separator('=')}"
           out_str << "\n  #{line_items}"
           out_str << "\n#{line_items_separator('-')}"
+          out_str
         end
       end
     end

@@ -6,7 +6,7 @@ module Mindee
   module Product
     module US
       module BankCheck
-        # Bank Checks (beta) V1 document prediction.
+        # Bank Check V1 document prediction.
         class BankCheckV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The check payer's account number.

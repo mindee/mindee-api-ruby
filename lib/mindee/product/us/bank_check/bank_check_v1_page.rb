@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module BankCheck
-        # Bank Checks (beta) V1 page.
+        # Bank Check V1 page.
         class BankCheckV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
@@ -19,7 +19,7 @@ module Mindee
           end
         end
 
-        # Bank Checks (beta) V1 page prediction.
+        # Bank Check V1 page prediction.
         class BankCheckV1PagePrediction < BankCheckV1Document
           include Mindee::Parsing::Standard
 
