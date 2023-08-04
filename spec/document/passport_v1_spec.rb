@@ -17,6 +17,10 @@ describe Mindee::Product::Passport::PassportV1 do
         response['document']
       ).inference
       expect(inference.product.type).to eq('standard')
+      expect(inference.prediction.surname.value).to be_nil
+      expect(inference.prediction.birth_date.value).to be_nil
+      expect(inference.prediction.issuance_date.value).to be_nil
+      expect(inference.prediction.expiry_date.value).to be_nil
     end
 
     it 'should load a complete document prediction' do
