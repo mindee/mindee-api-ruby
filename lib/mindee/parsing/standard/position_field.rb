@@ -30,7 +30,8 @@ module Mindee
         # @return [String]
         def to_s
           out_str = String.new
-          out_str << "Polygon with #{@polygon.size} points."
+          out_str << "Polygon with #{@polygon.size} points." if @polygon
+          out_str
         end
 
         private
