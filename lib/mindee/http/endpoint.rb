@@ -97,13 +97,9 @@ module Mindee
         }
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
-                      {
-                        'document' => input_source.url,
-                      }
+                      [['document', input_source.url]]
                     else
-                      {
-                        'document' => input_source.read_document(close: close_file),
-                      }
+                      [['document', input_source.read_document(close: close_file)]]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
 
@@ -132,13 +128,9 @@ module Mindee
         }
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
-                      {
-                        'document' => input_source.url,
-                      }
+                      [['document', input_source.url]]
                     else
-                      {
-                        'document' => input_source.read_document(close: close_file),
-                      }
+                      [['document', input_source.read_document(close: close_file)]]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
 
