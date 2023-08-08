@@ -378,13 +378,17 @@
 25
 26
 27
-28</pre>
+28
+29
+30</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/position_field.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@polygon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_polygon_from_prediction'><span class='object_link'><a href="../../Geometry.html#polygon_from_prediction-class_method" title="Mindee::Geometry.polygon_from_prediction (method)">polygon_from_prediction</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>polygon</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>polygon</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>polygon</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>polygon</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='ivar'>@polygon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_polygon_from_prediction'><span class='object_link'><a href="../../Geometry.html#polygon_from_prediction-class_method" title="Mindee::Geometry.polygon_from_prediction (method)">polygon_from_prediction</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>polygon</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
   <span class='ivar'>@quadrangle</span> <span class='op'>=</span> <span class='id identifier rubyid_to_quadrilateral'>to_quadrilateral</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>quadrangle</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@rectangle</span> <span class='op'>=</span> <span class='id identifier rubyid_to_quadrilateral'>to_quadrilateral</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rectangle</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@bounding_box</span> <span class='op'>=</span> <span class='id identifier rubyid_to_quadrilateral'>to_quadrilateral</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bounding_box</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -715,17 +719,19 @@
       <pre class="lines">
 
 
-31
-32
 33
-34</pre>
+34
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/position_field.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/position_field.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Polygon with </span><span class='embexpr_beg'>#{</span><span class='ivar'>@polygon</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='embexpr_end'>}</span><span class='tstring_content'> points.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Polygon with </span><span class='embexpr_beg'>#{</span><span class='ivar'>@polygon</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='embexpr_end'>}</span><span class='tstring_content'> points.</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@polygon</span>
+  <span class='id identifier rubyid_out_str'>out_str</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -737,7 +743,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 29 09:09:46 2023 by
+  Generated on Tue Aug  8 12:46:23 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
