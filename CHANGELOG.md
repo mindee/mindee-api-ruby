@@ -2,13 +2,11 @@
 
 ## v3.1.0 - 2023-08-08
 ### Changes
-
 * :sparkles: add support for US Driver License
 * :recycle: update unit tests & dependencies
 * :arrow_up: update Bank Checks (#46)
 
 ### Fixes
-
 * :bug: fix `all_words` display (#47)
 * :bug: fix empty `position_field` (#47)
 * :bug: fix byte repacking issues for PDF files (#45)
@@ -16,7 +14,6 @@
 
 ## v3.0.0 - 2023-06-29
 ### ¡Breaking Changes!
-
 * :boom: update `Client` creation & document upload
 * :boom: update custom `Endpoint` creation syntax
 * :art: improve product class syntax & structure
@@ -25,7 +22,6 @@
 * :art: separated common, standard & custom parsing features into their own modules
 
 ### Changes
-
 * :sparkles: add support for asynchronous endpoints
 * :sparkles: add support for Invoice Splitter V1
 * :sparkles: add support for OCR Full-text parsing on compatible APIs
@@ -40,7 +36,6 @@
 * :recycle: rewrite tutorials to match new syntax
 
 ### Fixes
-
 * :bug: fix: pages now use the proper `orientation` property
 * :zap: optimize: only a single endpoint is now created on document upload
 
