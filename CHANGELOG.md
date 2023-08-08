@@ -1,5 +1,19 @@
 # Mindee Ruby API Library Changelog
 
+## v3.1.0 - 2023-08-08
+### Changes
+
+* :sparkles: add support for US Driver License
+* :recycle: update unit tests & dependencies
+* :arrow_up: update Bank Checks (#46)
+
+### Fixes
+
+* :bug: fix `all_words` display (#47)
+* :bug: fix empty `position_field` (#47)
+* :bug: fix byte repacking issues for PDF files (#45)
+
+
 ## v3.0.0 - 2023-06-29
 ### ¡Breaking Changes!
 
