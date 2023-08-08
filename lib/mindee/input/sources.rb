@@ -38,7 +38,7 @@ module Mindee
         end
 
         def pdf?
-          @file_mimetype == 'application/pdf'
+          @file_mimetype.to_s == 'application/pdf'
         end
 
         def process_pdf(options)
@@ -49,9 +49,12 @@ module Mindee
         # @param close [Boolean]
         def read_document(close: true)
           @io_stream.seek(0)
+          # Avoids needlessly re-packing some files
           data = @io_stream.read
           @io_stream.close if close
-          [data].pack('m')
+          return ['document', data, { filename: @filename }] if pdf?
+
+          ['document', [data].pack('m'), { filename: @filename }]
         end
       end
 

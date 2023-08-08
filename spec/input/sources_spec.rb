@@ -4,7 +4,7 @@ require 'mindee/input/sources'
 
 require_relative '../data'
 
-describe Mindee::Input::Source::LocalInputSource do
+describe Mindee::Input::Source do
   context 'An image input file' do
     it 'should load a JPEG from a path' do
       input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'receipt/receipt.jpg'))
