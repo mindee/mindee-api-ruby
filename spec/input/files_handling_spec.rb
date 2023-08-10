@@ -10,6 +10,7 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'receipt/receipt.jpg')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_document
+      expect(read_f.length).to_not eq(3)
       expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
     end
   end
@@ -19,6 +20,7 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'receipt/receipt.jpga')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_document
+      expect(read_f.length).to_not eq(3)
       expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
     end
   end
@@ -28,6 +30,7 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'receipt/receipt.heic')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_document
+      expect(read_f.length).to_not eq(3)
       expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
     end
   end
@@ -37,6 +40,7 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'receipt/receipt.tif')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_document
+      expect(read_f.length).to_not eq(3)
       expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
     end
   end
@@ -46,6 +50,7 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'receipt/receipt.tiff')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_document
+      expect(read_f.length).to_not eq(3)
       expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
     end
   end
@@ -58,6 +63,7 @@ describe Mindee::Input::Source::LocalInputSource do
       # NOTE: pack() & Base64.encodebase64 inputs have different rules for line breaks
       # which also differ from the ones in the base file. For all intents and purposes,
       # we can ignore them.
+      expect(read_f.length).to_not eq(3)
       expect(read_f[1].gsub("\n", '')).to eq(File.read(file).gsub("\n", ''))
     end
   end
@@ -69,6 +75,7 @@ describe Mindee::Input::Source::LocalInputSource do
       read_f = input.read_document
       file_contents = File.read(file)
       expect(read_f[1]).to_not eq(Base64.encode64(file_contents))
+      expect(read_f.length).to eq(3)
       expect(Base64.decode64(read_f[1])).to eq(Base64.decode64(file_contents))
     end
   end
@@ -80,6 +87,7 @@ describe Mindee::Input::Source::LocalInputSource do
       read_f = input.read_document
       file_contents = File.read(file)
       expect(read_f[1]).to_not eq(Base64.encode64(file_contents))
+      expect(read_f.length).to eq(3)
       expect(Base64.decode64(read_f[1])).to eq(Base64.decode64(file_contents))
     end
   end

@@ -54,7 +54,7 @@ module Mindee
           @io_stream.close if close
           return ['document', data, { filename: @filename }] if pdf?
 
-          ['document', [data].pack('m'), { filename: @filename }]
+          ['document', [data].pack('m')]
         end
       end
 
