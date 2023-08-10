@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v3.1.1 - 2023-08-10
+### Fixes
+* :bug: fixed non-pdf files being improperly handled by Ruby requests
+
+
 ## v3.1.0 - 2023-08-08
 ### Changes
 * :sparkles: add support for US Driver License
