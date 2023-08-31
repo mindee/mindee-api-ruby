@@ -150,21 +150,29 @@ module Mindee
       delay_sec = kwargs.fetch(:delay_sec, 3)
       max_retries = kwargs.fetch(:max_retries, 10)
 
-      enqueue_res = this.enqueue(
+      enqueue_res = enqueue(
         input_source,
         product_class,
-        endpoint,
-        all_words,
-        close_file,
-        page_options,
-        cropper
+        endpoint: endpoint,
+        all_words: all_words,
+        close_file: close_file,
+        page_options: page_options,
+        cropper: cropper
       )
       sleep(initial_delay_sec)
       polling_attempts = 1
       job_id = enqueue_res.job.id
-      queue_res = this.parse_queued(job_id)
-      while (queue_res.job.status != JobStatus::COMPLETED and polling_attempts < max_retries)
+      queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
+      while (queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED) && (polling_attempts < max_retries)
+        sleep(delay_sec)
+        queue_res = parse_queued(job_id)
+        polling_attempts += 1
+      end
+      if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
+        raise "Asynchronous parsing request timed out after #{initial_delay_sec + (polling_attempts * delay_sec)} tries"
+      end
 
+      queue_res
     end
 
     # Load a document from an absolute path, as a string.
@@ -228,9 +236,9 @@ module Mindee
     # @param delay_sec [Integer, Float] delay between polling attempts
     # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 10.
     def validate_async_params(initial_delay_sec, delay_sec, max_retries)
-      raise "Cannot set auto-poll delay to less than 2 seconds" if (delay_sec < 2)
-      raise "Cannot set initial parsing delay to less than 4 seconds" if (initial_delay_sec < 4)
-      raise "Cannot set auto-poll delay to less than 2 seconds" unless (max_retries.is_a? Integer)
+      raise 'Cannot set auto-poll delay to less than 2 seconds' if delay_sec < 2
+      raise 'Cannot set initial parsing delay to less than 4 seconds' if initial_delay_sec < 4
+      raise 'Cannot set auto-poll delay to less than 2 seconds' unless max_retries.is_a? Integer
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
