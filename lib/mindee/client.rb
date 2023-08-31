@@ -17,7 +17,7 @@ module Mindee
     # Call prediction API on a document and parse the results.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    #
+    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -59,7 +59,7 @@ module Mindee
     # Enqueue a document for async parsing
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    #
+    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -100,10 +100,10 @@ module Mindee
 
     # Parses a queued document
     #
+    # @param job_id [String] Id of the job (queue) to poll from
+    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
-    #
-    # @param job_id [String] Id of the job (queue) to poll from
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_queued(
@@ -118,23 +118,24 @@ module Mindee
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    #
-    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
-    #  Doesn't need to be set in the case of OTS APIs.
-    # @param all_words [Boolean] Whether to extract all the words on each page.
-    #  This performs a full OCR operation on the server and will increase response time.
-    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
-    #  Set to false if you need to access the file after this operation.
-    # @page_indexes [Array<Integer>, nil] Zero-based list of page indexes.
-    # @param operation [Symbol, nil] Operation to apply on the document, given the `page_indexes specified:
+    # @param product_class [Mindee::Product] class of the product
+    # @param kwargs [Hash, nil] parsing options:
+    # * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #   Doesn't need to be set in the case of OTS APIs.
+    # * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #   This performs a full OCR operation on the server and will increase response time.
+    # * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #   Set to false if you need to access the file after this operation.
+    # * `:page_indexes` [Array<Integer>, nil] Zero-based list of page indexes.
+    # * `:operation` [Symbol, nil] Operation to apply on the document, given the `page_indexes specified:
     #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #      * `:REMOVE` - remove the specified pages, and keep all others.
-    # @param on_min_pages [Integer, nil] Apply the operation only if document has at least this many pages.
-    # @param cropper [Boolean, nil] Whether to include cropper results for each page.
+    # * `:on_min_pages` [Integer, nil] Apply the operation only if document has at least this many pages.
+    # * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
-    # @param initial_delay_sec [Integer, Float, nil] initial delay before polling. Defaults to 6.
-    # @param delay_sec [Integer, Float, nil] delay between polling attempts. Defaults to 3.
-    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 10.
+    # * `:initial_delay_sec` [Integer, Float, nil] initial delay before polling. Defaults to 6.
+    # * `:delay_sec` [Integer, Float, nil] delay between polling attempts. Defaults to 3.
+    # * `:max_retries` [Integer, nil] maximum amount of retries. Defaults to 10.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
