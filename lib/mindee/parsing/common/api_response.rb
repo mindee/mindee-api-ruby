@@ -88,10 +88,13 @@ module Mindee
         attr_reader :job
         # @return [Mindee::Parsing::Common::ApiRequest]
         attr_reader :api_request
+        # @return [String]
+        attr_reader :raw_http
 
         # @param product_class [Class<Mindee::Product>]
         # @param http_response [Hash]
-        def initialize(product_class, http_response)
+        def initialize(product_class, http_response, raw_http)
+          @raw_http = raw_http
           if http_response.key?('api_request')
             @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
           end
