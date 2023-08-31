@@ -58,7 +58,7 @@ module Mindee
         check_api_key
         response = document_queue_req_get(input_source, all_words, close_file, cropper)
         hashed_response = JSON.parse(response.body, object_class: Hash)
-        return hashed_response if (200..299).include?(response.code.to_i)
+        return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
         error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
         raise error
@@ -71,7 +71,7 @@ module Mindee
         check_api_key
         response = document_queue_req(job_id)
         hashed_response = JSON.parse(response.body, object_class: Hash)
-        return hashed_response if (200..299).include?(response.code.to_i)
+        return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
         error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
         raise error

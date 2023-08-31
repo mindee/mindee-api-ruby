@@ -93,9 +93,9 @@ module Mindee
       if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
-      endpoint = initialize_endpoint(product_class) if endpoint.nil?
+      endpoint, raw_http = initialize_endpoint(product_class) if endpoint.nil?
       Mindee::Parsing::Common::ApiResponse.new(product_class,
-                                               endpoint.predict_async(input_source, all_words, close_file, cropper))
+                                               endpoint.predict_async(input_source, all_words, close_file, cropper), raw_http)
     end
 
     # Parses a queued document
@@ -111,8 +111,8 @@ module Mindee
       product_class,
       endpoint: nil
     )
-      endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      Mindee::Parsing::Common::ApiResponse.new(product_class, endpoint.parse_async(job_id))
+      endpoint, raw_http = initialize_endpoint(product_class) if endpoint.nil?
+      Mindee::Parsing::Common::ApiResponse.new(product_class, endpoint.parse_async(job_id), raw_http)
     end
 
     # Load a document from an absolute path, as a string.
