@@ -96,7 +96,7 @@ module Mindee
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
       prediction, raw_http = endpoint.predict_async(input_source, all_words, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class,
-        prediction, raw_http)
+                                               prediction, raw_http)
     end
 
     # Parses a queued document
