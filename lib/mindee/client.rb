@@ -94,8 +94,9 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
+      predict, raw_http = endpoint.predict_async(input_source, all_words, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class,
-                                               endpoint.predict_async(input_source, all_words, close_file, cropper), raw_http)
+                                               predict, raw_http)
     end
 
     # Parses a queued document
@@ -112,7 +113,8 @@ module Mindee
       endpoint: nil
     )
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      Mindee::Parsing::Common::ApiResponse.new(product_class, endpoint.parse_async(job_id), raw_http)
+      predict, raw_http = endpoint.parse_async(job_id)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, predict, raw_http)
     end
 
     # Load a document from an absolute path, as a string.
