@@ -43,7 +43,7 @@ module Mindee
         check_api_key
         response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
         hashed_response = JSON.parse(response.body, object_class: Hash)
-        return hashed_response if (200..299).include?(response.code.to_i)
+        return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
         error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
         raise error

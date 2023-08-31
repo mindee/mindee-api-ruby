@@ -52,8 +52,8 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      prediction = endpoint.predict(input_source, all_words, close_file, cropper)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction)
+      prediction, raw_http = endpoint.predict(input_source, all_words, close_file, cropper)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Enqueue a document for async parsing
