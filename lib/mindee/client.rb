@@ -17,7 +17,7 @@ module Mindee
     # Call prediction API on a document and parse the results.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    #
+    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -59,7 +59,7 @@ module Mindee
     # Enqueue a document for async parsing
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    #
+    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -101,10 +101,10 @@ module Mindee
 
     # Parses a queued document
     #
+    # @param job_id [String] Id of the job (queue) to poll from
+    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
-    #
-    # @param job_id [String] Id of the job (queue) to poll from
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_queued(
@@ -116,6 +116,68 @@ module Mindee
       prediction, raw_http = endpoint.parse_async(job_id)
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
+
+    # rubocop:disable Metrics/ParameterLists
+
+    # Enqueue a document for async parsing and automatically try to retrieve it
+    #
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param product_class [Mindee::Product] class of the product
+    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
+    #   Doesn't need to be set in the case of OTS APIs.
+    # @param all_words [Boolean] Whether to extract all the words on each page.
+    #   This performs a full OCR operation on the server and will increase response time.
+    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
+    #   Set to false if you need to access the file after this operation.
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #      * `:REMOVE` - remove the specified pages, and keep all others.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    # @param cropper [Boolean, nil] Whether to include cropper results for each page.
+    #  This performs a cropping operation on the server and will increase response time.
+    # @param initial_delay_sec [Integer, Float, nil] initial delay before polling. Defaults to 6.
+    # @param delay_sec [Integer, Float, nil] delay between polling attempts. Defaults to 3.
+    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 10.
+    # @return [Mindee::Parsing::Common::ApiResponse]
+    def enqueue_and_parse(
+      input_source,
+      product_class,
+      endpoint: nil,
+      all_words: false,
+      close_file: true,
+      page_options: nil,
+      cropper: false,
+      initial_delay_sec: 6,
+      delay_sec: 3,
+      max_retries: 10
+    )
+      enqueue_res = enqueue(
+        input_source,
+        product_class,
+        endpoint: endpoint,
+        all_words: all_words,
+        close_file: close_file,
+        page_options: page_options,
+        cropper: cropper
+      )
+      sleep(initial_delay_sec)
+      polling_attempts = 1
+      job_id = enqueue_res.job.id
+      queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
+      while (queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED) && (polling_attempts < max_retries)
+        sleep(delay_sec)
+        queue_res = parse_queued(job_id)
+        polling_attempts += 1
+      end
+      if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
+        raise "Asynchronous parsing request timed out after #{initial_delay_sec + (polling_attempts * delay_sec)} tries"
+      end
+
+      queue_res
+    end
+    # rubocop:enable Metrics/ParameterLists
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
@@ -172,6 +234,16 @@ module Mindee
     end
 
     private
+
+    # Validates the parameters for async auto-polling
+    # @param initial_delay_sec [Integer, Float] initial delay before polling
+    # @param delay_sec [Integer, Float] delay between polling attempts
+    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 10.
+    def validate_async_params(initial_delay_sec, delay_sec, max_retries)
+      raise 'Cannot set auto-poll delay to less than 2 seconds' if delay_sec < 2
+      raise 'Cannot set initial parsing delay to less than 4 seconds' if initial_delay_sec < 4
+      raise 'Cannot set auto-poll delay to less than 2 seconds' unless max_retries.is_a? Integer
+    end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
     # @param product_class [Mindee::Product] class of the product
