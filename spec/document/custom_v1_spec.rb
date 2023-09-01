@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../data'
 
-DIR_CUSTOM_V1 = File.join(DATA_DIR, 'custom', 'response_v1').freeze
+DIR_CUSTOM_V1 = File.join(DATA_DIR, 'products', 'custom', 'response_v1').freeze
 
 describe Mindee::Product::Custom::CustomV1 do
   context 'A custom document V1' do

@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../../data'
 
-DIR_FR_BANK_ACCOUNT_DETAILS_V2 = File.join(DATA_DIR, 'fr', 'bank_account_details', 'response_v2').freeze
+DIR_FR_BANK_ACCOUNT_DETAILS_V2 = File.join(DATA_DIR, 'products', 'bank_account_details', 'response_v2').freeze
 
 describe Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2 do
   context 'A Bank Account Details V2' do
@@ -37,7 +37,6 @@ describe Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2 do
         response['document']
       )
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end

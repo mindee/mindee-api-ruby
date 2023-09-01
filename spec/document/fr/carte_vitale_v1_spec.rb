@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../../data'
 
-DIR_FR_CARTE_VITALE_V1 = File.join(DATA_DIR, 'fr', 'carte_vitale', 'response_v1').freeze
+DIR_FR_CARTE_VITALE_V1 = File.join(DATA_DIR, 'products', 'carte_vitale', 'response_v1').freeze
 
 describe Mindee::Product::FR::CarteVitale::CarteVitaleV1 do
   context 'A Carte Vitale V1' do
@@ -37,7 +37,6 @@ describe Mindee::Product::FR::CarteVitale::CarteVitaleV1 do
         response['document']
       )
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end

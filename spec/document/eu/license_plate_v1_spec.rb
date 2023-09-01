@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../../data'
 
-DIR_EU_LICENSE_PLATE_V1 = File.join(DATA_DIR, 'eu', 'license_plate', 'response_v1').freeze
+DIR_EU_LICENSE_PLATE_V1 = File.join(DATA_DIR, 'products', 'license_plates', 'response_v1').freeze
 
 describe Mindee::Product::EU::LicensePlate::LicensePlateV1 do
   context 'A License Plate V1' do

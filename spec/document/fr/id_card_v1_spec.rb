@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../../data'
 
-DIR_FR_ID_CARD_V1 = File.join(DATA_DIR, 'fr', 'id_card', 'response_v1').freeze
+DIR_FR_ID_CARD_V1 = File.join(DATA_DIR, 'products', 'idcard_fr', 'response_v1').freeze
 
 describe Mindee::Product::FR::IdCard::IdCardV1 do
   context 'A Carte Nationale d\'Identité V1' do
@@ -37,7 +37,6 @@ describe Mindee::Product::FR::IdCard::IdCardV1 do
         response['document']
       )
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end

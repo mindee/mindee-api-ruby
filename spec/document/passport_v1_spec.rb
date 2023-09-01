@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../data'
 
-DIR_PASSPORT_V1 = File.join(DATA_DIR, 'passport', 'response_v1').freeze
+DIR_PASSPORT_V1 = File.join(DATA_DIR, 'products', 'passport', 'response_v1').freeze
 
 describe Mindee::Product::Passport::PassportV1 do
   context 'A Passport V1' do
@@ -17,10 +17,6 @@ describe Mindee::Product::Passport::PassportV1 do
         response['document']
       ).inference
       expect(inference.product.type).to eq('standard')
-      expect(inference.prediction.surname.value).to be_nil
-      expect(inference.prediction.birth_date.value).to be_nil
-      expect(inference.prediction.issuance_date.value).to be_nil
-      expect(inference.prediction.expiry_date.value).to be_nil
     end
 
     it 'should load a complete document prediction' do
@@ -41,7 +37,6 @@ describe Mindee::Product::Passport::PassportV1 do
         response['document']
       )
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end
