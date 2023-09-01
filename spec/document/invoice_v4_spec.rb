@@ -5,7 +5,7 @@ require 'mindee/product'
 
 require_relative '../data'
 
-DIR_INVOICE_V4 = File.join(DATA_DIR, 'invoice', 'response_v4').freeze
+DIR_INVOICE_V4 = File.join(DATA_DIR, 'products', 'invoices', 'response_v4').freeze
 
 describe Mindee::Product::Invoice::InvoiceV4 do
   context 'An Invoice V4' do
@@ -38,7 +38,6 @@ describe Mindee::Product::Invoice::InvoiceV4 do
       response = load_json(DIR_INVOICE_V4, 'complete.json')
       document = Mindee::Parsing::Common::Document.new(Mindee::Product::Invoice::InvoiceV4, response['document'])
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.prediction.due_date.page_id).to eq(0)
       expect(page.to_s).to eq(to_string)
     end

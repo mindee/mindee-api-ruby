@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../data'
 
-DIR_PROOF_OF_ADDRESS_V1 = File.join(DATA_DIR, 'proof_of_address', 'response_v1').freeze
+DIR_PROOF_OF_ADDRESS_V1 = File.join(DATA_DIR, 'products', 'proof_of_address', 'response_v1').freeze
 
 describe Mindee::Product::ProofOfAddress::ProofOfAddressV1 do
   context 'A Proof of Address V1' do

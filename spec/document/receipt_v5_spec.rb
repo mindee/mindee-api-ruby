@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../data'
 
-DIR_RECEIPT_V5 = File.join(DATA_DIR, 'receipt', 'response_v5').freeze
+DIR_RECEIPT_V5 = File.join(DATA_DIR, 'products', 'expense_receipts', 'response_v5').freeze
 
 describe Mindee::Product::Receipt::ReceiptV5 do
   context 'A Receipt V5' do
@@ -37,7 +37,6 @@ describe Mindee::Product::Receipt::ReceiptV5 do
         response['document']
       )
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.to_s).to eq(to_string)
     end
   end

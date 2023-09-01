@@ -5,7 +5,7 @@ require 'mindee/product'
 require 'mindee/parsing'
 require_relative '../data'
 
-DIR_FINANCIAL_DOCUMENT_V1 = File.join(DATA_DIR, 'financial_document', 'response_v1').freeze
+DIR_FINANCIAL_DOCUMENT_V1 = File.join(DATA_DIR, 'products', 'financial_document', 'response_v1').freeze
 
 describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
   context 'A FinancialDocumentV1' do
