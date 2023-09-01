@@ -115,42 +115,42 @@ module Mindee
       Mindee::Parsing::Common::ApiResponse.new(product_class, endpoint.parse_async(job_id))
     end
 
+    # rubocop:disable Metrics/ParameterLists
+
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     # @param product_class [Mindee::Product] class of the product
-    # @param kwargs [Hash, nil] parsing options:
-    # * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     #   Doesn't need to be set in the case of OTS APIs.
-    # * `:all_words` [Boolean] Whether to extract all the words on each page.
+    # @param all_words [Boolean] Whether to extract all the words on each page.
     #   This performs a full OCR operation on the server and will increase response time.
-    # * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #   Set to false if you need to access the file after this operation.
-    # * `:page_indexes` [Array<Integer>, nil] Zero-based list of page indexes.
-    # * `:operation` [Symbol, nil] Operation to apply on the document, given the `page_indexes specified:
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
     #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #      * `:REMOVE` - remove the specified pages, and keep all others.
-    # * `:on_min_pages` [Integer, nil] Apply the operation only if document has at least this many pages.
-    # * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    # @param cropper [Boolean, nil] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
-    # * `:initial_delay_sec` [Integer, Float, nil] initial delay before polling. Defaults to 6.
-    # * `:delay_sec` [Integer, Float, nil] delay between polling attempts. Defaults to 3.
-    # * `:max_retries` [Integer, nil] maximum amount of retries. Defaults to 10.
+    # @param initial_delay_sec [Integer, Float, nil] initial delay before polling. Defaults to 6.
+    # @param delay_sec [Integer, Float, nil] delay between polling attempts. Defaults to 3.
+    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 10.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
       product_class,
-      **kwargs
+      endpoint: nil,
+      all_words: false,
+      close_file: true,
+      page_options: nil,
+      cropper: false,
+      initial_delay_sec: 6,
+      delay_sec: 3,
+      max_retries: 10
     )
-      endpoint = kwargs.fetch(:endpoint, nil)
-      all_words = kwargs.fetch(:all_words, false)
-      close_file = kwargs.fetch(:close_file, true)
-      page_options = kwargs.fetch(:page_options, nil)
-      cropper = kwargs.fetch(:cropper, false)
-      initial_delay_sec = kwargs.fetch(:initial_delay_sec, 6)
-      delay_sec = kwargs.fetch(:delay_sec, 3)
-      max_retries = kwargs.fetch(:max_retries, 10)
-
       enqueue_res = enqueue(
         input_source,
         product_class,
@@ -175,6 +175,7 @@ module Mindee
 
       queue_res
     end
+    # rubocop:enable Metrics/ParameterLists
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
