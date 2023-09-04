@@ -7,6 +7,7 @@ require_relative 'bank_check_v1_page'
 module Mindee
   module Product
     module US
+      # Bank Check module.
       module BankCheck
         # Bank Check V1 prediction inference.
         class BankCheckV1 < Mindee::Parsing::Common::Inference

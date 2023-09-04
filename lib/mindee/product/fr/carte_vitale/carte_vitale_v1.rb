@@ -7,6 +7,7 @@ require_relative 'carte_vitale_v1_page'
 module Mindee
   module Product
     module FR
+      # Carte Vitale module.
       module CarteVitale
         # Carte Vitale V1 prediction inference.
         class CarteVitaleV1 < Mindee::Parsing::Common::Inference

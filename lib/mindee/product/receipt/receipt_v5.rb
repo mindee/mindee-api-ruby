@@ -6,6 +6,7 @@ require_relative 'receipt_v5_page'
 
 module Mindee
   module Product
+    # Receipt module.
     module Receipt
       # Receipt V5 prediction inference.
       class ReceiptV5 < Mindee::Parsing::Common::Inference

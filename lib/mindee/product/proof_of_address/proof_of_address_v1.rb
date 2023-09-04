@@ -6,6 +6,7 @@ require_relative 'proof_of_address_v1_page'
 
 module Mindee
   module Product
+    # Proof of Address module.
     module ProofOfAddress
       # Proof of Address V1 prediction inference.
       class ProofOfAddressV1 < Mindee::Parsing::Common::Inference
