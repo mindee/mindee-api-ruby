@@ -10,78 +10,78 @@ module Mindee
         class DriverLicenseV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # US driver license holders address
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :address
           # US driver license holders date of birth
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :date_of_birth
           # Document Discriminator Number of the US Driver License
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :dd_number
           # US driver license holders class
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :dl_class
           # ID number of the US Driver License.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :driver_license_id
           # US driver license holders endorsements
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :endorsements
           # Date on which the documents expires.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :expiry_date
           # US driver license holders eye colour
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :eye_color
           # US driver license holders first name(s)
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :first_name
           # US driver license holders hair colour
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :hair_color
           # US driver license holders hight
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :height
           # Date on which the documents was issued.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :issued_date
           # US driver license holders last name
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :last_name
           # US driver license holders restrictions
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :restrictions
           # US driver license holders gender
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :sex
           # US State
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :state
           # US driver license holders weight
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :weight
 
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super()
-            @address = TextField.new(prediction['address'], page_id)
+            @address = StringField.new(prediction['address'], page_id)
             @date_of_birth = DateField.new(prediction['date_of_birth'], page_id)
-            @dd_number = TextField.new(prediction['dd_number'], page_id)
-            @dl_class = TextField.new(prediction['dl_class'], page_id)
-            @driver_license_id = TextField.new(prediction['driver_license_id'], page_id)
-            @endorsements = TextField.new(prediction['endorsements'], page_id)
+            @dd_number = StringField.new(prediction['dd_number'], page_id)
+            @dl_class = StringField.new(prediction['dl_class'], page_id)
+            @driver_license_id = StringField.new(prediction['driver_license_id'], page_id)
+            @endorsements = StringField.new(prediction['endorsements'], page_id)
             @expiry_date = DateField.new(prediction['expiry_date'], page_id)
-            @eye_color = TextField.new(prediction['eye_color'], page_id)
-            @first_name = TextField.new(prediction['first_name'], page_id)
-            @hair_color = TextField.new(prediction['hair_color'], page_id)
-            @height = TextField.new(prediction['height'], page_id)
+            @eye_color = StringField.new(prediction['eye_color'], page_id)
+            @first_name = StringField.new(prediction['first_name'], page_id)
+            @hair_color = StringField.new(prediction['hair_color'], page_id)
+            @height = StringField.new(prediction['height'], page_id)
             @issued_date = DateField.new(prediction['issued_date'], page_id)
-            @last_name = TextField.new(prediction['last_name'], page_id)
-            @restrictions = TextField.new(prediction['restrictions'], page_id)
-            @sex = TextField.new(prediction['sex'], page_id)
-            @state = TextField.new(prediction['state'], page_id)
-            @weight = TextField.new(prediction['weight'], page_id)
+            @last_name = StringField.new(prediction['last_name'], page_id)
+            @restrictions = StringField.new(prediction['restrictions'], page_id)
+            @sex = StringField.new(prediction['sex'], page_id)
+            @state = StringField.new(prediction['state'], page_id)
+            @weight = StringField.new(prediction['weight'], page_id)
           end
 
           # @return [String]
