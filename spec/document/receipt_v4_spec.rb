@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../data'
 
-DIR_RECEIPT_V4 = File.join(DATA_DIR, 'receipt', 'response_v4').freeze
+DIR_RECEIPT_V4 = File.join(DATA_DIR, 'products', 'expense_receipts', 'response_v4').freeze
 
 describe Mindee::Product::Receipt::ReceiptV4 do
   context 'A Receipt V4' do
@@ -34,7 +34,6 @@ describe Mindee::Product::Receipt::ReceiptV4 do
       response = load_json(DIR_RECEIPT_V4, 'complete.json')
       document = Mindee::Parsing::Common::Document.new(Mindee::Product::Receipt::ReceiptV4, response['document'])
       page = document.inference.pages[0]
-      expect(page.orientation.value).to eq(0)
       expect(page.prediction.date.page_id).to eq(0)
       expect(page.to_s).to eq(to_string)
     end

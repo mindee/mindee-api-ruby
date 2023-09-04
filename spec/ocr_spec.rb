@@ -5,12 +5,12 @@ require 'mindee/parsing'
 
 require_relative 'data'
 
-DIR_OCR = File.join(DATA_DIR, 'ocr')
+DIR_OCR = File.join(DATA_DIR, 'extras', 'ocr')
 
 describe Mindee::Parsing::Common do
   include Mindee::Parsing::Common
   context 'An OCR extraction' do
-    json_data = load_json(DIR_OCR, 'complete_with_ocr.json')
+    json_data = load_json(DIR_OCR, 'complete.json')
     it 'should extract ocr data from a document' do
       expected_text = read_file(DIR_OCR, 'ocr.txt')
       ocr = Mindee::Parsing::Common::Ocr::Ocr.new(json_data['document']['ocr'])

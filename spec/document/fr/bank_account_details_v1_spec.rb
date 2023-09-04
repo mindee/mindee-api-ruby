@@ -6,7 +6,7 @@ require 'mindee/parsing'
 
 require_relative '../../data'
 
-DIR_FR_BANK_ACCOUNT_DETAILS_V1 = File.join(DATA_DIR, 'fr', 'bank_account_details', 'response_v1').freeze
+DIR_FR_BANK_ACCOUNT_DETAILS_V1 = File.join(DATA_DIR, 'products', 'bank_account_details', 'response_v1').freeze
 
 describe Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV1 do
   context 'A Bank Account Details V1' do
