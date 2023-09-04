@@ -39,6 +39,8 @@ module Mindee
           construct_invoice_page_groups_from_prediction(prediction)
         end
 
+        # Reconstructs the page groups of a prediction
+        # @param prediction [hash]
         def construct_invoice_page_groups_from_prediction(prediction)
           @invoice_page_groups = []
           return unless prediction.key?('invoice_page_groups') && prediction['invoice_page_groups'].any?
