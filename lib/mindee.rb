@@ -26,9 +26,11 @@ module Mindee
     # Common fields and functions.
     module Common
     end
+
     # Custom fields and functions.
     module Custom
     end
+
     # Standard fields and functions.
     module Standard
     end
