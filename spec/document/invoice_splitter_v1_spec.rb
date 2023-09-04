@@ -5,7 +5,7 @@ require 'mindee/product'
 
 require_relative '../data'
 
-DIR_INVOICE_SPLITTER_V1 = File.join(DATA_DIR, 'invoice_splitter', 'response_v1').freeze
+DIR_INVOICE_SPLITTER_V1 = File.join(DATA_DIR, 'products', 'invoice_splitter', 'response_v1').freeze
 
 describe Mindee::Product::InvoiceSplitter::InvoiceSplitterV1 do
   context 'An Invoice Splitter V1' do
