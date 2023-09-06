@@ -78,6 +78,7 @@ module Mindee
             @nationality = TextField.new(prediction['nationality'], page_id)
             @surname = TextField.new(prediction['surname'], page_id)
           end
+
           # @return [String]
           def to_s
             given_names = @given_names.join("\n #{' ' * 15}")
