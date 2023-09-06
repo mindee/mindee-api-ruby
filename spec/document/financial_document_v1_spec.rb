@@ -3,6 +3,7 @@
 require 'json'
 require 'mindee/product'
 require 'mindee/parsing'
+
 require_relative '../data'
 
 DIR_FINANCIAL_DOCUMENT_V1 = File.join(DATA_DIR, 'products', 'financial_document', 'response_v1').freeze
