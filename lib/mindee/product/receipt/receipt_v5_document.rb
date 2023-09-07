@@ -22,28 +22,28 @@ module Mindee
         # @return [Array<Mindee::Product::Receipt::ReceiptV5LineItem>]
         attr_reader :line_items
         # The locale detected on the document.
-        # @return [Mindee::Parsing::Standard::Locale]
+        # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # The purchase subcategory among predefined classes for transport and food.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
         # The address of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
         # List of company registrations associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
         attr_reader :supplier_company_registrations
         # The name of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_name
         # The phone number of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_phone_number
         # List of tax lines information.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The time the purchase was made.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :time
         # The total amount of tip and gratuity.
         # @return [Mindee::Parsing::Standard::AmountField]
@@ -69,17 +69,17 @@ module Mindee
           prediction['line_items'].each do |item|
             @line_items.push(ReceiptV5LineItem.new(item, page_id))
           end
-          @locale = Locale.new(prediction['locale'], page_id)
+          @locale = LocaleField.new(prediction['locale'], page_id)
           @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
-          @supplier_address = TextField.new(prediction['supplier_address'], page_id)
+          @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
             @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
           end
-          @supplier_name = TextField.new(prediction['supplier_name'], page_id)
-          @supplier_phone_number = TextField.new(prediction['supplier_phone_number'], page_id)
+          @supplier_name = StringField.new(prediction['supplier_name'], page_id)
+          @supplier_phone_number = StringField.new(prediction['supplier_phone_number'], page_id)
           @taxes = Taxes.new(prediction['taxes'], page_id)
-          @time = TextField.new(prediction['time'], page_id)
+          @time = StringField.new(prediction['time'], page_id)
           @tip = AmountField.new(prediction['tip'], page_id)
           @total_amount = AmountField.new(prediction['total_amount'], page_id)
           @total_net = AmountField.new(prediction['total_net'], page_id)

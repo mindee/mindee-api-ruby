@@ -15,25 +15,25 @@ module Mindee
         # @return [Array<Mindee::Parsing::Standard::DateField>]
         attr_reader :dates
         # The address of the document's issuer.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :issuer_address
         # List of company registrations found for the issuer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
         attr_reader :issuer_company_registration
         # The name of the person or company issuing the document.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :issuer_name
         # The locale detected on the document.
-        # @return [Mindee::Parsing::Standard::Locale]
+        # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # The address of the recipient.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :recipient_address
         # List of company registrations found for the recipient.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
         attr_reader :recipient_company_registration
         # The name of the person or company receiving the document.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :recipient_name
 
         # @param prediction [Hash]
@@ -45,19 +45,19 @@ module Mindee
           prediction['dates'].each do |item|
             @dates.push(DateField.new(item, page_id))
           end
-          @issuer_address = TextField.new(prediction['issuer_address'], page_id)
+          @issuer_address = StringField.new(prediction['issuer_address'], page_id)
           @issuer_company_registration = []
           prediction['issuer_company_registration'].each do |item|
             @issuer_company_registration.push(CompanyRegistration.new(item, page_id))
           end
-          @issuer_name = TextField.new(prediction['issuer_name'], page_id)
-          @locale = Locale.new(prediction['locale'], page_id)
-          @recipient_address = TextField.new(prediction['recipient_address'], page_id)
+          @issuer_name = StringField.new(prediction['issuer_name'], page_id)
+          @locale = LocaleField.new(prediction['locale'], page_id)
+          @recipient_address = StringField.new(prediction['recipient_address'], page_id)
           @recipient_company_registration = []
           prediction['recipient_company_registration'].each do |item|
             @recipient_company_registration.push(CompanyRegistration.new(item, page_id))
           end
-          @recipient_name = TextField.new(prediction['recipient_name'], page_id)
+          @recipient_name = StringField.new(prediction['recipient_name'], page_id)
         end
 
         # @return [String]

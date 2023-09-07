@@ -9,7 +9,7 @@ module Mindee
       class ReceiptV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # Where the purchase was made, the language, and the currency.
-        # @return [Mindee::Parsing::Standard::Locale]
+        # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # Total including taxes
         # @return [Mindee::Parsing::Standard::AmountField]
@@ -24,13 +24,13 @@ module Mindee
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
         # The name of the supplier or merchant, as seen on the receipt.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier
         # List of taxes detected on the receipt.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # Time as seen on the receipt in HH:MM format.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :time
         # The receipt category among predefined classes.
         # @return [Mindee::Parsing::Standard::ClassificationField]
@@ -49,7 +49,7 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
-          @locale = Locale.new(prediction['locale'])
+          @locale = LocaleField.new(prediction['locale'])
           @total_amount = AmountField.new(prediction['total_amount'], page_id)
           @total_net = AmountField.new(prediction['total_net'], page_id)
           @total_tax = AmountField.new(prediction['total_tax'], page_id)
@@ -58,8 +58,8 @@ module Mindee
           @category = ClassificationField.new(prediction['category'], page_id)
           @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
           @document_type = ClassificationField.new(prediction['document_type'], page_id)
-          @supplier = TextField.new(prediction['supplier'], page_id)
-          @time = TextField.new(prediction['time'], page_id)
+          @supplier = StringField.new(prediction['supplier'], page_id)
+          @time = StringField.new(prediction['time'], page_id)
           @taxes = Taxes.new(prediction['taxes'], page_id)
         end
 

@@ -6,14 +6,21 @@ require 'time'
 module Mindee
   module Parsing
     module Common
+      # Potential values for queue in asynchronous calls.
       module JobStatus
+        # Document is waiting to be processed.
         WAITING = :waiting
+        # Document is currently being parsed.
         PROCESSING = :processing
+        # Document parsing is complete.
         COMPLETED = :completed
       end
 
+      # Potential values for requests.
       module RequestStatus
+        # Failed.
         FAILURE = :failure
+        # Success.
         SUCCESS = :success
       end
 

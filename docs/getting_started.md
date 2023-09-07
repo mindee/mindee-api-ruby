@@ -1,8 +1,7 @@
-This guide will help you get started with the Mindee Ruby  OCR SDK to easily extract data from your documents.
-
-The Ruby client supports [Invoice](https://developers.mindee.com/docs/ruby-invoice-ocr), [receipt](https://developers.mindee.com/docs/ruby-receipt-ocr),  [passport](https://developers.mindee.com/docs/ruby-passport-ocr),  OCR APIs and [custom-built API](https://developers.mindee.com/docs/ruby-api-builder) from the API Builder.
-
-You can view the source code on [GitHub](https://github.com/mindee/mindee-api-ruby).
+---
+title: Ruby Getting Started
+---
+This guide will help you get the most out of the Mindee Ruby client library to easily extract data from your documents.
 
 ## Installation
 
@@ -62,6 +61,7 @@ gem install mindee@<version>
 ```
 
 ## Usage
+
 Using Mindee's APIs can be broken down into the following steps:
 
 1. [Initialize a Client](#initializing-the-client)
@@ -201,7 +201,6 @@ result = mindee_client.parse(
   Mindee::Product::Invoice::InvoiceV4
 )
 ```
-
 
 ## Sending a File
 To send a file to the API, we need to specify how to process the document.

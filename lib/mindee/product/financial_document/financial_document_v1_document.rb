@@ -13,13 +13,13 @@ module Mindee
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :category
         # The address of the customer.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
         # List of company registrations associated to the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
         attr_reader :customer_company_registrations
         # The name of the customer.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_name
         # The date the purchase was made.
         # @return [Mindee::Parsing::Standard::DateField]
@@ -31,40 +31,40 @@ module Mindee
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :due_date
         # The invoice number or identifier.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :invoice_number
         # List of line item details.
         # @return [Array<Mindee::Product::FinancialDocument::FinancialDocumentV1LineItem>]
         attr_reader :line_items
         # The locale detected on the document.
-        # @return [Mindee::Parsing::Standard::Locale]
+        # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # List of Reference numbers, including PO number.
-        # @return [Array<Mindee::Parsing::Standard::TextField>]
+        # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
         # The purchase subcategory among predefined classes for transport and food.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
         # The address of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
         # List of company registrations associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
         attr_reader :supplier_company_registrations
         # The name of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_name
         # List of payment details associated to the supplier.
-        # @return [Array<Mindee::Parsing::Standard::PaymentDetails>]
+        # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
         attr_reader :supplier_payment_details
         # The phone number of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_phone_number
         # List of tax lines information.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The time the purchase was made.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :time
         # The total amount of tip and gratuity
         # @return [Mindee::Parsing::Standard::AmountField]
@@ -84,39 +84,39 @@ module Mindee
         def initialize(prediction, page_id)
           super()
           @category = ClassificationField.new(prediction['category'], page_id)
-          @customer_address = TextField.new(prediction['customer_address'], page_id)
+          @customer_address = StringField.new(prediction['customer_address'], page_id)
           @customer_company_registrations = []
           prediction['customer_company_registrations'].each do |item|
             @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
           end
-          @customer_name = TextField.new(prediction['customer_name'], page_id)
+          @customer_name = StringField.new(prediction['customer_name'], page_id)
           @date = DateField.new(prediction['date'], page_id)
           @document_type = ClassificationField.new(prediction['document_type'], page_id)
           @due_date = DateField.new(prediction['due_date'], page_id)
-          @invoice_number = TextField.new(prediction['invoice_number'], page_id)
+          @invoice_number = StringField.new(prediction['invoice_number'], page_id)
           @line_items = []
           prediction['line_items'].each do |item|
             @line_items.push(FinancialDocumentV1LineItem.new(item, page_id))
           end
-          @locale = Locale.new(prediction['locale'], page_id)
+          @locale = LocaleField.new(prediction['locale'], page_id)
           @reference_numbers = []
           prediction['reference_numbers'].each do |item|
-            @reference_numbers.push(TextField.new(item, page_id))
+            @reference_numbers.push(StringField.new(item, page_id))
           end
           @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
-          @supplier_address = TextField.new(prediction['supplier_address'], page_id)
+          @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
             @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
           end
-          @supplier_name = TextField.new(prediction['supplier_name'], page_id)
+          @supplier_name = StringField.new(prediction['supplier_name'], page_id)
           @supplier_payment_details = []
           prediction['supplier_payment_details'].each do |item|
-            @supplier_payment_details.push(PaymentDetails.new(item, page_id))
+            @supplier_payment_details.push(PaymentDetailsField.new(item, page_id))
           end
-          @supplier_phone_number = TextField.new(prediction['supplier_phone_number'], page_id)
+          @supplier_phone_number = StringField.new(prediction['supplier_phone_number'], page_id)
           @taxes = Taxes.new(prediction['taxes'], page_id)
-          @time = TextField.new(prediction['time'], page_id)
+          @time = StringField.new(prediction['time'], page_id)
           @tip = AmountField.new(prediction['tip'], page_id)
           @total_amount = AmountField.new(prediction['total_amount'], page_id)
           @total_net = AmountField.new(prediction['total_net'], page_id)
