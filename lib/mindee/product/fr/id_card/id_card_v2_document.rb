@@ -10,73 +10,73 @@ module Mindee
         class IdCardV2Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The alternate name of the card holder.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :alternate_name
           # The name of the issuing authority.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :authority
           # The date of birth of the card holder.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :birth_date
           # The place of birth of the card holder.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :birth_place
           # The card access number (CAN).
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :card_access_number
           # The document number.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :document_number
           # The expiry date of the identification card.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :expiry_date
           # The gender of the card holder.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :gender
           # The given name(s) of the card holder.
-          # @return [Array<Mindee::Parsing::Standard::TextField>]
+          # @return [Array<Mindee::Parsing::Standard::StringField>]
           attr_reader :given_names
           # The date of issue of the identification card.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :issue_date
           # The Machine Readable Zone, first line.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :mrz1
           # The Machine Readable Zone, second line.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :mrz2
           # The Machine Readable Zone, third line.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :mrz3
           # The nationality of the card holder.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :nationality
           # The surname of the card holder.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :surname
 
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super()
-            @alternate_name = TextField.new(prediction['alternate_name'], page_id)
-            @authority = TextField.new(prediction['authority'], page_id)
+            @alternate_name = StringField.new(prediction['alternate_name'], page_id)
+            @authority = StringField.new(prediction['authority'], page_id)
             @birth_date = DateField.new(prediction['birth_date'], page_id)
-            @birth_place = TextField.new(prediction['birth_place'], page_id)
-            @card_access_number = TextField.new(prediction['card_access_number'], page_id)
-            @document_number = TextField.new(prediction['document_number'], page_id)
+            @birth_place = StringField.new(prediction['birth_place'], page_id)
+            @card_access_number = StringField.new(prediction['card_access_number'], page_id)
+            @document_number = StringField.new(prediction['document_number'], page_id)
             @expiry_date = DateField.new(prediction['expiry_date'], page_id)
-            @gender = TextField.new(prediction['gender'], page_id)
+            @gender = StringField.new(prediction['gender'], page_id)
             @given_names = []
             prediction['given_names'].each do |item|
-              @given_names.push(TextField.new(item, page_id))
+              @given_names.push(StringField.new(item, page_id))
             end
             @issue_date = DateField.new(prediction['issue_date'], page_id)
-            @mrz1 = TextField.new(prediction['mrz1'], page_id)
-            @mrz2 = TextField.new(prediction['mrz2'], page_id)
-            @mrz3 = TextField.new(prediction['mrz3'], page_id)
-            @nationality = TextField.new(prediction['nationality'], page_id)
-            @surname = TextField.new(prediction['surname'], page_id)
+            @mrz1 = StringField.new(prediction['mrz1'], page_id)
+            @mrz2 = StringField.new(prediction['mrz2'], page_id)
+            @mrz3 = StringField.new(prediction['mrz3'], page_id)
+            @nationality = StringField.new(prediction['nationality'], page_id)
+            @surname = StringField.new(prediction['surname'], page_id)
           end
 
           # @return [String]

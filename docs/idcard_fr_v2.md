@@ -19,7 +19,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::FR::IdCard::IdCardV1
+  Mindee::Product::FR::IdCard::IdCardV2
 )
 
 # Print a full summary of the parsed data in RST format
@@ -34,43 +34,56 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: ef79c45b-1300-474f-af28-de65519cabd7
+:Mindee ID: d33828f1-ef7e-4984-b9df-a2bfaa38a78d
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/idcard_fr v1.0
+:Product: mindee/idcard_fr v2.0
 :Rotation applied: Yes
 
 Prediction
 ==========
-:Identity Number: 175775H55790
-:Given Name(s): VICTOR
+:Nationality:
+:Card Access Number: 175775H55790
+:Document Number:
+:Given Name(s): Victor
+                Marie
 :Surname: DAMBARD
+:Alternate Name:
 :Date of Birth: 1994-04-24
-:Place of Birth: LYON 4E ARRONDISSEMT
+:Place of Birth: LYON 4E ARRONDISSEM
+:Gender: M
 :Expiry Date: 2030-04-02
+:Mrz Line 1: IDFRADAMBARD<<<<<<<<<<<<<<<<<<075025
+:Mrz Line 2: 170775H557903VICTOR<<MARIE<9404246M5
+:Mrz Line 3:
+:Date of Issue: 2015-04-03
 :Issuing Authority: SOUS-PREFECTURE DE BELLE (02)
-:Gender:
-:MRZ Line 1: IDFRADAMBARD<<<<<<<<<<<<<<<<<<075025
-:MRZ Line 2: 170775H557903VICTOR<<MARIE<9404246M5
 
 Page Predictions
 ================
 
 Page 0
 ------
-:Document Side: RECTO & VERSO
-:Identity Number: 175775H55790
-:Given Name(s): VICTOR
+:Document Type: OLD
+:Document Sides: RECTO & VERSO
+:Nationality:
+:Card Access Number: 175775H55790
+:Document Number:
+:Given Name(s): Victor
+                Marie
 :Surname: DAMBARD
+:Alternate Name:
 :Date of Birth: 1994-04-24
-:Place of Birth: LYON 4E ARRONDISSEMT
+:Place of Birth: LYON 4E ARRONDISSEM
+:Gender: M
 :Expiry Date: 2030-04-02
+:Mrz Line 1: IDFRADAMBARD<<<<<<<<<<<<<<<<<<075025
+:Mrz Line 2: 170775H557903VICTOR<<MARIE<9404246M5
+:Mrz Line 3:
+:Date of Issue: 2015-04-03
 :Issuing Authority: SOUS-PREFECTURE DE BELLE (02)
-:Gender:
-:MRZ Line 1: IDFRADAMBARD<<<<<<<<<<<<<<<<<<075025
-:MRZ Line 2: 170775H557903VICTOR<<MARIE<9404246M5
 ```
 
 # Field Types
@@ -109,7 +122,14 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 Some fields are constrained to the page level, and so will not be retrievable to through the document.
 
 # Attributes
-The following fields are extracted for Carte Nationale d'Identité V1:
+The following fields are extracted for Carte Nationale d'Identité V2:
+
+## Alternate Name
+**alternate_name** ([StringField](#string-field)): The alternate name of the card holder.
+
+```rb
+puts result.document.inference.prediction.alternate_name.value
+```
 
 ## Issuing Authority
 **authority** ([StringField](#string-field)): The name of the issuing authority.
@@ -132,12 +152,35 @@ puts result.document.inference.prediction.birth_date.value
 puts result.document.inference.prediction.birth_place.value
 ```
 
-## Document Side
-[📄](#page-level-fields "This field is only present on individual pages.")**document_side** ([ClassificationField](#classification-field)): The side of the document which is visible.
+## Card Access Number
+**card_access_number** ([StringField](#string-field)): The card access number (CAN).
+
+```rb
+puts result.document.inference.prediction.card_access_number.value
+```
+
+## Document Number
+**document_number** ([StringField](#string-field)): The document number.
+
+```rb
+puts result.document.inference.prediction.document_number.value
+```
+
+## Document Sides
+[📄](#page-level-fields "This field is only present on individual pages.")**document_side** ([ClassificationField](#classification-field)): The sides of the document which are visible.
 
 ```rb
 for document_side_elem in result.document.document_side do
   puts document_side_elem.value
+end
+```
+
+## Document Type
+[📄](#page-level-fields "This field is only present on individual pages.")**document_type** ([ClassificationField](#classification-field)): The document type or format.
+
+```rb
+for document_type_elem in result.document.document_type do
+  puts document_type_elem.value
 end
 ```
 
@@ -164,25 +207,39 @@ for given_names_elem in result.document.inference.prediction.given_names do
 end
 ```
 
-## Identity Number
-**id_number** ([StringField](#string-field)): The identification card number.
+## Date of Issue
+**issue_date** ([DateField](#date-field)): The date of issue of the identification card.
 
 ```rb
-puts result.document.inference.prediction.id_number.value
+puts result.document.inference.prediction.issue_date.value
 ```
 
-## MRZ Line 1
-**mrz1** ([StringField](#string-field)): Machine Readable Zone, first line
+## Mrz Line 1
+**mrz1** ([StringField](#string-field)): The Machine Readable Zone, first line.
 
 ```rb
 puts result.document.inference.prediction.mrz1.value
 ```
 
-## MRZ Line 2
-**mrz2** ([StringField](#string-field)): Machine Readable Zone, second line
+## Mrz Line 2
+**mrz2** ([StringField](#string-field)): The Machine Readable Zone, second line.
 
 ```rb
 puts result.document.inference.prediction.mrz2.value
+```
+
+## Mrz Line 3
+**mrz3** ([StringField](#string-field)): The Machine Readable Zone, third line.
+
+```rb
+puts result.document.inference.prediction.mrz3.value
+```
+
+## Nationality
+**nationality** ([StringField](#string-field)): The nationality of the card holder.
+
+```rb
+puts result.document.inference.prediction.nationality.value
 ```
 
 ## Surname

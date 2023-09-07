@@ -125,12 +125,16 @@ customize the experience.
 * [Invoice OCR Ruby](https://developers.mindee.com/docs/invoice-ocr-ruby)
 * [Financial Document OCR Ruby](https://developers.mindee.com/docs/financial-document-ocr-ruby)
 * [Passport OCR Ruby](https://developers.mindee.com/docs/passport-ocr-ruby)
+* [Proof of Address OCR Ruby](https://developers.mindee.com/docs/proof-of-address-ocr-ruby)
 * [Receipt OCR Ruby](https://developers.mindee.com/docs/receipt-ocr-ruby)
 * [EU License Plate OCR Ruby](https://developers.mindee.com/docs/eu-license-plate-ocr-ruby)
 * [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/fr-bank-account-details-ocr-ruby)
 * [FR Carte Vitale OCR Ruby](https://developers.mindee.com/docs/fr-carte-vitale-ocr-ruby)
+* [FR ID Card OCR Ruby](https://developers.mindee.com/docs/fr-id-card-ocr-ruby)
 * [US Bank Check OCR Ruby](https://developers.mindee.com/docs/us-bank-check-ocr-ruby)
 * [US Driver License OCR Ruby](https://developers.mindee.com/docs/us-driver-license-ocr-ruby)
+* [Cropper API Ruby](https://developers.mindee.com/docs/cropper-api-ruby)
+* [Invoice Splitter API Ruby](https://developers.mindee.com/docs/invoice-splitter-api-ruby)
 
 
 You can also take a look at the
