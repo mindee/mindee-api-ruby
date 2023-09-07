@@ -33,8 +33,8 @@ module Mindee
           out_str << "\n:Product: #{@product.name} v#{@product.version}"
           out_str << "\n:Rotation applied: #{is_rotation_applied}"
           out_str << "\n\nPrediction\n=========="
-          out_str << "\n#{@prediction}"
-          out_str << "\n\nPage Predictions\n================\n\n"
+          out_str << "\n#{@prediction.to_s.size.positive? ? "#{@prediction}\n" : ''}"
+          out_str << "\nPage Predictions\n================\n\n"
           out_str << @pages.map(&:to_s).join("\n\n")
         end
       end
