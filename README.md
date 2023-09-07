@@ -47,22 +47,22 @@ puts result.document
 **Note:** Files can also be loaded from:
 
 A URL (`https`):
-```js
+```rb
 input_source = mindee_client.source_from_url("https://my-url")
 ```
 
 A bytes input stream:
-```js
+```rb
 input_source = mindee_client.source_from_bytes('/path/to/the/file.ext', "name-of-my-file.ext")
 ```
 
 A base64 encoded string:
-```js
+```rb
 input_source = mindee_client.source_from_b64string('/path/to/the/file.ext', "name-of-my-file.ext")
 ```
 
 A ruby `file` object:
-```js
+```rb
 input_source = mindee_client.source_from_file(input_file, "name-of-my-file.ext")
 ```
 

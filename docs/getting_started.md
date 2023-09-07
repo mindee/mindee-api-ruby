@@ -3,10 +3,6 @@ title: Ruby Getting Started
 ---
 This guide will help you get the most out of the Mindee Ruby client library to easily extract data from your documents.
 
-> 📘 **Info**
-> 
-> The library is typed-hinted using sorbet.
-
 ## Installation
 
 ### Requirements
