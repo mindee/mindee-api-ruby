@@ -6,6 +6,7 @@ require_relative 'cropper_v1_page'
 
 module Mindee
   module Product
+    # Cropper
     module Cropper
       # Cropper V1 prediction inference.
       class CropperV1 < Mindee::Parsing::Common::Inference

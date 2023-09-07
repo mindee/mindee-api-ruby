@@ -11,7 +11,7 @@ module Mindee
         include Mindee::Parsing::Standard
 
         # Locale information.
-        # @return [Mindee::Parsing::Standard::Locale]
+        # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # The nature of the invoice.
         # @return [Mindee::Parsing::Standard::ClassificationField]
@@ -29,10 +29,10 @@ module Mindee
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
         # The invoice number.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :invoice_number
         # List of Reference numbers including PO number.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :reference_numbers
         # The due date of the invoice.
         # @return [Mindee::Parsing::Standard::DateField]
@@ -41,22 +41,22 @@ module Mindee
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The name of the customer.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_name
         # The address of the customer.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
         # The company registration information for the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
         attr_reader :customer_company_registrations
         # The supplier's name.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_name
         # The supplier's address.
-        # @return [Mindee::Parsing::Standard::TextField]
+        # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
         # The payment information.
-        # @return [Array<Mindee::Parsing::Standard::PaymentDetails>]
+        # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
         attr_reader :supplier_payment_details
         # The supplier's company registration information.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
@@ -69,20 +69,20 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
-          @locale = Locale.new(prediction['locale'])
+          @locale = LocaleField.new(prediction['locale'])
           @document_type = ClassificationField.new(prediction['document_type'], page_id)
           @total_amount = AmountField.new(prediction['total_amount'], page_id)
           @total_net = AmountField.new(prediction['total_net'], page_id)
-          @customer_address = TextField.new(prediction['customer_address'], page_id)
-          @customer_name = TextField.new(prediction['customer_name'], page_id)
+          @customer_address = StringField.new(prediction['customer_address'], page_id)
+          @customer_name = StringField.new(prediction['customer_name'], page_id)
           @date = DateField.new(prediction['date'], page_id)
           @due_date = DateField.new(prediction['due_date'], page_id)
-          @invoice_number = TextField.new(prediction['invoice_number'], page_id)
-          @supplier_name = TextField.new(prediction['supplier_name'], page_id)
-          @supplier_address = TextField.new(prediction['supplier_address'], page_id)
+          @invoice_number = StringField.new(prediction['invoice_number'], page_id)
+          @supplier_name = StringField.new(prediction['supplier_name'], page_id)
+          @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @reference_numbers = []
           prediction['reference_numbers'].each do |item|
-            @reference_numbers.push(TextField.new(item, page_id))
+            @reference_numbers.push(StringField.new(item, page_id))
           end
           @customer_company_registrations = []
           prediction['customer_company_registrations'].each do |item|
@@ -91,7 +91,7 @@ module Mindee
           @taxes = Taxes.new(prediction['taxes'], page_id)
           @supplier_payment_details = []
           prediction['supplier_payment_details'].each do |item|
-            @supplier_payment_details.push(PaymentDetails.new(item, page_id))
+            @supplier_payment_details.push(PaymentDetailsField.new(item, page_id))
           end
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
@@ -168,7 +168,7 @@ module Mindee
 
           total_excl = {
             'value' => @total_amount.value - @taxes.map(&:value).sum,
-            'confidence' => TextField.array_confidence(@taxes) * @total_amount.confidence,
+            'confidence' => StringField.array_confidence(@taxes) * @total_amount.confidence,
           }
           @total_net = AmountField.new(total_excl, page_id, reconstructed: true)
         end
@@ -178,7 +178,7 @@ module Mindee
 
           total_incl = {
             'value' => @taxes.map(&:value).sum + @total_net.value,
-            'confidence' => TextField.array_confidence(@taxes) * @total_net.confidence,
+            'confidence' => StringField.array_confidence(@taxes) * @total_net.confidence,
           }
           @total_amount = AmountField.new(total_incl, page_id, reconstructed: true)
         end
@@ -188,7 +188,7 @@ module Mindee
 
           total_tax = {
             'value' => @taxes.map(&:value).sum,
-            'confidence' => TextField.array_confidence(@taxes),
+            'confidence' => StringField.array_confidence(@taxes),
           }
           return unless total_tax['value'].positive?
 
@@ -200,7 +200,7 @@ module Mindee
 
           total_tax = {
             'value' => @total_amount.value - @total_net.value,
-            'confidence' => TextField.array_confidence(@taxes),
+            'confidence' => StringField.array_confidence(@taxes),
           }
           return unless total_tax['value'] >= 0
 

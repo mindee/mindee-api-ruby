@@ -18,8 +18,9 @@ gem 'mindee'
 ```
 
 And then execute:
-
-    $ bundle install
+```sh
+bundle install
+```
 
 Finally, Ruby away!
 
@@ -41,6 +42,28 @@ result = mindee_client.parse(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
+```
+
+**Note:** Files can also be loaded from:
+
+A URL (`https`):
+```rb
+input_source = mindee_client.source_from_url("https://my-url")
+```
+
+A bytes input stream:
+```rb
+input_source = mindee_client.source_from_bytes('/path/to/the/file.ext', "name-of-my-file.ext")
+```
+
+A base64 encoded string:
+```rb
+input_source = mindee_client.source_from_b64string('/path/to/the/file.ext', "name-of-my-file.ext")
+```
+
+A ruby `file` object:
+```rb
+input_source = mindee_client.source_from_file(input_file, "name-of-my-file.ext")
 ```
 
 #### Region-Specific Documents
@@ -97,11 +120,22 @@ end
 There's more to it than that for those that need more features, or want to
 customize the experience.
 
-* [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-* [Ruby Custom APIs OCR](https://developers.mindee.com/docs/ruby-api-builder)
-* [Ruby invoices OCR](https://developers.mindee.com/docs/ruby-invoice-ocr)
-* [Ruby receipts OCR](https://developers.mindee.com/docs/ruby-receipt-ocr)
-* [Ruby passports OCR](https://developers.mindee.com/docs/ruby-passport-ocr)
+* [Ruby Overview](https://developers.mindee.com/docs/getting-started-ocr-ruby)
+* [Custom OCR Ruby](https://developers.mindee.com/docs/api-builder-ocr-ruby)
+* [Invoice OCR Ruby](https://developers.mindee.com/docs/invoice-ocr-ruby)
+* [Financial Document OCR Ruby](https://developers.mindee.com/docs/financial-document-ocr-ruby)
+* [Passport OCR Ruby](https://developers.mindee.com/docs/passport-ocr-ruby)
+* [Proof of Address OCR Ruby](https://developers.mindee.com/docs/proof-of-address-ocr-ruby)
+* [Receipt OCR Ruby](https://developers.mindee.com/docs/receipt-ocr-ruby)
+* [EU License Plate OCR Ruby](https://developers.mindee.com/docs/eu-license-plate-ocr-ruby)
+* [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/fr-bank-account-details-ocr-ruby)
+* [FR Carte Vitale OCR Ruby](https://developers.mindee.com/docs/fr-carte-vitale-ocr-ruby)
+* [FR ID Card OCR Ruby](https://developers.mindee.com/docs/fr-id-card-ocr-ruby)
+* [US Bank Check OCR Ruby](https://developers.mindee.com/docs/us-bank-check-ocr-ruby)
+* [US Driver License OCR Ruby](https://developers.mindee.com/docs/us-driver-license-ocr-ruby)
+* [Cropper API Ruby](https://developers.mindee.com/docs/cropper-api-ruby)
+* [Invoice Splitter API Ruby](https://developers.mindee.com/docs/invoice-splitter-api-ruby)
+
 
 You can also take a look at the
 [Reference Documentation](https://mindee.github.io/mindee-api-ruby/).

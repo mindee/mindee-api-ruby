@@ -6,6 +6,7 @@ require_relative 'invoice_splitter_v1_page'
 
 module Mindee
   module Product
+    # Invoice Splitter module.
     module InvoiceSplitter
       # Invoice Splitter V1 prediction inference.
       class InvoiceSplitterV1 < Mindee::Parsing::Common::Inference

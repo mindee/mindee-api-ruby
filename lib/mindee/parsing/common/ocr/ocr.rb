@@ -5,6 +5,7 @@ require_relative 'mvision_v1'
 module Mindee
   module Parsing
     module Common
+      # Ocr-specific parsing fields and options
       module Ocr
         # A single word.
         class OcrWord

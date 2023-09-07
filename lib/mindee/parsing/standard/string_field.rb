@@ -6,7 +6,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents basic text information.
-      class TextField < Field
+      class StringField < Field
         # Value as String
         # @return [String, nil]
         attr_reader :value

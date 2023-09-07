@@ -7,6 +7,7 @@ require_relative 'license_plate_v1_page'
 module Mindee
   module Product
     module EU
+      # License Plate module.
       module LicensePlate
         # License Plate V1 prediction inference.
         class LicensePlateV1 < Mindee::Parsing::Common::Inference

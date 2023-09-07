@@ -7,6 +7,7 @@ require_relative 'id_card_v2_page'
 module Mindee
   module Product
     module FR
+      # Carte Nationale d'Identité module.
       module IdCard
         # Carte Nationale d'Identité V2 prediction inference.
         class IdCardV2 < Mindee::Parsing::Common::Inference

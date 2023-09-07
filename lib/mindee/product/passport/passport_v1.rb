@@ -6,6 +6,7 @@ require_relative 'passport_v1_page'
 
 module Mindee
   module Product
+    # Passport module.
     module Passport
       # Passport V1 prediction inference.
       class PassportV1 < Mindee::Parsing::Common::Inference

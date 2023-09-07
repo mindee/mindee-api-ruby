@@ -2,8 +2,10 @@
 
 # Mindee
 module Mindee
+  # Current version.
   VERSION = '3.1.1'
 
+  # Finds and return the current platform.
   # @return [String]
   def self.find_platform
     host = RbConfig::CONFIG['host_os']
@@ -18,5 +20,7 @@ module Mindee
       return os unless (regexp =~ host).nil?
     end
   end
+
+  # Current platform.
   PLATFORM = find_platform.freeze
 end

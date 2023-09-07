@@ -10,7 +10,7 @@ module Mindee
         class LicensePlateV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # List of all license plates found in the image.
-          # @return [Array<Mindee::Parsing::Standard::TextField>]
+          # @return [Array<Mindee::Parsing::Standard::StringField>]
           attr_reader :license_plates
 
           # @param prediction [Hash]
@@ -19,7 +19,7 @@ module Mindee
             super()
             @license_plates = []
             prediction['license_plates'].each do |item|
-              @license_plates.push(TextField.new(item, page_id))
+              @license_plates.push(StringField.new(item, page_id))
             end
           end
 

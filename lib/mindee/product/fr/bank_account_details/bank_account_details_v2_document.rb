@@ -11,26 +11,26 @@ module Mindee
         class BankAccountDetailsV2Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # Full extraction of the account holders names.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :account_holders_names
           # Full extraction of BBAN, including: branch code, bank code, account and key.
           # @return [Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2Bban]
           attr_reader :bban
           # Full extraction of the IBAN number.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :iban
           # Full extraction of the SWIFT code.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :swift_code
 
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super()
-            @account_holders_names = TextField.new(prediction['account_holders_names'], page_id)
+            @account_holders_names = StringField.new(prediction['account_holders_names'], page_id)
             @bban = BankAccountDetailsV2Bban.new(prediction['bban'], page_id)
-            @iban = TextField.new(prediction['iban'], page_id)
-            @swift_code = TextField.new(prediction['swift_code'], page_id)
+            @iban = StringField.new(prediction['iban'], page_id)
+            @swift_code = StringField.new(prediction['swift_code'], page_id)
           end
 
           # @return [String]

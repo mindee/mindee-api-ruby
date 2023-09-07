@@ -1,0 +1,369 @@
+---
+title: Invoice OCR Ruby
+---
+The Ruby OCR SDK supports the [Invoice API](https://platform.mindee.com/mindee/invoices).
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/invoices/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+![Invoice sample](https://github.com/mindee/client-lib-test-data/blob/main/products/invoices/default_sample.jpg?raw=true)
+
+# Quick-Start
+```rb
+require 'mindee'
+
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
+# Load a file from disk
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+# Parse the file
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4
+)
+
+# Print a full summary of the parsed data in RST format
+puts result.document
+
+# Print the document-level parsed data
+# puts result.document.inference.prediction
+```
+
+**Output (RST):**
+```rst
+########
+Document
+########
+:Mindee ID: 656c2ec1-0920-4556-9bc2-772162bc698a
+:Filename: invoice.pdf
+
+Inference
+#########
+:Product: mindee/invoices v4.1
+:Rotation applied: Yes
+
+Prediction
+==========
+:Locale: fr; fr; EUR;
+:Document type: INVOICE
+:Invoice number: 0042004801351
+:Reference numbers: AD29094
+:Invoice date: 2020-02-17
+:Invoice due date: 2020-02-17
+:Supplier name: TURNPIKE DESIGNS CO.
+:Supplier address: 156 University Ave, Toronto ON, Canada M5H 2H7
+:Supplier company registrations: 501124705; FR33501124705
+:Supplier payment details: FR7640254025476501124705368;
+:Customer name: JIRO DOI
+:Customer address: 1954 Bloon Street West Toronto, ON, M6P 3K9 Canada
+:Customer company registrations: FR00000000000; 111222333
+:Taxes:
+  +---------------+--------+----------+---------------+
+  | Base          | Code   | Rate (%) | Amount        |
+  +===============+========+==========+===============+
+  |               |        | 20.00    | 97.98         |
+  +---------------+--------+----------+---------------+
+:Total net: 489.97
+:Total tax: 97.98
+:Total amount: 587.95
+:Line Items:
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  | Code                 | QTY     | Price   | Amount   | Tax (Rate)       | Description                          |
+  +======================+=========+=========+==========+==================+======================================+
+  |                      |         |         | 4.31     |  (2.10%)         | PQ20 ETIQ ULTRA RESIS METAXXDC       |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  |                      | 1.00    | 65.00   | 75.00    | 10.00            | Platinum web hosting package Down... |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  | XXX81125600010       | 1.00    | 250.01  | 275.51   | 25.50 (10.20%)   | a long string describing the item    |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  | ABC456               | 200.30  | 8.101   | 1622.63  | 121.70 (7.50%)   | Liquid perfection                    |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  |                      |         |         |          |                  | CARTOUCHE L NR BROTHER TN247BK       |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+
+Page Predictions
+================
+
+Page 0
+------
+:Locale: fr; fr; EUR;
+:Document type: INVOICE
+:Invoice number: 0042004801351
+:Reference numbers:
+:Invoice date: 2020-02-17
+:Invoice due date: 2020-02-17
+:Supplier name:
+:Supplier address:
+:Supplier company registrations: 501124705; FR33501124705
+:Supplier payment details: FR7640254025476501124705368;
+:Customer name:
+:Customer address:
+:Customer company registrations:
+:Taxes:
+  +---------------+--------+----------+---------------+
+  | Base          | Code   | Rate (%) | Amount        |
+  +===============+========+==========+===============+
+  |               |        | 20.00    | 97.98         |
+  +---------------+--------+----------+---------------+
+:Total net: 489.97
+:Total tax: 97.98
+:Total amount: 587.95
+:Line Items:
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  | Code                 | QTY     | Price   | Amount   | Tax (Rate)       | Description                          |
+  +======================+=========+=========+==========+==================+======================================+
+  |                      |         |         | 4.31     |  (2.10%)         | PQ20 ETIQ ULTRA RESIS METAXXDC       |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  |                      | 1.00    | 65.00   | 75.00    | 10.00            | Platinum web hosting package Down... |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+
+Page 1
+------
+:Locale: fr; fr; EUR;
+:Document type: INVOICE
+:Invoice number:
+:Reference numbers: AD29094
+:Invoice date:
+:Invoice due date: 2020-02-17
+:Supplier name: TURNPIKE DESIGNS CO.
+:Supplier address: 156 University Ave, Toronto ON, Canada M5H 2H7
+:Supplier company registrations:
+:Supplier payment details:
+:Customer name: JIRO DOI
+:Customer address: 1954 Bloon Street West Toronto, ON, M6P 3K9 Canada
+:Customer company registrations:
+:Taxes:
+  +---------------+--------+----------+---------------+
+  | Base          | Code   | Rate (%) | Amount        |
+  +===============+========+==========+===============+
+  |               |        | 8.00     | 193.20        |
+  +---------------+--------+----------+---------------+
+:Total net:
+:Total tax: 193.20
+:Total amount: 2608.20
+:Line Items:
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  | Code                 | QTY     | Price   | Amount   | Tax (Rate)       | Description                          |
+  +======================+=========+=========+==========+==================+======================================+
+  | XXX81125600010       | 1.00    | 250.00  | 250.00   |  (10.00%)        | a long string describing the item    |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  | ABC456               | 200.30  | 8.101   | 1622.63  | 121.70 (7.50%)   | Liquid perfection                    |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  |                      |         |         |          |                  | CARTOUCHE L NR BROTHER TN247BK       |
+  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+```
+
+# Field Types
+## Standard Fields
+These fields are generic and used in several products.
+
+### Basic Field
+Each prediction object contains a set of fields that inherit from the generic `Field` class.
+A typical `Field` object will have the following attributes:
+
+* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **confidence** (Float, nil): the confidence score of the field prediction.
+* **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
+* **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
+* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **reconstructed** (`Boolean`): indicates whether or not an object was reconstructed (not extracted as the API gave it).
+
+
+Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
+
+
+### Amount Field
+The amount field `AmountField` only has one constraint: its **value** is a `Float` (or `nil`).
+
+
+### Classification Field
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+
+> Note: a classification field's `value is always a `String`.
+
+
+### Company Registration Field
+Aside from the basic `Field` attributes, the company registration field `CompanyRegistrationField` also implements the following:
+
+* **type** (`String`): the type of company.
+
+### Date Field
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+
+* **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
+
+### Locale Field
+The locale field `LocaleField` only implements the **value**, **confidence** and **page_id** base `Field` attributes, but it comes with its own:
+
+* **language** (`String`): ISO 639-1 language code (e.g.: `en` for English). Can be `nil`.
+* **country** (`String`): ISO 3166-1 alpha-2 or ISO 3166-1 alpha-3 code for countries (e.g.: `GRB` or `GB` for "Great Britain"). Can be `nil`.
+* **currency** (`String`): ISO 4217 code for currencies (e.g.: `USD` for "US Dollars"). Can be `nil`.
+
+### String Field
+The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
+
+### Taxes Field
+#### Tax
+Aside from the basic `Field` attributes, the tax field `TaxField` also implements the following:
+
+* **rate** (`Float`): the tax rate applied to an item can be undefined. Expressed as a percentage. Can be `nil`.
+* **code** (`String`): tax code (or equivalent, depending on the origin of the document). Can be `nil`.
+* **base** (`Float`): base amount used for the tax. Can be `nil`.
+
+> Note: currently `TaxField` is not used on its own, and is accessed through a parent `Taxes` object, an array-like structure.
+
+#### Taxes (Array)
+The `Taxes` field represents an array-like collection of `TaxField` objects. As it is the representation of several objects, it has access to a custom `to_s` method that can render a `TaxField` object as a table line.
+
+## Specific Fields
+Fields which are specific to this product; they are not used in any other product.
+
+### Line Items Field
+List of line item details.
+
+A `InvoiceV4LineItem` implements the following attributes:
+
+* `description` (String): The item description.
+* `product_code` (String): The product code referring to the item.
+* `quantity` (Integer): The item quantity
+* `tax_amount` (Float): The item tax amount.
+* `tax_rate` (Float): The item tax rate in percentage.
+* `total_amount` (Float): The item total amount.
+* `unit_price` (Float): The item unit price.
+
+# Attributes
+The following fields are extracted for Invoice V4:
+
+## Customer Address
+**customerAddress** ([StringField](#string-field)): The address of the customer.
+
+```rb
+puts result.document.inference.prediction.customer_address.value
+```
+
+## Customer Company Registrations
+**customer_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the customer.
+
+```rb
+for customer_company_registration_elem in result.document.inference.prediction.customer_company_registration do
+  puts customer_company_registration_elem.value
+end
+```
+
+## Customer Name
+**customer_name** ([StringField](#string-field)): The name of the customer.
+
+```rb
+puts result.document.inference.prediction.customer_name.value
+```
+
+## Purchase Date
+**date** ([DateField](#date-field)): The date the purchase was made.
+
+```rb
+puts result.document.inference.prediction.date.value
+```
+
+## Document Type
+**document_type** ([ClassificationField](#classification-field)): One of: 'INVOICE', 'CREDIT NOTE'.
+
+```rb
+puts result.document.inference.prediction.document_type.value
+```
+
+## Due Date
+**due_date** ([DateField](#date-field)): The date on which the payment is due.
+
+```rb
+puts result.document.inference.prediction.due_date.value
+```
+
+## Invoice Number
+**invoice_number** ([StringField](#string-field)): The invoice number or identifier.
+
+```rb
+puts result.document.inference.prediction.invoice_number.value
+```
+
+## Line Items
+**line_items** (Array<[InvoiceV4LineItem](#line-items-field)>): List of line item details.
+
+```rb
+for line_items_elem in result.document.inference.prediction.line_items do
+  puts line_items_elem.value
+end
+```
+
+## Locale
+**locale** ([LocaleField](#locale-field)): The locale detected on the document.
+
+```rb
+puts result.document.inference.prediction.locale.value
+```
+
+## Reference Numbers
+**reference_numbers** (Array<[StringField](#string-field)>): List of Reference numbers, including PO number.
+
+```rb
+for reference_numbers_elem in result.document.inference.prediction.reference_numbers do
+  puts reference_numbers_elem.value
+end
+```
+
+## Supplier Address
+**supplier_address** ([StringField](#string-field)): The address of the supplier or merchant.
+
+```rb
+result.document.inference.prediction.supplier_address.value
+```
+
+## Supplier Company Registrations
+**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
+
+```rb
+for supplier_company_registrations_elem in result.document.inference.prediction.supplier_company_registrations do
+  puts supplier_company_registrations_elem.value
+end
+```
+
+## Supplier Name
+**supplier_name** ([StringField](#string-field)): The name of the supplier or merchant.
+
+```rb
+puts result.document.inference.prediction.supplier_name.value
+```
+
+## Supplier Payment Details
+**supplier_payment_details** (Array<[PaymentDetailsField](#payment-details-field)>): List of payment details associated to the supplier.
+
+```rb
+for supplier_payment_details_elem in result.document.inference.prediction.supplier_payment_details do
+  puts supplier_payment_details_elem.value
+end
+```
+
+## Taxes
+**taxes** (Array<[TaxField](#taxes-field)>): List of tax lines information.
+
+```rb
+for taxes_elem in result.document.inference.prediction.taxes do
+  puts taxes_elem.to_s
+end
+```
+
+## Total Amount
+**total_amount** ([AmountField](#amount-field)): The total amount paid: includes taxes, tips, fees, and other charges.
+
+```rb
+puts result.document.inference.prediction.total_amount.value
+```
+
+## Total Net
+**total_net** ([AmountField](#amount-field)): The net amount paid: does not include taxes, fees, and discounts.
+
+```rb
+puts result.document.inference.prediction.total_net.value
+```
+
+# Questions?
+[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)
