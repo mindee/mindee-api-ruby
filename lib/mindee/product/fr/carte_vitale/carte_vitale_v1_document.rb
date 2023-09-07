@@ -10,16 +10,16 @@ module Mindee
         class CarteVitaleV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The given name(s) of the card holder.
-          # @return [Array<Mindee::Parsing::Standard::TextField>]
+          # @return [Array<Mindee::Parsing::Standard::StringField>]
           attr_reader :given_names
           # The date the card was issued.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :issuance_date
           # The Social Security Number (Numéro de Sécurité Sociale) of the card holder
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :social_security
           # The surname of the card holder.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :surname
 
           # @param prediction [Hash]
@@ -28,11 +28,11 @@ module Mindee
             super()
             @given_names = []
             prediction['given_names'].each do |item|
-              @given_names.push(TextField.new(item, page_id))
+              @given_names.push(StringField.new(item, page_id))
             end
             @issuance_date = DateField.new(prediction['issuance_date'], page_id)
-            @social_security = TextField.new(prediction['social_security'], page_id)
-            @surname = TextField.new(prediction['surname'], page_id)
+            @social_security = StringField.new(prediction['social_security'], page_id)
+            @surname = StringField.new(prediction['surname'], page_id)
           end
 
           # @return [String]

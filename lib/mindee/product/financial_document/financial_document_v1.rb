@@ -6,6 +6,7 @@ require_relative 'financial_document_v1_page'
 
 module Mindee
   module Product
+    # Financial Document module.
     module FinancialDocument
       # Financial Document V1 prediction inference.
       class FinancialDocumentV1 < Mindee::Parsing::Common::Inference

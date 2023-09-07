@@ -6,9 +6,10 @@ require_relative 'pdf_tools'
 
 module Mindee
   module PDF
-    # Module for PDF document handling
+    # PDF document processing
     module PdfProcessor
       Origami::PDF.class_eval { include PDFTools }
+      # Default options for pdf documents processing.
       DEFAULT_OPTIONS = {
         page_indexes: [0],
         operation: :KEEP_ONLY,

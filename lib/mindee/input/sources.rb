@@ -8,6 +8,7 @@ require_relative '../pdf'
 module Mindee
   module Input
     module Source
+      # Mime types accepted by the server.
       ALLOWED_MIME_TYPES = [
         'application/pdf',
         'image/heic',
@@ -37,16 +38,28 @@ module Mindee
           raise "File type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}"
         end
 
+        # Shorthand for pdf mimetype validation.
         def pdf?
           @file_mimetype.to_s == 'application/pdf'
         end
 
+        # Parses a PDF file according to provided options.
+        # @param options [Hash, nil] Page cutting/merge options:
+        #
+        #  * `:page_indexes` Zero-based list of page indexes.
+        #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+        #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+        #      * `:REMOVE` - remove the specified pages, and keep all others.
+        #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
         def process_pdf(options)
           @io_stream.seek(0)
           @io_stream = PdfProcessor.parse(@io_stream, options)
         end
 
+        # Reads a document. Packs it into bytes if needed.
+        # Note: only needs filename in case of some pdf files.
         # @param close [Boolean]
+        # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
         def read_document(close: true)
           @io_stream.seek(0)
           # Avoids needlessly re-packing some files

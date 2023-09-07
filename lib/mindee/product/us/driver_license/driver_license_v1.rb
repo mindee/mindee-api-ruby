@@ -7,6 +7,7 @@ require_relative 'driver_license_v1_page'
 module Mindee
   module Product
     module US
+      # Driver License module.
       module DriverLicense
         # Driver License V1 prediction inference.
         class DriverLicenseV1 < Mindee::Parsing::Common::Inference

@@ -5,6 +5,7 @@ require_relative 'custom_v1_page'
 
 module Mindee
   module Product
+    # Custom product module.
     module Custom
       # Custom Document V1 prediction inference.
       class CustomV1 < Mindee::Parsing::Common::Inference

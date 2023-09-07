@@ -6,6 +6,7 @@ require_relative 'invoice_v4_page'
 
 module Mindee
   module Product
+    # Invoice module.
     module Invoice
       # Invoice document.
       class InvoiceV4 < Mindee::Parsing::Common::Inference

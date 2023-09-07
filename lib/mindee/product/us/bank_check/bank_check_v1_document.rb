@@ -10,37 +10,37 @@ module Mindee
         class BankCheckV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The check payer's account number.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :account_number
           # The amount of the check.
           # @return [Mindee::Parsing::Standard::AmountField]
           attr_reader :amount
           # The issuer's check number.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :check_number
           # The date the check was issued.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :date
           # List of the check's payees (recipients).
-          # @return [Array<Mindee::Parsing::Standard::TextField>]
+          # @return [Array<Mindee::Parsing::Standard::StringField>]
           attr_reader :payees
           # The check issuer's routing number.
-          # @return [Mindee::Parsing::Standard::TextField]
+          # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :routing_number
 
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super()
-            @account_number = TextField.new(prediction['account_number'], page_id)
+            @account_number = StringField.new(prediction['account_number'], page_id)
             @amount = AmountField.new(prediction['amount'], page_id)
-            @check_number = TextField.new(prediction['check_number'], page_id)
+            @check_number = StringField.new(prediction['check_number'], page_id)
             @date = DateField.new(prediction['date'], page_id)
             @payees = []
             prediction['payees'].each do |item|
-              @payees.push(TextField.new(item, page_id))
+              @payees.push(StringField.new(item, page_id))
             end
-            @routing_number = TextField.new(prediction['routing_number'], page_id)
+            @routing_number = StringField.new(prediction['routing_number'], page_id)
           end
 
           # @return [String]

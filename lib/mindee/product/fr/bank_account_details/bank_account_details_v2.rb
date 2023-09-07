@@ -7,6 +7,7 @@ require_relative 'bank_account_details_v2_page'
 module Mindee
   module Product
     module FR
+      # Bank Account Details module.
       module BankAccountDetails
         # Bank Account Details V2 prediction inference.
         class BankAccountDetailsV2 < Mindee::Parsing::Common::Inference

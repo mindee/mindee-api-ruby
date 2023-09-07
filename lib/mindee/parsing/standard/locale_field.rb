@@ -4,7 +4,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents locale information
-      class Locale
+      class LocaleField
         # The confidence score, value will be between 0.0 and 1.0
         # @return [Float]
         attr_reader :confidence

@@ -6,7 +6,7 @@ module Mindee
   module Product
     module InvoiceSplitter
       # Page Group for Invoice Splitter class
-      class PageGroup
+      class InvoiceSplitterV1PageGroup
         # @return[Array<Integer>]
         attr_reader :page_indexes
 
@@ -29,7 +29,7 @@ module Mindee
 
       # Invoice Splitter V1 document prediction.
       class InvoiceSplitterV1Document < Mindee::Parsing::Common::Prediction
-        # @return[Array<Mindee::Product::PageGroup>]
+        # @return[Array<Mindee::Product::InvoiceSplitterV1PageGroup>]
         attr_reader :invoice_page_groups
 
         # @param prediction [Hash]
@@ -39,12 +39,14 @@ module Mindee
           construct_invoice_page_groups_from_prediction(prediction)
         end
 
+        # Reconstructs the page groups of a prediction
+        # @param prediction [hash]
         def construct_invoice_page_groups_from_prediction(prediction)
           @invoice_page_groups = []
           return unless prediction.key?('invoice_page_groups') && prediction['invoice_page_groups'].any?
 
           prediction['invoice_page_groups'].each do |page_group_prediction|
-            @invoice_page_groups.append(PageGroup.new(page_group_prediction))
+            @invoice_page_groups.append(InvoiceSplitterV1PageGroup.new(page_group_prediction))
           end
         end
 

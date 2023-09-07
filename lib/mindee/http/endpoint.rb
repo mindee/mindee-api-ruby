@@ -6,15 +6,22 @@ require_relative '../version'
 
 module Mindee
   module HTTP
+    # API key's default environment key name.
     API_KEY_ENV_NAME = 'MINDEE_API_KEY'
+    # API key's default value.
     API_KEY_DEFAULT = nil
 
+    # Base URL default environment key name.
     BASE_URL_ENV_NAME = 'MINDEE_BASE_URL'
+    # Base URL's default value.
     BASE_URL_DEFAULT = 'https://api.mindee.net/v1'
 
+    # HTTP request timeout default environment key name.
     REQUEST_TIMEOUT_ENV_NAME = 'MINDEE_REQUEST_TIMEOUT'
+    # HTTP request timeout default value.
     TIMEOUT_DEFAULT = 120
 
+    # Default value for the user agent.
     USER_AGENT = "mindee-api-ruby@v#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
 
     # Generic API endpoint for a product.
