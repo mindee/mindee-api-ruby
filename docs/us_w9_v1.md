@@ -24,9 +24,6 @@ result = mindee_client.parse(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
-
-# Print the document-level parsed data
-# puts result.document.inference.prediction
 ```
 
 **Output (RST):**
