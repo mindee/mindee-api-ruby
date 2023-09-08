@@ -127,21 +127,19 @@ DOCUMENTS.each do |doc_key, doc_value|
     end
     if (doc_key != 'custom')
       opts.banner = "Product: #{doc_value[:description]}. \nUsage: mindee.rb #{doc_key} [options] file"
-      if doc_value[:async]
-        if doc_value[:sync]
-          opts.on("-A", "--async", "Call asynchronously") do |v|
-            options[:parse_async] = v
-          end
-        end
-      else
-      end
     else
       opts.banner = "#{doc_value[:description]}. \nUsage: mindee.rb custom [options] endpoint_name file"
       custom_subcommand(opts)
     end
+    if doc_value[:async]
+      if doc_value[:sync]
+        opts.on("-A", "--async", "Call asynchronously") do |v|
+          options[:parse_async] = v
+        end
+      end
+    end
   end
 end
-options[:parse_async] = false
 
 global_parser = OptionParser.new do | opts |
   opts.banner = "Usage: mindee.rb product [options] file"
@@ -191,6 +189,13 @@ else
 end
 
 page_options = options[:cut_pages].nil? ? nil : default_cutting
+if options[:parse_async].nil?
+  if !DOCUMENTS[command][:sync]
+    options[:parse_async] = true
+  else
+    options[:parse_async] = false
+  end
+end
 if options[:parse_async]
   result = mindee_client.enqueue_and_parse(
     input_source,
