@@ -146,6 +146,7 @@ customize the experience.
 * [FR ID Card OCR Ruby](https://developers.mindee.com/docs/fr-id-card-ocr-ruby)
 * [US Bank Check OCR Ruby](https://developers.mindee.com/docs/us-bank-check-ocr-ruby)
 * [US Driver License OCR Ruby](https://developers.mindee.com/docs/us-driver-license-ocr-ruby)
+* [US W9 API Ruby](https://developers.mindee.com/docs/us-w9-api-ruby)
 * [Cropper API Ruby](https://developers.mindee.com/docs/cropper-api-ruby)
 * [Invoice Splitter API Ruby](https://developers.mindee.com/docs/invoice-splitter-api-ruby)
 
