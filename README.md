@@ -116,6 +116,19 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
 end
 ```
 
+### CLI Tool
+
+A command-line interface tool is available to quickly test documents:
+```sh
+ruby ./bin/mindee.rb invoice path/to/your/file.ext
+```
+
+
+Using the ruby bundler:
+```sh
+bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
+```
+
 ## Further Reading
 There's more to it than that for those that need more features, or want to
 customize the experience.

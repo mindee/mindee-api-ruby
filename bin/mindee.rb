@@ -1,149 +1,217 @@
+# frozen_string_literal: true
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
 require 'optparse'
-
 require 'mindee'
 
 DOCUMENTS = {
   "custom" => {
-    help: "Custom document type from API builder",
-    prediction: Mindee::Product::Custom::CustomV1,
+    description: "Custom document type from API builder",
+    doc_class: Mindee::Product::Custom::CustomV1,
+    sync: true,
+    async: false,
   },
   "proof-of-address" => {
-    help: 'Proof of Address',
-    prediction: Mindee::Product::ProofOfAddress::ProofOfAddressV1,
+    description: 'Proof of Address',
+    doc_class: Mindee::Product::ProofOfAddress::ProofOfAddressV1,
+    sync: true,
+    async: false,
+  },
+  "cropper" => {
+    description: 'Cropper',
+    doc_class: Mindee::Product::Cropper::CropperV1,
+    sync: true,
+    async: false,
   },
   "financial-document" => {
-    help: 'Financial Document',
-    prediction: Mindee::Product::FinancialDocument::FinancialDocumentV1,
+    description: 'Financial Document',
+    doc_class: Mindee::Product::FinancialDocument::FinancialDocumentV1,
+    sync: true,
+    async: false,
   },
   "invoice" => {
-    help: 'Invoice',
-    prediction: Mindee::Product::Invoice::InvoiceV4,
+    description: 'Invoice',
+    doc_class: Mindee::Product::Invoice::InvoiceV4,
+    sync: true,
+    async: false,
   },
   "receipt" => {
-    help: "Expense Receipt",
-    prediction: Mindee::Product::Receipt::ReceiptV5,
+    description: "Expense Receipt",
+    doc_class: Mindee::Product::Receipt::ReceiptV5,
+    sync: true,
+    async: false,
   },
   "passport" => {
-    help: "Passport",
-    prediction: Mindee::Product::Passport::PassportV1,
+    description: "Passport",
+    doc_class: Mindee::Product::Passport::PassportV1,
+    sync: true,
+    async: false,
   },
   "eu-license-plate" => {
-    help: "EU License Plate",
-    prediction: Mindee::Product::EU::LicensePlate::LicensePlateV1,
+    description: "EU License Plate",
+    doc_class: Mindee::Product::EU::LicensePlate::LicensePlateV1,
+    sync: true,
+    async: false,
   },
   "fr-bank-account-details" => {
-    help: "FR Bank Account Details",
-    prediction: Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV1,
+    description: "FR Bank Account Details",
+    doc_class: Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2,
+    sync: true,
+    async: false,
   },
   "fr-carte-vitale" => {
-    help: "FR Carte Vitale",
-    prediction: Mindee::Product::FR::CarteVitale::CarteVitaleV1,
+    description: "FR Carte Vitale",
+    doc_class: Mindee::Product::FR::CarteVitale::CarteVitaleV1,
+    sync: true,
+    async: false,
   },
   "fr-id-card" => {
-    help: "FR ID Card",
-    prediction: Mindee::Product::FR::IdCard::IdCardV1,
+    description: "FR ID Card",
+    doc_class: Mindee::Product::FR::IdCard::IdCardV2,
+    sync: true,
+    async: false,
   },
   "us-bank-check" => {
-    help: "US Bank Check",
-    prediction: Mindee::Product::US::BankCheck::BankCheckV1,
+    description: "US Bank Check",
+    doc_class: Mindee::Product::US::BankCheck::BankCheckV1,
+    sync: true,
+    async: false,
+  },
+  "us-driver-license" => {
+    description: "US Driver License",
+    doc_class: Mindee::Product::US::DriverLicense::DriverLicenseV1,
+    sync: true,
+    async: false,
   },
   "invoice-splitter" => {
-    help: "US Bank Check",
-    prediction: Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
+    description: "US Bank Check",
+    doc_class: Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
+    sync: false,
+    async: true,
   },
 }
 
-options = {
-  api_key: '',
-  print_full: false,
-}
-
-def ots_subcommand(command, options)
-  OptionParser.new do |opt|
-    opt.banner = "Usage: #{command} [options] FILE"
-    opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
-      options[:api_key] = v
-    end
-    opt.on('-w', '--all-words', 'Include words in response') do |v|
-      options[:all_words] = v
-    end
-    opt.on('-c', '--cut-pages', "Cut document pages") do |v|
-      options[:cut_pages] = v
-    end
-  end
-end
-
-def custom_subcommand(options)
-  OptionParser.new do |opt|
-    opt.banner = "Usage: custom [options] ENDPOINT_NAME FILE"
-    opt.on('-w', '--all-words', 'Include words in response') do |v|
-      options[:all_words] = v
-    end
-    opt.on('-c', '--cut-pages', "Don't cut document pages") do |v|
-      options[:cut_pages] = v
-    end
-    opt.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
-      options[:api_key] = v
-    end
-    opt.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
-      options[:version] = v
-    end
-    opt.on('-a ACCOUNT_NAME', '--account ACCOUNT_NAME', 'API account name for the endpoint') do |v|
-      options[:account_name] = v
-    end
-  end
-end
-
-global_parser = OptionParser.new do |opt|
-  opt.banner = "Usage: #{$PROGRAM_NAME} [options] subcommand [options] FILE"
-  opt.separator('')
-  opt.separator("subcommands: #{DOCUMENTS.keys.join(', ')}")
-  opt.separator('')
-  opt.on('-f', '--full', "Print the full data, including pages") do |v|
-    options[:print_full] = true
-  end
-end
-
-global_parser.order!
-command = ARGV.shift
-if command == 'custom'
-  custom_subcommand(options).order!
-elsif DOCUMENTS.keys.include? command || ''
-  ots_subcommand(command, options).order!
-else
-  $stderr.puts global_parser
-  exit(1)
-end
-
-mindee_client = Mindee::Client.new(api_key: options[:api_key])
-
-if command == 'custom'
-  if ARGV.length != 2
-    $stderr.puts "The 'custom' command requires both ENDPOINT_NAME and FILE arguments."
-    exit(1)
-  end
-  doc_type = ARGV[0]
-  file_path = ARGV[1]
-else
-  if ARGV.length != 1
-    $stderr.puts 'No file specified.'
-    exit(1)
-  end
-  doc_type = ''
-  file_path = ARGV[0]
-end
-
-default_cutting = {
+options = {}
+DEFAULT_CUTTING = {
   page_indexes: [0, 1, 2, 3, 4],
   operation: :KEEP_ONLY,
   on_min_pages: 0,
 }
+
+# Initializes custom-specific options
+# @param cli_parser [OptionParser]
+def custom_subcommand(cli_parser)
+  cli_parser.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
+    options[:version] = v
+  end
+  cli_parser.on('-a ACCOUNT_NAME', '--account ACCOUNT_NAME', 'API account name for the endpoint') do |v|
+    options[:account_name] = v
+  end
+end
+
+product_parser = {}
+DOCUMENTS.each do |doc_key, doc_value|
+  product_parser[doc_key] = OptionParser.new do | opts |
+    opts.on('-w', '--all-words', 'Include words in response') do |v|
+      options[:all_words] = v
+    end
+    opts.on('-c', '--cut-pages', "Don't cut document pages") do |v|
+      options[:cut_pages] = v
+    end
+    opts.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
+      options[:api_key] = v
+    end
+    opts.on('-f', '--full', "Print the full data, including pages") do |v|
+      options[:print_full] = true
+    end
+    if (doc_key != 'custom')
+      opts.banner = "Product: #{doc_value[:description]}. \nUsage: mindee.rb #{doc_key} [options] file"
+    else
+      opts.banner = "#{doc_value[:description]}. \nUsage: mindee.rb custom [options] endpoint_name file"
+      custom_subcommand(opts)
+    end
+    if doc_value[:async]
+      if doc_value[:sync]
+        opts.on("-A", "--async", "Call asynchronously") do |v|
+          options[:parse_async] = v
+        end
+      end
+    end
+  end
+end
+
+global_parser = OptionParser.new do | opts |
+  opts.banner = "Usage: mindee.rb product [options] file"
+  opts.separator "Available products:"
+  opts.separator "  #{DOCUMENTS.keys.join("\n  ")}"
+end
+
+command = ARGV.shift
+if !DOCUMENTS.has_key?(command)
+  abort(global_parser.help)
+end
+doc_class = DOCUMENTS[command][:doc_class]
+product_parser[command].parse!
+
+if command == 'custom'
+  if ARGV.length < 2
+    $stderr.puts "The 'custom' command requires both ENDPOINT_NAME and file arguments."
+    abort(product_parser[command].help)
+  end
+  endpoint_name = ARGV[0]
+  options[:file_path] = ARGV[1]
+else
+  if ARGV.length < 1
+    $stderr.puts "file missing"
+    abort(product_parser[command].help)
+  end
+  endpoint_name = nil
+  options[:file_path] = ARGV[0]
+end
+
+mindee_client = Mindee::Client.new(api_key: options[:api_key])
+if (options[:file_path].start_with?("https://"))
+  input_source = mindee_client.source_from_url(options[:file_path])
+else
+  input_source = mindee_client.source_from_path(options[:file_path])
+end
+
+if command == 'custom'
+  endpoint_name = 'endpoint_name'
+  custom_endpoint = mindee_client.create_endpoint(
+    account_name: endpoint_name,
+    endpoint_name: options[:account_name],
+    endpoint_version: options[:endpoint_version].nil? ? "1" : options[:endpoint_version]
+  )
+else
+  custom_endpoint = nil
+end
+
 page_options = options[:cut_pages].nil? ? nil : default_cutting
-input_source = mindee_client.source_from_path(file_path)
-result = mindee_client.parse(input_source, DOCUMENTS[command][:prediction], page_options: page_options)
+if options[:parse_async].nil?
+  if !DOCUMENTS[command][:sync]
+    options[:parse_async] = true
+  else
+    options[:parse_async] = false
+  end
+end
+if options[:parse_async]
+  result = mindee_client.enqueue_and_parse(
+    input_source,
+    DOCUMENTS[command][:doc_class],
+    endpoint: custom_endpoint,
+    page_options: page_options,
+  )
+else
+  result = mindee_client.parse(
+    input_source,
+    DOCUMENTS[command][:doc_class],
+    endpoint: custom_endpoint,
+    page_options: page_options,
+  )
+end
+
 if options[:print_full]
   puts result.document
 else
