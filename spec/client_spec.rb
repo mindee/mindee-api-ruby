@@ -65,7 +65,7 @@ describe Mindee::Client do
       doc_class = Mindee::Product::Receipt::ReceiptV5
       expect do
         mindee_client1.parse(input_source, doc_class, all_words: false, close_file: true)
-      end.to raise_error Mindee::Parsing::Common::HttpError
+      end.to raise_error Mindee::HTTP::Error::HttpError
     end
 
     it 'should make an invalid API async enqueue call raising an exception' do
@@ -75,7 +75,7 @@ describe Mindee::Client do
       doc_class = Mindee::Product::Invoice::InvoiceV4
       expect do
         mindee_client1.enqueue(input_source, doc_class)
-      end.to raise_error Mindee::Parsing::Common::HttpError
+      end.to raise_error Mindee::HTTP::Error::HttpError
     end
 
     it 'should make an invalid API async parse call raising an exception' do
@@ -83,7 +83,7 @@ describe Mindee::Client do
       doc_class = Mindee::Product::InvoiceSplitter::InvoiceSplitterV1
       expect do
         mindee_client1.parse_queued('invalid-job-id', doc_class)
-      end.to raise_error Mindee::Parsing::Common::HttpError
+      end.to raise_error Mindee::HTTP::Error::HttpError
     end
   end
 end
