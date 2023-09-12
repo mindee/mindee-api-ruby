@@ -2,94 +2,102 @@
 
 module Mindee
   module HTTP
-    # Global HTTP error module.
+    # Mindee HTTP error module.
     module Error
+      module_function
+
+      # Creates an error object based on what's retrieved from a request.
+      # @param response [Hash] dictionary response retrieved by the server
+      def create_error_obj(response)
+        error_obj = response.respond_to?(:each_pair) ? response.dig('api_request', 'error') : nil
+        if error_obj.nil?
+          error_obj = if response.include?('Maximum pdf pages')
+                        {
+                          'code' => 'TooManyPages',
+                          'message' => 'Maximum amound of pdf pages reached.',
+                          'details' => response,
+                        }
+                      elsif response.include?('Max file size is')
+                        {
+                          'code' => 'FileTooLarge',
+                          'message' => 'Maximum file size reached.',
+                          'details' => response,
+                        }
+                      elsif response.include?('Invalid file type')
+                        {
+                          'code' => 'InvalidFiletype',
+                          'message' => 'Invalid file type.',
+                          'details' => response,
+                        }
+                      elsif response.include?('Gateway timeout')
+                        {
+                          'code' => 'RequestTimeout',
+                          'message' => 'Request timed out.',
+                          'details' => response,
+                        }
+                      elsif response.include?('Too Many Requests')
+                        {
+                          'code' => 'TooManyRequests',
+                          'message' => 'Too Many Requests.',
+                          'details' => response,
+                        }
+                      else
+                        {
+                          'code' => 'UnknownError',
+                          'message' => 'Server sent back an unexpected reply.',
+                          'details' => response,
+                        }
+                      end
+
+        end
+        error_obj
+      end
+
       # Creates an appropriate HTTP error exception, based on retrieved http error code
       # @param url [String] the url of the product
       # @param response [Hash] dictionary response retrieved by the server
       # @param code [Integer] http error code of the response
-      # @param server_error [String] potential error message to be given to the error.
-      def handle_error(url, response, code: nil, server_error: nil); end
+      def handle_error!(url, response, code)
+        error_obj = create_error_obj(response)
+        case code
+        when 400..499
+          MindeeHttpClientError.new(error_obj, url, code)
+        when 500..599
+          MindeeHttpServerError.new(error_obj, url, code)
+        else
+          MindeeHttpError.new(error_obj, url, code)
+        end
+      end
 
       # API HttpError
-      class HttpError < StandardError
+      class MindeeHttpError < StandardError
+        # @return [String]
+        attr_reader :status_code
         # @return [String]
         attr_reader :api_code
         # @return [String]
         attr_reader :api_details
         # @return [String]
         attr_reader :api_message
-        # @return [String]
-        attr_reader :name
 
-        def initialize(http_error, _url, code)
-          @api_code = code
+        # @param http_error [Hash]
+        # @param url [String]
+        # @param code [Integer]
+        def initialize(http_error, url, code)
+          @status_code = code
+          @api_code = http_error['code']
           @api_details = http_error['details']
           @api_message = http_error['message']
-          @name = name
-          super("#{@api_code}: #{@api_details} - #{@api_message}")
+          super("#{url} #{@status_code} HTTP error: #{@api_details} - #{@api_message}")
         end
       end
 
-      # Generic client errors.
-      # Can include errors like InvalidQuery.
-      class Http400Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp400Error'
-        end
+      # API client HttpError
+      class MindeeHttpClientError < MindeeHttpError
       end
 
-      # Can include errors like NoTokenSet or InvalidToken.
-      class Http401Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp401Error'
-        end
-      end
-
-      # Regular AccessForbidden error.
-      # Can also include errors like PlanLimitReached, AsyncRequestDisallowed or SyncRequestDisallowed.
-      class Http403Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp403Error'
-        end
-      end
-
-      # Uncommon error.
-      # Can occasionally happen when unusually large documents are passed.
-      class Http413Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp413Error'
-        end
-      end
-
-      # Usually corresponds to TooManyRequests errors.
-      # Arises whenever too many calls to the API are made in quick succession.
-      class Http429Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp429Error'
-        end
-      end
-
-      # Generic server errors.
-      class Http500Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp500Error'
-        end
-      end
-
-      # Miscellaneous server errors.
-      # Can include errors like RequestTimeout or GatewayTimeout.
-      class Http504Error < HttpError
-        def initialize(http_error, url, code)
-          super(http_error, url, code)
-          @name = 'MindeeHttp504Error'
-        end
+      # API server HttpError
+      class MindeeHttpServerError < MindeeHttpError
       end
     end
   end
