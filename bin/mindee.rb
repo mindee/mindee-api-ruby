@@ -84,6 +84,12 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
+  "us-w9" => {
+    description: "US W9 Form",
+    doc_class: Mindee::Product::US::W9::W9V1,
+    sync: true,
+    async: false
+  },
   "invoice-splitter" => {
     description: "US Bank Check",
     doc_class: Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
