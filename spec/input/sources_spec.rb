@@ -84,7 +84,7 @@ describe Mindee::Input::Source do
       source_doc_original = mindee_client.source_from_path("#{DATA_DIR}/products/invoices/invoice.pdf")
       expect do
         source_doc_fixed = mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_invoice.pdf",
-                                                                fix_pdf: true)
+                                                          fix_pdf: true)
         expect(source_doc_fixed.read_document[1].to_s).to eq(source_doc_original.read_document[1].to_s)
       end.not_to raise_error
     end

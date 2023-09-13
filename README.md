@@ -116,7 +116,7 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
 end
 ```
 
-### CLI Tool
+## CLI Tool
 
 A command-line interface tool is available to quickly test documents:
 ```sh
@@ -128,16 +128,6 @@ Using the ruby bundler:
 ```sh
 bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
 ```
-
-### 🧪 Experimental Features
-
-#### PDF fix
-
-Some pdf files might appear fine on your computer, but not on the server.
-This _experimental_ feature attempts to fix the file's header information before sending it to the server.
-
-> ⚠️ **Warning**: This feature copies your file and then **alters** it. The original file will be left alone, but the copy might get partially corrupted, and improperly parsed as a result. Use at your own discretion.
-
 
 ## Further Reading
 There's more to it than that for those that need more features, or want to
