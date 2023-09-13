@@ -8,7 +8,6 @@ require_relative '../pdf'
 module Mindee
   module Input
     module Source
-
       # Mime types accepted by the server.
       ALLOWED_MIME_TYPES = [
         'application/pdf',
@@ -37,8 +36,7 @@ module Mindee
 
       # Error sent if a pdf file couldn't be fixed
       class UnfixablePDFError < MimeTypeError
-
-        def initialize()
+        def initialize
           super("Corrupted PDF couldn't be repaired.")
         end
       end
@@ -58,11 +56,11 @@ module Mindee
         def initialize(io_stream, filename, fix_pdf: false)
           @io_stream = io_stream
           @filename = filename
-          if fix_pdf
-            @file_mimetype = Marcel::MimeType.for @io_stream 
-          else
-            @file_mimetype = Marcel::MimeType.for @io_stream, name: @filename
-          end
+          @file_mimetype = if fix_pdf
+                             Marcel::MimeType.for @io_stream
+                           else
+                             Marcel::MimeType.for @io_stream, name: @filename
+                           end
           return if ALLOWED_MIME_TYPES.include? @file_mimetype
 
           if filename.end_with?('.pdf') && fix_pdf
@@ -72,7 +70,7 @@ module Mindee
             return if ALLOWED_MIME_TYPES.include? @file_mimetype
           end
 
-          raise InvalidMimeTypeError.new(@file_mimetype.to_s)
+          raise InvalidMimeTypeError, @file_mimetype.to_s
         end
 
         # Attempts to fix pdf files if mimetype is rejected.
@@ -81,7 +79,7 @@ module Mindee
         # @param stream [StringIO]
         def rescue_broken_pdf(stream)
           stream.gets('%PDF-')
-          raise UnfixablePDFError.new if stream.eof? || stream.pos > 500
+          raise UnfixablePDFError if stream.eof? || stream.pos > 500
 
           stream.pos = stream.pos - 5
           data = stream.read
