@@ -305,7 +305,7 @@ end
 
 ### PDF repair
 
-Some pdf files might appear fine on your computer, but not on the server.
+Some PDF files might appear fine on your computer, but can be rejected by the server.
 This _experimental_ feature attempts to fix the file's header information before sending it to the server.
 
 > ⚠️ **Warning**: This feature copies your file and then **alters** it. The original file will be left alone, but the copy might get partially corrupted, and improperly parsed as a result. Use at your own discretion.
@@ -316,9 +316,7 @@ To enable it, simply set the `fix_pdf` flag to `true` during source creation:
 input_source = mindee_client.source_from_file(input_file, "name-of-my-file.ext", fix_pdf: true)
 ```
 
-Alternatively, you can use it through the CLI by setting the `-F` or `--fix-pdf` flag.
-
-Note: Not applicable for documents sent through url.
+Note: This only works for local files, files sent by URL will not be processed.
 
 ## Questions?
 [Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)
