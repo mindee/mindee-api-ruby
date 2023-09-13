@@ -149,6 +149,7 @@ customize the experience.
 * [US W9 API Ruby](https://developers.mindee.com/docs/us-w9-api-ruby)
 * [Cropper API Ruby](https://developers.mindee.com/docs/cropper-api-ruby)
 * [Invoice Splitter API Ruby](https://developers.mindee.com/docs/invoice-splitter-api-ruby)
+* [Multi Receipts Detector API Ruby](https://developers.mindee.com/docs/multi-receipts-detector-api-ruby)
 
 
 You can also take a look at the
