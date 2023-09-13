@@ -2,6 +2,7 @@
 
 require 'json'
 require 'net/http'
+require_relative 'error'
 require_relative '../version'
 
 module Mindee
@@ -52,7 +53,7 @@ module Mindee
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
-        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
+        error = Error.handle_error!(@url_name, hashed_response, response.code.to_i)
         raise error
       end
 
@@ -67,7 +68,7 @@ module Mindee
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
-        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
+        error = Error.handle_error!(@url_name, hashed_response, response.code.to_i)
         raise error
       end
 
@@ -80,7 +81,7 @@ module Mindee
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
-        error = Parsing::Common::HttpError.new(hashed_response['api_request']['error'])
+        error = Error.handle_error!(@url_name, hashed_response, response.code.to_i)
         raise error
       end
 
