@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'product/barcode_reader/barcode_reader_v1'
 require_relative 'product/custom/custom_v1'
 require_relative 'product/proof_of_address/proof_of_address_v1'
 require_relative 'product/financial_document/financial_document_v1'
