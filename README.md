@@ -116,7 +116,7 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
 end
 ```
 
-### CLI Tool
+## CLI Tool
 
 A command-line interface tool is available to quickly test documents:
 ```sh

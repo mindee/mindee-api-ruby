@@ -131,6 +131,9 @@ DOCUMENTS.each do |doc_key, doc_value|
     opts.on('-f', '--full', "Print the full data, including pages") do |v|
       options[:print_full] = true
     end
+    opts.on('-F', '--fix-pdf', "Attempts to fix broken PDF files before sending them to the server.") do |v|
+      options[:fix_pdf] = true
+    end
     if (doc_key != 'custom')
       opts.banner = "Product: #{doc_value[:description]}. \nUsage: mindee.rb #{doc_key} [options] file"
     else
@@ -180,7 +183,7 @@ mindee_client = Mindee::Client.new(api_key: options[:api_key])
 if (options[:file_path].start_with?("https://"))
   input_source = mindee_client.source_from_url(options[:file_path])
 else
-  input_source = mindee_client.source_from_path(options[:file_path])
+  input_source = mindee_client.source_from_path(options[:file_path], fix_pdf: options[:fix_pdf])
 end
 
 if command == 'custom'

@@ -18,24 +18,75 @@ module Mindee
         'image/webp',
       ].freeze
 
+      # Standard error for invalid mime types
+      class MimeTypeError < StandardError
+      end
+
+      # Error sent if the file's mimetype isn't allowed
+      class InvalidMimeTypeError < MimeTypeError
+        # @return [String]
+        attr_reader :invalid_mimetype
+
+        # @param mime_type [String]
+        def initialize(mime_type)
+          @invalid_mimetype = mime_type
+          super("'#{@invalid_mimetype}' mime type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}")
+        end
+      end
+
+      # Error sent if a pdf file couldn't be fixed
+      class UnfixablePDFError < MimeTypeError
+        def initialize
+          super("Corrupted PDF couldn't be repaired.")
+        end
+      end
+
       # Base class for loading documents.
       class LocalInputSource
         # @return [String]
         attr_reader :filename
         # @return [String]
         attr_reader :file_mimetype
-        # @return [StreamIO]
+        # @return [StringIO]
         attr_reader :io_stream
 
-        # @param io_stream [StreamIO]
-        def initialize(io_stream, filename)
+        # @param io_stream [StringIO]
+        # @param filename [String]
+        # @param fix_pdf [Boolean]
+        def initialize(io_stream, filename, fix_pdf: false)
           @io_stream = io_stream
           @filename = filename
-          @file_mimetype = Marcel::MimeType.for @io_stream, name: @filename
-
+          @file_mimetype = if fix_pdf
+                             Marcel::MimeType.for @io_stream
+                           else
+                             Marcel::MimeType.for @io_stream, name: @filename
+                           end
           return if ALLOWED_MIME_TYPES.include? @file_mimetype
 
-          raise "File type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}"
+          if filename.end_with?('.pdf') && fix_pdf
+            rescue_broken_pdf(@io_stream)
+            @file_mimetype = Marcel::MimeType.for @io_stream
+
+            return if ALLOWED_MIME_TYPES.include? @file_mimetype
+          end
+
+          raise InvalidMimeTypeError, @file_mimetype.to_s
+        end
+
+        # Attempts to fix pdf files if mimetype is rejected.
+        # "Broken PDFs" are often a result of third-party injecting invalid headers.
+        # This attempts to remove them and send the file
+        # @param stream [StringIO]
+        def rescue_broken_pdf(stream)
+          stream.gets('%PDF-')
+          raise UnfixablePDFError if stream.eof? || stream.pos > 500
+
+          stream.pos = stream.pos - 5
+          data = stream.read
+          @io_stream.close
+
+          @io_stream = StringIO.new
+          @io_stream << data
         end
 
         # Shorthand for pdf mimetype validation.
@@ -74,9 +125,10 @@ module Mindee
       # Load a document from a path.
       class PathInputSource < LocalInputSource
         # @param filepath [String]
-        def initialize(filepath)
+        # @param fix_pdf [Boolean]
+        def initialize(filepath, fix_pdf: false)
           io_stream = File.open(filepath, 'rb')
-          super(io_stream, File.basename(filepath))
+          super(io_stream, File.basename(filepath), fix_pdf: fix_pdf)
         end
       end
 
@@ -84,10 +136,11 @@ module Mindee
       class Base64InputSource < LocalInputSource
         # @param base64_string [String]
         # @param filename [String]
-        def initialize(base64_string, filename)
+        # @param fix_pdf [Boolean]
+        def initialize(base64_string, filename, fix_pdf: false)
           io_stream = StringIO.new(base64_string.unpack1('m*'))
           io_stream.set_encoding Encoding::BINARY
-          super(io_stream, filename)
+          super(io_stream, filename, fix_pdf: fix_pdf)
         end
       end
 
@@ -95,19 +148,22 @@ module Mindee
       class BytesInputSource < LocalInputSource
         # @param raw_bytes [String]
         # @param filename [String]
-        def initialize(raw_bytes, filename)
+        # @param fix_pdf [Boolean]
+        def initialize(raw_bytes, filename, fix_pdf: false)
           io_stream = StringIO.new(raw_bytes)
           io_stream.set_encoding Encoding::BINARY
-          super(io_stream, filename)
+          super(io_stream, filename, fix_pdf: fix_pdf)
         end
       end
 
       # Load a document from a file handle.
       class FileInputSource < LocalInputSource
+        # @param file_handle [String]
         # @param filename [String]
-        def initialize(file_handle, filename)
+        # @param fix_pdf [Boolean]
+        def initialize(file_handle, filename, fix_pdf: false)
           io_stream = file_handle
-          super(io_stream, filename)
+          super(io_stream, filename, fix_pdf: fix_pdf)
         end
       end
 
