@@ -31,7 +31,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
         # List of company registrations associated to the supplier.
-        # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
+        # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
         # The name of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
@@ -74,7 +74,7 @@ module Mindee
           @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
-            @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
+            @supplier_company_registrations.push(CompanyRegistrationField.new(item, page_id))
           end
           @supplier_name = StringField.new(prediction['supplier_name'], page_id)
           @supplier_phone_number = StringField.new(prediction['supplier_phone_number'], page_id)

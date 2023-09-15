@@ -147,8 +147,10 @@ customize the experience.
 * [US Bank Check OCR Ruby](https://developers.mindee.com/docs/us-bank-check-ocr-ruby)
 * [US Driver License OCR Ruby](https://developers.mindee.com/docs/us-driver-license-ocr-ruby)
 * [US W9 API Ruby](https://developers.mindee.com/docs/us-w9-api-ruby)
+* [Barcode Reader API Ruby](https://developers.mindee.com/docs/barcode-reader-api-ruby)
 * [Cropper API Ruby](https://developers.mindee.com/docs/cropper-api-ruby)
 * [Invoice Splitter API Ruby](https://developers.mindee.com/docs/invoice-splitter-api-ruby)
+* [Multi Receipts Detector API Ruby](https://developers.mindee.com/docs/multi-receipts-detector-api-ruby)
 
 
 You can also take a look at the
