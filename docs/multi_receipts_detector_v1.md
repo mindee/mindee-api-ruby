@@ -1,10 +1,10 @@
 ---
-title: Cropper API Ruby
+title: Multi Receipts Detector API Ruby
 ---
-The Ruby OCR SDK supports the [Cropper API](https://platform.mindee.com/mindee/cropper).
+The Ruby OCR SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
-![Cropper sample](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg?raw=true)
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+![Multi Receipts Detector sample](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
@@ -19,7 +19,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::Cropper::CropperV1
+  Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1
 )
 
 # Print a full summary of the parsed data in RST format
@@ -34,25 +34,34 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 149ce775-8302-4798-8649-7eda9fb84a1a
+:Mindee ID: d7c5b25f-e0d3-4491-af54-6183afa1aaab
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/cropper v1.0
-:Rotation applied: No
+:Product: mindee/multi_receipts_detector v1.0
+:Rotation applied: Yes
 
 Prediction
 ==========
-:Cropping:
+:List of Receipts: Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
 
 Page Predictions
 ================
 
 Page 0
 ------
-:Cropping: Polygon with 26 points.
-           Polygon with 25 points.
+:List of Receipts: Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
+                   Polygon with 4 points.
 ```
 
 # Field Types
@@ -80,20 +89,15 @@ The position field `PositionField` does not implement all the basic `Field` attr
 * **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond canvas).
 * **quadrangle** (`Mindee::Geometry::Quadrilateral`): a free polygon made up of four points.
 
-## Page-Level Fields
-Some fields are constrained to the page level, and so will not be retrievable to through the document.
-
 # Attributes
-The following fields are extracted for Cropper V1:
+The following fields are extracted for Multi Receipts Detector V1:
 
-## Document Cropper
-[📄](#page-level-fields "This field is only present on individual pages.")**cropping** (Array<[PositionField](#position-field)>): List of documents found in the image.
+## List of Receipts
+**receipts** (Array<[PositionField](#position-field)>): Positions of the receipts on the document.
 
 ```rb
-for page in result.document.inference.pages do
-  for cropping_elem in page.prediction.cropping do
-    puts cropping_elem.polygon
-  end
+for receipts_elem in result.document.inference.prediction.receipts do
+  puts receipts_elem.polygon
 end
 ```
 
