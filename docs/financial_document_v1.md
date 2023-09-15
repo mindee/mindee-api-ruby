@@ -230,7 +230,7 @@ for customer_company_registrations_elem in result.document.inference.prediction.
 end
 ```
 
-## Customer name
+## Customer Name
 **customer_name** ([StringField](#string-field)): The name of the customer.
 
 ```rb

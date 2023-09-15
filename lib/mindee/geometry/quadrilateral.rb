@@ -40,6 +40,11 @@ module Mindee
           throw '0, 1, 2, 3 only'
         end
       end
+
+      # A quadrilateral has four corners, always.
+      def size
+        4
+      end
     end
   end
 end

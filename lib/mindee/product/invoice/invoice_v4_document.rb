@@ -47,7 +47,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
         # The company registration information for the customer.
-        # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
+        # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :customer_company_registrations
         # The supplier's name.
         # @return [Mindee::Parsing::Standard::StringField]
@@ -59,7 +59,7 @@ module Mindee
         # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
         attr_reader :supplier_payment_details
         # The supplier's company registration information.
-        # @return [Array<Mindee::Parsing::Standard::CompanyRegistration>]
+        # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
         # Line items details.
         # @return [Array<Mindee::InvoiceV4LineItem>]
@@ -86,7 +86,7 @@ module Mindee
           end
           @customer_company_registrations = []
           prediction['customer_company_registrations'].each do |item|
-            @customer_company_registrations.push(CompanyRegistration.new(item, page_id))
+            @customer_company_registrations.push(CompanyRegistrationField.new(item, page_id))
           end
           @taxes = Taxes.new(prediction['taxes'], page_id)
           @supplier_payment_details = []
@@ -95,7 +95,7 @@ module Mindee
           end
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
-            @supplier_company_registrations.push(CompanyRegistration.new(item, page_id))
+            @supplier_company_registrations.push(CompanyRegistrationField.new(item, page_id))
           end
           @total_tax = AmountField.new(
             { value: nil, confidence: 0.0 }, page_id
