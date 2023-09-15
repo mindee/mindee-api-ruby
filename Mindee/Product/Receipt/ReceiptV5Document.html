@@ -247,7 +247,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#locale-instance_method" title="#locale (instance method)">#<strong>locale</strong>  &#x21d2; Mindee::Parsing::Standard::Locale </a>
+      <a href="#locale-instance_method" title="#locale (instance method)">#<strong>locale</strong>  &#x21d2; Mindee::Parsing::Standard::LocaleField </a>
     
 
     
@@ -305,7 +305,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#supplier_address-instance_method" title="#supplier_address (instance method)">#<strong>supplier_address</strong>  &#x21d2; Mindee::Parsing::Standard::TextField </a>
+      <a href="#supplier_address-instance_method" title="#supplier_address (instance method)">#<strong>supplier_address</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
     
 
     
@@ -334,7 +334,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#supplier_company_registrations-instance_method" title="#supplier_company_registrations (instance method)">#<strong>supplier_company_registrations</strong>  &#x21d2; Array&lt;Mindee::Parsing::Standard::CompanyRegistration&gt; </a>
+      <a href="#supplier_company_registrations-instance_method" title="#supplier_company_registrations (instance method)">#<strong>supplier_company_registrations</strong>  &#x21d2; Array&lt;Mindee::Parsing::Standard::CompanyRegistrationField&gt; </a>
     
 
     
@@ -363,7 +363,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#supplier_name-instance_method" title="#supplier_name (instance method)">#<strong>supplier_name</strong>  &#x21d2; Mindee::Parsing::Standard::TextField </a>
+      <a href="#supplier_name-instance_method" title="#supplier_name (instance method)">#<strong>supplier_name</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
     
 
     
@@ -392,7 +392,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#supplier_phone_number-instance_method" title="#supplier_phone_number (instance method)">#<strong>supplier_phone_number</strong>  &#x21d2; Mindee::Parsing::Standard::TextField </a>
+      <a href="#supplier_phone_number-instance_method" title="#supplier_phone_number (instance method)">#<strong>supplier_phone_number</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
     
 
     
@@ -450,7 +450,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#time-instance_method" title="#time (instance method)">#<strong>time</strong>  &#x21d2; Mindee::Parsing::Standard::TextField </a>
+      <a href="#time-instance_method" title="#time (instance method)">#<strong>time</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
     
 
     
@@ -761,17 +761,17 @@
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>line_items</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
     <span class='ivar'>@line_items</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ReceiptV5LineItem.html" title="Mindee::Product::Receipt::ReceiptV5LineItem (class)">ReceiptV5LineItem</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ReceiptV5LineItem.html#initialize-instance_method" title="Mindee::Product::Receipt::ReceiptV5LineItem#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
-  <span class='ivar'>@locale</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Locale.html" title="Mindee::Parsing::Standard::Locale (class)">Locale</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Locale.html#initialize-instance_method" title="Mindee::Parsing::Standard::Locale#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>locale</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@locale</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/LocaleField.html" title="Mindee::Parsing::Standard::LocaleField (class)">LocaleField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/LocaleField.html#initialize-instance_method" title="Mindee::Parsing::Standard::LocaleField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>locale</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@subcategory</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">ClassificationField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>subcategory</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@supplier_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@supplier_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@supplier_company_registrations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_company_registrations</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
-    <span class='ivar'>@supplier_company_registrations</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/CompanyRegistration.html" title="Mindee::Parsing::Standard::CompanyRegistration (class)">CompanyRegistration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/CompanyRegistration.html#initialize-instance_method" title="Mindee::Parsing::Standard::CompanyRegistration#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='ivar'>@supplier_company_registrations</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/CompanyRegistrationField.html" title="Mindee::Parsing::Standard::CompanyRegistrationField (class)">CompanyRegistrationField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/CompanyRegistrationField.html#initialize-instance_method" title="Mindee::Parsing::Standard::CompanyRegistrationField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
-  <span class='ivar'>@supplier_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@supplier_phone_number</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_phone_number</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@supplier_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@supplier_phone_number</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_phone_number</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@taxes</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Taxes.html" title="Mindee::Parsing::Standard::Taxes (class)">Taxes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Taxes.html#initialize-instance_method" title="Mindee::Parsing::Standard::Taxes#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>taxes</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@time</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">TextField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>time</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@time</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>time</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@tip</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html" title="Mindee::Parsing::Standard::AmountField (class)">AmountField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html#initialize-instance_method" title="Mindee::Parsing::Standard::AmountField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>tip</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@total_amount</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html" title="Mindee::Parsing::Standard::AmountField (class)">AmountField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html#initialize-instance_method" title="Mindee::Parsing::Standard::AmountField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_amount</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@total_net</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html" title="Mindee::Parsing::Standard::AmountField (class)">AmountField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html#initialize-instance_method" title="Mindee::Parsing::Standard::AmountField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_net</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
@@ -1016,7 +1016,7 @@
       <div class="method_details ">
   <h3 class="signature " id="locale-instance_method">
   
-    #<strong>locale</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/Locale.html" title="Mindee::Parsing::Standard::Locale (class)">Mindee::Parsing::Standard::Locale</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>locale</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/LocaleField.html" title="Mindee::Parsing::Standard::LocaleField (class)">Mindee::Parsing::Standard::LocaleField</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1038,7 +1038,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/Locale.html" title="Mindee::Parsing::Standard::Locale (class)">Mindee::Parsing::Standard::Locale</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/LocaleField.html" title="Mindee::Parsing::Standard::LocaleField (class)">Mindee::Parsing::Standard::LocaleField</a></span></tt>)</span>
       
       
       
@@ -1128,7 +1128,7 @@
       <div class="method_details ">
   <h3 class="signature " id="supplier_address-instance_method">
   
-    #<strong>supplier_address</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>supplier_address</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1150,7 +1150,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
       
       
       
@@ -1184,7 +1184,7 @@
       <div class="method_details ">
   <h3 class="signature " id="supplier_company_registrations-instance_method">
   
-    #<strong>supplier_company_registrations</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/CompanyRegistration.html" title="Mindee::Parsing::Standard::CompanyRegistration (class)">Mindee::Parsing::Standard::CompanyRegistration</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+    #<strong>supplier_company_registrations</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/CompanyRegistrationField.html" title="Mindee::Parsing::Standard::CompanyRegistrationField (class)">Mindee::Parsing::Standard::CompanyRegistrationField</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1206,7 +1206,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/CompanyRegistration.html" title="Mindee::Parsing::Standard::CompanyRegistration (class)">Mindee::Parsing::Standard::CompanyRegistration</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/CompanyRegistrationField.html" title="Mindee::Parsing::Standard::CompanyRegistrationField (class)">Mindee::Parsing::Standard::CompanyRegistrationField</a></span>&gt;</tt>)</span>
       
       
       
@@ -1240,7 +1240,7 @@
       <div class="method_details ">
   <h3 class="signature " id="supplier_name-instance_method">
   
-    #<strong>supplier_name</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>supplier_name</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1262,7 +1262,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
       
       
       
@@ -1296,7 +1296,7 @@
       <div class="method_details ">
   <h3 class="signature " id="supplier_phone_number-instance_method">
   
-    #<strong>supplier_phone_number</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>supplier_phone_number</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1318,7 +1318,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
       
       
       
@@ -1408,7 +1408,7 @@
       <div class="method_details ">
   <h3 class="signature " id="time-instance_method">
   
-    #<strong>time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1430,7 +1430,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/TextField.html" title="Mindee::Parsing::Standard::TextField (class)">Mindee::Parsing::Standard::TextField</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
       
       
       
@@ -1787,7 +1787,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 09:09:38 2023 by
+  Generated on Fri Sep 15 16:58:34 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

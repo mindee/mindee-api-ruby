@@ -81,7 +81,7 @@
 
 <p>And then execute:</p>
 
-<pre class="code ruby"><code class="ruby">$ bundle install
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
 </code></pre>
 
 <p>Finally, Ruby away!</p>
@@ -104,6 +104,28 @@
 
 <span class='comment'># Print a full summary of the parsed data in RST format
 </span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_document'>document</span>
+</code></pre>
+
+<p><strong>Note:</strong> Files can also be loaded from:</p>
+
+<p>A URL (<code>https</code>):</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_url'>source_from_url</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://my-url</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>A bytes input stream:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_bytes'>source_from_bytes</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name-of-my-file.ext</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>A base64 encoded string:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_b64string'>source_from_b64string</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name-of-my-file.ext</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>A ruby <code>file</code> object:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_file'>source_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name-of-my-file.ext</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 </code></pre>
 
 <h4 id="label-Region-Specific+Documents">Region-Specific Documents</h4>
@@ -156,19 +178,57 @@
 <span class='kw'>end</span>
 </code></pre>
 
+<h2 id="label-CLI+Tool">CLI Tool</h2>
+
+<p>A command-line interface tool is available to quickly test documents:</p>
+
+<pre class="code ruby"><code class="ruby">ruby ./bin/mindee.rb invoice path/to/your/file.ext
+</code></pre>
+
+<p>Using the ruby bundler:</p>
+
+<pre class="code ruby"><code class="ruby">bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
+</code></pre>
+
 <h2 id="label-Further+Reading">Further Reading</h2>
 
 <p>There’s more to it than that for those that need more features, or want to customize the experience.</p>
 <ul><li>
-<p><a href="https://developers.mindee.com/docs/ruby-getting-started">Ruby Overview</a></p>
+<p><a href="https://developers.mindee.com/docs/getting-started-ocr-ruby">Ruby Overview</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-api-builder">Ruby Custom APIs OCR</a></p>
+<p><a href="https://developers.mindee.com/docs/api-builder-ocr-ruby">Custom OCR Ruby</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-invoice-ocr">Ruby invoices OCR</a></p>
+<p><a href="https://developers.mindee.com/docs/invoice-ocr-ruby">Invoice OCR Ruby</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-receipt-ocr">Ruby receipts OCR</a></p>
+<p><a href="https://developers.mindee.com/docs/financial-document-ocr-ruby">Financial Document OCR Ruby</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-passport-ocr">Ruby passports OCR</a></p>
+<p><a href="https://developers.mindee.com/docs/passport-ocr-ruby">Passport OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/proof-of-address-ocr-ruby">Proof of Address OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/receipt-ocr-ruby">Receipt OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/eu-license-plate-ocr-ruby">EU License Plate OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/fr-bank-account-details-ocr-ruby">FR Bank Account Details OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/fr-carte-vitale-ocr-ruby">FR Carte Vitale OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/fr-id-card-ocr-ruby">FR ID Card OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/us-bank-check-ocr-ruby">US Bank Check OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/us-driver-license-ocr-ruby">US Driver License OCR Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/us-w9-api-ruby">US W9 API Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/barcode-reader-api-ruby">Barcode Reader API Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/cropper-api-ruby">Cropper API Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/invoice-splitter-api-ruby">Invoice Splitter API Ruby</a></p>
+</li><li>
+<p><a href="https://developers.mindee.com/docs/multi-receipts-detector-api-ruby">Multi Receipts Detector API Ruby</a></p>
 </li></ul>
 
 <p>You can also take a look at the <a href="https://mindee.github.io/mindee-api-ruby/">Reference Documentation</a>.</p>
@@ -185,7 +245,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Thu Aug 10 09:09:35 2023 by
+  Generated on Fri Sep 15 16:58:30 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

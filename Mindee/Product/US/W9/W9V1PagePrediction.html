@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Mindee::Product::US::W9::W9V1PagePrediction
+  
+    &mdash; Documentation by YARD 0.9.34
+  
+</title>
+
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Mindee::Product::US::W9::W9V1PagePrediction";
+  relpath = '../../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../../_index.html">Index (W)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Product.html" title="Mindee::Product (module)">Product</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../US.html" title="Mindee::Product::US (module)">US</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../W9.html" title="Mindee::Product::US::W9 (module)">W9</a></span></span>
+     &raquo; 
+    <span class="title">W9V1PagePrediction</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Mindee::Product::US::W9::W9V1PagePrediction
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="W9V1Document.html" title="Mindee::Product::US::W9::W9V1Document (class)">W9V1Document</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../../../Parsing/Common/Prediction.html" title="Mindee::Parsing::Common::Prediction (class)">Mindee::Parsing::Common::Prediction</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="W9V1Document.html" title="Mindee::Product::US::W9::W9V1Document (class)">W9V1Document</a></span></li>
+          
+            <li class="next">Mindee::Product::US::W9::W9V1PagePrediction</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Mindee::Parsing::Standard</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/mindee/product/us/w9/w9_v1_page.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>US W9 V1 page prediction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#address-instance_method" title="#address (instance method)">#<strong>address</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The street address (number, street, and apt. or suite no.) of the applicant.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#business_name-instance_method" title="#business_name (instance method)">#<strong>business_name</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The business name or disregarded entity name, if different from Name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#city_state_zip-instance_method" title="#city_state_zip (instance method)">#<strong>city_state_zip</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The city, state, and ZIP code of the applicant.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ein-instance_method" title="#ein (instance method)">#<strong>ein</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The employer identification number.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Name as shown on the applicant’s income tax return.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signature_date_position-instance_method" title="#signature_date_position (instance method)">#<strong>signature_date_position</strong>  &#x21d2; Mindee::Parsing::Standard::PositionField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Position of the signature date on the document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signature_position-instance_method" title="#signature_position (instance method)">#<strong>signature_position</strong>  &#x21d2; Mindee::Parsing::Standard::PositionField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Position of the signature on the document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ssn-instance_method" title="#ssn (instance method)">#<strong>ssn</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The applicant’s social security number.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tax_classification-instance_method" title="#tax_classification (instance method)">#<strong>tax_classification</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The federal tax classification, which can vary depending on the revision date.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tax_classification_llc-instance_method" title="#tax_classification_llc (instance method)">#<strong>tax_classification_llc</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Depending on revision year, among S, C, P or D for Limited Liability Company Classification.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tax_classification_other_details-instance_method" title="#tax_classification_other_details (instance method)">#<strong>tax_classification_other_details</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Tax Classification Other Details.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#w9_revision_date-instance_method" title="#w9_revision_date (instance method)">#<strong>w9_revision_date</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The Revision month and year of the W9 form.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(prediction, page_id)  &#x21d2; W9V1PagePrediction </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of W9V1PagePrediction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(prediction, page_id)  &#x21d2; <tt><span class='object_link'><a href="" title="Mindee::Product::US::W9::W9V1PagePrediction (class)">W9V1PagePrediction</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of W9V1PagePrediction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>prediction</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@business_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>business_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@city_state_zip</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>city_state_zip</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@ein</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ein</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@signature_date_position</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html" title="Mindee::Parsing::Standard::PositionField (class)">PositionField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html#initialize-instance_method" title="Mindee::Parsing::Standard::PositionField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>signature_date_position</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@signature_position</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html" title="Mindee::Parsing::Standard::PositionField (class)">PositionField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html#initialize-instance_method" title="Mindee::Parsing::Standard::PositionField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>signature_position</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@ssn</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ssn</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@tax_classification</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>tax_classification</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@tax_classification_llc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>tax_classification_llc</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@tax_classification_other_details</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>tax_classification_other_details</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@w9_revision_date</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>w9_revision_date</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="address-instance_method">
+  
+    #<strong>address</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The street address (number, street, and apt. or suite no.) of the applicant.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_address'>address</span>
+  <span class='ivar'>@address</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="business_name-instance_method">
+  
+    #<strong>business_name</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The business name or disregarded entity name, if different from Name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_business_name'>business_name</span>
+  <span class='ivar'>@business_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="city_state_zip-instance_method">
+  
+    #<strong>city_state_zip</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The city, state, and ZIP code of the applicant.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_city_state_zip'>city_state_zip</span>
+  <span class='ivar'>@city_state_zip</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ein-instance_method">
+  
+    #<strong>ein</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The employer identification number.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ein'>ein</span>
+  <span class='ivar'>@ein</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Name as shown on the applicant’s income tax return.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="signature_date_position-instance_method">
+  
+    #<strong>signature_date_position</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html" title="Mindee::Parsing::Standard::PositionField (class)">Mindee::Parsing::Standard::PositionField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Position of the signature date on the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html" title="Mindee::Parsing::Standard::PositionField (class)">Mindee::Parsing::Standard::PositionField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_signature_date_position'>signature_date_position</span>
+  <span class='ivar'>@signature_date_position</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="signature_position-instance_method">
+  
+    #<strong>signature_position</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html" title="Mindee::Parsing::Standard::PositionField (class)">Mindee::Parsing::Standard::PositionField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Position of the signature on the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/PositionField.html" title="Mindee::Parsing::Standard::PositionField (class)">Mindee::Parsing::Standard::PositionField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_signature_position'>signature_position</span>
+  <span class='ivar'>@signature_position</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ssn-instance_method">
+  
+    #<strong>ssn</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The applicant’s social security number.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ssn'>ssn</span>
+  <span class='ivar'>@ssn</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tax_classification-instance_method">
+  
+    #<strong>tax_classification</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The federal tax classification, which can vary depending on the revision date.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tax_classification'>tax_classification</span>
+  <span class='ivar'>@tax_classification</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tax_classification_llc-instance_method">
+  
+    #<strong>tax_classification_llc</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Depending on revision year, among S, C, P or D for Limited Liability Company Classification.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tax_classification_llc'>tax_classification_llc</span>
+  <span class='ivar'>@tax_classification_llc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tax_classification_other_details-instance_method">
+  
+    #<strong>tax_classification_other_details</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Tax Classification Other Details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tax_classification_other_details'>tax_classification_other_details</span>
+  <span class='ivar'>@tax_classification_other_details</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="w9_revision_date-instance_method">
+  
+    #<strong>w9_revision_date</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The Revision month and year of the W9 form.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_w9_revision_date'>w9_revision_date</span>
+  <span class='ivar'>@w9_revision_date</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1_page.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:SSN: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ssn</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:City State Zip: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@city_state_zip</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Business Name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@business_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:EIN: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ein</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Tax Classification: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@tax_classification</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Tax Classification Other Details: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@tax_classification_other_details</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:W9 Revision Date: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@w9_revision_date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Signature Position: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@signature_position</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Signature Date Position: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@signature_date_position</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Tax Classification LLC: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@tax_classification_llc</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Sep 15 16:58:32 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.1.4).
+</div>
+
+    </div>
+  </body>
+</html>

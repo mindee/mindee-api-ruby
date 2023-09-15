@@ -146,7 +146,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>@<a href="Array<Mindee::Product::PageGroup>“>return</a>.</p>
+<p>@<a href="Array<Mindee::Product::InvoiceSplitterV1PageGroup>“>return</a>.</p>
 </div></span>
   
 </li>
@@ -182,7 +182,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Reconstructs the page groups of a prediction.</p>
+</div></span>
   
 </li>
 
@@ -335,7 +337,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>@<a href="Array<Mindee::Product::PageGroup>“>return</a></p>
+<p>@<a href="Array<Mindee::Product::InvoiceSplitterV1PageGroup>“>return</a></p>
 
 
   </div>
@@ -380,30 +382,56 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reconstructs the page groups of a prediction</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>prediction</span>
+      
+      
+        <span class='type'>(<tt>hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
 44
 45
 46
 47
 48
-49</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_construct_invoice_page_groups_from_prediction'>construct_invoice_page_groups_from_prediction</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
   <span class='ivar'>@invoice_page_groups</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invoice_page_groups</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invoice_page_groups</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
 
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invoice_page_groups</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page_group_prediction'>page_group_prediction</span><span class='op'>|</span>
-    <span class='ivar'>@invoice_page_groups</span><span class='period'>.</span><span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="PageGroup.html" title="Mindee::Product::InvoiceSplitter::PageGroup (class)">PageGroup</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="PageGroup.html#initialize-instance_method" title="Mindee::Product::InvoiceSplitter::PageGroup#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_page_group_prediction'>page_group_prediction</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='ivar'>@invoice_page_groups</span><span class='period'>.</span><span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="InvoiceSplitterV1PageGroup.html" title="Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup (class)">InvoiceSplitterV1PageGroup</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="InvoiceSplitterV1PageGroup.html#initialize-instance_method" title="Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_page_group_prediction'>page_group_prediction</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -448,8 +476,6 @@
       <pre class="lines">
 
 
-52
-53
 54
 55
 56
@@ -457,10 +483,12 @@
 58
 59
 60
-61</pre>
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -482,7 +510,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 09:09:39 2023 by
+  Generated on Fri Sep 15 16:58:36 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

@@ -86,7 +86,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Module for PDF document handling</p>
+<p>PDF document processing</p>
 
 
   </div>
@@ -104,7 +104,18 @@
     <dl class="constants">
       
         <dt id="DEFAULT_OPTIONS-constant" class="">DEFAULT_OPTIONS =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Default options for pdf documents processing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
         </dt>
         <dd><pre class="code"><span class='lbrace'>{</span>
   <span class='label'>page_indexes:</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span>
@@ -276,7 +287,6 @@
       <pre class="lines">
 
 
-44
 45
 46
 47
@@ -286,10 +296,11 @@
 51
 52
 53
-54</pre>
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_indexes_from_keep'>indexes_from_keep</span><span class='lparen'>(</span><span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='comma'>,</span> <span class='id identifier rubyid_all_pages'>all_pages</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pages_to_keep'>pages_to_keep</span> <span class='op'>=</span> <span class='const'>Set</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -357,7 +368,6 @@
       <pre class="lines">
 
 
-58
 59
 60
 61
@@ -366,10 +376,11 @@
 64
 65
 66
-67</pre>
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_indexes_from_remove'>indexes_from_remove</span><span class='lparen'>(</span><span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='comma'>,</span> <span class='id identifier rubyid_all_pages'>all_pages</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pages_to_remove'>pages_to_remove</span> <span class='op'>=</span> <span class='const'>Set</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -438,14 +449,14 @@
       <pre class="lines">
 
 
-71
 72
 73
 74
-75</pre>
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_open_pdf'>open_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pdf_parser'>pdf_parser</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>PDF</span><span class='op'>::</span><span class='const'>LinearParser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>verbosity:</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>Parser</span><span class='op'>::</span><span class='const'>VERBOSE_QUIET</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -507,7 +518,6 @@
       <pre class="lines">
 
 
-20
 21
 22
 23
@@ -527,10 +537,11 @@
 37
 38
 39
-40</pre>
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processing.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#DEFAULT_OPTIONS-constant" title="Mindee::PDF::PdfProcessor::DEFAULT_OPTIONS (constant)">DEFAULT_OPTIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -563,7 +574,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 09:09:35 2023 by
+  Generated on Fri Sep 15 16:58:31 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
