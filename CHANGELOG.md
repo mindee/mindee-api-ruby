@@ -1,5 +1,21 @@
 # Mindee Ruby API Library Changelog
 
+## v3.2.0 - 2023-09-15
+### Changes
+* :sparkles: add support for Multi Receipts Detector V1
+* :sparkles: add support for Barcode Reader V1
+* :sparkles: add support for W9 V1
+* :sparkles: add support for FR ID Card V2
+* :sparkles: add support for async in CLI
+* :sparkles: add support for async auto-polling
+* :sparkles: add direct access to `raw_http` response
+* :memo: upgrade reference & guide documentation
+* :test_tube: **EXPERIMENTAL** add PDF repair option
+
+### Fixes
+* :bug: fix display issues with `PositionField`
+
+
 ## v3.1.1 - 2023-08-10
 ### Fixes
 * :bug: fixed non-pdf files being improperly handled by Ruby requests
