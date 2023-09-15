@@ -24,9 +24,6 @@ result = mindee_client.parse(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
-
-# Print the document-level parsed data
-# puts result.document.inference.prediction
 ```
 
 **Output (RST):**
@@ -44,15 +41,14 @@ Inference
 
 Prediction
 ==========
-:Cropping:
 
 Page Predictions
 ================
 
 Page 0
 ------
-:Cropping: Polygon with 26 points.
-           Polygon with 25 points.
+:Document Cropper: Polygon with 26 points.
+                   Polygon with 25 points.
 ```
 
 # Field Types
