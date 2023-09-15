@@ -29,12 +29,19 @@ module Mindee
           @value = @polygon
         end
 
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/PerceivedComplexity
         # @return [String]
         def to_s
-          out_str = String.new
-          out_str << "Polygon with #{@polygon.size} points." if @polygon
-          out_str
+          return "Polygon with #{@polygon.size} points." if @polygon&.size&.positive?
+          return "Polygon with #{@bounding_box.size} points." if @bounding_box&.size&.positive?
+          return "Polygon with #{@rectangle.size} points." if @rectangle&.size&.positive?
+          return "Polygon with #{@quadrangle.size} points." if @quadrangle&.size&.positive?
+
+          ''
         end
+        # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/PerceivedComplexity
 
         private
 
