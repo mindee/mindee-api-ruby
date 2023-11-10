@@ -73,7 +73,7 @@ module Mindee
       class MindeeHttpError < StandardError
         # @return [String]
         attr_reader :status_code
-        # @return [String]
+        # @return [Integer]
         attr_reader :api_code
         # @return [String]
         attr_reader :api_details

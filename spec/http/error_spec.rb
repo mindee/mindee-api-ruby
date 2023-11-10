@@ -33,7 +33,7 @@ describe Mindee::HTTP::Error do
       end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
     end
 
-    # NOTE: No reliable UT each HTTP errorfor ruby as the only semi-reliable http mock lib (Webmock) isn't compatible
+    # NOTE: No reliable UT each HTTP error for ruby as the only semi-reliable http mock lib (Webmock) isn't compatible
     # with multipart/form-data yet
     # TODO: fix when this is patched: https://github.com/bblimke/webmock/pull/791
 

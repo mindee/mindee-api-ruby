@@ -95,7 +95,7 @@ module Mindee
         attr_reader :job
         # @return [Mindee::Parsing::Common::ApiRequest]
         attr_reader :api_request
-        # @return [String]
+        # @return [Hash]
         attr_reader :raw_http
 
         # @param product_class [Class<Mindee::Product>]

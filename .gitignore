@@ -19,6 +19,7 @@ _test.rb
 /vendor
 /mindee-*/
 local-test
+local_test/
 
 # Used by dotenv library to load environment variables.
 .env
