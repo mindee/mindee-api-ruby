@@ -48,10 +48,17 @@ module Mindee
         def initialize(prediction, page_id, reconstructed: false)
           @values = []
           @confidence = prediction['confidence']
-          @page_id = page_id || prediction['page_id']
+          @page_id = if page_id.nil?
+                       prediction.include?('page_id') ? prediction['page_id'] : nil
+                     else
+                       page_id
+                     end
           @reconstructed = reconstructed
 
           prediction['values'].each do |field|
+            if (field.include?("page_id"))
+              @page_id = field["page_id"]
+            end
             @values.push(ListFieldItem.new(field))
           end
         end
