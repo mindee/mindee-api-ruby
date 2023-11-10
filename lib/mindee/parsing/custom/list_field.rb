@@ -56,9 +56,7 @@ module Mindee
           @reconstructed = reconstructed
 
           prediction['values'].each do |field|
-            if (field.include?("page_id"))
-              @page_id = field["page_id"]
-            end
+            @page_id = field['page_id'] if field.include?('page_id')
             @values.push(ListFieldItem.new(field))
           end
         end
