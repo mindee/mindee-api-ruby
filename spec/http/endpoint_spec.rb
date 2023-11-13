@@ -14,7 +14,7 @@ describe Mindee::HTTP::Endpoint do
     it 'should have a default root url' do
       endpoint = Mindee::HTTP::Endpoint.new('mindee', 'blahblah', '3',
                                             api_key: 'invalid-key')
-      expect(endpoint.url_root).to_not eq(Mindee::HTTP::BASE_URL_DEFAULT)
+      expect(endpoint.url_root).to eq("#{Mindee::HTTP::BASE_URL_DEFAULT}/products/mindee/blahblah/v3")
     end
 
     it 'should have an editable root url' do
