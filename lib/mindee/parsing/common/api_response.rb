@@ -100,8 +100,9 @@ module Mindee
 
         # @param product_class [Class<Mindee::Product>]
         # @param http_response [Hash]
+        # @param raw_http [String]
         def initialize(product_class, http_response, raw_http)
-          @raw_http = raw_http
+          @raw_http = raw_http.to_s
           if http_response.key?('api_request')
             @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
           end
