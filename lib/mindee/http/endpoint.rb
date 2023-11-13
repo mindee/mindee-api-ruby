@@ -174,6 +174,18 @@ module Mindee
         response
       end
 
+      # Sets a custom value for the API, only used in testing
+      # @param base_url [String]
+      def set_base_url(base_url)
+        env_value = ENV.fetch(BASE_URL_ENV_NAME, BASE_URL_DEFAULT)
+        if !base_url.empty? && !base_url.nil?
+          @url_root = base_url
+        else
+          @url_root = env_value
+        end
+      end
+
+      # Checks API key
       def check_api_key
         return unless @api_key.nil? || @api_key.empty?
 
