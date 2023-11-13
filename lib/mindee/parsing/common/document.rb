@@ -13,8 +13,10 @@ module Mindee
         attr_reader :name
         # @return [String] Mindee ID of the document
         attr_reader :id
-        # @return [Mindee::Parsing::Common::Ocr::Ocr, nil]
+        # @return [Mindee::Parsing::Common::Ocr::Ocr, nil] OCR text results (limited availability)
         attr_reader :ocr
+        # @return [Integer] Amount of pages of the document
+        attr_reader :n_pages
 
         # @param http_response [Hash]
         # @return [Mindee::Parsing::Common::Ocr::Ocr]
@@ -32,6 +34,7 @@ module Mindee
           @name = http_response['name']
           @inference = product_class.new(http_response['inference'])
           @ocr = self.class.load_ocr(http_response)
+          @n_pages = http_response['n_pages']
         end
 
         # @return [String]

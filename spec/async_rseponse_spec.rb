@@ -16,7 +16,7 @@ describe Mindee::Parsing::Common::ApiResponse do
       expect(parsed_response.job.status).to_not respond_to(:available_at)
       expect(parsed_response.job.status).to_not respond_to(:millisecs_taken)
       expect(parsed_response.api_request.error).to eq({})
-      expect(parsed_response.raw_http).to eq(response)
+      expect(parsed_response.raw_http).to eq(response.to_s)
     end
 
     it 'should not be able to be sent on incompatible endpoints' do
@@ -29,7 +29,7 @@ describe Mindee::Parsing::Common::ApiResponse do
       expect(parsed_response.job.status).to_not respond_to(:millisecs_taken)
       expect(parsed_response.api_request.status).to eq(Mindee::Parsing::Common::RequestStatus::FAILURE)
       expect(parsed_response.api_request.error['code']).to eq('Forbidden')
-      expect(parsed_response.raw_http).to eq(response)
+      expect(parsed_response.raw_http).to eq(response.to_s)
     end
 
     it 'should be able to poll processing a queue' do
@@ -42,7 +42,7 @@ describe Mindee::Parsing::Common::ApiResponse do
       expect(parsed_response.job.status).to_not respond_to(:available_at)
       expect(parsed_response.job.status).to_not respond_to(:millisecs_taken)
       expect(parsed_response.api_request.error['code']).to eq(nil)
-      expect(parsed_response.raw_http).to eq(response)
+      expect(parsed_response.raw_http).to eq(response.to_s)
     end
 
     it 'should be able to poll a completed queue' do
@@ -56,7 +56,7 @@ describe Mindee::Parsing::Common::ApiResponse do
       expect(parsed_response.job.millisecs_taken).to eq(4664)
       expect(parsed_response.document).to_not be(nil)
       expect(parsed_response.api_request.error['code']).to eq(nil)
-      expect(parsed_response.raw_http).to eq(response)
+      expect(parsed_response.raw_http).to eq(response.to_s)
     end
   end
 end
