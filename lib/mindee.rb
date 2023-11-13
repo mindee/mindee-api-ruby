@@ -5,9 +5,6 @@ require 'mindee/client'
 module Mindee
   # Mindee internal http module.
   module HTTP
-    # Global Mindee HTTP error handler.
-    class HttpError < StandardError
-    end
   end
 
   # PDF-specific operations.

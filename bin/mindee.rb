@@ -157,7 +157,7 @@ global_parser = OptionParser.new do | opts |
 end
 
 command = ARGV.shift
-if !DOCUMENTS.has_key?(command)
+if !DOCUMENTS.include?(command)
   abort(global_parser.help)
 end
 doc_class = DOCUMENTS[command][:doc_class]
