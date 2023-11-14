@@ -1,5 +1,15 @@
 # Mindee Ruby API Library Changelog
 
+## v3.3.0 - 2023-11-14
+### Changes
+* :sparkles: add access to `n_pages` document property
+* :wrench: add access to root url as a mocking substitute
+
+### Fixes
+* :bug: fix missing `page_id` attribute for newer custom builds
+* :bug: :wrench: hotifx for CLI script
+
+
 ## v3.2.0 - 2023-09-15
 ### Changes
 * :sparkles: add support for Multi Receipts Detector V1
