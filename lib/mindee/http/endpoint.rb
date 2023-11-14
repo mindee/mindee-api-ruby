@@ -31,6 +31,8 @@ module Mindee
       attr_reader :api_key
       # @return [Integer]
       attr_reader :request_timeout
+      # @return [String]
+      attr_reader :url_root
 
       def initialize(owner, url_name, version, api_key: '')
         @owner = owner
@@ -38,7 +40,8 @@ module Mindee
         @version = version
         @request_timeout = ENV.fetch(REQUEST_TIMEOUT_ENV_NAME, TIMEOUT_DEFAULT).to_i
         @api_key = api_key.nil? || api_key.empty? ? ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT) : api_key
-        @url_root = "#{BASE_URL_DEFAULT}/products/#{@owner}/#{@url_name}/v#{@version}"
+        base_url = ENV.fetch(BASE_URL_ENV_NAME, BASE_URL_DEFAULT)
+        @url_root = "#{base_url.chomp('/')}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
       # Call the prediction API.
@@ -174,6 +177,7 @@ module Mindee
         response
       end
 
+      # Checks API key
       def check_api_key
         return unless @api_key.nil? || @api_key.empty?
 
