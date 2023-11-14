@@ -18,22 +18,12 @@ describe Mindee::HTTP::Endpoint do
     end
 
     it 'should have an editable root url' do
+      ENV[Mindee::HTTP::BASE_URL_ENV_NAME] = 'localhost:1234/my-fake-root-url'
       endpoint = Mindee::HTTP::Endpoint.new('mindee', 'blahblah', '3',
                                             api_key: 'invalid-key')
-      endpoint.update_url_root('localhost:1234/my-fake-root-url')
       expect(endpoint.url_root).to_not eq(Mindee::HTTP::BASE_URL_DEFAULT)
       expect(endpoint.url_root).to eq('localhost:1234/my-fake-root-url/products/mindee/blahblah/v3')
-      endpoint.update_url_root('localhost:1234/my-fake-root-url/')
-      expect(endpoint.url_root).to eq('localhost:1234/my-fake-root-url/products/mindee/blahblah/v3')
-    end
-
-    it 'should have a working environment root url value' do
-      endpoint = Mindee::HTTP::Endpoint.new('mindee', 'blahblah', '3',
-                                            api_key: 'invalid-key')
-      stub_const('ENV', { Mindee::HTTP::BASE_URL_ENV_NAME => 'localhost:1234/my-fake-root-url-from-env/' })
-      endpoint.update_url_root('')
-      expect(endpoint.url_root).to_not eq(Mindee::HTTP::BASE_URL_DEFAULT)
-      expect(endpoint.url_root).to eq('localhost:1234/my-fake-root-url-from-env/products/mindee/blahblah/v3')
+      ENV.delete(Mindee::HTTP::BASE_URL_ENV_NAME)
     end
   end
 end
