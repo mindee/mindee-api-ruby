@@ -14,13 +14,16 @@ module Mindee
         attr_reader :polygon
         # @return [Array, Hash, String, nil]
         attr_reader :content
+        # @return [Integer, nil]
+        attr_reader :page_id
 
         # @param prediction [Hash]
-        def initialize(prediction)
+        def initialize(prediction, page_id: nil)
           @content = prediction['content']
           @confidence = prediction['confidence']
           @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
           @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
+          @page_id = page_id
         end
 
         # @return [String]
@@ -33,8 +36,6 @@ module Mindee
       class ListField
         # @return [Array<Mindee::Parsing::Custom::ListFieldItem>]
         attr_reader :values
-        # @return [Integer, nil]
-        attr_reader :page_id
         # true if the field was reconstructed or computed using other fields.
         # @return [Boolean]
         attr_reader :reconstructed
@@ -48,16 +49,12 @@ module Mindee
         def initialize(prediction, page_id, reconstructed: false)
           @values = []
           @confidence = prediction['confidence']
-          @page_id = if page_id.nil?
-                       prediction.include?('page_id') ? prediction['page_id'] : nil
-                     else
-                       page_id
-                     end
+          page_id = prediction['page_id'] if page_id.nil? && prediction.include?('page_id')
           @reconstructed = reconstructed
 
           prediction['values'].each do |field|
-            @page_id = field['page_id'] if field.include?('page_id')
-            @values.push(ListFieldItem.new(field))
+            page_id = field['page_id'] if field.include?('page_id')
+            @values.push(ListFieldItem.new(field, page_id: page_id))
           end
         end
 
