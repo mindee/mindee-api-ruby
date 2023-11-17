@@ -147,33 +147,6 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#page_id-instance_method" title="#page_id (instance method)">#<strong>page_id</strong>  &#x21d2; Integer<sup>?</sup> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#reconstructed-instance_method" title="#reconstructed (instance method)">#<strong>reconstructed</strong>  &#x21d2; Boolean </a>
     
 
@@ -403,7 +376,6 @@
       <pre class="lines">
 
 
-48
 49
 50
 51
@@ -412,19 +384,22 @@
 54
 55
 56
-57</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='comma'>,</span> <span class='label'>reconstructed:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='ivar'>@values</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='ivar'>@confidence</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>confidence</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='ivar'>@page_id</span> <span class='op'>=</span> <span class='id identifier rubyid_page_id'>page_id</span> <span class='op'>||</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_page_id'>page_id</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_id</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@reconstructed</span> <span class='op'>=</span> <span class='id identifier rubyid_reconstructed'>reconstructed</span>
 
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>values</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_field'>field</span><span class='op'>|</span>
-    <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ListFieldItem.html" title="Mindee::Parsing::Custom::ListFieldItem (class)">ListFieldItem</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ListFieldItem.html#initialize-instance_method" title="Mindee::Parsing::Custom::ListFieldItem#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_field'>field</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_page_id'>page_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field'>field</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_field'>field</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_id</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ListFieldItem.html" title="Mindee::Parsing::Custom::ListFieldItem (class)">ListFieldItem</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ListFieldItem.html#initialize-instance_method" title="Mindee::Parsing::Custom::ListFieldItem#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_field'>field</span><span class='comma'>,</span> <span class='label'>page_id:</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -478,69 +453,15 @@
       <pre class="lines">
 
 
-43
 44
-45</pre>
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_confidence'>confidence</span>
   <span class='ivar'>@confidence</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="page_id-instance_method">
-  
-    #<strong>page_id</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-37
-38
-39</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 37</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_page_id'>page_id</span>
-  <span class='ivar'>@page_id</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -588,12 +509,12 @@
       <pre class="lines">
 
 
-40
 41
-42</pre>
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reconstructed'>reconstructed</span>
   <span class='ivar'>@reconstructed</span>
@@ -642,12 +563,12 @@
       <pre class="lines">
 
 
-35
-36
-37</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_values'>values</span>
   <span class='ivar'>@values</span>
@@ -701,12 +622,12 @@
       <pre class="lines">
 
 
-60
-61
-62</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_contents_list'>contents_list</span>
   <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:content</span><span class='rparen'>)</span>
@@ -753,12 +674,12 @@
       <pre class="lines">
 
 
-65
-66
-67</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_contents_str'>contents_str</span><span class='lparen'>(</span><span class='label'>separator:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_separator'>separator</span><span class='rparen'>)</span>
@@ -805,12 +726,12 @@
       <pre class="lines">
 
 
-70
-71
-72</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/custom/list_field.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_contents_str'>contents_str</span><span class='lparen'>(</span><span class='label'>separator:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -825,7 +746,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 18 13:19:55 2023 by
+  Generated on Fri Nov 17 15:41:43 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

@@ -171,6 +171,33 @@
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#url_root-instance_method" title="#url_root (instance method)">#<strong>url_root</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -314,17 +341,18 @@
       <pre class="lines">
 
 
-35
-36
 37
 38
 39
 40
 41
-42</pre>
+42
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_owner'>owner</span><span class='comma'>,</span> <span class='id identifier rubyid_url_name'>url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_version'>version</span><span class='comma'>,</span> <span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@owner</span> <span class='op'>=</span> <span class='id identifier rubyid_owner'>owner</span>
@@ -332,7 +360,8 @@
   <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_version'>version</span>
   <span class='ivar'>@request_timeout</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#REQUEST_TIMEOUT_ENV_NAME-constant" title="Mindee::HTTP::REQUEST_TIMEOUT_ENV_NAME (constant)">REQUEST_TIMEOUT_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#TIMEOUT_DEFAULT-constant" title="Mindee::HTTP::TIMEOUT_DEFAULT (constant)">TIMEOUT_DEFAULT</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
   <span class='ivar'>@api_key</span> <span class='op'>=</span> <span class='id identifier rubyid_api_key'>api_key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_api_key'>api_key</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#API_KEY_ENV_NAME-constant" title="Mindee::HTTP::API_KEY_ENV_NAME (constant)">API_KEY_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#API_KEY_DEFAULT-constant" title="Mindee::HTTP::API_KEY_DEFAULT (constant)">API_KEY_DEFAULT</a></span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_api_key'>api_key</span>
-  <span class='ivar'>@url_root</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../HTTP.html#BASE_URL_DEFAULT-constant" title="Mindee::HTTP::BASE_URL_DEFAULT (constant)">BASE_URL_DEFAULT</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>/products/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@owner</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@url_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/v</span><span class='embexpr_beg'>#{</span><span class='ivar'>@version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_base_url'>base_url</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#BASE_URL_ENV_NAME-constant" title="Mindee::HTTP::BASE_URL_ENV_NAME (constant)">BASE_URL_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#BASE_URL_DEFAULT-constant" title="Mindee::HTTP::BASE_URL_DEFAULT (constant)">BASE_URL_DEFAULT</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@url_root</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_url'>base_url</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>/products/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@owner</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@url_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/v</span><span class='embexpr_beg'>#{</span><span class='ivar'>@version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -452,6 +481,60 @@
 </table>
 </div>
     
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="url_root-instance_method">
+  
+    #<strong>url_root</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_url_root'>url_root</span>
+  <span class='ivar'>@url_root</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 
@@ -513,18 +596,18 @@
       <pre class="lines">
 
 
-78
-79
-80
 81
 82
 83
 84
 85
-86</pre>
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -627,18 +710,18 @@
       <pre class="lines">
 
 
-50
-51
-52
 53
 54
 55
 56
 57
-58</pre>
+58
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_predict'>predict</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -730,18 +813,18 @@
       <pre class="lines">
 
 
-65
-66
-67
 68
 69
 70
 71
 72
-73</pre>
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -762,7 +845,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 18 13:19:54 2023 by
+  Generated on Fri Nov 17 15:41:42 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

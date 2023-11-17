@@ -69,10 +69,14 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">Object</span>
+      <span class="inheritName"><span class='object_link'><a href="../../Parsing/Standard/FeatureField.html" title="Mindee::Parsing::Standard::FeatureField (class)">Mindee::Parsing::Standard::FeatureField</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html" title="Mindee::Parsing::Standard::AbstractField (class)">Mindee::Parsing::Standard::AbstractField</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../../Parsing/Standard/FeatureField.html" title="Mindee::Parsing::Standard::FeatureField (class)">Mindee::Parsing::Standard::FeatureField</a></span></li>
           
             <li class="next">Mindee::Product::Invoice::InvoiceV4LineItem</li>
           
@@ -89,7 +93,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../Parsing/Common.html" title="Mindee::Parsing::Common (module)">Mindee::Parsing::Common</a></span>, <span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Mindee::Parsing::Standard</a></span></dd>
+      <dd><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Mindee::Parsing::Standard</a></span></dd>
   </dl>
   
   
@@ -107,7 +111,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Line items for Invoice V4</p>
+<p>List of line item details.</p>
 
 
   </div>
@@ -121,60 +125,6 @@
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#bounding_box-instance_method" title="#bounding_box (instance method)">#<strong>bounding_box</strong>  &#x21d2; Mindee::Geometry::Quadrilateral </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#confidence-instance_method" title="#confidence (instance method)">#<strong>confidence</strong>  &#x21d2; Float </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
     
       <li class="public ">
   <span class="summary_signature">
@@ -198,61 +148,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#page_id-instance_method" title="#page_id (instance method)">#<strong>page_id</strong>  &#x21d2; Integer </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#polygon-instance_method" title="#polygon (instance method)">#<strong>polygon</strong>  &#x21d2; Array&lt;Mindee::Geometry::Polygon&gt; </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The item description.</p>
+</div></span>
   
 </li>
 
@@ -308,7 +206,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The item quantity.</p>
+</div></span>
   
 </li>
 
@@ -335,7 +235,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The item tax amount.</p>
+</div></span>
   
 </li>
 
@@ -363,7 +265,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The item tax rate percentage.</p>
+<p>The item tax rate in percentage.</p>
 </div></span>
   
 </li>
@@ -391,7 +293,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The item total amount.</p>
+</div></span>
   
 </li>
 
@@ -418,7 +322,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The item unit price.</p>
+</div></span>
   
 </li>
 
@@ -426,6 +332,11 @@
   </ul>
 
 
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html" title="Mindee::Parsing::Standard::AbstractField (class)">Mindee::Parsing::Standard::AbstractField</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#bounding_box-instance_method" title="Mindee::Parsing::Standard::AbstractField#bounding_box (method)">#bounding_box</a></span>, <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#confidence-instance_method" title="Mindee::Parsing::Standard::AbstractField#confidence (method)">#confidence</a></span>, <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#page_id-instance_method" title="Mindee::Parsing::Standard::AbstractField#page_id (method)">#page_id</a></span>, <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#polygon-instance_method" title="Mindee::Parsing::Standard::AbstractField#polygon (method)">#polygon</a></span></p>
 
 
   
@@ -465,7 +376,51 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#printable_values-instance_method" title="#printable_values (instance method)">#<strong>printable_values</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_table_line-instance_method" title="#to_table_line (instance method)">#<strong>to_table_line</strong>  &#x21d2; String </a>
     
 
     
@@ -499,7 +454,23 @@
   
   
   
-  <div id="constructor_details" class="method_details_list">
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../Parsing/Standard/FeatureField.html" title="Mindee::Parsing::Standard::FeatureField (class)">Mindee::Parsing::Standard::FeatureField</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../Parsing/Standard/FeatureField.html#format_for_display-instance_method" title="Mindee::Parsing::Standard::FeatureField#format_for_display (method)">#format_for_display</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html" title="Mindee::Parsing::Standard::AbstractField (class)">Mindee::Parsing::Standard::AbstractField</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#array_confidence-class_method" title="Mindee::Parsing::Standard::AbstractField.array_confidence (method)">array_confidence</a></span>, <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#array_sum-class_method" title="Mindee::Parsing::Standard::AbstractField.array_sum (method)">array_sum</a></span>, <span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></p>
+<div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
@@ -554,6 +525,8 @@
       <pre class="lines">
 
 
+35
+36
 37
 38
 39
@@ -562,20 +535,20 @@
 42
 43
 44
-45
-46</pre>
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@description</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@product_code</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>product_code</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@quantity</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>quantity</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='ivar'>@unit_price</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unit_price</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='ivar'>@total_amount</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_amount</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@tax_amount</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>tax_amount</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@tax_rate</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>tax_rate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='ivar'>@description</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@total_amount</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_amount</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@unit_price</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unit_price</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@page_id</span> <span class='op'>=</span> <span class='id identifier rubyid_page_id'>page_id</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -591,115 +564,7 @@
       
       <span id=""></span>
       <div class="method_details first">
-  <h3 class="signature first" id="bounding_box-instance_method">
-  
-    #<strong>bounding_box</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Mindee::Geometry::Quadrilateral</a></span></tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Mindee::Geometry::Quadrilateral</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-31
-32
-33</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 31</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_bounding_box'>bounding_box</span>
-  <span class='ivar'>@bounding_box</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="confidence-instance_method">
-  
-    #<strong>confidence</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Float</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-27
-28
-29</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 27</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_confidence'>confidence</span>
-  <span class='ivar'>@confidence</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="description-instance_method">
+  <h3 class="signature first" id="description-instance_method">
   
     #<strong>description</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
   
@@ -710,6 +575,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>The item description.</p>
+
 
   </div>
 </div>
@@ -735,123 +602,15 @@
       <pre class="lines">
 
 
-15
-16
-17</pre>
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
   <span class='ivar'>@description</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="page_id-instance_method">
-  
-    #<strong>page_id</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-29
-30
-31</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 29</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_page_id'>page_id</span>
-  <span class='ivar'>@page_id</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="polygon-instance_method">
-  
-    #<strong>polygon</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span>&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-33
-34
-35</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 33</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_polygon'>polygon</span>
-  <span class='ivar'>@polygon</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -872,7 +631,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns The product code referring to the item.</p>
+<p>The product code referring to the item.</p>
 
 
   </div>
@@ -889,11 +648,6 @@
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>The product code referring to the item.</p>
-</div>
-      
     </li>
   
 </ul>
@@ -904,12 +658,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_product_code'>product_code</span>
   <span class='ivar'>@product_code</span>
@@ -933,229 +687,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>The item quantity</p>
 
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Float</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-17
-18
-19</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 17</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_quantity'>quantity</span>
-  <span class='ivar'>@quantity</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="tax_amount-instance_method">
-  
-    #<strong>tax_amount</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Float</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-25
-26
-27</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 25</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_tax_amount'>tax_amount</span>
-  <span class='ivar'>@tax_amount</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="tax_rate-instance_method">
-  
-    #<strong>tax_rate</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns The item tax rate percentage.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Float</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The item tax rate percentage.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-23
-24
-25</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 23</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_tax_rate'>tax_rate</span>
-  <span class='ivar'>@tax_rate</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="total_amount-instance_method">
-  
-    #<strong>total_amount</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Float</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-21
-22
-23</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 21</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_total_amount'>total_amount</span>
-  <span class='ivar'>@total_amount</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="unit_price-instance_method">
-  
-    #<strong>unit_price</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
 
   </div>
 </div>
@@ -1188,6 +721,230 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 19</span>
 
+<span class='kw'>def</span> <span class='id identifier rubyid_quantity'>quantity</span>
+  <span class='ivar'>@quantity</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tax_amount-instance_method">
+  
+    #<strong>tax_amount</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The item tax amount.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tax_amount'>tax_amount</span>
+  <span class='ivar'>@tax_amount</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tax_rate-instance_method">
+  
+    #<strong>tax_rate</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The item tax rate in percentage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tax_rate'>tax_rate</span>
+  <span class='ivar'>@tax_rate</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="total_amount-instance_method">
+  
+    #<strong>total_amount</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The item total amount.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_total_amount'>total_amount</span>
+  <span class='ivar'>@total_amount</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="unit_price-instance_method">
+  
+    #<strong>unit_price</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The item unit price.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 31</span>
+
 <span class='kw'>def</span> <span class='id identifier rubyid_unit_price'>unit_price</span>
   <span class='ivar'>@unit_price</span>
 <span class='kw'>end</span></pre>
@@ -1204,7 +961,75 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="to_s-instance_method">
+  <h3 class="signature first" id="printable_values-instance_method">
+  
+    #<strong>printable_values</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_printable_values'>printable_values</span>
+  <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@description</span><span class='comma'>,</span> <span class='int'>36</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:product_code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@product_code</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@quantity</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@tax_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@tax_rate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_rate</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@total_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@total_amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@unit_price</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@unit_price</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
   
     #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
   
@@ -1240,36 +1065,102 @@
       <pre class="lines">
 
 
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62</pre>
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
-  <span class='id identifier rubyid_tax'>tax</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_amount</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_tax'>tax</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> (</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_rate</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>%)</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@tax_rate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='ivar'>@description</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='ivar'>@description</span>
-  <span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_description'>description</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='int'>32</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>...</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_description'>description</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>35</span>
+  <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='id identifier rubyid_printable_values'>printable_values</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 20s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='ivar'>@product_code</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 7s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@quantity</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 7s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@unit_price</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 8s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@total_amount</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 16s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_tax'>tax</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 37s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_description'>description</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Description: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Product code: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:product_code</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Quantity: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Tax Amount: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Tax Rate (%): </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Total Amount: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  :Unit Price: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_table_line-instance_method">
+  
+    #<strong>to_table_line</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/invoice/invoice_v4_line_item.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_table_line'>to_table_line</span>
+  <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='id identifier rubyid_printable_values'>printable_values</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 37s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 13s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:product_code</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 9s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 11s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 13s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 13s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| %- 11s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>|</span><span class='tstring_end'>&#39;</span></span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1282,7 +1173,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 18 13:19:57 2023 by
+  Generated on Fri Nov 17 15:41:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
