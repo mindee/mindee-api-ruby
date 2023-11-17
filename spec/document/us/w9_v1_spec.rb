@@ -9,7 +9,7 @@ require_relative '../../data'
 DIR_US_W9_V1 = File.join(DATA_DIR, 'products', 'us_w9', 'response_v1').freeze
 
 describe Mindee::Product::US::W9::W9V1 do
-  context 'A US W9 V1' do
+  context 'A W9 V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_US_W9_V1, 'empty.json')
       inference = Mindee::Parsing::Common::Document.new(

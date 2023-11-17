@@ -34,123 +34,84 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 656c2ec1-0920-4556-9bc2-772162bc698a
-:Filename: invoice.pdf
+:Mindee ID: 16bd8752-8c4d-450f-8213-f33b2097504c
+:Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/invoices v4.1
+:Product: mindee/invoices v4.2
 :Rotation applied: Yes
 
 Prediction
 ==========
-:Locale: fr; fr; EUR;
-:Document type: INVOICE
-:Invoice number: 0042004801351
-:Reference numbers: AD29094
-:Invoice date: 2020-02-17
-:Invoice due date: 2020-02-17
-:Supplier name: TURNPIKE DESIGNS CO.
-:Supplier address: 156 University Ave, Toronto ON, Canada M5H 2H7
-:Supplier company registrations: 501124705; FR33501124705
-:Supplier payment details: FR7640254025476501124705368;
-:Customer name: JIRO DOI
-:Customer address: 1954 Bloon Street West Toronto, ON, M6P 3K9 Canada
-:Customer company registrations: FR00000000000; 111222333
-:Taxes:
-  +---------------+--------+----------+---------------+
-  | Base          | Code   | Rate (%) | Amount        |
-  +===============+========+==========+===============+
-  |               |        | 20.00    | 97.98         |
-  +---------------+--------+----------+---------------+
-:Total net: 489.97
-:Total tax: 97.98
-:Total amount: 587.95
-:Line Items:
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  | Code                 | QTY     | Price   | Amount   | Tax (Rate)       | Description                          |
-  +======================+=========+=========+==========+==================+======================================+
-  |                      |         |         | 4.31     |  (2.10%)         | PQ20 ETIQ ULTRA RESIS METAXXDC       |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  |                      | 1.00    | 65.00   | 75.00    | 10.00            | Platinum web hosting package Down... |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  | XXX81125600010       | 1.00    | 250.01  | 275.51   | 25.50 (10.20%)   | a long string describing the item    |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  | ABC456               | 200.30  | 8.101   | 1622.63  | 121.70 (7.50%)   | Liquid perfection                    |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  |                      |         |         |          |                  | CARTOUCHE L NR BROTHER TN247BK       |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-
-Page Predictions
-================
-
-Page 0
-------
-:Locale: fr; fr; EUR;
-:Document type: INVOICE
-:Invoice number: 0042004801351
-:Reference numbers:
-:Invoice date: 2020-02-17
-:Invoice due date: 2020-02-17
-:Supplier name:
-:Supplier address:
-:Supplier company registrations: 501124705; FR33501124705
-:Supplier payment details: FR7640254025476501124705368;
-:Customer name:
-:Customer address:
-:Customer company registrations:
-:Taxes:
-  +---------------+--------+----------+---------------+
-  | Base          | Code   | Rate (%) | Amount        |
-  +===============+========+==========+===============+
-  |               |        | 20.00    | 97.98         |
-  +---------------+--------+----------+---------------+
-:Total net: 489.97
-:Total tax: 97.98
-:Total amount: 587.95
-:Line Items:
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  | Code                 | QTY     | Price   | Amount   | Tax (Rate)       | Description                          |
-  +======================+=========+=========+==========+==================+======================================+
-  |                      |         |         | 4.31     |  (2.10%)         | PQ20 ETIQ ULTRA RESIS METAXXDC       |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  |                      | 1.00    | 65.00   | 75.00    | 10.00            | Platinum web hosting package Down... |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-
-Page 1
-------
-:Locale: fr; fr; EUR;
-:Document type: INVOICE
-:Invoice number:
-:Reference numbers: AD29094
-:Invoice date:
-:Invoice due date: 2020-02-17
-:Supplier name: TURNPIKE DESIGNS CO.
-:Supplier address: 156 University Ave, Toronto ON, Canada M5H 2H7
-:Supplier company registrations:
-:Supplier payment details:
-:Customer name: JIRO DOI
-:Customer address: 1954 Bloon Street West Toronto, ON, M6P 3K9 Canada
-:Customer company registrations:
+:Locale: en; en; CAD;
+:Invoice Number: 14
+:Reference Numbers: AD29094
+:Purchase Date: 2018-09-25
+:Due Date: 2018-09-25
+:Total Net:
+:Total Amount: 2608.20
 :Taxes:
   +---------------+--------+----------+---------------+
   | Base          | Code   | Rate (%) | Amount        |
   +===============+========+==========+===============+
   |               |        | 8.00     | 193.20        |
   +---------------+--------+----------+---------------+
-:Total net:
-:Total tax: 193.20
-:Total amount: 2608.20
+:Supplier Payment Details:
+:Supplier Name: TURNPIKE DESIGNS CO.
+:Supplier Company Registrations:
+:Supplier Address: 156 University Ave, Toronto ON, Canada M5H 2H7
+:Customer Name: JIRO DOI
+:Customer Company Registrations:
+:Customer Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
+:Document Type: INVOICE
 :Line Items:
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  | Code                 | QTY     | Price   | Amount   | Tax (Rate)       | Description                          |
-  +======================+=========+=========+==========+==================+======================================+
-  | XXX81125600010       | 1.00    | 250.00  | 250.00   |  (10.00%)        | a long string describing the item    |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  | ABC456               | 200.30  | 8.101   | 1622.63  | 121.70 (7.50%)   | Liquid perfection                    |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
-  |                      |         |         |          |                  | CARTOUCHE L NR BROTHER TN247BK       |
-  +----------------------+---------+---------+----------+------------------+--------------------------------------+
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+  | Description                          | Product code | Quantity | Tax Amount | Tax Rate (%) | Total Amount | Unit Price |
+  +======================================+==============+==========+============+==============+==============+============+
+  | Platinum web hosting package Down... |              | 1.00     |            |              | 65.00        | 65.00      |
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+  | 2 page website design Includes ba... |              | 3.00     |            |              | 2100.00      | 2100.00    |
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+  | Mobile designs Includes responsiv... |              | 1.00     |            |              | 250.00       | 250.00     |
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+
+Page Predictions
+================
+
+Page 0
+------
+:Locale: en; en; CAD;
+:Invoice Number: 14
+:Reference Numbers: AD29094
+:Purchase Date: 2018-09-25
+:Due Date: 2018-09-25
+:Total Net:
+:Total Amount: 2608.20
+:Taxes:
+  +---------------+--------+----------+---------------+
+  | Base          | Code   | Rate (%) | Amount        |
+  +===============+========+==========+===============+
+  |               |        | 8.00     | 193.20        |
+  +---------------+--------+----------+---------------+
+:Supplier Payment Details:
+:Supplier Name: TURNPIKE DESIGNS CO.
+:Supplier Company Registrations:
+:Supplier Address: 156 University Ave, Toronto ON, Canada M5H 2H7
+:Customer Name: JIRO DOI
+:Customer Company Registrations:
+:Customer Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
+:Document Type: INVOICE
+:Line Items:
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+  | Description                          | Product code | Quantity | Tax Amount | Tax Rate (%) | Total Amount | Unit Price |
+  +======================================+==============+==========+============+==============+==============+============+
+  | Platinum web hosting package Down... |              | 1.00     |            |              | 65.00        | 65.00      |
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+  | 2 page website design Includes ba... |              | 3.00     |            |              | 2100.00      | 2100.00    |
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
+  | Mobile designs Includes responsiv... |              | 1.00     |            |              | 250.00       | 250.00     |
+  +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
 ```
 
 # Field Types
@@ -199,6 +160,14 @@ The locale field `LocaleField` only implements the **value**, **confidence** and
 * **country** (`String`): ISO 3166-1 alpha-2 or ISO 3166-1 alpha-3 code for countries (e.g.: `GRB` or `GB` for "Great Britain"). Can be `nil`.
 * **currency** (`String`): ISO 4217 code for currencies (e.g.: `USD` for "US Dollars"). Can be `nil`.
 
+### Payment Details Field
+Aside from the basic `Field` attributes, the payment details field `PaymentDetailsField` also implements the following:
+
+* **account_number** (`String`): number of an account, expressed as a string. Can be `nil`.
+* **iban** (`String`): International Bank Account Number. Can be `nil`.
+* **routing_number** (`String`): routing number of an account. Can be `nil`.
+* **swift** (`String`): the account holder's bank's SWIFT Business Identifier Code (BIC). Can be `nil`.
+
 ### String Field
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
@@ -206,7 +175,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 #### Tax
 Aside from the basic `Field` attributes, the tax field `TaxField` also implements the following:
 
-* **rate** (`Float`): the tax rate applied to an item can be undefined. Expressed as a percentage. Can be `nil`.
+* **rate** (`Float`): the tax rate applied to an item can be expressed as a percentage. Can be `nil`.
 * **code** (`String`): tax code (or equivalent, depending on the origin of the document). Can be `nil`.
 * **base** (`Float`): base amount used for the tax. Can be `nil`.
 
@@ -225,7 +194,7 @@ A `InvoiceV4LineItem` implements the following attributes:
 
 * `description` (String): The item description.
 * `product_code` (String): The product code referring to the item.
-* `quantity` (Integer): The item quantity
+* `quantity` (Float): The item quantity
 * `tax_amount` (Float): The item tax amount.
 * `tax_rate` (Float): The item tax rate in percentage.
 * `total_amount` (Float): The item total amount.
@@ -235,7 +204,7 @@ A `InvoiceV4LineItem` implements the following attributes:
 The following fields are extracted for Invoice V4:
 
 ## Customer Address
-**customerAddress** ([StringField](#string-field)): The address of the customer.
+**customer_address** ([StringField](#string-field)): The address of the customer.
 
 ```rb
 puts result.document.inference.prediction.customer_address.value
@@ -245,13 +214,13 @@ puts result.document.inference.prediction.customer_address.value
 **customer_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the customer.
 
 ```rb
-for customer_company_registration_elem in result.document.inference.prediction.customer_company_registration do
-  puts customer_company_registration_elem.value
+for customer_company_registrations_elem in result.document.inference.prediction.customer_company_registrations do
+  puts customer_company_registrations_elem.value
 end
 ```
 
 ## Customer Name
-**customer_name** ([StringField](#string-field)): The name of the customer.
+**customer_name** ([StringField](#string-field)): The name of the customer or client.
 
 ```rb
 puts result.document.inference.prediction.customer_name.value
@@ -314,7 +283,7 @@ end
 **supplier_address** ([StringField](#string-field)): The address of the supplier or merchant.
 
 ```rb
-result.document.inference.prediction.supplier_address.value
+puts result.document.inference.prediction.supplier_address.value
 ```
 
 ## Supplier Company Registrations
@@ -343,7 +312,7 @@ end
 ```
 
 ## Taxes
-**taxes** (Array<[TaxField](#taxes-field)>): List of tax lines information.
+**taxes** (Array<[TaxField](#taxes-field)>): List of tax line details.
 
 ```rb
 for taxes_elem in result.document.inference.prediction.taxes do

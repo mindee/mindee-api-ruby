@@ -9,202 +9,162 @@ module Mindee
       # Invoice V4 document prediction.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
-
-        # Locale information.
-        # @return [Mindee::Parsing::Standard::LocaleField]
-        attr_reader :locale
-        # The nature of the invoice.
-        # @return [Mindee::Parsing::Standard::ClassificationField]
-        attr_reader :document_type
-        # The total amount with tax included.
-        # @return [Mindee::Parsing::Standard::AmountField]
-        attr_reader :total_amount
-        # The total amount without the tax value.
-        # @return [Mindee::Parsing::Standard::AmountField]
-        attr_reader :total_net
-        # The total tax.
-        # @return [Mindee::Parsing::Standard::AmountField]
-        attr_reader :total_tax
-        # The creation date of the invoice.
-        # @return [Mindee::Parsing::Standard::DateField]
-        attr_reader :date
-        # The invoice number.
-        # @return [Mindee::Parsing::Standard::StringField]
-        attr_reader :invoice_number
-        # List of Reference numbers including PO number.
-        # @return [Mindee::Parsing::Standard::StringField]
-        attr_reader :reference_numbers
-        # The due date of the invoice.
-        # @return [Mindee::Parsing::Standard::DateField]
-        attr_reader :due_date
-        # The list of taxes.
-        # @return [Mindee::Parsing::Standard::Taxes]
-        attr_reader :taxes
-        # The name of the customer.
-        # @return [Mindee::Parsing::Standard::StringField]
-        attr_reader :customer_name
         # The address of the customer.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
-        # The company registration information for the customer.
+        # List of company registrations associated to the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :customer_company_registrations
-        # The supplier's name.
+        # The name of the customer or client.
         # @return [Mindee::Parsing::Standard::StringField]
-        attr_reader :supplier_name
-        # The supplier's address.
+        attr_reader :customer_name
+        # The date the purchase was made.
+        # @return [Mindee::Parsing::Standard::DateField]
+        attr_reader :date
+        # One of: 'INVOICE', 'CREDIT NOTE'.
+        # @return [Mindee::Parsing::Standard::ClassificationField]
+        attr_reader :document_type
+        # The date on which the payment is due.
+        # @return [Mindee::Parsing::Standard::DateField]
+        attr_reader :due_date
+        # The invoice number or identifier.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :invoice_number
+        # List of line item details.
+        # @return [Array<Mindee::Product::Invoice::InvoiceV4LineItem>]
+        attr_reader :line_items
+        # The locale detected on the document.
+        # @return [Mindee::Parsing::Standard::LocaleField]
+        attr_reader :locale
+        # List of Reference numbers, including PO number.
+        # @return [Array<Mindee::Parsing::Standard::StringField>]
+        attr_reader :reference_numbers
+        # The address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
-        # The payment information.
-        # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
-        attr_reader :supplier_payment_details
-        # The supplier's company registration information.
+        # List of company registrations associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
-        # Line items details.
-        # @return [Array<Mindee::InvoiceV4LineItem>]
-        attr_reader :line_items
+        # The name of the supplier or merchant.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :supplier_name
+        # List of payment details associated to the supplier.
+        # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
+        attr_reader :supplier_payment_details
+        # List of tax line details.
+        # @return [Mindee::Parsing::Standard::Taxes]
+        attr_reader :taxes
+        # The total amount paid: includes taxes, tips, fees, and other charges.
+        # @return [Mindee::Parsing::Standard::AmountField]
+        attr_reader :total_amount
+        # The net amount paid: does not include taxes, fees, and discounts.
+        # @return [Mindee::Parsing::Standard::AmountField]
+        attr_reader :total_net
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
-          @locale = LocaleField.new(prediction['locale'])
-          @document_type = ClassificationField.new(prediction['document_type'], page_id)
-          @total_amount = AmountField.new(prediction['total_amount'], page_id)
-          @total_net = AmountField.new(prediction['total_net'], page_id)
           @customer_address = StringField.new(prediction['customer_address'], page_id)
-          @customer_name = StringField.new(prediction['customer_name'], page_id)
-          @date = DateField.new(prediction['date'], page_id)
-          @due_date = DateField.new(prediction['due_date'], page_id)
-          @invoice_number = StringField.new(prediction['invoice_number'], page_id)
-          @supplier_name = StringField.new(prediction['supplier_name'], page_id)
-          @supplier_address = StringField.new(prediction['supplier_address'], page_id)
-          @reference_numbers = []
-          prediction['reference_numbers'].each do |item|
-            @reference_numbers.push(StringField.new(item, page_id))
-          end
           @customer_company_registrations = []
           prediction['customer_company_registrations'].each do |item|
             @customer_company_registrations.push(CompanyRegistrationField.new(item, page_id))
           end
-          @taxes = Taxes.new(prediction['taxes'], page_id)
-          @supplier_payment_details = []
-          prediction['supplier_payment_details'].each do |item|
-            @supplier_payment_details.push(PaymentDetailsField.new(item, page_id))
-          end
-          @supplier_company_registrations = []
-          prediction['supplier_company_registrations'].each do |item|
-            @supplier_company_registrations.push(CompanyRegistrationField.new(item, page_id))
-          end
-          @total_tax = AmountField.new(
-            { value: nil, confidence: 0.0 }, page_id
-          )
+          @customer_name = StringField.new(prediction['customer_name'], page_id)
+          @date = DateField.new(prediction['date'], page_id)
+          @document_type = ClassificationField.new(prediction['document_type'], page_id)
+          @due_date = DateField.new(prediction['due_date'], page_id)
+          @invoice_number = StringField.new(prediction['invoice_number'], page_id)
           @line_items = []
           prediction['line_items'].each do |item|
             @line_items.push(InvoiceV4LineItem.new(item, page_id))
           end
-          reconstruct(page_id)
+          @locale = LocaleField.new(prediction['locale'], page_id)
+          @reference_numbers = []
+          prediction['reference_numbers'].each do |item|
+            @reference_numbers.push(StringField.new(item, page_id))
+          end
+          @supplier_address = StringField.new(prediction['supplier_address'], page_id)
+          @supplier_company_registrations = []
+          prediction['supplier_company_registrations'].each do |item|
+            @supplier_company_registrations.push(CompanyRegistrationField.new(item, page_id))
+          end
+          @supplier_name = StringField.new(prediction['supplier_name'], page_id)
+          @supplier_payment_details = []
+          prediction['supplier_payment_details'].each do |item|
+            @supplier_payment_details.push(PaymentDetailsField.new(item, page_id))
+          end
+          @taxes = Taxes.new(prediction['taxes'], page_id)
+          @total_amount = AmountField.new(prediction['total_amount'], page_id)
+          @total_net = AmountField.new(prediction['total_net'], page_id)
         end
 
         # @return [String]
         def to_s
-          customer_company_registrations = @customer_company_registrations.map(&:value).join('; ')
-          supplier_payment_details = @supplier_payment_details.map(&:to_s).join("\n                 ")
-          supplier_company_registrations = @supplier_company_registrations.map(&:to_s).join('; ')
-          reference_numbers = @reference_numbers.map(&:to_s).join(', ')
+          reference_numbers = @reference_numbers.join("\n #{' ' * 19}")
+          supplier_payment_details = @supplier_payment_details.join("\n #{' ' * 26}")
+          supplier_company_registrations = @supplier_company_registrations.join("\n #{' ' * 32}")
+          customer_company_registrations = @customer_company_registrations.join("\n #{' ' * 32}")
+          line_items = line_items_to_s
           out_str = String.new
           out_str << "\n:Locale: #{@locale}".rstrip
-          out_str << "\n:Document type: #{@document_type}".rstrip
-          out_str << "\n:Invoice number: #{@invoice_number}".rstrip
-          out_str << "\n:Reference numbers: #{reference_numbers}".rstrip
-          out_str << "\n:Invoice date: #{@date}".rstrip
-          out_str << "\n:Invoice due date: #{@due_date}".rstrip
-          out_str << "\n:Supplier name: #{@supplier_name}".rstrip
-          out_str << "\n:Supplier address: #{@supplier_address}".rstrip
-          out_str << "\n:Supplier company registrations: #{supplier_company_registrations}".rstrip
-          out_str << "\n:Supplier payment details: #{supplier_payment_details}".rstrip
-          out_str << "\n:Customer name: #{@customer_name}".rstrip
-          out_str << "\n:Customer address: #{@customer_address}".rstrip
-          out_str << "\n:Customer company registrations: #{customer_company_registrations}".rstrip
+          out_str << "\n:Invoice Number: #{@invoice_number}".rstrip
+          out_str << "\n:Reference Numbers: #{reference_numbers}".rstrip
+          out_str << "\n:Purchase Date: #{@date}".rstrip
+          out_str << "\n:Due Date: #{@due_date}".rstrip
+          out_str << "\n:Total Net: #{@total_net}".rstrip
+          out_str << "\n:Total Amount: #{@total_amount}".rstrip
           out_str << "\n:Taxes:#{@taxes}".rstrip
-          out_str << "\n:Total net: #{@total_net}".rstrip
-          out_str << "\n:Total tax: #{@total_tax}".rstrip
-          out_str << "\n:Total amount: #{@total_amount}".rstrip
+          out_str << "\n:Supplier Payment Details: #{supplier_payment_details}".rstrip
+          out_str << "\n:Supplier Name: #{@supplier_name}".rstrip
+          out_str << "\n:Supplier Company Registrations: #{supplier_company_registrations}".rstrip
+          out_str << "\n:Supplier Address: #{@supplier_address}".rstrip
+          out_str << "\n:Customer Name: #{@customer_name}".rstrip
+          out_str << "\n:Customer Company Registrations: #{customer_company_registrations}".rstrip
+          out_str << "\n:Customer Address: #{@customer_address}".rstrip
+          out_str << "\n:Document Type: #{@document_type}".rstrip
           out_str << "\n:Line Items:"
-          out_str << line_items_to_s
+          out_str << line_items
           out_str[1..].to_s
         end
 
         private
 
-        def line_item_separator(char)
-          "  +#{char * 22}+#{char * 9}+#{char * 9}+#{char * 10}+#{char * 18}+#{char * 38}+"
+        # @param char [String]
+        # @return [String]
+        def line_items_separator(char)
+          out_str = String.new
+          out_str << '  '
+          out_str << "+#{char * 38}"
+          out_str << "+#{char * 14}"
+          out_str << "+#{char * 10}"
+          out_str << "+#{char * 12}"
+          out_str << "+#{char * 14}"
+          out_str << "+#{char * 14}"
+          out_str << "+#{char * 12}"
+          out_str << '+'
+          out_str
         end
 
+        # @return [String]
         def line_items_to_s
           return '' if @line_items.empty?
 
-          line_items = @line_items.map(&:to_s).join("\n#{line_item_separator('-')}\n  ")
+          line_items = @line_items.map(&:to_table_line).join("\n#{line_items_separator('-')}\n  ")
           out_str = String.new
-          out_str << "\n#{line_item_separator('-')}"
-          out_str << "\n  | Code#{' ' * 17}| QTY     | Price   | Amount   | Tax (Rate)       | Description #{' ' * 25}|"
-          out_str << "\n#{line_item_separator('=')}"
+          out_str << "\n#{line_items_separator('-')}"
+          out_str << "\n  |"
+          out_str << ' Description                          |'
+          out_str << ' Product code |'
+          out_str << ' Quantity |'
+          out_str << ' Tax Amount |'
+          out_str << ' Tax Rate (%) |'
+          out_str << ' Total Amount |'
+          out_str << ' Unit Price |'
+          out_str << "\n#{line_items_separator('=')}"
           out_str << "\n  #{line_items}"
-          out_str << "\n#{line_item_separator('-')}"
-        end
-
-        def reconstruct(page_id)
-          construct_total_tax_from_taxes(page_id)
-          return unless page_id.nil?
-
-          construct_total_excl_from_tcc_and_taxes(page_id)
-          construct_total_incl_from_taxes_plus_excl(page_id)
-          construct_total_tax_from_totals(page_id)
-        end
-
-        def construct_total_excl_from_tcc_and_taxes(page_id)
-          return if @total_amount.value.nil? || taxes.empty? || !@total_net.value.nil?
-
-          total_excl = {
-            'value' => @total_amount.value - @taxes.map(&:value).sum,
-            'confidence' => StringField.array_confidence(@taxes) * @total_amount.confidence,
-          }
-          @total_net = AmountField.new(total_excl, page_id, reconstructed: true)
-        end
-
-        def construct_total_incl_from_taxes_plus_excl(page_id)
-          return if @total_net.value.nil? || @taxes.empty? || !@total_amount.value.nil?
-
-          total_incl = {
-            'value' => @taxes.map(&:value).sum + @total_net.value,
-            'confidence' => StringField.array_confidence(@taxes) * @total_net.confidence,
-          }
-          @total_amount = AmountField.new(total_incl, page_id, reconstructed: true)
-        end
-
-        def construct_total_tax_from_taxes(page_id)
-          return if @taxes.empty?
-
-          total_tax = {
-            'value' => @taxes.map(&:value).sum,
-            'confidence' => StringField.array_confidence(@taxes),
-          }
-          return unless total_tax['value'].positive?
-
-          @total_tax = AmountField.new(total_tax, page_id, reconstructed: true)
-        end
-
-        def construct_total_tax_from_totals(page_id)
-          return if !@total_tax.value.nil? || @total_amount.value.nil? || @total_net.value.nil?
-
-          total_tax = {
-            'value' => @total_amount.value - @total_net.value,
-            'confidence' => StringField.array_confidence(@taxes),
-          }
-          return unless total_tax['value'] >= 0
-
-          @total_tax = AmountField.new(total_tax, page_id, reconstructed: true)
+          out_str << "\n#{line_items_separator('-')}"
+          out_str
         end
       end
     end

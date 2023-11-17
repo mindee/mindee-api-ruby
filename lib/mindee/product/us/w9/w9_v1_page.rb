@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module W9
-        # US W9 V1 page.
+        # W9 V1 page.
         class W9V1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
@@ -19,7 +19,7 @@ module Mindee
           end
         end
 
-        # US W9 V1 page prediction.
+        # W9 V1 page prediction.
         class W9V1PagePrediction < W9V1Document
           include Mindee::Parsing::Standard
 
