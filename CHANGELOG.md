@@ -1,5 +1,15 @@
 # Mindee Ruby API Library Changelog
 
+## v3.3.0 - 2023-11-17
+### Changes
+* :sparkles: add support for Carte Grise V1
+* :sparkles: add page number attributes to doc
+* :arrow_up: update tests, docs & display format for some products
+
+### Fixes
+* :bug: fix page id not working on newer custom models
+
+
 ## v3.2.0 - 2023-09-15
 ### Changes
 * :sparkles: add support for Multi Receipts Detector V1

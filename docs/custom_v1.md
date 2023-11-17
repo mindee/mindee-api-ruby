@@ -74,7 +74,7 @@ Values of `ListField`s are stored in a `ListFieldItem` structure, which is imple
 * **confidence** (`Float`): the confidence score of the prediction
 * **bounding_box** (`Quadrilateral`): 4 relative vertices corrdinates of a rectangle containing the word in the document.
 * **polygon** (`Polygon`): vertices of a polygon containing the word.
-* **page_id** (`Integer`): the ID of the page, is `undefined` when at document-level.
+* **page_id** (`Integer`): the ID of the page, is `nil` when at document-level.
 
 ### Classification Field
 
