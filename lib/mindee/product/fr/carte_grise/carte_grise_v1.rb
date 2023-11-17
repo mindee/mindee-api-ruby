@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'w9_v1_document'
-require_relative 'w9_v1_page'
+require_relative 'carte_grise_v1_document'
+require_relative 'carte_grise_v1_page'
 
 module Mindee
   module Product
-    module US
-      # W9 module.
-      module W9
-        # W9 V1 prediction inference.
-        class W9V1 < Mindee::Parsing::Common::Inference
-          @endpoint_name = 'us_w9'
+    module FR
+      # Carte Grise module.
+      module CarteGrise
+        # Carte Grise V1 prediction inference.
+        class CarteGriseV1 < Mindee::Parsing::Common::Inference
+          @endpoint_name = 'carte_grise'
           @endpoint_version = '1'
 
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = W9V1Document.new
+            @prediction = CarteGriseV1Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              @pages.push(W9V1Page.new(page))
+              @pages.push(CarteGriseV1Page.new(page))
             end
           end
 

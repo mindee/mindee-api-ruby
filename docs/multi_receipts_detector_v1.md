@@ -1,5 +1,5 @@
 ---
-title: Multi Receipts Detector API Ruby
+title: Multi Receipts Detector OCR Ruby
 ---
 The Ruby OCR SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
 

@@ -58,11 +58,11 @@ Prediction
   |               | TAX    |          | 3.34          |
   +---------------+--------+----------+---------------+
 :Supplier Payment Details:
-:Supplier name: LOGANS
+:Supplier Name: LOGANS
 :Supplier Company Registrations:
 :Supplier Address: 2513 s stemmons freeway lewisville tx 75067
 :Supplier Phone Number: 9724596042
-:Customer name:
+:Customer Name:
 :Customer Company Registrations:
 :Customer Address:
 :Document Type: EXPENSE RECEIPT
@@ -97,11 +97,11 @@ Page 0
   |               | TAX    |          | 3.34          |
   +---------------+--------+----------+---------------+
 :Supplier Payment Details:
-:Supplier name: LOGANS
+:Supplier Name: LOGANS
 :Supplier Company Registrations:
 :Supplier Address: 2513 s stemmons freeway lewisville tx 75067
 :Supplier Phone Number: 9724596042
-:Customer name:
+:Customer Name:
 :Customer Company Registrations:
 :Customer Address:
 :Document Type: EXPENSE RECEIPT
@@ -179,7 +179,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 #### Tax
 Aside from the basic `Field` attributes, the tax field `TaxField` also implements the following:
 
-* **rate** (`Float`): the tax rate applied to an item can be undefined. Expressed as a percentage. Can be `nil`.
+* **rate** (`Float`): the tax rate applied to an item can be expressed as a percentage. Can be `nil`.
 * **code** (`String`): tax code (or equivalent, depending on the origin of the document). Can be `nil`.
 * **base** (`Float`): base amount used for the tax. Can be `nil`.
 
@@ -313,7 +313,7 @@ for supplier_company_registrations_elem in result.document.inference.prediction.
 end
 ```
 
-## Supplier name
+## Supplier Name
 **supplier_name** ([StringField](#string-field)): The name of the supplier or merchant.
 
 ```rb

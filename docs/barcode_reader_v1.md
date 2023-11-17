@@ -1,5 +1,5 @@
 ---
-title: Barcode Reader API Ruby
+title: Barcode Reader OCR Ruby
 ---
 The Ruby OCR SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
 
@@ -34,7 +34,7 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 0f54c154-5030-41ac-939e-046b7f6aca71
+:Mindee ID: f9c48da1-a306-4805-8da8-f7231fda2d88
 :Filename: default_sample.jpg
 
 Inference

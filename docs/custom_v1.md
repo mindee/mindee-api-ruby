@@ -59,14 +59,22 @@ If it is not set, it will default to "1".
 A `ListField` is a special type of custom list that implements the following:
 
 * **confidence** (`Float`): the confidence score of the field prediction.
-* **pageId** (`Integer`): the ID of the page, is `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether or not an object was reconstructed (not extracted as the API gave it).
+* **values** (`Array<`[ListFieldItem](#list-field-item)`>`): list of value fields
 
 Since the inner contents can vary, the value isn't accessed through a property, but rather through the following functions:
 * **contents_list()** (`[Array, Hash, String, nil]`): returns a list of values for each element.
 * **contents_str(separator:' ')** (`String`): returns a list of concatenated values, with an optional **separator** `String` between them.
 * **to_s()**: returns a string representation of all values, with an empty space between each of them.
 
+#### List Field Item
+
+Values of `ListField`s are stored in a `ListFieldItem` structure, which is implemented as follows:
+* **content** (`String`): extracted content of the prediction
+* **confidence** (`Float`): the confidence score of the prediction
+* **bounding_box** (`Quadrilateral`): 4 relative vertices corrdinates of a rectangle containing the word in the document.
+* **polygon** (`Polygon`): vertices of a polygon containing the word.
+* **page_id** (`Integer`): the ID of the page, is `undefined` when at document-level.
 
 ### Classification Field
 

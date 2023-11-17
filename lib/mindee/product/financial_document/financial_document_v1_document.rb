@@ -140,11 +140,11 @@ module Mindee
           out_str << "\n:Total Amount: #{@total_amount}".rstrip
           out_str << "\n:Taxes:#{@taxes}".rstrip
           out_str << "\n:Supplier Payment Details: #{supplier_payment_details}".rstrip
-          out_str << "\n:Supplier name: #{@supplier_name}".rstrip
+          out_str << "\n:Supplier Name: #{@supplier_name}".rstrip
           out_str << "\n:Supplier Company Registrations: #{supplier_company_registrations}".rstrip
           out_str << "\n:Supplier Address: #{@supplier_address}".rstrip
           out_str << "\n:Supplier Phone Number: #{@supplier_phone_number}".rstrip
-          out_str << "\n:Customer name: #{@customer_name}".rstrip
+          out_str << "\n:Customer Name: #{@customer_name}".rstrip
           out_str << "\n:Customer Company Registrations: #{customer_company_registrations}".rstrip
           out_str << "\n:Customer Address: #{@customer_address}".rstrip
           out_str << "\n:Document Type: #{@document_type}".rstrip

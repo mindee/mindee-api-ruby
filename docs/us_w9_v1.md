@@ -1,10 +1,10 @@
 ---
 title: US W9 OCR Ruby
 ---
-The Ruby OCR SDK supports the [US W9 API](https://platform.mindee.com/mindee/us_w9).
+The Ruby OCR SDK supports the [W9 API](https://platform.mindee.com/mindee/us_w9).
 
 Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
-![US W9 sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg?raw=true)
+![W9 sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
@@ -93,7 +93,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 Some fields are constrained to the page level, and so will not be retrievable to through the document.
 
 # Attributes
-The following fields are extracted for US W9 V1:
+The following fields are extracted for W9 V1:
 
 ## Address
 [📄](#page-level-fields "This field is only present on individual pages.")**address** ([StringField](#string-field)): The street address (number, street, and apt. or suite no.) of the applicant.

@@ -1,5 +1,5 @@
 ---
-title: Cropper API Ruby
+title: Cropper OCR Ruby
 ---
 The Ruby OCR SDK supports the [Cropper API](https://platform.mindee.com/mindee/cropper).
 
