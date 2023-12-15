@@ -243,11 +243,16 @@ module Mindee
     # Validates the parameters for async auto-polling
     # @param initial_delay_sec [Integer, Float] initial delay before polling
     # @param delay_sec [Integer, Float] delay between polling attempts
-    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 30.
+    # @param max_retries [Integer, nil] maximum amount of retries.
     def validate_async_params(initial_delay_sec, delay_sec, max_retries)
-      raise 'Cannot set auto-poll delay to less than 2 seconds' if delay_sec < 2
-      raise 'Cannot set initial parsing delay to less than 4 seconds' if initial_delay_sec < 4
-      raise 'Cannot set auto-poll delay to less than 2 seconds' unless max_retries.is_a? Integer
+      min_delay_sec = 1
+      min_initial_delay_sec = 2
+      min_retries = 2
+      raise "Cannot set auto-poll delay to less than #{min_delay_sec} seconds" if delay_sec < min_delay_sec
+      if initial_delay_sec < min_initial_delay_sec
+        raise "Cannot set initial parsing delay to less than #{min_initial_delay_sec} seconds"
+      end
+      raise "Cannot set auto-poll delay to less than #{min_retries} seconds" if max_retries < min_retries
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
