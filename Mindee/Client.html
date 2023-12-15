@@ -176,7 +176,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#enqueue_and_parse-instance_method" title="#enqueue_and_parse (instance method)">#<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false, initial_delay_sec: 6, delay_sec: 3, max_retries: 10)  &#x21d2; Mindee::Parsing::Common::ApiResponse </a>
+      <a href="#enqueue_and_parse-instance_method" title="#enqueue_and_parse (instance method)">#<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false, initial_delay_sec: 4, delay_sec: 2, max_retries: 30)  &#x21d2; Mindee::Parsing::Common::ApiResponse </a>
     
 
     
@@ -796,7 +796,7 @@
       <div class="method_details ">
   <h3 class="signature " id="enqueue_and_parse-instance_method">
   
-    #<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false, initial_delay_sec: 6, delay_sec: 3, max_retries: 10)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt> 
+    #<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint: nil, all_words: false, close_file: true, page_options: nil, cropper: false, initial_delay_sec: 4, delay_sec: 2, max_retries: 30)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">Mindee::Parsing::Common::ApiResponse</a></span></tt> 
   
 
   
@@ -939,12 +939,12 @@
         <span class='type'>(<tt>Integer</tt>, <tt>Float</tt>, <tt>nil</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>6</tt>)</em>
+        <em class="default">(defaults to: <tt>4</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>initial delay before polling. Defaults to 6.</p>
+<p>initial delay before polling. Defaults to 4.</p>
 </div>
       
     </li>
@@ -957,12 +957,12 @@
         <span class='type'>(<tt>Integer</tt>, <tt>Float</tt>, <tt>nil</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>3</tt>)</em>
+        <em class="default">(defaults to: <tt>2</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>delay between polling attempts. Defaults to 3.</p>
+<p>delay between polling attempts. Defaults to 2.</p>
 </div>
       
     </li>
@@ -975,12 +975,12 @@
         <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>10</tt>)</em>
+        <em class="default">(defaults to: <tt>30</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>maximum amount of retries. Defaults to 10.</p>
+<p>maximum amount of retries. Defaults to 30.</p>
 </div>
       
     </li>
@@ -1056,9 +1056,9 @@
   <span class='label'>close_file:</span> <span class='kw'>true</span><span class='comma'>,</span>
   <span class='label'>page_options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
   <span class='label'>cropper:</span> <span class='kw'>false</span><span class='comma'>,</span>
-  <span class='label'>initial_delay_sec:</span> <span class='int'>6</span><span class='comma'>,</span>
-  <span class='label'>delay_sec:</span> <span class='int'>3</span><span class='comma'>,</span>
-  <span class='label'>max_retries:</span> <span class='int'>10</span>
+  <span class='label'>initial_delay_sec:</span> <span class='int'>4</span><span class='comma'>,</span>
+  <span class='label'>delay_sec:</span> <span class='int'>2</span><span class='comma'>,</span>
+  <span class='label'>max_retries:</span> <span class='int'>30</span>
 <span class='rparen'>)</span>
   <span class='id identifier rubyid_enqueue_res'>enqueue_res</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
@@ -1922,7 +1922,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Nov 17 15:41:42 2023 by
+  Generated on Fri Dec 15 13:48:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
