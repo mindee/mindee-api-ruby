@@ -1,5 +1,12 @@
 # Mindee Ruby API Library Changelog
 
+## v3.3.1 - 2023-12-15
+### Changes
+* :recycle: tweak async delays & retry
+* :recycle: tweak default async sample delays & retry
+* :memo: update md doc & fix typos
+
+
 ## v3.3.0 - 2023-11-17
 ### Changes
 * :sparkles: add support for Carte Grise V1
