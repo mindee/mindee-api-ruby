@@ -131,7 +131,7 @@ A typical `Field` object will have the following attributes:
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether or not an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
@@ -326,6 +326,9 @@ puts result.document.inference.prediction.supplier_name.value
 ```rb
 for supplier_payment_details_elem in result.document.inference.prediction.supplier_payment_details do
   puts supplier_payment_details_elem.value
+    puts supplier_payment_details_elem.rate
+    puts supplier_payment_details_elem.code
+    puts supplier_payment_details_elem.basis
 end
 ```
 
@@ -341,7 +344,7 @@ puts result.document.inference.prediction.supplier_phone_number.value
 
 ```rb
 for taxes_elem in result.document.inference.prediction.taxes do
-  puts taxes_elem.to_s
+  puts taxes_elem.value
 end
 ```
 
