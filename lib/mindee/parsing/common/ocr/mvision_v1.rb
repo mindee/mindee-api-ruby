@@ -27,6 +27,21 @@ module Mindee
             end
             out_str.strip
           end
+
+          # Constructs a line from a column, located underneath given coordinates
+          # @param coordinates [Array<Mindee::Geometry::Point>] Polygon or bounding box where the reconstruction should start
+          # @param page_id [Integer] ID of the page to start at
+          # @param x_margin [Float] Margin of misalignment for the x coordinate.
+          # @return [Mindee::Parsing::Common::Ocr::OcrLine]
+          def reconstruct_vertically(coordinates, page_id, x_margin)
+            line_arr = OcrLine.new([])
+            @pages[page_id].all_lines.each do |line|
+              line.each do |word|
+                line_arr.push(word) if Geometry.below?(word.polygon, coordinates, x_margin / 2, x_margin * 2)
+              end
+            end
+            line_arr
+          end
         end
       end
     end
