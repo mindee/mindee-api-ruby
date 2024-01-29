@@ -104,7 +104,8 @@ module Mindee
         end
       end
 
-      class CustomTaxExtractor
+      # Tax Extraction Class
+      class TaxExtractor
         # Normalizes text by removing diacritics.
         # @param input_str [String] string to handle.
         # @return [String]
@@ -114,15 +115,18 @@ module Mindee
             .unicode_normalize(:nfd)
             .tr(diacritics, '')
             .unicode_normalize(:nfc)
+            .scrub
         end
 
         # Checks for a list of possible matches in a string. Case & diacritics insensitive.
         # @param text [String] string to search for matches.
-        # @param matches [Array<String>] array of values to look for
+        # @param candidates [Array<String>] array of values to look for
         # @return [Boolean]
-        def self.match_index(text, matches)
-          matches.each do |match|
-            return remove_accents(text.downcase).index(remove_accents(match.downcase)) unless remove_accents(text.downcase).index(remove_accents(match.downcase)).nil?
+        def self.match_index(text, candidates)
+          candidates.each do |candidate|
+            unless remove_accents(text.downcase).index(remove_accents(candidate.downcase)).nil?
+              return remove_accents(text.downcase).index(remove_accents(candidate.downcase))
+            end
           end
           nil
         end
@@ -142,7 +146,7 @@ module Mindee
         end
 
         def self.parse_amount(amount_str)
-          cleaned_str = amount_str.gsub(%r{[^\d.,]}, '')
+          cleaned_str = amount_str.scrub.gsub(%r{[^\d.,]}, '')
           cleaned_str.sub!(%r{,$}, '')
           extract_numeric_part(cleaned_str)
           numeric_part = cleaned_str.sub(%r{^[^\d]+}, '')
@@ -156,20 +160,27 @@ module Mindee
           percentage_str.gsub!('%', '')
           percentage_str.strip
           percentage_str.gsub!(',', '.')
-          Float(percentage_str)
+          Float(percentage_str.scrub)
         rescue ArgumentError
           nil
         end
 
-        def self.extract_from_line(line, pattern, page_id)
+        def self.extract_from_line(line, pattern, page_id, percent_first = false)
           found_hash = {}
 
-          matches = line.gsub(%r{[-+]}, '').match(pattern)
+          matches = line.match(pattern)
 
           # Edge case for when the tax is split-up between two pages, we'll consider as belonging to the first one
           found_hash['page_id'] = page_id unless found_hash.key?('page_id')
-          found_hash['code'] = matches[1] unless matches[1].nil?
-          found_hash['rate'] = parse_percentage(matches[2]) unless matches[2].nil?
+          return found_hash if matches.nil?
+
+          if percent_first
+            found_hash['code'] = matches[2] unless matches[2].nil?
+            found_hash['rate'] = parse_percentage(matches[1]) unless matches[1].nil?
+          else
+            found_hash['code'] = matches[1] unless matches[1].nil?
+            found_hash['rate'] = parse_percentage(matches[2]) unless matches[2].nil?
+          end
           if matches[4].nil? && !matches[3].nil?
             found_hash['value'] = parse_amount(matches[3]) unless matches[3].nil?
           elsif matches[3].nil? && !matches[4].nil?
@@ -182,11 +193,21 @@ module Mindee
         end
 
         def self.extract_horizontal(ocr_result, tax_names)
-          linear_pattern = %r{\s*([a-zA-Z]+[a-zA-Z\s]*\s*)[(\[]?\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)?\s*[)\]]?\s*(\d*[.,]?\d+|\d+)?\s+(\d*[.,]?\d+|\d+)?}
+          linear_pattern_percent_first = %r{\s*[(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)\s*[)\]]*\s*([a-zA-Z]+[a-zA-Z\s]*\s*)(\d*[.,]?\d+|\d+)?\s+(\d*[.,]?\d+|\d+)?}
+          linear_pattern_percent_second = %r{\s*([a-zA-Z]+[a-zA-Z\s]*\s*)[(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)?\s*[)\]]*\s*(\d*[.,]?\d+|\d+)?\s+(\d*[.,]?\d+|\d+)?}
           ocr_result.mvision_v1.pages.each_with_index do |page, page_id|
             page.all_lines.each do |line|
-              unless match_index(line.to_s, tax_names).nil? || line.to_s.gsub(%r{[-+]}, '').match(linear_pattern).nil?
-                return extract_from_line(line.to_s[match_index(line.to_s, tax_names)..-1], linear_pattern, page_id)
+              clean_line = line.to_s.scrub.gsub(%r{[-+]}, '').to_s
+              next if match_index(clean_line, tax_names).nil?
+
+              if !clean_line.match(linear_pattern_percent_first).nil?
+                return extract_from_line(clean_line[match_index(clean_line, ['%'])..],
+                                         linear_pattern_percent_first, page_id, true)
+              elsif !clean_line.match(linear_pattern_percent_second).nil?
+                return extract_from_line(clean_line[match_index(clean_line, tax_names)..], linear_pattern_percent_second,
+                                         page_id)
+              else
+                next
               end
             end
           end

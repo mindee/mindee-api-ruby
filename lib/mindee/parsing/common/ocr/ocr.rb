@@ -165,7 +165,8 @@ module Mindee
           end
 
           # Constructs a line from a column, located underneath given coordinates
-          # @param coordinates [Array<Mindee::Geometry::Point>] Polygon or bounding box where the reconstruction should start
+          # @param coordinates [Array<Mindee::Geometry::Point>] Polygon or bounding box where the reconstruction should
+          # start
           # @param page_id [Integer] ID of the page to start at
           # @param x_margin [Float] Margin of misalignment for the x coordinate (default 10%)
           # @return [Mindee::Parsing::Common::Ocr::OcrLine]
