@@ -67,7 +67,7 @@ module Mindee
 
       # Parses an amount from a string, and returns it as a float.
       # Returns nil if candidate isn't a valid amount.
-      # @param percentage_str [String] String candidate.
+      # @param amount_str [String] String candidate.
       # @return [Float, nil]
       def self.parse_amount(amount_str)
         cleaned_str = amount_str.scrub.gsub(%r{[^\d.,]}, '')
