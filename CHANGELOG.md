@@ -1,5 +1,11 @@
 # Mindee Ruby API Library Changelog
 
+## v3.4.0 - 2024-01-30
+### Changes
+* :arrow_up: update invoices to v4.4
+* :sparkles: add support for `raw_value` in string fields
+
+
 ## v3.3.1 - 2023-12-15
 ### Changes
 * :recycle: tweak async delays & retry

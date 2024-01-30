@@ -3,7 +3,7 @@
 # Mindee
 module Mindee
   # Current version.
-  VERSION = '3.3.1'
+  VERSION = '3.4.0'
 
   # Finds and return the current platform.
   # @return [String]
