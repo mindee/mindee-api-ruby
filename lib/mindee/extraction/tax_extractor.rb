@@ -16,10 +16,11 @@ module Mindee
           .scrub
       end
 
-      # Checks for a list of possible matches in a string. Case & diacritics insensitive.
+      # Checks for a list of possible matches in a string & returns the index of the first found candidate.
+      # Case & diacritics insensitive.
       # @param text [String] string to search for matches.
       # @param candidates [Array<String>] array of values to look for
-      # @return [Boolean]
+      # @return [Integer, nil]
       def self.match_index(text, candidates)
         candidates.each do |candidate|
           unless remove_accents(text.downcase).index(remove_accents(candidate.downcase)).nil?
@@ -29,6 +30,9 @@ module Mindee
         nil
       end
 
+      # Extracts the numeric part of a string, independently of commas & dots.
+      # @param amount_str [String] String to process.
+      # @return [String]
       def self.extract_numeric_part(amount_str)
         # Remove non-numeric characters except for dots and commas
         cleaned_str = amount_str.gsub(%r{[^\d.,]}, '')
@@ -43,6 +47,10 @@ module Mindee
         cleaned_str.sub(%r{^[^\d]+}, '')
       end
 
+      # Parses an amount from a string, and returns it as a float.
+      # Returns nil if candidate isn't a valid amount.
+      # @param percentage_str [String] String candidate.
+      # @return [Float, nil]
       def self.parse_amount(amount_str)
         cleaned_str = amount_str.scrub.gsub(%r{[^\d.,]}, '')
         cleaned_str.sub!(%r{,$}, '')
@@ -54,6 +62,10 @@ module Mindee
         nil
       end
 
+      # Parses a percentage from a string, and returns it as a float.
+      # Returns nil if candidate isn't a valid percentage.
+      # @param percentage_str [String] String candidate.
+      # @return [Float, nil]
       def self.parse_percentage(percentage_str)
         percentage_str.gsub!('%', '')
         percentage_str.strip
@@ -63,6 +75,11 @@ module Mindee
         nil
       end
 
+      # Extracts the rate and code, if found, from matches into the found_hash.
+      # @param matches [MatchData] RegEx matches of the values for taxes
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @param percent_first [Boolean] Whether the percentage was found before or after the tax name.
+      # @return [Hash]
       def self.extract_percentage(matches, found_hash, percent_first)
         if percent_first
           found_hash['code'] = matches[2].strip unless matches[2].nil?
@@ -76,6 +93,10 @@ module Mindee
 
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
+      # Extracts the basis and value of a tax from regex matches, independent of the order.
+      # @param matches [MatchData] RegEx matches of the values for taxes
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @return [Hash]
       def self.extract_basis_and_value(matches, found_hash)
         if matches[4].nil? && !matches[3].nil?
           found_hash['value'] = parse_amount(matches[3]) unless matches[3].nil?
@@ -90,12 +111,18 @@ module Mindee
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
 
-      def self.extract_from_line(line, pattern, page_id, percent_first)
+      # Extracts tax information from a horizontal line.
+      # @param line [String] Line to be processed.
+      # @param pattern [Regexp] RegEx pattern to search the line with.
+      # @param percent_first [Boolean] Whether the percentage was found before or after the tax name.
+      # @return [Hash]
+      def self.extract_from_horizontal_line(line, pattern, page_id, percent_first)
         found_hash = {}
 
         matches = line.match(pattern)
 
-        # Edge case for when the tax is split-up between two pages, we'll consider as belonging to the first one
+        # Edge case for when the tax is split-up between two pages, we'll consider that
+        # the answer belongs to the first one.
         found_hash['page_id'] = page_id unless found_hash.key?('page_id')
         return found_hash if matches.nil?
 
@@ -103,6 +130,10 @@ module Mindee
         extract_basis_and_value(matches, found_hash)
       end
 
+      # Processes a horizontal line for tax extraction. Returns a hash of collected values.
+      # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] Processed OCR results.
+      # @param tax_names [Array<String>] Possible tax names candidates.
+      # @return [Hash]
       def self.extract_horizontal(ocr_result, tax_names)
         linear_pattern_percent_first = %r{
           \s*[(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)\s*[)\]]*\s*
@@ -112,8 +143,8 @@ module Mindee
         }x
         linear_pattern_percent_second = %r{
           \s*([a-zA-Z]+[a-zA-Z\s]*\s*)
-          [(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)?\s*[)\]]*\s
-          *(\d*[.,]?\d+|\d+)?\s+
+          [(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)?\s*[)\]]*\s*
+          (\d*[.,]?\d+|\d+)?\s+
           (\d*[.,]?\d+|\d+)?
         }x
         ocr_result.mvision_v1.pages.each_with_index do |page, page_id|
@@ -122,11 +153,11 @@ module Mindee
             next if match_index(clean_line, tax_names).nil?
 
             if !clean_line.match(linear_pattern_percent_second).nil?
-              return extract_from_line(clean_line[match_index(clean_line, tax_names)..], linear_pattern_percent_second,
-                                       page_id, false)
+              return extract_from_horizontal_line(clean_line[match_index(clean_line, tax_names)..],
+                                                  linear_pattern_percent_second, page_id, false)
             elsif !clean_line.match(linear_pattern_percent_first).nil?
-              return extract_from_line(clean_line[match_index(clean_line, ['%'])..],
-                                       linear_pattern_percent_first, page_id, true)
+              return extract_from_horizontal_line(clean_line[match_index(clean_line, ['%'])..],
+                                                  linear_pattern_percent_first, page_id, true)
             else
               next
             end
@@ -135,6 +166,10 @@ module Mindee
         {}
       end
 
+      # Processes a vertical reconstructed line for tax extraction. Returns a hash of collected values.
+      # @param line [Mindee::Parsing::Common::Ocr::OcrLine] Processed OCR results.
+      # @param found_hash [Hash] Hash containing previously found values, if any.
+      # @return [Hash]
       def self.extract_vertical_values(line, found_hash)
         amounts = []
         line.each do |reconstructed_word|
