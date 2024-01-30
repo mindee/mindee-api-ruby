@@ -86,11 +86,11 @@ module Mindee
     def self.below?(candidate, anchor, margin_left, margin_max)
       return false if Geometry.get_min_max_y(candidate).min < Geometry.get_min_max_y(anchor).min
       if Geometry.get_min_max_x(candidate).min <
-        Geometry.get_min_max_x(anchor).min - (Geometry.get_min_max_x(anchor).min * margin_left)
+         Geometry.get_min_max_x(anchor).min - (Geometry.get_min_max_x(anchor).min * margin_left)
         return false
       end
       if Geometry.get_min_max_x(candidate).max >
-        Geometry.get_min_max_x(anchor).max + (Geometry.get_min_max_x(anchor).max * margin_max)
+         Geometry.get_min_max_x(anchor).max + (Geometry.get_min_max_x(anchor).max * margin_max)
         return false
       end
 
