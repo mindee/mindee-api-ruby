@@ -4,6 +4,24 @@ module Mindee
   module Extraction
     # Tax extractor class
     class TaxExtractor
+      # Extracts a single custom type of tax.
+      # For the sake of simplicity, this only extracts the first example, unless specifically instructed otherwise.
+      # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] result of the OCR.
+      # @param tax_names [Array<String>] list of all possible names the tax can have.
+      # @return [Mindee::Parsing::Standard::TaxField, nil]
+      def self.extract_custom_tax(ocr_result, tax_names)
+        return nil if ocr_result.is_a?(Mindee::Parsing::Common::Ocr) || tax_names.empty?
+
+        found_hash = extract_horizontal(ocr_result, tax_names)
+        # a tax is considered found horizontally if it has a value, otherwise it is vertical
+        found_hash = extract_vertical(ocr_result, tax_names, found_hash)
+
+        return if found_hash.empty?
+
+        Mindee::Parsing::Standard::TaxField.new(found_hash,
+                                                found_hash.key?('page_id') ? found_hash['page_id'] : nil)
+      end
+
       # Normalizes text by removing diacritics.
       # @param input_str [String] string to handle.
       # @return [String]
@@ -202,23 +220,9 @@ module Mindee
         found_hash
       end
 
-      # Extracts a single custom type of tax.
-      # For the sake of simplicity, this only extracts the first example, unless specifically instructed otherwise.
-      # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] result of the OCR.
-      # @param tax_names [Array<String>] list of all possible names the tax can have.
-      # @return [Mindee::Parsing::Standard::TaxField, nil]
-      def self.extract_custom_tax(ocr_result, tax_names)
-        return nil if ocr_result.is_a?(Mindee::Parsing::Common::Ocr) || tax_names.empty?
-
-        found_hash = extract_horizontal(ocr_result, tax_names)
-        # a tax is considered found horizontally if it has a value, otherwise it is vertical
-        found_hash = extract_vertical(ocr_result, tax_names, found_hash)
-
-        return if found_hash.empty?
-
-        Mindee::Parsing::Standard::TaxField.new(found_hash,
-                                                found_hash.key?('page_id') ? found_hash['page_id'] : nil)
-      end
+      private_class_method :remove_accents, :match_index, :extract_numeric_part, :parse_amount, :parse_percentage,
+                           :extract_percentage, :extract_basis_and_value, :extract_from_horizontal_line,
+                           :extract_horizontal, :extract_vertical_values, :extract_vertical
     end
   end
 end
