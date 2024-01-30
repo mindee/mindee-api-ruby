@@ -34,12 +34,12 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 16bd8752-8c4d-450f-8213-f33b2097504c
+:Mindee ID: 80f2328c-58a5-486a-9599-eb2d738680f0
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/invoices v4.2
+:Product: mindee/invoices v4.4
 :Rotation applied: Yes
 
 Prediction
@@ -51,6 +51,7 @@ Prediction
 :Due Date: 2018-09-25
 :Total Net:
 :Total Amount: 2608.20
+:Total Tax: 193.20
 :Taxes:
   +---------------+--------+----------+---------------+
   | Base          | Code   | Rate (%) | Amount        |
@@ -58,7 +59,7 @@ Prediction
   |               |        | 8.00     | 193.20        |
   +---------------+--------+----------+---------------+
 :Supplier Payment Details:
-:Supplier Name: TURNPIKE DESIGNS CO.
+:Supplier Name: TURNPIKE DESIGNS
 :Supplier Company Registrations:
 :Supplier Address: 156 University Ave, Toronto ON, Canada M5H 2H7
 :Customer Name: JIRO DOI
@@ -88,6 +89,7 @@ Page 0
 :Due Date: 2018-09-25
 :Total Net:
 :Total Amount: 2608.20
+:Total Tax: 193.20
 :Taxes:
   +---------------+--------+----------+---------------+
   | Base          | Code   | Rate (%) | Amount        |
@@ -95,7 +97,7 @@ Page 0
   |               |        | 8.00     | 193.20        |
   +---------------+--------+----------+---------------+
 :Supplier Payment Details:
-:Supplier Name: TURNPIKE DESIGNS CO.
+:Supplier Name: TURNPIKE DESIGNS
 :Supplier Company Registrations:
 :Supplier Address: 156 University Ave, Toronto ON, Canada M5H 2H7
 :Customer Name: JIRO DOI
@@ -308,9 +310,6 @@ puts result.document.inference.prediction.supplier_name.value
 ```rb
 for supplier_payment_details_elem in result.document.inference.prediction.supplier_payment_details do
   puts supplier_payment_details_elem.value
-    puts supplier_payment_details_elem.rate
-    puts supplier_payment_details_elem.code
-    puts supplier_payment_details_elem.basis
 end
 ```
 
@@ -319,7 +318,7 @@ end
 
 ```rb
 for taxes_elem in result.document.inference.prediction.taxes do
-  puts taxes_elem.value
+  puts taxes_elem.to_s
 end
 ```
 
@@ -335,6 +334,13 @@ puts result.document.inference.prediction.total_amount.value
 
 ```rb
 puts result.document.inference.prediction.total_net.value
+```
+
+## Total Tax
+**total_tax** ([AmountField](#amount-field)): The total tax: includes all the taxes paid for this invoice.
+
+```rb
+puts result.document.inference.prediction.total_tax.value
 ```
 
 # Questions?
