@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
+require 'mindee/extraction'
 
 module Mindee
   # Mindee internal http module.
@@ -16,6 +17,10 @@ module Mindee
     # Document source handling.
     module Source
     end
+  end
+
+  # Custom extraction module
+  module Extraction
   end
 
   # Parsing internals and fields.
