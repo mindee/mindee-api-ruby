@@ -60,6 +60,9 @@ module Mindee
         # The net amount paid: does not include taxes, fees, and discounts.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_net
+        # The total tax: includes all the taxes paid for this invoice.
+        # @return [Mindee::Parsing::Standard::AmountField]
+        attr_reader :total_tax
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
@@ -97,6 +100,7 @@ module Mindee
           @taxes = Taxes.new(prediction['taxes'], page_id)
           @total_amount = AmountField.new(prediction['total_amount'], page_id)
           @total_net = AmountField.new(prediction['total_net'], page_id)
+          @total_tax = AmountField.new(prediction['total_tax'], page_id)
         end
 
         # @return [String]
@@ -114,6 +118,7 @@ module Mindee
           out_str << "\n:Due Date: #{@due_date}".rstrip
           out_str << "\n:Total Net: #{@total_net}".rstrip
           out_str << "\n:Total Amount: #{@total_amount}".rstrip
+          out_str << "\n:Total Tax: #{@total_tax}".rstrip
           out_str << "\n:Taxes:#{@taxes}".rstrip
           out_str << "\n:Supplier Payment Details: #{supplier_payment_details}".rstrip
           out_str << "\n:Supplier Name: #{@supplier_name}".rstrip
