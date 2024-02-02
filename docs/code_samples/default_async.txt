@@ -1,0 +1,80 @@
+require 'json'
+require 'net/http'
+require 'uri'
+require 'time'
+
+api_key = "my-api-key"
+account = "my-account"
+endpoint = "my-endpoint"
+version = "my-version"
+
+url_enqueue = "https://api.mindee.net/v1/products/#{account}/#{endpoint}/v#{version}/predict_async"
+headers = { "Authorization" => "Token #{api_key}" }
+
+file_path = "/path/to/the/file.ext"
+file_content = File.binread(file_path)
+
+uri = URI.parse(url_enqueue)
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+
+boundary = "----WebKitFormBoundary#{SecureRandom.hex(16)}"
+headers['Content-Type'] = "multipart/form-data; boundary=#{boundary}"
+
+request_body = []
+request_body << "--#{boundary}\r\n"
+request_body << "Content-Disposition: form-data; name=\"document\"; filename=\"file.ext\"\r\n"
+request_body << "Content-Type: application/octet-stream\r\n\r\n"
+request_body << file_content
+request_body << "\r\n--#{boundary}--\r\n"
+
+request = Net::HTTP::Post.new(uri.path, headers)
+request.body = request_body.join
+response_enqueue = http.request(request)
+
+json_response_enqueue = JSON.parse(response_enqueue.body)
+
+unless response_enqueue.is_a?(Net::HTTPSuccess)
+  raise "Error: #{json_response_enqueue['api_request']['error']}"
+end
+
+job_id = json_response_enqueue["job"]["id"]
+
+url_parse_queued = "https://api.mindee.net/v1/products/#{account}/#{endpoint}/v#{version}/documents/queue/#{job_id}"
+sleep(4)
+
+tries = 1
+while tries < 30
+  url = URI.parse(url_parse_queued)
+  request_parse = Net::HTTP::Get.new(url.path, 'Authorization' => "Token #{api_key}")
+  response_parse = http.request(request_parse)
+  if response_parse.code.to_i >= 300 && response_parse.code.to_i <= 399
+    
+    redirection_parse = Net::HTTP::Get.new(response_parse['location'], 'Authorization' => "Token #{api_key}")
+    response_parse = http.request(redirection_parse)
+    json_response_parse = JSON.parse(response_parse.body)
+    break
+  else
+    json_response_parse = JSON.parse(response_parse.body)
+
+    unless response_parse.is_a?(Net::HTTPSuccess)
+      puts json_response_parse
+      raise "Error: #{json_response_parse['api_request']['error']}"
+    end
+
+    if json_response_parse["job"]["status"] == "completed"
+      break
+    else
+      puts json_response_parse["job"]
+    end
+
+    tries += 1
+    sleep(2)
+  end
+end
+
+unless json_response_parse["job"]["status"] == "completed"
+  raise "Async parsing timed out after #{tries} tries"
+end
+
+puts JSON.pretty_generate(json_response_parse["document"])
