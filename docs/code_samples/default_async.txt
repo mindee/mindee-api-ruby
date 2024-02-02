@@ -18,7 +18,7 @@ uri = URI.parse(url_enqueue)
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
-boundary = "----WebKitFormBoundary#{SecureRandom.hex(16)}"
+boundary = "----WebKitFormBoundary#{rand(36**32).to_s(36)}"
 headers['Content-Type'] = "multipart/form-data; boundary=#{boundary}"
 
 request_body = []
