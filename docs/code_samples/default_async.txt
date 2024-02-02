@@ -11,8 +11,7 @@ version = "my-version"
 url_enqueue = "https://api.mindee.net/v1/products/#{account}/#{endpoint}/v#{version}/predict_async"
 headers = { "Authorization" => "Token #{api_key}" }
 
-file_path = "/path/to/the/file.ext"
-file_content = File.binread(file_path)
+file = "/path/to/the/file.ext"
 
 uri = URI.parse(url_enqueue)
 http = Net::HTTP.new(uri.host, uri.port)
@@ -21,15 +20,8 @@ http.use_ssl = true
 boundary = "----WebKitFormBoundary#{rand(36**32).to_s(36)}"
 headers['Content-Type'] = "multipart/form-data; boundary=#{boundary}"
 
-request_body = []
-request_body << "--#{boundary}\r\n"
-request_body << "Content-Disposition: form-data; name=\"document\"; filename=\"file.ext\"\r\n"
-request_body << "Content-Type: application/octet-stream\r\n\r\n"
-request_body << file_content
-request_body << "\r\n--#{boundary}--\r\n"
-
 request = Net::HTTP::Post.new(uri.path, headers)
-request.body = request_body.join
+request.set_form([['document', File.open(file)]], 'multipart/form-data')
 response_enqueue = http.request(request)
 
 json_response_enqueue = JSON.parse(response_enqueue.body)
