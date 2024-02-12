@@ -116,7 +116,7 @@ module Mindee
           # Avoids needlessly re-packing some files
           data = @io_stream.read
           @io_stream.close if close
-          return ['document', data, { filename: @filename }] if pdf?
+          return ['document', data, { filename: URI.encode_www_form_component(@filename) }] if pdf?
 
           ['document', [data].pack('m')]
         end

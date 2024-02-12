@@ -8,6 +8,7 @@ module Mindee
     module Generated
       # A JSON-like object, with miscellaneous values.
       class GeneratedObjectField
+        include Mindee::Parsing::Standard
         attr_accessor :page_id, :confidence, :raw_value
 
         # Id of the page the object was found on.
@@ -34,6 +35,21 @@ module Mindee
           end
         end
 
+        def str_level(level = 0)
+          indent = "  #{'  ' * level}"
+          out_str = ''
+          @printable_values.each do |attr|
+            value = instance_variable_get("@#{attr}")
+            str_value = value.nil? ? '' : value.to_s
+            out_str += "\n#{indent}:#{attr}: #{str_value}"
+          end
+          "\n#{indent}#{out_str.strip}"
+        end
+
+        def to_s
+          str_level
+        end
+
         private
 
         def handle_position_field(name, value, item_page_id)
@@ -50,21 +66,6 @@ module Mindee
             value.nil? ? nil : value.to_s
           )
           @printable_values.push(name)
-        end
-
-        def str_level(level = 0)
-          indent = "  #{'  ' * level}"
-          out_str = ''
-          @printable_values.each do |attr|
-            value = instance_variable_get("@#{attr}")
-            str_value = value.nil? ? '' : value.to_s
-            out_str += "\n#{indent}:#{attr}: #{str_value}"
-          end
-          "\n#{indent}#{out_str.strip}"
-        end
-
-        def to_s
-          str_level
         end
       end
 
