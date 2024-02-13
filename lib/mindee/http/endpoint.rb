@@ -94,7 +94,7 @@ module Mindee
       # @param all_words [Boolean]
       # @param close_file [Boolean]
       # @param cropper [Boolean]
-      # @return [Net::HTTPResponse]
+      # @return [Net::HTTP, nil]
       def predict_req_post(input_source, all_words: false, close_file: true, cropper: false)
         uri = URI("#{@url_root}/predict")
 
