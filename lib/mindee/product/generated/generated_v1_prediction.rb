@@ -21,13 +21,13 @@ module Mindee
 
         def to_s
           out_str = ''
-          pattern = %r{^(\n*[  ]*)( {2}):}
+          pattern = %r{^(\n* *)( {2}):}
           @fields.each do |field_name, field_value|
-            if field_value.is_a?(GeneratedListField) && field_value.values.length > 0
-              str_value = generate_field_string(field_name, field_value, pattern)
-            else
-              str_value = field_value.to_s
-            end
+            str_value = if field_value.is_a?(GeneratedListField) && field_value.values.length.positive?
+                          generate_field_string(field_name, field_value, pattern)
+                        else
+                          field_value.to_s
+                        end
             out_str += ":#{field_name}: #{str_value}\n"
           end
           out_str
@@ -37,24 +37,24 @@ module Mindee
 
         def generate_field_string(field_name, field_value, pattern)
           str_value = ''
-          if field_value.values[0].is_a?(Parsing::Generated::GeneratedObjectField)
-            str_value += field_value.values[0].str_level(1).sub(pattern, "\\1* :")
-          else
-            str_value += field_value.values[0].to_s.sub(pattern, "\\1* :") + "\n"
-          end
+          str_value += if field_value.values[0].is_a?(Parsing::Generated::GeneratedObjectField)
+                         field_value.values[0].str_level(1).sub(pattern, '\\1* :')
+                       else
+                         "#{field_value.values[0].to_s.sub(pattern, '\\1* :')}\n"
+                       end
           field_value.values[1..].each do |sub_value|
-            if sub_value.is_a?(Parsing::Generated::GeneratedObjectField)
-              str_value += sub_value.str_level(1).sub(pattern, "\\1* :")
-            else
-              str_value += " " * (field_name.length + 2) + sub_value.to_s + "\n"
-            end
+            str_value += if sub_value.is_a?(Parsing::Generated::GeneratedObjectField)
+                           sub_value.str_level(1).sub(pattern, '\\1* :')
+                         else
+                           "#{' ' * (field_name.length + 2)}#{sub_value}\n"
+                         end
           end
           str_value.rstrip
         end
 
         def generate_list_field_string(field_name, field_value, pattern)
           str_value = ''
-          field_value.values.each do |sub_value|
+          field_value.each_value do |sub_value|
             str_value += generate_sub_value_string(field_name, sub_value, pattern)
           end
           str_value.rstrip
