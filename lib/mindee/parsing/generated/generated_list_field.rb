@@ -48,6 +48,7 @@ module Mindee
           @values.map(&:to_s).join(separator)
         end
 
+        # String representation
         def to_s
           contents_string
         end

@@ -19,6 +19,7 @@ module Mindee
           @fields = {}
         end
 
+        # String representation.
         def to_s
           out_str = ''
           pattern = %r{^(\n* *)( {2}):}

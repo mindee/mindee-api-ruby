@@ -35,6 +35,7 @@ module Mindee
           end
         end
 
+        # String representation that takes into account the level of indentation.
         def str_level(level = 0)
           indent = "  #{'  ' * level}"
           out_str = ''
@@ -46,6 +47,7 @@ module Mindee
           "\n#{indent}#{out_str.strip}"
         end
 
+        # String representation
         def to_s
           str_level
         end

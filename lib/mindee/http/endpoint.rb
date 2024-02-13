@@ -46,13 +46,15 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
       # @return [Hash]
-      def predict(input_source, all_words, close_file, cropper)
+      def predict(input_source, all_words, close_file, cropper, as_base64)
         check_api_key
-        response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
+        response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper,
+                                                  as_base64: as_base64)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
@@ -62,12 +64,14 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
       # @return [Hash]
-      def predict_async(input_source, all_words, close_file, cropper)
+      def predict_async(input_source, all_words, close_file, cropper, as_base64)
         check_api_key
-        response = document_queue_req_get(input_source, all_words, close_file, cropper)
+        response = document_queue_req_get(input_source, all_words, close_file, cropper, as_base64: as_base64)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
 
@@ -91,11 +95,12 @@ module Mindee
       private
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
       # @return [Net::HTTP, nil]
-      def predict_req_post(input_source, all_words: false, close_file: true, cropper: false)
+      def predict_req_post(input_source, all_words: false, close_file: true, cropper: false, as_base64: false)
         uri = URI("#{@url_root}/predict")
 
         params = {}
@@ -109,6 +114,8 @@ module Mindee
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
+                    elsif as_base64
+                      [input_source.read_b64(close: close_file)]
                     else
                       [input_source.read_document(close: close_file)]
                     end
@@ -122,11 +129,12 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
       # @return [Net::HTTPResponse]
-      def document_queue_req_get(input_source, all_words, close_file, cropper)
+      def document_queue_req_get(input_source, all_words, close_file, cropper, as_base64: false)
         uri = URI("#{@url_root}/predict_async")
 
         params = {}
@@ -140,6 +148,8 @@ module Mindee
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
+                    elsif as_base64
+                      [input_source.read_b64(close: close_file)]
                     else
                       [input_source.read_document(close: close_file)]
                     end
