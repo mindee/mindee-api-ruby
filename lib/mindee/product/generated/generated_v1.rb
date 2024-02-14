@@ -18,7 +18,9 @@ module Mindee
           @prediction = GeneratedV1Document.new(prediction['prediction'])
           @pages = []
           prediction['pages'].each do |page|
-            @pages.push(GeneratedV1Page.new(page))
+            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
+              @pages.push(GeneratedV1Page.new(page))
+            end
           end
         end
 

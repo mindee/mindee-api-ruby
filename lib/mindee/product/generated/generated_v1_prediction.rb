@@ -26,17 +26,25 @@ module Mindee
           @fields.each do |field_name, field_value|
             str_value = if field_value.is_a?(GeneratedListField) && field_value.values.length.positive?
                           generate_field_string(field_name, field_value, pattern)
+                        elsif field_value.nil? || (field_value.is_a?(GeneratedListField) && field_value.values.empty?)
+                          ''
                         else
                           field_value.to_s
                         end
-            out_str += ":#{field_name}: #{str_value}\n"
+            out_str += "\n:#{field_name}:"
+
+            if str_value.length.positive?
+              out_str += " #{str_value}".sub(%r{^\s+\n}, "\n")
+            end
           end
-          out_str
+          out_str.sub("\n", '')
         end
 
         private
 
         def generate_field_string(field_name, field_value, pattern)
+          return '' if field_value.values.empty? || field_value.values.nil?
+
           str_value = ''
           str_value += if field_value.values[0].is_a?(Parsing::Generated::GeneratedObjectField)
                          field_value.values[0].str_level(1).sub(pattern, '\\1* :')
@@ -47,7 +55,7 @@ module Mindee
             str_value += if sub_value.is_a?(Parsing::Generated::GeneratedObjectField)
                            sub_value.str_level(1).sub(pattern, '\\1* :')
                          else
-                           "#{' ' * (field_name.length + 2)}#{sub_value}\n"
+                           "#{' ' * (field_name.length + 2)} #{sub_value}\n"
                          end
           end
           str_value.rstrip
@@ -102,7 +110,7 @@ module Mindee
         # Lists names of all top-level field keys
         # @return [Array<String>]
         def list_field_names
-          @fields.keys
+          @fields.keys.map(&:to_s)
         end
       end
     end
