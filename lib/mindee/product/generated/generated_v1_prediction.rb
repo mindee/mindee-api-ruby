@@ -26,16 +26,12 @@ module Mindee
           @fields.each do |field_name, field_value|
             str_value = if field_value.is_a?(GeneratedListField) && field_value.values.length.positive?
                           generate_field_string(field_name, field_value, pattern)
-                        elsif field_value.nil? || (field_value.is_a?(GeneratedListField) && field_value.values.empty?)
-                          ''
                         else
                           field_value.to_s
                         end
             out_str += "\n:#{field_name}:"
 
-            if str_value.length.positive?
-              out_str += " #{str_value}".sub(%r{^\s+\n}, "\n")
-            end
+            out_str += " #{str_value}".sub(%r{^\s+\n}, "\n") if str_value.length.positive?
           end
           out_str.sub("\n", '')
         end

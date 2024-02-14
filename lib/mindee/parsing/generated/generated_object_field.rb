@@ -81,7 +81,8 @@ module Mindee
         private
 
         def handle_position_field(name, value, item_page_id)
-          @all_values[name.to_s] = PositionField.new({ name.to_s => value }, value_key: name.to_s, page_id: item_page_id)
+          @all_values[name.to_s] =
+            PositionField.new({ name.to_s => value }, value_key: name.to_s, page_id: item_page_id)
         end
 
         def handle_default_field(name, value)
