@@ -108,16 +108,6 @@ module Mindee
           @io_stream = PdfProcessor.parse(@io_stream, options)
         end
 
-        # Reads a document & returns the result as b64.
-        # @param close [Boolean]
-        # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
-        def read_b64(close: true)
-          @io_stream.seek(0)
-          data = @io_stream.read
-          @io_stream.close if close
-          ['document', [data].pack('m')]
-        end
-
         # Reads a document.
         # @param close [Boolean]
         # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]

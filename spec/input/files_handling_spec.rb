@@ -6,14 +6,6 @@ require_relative '../data'
 
 describe Mindee::Input::Source::LocalInputSource do
   context 'An jpg input file' do
-    it 'should be convertible to a proper base64 string' do
-      file = File.join(DATA_DIR, 'file_types/receipt.jpg')
-      input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_b64
-      expect(read_f.length).to eq(2)
-      expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
-    end
-
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.jpg')
       input = Mindee::Input::Source::PathInputSource.new(file)
@@ -24,14 +16,6 @@ describe Mindee::Input::Source::LocalInputSource do
   end
 
   context 'A jpga input file' do
-    it 'should be convertible to a proper base64 string' do
-      file = File.join(DATA_DIR, 'file_types/receipt.jpga')
-      input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_b64
-      expect(read_f.length).to eq(2)
-      expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
-    end
-
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.jpga')
       input = Mindee::Input::Source::PathInputSource.new(file)
@@ -42,14 +26,6 @@ describe Mindee::Input::Source::LocalInputSource do
   end
 
   context 'A heic input file' do
-    it 'should be convertible to a proper base64 string' do
-      file = File.join(DATA_DIR, 'file_types/receipt.heic')
-      input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_b64
-      expect(read_f.length).to eq(2)
-      expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
-    end
-
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.heic')
       input = Mindee::Input::Source::PathInputSource.new(file)
@@ -60,14 +36,6 @@ describe Mindee::Input::Source::LocalInputSource do
   end
 
   context 'A tif input file' do
-    it 'should be convertible to a proper base64 string' do
-      file = File.join(DATA_DIR, 'file_types/receipt.tif')
-      input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_b64
-      expect(read_f.length).to eq(2)
-      expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
-    end
-
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.tif')
       input = Mindee::Input::Source::PathInputSource.new(file)
@@ -78,27 +46,16 @@ describe Mindee::Input::Source::LocalInputSource do
   end
 
   context 'A tiff input file' do
-    it 'should be convertible to a proper base64 string' do
+    it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.tiff')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_b64
-      expect(read_f.length).to eq(2)
-      expect(read_f[1]).to eq(Base64.encode64(File.read(file)))
+      read_f = input.read_document
+      expect(read_f.length).to eq(3)
+      expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
     end
   end
 
   context 'A txt input file' do
-    it 'should be convertible to a proper base64 string' do
-      file = File.join(DATA_DIR, 'file_types/receipt.txt')
-      input = Mindee::Input::Source::Base64InputSource.new(File.read(file), 'receipt.txt')
-      read_f = input.read_b64
-      # NOTE: pack() & Base64.encodebase64 inputs have different rules for line breaks
-      # which also differ from the ones in the base file. For all intents and purposes,
-      # we can ignore them.
-      expect(read_f.length).to eq(2)
-      expect(read_f[1].gsub("\n", '')).to eq(File.read(file).gsub("\n", ''))
-    end
-
     it 'should stay in base64' do
       file = File.join(DATA_DIR, 'file_types/receipt.txt')
       input = Mindee::Input::Source::Base64InputSource.new(File.read(file), 'receipt.txt')

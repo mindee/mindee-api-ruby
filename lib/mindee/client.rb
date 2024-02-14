@@ -14,7 +14,6 @@ module Mindee
       @api_key = api_key
     end
 
-    # rubocop:disable Metrics/ParameterLists
     # Call prediction API on a document and parse the results.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
@@ -39,7 +38,6 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
-    # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse(
@@ -49,14 +47,13 @@ module Mindee
       all_words: false,
       close_file: true,
       page_options: nil,
-      cropper: false,
-      as_base64: false
+      cropper: false
     )
       if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      prediction, raw_http = endpoint.predict(input_source, all_words, close_file, cropper, as_base64)
+      prediction, raw_http = endpoint.predict(input_source, all_words, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
@@ -84,7 +81,6 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
-    # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(
@@ -94,14 +90,13 @@ module Mindee
       all_words: false,
       close_file: true,
       page_options: nil,
-      cropper: false,
-      as_base64: false
+      cropper: false
     )
       if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      prediction, raw_http = endpoint.predict_async(input_source, all_words, close_file, cropper, as_base64)
+      prediction, raw_http = endpoint.predict_async(input_source, all_words, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class,
                                                prediction, raw_http)
     end
@@ -124,6 +119,7 @@ module Mindee
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
+    # rubocop:disable Metrics/ParameterLists
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
@@ -141,7 +137,6 @@ module Mindee
     #      * `:REMOVE` - remove the specified pages, and keep all others.
     #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
     # @param cropper [Boolean, nil] Whether to include cropper results for each page.
-    # @param as_base64 [Boolean] Whether to enqueue the document as a base64 object
     #  This performs a cropping operation on the server and will increase response time.
     # @param initial_delay_sec [Integer, Float, nil] initial delay before polling. Defaults to 4.
     # @param delay_sec [Integer, Float, nil] delay between polling attempts. Defaults to 2.
@@ -155,7 +150,6 @@ module Mindee
       close_file: true,
       page_options: nil,
       cropper: false,
-      as_base64: false,
       initial_delay_sec: 4,
       delay_sec: 2,
       max_retries: 30
@@ -167,8 +161,7 @@ module Mindee
         all_words: all_words,
         close_file: close_file,
         page_options: page_options,
-        cropper: cropper,
-        as_base64: as_base64
+        cropper: cropper
       )
       sleep(initial_delay_sec)
       polling_attempts = 1
