@@ -1,24 +1,24 @@
-require 'uri'
-require 'net/http'
-require 'net/https'
+require 'mindee'
 
-api_key = "my-api-key"
-account = "my-account"
-endpoint = "my-endpoint"
-version = "my-version"
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
-url = URI("https://api.mindee.net/v1/products/#{account}/#{endpoint}/v#{version}/predict")
-file = '/path/to/the/file.ext'
+# Load a file from disk
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
+# Initialize a custom endpoint for this product
+custom_endpoint = mindee_client.create_endpoint(
+  account_name: 'my-account',
+  endpoint_name: 'my-endpoint',
+  version: 'my-version'
+)
 
-request = Net::HTTP::Post.new(url)
-request['Authorization'] = "Token #{api_key}"
-request.set_form([['document', File.open(file)]], 'multipart/form-data')
+# Parse the file
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Generated::GeneratedV1,
+  endpoint: custom_endpoint
+)
 
-response = http.request(request)
-if !response.kind_of? Net::HTTPSuccess
-  raise response.msg
-end
-puts response.read_body
+# Print a full summary of the parsed data in RST format
+puts result.document
