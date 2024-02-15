@@ -135,6 +135,7 @@ customize the experience.
 
 * [Ruby Overview](https://developers.mindee.com/docs/getting-started-ocr-ruby)
 * [Custom OCR Ruby](https://developers.mindee.com/docs/api-builder-ocr-ruby)
+* [Generated API Ruby](https://developers.mindee.com/docs/generated-api-ruby)
 * [Invoice OCR Ruby](https://developers.mindee.com/docs/invoice-ocr-ruby)
 * [Financial Document OCR Ruby](https://developers.mindee.com/docs/financial-document-ocr-ruby)
 * [Passport OCR Ruby](https://developers.mindee.com/docs/passport-ocr-ruby)
