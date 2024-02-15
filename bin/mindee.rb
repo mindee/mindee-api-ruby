@@ -5,12 +5,19 @@ require 'bundler/setup'
 require 'optparse'
 require 'mindee'
 
+options = {}
 DOCUMENTS = {
   "custom" => {
     description: "Custom document type from API builder",
     doc_class: Mindee::Product::Custom::CustomV1,
     sync: true,
     async: false,
+  },
+  "generated" => {
+    description: "Generated document type from API builder",
+    doc_class: Mindee::Product::Generated::GeneratedV1,
+    sync: true,
+    async: true,
   },
   "proof-of-address" => {
     description: 'Proof of Address',
@@ -105,11 +112,11 @@ DEFAULT_CUTTING = {
   on_min_pages: 0,
 }
 
-# Initializes custom-specific options
+# Initializes custom & generated-specific options
 # @param cli_parser [OptionParser]
-def custom_subcommand(cli_parser)
+def custom_subcommand(cli_parser, options)
   cli_parser.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
-    options[:version] = v
+    options[:endpoint_version] = v
   end
   cli_parser.on('-a ACCOUNT_NAME', '--account ACCOUNT_NAME', 'API account name for the endpoint') do |v|
     options[:account_name] = v
@@ -118,7 +125,7 @@ end
 
 product_parser = {}
 DOCUMENTS.each do |doc_key, doc_value|
-  product_parser[doc_key] = OptionParser.new do | opts |
+  product_parser[doc_key] = OptionParser.new do |opts|
     opts.on('-w', '--all-words', 'Include words in response') do |v|
       options[:all_words] = v
     end
@@ -134,11 +141,11 @@ DOCUMENTS.each do |doc_key, doc_value|
     opts.on('-F', '--fix-pdf', "Attempts to fix broken PDF files before sending them to the server.") do |v|
       options[:fix_pdf] = true
     end
-    if (doc_key != 'custom')
+    if (doc_key != 'custom' && doc_key != 'generated')
       opts.banner = "Product: #{doc_value[:description]}. \nUsage: mindee.rb #{doc_key} [options] file"
     else
-      opts.banner = "#{doc_value[:description]}. \nUsage: mindee.rb custom [options] endpoint_name file"
-      custom_subcommand(opts)
+      opts.banner = "#{doc_value[:description]}. \nUsage: \nmindee.rb custom [options] endpoint_name file\nor\nmindee.rb generated [options] endpoint_name file"
+      custom_subcommand(opts, options)
     end
     if doc_value[:async]
       if doc_value[:sync]
@@ -150,7 +157,7 @@ DOCUMENTS.each do |doc_key, doc_value|
   end
 end
 
-global_parser = OptionParser.new do | opts |
+global_parser = OptionParser.new do |opts|
   opts.banner = "Usage: mindee.rb product [options] file"
   opts.separator "Available products:"
   opts.separator "  #{DOCUMENTS.keys.join("\n  ")}"
@@ -163,9 +170,9 @@ end
 doc_class = DOCUMENTS[command][:doc_class]
 product_parser[command].parse!
 
-if command == 'custom'
+if command == 'custom' || command == 'generated'
   if ARGV.length < 2
-    $stderr.puts "The 'custom' command requires both ENDPOINT_NAME and file arguments."
+    $stderr.puts "The '#{command}' command requires both ENDPOINT_NAME and file arguments."
     abort(product_parser[command].help)
   end
   endpoint_name = ARGV[0]
@@ -186,12 +193,11 @@ else
   input_source = mindee_client.source_from_path(options[:file_path], fix_pdf: options[:fix_pdf])
 end
 
-if command == 'custom'
-  endpoint_name = 'endpoint_name'
+if command == 'custom' || command == 'generated'
   custom_endpoint = mindee_client.create_endpoint(
-    account_name: endpoint_name,
-    endpoint_name: options[:account_name],
-    endpoint_version: options[:endpoint_version].nil? ? "1" : options[:endpoint_version]
+    endpoint_name: endpoint_name,
+    account_name: options[:account_name],
+    version: options[:endpoint_version].nil? ? "1" : options[:endpoint_version]
   )
 else
   custom_endpoint = nil

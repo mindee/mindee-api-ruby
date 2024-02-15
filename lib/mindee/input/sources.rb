@@ -7,6 +7,7 @@ require_relative '../pdf'
 
 module Mindee
   module Input
+    # Document source handling.
     module Source
       # Mime types accepted by the server.
       ALLOWED_MIME_TYPES = [
@@ -107,8 +108,7 @@ module Mindee
           @io_stream = PdfProcessor.parse(@io_stream, options)
         end
 
-        # Reads a document. Packs it into bytes if needed.
-        # Note: only needs filename in case of some pdf files.
+        # Reads a document.
         # @param close [Boolean]
         # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
         def read_document(close: true)
@@ -116,9 +116,7 @@ module Mindee
           # Avoids needlessly re-packing some files
           data = @io_stream.read
           @io_stream.close if close
-          return ['document', data, { filename: @filename }] if pdf?
-
-          ['document', [data].pack('m')]
+          ['document', data, { filename: Mindee::Input::Source.convert_to_unicode_escape(@filename) }]
         end
       end
 
@@ -141,6 +139,16 @@ module Mindee
           io_stream = StringIO.new(base64_string.unpack1('m*'))
           io_stream.set_encoding Encoding::BINARY
           super(io_stream, filename, fix_pdf: fix_pdf)
+        end
+
+        # Overload of the same function to prevent a base64 from being re-encoded.
+        # @param close [Boolean]
+        # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
+        def read_document(close: true)
+          @io_stream.seek(0)
+          data = @io_stream.read
+          @io_stream.close if close
+          ['document', [data].pack('m'), { filename: Source.convert_to_unicode_escape(@filename) }]
         end
       end
 
@@ -177,6 +185,21 @@ module Mindee
 
           @url = url
         end
+      end
+
+      # Replaces non-ASCII characters by their unicode escape sequence.
+      # Keeps other characters as is.
+      # @return A clean String.
+      def self.convert_to_unicode_escape(string)
+        unicode_escape_string = ''.dup
+        string.each_char do |char|
+          unicode_escape_string << if char.bytesize > 1
+                                     "\\u#{char.unpack1('U').to_s(16).rjust(4, '0')}"
+                                   else
+                                     char
+                                   end
+        end
+        unicode_escape_string
       end
     end
   end

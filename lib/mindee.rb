@@ -31,6 +31,10 @@ module Mindee
     # Standard fields and functions.
     module Standard
     end
+
+    # Generated fields and functions.
+    module Generated
+    end
   end
 
   # Document input-related internals.

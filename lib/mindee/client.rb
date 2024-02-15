@@ -38,6 +38,7 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
+    #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse(
       input_source,
@@ -80,6 +81,7 @@ module Mindee
     # @param cropper [Boolean] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
     #
+    #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(
       input_source,
@@ -118,7 +120,6 @@ module Mindee
     end
 
     # rubocop:disable Metrics/ParameterLists
-
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
@@ -139,7 +140,7 @@ module Mindee
     #  This performs a cropping operation on the server and will increase response time.
     # @param initial_delay_sec [Integer, Float, nil] initial delay before polling. Defaults to 4.
     # @param delay_sec [Integer, Float, nil] delay between polling attempts. Defaults to 2.
-    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 30.
+    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 60.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
@@ -151,7 +152,7 @@ module Mindee
       cropper: false,
       initial_delay_sec: 4,
       delay_sec: 2,
-      max_retries: 30
+      max_retries: 60
     )
       enqueue_res = enqueue(
         input_source,
@@ -178,6 +179,7 @@ module Mindee
 
       queue_res
     end
+
     # rubocop:enable Metrics/ParameterLists
 
     # Load a document from an absolute path, as a string.

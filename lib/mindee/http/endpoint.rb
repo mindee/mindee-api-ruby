@@ -46,9 +46,9 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Hash]
       def predict(input_source, all_words, close_file, cropper)
         check_api_key
@@ -62,8 +62,9 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Hash]
       def predict_async(input_source, all_words, close_file, cropper)
         check_api_key
@@ -91,10 +92,10 @@ module Mindee
       private
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
-      # @return [Net::HTTPResponse]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @return [Net::HTTP, nil]
       def predict_req_post(input_source, all_words: false, close_file: true, cropper: false)
         uri = URI("#{@url_root}/predict")
 
@@ -122,9 +123,9 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean]
-      # @param close_file [Boolean]
-      # @param cropper [Boolean]
+      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param close_file [Boolean] Whether the file will be closed after reading
+      # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Net::HTTPResponse]
       def document_queue_req_get(input_source, all_words, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
