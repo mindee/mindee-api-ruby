@@ -1,5 +1,5 @@
 ---
-title: EU EU Driver License OCR Ruby
+title: EU Driver License OCR Ruby
 ---
 The Ruby OCR SDK supports the [EU Driver License API](https://platform.mindee.com/mindee/eu_driver_license).
 
