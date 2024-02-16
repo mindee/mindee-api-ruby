@@ -36,6 +36,8 @@ module Mindee
           out_str << "\n#{@prediction.to_s.size.positive? ? "#{@prediction}\n" : ''}"
           out_str << "\nPage Predictions\n================\n\n" unless @pages.empty?
           out_str << @pages.map(&:to_s).join("\n\n")
+          out_str.rstrip!
+          out_str
         end
       end
     end

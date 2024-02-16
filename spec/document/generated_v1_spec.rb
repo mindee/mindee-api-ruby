@@ -90,7 +90,7 @@ RSpec.describe 'International ID v1 document' do
       expect(prediction.fields['mrz3']).to be_an_instance_of(StringField)
       expect(prediction.fields['mrz3'].value).to be_nil
 
-      expect(international_id_v1_empty_doc.to_s).to eq(international_id_v1_empty_doc_string)
+      expect(international_id_v1_empty_doc.to_s.strip).to eq(international_id_v1_empty_doc_string.strip)
     end
   end
 
@@ -226,7 +226,7 @@ RSpec.describe 'International ID v1 document' do
         prediction.fields['mrz3'].value
       ).to eq('ESPANOLA<ESPANOLA<<CARMEN<<<<<<')
 
-      expect(international_id_v1_complete_doc.to_s).to eq(international_id_v1_complete_doc_string)
+      expect(international_id_v1_complete_doc.to_s.strip).to eq(international_id_v1_complete_doc_string.strip)
     end
   end
 end

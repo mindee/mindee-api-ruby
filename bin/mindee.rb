@@ -67,6 +67,12 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
+  "fr-bank-statement" => {
+    description: "FR Bank Statement",
+    doc_class: Mindee::Product::FR::BankStatement::BankStatementV1,
+    sync: false,
+    async: true,
+  },
   "fr-carte-vitale" => {
     description: "FR Carte Vitale",
     doc_class: Mindee::Product::FR::CarteVitale::CarteVitaleV1,
