@@ -286,7 +286,9 @@
 22
 23
 24
-25</pre>
+25
+26
+27</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1.rb', line 18</span>
@@ -296,7 +298,9 @@
   <span class='ivar'>@prediction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="W9V1Document.html" title="Mindee::Product::US::W9::W9V1Document (class)">W9V1Document</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
   <span class='ivar'>@pages</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>pages</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
-    <span class='ivar'>@pages</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="W9V1Page.html" title="Mindee::Product::US::W9::W9V1Page (class)">W9V1Page</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="W9V1Page.html#initialize-instance_method" title="Mindee::Product::US::W9::W9V1Page#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+      <span class='ivar'>@pages</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="W9V1Page.html" title="Mindee::Product::US::W9::W9V1Page (class)">W9V1Page</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="W9V1Page.html#initialize-instance_method" title="Mindee::Product::US::W9::W9V1Page#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -350,12 +354,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_endpoint_name'>endpoint_name</span>
   <span class='ivar'>@endpoint_name</span>
@@ -406,12 +410,12 @@
       <pre class="lines">
 
 
-33
-34
-35</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/us/w9/w9_v1.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_endpoint_version'>endpoint_version</span>
   <span class='ivar'>@endpoint_version</span>
@@ -427,7 +431,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Feb  2 13:07:10 2024 by
+  Generated on Fri Feb 16 17:18:03 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

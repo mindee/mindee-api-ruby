@@ -596,7 +596,6 @@
       <pre class="lines">
 
 
-81
 82
 83
 84
@@ -604,10 +603,11 @@
 86
 87
 88
-89</pre>
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -664,6 +664,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>Whether the full word extraction needs to be performed</p>
+</div>
+      
     </li>
   
     <li>
@@ -675,6 +680,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>Whether the file will be closed after reading</p>
+</div>
+      
     </li>
   
     <li>
@@ -685,6 +695,11 @@
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether a cropping operation will be applied</p>
+</div>
       
     </li>
   
@@ -771,12 +786,33 @@
   
     <li>
       
+        <span class='name'>all_words</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether the full word extraction needs to be performed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>close_file</span>
       
       
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether the file will be closed after reading</p>
+</div>
       
     </li>
   
@@ -788,6 +824,11 @@
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether a cropping operation will be applied</p>
+</div>
       
     </li>
   
@@ -813,7 +854,6 @@
       <pre class="lines">
 
 
-68
 69
 70
 71
@@ -821,10 +861,11 @@
 73
 74
 75
-76</pre>
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -845,7 +886,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Feb  2 13:07:09 2024 by
+  Generated on Fri Feb 16 17:18:03 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
