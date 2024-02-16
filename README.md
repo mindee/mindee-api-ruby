@@ -143,6 +143,7 @@ customize the experience.
 * [Receipt OCR Ruby](https://developers.mindee.com/docs/receipt-ocr-ruby)
 * [EU License Plate OCR Ruby](https://developers.mindee.com/docs/eu-license-plate-ocr-ruby)
 * [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/fr-bank-account-details-ocr-ruby)
+* [FR Bank Statement OCR Ruby](https://developers.mindee.com/docs/fr-bank-statement-ocr-ruby)
 * [FR Carte Vitale OCR Ruby](https://developers.mindee.com/docs/fr-carte-vitale-ocr-ruby)
 * [FR ID Card OCR Ruby](https://developers.mindee.com/docs/fr-id-card-ocr-ruby)
 * [US Bank Check OCR Ruby](https://developers.mindee.com/docs/us-bank-check-ocr-ruby)
