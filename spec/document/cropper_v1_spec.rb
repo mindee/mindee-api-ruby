@@ -28,7 +28,6 @@ describe Mindee::Product::Cropper::CropperV1 do
       )
       expect(document.to_s).to eq(to_string)
     end
-
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_CROPPER_V1, 'summary_page0.rst')
       response = load_json(DIR_CROPPER_V1, 'complete.json')

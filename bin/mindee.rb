@@ -43,6 +43,12 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
+  "international-id" => {
+    description: 'International Id',
+    doc_class: Mindee::Product::InternationalId::InternationalIdV2,
+    sync: false,
+    async: true,
+  },
   "receipt" => {
     description: "Expense Receipt",
     doc_class: Mindee::Product::Receipt::ReceiptV5,
@@ -58,6 +64,12 @@ DOCUMENTS = {
   "eu-license-plate" => {
     description: "EU License Plate",
     doc_class: Mindee::Product::EU::LicensePlate::LicensePlateV1,
+    sync: true,
+    async: false,
+  },
+  "eu-driver-license" => {
+    description: "EU Driver License",
+    doc_class: Mindee::Product::EU::DriverLicense::DriverLicenseV1,
     sync: true,
     async: false,
   },

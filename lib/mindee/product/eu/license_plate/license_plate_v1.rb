@@ -20,7 +20,9 @@ module Mindee
             @prediction = LicensePlateV1Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              @pages.push(LicensePlateV1Page.new(page))
+              if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
+                @pages.push(LicensePlateV1Page.new(page))
+              end
             end
           end
 

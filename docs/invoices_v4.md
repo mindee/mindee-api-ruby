@@ -310,6 +310,9 @@ puts result.document.inference.prediction.supplier_name.value
 ```rb
 for supplier_payment_details_elem in result.document.inference.prediction.supplier_payment_details do
   puts supplier_payment_details_elem.value
+    puts supplier_payment_details_elem.rate
+    puts supplier_payment_details_elem.code
+    puts supplier_payment_details_elem.basis
 end
 ```
 
@@ -318,7 +321,7 @@ end
 
 ```rb
 for taxes_elem in result.document.inference.prediction.taxes do
-  puts taxes_elem.to_s
+  puts taxes_elem.value
 end
 ```
 

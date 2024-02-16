@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'barcode_reader_v1_document'
-require_relative 'barcode_reader_v1_page'
+require_relative 'international_id_v2_document'
+require_relative 'international_id_v2_page'
 
 module Mindee
   module Product
-    # Barcode Reader module.
-    module BarcodeReader
-      # Barcode Reader V1 prediction inference.
-      class BarcodeReaderV1 < Mindee::Parsing::Common::Inference
-        @endpoint_name = 'barcode_reader'
-        @endpoint_version = '1'
+    # International ID module.
+    module InternationalId
+      # International ID V2 prediction inference.
+      class InternationalIdV2 < Mindee::Parsing::Common::Inference
+        @endpoint_name = 'international_id'
+        @endpoint_version = '2'
 
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = BarcodeReaderV1Document.new(prediction['prediction'], nil)
+          @prediction = InternationalIdV2Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
             if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-              @pages.push(BarcodeReaderV1Page.new(page))
+              @pages.push(InternationalIdV2Page.new(page))
             end
           end
         end
