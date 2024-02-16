@@ -1,5 +1,25 @@
 # Mindee Ruby API Library Changelog
 
+## v3.5.0 - 2024-02-16
+### Changes
+* :sparkles: add support for Generated V1 API
+* :recycle: documents now aren't automatically converted to b64 when enqueued as non-PDF files
+* :recycle: increase max async delay to 60 tries
+* :sparkles: add support for FR bank statements
+* :sparkles: add support for International ID V2
+* :sparkles: add support for EU Driver License V1
+* :recycle: update existing products
+* :arrow_up: upgrade test lib
+
+### Fixes
+* :memo: add missing default async sample code
+* :bug: fix rst display issues
+* :bug: fix display issues for single page models
+* :bug: fix miscellaneous issues related to data display (no changes expected on existing models)
+* :bug: fix CLI breaking for custom products
+* :bug: fix encoding issue that prevented UNICODE file names from being properly sent to the server
+
+
 ## v3.4.0 - 2024-01-30
 ### Changes
 * :arrow_up: update invoices to v4.4
