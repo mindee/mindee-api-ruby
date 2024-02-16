@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'carte_grise_v1_document'
-require_relative 'carte_grise_v1_page'
+require_relative 'driver_license_v1_document'
+require_relative 'driver_license_v1_page'
 
 module Mindee
   module Product
-    module FR
-      # Carte Grise module.
-      module CarteGrise
-        # Carte Grise V1 prediction inference.
-        class CarteGriseV1 < Mindee::Parsing::Common::Inference
-          @endpoint_name = 'carte_grise'
+    module EU
+      # EU Driver License module.
+      module DriverLicense
+        # EU Driver License V1 prediction inference.
+        class DriverLicenseV1 < Mindee::Parsing::Common::Inference
+          @endpoint_name = 'eu_driver_license'
           @endpoint_version = '1'
 
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = CarteGriseV1Document.new(prediction['prediction'], nil)
+            @prediction = DriverLicenseV1Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
               if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-                @pages.push(CarteGriseV1Page.new(page))
+                @pages.push(DriverLicenseV1Page.new(page))
               end
             end
           end

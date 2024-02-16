@@ -54,7 +54,7 @@ Prediction
 :Date Of Birth: 1957-02-01
 :Restrictions: NONE
 :Endorsements: NONE
-:Class:
+:Driver License Class: D
 :Sex: M
 :Height: 5-08
 :Weight: 185
@@ -79,7 +79,7 @@ Page 0
 :Date Of Birth: 1957-02-01
 :Restrictions: NONE
 :Endorsements: NONE
-:Class:
+:Driver License Class: D
 :Sex: M
 :Height: 5-08
 :Weight: 185

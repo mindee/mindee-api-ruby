@@ -19,7 +19,9 @@ module Mindee
           @prediction = InvoiceV4Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
-            @pages.push(InvoiceV4Page.new(page))
+            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
+              @pages.push(InvoiceV4Page.new(page))
+            end
           end
         end
 

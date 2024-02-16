@@ -6,33 +6,33 @@ require 'mindee/parsing'
 
 require_relative '../../data'
 
-DIR_FR_ID_CARD_V1 = File.join(DATA_DIR, 'products', 'idcard_fr', 'response_v1').freeze
+DIR_EU_DRIVER_LICENSE_V1 = File.join(DATA_DIR, 'products', 'eu_driver_license', 'response_v1').freeze
 
-describe Mindee::Product::FR::IdCard::IdCardV1 do
-  context 'A Carte Nationale d\'Identité V1' do
+describe Mindee::Product::EU::DriverLicense::DriverLicenseV1 do
+  context 'A EU Driver License V1' do
     it 'should load an empty document prediction' do
-      response = load_json(DIR_FR_ID_CARD_V1, 'empty.json')
+      response = load_json(DIR_EU_DRIVER_LICENSE_V1, 'empty.json')
       inference = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::FR::IdCard::IdCardV1,
+        Mindee::Product::EU::DriverLicense::DriverLicenseV1,
         response['document']
       ).inference
       expect(inference.product.type).to eq('standard')
     end
 
     it 'should load a complete document prediction' do
-      to_string = read_file(DIR_FR_ID_CARD_V1, 'summary_full.rst')
-      response = load_json(DIR_FR_ID_CARD_V1, 'complete.json')
+      to_string = read_file(DIR_EU_DRIVER_LICENSE_V1, 'summary_full.rst')
+      response = load_json(DIR_EU_DRIVER_LICENSE_V1, 'complete.json')
       document = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::FR::IdCard::IdCardV1,
+        Mindee::Product::EU::DriverLicense::DriverLicenseV1,
         response['document']
       )
       expect(document.to_s).to eq(to_string)
     end
     it 'should load a complete page 0 prediction' do
-      to_string = read_file(DIR_FR_ID_CARD_V1, 'summary_page0.rst')
-      response = load_json(DIR_FR_ID_CARD_V1, 'complete.json')
+      to_string = read_file(DIR_EU_DRIVER_LICENSE_V1, 'summary_page0.rst')
+      response = load_json(DIR_EU_DRIVER_LICENSE_V1, 'complete.json')
       document = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::FR::IdCard::IdCardV1,
+        Mindee::Product::EU::DriverLicense::DriverLicenseV1,
         response['document']
       )
       page = document.inference.pages[0]

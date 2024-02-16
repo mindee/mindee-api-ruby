@@ -19,7 +19,9 @@ module Mindee
           @prediction = MultiReceiptsDetectorV1Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
-            @pages.push(MultiReceiptsDetectorV1Page.new(page))
+            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
+              @pages.push(MultiReceiptsDetectorV1Page.new(page))
+            end
           end
         end
 

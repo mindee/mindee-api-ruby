@@ -28,16 +28,5 @@ describe Mindee::Product::EU::LicensePlate::LicensePlateV1 do
       )
       expect(document.to_s).to eq(to_string)
     end
-
-    it 'should load a complete page 0 prediction' do
-      to_string = read_file(DIR_EU_LICENSE_PLATE_V1, 'summary_page0.rst')
-      response = load_json(DIR_EU_LICENSE_PLATE_V1, 'complete.json')
-      document = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::EU::LicensePlate::LicensePlateV1,
-        response['document']
-      )
-      page = document.inference.pages[0]
-      expect(page.to_s).to eq(to_string)
-    end
   end
 end

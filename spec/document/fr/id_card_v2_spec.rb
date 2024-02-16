@@ -28,7 +28,6 @@ describe Mindee::Product::FR::IdCard::IdCardV2 do
       )
       expect(document.to_s).to eq(to_string)
     end
-
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_FR_ID_CARD_V2, 'summary_page0.rst')
       response = load_json(DIR_FR_ID_CARD_V2, 'complete.json')

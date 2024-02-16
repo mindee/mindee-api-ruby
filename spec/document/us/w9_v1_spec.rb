@@ -28,7 +28,6 @@ describe Mindee::Product::US::W9::W9V1 do
       )
       expect(document.to_s).to eq(to_string)
     end
-
     it 'should load a complete page 0 prediction' do
       to_string = read_file(DIR_US_W9_V1, 'summary_page0.rst')
       response = load_json(DIR_US_W9_V1, 'complete.json')
