@@ -9,7 +9,7 @@ require_relative '../../data'
 DIR_EU_DRIVER_LICENSE_V1 = File.join(DATA_DIR, 'products', 'eu_driver_license', 'response_v1').freeze
 
 describe Mindee::Product::EU::DriverLicense::DriverLicenseV1 do
-  context 'A EU Driver License V1' do
+  context 'A Driver License V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_EU_DRIVER_LICENSE_V1, 'empty.json')
       inference = Mindee::Parsing::Common::Document.new(

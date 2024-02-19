@@ -7,9 +7,9 @@ require_relative 'driver_license_v1_page'
 module Mindee
   module Product
     module EU
-      # EU Driver License module.
+      # Driver License module.
       module DriverLicense
-        # EU Driver License V1 prediction inference.
+        # Driver License V1 prediction inference.
         class DriverLicenseV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'eu_driver_license'
           @endpoint_version = '1'
