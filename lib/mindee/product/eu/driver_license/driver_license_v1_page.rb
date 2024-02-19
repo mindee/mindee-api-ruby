@@ -7,7 +7,7 @@ module Mindee
   module Product
     module EU
       module DriverLicense
-        # EU Driver License V1 page.
+        # Driver License V1 page.
         class DriverLicenseV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
@@ -19,7 +19,7 @@ module Mindee
           end
         end
 
-        # EU Driver License V1 page prediction.
+        # Driver License V1 page prediction.
         class DriverLicenseV1PagePrediction < DriverLicenseV1Document
           include Mindee::Parsing::Standard
 

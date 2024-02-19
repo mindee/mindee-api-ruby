@@ -6,7 +6,7 @@ module Mindee
   module Product
     module EU
       module DriverLicense
-        # EU Driver License V1 document prediction.
+        # Driver License V1 document prediction.
         class DriverLicenseV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # EU driver license holders address
