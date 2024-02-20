@@ -142,6 +142,7 @@ customize the experience.
 * [Passport OCR Ruby](https://developers.mindee.com/docs/passport-ocr-ruby)
 * [Proof of Address OCR Ruby](https://developers.mindee.com/docs/proof-of-address-ocr-ruby)
 * [Receipt OCR Ruby](https://developers.mindee.com/docs/receipt-ocr-ruby)
+* [Resume OCR Ruby](https://developers.mindee.com/docs/resume-ocr-ruby)
 * [EU License Plate OCR Ruby](https://developers.mindee.com/docs/eu-license-plate-ocr-ruby)
 * [EU Driver License OCR Ruby](https://developers.mindee.com/docs/eu-driver-license-ocr-ruby)
 * [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/fr-bank-account-details-ocr-ruby)

@@ -55,6 +55,12 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
+  "resume" => {
+    description: "Resume",
+    doc_class: Mindee::Product::Resume::ResumeV1,
+    sync: false,
+    async: true,
+  },
   "passport" => {
     description: "Passport",
     doc_class: Mindee::Product::Passport::PassportV1,
