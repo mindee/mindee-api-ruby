@@ -133,7 +133,6 @@ module Mindee
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :y6
 
-          # rubocop:disable Metrics/AbcSize
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
@@ -227,7 +226,6 @@ module Mindee
             out_str << "\n:MRZ Line 2: #{@mrz2}".rstrip
             out_str[1..].to_s
           end
-          # rubocop:enable Metrics/AbcSize
         end
       end
     end
