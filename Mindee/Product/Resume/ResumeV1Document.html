@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Mindee::Product::Resume::ResumeV1Document
+  
+    &mdash; Documentation by YARD 0.9.34
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Mindee::Product::Resume::ResumeV1Document";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Resume.html" title="Mindee::Product::Resume (module)">Resume</a></span></span>
+     &raquo; 
+    <span class="title">ResumeV1Document</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Mindee::Product::Resume::ResumeV1Document
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../../Parsing/Common/Prediction.html" title="Mindee::Parsing::Common::Prediction (class)">Mindee::Parsing::Common::Prediction</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../../Parsing/Common/Prediction.html" title="Mindee::Parsing::Common::Prediction (class)">Mindee::Parsing::Common::Prediction</a></span></li>
+          
+            <li class="next">Mindee::Product::Resume::ResumeV1Document</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Mindee::Parsing::Standard</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/mindee/product/resume/resume_v1_document.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Resume V1 document prediction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="ResumeV1PagePrediction.html" title="Mindee::Product::Resume::ResumeV1PagePrediction (class)">ResumeV1PagePrediction</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#address-instance_method" title="#address (instance method)">#<strong>address</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The location information of the candidate, including city, state, and country.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#certificates-instance_method" title="#certificates (instance method)">#<strong>certificates</strong>  &#x21d2; Array&lt;Mindee::Product::Resume::ResumeV1Certificate&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of certificates obtained by the candidate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#document_language-instance_method" title="#document_language (instance method)">#<strong>document_language</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The ISO 639 code of the language in which the document is written.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#document_type-instance_method" title="#document_type (instance method)">#<strong>document_type</strong>  &#x21d2; Mindee::Parsing::Standard::ClassificationField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The type of the document sent.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#education-instance_method" title="#education (instance method)">#<strong>education</strong>  &#x21d2; Array&lt;Mindee::Product::Resume::ResumeV1Education&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of the candidate’s educational background.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#email_address-instance_method" title="#email_address (instance method)">#<strong>email_address</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The email address of the candidate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#given_names-instance_method" title="#given_names (instance method)">#<strong>given_names</strong>  &#x21d2; Array&lt;Mindee::Parsing::Standard::StringField&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The candidate’s first or given names.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hard_skills-instance_method" title="#hard_skills (instance method)">#<strong>hard_skills</strong>  &#x21d2; Array&lt;Mindee::Parsing::Standard::StringField&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of the candidate’s technical abilities and knowledge.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#job_applied-instance_method" title="#job_applied (instance method)">#<strong>job_applied</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The position that the candidate is applying for.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#languages-instance_method" title="#languages (instance method)">#<strong>languages</strong>  &#x21d2; Array&lt;Mindee::Product::Resume::ResumeV1Language&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of languages that the candidate is proficient in.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nationality-instance_method" title="#nationality (instance method)">#<strong>nationality</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The ISO 3166 code for the country of citizenship of the candidate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#phone_number-instance_method" title="#phone_number (instance method)">#<strong>phone_number</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The phone number of the candidate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#profession-instance_method" title="#profession (instance method)">#<strong>profession</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The candidate’s current profession.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#professional_experiences-instance_method" title="#professional_experiences (instance method)">#<strong>professional_experiences</strong>  &#x21d2; Array&lt;Mindee::Product::Resume::ResumeV1ProfessionalExperience&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of the candidate’s professional experiences.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#social_networks_urls-instance_method" title="#social_networks_urls (instance method)">#<strong>social_networks_urls</strong>  &#x21d2; Array&lt;Mindee::Product::Resume::ResumeV1SocialNetworksUrl&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of social network profiles of the candidate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#soft_skills-instance_method" title="#soft_skills (instance method)">#<strong>soft_skills</strong>  &#x21d2; Array&lt;Mindee::Parsing::Standard::StringField&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of the candidate’s interpersonal and communication abilities.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surnames-instance_method" title="#surnames (instance method)">#<strong>surnames</strong>  &#x21d2; Array&lt;Mindee::Parsing::Standard::StringField&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The candidate’s last names.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(prediction, page_id)  &#x21d2; ResumeV1Document </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ResumeV1Document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(prediction, page_id)  &#x21d2; <tt><span class='object_link'><a href="" title="Mindee::Product::Resume::ResumeV1Document (class)">ResumeV1Document</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of ResumeV1Document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>prediction</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@certificates</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>certificates</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@certificates</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ResumeV1Certificate.html" title="Mindee::Product::Resume::ResumeV1Certificate (class)">ResumeV1Certificate</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ResumeV1Certificate.html#initialize-instance_method" title="Mindee::Product::Resume::ResumeV1Certificate#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@document_language</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>document_language</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@document_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">ClassificationField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>document_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@education</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>education</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@education</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ResumeV1Education.html" title="Mindee::Product::Resume::ResumeV1Education (class)">ResumeV1Education</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ResumeV1Education.html#initialize-instance_method" title="Mindee::Product::Resume::ResumeV1Education#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@email_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>email_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@given_names</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>given_names</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@given_names</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@hard_skills</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hard_skills</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@hard_skills</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@job_applied</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>job_applied</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@languages</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>languages</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@languages</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ResumeV1Language.html" title="Mindee::Product::Resume::ResumeV1Language (class)">ResumeV1Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ResumeV1Language.html#initialize-instance_method" title="Mindee::Product::Resume::ResumeV1Language#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@nationality</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nationality</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@phone_number</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>phone_number</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@profession</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>profession</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@professional_experiences</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>professional_experiences</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@professional_experiences</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ResumeV1ProfessionalExperience.html" title="Mindee::Product::Resume::ResumeV1ProfessionalExperience (class)">ResumeV1ProfessionalExperience</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ResumeV1ProfessionalExperience.html#initialize-instance_method" title="Mindee::Product::Resume::ResumeV1ProfessionalExperience#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@social_networks_urls</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>social_networks_urls</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@social_networks_urls</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ResumeV1SocialNetworksUrl.html" title="Mindee::Product::Resume::ResumeV1SocialNetworksUrl (class)">ResumeV1SocialNetworksUrl</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ResumeV1SocialNetworksUrl.html#initialize-instance_method" title="Mindee::Product::Resume::ResumeV1SocialNetworksUrl#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@soft_skills</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>soft_skills</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@soft_skills</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@surnames</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>surnames</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
+    <span class='ivar'>@surnames</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="address-instance_method">
+  
+    #<strong>address</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The location information of the candidate, including city, state, and country.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_address'>address</span>
+  <span class='ivar'>@address</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="certificates-instance_method">
+  
+    #<strong>certificates</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ResumeV1Certificate.html" title="Mindee::Product::Resume::ResumeV1Certificate (class)">Mindee::Product::Resume::ResumeV1Certificate</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of certificates obtained by the candidate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ResumeV1Certificate.html" title="Mindee::Product::Resume::ResumeV1Certificate (class)">Mindee::Product::Resume::ResumeV1Certificate</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_certificates'>certificates</span>
+  <span class='ivar'>@certificates</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="document_language-instance_method">
+  
+    #<strong>document_language</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The ISO 639 code of the language in which the document is written.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_document_language'>document_language</span>
+  <span class='ivar'>@document_language</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="document_type-instance_method">
+  
+    #<strong>document_type</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">Mindee::Parsing::Standard::ClassificationField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The type of the document sent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">Mindee::Parsing::Standard::ClassificationField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_document_type'>document_type</span>
+  <span class='ivar'>@document_type</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="education-instance_method">
+  
+    #<strong>education</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ResumeV1Education.html" title="Mindee::Product::Resume::ResumeV1Education (class)">Mindee::Product::Resume::ResumeV1Education</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of the candidate’s educational background.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ResumeV1Education.html" title="Mindee::Product::Resume::ResumeV1Education (class)">Mindee::Product::Resume::ResumeV1Education</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_education'>education</span>
+  <span class='ivar'>@education</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="email_address-instance_method">
+  
+    #<strong>email_address</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The email address of the candidate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_email_address'>email_address</span>
+  <span class='ivar'>@email_address</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="given_names-instance_method">
+  
+    #<strong>given_names</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The candidate’s first or given names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_given_names'>given_names</span>
+  <span class='ivar'>@given_names</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="hard_skills-instance_method">
+  
+    #<strong>hard_skills</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of the candidate’s technical abilities and knowledge.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_hard_skills'>hard_skills</span>
+  <span class='ivar'>@hard_skills</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="job_applied-instance_method">
+  
+    #<strong>job_applied</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The position that the candidate is applying for.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_job_applied'>job_applied</span>
+  <span class='ivar'>@job_applied</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="languages-instance_method">
+  
+    #<strong>languages</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ResumeV1Language.html" title="Mindee::Product::Resume::ResumeV1Language (class)">Mindee::Product::Resume::ResumeV1Language</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of languages that the candidate is proficient in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ResumeV1Language.html" title="Mindee::Product::Resume::ResumeV1Language (class)">Mindee::Product::Resume::ResumeV1Language</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_languages'>languages</span>
+  <span class='ivar'>@languages</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="nationality-instance_method">
+  
+    #<strong>nationality</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The ISO 3166 code for the country of citizenship of the candidate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_nationality'>nationality</span>
+  <span class='ivar'>@nationality</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="phone_number-instance_method">
+  
+    #<strong>phone_number</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The phone number of the candidate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_phone_number'>phone_number</span>
+  <span class='ivar'>@phone_number</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="profession-instance_method">
+  
+    #<strong>profession</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The candidate’s current profession.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_profession'>profession</span>
+  <span class='ivar'>@profession</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="professional_experiences-instance_method">
+  
+    #<strong>professional_experiences</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ResumeV1ProfessionalExperience.html" title="Mindee::Product::Resume::ResumeV1ProfessionalExperience (class)">Mindee::Product::Resume::ResumeV1ProfessionalExperience</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of the candidate’s professional experiences.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ResumeV1ProfessionalExperience.html" title="Mindee::Product::Resume::ResumeV1ProfessionalExperience (class)">Mindee::Product::Resume::ResumeV1ProfessionalExperience</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_professional_experiences'>professional_experiences</span>
+  <span class='ivar'>@professional_experiences</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="social_networks_urls-instance_method">
+  
+    #<strong>social_networks_urls</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ResumeV1SocialNetworksUrl.html" title="Mindee::Product::Resume::ResumeV1SocialNetworksUrl (class)">Mindee::Product::Resume::ResumeV1SocialNetworksUrl</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of social network profiles of the candidate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ResumeV1SocialNetworksUrl.html" title="Mindee::Product::Resume::ResumeV1SocialNetworksUrl (class)">Mindee::Product::Resume::ResumeV1SocialNetworksUrl</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_social_networks_urls'>social_networks_urls</span>
+  <span class='ivar'>@social_networks_urls</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="soft_skills-instance_method">
+  
+    #<strong>soft_skills</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The list of the candidate’s interpersonal and communication abilities.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_soft_skills'>soft_skills</span>
+  <span class='ivar'>@soft_skills</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="surnames-instance_method">
+  
+    #<strong>surnames</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The candidate’s last names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_surnames'>surnames</span>
+  <span class='ivar'>@surnames</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/resume/resume_v1_document.rb', line 119</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_given_names'>given_names</span> <span class='op'>=</span> <span class='ivar'>@given_names</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>13</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_surnames'>surnames</span> <span class='op'>=</span> <span class='ivar'>@surnames</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>10</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_social_networks_urls'>social_networks_urls</span> <span class='op'>=</span> <span class='id identifier rubyid_social_networks_urls_to_s'>social_networks_urls_to_s</span>
+  <span class='id identifier rubyid_languages'>languages</span> <span class='op'>=</span> <span class='id identifier rubyid_languages_to_s'>languages_to_s</span>
+  <span class='id identifier rubyid_hard_skills'>hard_skills</span> <span class='op'>=</span> <span class='ivar'>@hard_skills</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>13</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_soft_skills'>soft_skills</span> <span class='op'>=</span> <span class='ivar'>@soft_skills</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>13</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_education'>education</span> <span class='op'>=</span> <span class='id identifier rubyid_education_to_s'>education_to_s</span>
+  <span class='id identifier rubyid_professional_experiences'>professional_experiences</span> <span class='op'>=</span> <span class='id identifier rubyid_professional_experiences_to_s'>professional_experiences_to_s</span>
+  <span class='id identifier rubyid_certificates'>certificates</span> <span class='op'>=</span> <span class='id identifier rubyid_certificates_to_s'>certificates_to_s</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Document Language: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@document_language</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Document Type: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@document_type</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Given Names: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_given_names'>given_names</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Surnames: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_surnames'>surnames</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Nationality: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@nationality</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Email Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@email_address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Phone Number: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@phone_number</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Social Networks:</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_social_networks_urls'>social_networks_urls</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Profession: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@profession</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Job Applied: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@job_applied</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Languages:</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_languages'>languages</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Hard Skills: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hard_skills'>hard_skills</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Soft Skills: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_soft_skills'>soft_skills</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Education:</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_education'>education</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Professional Experiences:</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_professional_experiences'>professional_experiences</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Certificates:</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_certificates'>certificates</span>
+  <span class='id identifier rubyid_out_str'>out_str</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Wed Feb 21 15:19:19 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.1.4).
+</div>
+
+    </div>
+  </body>
+</html>
