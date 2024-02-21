@@ -13,7 +13,7 @@ module Mindee
       # Resume V1 document prediction.
       class ResumeV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
-        # The location information of the person, including city, state, and country.
+        # The location information of the candidate, including city, state, and country.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :address
         # The list of certificates obtained by the candidate.
@@ -22,50 +22,46 @@ module Mindee
         # The ISO 639 code of the language in which the document is written.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :document_language
-        # The type of the document sent, possible values being RESUME, MOTIVATION_LETTER and
-        # RECOMMENDATION_LETTER.
-        # @return [Mindee::Parsing::Standard::StringField]
+        # The type of the document sent.
+        # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
-        # The list of values that represent the educational background of an individual.
+        # The list of the candidate's educational background.
         # @return [Array<Mindee::Product::Resume::ResumeV1Education>]
         attr_reader :education
         # The email address of the candidate.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :email_address
-        # The list of names that represent a person's first or given names.
+        # The candidate's first or given names.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :given_names
-        # The list of specific technical abilities and knowledge mentioned in a resume.
+        # The list of the candidate's technical abilities and knowledge.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :hard_skills
-        # The specific industry or job role that the applicant is applying for.
+        # The position that the candidate is applying for.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :job_applied
-        # The list of languages that a person is proficient in, as stated in their resume.
+        # The list of languages that the candidate is proficient in.
         # @return [Array<Mindee::Product::Resume::ResumeV1Language>]
         attr_reader :languages
-        # The ISO 3166 code for the country of citizenship or origin of the person.
+        # The ISO 3166 code for the country of citizenship of the candidate.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :nationality
         # The phone number of the candidate.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :phone_number
-        # The area of expertise or specialization in which the individual has professional experience and
-        # qualifications.
+        # The candidate's current profession.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :profession
-        # The list of values that represent the professional experiences of an individual in their global
-        # resume.
+        # The list of the candidate's professional experiences.
         # @return [Array<Mindee::Product::Resume::ResumeV1ProfessionalExperience>]
         attr_reader :professional_experiences
-        # The list of URLs for social network profiles of the person.
+        # The list of social network profiles of the candidate.
         # @return [Array<Mindee::Product::Resume::ResumeV1SocialNetworksUrl>]
         attr_reader :social_networks_urls
-        # The list of values that represent a person's interpersonal and communication abilities in a global
-        # resume.
+        # The list of the candidate's interpersonal and communication abilities.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :soft_skills
-        # The list of last names provided in a resume document.
+        # The candidate's last names.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :surnames
 
@@ -79,7 +75,7 @@ module Mindee
             @certificates.push(ResumeV1Certificate.new(item, page_id))
           end
           @document_language = StringField.new(prediction['document_language'], page_id)
-          @document_type = StringField.new(prediction['document_type'], page_id)
+          @document_type = ClassificationField.new(prediction['document_type'], page_id)
           @education = []
           prediction['education'].each do |item|
             @education.push(ResumeV1Education.new(item, page_id))

@@ -11,10 +11,10 @@ module Mindee
         # The grade obtained for the certificate.
         # @return [String]
         attr_reader :grade
-        # The name of certifications obtained by the individual.
+        # The name of certification.
         # @return [String]
         attr_reader :name
-        # The organization or institution that issued the certificates listed in the document.
+        # The organization or institution that issued the certificate.
         # @return [String]
         attr_reader :provider
         # The year when a certificate was issued or received.

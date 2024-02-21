@@ -1,7 +1,7 @@
 inherit_from: ../../../.rubocop.yml
 
 Metrics/AbcSize:
-  Max: 75
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:

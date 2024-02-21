@@ -5,13 +5,13 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Resume
-      # The list of URLs for social network profiles of the person.
+      # The list of social network profiles of the candidate.
       class ResumeV1SocialNetworksUrl < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
-        # The name of of the social media concerned.
+        # The name of the social network.
         # @return [String]
         attr_reader :name
-        # The URL of the profile for this particular social network.
+        # The URL of the social network.
         # @return [String]
         attr_reader :url
 

@@ -5,32 +5,31 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Resume
-      # The list of values that represent the professional experiences of an individual in their global resume.
+      # The list of the candidate's professional experiences.
       class ResumeV1ProfessionalExperience < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
-        # The type of contract for a professional experience. Possible values: 'Full-Time', 'Part-Time',
-        # 'Internship' and 'Freelance'.
+        # The type of contract for the professional experience.
         # @return [String]
         attr_reader :contract_type
-        # The specific department or division within a company where the professional experience was gained.
+        # The specific department or division within the company.
         # @return [String]
         attr_reader :department
-        # The name of the company or organization where the candidate has worked.
+        # The name of the company or organization.
         # @return [String]
         attr_reader :employer
-        # The month when a professional experience ended.
+        # The month when the professional experience ended.
         # @return [String]
         attr_reader :end_month
-        # The year when a professional experience ended.
+        # The year when the professional experience ended.
         # @return [String]
         attr_reader :end_year
-        # The position or job title held by the individual in their previous work experience.
+        # The position or job title held by the candidate.
         # @return [String]
         attr_reader :role
-        # The month when a professional experience began.
+        # The month when the professional experience began.
         # @return [String]
         attr_reader :start_month
-        # The year when a professional experience began.
+        # The year when the professional experience began.
         # @return [String]
         attr_reader :start_year
 

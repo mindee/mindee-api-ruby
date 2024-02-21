@@ -5,22 +5,22 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Resume
-      # The list of values that represent the educational background of an individual.
+      # The list of the candidate's educational background.
       class ResumeV1Education < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
-        # The area of study or specialization pursued by an individual in their educational background.
+        # The area of study or specialization.
         # @return [String]
         attr_reader :degree_domain
-        # The type of degree obtained by the individual, such as Bachelor's, Master's, or Doctorate.
+        # The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
         # @return [String]
         attr_reader :degree_type
-        # The month when the education program or course was completed or is expected to be completed.
+        # The month when the education program or course was completed.
         # @return [String]
         attr_reader :end_month
-        # The year when the education program or course was completed or is expected to be completed.
+        # The year when the education program or course was completed.
         # @return [String]
         attr_reader :end_year
-        # The name of the school the individual went to.
+        # The name of the school.
         # @return [String]
         attr_reader :school
         # The month when the education program or course began.

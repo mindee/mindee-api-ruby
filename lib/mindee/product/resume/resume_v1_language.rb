@@ -5,13 +5,13 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Resume
-      # The list of languages that a person is proficient in, as stated in their resume.
+      # The list of languages that the candidate is proficient in.
       class ResumeV1Language < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
-        # The language ISO 639 code.
+        # The language's ISO 639 code.
         # @return [String]
         attr_reader :language
-        # The level for the language. Possible values: 'Fluent', 'Proficient', 'Intermediate' and 'Beginner'.
+        # The candidate's level for the language.
         # @return [String]
         attr_reader :level
 

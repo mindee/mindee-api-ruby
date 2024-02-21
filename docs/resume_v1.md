@@ -91,7 +91,7 @@ Prediction
   +-----------------+------------+---------------------------+-----------+----------+----------------------+-------------+------------+
   | Contract Type   | Department | Employer                  | End Month | End Year | Role                 | Start Month | Start Year |
   +=================+============+===========================+===========+==========+======================+=============+============+
-  | Full-Time       |            | Luna Web Design, New Y... | 05        | 2019     | Web Developer        | 09          | 2015       |
+  | Full-Time       |            | Luna Web Design, New York | 05        | 2019     | Web Developer        | 09          | 2015       |
   +-----------------+------------+---------------------------+-----------+----------+----------------------+-------------+------------+
 :Certificates:
   +------------+--------------------------------+---------------------------+------+
@@ -121,6 +121,12 @@ A typical `Field` object will have the following attributes:
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
 
+
+### Classification Field
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+
+> Note: a classification field's `value is always a `String`.
+
 ### String Field
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
@@ -133,62 +139,62 @@ The list of certificates obtained by the candidate.
 A `ResumeV1Certificate` implements the following attributes:
 
 * `grade` (String): The grade obtained for the certificate.
-* `name` (String): The name of certifications obtained by the individual.
-* `provider` (String): The organization or institution that issued the certificates listed in the document.
+* `name` (String): The name of certification.
+* `provider` (String): The organization or institution that issued the certificate.
 * `year` (String): The year when a certificate was issued or received.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Education Field
-The list of values that represent the educational background of an individual.
+The list of the candidate's educational background.
 
 A `ResumeV1Education` implements the following attributes:
 
-* `degree_domain` (String): The area of study or specialization pursued by an individual in their educational background.
-* `degree_type` (String): The type of degree obtained by the individual, such as Bachelor's, Master's, or Doctorate.
-* `end_month` (String): The month when the education program or course was completed or is expected to be completed.
-* `end_year` (String): The year when the education program or course was completed or is expected to be completed.
-* `school` (String): The name of the school the individual went to.
+* `degree_domain` (String): The area of study or specialization.
+* `degree_type` (String): The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
+* `end_month` (String): The month when the education program or course was completed.
+* `end_year` (String): The year when the education program or course was completed.
+* `school` (String): The name of the school.
 * `start_month` (String): The month when the education program or course began.
 * `start_year` (String): The year when the education program or course began.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Languages Field
-The list of languages that a person is proficient in, as stated in their resume.
+The list of languages that the candidate is proficient in.
 
 A `ResumeV1Language` implements the following attributes:
 
-* `language` (String): The language ISO 639 code.
-* `level` (String): The level for the language. Possible values: 'Fluent', 'Proficient', 'Intermediate' and 'Beginner'.
+* `language` (String): The language's ISO 639 code.
+* `level` (String): The candidate's level for the language.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Professional Experiences Field
-The list of values that represent the professional experiences of an individual in their global resume.
+The list of the candidate's professional experiences.
 
 A `ResumeV1ProfessionalExperience` implements the following attributes:
 
-* `contract_type` (String): The type of contract for a professional experience. Possible values: 'Full-Time', 'Part-Time', 'Internship' and 'Freelance'.
-* `department` (String): The specific department or division within a company where the professional experience was gained.
-* `employer` (String): The name of the company or organization where the candidate has worked.
-* `end_month` (String): The month when a professional experience ended.
-* `end_year` (String): The year when a professional experience ended.
-* `role` (String): The position or job title held by the individual in their previous work experience.
-* `start_month` (String): The month when a professional experience began.
-* `start_year` (String): The year when a professional experience began.
+* `contract_type` (String): The type of contract for the professional experience.
+* `department` (String): The specific department or division within the company.
+* `employer` (String): The name of the company or organization.
+* `end_month` (String): The month when the professional experience ended.
+* `end_year` (String): The year when the professional experience ended.
+* `role` (String): The position or job title held by the candidate.
+* `start_month` (String): The month when the professional experience began.
+* `start_year` (String): The year when the professional experience began.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Social Networks Field
-The list of URLs for social network profiles of the person.
+The list of social network profiles of the candidate.
 
 A `ResumeV1SocialNetworksUrl` implements the following attributes:
 
-* `name` (String): The name of of the social media concerned.
-* `url` (String): The URL of the profile for this particular social network.
+* `name` (String): The name of the social network.
+* `url` (String): The URL of the social network.
 
 # Attributes
 The following fields are extracted for Resume V1:
 
 ## Address
-**address** ([StringField](#string-field)): The location information of the person, including city, state, and country.
+**address** ([StringField](#string-field)): The location information of the candidate, including city, state, and country.
 
 ```rb
 puts result.document.inference.prediction.address.value
@@ -211,14 +217,14 @@ puts result.document.inference.prediction.document_language.value
 ```
 
 ## Document Type
-**document_type** ([StringField](#string-field)): The type of the document sent, possible values being RESUME, MOTIVATION_LETTER and RECOMMENDATION_LETTER.
+**document_type** ([ClassificationField](#classification-field)): The type of the document sent.
 
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
 
 ## Education
-**education** (Array<[ResumeV1Education](#education-field)>): The list of values that represent the educational background of an individual.
+**education** (Array<[ResumeV1Education](#education-field)>): The list of the candidate's educational background.
 
 ```rb
 for education_elem in result.document.inference.prediction.education do
@@ -234,7 +240,7 @@ puts result.document.inference.prediction.email_address.value
 ```
 
 ## Given Names
-**given_names** (Array<[StringField](#string-field)>): The list of names that represent a person's first or given names.
+**given_names** (Array<[StringField](#string-field)>): The candidate's first or given names.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -243,7 +249,7 @@ end
 ```
 
 ## Hard Skills
-**hard_skills** (Array<[StringField](#string-field)>): The list of specific technical abilities and knowledge mentioned in a resume.
+**hard_skills** (Array<[StringField](#string-field)>): The list of the candidate's technical abilities and knowledge.
 
 ```rb
 for hard_skills_elem in result.document.inference.prediction.hard_skills do
@@ -252,14 +258,14 @@ end
 ```
 
 ## Job Applied
-**job_applied** ([StringField](#string-field)): The specific industry or job role that the applicant is applying for.
+**job_applied** ([StringField](#string-field)): The position that the candidate is applying for.
 
 ```rb
 puts result.document.inference.prediction.job_applied.value
 ```
 
 ## Languages
-**languages** (Array<[ResumeV1Language](#languages-field)>): The list of languages that a person is proficient in, as stated in their resume.
+**languages** (Array<[ResumeV1Language](#languages-field)>): The list of languages that the candidate is proficient in.
 
 ```rb
 for languages_elem in result.document.inference.prediction.languages do
@@ -268,7 +274,7 @@ end
 ```
 
 ## Nationality
-**nationality** ([StringField](#string-field)): The ISO 3166 code for the country of citizenship or origin of the person.
+**nationality** ([StringField](#string-field)): The ISO 3166 code for the country of citizenship of the candidate.
 
 ```rb
 puts result.document.inference.prediction.nationality.value
@@ -282,14 +288,14 @@ puts result.document.inference.prediction.phone_number.value
 ```
 
 ## Profession
-**profession** ([StringField](#string-field)): The area of expertise or specialization in which the individual has professional experience and qualifications.
+**profession** ([StringField](#string-field)): The candidate's current profession.
 
 ```rb
 puts result.document.inference.prediction.profession.value
 ```
 
 ## Professional Experiences
-**professional_experiences** (Array<[ResumeV1ProfessionalExperience](#professional-experiences-field)>): The list of values that represent the professional experiences of an individual in their global resume.
+**professional_experiences** (Array<[ResumeV1ProfessionalExperience](#professional-experiences-field)>): The list of the candidate's professional experiences.
 
 ```rb
 for professional_experiences_elem in result.document.inference.prediction.professional_experiences do
@@ -298,7 +304,7 @@ end
 ```
 
 ## Social Networks
-**social_networks_urls** (Array<[ResumeV1SocialNetworksUrl](#social-networks-field)>): The list of URLs for social network profiles of the person.
+**social_networks_urls** (Array<[ResumeV1SocialNetworksUrl](#social-networks-field)>): The list of social network profiles of the candidate.
 
 ```rb
 for social_networks_urls_elem in result.document.inference.prediction.social_networks_urls do
@@ -307,7 +313,7 @@ end
 ```
 
 ## Soft Skills
-**soft_skills** (Array<[StringField](#string-field)>): The list of values that represent a person's interpersonal and communication abilities in a global resume.
+**soft_skills** (Array<[StringField](#string-field)>): The list of the candidate's interpersonal and communication abilities.
 
 ```rb
 for soft_skills_elem in result.document.inference.prediction.soft_skills do
@@ -316,7 +322,7 @@ end
 ```
 
 ## Surnames
-**surnames** (Array<[StringField](#string-field)>): The list of last names provided in a resume document.
+**surnames** (Array<[StringField](#string-field)>): The candidate's last names.
 
 ```rb
 for surnames_elem in result.document.inference.prediction.surnames do
@@ -325,4 +331,4 @@ end
 ```
 
 # Questions?
-[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-1jv6nawjq-FDgFcF2T5CmMmRpl9LLptw)
+[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-2d0ds7dtz-DPAF81ZqTy20chsYpQBW5g)
