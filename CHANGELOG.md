@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v3.6.0 - 2024-02-21
+### Changes
+* :sparkles: add support for resume V1
+
+
 ## v3.5.0 - 2024-02-16
 ### Changes
 * :sparkles: add support for Generated V1 API
