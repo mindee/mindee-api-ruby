@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module Mindee
   module HTTP
     # Mindee HTTP error module.
@@ -50,15 +52,20 @@ module Mindee
                       end
 
         end
-        error_obj
+        error_obj.nil? ? {} : error_obj
       end
 
       # Creates an appropriate HTTP error exception, based on retrieved http error code
       # @param url [String] the url of the product
       # @param response [Hash] dictionary response retrieved by the server
-      # @param code [Integer] http error code of the response
-      def handle_error!(url, response, code)
-        error_obj = create_error_obj(response)
+      def handle_error(url, response)
+        code = response.code.to_i
+        begin
+          parsed_hash = JSON.parse(response.body, object_class: Hash)
+        rescue JSON::ParserError
+          parsed_hash = response.body.to_s
+        end
+        error_obj = create_error_obj(parsed_hash)
         case code
         when 400..499
           MindeeHttpClientError.new(error_obj, url, code)
