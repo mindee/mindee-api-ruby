@@ -154,15 +154,15 @@ module Mindee
       # @return [Hash]
       def self.extract_horizontal(ocr_result, tax_names)
         linear_pattern_percent_first = %r{
-          \s*[(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)\s*[)\]]*\s*
-          ([a-zA-Z]+[a-zA-Z\s]*\s*)
-          (\d*[.,]?\d+|\d+)?\s+
+          [ .]*[(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?\s*\d*[.,]?\d+[ .]*)[ .]*[)\]]*[ .]*
+          ([a-zA-Z]+[a-zA-Z\s]*[ .]*)
+          (\d*[.,]?\d+|\d+)?[ .]+
           (\d*[.,]?\d+|\d+)?
         }x
         linear_pattern_percent_second = %r{
-          \s*([a-zA-Z]+[a-zA-Z\s]*\s*)
-          [(\[]*\s*(\s*\d*[.,]?\d+\s*%?|%?\s*\d*[.,]?\d+\s*)?\s*[)\]]*\s*
-          (\d*[.,]?\d+|\d+)?\s+
+          [ .]*([a-zA-Z]+[a-zA-Z\s]*[ .]*)
+          [(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?[ .]*\d*[.,]?\d+[ .]*)?[ .]*[)\]]*[ .]*
+          (\d*[.,]?\d+|\d+)?[ .]+
           (\d*[.,]?\d+|\d+)?
         }x
         ocr_result.mvision_v1.pages.each_with_index do |page, page_id|
