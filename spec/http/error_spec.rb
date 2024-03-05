@@ -2,6 +2,7 @@
 
 require 'mindee'
 require 'json'
+require_relative 'mock_http_response'
 
 describe Mindee::HTTP::Error do
   context 'An HTTP call' do
@@ -39,8 +40,8 @@ describe Mindee::HTTP::Error do
 
     it 'should fail on a 400 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_400_no_details.json")
-      error_obj = JSON.parse(file)
-      error400 = Mindee::HTTP::Error.handle_error!('dummy-url', error_obj, 400)
+      error_obj = MockHTTPResponse.new('1.0', '400', 'Some scary message here', file)
+      error400 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
       expect do
         raise error400
       end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
@@ -52,8 +53,8 @@ describe Mindee::HTTP::Error do
 
     it 'should fail on a 401 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_401_invalid_token.json")
-      error_obj = JSON.parse(file)
-      error401 = Mindee::HTTP::Error.handle_error!('dummy-url', error_obj, 401)
+      error_obj = MockHTTPResponse.new('1.0', '401', 'Authorization required', file)
+      error401 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
       expect do
         raise error401
       end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
@@ -65,8 +66,8 @@ describe Mindee::HTTP::Error do
 
     it 'should fail on a 429 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_429_too_many_requests.json")
-      error_obj = JSON.parse(file)
-      error429 = Mindee::HTTP::Error.handle_error!('dummy-url', error_obj, 429)
+      error_obj = MockHTTPResponse.new('1.0', '429', 'Too many requests', file)
+      error429 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
       expect do
         raise error429
       end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
@@ -78,8 +79,8 @@ describe Mindee::HTTP::Error do
 
     it 'should fail on a 500 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_500_inference_fail.json")
-      error_obj = JSON.parse(file)
-      error500 = Mindee::HTTP::Error.handle_error!('dummy-url', error_obj, 500)
+      error_obj = MockHTTPResponse.new('1.0', '500', 'Inference failed', file)
+      error500 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
       expect do
         raise error500
       end.to raise_error Mindee::HTTP::Error::MindeeHttpServerError
@@ -91,8 +92,8 @@ describe Mindee::HTTP::Error do
 
     it 'should fail on a 500 HTML response' do
       file = File.read("#{DATA_DIR}/errors/error_50x.html")
-      error_obj = file
-      error500 = Mindee::HTTP::Error.handle_error!('dummy-url', error_obj, 500)
+      error_obj = MockHTTPResponse.new('1.0', '500', '', file)
+      error500 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
       expect do
         raise error500
       end.to raise_error Mindee::HTTP::Error::MindeeHttpServerError

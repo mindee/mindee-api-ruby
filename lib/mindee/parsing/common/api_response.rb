@@ -14,6 +14,8 @@ module Mindee
         PROCESSING = :processing
         # Document parsing is complete.
         COMPLETED = :completed
+        # Job failed
+        FAILURE = :failed
       end
 
       # Potential values for requests.
@@ -36,10 +38,13 @@ module Mindee
         attr_reader :status
         # @return [Integer, nil]
         attr_reader :millisecs_taken
+        # @return [Hash, nil]
+        attr_reader :error
 
         # @param http_response [Hash]
         def initialize(http_response)
           @id = http_response['id']
+          @error = http_response['error']
           @issued_at = Time.iso8601(http_response['issued_at'])
           if http_response.key?('available_at') && !http_response['available_at'].nil?
             @available_at = Time.iso8601(http_response['available_at'])
@@ -108,7 +113,7 @@ module Mindee
           end
           if http_response.key?('document') &&
              (!http_response.key?('job') ||
-             http_response['job']['status'] == 'completed') &&
+               http_response['job']['status'] == 'completed') &&
              @api_request.status == RequestStatus::SUCCESS
             @document = Mindee::Parsing::Common::Document.new(product_class, http_response['document'])
           end

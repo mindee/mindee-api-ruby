@@ -4,6 +4,7 @@ require 'json'
 require 'net/http'
 require_relative 'error'
 require_relative '../version'
+require_relative 'response_validation'
 
 module Mindee
   module HTTP
@@ -49,14 +50,15 @@ module Mindee
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
-      # @return [Hash]
+      # @return [Array]
       def predict(input_source, all_words, close_file, cropper)
         check_api_key
         response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
         hashed_response = JSON.parse(response.body, object_class: Hash)
-        return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
+        return [hashed_response, response.body] if ResponseValidation.valid_sync_response?(response)
 
-        error = Error.handle_error!(@url_name, hashed_response, response.code.to_i)
+        ResponseValidation.clean_request!(response)
+        error = Error.handle_error(@url_name, response)
         raise error
       end
 
@@ -65,27 +67,29 @@ module Mindee
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
-      # @return [Hash]
+      # @return [Array]
       def predict_async(input_source, all_words, close_file, cropper)
         check_api_key
         response = document_queue_req_get(input_source, all_words, close_file, cropper)
         hashed_response = JSON.parse(response.body, object_class: Hash)
-        return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
+        return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
-        error = Error.handle_error!(@url_name, hashed_response, response.code.to_i)
+        ResponseValidation.clean_request!(response)
+        error = Error.handle_error(@url_name, response)
         raise error
       end
 
       # Calls the parsed async doc.
       # @param job_id [String]
-      # @return [Hash]
+      # @return [Array]
       def parse_async(job_id)
         check_api_key
         response = document_queue_req(job_id)
         hashed_response = JSON.parse(response.body, object_class: Hash)
-        return [hashed_response, response.body] if (200..299).include?(response.code.to_i)
+        return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
-        error = Error.handle_error!(@url_name, hashed_response, response.code.to_i)
+        ResponseValidation.clean_request!(response)
+        error = Error.handle_error(@url_name, response)
         raise error
       end
 
@@ -95,7 +99,7 @@ module Mindee
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
-      # @return [Net::HTTP, nil]
+      # @return [Net::HTTPResponse, nil]
       def predict_req_post(input_source, all_words: false, close_file: true, cropper: false)
         uri = URI("#{@url_root}/predict")
 
@@ -116,17 +120,18 @@ module Mindee
         form_data.push ['include_mvision', 'true'] if all_words
 
         req.set_form(form_data, 'multipart/form-data')
-
+        response = nil
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
-          http.request(req)
+          response = http.request(req)
         end
+        response
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
-      # @return [Net::HTTPResponse]
+      # @return [Net::HTTPResponse, nil]
       def document_queue_req_get(input_source, all_words, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
 
@@ -148,13 +153,15 @@ module Mindee
 
         req.set_form(form_data, 'multipart/form-data')
 
+        response = nil
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
-          http.request(req)
+          response = http.request(req)
         end
+        response
       end
 
       # @param job_id [String]
-      # @return [Net::HTTPResponse]
+      # @return [Net::HTTPResponse, nil]
       def document_queue_req(job_id)
         uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
@@ -171,8 +178,8 @@ module Mindee
 
         if response.code.to_i > 299 && response.code.to_i < 400
           req = Net::HTTP::Get.new(response['location'], headers)
-          response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
-            http.request(req)
+          Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
+            response = http.request(req)
           end
         end
         response
