@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.34
+    &mdash; Documentation by YARD 0.9.36
   
 </title>
 
@@ -85,6 +85,33 @@
 </code></pre>
 
 <p>Finally, Ruby away!</p>
+
+<h3 id="label-Environment+Variables">Environment Variables</h3>
+
+<p>This library offers customizable features through environment variables. While there may be instances where you need to rely on them, it’s crucial to exercise caution when modifying them to avoid unintended consequences.</p>
+
+<p>If you’re unsure whether you need to adjust these variables, it’s advisable to refrain from doing so unless you have a specific reason. Accidentally overwriting them can lead to unexpected behavior.</p>
+
+<p>Before making any changes, we recommend reviewing the following information to understand the purpose and potential impact of each environment variable:</p>
+<ul><li>
+<p><code>MINDEE_API_KEY</code>:</p>
+</li><li>
+<p><strong>Description</strong>: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!</p>
+</li><li>
+<p><strong>Default Value</strong>: <code>nil</code></p>
+</li><li>
+<p><code>MINDEE_BASE_URL</code>:</p>
+</li><li>
+<p><strong>Description</strong>: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.</p>
+</li><li>
+<p><strong>Default Value</strong>: <code>https://api.mindee.net/v1</code></p>
+</li><li>
+<p><code>MINDEE_REQUEST_TIMEOUT</code>:</p>
+</li><li>
+<p><strong>Description</strong>: The default timeout for HTTP requests (in seconds).</p>
+</li><li>
+<p><strong>Default Value</strong>: <code>120</code></p>
+</li></ul>
 
 <h3 id="label-Loading+a+File+and+Parsing+It">Loading a File and Parsing It</h3>
 
@@ -255,9 +282,9 @@
 </div></div>
 
       <div id="footer">
-  Generated on Wed Feb 21 15:19:16 2024 by
+  Generated on Thu Mar  7 09:44:36 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.1.4).
+  0.9.36 (ruby-3.1.4).
 </div>
 
     </div>
