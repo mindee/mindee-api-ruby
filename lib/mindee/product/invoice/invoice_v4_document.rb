@@ -9,6 +9,9 @@ module Mindee
       # Invoice V4 document prediction.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
+        # The customer's address used for billing.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :billing_address
         # The address of the customer.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
@@ -39,6 +42,9 @@ module Mindee
         # List of Reference numbers, including PO number.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
+        # Customer's delivery address.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :shipping_address
         # The address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
@@ -68,6 +74,7 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super()
+          @billing_address = StringField.new(prediction['billing_address'], page_id)
           @customer_address = StringField.new(prediction['customer_address'], page_id)
           @customer_company_registrations = []
           prediction['customer_company_registrations'].each do |item|
@@ -87,6 +94,7 @@ module Mindee
           prediction['reference_numbers'].each do |item|
             @reference_numbers.push(StringField.new(item, page_id))
           end
+          @shipping_address = StringField.new(prediction['shipping_address'], page_id)
           @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
@@ -127,6 +135,8 @@ module Mindee
           out_str << "\n:Customer Name: #{@customer_name}".rstrip
           out_str << "\n:Customer Company Registrations: #{customer_company_registrations}".rstrip
           out_str << "\n:Customer Address: #{@customer_address}".rstrip
+          out_str << "\n:Shipping Address: #{@shipping_address}".rstrip
+          out_str << "\n:Billing Address: #{@billing_address}".rstrip
           out_str << "\n:Document Type: #{@document_type}".rstrip
           out_str << "\n:Line Items:"
           out_str << line_items
