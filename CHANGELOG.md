@@ -1,5 +1,12 @@
 # Mindee Ruby API Library Changelog
 
+## v3.6.1 - 2024-03-07
+### Changes
+* :recycle: update error handling to account for future evolutions
+* :memo: update miscellaneous product documentations
+* :memo: add used environment variables to readme
+
+
 ## v3.6.0 - 2024-02-21
 ### Changes
 * :sparkles: add support for resume V1
