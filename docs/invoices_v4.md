@@ -34,12 +34,12 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 80f2328c-58a5-486a-9599-eb2d738680f0
+:Mindee ID: a9062dd1-0d34-42ab-9505-0481a8545106
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/invoices v4.4
+:Product: mindee/invoices v4.5
 :Rotation applied: Yes
 
 Prediction
@@ -65,6 +65,8 @@ Prediction
 :Customer Name: JIRO DOI
 :Customer Company Registrations:
 :Customer Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
+:Shipping Address:
+:Billing Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
 :Document Type: INVOICE
 :Line Items:
   +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
@@ -103,6 +105,8 @@ Page 0
 :Customer Name: JIRO DOI
 :Customer Company Registrations:
 :Customer Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
+:Shipping Address:
+:Billing Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
 :Document Type: INVOICE
 :Line Items:
   +--------------------------------------+--------------+----------+------------+--------------+--------------+------------+
@@ -205,6 +209,13 @@ A `InvoiceV4LineItem` implements the following attributes:
 # Attributes
 The following fields are extracted for Invoice V4:
 
+## Billing Address
+**billing_address** ([StringField](#string-field)): The customer's address used for billing.
+
+```rb
+puts result.document.inference.prediction.billing_address.value
+```
+
 ## Customer Address
 **customer_address** ([StringField](#string-field)): The address of the customer.
 
@@ -279,6 +290,13 @@ puts result.document.inference.prediction.locale.value
 for reference_numbers_elem in result.document.inference.prediction.reference_numbers do
   puts reference_numbers_elem.value
 end
+```
+
+## Shipping Address
+**shipping_address** ([StringField](#string-field)): Customer's delivery address.
+
+```rb
+puts result.document.inference.prediction.shipping_address.value
 ```
 
 ## Supplier Address
