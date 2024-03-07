@@ -39,11 +39,15 @@ specific reason. Accidentally overwriting them can lead to unexpected behavior.
 Before making any changes, we recommend reviewing the following information to understand the purpose and potential
 impact of each environment variable:
 
-| Variable Name            | Description                                                                                                                                                                          | Default Value               |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-| `MINDEE_API_KEY`         | Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!                                                                                         | `nil`                       |
-| `MINDEE_BASE_URL`        | The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location. | `https://api.mindee.net/v1` |
-| `MINDEE_REQUEST_TIMEOUT` | The default timeout (in seconds) for HTTP requests.                                                                                                                                  | `120`                       |
+* `MINDEE_API_KEY`: 
+  * **Description**: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!
+  * **Default Value**: `nil`
+* `MINDEE_BASE_URL`:
+  * **Description**: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.
+  * **Default Value**: `https://api.mindee.net/v1`
+* `MINDEE_REQUEST_TIMEOUT`:
+  * **Description**: The default timeout for HTTP requests (in seconds).
+  * **Default Value**: `120`
 
 ### Loading a File and Parsing It
 
