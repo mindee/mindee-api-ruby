@@ -77,5 +77,24 @@ module Mindee
       coords = points.map(&:x)
       MinMax.new(coords.min, coords.max)
     end
+
+    # Checks whether a set of coordinates is below another on the page, with a slight margin for the lateral value.
+    # @param candidate [Array<Mindee::Geometry::Point] Polygon to check
+    # @param anchor [Array<Mindee::Geometry::Point] Reference polygon
+    # @param margin_left [Float] Margin tolerance on the left of the anchor
+    # @param margin_right [Float] Margin tolerance on the right of the anchor
+    def self.below?(candidate, anchor, margin_left, margin_right)
+      return false if Geometry.get_min_max_y(candidate).min < Geometry.get_min_max_y(anchor).min
+      if Geometry.get_min_max_x(candidate).min <
+         Geometry.get_min_max_x(anchor).min - (Geometry.get_min_max_x(anchor).min * margin_left)
+        return false
+      end
+      if Geometry.get_min_max_x(candidate).max >
+         Geometry.get_min_max_x(anchor).max + (Geometry.get_min_max_x(anchor).max * margin_right)
+        return false
+      end
+
+      true
+    end
   end
 end

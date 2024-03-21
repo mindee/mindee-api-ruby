@@ -163,6 +163,16 @@ module Mindee
           def to_s
             @mvision_v1.to_s
           end
+
+          # Constructs a line from a column, located underneath given coordinates
+          # @param coordinates [Array<Mindee::Geometry::Point>] Polygon or bounding box where the reconstruction should
+          # start
+          # @param page_id [Integer] ID of the page to start at
+          # @param x_margin [Float] Margin of misalignment for the x coordinate (default 10%)
+          # @return [Mindee::Parsing::Common::Ocr::OcrLine]
+          def reconstruct_vertically(coordinates, page_id, x_margin = 0.05)
+            @mvision_v1.reconstruct_vertically(coordinates, page_id, x_margin)
+          end
         end
       end
     end
