@@ -140,7 +140,7 @@ module Mindee
     #  This performs a cropping operation on the server and will increase response time.
     # @param initial_delay_sec [Integer, Float, nil] initial delay before polling. Defaults to 4.
     # @param delay_sec [Integer, Float, nil] delay between polling attempts. Defaults to 2.
-    # @param max_retries [Integer, nil] maximum amount of retries. Defaults to 60.
+    # @param max_retries [Integer] maximum amount of retries. Defaults to 60.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
@@ -167,7 +167,9 @@ module Mindee
       polling_attempts = 1
       job_id = enqueue_res.job.id
       queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
-      while (queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED && queue_res.job.status != Mindee::Parsing::Common::JobStatus::FAILURE) && (polling_attempts < max_retries)
+      while (queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED &&
+        queue_res.job.status != Mindee::Parsing::Common::JobStatus::FAILURE) &&
+            (polling_attempts < max_retries)
         sleep(delay_sec)
         queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
         polling_attempts += 1
