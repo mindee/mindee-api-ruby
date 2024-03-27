@@ -71,6 +71,8 @@ module Mindee
           MindeeHttpClientError.new(error_obj, url, code)
         when 500..599
           MindeeHttpServerError.new(error_obj, url, code)
+        when 200..299
+          MindeeHttpServerError.new(error_obj, url, 500)
         else
           MindeeHttpError.new(error_obj, url, code)
         end
