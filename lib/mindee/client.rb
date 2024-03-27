@@ -167,7 +167,7 @@ module Mindee
       polling_attempts = 1
       job_id = enqueue_res.job.id
       queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
-      while (queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED) && (polling_attempts < max_retries)
+      while (queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED && queue_res.job.status != Mindee::Parsing::Common::JobStatus::FAILURE) && (polling_attempts < max_retries)
         sleep(delay_sec)
         queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
         polling_attempts += 1
