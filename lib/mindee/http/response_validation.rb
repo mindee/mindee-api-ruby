@@ -31,6 +31,9 @@ module Mindee
         return false unless (200..302).cover?(response.code.to_i)
 
         hashed_response = JSON.parse(response.body, object_class: Hash)
+
+        return false if hashed_response.dig('job', 'status') == Mindee::Parsing::Common::JobStatus::FAILURE
+
         return false if hashed_response.dig('job', 'error') && !hashed_response.dig('job', 'error').empty?
 
         true
@@ -47,7 +50,8 @@ module Mindee
         if hashed_response.dig('api_request', 'status_code').to_i > 399
           response.instance_variable_set(:@code, hashed_response['api_request']['status_code'].to_s)
         end
-        return unless hashed_response.dig('job', 'error').empty?
+        return unless hashed_response.dig('job', 'error').empty? &&
+                      hashed_response.dig('job', 'status') != Mindee::Parsing::Common::JobStatus::FAILURE
 
         response.instance_variable_set(:@code, '500')
       end

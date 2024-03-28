@@ -72,7 +72,7 @@ module Mindee
         when 500..599
           MindeeHttpServerError.new(error_obj, url, code)
         else
-          MindeeHttpServerError.new(error_obj, url, 500)
+          MindeeHttpError.new(error_obj, url, code)
         end
       end
 
