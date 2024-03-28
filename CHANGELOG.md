@@ -1,5 +1,12 @@
 # Mindee Ruby API Library Changelog
 
+## v3.6.2 - 2024-03-28
+### Changes
+* :sparkles: update Invoice to v4.5
+### Fixes
+* :bug: fix invalid error codes
+
+
 ## v3.6.1 - 2024-03-07
 ### Changes
 * :recycle: update error handling to account for future evolutions
