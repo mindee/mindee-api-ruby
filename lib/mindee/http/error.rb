@@ -8,10 +8,22 @@ module Mindee
     module Error
       module_function
 
+      # Extracts the HTTP error from the response hash, or the job error if there is one.
+      # @param response [Hash] dictionary response retrieved by the server
+      def extract_error(response)
+        return unless response.respond_to?(:each_pair)
+
+        if !response.dig('api_request', 'error').empty?
+          response.dig('api_request', 'error')
+        elsif !response.dig('job', 'error').empty?
+          response.dig('job', 'error')
+        end
+      end
+
       # Creates an error object based on what's retrieved from a request.
       # @param response [Hash] dictionary response retrieved by the server
       def create_error_obj(response)
-        error_obj = response.respond_to?(:each_pair) ? response.dig('api_request', 'error') : nil
+        error_obj = extract_error(response)
         if error_obj.nil?
           error_obj = if response.include?('Maximum pdf pages')
                         {

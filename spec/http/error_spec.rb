@@ -102,5 +102,23 @@ describe Mindee::HTTP::Error do
       expect(error500.api_message).to eq('Server sent back an unexpected reply.')
       expect(error500.api_details).to eq(file.to_s)
     end
+
+    it 'should fail on a 200 success but job failed' do
+      file = File.read("#{DATA_DIR}/async/get_failed_job_error.json")
+      error_obj = MockHTTPResponse.new('1.0', '200', 'success', file)
+      hashed_obj = JSON.parse(error_obj.body)
+      expect(error_obj.code.to_i).to eq(200)
+      expect(hashed_obj.dig('job', 'status')).to eq('failed')
+      expect(Mindee::HTTP::ResponseValidation.valid_async_response?(error_obj)).to be(false)
+      Mindee::HTTP::ResponseValidation.clean_request! error_obj
+      error500 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      expect do
+        raise error500
+      end.to raise_error Mindee::HTTP::Error::MindeeHttpServerError
+      expect(error500.status_code).to eq(500)
+      expect(error500.api_code).to eq('ServerError')
+      expect(error500.api_message).to eq('An error occurred')
+      expect(error500.api_details).to eq('An error occurred')
+    end
   end
 end
