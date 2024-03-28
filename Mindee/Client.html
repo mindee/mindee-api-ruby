@@ -936,7 +936,7 @@
         <span class='name'>initial_delay_sec</span>
       
       
-        <span class='type'>(<tt>Integer</tt>, <tt>Float</tt>, <tt>nil</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>, <tt>Float</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>4</tt>)</em>
@@ -954,7 +954,7 @@
         <span class='name'>delay_sec</span>
       
       
-        <span class='type'>(<tt>Integer</tt>, <tt>Float</tt>, <tt>nil</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>, <tt>Float</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>2</tt>)</em>
@@ -972,7 +972,7 @@
         <span class='name'>max_retries</span>
       
       
-        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>60</tt>)</em>
@@ -1073,7 +1073,7 @@
   <span class='id identifier rubyid_polling_attempts'>polling_attempts</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue_res'>enqueue_res</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
   <span class='id identifier rubyid_queue_res'>queue_res</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_queued'>parse_queued</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='rparen'>)</span>
-  <span class='kw'>while</span> <span class='lparen'>(</span><span class='id identifier rubyid_queue_res'>queue_res</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/JobStatus.html" title="Mindee::Parsing::Common::JobStatus (module)">JobStatus</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/JobStatus.html#COMPLETED-constant" title="Mindee::Parsing::Common::JobStatus::COMPLETED (constant)">COMPLETED</a></span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_polling_attempts'>polling_attempts</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_max_retries'>max_retries</span><span class='rparen'>)</span>
+  <span class='kw'>while</span> <span class='id identifier rubyid_queue_res'>queue_res</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/JobStatus.html" title="Mindee::Parsing::Common::JobStatus (module)">JobStatus</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/JobStatus.html#COMPLETED-constant" title="Mindee::Parsing::Common::JobStatus::COMPLETED (constant)">COMPLETED</a></span></span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_polling_attempts'>polling_attempts</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_max_retries'>max_retries</span>
     <span class='id identifier rubyid_sleep'>sleep</span><span class='lparen'>(</span><span class='id identifier rubyid_delay_sec'>delay_sec</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_queue_res'>queue_res</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_queued'>parse_queued</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_polling_attempts'>polling_attempts</span> <span class='op'>+=</span> <span class='int'>1</span>
@@ -1922,7 +1922,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Mar  7 09:44:37 2024 by
+  Generated on Thu Mar 28 15:50:21 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.1.4).
 </div>
