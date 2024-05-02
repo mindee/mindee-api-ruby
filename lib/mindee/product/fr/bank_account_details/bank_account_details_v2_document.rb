@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module BankAccountDetails
-        # Bank Account Details V2 document prediction.
+        # Bank Account Details API version 2.0 document data.
         class BankAccountDetailsV2Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # Full extraction of the account holders names.

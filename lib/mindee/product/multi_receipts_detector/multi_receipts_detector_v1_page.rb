@@ -6,7 +6,7 @@ require_relative 'multi_receipts_detector_v1_document'
 module Mindee
   module Product
     module MultiReceiptsDetector
-      # Multi Receipts Detector V1 page.
+      # Multi Receipts Detector API version 1.0 page data.
       class MultiReceiptsDetectorV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

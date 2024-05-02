@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module ProofOfAddress
-      # Proof of Address V1 document prediction.
+      # Proof of Address API version 1.1 document data.
       class ProofOfAddressV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The date the document was issued.

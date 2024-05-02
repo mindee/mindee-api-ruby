@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Cropper module.
     module Cropper
-      # Cropper V1 prediction inference.
+      # Cropper API version 1 inference prediction.
       class CropperV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'cropper'
         @endpoint_version = '1'

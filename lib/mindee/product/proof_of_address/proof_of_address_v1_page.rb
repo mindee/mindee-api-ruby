@@ -6,7 +6,7 @@ require_relative 'proof_of_address_v1_document'
 module Mindee
   module Product
     module ProofOfAddress
-      # Proof of Address V1 page.
+      # Proof of Address API version 1.1 page data.
       class ProofOfAddressV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

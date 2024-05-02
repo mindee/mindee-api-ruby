@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module BankAccountDetails
-        # Bank Account Details V1 page.
+        # Bank Account Details API version 1.0 page data.
         class BankAccountDetailsV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

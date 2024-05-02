@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module CarteGrise
-        # Carte Grise V1 page.
+        # Carte Grise API version 1.1 page data.
         class CarteGriseV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

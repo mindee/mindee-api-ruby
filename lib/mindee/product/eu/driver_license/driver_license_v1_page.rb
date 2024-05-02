@@ -7,7 +7,7 @@ module Mindee
   module Product
     module EU
       module DriverLicense
-        # Driver License V1 page.
+        # Driver License API version 1.0 page data.
         class DriverLicenseV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

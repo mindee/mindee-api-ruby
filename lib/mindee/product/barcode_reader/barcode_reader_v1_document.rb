@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module BarcodeReader
-      # Barcode Reader V1 document prediction.
+      # Barcode Reader API version 1.0 document data.
       class BarcodeReaderV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # List of decoded 1D barcodes.

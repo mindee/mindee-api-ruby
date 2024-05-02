@@ -8,7 +8,7 @@ module Mindee
   module Product
     # International ID module.
     module InternationalId
-      # International ID V2 prediction inference.
+      # International ID API version 2 inference prediction.
       class InternationalIdV2 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'international_id'
         @endpoint_version = '2'

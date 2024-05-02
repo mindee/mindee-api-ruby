@@ -9,7 +9,7 @@ module Mindee
     module FR
       # Carte Grise module.
       module CarteGrise
-        # Carte Grise V1 prediction inference.
+        # Carte Grise API version 1 inference prediction.
         class CarteGriseV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'carte_grise'
           @endpoint_version = '1'

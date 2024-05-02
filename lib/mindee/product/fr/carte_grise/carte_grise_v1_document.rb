@@ -6,7 +6,7 @@ module Mindee
   module Product
     module FR
       module CarteGrise
-        # Carte Grise V1 document prediction.
+        # Carte Grise API version 1.1 document data.
         class CarteGriseV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The vehicle's license plate number.

@@ -9,7 +9,7 @@ module Mindee
     module US
       # Driver License module.
       module DriverLicense
-        # Driver License V1 prediction inference.
+        # Driver License API version 1 inference prediction.
         class DriverLicenseV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'us_driver_license'
           @endpoint_version = '1'

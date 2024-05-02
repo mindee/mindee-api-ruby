@@ -9,7 +9,7 @@ module Mindee
     module FR
       # Carte Nationale d'Identité module.
       module IdCard
-        # Carte Nationale d'Identité V2 prediction inference.
+        # Carte Nationale d'Identité API version 2 inference prediction.
         class IdCardV2 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'idcard_fr'
           @endpoint_version = '2'

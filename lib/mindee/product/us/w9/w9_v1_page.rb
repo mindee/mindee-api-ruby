@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module W9
-        # W9 V1 page.
+        # W9 API version 1.0 page data.
         class W9V1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
