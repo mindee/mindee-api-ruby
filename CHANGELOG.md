@@ -1,6 +1,12 @@
 # Mindee Ruby API Library Changelog
 
-## v3.6.2 - 2024-03-28
+## v3.8.0 - 2024-05-02
+### Changes
+* :recycle: update products to newer syntax
+* :sparkles: update financial document to v1.6 & invoice to v4.6
+
+
+## v3.7.0 - 2024-03-28
 ### Changes
 * :sparkles: update Invoice to v4.5
 ### Fixes
