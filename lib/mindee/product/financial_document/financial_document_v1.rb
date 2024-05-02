@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Financial Document module.
     module FinancialDocument
-      # Financial Document V1 prediction inference.
+      # Financial Document API version 1 inference prediction.
       class FinancialDocumentV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'financial_document'
         @endpoint_version = '1'

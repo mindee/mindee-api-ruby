@@ -6,7 +6,7 @@ require_relative 'invoice_v4_line_item'
 module Mindee
   module Product
     module Invoice
-      # Invoice V4 document prediction.
+      # Invoice API version 4.6 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -18,6 +18,9 @@ module Mindee
         # List of company registrations associated to the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :customer_company_registrations
+        # The customer account number or identifier from the supplier.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :customer_id
         # The name of the customer or client.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_name
@@ -51,12 +54,21 @@ module Mindee
         # List of company registrations associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
+        # The email of the supplier or merchant.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :supplier_email
         # The name of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_name
         # List of payment details associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
         attr_reader :supplier_payment_details
+        # The phone number of the supplier or merchant.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :supplier_phone_number
+        # The website URL of the supplier or merchant.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :supplier_website
         # List of tax line details.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
@@ -80,6 +92,7 @@ module Mindee
           prediction['customer_company_registrations'].each do |item|
             @customer_company_registrations.push(CompanyRegistrationField.new(item, page_id))
           end
+          @customer_id = StringField.new(prediction['customer_id'], page_id)
           @customer_name = StringField.new(prediction['customer_name'], page_id)
           @date = DateField.new(prediction['date'], page_id)
           @document_type = ClassificationField.new(prediction['document_type'], page_id)
@@ -100,11 +113,14 @@ module Mindee
           prediction['supplier_company_registrations'].each do |item|
             @supplier_company_registrations.push(CompanyRegistrationField.new(item, page_id))
           end
+          @supplier_email = StringField.new(prediction['supplier_email'], page_id)
           @supplier_name = StringField.new(prediction['supplier_name'], page_id)
           @supplier_payment_details = []
           prediction['supplier_payment_details'].each do |item|
             @supplier_payment_details.push(PaymentDetailsField.new(item, page_id))
           end
+          @supplier_phone_number = StringField.new(prediction['supplier_phone_number'], page_id)
+          @supplier_website = StringField.new(prediction['supplier_website'], page_id)
           @taxes = Taxes.new(prediction['taxes'], page_id)
           @total_amount = AmountField.new(prediction['total_amount'], page_id)
           @total_net = AmountField.new(prediction['total_net'], page_id)
@@ -132,9 +148,13 @@ module Mindee
           out_str << "\n:Supplier Name: #{@supplier_name}".rstrip
           out_str << "\n:Supplier Company Registrations: #{supplier_company_registrations}".rstrip
           out_str << "\n:Supplier Address: #{@supplier_address}".rstrip
+          out_str << "\n:Supplier Phone Number: #{@supplier_phone_number}".rstrip
+          out_str << "\n:Supplier Website: #{@supplier_website}".rstrip
+          out_str << "\n:Supplier Email: #{@supplier_email}".rstrip
           out_str << "\n:Customer Name: #{@customer_name}".rstrip
           out_str << "\n:Customer Company Registrations: #{customer_company_registrations}".rstrip
           out_str << "\n:Customer Address: #{@customer_address}".rstrip
+          out_str << "\n:Customer ID: #{@customer_id}".rstrip
           out_str << "\n:Shipping Address: #{@shipping_address}".rstrip
           out_str << "\n:Billing Address: #{@billing_address}".rstrip
           out_str << "\n:Document Type: #{@document_type}".rstrip

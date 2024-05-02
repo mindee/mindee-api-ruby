@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Invoice module.
     module Invoice
-      # Invoice V4 prediction inference.
+      # Invoice API version 4 inference prediction.
       class InvoiceV4 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'invoices'
         @endpoint_version = '4'
