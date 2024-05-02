@@ -6,7 +6,7 @@ require_relative 'passport_v1_document'
 module Mindee
   module Product
     module Passport
-      # Passport V1 page.
+      # Passport API version 1.1 page data.
       class PassportV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

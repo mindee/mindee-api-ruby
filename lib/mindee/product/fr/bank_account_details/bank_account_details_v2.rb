@@ -9,7 +9,7 @@ module Mindee
     module FR
       # Bank Account Details module.
       module BankAccountDetails
-        # Bank Account Details V2 prediction inference.
+        # Bank Account Details API version 2 inference prediction.
         class BankAccountDetailsV2 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'bank_account_details'
           @endpoint_version = '2'

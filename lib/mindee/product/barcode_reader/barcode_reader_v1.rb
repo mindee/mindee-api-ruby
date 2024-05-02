@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Barcode Reader module.
     module BarcodeReader
-      # Barcode Reader V1 prediction inference.
+      # Barcode Reader API version 1 inference prediction.
       class BarcodeReaderV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'barcode_reader'
         @endpoint_version = '1'

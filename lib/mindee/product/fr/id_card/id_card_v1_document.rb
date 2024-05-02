@@ -6,7 +6,7 @@ module Mindee
   module Product
     module FR
       module IdCard
-        # Carte Nationale d'Identité V1 document prediction.
+        # Carte Nationale d'Identité API version 1.1 document data.
         class IdCardV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The name of the issuing authority.

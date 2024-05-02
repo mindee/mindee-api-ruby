@@ -9,7 +9,7 @@ module Mindee
     module US
       # W9 module.
       module W9
-        # W9 V1 prediction inference.
+        # W9 API version 1 inference prediction.
         class W9V1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'us_w9'
           @endpoint_version = '1'

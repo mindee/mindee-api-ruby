@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Cropper
-      # Cropper V1 document prediction.
+      # Cropper API version 1.1 document data.
       class CropperV1Document < Mindee::Parsing::Common::Prediction
       end
     end

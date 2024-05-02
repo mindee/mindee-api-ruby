@@ -6,7 +6,7 @@ module Mindee
   module Product
     module US
       module DriverLicense
-        # Driver License V1 document prediction.
+        # Driver License API version 1.1 document data.
         class DriverLicenseV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # US driver license holders address

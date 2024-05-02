@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module IdCard
-        # Carte Nationale d'Identité V2 page.
+        # Carte Nationale d'Identité API version 2.0 page data.
         class IdCardV2Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

@@ -10,7 +10,7 @@ require_relative 'resume_v1_certificate'
 module Mindee
   module Product
     module Resume
-      # Resume V1 document prediction.
+      # Resume API version 1.0 document data.
       class ResumeV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The location information of the candidate, including city, state, and country.

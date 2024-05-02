@@ -6,7 +6,7 @@ require_relative 'barcode_reader_v1_document'
 module Mindee
   module Product
     module BarcodeReader
-      # Barcode Reader V1 page.
+      # Barcode Reader API version 1.0 page data.
       class BarcodeReaderV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

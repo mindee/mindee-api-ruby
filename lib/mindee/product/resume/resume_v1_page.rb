@@ -6,7 +6,7 @@ require_relative 'resume_v1_document'
 module Mindee
   module Product
     module Resume
-      # Resume V1 page.
+      # Resume API version 1.0 page data.
       class ResumeV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

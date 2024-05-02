@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module CarteVitale
-        # Carte Vitale V1 page.
+        # Carte Vitale API version 1.1 page data.
         class CarteVitaleV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

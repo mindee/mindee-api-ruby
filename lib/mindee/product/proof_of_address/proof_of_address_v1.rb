@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Proof of Address module.
     module ProofOfAddress
-      # Proof of Address V1 prediction inference.
+      # Proof of Address API version 1 inference prediction.
       class ProofOfAddressV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'proof_of_address'
         @endpoint_version = '1'

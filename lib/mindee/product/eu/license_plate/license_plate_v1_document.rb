@@ -6,7 +6,7 @@ module Mindee
   module Product
     module EU
       module LicensePlate
-        # License Plate V1 document prediction.
+        # License Plate API version 1.1 document data.
         class LicensePlateV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # List of all license plates found in the image.

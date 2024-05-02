@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Receipt module.
     module Receipt
-      # Receipt V5 prediction inference.
+      # Receipt API version 5 inference prediction.
       class ReceiptV5 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'expense_receipts'
         @endpoint_version = '5'

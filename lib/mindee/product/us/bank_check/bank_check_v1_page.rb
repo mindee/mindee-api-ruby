@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module BankCheck
-        # Bank Check V1 page.
+        # Bank Check API version 1.1 page data.
         class BankCheckV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

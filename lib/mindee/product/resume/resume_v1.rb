@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Resume module.
     module Resume
-      # Resume V1 prediction inference.
+      # Resume API version 1 inference prediction.
       class ResumeV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'resume'
         @endpoint_version = '1'

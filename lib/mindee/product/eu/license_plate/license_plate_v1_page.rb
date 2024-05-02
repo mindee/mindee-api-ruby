@@ -7,7 +7,7 @@ module Mindee
   module Product
     module EU
       module LicensePlate
-        # License Plate V1 page.
+        # License Plate API version 1.1 page data.
         class LicensePlateV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

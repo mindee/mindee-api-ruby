@@ -6,7 +6,7 @@ require_relative 'cropper_v1_document'
 module Mindee
   module Product
     module Cropper
-      # Cropper V1 page.
+      # Cropper API version 1.1 page data.
       class CropperV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

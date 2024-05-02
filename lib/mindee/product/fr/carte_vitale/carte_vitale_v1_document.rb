@@ -6,7 +6,7 @@ module Mindee
   module Product
     module FR
       module CarteVitale
-        # Carte Vitale V1 document prediction.
+        # Carte Vitale API version 1.1 document data.
         class CarteVitaleV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The given name(s) of the card holder.

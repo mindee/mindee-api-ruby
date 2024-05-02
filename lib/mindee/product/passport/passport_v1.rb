@@ -8,7 +8,7 @@ module Mindee
   module Product
     # Passport module.
     module Passport
-      # Passport V1 prediction inference.
+      # Passport API version 1 inference prediction.
       class PassportV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'passport'
         @endpoint_version = '1'
