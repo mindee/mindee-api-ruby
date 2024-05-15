@@ -6,7 +6,7 @@ require_relative 'receipt_v5_line_item'
 module Mindee
   module Product
     module Receipt
-      # Receipt API version 5.1 document data.
+      # Receipt API version 5.2 document data.
       class ReceiptV5Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The purchase category among predefined classes.
@@ -24,6 +24,9 @@ module Mindee
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
+        # The receipt number or identifier.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :receipt_number
         # The purchase subcategory among predefined classes for transport and food.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
@@ -70,6 +73,7 @@ module Mindee
             @line_items.push(ReceiptV5LineItem.new(item, page_id))
           end
           @locale = LocaleField.new(prediction['locale'], page_id)
+          @receipt_number = StringField.new(prediction['receipt_number'], page_id)
           @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
           @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @supplier_company_registrations = []
@@ -106,6 +110,7 @@ module Mindee
           out_str << "\n:Supplier Company Registrations: #{supplier_company_registrations}".rstrip
           out_str << "\n:Supplier Address: #{@supplier_address}".rstrip
           out_str << "\n:Supplier Phone Number: #{@supplier_phone_number}".rstrip
+          out_str << "\n:Receipt Number: #{@receipt_number}".rstrip
           out_str << "\n:Line Items:"
           out_str << line_items
           out_str[1..].to_s

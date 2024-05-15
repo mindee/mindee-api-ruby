@@ -221,6 +221,13 @@ end
 puts result.document.inference.prediction.locale.value
 ```
 
+## Receipt Number
+**receipt_number** ([StringField](#string-field)): The receipt number or identifier.
+
+```rb
+puts result.document.inference.prediction.receipt_number.value
+```
+
 ## Purchase Subcategory
 **subcategory** ([ClassificationField](#classification-field)): The purchase subcategory among predefined classes for transport and food.
 
