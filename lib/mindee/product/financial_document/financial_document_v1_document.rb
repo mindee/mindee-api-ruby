@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.6 document data.
+      # Financial Document API version 1.7 document data.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -30,13 +30,16 @@ module Mindee
         # The date the purchase was made.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
+        # The document number or identifier.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :document_number
         # One of: 'INVOICE', 'CREDIT NOTE', 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # The date on which the payment is due.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :due_date
-        # The invoice number or identifier.
+        # The invoice number or identifier only if document is an invoice.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :invoice_number
         # List of line item details.
@@ -45,6 +48,9 @@ module Mindee
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
+        # The receipt number or identifier only if document is a receipt.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :receipt_number
         # List of Reference numbers, including PO number.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
@@ -108,6 +114,7 @@ module Mindee
           @customer_id = StringField.new(prediction['customer_id'], page_id)
           @customer_name = StringField.new(prediction['customer_name'], page_id)
           @date = DateField.new(prediction['date'], page_id)
+          @document_number = StringField.new(prediction['document_number'], page_id)
           @document_type = ClassificationField.new(prediction['document_type'], page_id)
           @due_date = DateField.new(prediction['due_date'], page_id)
           @invoice_number = StringField.new(prediction['invoice_number'], page_id)
@@ -116,6 +123,7 @@ module Mindee
             @line_items.push(FinancialDocumentV1LineItem.new(item, page_id))
           end
           @locale = LocaleField.new(prediction['locale'], page_id)
+          @receipt_number = StringField.new(prediction['receipt_number'], page_id)
           @reference_numbers = []
           prediction['reference_numbers'].each do |item|
             @reference_numbers.push(StringField.new(item, page_id))
@@ -153,6 +161,8 @@ module Mindee
           out_str = String.new
           out_str << "\n:Locale: #{@locale}".rstrip
           out_str << "\n:Invoice Number: #{@invoice_number}".rstrip
+          out_str << "\n:Receipt Number: #{@receipt_number}".rstrip
+          out_str << "\n:Document Number: #{@document_number}".rstrip
           out_str << "\n:Reference Numbers: #{reference_numbers}".rstrip
           out_str << "\n:Purchase Date: #{@date}".rstrip
           out_str << "\n:Due Date: #{@due_date}".rstrip

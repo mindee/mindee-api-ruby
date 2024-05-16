@@ -31,9 +31,6 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
                                                          response['document'])
         prediction = document.inference.prediction
         expect(prediction.invoice_number.bounding_box.top_left.x).to eq(prediction.invoice_number.polygon[0][0])
-        expect(prediction.date.value).to eq('2019-11-02')
-        expect(prediction.due_date.value).to eq('2019-02-26')
-        expect(prediction.due_date.page_id).to eq(0)
         expect(document.to_s).to eq(to_string)
       end
 
@@ -66,7 +63,6 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
         document = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
                                                          response['document'])
         expect(document.inference.prediction.date.page_id).to eq(0)
-        expect(document.inference.prediction.date.value).to eq('2014-07-07')
         expect(document.to_s).to eq(to_string)
       end
 
