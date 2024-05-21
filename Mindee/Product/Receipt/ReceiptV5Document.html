@@ -109,7 +109,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Receipt API version 5.1 document data.</p>
+<p>Receipt API version 5.2 document data.</p>
 
 
   </div>
@@ -268,6 +268,35 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>The locale detected on the document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receipt_number-instance_method" title="#receipt_number (instance method)">#<strong>receipt_number</strong>  &#x21d2; Mindee::Parsing::Standard::StringField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The receipt number or identifier.</p>
 </div></span>
   
 </li>
@@ -723,9 +752,6 @@
       <pre class="lines">
 
 
-63
-64
-65
 66
 67
 68
@@ -747,10 +773,14 @@
 84
 85
 86
-87</pre>
+87
+88
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
@@ -762,6 +792,7 @@
     <span class='ivar'>@line_items</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="ReceiptV5LineItem.html" title="Mindee::Product::Receipt::ReceiptV5LineItem (class)">ReceiptV5LineItem</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ReceiptV5LineItem.html#initialize-instance_method" title="Mindee::Product::Receipt::ReceiptV5LineItem#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='ivar'>@locale</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/LocaleField.html" title="Mindee::Parsing::Standard::LocaleField (class)">LocaleField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/LocaleField.html#initialize-instance_method" title="Mindee::Parsing::Standard::LocaleField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>locale</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@receipt_number</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>receipt_number</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@subcategory</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">ClassificationField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/Field.html#initialize-instance_method" title="Mindee::Parsing::Standard::Field#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>subcategory</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@supplier_address</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supplier_address</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='ivar'>@supplier_company_registrations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1070,6 +1101,62 @@
       
       <span id=""></span>
       <div class="method_details ">
+  <h3 class="signature " id="receipt_number-instance_method">
+  
+    #<strong>receipt_number</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The receipt number or identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">Mindee::Parsing::Standard::StringField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_receipt_number'>receipt_number</span>
+  <span class='ivar'>@receipt_number</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
   <h3 class="signature " id="subcategory-instance_method">
   
     #<strong>subcategory</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">Mindee::Parsing::Standard::ClassificationField</a></span></tt>  <span class="extras">(readonly)</span>
@@ -1108,12 +1195,12 @@
       <pre class="lines">
 
 
-29
-30
-31</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subcategory'>subcategory</span>
   <span class='ivar'>@subcategory</span>
@@ -1164,12 +1251,12 @@
       <pre class="lines">
 
 
-32
-33
-34</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_address'>supplier_address</span>
   <span class='ivar'>@supplier_address</span>
@@ -1220,12 +1307,12 @@
       <pre class="lines">
 
 
-35
-36
-37</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_company_registrations'>supplier_company_registrations</span>
   <span class='ivar'>@supplier_company_registrations</span>
@@ -1276,12 +1363,12 @@
       <pre class="lines">
 
 
-38
-39
-40</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_name'>supplier_name</span>
   <span class='ivar'>@supplier_name</span>
@@ -1332,12 +1419,12 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_phone_number'>supplier_phone_number</span>
   <span class='ivar'>@supplier_phone_number</span>
@@ -1388,12 +1475,12 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_taxes'>taxes</span>
   <span class='ivar'>@taxes</span>
@@ -1444,12 +1531,12 @@
       <pre class="lines">
 
 
-47
-48
-49</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time'>time</span>
   <span class='ivar'>@time</span>
@@ -1500,12 +1587,12 @@
       <pre class="lines">
 
 
-50
-51
-52</pre>
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tip'>tip</span>
   <span class='ivar'>@tip</span>
@@ -1556,12 +1643,12 @@
       <pre class="lines">
 
 
-53
-54
-55</pre>
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_amount'>total_amount</span>
   <span class='ivar'>@total_amount</span>
@@ -1612,12 +1699,12 @@
       <pre class="lines">
 
 
-56
-57
-58</pre>
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_net'>total_net</span>
   <span class='ivar'>@total_net</span>
@@ -1668,12 +1755,12 @@
       <pre class="lines">
 
 
-59
-60
-61</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_tax'>total_tax</span>
   <span class='ivar'>@total_tax</span>
@@ -1727,10 +1814,6 @@
       <pre class="lines">
 
 
-90
-91
-92
-93
 94
 95
 96
@@ -1749,10 +1832,15 @@
 109
 110
 111
-112</pre>
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/receipt/receipt_v5_document.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_supplier_company_registrations'>supplier_company_registrations</span> <span class='op'>=</span> <span class='ivar'>@supplier_company_registrations</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>32</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1773,6 +1861,7 @@
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Supplier Company Registrations: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_supplier_company_registrations'>supplier_company_registrations</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Supplier Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@supplier_address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Supplier Phone Number: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@supplier_phone_number</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Receipt Number: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@receipt_number</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Line Items:</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_line_items'>line_items</span>
   <span class='id identifier rubyid_out_str'>out_str</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1787,7 +1876,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May  2 14:55:07 2024 by
+  Generated on Tue May 21 08:32:56 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.1.5).
 </div>
