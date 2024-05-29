@@ -30,8 +30,8 @@ module Mindee
         end
       end
 
-      # Returns the
-      # @param [Hash]
+      # Returns the file as a hash.
+      # @return [Hash]
       def as_hash
         @file.rewind
         JSON.parse(@file.read, object_class: Hash)

@@ -188,7 +188,7 @@ module Mindee
     # @param local_response [Mindee::Input::LocalResponse]
     # @return [Mindee::Parsing::Common::ApiResponse]
     def load_prediction(product_class, local_response)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, local_response, local_response.to_json)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, local_response.as_hash, local_response.to_json)
     rescue KeyError
       raise 'No prediction found in local response.'
     end
