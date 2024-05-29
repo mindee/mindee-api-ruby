@@ -19,9 +19,7 @@ describe Mindee::Input::LocalResponse do
              )).to be(false)
       expect(response.get_hmac_signature(dummy_secret_key)).to eq(signature)
     end
-  end
 
-  context 'A local response' do
     it 'should load from a string' do
       str_file = File.read(FILE_PATH)
       response = Mindee::Input::LocalResponse.new(str_file)
@@ -31,9 +29,7 @@ describe Mindee::Input::LocalResponse do
              )).to be(false)
       expect(response.get_hmac_signature(dummy_secret_key)).to eq(signature)
     end
-  end
 
-  context 'A local response' do
     it 'should load from a StringIO' do
       strio_file = StringIO.new(File.read(FILE_PATH))
       response = Mindee::Input::LocalResponse.new(strio_file)
@@ -43,9 +39,7 @@ describe Mindee::Input::LocalResponse do
              )).to be(false)
       expect(response.get_hmac_signature(dummy_secret_key)).to eq(signature)
     end
-  end
 
-  context 'A local response' do
     it 'should load from a file-like object' do
       str_file = File.read(FILE_PATH)
       Tempfile.open do |tempfile|

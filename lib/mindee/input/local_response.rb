@@ -4,6 +4,7 @@ require 'json'
 require 'openssl'
 require 'stringio'
 require 'pathname'
+require 'tempfile'
 
 module Mindee
   module Input
@@ -34,9 +35,10 @@ module Mindee
       # @return [Hash]
       def as_hash
         @file.rewind
-        JSON.parse(@file.read, object_class: Hash)
+        file_str = @file.read
+        JSON.parse(file_str, object_class: Hash)
       rescue JSON::ParserError
-        raise 'File is not a valid dictionary.'
+        raise "File is not a valid dict. #{file_str}"
       end
 
       # Processes the secret key

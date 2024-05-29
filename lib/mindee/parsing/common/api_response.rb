@@ -110,6 +110,8 @@ module Mindee
           @raw_http = raw_http.to_s
           if http_response.key?('api_request')
             @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
+          else
+            raise "WHAT #{http_response}"
           end
           if http_response.key?('document') &&
              (!http_response.key?('job') ||
