@@ -23,10 +23,10 @@ module Mindee
 
         # @param prediction [Hash]
         def initialize(prediction, _page_id = nil)
-          value_key = if prediction.include? 'value'
-                        'value'
-                      else
+          value_key = if !prediction.include?('value') || prediction['value'].nil?
                         'language'
+                      else
+                        'value'
                       end
           @confidence = prediction['confidence']
           @value = prediction[value_key]
@@ -38,7 +38,7 @@ module Mindee
         # @return [String]
         def to_s
           out_str = String.new
-          out_str << "#{@value}; " if @value
+          out_str << "#{@value}; " unless @value.nil?
           out_str << "#{@language}; " if @language
           out_str << "#{@country}; " if @country
           out_str << "#{@currency}; " if @currency
