@@ -4,15 +4,61 @@ module Mindee
   module Extraction
     # Tax extractor class
     class TaxExtractor
+      # Extracts the most relevant candidate.
+      # @param candidates [Array<Hash>] a candidate for the tax.
+      # @param tax_names [Array<String>] list of all possible names the tax can have.
+      # @return [Hash, nil]
+      def self.extract_best(candidates, tax_names)
+        return candidates[0] if candidates.length == 1
+        return nil if candidates.empty?
+
+        picked = 0
+        picked_score = 0
+
+        candidates.each_with_index do |candidate, i|
+          next unless valid_candidate?(candidate, tax_names)
+
+          sum_fields_score = calculate_score(candidate, i)
+
+          if picked_score < sum_fields_score
+            picked_score = sum_fields_score
+            picked = i
+          end
+        end
+
+        candidates[picked]
+      end
+
+      # Checks whether a tax code has been properly read. Shouldn't trigger except in case of very specific regex breaks
+      # due to unsupported diacritics.
+      # @param candidate [Hash] A candidate for the tax.
+      # @param tax_names [Array<String>] list of all possible names the tax can have.
+      # @return [Boolean]
+      def self.valid_candidate?(candidate, tax_names)
+        tax_names.include?(candidate['code'])
+      end
+
+      # [Experimental] computes the score of a valid candidate for a tax.
+      # @param candidate [Hash] A candidate for the tax.
+      # @param index [Integer]
+      def self.calculate_score(candidate, index)
+        score = index + 1
+        score += 1 unless candidate['rate'].nil?
+        score += 2 unless candidate['value'].nil?
+        score += 2 unless candidate['base'].nil?
+        score
+      end
+
       # Extracts a single custom type of tax.
       # For the sake of simplicity, this only extracts the first example, unless specifically instructed otherwise.
       # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] result of the OCR.
       # @param tax_names [Array<String>] list of all possible names the tax can have.
       # @return [Mindee::Parsing::Standard::TaxField, nil]
+
       def self.extract_custom_tax(ocr_result, tax_names)
         return nil if ocr_result.is_a?(Mindee::Parsing::Common::Ocr) || tax_names.empty?
 
-        found_hash = extract_horizontal(ocr_result, tax_names)
+        found_hash = extract_best(extract_horizontal(ocr_result, tax_names), tax_names)
         # a tax is considered found horizontally if it has a value, otherwise it is vertical
         found_hash = extract_vertical(ocr_result, tax_names, found_hash)
 
@@ -37,12 +83,12 @@ module Mindee
       # Checks for a list of possible matches in a string & returns the index of the first found candidate.
       # Case & diacritics insensitive.
       # @param text [String] string to search for matches.
-      # @param candidates [Array<String>] array of values to look for
+      # @param str_candidates [Array<String>] array of values to look for
       # @return [Integer, nil]
-      def self.match_index(text, candidates)
-        candidates.each do |candidate|
-          unless remove_accents(text.downcase).index(remove_accents(candidate.downcase)).nil?
-            return remove_accents(text.downcase).index(remove_accents(candidate.downcase))
+      def self.match_index(text, str_candidates)
+        str_candidates.each do |str_candidate|
+          unless remove_accents(text.downcase).index(remove_accents(str_candidate.downcase)).nil?
+            return remove_accents(text.downcase).index(remove_accents(str_candidate.downcase))
           end
         end
         nil
@@ -62,7 +108,7 @@ module Mindee
         cleaned_str.gsub!(',', '')
 
         # Extract the numeric part of the string
-        cleaned_str.sub(%r{^[^\d]+}, '')
+        cleaned_str.sub(%r{^\D+}, '')
       end
 
       # Parses an amount from a string, and returns it as a float.
@@ -73,7 +119,7 @@ module Mindee
         cleaned_str = amount_str.scrub.gsub(%r{[^\d.,]}, '')
         cleaned_str.sub!(%r{,$}, '')
         extract_numeric_part(cleaned_str)
-        numeric_part = cleaned_str.sub(%r{^[^\d]+}, '')
+        numeric_part = cleaned_str.sub(%r{^\D+}, '')
         numeric_part.gsub!(',', '.')
         Float(numeric_part)
       rescue ArgumentError
@@ -138,6 +184,7 @@ module Mindee
         found_hash = {}
 
         matches = line.match(pattern)
+        # raise "#{pattern}"
 
         # Edge case for when the tax is split-up between two pages, we'll consider that
         # the answer belongs to the first one.
@@ -151,37 +198,38 @@ module Mindee
       # Processes a horizontal line for tax extraction. Returns a hash of collected values.
       # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] Processed OCR results.
       # @param tax_names [Array<String>] Possible tax names candidates.
-      # @return [Hash]
+      # @return [Array<Hash>]
       def self.extract_horizontal(ocr_result, tax_names)
+        candidates = []
         linear_pattern_percent_first = %r{
           [ .]*[(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?\s*\d*[.,]?\d+[ .]*)[ .]*[)\]]*[ .]*
-          ([a-zA-Z]+[a-zA-Z\s]*[ .]*)
+          ([a-zA-ZÀ-ÖØ-öø-ÿ]+[a-zA-Z\s]*[ .]*)
           (\d*[.,]?\d+|\d+)?[ .]+
           (\d*[.,]?\d+|\d+)?
         }x
         linear_pattern_percent_second = %r{
-          [ .]*([a-zA-Z]+[a-zA-Z\s]*[ .]*)
+          [ .]*([a-zA-ZÀ-ÖØ-öø-ÿ]+[a-zA-Z\s]*[ .]*)
           [(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?[ .]*\d*[.,]?\d+[ .]*)?[ .]*[)\]]*[ .]*
           (\d*[.,]?\d+|\d+)?[ .]+
           (\d*[.,]?\d+|\d+)?
         }x
-        ocr_result.mvision_v1.pages.each_with_index do |page, page_id|
+        ocr_result.mvision_v1.pages.each.with_index do |page, page_id|
           page.all_lines.each do |line|
             clean_line = line.to_s.scrub.gsub(%r{[-+]}, '').to_s
             next if match_index(clean_line, tax_names).nil?
 
             if !clean_line.match(linear_pattern_percent_second).nil?
-              return extract_from_horizontal_line(clean_line[match_index(clean_line, tax_names)..],
-                                                  linear_pattern_percent_second, page_id, false)
+              candidates.append(extract_from_horizontal_line(clean_line[match_index(clean_line, tax_names)..],
+                                                             linear_pattern_percent_second, page_id, false))
             elsif !clean_line.match(linear_pattern_percent_first).nil?
-              return extract_from_horizontal_line(clean_line[match_index(clean_line, ['%'])..],
-                                                  linear_pattern_percent_first, page_id, true)
+              candidates.append(extract_from_horizontal_line(clean_line[match_index(clean_line, ['%'])..],
+                                                             linear_pattern_percent_first, page_id, true))
             else
               next
             end
           end
         end
-        {}
+        candidates
       end
 
       # Processes a vertical reconstructed line for tax extraction. Returns a hash of collected values.
