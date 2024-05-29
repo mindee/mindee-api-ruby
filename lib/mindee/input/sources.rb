@@ -166,11 +166,11 @@ module Mindee
 
       # Load a document from a file handle.
       class FileInputSource < LocalInputSource
-        # @param file_handle [String]
+        # @param input_file [File]
         # @param filename [String]
         # @param fix_pdf [Boolean]
-        def initialize(file_handle, filename, fix_pdf: false)
-          io_stream = file_handle
+        def initialize(input_file, filename, fix_pdf: false)
+          io_stream = input_file
           super(io_stream, filename, fix_pdf: fix_pdf)
         end
       end

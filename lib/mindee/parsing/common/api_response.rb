@@ -108,9 +108,10 @@ module Mindee
         # @param raw_http [String]
         def initialize(product_class, http_response, raw_http)
           @raw_http = raw_http.to_s
-          if http_response.key?('api_request')
-            @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
-          end
+          raise 'Invalid response format.' unless http_response.key?('api_request')
+
+          @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
+
           if http_response.key?('document') &&
              (!http_response.key?('job') ||
                http_response['job']['status'] == 'completed') &&

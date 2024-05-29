@@ -57,5 +57,11 @@ describe Mindee::Client do
         mindee_client.source_from_path('/tmp/i-dont-exist')
       end.to raise_error Errno::ENOENT
     end
+
+    it 'should load a local response' do
+      local_resp = Mindee::Input::LocalResponse.new("#{DATA_DIR}/products/invoices/response_v4/complete.json")
+      mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
+      expect(mindee_client).to_not be_nil
+    end
   end
 end

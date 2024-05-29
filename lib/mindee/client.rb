@@ -182,6 +182,17 @@ module Mindee
 
     # rubocop:enable Metrics/ParameterLists
 
+    # Load a prediction.
+    #
+    # @param product_class [Mindee::Product] class of the product
+    # @param local_response [Mindee::Input::LocalResponse]
+    # @return [Mindee::Parsing::Common::ApiResponse]
+    def load_prediction(product_class, local_response)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, local_response.as_hash, local_response.as_hash.to_json)
+    rescue KeyError
+      raise 'No prediction found in local response.'
+    end
+
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
     # @param fix_pdf [Boolean] Attempts to fix broken pdf if true
