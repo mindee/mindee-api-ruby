@@ -4,19 +4,25 @@ module Mindee
   module Extraction
     # Tax extractor class
     class TaxExtractor
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
+
       # Extracts the most relevant candidate.
       # @param candidates [Array<Hash>] a candidate for the tax.
       # @param tax_names [Array<String>] list of all possible names the tax can have.
       # @return [Hash, nil]
-      def self.extract_best(candidates, tax_names)
-        return candidates[0] if candidates.length == 1
+      def self.pick_best(candidates, tax_names)
+        return candidates[0] if candidates.size == 1
         return nil if candidates.empty?
 
         picked = 0
         picked_score = 0
 
         candidates.each_with_index do |candidate, i|
-          next unless valid_candidate?(candidate, tax_names)
+          unless valid_candidate?(candidate, tax_names)
+            picked_score = -100
+            next
+          end
 
           sum_fields_score = calculate_score(candidate, i)
 
@@ -35,7 +41,12 @@ module Mindee
       # @param tax_names [Array<String>] list of all possible names the tax can have.
       # @return [Boolean]
       def self.valid_candidate?(candidate, tax_names)
-        tax_names.include?(candidate['code'])
+        return false if tax_names.empty? || candidate.nil? || candidate['code'].nil?
+
+        tax_names.each do |tax_name|
+          return true if remove_accents(tax_name.downcase) == remove_accents(candidate['code'].downcase)
+        end
+        false
       end
 
       # [Experimental] computes the score of a valid candidate for a tax.
@@ -48,8 +59,8 @@ module Mindee
           score -= 2 if candidate['rate'] > 100
           score -= 1 if candidate['rate'] > 30
         end
-        score += 2 unless candidate['value'].nil?
-        score += 2 unless candidate['base'].nil?
+        score += 4 unless candidate['value'].nil?
+        score += 1 unless candidate['base'].nil?
         score
       end
 
@@ -59,13 +70,19 @@ module Mindee
       # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
       # @return [Hash]
       def self.curate_values(found_hash, min_rate_percentage, max_rate_percentage)
-        reconstructed_hash = {}
+        reconstructed_hash = { 'code' => nil, 'page_id' => nil, 'rate' => nil, 'base' => nil, 'value' => nil }
+        return reconstructed_hash if found_hash.nil?
+
         reconstructed_hash['code'] =
           found_hash['code'].nil? ? found_hash['code'] : found_hash['code'].sub(%r{\s*\.*\s*$}, '')
 
-        found_hash['rate'] = found_hash['rate'] * 100 if found_hash['rate'] && found_hash['rate'] < 1 && (found_hash['rate']).positive?
+        if found_hash['rate'] && found_hash['rate'] < 1 && (found_hash['rate']).positive?
+          found_hash['rate'] =
+            found_hash['rate'] * 100
+        end
         found_hash = swap_rates_if_needed(found_hash, min_rate_percentage, max_rate_percentage)
         found_hash = decimate_rates_if_needed(found_hash)
+        found_hash = fix_rate(found_hash)
         reconstructed_hash['rate'] = found_hash['rate']
         set_base_and_value(reconstructed_hash, found_hash)
       end
@@ -82,6 +99,18 @@ module Mindee
           elsif valid_percentage?(found_hash['value'], min_rate_percentage, max_rate_percentage)
             found_hash['rate'], found_hash['value'] = found_hash['value'], found_hash['rate']
           end
+        end
+        found_hash
+      end
+
+      # Fixes the rate with base or value if rate is still invalid.
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
+      def self.fix_rate(found_hash)
+        if !found_hash['rate'].nil? && found_hash['rate'].negative?
+          found_hash['base'] = found_hash['value']
+          found_hash['value'] = found_hash['rate']
+          found_hash['rate'] = nil
         end
         found_hash
       end
@@ -119,7 +148,7 @@ module Mindee
         if found_hash['base'].nil?
           reconstructed_hash['base'] = found_hash['base']
           reconstructed_hash['value'] = found_hash['value']
-        elsif found_hash['base'] < found_hash['value']
+        elsif found_hash['value'].nil? && found_hash['base'] < found_hash['value']
           reconstructed_hash['base'] = found_hash['value']
           reconstructed_hash['value'] = found_hash['base']
         else
@@ -135,19 +164,28 @@ module Mindee
       # @param min_rate_percentage [Integer] Minimum allowed rate on the tax.
       # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
       # @return [Mindee::Parsing::Standard::TaxField, nil]
-
       def self.extract_custom_tax(ocr_result, tax_names, min_rate_percentage = 0, max_rate_percentage = 100)
         return nil if ocr_result.is_a?(Mindee::Parsing::Common::Ocr) || tax_names.empty?
 
-        found_hash = extract_best(extract_horizontal(ocr_result, tax_names), tax_names)
+        tax_names.sort!
+        found_hash = pick_best(extract_horizontal(ocr_result, tax_names), tax_names)
         # a tax is considered found horizontally if it has a value, otherwise it is vertical
-        found_hash = extract_vertical(ocr_result, tax_names, found_hash)
+        found_hash = extract_vertical(ocr_result, tax_names, found_hash) if found_hash.nil? || found_hash['value'].nil?
         found_hash = curate_values(found_hash, min_rate_percentage, max_rate_percentage)
 
         return if found_hash.nil? || found_hash.empty?
 
-        Mindee::Parsing::Standard::TaxField.new(found_hash,
-                                                found_hash.key?('page_id') ? found_hash['page_id'] : nil)
+        create_tax_field(found_hash)
+      end
+
+      # Creates a tax field from a given hash.
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @return [Mindee::Parsing::Standard::TaxField]
+      def self.create_tax_field(found_hash)
+        Mindee::Parsing::Standard::TaxField.new(
+          found_hash,
+          found_hash.key?('page_id') ? found_hash['page_id'] : nil
+        )
       end
 
       # Normalizes text by removing diacritics.
@@ -168,12 +206,13 @@ module Mindee
       # @param str_candidates [Array<String>] array of values to look for
       # @return [Integer, nil]
       def self.match_index(text, str_candidates)
+        idx = nil
         str_candidates.each do |str_candidate|
-          unless remove_accents(text.downcase).index(remove_accents(str_candidate.downcase)).nil?
-            return remove_accents(text.downcase).index(remove_accents(str_candidate.downcase))
-          end
+          found_idx = remove_accents(text.downcase).index(remove_accents(str_candidate.downcase))
+          idx = found_idx if idx.nil?
+          idx = found_idx if !found_idx.nil? && found_idx >= idx
         end
-        nil
+        idx
       end
 
       # Parses an amount from a string, and returns it as a float.
@@ -222,8 +261,6 @@ module Mindee
         found_hash
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity
       # Extracts the basis and value of a tax from regex matches, independent of the order.
       # @param matches [MatchData] RegEx matches of the values for taxes
       # @param found_hash [Hash] Hash of currently retrieved values
@@ -239,8 +276,6 @@ module Mindee
         end
         found_hash
       end
-      # rubocop:enable Metrics/CyclomaticComplexity
-      # rubocop:enable Metrics/PerceivedComplexity
 
       # Extracts tax information from a horizontal line.
       # @param line [String] Line to be processed.
@@ -251,13 +286,11 @@ module Mindee
         found_hash = {}
 
         matches = line.match(pattern)
-        # raise "#{pattern}"
 
         # Edge case for when the tax is split-up between two pages, we'll consider that
         # the answer belongs to the first one.
         found_hash['page_id'] = page_id unless found_hash.key?('page_id')
         return found_hash if matches.nil?
-
 
         found_hash = extract_percentage(matches, found_hash, percent_first)
         extract_basis_and_value(matches, found_hash)
@@ -270,30 +303,32 @@ module Mindee
       def self.extract_horizontal(ocr_result, tax_names)
         candidates = [{ 'code' => nil, 'value' => nil, 'base' => nil, 'rate' => nil }]
         linear_pattern_percent_first = %r{
-          [ .]*[(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?\s*\d*[.,]?\d+[ .]*)[ .]*[)\]]*[ .]*
-          ([a-zA-ZÀ-ÖØ-öø-ÿ]+[a-zA-Z\s]*[ .]*)
-          (\d*[.,]?\d+|\d+)?[ .]+
-          (\d*[.,]?\d+|\d+)?
+          ((?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\d*[.,])*\d+)?[ .]?
+          ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]?
+          ((?:\d*[.,])+\d{2,})?[ .]*
+          ((\d*[.,])*\d{2,})?
         }x
         linear_pattern_percent_second = %r{
-          [ .]*([a-zA-ZÀ-ÖØ-öø-ÿ]+[a-zA-Z\s]*[ .]*)
-          [(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?[ .]*\d*[.,]?\d+[ .]*)?[ .]*[)\]]*[ .]*
-          (\d*[.,]?\d+|\d+)?[ .]+
-          (\d*[.,]?\d+|\d+)?
+          ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]?
+          ((?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\d*[.,])*\d+)?[ .]?
+          ((?:\d*[.,])+\d{2,})?[ .]*
+          ((\d*[.,])*\d{2,})?
         }x
         ocr_result.mvision_v1.pages.each.with_index do |page, page_id|
           page.all_lines.each do |line|
-            clean_line = remove_currency_symbols(line.to_s.scrub.gsub(%r{[-+(\[)\]*]}, '').to_s)
+            clean_line = remove_currency_symbols(line.to_s.scrub.gsub(%r{[-+(\[)\]¿?*_]}, '')).gsub(%r{ +}, ' ')
             next if match_index(clean_line, tax_names).nil?
 
-            if !clean_line.match(linear_pattern_percent_second).nil?
+            unless clean_line.match(linear_pattern_percent_second).nil?
               candidates.append(extract_from_horizontal_line(clean_line[match_index(clean_line, tax_names)..],
                                                              linear_pattern_percent_second, page_id, false))
-            elsif !clean_line.match(linear_pattern_percent_first).nil?
-              candidates.append(extract_from_horizontal_line(clean_line[match_index(clean_line, ['%'])..],
+            end
+            if clean_line.include?('%') && !clean_line.match(linear_pattern_percent_first).nil?
+              candidates.append(extract_from_horizontal_line(clean_line[clean_line.index(%r{\d*[.,]?\d* ?%})..],
                                                              linear_pattern_percent_first, page_id, true))
-            else
-              next
+            elsif !clean_line.match(linear_pattern_percent_first).nil?
+              candidates.append(extract_from_horizontal_line(clean_line,
+                                                             linear_pattern_percent_first, page_id, true))
             end
           end
         end
@@ -337,12 +372,14 @@ module Mindee
       # @param tax_names [Array<String>] Array of possible names a tax can have
       # @param found_hash [Hash] Hash of currently retrieved values
       def self.extract_vertical(ocr_result, tax_names, found_hash)
+        found_hash = { 'code' => nil, 'page_id' => nil } if found_hash.nil?
+
         ocr_result.mvision_v1.pages.each_with_index do |page, page_id|
           page.all_words.each do |word|
             next if match_index(word.text, tax_names).nil?
 
             reconstructed_line = ocr_result.reconstruct_vertically(word.polygon, page_id)
-            found_hash['page_id'] = page_id unless found_hash['page_id'].nil?
+            found_hash['page_id'] = page_id if found_hash['page_id'].nil?
             found_hash['code'] = word.text.strip if found_hash['code'].nil?
             found_hash = extract_vertical_values(reconstructed_line, found_hash)
           end
@@ -350,9 +387,15 @@ module Mindee
         found_hash
       end
 
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
+
       private_class_method :remove_accents, :match_index, :parse_amount, :parse_percentage,
                            :extract_percentage, :extract_basis_and_value, :extract_from_horizontal_line,
-                           :extract_horizontal, :extract_vertical_values, :extract_vertical
+                           :extract_horizontal, :extract_vertical_values, :extract_vertical, :create_tax_field,
+                           :fix_rate, :pick_best, :calculate_score, :curate_values, :decimate_rates_if_needed,
+                           :extract_basis_and_value, :remove_currency_symbols, :set_base_and_value, :valid_candidate?,
+                           :valid_percentage?, :swap_rates_if_needed
     end
   end
 end
