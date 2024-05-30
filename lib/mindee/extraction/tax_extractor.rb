@@ -62,7 +62,7 @@ module Mindee
         # a tax is considered found horizontally if it has a value, otherwise it is vertical
         found_hash = extract_vertical(ocr_result, tax_names, found_hash)
 
-        return if found_hash.empty?
+        return if found_hash.nil? || found_hash.empty?
 
         Mindee::Parsing::Standard::TaxField.new(found_hash,
                                                 found_hash.key?('page_id') ? found_hash['page_id'] : nil)
@@ -167,7 +167,7 @@ module Mindee
         elsif matches[3].nil? && !matches[4].nil?
           found_hash['value'] = parse_amount(matches[4]) unless matches[4].nil?
         elsif !matches[3].nil? && !matches[4].nil?
-          found_hash['basis'] = parse_amount(matches[3]) unless matches[3].nil?
+          found_hash['base'] = parse_amount(matches[3]) unless matches[3].nil?
           found_hash['value'] = parse_amount(matches[4]) unless matches[4].nil?
         end
         found_hash
@@ -200,7 +200,7 @@ module Mindee
       # @param tax_names [Array<String>] Possible tax names candidates.
       # @return [Array<Hash>]
       def self.extract_horizontal(ocr_result, tax_names)
-        candidates = []
+        candidates = [{ 'code' => nil, 'value' => nil, 'base' => nil, 'rate' => nil }]
         linear_pattern_percent_first = %r{
           [ .]*[(\[]*[ .]*([ .]*\d*[.,]?\d+[ .]*%?|%?\s*\d*[.,]?\d+[ .]*)[ .]*[)\]]*[ .]*
           ([a-zA-ZÀ-ÖØ-öø-ÿ]+[a-zA-Z\s]*[ .]*)
@@ -244,8 +244,8 @@ module Mindee
         if amounts.length == 1 && !found_hash.key?('value')
           found_hash['value'] = amounts[0]
         else
-          found_hash['rate'] = amounts[0] unless found_hash.key?('rate')
-          found_hash['value'] = amounts[1] unless found_hash.key?('value')
+          found_hash['rate'] = amounts[0] if found_hash['rate'].nil?
+          found_hash['value'] = amounts[1] if found_hash['value'].nil?
         end
         found_hash
       end
@@ -260,8 +260,8 @@ module Mindee
             next if match_index(word.text, tax_names).nil?
 
             reconstructed_line = ocr_result.reconstruct_vertically(word.polygon, page_id)
-            found_hash['page_id'] = page_id unless found_hash.key?('page_id')
-            found_hash['code'] = word.text.strip unless found_hash.key?('code')
+            found_hash['page_id'] = page_id unless found_hash['page_id'].nil?
+            found_hash['code'] = word.text.strip if found_hash['code'].nil?
             found_hash = extract_vertical_values(reconstructed_line, found_hash)
           end
         end
