@@ -21,10 +21,7 @@ module Mindee
         picked_score = 0
 
         candidates.each_with_index do |candidate, i|
-          unless valid_candidate?(candidate, tax_names)
-            sum_fields_score = -100
-            next
-          end
+          next unless valid_candidate?(candidate, tax_names)
 
           sum_fields_score = calculate_score(candidate, i)
 
@@ -44,7 +41,6 @@ module Mindee
       # @return [Boolean]
       def self.valid_candidate?(candidate, tax_names)
         return false if tax_names.empty? || candidate.nil? || candidate['code'].nil?
-
 
         tax_names.each do |tax_name|
           return true if remove_accents(tax_name.downcase) == remove_accents(candidate['code'].downcase)
@@ -319,6 +315,7 @@ module Mindee
                                                                                              .gsub(%r{ +}, ' ').strip
 
             next if match_index(clean_line, tax_names).nil?
+
             unless clean_line.match(linear_pattern_percent_second).nil?
               candidates.append(extract_from_horizontal_line(clean_line[match_index(clean_line, tax_names)..],
                                                              linear_pattern_percent_second, page_id, false))
