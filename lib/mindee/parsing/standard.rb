@@ -2,6 +2,7 @@
 
 require_relative 'standard/amount_field'
 require_relative 'standard/base_field'
+require_relative 'standard/boolean_field'
 require_relative 'standard/classification_field'
 require_relative 'standard/company_registration_field'
 require_relative 'standard/date_field'
