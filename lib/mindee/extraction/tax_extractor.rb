@@ -43,24 +43,105 @@ module Mindee
       # @param index [Integer]
       def self.calculate_score(candidate, index)
         score = index + 1
-        score += 1 unless candidate['rate'].nil?
+        unless candidate['rate'].nil?
+          score += 1
+          score -= 2 if candidate['rate'] > 100
+          score -= 1 if candidate['rate'] > 30
+        end
         score += 2 unless candidate['value'].nil?
         score += 2 unless candidate['base'].nil?
         score
+      end
+
+      # Curates tax values based on simple rules to avoid improbable data
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @param min_rate_percentage [Integer] Minimum allowed rate on the tax.
+      # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
+      # @return [Hash]
+      def self.curate_tax_values(found_hash, min_rate_percentage, max_rate_percentage)
+        reconstructed_hash = {}
+        reconstructed_hash['code'] = found_hash['code']
+
+        found_hash['rate'] = found_hash['rate'] * 100 if found_hash['rate'] < 1 && (found_hash['rate']).positive?
+        found_hash = swap_rates_if_needed(found_hash, min_rate_percentage, max_rate_percentage)
+        found_hash = decimate_rates_if_needed(found_hash)
+        reconstructed_hash['rate'] = found_hash['rate']
+        set_base_and_value(reconstructed_hash, found_hash)
+      end
+
+      # Swaps the rate with base or value if rate is out of bounds
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @param min_rate_percentage [Integer] Minimum allowed rate on the tax.
+      # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
+      # @return [Hash]
+      def self.swap_rates_if_needed(found_hash, min_rate_percentage, max_rate_percentage)
+        if found_hash['rate'] && (found_hash['rate'] > max_rate_percentage || found_hash['rate'] < min_rate_percentage)
+          if valid_percentage?(found_hash['base'], min_rate_percentage, max_rate_percentage)
+            found_hash['rate'], found_hash['base'] = found_hash['base'], found_hash['rate']
+          elsif valid_percentage?(found_hash['value'], min_rate_percentage, max_rate_percentage)
+            found_hash['rate'], found_hash['value'] = found_hash['value'], found_hash['rate']
+          end
+        end
+        found_hash
+      end
+
+      # Swaps the rate with base or value if rate is out of bounds
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @return [Hash]
+      def self.decimate_rates_if_needed(found_hash)
+        if found_hash['rate'] > 100
+          if !found_hash['base'].nil? && found_hash['rate'] > found_hash['base']
+            found_hash['rate'], found_hash['base'] = found_hash['base'], found_hash['rate']
+          elsif !found_hash['value'].nil? && found_hash['rate'] > found_hash['value']
+            found_hash['rate'], found_hash['value'] = found_hash['value'], found_hash['rate']
+          end
+        end
+        found_hash
+      end
+
+      # Checks if a given percentage value is within the allowed range
+      # @param value [Integer] The value to check
+      # @param min_rate_percentage [Integer] Minimum allowed rate on the tax.
+      # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
+      # @return [Boolean]
+      def self.valid_percentage?(value, min_rate_percentage, max_rate_percentage)
+        return false if value.nil?
+
+        value > min_rate_percentage && value < max_rate_percentage
+      end
+
+      # Sets the base and value in the reconstructed hash based on certain conditions
+      # @param reconstructed_hash [Hash] Hash being reconstructed with new values
+      # @param found_hash [Hash] Hash of currently retrieved values
+      # @return [Hash]
+      def self.set_base_and_value(reconstructed_hash, found_hash)
+        if found_hash['base'].nil?
+          reconstructed_hash['base'] = found_hash['base']
+          reconstructed_hash['value'] = found_hash['value']
+        elsif found_hash['base'] < found_hash['value']
+          reconstructed_hash['base'] = found_hash['value']
+          reconstructed_hash['value'] = found_hash['base']
+        else
+          reconstructed_hash['value'] = found_hash['value']
+        end
+        reconstructed_hash
       end
 
       # Extracts a single custom type of tax.
       # For the sake of simplicity, this only extracts the first example, unless specifically instructed otherwise.
       # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] result of the OCR.
       # @param tax_names [Array<String>] list of all possible names the tax can have.
+      # @param min_rate_percentage [Integer] Minimum allowed rate on the tax.
+      # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
       # @return [Mindee::Parsing::Standard::TaxField, nil]
 
-      def self.extract_custom_tax(ocr_result, tax_names)
+      def self.extract_custom_tax(ocr_result, tax_names, min_rate_percentage = 0, max_rate_percentage = 100)
         return nil if ocr_result.is_a?(Mindee::Parsing::Common::Ocr) || tax_names.empty?
 
         found_hash = extract_best(extract_horizontal(ocr_result, tax_names), tax_names)
         # a tax is considered found horizontally if it has a value, otherwise it is vertical
         found_hash = extract_vertical(ocr_result, tax_names, found_hash)
+        found_hash = curate_tax_values(found_hash, min_rate_percentage, max_rate_percentage)
 
         return if found_hash.nil? || found_hash.empty?
 
