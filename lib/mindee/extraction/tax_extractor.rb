@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
+
 module Mindee
   module Extraction
     # Tax extractor class
@@ -303,20 +305,22 @@ module Mindee
       def self.extract_horizontal(ocr_result, tax_names)
         candidates = [{ 'code' => nil, 'value' => nil, 'base' => nil, 'rate' => nil }]
         linear_pattern_percent_first = %r{
-          ((?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\d*[.,])*\d+)?[ .]?
+          ((?:\s*-\s*)?(?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\s*-\s*)?(?:\d*[.,])*\d+)?[ .]?
           ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]?
-          ((?:\d*[.,])+\d{2,})?[ .]*
-          ((\d*[.,])*\d{2,})?
+          ((?:\s*-\s*)?(?:\d*[.,])+\d{2,})?[ .]*
+          ((?:\s*-\s*)?(\d*[.,])*\d{2,})?
         }x
         linear_pattern_percent_second = %r{
-          ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]?
-          ((?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\d*[.,])*\d+)?[ .]?
-          ((?:\d*[.,])+\d{2,})?[ .]*
-          ((\d*[.,])*\d{2,})?
+          ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]*
+          ((?:\s*-\s*)?(?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\s*-\s*)?(?:\d*[.,])*\d+)?[ .]?
+          ((?:\s*-\s*)?(?:\d*[.,])+\d{2,})?[ .]*
+          ((?:\s*-\s*)?(\d*[.,])*\d{2,})?
         }x
         ocr_result.mvision_v1.pages.each.with_index do |page, page_id|
           page.all_lines.each do |line|
-            clean_line = remove_currency_symbols(line.to_s.scrub.gsub(%r{[-+(\[)\]¿?*_]}, '')).gsub(%r{ +}, ' ')
+            clean_line = remove_currency_symbols(line.to_s.scrub.gsub(%r{[+(\[)\]¿?*_]}, '')).gsub(%r{\.{2,}}, ' ')
+                                                                                             .gsub(%r{ +}, ' ')
+
             next if match_index(clean_line, tax_names).nil?
 
             unless clean_line.match(linear_pattern_percent_second).nil?
@@ -389,7 +393,6 @@ module Mindee
 
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
-
       private_class_method :remove_accents, :match_index, :parse_amount, :parse_percentage,
                            :extract_percentage, :extract_basis_and_value, :extract_from_horizontal_line,
                            :extract_horizontal, :extract_vertical_values, :extract_vertical, :create_tax_field,
@@ -399,3 +402,5 @@ module Mindee
     end
   end
 end
+
+# rubocop:enable Metrics/ClassLength
