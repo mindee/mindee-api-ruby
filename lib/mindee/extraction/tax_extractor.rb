@@ -104,7 +104,6 @@ module Mindee
 
       # Rates can't be negative if set.
       # @param found_hash [Hash] Hash of currently retrieved values
-      # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
       def self.fix_rate(found_hash)
         found_hash['rate'] = found_hash['rate'].abs unless found_hash['rate'].nil?
         found_hash
