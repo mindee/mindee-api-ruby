@@ -22,7 +22,7 @@ module Mindee
 
         candidates.each_with_index do |candidate, i|
           unless valid_candidate?(candidate, tax_names)
-            picked_score = -100
+            sum_fields_score = -100
             next
           end
 
@@ -44,6 +44,7 @@ module Mindee
       # @return [Boolean]
       def self.valid_candidate?(candidate, tax_names)
         return false if tax_names.empty? || candidate.nil? || candidate['code'].nil?
+
 
         tax_names.each do |tax_name|
           return true if remove_accents(tax_name.downcase) == remove_accents(candidate['code'].downcase)
@@ -105,15 +106,11 @@ module Mindee
         found_hash
       end
 
-      # Fixes the rate with base or value if rate is still invalid.
+      # Rates can't be negative if set.
       # @param found_hash [Hash] Hash of currently retrieved values
       # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
       def self.fix_rate(found_hash)
-        if !found_hash['rate'].nil? && found_hash['rate'].negative?
-          found_hash['base'] = found_hash['value']
-          found_hash['value'] = found_hash['rate']
-          found_hash['rate'] = nil
-        end
+        found_hash['rate'] = found_hash['rate'].abs unless found_hash['rate'].nil?
         found_hash
       end
 
@@ -255,10 +252,10 @@ module Mindee
       def self.extract_percentage(matches, found_hash, percent_first)
         if percent_first
           found_hash['code'] = matches[2].strip unless matches[2].nil?
-          found_hash['rate'] = parse_amount(matches[1]) unless matches[1].nil?
+          found_hash['rate'] = parse_amount(matches[1].gsub('%', '')) unless matches[1].nil?
         else
           found_hash['code'] = matches[1].strip unless matches[1].nil?
-          found_hash['rate'] = parse_amount(matches[2]) unless matches[2].nil?
+          found_hash['rate'] = parse_amount(matches[2].gsub('%', '')) unless matches[2].nil?
         end
         found_hash
       end
@@ -319,10 +316,9 @@ module Mindee
         ocr_result.mvision_v1.pages.each.with_index do |page, page_id|
           page.all_lines.each do |line|
             clean_line = remove_currency_symbols(line.to_s.scrub.gsub(%r{[+(\[)\]¿?*_]}, '')).gsub(%r{\.{2,}}, ' ')
-                                                                                             .gsub(%r{ +}, ' ')
+                                                                                             .gsub(%r{ +}, ' ').strip
 
             next if match_index(clean_line, tax_names).nil?
-
             unless clean_line.match(linear_pattern_percent_second).nil?
               candidates.append(extract_from_horizontal_line(clean_line[match_index(clean_line, tax_names)..],
                                                              linear_pattern_percent_second, page_id, false))
