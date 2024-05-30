@@ -58,11 +58,12 @@ module Mindee
       # @param min_rate_percentage [Integer] Minimum allowed rate on the tax.
       # @param max_rate_percentage [Integer] Maximum allowed rate on the tax.
       # @return [Hash]
-      def self.curate_tax_values(found_hash, min_rate_percentage, max_rate_percentage)
+      def self.curate_values(found_hash, min_rate_percentage, max_rate_percentage)
         reconstructed_hash = {}
-        reconstructed_hash['code'] = found_hash['code']
+        reconstructed_hash['code'] =
+          found_hash['code'].nil? ? found_hash['code'] : found_hash['code'].sub(%r{\s*\.*\s*$}, '')
 
-        found_hash['rate'] = found_hash['rate'] * 100 if found_hash['rate'] < 1 && (found_hash['rate']).positive?
+        found_hash['rate'] = found_hash['rate'] * 100 if found_hash['rate'] && found_hash['rate'] < 1 && (found_hash['rate']).positive?
         found_hash = swap_rates_if_needed(found_hash, min_rate_percentage, max_rate_percentage)
         found_hash = decimate_rates_if_needed(found_hash)
         reconstructed_hash['rate'] = found_hash['rate']
@@ -89,7 +90,7 @@ module Mindee
       # @param found_hash [Hash] Hash of currently retrieved values
       # @return [Hash]
       def self.decimate_rates_if_needed(found_hash)
-        if found_hash['rate'] > 100
+        if found_hash['rate'] && found_hash['rate'] > 100
           if !found_hash['base'].nil? && found_hash['rate'] > found_hash['base']
             found_hash['rate'], found_hash['base'] = found_hash['base'], found_hash['rate']
           elsif !found_hash['value'].nil? && found_hash['rate'] > found_hash['value']
@@ -141,7 +142,7 @@ module Mindee
         found_hash = extract_best(extract_horizontal(ocr_result, tax_names), tax_names)
         # a tax is considered found horizontally if it has a value, otherwise it is vertical
         found_hash = extract_vertical(ocr_result, tax_names, found_hash)
-        found_hash = curate_tax_values(found_hash, min_rate_percentage, max_rate_percentage)
+        found_hash = curate_values(found_hash, min_rate_percentage, max_rate_percentage)
 
         return if found_hash.nil? || found_hash.empty?
 
@@ -175,34 +176,19 @@ module Mindee
         nil
       end
 
-      # Extracts the numeric part of a string, independently of commas & dots.
-      # @param amount_str [String] String to process.
-      # @return [String]
-      def self.extract_numeric_part(amount_str)
-        # Remove non-numeric characters except for dots and commas
-        cleaned_str = amount_str.gsub(%r{[^\d.,]}, '')
-
-        # If the cleaned string ends with a comma, remove it
-        cleaned_str.sub!(%r{,$}, '')
-
-        # Replace commas with an empty string for proper float conversion
-        cleaned_str.gsub!(',', '')
-
-        # Extract the numeric part of the string
-        cleaned_str.sub(%r{^\D+}, '')
-      end
-
       # Parses an amount from a string, and returns it as a float.
       # Returns nil if candidate isn't a valid amount.
       # @param amount_str [String] String candidate.
       # @return [Float, nil]
       def self.parse_amount(amount_str)
-        cleaned_str = amount_str.scrub.gsub(%r{[^\d.,]}, '')
-        cleaned_str.sub!(%r{,$}, '')
-        extract_numeric_part(cleaned_str)
-        numeric_part = cleaned_str.sub(%r{^\D+}, '')
-        numeric_part.gsub!(',', '.')
-        Float(numeric_part)
+        cleaned_str = amount_str.gsub(' ', '')
+        if (cleaned_str.length > 3 && cleaned_str[-3] == ',') || cleaned_str[-2] == ','
+          cleaned_str = cleaned_str.gsub('.', '')
+          cleaned_str = cleaned_str.gsub(',', '.')
+        elsif (cleaned_str.length > 3 && cleaned_str[-3] == '.') || cleaned_str[-2] == '.'
+          cleaned_str = cleaned_str.gsub(',', '')
+        end
+        Float(cleaned_str)
       rescue ArgumentError
         nil
       end
@@ -228,10 +214,10 @@ module Mindee
       def self.extract_percentage(matches, found_hash, percent_first)
         if percent_first
           found_hash['code'] = matches[2].strip unless matches[2].nil?
-          found_hash['rate'] = parse_percentage(matches[1]) unless matches[1].nil?
+          found_hash['rate'] = parse_amount(matches[1]) unless matches[1].nil?
         else
           found_hash['code'] = matches[1].strip unless matches[1].nil?
-          found_hash['rate'] = parse_percentage(matches[2]) unless matches[2].nil?
+          found_hash['rate'] = parse_amount(matches[2]) unless matches[2].nil?
         end
         found_hash
       end
@@ -272,6 +258,7 @@ module Mindee
         found_hash['page_id'] = page_id unless found_hash.key?('page_id')
         return found_hash if matches.nil?
 
+
         found_hash = extract_percentage(matches, found_hash, percent_first)
         extract_basis_and_value(matches, found_hash)
       end
@@ -296,7 +283,7 @@ module Mindee
         }x
         ocr_result.mvision_v1.pages.each.with_index do |page, page_id|
           page.all_lines.each do |line|
-            clean_line = line.to_s.scrub.gsub(%r{[-+]}, '').to_s
+            clean_line = remove_currency_symbols(line.to_s.scrub.gsub(%r{[-+(\[)\]*]}, '').to_s)
             next if match_index(clean_line, tax_names).nil?
 
             if !clean_line.match(linear_pattern_percent_second).nil?
@@ -311,6 +298,20 @@ module Mindee
           end
         end
         candidates
+      end
+
+      # @param input_string [String] string to remove the symbols from
+      def self.remove_currency_symbols(input_string)
+        # Define an array of common currency symbols
+        currency_symbols = ['$', '€', '£', '¥', '₹', '₽', '฿', '₺', '₴', '₿', '₡', '₮', '₱', '₲', '₪', '₫', '₩', '₵',
+                            '₦', '₢', '₤', '₣', '₧', '₯', '₠', '₶', '₸', '₷', '₼', '₾', '₺', '﹩', '₨', '₹', '＄', '﹫']
+
+        # Iterate over each currency symbol and remove it from the input string
+        currency_symbols.each do |symbol|
+          input_string.gsub!(symbol, '')
+        end
+
+        input_string
       end
 
       # Processes a vertical reconstructed line for tax extraction. Returns a hash of collected values.
@@ -349,7 +350,7 @@ module Mindee
         found_hash
       end
 
-      private_class_method :remove_accents, :match_index, :extract_numeric_part, :parse_amount, :parse_percentage,
+      private_class_method :remove_accents, :match_index, :parse_amount, :parse_percentage,
                            :extract_percentage, :extract_basis_and_value, :extract_from_horizontal_line,
                            :extract_horizontal, :extract_vertical_values, :extract_vertical
     end
