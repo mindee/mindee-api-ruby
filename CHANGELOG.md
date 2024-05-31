@@ -1,5 +1,14 @@
 # Mindee Ruby API Library Changelog
 
+## v3.10.0 - 2024-05-31
+### Changes
+* :sparkles: add support for us mail v2 (#98)
+* :sparkles: add support for boolean fields
+* :sparkles: add support for webhooks (#97)
+### Fixes
+* :recycle: tweak display for LocaleField
+
+
 ## v3.9.0 - 2024-05-16
 ### Changes
 * :sparkles: update financial document to v1.7 & receipts to v5.2
