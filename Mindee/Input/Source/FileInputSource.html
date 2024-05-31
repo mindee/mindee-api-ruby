@@ -135,7 +135,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(file_handle, filename, fix_pdf: false)  &#x21d2; FileInputSource </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(input_file, filename, fix_pdf: false)  &#x21d2; FileInputSource </a>
     
 
     
@@ -178,7 +178,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(file_handle, filename, fix_pdf: false)  &#x21d2; <tt><span class='object_link'><a href="" title="Mindee::Input::Source::FileInputSource (class)">FileInputSource</a></span></tt> 
+    #<strong>initialize</strong>(input_file, filename, fix_pdf: false)  &#x21d2; <tt><span class='object_link'><a href="" title="Mindee::Input::Source::FileInputSource (class)">FileInputSource</a></span></tt> 
   
 
   
@@ -198,10 +198,10 @@
   
     <li>
       
-        <span class='name'>file_handle</span>
+        <span class='name'>input_file</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt>File</tt>)</span>
       
       
       
@@ -248,8 +248,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/input/sources.rb', line 172</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_file_handle'>file_handle</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>fix_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_io_stream'>io_stream</span> <span class='op'>=</span> <span class='id identifier rubyid_file_handle'>file_handle</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>fix_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_io_stream'>io_stream</span> <span class='op'>=</span> <span class='id identifier rubyid_input_file'>input_file</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>fix_pdf:</span> <span class='id identifier rubyid_fix_pdf'>fix_pdf</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -263,9 +263,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue May 21 08:32:53 2024 by
+  Generated on Fri May 31 08:49:44 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.1.5).
+  0.9.36 (ruby-3.1.6).
 </div>
 
     </div>
