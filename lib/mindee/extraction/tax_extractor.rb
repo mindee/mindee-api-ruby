@@ -6,9 +6,6 @@ module Mindee
   module Extraction
     # Tax extractor class
     class TaxExtractor < OcrExtractor
-      # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity
-
       # Extracts the most relevant candidate.
       # @param candidates [Array<Hash>] a candidate for the tax.
       # @param tax_names [Array<String>] list of all possible names the tax can have.
@@ -190,6 +187,9 @@ module Mindee
         found_hash
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
+
       # Extracts the basis and value of a tax from regex matches, independent of the order.
       # @param matches [MatchData] RegEx matches of the values for taxes
       # @param found_hash [Hash] Hash of currently retrieved values
@@ -205,6 +205,9 @@ module Mindee
         end
         found_hash
       end
+
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       # Extracts tax information from a horizontal line.
       # @param line [String] Line to be processed.
@@ -224,6 +227,9 @@ module Mindee
         found_hash = extract_percentage_from_tax(matches, found_hash, percent_first)
         extract_basis_and_value(matches, found_hash)
       end
+
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
 
       # Processes a horizontal line for tax extraction. Returns a hash of collected values.
       # @param ocr_result [Mindee::Parsing::Common::Ocr::Ocr] Processed OCR results.
@@ -265,6 +271,8 @@ module Mindee
         end
         candidates
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       # Processes a vertical reconstructed line for tax extraction. Returns a hash of collected values.
       # @param line [Mindee::Parsing::Common::Ocr::OcrLine] Processed OCR results.
@@ -304,8 +312,6 @@ module Mindee
         found_hash
       end
 
-      # rubocop:enable Metrics/CyclomaticComplexity
-      # rubocop:enable Metrics/PerceivedComplexity
       private_class_method :extract_percentage_from_tax, :extract_basis_and_value, :extract_tax_from_horizontal_line,
                            :extract_horizontal_tax, :extract_vertical_tax_values, :extract_vertical_tax,
                            :create_tax_field, :fix_rate, :pick_best, :calculate_score, :curate_values,
