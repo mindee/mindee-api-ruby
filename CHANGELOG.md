@@ -2,7 +2,7 @@
 
 ## v3.11.0 - 2024-06-10
 ### Changes
-* :sparkles: add support custom tax extraction feature (#76)
+* :sparkles: add custom tax extraction feature (#76)
 
 
 ## v3.10.0 - 2024-05-31
