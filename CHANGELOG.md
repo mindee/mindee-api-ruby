@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v3.11.0 - 2024-06-10
+### Changes
+* :sparkles: add support custom tax extraction feature (#76)
+
+
 ## v3.10.0 - 2024-05-31
 ### Changes
 * :sparkles: add support for us mail v2 (#98)
