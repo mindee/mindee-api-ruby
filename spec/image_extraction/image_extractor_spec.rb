@@ -7,98 +7,58 @@ require_relative '../data'
 
 describe Mindee::ImageExtraction do
   include Mindee::ImageExtraction
-  let(:multi_receipts_single_page_path) do
-    File.join(DATA_DIR, 'products', 'multi_receipts_detector', 'default_sample.jpg')
+  let(:barcode_path) do
+    File.join(DATA_DIR, 'products', 'barcode_reader', 'default_sample.jpg')
   end
 
-  let(:multi_receipts_single_page_json_path) do
-    File.join(DATA_DIR, 'products', 'multi_receipts_detector', 'response_v1')
+  let(:barcode_json_path) do
+    File.join(DATA_DIR, 'products', 'barcode_reader', 'response_v1', 'complete.json')
   end
 
-  let(:multi_receipts_multi_page_path) do
-    File.join(DATA_DIR, 'products', 'multi_receipts_detector', 'multipage_sample.pdf')
-  end
+  context 'an image extractor' do
+    it 'extracts barcode images correctly' do
+      # Assuming barcode_path and barcode_json_path are fixtures provided by RSpec
 
-  let(:multi_receipts_multi_page_json_path) do
-    File.join(DATA_DIR, 'products', 'multi_receipts_detector', 'response_v1')
-  end
+      # Load JSON fixture
+      json_data = JSON.parse(File.read(barcode_json_path))
+      inference = Mindee::Product::BarcodeReader::BarcodeReaderV1.new(json_data['document']['inference'])
 
-  describe '#extract_receipts' do
-    context 'with single page multi receipt' do
-      it 'splits receipts correctly' do
-        input_sample = Mindee::Input::Source::PathInputSource.new(multi_receipts_single_page_path)
-        response = load_json(multi_receipts_single_page_json_path, 'complete.json')
-        doc = Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
-        extracted_receipts = extract_receipts(input_sample, doc)
-
-        expect(extracted_receipts.size).to eq(6)
-
-        expect(extracted_receipts[0].page_id).to eq(1)
-        expect(extracted_receipts[0].element_id).to eq(0)
-        image_buffer0 = MiniMagick::Image.read(extracted_receipts[0].buffer)
-        expect(image_buffer0.dimensions).to eq([341, 505])
-
-        expect(extracted_receipts[1].page_id).to eq(1)
-        expect(extracted_receipts[1].element_id).to eq(1)
-        image_buffer1 = MiniMagick::Image.read(extracted_receipts[1].buffer)
-        expect(image_buffer1.dimensions).to eq([461, 908])
-
-        expect(extracted_receipts[2].page_id).to eq(1)
-        expect(extracted_receipts[2].element_id).to eq(2)
-        image_buffer2 = MiniMagick::Image.read(extracted_receipts[2].buffer)
-        expect(image_buffer2.dimensions).to eq([471, 790])
-
-        expect(extracted_receipts[3].page_id).to eq(1)
-        expect(extracted_receipts[3].element_id).to eq(3)
-        image_buffer3 = MiniMagick::Image.read(extracted_receipts[3].buffer)
-        expect(image_buffer3.dimensions).to eq([464, 1200])
-
-        expect(extracted_receipts[4].page_id).to eq(1)
-        expect(extracted_receipts[4].element_id).to eq(4)
-        image_buffer4 = MiniMagick::Image.read(extracted_receipts[4].buffer)
-        expect(image_buffer4.dimensions).to eq([530, 943])
-
-        expect(extracted_receipts[5].page_id).to eq(1)
-        expect(extracted_receipts[5].element_id).to eq(5)
-        image_buffer5 = MiniMagick::Image.read(extracted_receipts[5].buffer)
-        expect(image_buffer5.dimensions).to eq([367, 593])
+      # Extract polygon coordinates
+      barcodes1 = []
+      inference.prediction.codes_1d.each do |barcode|
+        barcodes1.push(barcode.polygon)
       end
-    end
-
-    context 'with multi page receipt' do
-      it 'splits receipts correctly' do
-        input_sample = Mindee::Input::Source::PathInputSource.new(multi_receipts_multi_page_path)
-        response = load_json(multi_receipts_multi_page_json_path, 'multipage_sample.json')
-        doc = Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
-        extracted_receipts = extract_receipts(input_sample, doc)
-
-        expect(extracted_receipts.size).to eq(5)
-
-        expect(extracted_receipts[0].page_id).to eq(1)
-        expect(extracted_receipts[0].element_id).to eq(0)
-        image_buffer0 = MiniMagick::Image.read(extracted_receipts[0].buffer)
-        expect(image_buffer0.dimensions).to eq([198, 566])
-
-        expect(extracted_receipts[1].page_id).to eq(1)
-        expect(extracted_receipts[1].element_id).to eq(1)
-        image_buffer1 = MiniMagick::Image.read(extracted_receipts[1].buffer)
-        expect(image_buffer1.dimensions).to eq([206, 382])
-
-        expect(extracted_receipts[2].page_id).to eq(1)
-        expect(extracted_receipts[2].element_id).to eq(2)
-        image_buffer2 = MiniMagick::Image.read(extracted_receipts[2].buffer)
-        expect(image_buffer2.dimensions).to eq([195, 231])
-
-        expect(extracted_receipts[3].page_id).to eq(2)
-        expect(extracted_receipts[3].element_id).to eq(0)
-        image_buffer3 = MiniMagick::Image.read(extracted_receipts[3].buffer)
-        expect(image_buffer3.dimensions).to eq([213, 356])
-
-        expect(extracted_receipts[4].page_id).to eq(2)
-        expect(extracted_receipts[4].element_id).to eq(1)
-        image_buffer4 = MiniMagick::Image.read(extracted_receipts[4].buffer)
-        expect(image_buffer4.dimensions).to eq([212, 516])
+      barcodes2 = []
+      inference.prediction.codes_2d.each do |barcode|
+        barcodes2.push(barcode.polygon)
       end
+
+      # Create input source
+      input_source = Mindee::Input::Source::PathInputSource.new(barcode_path)
+
+      # Extract images
+
+      extracted_barcodes_1d = extract_multiple_images_from_source(input_source, 1, barcodes1)
+      extracted_barcodes_2d = extract_multiple_images_from_source(input_source, 1, barcodes2)
+
+      # Assertions
+      expect(extracted_barcodes_1d.size).to eq(1)
+      expect(extracted_barcodes_2d.size).to eq(2)
+
+      expect(extracted_barcodes_1d[0].as_source.filename).to end_with('jpg')
+      extracted_barcodes_1d[0].buffer.rewind
+      image_buffer1 = MiniMagick::Image.read(extracted_barcodes_1d[0].buffer)
+      expect(image_buffer1.dimensions).to eq([353, 199])
+
+      extracted_barcodes_2d[0].buffer.rewind
+      image_buffer2 = MiniMagick::Image.read(extracted_barcodes_2d[0].buffer)
+      expect(image_buffer2.dimensions).to eq([214, 216])
+      expect(extracted_barcodes_2d[0].as_source.filename).to end_with('jpg')
+
+      extracted_barcodes_2d[0].buffer.rewind
+      image_buffer3 = MiniMagick::Image.read(extracted_barcodes_2d[1].buffer)
+      expect(image_buffer3.dimensions).to eq([193, 201])
+      expect(extracted_barcodes_2d[1].as_source.filename).to end_with('jpg')
     end
   end
 end

@@ -13,84 +13,199 @@ module Mindee
     def attach_image_as_new_file(input_buffer)
       # Attaches an image as a new page in a PdfDocument object.
       #
-      # @param input_buffer [StringIO] Input buffer. Only supports JPEG.
+      # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
       # @return [Origami::PDF] A PdfDocument handle.
 
       input_buffer.rewind
-      magick_image = MiniMagick::Image.open(input_buffer)
-      magick_image.format('pdf')
+      magick_image = MiniMagick::Image.read(input_buffer)
+      # NOTE: some jpeg images get rendered as three different versions of themselves per output if the format isn't
+      # converted.
+      magick_image.format('jpg')
+      original_density = magick_image.resolution
+      scale_factor = original_density[0].to_f / 4.166666 # No clue why bit the resolution needs to be reduced for
+      # the pdf otherwise the resulting image shrinks.
+      magick_image.format('pdf', 0, { density: scale_factor.to_s })
       io_buffer = StringIO.new
       magick_image.write(io_buffer)
       io_buffer.rewind
       Origami::PDF.read(io_buffer)
     end
 
+    # Extracts multiple images from a given local input source.
+    #
+    # @param [Mindee::Input::Source::LocalInputSource] input_source
+    # @param [Integer] page_id ID of the Page to extract from.
+    # @param [Array<Array<Mindee::Geometry::Point>>, Array<Mindee::Geometry::Quadrangle>] polygons List of coordinates
+    # to extract.
+    # @return [Array<Mindee::ImageExtraction::ExtractedImage>] Extracted Images.
     def extract_multiple_images_from_source(input_source, page_id, polygons)
-      # Extracts elements from a page based on a list of bounding boxes.
-      #
-      # @param input_source [LocalInputSource] Local Input source to extract elements from.
-      # @param page_id [Integer] ID of the page to extract from.
-      # @param polygons [Array<Array<Point>>] List of coordinates to pull the elements from.
-      # @return [Array<ExtractedImage>] List of byte arrays representing the extracted elements.
-      pdf_doc = load_pdf_doc(input_source)
+      new_stream = load_doc(input_source, page_id)
+      new_stream.seek(0)
+
+      extract_images_from_polygons(input_source, new_stream, page_id, polygons)
+    end
+
+    # Retrieves a PDF document's page.
+    #
+    # @param [Origami::PDF] pdf_doc Origami PDF handle.
+    # @param [Integer] page_id Page ID.
+    def get_page(pdf_doc, page_id)
       stream = StringIO.new
       pdf_doc.save(stream)
-      # NOTE: copying the page from the first PDF to the second does NOT work for this. Hence the call to the custom
-      # OrigaMindee pdf processor.
+
       options = {
         page_indexes: [page_id - 1],
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
+
       stream.rewind
-      new_stream = Mindee::PDF::PdfProcessor.parse(stream, options)
+      Mindee::PDF::PdfProcessor.parse(stream, options)
+    end
 
+    # Extracts images from their positions on a file (as polygons).
+    #
+    # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
+    # @param [StringIO] pdf_stream Buffer of the PDF.
+    # @param [Integer] page_id Page ID.
+    # @param [Array<Mindee::Geometry::Point>, Array<Mindee::Geometry::Polygon>, Array<Mindee::Geometry::Quadrangle>]
+    # polygons.
+    # @return [Array<Mindee::ImageExtraction::ExtractedImage>] Extracted Images.
+    def extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
       extracted_elements = []
-      polygons.each_with_index do |polygon, element_id|
-        new_stream.rewind
-        page_content = MiniMagick::Image.read(new_stream)
-        width = page_content[:width]
-        height = page_content[:height]
-        min_max_x = Geometry.get_min_max_x(
-          [polygon.top_left, polygon.bottom_right, polygon.top_right, polygon.bottom_left]
-        )
-        min_max_y = Geometry.get_min_max_y(
-          [polygon.top_left, polygon.bottom_right, polygon.top_right, polygon.bottom_left]
-        )
-        min_x = (min_max_x.min * width).to_i
-        min_y = (min_max_y.min * height).to_i
-        max_x = (min_max_x.max * width).to_i
-        max_y = (min_max_y.max * height).to_i
 
-        page_content.format('png')
-        page_content.crop("#{max_x - min_x}x#{max_y - min_y}+#{min_x}+#{min_y}")
+      polygons.each_with_index do |polygon, element_id|
+        polygon = normalize_polygon(polygon)
+        page_content = read_page_content(pdf_stream)
+
+        min_max_x = Geometry.get_min_max_x([
+                                             polygon.top_left,
+                                             polygon.bottom_right,
+                                             polygon.top_right,
+                                             polygon.bottom_left,
+                                           ])
+        min_max_y = Geometry.get_min_max_y([
+                                             polygon.top_left,
+                                             polygon.bottom_right,
+                                             polygon.top_right,
+                                             polygon.bottom_left,
+                                           ])
+        file_extension = determine_file_extension(input_source)
+        cropped_image = crop_image(page_content, min_max_x, min_max_y)
+        if file_extension == 'pdf'
+          cropped_image.format('jpg')
+        else
+          cropped_image.format(file_extension)
+        end
 
         buffer = StringIO.new
-        page_content.write(buffer)
-        buffer.rewind
+        write_image_to_buffer(cropped_image, buffer)
 
-        extracted_elements << ExtractedImage.new(
-          Mindee::Input::Source::BytesInputSource.new(buffer.read,
-                                                      "#{input_source.filename}_p#{page_id}_e#{element_id}.png"),
-          page_id,
-          element_id
-        )
+        file_name = generate_filename(input_source, page_id, element_id, file_extension)
+
+        extracted_elements << create_extracted_image(buffer, file_name, page_id, element_id)
       end
 
       extracted_elements
     end
 
-    def load_pdf_doc(input_file)
-      # Loads a PDF document from a local input source.
-      #
-      # @param input_file [LocalInputSource] Local input.
-      # @return [Origami::PDF] A valid PdfDocument handle.
-
-      if input_file.pdf?
-        input_file.io_stream.rewind
-        Origami::PDF.read(input_file.io_stream)
+    # Retrieves the bounding box of a polygon.
+    #
+    # @param [Array<Point>, Mindee::Geometry::Polygon] polygon
+    def normalize_polygon(polygon)
+      if polygon.is_a?(Mindee::Geometry::Polygon)
+        Mindee::Geometry.get_bounding_box(polygon)
       else
-        attach_image_as_new_file(input_file.io_stream)
+        polygon
+      end
+    end
+
+    # Loads a buffer into a MiniMagick Image.
+    #
+    # @param [StringIO] pdf_stream Buffer containg the PDF
+    # @return [MiniMagick::Image] a valid MiniMagick image handle.
+    def read_page_content(pdf_stream)
+      pdf_stream.rewind
+      MiniMagick::Image.read(pdf_stream)
+    end
+
+    # Crops a MiniMagick Image from a the given bounding box.
+    #
+    # @param [MiniMagick::Image] image Input Image.
+    # @param [Mindee::Geometry::MinMax] min_max_x minimum & maximum values for the x coordinates.
+    # @param [Mindee::Geometry::MinMax] min_max_y minimum & maximum values for the y coordinates.
+    def crop_image(image, min_max_x, min_max_y)
+      width = image[:width].to_i
+      height = image[:height].to_i
+
+      image.format('jpg')
+      new_width = (min_max_x.max - min_max_x.min) * width
+      new_height = (min_max_y.max - min_max_y.min) * height
+      image.crop("#{new_width}x#{new_height}+#{min_max_x.min * width}+#{min_max_y.min * height}")
+
+      image
+    end
+
+    # Writes a MiniMagick::Image to a buffer.
+    #
+    # @param [MiniMagick::Image] image a valid MiniMagick image.
+    # @param [Object] buffer
+    def write_image_to_buffer(image, buffer)
+      image.write(buffer)
+      buffer.rewind
+    end
+
+    # Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.
+    #
+    # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
+    # @return [String] A valid file extension.
+    def determine_file_extension(input_source)
+      if input_source.pdf? || input_source.filename.downcase.end_with?('pdf')
+        'jpg'
+      else
+        File.extname(input_source.filename).strip.downcase[1..]
+      end
+    end
+
+    # Generates a filename from the main input source.
+    #
+    # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
+    # @param [Integer] page_id ID of the page the element was extracted from.
+    # @param [Integer] element_id ID of the element on a given page
+    # @param [String] file_extension extension as extracted from the main file.
+    # @return [String] The generated filename.
+    def generate_filename(input_source, page_id, element_id, file_extension)
+      "#{input_source.filename}_page#{page_id}-#{element_id}.#{file_extension}"
+    end
+
+    # Generates an ExtractedImage.
+    #
+    # @param [StringIO] buffer Buffer containing the image.
+    # @param [String] file_name Name for the file.
+    # @param [Object] page_id ID of the page the file was generated from.
+    # @param [Object] element_id ID of the element of a given page.
+    def create_extracted_image(buffer, file_name, page_id, element_id)
+      buffer.rewind
+      ExtractedImage.new(
+        Mindee::Input::Source::BytesInputSource.new(buffer.read, file_name),
+        page_id,
+        element_id
+      )
+    end
+
+    # Loads a single_page from an image file or a pdf document.
+    #
+    # @param input_file [LocalInputSource] Local input.
+    # @param [Integer] page_id Page ID.
+    # @return [MiniMagick::Image] A valid PdfDocument handle.
+    def load_doc(input_file, page_id)
+      input_file.io_stream.rewind
+      if input_file.pdf?
+        new_stream = get_page(Origami::PDF.read(input_file.io_stream), page_id)
+        new_stream.rewind
+        new_stream
+      else
+        input_file.io_stream
       end
     end
   end

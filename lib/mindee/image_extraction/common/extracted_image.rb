@@ -16,6 +16,9 @@ module Mindee
       # Buffer object of the file's content.
       attr_reader :buffer
 
+      # Internal name for the file.
+      attr_reader :internal_file_name
+
       # Initializes the ExtractedImage with a buffer and an internal file name.
       #
       # @param input_source [LocalInputSource] Local source for input.
@@ -24,7 +27,12 @@ module Mindee
       def initialize(input_source, page_id, element_id)
         @buffer = StringIO.new(input_source.io_stream.read)
         @buffer.rewind
-        @internal_file_name = "#{input_source.filename}_p#{page_id}_#{element_id}.pdf"
+        extension = if input_source.pdf?
+                      'jpg'
+                    else
+                      File.extname(input_source.filename)
+                    end
+        @internal_file_name = "#{input_source.filename}_p#{page_id}_#{element_id}.#{extension}"
         @page_id = page_id
         @element_id = element_id.nil? ? 0 : element_id
       end
@@ -58,7 +66,7 @@ module Mindee
       # @return [FileInputSource] A BufferInput source.
       def as_source
         @buffer.rewind
-        FileInputSource.new(@buffer)
+        Mindee::Input::Source::BytesInputSource.new(@buffer.read, @internal_file_name)
       end
     end
   end
