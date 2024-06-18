@@ -18,7 +18,7 @@ module Mindee
 
         def to_table_line
           printable = printable_values
-          format('| %-15s | %-20s ', printable['type'], printable['value'])
+          format('| %<type>-15s | %<value>-20s ', type: printable['type'], value: printable['value'])
         end
 
         def to_s
