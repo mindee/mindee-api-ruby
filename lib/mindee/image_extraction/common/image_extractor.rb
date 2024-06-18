@@ -16,7 +16,6 @@ module Mindee
       # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
       # @return [Origami::PDF] A PdfDocument handle.
 
-      input_buffer.rewind
       magick_image = MiniMagick::Image.read(input_buffer)
       # NOTE: some jpeg images get rendered as three different versions of themselves per output if the format isn't
       # converted.
@@ -27,7 +26,6 @@ module Mindee
       magick_image.format('pdf', 0, { density: scale_factor.to_s })
       io_buffer = StringIO.new
       magick_image.write(io_buffer)
-      io_buffer.rewind
       Origami::PDF.read(io_buffer)
     end
 
@@ -55,11 +53,8 @@ module Mindee
 
       options = {
         page_indexes: [page_id - 1],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
       }
 
-      stream.rewind
       Mindee::PDF::PdfProcessor.parse(stream, options)
     end
 
@@ -100,8 +95,7 @@ module Mindee
 
         buffer = StringIO.new
         write_image_to_buffer(cropped_image, buffer)
-
-        file_name = generate_filename(input_source, page_id, element_id, file_extension)
+        file_name = "#{input_source.filename}_page#{page_id}-#{element_id}.#{file_extension}"
 
         extracted_elements << create_extracted_image(buffer, file_name, page_id, element_id)
       end
@@ -149,10 +143,9 @@ module Mindee
     # Writes a MiniMagick::Image to a buffer.
     #
     # @param [MiniMagick::Image] image a valid MiniMagick image.
-    # @param [Object] buffer
+    # @param [StringIO] buffer
     def write_image_to_buffer(image, buffer)
       image.write(buffer)
-      buffer.rewind
     end
 
     # Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.
@@ -165,17 +158,6 @@ module Mindee
       else
         File.extname(input_source.filename).strip.downcase[1..]
       end
-    end
-
-    # Generates a filename from the main input source.
-    #
-    # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
-    # @param [Integer] page_id ID of the page the element was extracted from.
-    # @param [Integer] element_id ID of the element on a given page
-    # @param [String] file_extension extension as extracted from the main file.
-    # @return [String] The generated filename.
-    def generate_filename(input_source, page_id, element_id, file_extension)
-      "#{input_source.filename}_page#{page_id}-#{element_id}.#{file_extension}"
     end
 
     # Generates an ExtractedImage.
@@ -201,9 +183,7 @@ module Mindee
     def load_doc(input_file, page_id)
       input_file.io_stream.rewind
       if input_file.pdf?
-        new_stream = get_page(Origami::PDF.read(input_file.io_stream), page_id)
-        new_stream.rewind
-        new_stream
+        get_page(Origami::PDF.read(input_file.io_stream), page_id)
       else
         input_file.io_stream
       end
