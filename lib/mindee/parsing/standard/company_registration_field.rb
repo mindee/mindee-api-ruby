@@ -15,6 +15,23 @@ module Mindee
           super
           @type = prediction['type']
         end
+
+        def to_table_line
+          printable = printable_values
+          format('| %<type>-15s | %<value>-20s ', type: printable['type'], value: printable['value'])
+        end
+
+        def to_s
+          printable = printable_values
+          format('Type: %<type>s, Value: %<value>s', type: printable['type'], value: printable['value'])
+        end
+
+        def printable_values
+          printable = {}
+          printable['type'] = type
+          printable['value'] = value
+          printable
+        end
       end
     end
   end
