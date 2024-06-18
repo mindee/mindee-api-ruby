@@ -118,6 +118,14 @@ module Mindee
           @io_stream.close if close
           ['document', data, { filename: Mindee::Input::Source.convert_to_unicode_escape(@filename) }]
         end
+
+        def count_pdf_pages
+          return 1 unless pdf?
+
+          @io_stream.seek(0)
+          pdf_processor = Mindee::PDF::PdfProcessor.open_pdf(@io_stream)
+          pdf_processor.pages.size
+        end
       end
 
       # Load a document from a path.

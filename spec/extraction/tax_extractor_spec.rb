@@ -6,8 +6,6 @@ require 'mindee/parsing'
 
 require_relative '../data'
 
-DIR_OCR = File.join(DATA_DIR, 'products', 'extras', 'ocr').freeze
-
 describe Mindee::Product::Cropper::CropperV1 do
   context 'A custom tax extraction' do
     it 'should properly extract the tax from a document.' do
