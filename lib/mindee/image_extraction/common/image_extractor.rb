@@ -63,8 +63,7 @@ module Mindee
     # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
     # @param [StringIO] pdf_stream Buffer of the PDF.
     # @param [Integer] page_id Page ID.
-    # @param [Array<Mindee::Geometry::Point>, Array<Mindee::Geometry::Polygon>, Array<Mindee::Geometry::Quadrangle>]
-    # polygons.
+    # @param [Array<Mindee::Geometry::Point, Mindee::Geometry::Polygon, Mindee::Geometry::Quadrangle>] polygons
     # @return [Array<Mindee::ImageExtraction::ExtractedImage>] Extracted Images.
     def extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
       extracted_elements = []
