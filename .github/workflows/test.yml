@@ -23,7 +23,7 @@ jobs:
           - "3.1"
           - "3.2"
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
 
@@ -32,6 +32,14 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
+
+    - name: Install Ghostscript on Ubuntu
+      if: runner.os == 'Linux'
+      run: sudo apt-get install -y ghostscript
+
+    - name: Install Ghostscript on macOS
+      if: runner.os == 'macOS'
+      run: brew install ghostscript
 
     - name: Run Rspec
       run: |
