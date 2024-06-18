@@ -40,6 +40,12 @@ jobs:
     - name: Install Ghostscript on macOS
       if: runner.os == 'macOS'
       run: brew install ghostscript
+    - name: Change ImageMagick security policy
+      run: |
+        DQT='"'
+        SRC="rights=${DQT}none${DQT} pattern=${DQT}PDF${DQT}"
+        RPL="rights=${DQT}read|write${DQT} pattern=${DQT}PDF${DQT}"
+        sudo sed -i "s/$SRC/$RPL/" /etc/ImageMagick-6/policy.xml
 
     - name: Run Rspec
       run: |
