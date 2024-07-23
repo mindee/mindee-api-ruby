@@ -35,7 +35,9 @@ jobs:
 
     - name: Install Ghostscript on Ubuntu
       if: runner.os == 'Linux'
-      run: sudo apt-get install -y ghostscript
+      run: |
+          sudo apt update
+          sudo apt-get install -y ghostscript
 
     - name: Install Ghostscript and ImageMagick on macOS
       if: runner.os == 'macOS'

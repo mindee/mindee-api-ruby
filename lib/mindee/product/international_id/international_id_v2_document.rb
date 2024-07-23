@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module InternationalId
-      # International ID API version 2.0 document data.
+      # International ID API version 2.1 document data.
       class InternationalIdV2Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The physical address of the document holder.

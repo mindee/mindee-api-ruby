@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module MultiReceiptsDetector
-      # Multi Receipts Detector API version 1.0 document data.
+      # Multi Receipts Detector API version 1.1 document data.
       class MultiReceiptsDetectorV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # Positions of the receipts on the document.
