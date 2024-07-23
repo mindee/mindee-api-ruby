@@ -152,10 +152,10 @@ puts result.document.inference.prediction.group_number.value
 ```
 
 ## Issuer 80840
-**issuer_80840** ([StringField](#string-field)): The organization that issued the healthcare plan.
+**issuer80840** ([StringField](#string-field)): The organization that issued the healthcare plan.
 
 ```rb
-puts result.document.inference.prediction.issuer_80840.value
+puts result.document.inference.prediction.issuer80840.value
 ```
 
 ## Member ID

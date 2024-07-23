@@ -27,7 +27,7 @@ module Mindee
           attr_reader :group_number
           # The organization that issued the healthcare plan.
           # @return [Mindee::Parsing::Standard::StringField]
-          attr_reader :issuer_80840
+          attr_reader :issuer80840
           # The unique identifier for the member in the healthcare system.
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :member_id
@@ -62,7 +62,7 @@ module Mindee
             end
             @enrollment_date = DateField.new(prediction['enrollment_date'], page_id)
             @group_number = StringField.new(prediction['group_number'], page_id)
-            @issuer_80840 = StringField.new(prediction['issuer_80840'], page_id)
+            @issuer80840 = StringField.new(prediction['issuer_80840'], page_id)
             @member_id = StringField.new(prediction['member_id'], page_id)
             @member_name = StringField.new(prediction['member_name'], page_id)
             @payer_id = StringField.new(prediction['payer_id'], page_id)
@@ -79,7 +79,7 @@ module Mindee
             out_str << "\n:Company Name: #{@company_name}".rstrip
             out_str << "\n:Member Name: #{@member_name}".rstrip
             out_str << "\n:Member ID: #{@member_id}".rstrip
-            out_str << "\n:Issuer 80840: #{@issuer_80840}".rstrip
+            out_str << "\n:Issuer 80840: #{@issuer80840}".rstrip
             out_str << "\n:Dependents: #{dependents}".rstrip
             out_str << "\n:Group Number: #{@group_number}".rstrip
             out_str << "\n:Payer ID: #{@payer_id}".rstrip
