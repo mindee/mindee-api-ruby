@@ -6,7 +6,7 @@ require_relative 'receipt_v5_line_item'
 module Mindee
   module Product
     module Receipt
-      # Receipt API version 5.2 document data.
+      # Receipt API version 5.3 document data.
       class ReceiptV5Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The purchase category among predefined classes.

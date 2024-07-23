@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.7 document data.
+      # Financial Document API version 1.9 document data.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -206,6 +206,7 @@ module Mindee
           out_str << "+#{char * 12}"
           out_str << "+#{char * 14}"
           out_str << "+#{char * 14}"
+          out_str << "+#{char * 17}"
           out_str << "+#{char * 12}"
           out_str << '+'
           out_str
@@ -225,6 +226,7 @@ module Mindee
           out_str << ' Tax Amount |'
           out_str << ' Tax Rate (%) |'
           out_str << ' Total Amount |'
+          out_str << ' Unit of measure |'
           out_str << ' Unit Price |'
           out_str << "\n#{line_items_separator('=')}"
           out_str << "\n  #{line_items}"

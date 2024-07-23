@@ -6,7 +6,7 @@ require_relative 'invoice_v4_line_item'
 module Mindee
   module Product
     module Invoice
-      # Invoice API version 4.6 document data.
+      # Invoice API version 4.7 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -176,6 +176,7 @@ module Mindee
           out_str << "+#{char * 12}"
           out_str << "+#{char * 14}"
           out_str << "+#{char * 14}"
+          out_str << "+#{char * 17}"
           out_str << "+#{char * 12}"
           out_str << '+'
           out_str
@@ -195,6 +196,7 @@ module Mindee
           out_str << ' Tax Amount |'
           out_str << ' Tax Rate (%) |'
           out_str << ' Total Amount |'
+          out_str << ' Unit of measure |'
           out_str << ' Unit Price |'
           out_str << "\n#{line_items_separator('=')}"
           out_str << "\n  #{line_items}"

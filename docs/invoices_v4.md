@@ -34,7 +34,7 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 5c0371d0-1433-43a4-b8fb-a3b11aaf9a0e
+:Mindee ID: 128a314f-1adb-42eb-a9e3-402055a8b8ce
 :Filename: default_sample.jpg
 
 Inference
@@ -49,7 +49,7 @@ Prediction
 :Reference Numbers: AD29094
 :Purchase Date: 2018-09-25
 :Due Date:
-:Total Net:
+:Total Net: 2145.00
 :Total Amount: 2608.20
 :Total Tax: 193.20
 :Taxes:
@@ -93,7 +93,7 @@ Page 0
 :Reference Numbers: AD29094
 :Purchase Date: 2018-09-25
 :Due Date:
-:Total Net:
+:Total Net: 2145.00
 :Total Amount: 2608.20
 :Total Tax: 193.20
 :Taxes:
@@ -212,6 +212,7 @@ A `InvoiceV4LineItem` implements the following attributes:
 * `tax_amount` (Float): The item tax amount.
 * `tax_rate` (Float): The item tax rate in percentage.
 * `total_amount` (Float): The item total amount.
+* `unit_measure` (String): The item unit of measure.
 * `unit_price` (Float): The item unit price.
 
 # Attributes

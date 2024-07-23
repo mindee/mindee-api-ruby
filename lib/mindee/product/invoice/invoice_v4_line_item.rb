@@ -26,6 +26,9 @@ module Mindee
         # The item total amount.
         # @return [Float]
         attr_reader :total_amount
+        # The item unit of measure.
+        # @return [String]
+        attr_reader :unit_measure
         # The item unit price.
         # @return [Float]
         attr_reader :unit_price
@@ -40,6 +43,7 @@ module Mindee
           @tax_amount = prediction['tax_amount']
           @tax_rate = prediction['tax_rate']
           @total_amount = prediction['total_amount']
+          @unit_measure = prediction['unit_measure']
           @unit_price = prediction['unit_price']
           @page_id = page_id
         end
@@ -53,6 +57,7 @@ module Mindee
           printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
           printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
           printable[:total_amount] = @total_amount.nil? ? '' : Field.float_to_string(@total_amount)
+          printable[:unit_measure] = format_for_display(@unit_measure, nil)
           printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
           printable
         end
@@ -67,6 +72,7 @@ module Mindee
           out_str << format('| %- 11s', printable[:tax_amount])
           out_str << format('| %- 13s', printable[:tax_rate])
           out_str << format('| %- 13s', printable[:total_amount])
+          out_str << format('| %- 16s', printable[:unit_measure])
           out_str << format('| %- 11s', printable[:unit_price])
           out_str << '|'
         end
@@ -81,6 +87,7 @@ module Mindee
           out_str << "\n  :Tax Amount: #{printable[:tax_amount]}"
           out_str << "\n  :Tax Rate (%): #{printable[:tax_rate]}"
           out_str << "\n  :Total Amount: #{printable[:total_amount]}"
+          out_str << "\n  :Unit of measure: #{printable[:unit_measure]}"
           out_str << "\n  :Unit Price: #{printable[:unit_price]}"
           out_str
         end

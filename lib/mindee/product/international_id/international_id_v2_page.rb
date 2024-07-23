@@ -6,7 +6,7 @@ require_relative 'international_id_v2_document'
 module Mindee
   module Product
     module InternationalId
-      # International ID API version 2.0 page data.
+      # International ID API version 2.1 page data.
       class InternationalIdV2Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
