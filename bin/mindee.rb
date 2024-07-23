@@ -35,7 +35,7 @@ DOCUMENTS = {
     description: 'Financial Document',
     doc_class: Mindee::Product::FinancialDocument::FinancialDocumentV1,
     sync: true,
-    async: false,
+    async: true,
   },
   "invoice" => {
     description: 'Invoice',
@@ -114,6 +114,12 @@ DOCUMENTS = {
     doc_class: Mindee::Product::US::DriverLicense::DriverLicenseV1,
     sync: true,
     async: false,
+  },
+  "us-heathcare-card" => {
+    description: "US Healthcare Card",
+    doc_class: Mindee::Product::US::HealthcareCard::HealthcareCardV1,
+    sync: false,
+    async: true
   },
   "us-w9" => {
     description: "US W9 Form",
