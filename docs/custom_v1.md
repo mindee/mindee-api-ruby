@@ -4,6 +4,8 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-api-builder-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
+> 🚧 This product is still supported, but is considered to be deprecated. If you are looking for the DocTI API documentation, you can find it [here](https://developers.mindee.com/docs/ruby-generated-ocr).
+
 The Ruby OCR SDK supports [custom-built APIs](https://developers.mindee.com/docs/build-your-first-document-parsing-api).
 If your document isn't covered by one of Mindee's Off-the-Shelf APIs, you can create your own API using the[API Builder](https://platform.mindee.com/api-builder).
 
