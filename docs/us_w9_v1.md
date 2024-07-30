@@ -1,5 +1,8 @@
 ---
 title: US W9 OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-us-w9-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [W9 API](https://platform.mindee.com/mindee/us_w9).
 
@@ -24,6 +27,7 @@ result = mindee_client.parse(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
+
 ```
 
 **Output (RST):**
@@ -73,7 +77,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -90,13 +94,13 @@ The position field `PositionField` does not implement all the basic `Field` attr
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
 ## Page-Level Fields
-Some fields are constrained to the page level, and so will not be retrievable to through the document.
+Some fields are constrained to the page level, and so will not be retrievable at document level.
 
 # Attributes
 The following fields are extracted for W9 V1:
 
 ## Address
-[📄](#page-level-fields "This field is only present on individual pages.")**address** ([StringField](#string-field)): The street address (number, street, and apt. or suite no.) of the applicant.
+[📄](#page-level-fields "This field is only present on individual pages.")**address**([StringField](#string-field)): The street address (number, street, and apt. or suite no.) of the applicant.
 
 ```rb
 for address_elem in result.document.address do
@@ -105,7 +109,7 @@ end
 ```
 
 ## Business Name
-[📄](#page-level-fields "This field is only present on individual pages.")**business_name** ([StringField](#string-field)): The business name or disregarded entity name, if different from Name.
+[📄](#page-level-fields "This field is only present on individual pages.")**business_name**([StringField](#string-field)): The business name or disregarded entity name, if different from Name.
 
 ```rb
 for business_name_elem in result.document.business_name do
@@ -114,7 +118,7 @@ end
 ```
 
 ## City State Zip
-[📄](#page-level-fields "This field is only present on individual pages.")**city_state_zip** ([StringField](#string-field)): The city, state, and ZIP code of the applicant.
+[📄](#page-level-fields "This field is only present on individual pages.")**city_state_zip**([StringField](#string-field)): The city, state, and ZIP code of the applicant.
 
 ```rb
 for city_state_zip_elem in result.document.city_state_zip do
@@ -123,7 +127,7 @@ end
 ```
 
 ## EIN
-[📄](#page-level-fields "This field is only present on individual pages.")**ein** ([StringField](#string-field)): The employer identification number.
+[📄](#page-level-fields "This field is only present on individual pages.")**ein**([StringField](#string-field)): The employer identification number.
 
 ```rb
 for ein_elem in result.document.ein do
@@ -132,7 +136,7 @@ end
 ```
 
 ## Name
-[📄](#page-level-fields "This field is only present on individual pages.")**name** ([StringField](#string-field)): Name as shown on the applicant's income tax return.
+[📄](#page-level-fields "This field is only present on individual pages.")**name**([StringField](#string-field)): Name as shown on the applicant's income tax return.
 
 ```rb
 for name_elem in result.document.name do
@@ -141,7 +145,7 @@ end
 ```
 
 ## Signature Date Position
-[📄](#page-level-fields "This field is only present on individual pages.")**signature_date_position** ([PositionField](#position-field)): Position of the signature date on the document.
+[📄](#page-level-fields "This field is only present on individual pages.")**signature_date_position**([PositionField](#position-field)): Position of the signature date on the document.
 
 ```rb
 for signature_date_position_elem in result.document.signature_date_position do
@@ -150,7 +154,7 @@ end
 ```
 
 ## Signature Position
-[📄](#page-level-fields "This field is only present on individual pages.")**signature_position** ([PositionField](#position-field)): Position of the signature on the document.
+[📄](#page-level-fields "This field is only present on individual pages.")**signature_position**([PositionField](#position-field)): Position of the signature on the document.
 
 ```rb
 for signature_position_elem in result.document.signature_position do
@@ -159,7 +163,7 @@ end
 ```
 
 ## SSN
-[📄](#page-level-fields "This field is only present on individual pages.")**ssn** ([StringField](#string-field)): The applicant's social security number.
+[📄](#page-level-fields "This field is only present on individual pages.")**ssn**([StringField](#string-field)): The applicant's social security number.
 
 ```rb
 for ssn_elem in result.document.ssn do
@@ -168,7 +172,7 @@ end
 ```
 
 ## Tax Classification
-[📄](#page-level-fields "This field is only present on individual pages.")**tax_classification** ([StringField](#string-field)): The federal tax classification, which can vary depending on the revision date.
+[📄](#page-level-fields "This field is only present on individual pages.")**tax_classification**([StringField](#string-field)): The federal tax classification, which can vary depending on the revision date.
 
 ```rb
 for tax_classification_elem in result.document.tax_classification do
@@ -177,7 +181,7 @@ end
 ```
 
 ## Tax Classification LLC
-[📄](#page-level-fields "This field is only present on individual pages.")**tax_classification_llc** ([StringField](#string-field)): Depending on revision year, among S, C, P or D for Limited Liability Company Classification.
+[📄](#page-level-fields "This field is only present on individual pages.")**tax_classification_llc**([StringField](#string-field)): Depending on revision year, among S, C, P or D for Limited Liability Company Classification.
 
 ```rb
 for tax_classification_llc_elem in result.document.tax_classification_llc do
@@ -186,7 +190,7 @@ end
 ```
 
 ## Tax Classification Other Details
-[📄](#page-level-fields "This field is only present on individual pages.")**tax_classification_other_details** ([StringField](#string-field)): Tax Classification Other Details.
+[📄](#page-level-fields "This field is only present on individual pages.")**tax_classification_other_details**([StringField](#string-field)): Tax Classification Other Details.
 
 ```rb
 for tax_classification_other_details_elem in result.document.tax_classification_other_details do
@@ -195,7 +199,7 @@ end
 ```
 
 ## W9 Revision Date
-[📄](#page-level-fields "This field is only present on individual pages.")**w9_revision_date** ([StringField](#string-field)): The Revision month and year of the W9 form.
+[📄](#page-level-fields "This field is only present on individual pages.")**w9_revision_date**([StringField](#string-field)): The Revision month and year of the W9 form.
 
 ```rb
 for w9_revision_date_elem in result.document.w9_revision_date do

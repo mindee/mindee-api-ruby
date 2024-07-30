@@ -1,5 +1,8 @@
 ---
 title: FR Carte Vitale OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-fr-carte-vitale-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Carte Vitale API](https://platform.mindee.com/mindee/carte_vitale).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -72,7 +76,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -90,7 +94,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for Carte Vitale V1:
 
 ## Given Name(s)
-**given_names** (Array<[StringField](#string-field)>): The given name(s) of the card holder.
+**given_names**(Array<[StringField](#string-field)>): The given name(s) of the card holder.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -99,21 +103,21 @@ end
 ```
 
 ## Issuance Date
-**issuance_date** ([DateField](#date-field)): The date the card was issued.
+**issuance_date**([DateField](#date-field)): The date the card was issued.
 
 ```rb
 puts result.document.inference.prediction.issuance_date.value
 ```
 
 ## Social Security Number
-**social_security** ([StringField](#string-field)): The Social Security Number (Numéro de Sécurité Sociale) of the card holder
+**social_security**([StringField](#string-field)): The Social Security Number (Numéro de Sécurité Sociale) of the card holder
 
 ```rb
 puts result.document.inference.prediction.social_security.value
 ```
 
 ## Surname
-**surname** ([StringField](#string-field)): The surname of the card holder.
+**surname**([StringField](#string-field)): The surname of the card holder.
 
 ```rb
 puts result.document.inference.prediction.surname.value

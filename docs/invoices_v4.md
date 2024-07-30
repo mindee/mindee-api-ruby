@@ -1,5 +1,8 @@
 ---
 title: Invoice OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-invoice-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Invoice API](https://platform.mindee.com/mindee/invoices).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 You can also call this product asynchronously:
@@ -51,6 +55,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -164,7 +169,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -243,21 +248,21 @@ A `InvoiceV4LineItem` implements the following attributes:
 The following fields are extracted for Invoice V4:
 
 ## Billing Address
-**billing_address** ([StringField](#string-field)): The customer's address used for billing.
+**billing_address**([StringField](#string-field)): The customer's address used for billing.
 
 ```rb
 puts result.document.inference.prediction.billing_address.value
 ```
 
 ## Customer Address
-**customer_address** ([StringField](#string-field)): The address of the customer.
+**customer_address**([StringField](#string-field)): The address of the customer.
 
 ```rb
 puts result.document.inference.prediction.customer_address.value
 ```
 
 ## Customer Company Registrations
-**customer_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the customer.
+**customer_company_registrations**(Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the customer.
 
 ```rb
 for customer_company_registrations_elem in result.document.inference.prediction.customer_company_registrations do
@@ -266,49 +271,49 @@ end
 ```
 
 ## Customer ID
-**customer_id** ([StringField](#string-field)): The customer account number or identifier from the supplier.
+**customer_id**([StringField](#string-field)): The customer account number or identifier from the supplier.
 
 ```rb
 puts result.document.inference.prediction.customer_id.value
 ```
 
 ## Customer Name
-**customer_name** ([StringField](#string-field)): The name of the customer or client.
+**customer_name**([StringField](#string-field)): The name of the customer or client.
 
 ```rb
 puts result.document.inference.prediction.customer_name.value
 ```
 
 ## Purchase Date
-**date** ([DateField](#date-field)): The date the purchase was made.
+**date**([DateField](#date-field)): The date the purchase was made.
 
 ```rb
 puts result.document.inference.prediction.date.value
 ```
 
 ## Document Type
-**document_type** ([ClassificationField](#classification-field)): One of: 'INVOICE', 'CREDIT NOTE'.
+**document_type**([ClassificationField](#classification-field)): One of: 'INVOICE', 'CREDIT NOTE'.
 
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
 
 ## Due Date
-**due_date** ([DateField](#date-field)): The date on which the payment is due.
+**due_date**([DateField](#date-field)): The date on which the payment is due.
 
 ```rb
 puts result.document.inference.prediction.due_date.value
 ```
 
 ## Invoice Number
-**invoice_number** ([StringField](#string-field)): The invoice number or identifier.
+**invoice_number**([StringField](#string-field)): The invoice number or identifier.
 
 ```rb
 puts result.document.inference.prediction.invoice_number.value
 ```
 
 ## Line Items
-**line_items** (Array<[InvoiceV4LineItem](#line-items-field)>): List of line item details.
+**line_items**(Array<[InvoiceV4LineItem](#line-items-field)>): List of line item details.
 
 ```rb
 for line_items_elem in result.document.inference.prediction.line_items do
@@ -317,14 +322,14 @@ end
 ```
 
 ## Locale
-**locale** ([LocaleField](#locale-field)): The locale detected on the document.
+**locale**([LocaleField](#locale-field)): The locale detected on the document.
 
 ```rb
 puts result.document.inference.prediction.locale.value
 ```
 
 ## Reference Numbers
-**reference_numbers** (Array<[StringField](#string-field)>): List of Reference numbers, including PO number.
+**reference_numbers**(Array<[StringField](#string-field)>): List of Reference numbers, including PO number.
 
 ```rb
 for reference_numbers_elem in result.document.inference.prediction.reference_numbers do
@@ -333,21 +338,21 @@ end
 ```
 
 ## Shipping Address
-**shipping_address** ([StringField](#string-field)): Customer's delivery address.
+**shipping_address**([StringField](#string-field)): Customer's delivery address.
 
 ```rb
 puts result.document.inference.prediction.shipping_address.value
 ```
 
 ## Supplier Address
-**supplier_address** ([StringField](#string-field)): The address of the supplier or merchant.
+**supplier_address**([StringField](#string-field)): The address of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_address.value
 ```
 
 ## Supplier Company Registrations
-**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
+**supplier_company_registrations**(Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
 
 ```rb
 for supplier_company_registrations_elem in result.document.inference.prediction.supplier_company_registrations do
@@ -356,21 +361,21 @@ end
 ```
 
 ## Supplier Email
-**supplier_email** ([StringField](#string-field)): The email of the supplier or merchant.
+**supplier_email**([StringField](#string-field)): The email of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_email.value
 ```
 
 ## Supplier Name
-**supplier_name** ([StringField](#string-field)): The name of the supplier or merchant.
+**supplier_name**([StringField](#string-field)): The name of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_name.value
 ```
 
 ## Supplier Payment Details
-**supplier_payment_details** (Array<[PaymentDetailsField](#payment-details-field)>): List of payment details associated to the supplier.
+**supplier_payment_details**(Array<[PaymentDetailsField](#payment-details-field)>): List of payment details associated to the supplier.
 
 ```rb
 for supplier_payment_details_elem in result.document.inference.prediction.supplier_payment_details do
@@ -382,21 +387,21 @@ end
 ```
 
 ## Supplier Phone Number
-**supplier_phone_number** ([StringField](#string-field)): The phone number of the supplier or merchant.
+**supplier_phone_number**([StringField](#string-field)): The phone number of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_phone_number.value
 ```
 
 ## Supplier Website
-**supplier_website** ([StringField](#string-field)): The website URL of the supplier or merchant.
+**supplier_website**([StringField](#string-field)): The website URL of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_website.value
 ```
 
 ## Taxes
-**taxes** (Array<[TaxField](#taxes-field)>): List of tax line details.
+**taxes**(Array<[TaxField](#taxes-field)>): List of tax line details.
 
 ```rb
 for taxes_elem in result.document.inference.prediction.taxes do
@@ -405,21 +410,21 @@ end
 ```
 
 ## Total Amount
-**total_amount** ([AmountField](#amount-field)): The total amount paid: includes taxes, tips, fees, and other charges.
+**total_amount**([AmountField](#amount-field)): The total amount paid: includes taxes, tips, fees, and other charges.
 
 ```rb
 puts result.document.inference.prediction.total_amount.value
 ```
 
 ## Total Net
-**total_net** ([AmountField](#amount-field)): The net amount paid: does not include taxes, fees, and discounts.
+**total_net**([AmountField](#amount-field)): The net amount paid: does not include taxes, fees, and discounts.
 
 ```rb
 puts result.document.inference.prediction.total_net.value
 ```
 
 ## Total Tax
-**total_tax** ([AmountField](#amount-field)): The total tax: includes all the taxes paid for this invoice.
+**total_tax**([AmountField](#amount-field)): The total tax: includes all the taxes paid for this invoice.
 
 ```rb
 puts result.document.inference.prediction.total_tax.value

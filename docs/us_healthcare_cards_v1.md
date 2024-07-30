@@ -1,5 +1,8 @@
 ---
 title: US Healthcare Card OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-us-healthcare-card-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Healthcare Card API](https://platform.mindee.com/mindee/us_healthcare_cards).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -84,7 +88,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -113,14 +117,14 @@ A `HealthcareCardV1Copay` implements the following attributes:
 The following fields are extracted for Healthcare Card V1:
 
 ## Company Name
-**company_name** ([StringField](#string-field)): The name of the company that provides the healthcare plan.
+**company_name**([StringField](#string-field)): The name of the company that provides the healthcare plan.
 
 ```rb
 puts result.document.inference.prediction.company_name.value
 ```
 
 ## copays
-**copays** (Array<[HealthcareCardV1Copay](#copays-field)>): Is a fixed amount for a covered service.
+**copays**(Array<[HealthcareCardV1Copay](#copays-field)>): Is a fixed amount for a covered service.
 
 ```rb
 for copays_elem in result.document.inference.prediction.copays do
@@ -129,7 +133,7 @@ end
 ```
 
 ## Dependents
-**dependents** (Array<[StringField](#string-field)>): The list of dependents covered by the healthcare plan.
+**dependents**(Array<[StringField](#string-field)>): The list of dependents covered by the healthcare plan.
 
 ```rb
 for dependents_elem in result.document.inference.prediction.dependents do
@@ -138,63 +142,63 @@ end
 ```
 
 ## Enrollment Date
-**enrollment_date** ([DateField](#date-field)): The date when the member enrolled in the healthcare plan.
+**enrollment_date**([DateField](#date-field)): The date when the member enrolled in the healthcare plan.
 
 ```rb
 puts result.document.inference.prediction.enrollment_date.value
 ```
 
 ## Group Number
-**group_number** ([StringField](#string-field)): The group number associated with the healthcare plan.
+**group_number**([StringField](#string-field)): The group number associated with the healthcare plan.
 
 ```rb
 puts result.document.inference.prediction.group_number.value
 ```
 
 ## Issuer 80840
-**issuer80840** ([StringField](#string-field)): The organization that issued the healthcare plan.
+**issuer80840**([StringField](#string-field)): The organization that issued the healthcare plan.
 
 ```rb
 puts result.document.inference.prediction.issuer80840.value
 ```
 
 ## Member ID
-**member_id** ([StringField](#string-field)): The unique identifier for the member in the healthcare system.
+**member_id**([StringField](#string-field)): The unique identifier for the member in the healthcare system.
 
 ```rb
 puts result.document.inference.prediction.member_id.value
 ```
 
 ## Member Name
-**member_name** ([StringField](#string-field)): The name of the member covered by the healthcare plan.
+**member_name**([StringField](#string-field)): The name of the member covered by the healthcare plan.
 
 ```rb
 puts result.document.inference.prediction.member_name.value
 ```
 
 ## Payer ID
-**payer_id** ([StringField](#string-field)): The unique identifier for the payer in the healthcare system.
+**payer_id**([StringField](#string-field)): The unique identifier for the payer in the healthcare system.
 
 ```rb
 puts result.document.inference.prediction.payer_id.value
 ```
 
 ## RX BIN
-**rx_bin** ([StringField](#string-field)): The BIN number for prescription drug coverage.
+**rx_bin**([StringField](#string-field)): The BIN number for prescription drug coverage.
 
 ```rb
 puts result.document.inference.prediction.rx_bin.value
 ```
 
 ## RX GRP
-**rx_grp** ([StringField](#string-field)): The group number for prescription drug coverage.
+**rx_grp**([StringField](#string-field)): The group number for prescription drug coverage.
 
 ```rb
 puts result.document.inference.prediction.rx_grp.value
 ```
 
 ## RX PCN
-**rx_pcn** ([StringField](#string-field)): The PCN number for prescription drug coverage.
+**rx_pcn**([StringField](#string-field)): The PCN number for prescription drug coverage.
 
 ```rb
 puts result.document.inference.prediction.rx_pcn.value

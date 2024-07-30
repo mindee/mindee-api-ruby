@@ -1,5 +1,8 @@
 ---
 title: EU License Plate OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-eu-license-plate-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [License Plate API](https://platform.mindee.com/mindee/license_plates).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -66,7 +70,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -79,7 +83,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for License Plate V1:
 
 ## License Plates
-**license_plates** (Array<[StringField](#string-field)>): List of all license plates found in the image.
+**license_plates**(Array<[StringField](#string-field)>): List of all license plates found in the image.
 
 ```rb
 for license_plates_elem in result.document.inference.prediction.license_plates do

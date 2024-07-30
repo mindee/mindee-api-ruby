@@ -1,5 +1,8 @@
 ---
 title: Barcode Reader OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-barcode-reader-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -70,7 +74,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -83,7 +87,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for Barcode Reader V1:
 
 ## Barcodes 1D
-**codes_1d** (Array<[StringField](#string-field)>): List of decoded 1D barcodes.
+**codes_1d**(Array<[StringField](#string-field)>): List of decoded 1D barcodes.
 
 ```rb
 for codes_1d_elem in result.document.inference.prediction.codes_1d do
@@ -92,7 +96,7 @@ end
 ```
 
 ## Barcodes 2D
-**codes_2d** (Array<[StringField](#string-field)>): List of decoded 2D barcodes.
+**codes_2d**(Array<[StringField](#string-field)>): List of decoded 2D barcodes.
 
 ```rb
 for codes_2d_elem in result.document.inference.prediction.codes_2d do

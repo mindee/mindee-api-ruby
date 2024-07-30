@@ -1,5 +1,8 @@
 ---
 title: US Bank Check OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-us-bank-check-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Bank Check API](https://platform.mindee.com/mindee/bank_check).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -80,7 +84,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -106,34 +110,34 @@ The position field `PositionField` does not implement all the basic `Field` attr
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
 ## Page-Level Fields
-Some fields are constrained to the page level, and so will not be retrievable to through the document.
+Some fields are constrained to the page level, and so will not be retrievable at document level.
 
 # Attributes
 The following fields are extracted for Bank Check V1:
 
 ## Account Number
-**account_number** ([StringField](#string-field)): The check payer's account number.
+**account_number**([StringField](#string-field)): The check payer's account number.
 
 ```rb
 puts result.document.inference.prediction.account_number.value
 ```
 
 ## Amount
-**amount** ([AmountField](#amount-field)): The amount of the check.
+**amount**([AmountField](#amount-field)): The amount of the check.
 
 ```rb
 puts result.document.inference.prediction.amount.value
 ```
 
 ## Check Number
-**check_number** ([StringField](#string-field)): The issuer's check number.
+**check_number**([StringField](#string-field)): The issuer's check number.
 
 ```rb
 puts result.document.inference.prediction.check_number.value
 ```
 
 ## Check Position
-[📄](#page-level-fields "This field is only present on individual pages.")**check_position** ([PositionField](#position-field)): The position of the check on the document.
+[📄](#page-level-fields "This field is only present on individual pages.")**check_position**([PositionField](#position-field)): The position of the check on the document.
 
 ```rb
 for check_position_elem in result.document.check_position do
@@ -142,14 +146,14 @@ end
 ```
 
 ## Check Issue Date
-**date** ([DateField](#date-field)): The date the check was issued.
+**date**([DateField](#date-field)): The date the check was issued.
 
 ```rb
 puts result.document.inference.prediction.date.value
 ```
 
 ## Payees
-**payees** (Array<[StringField](#string-field)>): List of the check's payees (recipients).
+**payees**(Array<[StringField](#string-field)>): List of the check's payees (recipients).
 
 ```rb
 for payees_elem in result.document.inference.prediction.payees do
@@ -158,14 +162,14 @@ end
 ```
 
 ## Routing Number
-**routing_number** ([StringField](#string-field)): The check issuer's routing number.
+**routing_number**([StringField](#string-field)): The check issuer's routing number.
 
 ```rb
 puts result.document.inference.prediction.routing_number.value
 ```
 
 ## Signature Positions
-[📄](#page-level-fields "This field is only present on individual pages.")**signatures_positions** (Array<[PositionField](#position-field)>): List of signature positions
+[📄](#page-level-fields "This field is only present on individual pages.")**signatures_positions**(Array<[PositionField](#position-field)>): List of signature positions
 
 ```rb
 for page in result.document.inference.pages do

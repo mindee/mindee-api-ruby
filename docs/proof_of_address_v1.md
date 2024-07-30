@@ -1,5 +1,8 @@
 ---
 title: Proof of Address OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-proof-of-address-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Proof of Address API](https://platform.mindee.com/mindee/proof_of_address).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -104,7 +108,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -135,14 +139,14 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for Proof of Address V1:
 
 ## Date of Issue
-**date** ([DateField](#date-field)): The date the document was issued.
+**date**([DateField](#date-field)): The date the document was issued.
 
 ```rb
 puts result.document.inference.prediction.date.value
 ```
 
 ## Dates
-**dates** (Array<[DateField](#date-field)>): List of dates found on the document.
+**dates**(Array<[DateField](#date-field)>): List of dates found on the document.
 
 ```rb
 for dates_elem in result.document.inference.prediction.dates do
@@ -151,14 +155,14 @@ end
 ```
 
 ## Issuer Address
-**issuer_address** ([StringField](#string-field)): The address of the document's issuer.
+**issuer_address**([StringField](#string-field)): The address of the document's issuer.
 
 ```rb
 puts result.document.inference.prediction.issuer_address.value
 ```
 
 ## Issuer Company Registrations
-**issuer_company_registration** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations found for the issuer.
+**issuer_company_registration**(Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations found for the issuer.
 
 ```rb
 for issuer_company_registration_elem in result.document.inference.prediction.issuer_company_registration do
@@ -167,28 +171,28 @@ end
 ```
 
 ## Issuer Name
-**issuer_name** ([StringField](#string-field)): The name of the person or company issuing the document.
+**issuer_name**([StringField](#string-field)): The name of the person or company issuing the document.
 
 ```rb
 puts result.document.inference.prediction.issuer_name.value
 ```
 
 ## Locale
-**locale** ([LocaleField](#locale-field)): The locale detected on the document.
+**locale**([LocaleField](#locale-field)): The locale detected on the document.
 
 ```rb
 puts result.document.inference.prediction.locale.value
 ```
 
 ## Recipient Address
-**recipient_address** ([StringField](#string-field)): The address of the recipient.
+**recipient_address**([StringField](#string-field)): The address of the recipient.
 
 ```rb
 puts result.document.inference.prediction.recipient_address.value
 ```
 
 ## Recipient Company Registrations
-**recipient_company_registration** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations found for the recipient.
+**recipient_company_registration**(Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations found for the recipient.
 
 ```rb
 for recipient_company_registration_elem in result.document.inference.prediction.recipient_company_registration do
@@ -197,7 +201,7 @@ end
 ```
 
 ## Recipient Name
-**recipient_name** ([StringField](#string-field)): The name of the person or company receiving the document.
+**recipient_name**([StringField](#string-field)): The name of the person or company receiving the document.
 
 ```rb
 puts result.document.inference.prediction.recipient_name.value

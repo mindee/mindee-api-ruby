@@ -1,5 +1,8 @@
 ---
 title: FR Bank Account Details OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-fr-bank-account-details-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Bank Account Details API](https://platform.mindee.com/mindee/bank_account_details).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -80,7 +84,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -106,28 +110,28 @@ A `BankAccountDetailsV2Bban` implements the following attributes:
 The following fields are extracted for Bank Account Details V2:
 
 ## Account Holder's Names
-**account_holders_names** ([StringField](#string-field)): Full extraction of the account holders names.
+**account_holders_names**([StringField](#string-field)): Full extraction of the account holders names.
 
 ```rb
 puts result.document.inference.prediction.account_holders_names.value
 ```
 
 ## Basic Bank Account Number
-**bban** ([BankAccountDetailsV2Bban](#basic-bank-account-number-field)): Full extraction of BBAN, including: branch code, bank code, account and key.
+**bban**([BankAccountDetailsV2Bban](#basic-bank-account-number-field)): Full extraction of BBAN, including: branch code, bank code, account and key.
 
 ```rb
 puts result.document.inference.prediction.bban.value
 ```
 
 ## IBAN
-**iban** ([StringField](#string-field)): Full extraction of the IBAN number.
+**iban**([StringField](#string-field)): Full extraction of the IBAN number.
 
 ```rb
 puts result.document.inference.prediction.iban.value
 ```
 
 ## SWIFT Code
-**swift_code** ([StringField](#string-field)): Full extraction of the SWIFT code.
+**swift_code**([StringField](#string-field)): Full extraction of the SWIFT code.
 
 ```rb
 puts result.document.inference.prediction.swift_code.value

@@ -1,5 +1,8 @@
 ---
 title: US US Mail OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-us-us-mail-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [US Mail API](https://platform.mindee.com/mindee/us_mail).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -59,7 +63,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -100,7 +104,7 @@ A `UsMailV2SenderAddress` implements the following attributes:
 The following fields are extracted for US Mail V2:
 
 ## Recipient Addresses
-**recipient_addresses** (Array<[UsMailV2RecipientAddress](#recipient-addresses-field)>): The addresses of the recipients.
+**recipient_addresses**(Array<[UsMailV2RecipientAddress](#recipient-addresses-field)>): The addresses of the recipients.
 
 ```rb
 for recipient_addresses_elem in result.document.inference.prediction.recipient_addresses do
@@ -109,7 +113,7 @@ end
 ```
 
 ## Recipient Names
-**recipient_names** (Array<[StringField](#string-field)>): The names of the recipients.
+**recipient_names**(Array<[StringField](#string-field)>): The names of the recipients.
 
 ```rb
 for recipient_names_elem in result.document.inference.prediction.recipient_names do
@@ -118,14 +122,14 @@ end
 ```
 
 ## Sender Address
-**sender_address** ([UsMailV2SenderAddress](#sender-address-field)): The address of the sender.
+**sender_address**([UsMailV2SenderAddress](#sender-address-field)): The address of the sender.
 
 ```rb
 puts result.document.inference.prediction.sender_address.value
 ```
 
 ## Sender Name
-**sender_name** ([StringField](#string-field)): The name of the sender.
+**sender_name**([StringField](#string-field)): The name of the sender.
 
 ```rb
 puts result.document.inference.prediction.sender_name.value

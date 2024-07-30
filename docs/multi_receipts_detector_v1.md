@@ -1,5 +1,8 @@
 ---
 title: Multi Receipts Detector OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-multi-receipts-detector-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -76,7 +80,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -93,7 +97,7 @@ The position field `PositionField` does not implement all the basic `Field` attr
 The following fields are extracted for Multi Receipts Detector V1:
 
 ## List of Receipts
-**receipts** (Array<[PositionField](#position-field)>): Positions of the receipts on the document.
+**receipts**(Array<[PositionField](#position-field)>): Positions of the receipts on the document.
 
 ```rb
 for receipts_elem in result.document.inference.prediction.receipts do

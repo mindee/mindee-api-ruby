@@ -1,5 +1,8 @@
 ---
 title: EU Driver License OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-eu-driver-license-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Driver License API](https://platform.mindee.com/mindee/eu_driver_license).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -90,7 +94,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -112,90 +116,90 @@ The position field `PositionField` does not implement all the basic `Field` attr
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
 ## Page-Level Fields
-Some fields are constrained to the page level, and so will not be retrievable to through the document.
+Some fields are constrained to the page level, and so will not be retrievable at document level.
 
 # Attributes
 The following fields are extracted for Driver License V1:
 
 ## Address
-**address** ([StringField](#string-field)): EU driver license holders address
+**address**([StringField](#string-field)): EU driver license holders address
 
 ```rb
 puts result.document.inference.prediction.address.value
 ```
 
 ## Driver License Category
-**category** ([StringField](#string-field)): EU driver license holders categories
+**category**([StringField](#string-field)): EU driver license holders categories
 
 ```rb
 puts result.document.inference.prediction.category.value
 ```
 
 ## Country Code
-**country_code** ([StringField](#string-field)): Country code extracted as a string.
+**country_code**([StringField](#string-field)): Country code extracted as a string.
 
 ```rb
 puts result.document.inference.prediction.country_code.value
 ```
 
 ## Date Of Birth
-**date_of_birth** ([DateField](#date-field)): The date of birth of the document holder
+**date_of_birth**([DateField](#date-field)): The date of birth of the document holder
 
 ```rb
 puts result.document.inference.prediction.date_of_birth.value
 ```
 
 ## Document ID
-**document_id** ([StringField](#string-field)): ID number of the Document.
+**document_id**([StringField](#string-field)): ID number of the Document.
 
 ```rb
 puts result.document.inference.prediction.document_id.value
 ```
 
 ## Expiry Date
-**expiry_date** ([DateField](#date-field)): Date the document expires
+**expiry_date**([DateField](#date-field)): Date the document expires
 
 ```rb
 puts result.document.inference.prediction.expiry_date.value
 ```
 
 ## First Name
-**first_name** ([StringField](#string-field)): First name(s) of the driver license holder
+**first_name**([StringField](#string-field)): First name(s) of the driver license holder
 
 ```rb
 puts result.document.inference.prediction.first_name.value
 ```
 
 ## Issue Authority
-**issue_authority** ([StringField](#string-field)): Authority that issued the document
+**issue_authority**([StringField](#string-field)): Authority that issued the document
 
 ```rb
 puts result.document.inference.prediction.issue_authority.value
 ```
 
 ## Issue Date
-**issue_date** ([DateField](#date-field)): Date the document was issued
+**issue_date**([DateField](#date-field)): Date the document was issued
 
 ```rb
 puts result.document.inference.prediction.issue_date.value
 ```
 
 ## Last Name
-**last_name** ([StringField](#string-field)): Last name of the driver license holder.
+**last_name**([StringField](#string-field)): Last name of the driver license holder.
 
 ```rb
 puts result.document.inference.prediction.last_name.value
 ```
 
 ## MRZ
-**mrz** ([StringField](#string-field)): Machine-readable license number
+**mrz**([StringField](#string-field)): Machine-readable license number
 
 ```rb
 puts result.document.inference.prediction.mrz.value
 ```
 
 ## Photo
-[📄](#page-level-fields "This field is only present on individual pages.")**photo** ([PositionField](#position-field)): Has a photo of the EU driver license holder
+[📄](#page-level-fields "This field is only present on individual pages.")**photo**([PositionField](#position-field)): Has a photo of the EU driver license holder
 
 ```rb
 for photo_elem in result.document.photo do
@@ -204,14 +208,14 @@ end
 ```
 
 ## Place Of Birth
-**place_of_birth** ([StringField](#string-field)): Place where the driver license holder was born
+**place_of_birth**([StringField](#string-field)): Place where the driver license holder was born
 
 ```rb
 puts result.document.inference.prediction.place_of_birth.value
 ```
 
 ## Signature
-[📄](#page-level-fields "This field is only present on individual pages.")**signature** ([PositionField](#position-field)): Has a signature of the EU driver license holder
+[📄](#page-level-fields "This field is only present on individual pages.")**signature**([PositionField](#position-field)): Has a signature of the EU driver license holder
 
 ```rb
 for signature_elem in result.document.signature do

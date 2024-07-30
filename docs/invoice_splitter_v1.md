@@ -1,5 +1,8 @@
 ---
 title: Invoice Splitter API Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-invoice-splitter-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Invoice Splitter API](https://platform.mindee.com/mindee/invoice_splitter).
 
@@ -33,30 +36,30 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 8c25cc63-212b-4537-9c9b-3fbd3bd0ee20
-:Filename: default_sample.jpg
+:Mindee ID: 15ad7a19-7b75-43d0-b0c6-9a641a12b49b
+:Filename: default_sample.pdf
 
 Inference
 #########
-:Product: mindee/carte_vitale v1.0
-:Rotation applied: Yes
+:Product: mindee/invoice_splitter v1.1
+:Rotation applied: No
 
 Prediction
 ==========
-:Given Name(s): NATHALIE
-:Surname: DURAND
-:Social Security Number: 269054958815780
-:Issuance Date: 2007-01-01
+:Invoice Page Groups:
+  :Page indexes: 0
+  :Page indexes: 1
 
 Page Predictions
 ================
 
 Page 0
 ------
-:Given Name(s): NATHALIE
-:Surname: DURAND
-:Social Security Number: 269054958815780
-:Issuance Date: 2007-01-01
+:Invoice Page Groups:
+
+Page 1
+------
+:Invoice Page Groups:
 ```
 
 # Field Types
@@ -77,7 +80,7 @@ The following fields are extracted for Invoice Splitter V1:
 
 ```rb
 for invoice_page_groups_elem in result.document.inference.prediction.invoice_page_groups do 
-  puts invoicePageGroupsElem.pageIndexes.join(', ')
+  puts invoice_page_groups_elem.page_indexes.join(', ')
 end
 ```
 

@@ -1,5 +1,8 @@
 ---
 title: International ID OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-international-id-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [International ID API](https://platform.mindee.com/mindee/international_id).
 
@@ -27,6 +30,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
@@ -76,7 +80,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -100,56 +104,56 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for International ID V2:
 
 ## Address
-**address** ([StringField](#string-field)): The physical address of the document holder.
+**address**([StringField](#string-field)): The physical address of the document holder.
 
 ```rb
 puts result.document.inference.prediction.address.value
 ```
 
 ## Birth Date
-**birth_date** ([DateField](#date-field)): The date of birth of the document holder.
+**birth_date**([DateField](#date-field)): The date of birth of the document holder.
 
 ```rb
 puts result.document.inference.prediction.birth_date.value
 ```
 
 ## Birth Place
-**birth_place** ([StringField](#string-field)): The place of birth of the document holder.
+**birth_place**([StringField](#string-field)): The place of birth of the document holder.
 
 ```rb
 puts result.document.inference.prediction.birth_place.value
 ```
 
 ## Country of Issue
-**country_of_issue** ([StringField](#string-field)): The country where the document was issued.
+**country_of_issue**([StringField](#string-field)): The country where the document was issued.
 
 ```rb
 puts result.document.inference.prediction.country_of_issue.value
 ```
 
 ## Document Number
-**document_number** ([StringField](#string-field)): The unique identifier assigned to the document.
+**document_number**([StringField](#string-field)): The unique identifier assigned to the document.
 
 ```rb
 puts result.document.inference.prediction.document_number.value
 ```
 
 ## Document Type
-**document_type** ([ClassificationField](#classification-field)): The type of personal identification document.
+**document_type**([ClassificationField](#classification-field)): The type of personal identification document.
 
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
 
 ## Expiration Date
-**expiry_date** ([DateField](#date-field)): The date when the document becomes invalid.
+**expiry_date**([DateField](#date-field)): The date when the document becomes invalid.
 
 ```rb
 puts result.document.inference.prediction.expiry_date.value
 ```
 
 ## Given Names
-**given_names** (Array<[StringField](#string-field)>): The list of the document holder's given names.
+**given_names**(Array<[StringField](#string-field)>): The list of the document holder's given names.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -158,63 +162,63 @@ end
 ```
 
 ## Issue Date
-**issue_date** ([DateField](#date-field)): The date when the document was issued.
+**issue_date**([DateField](#date-field)): The date when the document was issued.
 
 ```rb
 puts result.document.inference.prediction.issue_date.value
 ```
 
 ## MRZ Line 1
-**mrz_line1** ([StringField](#string-field)): The Machine Readable Zone, first line.
+**mrz_line1**([StringField](#string-field)): The Machine Readable Zone, first line.
 
 ```rb
 puts result.document.inference.prediction.mrz_line1.value
 ```
 
 ## MRZ Line 2
-**mrz_line2** ([StringField](#string-field)): The Machine Readable Zone, second line.
+**mrz_line2**([StringField](#string-field)): The Machine Readable Zone, second line.
 
 ```rb
 puts result.document.inference.prediction.mrz_line2.value
 ```
 
 ## MRZ Line 3
-**mrz_line3** ([StringField](#string-field)): The Machine Readable Zone, third line.
+**mrz_line3**([StringField](#string-field)): The Machine Readable Zone, third line.
 
 ```rb
 puts result.document.inference.prediction.mrz_line3.value
 ```
 
 ## Nationality
-**nationality** ([StringField](#string-field)): The country of citizenship of the document holder.
+**nationality**([StringField](#string-field)): The country of citizenship of the document holder.
 
 ```rb
 puts result.document.inference.prediction.nationality.value
 ```
 
 ## Personal Number
-**personal_number** ([StringField](#string-field)): The unique identifier assigned to the document holder.
+**personal_number**([StringField](#string-field)): The unique identifier assigned to the document holder.
 
 ```rb
 puts result.document.inference.prediction.personal_number.value
 ```
 
 ## Sex
-**sex** ([StringField](#string-field)): The biological sex of the document holder.
+**sex**([StringField](#string-field)): The biological sex of the document holder.
 
 ```rb
 puts result.document.inference.prediction.sex.value
 ```
 
 ## State of Issue
-**state_of_issue** ([StringField](#string-field)): The state or territory where the document was issued.
+**state_of_issue**([StringField](#string-field)): The state or territory where the document was issued.
 
 ```rb
 puts result.document.inference.prediction.state_of_issue.value
 ```
 
 ## Surnames
-**surnames** (Array<[StringField](#string-field)>): The list of the document holder's family names.
+**surnames**(Array<[StringField](#string-field)>): The list of the document holder's family names.
 
 ```rb
 for surnames_elem in result.document.inference.prediction.surnames do
