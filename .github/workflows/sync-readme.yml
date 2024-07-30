@@ -6,6 +6,7 @@ on:
   release:
     branches:
       - main
+  pull_request:
 
 jobs:
   sync:
