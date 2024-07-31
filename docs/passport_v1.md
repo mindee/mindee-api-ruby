@@ -108,42 +108,42 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for Passport V1:
 
 ## Date of Birth
-**birth_date**([DateField](#date-field)): The date of birth of the passport holder.
+**birth_date** ([DateField](#date-field)): The date of birth of the passport holder.
 
 ```rb
 puts result.document.inference.prediction.birth_date.value
 ```
 
 ## Place of Birth
-**birth_place**([StringField](#string-field)): The place of birth of the passport holder.
+**birth_place** ([StringField](#string-field)): The place of birth of the passport holder.
 
 ```rb
 puts result.document.inference.prediction.birth_place.value
 ```
 
 ## Country Code
-**country**([StringField](#string-field)): The country's 3 letter code (ISO 3166-1 alpha-3).
+**country** ([StringField](#string-field)): The country's 3 letter code (ISO 3166-1 alpha-3).
 
 ```rb
 puts result.document.inference.prediction.country.value
 ```
 
 ## Expiry Date
-**expiry_date**([DateField](#date-field)): The expiry date of the passport.
+**expiry_date** ([DateField](#date-field)): The expiry date of the passport.
 
 ```rb
 puts result.document.inference.prediction.expiry_date.value
 ```
 
 ## Gender
-**gender**([StringField](#string-field)): The gender of the passport holder.
+**gender** ([StringField](#string-field)): The gender of the passport holder.
 
 ```rb
 puts result.document.inference.prediction.gender.value
 ```
 
 ## Given Name(s)
-**given_names**(Array<[StringField](#string-field)>): The given name(s) of the passport holder.
+**given_names** (Array<[StringField](#string-field)>): The given name(s) of the passport holder.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -152,35 +152,35 @@ end
 ```
 
 ## ID Number
-**id_number**([StringField](#string-field)): The passport's identification number.
+**id_number** ([StringField](#string-field)): The passport's identification number.
 
 ```rb
 puts result.document.inference.prediction.id_number.value
 ```
 
 ## Date of Issue
-**issuance_date**([DateField](#date-field)): The date the passport was issued.
+**issuance_date** ([DateField](#date-field)): The date the passport was issued.
 
 ```rb
 puts result.document.inference.prediction.issuance_date.value
 ```
 
 ## MRZ Line 1
-**mrz1**([StringField](#string-field)): Machine Readable Zone, first line
+**mrz1** ([StringField](#string-field)): Machine Readable Zone, first line
 
 ```rb
 puts result.document.inference.prediction.mrz1.value
 ```
 
 ## MRZ Line 2
-**mrz2**([StringField](#string-field)): Machine Readable Zone, second line
+**mrz2** ([StringField](#string-field)): Machine Readable Zone, second line
 
 ```rb
 puts result.document.inference.prediction.mrz2.value
 ```
 
 ## Surname
-**surname**([StringField](#string-field)): The surname of the passport holder.
+**surname** ([StringField](#string-field)): The surname of the passport holder.
 
 ```rb
 puts result.document.inference.prediction.surname.value

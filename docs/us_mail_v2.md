@@ -104,7 +104,7 @@ A `UsMailV2SenderAddress` implements the following attributes:
 The following fields are extracted for US Mail V2:
 
 ## Recipient Addresses
-**recipient_addresses**(Array<[UsMailV2RecipientAddress](#recipient-addresses-field)>): The addresses of the recipients.
+**recipient_addresses** (Array<[UsMailV2RecipientAddress](#recipient-addresses-field)>): The addresses of the recipients.
 
 ```rb
 for recipient_addresses_elem in result.document.inference.prediction.recipient_addresses do
@@ -113,7 +113,7 @@ end
 ```
 
 ## Recipient Names
-**recipient_names**(Array<[StringField](#string-field)>): The names of the recipients.
+**recipient_names** (Array<[StringField](#string-field)>): The names of the recipients.
 
 ```rb
 for recipient_names_elem in result.document.inference.prediction.recipient_names do
@@ -122,14 +122,14 @@ end
 ```
 
 ## Sender Address
-**sender_address**([UsMailV2SenderAddress](#sender-address-field)): The address of the sender.
+**sender_address** ([UsMailV2SenderAddress](#sender-address-field)): The address of the sender.
 
 ```rb
 puts result.document.inference.prediction.sender_address.value
 ```
 
 ## Sender Name
-**sender_name**([StringField](#string-field)): The name of the sender.
+**sender_name** ([StringField](#string-field)): The name of the sender.
 
 ```rb
 puts result.document.inference.prediction.sender_name.value

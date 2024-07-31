@@ -198,14 +198,14 @@ A `ResumeV1SocialNetworksUrl` implements the following attributes:
 The following fields are extracted for Resume V1:
 
 ## Address
-**address**([StringField](#string-field)): The location information of the candidate, including city, state, and country.
+**address** ([StringField](#string-field)): The location information of the candidate, including city, state, and country.
 
 ```rb
 puts result.document.inference.prediction.address.value
 ```
 
 ## Certificates
-**certificates**(Array<[ResumeV1Certificate](#certificates-field)>): The list of certificates obtained by the candidate.
+**certificates** (Array<[ResumeV1Certificate](#certificates-field)>): The list of certificates obtained by the candidate.
 
 ```rb
 for certificates_elem in result.document.inference.prediction.certificates do
@@ -214,21 +214,21 @@ end
 ```
 
 ## Document Language
-**document_language**([StringField](#string-field)): The ISO 639 code of the language in which the document is written.
+**document_language** ([StringField](#string-field)): The ISO 639 code of the language in which the document is written.
 
 ```rb
 puts result.document.inference.prediction.document_language.value
 ```
 
 ## Document Type
-**document_type**([ClassificationField](#classification-field)): The type of the document sent.
+**document_type** ([ClassificationField](#classification-field)): The type of the document sent.
 
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
 
 ## Education
-**education**(Array<[ResumeV1Education](#education-field)>): The list of the candidate's educational background.
+**education** (Array<[ResumeV1Education](#education-field)>): The list of the candidate's educational background.
 
 ```rb
 for education_elem in result.document.inference.prediction.education do
@@ -237,14 +237,14 @@ end
 ```
 
 ## Email Address
-**email_address**([StringField](#string-field)): The email address of the candidate.
+**email_address** ([StringField](#string-field)): The email address of the candidate.
 
 ```rb
 puts result.document.inference.prediction.email_address.value
 ```
 
 ## Given Names
-**given_names**(Array<[StringField](#string-field)>): The candidate's first or given names.
+**given_names** (Array<[StringField](#string-field)>): The candidate's first or given names.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -253,7 +253,7 @@ end
 ```
 
 ## Hard Skills
-**hard_skills**(Array<[StringField](#string-field)>): The list of the candidate's technical abilities and knowledge.
+**hard_skills** (Array<[StringField](#string-field)>): The list of the candidate's technical abilities and knowledge.
 
 ```rb
 for hard_skills_elem in result.document.inference.prediction.hard_skills do
@@ -262,14 +262,14 @@ end
 ```
 
 ## Job Applied
-**job_applied**([StringField](#string-field)): The position that the candidate is applying for.
+**job_applied** ([StringField](#string-field)): The position that the candidate is applying for.
 
 ```rb
 puts result.document.inference.prediction.job_applied.value
 ```
 
 ## Languages
-**languages**(Array<[ResumeV1Language](#languages-field)>): The list of languages that the candidate is proficient in.
+**languages** (Array<[ResumeV1Language](#languages-field)>): The list of languages that the candidate is proficient in.
 
 ```rb
 for languages_elem in result.document.inference.prediction.languages do
@@ -278,28 +278,28 @@ end
 ```
 
 ## Nationality
-**nationality**([StringField](#string-field)): The ISO 3166 code for the country of citizenship of the candidate.
+**nationality** ([StringField](#string-field)): The ISO 3166 code for the country of citizenship of the candidate.
 
 ```rb
 puts result.document.inference.prediction.nationality.value
 ```
 
 ## Phone Number
-**phone_number**([StringField](#string-field)): The phone number of the candidate.
+**phone_number** ([StringField](#string-field)): The phone number of the candidate.
 
 ```rb
 puts result.document.inference.prediction.phone_number.value
 ```
 
 ## Profession
-**profession**([StringField](#string-field)): The candidate's current profession.
+**profession** ([StringField](#string-field)): The candidate's current profession.
 
 ```rb
 puts result.document.inference.prediction.profession.value
 ```
 
 ## Professional Experiences
-**professional_experiences**(Array<[ResumeV1ProfessionalExperience](#professional-experiences-field)>): The list of the candidate's professional experiences.
+**professional_experiences** (Array<[ResumeV1ProfessionalExperience](#professional-experiences-field)>): The list of the candidate's professional experiences.
 
 ```rb
 for professional_experiences_elem in result.document.inference.prediction.professional_experiences do
@@ -308,7 +308,7 @@ end
 ```
 
 ## Social Networks
-**social_networks_urls**(Array<[ResumeV1SocialNetworksUrl](#social-networks-field)>): The list of social network profiles of the candidate.
+**social_networks_urls** (Array<[ResumeV1SocialNetworksUrl](#social-networks-field)>): The list of social network profiles of the candidate.
 
 ```rb
 for social_networks_urls_elem in result.document.inference.prediction.social_networks_urls do
@@ -317,7 +317,7 @@ end
 ```
 
 ## Soft Skills
-**soft_skills**(Array<[StringField](#string-field)>): The list of the candidate's interpersonal and communication abilities.
+**soft_skills** (Array<[StringField](#string-field)>): The list of the candidate's interpersonal and communication abilities.
 
 ```rb
 for soft_skills_elem in result.document.inference.prediction.soft_skills do
@@ -326,7 +326,7 @@ end
 ```
 
 ## Surnames
-**surnames**(Array<[StringField](#string-field)>): The candidate's last names.
+**surnames** (Array<[StringField](#string-field)>): The candidate's last names.
 
 ```rb
 for surnames_elem in result.document.inference.prediction.surnames do

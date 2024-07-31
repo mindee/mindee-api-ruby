@@ -87,7 +87,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for Barcode Reader V1:
 
 ## Barcodes 1D
-**codes_1d**(Array<[StringField](#string-field)>): List of decoded 1D barcodes.
+**codes_1d** (Array<[StringField](#string-field)>): List of decoded 1D barcodes.
 
 ```rb
 for codes_1d_elem in result.document.inference.prediction.codes_1d do
@@ -96,7 +96,7 @@ end
 ```
 
 ## Barcodes 2D
-**codes_2d**(Array<[StringField](#string-field)>): List of decoded 2D barcodes.
+**codes_2d** (Array<[StringField](#string-field)>): List of decoded 2D barcodes.
 
 ```rb
 for codes_2d_elem in result.document.inference.prediction.codes_2d do

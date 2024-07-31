@@ -110,28 +110,28 @@ A `BankAccountDetailsV2Bban` implements the following attributes:
 The following fields are extracted for Bank Account Details V2:
 
 ## Account Holder's Names
-**account_holders_names**([StringField](#string-field)): Full extraction of the account holders names.
+**account_holders_names** ([StringField](#string-field)): Full extraction of the account holders names.
 
 ```rb
 puts result.document.inference.prediction.account_holders_names.value
 ```
 
 ## Basic Bank Account Number
-**bban**([BankAccountDetailsV2Bban](#basic-bank-account-number-field)): Full extraction of BBAN, including: branch code, bank code, account and key.
+**bban** ([BankAccountDetailsV2Bban](#basic-bank-account-number-field)): Full extraction of BBAN, including: branch code, bank code, account and key.
 
 ```rb
 puts result.document.inference.prediction.bban.value
 ```
 
 ## IBAN
-**iban**([StringField](#string-field)): Full extraction of the IBAN number.
+**iban** ([StringField](#string-field)): Full extraction of the IBAN number.
 
 ```rb
 puts result.document.inference.prediction.iban.value
 ```
 
 ## SWIFT Code
-**swift_code**([StringField](#string-field)): Full extraction of the SWIFT code.
+**swift_code** ([StringField](#string-field)): Full extraction of the SWIFT code.
 
 ```rb
 puts result.document.inference.prediction.swift_code.value

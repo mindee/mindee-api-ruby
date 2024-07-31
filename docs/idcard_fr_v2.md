@@ -129,49 +129,49 @@ Some fields are constrained to the page level, and so will not be retrievable at
 The following fields are extracted for Carte Nationale d'Identité V2:
 
 ## Alternate Name
-**alternate_name**([StringField](#string-field)): The alternate name of the card holder.
+**alternate_name** ([StringField](#string-field)): The alternate name of the card holder.
 
 ```rb
 puts result.document.inference.prediction.alternate_name.value
 ```
 
 ## Issuing Authority
-**authority**([StringField](#string-field)): The name of the issuing authority.
+**authority** ([StringField](#string-field)): The name of the issuing authority.
 
 ```rb
 puts result.document.inference.prediction.authority.value
 ```
 
 ## Date of Birth
-**birth_date**([DateField](#date-field)): The date of birth of the card holder.
+**birth_date** ([DateField](#date-field)): The date of birth of the card holder.
 
 ```rb
 puts result.document.inference.prediction.birth_date.value
 ```
 
 ## Place of Birth
-**birth_place**([StringField](#string-field)): The place of birth of the card holder.
+**birth_place** ([StringField](#string-field)): The place of birth of the card holder.
 
 ```rb
 puts result.document.inference.prediction.birth_place.value
 ```
 
 ## Card Access Number
-**card_access_number**([StringField](#string-field)): The card access number (CAN).
+**card_access_number** ([StringField](#string-field)): The card access number (CAN).
 
 ```rb
 puts result.document.inference.prediction.card_access_number.value
 ```
 
 ## Document Number
-**document_number**([StringField](#string-field)): The document number.
+**document_number** ([StringField](#string-field)): The document number.
 
 ```rb
 puts result.document.inference.prediction.document_number.value
 ```
 
 ## Document Sides
-[📄](#page-level-fields "This field is only present on individual pages.")**document_side**([ClassificationField](#classification-field)): The sides of the document which are visible.
+[📄](#page-level-fields "This field is only present on individual pages.")**document_side** ([ClassificationField](#classification-field)): The sides of the document which are visible.
 
 ```rb
 for document_side_elem in result.document.document_side do
@@ -180,7 +180,7 @@ end
 ```
 
 ## Document Type
-[📄](#page-level-fields "This field is only present on individual pages.")**document_type**([ClassificationField](#classification-field)): The document type or format.
+[📄](#page-level-fields "This field is only present on individual pages.")**document_type** ([ClassificationField](#classification-field)): The document type or format.
 
 ```rb
 for document_type_elem in result.document.document_type do
@@ -189,21 +189,21 @@ end
 ```
 
 ## Expiry Date
-**expiry_date**([DateField](#date-field)): The expiry date of the identification card.
+**expiry_date** ([DateField](#date-field)): The expiry date of the identification card.
 
 ```rb
 puts result.document.inference.prediction.expiry_date.value
 ```
 
 ## Gender
-**gender**([StringField](#string-field)): The gender of the card holder.
+**gender** ([StringField](#string-field)): The gender of the card holder.
 
 ```rb
 puts result.document.inference.prediction.gender.value
 ```
 
 ## Given Name(s)
-**given_names**(Array<[StringField](#string-field)>): The given name(s) of the card holder.
+**given_names** (Array<[StringField](#string-field)>): The given name(s) of the card holder.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -212,42 +212,42 @@ end
 ```
 
 ## Date of Issue
-**issue_date**([DateField](#date-field)): The date of issue of the identification card.
+**issue_date** ([DateField](#date-field)): The date of issue of the identification card.
 
 ```rb
 puts result.document.inference.prediction.issue_date.value
 ```
 
 ## Mrz Line 1
-**mrz1**([StringField](#string-field)): The Machine Readable Zone, first line.
+**mrz1** ([StringField](#string-field)): The Machine Readable Zone, first line.
 
 ```rb
 puts result.document.inference.prediction.mrz1.value
 ```
 
 ## Mrz Line 2
-**mrz2**([StringField](#string-field)): The Machine Readable Zone, second line.
+**mrz2** ([StringField](#string-field)): The Machine Readable Zone, second line.
 
 ```rb
 puts result.document.inference.prediction.mrz2.value
 ```
 
 ## Mrz Line 3
-**mrz3**([StringField](#string-field)): The Machine Readable Zone, third line.
+**mrz3** ([StringField](#string-field)): The Machine Readable Zone, third line.
 
 ```rb
 puts result.document.inference.prediction.mrz3.value
 ```
 
 ## Nationality
-**nationality**([StringField](#string-field)): The nationality of the card holder.
+**nationality** ([StringField](#string-field)): The nationality of the card holder.
 
 ```rb
 puts result.document.inference.prediction.nationality.value
 ```
 
 ## Surname
-**surname**([StringField](#string-field)): The surname of the card holder.
+**surname** ([StringField](#string-field)): The surname of the card holder.
 
 ```rb
 puts result.document.inference.prediction.surname.value

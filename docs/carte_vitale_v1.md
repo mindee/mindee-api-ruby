@@ -94,7 +94,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for Carte Vitale V1:
 
 ## Given Name(s)
-**given_names**(Array<[StringField](#string-field)>): The given name(s) of the card holder.
+**given_names** (Array<[StringField](#string-field)>): The given name(s) of the card holder.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -103,21 +103,21 @@ end
 ```
 
 ## Issuance Date
-**issuance_date**([DateField](#date-field)): The date the card was issued.
+**issuance_date** ([DateField](#date-field)): The date the card was issued.
 
 ```rb
 puts result.document.inference.prediction.issuance_date.value
 ```
 
 ## Social Security Number
-**social_security**([StringField](#string-field)): The Social Security Number (Numéro de Sécurité Sociale) of the card holder
+**social_security** ([StringField](#string-field)): The Social Security Number (Numéro de Sécurité Sociale) of the card holder
 
 ```rb
 puts result.document.inference.prediction.social_security.value
 ```
 
 ## Surname
-**surname**([StringField](#string-field)): The surname of the card holder.
+**surname** ([StringField](#string-field)): The surname of the card holder.
 
 ```rb
 puts result.document.inference.prediction.surname.value

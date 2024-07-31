@@ -97,7 +97,7 @@ The position field `PositionField` does not implement all the basic `Field` attr
 The following fields are extracted for Multi Receipts Detector V1:
 
 ## List of Receipts
-**receipts**(Array<[PositionField](#position-field)>): Positions of the receipts on the document.
+**receipts** (Array<[PositionField](#position-field)>): Positions of the receipts on the document.
 
 ```rb
 for receipts_elem in result.document.inference.prediction.receipts do

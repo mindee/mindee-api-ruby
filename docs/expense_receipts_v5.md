@@ -191,28 +191,28 @@ A `ReceiptV5LineItem` implements the following attributes:
 The following fields are extracted for Receipt V5:
 
 ## Purchase Category
-**category**([ClassificationField](#classification-field)): The purchase category among predefined classes.
+**category** ([ClassificationField](#classification-field)): The purchase category among predefined classes.
 
 ```rb
 puts result.document.inference.prediction.category.value
 ```
 
 ## Purchase Date
-**date**([DateField](#date-field)): The date the purchase was made.
+**date** ([DateField](#date-field)): The date the purchase was made.
 
 ```rb
 puts result.document.inference.prediction.date.value
 ```
 
 ## Document Type
-**document_type**([ClassificationField](#classification-field)): One of: 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
+**document_type** ([ClassificationField](#classification-field)): One of: 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
 
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
 
 ## Line Items
-**line_items**(Array<[ReceiptV5LineItem](#line-items-field)>): List of line item details.
+**line_items** (Array<[ReceiptV5LineItem](#line-items-field)>): List of line item details.
 
 ```rb
 for line_items_elem in result.document.inference.prediction.line_items do
@@ -221,35 +221,35 @@ end
 ```
 
 ## Expense Locale
-**locale**([LocaleField](#locale-field)): The locale detected on the document.
+**locale** ([LocaleField](#locale-field)): The locale detected on the document.
 
 ```rb
 puts result.document.inference.prediction.locale.value
 ```
 
 ## Receipt Number
-**receipt_number**([StringField](#string-field)): The receipt number or identifier.
+**receipt_number** ([StringField](#string-field)): The receipt number or identifier.
 
 ```rb
 puts result.document.inference.prediction.receipt_number.value
 ```
 
 ## Purchase Subcategory
-**subcategory**([ClassificationField](#classification-field)): The purchase subcategory among predefined classes for transport and food.
+**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory among predefined classes for transport and food.
 
 ```rb
 puts result.document.inference.prediction.subcategory.value
 ```
 
 ## Supplier Address
-**supplier_address**([StringField](#string-field)): The address of the supplier or merchant.
+**supplier_address** ([StringField](#string-field)): The address of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_address.value
 ```
 
 ## Supplier Company Registrations
-**supplier_company_registrations**(Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
+**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
 
 ```rb
 for supplier_company_registrations_elem in result.document.inference.prediction.supplier_company_registrations do
@@ -258,21 +258,21 @@ end
 ```
 
 ## Supplier Name
-**supplier_name**([StringField](#string-field)): The name of the supplier or merchant.
+**supplier_name** ([StringField](#string-field)): The name of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_name.value
 ```
 
 ## Supplier Phone Number
-**supplier_phone_number**([StringField](#string-field)): The phone number of the supplier or merchant.
+**supplier_phone_number** ([StringField](#string-field)): The phone number of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_phone_number.value
 ```
 
 ## Taxes
-**taxes**(Array<[TaxField](#taxes-field)>): List of tax lines information.
+**taxes** (Array<[TaxField](#taxes-field)>): List of tax lines information.
 
 ```rb
 for taxes_elem in result.document.inference.prediction.taxes do
@@ -281,35 +281,35 @@ end
 ```
 
 ## Purchase Time
-**time**([StringField](#string-field)): The time the purchase was made.
+**time** ([StringField](#string-field)): The time the purchase was made.
 
 ```rb
 puts result.document.inference.prediction.time.value
 ```
 
 ## Tip and Gratuity
-**tip**([AmountField](#amount-field)): The total amount of tip and gratuity.
+**tip** ([AmountField](#amount-field)): The total amount of tip and gratuity.
 
 ```rb
 puts result.document.inference.prediction.tip.value
 ```
 
 ## Total Amount
-**total_amount**([AmountField](#amount-field)): The total amount paid: includes taxes, discounts, fees, tips, and gratuity.
+**total_amount** ([AmountField](#amount-field)): The total amount paid: includes taxes, discounts, fees, tips, and gratuity.
 
 ```rb
 puts result.document.inference.prediction.total_amount.value
 ```
 
 ## Total Net
-**total_net**([AmountField](#amount-field)): The net amount paid: does not include taxes, fees, and discounts.
+**total_net** ([AmountField](#amount-field)): The net amount paid: does not include taxes, fees, and discounts.
 
 ```rb
 puts result.document.inference.prediction.total_net.value
 ```
 
 ## Total Tax
-**total_tax**([AmountField](#amount-field)): The total amount of taxes.
+**total_tax** ([AmountField](#amount-field)): The total amount of taxes.
 
 ```rb
 puts result.document.inference.prediction.total_tax.value

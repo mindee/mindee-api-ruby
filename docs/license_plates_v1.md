@@ -83,7 +83,7 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 The following fields are extracted for License Plate V1:
 
 ## License Plates
-**license_plates**(Array<[StringField](#string-field)>): List of all license plates found in the image.
+**license_plates** (Array<[StringField](#string-field)>): List of all license plates found in the image.
 
 ```rb
 for license_plates_elem in result.document.inference.prediction.license_plates do

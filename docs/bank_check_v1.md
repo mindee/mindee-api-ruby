@@ -116,28 +116,28 @@ Some fields are constrained to the page level, and so will not be retrievable at
 The following fields are extracted for Bank Check V1:
 
 ## Account Number
-**account_number**([StringField](#string-field)): The check payer's account number.
+**account_number** ([StringField](#string-field)): The check payer's account number.
 
 ```rb
 puts result.document.inference.prediction.account_number.value
 ```
 
 ## Amount
-**amount**([AmountField](#amount-field)): The amount of the check.
+**amount** ([AmountField](#amount-field)): The amount of the check.
 
 ```rb
 puts result.document.inference.prediction.amount.value
 ```
 
 ## Check Number
-**check_number**([StringField](#string-field)): The issuer's check number.
+**check_number** ([StringField](#string-field)): The issuer's check number.
 
 ```rb
 puts result.document.inference.prediction.check_number.value
 ```
 
 ## Check Position
-[📄](#page-level-fields "This field is only present on individual pages.")**check_position**([PositionField](#position-field)): The position of the check on the document.
+[📄](#page-level-fields "This field is only present on individual pages.")**check_position** ([PositionField](#position-field)): The position of the check on the document.
 
 ```rb
 for check_position_elem in result.document.check_position do
@@ -146,14 +146,14 @@ end
 ```
 
 ## Check Issue Date
-**date**([DateField](#date-field)): The date the check was issued.
+**date** ([DateField](#date-field)): The date the check was issued.
 
 ```rb
 puts result.document.inference.prediction.date.value
 ```
 
 ## Payees
-**payees**(Array<[StringField](#string-field)>): List of the check's payees (recipients).
+**payees** (Array<[StringField](#string-field)>): List of the check's payees (recipients).
 
 ```rb
 for payees_elem in result.document.inference.prediction.payees do
@@ -162,14 +162,14 @@ end
 ```
 
 ## Routing Number
-**routing_number**([StringField](#string-field)): The check issuer's routing number.
+**routing_number** ([StringField](#string-field)): The check issuer's routing number.
 
 ```rb
 puts result.document.inference.prediction.routing_number.value
 ```
 
 ## Signature Positions
-[📄](#page-level-fields "This field is only present on individual pages.")**signatures_positions**(Array<[PositionField](#position-field)>): List of signature positions
+[📄](#page-level-fields "This field is only present on individual pages.")**signatures_positions** (Array<[PositionField](#position-field)>): List of signature positions
 
 ```rb
 for page in result.document.inference.pages do
