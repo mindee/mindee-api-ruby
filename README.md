@@ -168,7 +168,7 @@ There's more to it than that for those that need more features, or want to
 customize the experience.
 
 * [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-* [Custom OCR Ruby](https://developers.mindee.com/docs/ruby-api-builder-ocr)
+* [Custom OCR Ruby (Deprecated)](https://developers.mindee.com/docs/ruby-api-builder-ocr)
 * [Generated API Ruby](https://developers.mindee.com/docs/generated-api-ruby)
 * [Invoice OCR Ruby](https://developers.mindee.com/docs/ruby-invoice-ocr)
 * [International Id OCR Ruby](https://developers.mindee.com/docs/ruby-international-id-ocr)
