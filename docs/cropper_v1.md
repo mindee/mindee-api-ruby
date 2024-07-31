@@ -1,5 +1,8 @@
 ---
 title: Cropper OCR Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-cropper-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Cropper API](https://platform.mindee.com/mindee/cropper).
 
@@ -24,6 +27,7 @@ result = mindee_client.parse(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
+
 ```
 
 **Output (RST):**
@@ -63,7 +67,7 @@ A typical `Field` object will have the following attributes:
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
-* **page_id** (`Integer`, `nil`): the ID of the page, is `nil` when at document-level.
+* **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
 * **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
@@ -77,7 +81,7 @@ The position field `PositionField` does not implement all the basic `Field` attr
 * **quadrangle** (`Mindee::Geometry::Quadrilateral`): a free polygon made up of four points.
 
 ## Page-Level Fields
-Some fields are constrained to the page level, and so will not be retrievable to through the document.
+Some fields are constrained to the page level, and so will not be retrievable at document level.
 
 # Attributes
 The following fields are extracted for Cropper V1:

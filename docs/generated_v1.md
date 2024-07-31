@@ -1,5 +1,8 @@
 ---
 title: Generated API Ruby
+category: 622b805aaec68102ea7fcbc2
+slug: ruby-generated-ocr
+parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports generated APIs.
 Generated APIs can theoretically support all APIs in a catch-all generic format.
