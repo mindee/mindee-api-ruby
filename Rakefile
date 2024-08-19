@@ -20,6 +20,11 @@ YARD::Rake::YardocTask.new(:doc) do |task|
   task.files = ['lib/**/*.rb']
 end
 
+desc 'Run integration tests'
+RSpec::Core::RakeTask.new(:integration) do |t|
+  t.pattern = 'spec/**/*_integration.rb'
+end
+
 Rake::Task[:doc].enhance do
   FileUtils.cp_r(
     File.join('docs', 'code_samples'),

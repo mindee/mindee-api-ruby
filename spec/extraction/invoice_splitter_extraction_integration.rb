@@ -2,6 +2,7 @@
 
 require 'mindee'
 require 'rspec'
+require_relative '../data'
 require_relative '../test_utilities'
 
 describe 'PDF Invoice Extraction (Strict Mode)' do
