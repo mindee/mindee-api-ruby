@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require_relative 'image_extraction/common'
-require_relative 'image_extraction/multi_receipts_extractor'
+require_relative 'image_extraction/'
+require_relative 'image_extraction/receipts_extractor'
