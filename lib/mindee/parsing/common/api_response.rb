@@ -103,7 +103,7 @@ module Mindee
         # @return [String]
         attr_reader :raw_http
 
-        # @param product_class [Class<Mindee::Product>]
+        # @param product_class [Mindee::Inference]
         # @param http_response [Hash]
         # @param raw_http [String]
         def initialize(product_class, http_response, raw_http)

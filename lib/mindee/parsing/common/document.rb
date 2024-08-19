@@ -27,7 +27,7 @@ module Mindee
           Ocr::Ocr.new(ocr_prediction)
         end
 
-        # @param product_class [Class<Mindee::Product>]
+        # @param product_class [Mindee::Inference]
         # @param http_response [Hash]
         def initialize(product_class, http_response)
           @id = http_response['id']

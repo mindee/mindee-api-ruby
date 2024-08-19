@@ -11,32 +11,29 @@ module Mindee
         if local_input.pdf?
           @source_pdf = local_input.io_stream
         else
-          pdf_image = attach_image_as_new_file(local_input.io_stream)
+          pdf_image = ImageExtraction.attach_image_as_new_file(local_input.io_stream)
           io_buffer = StringIO.new
           pdf_image.save(io_buffer)
 
-          @source_pdf = pdf_image
+          @source_pdf = io_buffer
         end
       end
 
       # Retrieves the page count for the Pdf object.
       # @return [Integer]
       def page_count
-        Origami::PDF.read(@source_pdf).pages.size
+        Mindee::PDF::PdfProcessor.open_pdf(@source_pdf).pages.size
       end
 
       # Creates a new Pdf from pages and save it into a buffer.
       # @param page_indexes [Array<Integer>] List of page number to use for merging in the original Pdf.
       # @return [StreamIO] The buffer containing the new Pdf.
       def cut_pages(page_indexes)
-        pdf = Origami::PDF.read(@source_pdf)
-        new_pdf = Origami::PDF.new
-        pdf.each_with_index do |page, index|
-          new_pdf.append_page(page) if page_indexes.include?(index)
-        end
-        buffer = StringIO.new
-        new_pdf.write(buffer)
-        buffer
+        options = {
+          page_indexes: page_indexes,
+        }
+
+        Mindee::PDF::PdfProcessor.parse(@source_pdf, options)
       end
 
       # Extract the sub-documents from the main pdf, based on the given list of page indexes.
@@ -45,14 +42,16 @@ module Mindee
       def extract_sub_documents(page_indexes)
         extracted_pdfs = []
         extension = File.extname(@filename)
-        basename = File.basename(@filename)
+        basename = File.basename(@filename, extension)
         page_indexes.each do |page_index_list|
-          raise "Empty indexes aren't allowed for extraction." if page_index_list.empty? || page_index_list.nil?
+          if page_index_list.empty? || page_index_list.nil?
+            raise "Empty indexes aren't allowed for extraction #{page_index_list}"
+          end
 
           page_index_list.each do |page_index|
             raise "Index #{page_index} is out of range." if (page_index > page_count) || page_index.negative?
           end
-          formatted_max_index = "#{format('%03d', page_index_list[page_index_list.length - 1] + 1)}.#{extension}"
+          formatted_max_index = format('%03d', page_index_list[page_index_list.length - 1] + 1).to_s
           field_filename = "#{basename}_#{format('%03d',
                                                  (page_index_list[0] + 1))}-#{formatted_max_index}#{extension}"
           extracted_pdf = ExtractedPdf.new(cut_pages(page_index_list), field_filename)
@@ -67,7 +66,9 @@ module Mindee
       # @return [Array<Mindee::PdfExtractor::ExtractedPdf>]
       def extract_invoices(page_indexes, strict: false)
         raise 'No indexes provided.' if page_indexes.empty?
-        return extract_sub_documents(page_indexes) if page_indexes[0].is_a?(InvoiceSplitterV1PageGroup)
+        unless page_indexes[0].is_a?(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup)
+          return extract_sub_documents(page_indexes)
+        end
         return extract_sub_documents(page_indexes.map(&:page_indexes)) unless strict
 
         correct_page_indexes = process_page_indexes(page_indexes)
@@ -87,6 +88,8 @@ module Mindee
 
           if confidence_sufficient?(confidence, previous_confidence)
             current_list = page_list
+          elsif confidence >= 0.5
+            current_list = handle_high_confidence(correct_page_indexes, current_list, page_list)
           elsif low_confidence_with_more_pages?(confidence, i, page_indexes)
             handle_low_confidence(correct_page_indexes, current_list, page_list)
           else
@@ -100,11 +103,16 @@ module Mindee
       end
 
       def confidence_sufficient?(confidence, previous_confidence)
-        confidence >= 0.5 && !previous_confidence.nil?
+        confidence >= 0.5 && previous_confidence.nil?
       end
 
       def low_confidence_with_more_pages?(confidence, current_index, page_indexes)
-        confidence < 0.5 && current_index < page_indexes.length - 1
+        confidence < 0.5 && current_index == page_indexes.length - 1
+      end
+
+      def handle_high_confidence(correct_page_indexes, current_list, page_list)
+        correct_page_indexes << current_list
+        page_list
       end
 
       def handle_low_confidence(correct_page_indexes, current_list, page_list)

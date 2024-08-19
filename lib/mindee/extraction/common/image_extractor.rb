@@ -10,7 +10,7 @@ require_relative 'extracted_image'
 module Mindee
   # Image Extraction Module.
   module ImageExtraction
-    def attach_image_as_new_file(input_buffer)
+    def self.attach_image_as_new_file(input_buffer)
       # Attaches an image as a new page in a PdfDocument object.
       #
       # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
@@ -24,9 +24,7 @@ module Mindee
       scale_factor = original_density[0].to_f / 4.166666 # No clue why bit the resolution needs to be reduced for
       # the pdf otherwise the resulting image shrinks.
       magick_image.format('pdf', 0, { density: scale_factor.to_s })
-      io_buffer = StringIO.new
-      magick_image.write(io_buffer)
-      Origami::PDF.read(io_buffer)
+      Origami::PDF.read(StringIO.new(magick_image.to_blob))
     end
 
     # Extracts multiple images from a given local input source.
