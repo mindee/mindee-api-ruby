@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'mindee'
 
 # Init a new client
