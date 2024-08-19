@@ -20,13 +20,13 @@ describe 'Invoice extraction' do
     jpg_input = Mindee::Input::Source::PathInputSource.new(invoice_default_sample_path)
     expect(jpg_input.pdf?).to eq(false)
 
-    extractor = Mindee::PdfExtractor::PdfExtractor.new(jpg_input)
+    extractor = Mindee::Extraction::PdfExtractor::PdfExtractor.new(jpg_input)
     expect(extractor.page_count).to eq(1)
   end
 
   it 'should extract invoices from a PDF (no strict mode)' do
     pdf_input = Mindee::Input::Source::PathInputSource.new(invoice_splitter_5p_path)
-    extractor = Mindee::PdfExtractor::PdfExtractor.new(pdf_input)
+    extractor = Mindee::Extraction::PdfExtractor::PdfExtractor.new(pdf_input)
 
     expect(extractor.page_count).to eq(5)
 
@@ -45,9 +45,10 @@ describe 'Invoice extraction' do
 
   it 'should extract invoices from a PDF (strict mode)' do
     pdf_input = Mindee::Input::Source::PathInputSource.new(invoice_splitter_5p_path)
-    extractor = Mindee::PdfExtractor::PdfExtractor.new(pdf_input)
+    extractor = Mindee::Extraction::PdfExtractor::PdfExtractor.new(pdf_input)
 
     expect(extractor.page_count).to eq(5)
+    expect(loaded_prediction.invoice_page_groups.length).to eq(3)
 
     extracted_pdfs_strict = extractor.extract_invoices(loaded_prediction.invoice_page_groups, strict: true)
 

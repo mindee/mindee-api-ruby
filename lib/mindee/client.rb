@@ -59,8 +59,8 @@ module Mindee
 
     # Enqueue a document for async parsing
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     # @param product_class [Mindee::Inference] class of the product
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     # Doesn't need to be set in the case of OTS APIs.
     #
