@@ -1,7 +1,7 @@
 ---
 title: FR Bank Statement (FR) OCR Ruby
 category: 622b805aaec68102ea7fcbc2
-slug: ruby-us-bank-check-ocr
+slug: ruby-fr-bank-statement-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Bank Statement (FR) API](https://platform.mindee.com/mindee/bank_statement_fr).
