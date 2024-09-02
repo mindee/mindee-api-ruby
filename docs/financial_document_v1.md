@@ -269,6 +269,16 @@ puts result.document.inference.prediction.billing_address.value
 ## Purchase Category
 **category** ([ClassificationField](#classification-field)): The purchase category among predefined classes.
 
+> Possible values include:
+> - toll
+> - food
+> - parking
+> - transport
+> - accommodation
+> - gasoline
+> - telecom
+> - miscellaneous
+
 ```rb
 puts result.document.inference.prediction.category.value
 ```
@@ -319,6 +329,12 @@ puts result.document.inference.prediction.document_number.value
 
 ## Document Type
 **document_type** ([ClassificationField](#classification-field)): One of: 'INVOICE', 'CREDIT NOTE', 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
+
+> Possible values include:
+> - INVOICE
+> - CREDIT NOTE
+> - CREDIT CARD RECEIPT
+> - EXPENSE RECEIPT
 
 ```rb
 puts result.document.inference.prediction.document_type.value
@@ -379,6 +395,13 @@ puts result.document.inference.prediction.shipping_address.value
 
 ## Purchase Subcategory
 **subcategory** ([ClassificationField](#classification-field)): The purchase subcategory among predefined classes for transport and food.
+
+> Possible values include:
+> - plane
+> - taxi
+> - train
+> - restaurant
+> - shopping
 
 ```rb
 puts result.document.inference.prediction.subcategory.value

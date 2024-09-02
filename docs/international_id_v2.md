@@ -141,6 +141,14 @@ puts result.document.inference.prediction.document_number.value
 ## Document Type
 **document_type** ([ClassificationField](#classification-field)): The type of personal identification document.
 
+> Possible values include:
+> - IDENTIFICATION_CARD
+> - PASSPORT
+> - DRIVER_LICENSE
+> - VISA
+> - RESIDENCY_CARD
+> - VOTER_REGISTRATION
+
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
