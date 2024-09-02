@@ -29,7 +29,7 @@ module Mindee
 
       # Invoice Splitter V1 document prediction.
       class InvoiceSplitterV1Document < Mindee::Parsing::Common::Prediction
-        # @return[Array<Mindee::Product::InvoiceSplitterV1PageGroup>]
+        # @return[Array<Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup>]
         attr_reader :invoice_page_groups
 
         # @param prediction [Hash]

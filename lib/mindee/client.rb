@@ -17,7 +17,7 @@ module Mindee
     # Call prediction API on a document and parse the results.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param product_class [Mindee::Product] class of the product
+    # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [HTTP::Endpoint] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -59,8 +59,8 @@ module Mindee
 
     # Enqueue a document for async parsing
     #
+    # @param product_class [Mindee::Inference] class of the product
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param product_class [Mindee::Product] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -104,7 +104,7 @@ module Mindee
     # Parses a queued document
     #
     # @param job_id [String] Id of the job (queue) to poll from
-    # @param product_class [Mindee::Product] class of the product
+    # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
     #
@@ -123,7 +123,7 @@ module Mindee
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param product_class [Mindee::Product] class of the product
+    # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
     #   Doesn't need to be set in the case of OTS APIs.
     # @param all_words [Boolean] Whether to extract all the words on each page.
@@ -184,7 +184,7 @@ module Mindee
 
     # Load a prediction.
     #
-    # @param product_class [Mindee::Product] class of the product
+    # @param product_class [Mindee::Inference] class of the product
     # @param local_response [Mindee::Input::LocalResponse]
     # @return [Mindee::Parsing::Common::ApiResponse]
     def load_prediction(product_class, local_response)
@@ -269,7 +269,7 @@ module Mindee
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
-    # @param product_class [Mindee::Product] class of the product
+    # @param product_class [Mindee::Inference] class of the product
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.
