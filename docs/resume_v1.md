@@ -170,11 +170,11 @@ A `ResumeV1Language` implements the following attributes:
 * `language` (String): The language's ISO 639 code.
 * `level` (String): The candidate's level for the language.
 
-> Possible values include:
-> - Fluent
-> - Proficient
-> - Intermediate
-> - Beginner
+#### Possible values include:
+ - Fluent
+ - Proficient
+ - Intermediate
+ - Beginner
 
 Fields which are specific to this product; they are not used in any other product.
 
@@ -185,11 +185,11 @@ A `ResumeV1ProfessionalExperience` implements the following attributes:
 
 * `contract_type` (String): The type of contract for the professional experience.
 
-> Possible values include:
-> - Full-Time
-> - Part-Time
-> - Internship
-> - Freelance
+#### Possible values include:
+ - Full-Time
+ - Part-Time
+ - Internship
+ - Freelance
 
 * `department` (String): The specific department or division within the company.
 * `employer` (String): The name of the company or organization.
@@ -237,10 +237,10 @@ puts result.document.inference.prediction.document_language.value
 ## Document Type
 **document_type** ([ClassificationField](#classification-field)): The type of the document sent.
 
-> Possible values include:
-> - RESUME
-> - MOTIVATION_LETTER
-> - RECOMMENDATION_LETTER
+#### Possible values include:
+ - RESUME
+ - MOTIVATION_LETTER
+ - RECOMMENDATION_LETTER
 
 ```rb
 puts result.document.inference.prediction.document_type.value
