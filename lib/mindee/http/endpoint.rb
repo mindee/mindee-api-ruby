@@ -48,12 +48,19 @@ module Mindee
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Array]
-      def predict(input_source, all_words, close_file, cropper)
+      def predict(input_source, all_words, full_text, close_file, cropper)
         check_api_key
-        response = predict_req_post(input_source, all_words: all_words, close_file: close_file, cropper: cropper)
+        response = predict_req_post(
+          input_source,
+          all_words: all_words,
+          full_text: full_text,
+          close_file: close_file,
+          cropper: cropper
+        )
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if ResponseValidation.valid_sync_response?(response)
 
@@ -65,12 +72,13 @@ module Mindee
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Array]
-      def predict_async(input_source, all_words, close_file, cropper)
+      def predict_async(input_source, all_words, full_text, close_file, cropper)
         check_api_key
-        response = document_queue_req_get(input_source, all_words, close_file, cropper)
+        response = document_queue_req_get(input_source, all_words, full_text, close_file, cropper)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
@@ -97,10 +105,11 @@ module Mindee
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Net::HTTPResponse, nil]
-      def predict_req_post(input_source, all_words: false, close_file: true, cropper: false)
+      def predict_req_post(input_source, all_words: false, full_text: false, close_file: true, cropper: false)
         uri = URI("#{@url_root}/predict")
 
         params = {}
@@ -118,6 +127,7 @@ module Mindee
                       [input_source.read_document(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
+        form_data.push ['full_text_ocr', 'true'] if full_text
 
         req.set_form(form_data, 'multipart/form-data')
         response = nil
@@ -129,10 +139,11 @@ module Mindee
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
       # @param close_file [Boolean] Whether the file will be closed after reading
       # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Net::HTTPResponse, nil]
-      def document_queue_req_get(input_source, all_words, close_file, cropper)
+      def document_queue_req_get(input_source, all_words, full_text, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
 
         params = {}
@@ -150,6 +161,7 @@ module Mindee
                       [input_source.read_document(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
+        form_data.push ['full_text_ocr', 'true'] if full_text
 
         req.set_form(form_data, 'multipart/form-data')
 
