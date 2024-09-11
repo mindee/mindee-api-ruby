@@ -45,11 +45,6 @@ module Mindee
       def size
         4
       end
-
-      # A quadrilateral has four corners, always.
-      def count
-        4
-      end
     end
   end
 end

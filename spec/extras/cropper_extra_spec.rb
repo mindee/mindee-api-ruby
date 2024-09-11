@@ -31,9 +31,9 @@ describe 'cropper extra do' do
       expect(cropping.bounding_box[3].x).to be_within(0.001).of(0.057)
       expect(cropping.bounding_box[3].y).to be_within(0.001).of(1.0)
 
-      expect(cropping.polygon.count).to eq(24)
-      expect(cropping.quadrangle.count).to eq(4)
-      expect(cropping.rectangle.count).to eq(4)
+      expect(cropping.polygon.size).to eq(24)
+      expect(cropping.quadrangle.size).to eq(4)
+      expect(cropping.rectangle.size).to eq(4)
     end
   end
 end
