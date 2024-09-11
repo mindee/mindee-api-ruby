@@ -2,9 +2,7 @@
 
 require 'json'
 require 'rspec'
-require_relative '../data'
-
-EXTRAS_DIR = File.join(DATA_DIR, 'extras').freeze
+require_relative 'extras_utils'
 
 # NOTE: Implementing extras per pages without content (like the Java library)
 # would be a breaking change for the Ruby SDK.

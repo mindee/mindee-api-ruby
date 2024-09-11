@@ -14,8 +14,8 @@ module Mindee
 
           def initialize(raw_prediction, page_id = nil)
             @croppings = []
-            raw_prediction['croppings']&.each do |crop|
-              @croppings.push(PositionField.new(crop, page_id))
+            raw_prediction['cropping']&.each do |crop|
+              @croppings.push(Mindee::Parsing::Standard::PositionField.new(crop, page_id))
             end
           end
 
