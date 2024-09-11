@@ -2,7 +2,6 @@
 
 require 'json'
 require 'rspec'
-require 'mindee'
 require_relative '../data'
 
 EXTRAS_DIR = File.join(DATA_DIR, 'extras').freeze

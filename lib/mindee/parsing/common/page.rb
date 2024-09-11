@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'product'
+require_relative 'extras'
 
 module Mindee
   module Parsing
@@ -18,11 +19,15 @@ module Mindee
         # Page prediction
         # @return [Mindee::Parsing::Common::Prediction]
         attr_reader :prediction
+        # Additional page-level information.
+        # @return [Mindee::Parsing::Common::Extras::Extras]
+        attr_reader :extras
 
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)
           @page_id = raw_prediction['id']
           @orientation = Orientation.new(raw_prediction['orientation'], @page_id)
+          @extras = Extras::Extras.new(raw_prediction['extras']) unless raw_prediction['extras'].nil?
         end
 
         # @return [String]
