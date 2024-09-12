@@ -24,6 +24,9 @@ module Mindee
     # @param all_words [Boolean] Whether to include the full text for each page.
     #  This performs a full OCR operation on the server and will increase response time.
     #
+    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #  This performs a full OCR operation on the server and may increase response time.
+    #
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #  Set to false if you need to access the file after this operation.
     #
@@ -45,6 +48,7 @@ module Mindee
       product_class,
       endpoint: nil,
       all_words: false,
+      full_text: false,
       close_file: true,
       page_options: nil,
       cropper: false
@@ -53,7 +57,7 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      prediction, raw_http = endpoint.predict(input_source, all_words, close_file, cropper)
+      prediction, raw_http = endpoint.predict(input_source, all_words, full_text, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
@@ -66,6 +70,9 @@ module Mindee
     #
     # @param all_words [Boolean] Whether to extract all the words on each page.
     #  This performs a full OCR operation on the server and will increase response time.
+    #
+    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #  This performs a full OCR operation on the server and may increase response time.
     #
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #  Set to false if you need to access the file after this operation.
@@ -88,6 +95,7 @@ module Mindee
       product_class,
       endpoint: nil,
       all_words: false,
+      full_text: false,
       close_file: true,
       page_options: nil,
       cropper: false
@@ -96,7 +104,7 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-      prediction, raw_http = endpoint.predict_async(input_source, all_words, close_file, cropper)
+      prediction, raw_http = endpoint.predict_async(input_source, all_words, full_text, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class,
                                                prediction, raw_http)
     end
@@ -128,6 +136,8 @@ module Mindee
     #   Doesn't need to be set in the case of OTS APIs.
     # @param all_words [Boolean] Whether to extract all the words on each page.
     #   This performs a full OCR operation on the server and will increase response time.
+    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #  This performs a full OCR operation on the server and may increase response time.
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #   Set to false if you need to access the file after this operation.
     # @param page_options [Hash, nil] Page cutting/merge options:
@@ -147,6 +157,7 @@ module Mindee
       product_class,
       endpoint: nil,
       all_words: false,
+      full_text: false,
       close_file: true,
       page_options: nil,
       cropper: false,
@@ -159,6 +170,7 @@ module Mindee
         product_class,
         endpoint: endpoint,
         all_words: all_words,
+        full_text: full_text,
         close_file: close_file,
         page_options: page_options,
         cropper: cropper
