@@ -31,7 +31,7 @@ module Mindee
         end
 
         def self.load_extras(http_response)
-          extras_prediction = http_response.fetch('extras', nil)
+          extras_prediction = http_response['inference'].fetch('extras', nil)
           return nil if extras_prediction.nil? || extras_prediction.fetch('mvision-v1', nil).nil?
 
           Extras::Extras::Extras.new(extras_prediction)
