@@ -1,5 +1,14 @@
 # Mindee Ruby API Library Changelog
 
+## v3.13.0 - 2024-09-12
+### Changes
+* :sparkles: add support for cropper extra
+* :sparkles: add support for full text ocr extra
+* :sparkles: add support for invoice auto-extraction
+### Fixes
+* :memo: fix outdated documentation
+
+
 ## v3.12.0 - 2024-07-24
 ### Changes
 * :sparkles: add support for Multi-Receipts Extraction
