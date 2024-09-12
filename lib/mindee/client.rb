@@ -25,7 +25,7 @@ module Mindee
     #  This performs a full OCR operation on the server and will increase response time.
     #
     # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and will increase response time.
+    #  This performs a full OCR operation on the server and may increase response time.
     #
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #  Set to false if you need to access the file after this operation.
@@ -72,7 +72,7 @@ module Mindee
     #  This performs a full OCR operation on the server and will increase response time.
     #
     # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and will increase response time.
+    #  This performs a full OCR operation on the server and may increase response time.
     #
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #  Set to false if you need to access the file after this operation.
@@ -137,7 +137,7 @@ module Mindee
     # @param all_words [Boolean] Whether to extract all the words on each page.
     #   This performs a full OCR operation on the server and will increase response time.
     # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and will increase response time.
+    #  This performs a full OCR operation on the server and may increase response time.
     # @param close_file [Boolean] Whether to `close()` the file after parsing it.
     #   Set to false if you need to access the file after this operation.
     # @param page_options [Hash, nil] Page cutting/merge options:
