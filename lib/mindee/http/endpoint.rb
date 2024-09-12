@@ -202,9 +202,9 @@ module Mindee
         return unless @api_key.nil? || @api_key.empty?
 
         raise "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
-                "check your Client Configuration.\n" \
-                'You can set this using the ' \
-                "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
+              "check your Client Configuration.\n" \
+              'You can set this using the ' \
+              "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end
   end
