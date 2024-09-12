@@ -4,7 +4,7 @@ require 'json'
 require 'mindee'
 require_relative 'extras_utils'
 
-describe 'cropper extra do' do
+describe 'cropper extra' do
   let(:cropper_dir) do
     File.join(EXTRAS_DIR, 'cropper')
   end

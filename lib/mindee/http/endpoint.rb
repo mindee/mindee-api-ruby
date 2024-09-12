@@ -114,6 +114,7 @@ module Mindee
 
         params = {}
         params[:cropper] = 'true' if cropper
+        params[:full_text_ocr] = 'true' if full_text
         uri.query = URI.encode_www_form(params)
 
         headers = {
@@ -127,7 +128,6 @@ module Mindee
                       [input_source.read_document(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
-        form_data.push ['full_text_ocr', 'true'] if full_text
 
         req.set_form(form_data, 'multipart/form-data')
         response = nil
@@ -148,6 +148,7 @@ module Mindee
 
         params = {}
         params[:cropper] = 'true' if cropper
+        params[:full_text_ocr] = 'true' if full_text
         uri.query = URI.encode_www_form(params)
 
         headers = {
@@ -161,7 +162,6 @@ module Mindee
                       [input_source.read_document(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
-        form_data.push ['full_text_ocr', 'true'] if full_text
 
         req.set_form(form_data, 'multipart/form-data')
 
@@ -202,9 +202,9 @@ module Mindee
         return unless @api_key.nil? || @api_key.empty?
 
         raise "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
-              "check your Client Configuration.\n" \
-              'You can set this using the ' \
-              "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
+                "check your Client Configuration.\n" \
+                'You can set this using the ' \
+                "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end
   end

@@ -70,6 +70,7 @@ module Mindee
           @country_of_issue = StringField.new(prediction['country_of_issue'], page_id)
           @document_number = StringField.new(prediction['document_number'], page_id)
           @document_type = ClassificationField.new(prediction['document_type'], page_id)
+          puts prediction['expiry_date']
           @expiry_date = DateField.new(prediction['expiry_date'], page_id)
           @given_names = []
           prediction['given_names'].each do |item|
