@@ -32,8 +32,10 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:accrued_this_period] = @accrued_this_period.nil? ? '' : Field.float_to_string(@accrued_this_period)
-            printable[:balance_end_of_period] = @balance_end_of_period.nil? ? '' : Field.float_to_string(@balance_end_of_period)
+            printable[:accrued_this_period] =
+              @accrued_this_period.nil? ? '' : Field.float_to_string(@accrued_this_period)
+            printable[:balance_end_of_period] =
+              @balance_end_of_period.nil? ? '' : Field.float_to_string(@balance_end_of_period)
             printable[:used_this_period] = @used_this_period.nil? ? '' : Field.float_to_string(@used_this_period)
             printable
           end
@@ -41,8 +43,10 @@ module Mindee
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:accrued_this_period] = @accrued_this_period.nil? ? '' : Field.float_to_string(@accrued_this_period)
-            printable[:balance_end_of_period] = @balance_end_of_period.nil? ? '' : Field.float_to_string(@balance_end_of_period)
+            printable[:accrued_this_period] =
+              @accrued_this_period.nil? ? '' : Field.float_to_string(@accrued_this_period)
+            printable[:balance_end_of_period] =
+              @balance_end_of_period.nil? ? '' : Field.float_to_string(@balance_end_of_period)
             printable[:used_this_period] = @used_this_period.nil? ? '' : Field.float_to_string(@used_this_period)
             printable
           end
