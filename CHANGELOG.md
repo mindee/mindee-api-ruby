@@ -1,5 +1,23 @@
 # Mindee Ruby API Library Changelog
 
+## v3.13.0 - 2024-09-18
+### Changes
+* :sparkles: add support for BillOfLadingV1
+* :sparkles: add support for (US) UsMailV2
+* :sparkles: add support for (FR) EnergyBillV1
+* :sparkles: add support for (FR) PayslipV1
+* :sparkles: add support for NutritionFactsLabelV1
+* :sparkles: add support for cropper Extra
+* :sparkles: add support for full text Extra
+* :sparkles: add support for invoice splitter auto-extraction
+
+### Fixes
+* :bug: fixed a bug that prevented longer decimals from appearing in the string representation of some objects
+* :bug: fixed a bug that caused non-table elements to unexpectedly appear truncated when printed to the console
+* :memo: fix a few documentation errors & typos
+* :wrench: updated CI dependencies
+
+
 ## v3.12.0 - 2024-07-24
 ### Changes
 * :sparkles: add support for Multi-Receipts Extraction
