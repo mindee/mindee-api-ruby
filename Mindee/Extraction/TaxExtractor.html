@@ -6,7 +6,7 @@
 <title>
   Class: Mindee::Extraction::TaxExtractor
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.37
   
 </title>
 
@@ -96,7 +96,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/extraction/tax_extractor.rb</dd>
+    <dd>lib/mindee/extraction/tax_extractor/tax_extractor.rb</dd>
   </dl>
   
 </div>
@@ -295,7 +295,7 @@
 162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/extraction/tax_extractor.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/extraction/tax_extractor/tax_extractor.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extract_custom_tax'>extract_custom_tax</span><span class='lparen'>(</span><span class='id identifier rubyid_ocr_result'>ocr_result</span><span class='comma'>,</span> <span class='id identifier rubyid_tax_names'>tax_names</span><span class='comma'>,</span> <span class='id identifier rubyid_min_rate_percentage'>min_rate_percentage</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_max_rate_percentage'>max_rate_percentage</span> <span class='op'>=</span> <span class='int'>100</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_ocr_result'>ocr_result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Parsing/Common/Ocr.html" title="Mindee::Parsing::Common::Ocr (module)">Ocr</a></span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_tax_names'>tax_names</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -323,9 +323,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul 25 15:50:20 2024 by
+  Generated on Wed Sep 18 13:19:10 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.1.6).
+  0.9.37 (ruby-3.1.6).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Class: Mindee::HTTP::Endpoint
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.37
   
 </title>
 
@@ -264,7 +264,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#predict-instance_method" title="#predict (instance method)">#<strong>predict</strong>(input_source, all_words, close_file, cropper)  &#x21d2; Array </a>
+      <a href="#predict-instance_method" title="#predict (instance method)">#<strong>predict</strong>(input_source, all_words, full_text, close_file, cropper)  &#x21d2; Array </a>
     
 
     
@@ -288,7 +288,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#predict_async-instance_method" title="#predict_async (instance method)">#<strong>predict_async</strong>(input_source, all_words, close_file, cropper)  &#x21d2; Array </a>
+      <a href="#predict_async-instance_method" title="#predict_async (instance method)">#<strong>predict_async</strong>(input_source, all_words, full_text, close_file, cropper)  &#x21d2; Array </a>
     
 
     
@@ -596,19 +596,19 @@
       <pre class="lines">
 
 
-85
-86
-87
-88
-89
-90
-91
-92
 93
-94</pre>
+94
+95
+96
+97
+98
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -628,7 +628,7 @@
       <div class="method_details ">
   <h3 class="signature " id="predict-instance_method">
   
-    #<strong>predict</strong>(input_source, all_words, close_file, cropper)  &#x21d2; <tt>Array</tt> 
+    #<strong>predict</strong>(input_source, all_words, full_text, close_file, cropper)  &#x21d2; <tt>Array</tt> 
   
 
   
@@ -669,6 +669,22 @@
         &mdash;
         <div class='inline'>
 <p>Whether the full word extraction needs to be performed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>full_text</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to include the full OCR text response in compatible APIs</p>
 </div>
       
     </li>
@@ -727,7 +743,6 @@
       <pre class="lines">
 
 
-54
 55
 56
 57
@@ -736,14 +751,27 @@
 60
 61
 62
-63</pre>
+63
+64
+65
+66
+67
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 55</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_predict'>predict</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_predict'>predict</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
-  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_predict_req_post'>predict_req_post</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='label'>all_words:</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='label'>close_file:</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='label'>cropper:</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_predict_req_post'>predict_req_post</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+    <span class='label'>all_words:</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span>
+    <span class='label'>full_text:</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span>
+    <span class='label'>close_file:</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span>
+    <span class='label'>cropper:</span> <span class='id identifier rubyid_cropper'>cropper</span>
+  <span class='rparen'>)</span>
   <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_sync_response?'><span class='object_link'><a href="ResponseValidation.html#valid_sync_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_sync_response? (method)">valid_sync_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
 
@@ -759,7 +787,7 @@
       <div class="method_details ">
   <h3 class="signature " id="predict_async-instance_method">
   
-    #<strong>predict_async</strong>(input_source, all_words, close_file, cropper)  &#x21d2; <tt>Array</tt> 
+    #<strong>predict_async</strong>(input_source, all_words, full_text, close_file, cropper)  &#x21d2; <tt>Array</tt> 
   
 
   
@@ -800,6 +828,22 @@
         &mdash;
         <div class='inline'>
 <p>Whether the full word extraction needs to be performed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>full_text</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to include the full OCR text response in compatible APIs.</p>
 </div>
       
     </li>
@@ -858,23 +902,23 @@
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 79</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
-  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_document_queue_req_get'>document_queue_req_get</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_document_queue_req_get'>document_queue_req_get</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_async_response?'><span class='object_link'><a href="ResponseValidation.html#valid_async_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_async_response? (method)">valid_async_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
 
@@ -892,9 +936,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul 25 15:50:19 2024 by
+  Generated on Wed Sep 18 13:19:07 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.1.6).
+  0.9.37 (ruby-3.1.6).
 </div>
 
     </div>

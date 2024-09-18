@@ -6,7 +6,7 @@
 <title>
   Class: Mindee::Parsing::Common::Document
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.37
   
 </title>
 
@@ -116,6 +116,35 @@
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extras-instance_method" title="#extras (instance method)">#<strong>extras</strong>  &#x21d2; Mindee::Parsing::Common::Extras::Extras </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Potential Extras fields sent back along the prediction.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -276,6 +305,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#load_extras-class_method" title="load_extras (class method)">.<strong>load_extras</strong>(http_response)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#load_ocr-class_method" title="load_ocr (class method)">.<strong>load_ocr</strong>(http_response)  &#x21d2; Mindee::Parsing::Common::Ocr::Ocr </a>
     
 
@@ -384,7 +435,7 @@
         <span class='name'>product_class</span>
       
       
-        <span class='type'>(<tt>Class&lt;<span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Mindee::Product</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Mindee::Inference</tt>)</span>
       
       
       
@@ -410,22 +461,26 @@
       <pre class="lines">
 
 
-32
-33
-34
-35
-36
-37
-38</pre>
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='rparen'>)</span>
   <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@name</span> <span class='op'>=</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@inference</span> <span class='op'>=</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>inference</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@ocr</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_load_ocr'>load_ocr</span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='rparen'>)</span>
+  <span class='ivar'>@extras</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_load_extras'>load_extras</span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_inject_full_text_ocr'>inject_full_text_ocr</span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='rparen'>)</span>
   <span class='ivar'>@n_pages</span> <span class='op'>=</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>n_pages</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -441,7 +496,68 @@
       
       <span id=""></span>
       <div class="method_details first">
-  <h3 class="signature first" id="id-instance_method">
+  <h3 class="signature first" id="extras-instance_method">
+  
+    #<strong>extras</strong>  &#x21d2; <tt><span class='object_link'><a href="Extras/Extras.html" title="Mindee::Parsing::Common::Extras::Extras (class)">Mindee::Parsing::Common::Extras::Extras</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Potential Extras fields sent back along the prediction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Extras/Extras.html" title="Mindee::Parsing::Common::Extras::Extras (class)">Mindee::Parsing::Common::Extras::Extras</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Potential Extras fields sent back along the prediction.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_extras'>extras</span>
+  <span class='ivar'>@extras</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="id-instance_method">
   
     #<strong>id</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
   
@@ -484,12 +600,12 @@
       <pre class="lines">
 
 
-15
 16
-17</pre>
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
   <span class='ivar'>@id</span>
@@ -538,12 +654,12 @@
       <pre class="lines">
 
 
-11
 12
-13</pre>
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inference'>inference</span>
   <span class='ivar'>@inference</span>
@@ -599,12 +715,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_n_pages'>n_pages</span>
   <span class='ivar'>@n_pages</span>
@@ -660,12 +776,12 @@
       <pre class="lines">
 
 
-13
 14
-15</pre>
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@name</span>
@@ -721,12 +837,12 @@
       <pre class="lines">
 
 
-17
-18
-19</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ocr'>ocr</span>
   <span class='ivar'>@ocr</span>
@@ -744,7 +860,43 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="load_ocr-class_method">
+  <h3 class="signature first" id="load_extras-class_method">
+  
+    .<strong>load_extras</strong>(http_response)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_load_extras'>load_extras</span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_extras_prediction'>extras_prediction</span> <span class='op'>=</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>inference</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>extras</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_extras_prediction'>extras_prediction</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_extras_prediction'>extras_prediction</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mvision-v1</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='const'><span class='object_link'><a href="Extras.html" title="Mindee::Parsing::Common::Extras (module)">Extras</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Extras/Extras.html" title="Mindee::Parsing::Common::Extras::Extras (class)">Extras</a></span></span><span class='op'>::</span><span class='const'>Extras</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_extras_prediction'>extras_prediction</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_ocr-class_method">
   
     .<strong>load_ocr</strong>(http_response)  &#x21d2; <tt><span class='object_link'><a href="Ocr/Ocr.html" title="Mindee::Parsing::Common::Ocr::Ocr (class)">Mindee::Parsing::Common::Ocr::Ocr</a></span></tt> 
   
@@ -795,15 +947,15 @@
       <pre class="lines">
 
 
-23
-24
-25
 26
 27
-28</pre>
+28
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_load_ocr'>load_ocr</span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_ocr_prediction'>ocr_prediction</span> <span class='op'>=</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ocr</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
@@ -859,16 +1011,16 @@
       <pre class="lines">
 
 
-41
-42
-43
-44
-45
-46
-47</pre>
+53
+54
+55
+56
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/document.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -887,9 +1039,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jul 25 15:50:20 2024 by
+  Generated on Wed Sep 18 13:19:07 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.1.6).
+  0.9.37 (ruby-3.1.6).
 </div>
 
     </div>
