@@ -1,0 +1,64 @@
+# frozen_string_literal: true
+
+require_relative '../../../parsing'
+
+module Mindee
+  module Product
+    module FR
+      module EnergyBill
+        # Information about the energy meter.
+        class EnergyBillV1MeterDetail < Mindee::Parsing::Standard::FeatureField
+          include Mindee::Parsing::Standard
+          # The unique identifier of the energy meter.
+          # @return [String]
+          attr_reader :meter_number
+          # The type of energy meter.
+          # @return [String]
+          attr_reader :meter_type
+          # The unit of measurement for energy consumption, which can be kW, m³, or L.
+          # @return [String]
+          attr_reader :unit
+
+          # @param prediction [Hash]
+          # @param page_id [Integer, nil]
+          def initialize(prediction, page_id)
+            super(prediction, page_id)
+            @meter_number = prediction['meter_number']
+            @meter_type = prediction['meter_type']
+            @unit = prediction['unit']
+            @page_id = page_id
+          end
+
+          # @return [Hash]
+          def printable_values
+            printable = {}
+            printable[:meter_number] = format_for_display(@meter_number, nil)
+            printable[:meter_type] = format_for_display(@meter_type, nil)
+            printable[:unit] = format_for_display(@unit, nil)
+            printable
+          end
+
+          # @return [String]
+          def to_table_line
+            printable = printable_values
+            out_str = String.new
+            out_str << format('| %- 13s', printable[:meter_number])
+            out_str << format('| %- 11s', printable[:meter_type])
+            out_str << format('| %- 16s', printable[:unit])
+            out_str << '|'
+          end
+
+          # @return [String]
+          def to_s
+            printable = printable_values
+            out_str = String.new
+            out_str << "\n  :Meter Number: #{printable[:meter_number]}"
+            out_str << "\n  :Meter Type: #{printable[:meter_type]}"
+            out_str << "\n  :Unit of Measure: #{printable[:unit]}"
+            out_str
+          end
+        end
+      end
+    end
+  end
+end
