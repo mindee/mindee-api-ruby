@@ -29,13 +29,21 @@ module Mindee
           def printable_values
             printable = {}
             printable[:service_fees] = @service_fees.nil? ? '' : Field.float_to_string(@service_fees)
+            printable[:service_name] = format_for_display(@service_name)
+            printable
+          end
+
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
+            printable[:service_fees] = @service_fees.nil? ? '' : Field.float_to_string(@service_fees)
             printable[:service_name] = format_for_display(@service_name, nil)
             printable
           end
 
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 13s', printable[:service_fees])
             out_str << format('| %- 13s', printable[:service_name])

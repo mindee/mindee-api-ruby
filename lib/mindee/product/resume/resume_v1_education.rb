@@ -47,6 +47,19 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
+          printable[:degree_domain] = format_for_display(@degree_domain)
+          printable[:degree_type] = format_for_display(@degree_type)
+          printable[:end_month] = format_for_display(@end_month)
+          printable[:end_year] = format_for_display(@end_year)
+          printable[:school] = format_for_display(@school)
+          printable[:start_month] = format_for_display(@start_month)
+          printable[:start_year] = format_for_display(@start_year)
+          printable
+        end
+
+        # @return [Hash]
+        def table_printable_values
+          printable = {}
           printable[:degree_domain] = format_for_display(@degree_domain, 15)
           printable[:degree_type] = format_for_display(@degree_type, 25)
           printable[:end_month] = format_for_display(@end_month, nil)
@@ -59,7 +72,7 @@ module Mindee
 
         # @return [String]
         def to_table_line
-          printable = printable_values
+          printable = table_printable_values
           out_str = String.new
           out_str << format('| %- 16s', printable[:degree_domain])
           out_str << format('| %- 26s', printable[:degree_type])

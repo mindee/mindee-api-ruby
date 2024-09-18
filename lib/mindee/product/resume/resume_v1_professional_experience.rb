@@ -51,6 +51,20 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
+          printable[:contract_type] = format_for_display(@contract_type)
+          printable[:department] = format_for_display(@department)
+          printable[:employer] = format_for_display(@employer)
+          printable[:end_month] = format_for_display(@end_month)
+          printable[:end_year] = format_for_display(@end_year)
+          printable[:role] = format_for_display(@role)
+          printable[:start_month] = format_for_display(@start_month)
+          printable[:start_year] = format_for_display(@start_year)
+          printable
+        end
+
+        # @return [Hash]
+        def table_printable_values
+          printable = {}
           printable[:contract_type] = format_for_display(@contract_type, 15)
           printable[:department] = format_for_display(@department, 10)
           printable[:employer] = format_for_display(@employer, 25)
@@ -64,7 +78,7 @@ module Mindee
 
         # @return [String]
         def to_table_line
-          printable = printable_values
+          printable = table_printable_values
           out_str = String.new
           out_str << format('| %- 16s', printable[:contract_type])
           out_str << format('| %- 11s', printable[:department])

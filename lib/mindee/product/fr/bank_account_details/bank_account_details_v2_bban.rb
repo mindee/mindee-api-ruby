@@ -36,22 +36,11 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:bban_bank_code] = format_for_display(@bban_bank_code, nil)
-            printable[:bban_branch_code] = format_for_display(@bban_branch_code, nil)
-            printable[:bban_key] = format_for_display(@bban_key, nil)
-            printable[:bban_number] = format_for_display(@bban_number, nil)
+            printable[:bban_bank_code] = format_for_display(@bban_bank_code)
+            printable[:bban_branch_code] = format_for_display(@bban_branch_code)
+            printable[:bban_key] = format_for_display(@bban_key)
+            printable[:bban_number] = format_for_display(@bban_number)
             printable
-          end
-
-          # @return [String]
-          def to_table_line
-            printable = printable_values
-            out_str = String.new
-            out_str << format('| %- 10s', printable[:bban_bank_code])
-            out_str << format('| %- 12s', printable[:bban_branch_code])
-            out_str << format('| %- 4s', printable[:bban_key])
-            out_str << format('| %- 15s', printable[:bban_number])
-            out_str << '|'
           end
 
           # @return [String]
