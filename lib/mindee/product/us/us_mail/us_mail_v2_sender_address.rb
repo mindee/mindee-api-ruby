@@ -48,29 +48,6 @@ module Mindee
             printable
           end
 
-          # @return [Hash]
-          def table_printable_values
-            printable = {}
-            printable[:city] = format_for_display(@city, 15)
-            printable[:complete] = format_for_display(@complete, 35)
-            printable[:postal_code] = format_for_display(@postal_code, nil)
-            printable[:state] = format_for_display(@state, nil)
-            printable[:street] = format_for_display(@street, 25)
-            printable
-          end
-
-          # @return [String]
-          def to_table_line
-            printable = table_printable_values
-            out_str = String.new
-            out_str << format('| %- 16s', printable[:city])
-            out_str << format('| %- 36s', printable[:complete])
-            out_str << format('| %- 12s', printable[:postal_code])
-            out_str << format('| %- 6s', printable[:state])
-            out_str << format('| %- 26s', printable[:street])
-            out_str << '|'
-          end
-
           # @return [String]
           def to_s
             printable = printable_values

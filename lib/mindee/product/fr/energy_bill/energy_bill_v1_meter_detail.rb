@@ -38,25 +38,6 @@ module Mindee
             printable
           end
 
-          # @return [Hash]
-          def table_printable_values
-            printable = {}
-            printable[:meter_number] = format_for_display(@meter_number, nil)
-            printable[:meter_type] = format_for_display(@meter_type, nil)
-            printable[:unit] = format_for_display(@unit, nil)
-            printable
-          end
-
-          # @return [String]
-          def to_table_line
-            printable = table_printable_values
-            out_str = String.new
-            out_str << format('| %- 13s', printable[:meter_number])
-            out_str << format('| %- 11s', printable[:meter_type])
-            out_str << format('| %- 16s', printable[:unit])
-            out_str << '|'
-          end
-
           # @return [String]
           def to_s
             printable = printable_values

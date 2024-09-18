@@ -53,31 +53,6 @@ module Mindee
             printable
           end
 
-          # @return [Hash]
-          def table_printable_values
-            printable = {}
-            printable[:category] = format_for_display(@category, nil)
-            printable[:coefficient] = @coefficient.nil? ? '' : Field.float_to_string(@coefficient)
-            printable[:collective_agreement] = format_for_display(@collective_agreement, nil)
-            printable[:job_title] = format_for_display(@job_title, nil)
-            printable[:position_level] = format_for_display(@position_level, nil)
-            printable[:start_date] = format_for_display(@start_date, nil)
-            printable
-          end
-
-          # @return [String]
-          def to_table_line
-            printable = table_printable_values
-            out_str = String.new
-            out_str << format('| %- 9s', printable[:category])
-            out_str << format('| %- 12s', printable[:coefficient])
-            out_str << format('| %- 21s', printable[:collective_agreement])
-            out_str << format('| %- 10s', printable[:job_title])
-            out_str << format('| %- 15s', printable[:position_level])
-            out_str << format('| %- 11s', printable[:start_date])
-            out_str << '|'
-          end
-
           # @return [String]
           def to_s
             printable = printable_values
