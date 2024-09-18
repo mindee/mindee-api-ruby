@@ -98,6 +98,7 @@ module Mindee
           return '' if in_str.nil?
           return in_str if max_col_size.nil?
 
+          in_str = in_str.gsub(/[\n\r\t]/, "\n" => '\\n', "\r" => '\\r', "\t" => '\\t')
           in_str.length <= max_col_size ? in_str : "#{in_str[0..max_col_size - 4]}..."
         end
       end

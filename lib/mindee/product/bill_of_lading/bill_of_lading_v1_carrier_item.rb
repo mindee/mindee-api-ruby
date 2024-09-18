@@ -43,6 +43,18 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
+          printable[:description] = format_for_display(@description)
+          printable[:gross_weight] = @gross_weight.nil? ? '' : Field.float_to_string(@gross_weight)
+          printable[:measurement] = @measurement.nil? ? '' : Field.float_to_string(@measurement)
+          printable[:measurement_unit] = format_for_display(@measurement_unit)
+          printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
+          printable[:weight_unit] = format_for_display(@weight_unit)
+          printable
+        end
+
+        # @return [Hash]
+        def table_printable_values
+          printable = {}
           printable[:description] = format_for_display(@description, 36)
           printable[:gross_weight] = @gross_weight.nil? ? '' : Field.float_to_string(@gross_weight)
           printable[:measurement] = @measurement.nil? ? '' : Field.float_to_string(@measurement)
@@ -54,7 +66,7 @@ module Mindee
 
         # @return [String]
         def to_table_line
-          printable = printable_values
+          printable = table_printable_values
           out_str = String.new
           out_str << format('| %- 37s', printable[:description])
           out_str << format('| %- 13s', printable[:gross_weight])

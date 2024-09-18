@@ -32,6 +32,15 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
+            printable[:bank_name] = format_for_display(@bank_name)
+            printable[:iban] = format_for_display(@iban)
+            printable[:swift] = format_for_display(@swift)
+            printable
+          end
+
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
             printable[:bank_name] = format_for_display(@bank_name, nil)
             printable[:iban] = format_for_display(@iban, nil)
             printable[:swift] = format_for_display(@swift, nil)
@@ -40,7 +49,7 @@ module Mindee
 
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 10s', printable[:bank_name])
             out_str << format('| %- 5s', printable[:iban])

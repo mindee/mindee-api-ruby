@@ -73,9 +73,25 @@ module Mindee
             printable
           end
 
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
+            printable[:gross_salary] = @gross_salary.nil? ? '' : Field.float_to_string(@gross_salary)
+            printable[:gross_salary_ytd] = @gross_salary_ytd.nil? ? '' : Field.float_to_string(@gross_salary_ytd)
+            printable[:income_tax_rate] = @income_tax_rate.nil? ? '' : Field.float_to_string(@income_tax_rate)
+            printable[:income_tax_withheld] = @income_tax_withheld.nil? ? '' : Field.float_to_string(@income_tax_withheld)
+            printable[:net_paid] = @net_paid.nil? ? '' : Field.float_to_string(@net_paid)
+            printable[:net_paid_before_tax] = @net_paid_before_tax.nil? ? '' : Field.float_to_string(@net_paid_before_tax)
+            printable[:net_taxable] = @net_taxable.nil? ? '' : Field.float_to_string(@net_taxable)
+            printable[:net_taxable_ytd] = @net_taxable_ytd.nil? ? '' : Field.float_to_string(@net_taxable_ytd)
+            printable[:total_cost_employer] = @total_cost_employer.nil? ? '' : Field.float_to_string(@total_cost_employer)
+            printable[:total_taxes_and_deductions] = @total_taxes_and_deductions.nil? ? '' : Field.float_to_string(@total_taxes_and_deductions)
+            printable
+          end
+
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 13s', printable[:gross_salary])
             out_str << format('| %- 17s', printable[:gross_salary_ytd])

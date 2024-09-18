@@ -40,6 +40,17 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
+            printable[:end_date] = format_for_display(@end_date)
+            printable[:month] = format_for_display(@month)
+            printable[:payment_date] = format_for_display(@payment_date)
+            printable[:start_date] = format_for_display(@start_date)
+            printable[:year] = format_for_display(@year)
+            printable
+          end
+
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
             printable[:end_date] = format_for_display(@end_date, nil)
             printable[:month] = format_for_display(@month, nil)
             printable[:payment_date] = format_for_display(@payment_date, nil)
@@ -50,7 +61,7 @@ module Mindee
 
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 9s', printable[:end_date])
             out_str << format('| %- 6s', printable[:month])

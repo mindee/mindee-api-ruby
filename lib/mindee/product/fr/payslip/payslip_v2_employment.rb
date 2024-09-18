@@ -44,6 +44,18 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
+            printable[:category] = format_for_display(@category)
+            printable[:coefficient] = @coefficient.nil? ? '' : Field.float_to_string(@coefficient)
+            printable[:collective_agreement] = format_for_display(@collective_agreement)
+            printable[:job_title] = format_for_display(@job_title)
+            printable[:position_level] = format_for_display(@position_level)
+            printable[:start_date] = format_for_display(@start_date)
+            printable
+          end
+
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
             printable[:category] = format_for_display(@category, nil)
             printable[:coefficient] = @coefficient.nil? ? '' : Field.float_to_string(@coefficient)
             printable[:collective_agreement] = format_for_display(@collective_agreement, nil)
@@ -55,7 +67,7 @@ module Mindee
 
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 9s', printable[:category])
             out_str << format('| %- 12s', printable[:coefficient])

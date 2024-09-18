@@ -38,6 +38,16 @@ module Mindee
             printable = {}
             printable[:amount] = @amount.nil? ? '' : Field.float_to_string(@amount)
             printable[:base] = @base.nil? ? '' : Field.float_to_string(@base)
+            printable[:description] = format_for_display(@description)
+            printable[:rate] = @rate.nil? ? '' : Field.float_to_string(@rate)
+            printable
+          end
+
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
+            printable[:amount] = @amount.nil? ? '' : Field.float_to_string(@amount)
+            printable[:base] = @base.nil? ? '' : Field.float_to_string(@base)
             printable[:description] = format_for_display(@description, 36)
             printable[:rate] = @rate.nil? ? '' : Field.float_to_string(@rate)
             printable
@@ -45,7 +55,7 @@ module Mindee
 
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 13s', printable[:amount])
             out_str << format('| %- 10s', printable[:base])

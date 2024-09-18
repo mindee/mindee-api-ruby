@@ -31,6 +31,15 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
+          printable[:name] = format_for_display(@name)
+          printable[:professional_number] = format_for_display(@professional_number)
+          printable[:scac] = format_for_display(@scac)
+          printable
+        end
+
+        # @return [Hash]
+        def table_printable_values
+          printable = {}
           printable[:name] = format_for_display(@name, nil)
           printable[:professional_number] = format_for_display(@professional_number, nil)
           printable[:scac] = format_for_display(@scac, nil)
@@ -39,7 +48,7 @@ module Mindee
 
         # @return [String]
         def to_table_line
-          printable = printable_values
+          printable = table_printable_values
           out_str = String.new
           out_str << format('| %- 5s', printable[:name])
           out_str << format('| %- 20s', printable[:professional_number])

@@ -38,9 +38,18 @@ module Mindee
             printable
           end
 
+          # @return [Hash]
+          def table_printable_values
+            printable = {}
+            printable[:accrued_this_period] = @accrued_this_period.nil? ? '' : Field.float_to_string(@accrued_this_period)
+            printable[:balance_end_of_period] = @balance_end_of_period.nil? ? '' : Field.float_to_string(@balance_end_of_period)
+            printable[:used_this_period] = @used_this_period.nil? ? '' : Field.float_to_string(@used_this_period)
+            printable
+          end
+
           # @return [String]
           def to_table_line
-            printable = printable_values
+            printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 20s', printable[:accrued_this_period])
             out_str << format('| %- 22s', printable[:balance_end_of_period])
