@@ -4,7 +4,7 @@ require_relative '../../input/sources'
 
 module Mindee
   # Image Extraction Module.
-  module ImageExtraction
+  module Extraction
     # Generic class for image extraction.
     class ExtractedImage
       # Id of the page the image was extracted from.

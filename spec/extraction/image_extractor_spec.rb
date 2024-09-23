@@ -5,8 +5,8 @@ require 'mindee/input/sources'
 require 'mindee/extraction'
 require_relative '../data'
 
-describe Mindee::ImageExtraction do
-  include Mindee::ImageExtraction
+describe Mindee::Extraction do
+  include Mindee::Extraction
   let(:barcode_path) do
     File.join(DATA_DIR, 'products', 'barcode_reader', 'default_sample.jpg')
   end
@@ -29,8 +29,10 @@ describe Mindee::ImageExtraction do
       end
       input_source = Mindee::Input::Source::PathInputSource.new(barcode_path)
 
-      extracted_barcodes_1d = extract_multiple_images_from_source(input_source, 1, barcodes1)
-      extracted_barcodes_2d = extract_multiple_images_from_source(input_source, 1, barcodes2)
+      extracted_barcodes_1d = Mindee::Extraction::ImageExtractor.extract_multiple_images_from_source(input_source, 1,
+                                                                                                     barcodes1)
+      extracted_barcodes_2d = Mindee::Extraction::ImageExtractor.extract_multiple_images_from_source(input_source, 1,
+                                                                                                     barcodes2)
 
       expect(extracted_barcodes_1d.size).to eq(1)
       expect(extracted_barcodes_2d.size).to eq(2)
