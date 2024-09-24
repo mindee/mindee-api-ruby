@@ -13,7 +13,7 @@ module Mindee
           if local_input.pdf?
             @source_pdf = local_input.io_stream
           else
-            pdf_image = ImageExtraction.attach_image_as_new_file(local_input.io_stream)
+            pdf_image = Extraction::ImageExtractor.attach_image_as_new_file(local_input.io_stream)
             io_buffer = StringIO.new
             pdf_image.save(io_buffer)
 
