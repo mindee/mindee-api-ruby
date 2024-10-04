@@ -19,6 +19,16 @@ module Mindee
     end
   end
 
+  module Image
+    # Miscellaneous image operations.
+    module ImageUtils
+    end
+
+    # Image compressor module to handle image compression.
+    module ImageCompressor
+    end
+  end
+
   # Custom extraction module
   module Extraction
   end
