@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'mindee/input/sources'
-require 'mindee'
 
 require_relative '../data'
 
@@ -143,8 +142,8 @@ describe Mindee::Input::Source do
       expect(rendered_file_sizes[3]).to be > rendered_file_sizes[4]
     end
 
-    # after(:each) do
-    #   FileUtils.rm_f(output_dir)
-    # end
+    after(:each) do
+      FileUtils.rm_f(output_dir)
+    end
   end
 end
