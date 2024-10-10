@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.9 document data.
+      # Financial Document API version 1.10 document data.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -48,6 +48,12 @@ module Mindee
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
+        # The date on which the payment is due / fullfilled.
+        # @return [Mindee::Parsing::Standard::DateField]
+        attr_reader :payment_date
+        # The purchase order number.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :po_number
         # The receipt number or identifier only if document is a receipt.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :receipt_number
@@ -123,6 +129,8 @@ module Mindee
             @line_items.push(FinancialDocumentV1LineItem.new(item, page_id))
           end
           @locale = LocaleField.new(prediction['locale'], page_id)
+          @payment_date = DateField.new(prediction['payment_date'], page_id)
+          @po_number = StringField.new(prediction['po_number'], page_id)
           @receipt_number = StringField.new(prediction['receipt_number'], page_id)
           @reference_numbers = []
           prediction['reference_numbers'].each do |item|
@@ -161,11 +169,13 @@ module Mindee
           out_str = String.new
           out_str << "\n:Locale: #{@locale}".rstrip
           out_str << "\n:Invoice Number: #{@invoice_number}".rstrip
+          out_str << "\n:Purchase Order Number: #{@po_number}".rstrip
           out_str << "\n:Receipt Number: #{@receipt_number}".rstrip
           out_str << "\n:Document Number: #{@document_number}".rstrip
           out_str << "\n:Reference Numbers: #{reference_numbers}".rstrip
           out_str << "\n:Purchase Date: #{@date}".rstrip
           out_str << "\n:Due Date: #{@due_date}".rstrip
+          out_str << "\n:Payment Date: #{@payment_date}".rstrip
           out_str << "\n:Total Net: #{@total_net}".rstrip
           out_str << "\n:Total Amount: #{@total_amount}".rstrip
           out_str << "\n:Taxes:#{@taxes}".rstrip

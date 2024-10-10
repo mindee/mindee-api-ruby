@@ -6,7 +6,7 @@ require_relative 'invoice_v4_line_item'
 module Mindee
   module Product
     module Invoice
-      # Invoice API version 4.7 document data.
+      # Invoice API version 4.8 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -42,6 +42,12 @@ module Mindee
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
+        # The date on which the payment is due/ was full-filled.
+        # @return [Mindee::Parsing::Standard::DateField]
+        attr_reader :payment_date
+        # The purchase order number.
+        # @return [Mindee::Parsing::Standard::StringField]
+        attr_reader :po_number
         # List of Reference numbers, including PO number.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
@@ -103,6 +109,8 @@ module Mindee
             @line_items.push(InvoiceV4LineItem.new(item, page_id))
           end
           @locale = LocaleField.new(prediction['locale'], page_id)
+          @payment_date = DateField.new(prediction['payment_date'], page_id)
+          @po_number = StringField.new(prediction['po_number'], page_id)
           @reference_numbers = []
           prediction['reference_numbers'].each do |item|
             @reference_numbers.push(StringField.new(item, page_id))
@@ -137,9 +145,11 @@ module Mindee
           out_str = String.new
           out_str << "\n:Locale: #{@locale}".rstrip
           out_str << "\n:Invoice Number: #{@invoice_number}".rstrip
+          out_str << "\n:Purchase Order Number: #{@po_number}".rstrip
           out_str << "\n:Reference Numbers: #{reference_numbers}".rstrip
           out_str << "\n:Purchase Date: #{@date}".rstrip
           out_str << "\n:Due Date: #{@due_date}".rstrip
+          out_str << "\n:Payment Date: #{@payment_date}".rstrip
           out_str << "\n:Total Net: #{@total_net}".rstrip
           out_str << "\n:Total Amount: #{@total_amount}".rstrip
           out_str << "\n:Total Tax: #{@total_tax}".rstrip

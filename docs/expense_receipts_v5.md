@@ -50,7 +50,7 @@ Prediction
 ==========
 :Expense Locale: en-GB; en; GB; GBP;
 :Purchase Category: food
-:Purchase Subcategory: restaurant
+:Purchase Subcategory:
 :Document Type: EXPENSE RECEIPT
 :Purchase Date: 2016-02-26
 :Purchase Time: 15:20
@@ -64,7 +64,7 @@ Prediction
   +===============+========+==========+===============+
   | 8.50          | VAT    | 20.00    | 1.70          |
   +---------------+--------+----------+---------------+
-:Supplier Name: clachan
+:Supplier Name: Clachan
 :Supplier Company Registrations: Type: VAT NUMBER, Value: 232153895
                                  Type: VAT NUMBER, Value: 232153895
 :Supplier Address: 34 Kingley Street W1B 50H
@@ -84,7 +84,7 @@ Page 0
 ------
 :Expense Locale: en-GB; en; GB; GBP;
 :Purchase Category: food
-:Purchase Subcategory: restaurant
+:Purchase Subcategory:
 :Document Type: EXPENSE RECEIPT
 :Purchase Date: 2016-02-26
 :Purchase Time: 15:20
@@ -98,7 +98,7 @@ Page 0
   +===============+========+==========+===============+
   | 8.50          | VAT    | 20.00    | 1.70          |
   +---------------+--------+----------+---------------+
-:Supplier Name: clachan
+:Supplier Name: Clachan
 :Supplier Company Registrations: Type: VAT NUMBER, Value: 232153895
                                  Type: VAT NUMBER, Value: 232153895
 :Supplier Address: 34 Kingley Street W1B 50H
