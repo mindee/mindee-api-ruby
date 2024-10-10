@@ -93,7 +93,7 @@ Prediction
 :Supplier Address: 156 University Ave, Toronto ON, Canada, M5H 2H7
 :Supplier Phone Number: 4165551212
 :Supplier Website:
-:Supplier Email: i_doi@example.com
+:Supplier Email: ldoi@example.com
 :Customer Name: JIRO DOI
 :Customer Company Registrations:
 :Customer Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
@@ -137,7 +137,7 @@ Page 0
 :Supplier Address: 156 University Ave, Toronto ON, Canada, M5H 2H7
 :Supplier Phone Number: 4165551212
 :Supplier Website:
-:Supplier Email: i_doi@example.com
+:Supplier Email: ldoi@example.com
 :Customer Name: JIRO DOI
 :Customer Company Registrations:
 :Customer Address: 1954 Bloor Street West Toronto, ON, M6P 3K9 Canada
@@ -330,6 +330,20 @@ end
 
 ```rb
 puts result.document.inference.prediction.locale.value
+```
+
+## Payment Date
+**payment_date** ([DateField](#date-field)): The date on which the payment is due/ was full-filled.
+
+```rb
+puts result.document.inference.prediction.payment_date.value
+```
+
+## Purchase Order Number
+**po_number** ([StringField](#string-field)): The purchase order number.
+
+```rb
+puts result.document.inference.prediction.po_number.value
 ```
 
 ## Reference Numbers

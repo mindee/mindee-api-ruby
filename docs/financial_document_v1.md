@@ -370,6 +370,20 @@ end
 puts result.document.inference.prediction.locale.value
 ```
 
+## Payment Date
+**payment_date** ([DateField](#date-field)): The date on which the payment is due / fullfilled.
+
+```rb
+puts result.document.inference.prediction.payment_date.value
+```
+
+## Purchase Order Number
+**po_number** ([StringField](#string-field)): The purchase order number.
+
+```rb
+puts result.document.inference.prediction.po_number.value
+```
+
 ## Receipt Number
 **receipt_number** ([StringField](#string-field)): The receipt number or identifier only if document is a receipt.
 
