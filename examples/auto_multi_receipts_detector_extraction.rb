@@ -3,8 +3,8 @@
 require 'mindee'
 require 'mindee/extraction'
 
-def multi_receipts_detection(file_path)
-  mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+def multi_receipts_detection(file_path, mindee_client)
   input_source = mindee_client.source_from_path(file_path)
 
   result_split = mindee_client.parse(
@@ -27,6 +27,5 @@ def multi_receipts_detection(file_path)
   end
 end
 
-# Usage
 my_file_path = '/path/to/the/file.ext'
-multi_receipts_detection(my_file_path)
+multi_receipts_detection(my_file_path, mindee_client)
