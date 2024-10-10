@@ -137,19 +137,30 @@ module Mindee
         #   WARNING: this operation is strongly discouraged.
         # @param [Boolean] disable_source_text If the PDF has source text, whether to re-apply it to the original or
         #   not. Needs force_source_text to work.
-        def compress(quality: 85, max_width: nil, max_height: nil, force_source_text: false, disable_source_text: true)
-          if pdf?
-            puts "TODO #{force_source_text}|#{disable_source_text}"
-          else
-            @io_stream.rewind
-            buffer = Mindee::Image::ImageCompressor.compress_image(
-              @io_stream,
-              quality: quality,
-              max_width: max_width,
-              max_height: max_height
-            )
-            @io_stream = buffer
-          end
+        def compress!(quality: 85, max_width: nil, max_height: nil, force_source_text: false, disable_source_text: true)
+          buffer = if pdf?
+                     Mindee::PDF::PDFCompressor.compress_pdf(
+                       @io_stream,
+                       quality: quality,
+                       force_source_text: force_source_text,
+                       disable_source_text: disable_source_text
+                     )
+                   else
+                     Mindee::Image::ImageCompressor.compress_image(
+                       @io_stream,
+                       quality: quality,
+                       max_width: max_width,
+                       max_height: max_height
+                     )
+                   end
+          @io_stream = buffer
+          @io_stream.rewind
+        end
+
+        # Checks whether the file has source text if it is a pdf. False otherwise
+        # @return [Boolean] True if the file is a PDF and has source text.
+        def source_text?
+          Mindee::PDF::PDFTools.source_text?(@io_stream)
         end
       end
 

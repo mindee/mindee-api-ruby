@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'mindee'
 require 'mindee/input/sources'
 
 require_relative '../data'
@@ -96,7 +97,7 @@ describe Mindee::Input::Source do
 
     it 'should compress the image from input source' do
       receipt_input = Mindee::Input::Source::PathInputSource.new(input_receipt_path)
-      receipt_input.compress(quality: 80) # NOTE: base jpg quality is ~81
+      receipt_input.compress!(quality: 80) # NOTE: base jpg quality is ~81
 
       FileUtils.mkdir_p(File.dirname("#{output_dir}compress_indirect.jpg"))
       File.write("#{output_dir}compress_indirect.jpg", receipt_input.io_stream.read)
@@ -117,8 +118,6 @@ describe Mindee::Input::Source do
         Mindee::Image::ImageCompressor.compress_image(receipt_input.io_stream, quality: 10),
         Mindee::Image::ImageCompressor.compress_image(receipt_input.io_stream, quality: 1),
       ]
-
-      FileUtils.mkdir_p(output_dir)
 
       output_files = [
         "#{output_dir}/compress100.jpg",
@@ -143,7 +142,41 @@ describe Mindee::Input::Source do
     end
 
     after(:each) do
-      FileUtils.rm_f(output_dir)
+      FileUtils.rm_f("#{output_dir}/compress100.jpg")
+      FileUtils.rm_f("#{output_dir}/compress75.jpg")
+      FileUtils.rm_f("#{output_dir}/compress50.jpg")
+      FileUtils.rm_f("#{output_dir}/compress10.jpg")
+      FileUtils.rm_f("#{output_dir}/compress1.jpg")
+    end
+  end
+
+  describe 'The PDF text detection method' do
+    it 'should detect text pdf in a PDF file.' do
+      text_input = Mindee::Input::Source::PathInputSource.new("#{DATA_DIR}/file_types/pdf/multipage.pdf")
+      expect(Mindee::PDF::PDFTools.source_text?(text_input.io_stream)).to be(true)
+    end
+
+    it 'should not detect text pdf in an empty PDF file.' do
+      no_text_input = Mindee::Input::Source::PathInputSource.new(
+        "#{DATA_DIR}/products/invoice_splitter/default_sample.pdf"
+      )
+      expect(Mindee::PDF::PDFTools.source_text?(no_text_input.io_stream)).to be(false)
+    end
+
+    it 'should not detect text pdf in an image file.' do
+      image_input = Mindee::Input::Source::PathInputSource.new("#{DATA_DIR}/file_types/receipt.jpg")
+      expect(Mindee::PDF::PDFTools.source_text?(image_input.io_stream)).to be(false)
+    end
+  end
+
+  describe 'PDF compression' do
+    it 'should compress from an input source' do
+      input_file_path = "#{DATA_DIR}/products/invoice_splitter/default_sample.pdf"
+      output_file_path = "#{DATA_DIR}/output/resize_indirect.pdf"
+      pdf_input = Mindee::Input::Source::PathInputSource.new("#{DATA_DIR}/products/invoice_splitter/default_sample.pdf")
+      pdf_input.compress!(quality: 50)
+      File.write(output_file_path, pdf_input.io_stream.read)
+      expect(File.size(output_file_path)).to be < File.size(input_file_path)
     end
   end
 end

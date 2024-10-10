@@ -13,6 +13,7 @@ module Mindee
       # @return [StringIO]
       def self.compress_image(image, quality: 85, max_width: nil, max_height: nil)
         processed_image = ImageUtils.to_image(image)
+        processed_image.format 'jpg'
         final_width, final_height = ImageUtils.calculate_new_dimensions(
           processed_image,
           max_width: max_width,
