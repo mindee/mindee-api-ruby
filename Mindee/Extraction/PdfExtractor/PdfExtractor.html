@@ -315,7 +315,7 @@
   <span class='kw'>if</span> <span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_pdf?'>pdf?</span>
     <span class='ivar'>@source_pdf</span> <span class='op'>=</span> <span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_io_stream'>io_stream</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_pdf_image'>pdf_image</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../ImageExtraction.html" title="Mindee::ImageExtraction (module)">ImageExtraction</a></span></span><span class='period'>.</span><span class='id identifier rubyid_attach_image_as_new_file'><span class='object_link'><a href="../../ImageExtraction.html#attach_image_as_new_file-class_method" title="Mindee::ImageExtraction.attach_image_as_new_file (method)">attach_image_as_new_file</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_pdf_image'>pdf_image</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Extraction.html" title="Mindee::Extraction (module)">Extraction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ImageExtractor.html" title="Mindee::Extraction::ImageExtractor (class)">ImageExtractor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_attach_image_as_new_file'><span class='object_link'><a href="../ImageExtractor.html#attach_image_as_new_file-class_method" title="Mindee::Extraction::ImageExtractor.attach_image_as_new_file (method)">attach_image_as_new_file</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_io_buffer'>io_buffer</span> <span class='op'>=</span> <span class='const'>StringIO</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
     <span class='id identifier rubyid_pdf_image'>pdf_image</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='id identifier rubyid_io_buffer'>io_buffer</span><span class='rparen'>)</span>
 
@@ -731,7 +731,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 18 13:19:10 2024 by
+  Generated on Fri Oct 11 15:53:23 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

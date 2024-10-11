@@ -153,6 +153,35 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#is_computed-instance_method" title="#is_computed (instance method)">#<strong>is_computed</strong>  &#x21d2; Boolean<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether the field was computed or retrieved directly from the document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#raw-instance_method" title="#raw (instance method)">#<strong>raw</strong>  &#x21d2; String<sup>?</sup> </a>
     
 
@@ -332,19 +361,21 @@
       <pre class="lines">
 
 
-24
-25
-26
 27
 28
 29
-30</pre>
+30
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/date_field.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/date_field.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
+  <span class='ivar'>@is_computed</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>is_computed</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='ivar'>@value</span>
 
   <span class='ivar'>@date_object</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@value</span><span class='rparen'>)</span>
@@ -410,6 +441,62 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_date_object'>date_object</span>
   <span class='ivar'>@date_object</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_computed-instance_method">
+  
+    #<strong>is_computed</strong>  &#x21d2; <tt>Boolean</tt><sup>?</sup>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether the field was computed or retrieved directly from the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/date_field.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_computed'>is_computed</span>
+  <span class='ivar'>@is_computed</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -534,7 +621,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 18 13:19:08 2024 by
+  Generated on Fri Oct 11 15:53:21 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
