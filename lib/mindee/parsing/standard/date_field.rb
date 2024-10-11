@@ -18,11 +18,15 @@ module Mindee
         # The textual representation of the date as found on the document.
         # @return [String, nil]
         attr_reader :raw
+        # Whether the field was computed or retrieved directly from the document.
+        # @return [Boolean, nil]
+        attr_reader :is_computed
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super
+          @is_computed = prediction['is_computed']
           return unless @value
 
           @date_object = Date.parse(@value)
