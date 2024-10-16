@@ -15,9 +15,8 @@ module Mindee
         pdf_data.rewind
         pdf = Origami::PDF.read(pdf_data)
         output_pdf = Origami::PDF.new
-
-        pdf.each_page.with_index do |page, i|
-          process_pdf_page(page, output_pdf, i + 1, quality, disable_source_text)
+        pdf.pages.each.with_index do |_, i|
+          process_pdf_page(Mindee::PDF::PdfProcessor.get_page(pdf, i), output_pdf, i, quality, disable_source_text)
         end
 
         output_stream = StringIO.new
@@ -25,44 +24,26 @@ module Mindee
         output_stream
       end
 
-      def self.process_pdf_page(page, output_doc, _page_index, image_quality, disable_source_text)
+      def self.process_pdf_page(page_stream, output_doc, page_index, image_quality, _disable_source_text)
         new_page = Origami::Page.new
-        content_stream = Origami::ContentStream.new
 
-        media_box = page[:MediaBox] || output_doc.pages.first[:MediaBox]
-        page_width = media_box[2] - media_box[0]
-        page_height = media_box[3] - media_box[1]
+        compressed_image = MiniMagick::Image.read(page_stream.read)
+        compressed_image.format('jpg')
+        compressed_image.quality image_quality.to_s
+        image_io = Mindee::Image::ImageUtils.image_to_stringio(compressed_image)
+        compressed_xobject = Origami::Graphics::ImageXObject.from_image_file(image_io, 'jpg')
+        compressed_xobject.dictionary[:BitsPerComponent] = 8
+        compressed_xobject.dictionary[:Filter] = :DCTDecode
+        compressed_xobject.dictionary[:Width] = compressed_image[:width]
+        compressed_xobject.dictionary[:Height] = compressed_image[:height]
+        compressed_xobject.dictionary[:ColorSpace] = :DeviceRGB
+        xobject_name = "X#{page_index + 1}"
+        content = "q\n#{compressed_image[:width]} 0 0 #{compressed_image[:height]} 0 0 cm\n/#{xobject_name} Do\nQ\n"
+        content_stream = Origami::Stream.new(content)
+        new_page.Contents = content_stream
 
-        page.each_xobject do |name, xobject|
-          if xobject[:Subtype] == :Image
-            io_stream = StringIO.new
-            io_stream << xobject.to_image_file(bypass_dct: true)[1].to_s
-            io_stream.rewind
-            compressed_image = Mindee::Image::ImageCompressor.compress_image(
-              io_stream,
-              quality: image_quality
-            )
-            compressed_image.rewind
-            compressed_xobject = Origami::Graphics::ImageXObject.from_image_file(compressed_image, 'jpg')
-
-            width = xobject.dictionary[:Width]
-            height = xobject.dictionary[:Height]
-            compressed_xobject.dictionary[:Subtype] = xobject.dictionary[:Subtype]
-            compressed_xobject.dictionary[:Width] = width
-            compressed_xobject.dictionary[:Height] = height
-            compressed_xobject.dictionary[:ColorSpace] = :DeviceRGB
-            compressed_xobject.dictionary[:BitsPerComponent] = xobject.dictionary[:BitsPerComponent]
-            compressed_xobject.dictionary[:Filter] = :DCTDecode
-            content_stream.draw_image(name, x: 0, y: 0, w: page_width, h: page_height)
-            new_page.add_xobject(compressed_xobject, name)
-          else
-            new_page.add_xobject(xobject, name)
-          end
-        end
-
-        new_page[:Contents] = page[:Contents] unless disable_source_text
-        new_page[:Contents] = content_stream
-        output_doc.append_page new_page.copy
+        new_page.add_xobject(compressed_xobject, xobject_name)
+        output_doc.append_page new_page
       end
 
       def self.process_image_xobject(image_data, image_quality, width, height)

@@ -11,7 +11,7 @@ module Mindee
   # Image Extraction Module.
   module Extraction
     # Image Extraction wrapper class.
-    class ImageExtractor
+    module ImageExtractor
       def self.attach_image_as_new_file(input_buffer, format: 'jpg')
         # Attaches an image as a new page in a PdfDocument object.
         #
@@ -37,25 +37,10 @@ module Mindee
       # to extract.
       # @return [Array<Mindee::Extraction::ExtractedImage>] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
-        new_stream = load_doc(input_source, page_id)
+        new_stream = load_input_source_pdf_page_as_image(input_source, page_id)
         new_stream.seek(0)
 
         extract_images_from_polygons(input_source, new_stream, page_id, polygons)
-      end
-
-      # Retrieves a PDF document's page.
-      #
-      # @param [Origami::PDF] pdf_doc Origami PDF handle.
-      # @param [Integer] page_id Page ID.
-      def self.get_page(pdf_doc, page_id)
-        stream = StringIO.new
-        pdf_doc.save(stream)
-
-        options = {
-          page_indexes: [page_id - 1],
-        }
-
-        Mindee::PDF::PdfProcessor.parse(stream, options)
       end
 
       # Extracts images from their positions on a file (as polygons).
@@ -179,10 +164,10 @@ module Mindee
       # @param input_file [LocalInputSource] Local input.
       # @param [Integer] page_id Page ID.
       # @return [MiniMagick::Image] A valid PdfDocument handle.
-      def self.load_doc(input_file, page_id)
+      def self.load_input_source_pdf_page_as_image(input_file, page_id)
         input_file.io_stream.rewind
         if input_file.pdf?
-          get_page(Origami::PDF.read(input_file.io_stream), page_id)
+          Mindee::PDF::PdfProcessor.get_page(Origami::PDF.read(input_file.io_stream), page_id)
         else
           input_file.io_stream
         end

@@ -172,11 +172,41 @@ describe Mindee::Input::Source do
   describe 'PDF compression' do
     it 'should compress from an input source' do
       input_file_path = "#{DATA_DIR}/products/invoice_splitter/default_sample.pdf"
-      output_file_path = "#{DATA_DIR}/output/resize_indirect.pdf"
+      output_file_path = "#{DATA_DIR}/output/compress_indirect.pdf"
       pdf_input = Mindee::Input::Source::PathInputSource.new("#{DATA_DIR}/products/invoice_splitter/default_sample.pdf")
       pdf_input.compress!(quality: 50)
       File.write(output_file_path, pdf_input.io_stream.read)
       expect(File.size(output_file_path)).to be < File.size(input_file_path)
+    end
+
+    it 'should compress from the compressor' do
+      input_file_path = "#{DATA_DIR}/products/invoice_splitter/default_sample.pdf"
+      output_file_paths = {
+        85 => "#{DATA_DIR}/output/compressed_direct_85.pdf",
+        75 => "#{DATA_DIR}/output/compressed_direct_75.pdf",
+        50 => "#{DATA_DIR}/output/compressed_direct_50.pdf",
+        10 => "#{DATA_DIR}/output/compressed_direct_10.pdf",
+      }
+      pdf = File.open(input_file_path)
+      output_file_paths.each_pair do |key, value|
+        compressed_pdf = Mindee::PDF::PDFCompressor.compress_pdf(pdf, quality: key)
+        compressed_pdf.rewind
+        File.write(value, compressed_pdf.read)
+      end
+      expect(File.size(input_file_path)).to be > File.size(output_file_paths[85])
+      expect(File.size(output_file_paths[75])).to be < File.size(output_file_paths[85])
+      expect(File.size(output_file_paths[50])).to be < File.size(output_file_paths[75])
+      expect(File.size(output_file_paths[10])).to be < File.size(output_file_paths[50])
+    end
+  end
+  describe 'source text PDF compression' do
+    it 'should compress if forced' do
+      input_file_path = "#{DATA_DIR}/file_types/pdf/multipage.pdf"
+      output_file_path = "#{DATA_DIR}/output/compress_with_text.pdf"
+      pdf_input = Mindee::Input::Source::PathInputSource.new(input_file_path)
+      pdf_input.compress!(quality: 50, force_source_text: true, disable_source_text: false)
+      File.write(output_file_path, pdf_input.io_stream.read)
+      expect(File.size(output_file_path)).to be > File.size(input_file_path)
     end
   end
 end
