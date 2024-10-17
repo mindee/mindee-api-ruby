@@ -2,6 +2,7 @@
 
 require 'mindee'
 require 'mindee/input/sources'
+require 'pdf-reader'
 
 require_relative '../data'
 
@@ -207,6 +208,20 @@ describe Mindee::Input::Source do
       pdf_input.compress!(quality: 50, force_source_text: true, disable_source_text: false)
       File.write(output_file_path, pdf_input.io_stream.read)
       expect(File.size(output_file_path)).to be > File.size(input_file_path)
+
+      pdf_input.io_stream.rewind
+      reader = PDFReader::Reader.new(pdf_input.io_stream)
+
+      text = ''
+      reader.pages.each do |original_page|
+        receiver = PDFReader::Reader::PageTextReceiver.new
+        original_page.walk(receiver)
+
+        receiver.runs.each do |text_run|
+          text += text_run.text
+        end
+      end
+      expect(text).to eq('*' * 650)
     end
   end
 end
