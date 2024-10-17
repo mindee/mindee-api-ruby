@@ -68,6 +68,17 @@ module Mindee
 
         [new_width, new_height]
       end
+
+      def self.calculate_dimensions(image, media_box)
+        if media_box && !media_box.empty?
+          [
+            media_box[2]&.to_i || image[:width],
+            media_box[3]&.to_i || image[:height],
+          ]
+        else
+          [image[:width], image[:height]]
+        end
+      end
     end
   end
 end
