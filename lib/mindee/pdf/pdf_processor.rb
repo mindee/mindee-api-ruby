@@ -74,6 +74,21 @@ module Mindee
         io_stream.seek(0)
         pdf_parser.parse(io_stream)
       end
+
+      # Retrieves a PDF document's page.
+      #
+      # @param [Origami::PDF] pdf_doc Origami PDF handle.
+      # @param [Integer] page_id Page ID.
+      def self.get_page(pdf_doc, page_id)
+        stream = StringIO.new
+        pdf_doc.save(stream)
+
+        options = {
+          page_indexes: [page_id - 1],
+        }
+
+        parse(stream, options)
+      end
     end
   end
 end
