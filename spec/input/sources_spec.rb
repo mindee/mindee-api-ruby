@@ -159,7 +159,7 @@ describe Mindee::Input::Source do
 
     it 'should not detect text pdf in an empty PDF file.' do
       no_text_input = Mindee::Input::Source::PathInputSource.new(
-        "#{DATA_DIR}/products/invoice_splitter/default_sample.pdf"
+        "#{DATA_DIR}/file_types/pdf/blank_1.pdf"
       )
       expect(Mindee::PDF::PDFTools.source_text?(no_text_input.io_stream)).to be(false)
     end
@@ -199,6 +199,15 @@ describe Mindee::Input::Source do
       expect(File.size(output_file_paths[50])).to be < File.size(output_file_paths[75])
       expect(File.size(output_file_paths[10])).to be < File.size(output_file_paths[50])
     end
+
+    after(:each) do
+      output_dir = "#{DATA_DIR}/output"
+      FileUtils.rm_f("#{output_dir}/compressed_direct_85.pdf")
+      FileUtils.rm_f("#{output_dir}/compressed_direct_75.pdf")
+      FileUtils.rm_f("#{output_dir}/compressed_direct_50.pdf")
+      FileUtils.rm_f("#{output_dir}/compressed_direct_10.pdf")
+      FileUtils.rm_f("#{output_dir}/compress_indirect.pdf")
+    end
   end
   describe 'source text PDF compression' do
     it 'should compress if forced' do
@@ -222,6 +231,11 @@ describe Mindee::Input::Source do
         end
       end
       expect(text).to eq('*' * 650)
+    end
+
+    after(:each) do
+      output_dir = "#{DATA_DIR}/output"
+      FileUtils.rm_f("#{output_dir}/compress_with_text.pdf")
     end
   end
 end

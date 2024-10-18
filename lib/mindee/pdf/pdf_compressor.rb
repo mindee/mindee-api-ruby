@@ -7,39 +7,54 @@ module Mindee
   module PDF
     # Image compressor module to handle PDF compression.
     module PDFCompressor
-      def self.compress_pdf(
-        pdf_data,
-        quality: 85,
-        force_source_text: false,
-        disable_source_text: true
-      )
+      # Compresses each page of a provided PDF stream. Skips if force_source_text isn't set and source text is detected.
+      # @param quality [Integer] Compression quality (70-100 for most JPG images in the test dataset).
+      # @param force_source_text [Boolean] If true, attempts to re-write detected text.
+      # @param disable_source_text [Boolean] If true, doesn't re-apply source text to the original PDF.
+      def self.compress_pdf(pdf_data, quality: 85, force_source_text: false, disable_source_text: true)
         return pdf_data if !force_source_text && PDFTools.source_text?(pdf_data)
 
         pdf_data.rewind
         pdf = Origami::PDF.read(pdf_data)
-        pages = []
-        pdf.pages.each.with_index do |page, i|
-          page = process_pdf_page(Mindee::PDF::PdfProcessor.get_page(pdf, i), i, quality, page[:MediaBox])
-          pages.append(page)
-        end
+        pages = process_pdf_pages(pdf, quality)
 
-        output_pdf = Origami::PDF.new
-        # The manual insertion of the xobject parameters into the PDF seems to put the last created page in the first
-        # position. This fixes it.
-        pages.push(pages.shift) unless pages.count < 2
-
-        inject_text(pdf_data, pages) unless disable_source_text
-        pages.each do |page|
-          output_pdf.append_page(page)
-        end
-
-        pages.each
+        output_pdf = create_output_pdf(pages, disable_source_text, pdf_data)
 
         output_stream = StringIO.new
         output_pdf.save(output_stream)
         output_stream
       end
 
+      # Processes all pages in the PDF.
+      # @param pdf [Origami::PDF] The Origami PDF object to process.
+      # @param quality [Integer] Compression quality.
+      # @return [Array<Origami::Page>] Processed pages.
+      def self.process_pdf_pages(pdf, quality)
+        pdf.pages.map.with_index do |page, index|
+          process_pdf_page(Mindee::PDF::PdfProcessor.get_page(pdf, index), index, quality, page[:MediaBox])
+        end
+      end
+
+      # Creates the output PDF with processed pages.
+      # @param pages [Array] Processed pages
+      # @param disable_source_text [Boolean] Whether to disable source text
+      # @param pdf_data [StringIO] Original PDF data
+      # @return [Origami::PDF] Output PDF object
+      def self.create_output_pdf(pages, disable_source_text, pdf_data)
+        output_pdf = Origami::PDF.new
+        # NOTE: Page order and XObject handling require adjustment due to origami adding the last page first.
+        pages.rotate!(1) if pages.count >= 2
+
+        inject_text(pdf_data, pages) unless disable_source_text
+
+        pages.each { |page| output_pdf.append_page(page) }
+
+        output_pdf
+      end
+
+      # Extracts text from a source text PDF, and injects it into a newly-created one.
+      # @param pdf_data [StringIO] Stream representation of the PDF.
+      # @param pages [Array<Origami::Page>] Array of pages containing the rasterized version of the initial pages.
       def self.inject_text(pdf_data, pages)
         reader = PDFReader::Reader.new(pdf_data)
 
@@ -64,10 +79,16 @@ module Mindee
         end
       end
 
+      # Takes in a page stream, rasterizes it into a JPEG image, and applies the result onto a new Origami PDF page.
+      # @param page_stream [StringIO] Stream representation of a single page from the initial PDF.
+      # @param page_index [Integer] Index of the current page. Technically not needed, but left for debugging purposes.
+      # @param image_quality [Integer] Quality to apply to the rasterized page.
+      # @param media_box [Array<Integer>, nil] Extracted media box from the page. Can be nil.
+      # @return [Origami::Page]
       def self.process_pdf_page(page_stream, page_index, image_quality, media_box)
         new_page = Origami::Page.new
-        compressed_image = compress_pdf_image(page_stream, image_quality)
-        width, height = Mindee::Image::ImageUtils.calculate_dimensions(compressed_image, media_box)
+        compressed_image = Mindee::Image::ImageUtils.pdf_to_magick_image(page_stream, image_quality)
+        width, height = Mindee::Image::ImageUtils.calculate_dimensions_from_media_box(compressed_image, media_box)
 
         compressed_xobject = PDF::PDFTools.create_xobject(compressed_image)
         PDF::PDFTools.set_xobject_properties(compressed_xobject, compressed_image)
@@ -78,13 +99,6 @@ module Mindee
 
         PDF::PDFTools.set_page_dimensions(new_page, width, height)
         new_page
-      end
-
-      def self.compress_pdf_image(page_stream, image_quality)
-        compressed_image = MiniMagick::Image.read(page_stream.read)
-        compressed_image.format('jpg')
-        compressed_image.quality image_quality.to_s
-        compressed_image
       end
     end
   end

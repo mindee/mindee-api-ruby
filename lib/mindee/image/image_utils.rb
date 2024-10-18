@@ -5,9 +5,10 @@ module Mindee
   module Image
     # Miscellaneous image operations.
     module ImageUtils
-      # @param image [MiniMagick::Image]
-      # @param width [Integer]
-      # @param height [Integer]
+      # Resizes a provided MiniMagick Image with the given width & height, if present.
+      # @param image [MiniMagick::Image] MiniMagick image handle.
+      # @param width [Integer] Width to comply with.
+      # @param height [Integer] Height to comply with.
       def self.resize_image(image, width, height)
         if width && height
           image.resize "#{width}x#{height}"
@@ -18,8 +19,9 @@ module Mindee
         end
       end
 
-      # @param image [MiniMagick::Image]
-      # @param quality [Integer]
+      # Compresses the quality of the provided MiniMagick image.
+      # @param image [MiniMagick::Image] MiniMagick image handle.
+      # @param quality [Integer] Quality to apply to the image. This is independent from a JPG's base quality.
       def self.compress_image_quality(image, quality)
         image.quality quality.to_s
       end
@@ -39,6 +41,9 @@ module Mindee
       end
 
       # Converts a StringIO containing an image into a MiniMagick image.
+      # @param image [MiniMagick::Image] the input image.
+      # @param format [String] Format parameter, left open for the future, but should be JPEG for current use-cases.
+      # @return [StringIO]
       def self.image_to_stringio(image, format = 'JPEG')
         image.format format
         blob = image.to_blob
@@ -69,15 +74,30 @@ module Mindee
         [new_width, new_height]
       end
 
-      def self.calculate_dimensions(image, media_box)
-        if media_box && !media_box.empty?
+      # Computes the Height & Width from a page's media box. Falls back to the size of the initial image.
+      # @param image [MiniMagick::Image] The initial image that will fit into the page.
+      # @param media_box [Array<Integer>, nil]
+      # @return [Array<Integer>]
+      def self.calculate_dimensions_from_media_box(image, media_box)
+        if !media_box.nil? && media_box.any?
           [
-            media_box[2]&.to_i || image[:width],
-            media_box[3]&.to_i || image[:height],
+            media_box[2]&.to_i || image[:width].to_i,
+            media_box[3]&.to_i || image[:height].to_i,
           ]
         else
-          [image[:width], image[:height]]
+          [image[:width].to_i, image[:height].to_i]
         end
+      end
+
+      # Transforms a PDF into a MagickImage. This is currently used for single-page PDFs.
+      # @param pdf_stream [StringIO] Input stream.
+      # @param image_quality [Integer] Quality to apply to the image.
+      # @return [MiniMagick::Image]
+      def self.pdf_to_magick_image(pdf_stream, image_quality)
+        compressed_image = MiniMagick::Image.read(pdf_stream.read)
+        compressed_image.format('jpg')
+        compressed_image.quality image_quality.to_s
+        compressed_image
       end
     end
   end
