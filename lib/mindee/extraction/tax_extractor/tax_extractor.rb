@@ -271,6 +271,7 @@ module Mindee
         end
         candidates
       end
+
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
 

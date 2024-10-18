@@ -128,6 +128,7 @@ module Mindee
     end
 
     # rubocop:disable Metrics/ParameterLists
+
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]

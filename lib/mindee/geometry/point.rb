@@ -10,9 +10,10 @@ module Mindee
       # @return [Float]
       attr_accessor :y
 
+      # rubocop:disable Naming/MethodParameterName
+
       # @param x [Float]
       # @param y [Float]
-      # rubocop:disable Naming/MethodParameterName
       def initialize(x, y)
         @x = x
         @y = y
