@@ -148,6 +148,7 @@ describe Mindee::Input::Source do
       FileUtils.rm_f("#{output_dir}/compress50.jpg")
       FileUtils.rm_f("#{output_dir}/compress10.jpg")
       FileUtils.rm_f("#{output_dir}/compress1.jpg")
+      FileUtils.rm_f("#{output_dir}/compress_indirect.jpg")
     end
   end
 
