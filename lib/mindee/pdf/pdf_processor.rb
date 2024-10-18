@@ -18,6 +18,7 @@ module Mindee
 
       # @param io_stream [StreamIO]
       # @param options [Hash]
+      # @return [StringIO]
       def self.parse(io_stream, options)
         options = DEFAULT_OPTIONS.merge(options)
 
@@ -79,6 +80,7 @@ module Mindee
       #
       # @param [Origami::PDF] pdf_doc Origami PDF handle.
       # @param [Integer] page_id Page ID.
+      # @return [StringIO]
       def self.get_page(pdf_doc, page_id)
         stream = StringIO.new
         pdf_doc.save(stream)
