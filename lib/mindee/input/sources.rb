@@ -4,6 +4,7 @@ require 'stringio'
 require 'marcel'
 
 require_relative '../pdf'
+require_relative '../image'
 
 module Mindee
   module Input
@@ -125,6 +126,41 @@ module Mindee
           @io_stream.seek(0)
           pdf_processor = Mindee::PDF::PdfProcessor.open_pdf(@io_stream)
           pdf_processor.pages.size
+        end
+
+        # Compresses the file, according to the provided info.
+        # @param [Integer] quality Quality of the output file.
+        # @param [Integer, nil] max_width Maximum width (Ignored for PDFs).
+        # @param [Integer, nil] max_height Maximum height (Ignored for PDFs).
+        # @param [Boolean] force_source_text Whether to force the operation on PDFs with source text.
+        #   This will attempt to re-render PDF text over the rasterized original. If disabled, ignored the operation.
+        #   WARNING: this operation is strongly discouraged.
+        # @param [Boolean] disable_source_text If the PDF has source text, whether to re-apply it to the original or
+        #   not. Needs force_source_text to work.
+        def compress!(quality: 85, max_width: nil, max_height: nil, force_source_text: false, disable_source_text: true)
+          buffer = if pdf?
+                     Mindee::PDF::PDFCompressor.compress_pdf(
+                       @io_stream,
+                       quality: quality,
+                       force_source_text_compression: force_source_text,
+                       disable_source_text: disable_source_text
+                     )
+                   else
+                     Mindee::Image::ImageCompressor.compress_image(
+                       @io_stream,
+                       quality: quality,
+                       max_width: max_width,
+                       max_height: max_height
+                     )
+                   end
+          @io_stream = buffer
+          @io_stream.rewind
+        end
+
+        # Checks whether the file has source text if it is a pdf. False otherwise
+        # @return [Boolean] True if the file is a PDF and has source text.
+        def source_text?
+          Mindee::PDF::PDFTools.source_text?(@io_stream)
         end
       end
 

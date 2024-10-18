@@ -54,7 +54,6 @@ module Mindee
         image = MiniMagick::Image.read(@buffer)
         image.format file_format.downcase
         image.write resolved_path.to_s
-        logger.info("File saved successfully to '#{resolved_path}'.")
       rescue TypeError
         raise 'Invalid path/filename provided.'
       rescue StandardError

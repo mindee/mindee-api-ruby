@@ -18,6 +18,7 @@ module Mindee
 
       # @param io_stream [StreamIO]
       # @param options [Hash]
+      # @return [StringIO]
       def self.parse(io_stream, options)
         options = DEFAULT_OPTIONS.merge(options)
 
@@ -73,6 +74,22 @@ module Mindee
         pdf_parser = Origami::PDF::LinearParser.new({ verbosity: Origami::Parser::VERBOSE_QUIET })
         io_stream.seek(0)
         pdf_parser.parse(io_stream)
+      end
+
+      # Retrieves a PDF document's page.
+      #
+      # @param [Origami::PDF] pdf_doc Origami PDF handle.
+      # @param [Integer] page_id Page ID.
+      # @return [StringIO]
+      def self.get_page(pdf_doc, page_id)
+        stream = StringIO.new
+        pdf_doc.save(stream)
+
+        options = {
+          page_indexes: [page_id - 1],
+        }
+
+        parse(stream, options)
       end
     end
   end

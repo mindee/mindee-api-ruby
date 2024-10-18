@@ -65,6 +65,7 @@ module Mindee
 
         # rubocop:disable Metrics/CyclomaticComplexity
         # rubocop:disable Metrics/PerceivedComplexity
+
         # Extracts invoices as complete PDFs from the document.
         # @param page_indexes [Array<Array<Integer>, InvoiceSplitterV1PageGroup>]
         # @param strict [Boolean]
@@ -99,6 +100,7 @@ module Mindee
           end
           extract_sub_documents(correct_page_indexes)
         end
+
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/PerceivedComplexity
 

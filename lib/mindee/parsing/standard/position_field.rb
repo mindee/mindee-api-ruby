@@ -31,6 +31,8 @@ module Mindee
 
         # rubocop:disable Metrics/CyclomaticComplexity
         # rubocop:disable Metrics/PerceivedComplexity
+
+        # String representation.
         # @return [String]
         def to_s
           return "Polygon with #{@polygon.size} points." if @polygon&.size&.positive?
@@ -40,6 +42,7 @@ module Mindee
 
           ''
         end
+
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/PerceivedComplexity
 

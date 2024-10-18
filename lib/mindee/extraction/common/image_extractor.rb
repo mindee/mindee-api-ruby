@@ -11,8 +11,8 @@ module Mindee
   # Image Extraction Module.
   module Extraction
     # Image Extraction wrapper class.
-    class ImageExtractor
-      def self.attach_image_as_new_file(input_buffer)
+    module ImageExtractor
+      def self.attach_image_as_new_file(input_buffer, format: 'jpg')
         # Attaches an image as a new page in a PdfDocument object.
         #
         # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
@@ -21,9 +21,9 @@ module Mindee
         magick_image = MiniMagick::Image.read(input_buffer)
         # NOTE: some jpeg images get rendered as three different versions of themselves per output if the format isn't
         # converted.
-        magick_image.format('jpg')
+        magick_image.format(format)
         original_density = magick_image.resolution
-        scale_factor = original_density[0].to_f / 4.166666 # No clue why bit the resolution needs to be reduced for
+        scale_factor = original_density[0].to_f / 4.166666 # No clue why the resolution needs to be reduced for
         # the pdf otherwise the resulting image shrinks.
         magick_image.format('pdf', 0, { density: scale_factor.to_s })
         Origami::PDF.read(StringIO.new(magick_image.to_blob))
@@ -37,25 +37,10 @@ module Mindee
       # to extract.
       # @return [Array<Mindee::Extraction::ExtractedImage>] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
-        new_stream = load_doc(input_source, page_id)
+        new_stream = load_input_source_pdf_page_as_image(input_source, page_id)
         new_stream.seek(0)
 
         extract_images_from_polygons(input_source, new_stream, page_id, polygons)
-      end
-
-      # Retrieves a PDF document's page.
-      #
-      # @param [Origami::PDF] pdf_doc Origami PDF handle.
-      # @param [Integer] page_id Page ID.
-      def self.get_page(pdf_doc, page_id)
-        stream = StringIO.new
-        pdf_doc.save(stream)
-
-        options = {
-          page_indexes: [page_id - 1],
-        }
-
-        Mindee::PDF::PdfProcessor.parse(stream, options)
       end
 
       # Extracts images from their positions on a file (as polygons).
@@ -179,10 +164,10 @@ module Mindee
       # @param input_file [LocalInputSource] Local input.
       # @param [Integer] page_id Page ID.
       # @return [MiniMagick::Image] A valid PdfDocument handle.
-      def self.load_doc(input_file, page_id)
+      def self.load_input_source_pdf_page_as_image(input_file, page_id)
         input_file.io_stream.rewind
         if input_file.pdf?
-          get_page(Origami::PDF.read(input_file.io_stream), page_id)
+          Mindee::PDF::PdfProcessor.get_page(Origami::PDF.read(input_file.io_stream), page_id)
         else
           input_file.io_stream
         end
