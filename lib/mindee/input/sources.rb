@@ -142,7 +142,7 @@ module Mindee
                      Mindee::PDF::PDFCompressor.compress_pdf(
                        @io_stream,
                        quality: quality,
-                       force_source_text: force_source_text,
+                       force_source_text_compression: force_source_text,
                        disable_source_text: disable_source_text
                      )
                    else

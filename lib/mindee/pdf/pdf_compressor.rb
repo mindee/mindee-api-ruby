@@ -9,10 +9,22 @@ module Mindee
     module PDFCompressor
       # Compresses each page of a provided PDF stream. Skips if force_source_text isn't set and source text is detected.
       # @param quality [Integer] Compression quality (70-100 for most JPG images in the test dataset).
-      # @param force_source_text [Boolean] If true, attempts to re-write detected text.
+      # @param force_source_text_compression [Boolean] If true, attempts to re-write detected text.
       # @param disable_source_text [Boolean] If true, doesn't re-apply source text to the original PDF.
-      def self.compress_pdf(pdf_data, quality: 85, force_source_text: false, disable_source_text: true)
-        return pdf_data if !force_source_text && PDFTools.source_text?(pdf_data)
+      def self.compress_pdf(pdf_data, quality: 85, force_source_text_compression: false, disable_source_text: true)
+        if PDFTools.source_text?(pdf_data)
+          if force_source_text_compression
+            if disable_source_text
+              puts "\e[33m[WARNING] Re-writing PDF source-text is an EXPERIMENTAL feature.\e[0m"
+            else
+              puts "\e[33m[WARNING] Source-file contains text, but disable_source_text flag is ignored. " \
+                   "Resulting file will not contain any embedded text.\e[0m"
+            end
+          else
+            puts "\e[33m[WARNING] Source-text detected in input PDF. Aborting operation.\e[0m"
+            return pdf_data
+          end
+        end
 
         pdf_data.rewind
         pdf = Origami::PDF.read(pdf_data)
@@ -36,10 +48,10 @@ module Mindee
       end
 
       # Creates the output PDF with processed pages.
-      # @param pages [Array] Processed pages
-      # @param disable_source_text [Boolean] Whether to disable source text
-      # @param pdf_data [StringIO] Original PDF data
-      # @return [Origami::PDF] Output PDF object
+      # @param pages [Array] Processed pages.
+      # @param disable_source_text [Boolean] Whether to disable source text.
+      # @param pdf_data [StringIO] Original PDF data.
+      # @return [Origami::PDF] Output PDF object.
       def self.create_output_pdf(pages, disable_source_text, pdf_data)
         output_pdf = Origami::PDF.new
         # NOTE: Page order and XObject handling require adjustment due to origami adding the last page first.
