@@ -195,7 +195,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">LocalInputSource</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="LocalInputSource.html#count_pdf_pages-instance_method" title="Mindee::Input::Source::LocalInputSource#count_pdf_pages (method)">#count_pdf_pages</a></span>, <span class='object_link'><a href="LocalInputSource.html#pdf%3F-instance_method" title="Mindee::Input::Source::LocalInputSource#pdf? (method)">#pdf?</a></span>, <span class='object_link'><a href="LocalInputSource.html#process_pdf-instance_method" title="Mindee::Input::Source::LocalInputSource#process_pdf (method)">#process_pdf</a></span>, <span class='object_link'><a href="LocalInputSource.html#rescue_broken_pdf-instance_method" title="Mindee::Input::Source::LocalInputSource#rescue_broken_pdf (method)">#rescue_broken_pdf</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="LocalInputSource.html#compress!-instance_method" title="Mindee::Input::Source::LocalInputSource#compress! (method)">#compress!</a></span>, <span class='object_link'><a href="LocalInputSource.html#count_pdf_pages-instance_method" title="Mindee::Input::Source::LocalInputSource#count_pdf_pages (method)">#count_pdf_pages</a></span>, <span class='object_link'><a href="LocalInputSource.html#pdf%3F-instance_method" title="Mindee::Input::Source::LocalInputSource#pdf? (method)">#pdf?</a></span>, <span class='object_link'><a href="LocalInputSource.html#process_pdf-instance_method" title="Mindee::Input::Source::LocalInputSource#process_pdf (method)">#process_pdf</a></span>, <span class='object_link'><a href="LocalInputSource.html#rescue_broken_pdf-instance_method" title="Mindee::Input::Source::LocalInputSource#rescue_broken_pdf (method)">#rescue_broken_pdf</a></span>, <span class='object_link'><a href="LocalInputSource.html#source_text%3F-instance_method" title="Mindee::Input::Source::LocalInputSource#source_text? (method)">#source_text?</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -264,14 +264,14 @@
       <pre class="lines">
 
 
-146
-147
-148
-149
-150</pre>
+182
+183
+184
+185
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/sources.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/sources.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>fix_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_io_stream'>io_stream</span> <span class='op'>=</span> <span class='const'>StringIO</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='period'>.</span><span class='id identifier rubyid_unpack1'>unpack1</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>m*</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -346,15 +346,15 @@
       <pre class="lines">
 
 
-155
-156
-157
-158
-159
-160</pre>
+191
+192
+193
+194
+195
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/sources.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/sources.rb', line 191</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_document'>read_document</span><span class='lparen'>(</span><span class='label'>close:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='ivar'>@io_stream</span><span class='period'>.</span><span class='id identifier rubyid_seek'>seek</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span>
@@ -372,7 +372,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 11 15:53:20 2024 by
+  Generated on Tue Oct 29 10:20:42 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

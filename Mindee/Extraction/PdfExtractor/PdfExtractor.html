@@ -167,7 +167,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>rubocop:disable Metrics/CyclomaticComplexity rubocop:disable Metrics/PerceivedComplexity Extracts invoices as complete PDFs from the document.</p>
+<p>Extracts invoices as complete PDFs from the document.</p>
 </div></span>
   
 </li>
@@ -315,7 +315,7 @@
   <span class='kw'>if</span> <span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_pdf?'>pdf?</span>
     <span class='ivar'>@source_pdf</span> <span class='op'>=</span> <span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_io_stream'>io_stream</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_pdf_image'>pdf_image</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Extraction.html" title="Mindee::Extraction (module)">Extraction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ImageExtractor.html" title="Mindee::Extraction::ImageExtractor (class)">ImageExtractor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_attach_image_as_new_file'><span class='object_link'><a href="../ImageExtractor.html#attach_image_as_new_file-class_method" title="Mindee::Extraction::ImageExtractor.attach_image_as_new_file (method)">attach_image_as_new_file</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_pdf_image'>pdf_image</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Extraction.html" title="Mindee::Extraction (module)">Extraction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ImageExtractor.html" title="Mindee::Extraction::ImageExtractor (module)">ImageExtractor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_attach_image_as_new_file'><span class='object_link'><a href="../ImageExtractor.html#attach_image_as_new_file-class_method" title="Mindee::Extraction::ImageExtractor.attach_image_as_new_file (method)">attach_image_as_new_file</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_io_buffer'>io_buffer</span> <span class='op'>=</span> <span class='const'>StringIO</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
     <span class='id identifier rubyid_pdf_image'>pdf_image</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='id identifier rubyid_io_buffer'>io_buffer</span><span class='rparen'>)</span>
 
@@ -433,7 +433,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>rubocop:disable Metrics/CyclomaticComplexity rubocop:disable Metrics/PerceivedComplexity Extracts invoices as complete PDFs from the document.</p>
+<p>Extracts invoices as complete PDFs from the document.</p>
 
 
   </div>
@@ -488,7 +488,6 @@
       <pre class="lines">
 
 
-72
 73
 74
 75
@@ -517,10 +516,11 @@
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/extraction/pdf_extractor/pdf_extractor.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/extraction/pdf_extractor/pdf_extractor.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extract_invoices'>extract_invoices</span><span class='lparen'>(</span><span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='comma'>,</span> <span class='label'>strict:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>No indexes provided.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -731,7 +731,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 11 15:53:23 2024 by
+  Generated on Tue Oct 29 10:20:46 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
