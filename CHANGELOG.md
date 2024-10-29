@@ -1,5 +1,15 @@
 # Mindee Ruby API Library Changelog
 
+## v3.15.0 - 2024-10-29
+### Changes
+* :sparkles: add support for image compression
+* :sparkles: add support for PDF compression
+### Fixes
+* :recycle: refactor pdf & image namespaces
+* :memo: fix rubocop directives unexpectedly appearing in Yard documentation
+* :arrow_up: bump version for mini_magick
+
+
 ## v3.14.0 - 2024-10-11
 ### Changes
 * :sparkles: add support for Financial Document v1.10
