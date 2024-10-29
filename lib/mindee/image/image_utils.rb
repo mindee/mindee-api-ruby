@@ -21,7 +21,7 @@ module Mindee
 
       # Compresses the quality of the provided MiniMagick image.
       # @param image [MiniMagick::Image] MiniMagick image handle.
-      # @param quality [Integer] Quality to apply to the image. This is independent from a JPG's base quality.
+      # @param quality [Integer] Quality to apply to the image. This is independent of a JPG's base quality.
       def self.compress_image_quality(image, quality)
         image.quality quality.to_s
       end

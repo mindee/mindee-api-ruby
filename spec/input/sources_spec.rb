@@ -122,7 +122,7 @@ describe Mindee::Input::Source do
 
       output_files = [
         "#{output_dir}/compress100.jpg",
-        "#{output_dir}/compress75.jpg",
+        "#{output_dir}/compress85.jpg",
         "#{output_dir}/compress50.jpg",
         "#{output_dir}/compress10.jpg",
         "#{output_dir}/compress1.jpg",
@@ -144,7 +144,7 @@ describe Mindee::Input::Source do
 
     after(:each) do
       FileUtils.rm_f("#{output_dir}/compress100.jpg")
-      FileUtils.rm_f("#{output_dir}/compress75.jpg")
+      FileUtils.rm_f("#{output_dir}/compress85.jpg")
       FileUtils.rm_f("#{output_dir}/compress50.jpg")
       FileUtils.rm_f("#{output_dir}/compress10.jpg")
       FileUtils.rm_f("#{output_dir}/compress1.jpg")
@@ -210,6 +210,7 @@ describe Mindee::Input::Source do
       FileUtils.rm_f("#{output_dir}/compress_indirect.pdf")
     end
   end
+
   describe 'source text PDF compression' do
     it 'should compress if forced' do
       input_file_path = "#{DATA_DIR}/file_types/pdf/multipage.pdf"

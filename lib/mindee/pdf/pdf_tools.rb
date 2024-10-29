@@ -38,7 +38,7 @@ module Mindee
         data = stream.data
         return false if data.nil? || data.empty?
 
-        text_operators = ['Tc', 'Tw', 'Th', 'TL', 'Tf', 'Tfs', 'Tk', 'Tr', 'Tm', 'T*', 'Tj', 'TJ', "'", '"']
+        text_operators = ['Tc', 'Tw', 'Th', 'TL', 'Tf', 'Tk', 'Tr', 'Tm', 'T*', 'Tj', 'TJ', "'", '"']
         text_operators.any? { |op| data.include?(op) }
       end
 
