@@ -149,8 +149,8 @@ module Mindee
     #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
     # @param cropper [Boolean, nil] Whether to include cropper results for each page.
     #  This performs a cropping operation on the server and will increase response time.
-    # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 4.
-    # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 2.
+    # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
+    # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
     # @param max_retries [Integer] maximum amount of retries. Defaults to 60.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
@@ -162,8 +162,8 @@ module Mindee
       close_file: true,
       page_options: nil,
       cropper: false,
-      initial_delay_sec: 4,
-      delay_sec: 2,
+      initial_delay_sec: 2,
+      delay_sec: 1.5,
       max_retries: 60
     )
       enqueue_res = enqueue(
@@ -272,13 +272,13 @@ module Mindee
     # @param max_retries [Integer, nil] maximum amount of retries.
     def validate_async_params(initial_delay_sec, delay_sec, max_retries)
       min_delay_sec = 1
-      min_initial_delay_sec = 2
+      min_initial_delay_sec = 1
       min_retries = 2
-      raise "Cannot set auto-poll delay to less than #{min_delay_sec} seconds" if delay_sec < min_delay_sec
+      raise "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)" if delay_sec < min_delay_sec
       if initial_delay_sec < min_initial_delay_sec
-        raise "Cannot set initial parsing delay to less than #{min_initial_delay_sec} seconds"
+        raise "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
       end
-      raise "Cannot set auto-poll delay to less than #{min_retries} seconds" if max_retries < min_retries
+      raise "Cannot set auto-poll retries to less than #{min_retries}" if max_retries < min_retries
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
