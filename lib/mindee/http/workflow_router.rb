@@ -57,7 +57,6 @@ module Mindee
           'Authorization' => "Token #{@api_key}",
           'User-Agent' => USER_AGENT,
         }
-        puts "URI??? #{uri}"
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
