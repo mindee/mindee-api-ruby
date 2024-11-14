@@ -10,7 +10,7 @@ require_relative 'resume_v1_certificate'
 module Mindee
   module Product
     module Resume
-      # Resume API version 1.0 document data.
+      # Resume API version 1.1 document data.
       class ResumeV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The location information of the candidate, including city, state, and country.
@@ -252,6 +252,7 @@ module Mindee
           out_str << '  '
           out_str << "+#{char * 17}"
           out_str << "+#{char * 12}"
+          out_str << "+#{char * 38}"
           out_str << "+#{char * 27}"
           out_str << "+#{char * 11}"
           out_str << "+#{char * 10}"
@@ -274,6 +275,7 @@ module Mindee
           out_str << "\n  |"
           out_str << ' Contract Type   |'
           out_str << ' Department |'
+          out_str << ' Description                          |'
           out_str << ' Employer                  |'
           out_str << ' End Month |'
           out_str << ' End Year |'

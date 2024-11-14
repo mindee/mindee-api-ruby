@@ -6,7 +6,7 @@ require_relative 'invoice_v4_line_item'
 module Mindee
   module Product
     module Invoice
-      # Invoice API version 4.8 document data.
+      # Invoice API version 4.9 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.

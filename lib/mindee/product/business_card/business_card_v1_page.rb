@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'resume_v1_document'
+require_relative 'business_card_v1_document'
 
 module Mindee
   module Product
-    module Resume
-      # Resume API version 1.1 page data.
-      class ResumeV1Page < Mindee::Parsing::Common::Page
+    module BusinessCard
+      # Business Card API version 1.0 page data.
+      class BusinessCardV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
           super(prediction)
-          @prediction = ResumeV1PagePrediction.new(
+          @prediction = BusinessCardV1PagePrediction.new(
             prediction['prediction'],
             prediction['id']
           )
         end
       end
 
-      # Resume V1 page prediction.
-      class ResumeV1PagePrediction < ResumeV1Document
+      # Business Card V1 page prediction.
+      class BusinessCardV1PagePrediction < BusinessCardV1Document
         # @return [String]
         def to_s
           out_str = String.new
