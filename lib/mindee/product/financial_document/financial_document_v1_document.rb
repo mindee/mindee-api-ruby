@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.10 document data.
+      # Financial Document API version 1.11 document data.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.

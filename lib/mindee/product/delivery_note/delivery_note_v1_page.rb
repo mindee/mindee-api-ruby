@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'resume_v1_document'
+require_relative 'delivery_note_v1_document'
 
 module Mindee
   module Product
-    module Resume
-      # Resume API version 1.1 page data.
-      class ResumeV1Page < Mindee::Parsing::Common::Page
+    module DeliveryNote
+      # Delivery note API version 1.1 page data.
+      class DeliveryNoteV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
           super(prediction)
-          @prediction = ResumeV1PagePrediction.new(
+          @prediction = DeliveryNoteV1PagePrediction.new(
             prediction['prediction'],
             prediction['id']
           )
         end
       end
 
-      # Resume V1 page prediction.
-      class ResumeV1PagePrediction < ResumeV1Document
+      # Delivery note V1 page prediction.
+      class DeliveryNoteV1PagePrediction < DeliveryNoteV1Document
         # @return [String]
         def to_s
           out_str = String.new

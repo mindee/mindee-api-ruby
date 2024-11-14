@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_document'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.10 page data.
+      # Financial Document API version 1.11 page data.
       class FinancialDocumentV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
