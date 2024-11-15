@@ -237,8 +237,8 @@ module Mindee
       end
 
       product_class ||= Product::Generated::GeneratedV1
-      router = Mindee::HTTP::WorkflowRouter.new(workflow_id, api_key: @api_key)
-      prediction, raw_http = router.execute_workflow(input_source, all_words, full_text, close_file, cropper)
+      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
+      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, all_words, full_text, close_file, cropper)
       Mindee::Parsing::Common::WorkflowResponse.new(product_class,
                                                     prediction, raw_http)
     end

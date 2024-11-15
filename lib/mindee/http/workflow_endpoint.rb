@@ -7,7 +7,7 @@ require_relative 'error'
 module Mindee
   module HTTP
     # Handles the routing for workflow calls.
-    class WorkflowRouter
+    class WorkflowEndpoint
       # @return [String]
       attr_reader :api_key
       # @return [Integer]
