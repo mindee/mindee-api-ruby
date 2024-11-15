@@ -9,7 +9,7 @@ module Mindee
         # @return [String]
         attr_reader :name
 
-        # Identifier for the execution.
+        # Optional alias for the file.
         # @return [String]
         attr_reader :alias
 
