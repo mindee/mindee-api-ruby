@@ -5,7 +5,7 @@ require 'mindee'
 require_relative '../data'
 
 RSpec.describe Mindee::Client do
-  describe '#execute_workflow' do
+  describe 'execute_workflow' do
     it 'should deserialize response correctly when sending a document to an execution' do
       json_file_path = "#{DATA_DIR}/workflows/success.json"
       mock_response = JSON.parse(File.read(json_file_path))
