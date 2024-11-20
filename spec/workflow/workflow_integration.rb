@@ -25,7 +25,7 @@ describe Mindee::Client do
       )
 
       expect(response.execution.file.alias).to eq(document_alias)
-      expect(response.execution.priority).to eq(Mindee::Parsing::Common::ExecutionPriority::LOW)
+      expect(response.execution.priority).to eq(priority)
     end
   end
 end

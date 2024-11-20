@@ -27,7 +27,7 @@ describe Mindee::Client do
       expect(mocked_execution.execution.file.name).to eq('default_sample.jpg')
       expect(mocked_execution.execution.id).to eq('8c75c035-e083-4e77-ba3b-7c3598bd1d8a')
       expect(mocked_execution.execution.inference).to be_nil
-      expect(mocked_execution.execution.priority).to eq('medium')
+      expect(mocked_execution.execution.priority).to eq(:medium)
       expect(mocked_execution.execution.reviewed_at).to be_nil
       expect(mocked_execution.execution.reviewed_prediction).to be_nil
       expect(mocked_execution.execution.status).to eq('processing')
@@ -60,7 +60,7 @@ describe Mindee::Client do
       expect(mocked_execution.execution.file.name).to eq('default_sample.jpg')
       expect(mocked_execution.execution.id).to eq('b743e123-e18c-4b62-8a07-811a4f72afd3')
       expect(mocked_execution.execution.inference).to be_nil
-      expect(mocked_execution.execution.priority).to eq('low')
+      expect(mocked_execution.execution.priority).to eq(:low)
       expect(mocked_execution.execution.reviewed_at).to be_nil
       expect(mocked_execution.execution.reviewed_prediction).to be_nil
       expect(mocked_execution.execution.status).to eq('processing')
