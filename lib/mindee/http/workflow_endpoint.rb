@@ -24,14 +24,13 @@ module Mindee
 
       # Sends a document to the workflow.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param document_alias [String, nil] Alias to give to the document.
+      # @param priority [Symbol, nil] Priority to give to the document.
       # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [Boolean] Whether the file will be closed after reading
-      # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Array]
-      def execute_workflow(input_source, all_words, full_text, close_file, cropper)
+      def execute_workflow(input_source, full_text, document_alias, priority)
         check_api_key
-        response = workflow_execution_req_post(input_source, all_words, full_text, close_file, cropper)
+        response = workflow_execution_req_post(input_source, document_alias, priority, full_text)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
@@ -41,15 +40,13 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean] Whether the full word extraction needs to be performed
+      # @param document_alias [String, nil] Alias to give to the document.
+      # @param priority [Symbol, nil] Priority to give to the document.
       # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [Boolean] Whether the file will be closed after reading
-      # @param cropper [Boolean] Whether a cropping operation will be applied
       # @return [Net::HTTPResponse, nil]
-      def workflow_execution_req_post(input_source, all_words, full_text, close_file, cropper)
+      def workflow_execution_req_post(input_source, document_alias, priority, full_text)
         uri = URI(@url)
         params = {}
-        params[:cropper] = 'true' if cropper
         params[:full_text_ocr] = 'true' if full_text
         uri.query = URI.encode_www_form(params)
 
@@ -61,9 +58,10 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
                     else
-                      [input_source.read_document(close: close_file)]
+                      [input_source.read_document]
                     end
-        form_data.push ['include_mvision', 'true'] if all_words
+        form_data.push ['alias', document_alias] if document_alias
+        form_data.push ['priority', priority.to_s] if priority
 
         req.set_form(form_data, 'multipart/form-data')
 

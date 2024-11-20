@@ -197,17 +197,11 @@ module Mindee
 
     # Sends a document to a workflow.
     #
-    # @param product_class [Mindee::Inference] class of the product
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    #
-    # @param all_words [Boolean] Whether to extract all the words on each page.
-    #  This performs a full OCR operation on the server and will increase response time.
-    #
+    # @param document_alias [String, nil] Alias to give to the document.
+    # @param priority [Symbol, nil] Priority to give to the document.
     # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
     #  This performs a full OCR operation on the server and may increase response time.
-    #
-    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
-    #  Set to false if you need to access the file after this operation.
     #
     # @param page_options [Hash, nil] Page cutting/merge options:
     #
@@ -217,29 +211,23 @@ module Mindee
     #      * `:REMOVE` - remove the specified pages, and keep all others.
     #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
     #
-    # @param cropper [Boolean] Whether to include cropper results for each page.
-    #  This performs a cropping operation on the server and will increase response time.
-    #
     #
     # @return [Mindee::Parsing::Common::WorkflowResponse]
     def execute_workflow(
       input_source,
       workflow_id,
-      product_class: nil,
-      all_words: false,
+      document_alias: nil,
+      priority: nil,
       full_text: false,
-      close_file: true,
-      page_options: nil,
-      cropper: false
+      page_options: nil
     )
       if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
         input_source.process_pdf(page_options)
       end
 
-      product_class ||= Product::Generated::GeneratedV1
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
-      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, all_words, full_text, close_file, cropper)
-      Mindee::Parsing::Common::WorkflowResponse.new(product_class,
+      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority)
+      Mindee::Parsing::Common::WorkflowResponse.new(Product::Generated::GeneratedV1,
                                                     prediction, raw_http)
     end
 

@@ -21,7 +21,7 @@ module Mindee
         # @return [Mindee::Inference]
         attr_reader :inference
         # Priority of the execution.
-        # @return [String]
+        # @return [ExecutionPriority]
         attr_reader :priority
         # The time at which the file was tagged as reviewed.
         # @return [Time, nil]
@@ -55,7 +55,7 @@ module Mindee
           @file = ExecutionFile.new(http_response['file']) if http_response['file']
           @id = http_response['id']
           @inference = product_class.new(http_response['inference']) if http_response['inference']
-          @priority = http_response['priority']
+          @priority = Mindee::Parsing::Common::ExecutionPriority.to_priority(http_response['priority'])
           @reviewed_at = Time.iso8601(http_response['reviewed_at']) if http_response['reviewed_at']
           @available_at = Time.iso8601(http_response['available_at']) if http_response['available_at']
           if http_response['reviewed_prediction']
