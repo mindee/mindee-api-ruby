@@ -14,6 +14,7 @@ result = mindee_client.execute_workflow(
   workflow_id
 )
 
+# Alternatively, set an alias & a priority for the execution.
 # result = mindee_client.execute_workflow(
 #   input_source,
 #   workflow_id,
