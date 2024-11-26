@@ -195,6 +195,46 @@ module Mindee
 
     # rubocop:enable Metrics/ParameterLists
 
+    # Sends a document to a workflow.
+    #
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param document_alias [String, nil] Alias to give to the document.
+    # @param priority [Symbol, nil] Priority to give to the document.
+    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #  This performs a full OCR operation on the server and may increase response time.
+    #
+    # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
+    # requiring authentication.
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #      * `:REMOVE` - remove the specified pages, and keep all others.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    #
+    #
+    # @return [Mindee::Parsing::Common::WorkflowResponse]
+    def execute_workflow(
+      input_source,
+      workflow_id,
+      document_alias: nil,
+      priority: nil,
+      full_text: false,
+      public_url: nil,
+      page_options: nil
+    )
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
+        input_source.process_pdf(page_options)
+      end
+
+      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
+      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority,
+                                                                public_url)
+      Mindee::Parsing::Common::WorkflowResponse.new(Product::Generated::GeneratedV1,
+                                                    prediction, raw_http)
+    end
+
     # Load a prediction.
     #
     # @param product_class [Mindee::Inference] class of the product

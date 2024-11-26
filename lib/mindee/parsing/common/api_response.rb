@@ -32,7 +32,7 @@ module Mindee
         attr_reader :id
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :issued_at
-        # @return [Mindee::Parsing::Standard::DateField, nil]
+        # @return [Time, nil]
         attr_reader :available_at
         # @return [JobStatus, Symbol]
         attr_reader :status
@@ -119,6 +119,27 @@ module Mindee
             @document = Mindee::Parsing::Common::Document.new(product_class, http_response['document'])
           end
           @job = Mindee::Parsing::Common::Job.new(http_response['job']) if http_response.key?('job')
+        end
+      end
+
+      # Represents the server response after a document is sent to a workflow.
+      class WorkflowResponse
+        # Set the prediction model used to parse the document.
+        # The response object will be instantiated based on this parameter.
+        # @return [Mindee::Parsing::Common::Execution]
+        attr_reader :execution
+        # @return [Mindee::Parsing::Common::ApiRequest]
+        attr_reader :api_request
+        # @return [String]
+        attr_reader :raw_http
+
+        # @param http_response [Hash]
+        # @param product_class [Mindee::Inference]
+        def initialize(product_class, http_response, raw_http)
+          @raw_http = raw_http.to_s
+          @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
+          product_class = (product_class || Product::Generated::GeneratedV1)
+          @execution = Mindee::Parsing::Common::Execution.new(product_class, http_response['execution'])
         end
       end
     end
