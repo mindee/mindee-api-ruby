@@ -203,6 +203,8 @@ module Mindee
     # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
     #  This performs a full OCR operation on the server and may increase response time.
     #
+    # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
+    # requiring authentication.
     # @param page_options [Hash, nil] Page cutting/merge options:
     #
     #  * `:page_indexes` Zero-based list of page indexes.
@@ -219,6 +221,7 @@ module Mindee
       document_alias: nil,
       priority: nil,
       full_text: false,
+      public_url: nil,
       page_options: nil
     )
       if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
@@ -226,7 +229,8 @@ module Mindee
       end
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
-      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority)
+      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority,
+                                                                public_url)
       Mindee::Parsing::Common::WorkflowResponse.new(Product::Generated::GeneratedV1,
                                                     prediction, raw_http)
     end
