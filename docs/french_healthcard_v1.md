@@ -1,13 +1,13 @@
 ---
-title: FR Carte Vitale OCR Ruby
+title: FR Health Card OCR Ruby
 category: 622b805aaec68102ea7fcbc2
-slug: ruby-fr-carte-vitale-ocr
+slug: ruby-fr-health-card-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
-The Ruby OCR SDK supports the [Carte Vitale API](https://platform.mindee.com/mindee/carte_vitale).
+The Ruby OCR SDK supports the [Health Card API](https://platform.mindee.com/mindee/french_healthcard).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_vitale/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
-![Carte Vitale sample](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_vitale/default_sample.jpg?raw=true)
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/french_healthcard/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+![Health Card sample](https://github.com/mindee/client-lib-test-data/blob/main/products/french_healthcard/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
@@ -20,9 +20,9 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Parse the file
-result = mindee_client.parse(
+result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::FR::CarteVitale::CarteVitaleV1
+  Mindee::Product::FR::HealthCard::HealthCardV1
 )
 
 # Print a full summary of the parsed data in RST format
@@ -38,29 +38,19 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: 8c25cc63-212b-4537-9c9b-3fbd3bd0ee20
+:Mindee ID: 9ee2733d-933a-4dcd-a73a-a31395e3b288
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/carte_vitale v1.0
+:Product: mindee/french_healthcard v1.0
 :Rotation applied: Yes
 
 Prediction
 ==========
 :Given Name(s): NATHALIE
 :Surname: DURAND
-:Social Security Number: 269054958815780
-:Issuance Date: 2007-01-01
-
-Page Predictions
-================
-
-Page 0
-------
-:Given Name(s): NATHALIE
-:Surname: DURAND
-:Social Security Number: 269054958815780
+:Social Security Number: 2 69 05 49 588 157 80
 :Issuance Date: 2007-01-01
 ```
 
@@ -91,10 +81,10 @@ Aside from the basic `Field` attributes, the date field `DateField` also impleme
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
 # Attributes
-The following fields are extracted for Carte Vitale V1:
+The following fields are extracted for Health Card V1:
 
 ## Given Name(s)
-**given_names** (Array<[StringField](#string-field)>): The given name(s) of the card holder.
+**given_names** (Array<[StringField](#string-field)>): The given names of the card holder.
 
 ```rb
 for given_names_elem in result.document.inference.prediction.given_names do
@@ -103,14 +93,14 @@ end
 ```
 
 ## Issuance Date
-**issuance_date** ([DateField](#date-field)): The date the card was issued.
+**issuance_date** ([DateField](#date-field)): The date when the carte vitale document was issued.
 
 ```rb
 puts result.document.inference.prediction.issuance_date.value
 ```
 
 ## Social Security Number
-**social_security** ([StringField](#string-field)): The Social Security Number (Numéro de Sécurité Sociale) of the card holder
+**social_security** ([StringField](#string-field)): The social security number of the card holder.
 
 ```rb
 puts result.document.inference.prediction.social_security.value
