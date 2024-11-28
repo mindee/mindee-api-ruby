@@ -41,7 +41,7 @@ DOCUMENTS = {
     description: 'Invoice',
     doc_class: Mindee::Product::Invoice::InvoiceV4,
     sync: true,
-    async: false,
+    async: true,
   },
   "international-id" => {
     description: 'International Id',
@@ -53,7 +53,13 @@ DOCUMENTS = {
     description: "Expense Receipt",
     doc_class: Mindee::Product::Receipt::ReceiptV5,
     sync: true,
-    async: false,
+    async: true,
+  },
+  "driver-license" => {
+    description: "Driver License",
+    doc_class: Mindee::Product::DriverLicense::DriverLicenseV1,
+    sync: false,
+    async: true,
   },
   "resume" => {
     description: "Resume",
@@ -102,6 +108,18 @@ DOCUMENTS = {
     doc_class: Mindee::Product::FR::IdCard::IdCardV2,
     sync: true,
     async: false,
+  },
+  "fr-health-card" => {
+    description: "FR Health Card",
+    doc_class: Mindee::Product::FR::HealthCard::HealthCardV1,
+    sync: false,
+    async: true,
+  },
+  "fr-payslip" => {
+    description: "FR Payslip",
+    doc_class: Mindee::Product::FR::Payslip::PayslipV3,
+    sync: false,
+    async: true,
   },
   "us-bank-check" => {
     description: "US Bank Check",
