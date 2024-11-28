@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'resume_v1_document'
+require_relative 'driver_license_v1_document'
 
 module Mindee
   module Product
-    module Resume
-      # Resume API version 1.2 page data.
-      class ResumeV1Page < Mindee::Parsing::Common::Page
+    module DriverLicense
+      # Driver License API version 1.0 page data.
+      class DriverLicenseV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
           super(prediction)
-          @prediction = ResumeV1PagePrediction.new(
+          @prediction = DriverLicenseV1PagePrediction.new(
             prediction['prediction'],
             prediction['id']
           )
         end
       end
 
-      # Resume V1 page prediction.
-      class ResumeV1PagePrediction < ResumeV1Document
+      # Driver License V1 page prediction.
+      class DriverLicenseV1PagePrediction < DriverLicenseV1Document
         # @return [String]
         def to_s
           out_str = String.new
