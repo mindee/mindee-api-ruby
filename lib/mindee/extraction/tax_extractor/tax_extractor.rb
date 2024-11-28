@@ -125,15 +125,14 @@ module Mindee
       # @param found_hash [Hash] Hash of currently retrieved values
       # @return [Hash]
       def self.set_base_and_value(reconstructed_hash, found_hash)
-        if found_hash['base'].nil?
-          reconstructed_hash['base'] = found_hash['base']
-          reconstructed_hash['value'] = found_hash['value']
-        elsif found_hash['value'].nil? && found_hash['base'] < found_hash['value']
+        if !found_hash['base'].nil? && !found_hash['value'].nil? && found_hash['base'] > found_hash['value']
           reconstructed_hash['base'] = found_hash['value']
           reconstructed_hash['value'] = found_hash['base']
         else
+          reconstructed_hash['base'] = found_hash['base']
           reconstructed_hash['value'] = found_hash['value']
         end
+
         reconstructed_hash
       end
 
