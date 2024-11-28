@@ -84,7 +84,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/parsing/common/page.rb,<br /> lib/mindee/parsing/common/ocr/ocr.rb,<br /> lib/mindee/parsing/common/product.rb,<br /> lib/mindee/parsing/common/document.rb,<br /> lib/mindee/parsing/common/inference.rb,<br /> lib/mindee/parsing/common/prediction.rb,<br /> lib/mindee/parsing/common/orientation.rb,<br /> lib/mindee/parsing/common/api_response.rb,<br /> lib/mindee/parsing/common/extras/extras.rb,<br /> lib/mindee/parsing/common/ocr/mvision_v1.rb,<br /> lib/mindee/parsing/common/extras/cropper_extra.rb,<br /> lib/mindee/parsing/common/extras/full_text_ocr_extra.rb</span>
+  lib/mindee/parsing/common/page.rb,<br /> lib/mindee/parsing/common/ocr/ocr.rb,<br /> lib/mindee/parsing/common/product.rb,<br /> lib/mindee/parsing/common/document.rb,<br /> lib/mindee/parsing/common/execution.rb,<br /> lib/mindee/parsing/common/inference.rb,<br /> lib/mindee/parsing/common/prediction.rb,<br /> lib/mindee/parsing/common/orientation.rb,<br /> lib/mindee/parsing/common/api_response.rb,<br /> lib/mindee/parsing/common/extras/extras.rb,<br /> lib/mindee/parsing/common/execution_file.rb,<br /> lib/mindee/parsing/common/ocr/mvision_v1.rb,<br /> lib/mindee/parsing/common/execution_priority.rb,<br /> lib/mindee/parsing/common/extras/cropper_extra.rb,<br /> lib/mindee/parsing/common/extras/full_text_ocr_extra.rb</span>
 </dd>
   </dl>
   
@@ -105,11 +105,11 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Common/Extras.html" title="Mindee::Parsing::Common::Extras (module)">Extras</a></span>, <span class='object_link'><a href="Common/JobStatus.html" title="Mindee::Parsing::Common::JobStatus (module)">JobStatus</a></span>, <span class='object_link'><a href="Common/Ocr.html" title="Mindee::Parsing::Common::Ocr (module)">Ocr</a></span>, <span class='object_link'><a href="Common/RequestStatus.html" title="Mindee::Parsing::Common::RequestStatus (module)">RequestStatus</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Common/ExecutionPriority.html" title="Mindee::Parsing::Common::ExecutionPriority (module)">ExecutionPriority</a></span>, <span class='object_link'><a href="Common/Extras.html" title="Mindee::Parsing::Common::Extras (module)">Extras</a></span>, <span class='object_link'><a href="Common/JobStatus.html" title="Mindee::Parsing::Common::JobStatus (module)">JobStatus</a></span>, <span class='object_link'><a href="Common/Ocr.html" title="Mindee::Parsing::Common::Ocr (module)">Ocr</a></span>, <span class='object_link'><a href="Common/RequestStatus.html" title="Mindee::Parsing::Common::RequestStatus (module)">RequestStatus</a></span>
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Common/ApiRequest.html" title="Mindee::Parsing::Common::ApiRequest (class)">ApiRequest</a></span>, <span class='object_link'><a href="Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span>, <span class='object_link'><a href="Common/Document.html" title="Mindee::Parsing::Common::Document (class)">Document</a></span>, <span class='object_link'><a href="Common/Inference.html" title="Mindee::Parsing::Common::Inference (class)">Inference</a></span>, <span class='object_link'><a href="Common/Job.html" title="Mindee::Parsing::Common::Job (class)">Job</a></span>, <span class='object_link'><a href="Common/Orientation.html" title="Mindee::Parsing::Common::Orientation (class)">Orientation</a></span>, <span class='object_link'><a href="Common/Page.html" title="Mindee::Parsing::Common::Page (class)">Page</a></span>, <span class='object_link'><a href="Common/Prediction.html" title="Mindee::Parsing::Common::Prediction (class)">Prediction</a></span>, <span class='object_link'><a href="Common/Product.html" title="Mindee::Parsing::Common::Product (class)">Product</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Common/ApiRequest.html" title="Mindee::Parsing::Common::ApiRequest (class)">ApiRequest</a></span>, <span class='object_link'><a href="Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span>, <span class='object_link'><a href="Common/Document.html" title="Mindee::Parsing::Common::Document (class)">Document</a></span>, <span class='object_link'><a href="Common/Execution.html" title="Mindee::Parsing::Common::Execution (class)">Execution</a></span>, <span class='object_link'><a href="Common/ExecutionFile.html" title="Mindee::Parsing::Common::ExecutionFile (class)">ExecutionFile</a></span>, <span class='object_link'><a href="Common/Inference.html" title="Mindee::Parsing::Common::Inference (class)">Inference</a></span>, <span class='object_link'><a href="Common/Job.html" title="Mindee::Parsing::Common::Job (class)">Job</a></span>, <span class='object_link'><a href="Common/Orientation.html" title="Mindee::Parsing::Common::Orientation (class)">Orientation</a></span>, <span class='object_link'><a href="Common/Page.html" title="Mindee::Parsing::Common::Page (class)">Page</a></span>, <span class='object_link'><a href="Common/Prediction.html" title="Mindee::Parsing::Common::Prediction (class)">Prediction</a></span>, <span class='object_link'><a href="Common/Product.html" title="Mindee::Parsing::Common::Product (class)">Product</a></span>, <span class='object_link'><a href="Common/WorkflowResponse.html" title="Mindee::Parsing::Common::WorkflowResponse (class)">WorkflowResponse</a></span>
     
   
 </p>
@@ -125,7 +125,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Nov 14 10:11:06 2024 by
+  Generated on Thu Nov 28 09:58:43 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

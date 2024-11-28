@@ -9,7 +9,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::InternationalId::InternationalIdV1
+  Mindee::Product::DriverLicense::DriverLicenseV1
 )
 
 # Print a full summary of the parsed data in RST format

@@ -1,0 +1,29 @@
+require 'mindee'
+
+workflow_id = 'workflow-id'
+
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
+# Load a file from disk
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+# Send the file to the workflow
+result = mindee_client.execute_workflow(
+  input_source,
+  workflow_id
+)
+
+# Alternatively, set an alias & a priority for the execution.
+# result = mindee_client.execute_workflow(
+#   input_source,
+#   workflow_id,
+#   document_alias: "my-alias",
+#   priority: Mindee::Parsing::Common::ExecutionPriority::LOW
+# )
+
+# Print the execution's ID to make sure it worked
+puts result.execution.id
+
+# Print the inference, if present
+# puts result.document.inference
