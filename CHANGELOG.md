@@ -1,5 +1,13 @@
 # Mindee Ruby API Library Changelog
 
+## v3.17.0 - 2024-11-28
+### Changes
+* :sparkles: add support for workflows
+* :sparkles: add support for French Health Card V1
+* :sparkles: add support for Driver License V1
+* :sparkles: add support for Payslip FR V3
+* :coffin: remove support for international ID V1
+
 ## v3.16.0 - 2024-11-14
 ### Changes
 * :sparkles: add support for business cards V1
