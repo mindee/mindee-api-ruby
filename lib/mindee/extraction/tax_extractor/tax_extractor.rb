@@ -2,6 +2,8 @@
 
 require_relative 'ocr_extractor'
 
+# rubocop:disable Metrics/ClassLength
+
 module Mindee
   module Extraction
     # Tax extractor class
@@ -72,9 +74,12 @@ module Mindee
         reconstructed_hash['code'] =
           found_hash['code'].nil? ? found_hash['code'] : found_hash['code'].sub(%r{\s*\.*\s*$}, '')
 
-        if found_hash['rate'] && found_hash['rate'] < 1 && (found_hash['rate']).positive?
-          found_hash['rate'] =
-            found_hash['rate'] * 100
+        if found_hash['rate']
+          if found_hash['rate'].abs < 1
+            found_hash['rate'] *= 10
+          elsif found_hash['rate'].abs > 100
+            found_hash['rate'] /= 10
+          end
         end
         found_hash = swap_rates_if_needed(found_hash, min_rate_percentage, max_rate_percentage)
         found_hash = decimate_rates_if_needed(found_hash)
@@ -125,15 +130,26 @@ module Mindee
       # @param found_hash [Hash] Hash of currently retrieved values
       # @return [Hash]
       def self.set_base_and_value(reconstructed_hash, found_hash)
-        if !found_hash['base'].nil? && !found_hash['value'].nil? && found_hash['base'] > found_hash['value']
-          reconstructed_hash['base'] = found_hash['value']
-          reconstructed_hash['value'] = found_hash['base']
-        else
-          reconstructed_hash['base'] = found_hash['base']
-          reconstructed_hash['value'] = found_hash['value']
+        base = found_hash['base']
+        value = found_hash['value']
+
+        if base && value
+          reconstructed_hash['base'], reconstructed_hash['value'] = [base, value].minmax
+        elsif base
+          reconstructed_hash['base'] = base
+        elsif value
+          reconstructed_hash['value'] = value
+          calculate_base(reconstructed_hash)
         end
 
         reconstructed_hash
+      end
+
+      def self.calculate_base(hash)
+        rate = hash['rate']
+        return unless rate&.positive?
+
+        hash['base'] = hash['value'] / (rate / 100.0)
       end
 
       # Extracts a single custom type of tax.
@@ -148,7 +164,6 @@ module Mindee
 
         tax_names.sort!
         found_hash = pick_best(extract_horizontal_tax(ocr_result, tax_names), tax_names)
-        # a tax is considered found horizontally if it has a value, otherwise it is vertical
         if found_hash.nil? || found_hash['value'].nil?
           found_hash = extract_vertical_tax(ocr_result, tax_names,
                                             found_hash)
@@ -239,14 +254,14 @@ module Mindee
         linear_pattern_percent_first = %r{
           ((?:\s*-\s*)?(?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\s*-\s*)?(?:\d*[.,])*\d+)?[ .]?
           ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]?
-          ((?:\s*-\s*)?(?:\d*[.,])+\d{2,})?[ .]*
-          ((?:\s*-\s*)?(\d*[.,])*\d{2,})?
+          ((?:\s*-\s*)?(?:\d*[.,])+\d+)?[ .]*
+          ((?:\s*-\s*)?(\d*[.,])*\d+)?
         }x
         linear_pattern_percent_second = %r{
           ([a-zA-ZÀ-ÖØ-öø-ÿ .]*[a-zA-ZÀ-ÖØ-öø-ÿ]?)[ .]*
           ((?:\s*-\s*)?(?:\d*[.,])*\d+[ ]?%?|%?[ ]?(?:\s*-\s*)?(?:\d*[.,])*\d+)?[ .]?
-          ((?:\s*-\s*)?(?:\d*[.,])+\d{2,})?[ .]*
-          ((?:\s*-\s*)?(\d*[.,])*\d{2,})?
+          ((?:\s*-\s*)?(?:\d*[.,])+\d+)?[ .]*
+          ((?:\s*-\s*)?(\d*[.,])*\d+)?
         }x
         ocr_result.mvision_v1.pages.each.with_index do |page, page_id|
           page.all_lines.each do |line|
@@ -303,7 +318,7 @@ module Mindee
           page.all_words.each do |word|
             next if match_index(word.text, tax_names).nil?
 
-            reconstructed_line = ocr_result.reconstruct_vertically(word.polygon, page_id)
+            reconstructed_line = ocr_result.reconstruct_vertically(word.polygon, page_id, 0.25)
             found_hash['page_id'] = page_id if found_hash['page_id'].nil?
             found_hash['code'] = word.text.strip if found_hash['code'].nil?
             found_hash = extract_vertical_tax_values(reconstructed_line, found_hash)
@@ -315,8 +330,9 @@ module Mindee
       private_class_method :extract_percentage_from_tax, :extract_basis_and_value, :extract_tax_from_horizontal_line,
                            :extract_horizontal_tax, :extract_vertical_tax_values, :extract_vertical_tax,
                            :create_tax_field, :fix_rate, :pick_best, :calculate_score, :curate_values,
-                           :decimate_rates_if_needed, :extract_basis_and_value, :set_base_and_value, :valid_candidate?,
-                           :swap_rates_if_needed
+                           :decimate_rates_if_needed, :set_base_and_value, :valid_candidate?,
+                           :swap_rates_if_needed, :calculate_base
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
