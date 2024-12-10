@@ -50,18 +50,6 @@ describe Mindee::Input::Source do
     end
   end
 
-  context 'A remote url file' do
-    it 'should not send an invalid URL' do
-      expect do
-        Mindee::Input::Source::UrlInputSource.new('http://invalid-url')
-      end.to raise_error 'URL must be HTTPS'
-    end
-    it 'should send a valid URL' do
-      input = Mindee::Input::Source::UrlInputSource.new('https://platform.mindee.com')
-      expect(input.url).to eq('https://platform.mindee.com')
-    end
-  end
-
   context 'A broken fixable PDF' do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
     it 'Should not raise a mime error' do

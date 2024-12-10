@@ -97,12 +97,6 @@ DOCUMENTS = {
     sync: false,
     async: true,
   },
-  "fr-carte-vitale" => {
-    description: "FR Carte Vitale",
-    doc_class: Mindee::Product::FR::CarteVitale::CarteVitaleV1,
-    sync: true,
-    async: false,
-  },
   "fr-id-card" => {
     description: "FR ID Card",
     doc_class: Mindee::Product::FR::IdCard::IdCardV2,
