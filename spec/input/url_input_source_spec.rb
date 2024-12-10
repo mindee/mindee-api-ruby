@@ -37,7 +37,7 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
       let(:mock_response) { MockHTTPResponse.new('1.1', '200', 'OK', 'file content') }
 
       it 'returns a BytesInputSource' do
-        result = url_input_source.as_local_input_source('', filename: 'file.pdf')
+        result = url_input_source.as_local_input_source(filename: 'file.pdf')
         expect(result).to be_a(Mindee::Input::Source::BytesInputSource)
         expect(result.filename).to eq('file.pdf')
         expect(result.io_stream).to be_a(StringIO)
@@ -45,12 +45,12 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
       end
 
       it 'uses a custom filename when provided' do
-        result = url_input_source.as_local_input_source('', filename: 'custom.pdf')
+        result = url_input_source.as_local_input_source(filename: 'custom.pdf')
         expect(result.filename).to eq('custom.pdf')
       end
 
       it 'handles authentication' do
-        result = url_input_source.as_local_input_source('', username: 'user', password: 'pass')
+        result = url_input_source.as_local_input_source(username: 'user', password: 'pass')
         expect(result).to be_a(Mindee::Input::Source::BytesInputSource)
       end
     end
@@ -59,7 +59,7 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
       let(:mock_response) { MockHTTPResponse.new('1.1', '404', 'Not Found', '') }
 
       it 'raises an error' do
-        expect { url_input_source.as_local_input_source('') }.to raise_error(RuntimeError, %r{Failed to download file})
+        expect { url_input_source.as_local_input_source }.to raise_error(RuntimeError, %r{Failed to download file})
       end
     end
   end

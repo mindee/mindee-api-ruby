@@ -47,7 +47,7 @@ module Mindee
         # @param token [String, nil] Optional token for JWT-based authentication.
         # @param max_redirects [Integer] Maximum amount of redirects to follow.
         # @return [BytesInputSource] The full path of the saved file.
-        def as_local_input_source(_path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
+        def as_local_input_source(filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
           filename = fill_filename(filename)
           response_body = fetch_file_content(username: username, password: password, token: token,
                                              max_redirects: max_redirects)
