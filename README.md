@@ -116,7 +116,7 @@ result = mindee_client.parse(
 puts result.document
 ```
 
-### Custom Document (API Builder)
+### Custom Documents (docTI & Custom APIs)
 
 ```ruby
 require 'mindee'
@@ -131,9 +131,9 @@ endpoint = mindee_client.create_endpoint(
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
-result = mindee_client.parse(
+result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::Custom::CustomV1,
+  Mindee::Product::Generated::GeneratedV1,
   endpoint: endpoint
 )
 
@@ -181,7 +181,7 @@ customize the experience.
 * [EU Driver License OCR Ruby](https://developers.mindee.com/docs/ruby-eu-driver-license-ocr)
 * [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-account-details-ocr)
 * [FR Bank Statement OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-statement-ocr)
-* [FR Carte Vitale OCR Ruby](https://developers.mindee.com/docs/ruby-fr-carte-vitale-ocr)
+* [FR Health Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-health-card-ocr)
 * [FR ID Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-carte-nationale-didentite-ocr)
 * [US Bank Check OCR Ruby](https://developers.mindee.com/docs/ruby-us-bank-check-ocr)
 * [US Driver License OCR Ruby](https://developers.mindee.com/docs/ruby-us-driver-license-ocr)
