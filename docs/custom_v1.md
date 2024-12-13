@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-api-builder-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
-> 🚧 This product is still supported, but is considered to be deprecated. If you are looking for the DocTI API documentation, you can find it [here](https://developers.mindee.com/docs/ruby-generated-ocr).
+> 🚧 This product is still supported, but is considered to be deprecated. If you are looking for the docTI API documentation, you can find it [here](https://developers.mindee.com/docs/ruby-generated-ocr).
 
 # Quick-Start
 

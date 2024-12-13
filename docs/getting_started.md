@@ -226,20 +226,20 @@ result = mindee_client.parse(
 )
 ```
 
-### Custom Documents
+### Custom Documents (docTI)
 For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
 
 ```ruby
-endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine')
+endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine', account_name: 'my-account')
 
-result = mindee_client.parse(
+result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::Custom::CustomV1,
+  Mindee::Product::Generated::GeneratedV1,
   endpoint: endpoint
 )
 ```
 
-This is because the `CustomV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.
+This is because the `GeneratedV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.
 
 ## Process the Result
 The response object is common to all documents, including custom documents. The main properties are:
