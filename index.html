@@ -174,7 +174,7 @@
 </span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_document'>document</span>
 </code></pre>
 
-<h3 id="label-Custom+Document+-28API+Builder-29">Custom Document (API Builder)</h3>
+<h3 id="label-Custom+Documents+-28docTI+-26+Custom+APIs-29">Custom Documents (docTI &amp; Custom APIs)</h3>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mindee</span><span class='tstring_end'>&#39;</span></span>
 
@@ -188,9 +188,9 @@
 <span class='comment'># Load a file from disk
 </span><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
-<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_enqueue_and_parse'>enqueue_and_parse</span><span class='lparen'>(</span>
   <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
-  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Custom.html" title="Mindee::Product::Custom (module)">Custom</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Custom/CustomV1.html" title="Mindee::Product::Custom::CustomV1 (class)">CustomV1</a></span></span><span class='comma'>,</span>
+  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Generated.html" title="Mindee::Product::Generated (module)">Generated</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Generated/GeneratedV1.html" title="Mindee::Product::Generated::GeneratedV1 (class)">GeneratedV1</a></span></span><span class='comma'>,</span>
   <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span>
 <span class='rparen'>)</span>
 
@@ -249,7 +249,7 @@
 </li><li>
 <p><a href="https://developers.mindee.com/docs/ruby-fr-bank-statement-ocr">FR Bank Statement OCR Ruby</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-fr-carte-vitale-ocr">FR Carte Vitale OCR Ruby</a></p>
+<p><a href="https://developers.mindee.com/docs/ruby-fr-health-card-ocr">FR Health Card OCR Ruby</a></p>
 </li><li>
 <p><a href="https://developers.mindee.com/docs/ruby-fr-carte-nationale-didentite-ocr">FR ID Card OCR Ruby</a></p>
 </li><li>
@@ -282,7 +282,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Thu Nov 28 09:58:42 2024 by
+  Generated on Fri Dec 13 09:53:55 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

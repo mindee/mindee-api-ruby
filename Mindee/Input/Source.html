@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/input/sources.rb</span>
+  lib/mindee/input/sources/url_input_source.rb,<br /> lib/mindee/input/sources/file_input_source.rb,<br /> lib/mindee/input/sources/path_input_source.rb,<br /> lib/mindee/input/sources/bytes_input_source.rb,<br /> lib/mindee/input/sources/local_input_source.rb,<br /> lib/mindee/input/sources/base64_input_source.rb</span>
 </dd>
   </dl>
   
@@ -173,7 +173,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Replaces non-ASCII characters by their unicode escape sequence.</p>
+<p>Replaces non-ASCII characters by their UNICODE escape sequence.</p>
 </div></span>
   
 </li>
@@ -200,7 +200,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Replaces non-ASCII characters by their unicode escape sequence. Keeps other characters as is.</p>
+<p>Replaces non-ASCII characters by their UNICODE escape sequence. Keeps other characters as is.</p>
 
 
   </div>
@@ -232,20 +232,20 @@
       <pre class="lines">
 
 
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/sources.rb', line 237</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/sources/local_input_source.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_convert_to_unicode_escape'>convert_to_unicode_escape</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_unicode_escape_string'>unicode_escape_string</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
@@ -268,7 +268,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Nov 28 09:58:43 2024 by
+  Generated on Fri Dec 13 09:53:55 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
