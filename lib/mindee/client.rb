@@ -151,7 +151,7 @@ module Mindee
     #  This performs a cropping operation on the server and will increase response time.
     # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
     # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
-    # @param max_retries [Integer] maximum amount of retries. Defaults to 60.
+    # @param max_retries [Integer] maximum amount of retries. Defaults to 80.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
@@ -164,7 +164,7 @@ module Mindee
       cropper: false,
       initial_delay_sec: 2,
       delay_sec: 1.5,
-      max_retries: 60
+      max_retries: 80
     )
       enqueue_res = enqueue(
         input_source,
