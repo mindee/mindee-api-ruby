@@ -14,6 +14,10 @@ module Mindee
         def initialize(prediction, page_id = nil, reconstructed: false)
           super
         end
+
+        def to_s
+          value ? 'True' : 'False'
+        end
       end
     end
   end
