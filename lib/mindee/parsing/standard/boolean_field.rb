@@ -16,6 +16,8 @@ module Mindee
         end
 
         def to_s
+          return '' if value.nil?
+
           value ? 'True' : 'False'
         end
       end
