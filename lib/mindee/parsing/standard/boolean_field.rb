@@ -14,6 +14,12 @@ module Mindee
         def initialize(prediction, page_id = nil, reconstructed: false)
           super
         end
+
+        def to_s
+          return '' if value.nil?
+
+          value ? 'True' : 'False'
+        end
       end
     end
   end

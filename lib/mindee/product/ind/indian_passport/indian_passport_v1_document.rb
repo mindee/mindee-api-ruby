@@ -6,7 +6,7 @@ module Mindee
   module Product
     module IND
       module IndianPassport
-        # Passport - India API version 1.0 document data.
+        # Passport - India API version 1.2 document data.
         class IndianPassportV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The first line of the address of the passport holder.
