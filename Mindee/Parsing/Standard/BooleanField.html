@@ -199,6 +199,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -218,7 +240,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractField.html" title="Mindee::Parsing::Standard::AbstractField (class)">AbstractField</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="AbstractField.html#array_confidence-class_method" title="Mindee::Parsing::Standard::AbstractField.array_confidence (method)">array_confidence</a></span>, <span class='object_link'><a href="AbstractField.html#array_sum-class_method" title="Mindee::Parsing::Standard::AbstractField.array_sum (method)">array_sum</a></span>, <span class='object_link'><a href="AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span>, <span class='object_link'><a href="AbstractField.html#to_s-instance_method" title="Mindee::Parsing::Standard::AbstractField#to_s (method)">#to_s</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="AbstractField.html#array_confidence-class_method" title="Mindee::Parsing::Standard::AbstractField.array_confidence (method)">array_confidence</a></span>, <span class='object_link'><a href="AbstractField.html#array_sum-class_method" title="Mindee::Parsing::Standard::AbstractField.array_sum (method)">array_sum</a></span>, <span class='object_link'><a href="AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -327,10 +349,50 @@
   </div>
 
 
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/standard/boolean_field.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>True</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>False</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 13 09:53:58 2024 by
+  Generated on Tue Jan 14 12:36:09 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
