@@ -9,7 +9,7 @@ AllCops:
     - _test.rb
     - local_test/*
 
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.0
   SuggestExtensions: false
 
 Gemspec/DevelopmentDependencies:

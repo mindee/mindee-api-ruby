@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.6')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
 
   spec.add_runtime_dependency 'marcel', '~> 1.0.2'
   spec.add_runtime_dependency 'mini_magick', '>=4', '< 6'
