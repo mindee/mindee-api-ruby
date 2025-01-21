@@ -33,7 +33,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
+          super
           @degree_domain = prediction['degree_domain']
           @degree_type = prediction['degree_type']
           @end_month = prediction['end_month']

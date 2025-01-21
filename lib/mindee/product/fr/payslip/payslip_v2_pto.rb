@@ -22,7 +22,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @accrued_this_period = prediction['accrued_this_period']
             @balance_end_of_period = prediction['balance_end_of_period']
             @used_this_period = prediction['used_this_period']

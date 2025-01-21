@@ -29,13 +29,13 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
 
-  spec.add_runtime_dependency 'marcel', '~> 1.0.2'
-  spec.add_runtime_dependency 'mini_magick', '>=4', '< 6'
-  spec.add_runtime_dependency 'origamindee', '~> 3.1.0'
-  spec.add_runtime_dependency 'pdf-reader', '~> 2.12.0'
+  spec.add_dependency 'marcel', '~> 1.0.4'
+  spec.add_dependency 'mini_magick', '>=4', '< 6'
+  spec.add_dependency 'origamindee', '~> 3.1.0'
+  spec.add_dependency 'pdf-reader', '~> 2.13.0'
 
-  spec.add_development_dependency 'rake', '~> 12.3.3'
-  spec.add_development_dependency 'rspec', '~> 3.12.0'
-  spec.add_development_dependency 'rubocop', '~> 1.49.0'
-  spec.add_development_dependency 'yard', '~> 0.9.34'
+  spec.add_development_dependency 'rake', '~> 13.2.1'
+  spec.add_development_dependency 'rspec', '~> 3.13.0'
+  spec.add_development_dependency 'rubocop', '~> 1.70.0'
+  spec.add_development_dependency 'yard', '~> 0.9.37'
 end

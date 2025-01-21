@@ -10,7 +10,7 @@ module Mindee
       class ReceiptV4Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          super(prediction)
+          super
           @prediction = ReceiptV4PagePrediction.new(
             prediction['prediction'],
             prediction['id']
