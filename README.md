@@ -162,6 +162,54 @@ Using the ruby bundler:
 bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
 ```
 
+
+### Enqueue and Parse a Webhook Response
+This is an optional way of handling asynchronous APIs.
+
+```rb
+require 'mindee'
+
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
+# Load a file from disk
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+
+# Parse the file
+enqueue_response = mindee_client.enqueue(
+  input_source,
+  Mindee::Product::InternationalId::InternationalIdV2
+)
+
+job_id = enqueue_response.job.id
+
+# Load the JSON string sent by the Mindee webhook POST callback.
+# Reading the callback data will vary greatly depending on your HTTP server.
+# This is therefore beyond the scope of this example.
+
+local_response = Mindee::Input::LocalResponse.new(request.body.string)
+
+# You can also use a File object as the input.
+# FILE_PATH = File.join('path', 'to', 'file.json').freeze
+# local_response = Mindee::Input::LocalResponse.new(FILE_PATH);
+
+# Optional: verify the HMAC signature.
+unless local_response.valid_hmac_signature?(my_secret_key, 'invalid signature')
+  raise "Invalid HMAC signature!"
+end
+
+
+# Deserialize the response:
+result = mindee_client.load_prediction(
+        Mindee::Product::InternationalId::InternationalIdV2,
+        local_response
+)
+
+# Print a full summary of the parsed data in RST format
+puts result.document
+```
+
 ## Further Reading
 
 There's more to it than that for those that need more features, or want to

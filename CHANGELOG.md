@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v3.19.1 - 2025-01-21
+### Changes
+* :bug: fix extras failing at document level if missing from prediction
+
+
 ## v3.19.0 - 2025-01-14
 ### Changes
 * :sparkles: add support for US Mail V3
