@@ -11,7 +11,7 @@ module Mindee
         class W9V1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = W9V1PagePrediction.new(
               prediction['prediction'],
               prediction['id']

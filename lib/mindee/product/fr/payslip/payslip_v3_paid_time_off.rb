@@ -28,7 +28,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @accrued = prediction['accrued']
             @period = prediction['period']
             @pto_type = prediction['pto_type']

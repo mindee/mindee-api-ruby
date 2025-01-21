@@ -9,7 +9,7 @@ This guide will help you get the most out of the Mindee Ruby client library to e
 ## Installation
 
 ### Requirements
-The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2
+The following Ruby versions are tested and supported: 3.0, 3.1, 3.2, 3.3
 
 ### Standard Installation
 To quickly get started with the Ruby OCR SDK, Install by adding this line to your application's Gemfile:

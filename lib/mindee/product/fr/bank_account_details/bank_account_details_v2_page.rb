@@ -11,7 +11,7 @@ module Mindee
         class BankAccountDetailsV2Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = BankAccountDetailsV2PagePrediction.new(
               prediction['prediction'],
               prediction['id']

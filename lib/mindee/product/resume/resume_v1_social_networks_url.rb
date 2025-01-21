@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
+          super
           @name = prediction['name']
           @url = prediction['url']
           @page_id = page_id

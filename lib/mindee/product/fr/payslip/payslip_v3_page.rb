@@ -11,7 +11,7 @@ module Mindee
         class PayslipV3Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = PayslipV3PagePrediction.new(
               prediction['prediction'],
               prediction['id']
