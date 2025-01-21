@@ -217,6 +217,53 @@
 <pre class="code ruby"><code class="ruby">bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
 </code></pre>
 
+<h3 id="label-Enqueue+and+Parse+a+Webhook+Response">Enqueue and Parse a Webhook Response</h3>
+
+<p>This is an optional way of handling asynchronous APIs.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mindee</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># Init a new client
+</span><span class='id identifier rubyid_mindee_client'>mindee_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Client.html" title="Mindee::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Mindee/Client.html#initialize-instance_method" title="Mindee::Client#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my-api-key</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># Load a file from disk
+</span><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+
+<span class='comment'># Parse the file
+</span><span class='id identifier rubyid_enqueue_response'>enqueue_response</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/InternationalId.html" title="Mindee::Product::InternationalId (module)">InternationalId</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/InternationalId/InternationalIdV2.html" title="Mindee::Product::InternationalId::InternationalIdV2 (class)">InternationalIdV2</a></span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue_response'>enqueue_response</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+
+<span class='comment'># Load the JSON string sent by the Mindee webhook POST callback.
+</span><span class='comment'># Reading the callback data will vary greatly depending on your HTTP server.
+</span><span class='comment'># This is therefore beyond the scope of this example.
+</span>
+<span class='id identifier rubyid_local_response'>local_response</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Input/LocalResponse.html" title="Mindee::Input::LocalResponse (class)">LocalResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Mindee/Input/LocalResponse.html#initialize-instance_method" title="Mindee::Input::LocalResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
+
+<span class='comment'># You can also use a File object as the input.
+</span><span class='comment'># FILE_PATH = File.join(&#39;path&#39;, &#39;to&#39;, &#39;file.json&#39;).freeze
+</span><span class='comment'># local_response = Mindee::Input::LocalResponse.new(FILE_PATH);
+</span>
+<span class='comment'># Optional: verify the HMAC signature.
+</span><span class='kw'>unless</span> <span class='id identifier rubyid_local_response'>local_response</span><span class='period'>.</span><span class='id identifier rubyid_valid_hmac_signature?'>valid_hmac_signature?</span><span class='lparen'>(</span><span class='id identifier rubyid_my_secret_key'>my_secret_key</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invalid signature</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid HMAC signature!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+
+<span class='comment'># Deserialize the response:
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_load_prediction'>load_prediction</span><span class='lparen'>(</span>
+        <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/InternationalId.html" title="Mindee::Product::InternationalId (module)">InternationalId</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/InternationalId/InternationalIdV2.html" title="Mindee::Product::InternationalId::InternationalIdV2 (class)">InternationalIdV2</a></span></span><span class='comma'>,</span>
+        <span class='id identifier rubyid_local_response'>local_response</span>
+<span class='rparen'>)</span>
+
+<span class='comment'># Print a full summary of the parsed data in RST format
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_document'>document</span>
+</code></pre>
+
 <h2 id="label-Further+Reading">Further Reading</h2>
 
 <p>There’s more to it than that for those that need more features, or want to customize the experience.</p>
@@ -282,7 +329,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Tue Jan 14 12:36:06 2025 by
+  Generated on Tue Jan 21 16:24:22 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
