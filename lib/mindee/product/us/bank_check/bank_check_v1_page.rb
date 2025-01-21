@@ -11,7 +11,7 @@ module Mindee
         class BankCheckV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = BankCheckV1PagePrediction.new(
               prediction['prediction'],
               prediction['id']
@@ -38,7 +38,7 @@ module Mindee
             prediction['signatures_positions'].each do |item|
               @signatures_positions.push(PositionField.new(item, page_id))
             end
-            super(prediction, page_id)
+            super
           end
 
           # @return [String]

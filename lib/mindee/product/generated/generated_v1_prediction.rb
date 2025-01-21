@@ -15,7 +15,7 @@ module Mindee
         attr_reader :fields
 
         def initialize
-          super()
+          super
           @fields = {}
         end
 

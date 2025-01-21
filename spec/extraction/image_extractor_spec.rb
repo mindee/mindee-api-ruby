@@ -19,14 +19,8 @@ describe Mindee::Extraction do
     it 'extracts barcode images correctly' do
       json_data = JSON.parse(File.read(barcode_json_path))
       inference = Mindee::Product::BarcodeReader::BarcodeReaderV1.new(json_data['document']['inference'])
-      barcodes1 = []
-      inference.prediction.codes_1d.each do |barcode|
-        barcodes1.push(barcode.polygon)
-      end
-      barcodes2 = []
-      inference.prediction.codes_2d.each do |barcode|
-        barcodes2.push(barcode.polygon)
-      end
+      barcodes1 = inference.prediction.codes_1d.map(&:polygon)
+      barcodes2 = inference.prediction.codes_2d.map(&:polygon)
       input_source = Mindee::Input::Source::PathInputSource.new(barcode_path)
 
       extracted_barcodes_1d = Mindee::Extraction::ImageExtractor.extract_multiple_images_from_source(input_source, 1,
