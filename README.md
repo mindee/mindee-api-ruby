@@ -188,7 +188,11 @@ job_id = enqueue_response.job.id
 # Reading the callback data will vary greatly depending on your HTTP server.
 # This is therefore beyond the scope of this example.
 
-local_response = Mindee::Input::LocalResponse.new(FILE_PATH)
+local_response = Mindee::Input::LocalResponse.new(request.body.string)
+
+# You can also use a File object as the input.
+# FILE_PATH = File.join('path', 'to', 'file.json').freeze
+# local_response = Mindee::Input::LocalResponse.new(FILE_PATH);
 
 # Optional: verify the HMAC signature.
 unless local_response.valid_hmac_signature?(my_secret_key, 'invalid signature')
