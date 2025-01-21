@@ -11,7 +11,7 @@ module Mindee
         class DriverLicenseV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = DriverLicenseV1PagePrediction.new(
               prediction['prediction'],
               prediction['id']
@@ -35,7 +35,7 @@ module Mindee
           def initialize(prediction, page_id)
             @photo = PositionField.new(prediction['photo'], page_id)
             @signature = PositionField.new(prediction['signature'], page_id)
-            super(prediction, page_id)
+            super
           end
 
           # @return [String]
