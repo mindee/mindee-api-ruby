@@ -16,33 +16,20 @@ require_relative 'extras_utils'
 #   end
 # end
 
-shared_context 'load document' do
-  let(:load_document) do
-    prediction_data = JSON.parse(File.read(File.join(EXTRAS_DIR, 'full_text_ocr', 'complete.json')))
-    Mindee::Parsing::Common::ApiResponse.new(
-      Mindee::Product::InternationalId::InternationalIdV2,
-      prediction_data,
-      prediction_data
-    ).document
-  end
-  let(:load_invalid_document) do
-    prediction_data = JSON.parse(File.read(File.join(DIR_PRODUCTS, 'international_id', 'response_v2', 'complete.json')))
-    Mindee::Parsing::Common::ApiResponse.new(
-      Mindee::Product::InternationalId::InternationalIdV2,
-      prediction_data,
-      prediction_data
-    ).document
-  end
+def load_document_from_path(file_path)
+  prediction_data = JSON.parse(File.read(file_path))
+  Mindee::Parsing::Common::ApiResponse.new(
+    Mindee::Product::InternationalId::InternationalIdV2,
+    prediction_data,
+    prediction_data
+  ).document
 end
 
 describe 'FullTextOCR' do
-  include_context 'load document'
-  # include_context "load pages"
-
   it 'gets full text OCR result' do
     expected_text = File.read(File.join(EXTRAS_DIR, 'full_text_ocr', 'full_text_ocr.txt'))
 
-    full_text_ocr = load_document.extras.full_text_ocr
+    full_text_ocr = load_document_from_path(File.join(EXTRAS_DIR, 'full_text_ocr', 'complete.json')).extras.full_text_ocr
     # page0_ocr = load_pages[0].extras.full_text_ocr.content
 
     expect(full_text_ocr.to_s.strip).to eq(expected_text.strip)
@@ -50,7 +37,7 @@ describe 'FullTextOCR' do
   end
 
   it "doesn't get full text when the payload is empty" do
-    full_text_ocr = load_invalid_document
+    full_text_ocr = load_document_from_path(File.join(DIR_PRODUCTS, 'international_id', 'response_v2', 'complete.json'))
     expect(full_text_ocr.extras).to be_nil
   end
 end
