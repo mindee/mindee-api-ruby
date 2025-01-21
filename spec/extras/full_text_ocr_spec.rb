@@ -25,6 +25,14 @@ shared_context 'load document' do
       prediction_data
     ).document
   end
+  let(:load_invalid_document) do
+    prediction_data = JSON.parse(File.read(File.join(DIR_PRODUCTS, 'international_id', 'response_v2', 'complete.json')))
+    Mindee::Parsing::Common::ApiResponse.new(
+      Mindee::Product::InternationalId::InternationalIdV2,
+      prediction_data,
+      prediction_data
+    ).document
+  end
 end
 
 describe 'FullTextOCR' do
@@ -39,5 +47,10 @@ describe 'FullTextOCR' do
 
     expect(full_text_ocr.to_s.strip).to eq(expected_text.strip)
     # expect(page0_ocr).to eq(expected_text.split("\n").join("\n"))
+  end
+
+  it "doesn't get full text when the payload is empty" do
+    full_text_ocr = load_invalid_document
+    expect(full_text_ocr.extras).to be_nil
   end
 end

@@ -63,7 +63,6 @@ module Mindee
         def inject_full_text_ocr(raw_prediction)
           return unless raw_prediction.dig('inference', 'pages', 0, 'extras', 'full_text_ocr')
 
-
           full_text_ocr = String.new
           raw_prediction.dig('inference', 'pages').each do |page|
             full_text_ocr << (page['extras']['full_text_ocr']['content'])
