@@ -11,7 +11,7 @@ module Mindee
         class UsMailV3Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = UsMailV3PagePrediction.new(
               prediction['prediction'],
               prediction['id']

@@ -11,7 +11,7 @@ module Mindee
         class IdCardV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
+            super
             @prediction = IdCardV1PagePrediction.new(
               prediction['prediction'],
               prediction['id']
@@ -31,7 +31,7 @@ module Mindee
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             @document_side = ClassificationField.new(prediction['document_side'], page_id)
-            super(prediction, page_id)
+            super
           end
 
           # @return [String]
