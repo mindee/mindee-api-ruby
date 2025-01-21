@@ -24,7 +24,7 @@ module Mindee
     TIMEOUT_DEFAULT = 120
 
     # Default value for the user agent.
-    USER_AGENT = "mindee-api-ruby@v#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}"
+    USER_AGENT = "mindee-api-ruby@v#{Mindee::VERSION} ruby-v#{RUBY_VERSION} #{Mindee::PLATFORM}".freeze
 
     # Generic API endpoint for a product.
     class Endpoint
