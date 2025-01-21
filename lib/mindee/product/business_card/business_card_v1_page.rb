@@ -10,7 +10,7 @@ module Mindee
       class BusinessCardV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          super(prediction)
+          super
           @prediction = BusinessCardV1PagePrediction.new(
             prediction['prediction'],
             prediction['id']
