@@ -10,10 +10,6 @@ jobs:
     uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@harmonize-CI
     needs: static_analysis
     secrets: inherit
-  test_regressions:
-    uses: mindee/mindee-api-ruby/.github/workflows/_test-regressions.yml@harmonize-CI
-    needs: test_units
-    secrets: inherit
   test_integrations:
     uses: mindee/mindee-api-ruby/.github/workflows/_test-integrations.yml@harmonize-CI
     needs: test_units
