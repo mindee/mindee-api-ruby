@@ -147,20 +147,12 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
   puts field_data.to_s
 end
 ```
+## Asynchronously Parsing a File
 
-## CLI Tool
+This allows for easier handling of bursts of documents sent.
 
-A command-line interface tool is available to quickly test documents:
-
-```sh
-ruby ./bin/mindee.rb invoice path/to/your/file.ext
-```
-
-Using the ruby bundler:
-
-```sh
-bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
-```
+Some products are only available asynchronously, check the example code
+directly on the Mindee platform.
 
 
 ### Enqueue and Parse a Webhook Response
@@ -208,6 +200,21 @@ result = mindee_client.load_prediction(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
+```
+
+
+## CLI Tool
+
+A command-line interface tool is available to quickly test documents:
+
+```sh
+ruby ./bin/mindee.rb invoice path/to/your/file.ext
+```
+
+Using the ruby bundler:
+
+```sh
+bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
 ```
 
 ## Further Reading
