@@ -6,7 +6,7 @@ Quickly and easily connect to Mindee's API services using Ruby.
 
 ## Requirements
 
-The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2
+The following Ruby versions are tested and supported: 3.0, 3.1, 3.2, 3.3
 
 ## Quick Start
 
