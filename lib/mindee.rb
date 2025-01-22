@@ -4,6 +4,10 @@ require 'mindee/client'
 require 'mindee/extraction'
 
 module Mindee
+  # Mindee internal error module.
+  module Errors
+  end
+
   # Mindee internal http module.
   module HTTP
   end
