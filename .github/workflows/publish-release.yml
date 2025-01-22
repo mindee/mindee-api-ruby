@@ -6,12 +6,12 @@ on:
 
 jobs:
   publish_docs:
-    uses: mindee/mindee-api-ruby/.github/workflows/_publish-docs.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_publish-docs.yml@harmonize-CI
     secrets: inherit
   publish_guide:
-    uses: mindee/mindee-api-ruby/.github/workflows/_publish-guide.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_publish-guide.yml@harmonize-CI
     needs: publish_docs
     secrets: inherit
   publish_code:
-    uses: mindee/mindee-api-ruby/.github/workflows/_publish-code.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_publish-code.yml@harmonize-CI
     secrets: inherit
