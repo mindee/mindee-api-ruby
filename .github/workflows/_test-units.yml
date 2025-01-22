@@ -39,7 +39,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
           sudo apt update
-          sudo apt-get install -y ghostscript
+          sudo apt-get install -y ghostscript imagemagick
 
     - name: Install Ghostscript and ImageMagick on macOS
       if: runner.os == 'macOS'
