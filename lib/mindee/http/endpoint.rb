@@ -203,8 +203,7 @@ module Mindee
 
         raise Errors::MindeeAPIError,
               "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
-              "check your Client Configuration.\n" \
-              'You can set this using the ' \
+              "check your Client Configuration.\nYou can set this using the " \
               "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end

@@ -82,8 +82,7 @@ module Mindee
         return unless @api_key.nil? || @api_key.empty?
 
         raise Errors::MindeeUserError, "Missing API key. Check your Client Configuration.\n" \
-                                       'You can set this using the ' \
-                                       "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
+                                       "You can set this using the '#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
     end
   end
