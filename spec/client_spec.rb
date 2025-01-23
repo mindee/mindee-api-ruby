@@ -63,5 +63,60 @@ describe Mindee::Client do
       mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
       expect(mindee_client).to_not be_nil
     end
+
+    it 'should not load an invalid local response' do
+      local_resp = Mindee::Input::LocalResponse.new("#{DATA_DIR}/geometry/polygon.json")
+      expect do
+        mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
+      end.to raise_error Mindee::Errors::MindeeInputError
+    end
+
+    it 'should not validate improper async parameters' do
+      file_data = File.binread("#{DATA_DIR}/file_types/receipt.jpg")
+      input_source = mindee_client.source_from_bytes(file_data, 'receipt.jpg')
+      expect do
+        mindee_client.enqueue_and_parse(
+          input_source,
+          Mindee::Product::Invoice::InvoiceV4,
+          max_retries: 0
+        )
+      end.to raise_error ArgumentError
+      expect do
+        mindee_client.enqueue_and_parse(
+          input_source,
+          Mindee::Product::Invoice::InvoiceV4,
+          initial_delay_sec: 0.5
+        )
+      end.to raise_error ArgumentError
+      expect do
+        mindee_client.enqueue_and_parse(
+          input_source,
+          Mindee::Product::Invoice::InvoiceV4,
+          delay_sec: 0.5
+        )
+      end.to raise_error ArgumentError
+    end
+
+    it 'should not initialize an invalid endpoint' do
+      expect do
+        mindee_client.send(
+          :initialize_endpoint,
+          Mindee::Product::Generated::GeneratedV1,
+          endpoint_name: nil,
+          account_name: 'account_name',
+          version: 'version'
+        )
+      end.to raise_error Mindee::Errors::MindeeUserError
+
+      expect do
+        mindee_client.send(
+          :initialize_endpoint,
+          Mindee::Product::Generated::GeneratedV1,
+          endpoint_name: '',
+          account_name: 'account_name',
+          version: 'version'
+        )
+      end.to raise_error Mindee::Errors::MindeeUserError
+    end
   end
 end
