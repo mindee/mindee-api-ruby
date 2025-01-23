@@ -20,7 +20,7 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
 
     context 'with invalid URL' do
       it 'raises an error for invalid URLs' do
-        expect { described_class.new(invalid_url) }.to raise_error('URL must be HTTPS')
+        expect { described_class.new(invalid_url) }.to raise_error(Mindee::Errors::MindeeInputError)
       end
     end
   end
@@ -59,7 +59,9 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
       let(:mock_response) { MockHTTPResponse.new('1.1', '404', 'Not Found', '') }
 
       it 'raises an error' do
-        expect { url_input_source.as_local_input_source }.to raise_error(RuntimeError, %r{Failed to download file})
+        expect do
+          url_input_source.as_local_input_source
+        end.to raise_error(Mindee::Errors::MindeeAPIError, %r{Failed to download file})
       end
     end
   end
@@ -102,7 +104,9 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
       let(:mock_response) { MockHTTPResponse.new('1.1', '404', 'Not Found', '') }
 
       it 'raises an error' do
-        expect { url_input_source.save_to_file('/tmp') }.to raise_error(RuntimeError, %r{Failed to download file})
+        expect do
+          url_input_source.save_to_file('/tmp')
+        end.to raise_error(Mindee::Errors::MindeeAPIError, %r{Failed to download file})
       end
     end
   end

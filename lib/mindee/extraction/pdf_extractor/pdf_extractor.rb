@@ -47,11 +47,14 @@ module Mindee
           basename = File.basename(@filename, extension)
           page_indexes.each do |page_index_list|
             if page_index_list.empty? || page_index_list.nil?
-              raise "Empty indexes aren't allowed for extraction #{page_index_list}"
+              raise Errors::MindeePDFError, "Empty indexes aren't allowed for extraction #{page_index_list}"
             end
 
             page_index_list.each do |page_index|
-              raise "Index #{page_index} is out of range." if (page_index > page_count) || page_index.negative?
+              if (page_index > page_count) || page_index.negative?
+                raise Errors::MindeePDFError,
+                      "Index #{page_index} is out of range."
+              end
             end
             formatted_max_index = format('%03d', page_index_list[page_index_list.length - 1] + 1).to_s
             field_filename = "#{basename}_#{format('%03d',
@@ -71,7 +74,7 @@ module Mindee
         # @param strict [Boolean]
         # @return [Array<Mindee::Extraction::PdfExtractor::ExtractedPdf>]
         def extract_invoices(page_indexes, strict: false)
-          raise 'No indexes provided.' if page_indexes.empty?
+          raise Errors::MindeePDFError, 'No indexes provided.' if page_indexes.empty?
           unless page_indexes[0].is_a?(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup)
             return extract_sub_documents(page_indexes)
           end

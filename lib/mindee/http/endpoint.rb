@@ -2,7 +2,7 @@
 
 require 'json'
 require 'net/http'
-require_relative 'error'
+require_relative 'error_handler'
 require_relative '../version'
 require_relative 'response_validation'
 
@@ -65,7 +65,7 @@ module Mindee
         return [hashed_response, response.body] if ResponseValidation.valid_sync_response?(response)
 
         ResponseValidation.clean_request!(response)
-        error = Error.handle_error(@url_name, response)
+        error = ErrorHandler.handle_error(@url_name, response)
         raise error
       end
 
@@ -83,7 +83,7 @@ module Mindee
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
         ResponseValidation.clean_request!(response)
-        error = Error.handle_error(@url_name, response)
+        error = ErrorHandler.handle_error(@url_name, response)
         raise error
       end
 
@@ -97,7 +97,7 @@ module Mindee
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
         ResponseValidation.clean_request!(response)
-        error = Error.handle_error(@url_name, response)
+        error = ErrorHandler.handle_error(@url_name, response)
         raise error
       end
 
@@ -201,7 +201,8 @@ module Mindee
       def check_api_key
         return unless @api_key.nil? || @api_key.empty?
 
-        raise "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
+        raise Errors::MindeeAPIError,
+              "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
               "check your Client Configuration.\n" \
               'You can set this using the ' \
               "'#{HTTP::API_KEY_ENV_NAME}' environment variable."

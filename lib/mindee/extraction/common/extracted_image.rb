@@ -46,7 +46,7 @@ module Mindee
       def save_to_file(output_path, file_format = nil)
         resolved_path = Pathname.new(output_path).realpath
         if file_format.nil?
-          raise ArgumentError, 'Invalid file format.' if resolved_path.extname.delete('.').empty?
+          raise Errors::MindeeImageError, 'Invalid file format.' if resolved_path.extname.delete('.').empty?
 
           file_format = resolved_path.extname.delete('.').upcase
         end
@@ -55,9 +55,9 @@ module Mindee
         image.format file_format.downcase
         image.write resolved_path.to_s
       rescue TypeError
-        raise 'Invalid path/filename provided.'
+        raise Errors::MindeeImageError, 'Invalid path/filename provided.'
       rescue StandardError
-        raise "Could not save file #{Pathname.new(output_path).basename}."
+        raise Errors::MindeeImageError, "Could not save file #{Pathname.new(output_path).basename}."
       end
 
       # Return the file as a Mindee-compatible BufferInput source.

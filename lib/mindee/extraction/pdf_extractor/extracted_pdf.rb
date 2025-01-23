@@ -27,14 +27,15 @@ module Mindee
           current_pdf = Mindee::PDF::PdfProcessor.open_pdf(pdf_bytes)
           current_pdf.pages.size
         rescue TypeError
-          raise 'Could not retrieve page count from Extracted PDF object.'
+          raise Errors::MindeePDFError, 'Could not retrieve page count from Extracted PDF object.'
         end
 
         # Writes the contents of the current PDF object to a file.
         # @param output_path [String] Path to write to.
         def write_to_file(output_path)
-          raise 'Provided path is not a file' if File.directory?(destination)
-          raise 'Invalid save path provided' unless File.exist?(File.expand_path('..', output_path))
+          raise Errors::MindeePDFError, 'Provided path is not a file' if File.directory?(destination)
+          raise Errors::MindeePDFError, 'Invalid save path provided' unless File.exist?(File.expand_path('..',
+                                                                                                         output_path))
 
           if File.extname(output_path).downcase == '.pdf'
             base_path = File.expand_path('..', output_path)
