@@ -26,7 +26,7 @@ module Mindee
         def page_count
           current_pdf = Mindee::PDF::PdfProcessor.open_pdf(pdf_bytes)
           current_pdf.pages.size
-        rescue TypeError
+        rescue TypeError, Origami::InvalidPDFError
           raise Errors::MindeePDFError, 'Could not retrieve page count from Extracted PDF object.'
         end
 

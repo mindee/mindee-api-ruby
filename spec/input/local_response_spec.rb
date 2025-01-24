@@ -53,5 +53,18 @@ describe Mindee::Input::LocalResponse do
         expect(response.get_hmac_signature(dummy_secret_key)).to eq(signature)
       end
     end
+
+    it 'should trigger an error when something invalid is passed' do
+      expect do
+        Mindee::Input::LocalResponse.new(123)
+      end.to raise_error Mindee::Errors::MindeeInputError
+    end
+
+    it 'should trigger an error when the payload is not hashable' do
+      local_response = Mindee::Input::LocalResponse.new('Your mother was a hamster.')
+      expect do
+        local_response.as_hash
+      end.to raise_error Mindee::Errors::MindeeInputError
+    end
   end
 end

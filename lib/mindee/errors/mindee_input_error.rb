@@ -16,7 +16,8 @@ module Mindee
       # @param mime_type [String]
       def initialize(mime_type)
         @invalid_mimetype = mime_type
-        super("'#{@invalid_mimetype}' mime type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}")
+        super("'#{@invalid_mimetype}' mime type not allowed, must be one of" \
+              "#{Mindee::Input::Source::ALLOWED_MIME_TYPES.join(', ')}")
       end
     end
 

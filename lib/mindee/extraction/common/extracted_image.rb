@@ -28,11 +28,12 @@ module Mindee
         @buffer = StringIO.new(input_source.io_stream.read)
         @buffer.rewind
         extension = if input_source.pdf?
-                      'jpg'
+                      '.jpg'
                     else
                       File.extname(input_source.filename)
                     end
-        @internal_file_name = "#{input_source.filename}_p#{page_id}_#{element_id}.#{extension}"
+        base_name = File.basename(input_source.filename, File.extname(input_source.filename))
+        @internal_file_name = "#{base_name}_p#{page_id}_#{element_id}#{extension}"
         @page_id = page_id
         @element_id = element_id.nil? ? 0 : element_id
       end
@@ -44,7 +45,7 @@ module Mindee
       # extension if not provided.
       # @raise [MindeeError] If an invalid path or filename is provided.
       def save_to_file(output_path, file_format = nil)
-        resolved_path = Pathname.new(output_path).realpath
+        resolved_path = Pathname.new(File.expand_path(output_path))
         if file_format.nil?
           raise Errors::MindeeImageError, 'Invalid file format.' if resolved_path.extname.delete('.').empty?
 
@@ -54,10 +55,9 @@ module Mindee
         image = MiniMagick::Image.read(@buffer)
         image.format file_format.downcase
         image.write resolved_path.to_s
-      rescue TypeError
-        raise Errors::MindeeImageError, 'Invalid path/filename provided.'
       rescue StandardError
-        raise Errors::MindeeImageError, "Could not save file #{Pathname.new(output_path).basename}."
+        raise Errors::MindeeImageError, "Could not save file '#{output_path}'. " \
+                                        'Is the provided file path valid?.'
       end
 
       # Return the file as a Mindee-compatible BufferInput source.

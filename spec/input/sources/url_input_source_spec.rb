@@ -2,7 +2,7 @@
 
 require 'rspec'
 require 'mindee'
-require_relative '../http/mock_http_response'
+require_relative '../../http/mock_http_response'
 
 RSpec.describe Mindee::Input::Source::UrlInputSource do
   let(:valid_url) { 'https://validurl/some/file.jpg' }

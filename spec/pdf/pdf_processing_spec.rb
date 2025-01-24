@@ -108,5 +108,18 @@ describe Mindee::PDF do
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(9)
     end
+
+    it 'Should fail on invalid operation' do
+      io_stream = File.open(filepath, 'rb')
+      io_stream.seek(0)
+      options = {
+        page_indexes: [1],
+        operation: :broken,
+        on_min_pages: 0,
+      }
+      expect do
+        Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      end.to raise_error ArgumentError
+    end
   end
 end

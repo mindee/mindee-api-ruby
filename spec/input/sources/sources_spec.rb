@@ -5,7 +5,7 @@ require 'mindee/input/sources'
 require 'mindee/errors'
 require 'pdf-reader'
 
-require_relative '../data'
+require_relative '../../data'
 
 describe Mindee::Input::Source do
   context 'An image input file' do
