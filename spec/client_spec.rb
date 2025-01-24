@@ -106,7 +106,7 @@ describe Mindee::Client do
           account_name: 'account_name',
           version: 'version'
         )
-      end.to raise_error Mindee::Errors::MindeeUserError
+      end.to raise_error Mindee::Errors::MindeeConfigurationError
 
       expect do
         mindee_client.send(
@@ -116,7 +116,7 @@ describe Mindee::Client do
           account_name: 'account_name',
           version: 'version'
         )
-      end.to raise_error Mindee::Errors::MindeeUserError
+      end.to raise_error Mindee::Errors::MindeeConfigurationError
     end
   end
 end

@@ -344,7 +344,7 @@ module Mindee
     def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
       if (endpoint_name.nil? || endpoint_name.empty?) &&
          [Mindee::Product::Custom::CustomV1, Mindee::Product::Generated::GeneratedV1].include?(product_class)
-        raise Errors::MindeeUserError, 'Missing argument endpoint_name when using custom class'
+        raise Errors::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
       end
 
       endpoint_name = fix_endpoint_name(product_class, endpoint_name)

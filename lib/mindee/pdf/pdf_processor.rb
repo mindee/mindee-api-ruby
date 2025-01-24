@@ -34,7 +34,7 @@ module Mindee
         when :REMOVE
           pages_to_remove = indexes_from_remove(options[:page_indexes], all_pages)
         else
-          raise Errors::MindeeUserError, "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{behavior}'"
+          raise Errors::MindeeConfigurationError, "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{behavior}'"
         end
 
         current_pdf.delete_pages_at(pages_to_remove) if pages_to_remove.to_a != all_pages.to_a

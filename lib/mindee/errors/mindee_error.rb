@@ -9,7 +9,7 @@ module Mindee
     class MindeeAPIError < MindeeError; end
 
     # Errors relating to misuse of the library.
-    class MindeeUserError < MindeeError; end
+    class MindeeConfigurationError < MindeeError; end
 
     # Errors relating to geometric manipulation issues.
     class MindeeGeometryError < MindeeError; end
