@@ -100,6 +100,18 @@ describe Mindee::Image::ExtractedImage do
       input_source.io_stream.rewind
     end
 
+    it 'should raise an error when MiniMagick fails during save' do
+      allow(MiniMagick::Image).to receive(:read).and_raise(StandardError)
+
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, 1, 2)
+
+      Tempfile.create(['output', '.jpg']) do |tempfile|
+        expect do
+          extracted_image.save_to_file(tempfile.path, 'jpg')
+        end.to raise_error(Mindee::Errors::MindeeImageError, %r{Could not save file})
+      end
+    end
+
     after(:each) do
       # FileUtils.rm_f("#{output_dir}/compress100.jpg")
     end

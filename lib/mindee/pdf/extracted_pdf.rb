@@ -2,10 +2,10 @@
 
 module Mindee
   # Pdf Extraction Module.
-  module Image
-    module PdfExtractor
+  module PDF
+    module PDFExtractor
       # An extracted sub-Pdf.
-      class ExtractedPdf
+      class ExtractedPDF
         # Byte contents of the pdf
         # @return [StreamIO]
         attr_reader :pdf_bytes

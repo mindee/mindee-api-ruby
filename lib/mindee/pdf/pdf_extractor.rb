@@ -2,11 +2,11 @@
 
 module Mindee
   # Pdf Extraction Module.
-  module Image
+  module PDF
     # Pdf Extraction class.
-    module PdfExtractor
+    module PDFExtractor
       # Pdf extraction class.
-      class PdfExtractor
+      class PDFExtractor
         # @param local_input [Mindee::Input::Source::LocalInputSource]
         def initialize(local_input)
           @filename = local_input.filename
@@ -40,7 +40,7 @@ module Mindee
 
         # Extract the sub-documents from the main pdf, based on the given list of page indexes.
         # @param page_indexes [Array<Array<Integer>>] List of page number to use for merging in the original Pdf.
-        # @return [Array<Mindee::Image::PdfExtractor::ExtractedPdf>] The buffer containing the new Pdf.
+        # @return [Array<Mindee::PDF::PDFExtractor::ExtractedPDF>] The buffer containing the new Pdf.
         def extract_sub_documents(page_indexes)
           extracted_pdfs = []
           extension = File.extname(@filename)
@@ -59,8 +59,8 @@ module Mindee
             formatted_max_index = format('%03d', page_index_list[page_index_list.length - 1] + 1).to_s
             field_filename = "#{basename}_#{format('%03d',
                                                    (page_index_list[0] + 1))}-#{formatted_max_index}#{extension}"
-            extracted_pdf = Mindee::Image::PdfExtractor::ExtractedPdf.new(cut_pages(page_index_list),
-                                                                          field_filename)
+            extracted_pdf = Mindee::PDF::PDFExtractor::ExtractedPDF.new(cut_pages(page_index_list),
+                                                                        field_filename)
             extracted_pdfs << extracted_pdf
           end
           extracted_pdfs
@@ -72,7 +72,7 @@ module Mindee
         # Extracts invoices as complete PDFs from the document.
         # @param page_indexes [Array<Array<Integer>, InvoiceSplitterV1PageGroup>]
         # @param strict [Boolean]
-        # @return [Array<Mindee::Image::PdfExtractor::ExtractedPdf>]
+        # @return [Array<Mindee::PDF::PDFExtractor::ExtractedPDF>]
         def extract_invoices(page_indexes, strict: false)
           raise Errors::MindeePDFError, 'No indexes provided.' if page_indexes.empty?
           unless page_indexes[0].is_a?(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup)
