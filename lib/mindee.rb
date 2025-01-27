@@ -34,7 +34,7 @@ module Mindee
   end
 
   # Custom extraction module
-  module Extraction
+  module Image
   end
 
   # Parsing internals and fields.

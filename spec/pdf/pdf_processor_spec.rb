@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'mindee/pdf'
+require 'mindee'
 
 require_relative '../data'
 

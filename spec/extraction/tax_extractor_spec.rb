@@ -13,7 +13,7 @@ describe Mindee::Product::Cropper::CropperV1 do
       ocr = Mindee::Parsing::Common::Ocr::Ocr.new(
         response['document']['ocr']
       )
-      found_tax = Mindee::Extraction::TaxExtractor.extract_custom_tax(ocr, ['Tax'], 0, 20)
+      found_tax = Mindee::Image::TaxExtractor.extract_custom_tax(ocr, ['Tax'], 0, 20)
       expect(found_tax.code).to eq('Tax')
       expect(found_tax.rate).to eq(8)
       expect(found_tax.value).to eq(nil)

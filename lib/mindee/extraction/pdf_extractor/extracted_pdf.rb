@@ -2,7 +2,7 @@
 
 module Mindee
   # Pdf Extraction Module.
-  module Extraction
+  module Image
     module PdfExtractor
       # An extracted sub-Pdf.
       class ExtractedPdf

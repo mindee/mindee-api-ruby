@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
-  module Extraction
+  module Image
     # Generic extractor class
     class OcrExtractor
       # Checks for a list of possible matches in a string & returns the index of the first found candidate.

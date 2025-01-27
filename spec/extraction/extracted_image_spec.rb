@@ -7,7 +7,7 @@ require 'stringio'
 require 'mini_magick'
 require_relative '../data'
 
-describe Mindee::Extraction::ExtractedImage do
+describe Mindee::Image::ExtractedImage do
   let(:dummy_io_content) { 'This is a test file content.' }
   let(:input_source) do
     Mindee::Input::Source::PathInputSource.new("#{DATA_DIR}/products/invoices/default_sample.jpg")
@@ -17,7 +17,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should initialize correctly with valid inputs' do
       page_id = 1
       element_id = 2
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, element_id)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, element_id)
 
       expect(extracted_image.buffer).to_not be(nil)
       expect(extracted_image.page_id).to eq(page_id)
@@ -27,7 +27,7 @@ describe Mindee::Extraction::ExtractedImage do
 
     it 'should handle nil element_id by setting it to 0' do
       page_id = 1
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, nil)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, nil)
 
       expect(extracted_image.element_id).to eq(0)
     end
@@ -35,7 +35,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should save the buffer to a file with valid format' do
       page_id = 1
       element_id = 2
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, element_id)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, element_id)
 
       random_sequence = Array.new(8) { rand(0..9) }.join
       extracted_image.save_to_file("#{DATA_DIR}/output/temp-#{random_sequence}.jpg", 'jpg')
@@ -48,7 +48,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should infer file format from extension if not provided' do
       page_id = 1
       element_id = 2
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, element_id)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, element_id)
 
       Tempfile.create(['output', '.png']) do |tempfile|
         extracted_image.save_to_file(tempfile.path)
@@ -60,7 +60,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should raise an error for invalid file format during save' do
       page_id = 1
       element_id = 2
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, element_id)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, element_id)
 
       Tempfile.create(['output', '.']) do |tempfile|
         expect do
@@ -72,7 +72,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should raise an error for invalid path during save' do
       page_id = 1
       element_id = 2
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, element_id)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, element_id)
 
       invalid_path = '/invalid/path/output.jpg'
       expect do
@@ -83,7 +83,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should return a valid source object from as_source' do
       page_id = 1
       element_id = 2
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, page_id, element_id)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, page_id, element_id)
 
       source_object = extracted_image.as_source
 
@@ -94,7 +94,7 @@ describe Mindee::Extraction::ExtractedImage do
     it 'should raise an error when MiniMagick fails during save' do
       allow(MiniMagick::Image).to receive(:read).and_raise(StandardError)
 
-      extracted_image = Mindee::Extraction::ExtractedImage.new(input_source, 1, 2)
+      extracted_image = Mindee::Image::ExtractedImage.new(input_source, 1, 2)
 
       Tempfile.create(['output', '.jpg']) do |tempfile|
         expect do

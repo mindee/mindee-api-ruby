@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative '../../input/sources'
+require_relative '../input/sources'
 
 module Mindee
   # Image Extraction Module.
-  module Extraction
+  module Image
     # Generic class for image extraction.
     class ExtractedImage
-      # Id of the page the image was extracted from.
+      # ID of the page the image was extracted from.
       attr_reader :page_id
 
-      # Id of the element on a given page.
+      # ID of the element on a given page.
       attr_reader :element_id
 
       # Buffer object of the file's content.
@@ -51,13 +51,15 @@ module Mindee
 
           file_format = resolved_path.extname.delete('.').upcase
         end
-        @buffer.rewind
-        image = MiniMagick::Image.read(@buffer)
-        image.format file_format.downcase
-        image.write resolved_path.to_s
-      rescue StandardError
-        raise Errors::MindeeImageError, "Could not save file '#{output_path}'. " \
-                                        'Is the provided file path valid?.'
+        begin
+          @buffer.rewind
+          image = MiniMagick::Image.read(@buffer)
+          image.format file_format.downcase
+          image.write resolved_path.to_s
+        rescue StandardError
+          raise Errors::MindeeImageError, "Could not save file '#{output_path}'. " \
+                                          'Is the provided file path valid?.'
+        end
       end
 
       # Return the file as a Mindee-compatible BufferInput source.

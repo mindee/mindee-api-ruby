@@ -5,7 +5,7 @@ require_relative 'ocr_extractor'
 # rubocop:disable Metrics/ClassLength
 
 module Mindee
-  module Extraction
+  module Image
     # Tax extractor class
     class TaxExtractor < OcrExtractor
       # Extracts the most relevant candidate.
