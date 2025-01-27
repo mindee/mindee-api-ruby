@@ -113,7 +113,7 @@ describe Mindee::Image::ExtractedImage do
     end
 
     after(:each) do
-      # FileUtils.rm_f("#{output_dir}/compress100.jpg")
+      FileUtils.rm_f("#{output_dir}/output_test.jpg")
     end
   end
 end
