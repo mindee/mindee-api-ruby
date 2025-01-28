@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Mindee
-  # Pdf Extraction Module.
-  module Extraction
-    module PdfExtractor
+  # PDF Extraction Module.
+  module PDF
+    module PDFExtractor
       # An extracted sub-Pdf.
-      class ExtractedPdf
+      class ExtractedPDF
         # Byte contents of the pdf
         # @return [StreamIO]
         attr_reader :pdf_bytes
@@ -26,17 +26,20 @@ module Mindee
         def page_count
           current_pdf = Mindee::PDF::PdfProcessor.open_pdf(pdf_bytes)
           current_pdf.pages.size
-        rescue TypeError
-          raise 'Could not retrieve page count from Extracted PDF object.'
+        rescue TypeError, Origami::InvalidPDFError
+          raise Errors::MindeePDFError, 'Could not retrieve page count from Extracted PDF object.'
         end
 
         # Writes the contents of the current PDF object to a file.
         # @param output_path [String] Path to write to.
-        def write_to_file(output_path)
-          raise 'Provided path is not a file' if File.directory?(destination)
-          raise 'Invalid save path provided' unless File.exist?(File.expand_path('..', output_path))
+        # @param override [Boolean] Whether to override the destination file.
+        def write_to_file(output_path, override: false)
+          raise Errors::MindeePDFError, 'Provided path is not a file' if File.directory?(output_path)
+          raise Errors::MindeePDFError, 'Invalid save path provided' unless File.exist?(
+            File.expand_path('..', output_path)
+          ) && !override
 
-          if File.extname(output_path).downcase == '.pdf'
+          if File.extname(output_path).downcase == 'pdf'
             base_path = File.expand_path('..', output_path)
             output_path = File.expand_path("#{File.basename(output_path)}.pdf", base_path)
           end

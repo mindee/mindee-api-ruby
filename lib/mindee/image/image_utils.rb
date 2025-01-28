@@ -36,7 +36,8 @@ module Mindee
         elsif image.is_a?(MiniMagick::Image)
           image
         else
-          raise "Expected an I/O object or a MiniMagick::Image. '#{image.class}' given instead."
+          img_class = image.class ? image.class.to_s : 'unknown format'
+          raise Errors::MindeeImageError, "Expected an I/O object or a MiniMagick::Image. '#{img_class}' given instead."
         end
       end
 
@@ -59,7 +60,7 @@ module Mindee
       # @param max_width [Integer] Maximum width. If not specified, the horizontal ratio will remain the same.
       # @param max_height [Integer] Maximum height. If not specified, the vertical ratio will remain the same.
       def self.calculate_new_dimensions(original, max_width: nil, max_height: nil)
-        raise 'Provided image could not be processed for resizing.' if original.nil?
+        raise Errors::MindeeImageError, 'Provided image could not be processed for resizing.' if original.nil?
 
         return [original.width, original.height] if max_width.nil? && max_height.nil?
 

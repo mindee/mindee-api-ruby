@@ -30,7 +30,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
     )
     inference = response.document.inference
 
-    pdf_extractor = Mindee::Extraction::PdfExtractor::PdfExtractor.new(invoice_splitter_input)
+    pdf_extractor = Mindee::PDF::PDFExtractor::PDFExtractor.new(invoice_splitter_input)
     expect(pdf_extractor.page_count).to eq(2)
 
     extracted_pdfs_strict = pdf_extractor.extract_invoices(inference.prediction.invoice_page_groups, strict: true)

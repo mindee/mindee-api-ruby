@@ -2,7 +2,7 @@
 
 require 'mindee/input/sources'
 require 'base64'
-require_relative '../data'
+require_relative '../../data'
 
 describe Mindee::Input::Source::LocalInputSource do
   context 'An jpg input file' do

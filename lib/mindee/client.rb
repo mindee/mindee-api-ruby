@@ -166,6 +166,7 @@ module Mindee
       delay_sec: 1.5,
       max_retries: 80
     )
+      validate_async_params(initial_delay_sec, delay_sec, max_retries)
       enqueue_res = enqueue(
         input_source,
         product_class,
@@ -187,7 +188,8 @@ module Mindee
       end
       if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
         elapsed = initial_delay_sec + (polling_attempts * delay_sec)
-        raise "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
+        raise Errors::MindeeAPIError,
+              "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
       end
 
       queue_res
@@ -242,8 +244,8 @@ module Mindee
     # @return [Mindee::Parsing::Common::ApiResponse]
     def load_prediction(product_class, local_response)
       Mindee::Parsing::Common::ApiResponse.new(product_class, local_response.as_hash, local_response.as_hash.to_json)
-    rescue KeyError
-      raise 'No prediction found in local response.'
+    rescue KeyError, Errors::MindeeAPIError
+      raise Errors::MindeeInputError, 'No prediction found in local response.'
     end
 
     # Load a document from an absolute path, as a string.
@@ -314,11 +316,18 @@ module Mindee
       min_delay_sec = 1
       min_initial_delay_sec = 1
       min_retries = 2
-      raise "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)" if delay_sec < min_delay_sec
-      if initial_delay_sec < min_initial_delay_sec
-        raise "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
+      if delay_sec < min_delay_sec
+        raise ArgumentError,
+              "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)"
       end
-      raise "Cannot set auto-poll retries to less than #{min_retries}" if max_retries < min_retries
+      if initial_delay_sec < min_initial_delay_sec
+        raise ArgumentError,
+              "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
+      end
+      return unless max_retries < min_retries
+
+      raise ArgumentError,
+            "Cannot set auto-poll retries to less than #{min_retries}"
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
@@ -333,8 +342,9 @@ module Mindee
     # @param version [String] For custom endpoints, version of the product.
     # @return [Mindee::HTTP::Endpoint]
     def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
-      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Custom::CustomV1
-        raise 'Missing argument endpoint_name when using custom class'
+      if (endpoint_name.nil? || endpoint_name.empty?) &&
+         [Mindee::Product::Custom::CustomV1, Mindee::Product::Generated::GeneratedV1].include?(product_class)
+        raise Errors::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
       end
 
       endpoint_name = fix_endpoint_name(product_class, endpoint_name)

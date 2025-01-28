@@ -13,7 +13,7 @@ module Mindee
         attr_reader :url
 
         def initialize(url)
-          raise 'URL must be HTTPS' unless url.start_with? 'https://'
+          raise Errors::MindeeInputError, 'URL must be HTTPS' unless url.start_with? 'https://'
 
           @url = url
         end
@@ -27,7 +27,7 @@ module Mindee
         # @param token [String, nil] Optional token for JWT-based authentication.
         # @param max_redirects [Integer] Maximum amount of redirects to follow.
         # @return [String] The full path of the saved file.
-        def save_to_file(path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
+        def write_to_file(path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
           response_body = fetch_file_content(username: username, password: password, token: token,
                                              max_redirects: max_redirects)
 
@@ -72,9 +72,9 @@ module Mindee
 
           response = make_request(uri, request, max_redirects)
           if response.code.to_i > 299
-            raise "Failed to download file: HTTP status code #{response.code}"
+            raise Errors::MindeeAPIError, "Failed to download file: HTTP status code #{response.code}"
           elsif response.code.to_i < 200
-            raise "Failed to download file: Invalid response code #{response.code}."
+            raise Errors::MindeeAPIError, "Failed to download file: Invalid response code #{response.code}."
           end
 
           response.body
@@ -100,7 +100,7 @@ module Mindee
             response = http.request(request)
             if response.is_a?(Net::HTTPRedirection) && max_redirects.positive?
               location = response['location']
-              raise 'No location in redirection header.' if location.nil?
+              raise Errors::MindeeInputError, 'No location in redirection header.' if location.nil?
 
               new_uri = URI.parse(location)
               request = Net::HTTP::Get.new(new_uri)
