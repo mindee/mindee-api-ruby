@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
-require 'mindee/extraction'
 
 module Mindee
   # Mindee internal error module.

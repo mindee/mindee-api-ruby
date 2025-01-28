@@ -2,7 +2,6 @@
 
 require 'mindee/product'
 require 'mindee/input/sources'
-require 'mindee/extraction'
 require_relative '../data'
 
 describe Mindee::Image do
