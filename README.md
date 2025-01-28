@@ -116,7 +116,9 @@ result = mindee_client.parse(
 puts result.document
 ```
 
-### Custom Documents (docTI & Custom APIs)
+### Universal document handling
+
+The Universal product acts as a catch-all for every and any API if it doesn't have an assigned product name.
 
 ```ruby
 require 'mindee'
@@ -223,8 +225,7 @@ There's more to it than that for those that need more features, or want to
 customize the experience.
 
 * [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-* [Custom OCR Ruby (Deprecated)](https://developers.mindee.com/docs/ruby-api-builder-ocr)
-* [Generated API Ruby](https://developers.mindee.com/docs/ruby-generated-ocr)
+* [Universal API Ruby](https://developers.mindee.com/docs/ruby-universal-ocr)
 * [Invoice OCR Ruby](https://developers.mindee.com/docs/ruby-invoice-ocr)
 * [International Id OCR Ruby](https://developers.mindee.com/docs/ruby-international-id-ocr)
 * [Financial Document OCR Ruby](https://developers.mindee.com/docs/ruby-financial-document-ocr)

@@ -4,8 +4,8 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-universal-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
-The Ruby OCR SDK supports generated APIs.
-Generated APIs can theoretically support all APIs in a catch-all generic format.
+The Ruby OCR SDK supports a universal wrapper class for all products.
+Universal supports all product in a catch-all generic format.
 
 # Quick-Start
 
@@ -36,22 +36,22 @@ result = mindee_client.enqueue_and_parse(
 puts result.document
 ```
 
-# Generated Endpoints
+# Universal Endpoints
 
-You may have noticed in the previous step that in order to access a custom build, you will need to provide an account and an endpoint name at the very least.
+You may have noticed in the previous step that in order to access a universal build, you will need to provide an account and an endpoint name at the very least.
 
 Although it is optional, the version number should match the latest version of your build in most use-cases.
 If it is not set, it will default to "1".
 
 # Field Types
 
-## Generated Fields
+## Universal Fields
 
-### Generated List Field
+### Universal List Field
 
-A `GeneratedListField` is a special type of custom list that implements the following:
+A `UniversalListField` is a special type of custom list that implements the following:
 
-- **values** (`Array<StringField`[GeneratedObjectField](#Generated-object-field)`>`): the confidence score of the field prediction.
+- **values** (`Array<StringField`[UniversalObjectField](#universal-object-field)`>`): the confidence score of the field prediction.
 - **page_id** (`Integer`): only available for some documents ATM.
 
 Since the inner contents can vary, the value isn't accessed through a property, but rather through the following functions:
@@ -60,9 +60,9 @@ Since the inner contents can vary, the value isn't accessed through a property, 
 - **contents_string(separator=" ")** (`-> String`): returns a list of concatenated values, with an optional **separator** `String` between them.
 > **Note:** the `to_s` method returns a string representation of all values of this object, with an empty space between each of them.
 
-### Generated Object Field
+### Universal Object Field
 
-Unrecognized structures and sometimes values of `ListField`s are stored in a `GeneratedObjectField` structure, which is implemented dynamically depending on the object's structure.
+Unrecognized structures and sometimes values of `ListField`s are stored in a `UniversalObjectField` structure, which is implemented dynamically depending on the object's structure.
 
 - **page_id** (`[Integer, nil]`): the ID of the page, is `nil` when at document-level.
 - **raw_value** (`[String, nil]`): an optional field for when some post-processing has been done on fields (e.g. amounts). `nil` in most instances.
@@ -78,11 +78,11 @@ The text field `StringField` only has one constraint: its **value** is an `Optio
 
 # Attributes
 
-Generated builds always have access to at least two attributes:
+Universal builds always have access to at least two attributes:
 
 ## Fields
 
-**fields** (`Hash<String, Array<`[GeneratedListField](#generated-list-field),[GeneratedObjectField](#generated-object-field), `(#stringfield)[StringField]>>`):
+**fields** (`Hash<String, Array<`[UniversalListField](#universal-list-field),[UniversalObjectField](#universal-object-field), `(#stringfield)[StringField]>>`):
 
 ```ruby
 puts result.document.inference.prediction.fields["my-field"].to_s
