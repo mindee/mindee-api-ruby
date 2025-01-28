@@ -182,7 +182,7 @@ job_id = enqueue_response.job.id
 
 local_response = Mindee::Input::LocalResponse.new(request.body.string)
 
-# You can also load the json from a local path.
+# You can also use a File object as the input.
 # FILE_PATH = File.join('path', 'to', 'file.json').freeze
 # local_response = Mindee::Input::LocalResponse.new(FILE_PATH);
 
