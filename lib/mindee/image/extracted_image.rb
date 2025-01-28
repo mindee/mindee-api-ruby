@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../input/sources'
+require_relative '../logging'
 
 module Mindee
   # Image Extraction Module.
@@ -56,6 +57,7 @@ module Mindee
           image = MiniMagick::Image.read(@buffer)
           image.format file_format.downcase
           image.write resolved_path.to_s
+          logger.info("File saved successfully to '#{resolved_path}'")
         rescue StandardError
           raise Errors::MindeeImageError, "Could not save file '#{output_path}'. " \
                                           'Is the provided file path valid?.'

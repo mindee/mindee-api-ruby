@@ -62,7 +62,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
                     else
-                      [input_source.read_document]
+                      [input_source.read_contents]
                     end
         form_data.push ['alias', document_alias] if document_alias
         form_data.push ['public_url', public_url] if public_url

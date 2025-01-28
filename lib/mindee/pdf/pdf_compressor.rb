@@ -15,13 +15,13 @@ module Mindee
         if PDFTools.source_text?(pdf_data)
           if force_source_text_compression
             if disable_source_text
-              puts "\e[33m[WARNING] Re-writing PDF source-text is an EXPERIMENTAL feature.\e[0m"
+              logger.warn('Re-writing PDF source-text is an EXPERIMENTAL feature.')
             else
-              puts "\e[33m[WARNING] Source-file contains text, but disable_source_text flag is ignored. " \
-                   "Resulting file will not contain any embedded text.\e[0m"
+              logger.warn('Source-file contains text, but disable_source_text flag is ignored. ' \
+                          'Resulting file will not contain any embedded text.')
             end
           else
-            puts "\e[33m[WARNING] Source-text detected in input PDF. Aborting operation.\e[0m"
+            logger.warn('Source-text detected in input PDF. Aborting operation.')
             return pdf_data
           end
         end
@@ -54,7 +54,6 @@ module Mindee
       # @return [Origami::PDF] Output PDF object.
       def self.create_output_pdf(pages, disable_source_text, pdf_data)
         output_pdf = Origami::PDF.new
-        # NOTE: Page order and XObject handling require adjustment due to origami adding the last page first.
         pages.rotate!(1) if pages.count >= 2
 
         inject_text(pdf_data, pages) unless disable_source_text

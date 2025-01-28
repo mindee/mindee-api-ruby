@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
+require 'mindee/logging'
 
 module Mindee
   # Mindee internal error module.
