@@ -51,12 +51,12 @@ describe Mindee::Image::ExtractedImage do
     end
   end
 
-  describe '#save_to_file' do
+  describe '#write_to_file' do
     it 'saves the buffer to a file with the correct format' do
       extracted_image = described_class.new(input_source, page_id, element_id)
       output_path = "#{output_dir}/output_test.jpg"
 
-      extracted_image.save_to_file(output_path)
+      extracted_image.write_to_file(output_path)
 
       expect(File.exist?(output_path)).to be true
       expect(File.size(output_path)).to be > 0
@@ -67,7 +67,7 @@ describe Mindee::Image::ExtractedImage do
       invalid_output_path = "#{output_dir}/output_test"
 
       expect do
-        extracted_image.save_to_file(invalid_output_path)
+        extracted_image.write_to_file(invalid_output_path)
       end.to raise_error(Mindee::Errors::MindeeImageError, %r{Invalid file format})
     end
 
@@ -76,7 +76,7 @@ describe Mindee::Image::ExtractedImage do
       invalid_output_path = '/invalid/path/output_test.jpg'
 
       expect do
-        extracted_image.save_to_file(invalid_output_path)
+        extracted_image.write_to_file(invalid_output_path)
       end.to raise_error(Mindee::Errors::MindeeImageError)
     end
   end
@@ -107,7 +107,7 @@ describe Mindee::Image::ExtractedImage do
 
       Tempfile.create(['output', '.jpg']) do |tempfile|
         expect do
-          extracted_image.save_to_file(tempfile.path, 'jpg')
+          extracted_image.write_to_file(tempfile.path, 'jpg')
         end.to raise_error(Mindee::Errors::MindeeImageError, %r{Could not save file})
       end
     end

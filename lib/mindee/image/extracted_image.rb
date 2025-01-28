@@ -44,7 +44,7 @@ module Mindee
       # @param file_format [String, nil] Optional MiniMagick-compatible format for the file. Inferred from file
       # extension if not provided.
       # @raise [MindeeError] If an invalid path or filename is provided.
-      def save_to_file(output_path, file_format = nil)
+      def write_to_file(output_path, file_format = nil)
         resolved_path = Pathname.new(File.expand_path(output_path))
         if file_format.nil?
           raise Errors::MindeeImageError, 'Invalid file format.' if resolved_path.extname.delete('.').empty?

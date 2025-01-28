@@ -27,7 +27,7 @@ module Mindee
         # @param token [String, nil] Optional token for JWT-based authentication.
         # @param max_redirects [Integer] Maximum amount of redirects to follow.
         # @return [String] The full path of the saved file.
-        def save_to_file(path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
+        def write_to_file(path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
           response_body = fetch_file_content(username: username, password: password, token: token,
                                              max_redirects: max_redirects)
 

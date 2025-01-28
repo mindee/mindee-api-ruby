@@ -66,7 +66,7 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
     end
   end
 
-  describe '#save_to_file' do
+  describe '#write_to_file' do
     let(:url_input_source) { described_class.new(valid_url) }
     let(:url_input_source_no_filename) { described_class.new(valid_url_no_filename) }
 
@@ -79,23 +79,23 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
       let(:mock_response) { MockHTTPResponse.new('1.1', '200', 'OK', 'file content') }
 
       it 'generates a valid filename when not provided' do
-        output_file_path = url_input_source_no_filename.save_to_file(output_dir)
+        output_file_path = url_input_source_no_filename.write_to_file(output_dir)
         expect(output_file_path).to match(%r{mindee_temp_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}_[a-z0-9]{8}\.tmp})
       end
 
       it 'saves the file with the provided filename' do
-        result = url_input_source.save_to_file('/tmp', filename: 'file.pdf')
+        result = url_input_source.write_to_file('/tmp', filename: 'file.pdf')
         expect(result).to eq('/tmp/file.pdf')
         expect(File).to have_received(:write).with('/tmp/file.pdf', 'file content')
       end
 
       it 'uses a custom filename when provided' do
-        result = url_input_source.save_to_file('/tmp', filename: 'custom.pdf')
+        result = url_input_source.write_to_file('/tmp', filename: 'custom.pdf')
         expect(result).to eq('/tmp/custom.pdf')
       end
 
       it 'handles authentication' do
-        result = url_input_source_no_filename.save_to_file('/tmp', username: 'user', password: 'pass')
+        result = url_input_source_no_filename.write_to_file('/tmp', username: 'user', password: 'pass')
         expect(result).to match(%r{/tmp/mindee_temp_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}_[a-z0-9]{8}\.tmp})
       end
     end
@@ -105,7 +105,7 @@ RSpec.describe Mindee::Input::Source::UrlInputSource do
 
       it 'raises an error' do
         expect do
-          url_input_source.save_to_file('/tmp')
+          url_input_source.write_to_file('/tmp')
         end.to raise_error(Mindee::Errors::MindeeAPIError, %r{Failed to download file})
       end
     end

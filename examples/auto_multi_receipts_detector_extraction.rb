@@ -16,7 +16,7 @@ def multi_receipts_detection(file_path, mindee_client)
   images = Mindee::Extraction::MultiReceiptsExtractor.extract_receipts(input_source, result_split.document.inference)
   images.each do |sub_image|
     # Optional: Save the files locally
-    # sub_image.save_to_file("/path/to/my/extracted/file/folder")
+    # sub_image.write_to_file("/path/to/my/extracted/file/folder")
 
     result_receipt = mindee_client.parse(
       sub_image.as_source,

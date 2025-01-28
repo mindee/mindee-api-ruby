@@ -33,7 +33,7 @@ def parse_multi_page(mindee_client, input_source)
 
   extracted_pdfs.each do |extracted_pdf|
     # Optional: Save the files locally
-    # extracted_pdf.save_to_file("output/path")
+    # extracted_pdf.write_to_file("output/path")
 
     invoice_result = mindee_client.parse(
       extracted_pdf.as_input_source,
