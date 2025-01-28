@@ -116,13 +116,12 @@ module Mindee
         end
       end
 
+      # Extracts individual receipts from multi-receipts documents.
+      #
+      # @param input_source [LocalInputSource] Local Input Source to extract sub-receipts from.
+      # @param inference [Inference] Results of the inference.
+      # @return [Array<ExtractedImage>] Individual extracted receipts as an array of ExtractedMultiReceiptsImage.
       def self.extract_receipts(input_source, inference)
-        # Extracts individual receipts from multi-receipts documents.
-        #
-        # @param input_source [LocalInputSource] Local Input Source to extract sub-receipts from.
-        # @param inference [Inference] Results of the inference.
-        # @return [Array<ExtractedImage>] Individual extracted receipts as an array of ExtractedMultiReceiptsImage.
-
         images = []
         unless inference.prediction.receipts
           raise Errors::MindeeInputError,
