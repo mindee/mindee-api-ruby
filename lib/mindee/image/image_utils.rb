@@ -100,6 +100,63 @@ module Mindee
         compressed_image.quality image_quality.to_s
         compressed_image
       end
+
+      # Retrieves the bounding box of a polygon.
+      #
+      # @param [Array<Point>, Mindee::Geometry::Polygon] polygon
+      def self.normalize_polygon(polygon)
+        if polygon.is_a?(Mindee::Geometry::Polygon)
+          Mindee::Geometry.get_bounding_box(polygon)
+        else
+          polygon
+        end
+      end
+
+      # Loads a buffer into a MiniMagick Image.
+      #
+      # @param [StringIO] pdf_stream Buffer containg the PDF
+      # @return [MiniMagick::Image] a valid MiniMagick image handle.
+      def self.read_page_content(pdf_stream)
+        pdf_stream.rewind
+        MiniMagick::Image.read(pdf_stream)
+      end
+
+      # Crops a MiniMagick Image from a the given bounding box.
+      #
+      # @param [MiniMagick::Image] image Input Image.
+      # @param [Mindee::Geometry::MinMax] min_max_x minimum & maximum values for the x coordinates.
+      # @param [Mindee::Geometry::MinMax] min_max_y minimum & maximum values for the y coordinates.
+      def self.crop_image(image, min_max_x, min_max_y)
+        width = image[:width].to_i
+        height = image[:height].to_i
+
+        image.format('jpg')
+        new_width = (min_max_x.max - min_max_x.min) * width
+        new_height = (min_max_y.max - min_max_y.min) * height
+        image.crop("#{new_width}x#{new_height}+#{min_max_x.min * width}+#{min_max_y.min * height}")
+
+        image
+      end
+
+      # Writes a MiniMagick::Image to a buffer.
+      #
+      # @param [MiniMagick::Image] image a valid MiniMagick image.
+      # @param [StringIO] buffer
+      def self.write_image_to_buffer(image, buffer)
+        image.write(buffer)
+      end
+
+      # Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.
+      #
+      # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
+      # @return [String] A valid file extension.
+      def self.determine_file_extension(input_source)
+        if input_source.pdf? || input_source.filename.downcase.end_with?('pdf')
+          'jpg'
+        else
+          File.extname(input_source.filename).strip.downcase[1..]
+        end
+      end
     end
   end
 end
