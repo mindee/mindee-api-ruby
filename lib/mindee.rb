@@ -4,6 +4,14 @@ require 'mindee/client'
 require 'mindee/extraction'
 
 module Mindee
+  # Mindee internal error module.
+  module Errors
+  end
+
+  # Custom extraction module
+  module Extraction
+  end
+
   # Mindee internal http module.
   module HTTP
   end
@@ -27,10 +35,6 @@ module Mindee
     # Image compressor module to handle image compression.
     module ImageCompressor
     end
-  end
-
-  # Custom extraction module
-  module Extraction
   end
 
   # Parsing internals and fields.

@@ -27,7 +27,7 @@ module Mindee
                   end
           @file.rewind
         else
-          raise "Incompatible type for input '#{input_file.class}'."
+          raise Errors::MindeeInputError, "Incompatible type for input '#{input_file.class}'."
         end
       end
 
@@ -38,7 +38,7 @@ module Mindee
         file_str = @file.read
         JSON.parse(file_str, object_class: Hash)
       rescue JSON::ParserError
-        raise "File is not a valid dict. #{file_str}"
+        raise Errors::MindeeInputError, "File is not a valid dict. #{file_str}"
       end
 
       # Processes the secret key
@@ -56,7 +56,7 @@ module Mindee
           @file.rewind
           mac = OpenSSL::HMAC.hexdigest(algorithm, self.class.process_secret_key(secret_key), @file.read)
         rescue StandardError
-          raise 'Could not get HMAC signature from payload.'
+          raise Errors::MindeeInputError, 'Could not get HMAC signature from payload.'
         end
         mac
       end

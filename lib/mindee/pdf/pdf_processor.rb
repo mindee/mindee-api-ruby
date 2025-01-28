@@ -28,13 +28,12 @@ module Mindee
 
         all_pages = (0..pages_count - 1).to_a
 
-        case options[:operation]
-        when :KEEP_ONLY
+        if options[:operation] == :KEEP_ONLY
           pages_to_remove = indexes_from_keep(options[:page_indexes], all_pages)
-        when :REMOVE
+        elsif options[:operation] == :REMOVE
           pages_to_remove = indexes_from_remove(options[:page_indexes], all_pages)
         else
-          raise "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{behavior}'"
+          raise ArgumentError, "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{options[:operation]}'"
         end
 
         current_pdf.delete_pages_at(pages_to_remove) if pages_to_remove.to_a != all_pages.to_a
