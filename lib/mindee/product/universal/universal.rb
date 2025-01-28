@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
-require_relative 'custom_v1_document'
-require_relative 'custom_v1_page'
+require_relative 'universal_document'
+require_relative 'universal_page'
 
 module Mindee
   module Product
-    # Custom product module.
-    module Custom
-      # Custom Document V1 prediction inference.
-      class CustomV1 < Mindee::Parsing::Common::Inference
+    # Universal product module.
+    module Universal
+      # Universal Document V1 prediction inference.
+      class Universal < Mindee::Parsing::Common::Inference
         @endpoint_name = ''
         @endpoint_version = ''
 
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = CustomV1Document.new(prediction['prediction'], nil)
+          @prediction = UniversalDocument.new(prediction['prediction'])
           @pages = []
           prediction['pages'].each do |page|
-            @pages.push(CustomV1Page.new(page))
+            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
+              @pages.push(UniversalPage.new(page))
+            end
           end
         end
 

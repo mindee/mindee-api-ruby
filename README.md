@@ -133,7 +133,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: endpoint
 )
 

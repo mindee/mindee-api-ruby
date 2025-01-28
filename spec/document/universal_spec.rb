@@ -8,10 +8,10 @@ require_relative '../data'
 
 StringField = Mindee::Parsing::Standard.const_get(:StringField)
 PositionField = Mindee::Parsing::Standard.const_get(:PositionField)
-GeneratedListField = Mindee::Parsing::Generated.const_get(:GeneratedListField)
-GeneratedObjectField = Mindee::Parsing::Generated.const_get(:GeneratedObjectField)
-GeneratedV1 = Mindee::Product::Generated.const_get(:GeneratedV1)
-GeneratedV1Page = Mindee::Product::Generated.const_get(:GeneratedV1Page)
+GeneratedListField = Mindee::Parsing::Universal.const_get(:UniversalListField)
+GeneratedObjectField = Mindee::Parsing::Universal.const_get(:UniversalObjectField)
+Universal = Mindee::Product::Universal.const_get(:Universal)
+UniversalPage = Mindee::Product::Universal.const_get(:UniversalPage)
 Document = Mindee::Parsing::Common.const_get(:Document)
 
 RSpec.describe 'International ID v1 document' do
@@ -21,7 +21,7 @@ RSpec.describe 'International ID v1 document' do
                                                  'generated',
                                                  'response_v1',
                                                  'complete_international_id_v1.json')))
-    Document.new(GeneratedV1,
+    Document.new(Universal,
                  parsed_file['document'])
   end
 
@@ -29,7 +29,7 @@ RSpec.describe 'International ID v1 document' do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products', 'generated', 'response_v1',
                                                  'empty_international_id_v1.json')))
-    Document.new(GeneratedV1,
+    Document.new(Universal,
                  parsed_file['document'])
   end
 
@@ -238,7 +238,7 @@ RSpec.describe 'Invoice V4 document' do
                                                  'generated',
                                                  'response_v1',
                                                  'complete_invoice_v4.json')))
-    Document.new(GeneratedV1,
+    Document.new(Universal,
                  parsed_file['document'])
   end
   let(:invoice_v4_page0_doc) do
@@ -247,14 +247,14 @@ RSpec.describe 'Invoice V4 document' do
                                                  'generated',
                                                  'response_v1',
                                                  'complete_invoice_v4.json')))
-    GeneratedV1Page.new(parsed_file['document']['inference']['pages'][0])
+    UniversalPage.new(parsed_file['document']['inference']['pages'][0])
   end
 
   let(:invoice_v4_empty_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products', 'generated', 'response_v1',
                                                  'empty_invoice_v4.json')))
-    Document.new(GeneratedV1,
+    Document.new(Universal,
                  parsed_file['document'])
   end
 
@@ -271,7 +271,7 @@ RSpec.describe 'Invoice V4 document' do
     File.read(File.join(DATA_DIR,
                         'products', 'generated', 'response_v1', 'summary_empty_invoice_v4.rst'))
   end
-  describe 'Empty generated Invoice' do
+  describe 'Empty universal Invoice' do
     it 'ensures all fields are empty' do
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['customer_address']
@@ -391,7 +391,7 @@ RSpec.describe 'Invoice V4 document' do
     end
   end
 
-  describe 'Complete generated Invoice' do
+  describe 'Complete universal Invoice' do
     it 'ensures all fields are populated correctly' do
       prediction = invoice_v4_complete_doc.inference.prediction
       expect(prediction.fields['customer_address']).to be_an_instance_of(StringField)

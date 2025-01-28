@@ -1,7 +1,7 @@
 ---
-title: Generated API Ruby
+title: Universal API Ruby
 category: 622b805aaec68102ea7fcbc2
-slug: ruby-generated-ocr
+slug: ruby-universal-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports generated APIs.
@@ -28,7 +28,7 @@ custom_endpoint = mindee_client.create_endpoint(
 # Parse the file
 result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: custom_endpoint
 )
 

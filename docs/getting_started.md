@@ -234,12 +234,12 @@ endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine', account_name: '
 
 result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: endpoint
 )
 ```
 
-This is because the `GeneratedV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.
+This is because the `Universal` class is enough to handle the return processing, but the actual endpoint needs to be specified.
 
 ## Process the Result
 The response object is common to all documents, including custom documents. The main properties are:

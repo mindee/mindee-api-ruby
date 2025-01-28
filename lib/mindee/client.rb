@@ -111,7 +111,7 @@ module Mindee
 
     # Parses a queued document
     #
-    # @param job_id [String] Id of the job (queue) to poll from
+    # @param job_id [String] ID of the job (queue) to poll from
     # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
@@ -233,7 +233,7 @@ module Mindee
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
       prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority,
                                                                 public_url)
-      Mindee::Parsing::Common::WorkflowResponse.new(Product::Generated::GeneratedV1,
+      Mindee::Parsing::Common::WorkflowResponse.new(Product::Universal::Universal,
                                                     prediction, raw_http)
     end
 
@@ -302,8 +302,12 @@ module Mindee
     # @param version [String] For custom endpoints, version of the product
     # @return [Mindee::HTTP::Endpoint]
     def create_endpoint(endpoint_name: '', account_name: '', version: '')
-      initialize_endpoint(Mindee::Product::Custom::CustomV1, endpoint_name: endpoint_name, account_name: account_name,
-                                                             version: version)
+      initialize_endpoint(
+        Mindee::Product::Universal::Universal,
+        endpoint_name: endpoint_name,
+        account_name: account_name,
+        version: version
+      )
     end
 
     private
@@ -342,9 +346,8 @@ module Mindee
     # @param version [String] For custom endpoints, version of the product.
     # @return [Mindee::HTTP::Endpoint]
     def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
-      if (endpoint_name.nil? || endpoint_name.empty?) &&
-         [Mindee::Product::Custom::CustomV1, Mindee::Product::Generated::GeneratedV1].include?(product_class)
-        raise Errors::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
+      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Universal::Universal
+        raise 'Missing argument endpoint_name when using custom class'
       end
 
       endpoint_name = fix_endpoint_name(product_class, endpoint_name)
