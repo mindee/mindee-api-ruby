@@ -36,6 +36,10 @@ module Mindee
     end
   end
 
+  # Logging
+  module Logging
+  end
+
   # Parsing internals and fields.
   module Parsing
     # Common fields and functions.
@@ -69,4 +73,8 @@ module Mindee
     module US
     end
   end
+end
+
+def logger
+  Mindee::Logging.logger
 end
