@@ -20,29 +20,6 @@ module Mindee
         'image/webp',
       ].freeze
 
-      # Standard error for invalid mime types
-      class MimeTypeError < StandardError
-      end
-
-      # Error sent if the file's mimetype isn't allowed
-      class InvalidMimeTypeError < MimeTypeError
-        # @return [String]
-        attr_reader :invalid_mimetype
-
-        # @param mime_type [String]
-        def initialize(mime_type)
-          @invalid_mimetype = mime_type
-          super("'#{@invalid_mimetype}' mime type not allowed, must be one of #{ALLOWED_MIME_TYPES.join(', ')}")
-        end
-      end
-
-      # Error sent if a pdf file couldn't be fixed
-      class UnfixablePDFError < MimeTypeError
-        def initialize
-          super("Corrupted PDF couldn't be repaired.")
-        end
-      end
-
       # Base class for loading documents.
       class LocalInputSource
         # @return [String]
@@ -72,7 +49,7 @@ module Mindee
             return if ALLOWED_MIME_TYPES.include? @file_mimetype
           end
 
-          raise InvalidMimeTypeError, @file_mimetype.to_s
+          raise Errors::MindeeMimeTypeError, @file_mimetype.to_s
         end
 
         # Attempts to fix pdf files if mimetype is rejected.
@@ -81,7 +58,7 @@ module Mindee
         # @param stream [StringIO]
         def rescue_broken_pdf(stream)
           stream.gets('%PDF-')
-          raise UnfixablePDFError if stream.eof? || stream.pos > 500
+          raise Errors::MindeePDFError if stream.eof? || stream.pos > 500
 
           stream.pos = stream.pos - 5
           data = stream.read
