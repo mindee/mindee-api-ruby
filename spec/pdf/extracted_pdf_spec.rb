@@ -47,12 +47,12 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
     end
   end
 
-  describe '#write_to_file' do
+  describe '#save_to_file' do
     it 'writes the PDF bytes to a specified file path' do
       pdf_stream = File.open(valid_pdf_path, 'r')
       pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
-      expect { pdf_wrapper.write_to_file(output_path) }.not_to raise_error
+      expect { pdf_wrapper.save_to_file(output_path) }.not_to raise_error
       expect(File).to have_received(:write).with(output_path, pdf_stream)
     end
 
@@ -62,7 +62,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
       pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
       expect do
-        pdf_wrapper.write_to_file(output_path)
+        pdf_wrapper.save_to_file(output_path)
       end.to raise_error Mindee::Errors::MindeePDFError, %r{Provided path is not a file}
     end
 
@@ -72,7 +72,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
       pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
       expect do
-        pdf_wrapper.write_to_file(output_path)
+        pdf_wrapper.save_to_file(output_path)
       end.to raise_error Mindee::Errors::MindeePDFError, %r{Invalid save path provided}
     end
   end
