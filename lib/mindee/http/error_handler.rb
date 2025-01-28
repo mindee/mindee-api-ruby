@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require 'json'
+require_relative '../errors/mindee_http_error'
 
 module Mindee
   module HTTP
     # Mindee HTTP error module.
-    module Error
+    module ErrorHandler
       module_function
 
       # Extracts the HTTP error from the response hash, or the job error if there is one.
@@ -80,43 +81,12 @@ module Mindee
         error_obj = create_error_obj(parsed_hash)
         case code
         when 400..499
-          MindeeHttpClientError.new(error_obj, url, code)
+          Errors::MindeeHTTPClientError.new(error_obj, url, code)
         when 500..599
-          MindeeHttpServerError.new(error_obj, url, code)
+          Errors::MindeeHTTPServerError.new(error_obj, url, code)
         else
-          MindeeHttpError.new(error_obj, url, code)
+          Errors::MindeeHTTPError.new(error_obj, url, code)
         end
-      end
-
-      # API HttpError
-      class MindeeHttpError < StandardError
-        # @return [String]
-        attr_reader :status_code
-        # @return [Integer]
-        attr_reader :api_code
-        # @return [String]
-        attr_reader :api_details
-        # @return [String]
-        attr_reader :api_message
-
-        # @param http_error [Hash]
-        # @param url [String]
-        # @param code [Integer]
-        def initialize(http_error, url, code)
-          @status_code = code
-          @api_code = http_error['code']
-          @api_details = http_error['details']
-          @api_message = http_error['message']
-          super("#{url} #{@status_code} HTTP error: #{@api_details} - #{@api_message}")
-        end
-      end
-
-      # API client HttpError
-      class MindeeHttpClientError < MindeeHttpError
-      end
-
-      # API server HttpError
-      class MindeeHttpServerError < MindeeHttpError
       end
     end
   end

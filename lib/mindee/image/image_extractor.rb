@@ -4,12 +4,12 @@ require 'mini_magick'
 require 'origami'
 require 'stringio'
 require 'tempfile'
-require_relative '../../input/sources'
+require_relative '../input/sources'
 require_relative 'extracted_image'
 
 module Mindee
   # Image Extraction Module.
-  module Extraction
+  module Image
     # Image Extraction wrapper class.
     module ImageExtractor
       def self.attach_image_as_new_file(input_buffer, format: 'jpg')
@@ -35,7 +35,7 @@ module Mindee
       # @param [Integer] page_id ID of the Page to extract from.
       # @param [Array<Array<Mindee::Geometry::Point>>, Array<Mindee::Geometry::Quadrangle>] polygons List of coordinates
       # to extract.
-      # @return [Array<Mindee::Extraction::ExtractedImage>] Extracted Images.
+      # @return [Array<Mindee::Image::ExtractedImage>] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
         new_stream = load_input_source_pdf_page_as_image(input_source, page_id)
         new_stream.seek(0)
@@ -49,7 +49,7 @@ module Mindee
       # @param [StringIO] pdf_stream Buffer of the PDF.
       # @param [Integer] page_id Page ID.
       # @param [Array<Mindee::Geometry::Point, Mindee::Geometry::Polygon, Mindee::Geometry::Quadrangle>] polygons
-      # @return [Array<Mindee::Extraction::ExtractedImage>] Extracted Images.
+      # @return [Array<Mindee::Image::ExtractedImage>] Extracted Images.
       def self.extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
         extracted_elements = []
 
