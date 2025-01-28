@@ -8,6 +8,10 @@ module Mindee
   module Errors
   end
 
+  # Custom extraction module
+  module Extraction
+  end
+
   # Mindee internal http module.
   module HTTP
   end
@@ -31,10 +35,6 @@ module Mindee
     # Image compressor module to handle image compression.
     module ImageCompressor
     end
-  end
-
-  # Custom extraction module
-  module Image
   end
 
   # Parsing internals and fields.
