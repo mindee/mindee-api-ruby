@@ -4,7 +4,7 @@ require 'mindee'
 require 'json'
 require_relative 'mock_http_response'
 
-describe Mindee::HTTP::Error do
+describe Mindee::HTTP::ErrorHandler do
   context 'An HTTP call' do
     it 'should make an invalid API sync parse call raising an exception' do
       mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
@@ -13,7 +13,7 @@ describe Mindee::HTTP::Error do
       doc_class = Mindee::Product::Receipt::ReceiptV5
       expect do
         mindee_client1.parse(input_source, doc_class, all_words: false, close_file: true)
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
+      end.to raise_error Mindee::Errors::MindeeHTTPClientError
     end
 
     it 'should make an invalid API async enqueue call raising an exception' do
@@ -23,7 +23,7 @@ describe Mindee::HTTP::Error do
       doc_class = Mindee::Product::Invoice::InvoiceV4
       expect do
         mindee_client1.enqueue(input_source, doc_class)
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
+      end.to raise_error Mindee::Errors::MindeeHTTPClientError
     end
 
     it 'should make an invalid API async parse call raising an exception' do
@@ -31,7 +31,7 @@ describe Mindee::HTTP::Error do
       doc_class = Mindee::Product::InvoiceSplitter::InvoiceSplitterV1
       expect do
         mindee_client1.parse_queued('invalid-job-id', doc_class)
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
+      end.to raise_error Mindee::Errors::MindeeHTTPClientError
     end
 
     # NOTE: No reliable UT each HTTP error for ruby as the only semi-reliable http mock lib (Webmock) isn't compatible
@@ -41,10 +41,10 @@ describe Mindee::HTTP::Error do
     it 'should fail on a 400 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_400_no_details.json")
       error_obj = MockHTTPResponse.new('1.0', '400', 'Some scary message here', file)
-      error400 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      error400 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error400
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
+      end.to raise_error Mindee::Errors::MindeeHTTPClientError
       expect(error400.status_code).to eq(400)
       expect(error400.api_code).to eq('SomeCode')
       expect(error400.api_message).to eq('Some scary message here')
@@ -54,10 +54,10 @@ describe Mindee::HTTP::Error do
     it 'should fail on a 401 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_401_invalid_token.json")
       error_obj = MockHTTPResponse.new('1.0', '401', 'Authorization required', file)
-      error401 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      error401 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error401
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
+      end.to raise_error Mindee::Errors::MindeeHTTPClientError
       expect(error401.status_code).to eq(401)
       expect(error401.api_code).to eq('Unauthorized')
       expect(error401.api_message).to eq('Authorization required')
@@ -67,10 +67,10 @@ describe Mindee::HTTP::Error do
     it 'should fail on a 429 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_429_too_many_requests.json")
       error_obj = MockHTTPResponse.new('1.0', '429', 'Too many requests', file)
-      error429 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      error429 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error429
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpClientError
+      end.to raise_error Mindee::Errors::MindeeHTTPClientError
       expect(error429.status_code).to eq(429)
       expect(error429.api_code).to eq('TooManyRequests')
       expect(error429.api_message).to eq('Too many requests')
@@ -80,10 +80,10 @@ describe Mindee::HTTP::Error do
     it 'should fail on a 500 response with object' do
       file = File.read("#{DATA_DIR}/errors/error_500_inference_fail.json")
       error_obj = MockHTTPResponse.new('1.0', '500', 'Inference failed', file)
-      error500 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      error500 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error500
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpServerError
+      end.to raise_error Mindee::Errors::MindeeHTTPServerError
       expect(error500.status_code).to eq(500)
       expect(error500.api_code).to eq('failure')
       expect(error500.api_message).to eq('Inference failed')
@@ -93,10 +93,10 @@ describe Mindee::HTTP::Error do
     it 'should fail on a 500 HTML response' do
       file = File.read("#{DATA_DIR}/errors/error_50x.html")
       error_obj = MockHTTPResponse.new('1.0', '500', '', file)
-      error500 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      error500 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error500
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpServerError
+      end.to raise_error Mindee::Errors::MindeeHTTPServerError
       expect(error500.status_code).to eq(500)
       expect(error500.api_code).to eq('UnknownError')
       expect(error500.api_message).to eq('Server sent back an unexpected reply.')
@@ -111,10 +111,10 @@ describe Mindee::HTTP::Error do
       expect(hashed_obj.dig('job', 'status')).to eq('failed')
       expect(Mindee::HTTP::ResponseValidation.valid_async_response?(error_obj)).to be(false)
       Mindee::HTTP::ResponseValidation.clean_request! error_obj
-      error500 = Mindee::HTTP::Error.handle_error('dummy-url', error_obj)
+      error500 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error500
-      end.to raise_error Mindee::HTTP::Error::MindeeHttpServerError
+      end.to raise_error Mindee::Errors::MindeeHTTPServerError
       expect(error500.status_code).to eq(500)
       expect(error500.api_code).to eq('ServerError')
       expect(error500.api_message).to eq('An error occurred')
