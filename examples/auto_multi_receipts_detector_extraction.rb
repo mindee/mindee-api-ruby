@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'mindee'
-require 'mindee/extraction'
 
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 def multi_receipts_detection(file_path, mindee_client)
@@ -13,7 +12,7 @@ def multi_receipts_detection(file_path, mindee_client)
     close_file: false
   )
 
-  images = Mindee::Extraction::MultiReceiptsExtractor.extract_receipts(input_source, result_split.document.inference)
+  images = Mindee::Image::ImageExtractor.extract_receipts(input_source, result_split.document.inference)
   images.each do |sub_image|
     # Optional: Save the files locally
     # sub_image.write_to_file("/path/to/my/extracted/file/folder")

@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
-require 'mindee/extraction'
 
 module Mindee
   # Mindee internal error module.
   module Errors
-  end
-
-  # Custom extraction module
-  module Extraction
   end
 
   # Mindee internal http module.
