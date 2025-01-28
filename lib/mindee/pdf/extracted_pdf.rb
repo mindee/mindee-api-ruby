@@ -32,12 +32,14 @@ module Mindee
 
         # Writes the contents of the current PDF object to a file.
         # @param output_path [String] Path to write to.
-        def write_to_file(output_path)
-          raise Errors::MindeePDFError, 'Provided path is not a file' if File.directory?(destination)
-          raise Errors::MindeePDFError, 'Invalid save path provided' unless File.exist?(File.expand_path('..',
-                                                                                                         output_path))
+        # @param override [Boolean] Whether to override the destination file.
+        def write_to_file(output_path, override: false)
+          raise Errors::MindeePDFError, 'Provided path is not a file' if File.directory?(output_path)
+          raise Errors::MindeePDFError, 'Invalid save path provided' unless File.exist?(
+            File.expand_path('..', output_path)
+          ) && !override
 
-          if File.extname(output_path).downcase == '.pdf'
+          if File.extname(output_path).downcase == 'pdf'
             base_path = File.expand_path('..', output_path)
             output_path = File.expand_path("#{File.basename(output_path)}.pdf", base_path)
           end
