@@ -101,8 +101,8 @@ describe Mindee::Client do
       expect do
         mindee_client.send(
           :initialize_endpoint,
-          Mindee::Product::Generated::GeneratedV1,
-          endpoint_name: nil,
+          Mindee::Product::Universal::Universal,
+          endpoint_name: '',
           account_name: 'account_name',
           version: 'version'
         )
@@ -111,7 +111,7 @@ describe Mindee::Client do
       expect do
         mindee_client.send(
           :initialize_endpoint,
-          Mindee::Product::Generated::GeneratedV1,
+          Mindee::Product::Universal::Universal,
           endpoint_name: '',
           account_name: 'account_name',
           version: 'version'
