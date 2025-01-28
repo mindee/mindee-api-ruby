@@ -4,7 +4,7 @@ require_relative '../../image/image_extractor'
 
 module Mindee
   # Image Extraction Module.
-  module Image
+  module Extraction
     # Multi-receipts extraction class wrapper.
     class MultiReceiptsExtractor
       def self.extract_receipts(input_source, inference)
