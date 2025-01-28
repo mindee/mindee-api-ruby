@@ -249,7 +249,7 @@ module Mindee
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
 
-      logger.debug("Sending document to workflow '#{workflow_endpoint.url_root}'")
+      logger.debug("Sending document to workflow '#{workflow_id}'")
 
       prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority,
                                                                 public_url)
