@@ -12,10 +12,14 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = UsMailV2PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            @prediction = if prediction['prediction'].empty?
+                            {}
+                          else
+                            UsMailV2PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 

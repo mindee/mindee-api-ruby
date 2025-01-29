@@ -34,8 +34,10 @@ module Mindee
           out_str << "\n:Rotation applied: #{is_rotation_applied}"
           out_str << "\n\nPrediction\n=========="
           out_str << "\n#{@prediction.to_s.size.positive? ? "#{@prediction}\n" : ''}"
-          out_str << "\nPage Predictions\n================\n\n" unless @pages.empty?
-          out_str << @pages.map(&:to_s).join("\n\n")
+          if @pages.any? { |page| page.prediction != {} }
+            out_str << "\nPage Predictions\n================\n\n"
+            out_str << @pages.map(&:to_s).join("\n\n")
+          end
           out_str.rstrip!
           out_str
         end

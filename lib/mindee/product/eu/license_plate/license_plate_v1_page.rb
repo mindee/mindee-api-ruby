@@ -12,10 +12,14 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = LicensePlateV1PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            @prediction = if prediction['prediction'].empty?
+                            {}
+                          else
+                            LicensePlateV1PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 
