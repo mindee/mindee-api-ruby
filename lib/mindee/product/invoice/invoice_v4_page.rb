@@ -12,7 +12,7 @@ module Mindee
         def initialize(prediction)
           super
           @prediction = if prediction['prediction'].empty?
-                          {}
+                          nil
                         else
                           InvoiceV4PagePrediction.new(
                             prediction['prediction'],

@@ -13,7 +13,7 @@ module Mindee
           def initialize(prediction)
             super
             @prediction = if prediction['prediction'].empty?
-                            {}
+                            nil
                           else
                             BankAccountDetailsV2PagePrediction.new(
                               prediction['prediction'],

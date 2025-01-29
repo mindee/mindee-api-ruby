@@ -12,7 +12,7 @@ module Mindee
         def initialize(prediction)
           super
           @prediction = if prediction['prediction'].empty?
-                          {}
+                          nil
                         else
                           DeliveryNoteV1PagePrediction.new(
                             prediction['prediction'],
