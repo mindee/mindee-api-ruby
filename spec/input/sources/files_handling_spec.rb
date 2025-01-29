@@ -9,7 +9,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.jpg')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       expect(read_f.length).to eq(3)
       expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
     end
@@ -19,7 +19,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.jpga')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       expect(read_f.length).to eq(3)
       expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
     end
@@ -29,7 +29,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.heic')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       expect(read_f.length).to eq(3)
       expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
     end
@@ -39,7 +39,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.tif')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       expect(read_f.length).to eq(3)
       expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
     end
@@ -49,7 +49,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should be readable as raw bytes' do
       file = File.join(DATA_DIR, 'file_types/receipt.tiff')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       expect(read_f.length).to eq(3)
       expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
     end
@@ -59,7 +59,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should stay in base64' do
       file = File.join(DATA_DIR, 'file_types/receipt.txt')
       input = Mindee::Input::Source::Base64InputSource.new(File.read(file), 'receipt.txt')
-      read_f = input.read_document
+      read_f = input.read_contents
       expect(read_f.length).to eq(3)
       expect(read_f[1].gsub("\n", '')).to eq(File.read(file).gsub("\n", ''))
     end
@@ -69,7 +69,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should not be converted' do
       file = File.join(DATA_DIR, 'file_types/pdf/not_blank_image_only.pdf')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       file_contents = File.read(file)
       expect(read_f[1]).to_not eq(Base64.encode64(file_contents))
       expect(read_f.length).to eq(3)
@@ -81,7 +81,7 @@ describe Mindee::Input::Source::LocalInputSource do
     it 'should not be converted' do
       file = File.join(DATA_DIR, 'file_types/pdf/valid_exported.pdf')
       input = Mindee::Input::Source::PathInputSource.new(file)
-      read_f = input.read_document
+      read_f = input.read_contents
       file_contents = File.read(file)
       expect(read_f[1]).to_not eq(Base64.encode64(file_contents))
       expect(read_f.length).to eq(3)

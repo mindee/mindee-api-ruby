@@ -3,6 +3,7 @@
 require 'net/http'
 require 'uri'
 require 'fileutils'
+require_relative '../../logging'
 
 module Mindee
   module Input
@@ -14,6 +15,8 @@ module Mindee
 
         def initialize(url)
           raise Errors::MindeeInputError, 'URL must be HTTPS' unless url.start_with? 'https://'
+
+          logger.debug("URL input: #{url}")
 
           @url = url
         end
