@@ -42,16 +42,12 @@ module Mindee
     module Common
     end
 
-    # Custom fields and functions.
-    module Custom
-    end
-
     # Standard fields and functions.
     module Standard
     end
 
-    # Generated fields and functions.
-    module Generated
+    # Universal fields and functions.
+    module Universal
     end
   end
 

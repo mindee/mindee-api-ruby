@@ -31,7 +31,7 @@ module Mindee
           # The initial amount of money in an account at the start of the period.
           # @return [Mindee::Parsing::Standard::AmountField]
           attr_reader :opening_balance
-          # The date on which the bank statement was generated.
+          # The date on which the bank statement was universal.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :statement_date
           # The date when the statement period ends.

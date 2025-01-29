@@ -10,7 +10,7 @@ module Mindee
       # Abstract wrapper class for prediction Pages
       # Holds prediction for a page as well as it's orientation and  id.
       class Page
-        # Id of the page (as given by the API).
+        # ID of the page (as given by the API).
         # @return [Integer]
         attr_reader :page_id
         # Orientation of the page.

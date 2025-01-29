@@ -15,7 +15,7 @@ describe Mindee::Client do
       allow(Net::HTTP).to receive(:start).and_return(mocked_response)
 
       mocked_execution = Mindee::Parsing::Common::WorkflowResponse.new(
-        GeneratedV1,
+        Universal,
         JSON.parse(mocked_response.body, object_class: Hash),
         mocked_response.body
       )
@@ -47,7 +47,7 @@ describe Mindee::Client do
       allow(Net::HTTP).to receive(:start).and_return(mocked_response)
 
       mocked_execution = Mindee::Parsing::Common::WorkflowResponse.new(
-        GeneratedV1,
+        Universal,
         JSON.parse(mocked_response.body, object_class: Hash),
         mocked_response.body
       )

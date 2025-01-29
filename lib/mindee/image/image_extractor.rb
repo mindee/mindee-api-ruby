@@ -91,7 +91,7 @@ module Mindee
       #
       # @param [StringIO] buffer Buffer containing the image.
       # @param [String] file_name Name for the file.
-      # @param [Object] page_id ID of the page the file was generated from.
+      # @param [Object] page_id ID of the page the file was universal from.
       # @param [Object] element_id ID of the element of a given page.
       def self.create_extracted_image(buffer, file_name, page_id, element_id)
         buffer.rewind
