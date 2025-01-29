@@ -116,7 +116,7 @@ result = mindee_client.parse(
 puts result.document
 ```
 
-### Universal document handling
+### Universal - All Other Documents
 
 The Universal product acts as a catch-all for every and any API if it doesn't have an assigned product name.
 
