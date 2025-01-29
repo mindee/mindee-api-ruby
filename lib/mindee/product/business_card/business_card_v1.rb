@@ -19,9 +19,7 @@ module Mindee
           @prediction = BusinessCardV1Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
-            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-              @pages.push(BusinessCardV1Page.new(page))
-            end
+            @pages.push(BusinessCardV1Page.new(page))
           end
         end
 

@@ -19,9 +19,7 @@ module Mindee
           @prediction = ResumeV1Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
-            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-              @pages.push(ResumeV1Page.new(page))
-            end
+            @pages.push(ResumeV1Page.new(page))
           end
         end
 

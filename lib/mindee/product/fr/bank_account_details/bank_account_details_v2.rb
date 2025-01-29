@@ -20,9 +20,7 @@ module Mindee
             @prediction = BankAccountDetailsV2Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-                @pages.push(BankAccountDetailsV2Page.new(page))
-              end
+              @pages.push(BankAccountDetailsV2Page.new(page))
             end
           end
 
