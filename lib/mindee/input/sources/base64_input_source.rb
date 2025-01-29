@@ -19,7 +19,7 @@ module Mindee
         # Overload of the same function to prevent a base64 from being re-encoded.
         # @param close [Boolean]
         # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
-        def read_document(close: true)
+        def read_contents(close: true)
           @io_stream.seek(0)
           data = @io_stream.read
           @io_stream.close if close
