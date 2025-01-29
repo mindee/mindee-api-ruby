@@ -7,15 +7,9 @@ require 'mindee'
 
 options = {}
 DOCUMENTS = {
-  "custom" => {
-    description: "Custom document type from API builder",
-    doc_class: Mindee::Product::Custom::CustomV1,
-    sync: true,
-    async: false,
-  },
-  "generated" => {
-    description: "Generated document type from API builder",
-    doc_class: Mindee::Product::Generated::GeneratedV1,
+  "universal" => {
+    description: "Universal document type from API builder",
+    doc_class: Mindee::Product::Universal::Universal,
     sync: true,
     async: true,
   },
@@ -154,7 +148,7 @@ DEFAULT_CUTTING = {
   on_min_pages: 0,
 }
 
-# Initializes custom & generated-specific options
+# Initializes universal-specific options
 # @param cli_parser [OptionParser]
 def custom_subcommand(cli_parser, options)
   cli_parser.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
@@ -183,10 +177,8 @@ DOCUMENTS.each do |doc_key, doc_value|
     opts.on('-F', '--fix-pdf', "Attempts to fix broken PDF files before sending them to the server.") do |v|
       options[:fix_pdf] = true
     end
-    if (doc_key != 'custom' && doc_key != 'generated')
-      opts.banner = "Product: #{doc_value[:description]}. \nUsage: mindee.rb #{doc_key} [options] file"
-    else
-      opts.banner = "#{doc_value[:description]}. \nUsage: \nmindee.rb custom [options] endpoint_name file\nor\nmindee.rb generated [options] endpoint_name file"
+    if doc_key != 'universal'
+      opts.banner = "#{doc_value[:description]}. \nUsage: \nmindee.rb universal [options] endpoint_name file\nor\nmindee.rb universal [options] endpoint_name file"
       custom_subcommand(opts, options)
     end
     if doc_value[:async]
@@ -206,13 +198,13 @@ global_parser = OptionParser.new do |opts|
 end
 
 command = ARGV.shift
-if !DOCUMENTS.include?(command)
+unless DOCUMENTS.include?(command)
   abort(global_parser.help)
 end
 doc_class = DOCUMENTS[command][:doc_class]
 product_parser[command].parse!
 
-if command == 'custom' || command == 'generated'
+if command == 'universal'
   if ARGV.length < 2
     $stderr.puts "The '#{command}' command requires both ENDPOINT_NAME and file arguments."
     abort(product_parser[command].help)
@@ -229,13 +221,13 @@ else
 end
 
 mindee_client = Mindee::Client.new(api_key: options[:api_key])
-if (options[:file_path].start_with?("https://"))
+if options[:file_path].start_with?("https://")
   input_source = mindee_client.source_from_url(options[:file_path])
 else
   input_source = mindee_client.source_from_path(options[:file_path], fix_pdf: options[:fix_pdf])
 end
 
-if command == 'custom' || command == 'generated'
+if command == 'universal'
   custom_endpoint = mindee_client.create_endpoint(
     endpoint_name: endpoint_name,
     account_name: options[:account_name],
