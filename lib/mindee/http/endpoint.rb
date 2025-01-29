@@ -40,6 +40,9 @@ module Mindee
         @url_name = url_name
         @version = version
         @request_timeout = ENV.fetch(REQUEST_TIMEOUT_ENV_NAME, TIMEOUT_DEFAULT).to_i
+        if api_key.nil? && !ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT).empty?
+          logger.debug('API key set from environment')
+        end
         @api_key = api_key.nil? || api_key.empty? ? ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT) : api_key
         base_url = ENV.fetch(BASE_URL_ENV_NAME, BASE_URL_DEFAULT)
         @url_root = "#{base_url.chomp('/')}/products/#{@owner}/#{@url_name}/v#{@version}"
@@ -125,7 +128,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
                     else
-                      [input_source.read_document(close: close_file)]
+                      [input_source.read_contents(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
 
@@ -159,7 +162,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
                       [['document', input_source.url]]
                     else
-                      [input_source.read_document(close: close_file)]
+                      [input_source.read_contents(close: close_file)]
                     end
         form_data.push ['include_mvision', 'true'] if all_words
 

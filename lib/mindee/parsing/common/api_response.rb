@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'document'
+require_relative '../../logging'
 require 'time'
 
 module Mindee
@@ -107,6 +108,7 @@ module Mindee
         # @param http_response [Hash]
         # @param raw_http [String]
         def initialize(product_class, http_response, raw_http)
+          logger.debug('Handling API response')
           @raw_http = raw_http.to_s
           raise Errors::MindeeAPIError, 'Invalid response format.' unless http_response.key?('api_request')
 
