@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require_relative 'generated_object_field'
+require_relative 'universal_object_field'
 
 module Mindee
   module Parsing
-    module Generated
-      # A list of values or objects, used in generated APIs.
-      class GeneratedListField
+    module Universal
+      # A list of values or objects, used in universal APIs.
+      class UniversalListField
         include Mindee::Parsing::Standard
-        include Mindee::Parsing::Generated
+        include Mindee::Parsing::Universal
 
-        # Id of the page (as given by the API).
+        # ID of the page (as given by the API).
         # @return [Integer]
         attr_accessor :page_id
 
         # List of word values
-        # @return [Array<GeneratedObjectField, StringField>]
+        # @return [Array<UniversalObjectField, StringField>]
         attr_accessor :values
 
-        # Id of the page the object was found on.
+        # ID of the page the object was found on.
         # List of word values.
 
         def initialize(raw_prediction, page_id = nil)
@@ -27,8 +27,8 @@ module Mindee
           raw_prediction.each do |value|
             page_id = value['page_id'] if value.key?('page_id') && !value['page_id'].nil?
 
-            if Generated.generated_object?(value)
-              @values.push(GeneratedObjectField.new(value, page_id))
+            if Universal.generated_object?(value)
+              @values.push(UniversalObjectField.new(value, page_id))
             else
               value_str = value.dup
               value_str['value'] = value_str['value'].to_s if value_str.key?('value') && !value_str['value'].nil?

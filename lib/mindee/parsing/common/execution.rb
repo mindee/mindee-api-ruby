@@ -30,7 +30,7 @@ module Mindee
         # @return [Time, nil]
         attr_reader :available_at
         # Reviewed fields and values.
-        # @return [Mindee::Product::Generated::GeneratedV1Document]
+        # @return [Mindee::Product::Universal::UniversalDocument]
         attr_reader :reviewed_prediction
         # Execution Status.
         # @return [String]
@@ -59,7 +59,7 @@ module Mindee
           @reviewed_at = Time.iso8601(http_response['reviewed_at']) if http_response['reviewed_at']
           @available_at = Time.iso8601(http_response['available_at']) if http_response['available_at']
           if http_response['reviewed_prediction']
-            @reviewed_prediction = GeneratedV1Document.new(http_response['reviewed_prediction'])
+            @reviewed_prediction = UniversalDocument.new(http_response['reviewed_prediction'])
           end
           @status = http_response['status']
           @type = http_response['type']

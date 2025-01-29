@@ -4,14 +4,14 @@ require_relative '../common'
 
 module Mindee
   module Parsing
-    # Generated fields and functions.
-    module Generated
+    # Universal fields and functions.
+    module Universal
       # A JSON-like object, with miscellaneous values.
-      class GeneratedObjectField
+      class UniversalObjectField
         include Mindee::Parsing::Standard
         attr_accessor :page_id, :confidence, :raw_value
 
-        # Id of the page the object was found on.
+        # ID of the page the object was found on.
         # Confidence with which the value was assessed.
         # Raw unprocessed value, as it was sent by the server.
 
