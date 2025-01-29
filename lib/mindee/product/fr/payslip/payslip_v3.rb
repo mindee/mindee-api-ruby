@@ -20,9 +20,7 @@ module Mindee
             @prediction = PayslipV3Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-                @pages.push(PayslipV3Page.new(page))
-              end
+              @pages.push(PayslipV3Page.new(page))
             end
           end
 

@@ -20,9 +20,7 @@ module Mindee
             @prediction = EnergyBillV1Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-                @pages.push(EnergyBillV1Page.new(page))
-              end
+              @pages.push(EnergyBillV1Page.new(page))
             end
           end
 
