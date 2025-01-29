@@ -4,14 +4,14 @@ require_relative '../../parsing'
 
 module Mindee
   module Product
-    module Generated
-      # Generated Document V1 page.
-      class GeneratedV1Prediction < Mindee::Parsing::Common::Prediction
+    module Universal
+      # Universal Document V1 page.
+      class UniversalPrediction < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Common
         include Mindee::Parsing::Standard
-        include Mindee::Parsing::Generated
+        include Mindee::Parsing::Universal
         # All value fields in the document
-        # @return [Hash<Symbol, Mindee::Parsing::Generated::GeneratedListField>]
+        # @return [Hash<Symbol, Mindee::Parsing::Universal::UniversalListField>]
         attr_reader :fields
 
         def initialize
@@ -24,7 +24,7 @@ module Mindee
           out_str = ''
           pattern = %r{^(\n* *)( {2}):}
           @fields.each do |field_name, field_value|
-            str_value = if field_value.is_a?(GeneratedListField) && field_value.values.length.positive?
+            str_value = if field_value.is_a?(UniversalListField) && field_value.values.length.positive?
                           generate_field_string(field_name, field_value, pattern)
                         else
                           field_value.to_s
@@ -42,13 +42,13 @@ module Mindee
           return '' if field_value.values.empty? || field_value.values.nil?
 
           str_value = ''
-          str_value += if field_value.values[0].is_a?(Parsing::Generated::GeneratedObjectField)
+          str_value += if field_value.values[0].is_a?(Parsing::Universal::UniversalObjectField)
                          field_value.values[0].str_level(1).sub(pattern, '\\1* :')
                        else
                          "#{field_value.values[0].to_s.sub(pattern, '\\1* :')}\n"
                        end
           field_value.values[1..].each do |sub_value|
-            str_value += if sub_value.is_a?(Parsing::Generated::GeneratedObjectField)
+            str_value += if sub_value.is_a?(Parsing::Universal::UniversalObjectField)
                            sub_value.str_level(1).sub(pattern, '\\1* :')
                          else
                            "#{' ' * (field_name.length + 2)} #{sub_value}\n"

@@ -75,7 +75,7 @@ Using Mindee's APIs can be broken down into the following steps:
 Let's take a deep dive into how this works.
 
 ## Initializing the Client
-The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for Custom APIs).
+The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for Universal APIs).
 
 The `Client` requires your [API key](https://developers.mindee.com/docs/make-your-first-request#create-an-api-key).
 
@@ -226,7 +226,7 @@ result = mindee_client.parse(
 )
 ```
 
-### Custom Documents (docTI)
+### Universal Documents (docTI)
 For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
 
 ```ruby
@@ -234,15 +234,15 @@ endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine', account_name: '
 
 result = mindee_client.enqueue_and_parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: endpoint
 )
 ```
 
-This is because the `GeneratedV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.
+This is because the `Universal` class is enough to handle the return processing, but the actual endpoint needs to be specified.
 
 ## Process the Result
-The response object is common to all documents, including custom documents. The main properties are:
+The response object is common to all documents, including custom documents (using the Universal product). The main properties are:
 
 * `id` — Mindee ID of the document
 * `name` — Filename sent to the API
