@@ -19,9 +19,7 @@ module Mindee
           @prediction = CropperV1Document.new
           @pages = []
           prediction['pages'].each do |page|
-            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-              @pages.push(CropperV1Page.new(page))
-            end
+            @pages.push(CropperV1Page.new(page))
           end
         end
 
