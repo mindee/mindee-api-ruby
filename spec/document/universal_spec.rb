@@ -18,7 +18,7 @@ RSpec.describe 'International ID v1 document' do
   let(:international_id_v1_complete_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
-                                                 'universal',
+                                                 'generated',
                                                  'response_v1',
                                                  'complete_international_id_v1.json')))
     Document.new(Universal,
@@ -27,7 +27,7 @@ RSpec.describe 'International ID v1 document' do
 
   let(:international_id_v1_empty_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
-                                                 'products', 'universal', 'response_v1',
+                                                 'products', 'generated', 'response_v1',
                                                  'empty_international_id_v1.json')))
     Document.new(Universal,
                  parsed_file['document'])
@@ -35,12 +35,12 @@ RSpec.describe 'International ID v1 document' do
 
   let(:international_id_v1_complete_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'universal', 'response_v1', 'summary_full_international_id_v1.rst'))
+                        'products', 'generated', 'response_v1', 'summary_full_international_id_v1.rst'))
   end
 
   let(:international_id_v1_empty_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'universal', 'response_v1', 'summary_empty_international_id_v1.rst'))
+                        'products', 'generated', 'response_v1', 'summary_empty_international_id_v1.rst'))
   end
 
   describe 'Empty document' do
@@ -235,7 +235,7 @@ RSpec.describe 'Invoice V4 document' do
   let(:invoice_v4_complete_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
-                                                 'universal',
+                                                 'generated',
                                                  'response_v1',
                                                  'complete_invoice_v4.json')))
     Document.new(Universal,
@@ -244,7 +244,7 @@ RSpec.describe 'Invoice V4 document' do
   let(:invoice_v4_page0_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
-                                                 'universal',
+                                                 'generated',
                                                  'response_v1',
                                                  'complete_invoice_v4.json')))
     UniversalPage.new(parsed_file['document']['inference']['pages'][0])
@@ -252,7 +252,7 @@ RSpec.describe 'Invoice V4 document' do
 
   let(:invoice_v4_empty_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
-                                                 'products', 'universal', 'response_v1',
+                                                 'products', 'generated', 'response_v1',
                                                  'empty_invoice_v4.json')))
     Document.new(Universal,
                  parsed_file['document'])
@@ -260,16 +260,16 @@ RSpec.describe 'Invoice V4 document' do
 
   let(:invoice_v4_complete_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'universal', 'response_v1', 'summary_full_invoice_v4.rst'))
+                        'products', 'generated', 'response_v1', 'summary_full_invoice_v4.rst'))
   end
   let(:invoice_v4_page0_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'universal', 'response_v1', 'summary_page0_invoice_v4.rst'))
+                        'products', 'generated', 'response_v1', 'summary_page0_invoice_v4.rst'))
   end
 
   let(:invoice_v4_empty_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'universal', 'response_v1', 'summary_empty_invoice_v4.rst'))
+                        'products', 'generated', 'response_v1', 'summary_empty_invoice_v4.rst'))
   end
   describe 'Empty universal Invoice' do
     it 'ensures all fields are empty' do

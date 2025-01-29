@@ -53,12 +53,12 @@ module Mindee
           printable = {}
           printable[:description] = format_for_display(@description)
           printable[:product_code] = format_for_display(@product_code)
-          printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
-          printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
-          printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
-          printable[:total_amount] = @total_amount.nil? ? '' : Field.float_to_string(@total_amount)
+          printable[:quantity] = @quantity.nil? ? '' : BaseField.float_to_string(@quantity)
+          printable[:tax_amount] = @tax_amount.nil? ? '' : BaseField.float_to_string(@tax_amount)
+          printable[:tax_rate] = @tax_rate.nil? ? '' : BaseField.float_to_string(@tax_rate)
+          printable[:total_amount] = @total_amount.nil? ? '' : BaseField.float_to_string(@total_amount)
           printable[:unit_measure] = format_for_display(@unit_measure)
-          printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+          printable[:unit_price] = @unit_price.nil? ? '' : BaseField.float_to_string(@unit_price)
           printable
         end
 
@@ -67,12 +67,12 @@ module Mindee
           printable = {}
           printable[:description] = format_for_display(@description, 36)
           printable[:product_code] = format_for_display(@product_code, nil)
-          printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
-          printable[:tax_amount] = @tax_amount.nil? ? '' : Field.float_to_string(@tax_amount)
-          printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
-          printable[:total_amount] = @total_amount.nil? ? '' : Field.float_to_string(@total_amount)
+          printable[:quantity] = @quantity.nil? ? '' : BaseField.float_to_string(@quantity)
+          printable[:tax_amount] = @tax_amount.nil? ? '' : BaseField.float_to_string(@tax_amount)
+          printable[:tax_rate] = @tax_rate.nil? ? '' : BaseField.float_to_string(@tax_rate)
+          printable[:total_amount] = @total_amount.nil? ? '' : BaseField.float_to_string(@total_amount)
           printable[:unit_measure] = format_for_display(@unit_measure, nil)
-          printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+          printable[:unit_price] = @unit_price.nil? ? '' : BaseField.float_to_string(@unit_price)
           printable
         end
 

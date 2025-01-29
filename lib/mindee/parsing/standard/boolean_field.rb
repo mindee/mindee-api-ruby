@@ -6,7 +6,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents basic text information.
-      class BooleanField < Field
+      class BooleanField < BaseField
         # Value as Boolean
         # @return [Boolean, nil]
         attr_reader :value
