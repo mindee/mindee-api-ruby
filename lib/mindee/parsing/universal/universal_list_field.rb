@@ -27,7 +27,7 @@ module Mindee
           raw_prediction.each do |value|
             page_id = value['page_id'] if value.key?('page_id') && !value['page_id'].nil?
 
-            if Universal.generated_object?(value)
+            if Universal.universal_object?(value)
               @values.push(UniversalObjectField.new(value, page_id))
             else
               value_str = value.dup

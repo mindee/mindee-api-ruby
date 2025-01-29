@@ -8,8 +8,8 @@ require_relative '../data'
 
 StringField = Mindee::Parsing::Standard.const_get(:StringField)
 PositionField = Mindee::Parsing::Standard.const_get(:PositionField)
-GeneratedListField = Mindee::Parsing::Universal.const_get(:UniversalListField)
-GeneratedObjectField = Mindee::Parsing::Universal.const_get(:UniversalObjectField)
+UniversalListField = Mindee::Parsing::Universal.const_get(:UniversalListField)
+UniversalObjectField = Mindee::Parsing::Universal.const_get(:UniversalObjectField)
 Universal = Mindee::Product::Universal.const_get(:Universal)
 UniversalPage = Mindee::Product::Universal.const_get(:UniversalPage)
 Document = Mindee::Parsing::Common.const_get(:Document)
@@ -18,7 +18,7 @@ RSpec.describe 'International ID v1 document' do
   let(:international_id_v1_complete_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
-                                                 'generated',
+                                                 'universal',
                                                  'response_v1',
                                                  'complete_international_id_v1.json')))
     Document.new(Universal,
@@ -27,7 +27,7 @@ RSpec.describe 'International ID v1 document' do
 
   let(:international_id_v1_empty_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
-                                                 'products', 'generated', 'response_v1',
+                                                 'products', 'universal', 'response_v1',
                                                  'empty_international_id_v1.json')))
     Document.new(Universal,
                  parsed_file['document'])
@@ -35,12 +35,12 @@ RSpec.describe 'International ID v1 document' do
 
   let(:international_id_v1_complete_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'generated', 'response_v1', 'summary_full_international_id_v1.rst'))
+                        'products', 'universal', 'response_v1', 'summary_full_international_id_v1.rst'))
   end
 
   let(:international_id_v1_empty_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'generated', 'response_v1', 'summary_empty_international_id_v1.rst'))
+                        'products', 'universal', 'response_v1', 'summary_empty_international_id_v1.rst'))
   end
 
   describe 'Empty document' do
@@ -54,10 +54,10 @@ RSpec.describe 'International ID v1 document' do
       expect(prediction.fields['country_of_issue']).to be_an_instance_of(StringField)
       expect(prediction.fields['country_of_issue'].value).to be_nil
 
-      expect(prediction.fields['surnames']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['surnames']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['surnames'].values.length).to eq(0)
 
-      expect(prediction.fields['given_names']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['given_names']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['given_names'].values.length).to eq(0)
 
       expect(prediction.fields['sex']).to be_an_instance_of(StringField)
@@ -131,7 +131,7 @@ RSpec.describe 'International ID v1 document' do
 
       expect(
         prediction.fields['surnames']
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(
         prediction.fields['surnames']
                   .values[0]
@@ -145,7 +145,7 @@ RSpec.describe 'International ID v1 document' do
 
       expect(
         prediction.fields['given_names']
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(
         prediction.fields['given_names']
                   .values[0]
@@ -235,7 +235,7 @@ RSpec.describe 'Invoice V4 document' do
   let(:invoice_v4_complete_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
-                                                 'generated',
+                                                 'universal',
                                                  'response_v1',
                                                  'complete_invoice_v4.json')))
     Document.new(Universal,
@@ -244,7 +244,7 @@ RSpec.describe 'Invoice V4 document' do
   let(:invoice_v4_page0_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
-                                                 'generated',
+                                                 'universal',
                                                  'response_v1',
                                                  'complete_invoice_v4.json')))
     UniversalPage.new(parsed_file['document']['inference']['pages'][0])
@@ -252,7 +252,7 @@ RSpec.describe 'Invoice V4 document' do
 
   let(:invoice_v4_empty_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
-                                                 'products', 'generated', 'response_v1',
+                                                 'products', 'universal', 'response_v1',
                                                  'empty_invoice_v4.json')))
     Document.new(Universal,
                  parsed_file['document'])
@@ -260,16 +260,16 @@ RSpec.describe 'Invoice V4 document' do
 
   let(:invoice_v4_complete_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'generated', 'response_v1', 'summary_full_invoice_v4.rst'))
+                        'products', 'universal', 'response_v1', 'summary_full_invoice_v4.rst'))
   end
   let(:invoice_v4_page0_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'generated', 'response_v1', 'summary_page0_invoice_v4.rst'))
+                        'products', 'universal', 'response_v1', 'summary_page0_invoice_v4.rst'))
   end
 
   let(:invoice_v4_empty_doc_string) do
     File.read(File.join(DATA_DIR,
-                        'products', 'generated', 'response_v1', 'summary_empty_invoice_v4.rst'))
+                        'products', 'universal', 'response_v1', 'summary_empty_invoice_v4.rst'))
   end
   describe 'Empty universal Invoice' do
     it 'ensures all fields are empty' do
@@ -283,7 +283,7 @@ RSpec.describe 'Invoice V4 document' do
         invoice_v4_empty_doc.inference.prediction.fields[
           'customer_company_registrations'
         ]
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(
         invoice_v4_empty_doc.inference.prediction.fields[
           'customer_company_registrations'
@@ -323,18 +323,18 @@ RSpec.describe 'Invoice V4 document' do
 
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['line_items']
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(invoice_v4_empty_doc.inference.prediction.fields['line_items'].values.length).to eq(0)
 
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['locale']
-      ).to be_an_instance_of(GeneratedObjectField)
+      ).to be_an_instance_of(UniversalObjectField)
       expect(invoice_v4_empty_doc.inference.prediction.fields['locale'].currency).to be_nil
       expect(invoice_v4_empty_doc.inference.prediction.fields['locale'].language).to be_nil
 
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['reference_numbers']
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['reference_numbers'].values.length
       ).to eq(0)
@@ -349,7 +349,7 @@ RSpec.describe 'Invoice V4 document' do
         invoice_v4_empty_doc.inference.prediction.fields[
           'supplier_company_registrations'
         ]
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(
         invoice_v4_empty_doc.inference.prediction.fields[
           'supplier_company_registrations'].values.length
@@ -364,7 +364,7 @@ RSpec.describe 'Invoice V4 document' do
 
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['supplier_payment_details']
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(
         invoice_v4_empty_doc.inference.prediction.fields[
           'supplier_payment_details'
@@ -373,7 +373,7 @@ RSpec.describe 'Invoice V4 document' do
 
       expect(
         invoice_v4_empty_doc.inference.prediction.fields['taxes']
-      ).to be_an_instance_of(GeneratedListField)
+      ).to be_an_instance_of(UniversalListField)
       expect(invoice_v4_empty_doc.inference.prediction.fields['taxes'].values.length).to eq(0)
 
       expect(
@@ -397,7 +397,7 @@ RSpec.describe 'Invoice V4 document' do
       expect(prediction.fields['customer_address']).to be_an_instance_of(StringField)
       expect(prediction.fields['customer_address'].value).to eq('1954 Bloon Street West Toronto, ON, M6P 3K9 Canada')
 
-      expect(prediction.fields['customer_company_registrations']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['customer_company_registrations']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['customer_company_registrations'].values.length).to eq(0)
 
       expect(prediction.fields['customer_name']).to be_an_instance_of(StringField)
@@ -415,8 +415,8 @@ RSpec.describe 'Invoice V4 document' do
       expect(prediction.fields['invoice_number']).to be_an_instance_of(StringField)
       expect(prediction.fields['invoice_number'].value).to eq('0042004801351')
 
-      expect(prediction.fields['line_items']).to be_an_instance_of(GeneratedListField)
-      expect(prediction.fields['line_items'].values[0]).to be_an_instance_of(GeneratedObjectField)
+      expect(prediction.fields['line_items']).to be_an_instance_of(UniversalListField)
+      expect(prediction.fields['line_items'].values[0]).to be_an_instance_of(UniversalObjectField)
       expect(prediction.fields['line_items'].values[0].description).to eq('S)BOIE 5X500 FEUILLES A4')
       expect(prediction.fields['line_items'].values[0].product_code).to be_nil
       expect(prediction.fields['line_items'].values[0].quantity).to be_nil
@@ -427,25 +427,25 @@ RSpec.describe 'Invoice V4 document' do
       expect(prediction.fields['line_items'].values[0].unit_price).to be_nil
       expect(prediction.fields['line_items'].values[6].unit_price).to eq('65.0')
 
-      expect(prediction.fields['locale']).to be_an_instance_of(GeneratedObjectField)
+      expect(prediction.fields['locale']).to be_an_instance_of(UniversalObjectField)
       expect(prediction.fields['locale'].currency).to eq('EUR')
       expect(prediction.fields['locale'].language).to eq('fr')
 
-      expect(prediction.fields['reference_numbers']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['reference_numbers']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['reference_numbers'].values[0].value).to eq('AD29094')
 
       expect(prediction.fields['supplier_address']).to be_an_instance_of(StringField)
       expect(prediction.fields['supplier_address'].value).to eq('156 University Ave, Toronto ON, Canada M5H 2H7')
-      expect(prediction.fields['supplier_company_registrations']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['supplier_company_registrations']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['supplier_company_registrations'].values.length).to eq(0)
 
       expect(prediction.fields['supplier_name']).to be_an_instance_of(StringField)
       expect(prediction.fields['supplier_name'].value).to eq('TURNPIKE DESIGNS CO.')
 
-      expect(prediction.fields['supplier_payment_details']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['supplier_payment_details']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['supplier_payment_details'].values[0].iban).to eq('FR7640254025476501124705368')
 
-      expect(prediction.fields['taxes']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['taxes']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['taxes'].values[0].polygon).to be_an_instance_of(PositionField)
       expect(
         prediction.fields['taxes'].values[0].polygon.value.map do |point|
@@ -466,7 +466,7 @@ RSpec.describe 'Invoice V4 document' do
       prediction = invoice_v4_page0_doc.prediction
       expect(prediction.fields['customer_address']).to be_an_instance_of(StringField)
       expect(prediction.fields['customer_address'].value).to be_nil
-      expect(prediction.fields['customer_company_registrations']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['customer_company_registrations']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['customer_company_registrations'].values.length).to eq(0)
 
       expect(prediction.fields['customer_name']).to be_an_instance_of(StringField)
@@ -484,8 +484,8 @@ RSpec.describe 'Invoice V4 document' do
       expect(prediction.fields['invoice_number']).to be_an_instance_of(StringField)
       expect(prediction.fields['invoice_number'].value).to eq('0042004801351')
 
-      expect(prediction.fields['line_items']).to be_an_instance_of(GeneratedListField)
-      expect(prediction.fields['line_items'].values[0]).to be_an_instance_of(GeneratedObjectField)
+      expect(prediction.fields['line_items']).to be_an_instance_of(UniversalListField)
+      expect(prediction.fields['line_items'].values[0]).to be_an_instance_of(UniversalObjectField)
       expect(prediction.fields['line_items'].values[0].description).to eq('S)BOIE 5X500 FEUILLES A4')
       expect(prediction.fields['line_items'].values[0].product_code).to be_nil
       expect(prediction.fields['line_items'].values[0].quantity).to be_nil
@@ -494,25 +494,25 @@ RSpec.describe 'Invoice V4 document' do
       expect(prediction.fields['line_items'].values[0].total_amount).to eq('2.63')
       expect(prediction.fields['line_items'].values[0].unit_price).to be_nil
 
-      expect(prediction.fields['locale']).to be_an_instance_of(GeneratedObjectField)
+      expect(prediction.fields['locale']).to be_an_instance_of(UniversalObjectField)
       expect(prediction.fields['locale'].currency).to eq('EUR')
       expect(prediction.fields['locale'].language).to eq('fr')
 
-      expect(prediction.fields['reference_numbers']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['reference_numbers']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['reference_numbers'].values.length).to eq(0)
 
       expect(prediction.fields['supplier_address']).to be_an_instance_of(StringField)
       expect(prediction.fields['supplier_address'].value).to be_nil
-      expect(prediction.fields['supplier_company_registrations']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['supplier_company_registrations']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['supplier_company_registrations'].values.length).to eq(0)
 
       expect(prediction.fields['supplier_name']).to be_an_instance_of(StringField)
       expect(prediction.fields['supplier_name'].value).to be_nil
 
-      expect(prediction.fields['supplier_payment_details']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['supplier_payment_details']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['supplier_payment_details'].values[0].iban).to eq('FR7640254025476501124705368')
 
-      expect(prediction.fields['taxes']).to be_an_instance_of(GeneratedListField)
+      expect(prediction.fields['taxes']).to be_an_instance_of(UniversalListField)
       expect(prediction.fields['taxes'].values[0].polygon).to be_an_instance_of(PositionField)
       expect(prediction.fields['taxes'].values[0].polygon.value.map do |point|
                [point.x, point.y]

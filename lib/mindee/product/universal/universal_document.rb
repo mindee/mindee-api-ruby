@@ -18,7 +18,7 @@ module Mindee
           raw_prediction.each do |field_name, field_contents|
             if field_contents.is_a?(Array)
               @fields[field_name] = Parsing::Universal::UniversalListField.new(field_contents)
-            elsif field_contents.is_a?(Hash) && Parsing::Universal.generated_object?(field_contents)
+            elsif field_contents.is_a?(Hash) && Parsing::Universal.universal_object?(field_contents)
               @fields[field_name] = Parsing::Universal::UniversalObjectField.new(field_contents)
             else
               field_contents_str = field_contents.dup
