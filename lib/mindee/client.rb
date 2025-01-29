@@ -4,6 +4,9 @@ require_relative 'input'
 require_relative 'http'
 require_relative 'product'
 require_relative 'parsing/common/api_response'
+require_relative 'logging'
+
+OTS_OWNER = 'mindee'
 
 module Mindee
   # Mindee API Client.
@@ -57,6 +60,9 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
+
+      logger.debug("Parsing document as '#{endpoint.url_root}'")
+
       prediction, raw_http = endpoint.predict(input_source, all_words, full_text, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
@@ -104,6 +110,9 @@ module Mindee
         input_source.process_pdf(page_options)
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
+
+      logger.debug("Enqueueing document as '#{endpoint.url_root}'")
+
       prediction, raw_http = endpoint.predict_async(input_source, all_words, full_text, close_file, cropper)
       Mindee::Parsing::Common::ApiResponse.new(product_class,
                                                prediction, raw_http)
@@ -123,6 +132,9 @@ module Mindee
       endpoint: nil
     )
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
+
+      logger.debug("Fetching queued document as '#{endpoint.url_root}")
+
       prediction, raw_http = endpoint.parse_async(job_id)
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
@@ -177,11 +189,16 @@ module Mindee
         page_options: page_options,
         cropper: cropper
       )
+      job_id = enqueue_res.job.id
       sleep(initial_delay_sec)
       polling_attempts = 1
-      job_id = enqueue_res.job.id
+
+      logger.debug("Successfully enqueued document with job id: '#{job_id}'")
+
       queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
+
       while queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED && polling_attempts < max_retries
+        logger.debug("Polling server for parsing result with job id: '#{job_id}. Attempt #{polling_attempts}'")
         sleep(delay_sec)
         queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
         polling_attempts += 1
@@ -231,6 +248,9 @@ module Mindee
       end
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
+
+      logger.debug("Sending document to workflow '#{workflow_id}'")
+
       prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority,
                                                                 public_url)
       Mindee::Parsing::Common::WorkflowResponse.new(Product::Universal::Universal,
@@ -363,6 +383,7 @@ module Mindee
     end
 
     def fix_account_name(account_name)
+      logger.info("No account name provided, #{OTS_OWNER} will be used by default.")
       return 'mindee' if account_name.nil? || account_name.empty?
 
       account_name
@@ -370,7 +391,11 @@ module Mindee
 
     def fix_version(product_class, version)
       return version unless version.nil? || version.empty?
-      return '1' if product_class.endpoint_version.nil? || product_class.endpoint_version.empty?
+
+      if product_class.endpoint_version.nil? || product_class.endpoint_version.empty?
+        logger.debug('No version provided for a custom build, will attempt to poll version 1 by default.')
+        return '1'
+      end
 
       product_class.endpoint_version
     end

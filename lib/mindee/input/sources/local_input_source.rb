@@ -40,12 +40,16 @@ module Mindee
                            else
                              Marcel::MimeType.for @io_stream, name: @filename
                            end
-          return if ALLOWED_MIME_TYPES.include? @file_mimetype
+          if ALLOWED_MIME_TYPES.include? @file_mimetype
+            logger.debug("Loaded new input #{@filename} from #{self.class}")
+            return
+          end
 
           if filename.end_with?('.pdf') && fix_pdf
             rescue_broken_pdf(@io_stream)
             @file_mimetype = Marcel::MimeType.for @io_stream
 
+            logger.debug("Loaded new input #{@filename} from #{self.class}")
             return if ALLOWED_MIME_TYPES.include? @file_mimetype
           end
 
@@ -89,7 +93,8 @@ module Mindee
         # Reads a document.
         # @param close [Boolean]
         # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
-        def read_document(close: true)
+        def read_contents(close: true)
+          logger.debug("Reading data from: #{@filename}")
           @io_stream.seek(0)
           # Avoids needlessly re-packing some files
           data = @io_stream.read
