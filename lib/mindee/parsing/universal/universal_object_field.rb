@@ -90,7 +90,7 @@ module Mindee
         end
       end
 
-      def self.generated_object?(str_dict)
+      def self.universal_object?(str_dict)
         common_keys = [
           'value',
           'polygon',

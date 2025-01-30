@@ -4,6 +4,8 @@ require_relative 'input'
 require_relative 'http'
 require_relative 'product'
 require_relative 'parsing/common/api_response'
+require_relative 'parsing/common/job'
+require_relative 'parsing/common/workflow_response'
 require_relative 'logging'
 
 OTS_OWNER = 'mindee'
