@@ -6,7 +6,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents payment details for invoices and receipts
-      class PaymentDetailsField < Field
+      class PaymentDetailsField < BaseField
         # @return [String, nil]
         attr_reader :account_number
         # @return [String, nil]

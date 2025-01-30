@@ -8,7 +8,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents a date.
-      class DateField < Field
+      class DateField < BaseField
         # The date as a standard Ruby `Date` object.
         # @return [Date, nil]
         attr_reader :date_object
