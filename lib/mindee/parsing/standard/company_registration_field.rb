@@ -4,7 +4,7 @@ module Mindee
   module Parsing
     module Standard
       # Company registration number or code, and its type.
-      class CompanyRegistrationField < Field
+      class CompanyRegistrationField < BaseField
         # @return [String]
         attr_reader :type
 
