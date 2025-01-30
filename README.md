@@ -208,14 +208,16 @@ puts result.document
 A command-line interface tool is available to quickly test documents:
 
 ```sh
-ruby ./bin/mindee.rb invoice path/to/your/file.ext
+ruby ./bin/mindee.rb <product_name> path/to/your/file.ext
 ```
 
 Using the ruby bundler:
 
 ```sh
-bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
+bundle exec ruby ./bin/mindee.rb <product_name> path/to/your/file.ext
 ```
+
+Where possible values for `<product_name>` can be displayed by running the command with no arguments.
 
 ## Further Reading
 
