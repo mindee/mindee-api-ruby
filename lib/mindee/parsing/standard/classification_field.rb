@@ -6,7 +6,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents a classifier value.
-      class ClassificationField < Field
+      class ClassificationField < BaseField
         # Value as String
         # @return [String]
         attr_reader :value

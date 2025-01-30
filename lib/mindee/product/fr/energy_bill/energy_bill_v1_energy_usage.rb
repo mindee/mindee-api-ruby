@@ -47,9 +47,9 @@ module Mindee
             printable[:description] = format_for_display(@description)
             printable[:end_date] = format_for_display(@end_date)
             printable[:start_date] = format_for_display(@start_date)
-            printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
-            printable[:total] = @total.nil? ? '' : Field.float_to_string(@total)
-            printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+            printable[:tax_rate] = @tax_rate.nil? ? '' : BaseField.float_to_string(@tax_rate)
+            printable[:total] = @total.nil? ? '' : BaseField.float_to_string(@total)
+            printable[:unit_price] = @unit_price.nil? ? '' : BaseField.float_to_string(@unit_price)
             printable
           end
 
@@ -59,9 +59,9 @@ module Mindee
             printable[:description] = format_for_display(@description, 36)
             printable[:end_date] = format_for_display(@end_date, 10)
             printable[:start_date] = format_for_display(@start_date, nil)
-            printable[:tax_rate] = @tax_rate.nil? ? '' : Field.float_to_string(@tax_rate)
-            printable[:total] = @total.nil? ? '' : Field.float_to_string(@total)
-            printable[:unit_price] = @unit_price.nil? ? '' : Field.float_to_string(@unit_price)
+            printable[:tax_rate] = @tax_rate.nil? ? '' : BaseField.float_to_string(@tax_rate)
+            printable[:total] = @total.nil? ? '' : BaseField.float_to_string(@total)
+            printable[:unit_price] = @unit_price.nil? ? '' : BaseField.float_to_string(@unit_price)
             printable
           end
 
