@@ -13,12 +13,6 @@ DOCUMENTS = {
     sync: true,
     async: true,
   },
-  "proof-of-address" => {
-    description: 'Proof of Address',
-    doc_class: Mindee::Product::ProofOfAddress::ProofOfAddressV1,
-    sync: true,
-    async: false,
-  },
   "cropper" => {
     description: 'Cropper',
     doc_class: Mindee::Product::Cropper::CropperV1,
@@ -73,12 +67,6 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
-  "eu-driver-license" => {
-    description: "EU Driver License",
-    doc_class: Mindee::Product::EU::DriverLicense::DriverLicenseV1,
-    sync: true,
-    async: false,
-  },
   "fr-bank-account-details" => {
     description: "FR Bank Account Details",
     doc_class: Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2,
@@ -112,12 +100,6 @@ DOCUMENTS = {
   "us-bank-check" => {
     description: "US Bank Check",
     doc_class: Mindee::Product::US::BankCheck::BankCheckV1,
-    sync: true,
-    async: false,
-  },
-  "us-driver-license" => {
-    description: "US Driver License",
-    doc_class: Mindee::Product::US::DriverLicense::DriverLicenseV1,
     sync: true,
     async: false,
   },
