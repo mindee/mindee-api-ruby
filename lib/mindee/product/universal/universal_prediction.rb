@@ -66,7 +66,7 @@ module Mindee
         end
 
         def generate_sub_value_string(field_name, sub_value, pattern)
-          if sub_value.is_a?(GeneratedObjectField)
+          if sub_value.is_a?(UniversalObjectField)
             sub_value.str_level(1).gsub(pattern, '\1* :')
           else
             (' ' * (field_name.length + 2)) + "#{sub_value}\n"
@@ -84,21 +84,21 @@ module Mindee
         end
 
         # Returns a hash of all list-like fields
-        # @return [Hash<String, GeneratedListField>]
+        # @return [Hash<String, UniversalListField>]
         def list_fields
           list_fields = {}
           @fields.each do |field_name, field_value|
-            list_fields[field_name] = field_value if field_value.is_a?(GeneratedListField)
+            list_fields[field_name] = field_value if field_value.is_a?(UniversalListField)
           end
           list_fields
         end
 
         # Returns a hash of all object-like fields
-        # @return [Hash<String, GeneratedObjectField>]
+        # @return [Hash<String, UniversalObjectField>]
         def object_fields
           object_fields = {}
           @fields.each do |field_name, field_value|
-            object_fields[field_name] = field_value if field_value.is_a?(GeneratedObjectField)
+            object_fields[field_name] = field_value if field_value.is_a?(UniversalObjectField)
           end
           object_fields
         end

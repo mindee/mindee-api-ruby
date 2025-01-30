@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require_relative 'generated/universal_object_field'
-require_relative 'generated/universal_list_field'
+require_relative 'universal/universal_object_field'
+require_relative 'universal/universal_list_field'

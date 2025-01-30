@@ -31,9 +31,9 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
-          printable[:daily_value] = @daily_value.nil? ? '' : Field.float_to_string(@daily_value)
-          printable[:per_100g] = @per_100g.nil? ? '' : Field.float_to_string(@per_100g)
-          printable[:per_serving] = @per_serving.nil? ? '' : Field.float_to_string(@per_serving)
+          printable[:daily_value] = @daily_value.nil? ? '' : BaseField.float_to_string(@daily_value)
+          printable[:per_100g] = @per_100g.nil? ? '' : BaseField.float_to_string(@per_100g)
+          printable[:per_serving] = @per_serving.nil? ? '' : BaseField.float_to_string(@per_serving)
           printable
         end
 
