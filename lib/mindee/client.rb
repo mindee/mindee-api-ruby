@@ -13,6 +13,7 @@ OTS_OWNER = 'mindee'
 module Mindee
   # Mindee API Client.
   # See: https://developers.mindee.com/docs
+  # rubocop:disable Metrics/ClassLength
   class Client
     # @param api_key [String]
     def initialize(api_key: '')
@@ -473,4 +474,5 @@ module Mindee
       product_class.endpoint_version
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end
