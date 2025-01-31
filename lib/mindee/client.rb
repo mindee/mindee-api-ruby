@@ -215,8 +215,6 @@ module Mindee
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
-    private
-
     # rubocop:disable Metrics/ParameterLists
 
     # Enqueue a document for async parsing and automatically try to retrieve it
@@ -407,8 +405,6 @@ module Mindee
         version: version
       )
     end
-
-    private
 
     # Validates the parameters for async auto-polling
     # @param initial_delay_sec [Integer, Float] initial delay before polling
