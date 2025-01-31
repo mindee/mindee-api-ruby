@@ -87,7 +87,7 @@ module Mindee
         #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
         def process_pdf(options)
           @io_stream.seek(0)
-          @io_stream = PdfProcessor.parse(@io_stream, options)
+          @io_stream = PdfProcessor.parse_sync(@io_stream, options)
         end
 
         # Reads a document.

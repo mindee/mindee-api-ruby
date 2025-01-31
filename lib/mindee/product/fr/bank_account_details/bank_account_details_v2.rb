@@ -13,6 +13,8 @@ module Mindee
         class BankAccountDetailsV2 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'bank_account_details'
           @endpoint_version = '2'
+          @has_async = false
+          @has_sync = true
 
           # @param prediction [Hash]
           def initialize(prediction)
@@ -31,6 +33,12 @@ module Mindee
             # Version for this product.
             # @return [String]
             attr_reader :endpoint_version
+            # Whether this product has access to an asynchronous endpoint.
+            # @return [Boolean]
+            attr_reader :has_async
+            # Whether this product has access to synchronous endpoint.
+            # @return [Boolean]
+            attr_reader :has_sync
           end
         end
       end

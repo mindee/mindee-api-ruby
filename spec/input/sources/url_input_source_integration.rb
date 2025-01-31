@@ -12,7 +12,7 @@ describe Mindee::Input::Source::UrlInputSource do
     local_input = remote_input.as_local_input_source
     expect(local_input.filename).to eq('invoice_5p.pdf')
 
-    result = client.parse(local_input, Mindee::Product::Invoice::InvoiceV4)
+    result = client.parse_sync(local_input, Mindee::Product::Invoice::InvoiceV4)
     expect(result.document.n_pages).to eq(5)
   end
 end

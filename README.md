@@ -61,9 +61,9 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
+result = mindee_client.parse_sync(
+        input_source,
+        Mindee::Product::Invoice::InvoiceV4
 )
 
 # Print a full summary of the parsed data in RST format
@@ -107,9 +107,9 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::EU::LicensePlate::LicensePlateV1
+result = mindee_client.parse_sync(
+        input_source,
+        Mindee::Product::EU::LicensePlate::LicensePlateV1
 )
 
 # Print a full summary of the parsed data in RST format

@@ -39,7 +39,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
     expect(extracted_pdfs_strict[0].filename).to eq('default_sample_001-001.pdf')
     expect(extracted_pdfs_strict[1].filename).to eq('default_sample_002-002.pdf')
 
-    invoice0 = client.parse(extracted_pdfs_strict[0].as_input_source, Mindee::Product::Invoice::InvoiceV4)
+    invoice0 = client.parse_sync(extracted_pdfs_strict[0].as_input_source, Mindee::Product::Invoice::InvoiceV4)
 
     test_string_rst_invoice0 = prepare_invoice_return(
       File.join(product_data_dir, 'invoices', 'response_v4', 'summary_full_invoice_p1.rst'),

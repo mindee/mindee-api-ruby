@@ -235,7 +235,7 @@ if options[:parse_async]
     page_options: page_options,
   )
 else
-  result = mindee_client.parse(
+  result = mindee_client.parse_sync(
     input_source,
     DOCUMENTS[command][:doc_class],
     endpoint: custom_endpoint,

@@ -14,7 +14,7 @@ def invoice_splitter_auto_extraction(file_path)
 end
 
 def parse_single_page(mindee_client, input_source)
-  invoice_result = mindee_client.parse(
+  invoice_result = mindee_client.parse_sync(
     input_source,
     Mindee::Product::Invoice::InvoiceV4
   )
@@ -35,7 +35,7 @@ def parse_multi_page(mindee_client, input_source)
     # Optional: Save the files locally
     # extracted_pdf.write_to_file("output/path")
 
-    invoice_result = mindee_client.parse(
+    invoice_result = mindee_client.parse_sync(
       extracted_pdf.as_input_source,
       Mindee::Product::Invoice::InvoiceV4,
       close_file: false

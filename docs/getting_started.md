@@ -137,7 +137,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Parse the file
-result = mindee_client.parse(
+result = mindee_client.parse_sync(
   input_source,
   Mindee::Product::Invoice::InvoiceV4
 )
@@ -155,7 +155,7 @@ File.open(INVOICE_FILE, 'rb') do |fo|
   input_source = mindee_client.source_from_file(fo, "invoice.jpg")
 end
 
-result = mindee_client.parse(
+result = mindee_client.parse_sync(
   input_source,
   Mindee::Product::Invoice::InvoiceV4
 )
@@ -171,7 +171,7 @@ b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
 
 input_source = mindee_client.source_from_b64string(b64_string, "receipt.jpg")
 
-result = mindee_client.parse(
+result = mindee_client.parse_sync(
   input_source,
   Mindee::Product::Receipt::ReceiptV5
 )
@@ -183,10 +183,10 @@ Requires raw bytes.
 **Note**: The original filename is required when calling the method.
 
 ```ruby
-raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
+raw_bytes = b "%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
 input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
 
-result = mindee_client.parse(
+result = mindee_client.parse_sync(
   input_source,
   Mindee::Product::Invoice::InvoiceV4
 )
@@ -196,10 +196,11 @@ result = mindee_client.parse(
 Requires an url as a String.
 
 **Note**: the url must start with `https://`.
+
 ```ruby
 input_source = mindee_client.source_from_url("https://www.example.com/invoice.pdf")
 
-result = mindee_client.parse(
+result = mindee_client.parse_sync(
   input_source,
   Mindee::Product::Invoice::InvoiceV4
 )
@@ -218,9 +219,10 @@ This is detailed in each document-specific guide.
 
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
+
 ```ruby
 
-result = mindee_client.parse(
+result = mindee_client.parse_sync(
   input_source,
   Mindee::Product::Invoice::InvoiceV4
 )

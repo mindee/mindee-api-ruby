@@ -19,6 +19,77 @@ module Mindee
       @api_key = api_key
     end
 
+    # rubocop:disable Metrics/ParameterLists
+
+    # Enqueue a document for async parsing and automatically try to retrieve it
+    #
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param product_class [Mindee::Inference] class of the product
+    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
+    #   Doesn't need to be set in the case of OTS APIs.
+    # @param all_words [Boolean] Whether to extract all the words on each page.
+    #   This performs a full OCR operation on the server and will increase response time.
+    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #  This performs a full OCR operation on the server and may increase response time.
+    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
+    #   Set to false if you need to access the file after this operation.
+    # @param page_options [Hash, nil] Page cutting/merge options:
+    #  * `:page_indexes` Zero-based list of page indexes.
+    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
+    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #      * `:REMOVE` - remove the specified pages, and keep all others.
+    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
+    # @param cropper [Boolean, nil] Whether to include cropper results for each page.
+    #  This performs a cropping operation on the server and will increase response time.
+    # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
+    # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
+    # @param max_retries [Integer] maximum amount of retries. Defaults to 80.
+    # @param enqueue [Boolean] Whether to enqueue the file on the enqueue route.
+    # @return [Mindee::Parsing::Common::ApiResponse]
+    def parse(
+      input_source,
+      product_class,
+      endpoint: nil,
+      all_words: false,
+      full_text: false,
+      close_file: true,
+      page_options: nil,
+      cropper: false,
+      initial_delay_sec: 2,
+      delay_sec: 1.5,
+      max_retries: 80,
+      enqueue: true
+    )
+      if enqueue && product_class.has_sync
+        enqueue_and_parse(
+          input_source,
+          product_class,
+          endpoint: endpoint,
+          all_words: all_words,
+          full_text: full_text,
+          close_file: close_file,
+          page_options: page_options,
+          cropper: cropper,
+          initial_delay_sec: initial_delay_sec,
+          delay_sec: delay_sec,
+          max_retries: max_retries
+        )
+      else
+        parse_sync(
+          input_source,
+          product_class,
+          endpoint: endpoint,
+          all_words: all_words,
+          full_text: full_text,
+          close_file: close_file,
+          page_options: page_options,
+          cropper: cropper
+        )
+      end
+    end
+
+    # rubocop:enable Metrics/ParameterLists
+
     # Call prediction API on a document and parse the results.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
@@ -48,7 +119,7 @@ module Mindee
     #
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
-    def parse(
+    def parse_sync(
       input_source,
       product_class,
       endpoint: nil,
