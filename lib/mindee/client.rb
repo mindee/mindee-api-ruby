@@ -89,8 +89,6 @@ module Mindee
       end
     end
 
-    private
-
     # rubocop:enable Metrics/ParameterLists
 
     # Call prediction API on a document and parse the results.
@@ -473,6 +471,9 @@ module Mindee
 
       product_class.endpoint_version
     end
+
+    private :parse_sync, :validate_async_params, :initialize_endpoint, :fix_endpoint_name, :fix_version,
+            :fix_account_name
   end
   # rubocop:enable Metrics/ClassLength
 end
