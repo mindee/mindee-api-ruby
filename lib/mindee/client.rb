@@ -89,6 +89,8 @@ module Mindee
       end
     end
 
+    private
+
     # rubocop:enable Metrics/ParameterLists
 
     # Call prediction API on a document and parse the results.
@@ -212,6 +214,8 @@ module Mindee
       prediction, raw_http = endpoint.parse_async(job_id)
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
+
+    private
 
     # rubocop:disable Metrics/ParameterLists
 
