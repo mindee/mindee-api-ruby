@@ -61,7 +61,7 @@ module Mindee
       max_retries: 80,
       enqueue: true
     )
-      if enqueue && product_class.has_sync
+      if enqueue && product_class.has_async
         enqueue_and_parse(
           input_source,
           product_class,
