@@ -6,7 +6,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 def multi_receipts_detection(file_path, mindee_client)
   input_source = mindee_client.source_from_path(file_path)
 
-  result_multi_receipts = mindee_client.parse_sync(
+  result_multi_receipts = mindee_client.parse(
     input_source,
     Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1,
     close_file: false
@@ -17,7 +17,7 @@ def multi_receipts_detection(file_path, mindee_client)
     # Optional: Save the files locally
     # sub_image.write_to_file("/path/to/my/extracted/file/folder")
 
-    result_receipt = mindee_client.parse_sync(
+    result_receipt = mindee_client.parse(
       sub_image.as_source,
       Mindee::Product::Receipt::ReceiptV5,
       close_file: false

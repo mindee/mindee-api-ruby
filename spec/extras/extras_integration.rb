@@ -13,7 +13,7 @@ describe 'cropper extra' do
     cropper_extra = Mindee::Input::Source::PathInputSource.new(
       File.join(invoice_path)
     )
-    cropper_result = client.parse_sync(cropper_extra, Mindee::Product::Invoice::InvoiceV4, cropper: true)
+    cropper_result = client.parse(cropper_extra, Mindee::Product::Invoice::InvoiceV4, cropper: true)
     expect(cropper_result.document.inference.pages[0].extras.cropper).to_not be_nil
   end
 end
