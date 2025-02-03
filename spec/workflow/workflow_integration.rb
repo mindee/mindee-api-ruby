@@ -20,8 +20,8 @@ describe Mindee::Client do
       response = client.execute_workflow(
         invoice_splitter_input,
         ENV.fetch('WORKFLOW_ID'),
-        document_alias: document_alias,
-        priority: priority
+        options: { document_alias: document_alias,
+                   priority: priority }
       )
 
       expect(response.execution.file.alias).to eq(document_alias)

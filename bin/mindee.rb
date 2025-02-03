@@ -5,7 +5,6 @@ require 'bundler/setup'
 require 'optparse'
 require 'mindee'
 
-options = {}
 DOCUMENTS = {
   "universal" => {
     description: "Universal document type from API builder",
@@ -219,7 +218,7 @@ else
   custom_endpoint = nil
 end
 
-page_options = options[:cut_pages].nil? ? nil : default_cutting
+page_options = options[:cut_pages].nil? ? nil : :default_cutting
 if options[:parse_async].nil?
   if !DOCUMENTS[command][:sync]
     options[:parse_async] = true
@@ -227,21 +226,12 @@ if options[:parse_async].nil?
     options[:parse_async] = false
   end
 end
-if options[:parse_async]
-  result = mindee_client.enqueue_and_parse(
-    input_source,
-    DOCUMENTS[command][:doc_class],
-    endpoint: custom_endpoint,
-    page_options: page_options,
-  )
-else
-  result = mindee_client.parse_sync(
-    input_source,
-    DOCUMENTS[command][:doc_class],
-    endpoint: custom_endpoint,
-    page_options: page_options,
-  )
-end
+result = mindee_client.parse(
+  input_source,
+  doc_class,
+  options: { endpoint: custom_endpoint,
+             page_options: page_options, enqueue: options[:parse_async] }
+)
 
 if options[:print_full]
   puts result.document

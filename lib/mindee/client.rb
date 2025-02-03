@@ -20,174 +20,157 @@ module Mindee
       @api_key = api_key
     end
 
-    # rubocop:disable Metrics/ParameterLists
-
-    # Enqueue a document for async parsing and automatically try to retrieve it
+    # Enqueue a document for parsing and automatically try to retrieve it if needed.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param product_class [Mindee::Inference] class of the product
-    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
-    #   Doesn't need to be set in the case of OTS APIs.
-    # @param all_words [Boolean] Whether to extract all the words on each page.
-    #   This performs a full OCR operation on the server and will increase response time.
-    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and may increase response time.
-    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
-    #   Set to false if you need to access the file after this operation.
-    # @param page_options [Hash, nil] Page cutting/merge options:
-    #  * `:page_indexes` Zero-based list of page indexes.
-    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
-    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-    #      * `:REMOVE` - remove the specified pages, and keep all others.
-    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
-    # @param cropper [Boolean, nil] Whether to include cropper results for each page.
-    #  This performs a cropping operation on the server and will increase response time.
-    # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
-    # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
-    # @param max_retries [Integer] maximum amount of retries. Defaults to 80.
-    # @param enqueue [Boolean] Whether to enqueue the file on the enqueue route.
+    #   The source of the input document (local file or URL).
+    # @param product_class [Mindee::Inference] The class of the product.
+    # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
+    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #       Doesn't need to be set in the case of OTS APIs.
+    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #       This performs a full OCR operation on the server and will increase response time.
+    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #       This performs a full OCR operation on the server and may increase response time.
+    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #       Set to false if you need to access the file after this operation.
+    #   * `:page_options` [Hash, nil] Page cutting/merge options:
+    #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
+    #       - `:operation` [Symbol] Operation to apply on the document, given the `page_indexes` specified:
+    #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #           - `:REMOVE` - remove the specified pages, and keep all others.
+    #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
+    #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #       This performs a cropping operation on the server and will increase response time.
+    #   * `:initial_delay_sec` [Integer, Float] Initial delay before polling. Defaults to 2.
+    #   * `:delay_sec` [Integer, Float] Delay between polling attempts. Defaults to 1.5.
+    #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
+    # @param enqueue [Boolean] Whether to enqueue the file on the enqueue route. Defaults to true.
     # @return [Mindee::Parsing::Common::ApiResponse]
-    def parse(
-      input_source,
-      product_class,
-      endpoint: nil,
-      all_words: false,
-      full_text: false,
-      close_file: true,
-      page_options: nil,
-      cropper: false,
-      initial_delay_sec: 2,
-      delay_sec: 1.5,
-      max_retries: 80,
-      enqueue: true
-    )
+    def parse(input_source, product_class, options: {}, enqueue: true)
       if enqueue && product_class.has_async
         enqueue_and_parse(
           input_source,
           product_class,
-          endpoint: endpoint,
-          all_words: all_words,
-          full_text: full_text,
-          close_file: close_file,
-          page_options: page_options,
-          cropper: cropper,
-          initial_delay_sec: initial_delay_sec,
-          delay_sec: delay_sec,
-          max_retries: max_retries
+          options: options
         )
       else
         parse_sync(
           input_source,
           product_class,
-          endpoint: endpoint,
-          all_words: all_words,
-          full_text: full_text,
-          close_file: close_file,
-          page_options: page_options,
-          cropper: cropper
+          options: options
         )
       end
     end
-
-    # rubocop:enable Metrics/ParameterLists
 
     # Call prediction API on a document and parse the results.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     # @param product_class [Mindee::Inference] class of the product
-    # @param endpoint [HTTP::Endpoint] Endpoint of the API
-    # Doesn't need to be set in the case of OTS APIs.
-    #
-    # @param all_words [Boolean] Whether to include the full text for each page.
-    #  This performs a full OCR operation on the server and will increase response time.
-    #
-    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and may increase response time.
-    #
-    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
-    #  Set to false if you need to access the file after this operation.
-    #
-    # @param page_options [Hash, nil] Page cutting/merge options:
-    #
-    #  * `:page_indexes` Zero-based list of page indexes.
-    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
-    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-    #      * `:REMOVE` - remove the specified pages, and keep all others.
-    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
-    #
-    # @param cropper [Boolean] Whether to include cropper results for each page.
-    #  This performs a cropping operation on the server and will increase response time.
-    #
+    # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
+    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #       Doesn't need to be set in the case of OTS APIs.
+    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #       This performs a full OCR operation on the server and will increase response time.
+    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #       This performs a full OCR operation on the server and may increase response time.
+    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #       Set to false if you need to access the file after this operation.
+    #   * `:page_options` [Hash, nil] Page cutting/merge options:
+    #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
+    #       - `:operation` [Symbol] Operation to apply on the document, given the `page_indexes` specified:
+    #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #           - `:REMOVE` - remove the specified pages, and keep all others.
+    #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
+    #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #       This performs a cropping operation on the server and will increase response time.
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_sync(
       input_source,
       product_class,
-      endpoint: nil,
-      all_words: false,
-      full_text: false,
-      close_file: true,
-      page_options: nil,
-      cropper: false
+      options: {}
     )
-      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
-        input_source.process_pdf(page_options)
+      default_options = { endpoint: nil,
+                          all_words: false,
+                          full_text: false,
+                          close_file: true,
+                          page_options: nil,
+                          cropper: false }
+      options = default_options.merge(options)
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
+         !options[:page_options].nil? &&
+         input_source.pdf?
+        input_source.process_pdf(options[:page_options])
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
 
       logger.debug("Parsing document as '#{endpoint.url_root}'")
 
-      prediction, raw_http = endpoint.predict(input_source, all_words, full_text, close_file, cropper)
+      prediction, raw_http = endpoint.predict(
+        input_source,
+        options[:all_words],
+        options[:full_text],
+        options[:close_file],
+        options[:cropper]
+      )
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Enqueue a document for async parsing
     #
-    # @param product_class [Mindee::Inference] class of the product
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
-    # Doesn't need to be set in the case of OTS APIs.
-    #
-    # @param all_words [Boolean] Whether to extract all the words on each page.
-    #  This performs a full OCR operation on the server and will increase response time.
-    #
-    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and may increase response time.
-    #
-    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
-    #  Set to false if you need to access the file after this operation.
-    #
-    # @param page_options [Hash, nil] Page cutting/merge options:
-    #
-    #  * `:page_indexes` Zero-based list of page indexes.
-    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
-    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-    #      * `:REMOVE` - remove the specified pages, and keep all others.
-    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
-    #
-    # @param cropper [Boolean] Whether to include cropper results for each page.
-    #  This performs a cropping operation on the server and will increase response time.
-    #
+    #   The source of the input document (local file or URL).
+    # @param product_class [Mindee::Inference] The class of the product.
+    # @param options [Hash] A hash of options to configure the enqueue behavior. Possible keys:
+    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #       Doesn't need to be set in the case of OTS APIs.
+    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #       This performs a full OCR operation on the server and will increase response time.
+    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #       This performs a full OCR operation on the server and may increase response time.
+    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #       Set to false if you need to access the file after this operation.
+    #   * `:page_options` [Hash, nil] Page cutting/merge options:
+    #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
+    #       - `:operation` [Symbol] Operation to apply on the document, given the `page_indexes` specified:
+    #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #           - `:REMOVE` - remove the specified pages, and keep all others.
+    #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
+    #   * `:cropper` [Boolean] Whether to include cropper results for each page.
+    #       This performs a cropping operation on the server and will increase response time.
     #
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(
       input_source,
       product_class,
-      endpoint: nil,
-      all_words: false,
-      full_text: false,
-      close_file: true,
-      page_options: nil,
-      cropper: false
+      options: {}
     )
-      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
-        input_source.process_pdf(page_options)
+      default_options = {
+        endpoint: nil,
+        all_words: false,
+        full_text: false,
+        close_file: true,
+        page_options: nil,
+        cropper: false,
+      }
+      options = default_options.merge(options)
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
+         !options[:page_options].nil? &&
+         input_source.pdf?
+        input_source.process_pdf(options[:page_options])
       end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
 
       logger.debug("Enqueueing document as '#{endpoint.url_root}'")
 
-      prediction, raw_http = endpoint.predict_async(input_source, all_words, full_text, close_file, cropper)
+      prediction, raw_http = endpoint.predict_async(
+        input_source,
+        options[:all_words],
+        options[:full_text],
+        options[:close_file],
+        options[:cropper]
+      )
       Mindee::Parsing::Common::ApiResponse.new(product_class,
                                                prediction, raw_http)
     end
@@ -213,72 +196,72 @@ module Mindee
       Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
-    # rubocop:disable Metrics/ParameterLists
-
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param product_class [Mindee::Inference] class of the product
-    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API.
-    #   Doesn't need to be set in the case of OTS APIs.
-    # @param all_words [Boolean] Whether to extract all the words on each page.
-    #   This performs a full OCR operation on the server and will increase response time.
-    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and may increase response time.
-    # @param close_file [Boolean] Whether to `close()` the file after parsing it.
-    #   Set to false if you need to access the file after this operation.
-    # @param page_options [Hash, nil] Page cutting/merge options:
-    #  * `:page_indexes` Zero-based list of page indexes.
-    #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
-    #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-    #      * `:REMOVE` - remove the specified pages, and keep all others.
-    #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
-    # @param cropper [Boolean, nil] Whether to include cropper results for each page.
-    #  This performs a cropping operation on the server and will increase response time.
-    # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
-    # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
-    # @param max_retries [Integer] maximum amount of retries. Defaults to 80.
+    #   The source of the input document (local file or URL).
+    # @param product_class [Mindee::Inference] The class of the product.
+    # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
+    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #       Doesn't need to be set in the case of OTS APIs.
+    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #       This performs a full OCR operation on the server and will increase response time.
+    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #       This performs a full OCR operation on the server and may increase response time.
+    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #       Set to false if you need to access the file after this operation.
+    #   * `:page_options` [Hash, nil] Page cutting/merge options:
+    #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
+    #       - `:operation` [Symbol] Operation to apply on the document, given the `page_indexes` specified:
+    #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+    #           - `:REMOVE` - remove the specified pages, and keep all others.
+    #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
+    #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #       This performs a cropping operation on the server and will increase response time.
+    #   * `:initial_delay_sec` [Integer, Float] Initial delay before polling. Defaults to 2.
+    #   * `:delay_sec` [Integer, Float] Delay between polling attempts. Defaults to 1.5.
+    #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
       product_class,
-      endpoint: nil,
-      all_words: false,
-      full_text: false,
-      close_file: true,
-      page_options: nil,
-      cropper: false,
-      initial_delay_sec: 2,
-      delay_sec: 1.5,
-      max_retries: 80
+      options: {}
     )
-      validate_async_params(initial_delay_sec, delay_sec, max_retries)
+      default_options = {
+        endpoint: nil,
+        all_words: false,
+        full_text: false,
+        close_file: true,
+        page_options: nil,
+        cropper: false,
+        initial_delay_sec: 2,
+        delay_sec: 1.5,
+        max_retries: 80,
+      }
+      options = default_options.merge(options)
+      validate_async_params(options[:initial_delay_sec], options[:delay_sec], options[:max_retries])
       enqueue_res = enqueue(
         input_source,
         product_class,
-        endpoint: endpoint,
-        all_words: all_words,
-        full_text: full_text,
-        close_file: close_file,
-        page_options: page_options,
-        cropper: cropper
+        options: options
       )
       job_id = enqueue_res.job.id
-      sleep(initial_delay_sec)
+      sleep(options[:initial_delay_sec])
       polling_attempts = 1
 
       logger.debug("Successfully enqueued document with job id: '#{job_id}'")
 
-      queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
+      queue_res = parse_queued(job_id, product_class, endpoint: options[:endpoint])
 
-      while queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED && polling_attempts < max_retries
+      while queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED &&
+            polling_attempts < options[:max_retries]
         logger.debug("Polling server for parsing result with job id: '#{job_id}. Attempt #{polling_attempts}'")
-        sleep(delay_sec)
-        queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
+        sleep(options[:delay_sec])
+        queue_res = parse_queued(job_id, product_class, endpoint: options[:endpoint])
         polling_attempts += 1
       end
       if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
-        elapsed = initial_delay_sec + (polling_attempts * delay_sec)
+        elapsed = options[:initial_delay_sec] + (polling_attempts * options[:delay_sec])
         raise Errors::MindeeAPIError,
               "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
       end
@@ -286,20 +269,9 @@ module Mindee
       queue_res
     end
 
-    # rubocop:enable Metrics/ParameterLists
-
     # Sends a document to a workflow.
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-    # @param document_alias [String, nil] Alias to give to the document.
-    # @param priority [Symbol, nil] Priority to give to the document.
-    # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-    #  This performs a full OCR operation on the server and may increase response time.
-    #
-    # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
-    # requiring authentication.
-    # @param page_options [Hash, nil] Page cutting/merge options:
-    #
     #  * `:page_indexes` Zero-based list of page indexes.
     #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
     #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
@@ -311,22 +283,31 @@ module Mindee
     def execute_workflow(
       input_source,
       workflow_id,
-      document_alias: nil,
-      priority: nil,
-      full_text: false,
-      public_url: nil,
-      page_options: nil
+      options: {}
     )
-      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) && !page_options.nil? && input_source.pdf?
-        input_source.process_pdf(page_options)
+      default_options = { document_alias: nil,
+                          priority: nil,
+                          full_text: false,
+                          public_url: nil,
+                          page_options: nil }
+      options = default_options.merge(options)
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
+         !options[:page_options].nil? &&
+         input_source.pdf?
+        input_source.process_pdf(options[:page_options])
       end
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
 
       logger.debug("Sending document to workflow '#{workflow_id}'")
 
-      prediction, raw_http = workflow_endpoint.execute_workflow(input_source, full_text, document_alias, priority,
-                                                                public_url)
+      prediction, raw_http = workflow_endpoint.execute_workflow(
+        input_source,
+        options[:full_text],
+        options[:document_alias],
+        options[:priority],
+        options[:public_url]
+      )
       Mindee::Parsing::Common::WorkflowResponse.new(Product::Universal::Universal,
                                                     prediction, raw_http)
     end
@@ -475,5 +456,6 @@ module Mindee
     private :parse_sync, :validate_async_params, :initialize_endpoint, :fix_endpoint_name, :fix_version,
             :fix_account_name
   end
+
   # rubocop:enable Metrics/ClassLength
 end

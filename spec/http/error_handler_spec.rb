@@ -12,7 +12,7 @@ describe Mindee::HTTP::ErrorHandler do
       input_source = mindee_client1.source_from_file(file, 'receipt.jpg')
       doc_class = Mindee::Product::Receipt::ReceiptV5
       expect do
-        mindee_client1.parse(input_source, doc_class, all_words: false, close_file: true)
+        mindee_client1.parse(input_source, doc_class, options: { all_words: false, close_file: true })
       end.to raise_error Mindee::Errors::MindeeHTTPClientError
     end
 
