@@ -46,19 +46,39 @@ module Mindee
     #   * `:delay_sec` [Integer, Float] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
     # @param enqueue [Boolean] Whether to enqueue the file on the enqueue route. Defaults to true.
+    # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
-    def parse(input_source, product_class, options: {}, enqueue: true)
+    def parse(input_source, product_class, endpoint: nil, options: {}, enqueue: true)
+      default_options = {
+        all_words: false,
+        full_text: false,
+        close_file: true,
+        page_options: nil,
+        cropper: false,
+        initial_delay_sec: 2,
+        delay_sec: 1.5,
+        max_retries: 80,
+      }
+      options = default_options.merge(options)
+      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
+         !options[:page_options].nil? &&
+         input_source.pdf?
+        input_source.process_pdf(options[:page_options])
+      end
+      endpoint = initialize_endpoint(product_class) if endpoint.nil?
       if enqueue && product_class.has_async
         enqueue_and_parse(
           input_source,
           product_class,
-          options: options
+          endpoint,
+          options
         )
       else
         parse_sync(
           input_source,
           product_class,
-          options: options
+          endpoint,
+          options
         )
       end
     end
@@ -68,8 +88,6 @@ module Mindee
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
     # @param product_class [Mindee::Inference] class of the product
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
-    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
-    #       Doesn't need to be set in the case of OTS APIs.
     #   * `:all_words` [Boolean] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
     #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
@@ -84,27 +102,14 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
-    #
+    # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_sync(
       input_source,
       product_class,
-      options: {}
+      endpoint,
+      options
     )
-      default_options = { endpoint: nil,
-                          all_words: false,
-                          full_text: false,
-                          close_file: true,
-                          page_options: nil,
-                          cropper: false }
-      options = default_options.merge(options)
-      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
-         !options[:page_options].nil? &&
-         input_source.pdf?
-        input_source.process_pdf(options[:page_options])
-      end
-      endpoint = initialize_endpoint(product_class) if endpoint.nil?
-
       logger.debug("Parsing document as '#{endpoint.url_root}'")
 
       prediction, raw_http = endpoint.predict(
@@ -139,29 +144,15 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [Boolean] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
-    #
+    # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(
       input_source,
       product_class,
+      endpoint: nil,
       options: {}
     )
-      default_options = {
-        endpoint: nil,
-        all_words: false,
-        full_text: false,
-        close_file: true,
-        page_options: nil,
-        cropper: false,
-      }
-      options = default_options.merge(options)
-      if input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
-         !options[:page_options].nil? &&
-         input_source.pdf?
-        input_source.process_pdf(options[:page_options])
-      end
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
-
       logger.debug("Enqueueing document as '#{endpoint.url_root}'")
 
       prediction, raw_http = endpoint.predict_async(
@@ -221,28 +212,19 @@ module Mindee
     #   * `:initial_delay_sec` [Integer, Float] Initial delay before polling. Defaults to 2.
     #   * `:delay_sec` [Integer, Float] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
+    # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_parse(
       input_source,
       product_class,
-      options: {}
+      endpoint,
+      options
     )
-      default_options = {
-        endpoint: nil,
-        all_words: false,
-        full_text: false,
-        close_file: true,
-        page_options: nil,
-        cropper: false,
-        initial_delay_sec: 2,
-        delay_sec: 1.5,
-        max_retries: 80,
-      }
-      options = default_options.merge(options)
       validate_async_params(options[:initial_delay_sec], options[:delay_sec], options[:max_retries])
       enqueue_res = enqueue(
         input_source,
         product_class,
+        endpoint: endpoint,
         options: options
       )
       job_id = enqueue_res.job.id
@@ -251,13 +233,13 @@ module Mindee
 
       logger.debug("Successfully enqueued document with job id: '#{job_id}'")
 
-      queue_res = parse_queued(job_id, product_class, endpoint: options[:endpoint])
+      queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
 
       while queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED &&
             polling_attempts < options[:max_retries]
         logger.debug("Polling server for parsing result with job id: '#{job_id}. Attempt #{polling_attempts}'")
         sleep(options[:delay_sec])
-        queue_res = parse_queued(job_id, product_class, endpoint: options[:endpoint])
+        queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
         polling_attempts += 1
       end
       if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
@@ -436,9 +418,10 @@ module Mindee
     end
 
     def fix_account_name(account_name)
-      logger.info("No account name provided, #{OTS_OWNER} will be used by default.")
-      return 'mindee' if account_name.nil? || account_name.empty?
-
+      if account_name.nil? || account_name.empty?
+        logger.info("No account name provided, #{OTS_OWNER} will be used by default.")
+        return OTS_OWNER
+      end
       account_name
     end
 

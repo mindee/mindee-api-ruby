@@ -25,7 +25,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
     invoice_splitter_input = Mindee::Input::Source::PathInputSource.new(
       File.join(product_data_dir, 'invoice_splitter', 'default_sample.pdf')
     )
-    response = client.enqueue_and_parse(
+    response = client.parse(
       invoice_splitter_input, Mindee::Product::InvoiceSplitter::InvoiceSplitterV1, options: { close_file: false }
     )
     inference = response.document.inference
