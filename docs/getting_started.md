@@ -183,7 +183,7 @@ Requires raw bytes.
 **Note**: The original filename is required when calling the method.
 
 ```ruby
-raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
+raw_bytes = b "%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
 input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
 
 result = mindee_client.parse(
@@ -196,6 +196,7 @@ result = mindee_client.parse(
 Requires an url as a String.
 
 **Note**: the url must start with `https://`.
+
 ```ruby
 input_source = mindee_client.source_from_url("https://www.example.com/invoice.pdf")
 
@@ -218,6 +219,7 @@ This is detailed in each document-specific guide.
 
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
+
 ```ruby
 
 result = mindee_client.parse(
@@ -232,7 +234,7 @@ For custom documents, the endpoint to use must also be set, and it must take in 
 ```ruby
 endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine', account_name: 'my-account')
 
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
   Mindee::Product::Universal::Universal,
   endpoint: endpoint
