@@ -20,7 +20,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Parse the file
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
   Mindee::Product::US::HealthcareCard::HealthcareCardV1
 )
@@ -30,7 +30,6 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
-
 ```
 
 **Output (RST):**
