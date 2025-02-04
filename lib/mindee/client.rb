@@ -13,16 +13,16 @@ OTS_OWNER = 'mindee'
 module Mindee
   # Struct for configuration options in parse calls
   #
-  # @param all_words [Boolean] Whether to include the full text for each page.
+  # @!attribute all_words [Boolean] Whether to include the full text for each page.
   #  This performs a full OCR operation on the server and will increase response time.
   #
-  # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+  # @!attribute full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
   #  This performs a full OCR operation on the server and may increase response time.
   #
-  # @param close_file [Boolean] Whether to `close()` the file after parsing it.
+  # @!attribute close_file [Boolean] Whether to `close()` the file after parsing it.
   #  Set to false if you need to access the file after this operation.
   #
-  # @param page_options [Hash, nil] Page cutting/merge options:
+  # @!attribute page_options [Hash, nil] Page cutting/merge options:
   #
   #  * `:page_indexes` Zero-based list of page indexes.
   #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
@@ -30,11 +30,11 @@ module Mindee
   #      * `:REMOVE` - remove the specified pages, and keep all others.
   #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
   #
-  # @param cropper [Boolean] Whether to include cropper results for each page.
+  # @!attribute cropper [Boolean] Whether to include cropper results for each page.
   #  This performs a cropping operation on the server and will increase response time.
-  # @param initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
-  # @param delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
-  # @param max_retries [Integer] maximum amount of retries. Defaults to 80.
+  # @!attribute initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
+  # @!attribute delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
+  # @!attribute max_retries [Integer] maximum amount of retries. Defaults to 80.
   ParseOptions = Struct.new(
     :all_words,
     :full_text,
@@ -61,14 +61,14 @@ module Mindee
 
   # Struct for configuration options in workflow executions
   #
-  # @param document_alias [String, nil] Alias to give to the document.
-  # @param priority [Symbol, nil] Priority to give to the document.
-  # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+  # @!attribute document_alias [String, nil] Alias to give to the document.
+  # @!attribute priority [Symbol, nil] Priority to give to the document.
+  # @!attribute full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
   #  This performs a full OCR operation on the server and may increase response time.
   #
-  # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
+  # @!attribute public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
   # requiring authentication.
-  # @param page_options [Hash, nil] Page cutting/merge options:
+  # @!attribute page_options [Hash, nil] Page cutting/merge options:
   #  * `:page_indexes` Zero-based list of page indexes.
   #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
   #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
