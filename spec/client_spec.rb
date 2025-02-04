@@ -75,24 +75,24 @@ describe Mindee::Client do
       file_data = File.binread("#{DATA_DIR}/file_types/receipt.jpg")
       input_source = mindee_client.source_from_bytes(file_data, 'receipt.jpg')
       expect do
-        mindee_client.enqueue_and_parse(
+        mindee_client.parse(
           input_source,
           Mindee::Product::Invoice::InvoiceV4,
-          max_retries: 0
+          options: { max_retries: 0 }
         )
       end.to raise_error ArgumentError
       expect do
-        mindee_client.enqueue_and_parse(
+        mindee_client.parse(
           input_source,
           Mindee::Product::Invoice::InvoiceV4,
-          initial_delay_sec: 0.5
+          options: { initial_delay_sec: 0.5 }
         )
       end.to raise_error ArgumentError
       expect do
-        mindee_client.enqueue_and_parse(
+        mindee_client.parse(
           input_source,
           Mindee::Product::Invoice::InvoiceV4,
-          delay_sec: 0.5
+          options: { delay_sec: 0.5 }
         )
       end.to raise_error ArgumentError
     end
