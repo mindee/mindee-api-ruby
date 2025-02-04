@@ -12,6 +12,8 @@ module Mindee
       class PassportV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'passport'
         @endpoint_version = '1'
+        @has_async = false
+        @has_sync = true
 
         # @param prediction [Hash]
         def initialize(prediction)
@@ -30,6 +32,12 @@ module Mindee
           # Version for this product.
           # @return [String]
           attr_reader :endpoint_version
+          # Whether this product has access to an asynchronous endpoint.
+          # @return [Boolean]
+          attr_reader :has_async
+          # Whether this product has access to synchronous endpoint.
+          # @return [Boolean]
+          attr_reader :has_sync
         end
       end
     end
