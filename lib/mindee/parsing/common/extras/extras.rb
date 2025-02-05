@@ -23,6 +23,7 @@ module Mindee
             end
           end
 
+          # @return [String]
           def to_s
             out_str = String.new
             instance_variables.each do |var|

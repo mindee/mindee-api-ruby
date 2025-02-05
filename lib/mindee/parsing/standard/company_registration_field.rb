@@ -16,16 +16,21 @@ module Mindee
           @type = prediction['type']
         end
 
+        # Table line representation of the values.
+        # @return [String] The formatted table line, as a string.
         def to_table_line
           printable = printable_values
           format('| %<type>-15s | %<value>-20s ', type: printable['type'], value: printable['value'])
         end
 
+        # @return [String]
         def to_s
           printable = printable_values
           format('Type: %<type>s, Value: %<value>s', type: printable['type'], value: printable['value'])
         end
 
+        # Hashed representation of the values.
+        # @return [Hash] Hash of the values.
         def printable_values
           printable = {}
           printable['type'] = type
