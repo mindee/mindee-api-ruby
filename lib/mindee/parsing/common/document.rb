@@ -21,7 +21,8 @@ module Mindee
         # @return [Integer] Amount of pages of the document
         attr_reader :n_pages
 
-        # @param http_response [Hash]
+        # Loads the MVision OCR response.
+        # @param http_response [Hash] Full HTTP contents of the response.
         # @return [Mindee::Parsing::Common::Ocr::Ocr]
         def self.load_ocr(http_response)
           ocr_prediction = http_response.fetch('ocr', nil)
@@ -30,7 +31,10 @@ module Mindee
           Ocr::Ocr.new(ocr_prediction)
         end
 
-        def self.load_extras(http_response)
+        # Loads extras into the document prediction.
+        # @param http_response [Hash] Full HTTP contents of the response.
+        # @return [Mindee::Parsing::Common::Ocr::Ocr]
+        def self.extract_extras(http_response)
           extras_prediction = http_response['inference'].fetch('extras', nil)
           return nil if extras_prediction.nil? || extras_prediction.fetch('mvision-v1', nil).nil?
 
@@ -44,7 +48,7 @@ module Mindee
           @name = http_response['name']
           @inference = product_class.new(http_response['inference'])
           @ocr = self.class.load_ocr(http_response)
-          @extras = self.class.load_extras(http_response)
+          @extras = self.class.extract_extras(http_response)
           inject_full_text_ocr(http_response)
           @n_pages = http_response['n_pages']
         end

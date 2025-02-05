@@ -15,7 +15,7 @@ describe 'multi-receipts extraction' do
   end
 
   let(:empty_input_source) do
-    double('InputSource', count_pdf_pages: 0)
+    double('InputSource', count_pages: 0)
   end
   let(:multi_receipts_single_page_path) do
     File.join(DATA_DIR, 'products', 'multi_receipts_detector', 'default_sample.jpg')

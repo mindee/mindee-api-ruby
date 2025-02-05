@@ -70,12 +70,17 @@ module Mindee
     module FR
     end
 
+    # Indian-specific products.
+    module IND
+    end
+
     # US-specific products.
     module US
     end
   end
 end
 
+# Shorthand to call the logger from anywhere.
 def logger
   Mindee::Logging.logger
 end
