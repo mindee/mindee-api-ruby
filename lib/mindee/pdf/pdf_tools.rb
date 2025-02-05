@@ -2,9 +2,17 @@
 
 module Mindee
   module PDF
-    # Monkey-patching for Origami
+    # Collection of miscellaneous PDF operations,as well as some monkey-patching for Origami.
     module PDFTools
-      # @return [StringIO]
+      # Converts the current PDF document into a binary-encoded StringIO stream.
+      #
+      # @param [Hash] params Optional settings to override default processing flags.
+      #   - :delinearize [Boolean] (default: true) Whether to convert a linearized PDF to its full form.
+      #   - :recompile [Boolean] (default: true) Whether to recompile the PDF after processing.
+      #   - :decrypt [Boolean] (default: false) Whether to attempt to decrypt the PDF.
+      #   - Other keys such as :intent, :rebuild_xrefs, :noindent, and :obfuscate may be modified automatically.
+      #
+      # @return [StringIO] A binary-encoded stream representing the processed PDF.
       def to_io_stream(params = {})
         options = {
           delinearize: true,
@@ -43,7 +51,7 @@ module Mindee
       end
 
       # Checks whether the file has source_text. Sends false if the file isn't a PDF.
-      # @param [StringIO] pdf_data
+      # @param [StringIO] pdf_data Abinary-encoded stream representing the PDF file.
       # @return [Boolean] True if the pdf has source text, false otherwise.
       def self.source_text?(pdf_data)
         begin
@@ -70,11 +78,22 @@ module Mindee
         false
       end
 
+      # Creates an image XObject from the provided image.
+      #
+      # Converts the given image to a binary stream using Mindee's image utilities, then creates
+      # an Origami::Graphics::ImageXObject with a JPEG filter.
+      #
+      # @param [Minimagick::Image] image An image object with the necessary data and structure.
+      # @return [Origami::Graphics::ImageXObject] The created image XObject.
       def self.create_xobject(image)
         image_io = Mindee::Image::ImageUtils.image_to_stringio(image)
         Origami::Graphics::ImageXObject.from_image_file(image_io, 'jpg')
       end
 
+      # Sets properties on the provided image XObject based on image metadata.
+      #
+      # @param [Origami::Graphics::ImageXObject] xobject The image XObject to update.
+      # @param [Hash] image A hash containing image metadata (such as width, height, properties, etc.).
       def self.set_xobject_properties(xobject, image)
         xobject.dictionary[:BitsPerComponent] = 8
         xobject.dictionary[:Filter] = determine_filter(image)
@@ -83,6 +102,10 @@ module Mindee
         xobject.dictionary[:ColorSpace] = determine_colorspace(image)
       end
 
+      # Determines the appropriate filter for an image based on its properties.
+      #
+      # @param [Hash] image The image data hash containing properties.
+      # @return [Symbol] One of :FlateDecode, :LZWDecode or :DCTDecode.
       def self.determine_filter(image)
         filter = image.data['properties']['filter']
         case filter
@@ -92,6 +115,10 @@ module Mindee
         end
       end
 
+      # Determines the colorspace for an image based on its metadata.
+      #
+      # @param [Hash] image The image data hash.
+      # @return [Symbol] One of :DeviceCMYK, :DeviceGray or :DeviceRGB.
       def self.determine_colorspace(image)
         colorspace = image.data['colorspace']
         case colorspace
@@ -101,17 +128,35 @@ module Mindee
         end
       end
 
+      # Adds a content stream to the specified PDF page to display an image XObject.
+      #
+      # @param [Origami::Page] page The PDF page to which content will be added.
+      # @param [String] xobject_name The name identifying the XObject.
+      # @param [Integer] width The width for the transformation matrix.
+      # @param [Integer] height The height for the transformation matrix.
       def self.add_content_to_page(page, xobject_name, width, height)
         content = "q\n#{width} 0 0 #{height} 0 0 cm\n/#{xobject_name} Do\nQ\n"
         content_stream = Origami::Stream.new(content)
         page.Contents = content_stream
       end
 
+      # Sets the dimensions for the specified PDF page.
+      #
+      # @param [Origami::Page] page The PDF page whose dimensions are being set.
+      # @param [Numeric] width The target width of the page.
+      # @param [Numeric] height The target height of the page.
       def self.set_page_dimensions(page, width, height)
         page[:MediaBox] = [0, 0, width, height]
         page[:CropBox] = [0, 0, width, height]
       end
 
+      # Processes an image into an image XObject for PDF embedding.
+      #
+      # @param [Hash] image_data The raw image data.
+      # @param [Integer] image_quality The quality setting for image compression.
+      # @param [Numeric] width The desired width of the output image.
+      # @param [Numeric] height The desired height of the output image.
+      # @return [Origami::Graphics::ImageXObject] The resulting image XObject.
       def self.process_image_xobject(image_data, image_quality, width, height)
         compressed_data = Image::ImageCompressor.compress_image(
           image_data,

@@ -16,7 +16,7 @@ module Mindee
               'No possible receipts candidates found for Multi-Receipts extraction.'
       end
 
-      (0...input_source.count_pdf_pages).each do |page_id|
+      (0...input_source.count_pages).each do |page_id|
         receipt_positions = inference.pages[page_id].prediction.receipts.map(&:bounding_box)
         images.concat(
           Mindee::Image::ImageExtractor.extract_multiple_images_from_source(input_source, page_id + 1,

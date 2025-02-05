@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'pdf-reader'
+# Shorthand for pdf-reader's PDF namespace, to avoid mixups with the local Origami fork.
 PDFReader = PDF
 
 module Mindee
