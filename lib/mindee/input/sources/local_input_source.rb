@@ -102,7 +102,10 @@ module Mindee
           ['document', data, { filename: Mindee::Input::Source.convert_to_unicode_escape(@filename) }]
         end
 
-        def count_pdf_pages
+        # Returns the page count for a document.
+        # Defaults to one for images.
+        # @return [Integer]
+        def count_pages
           return 1 unless pdf?
 
           @io_stream.seek(0)

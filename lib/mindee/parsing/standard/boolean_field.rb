@@ -15,6 +15,7 @@ module Mindee
           super
         end
 
+        # @return [String]
         def to_s
           return '' if value.nil?
 

@@ -12,12 +12,11 @@ module Mindee
   module Image
     # Image Extraction wrapper class.
     module ImageExtractor
+      # Attaches an image as a new page in a PdfDocument object.
+      #
+      # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
+      # @return [Origami::PDF] A PdfDocument handle.
       def self.attach_image_as_new_file(input_buffer, format: 'jpg')
-        # Attaches an image as a new page in a PdfDocument object.
-        #
-        # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
-        # @return [Origami::PDF] A PdfDocument handle.
-
         magick_image = MiniMagick::Image.read(input_buffer)
         # NOTE: some jpeg images get rendered as three different versions of themselves per output if the format isn't
         # converted.

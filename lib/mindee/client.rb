@@ -8,6 +8,7 @@ require_relative 'parsing/common/job'
 require_relative 'parsing/common/workflow_response'
 require_relative 'logging'
 
+# Default owner for products.
 OTS_OWNER = 'mindee'
 
 module Mindee
@@ -32,8 +33,8 @@ module Mindee
   #
   # @!attribute cropper [Boolean] Whether to include cropper results for each page.
   #  This performs a cropping operation on the server and will increase response time.
-  # @!attribute initial_delay_sec [Integer, Float] initial delay before polling. Defaults to 2.
-  # @!attribute delay_sec [Integer, Float] delay between polling attempts. Defaults to 1.5.
+  # @!attribute initial_delay_sec [Numeric] initial delay before polling. Defaults to 2.
+  # @!attribute delay_sec [Numeric] delay between polling attempts. Defaults to 1.5.
   # @!attribute max_retries [Integer] maximum amount of retries. Defaults to 80.
   ParseOptions = Struct.new(
     :all_words,
@@ -122,8 +123,8 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
-    #   * `:initial_delay_sec` [Integer, Float] Initial delay before polling. Defaults to 2.
-    #   * `:delay_sec` [Integer, Float] Delay between polling attempts. Defaults to 1.5.
+    #   * `:initial_delay_sec` [Numeric] Initial delay before polling. Defaults to 2.
+    #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
     # @param enqueue [Boolean] Whether to enqueue the file.
     # @return [Mindee::Parsing::Common::ApiResponse]
@@ -250,8 +251,8 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
-    #   * `:initial_delay_sec` [Integer, Float] Initial delay before polling. Defaults to 2.
-    #   * `:delay_sec` [Integer, Float] Delay between polling attempts. Defaults to 1.5.
+    #   * `:initial_delay_sec` [Numeric] Initial delay before polling. Defaults to 2.
+    #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
     # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
@@ -395,8 +396,8 @@ module Mindee
     end
 
     # Validates the parameters for async auto-polling
-    # @param initial_delay_sec [Integer, Float] initial delay before polling
-    # @param delay_sec [Integer, Float] delay between polling attempts
+    # @param initial_delay_sec [Numeric] initial delay before polling
+    # @param delay_sec [Numeric] delay between polling attempts
     # @param max_retries [Integer, nil] maximum amount of retries.
     def validate_async_params(initial_delay_sec, delay_sec, max_retries)
       min_delay_sec = 1
