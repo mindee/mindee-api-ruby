@@ -6,7 +6,7 @@ def invoice_splitter_auto_extraction(file_path)
   mindee_client = Mindee::Client.new(api_key: 'my-api-key')
   input_source = mindee_client.source_from_path(file_path)
 
-  if input_source.pdf? && input_source.count_pdf_pages > 1
+  if input_source.pdf? && input_source.count_pages > 1
     parse_multi_page(mindee_client, input_source)
   else
     parse_single_page(mindee_client, input_source)
