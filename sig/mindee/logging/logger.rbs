@@ -1,0 +1,5 @@
+module Mindee
+  module Logging
+    self.@logger: Logger
+  end
+end

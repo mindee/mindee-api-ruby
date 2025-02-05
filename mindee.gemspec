@@ -6,20 +6,18 @@ Gem::Specification.new do |spec|
   spec.name          = 'mindee'
   spec.version       = Mindee::VERSION
   spec.authors       = ['Mindee, SA']
-  spec.email         = ['devrel@mindee.co']
+  spec.email         = ['opensource@mindee.co']
 
   spec.summary       = 'Mindee API Helper Library for Ruby'
   spec.description   = "Quickly and easily connect to Mindee's API services using Ruby."
   spec.homepage      = 'https://github.com/mindee/mindee-api-ruby'
   spec.license       = 'MIT'
 
-  spec.metadata['homepage_uri'] = 'https://mindee.com/'
-  spec.metadata['source_code_uri'] = 'https://github.com/mindee/mindee-api-ruby'
-  spec.metadata['changelog_uri'] = 'https://github.com/mindee/mindee-api-ruby/blob/main/CHANGELOG.md'
+  spec.metadata['homepage_uri']      = 'https://mindee.com/'
+  spec.metadata['source_code_uri']   = 'https://github.com/mindee/mindee-api-ruby'
+  spec.metadata['changelog_uri']     = 'https://github.com/mindee/mindee-api-ruby/blob/main/CHANGELOG.md'
   spec.metadata['rubygems_mfa_required'] = 'true'
 
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(.github|spec|features)/}) }
   end
@@ -30,12 +28,16 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
 
   spec.add_dependency 'marcel', '~> 1.0.4'
-  spec.add_dependency 'mini_magick', '>=4', '< 6'
+  spec.add_dependency 'mini_magick', '>= 4', '< 6'
   spec.add_dependency 'origamindee', '~> 3.1.0'
   spec.add_dependency 'pdf-reader', '~> 2.13.0'
 
+  spec.add_development_dependency 'prism', '~> 1.3'
   spec.add_development_dependency 'rake', '~> 13.2.1'
+  spec.add_development_dependency 'rbs', '~> 3.8', '>= 3.8.1'
   spec.add_development_dependency 'rspec', '~> 3.13.0'
   spec.add_development_dependency 'rubocop', '~> 1.70.0'
+  spec.add_development_dependency 'steep', '~> 1.9', '>= 1.9.4'
+  spec.add_development_dependency 'typeprof', '~> 0.30.1'
   spec.add_development_dependency 'yard', '~> 0.9.37'
 end
