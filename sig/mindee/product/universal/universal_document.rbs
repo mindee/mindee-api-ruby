@@ -1,0 +1,12 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/universal/universal_document.rb
+module Mindee
+  module Product
+    module Product::Universal
+      class Product::Universal::UniversalDocument # failed to identify its superclass
+        def initialize: (untyped) -> untyped
+      end
+    end
+  end
+end

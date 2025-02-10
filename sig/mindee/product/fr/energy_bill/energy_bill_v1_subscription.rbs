@@ -1,0 +1,24 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/energy_bill/energy_bill_v1_subscription.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::EnergyBill
+        class Product::FR::EnergyBill::EnergyBillV1Subscription # failed to identify its superclass
+          def description: -> untyped
+          def end_date: -> untyped
+          def start_date: -> untyped
+          def tax_rate: -> untyped
+          def total: -> untyped
+          def unit_price: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def printable_values: -> Hash[untyped, String]
+          def table_printable_values: -> Hash[untyped, String]
+          def to_table_line: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

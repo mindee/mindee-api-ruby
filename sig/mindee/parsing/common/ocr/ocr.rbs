@@ -1,0 +1,41 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/common/ocr/ocr.rb
+module Mindee
+  module Parsing
+    module Parsing::Common
+      module Parsing::Common::Ocr
+        class Parsing::Common::Ocr::OcrWord
+          def confidence: -> untyped
+          def confidence=: (untyped) -> untyped
+          def text: -> untyped
+          def bounding_box: -> untyped
+          def polygon: -> untyped
+          def initialize: (untyped) -> nil
+          def to_s: -> untyped
+        end
+        class Parsing::Common::Ocr::OcrLine < Array
+          def initialize: (?[]?, ?Array[untyped]?) -> Object?
+          def sort_on_x: -> Parsing::Common::Ocr::OcrLine
+          def to_s: -> String
+        end
+        class Parsing::Common::Ocr::OcrPage
+          def all_words: -> []
+          def lines: -> []
+          def initialize: (untyped) -> untyped
+          def all_lines: -> []
+          def to_s: -> String
+          def parse_one: (Array[Parsing::Common::Ocr::OcrWord], nil, [], []) -> Array[Parsing::Common::Ocr::OcrLine]?
+          def to_lines: -> []
+          def words_on_same_line?: (Parsing::Common::Ocr::OcrWord?, Parsing::Common::Ocr::OcrWord) -> untyped
+        end
+        class Parsing::Common::Ocr::Ocr
+          def mvision_v1: -> untyped
+          def initialize: (untyped) -> untyped
+          def to_s: -> untyped
+          def reconstruct_vertically: (untyped, untyped, ?Float) -> untyped
+        end
+      end
+    end
+  end
+end

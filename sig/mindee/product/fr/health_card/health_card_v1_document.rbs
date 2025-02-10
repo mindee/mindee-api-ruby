@@ -1,0 +1,19 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/health_card/health_card_v1_document.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::HealthCard
+        class Product::FR::HealthCard::HealthCardV1Document # failed to identify its superclass
+          def given_names: -> []
+          def issuance_date: -> untyped
+          def social_security: -> untyped
+          def surname: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

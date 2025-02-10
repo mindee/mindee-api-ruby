@@ -1,0 +1,15 @@
+# lib/mindee/parsing/common/inference.rb
+module Mindee
+  module Parsing
+    module Common
+      class Inference
+        def is_rotation_applied: -> untyped
+        def pages: -> []
+        def prediction: -> untyped
+        def product: -> untyped
+        def initialize: (untyped) -> []
+        def to_s: -> String
+      end
+    end
+  end
+end

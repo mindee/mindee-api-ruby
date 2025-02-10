@@ -1,0 +1,15 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/international_id/international_id_v2_page.rb
+module Mindee
+  module Product
+    module Product::InternationalId
+      class Product::InternationalId::InternationalIdV2Page # failed to identify its superclass
+        def initialize: (untyped) -> nil
+      end
+      class Product::InternationalId::InternationalIdV2PagePrediction # failed to identify its superclass
+        def to_s: -> String
+      end
+    end
+  end
+end

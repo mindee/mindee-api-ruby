@@ -1,0 +1,21 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/standard/abstract_field.rb
+module Mindee
+  module Parsing
+    module Parsing::Standard
+      class Parsing::Standard::AbstractField
+        def bounding_box: -> untyped
+        def polygon: -> untyped
+        def page_id: -> untyped
+        def confidence: -> untyped
+        def confidence=: (untyped) -> untyped
+        def initialize: (untyped, untyped) -> untyped
+        def to_s: -> String
+        def self.array_confidence: (untyped) -> Float
+        def self.array_sum: (untyped) -> Float
+        def self.float_to_string: (untyped, ?Integer) -> String
+      end
+    end
+  end
+end

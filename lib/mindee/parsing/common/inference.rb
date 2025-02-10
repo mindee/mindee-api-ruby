@@ -17,6 +17,18 @@ module Mindee
         attr_reader :prediction
         # @return [Mindee::Parsing::Common::Product]
         attr_reader :product
+        # Name of the endpoint for this product.
+        # @return [String]
+        attr_reader :endpoint_name
+        # Version for this product.
+        # @return [String]
+        attr_reader :endpoint_version
+        # Whether this product has access to an asynchronous endpoint.
+        # @return [Boolean]
+        attr_reader :has_async
+        # Whether this product has access to synchronous endpoint.
+        # @return [Boolean]
+        attr_reader :has_sync
 
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)

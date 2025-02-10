@@ -1,0 +1,21 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/universal/universal_prediction.rb
+module Mindee
+  module Product
+    module Product::Universal
+      class Product::Universal::UniversalPrediction # failed to identify its superclass
+        def fields: -> Hash[untyped, untyped]
+        def initialize: -> Hash[untyped, untyped]
+        def to_s: -> String
+        def generate_field_string: (untyped, untyped, Regexp) -> String
+        def generate_list_field_string: (untyped, untyped, untyped) -> String
+        def generate_sub_value_string: (untyped, untyped, untyped) -> String
+        def single_fields: -> Hash[untyped, untyped]
+        def list_fields: -> Hash[untyped, untyped]
+        def object_fields: -> Hash[untyped, untyped]
+        def list_field_names: -> Array[untyped]
+      end
+    end
+  end
+end

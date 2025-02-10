@@ -1,0 +1,15 @@
+# TypeProf 0.30.1
+
+# lib/mindee/pdf/pdf_processor.rb
+module Mindee
+  module PDF
+    module PDF::PdfProcessor
+      PDF::PdfProcessor::DEFAULT_OPTIONS: Hash[:on_min_pages | :operation | :page_indexes, :KEEP_ONLY | Integer | [Integer]]
+      def self.parse: (StringIO, Hash[:page_indexes, [untyped]]) -> nil
+      def self.indexes_from_keep: (:KEEP_ONLY | Integer | [Integer] | [untyped], Array[Integer]) -> untyped
+      def self.indexes_from_remove: (:KEEP_ONLY | Integer | [Integer] | [untyped], Array[Integer]) -> (Array[Integer] | Array[untyped])
+      def self.open_pdf: (StringIO) -> untyped
+      def self.get_page: (untyped, untyped) -> nil
+    end
+  end
+end

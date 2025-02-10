@@ -1,0 +1,25 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/payslip/payslip_v2_document.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::Payslip
+        class Product::FR::Payslip::PayslipV2Document # failed to identify its superclass
+          def bank_account_details: -> untyped
+          def employee: -> untyped
+          def employer: -> untyped
+          def employment: -> untyped
+          def pay_detail: -> untyped
+          def pay_period: -> untyped
+          def pto: -> untyped
+          def salary_details: -> []
+          def initialize: (untyped, untyped) -> untyped
+          def to_s: -> String
+          def salary_details_separator: (String) -> String
+          def salary_details_to_s: -> String
+        end
+      end
+    end
+  end
+end

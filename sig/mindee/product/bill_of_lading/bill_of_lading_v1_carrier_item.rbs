@@ -1,0 +1,22 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/bill_of_lading/bill_of_lading_v1_carrier_item.rb
+module Mindee
+  module Product
+    module Product::BillOfLading
+      class Product::BillOfLading::BillOfLadingV1CarrierItem # failed to identify its superclass
+        def description: -> untyped
+        def gross_weight: -> untyped
+        def measurement: -> untyped
+        def measurement_unit: -> untyped
+        def quantity: -> untyped
+        def weight_unit: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+        def printable_values: -> Hash[untyped, String]
+        def table_printable_values: -> Hash[untyped, String]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

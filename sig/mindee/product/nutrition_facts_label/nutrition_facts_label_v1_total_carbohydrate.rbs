@@ -1,0 +1,17 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_total_carbohydrate.rb
+module Mindee
+  module Product
+    module Product::NutritionFactsLabel
+      class Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate # failed to identify its superclass
+        def daily_value: -> untyped
+        def per_100g: -> untyped
+        def per_serving: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+        def printable_values: -> Hash[untyped, String]
+        def to_s: -> String
+      end
+    end
+  end
+end

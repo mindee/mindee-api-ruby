@@ -1,0 +1,21 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/payslip/payslip_v2_pay_period.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::Payslip
+        class Product::FR::Payslip::PayslipV2PayPeriod # failed to identify its superclass
+          def end_date: -> untyped
+          def month: -> untyped
+          def payment_date: -> untyped
+          def start_date: -> untyped
+          def year: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def printable_values: -> Hash[untyped, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

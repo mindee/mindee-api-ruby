@@ -1,0 +1,35 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/energy_bill/energy_bill_v1_document.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::EnergyBill
+        class Product::FR::EnergyBill::EnergyBillV1Document # failed to identify its superclass
+          def contract_id: -> untyped
+          def delivery_point: -> untyped
+          def due_date: -> untyped
+          def energy_consumer: -> untyped
+          def energy_supplier: -> untyped
+          def energy_usage: -> []
+          def invoice_date: -> untyped
+          def invoice_number: -> untyped
+          def meter_details: -> untyped
+          def subscription: -> []
+          def taxes_and_contributions: -> []
+          def total_amount: -> untyped
+          def total_before_taxes: -> untyped
+          def total_taxes: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def to_s: -> String
+          def subscription_separator: (String) -> String
+          def subscription_to_s: -> String
+          def energy_usage_separator: (String) -> String
+          def energy_usage_to_s: -> String
+          def taxes_and_contributions_separator: (String) -> String
+          def taxes_and_contributions_to_s: -> String
+        end
+      end
+    end
+  end
+end

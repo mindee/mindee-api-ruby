@@ -1,0 +1,30 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/id_card/id_card_v2_document.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::IdCard
+        class Product::FR::IdCard::IdCardV2Document # failed to identify its superclass
+          def alternate_name: -> untyped
+          def authority: -> untyped
+          def birth_date: -> untyped
+          def birth_place: -> untyped
+          def card_access_number: -> untyped
+          def document_number: -> untyped
+          def expiry_date: -> untyped
+          def gender: -> untyped
+          def given_names: -> []
+          def issue_date: -> untyped
+          def mrz1: -> untyped
+          def mrz2: -> untyped
+          def mrz3: -> untyped
+          def nationality: -> untyped
+          def surname: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

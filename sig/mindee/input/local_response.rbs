@@ -1,0 +1,15 @@
+# TypeProf 0.30.1
+
+# lib/mindee/input/local_response.rb
+module Mindee
+  module Input
+    class Input::LocalResponse
+      def file: -> StringIO
+      def initialize: (untyped) -> Integer
+      def as_hash: -> nil
+      def self.process_secret_key: (untyped) -> untyped
+      def get_hmac_signature: (untyped) -> untyped
+      def valid_hmac_signature?: (untyped, untyped) -> untyped
+    end
+  end
+end

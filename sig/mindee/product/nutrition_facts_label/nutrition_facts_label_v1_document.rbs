@@ -1,0 +1,29 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_document.rb
+module Mindee
+  module Product
+    module Product::NutritionFactsLabel
+      class Product::NutritionFactsLabel::NutritionFactsLabelV1Document # failed to identify its superclass
+        def added_sugars: -> untyped
+        def calories: -> untyped
+        def cholesterol: -> untyped
+        def dietary_fiber: -> untyped
+        def nutrients: -> []
+        def protein: -> untyped
+        def saturated_fat: -> untyped
+        def serving_per_box: -> untyped
+        def serving_size: -> untyped
+        def sodium: -> untyped
+        def total_carbohydrate: -> untyped
+        def total_fat: -> untyped
+        def total_sugars: -> untyped
+        def trans_fat: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+        def to_s: -> String
+        def nutrients_separator: (String) -> String
+        def nutrients_to_s: -> String
+      end
+    end
+  end
+end

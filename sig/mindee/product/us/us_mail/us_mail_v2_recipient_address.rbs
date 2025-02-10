@@ -1,0 +1,25 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/us/us_mail/us_mail_v2_recipient_address.rb
+module Mindee
+  module Product
+    module Product::US
+      module Product::US::UsMail
+        class Product::US::UsMail::UsMailV2RecipientAddress # failed to identify its superclass
+          def city: -> untyped
+          def complete: -> untyped
+          def is_address_change: -> untyped
+          def postal_code: -> untyped
+          def private_mailbox_number: -> untyped
+          def state: -> untyped
+          def street: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def printable_values: -> Hash[untyped, untyped]
+          def table_printable_values: -> Hash[untyped, untyped]
+          def to_table_line: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

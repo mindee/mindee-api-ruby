@@ -1,0 +1,12 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/standard/feature_field.rb
+module Mindee
+  module Parsing
+    module Parsing::Standard
+      class Parsing::Standard::FeatureField # failed to identify its superclass
+        def format_for_display: (untyped, ?nil) -> String
+      end
+    end
+  end
+end

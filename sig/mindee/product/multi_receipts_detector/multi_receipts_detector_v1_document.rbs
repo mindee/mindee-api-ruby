@@ -1,0 +1,14 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/multi_receipts_detector/multi_receipts_detector_v1_document.rb
+module Mindee
+  module Product
+    module Product::MultiReceiptsDetector
+      class Product::MultiReceiptsDetector::MultiReceiptsDetectorV1Document # failed to identify its superclass
+        def receipts: -> []
+        def initialize: (untyped, untyped) -> untyped
+        def to_s: -> String
+      end
+    end
+  end
+end

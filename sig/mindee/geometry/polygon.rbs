@@ -1,0 +1,11 @@
+# TypeProf 0.30.1
+
+# lib/mindee/geometry/polygon.rb
+module Mindee
+  module Geometry
+    class Geometry::Polygon < Array
+      def centroid: -> untyped
+      def point_in_y?: (untyped) -> untyped
+    end
+  end
+end

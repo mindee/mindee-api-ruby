@@ -1,0 +1,12 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/standard/classification_field.rb
+module Mindee
+  module Parsing
+    module Parsing::Standard
+      class Parsing::Standard::ClassificationField # failed to identify its superclass
+        def value: -> untyped
+      end
+    end
+  end
+end

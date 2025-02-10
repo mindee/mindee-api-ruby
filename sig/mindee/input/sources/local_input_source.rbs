@@ -1,0 +1,24 @@
+# TypeProf 0.30.1
+
+# lib/mindee/input/sources/local_input_source.rb
+module Mindee
+  module Input
+    module Source
+      ALLOWED_MIME_TYPES: Array[String]
+      class LocalInputSource
+        def filename: -> untyped
+        def file_mimetype: -> untyped
+        def io_stream: -> StringIO
+        def initialize: (untyped, untyped, ?fix_pdf: false) -> nil
+        def rescue_broken_pdf: (StringIO) -> StringIO
+        def pdf?: -> untyped
+        def process_pdf: (untyped) -> untyped
+        def read_contents: (?close: true) -> [String, String?, Hash[:filename, String]]
+        def count_pages: -> Integer
+        def compress!: (?quality: Integer, ?max_width: nil, ?max_height: nil, ?force_source_text: false, ?disable_source_text: true) -> Integer
+        def source_text?: -> untyped
+      end
+      def self.convert_to_unicode_escape: (untyped) -> String
+    end
+  end
+end

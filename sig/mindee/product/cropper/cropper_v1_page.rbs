@@ -1,0 +1,17 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/cropper/cropper_v1_page.rb
+module Mindee
+  module Product
+    module Product::Cropper
+      class Product::Cropper::CropperV1Page # failed to identify its superclass
+        def initialize: (untyped) -> nil
+      end
+      class Product::Cropper::CropperV1PagePrediction # failed to identify its superclass
+        def cropping: -> []
+        def initialize: (untyped, untyped) -> Object
+        def to_s: -> String
+      end
+    end
+  end
+end

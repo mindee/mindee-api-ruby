@@ -1,0 +1,13 @@
+# TypeProf 0.30.1
+
+# lib/mindee/input/sources/base64_input_source.rb
+module Mindee
+  module Input
+    module Source
+      class Base64InputSource # failed to identify its superclass
+        def initialize: (untyped, untyped, ?fix_pdf: false) -> untyped
+        def read_contents: (?close: true) -> [String, String, Hash[:filename, untyped]]
+      end
+    end
+  end
+end

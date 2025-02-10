@@ -12,84 +12,64 @@ require_relative 'logging'
 OTS_OWNER = 'mindee'
 
 module Mindee
-  # Struct for configuration options in parse calls
+  # Class for configuration options in parse calls.
   #
   # @!attribute all_words [Boolean] Whether to include the full text for each page.
-  #  This performs a full OCR operation on the server and will increase response time.
-  #
+  #   This performs a full OCR operation on the server and will increase response time.
   # @!attribute full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-  #  This performs a full OCR operation on the server and may increase response time.
-  #
+  #   This performs a full OCR operation on the server and may increase response time.
   # @!attribute close_file [Boolean] Whether to `close()` the file after parsing it.
-  #  Set to false if you need to access the file after this operation.
-  #
+  #   Set to false if you need to access the file after this operation.
   # @!attribute page_options [Hash, nil] Page cutting/merge options:
-  #
-  #  * `:page_indexes` Zero-based list of page indexes.
-  #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
-  #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-  #      * `:REMOVE` - remove the specified pages, and keep all others.
-  #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
-  #
+  #   * `:page_indexes` Zero-based list of page indexes.
+  #   * `:operation` Operation to apply on the document, given the specified page indexes:
+  #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+  #       * `:REMOVE` - remove the specified pages, and keep all others.
+  #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
   # @!attribute cropper [Boolean] Whether to include cropper results for each page.
-  #  This performs a cropping operation on the server and will increase response time.
-  # @!attribute initial_delay_sec [Numeric] initial delay before polling. Defaults to 2.
-  # @!attribute delay_sec [Numeric] delay between polling attempts. Defaults to 1.5.
-  # @!attribute max_retries [Integer] maximum amount of retries. Defaults to 80.
-  ParseOptions = Struct.new(
-    :all_words,
-    :full_text,
-    :close_file,
-    :page_options,
-    :cropper,
-    :initial_delay_sec,
-    :delay_sec,
-    :max_retries
-  ) do
-    def initialize(params = {})
-      super(
-        params.fetch(:all_words, false),
-        params.fetch(:full_text, false),
-        params.fetch(:close_file, true),
-        params.fetch(:page_options, nil),
-        params.fetch(:cropper, false),
-        params.fetch(:initial_delay_sec, 2),
-        params.fetch(:delay_sec, 1.5),
-        params.fetch(:max_retries, 80)
-      )
+  #   This performs a cropping operation on the server and will increase response time.
+  # @!attribute initial_delay_sec [Numeric] Initial delay before polling. Defaults to 2.
+  # @!attribute delay_sec [Numeric] Delay between polling attempts. Defaults to 1.5.
+  # @!attribute max_retries [Integer] Maximum number of retries. Defaults to 80.
+  class ParseOptions
+    attr_accessor :all_words, :full_text, :close_file, :page_options, :cropper,
+                  :initial_delay_sec, :delay_sec, :max_retries
+
+    def initialize(params: {})
+      @all_words = params.fetch(:all_words, false)
+      @full_text = params.fetch(:full_text, false)
+      @close_file = params.fetch(:close_file, true)
+      @page_options = params.fetch(:page_options, nil) # TODO: convert to dataclass
+      @cropper = params.fetch(:cropper, false)
+      @initial_delay_sec = params.fetch(:initial_delay_sec, 2)
+      @delay_sec = params.fetch(:delay_sec, 1.5)
+      @max_retries = params.fetch(:max_retries, 80)
     end
   end
 
-  # Struct for configuration options in workflow executions
+  # Class for configuration options in workflow executions.
   #
   # @!attribute document_alias [String, nil] Alias to give to the document.
   # @!attribute priority [Symbol, nil] Priority to give to the document.
   # @!attribute full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-  #  This performs a full OCR operation on the server and may increase response time.
-  #
+  #   This performs a full OCR operation on the server and may increase response time.
   # @!attribute public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
-  # requiring authentication.
+  #   requiring authentication.
   # @!attribute page_options [Hash, nil] Page cutting/merge options:
-  #  * `:page_indexes` Zero-based list of page indexes.
-  #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
-  #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-  #      * `:REMOVE` - remove the specified pages, and keep all others.
-  #  * `:on_min_pages` Apply the operation only if document has at least this many pa
-  WorkflowOptions = Struct.new(
-    :document_alias,
-    :priority,
-    :full_text,
-    :public_url,
-    :page_options
-  ) do
+  #   * `:page_indexes` Zero-based list of page indexes.
+  #   * `:operation` Operation to apply on the document, given the specified page indexes:
+  #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+  #       * `:REMOVE` - remove the specified pages, and keep all others.
+  #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
+  class WorkflowOptions
+    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options
+
     def initialize(params = {})
-      super(
-        params.fetch(:document_alias, nil),
-        params.fetch(:priority, nil),
-        params.fetch(:full_text, false),
-        params.fetch(:public_url, nil),
-        params.fetch(:page_options, nil)
-      )
+      @document_alias = params.fetch(:document_alias, nil)
+      @priority = params.fetch(:priority, nil)
+      @full_text = params.fetch(:full_text, false)
+      @public_url = params.fetch(:public_url, nil)
+      @page_options = params.fetch(:page_options, nil)
     end
   end
 
@@ -461,10 +441,18 @@ module Mindee
       product_class.endpoint_version
     end
 
+    # If needed, converts the parsing options provided as a hash into a proper ParseOptions object.
+    # @param options [Hash, ParseOptions] Options.
+    # @return [ParseOptions]
     def normalize_parse_options(options)
-      options.is_a?(ParseOptions) ? options : ParseOptions.new(options)
+      return options if options.is_a?(ParseOptions)
+
+      ParseOptions.new(params: options)
     end
 
+    # Processes a PDF if parameters were provided.
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param opts [ParseOptions]
     def process_pdf_if_required(input_source, opts)
       return unless input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
                     opts.page_options &&

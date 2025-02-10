@@ -1,0 +1,19 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/payslip/payslip_v3_bank_account_detail.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::Payslip
+        class Product::FR::Payslip::PayslipV3BankAccountDetail # failed to identify its superclass
+          def bank_name: -> untyped
+          def iban: -> untyped
+          def swift: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def printable_values: -> Hash[untyped, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

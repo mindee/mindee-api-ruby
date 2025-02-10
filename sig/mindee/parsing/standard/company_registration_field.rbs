@@ -1,0 +1,16 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/standard/company_registration_field.rb
+module Mindee
+  module Parsing
+    module Parsing::Standard
+      class Parsing::Standard::CompanyRegistrationField # failed to identify its superclass
+        def type: -> untyped
+        def initialize: (untyped, untyped, ?reconstructed: false) -> untyped
+        def to_table_line: -> String
+        def to_s: -> String
+        def printable_values: -> Hash[String, untyped]
+      end
+    end
+  end
+end

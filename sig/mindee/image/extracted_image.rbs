@@ -1,0 +1,16 @@
+# TypeProf 0.30.1
+
+# lib/mindee/image/extracted_image.rb
+module Mindee
+  module Image
+    class Image::ExtractedImage
+      def page_id: -> untyped
+      def element_id: -> Integer
+      def buffer: -> StringIO
+      def internal_file_name: -> String
+      def initialize: (untyped, untyped, untyped) -> Integer
+      def write_to_file: (untyped, ?nil) -> nil
+      def as_source: -> untyped
+    end
+  end
+end

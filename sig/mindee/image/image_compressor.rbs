@@ -1,0 +1,10 @@
+# TypeProf 0.30.1
+
+# lib/mindee/image/image_compressor.rb
+module Mindee
+  module Image
+    module Image::ImageCompressor
+      def self.compress_image: (untyped, ?quality: Integer, ?max_width: nil, ?max_height: nil) -> untyped
+    end
+  end
+end

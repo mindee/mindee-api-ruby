@@ -1,0 +1,15 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/barcode_reader/barcode_reader_v1_page.rb
+module Mindee
+  module Product
+    module Product::BarcodeReader
+      class Product::BarcodeReader::BarcodeReaderV1Page # failed to identify its superclass
+        def initialize: (untyped) -> nil
+      end
+      class Product::BarcodeReader::BarcodeReaderV1PagePrediction # failed to identify its superclass
+        def to_s: -> String
+      end
+    end
+  end
+end

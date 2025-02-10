@@ -1,0 +1,21 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb
+module Mindee
+  module Product
+    module Product::InvoiceSplitter
+      class Product::InvoiceSplitter::InvoiceSplitterV1PageGroup
+        def page_indexes: -> untyped
+        def confidence: -> Float?
+        def initialize: (untyped) -> Float?
+        def to_s: -> String
+      end
+      class Product::InvoiceSplitter::InvoiceSplitterV1Document # failed to identify its superclass
+        def invoice_page_groups: -> []
+        def initialize: (untyped, untyped) -> nil
+        def construct_invoice_page_groups_from_prediction: (untyped) -> nil
+        def to_s: -> String
+      end
+    end
+  end
+end

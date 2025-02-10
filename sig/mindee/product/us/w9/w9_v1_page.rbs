@@ -1,0 +1,30 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/us/w9/w9_v1_page.rb
+module Mindee
+  module Product
+    module Product::US
+      module Product::US::W9
+        class Product::US::W9::W9V1Page # failed to identify its superclass
+          def initialize: (untyped) -> nil
+        end
+        class Product::US::W9::W9V1PagePrediction # failed to identify its superclass
+          def address: -> untyped
+          def business_name: -> untyped
+          def city_state_zip: -> untyped
+          def ein: -> untyped
+          def name: -> untyped
+          def signature_date_position: -> untyped
+          def signature_position: -> untyped
+          def ssn: -> untyped
+          def tax_classification: -> untyped
+          def tax_classification_llc: -> untyped
+          def tax_classification_other_details: -> untyped
+          def w9_revision_date: -> untyped
+          def initialize: (untyped, untyped) -> Object
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

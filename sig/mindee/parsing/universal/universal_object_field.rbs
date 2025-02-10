@@ -1,0 +1,25 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/universal/universal_object_field.rb
+module Mindee
+  module Parsing
+    module Parsing::Universal
+      class Parsing::Universal::UniversalObjectField
+        def page_id: -> untyped
+        def page_id=: (untyped) -> untyped
+        def confidence: -> untyped
+        def confidence=: (untyped) -> untyped
+        def raw_value: -> untyped
+        def raw_value=: (untyped) -> untyped
+        def initialize: (untyped, ?nil) -> untyped
+        def str_level: (?Integer) -> String
+        def method_missing: (untyped, *untyped) -> nil
+        def respond_to_missing?: (untyped, ?false) -> bool
+        def to_s: -> String
+        def handle_position_field: (untyped, untyped, untyped) -> untyped
+        def handle_default_field: (untyped, untyped) -> nil
+      end
+      def self.universal_object?: (untyped) -> bool
+    end
+  end
+end

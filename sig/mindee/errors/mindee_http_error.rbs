@@ -1,0 +1,18 @@
+# TypeProf 0.30.1
+
+# lib/mindee/errors/mindee_http_error.rb
+module Mindee
+  module Errors
+    class Errors::MindeeHTTPError # failed to identify its superclass
+      def status_code: -> untyped
+      def api_code: -> untyped
+      def api_details: -> untyped
+      def api_message: -> untyped
+      def initialize: (untyped, untyped, untyped) -> untyped
+    end
+    class Errors::MindeeHTTPClientError < Errors::MindeeHTTPError
+    end
+    class Errors::MindeeHTTPServerError < Errors::MindeeHTTPError
+    end
+  end
+end

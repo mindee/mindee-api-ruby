@@ -1,0 +1,17 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/common/ocr/mvision_v1.rb
+module Mindee
+  module Parsing
+    module Parsing::Common
+      module Parsing::Common::Ocr
+        class Parsing::Common::Ocr::MVisionV1
+          def pages: -> []
+          def initialize: (untyped) -> untyped
+          def to_s: -> String
+          def reconstruct_vertically: (untyped, untyped, untyped) -> untyped
+        end
+      end
+    end
+  end
+end

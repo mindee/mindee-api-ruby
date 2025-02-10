@@ -1,0 +1,30 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/bank_statement/bank_statement_v1_document.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::BankStatement
+        class Product::FR::BankStatement::BankStatementV1Document # failed to identify its superclass
+          def account_number: -> untyped
+          def bank_address: -> untyped
+          def bank_name: -> untyped
+          def client_address: -> untyped
+          def client_name: -> untyped
+          def closing_balance: -> untyped
+          def opening_balance: -> untyped
+          def statement_date: -> untyped
+          def statement_end_date: -> untyped
+          def statement_start_date: -> untyped
+          def total_credits: -> untyped
+          def total_debits: -> untyped
+          def transactions: -> []
+          def initialize: (untyped, untyped) -> untyped
+          def to_s: -> String
+          def transactions_separator: (String) -> String
+          def transactions_to_s: -> String
+        end
+      end
+    end
+  end
+end

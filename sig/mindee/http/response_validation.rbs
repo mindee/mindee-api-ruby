@@ -1,0 +1,12 @@
+# TypeProf 0.30.1
+
+# lib/mindee/http/response_validation.rb
+module Mindee
+  module HTTP
+    module HTTP::ResponseValidation
+      def self.valid_sync_response?: (untyped) -> bool
+      def self.valid_async_response?: (untyped) -> bool
+      def self.clean_request!: (untyped) -> nil
+    end
+  end
+end

@@ -1,0 +1,18 @@
+# TypeProf 0.30.1
+
+# lib/mindee/parsing/common/job.rb
+module Mindee
+  module Parsing
+    module Parsing::Common
+      class Parsing::Common::Job
+        def id: -> untyped
+        def issued_at: -> untyped
+        def available_at: -> untyped
+        def status: -> untyped
+        def millisecs_taken: -> Integer
+        def error: -> untyped
+        def initialize: (untyped) -> untyped
+      end
+    end
+  end
+end

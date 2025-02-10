@@ -38,6 +38,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.13.0'
   spec.add_development_dependency 'rubocop', '~> 1.70.0'
   spec.add_development_dependency 'steep', '~> 1.9', '>= 1.9.4'
-  spec.add_development_dependency 'typeprof', '~> 0.30.1'
   spec.add_development_dependency 'yard', '~> 0.9.37'
 end

@@ -1,0 +1,18 @@
+# TypeProf 0.30.1
+
+# lib/mindee/pdf/pdf_extractor.rb
+module Mindee
+  module PDF
+    module PDF::PDFExtractor
+      class PDF::PDFExtractor::PDFExtractor
+        def initialize: (untyped) -> StringIO
+        def page_count: -> untyped
+        def cut_pages: ([]) -> untyped
+        def extract_sub_documents: ([]) -> []
+        def extract_invoices: (untyped, ?strict: false) -> []
+        def source_pdf: -> StringIO
+        def filename: -> untyped
+      end
+    end
+  end
+end

@@ -1,0 +1,26 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/payslip/payslip_v3_pay_detail.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::Payslip
+        class Product::FR::Payslip::PayslipV3PayDetail # failed to identify its superclass
+          def gross_salary: -> untyped
+          def gross_salary_ytd: -> untyped
+          def income_tax_rate: -> untyped
+          def income_tax_withheld: -> untyped
+          def net_paid: -> untyped
+          def net_paid_before_tax: -> untyped
+          def net_taxable: -> untyped
+          def net_taxable_ytd: -> untyped
+          def total_cost_employer: -> untyped
+          def total_taxes_and_deductions: -> untyped
+          def initialize: (untyped, untyped) -> untyped
+          def printable_values: -> Hash[untyped, String]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

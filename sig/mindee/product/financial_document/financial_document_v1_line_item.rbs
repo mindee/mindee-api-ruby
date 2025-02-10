@@ -1,0 +1,24 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/financial_document/financial_document_v1_line_item.rb
+module Mindee
+  module Product
+    module Product::FinancialDocument
+      class Product::FinancialDocument::FinancialDocumentV1LineItem # failed to identify its superclass
+        def description: -> untyped
+        def product_code: -> untyped
+        def quantity: -> untyped
+        def tax_amount: -> untyped
+        def tax_rate: -> untyped
+        def total_amount: -> untyped
+        def unit_measure: -> untyped
+        def unit_price: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+        def printable_values: -> Hash[untyped, String]
+        def table_printable_values: -> Hash[untyped, String]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

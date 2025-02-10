@@ -1,0 +1,17 @@
+# TypeProf 0.30.1
+
+# lib/mindee/product/fr/health_card/health_card_v1_page.rb
+module Mindee
+  module Product
+    module Product::FR
+      module Product::FR::HealthCard
+        class Product::FR::HealthCard::HealthCardV1Page # failed to identify its superclass
+          def initialize: (untyped) -> nil
+        end
+        class Product::FR::HealthCard::HealthCardV1PagePrediction # failed to identify its superclass
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end
