@@ -1,0 +1,10 @@
+# lib/mindee/input/sources/bytes_input_source.rb
+module Mindee
+  module Input
+    module Source
+      class BytesInputSource # failed to identify its superclass
+        def initialize: (untyped, untyped, ?fix_pdf: bool) -> untyped
+      end
+    end
+  end
+end

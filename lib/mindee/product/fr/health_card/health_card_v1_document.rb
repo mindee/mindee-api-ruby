@@ -25,10 +25,10 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @given_names = []
             prediction['given_names'].each do |item|
-              @given_names.push(StringField.new(item, page_id))
+              @given_names.push(Parsing::Standard::StringField.new(item, page_id))
             end
             @issuance_date = DateField.new(prediction['issuance_date'], page_id)
             @social_security = StringField.new(prediction['social_security'], page_id)

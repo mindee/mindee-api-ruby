@@ -6,7 +6,7 @@ module Mindee
   module Product
     module MultiReceiptsDetector
       # Multi Receipts Detector API version 1.1 document data.
-      class MultiReceiptsDetectorV1Document < Mindee::Parsing::Common::Prediction
+      class MultiReceiptsDetectorV1Document < Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # Positions of the receipts on the document.
         # @return [Array<Mindee::Parsing::Standard::PositionField>]
@@ -14,11 +14,11 @@ module Mindee
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
-        def initialize(prediction, page_id)
-          super()
+        def initialize(prediction, page_id = nil)
+          super(prediction)
           @receipts = []
           prediction['receipts'].each do |item|
-            @receipts.push(PositionField.new(item, page_id))
+            @receipts.push(Parsing::Standard::PositionField.new(item, page_id))
           end
         end
 

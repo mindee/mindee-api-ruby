@@ -2,7 +2,7 @@
 
 require 'json'
 require 'net/http'
-require_relative 'error_handler'
+require_relative 'http_error_handler'
 
 module Mindee
   module HTTP
@@ -26,7 +26,7 @@ module Mindee
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param document_alias [String, nil] Alias to give to the document.
       # @param priority [Symbol, nil] Priority to give to the document.
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
       # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
       # requiring authentication.
       # @return [Array]
@@ -37,20 +37,20 @@ module Mindee
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
         ResponseValidation.clean_request!(response)
-        error = ErrorHandler.handle_error(@url_name, response)
+        error = Mindee::HTTP::ErrorHandler.handle_error(@url_name, response)
         raise error
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param document_alias [String, nil] Alias to give to the document.
       # @param priority [Symbol, nil] Priority to give to the document.
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
       # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
       # requiring authentication.
       # @return [Net::HTTPResponse, nil]
       def workflow_execution_req_post(input_source, document_alias, priority, full_text, public_url)
         uri = URI(@url)
-        params = {}
+        params = {} # : Hash[Symbol | String, untyped]
         params[:full_text_ocr] = 'true' if full_text
         uri.query = URI.encode_www_form(params)
 

@@ -19,7 +19,7 @@ module Mindee
         # @return [String, nil]
         attr_reader :raw
         # Whether the field was computed or retrieved directly from the document.
-        # @return [Boolean, nil]
+        # @return [bool, nil]
         attr_reader :is_computed
 
         # @param prediction [Hash]

@@ -34,10 +34,10 @@ module Mindee
             # @return [String]
             attr_reader :endpoint_version
             # Whether this product has access to an asynchronous endpoint.
-            # @return [Boolean]
+            # @return [bool]
             attr_reader :has_async
             # Whether this product has access to synchronous endpoint.
-            # @return [Boolean]
+            # @return [bool]
             attr_reader :has_sync
           end
         end

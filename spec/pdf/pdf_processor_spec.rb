@@ -22,7 +22,7 @@ describe Mindee::PDF do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -35,7 +35,7 @@ describe Mindee::PDF do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -52,7 +52,7 @@ describe Mindee::PDF do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -65,7 +65,7 @@ describe Mindee::PDF do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
     end
@@ -78,7 +78,7 @@ describe Mindee::PDF do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(3)
     end
@@ -91,7 +91,7 @@ describe Mindee::PDF do
         operation: :KEEP_ONLY,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(5)
     end
@@ -104,7 +104,7 @@ describe Mindee::PDF do
         operation: :REMOVE,
         on_min_pages: 0,
       }
-      new_stream = Mindee::PDF::PdfProcessor.parse(io_stream, options)
+      new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(9)
     end
@@ -118,7 +118,7 @@ describe Mindee::PDF do
         on_min_pages: 0,
       }
       expect do
-        Mindee::PDF::PdfProcessor.parse(io_stream, options)
+        Mindee::PDF::PDFProcessor.parse(io_stream, options)
       end.to raise_error ArgumentError
     end
   end

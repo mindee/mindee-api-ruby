@@ -1,0 +1,12 @@
+# lib/mindee/parsing/standard/string_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class StringField # failed to identify its superclass
+        def value: -> untyped
+        def raw_value: -> untyped
+        def initialize: (untyped, ?nil, ?reconstructed: false) -> untyped
+      end
+    end
+  end
+end

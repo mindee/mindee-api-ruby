@@ -1,0 +1,13 @@
+# lib/mindee/image/image_extractor.rb
+module Mindee
+  module Image
+    module ImageExtractor
+      def self.attach_image_as_new_file: (untyped, ?format: String) -> untyped
+      def self.to_blob: () -> String
+      def self.extract_multiple_images_from_source: (untyped, untyped, untyped) -> Array[untyped]
+      def self.extract_images_from_polygons: (untyped, untyped, untyped, untyped) -> Array[untyped]
+      def self.create_extracted_image: (StringIO, String, untyped, untyped) -> untyped
+      def self.load_input_source_pdf_page_as_stringio: (untyped, untyped) -> untyped
+    end
+  end
+end

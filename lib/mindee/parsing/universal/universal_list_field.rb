@@ -22,17 +22,17 @@ module Mindee
         # List of word values.
 
         def initialize(raw_prediction, page_id = nil)
-          @values = []
+          @values = [] # : Array[UniversalObjectField | Parsing::Standard::StringField]
 
           raw_prediction.each do |value|
             page_id = value['page_id'] if value.key?('page_id') && !value['page_id'].nil?
 
             if Universal.universal_object?(value)
-              @values.push(UniversalObjectField.new(value, page_id))
+              @values.push(Mindee::Parsing::Universal::UniversalObjectField.new(value, page_id))
             else
               value_str = value.dup
               value_str['value'] = value_str['value'].to_s if value_str.key?('value') && !value_str['value'].nil?
-              @values.push(StringField.new(value_str, page_id))
+              @values.push(Mindee::Parsing::Standard::StringField.new(value_str, page_id))
             end
           end
         end

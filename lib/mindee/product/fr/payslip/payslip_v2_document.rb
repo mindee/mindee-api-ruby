@@ -45,7 +45,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @bank_account_details = PayslipV2BankAccountDetail.new(prediction['bank_account_details'], page_id)
             @employee = PayslipV2Employee.new(prediction['employee'], page_id)
             @employer = PayslipV2Employer.new(prediction['employer'], page_id)
@@ -55,7 +55,7 @@ module Mindee
             @pto = PayslipV2Pto.new(prediction['pto'], page_id)
             @salary_details = []
             prediction['salary_details'].each do |item|
-              @salary_details.push(PayslipV2SalaryDetail.new(item, page_id))
+              @salary_details.push(Payslip::PayslipV2SalaryDetail.new(item, page_id))
             end
           end
 

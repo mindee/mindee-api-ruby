@@ -1,0 +1,27 @@
+# lib/mindee/parsing/common/api_response.rb
+module Mindee
+  module Parsing
+    module Common
+      module JobStatus
+        WAITING: :waiting
+        PROCESSING: :processing
+        COMPLETED: :completed
+        FAILURE: :failed
+      end
+      module RequestStatus
+        FAILURE: :failure
+        SUCCESS: :success
+      end
+
+
+      class ApiResponse
+        def logger: () -> untyped
+        def document: -> untyped
+        def job: -> untyped
+        def api_request: -> untyped
+        def raw_http: -> untyped
+        def initialize: (untyped, untyped, untyped) -> untyped
+      end
+    end
+  end
+end

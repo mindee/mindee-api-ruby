@@ -9,7 +9,7 @@ module Mindee
     module ResponseValidation
       # Checks if the synchronous response is valid. Returns True if the response is valid.
       # @param [Net::HTTPResponse] response
-      # @return [Boolean]
+      # @return [bool]
       def self.valid_sync_response?(response)
         return false unless (200..399).cover?(response.code.to_i)
 
@@ -24,7 +24,7 @@ module Mindee
       # Checks if the asynchronous response is valid. Also checks if it is a valid synchronous response.
       # Returns true if the response is valid.
       # @param [Net::HTTPResponse] response
-      # @return [Boolean]
+      # @return [bool]
       def self.valid_async_response?(response)
         return false unless valid_sync_response?(response)
 
