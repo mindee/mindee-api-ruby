@@ -10,10 +10,10 @@ module Mindee
         def ocr: -> nil
         def n_pages: -> untyped
         def self.load_ocr: (untyped) -> Parsing::Common::Ocr::Ocr?
-        def self.extract_extras: (untyped) -> Parsing::Common::Extras
+        def self.extract_extras: (untyped) -> Parsing::Common::Extras::Extras?
         def initialize: (untyped, untyped) -> untyped
         def to_s: -> String
-        def inject_full_text_ocr: (untyped) -> nil
+        def inject_full_text_ocr: (untyped) -> untyped
       end
     end
   end

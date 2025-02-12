@@ -4,7 +4,7 @@ module Mindee
     module Common
       module Extras
         class CropperExtra
-          def croppings: -> []
+          def croppings: -> Array[Standard::PositionField]
           def initialize: (untyped, ?nil) -> untyped
           def to_s: -> String
         end

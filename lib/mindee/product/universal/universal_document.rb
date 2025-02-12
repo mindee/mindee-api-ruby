@@ -11,7 +11,7 @@ module Mindee
         include Mindee::Parsing::Standard
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)
-          super()
+          super
           raw_prediction.each do |field_name, field_contents|
             if field_contents.is_a?(Array)
               @fields[field_name] = Parsing::Universal::UniversalListField.new(field_contents)

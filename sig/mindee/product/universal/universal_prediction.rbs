@@ -4,7 +4,7 @@ module Mindee
     module Universal
       class UniversalPrediction < Parsing::Common::Prediction
         def fields: -> Hash[untyped, untyped]
-        def initialize: -> void
+        def initialize: (untyped?) -> void
         def to_s: -> String
         def generate_field_string: (untyped, untyped, Regexp) -> String
         def generate_list_field_string: (untyped, untyped, untyped) -> String
