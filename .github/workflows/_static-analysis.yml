@@ -25,6 +25,10 @@ jobs:
       run: |
         bundle exec rubocop ./
 
+    - name: Attempt to generate the documentation
+      run: |
+        bundle exec rake doc
+
     - name: Check types using Steep
       run: |
         bundle exec steep check
