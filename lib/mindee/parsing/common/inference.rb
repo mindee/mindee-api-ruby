@@ -9,7 +9,7 @@ module Mindee
       # Abstract class for prediction Inferences
       # Holds prediction for a page or entire document.
       class Inference
-        # @return [Boolean]
+        # @return [bool]
         attr_reader :is_rotation_applied
         # @return [Array<Mindee::Parsing::Common::Page>]
         attr_reader :pages
@@ -24,10 +24,10 @@ module Mindee
         # @return [String]
         attr_reader :endpoint_version
         # Whether this product has access to an asynchronous endpoint.
-        # @return [Boolean]
+        # @return [bool]
         attr_reader :has_async
         # Whether this product has access to synchronous endpoint.
-        # @return [Boolean]
+        # @return [bool]
         attr_reader :has_sync
 
         @endpoint_name = nil

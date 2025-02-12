@@ -6,7 +6,7 @@ module Mindee
       # Feature field object wrapper for specialized methods.
       class FeatureField < AbstractField
         # Format strings for display by shortening long strings and assigning empty ones.
-        # @param in_str [String, Boolean, nil]
+        # @param in_str [String, bool, nil]
         # @param max_col_size [int, nil]
         # @return [String]
         def format_for_display(in_str, max_col_size = nil)

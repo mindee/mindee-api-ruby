@@ -54,7 +54,7 @@ module Mindee
     def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Polls for a queued document using its job_id.
-    def parse_queued: (String, untyped, ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
+    def parse_queued: (String, singleton(Parsing::Common::Inference), ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
 
     # Enqueue and then continually poll for the parsing result.
     def enqueue_and_parse: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
@@ -64,7 +64,7 @@ module Mindee
     def execute_workflow: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
 
     # Loads a prediction from a local response.
-    def load_prediction: (untyped, Input::LocalResponse) -> Parsing::Common::ApiResponse
+    def load_prediction: (singleton(Parsing::Common::Inference), Input::LocalResponse) -> Parsing::Common::ApiResponse
 
     # Creates an input source from a file path.
     def source_from_path: (String, ?fix_pdf: bool) -> Input::Source::PathInputSource
@@ -94,19 +94,19 @@ module Mindee
     def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions | WorkflowOptions) -> void
 
     # Creates an endpoint using the product class and supplied values.
-    def initialize_endpoint: (untyped, ?endpoint_name: String, ?account_name: String, ?version: String) -> HTTP::Endpoint
+    def initialize_endpoint: (singleton(Parsing::Common::Inference), ?endpoint_name: String, ?account_name: String, ?version: String) -> HTTP::Endpoint
 
     # Validates asynchronous polling parameters.
     def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
 
     # Helper to fix an endpoint name when not provided.
-    def fix_endpoint_name: (untyped, String?) -> String?
+    def fix_endpoint_name: (singleton(Parsing::Common::Inference), String?) -> String?
 
     # Helper to fix the account name.
     def fix_account_name: (String) -> String
 
     # Helper to fix the version.
     # Note: leave untyped, as RBS isn't able to recognize inherited class attributes yet.
-    def fix_version: (untyped, String) -> String
+    def fix_version: (singleton(Parsing::Common::Inference), String) -> String
   end
 end

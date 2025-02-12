@@ -26,7 +26,7 @@ module Mindee
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param document_alias [String, nil] Alias to give to the document.
       # @param priority [Symbol, nil] Priority to give to the document.
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
       # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
       # requiring authentication.
       # @return [Array]
@@ -44,7 +44,7 @@ module Mindee
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
       # @param document_alias [String, nil] Alias to give to the document.
       # @param priority [Symbol, nil] Priority to give to the document.
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
       # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
       # requiring authentication.
       # @return [Net::HTTPResponse, nil]

@@ -7,9 +7,9 @@ module Mindee
       # Converts the current PDF document into a binary-encoded StringIO stream.
       #
       # @param [Hash] params Optional settings to override default processing flags.
-      #   - :delinearize [Boolean] (default: true) Whether to convert a linearized PDF to its full form.
-      #   - :recompile [Boolean] (default: true) Whether to recompile the PDF after processing.
-      #   - :decrypt [Boolean] (default: false) Whether to attempt to decrypt the PDF.
+      #   - :delinearize [bool] (default: true) Whether to convert a linearized PDF to its full form.
+      #   - :recompile [bool] (default: true) Whether to recompile the PDF after processing.
+      #   - :decrypt [bool] (default: false) Whether to attempt to decrypt the PDF.
       #   - Other keys such as :intent, :rebuild_xrefs, :noindent, and :obfuscate may be modified automatically.
       #
       # @return [StringIO] A binary-encoded stream representing the processed PDF.
@@ -42,7 +42,7 @@ module Mindee
       # Checks a PDFs stream content for text operators
       # See https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf page 243-251.
       # @param [StringIO] stream Stream object from a PDFs page.
-      # @return [Boolean] True if a text operator is found in the stream.
+      # @return [bool] True if a text operator is found in the stream.
       def self.stream_has_text?(stream)
         data = stream.data
         return false if data.nil? || data.empty?
@@ -53,7 +53,7 @@ module Mindee
 
       # Checks whether the file has source_text. Sends false if the file isn't a PDF.
       # @param [StringIO] pdf_data Abinary-encoded stream representing the PDF file.
-      # @return [Boolean] True if the pdf has source text, false otherwise.
+      # @return [bool] True if the pdf has source text, false otherwise.
       def self.source_text?(pdf_data)
         begin
           pdf_data.rewind

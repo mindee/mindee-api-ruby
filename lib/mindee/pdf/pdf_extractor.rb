@@ -71,7 +71,7 @@ module Mindee
 
         # Extracts invoices as complete PDFs from the document.
         # @param page_indexes [Array<Array<Integer>, InvoiceSplitterV1PageGroup>]
-        # @param strict [Boolean]
+        # @param strict [bool]
         # @return [Array<Mindee::PDF::PDFExtractor::ExtractedPDF>]
         def extract_invoices(page_indexes, strict: false)
           raise Errors::MindeePDFError, 'No indexes provided.' if page_indexes.empty?

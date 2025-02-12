@@ -9,6 +9,10 @@ module Mindee
         def product: -> untyped
         def initialize: (untyped) -> void
         def to_s: -> String
+        def self.endpoint_name: -> String
+        def self.endpoint_version: -> String
+        def self.has_async: -> bool
+        def self.has_sync: -> bool
       end
     end
   end

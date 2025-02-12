@@ -140,7 +140,7 @@ module Mindee
           # Determine if two words are on the same line.
           # @param current_word [Mindee::Parsing::Common::Ocr::OcrWord]
           # @param next_word [Mindee::Parsing::Common::Ocr::OcrWord]
-          # @return [Boolean]
+          # @return [bool]
           def words_on_same_line?(current_word, next_word)
             current_in_next = current_word.polygon.point_in_y?(next_word.polygon.centroid)
             next_in_current = next_word.polygon.point_in_y?(current_word.polygon.centroid) unless current_word.nil?

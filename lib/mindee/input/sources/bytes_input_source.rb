@@ -9,7 +9,7 @@ module Mindee
       class BytesInputSource < LocalInputSource
         # @param raw_bytes [String]
         # @param filename [String]
-        # @param fix_pdf [Boolean]
+        # @param fix_pdf [bool]
         def initialize(raw_bytes, filename, fix_pdf: false)
           io_stream = StringIO.new(raw_bytes)
           io_stream.set_encoding Encoding::BINARY

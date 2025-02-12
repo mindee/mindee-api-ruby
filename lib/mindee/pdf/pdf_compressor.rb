@@ -10,8 +10,8 @@ module Mindee
     module PDFCompressor
       # Compresses each page of a provided PDF stream. Skips if force_source_text isn't set and source text is detected.
       # @param quality [Integer] Compression quality (70-100 for most JPG images in the test dataset).
-      # @param force_source_text_compression [Boolean] If true, attempts to re-write detected text.
-      # @param disable_source_text [Boolean] If true, doesn't re-apply source text to the original PDF.
+      # @param force_source_text_compression [bool] If true, attempts to re-write detected text.
+      # @param disable_source_text [bool] If true, doesn't re-apply source text to the original PDF.
       def self.compress_pdf(pdf_data, quality: 85, force_source_text_compression: false, disable_source_text: true)
         if PDFTools.source_text?(pdf_data)
           if force_source_text_compression
@@ -50,7 +50,7 @@ module Mindee
 
       # Creates the output PDF with processed pages.
       # @param pages [Array] Processed pages.
-      # @param disable_source_text [Boolean] Whether to disable source text.
+      # @param disable_source_text [bool] Whether to disable source text.
       # @param pdf_data [StringIO] Original PDF data.
       # @return [Origami::PDF] Output PDF object.
       def self.create_output_pdf(pages, disable_source_text, pdf_data)

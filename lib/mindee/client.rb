@@ -35,11 +35,11 @@ module Mindee
 
   # Class for configuration options in parse calls.
   #
-  # @!attribute all_words [Boolean] Whether to include the full text for each page.
+  # @!attribute all_words [bool] Whether to include the full text for each page.
   #   This performs a full OCR operation on the server and will increase response time.
-  # @!attribute full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+  # @!attribute full_text [bool] Whether to include the full OCR text response in compatible APIs.
   #   This performs a full OCR operation on the server and may increase response time.
-  # @!attribute close_file [Boolean] Whether to `close()` the file after parsing it.
+  # @!attribute close_file [bool] Whether to `close()` the file after parsing it.
   #   Set to false if you need to access the file after this operation.
   # @!attribute page_options [PageOptions, Hash, nil] Page cutting/merge options:
   #   * `:page_indexes` Zero-based list of page indexes.
@@ -47,7 +47,7 @@ module Mindee
   #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
   #       * `:REMOVE` - remove the specified pages, and keep all others.
   #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
-  # @!attribute cropper [Boolean] Whether to include cropper results for each page.
+  # @!attribute cropper [bool] Whether to include cropper results for each page.
   #   This performs a cropping operation on the server and will increase response time.
   # @!attribute initial_delay_sec [Numeric] Initial delay before polling. Defaults to 2.
   # @!attribute delay_sec [Numeric] Delay between polling attempts. Defaults to 1.5.
@@ -74,7 +74,7 @@ module Mindee
   #
   # @!attribute document_alias [String, nil] Alias to give to the document.
   # @!attribute priority [Symbol, nil] Priority to give to the document.
-  # @!attribute full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
+  # @!attribute full_text [bool] Whether to include the full OCR text response in compatible APIs.
   #   This performs a full OCR operation on the server and may increase response time.
   # @!attribute public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
   #   requiring authentication.
@@ -114,11 +114,11 @@ module Mindee
     # @param product_class [Mindee::Inference] The class of the product.
     # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
-    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
-    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #   * `:full_text` [bool] Whether to include the full OCR text response in compatible APIs.
     #       This performs a full OCR operation on the server and may increase response time.
-    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #   * `:close_file` [bool] Whether to `close()` the file after parsing it.
     #       Set to false if you need to access the file after this operation.
     #   * `:page_options` [Hash, nil] Page cutting/merge options:
     #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
@@ -126,12 +126,12 @@ module Mindee
     #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #           - `:REMOVE` - remove the specified pages, and keep all others.
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
-    #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #   * `:cropper` [bool, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
     #   * `:initial_delay_sec` [Numeric] Initial delay before polling. Defaults to 2.
     #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
-    # @param enqueue [Boolean] Whether to enqueue the file.
+    # @param enqueue [bool] Whether to enqueue the file.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse(input_source, product_class, endpoint: nil, options: {}, enqueue: true)
       opts = normalize_parse_options(options)
@@ -151,11 +151,11 @@ module Mindee
     # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
-    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
-    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #   * `:full_text` [bool] Whether to include the full OCR text response in compatible APIs.
     #       This performs a full OCR operation on the server and may increase response time.
-    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #   * `:close_file` [bool] Whether to `close()` the file after parsing it.
     #       Set to false if you need to access the file after this operation.
     #   * `:page_options` [Hash, nil] Page cutting/merge options:
     #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
@@ -163,7 +163,7 @@ module Mindee
     #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #           - `:REMOVE` - remove the specified pages, and keep all others.
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
-    #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #   * `:cropper` [bool, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse_sync(input_source, product_class, endpoint, options)
@@ -188,11 +188,11 @@ module Mindee
     # @param options [Hash] A hash of options to configure the enqueue behavior. Possible keys:
     #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
     #       Doesn't need to be set in the case of OTS APIs.
-    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
-    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #   * `:full_text` [bool] Whether to include the full OCR text response in compatible APIs.
     #       This performs a full OCR operation on the server and may increase response time.
-    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #   * `:close_file` [bool] Whether to `close()` the file after parsing it.
     #       Set to false if you need to access the file after this operation.
     #   * `:page_options` [Hash, nil] Page cutting/merge options:
     #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
@@ -200,7 +200,7 @@ module Mindee
     #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #           - `:REMOVE` - remove the specified pages, and keep all others.
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
-    #   * `:cropper` [Boolean] Whether to include cropper results for each page.
+    #   * `:cropper` [bool] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
     # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
@@ -242,11 +242,11 @@ module Mindee
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
     #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
     #       Doesn't need to be set in the case of OTS APIs.
-    #   * `:all_words` [Boolean] Whether to extract all the words on each page.
+    #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
-    #   * `:full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #   * `:full_text` [bool] Whether to include the full OCR text response in compatible APIs.
     #       This performs a full OCR operation on the server and may increase response time.
-    #   * `:close_file` [Boolean] Whether to `close()` the file after parsing it.
+    #   * `:close_file` [bool] Whether to `close()` the file after parsing it.
     #       Set to false if you need to access the file after this operation.
     #   * `:page_options` [Hash, nil] Page cutting/merge options:
     #       - `:page_indexes` [Array<Integer>] Zero-based list of page indexes.
@@ -254,7 +254,7 @@ module Mindee
     #           - `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #           - `:REMOVE` - remove the specified pages, and keep all others.
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
-    #   * `:cropper` [Boolean, nil] Whether to include cropper results for each page.
+    #   * `:cropper` [bool, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
     #   * `:initial_delay_sec` [Numeric] Initial delay before polling. Defaults to 2.
     #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
@@ -298,7 +298,7 @@ module Mindee
     # @param options [Hash, WorkflowOptions] Options to configure workflow behavior.  Possible keys:
     #   * `document_alias` [String, nil] Alias to give to the document.
     #   * `priority` [Symbol, nil] Priority to give to the document.
-    #   * `full_text` [Boolean] Whether to include the full OCR text response in compatible APIs.
+    #   * `full_text` [bool] Whether to include the full OCR text response in compatible APIs.
     #
     #   * `public_url` [String, nil] A unique, encrypted URL for accessing the document validation interface without
     # requiring authentication.
@@ -343,7 +343,7 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @param fix_pdf [Boolean] Attempts to fix broken pdf if true
+    # @param fix_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::PathInputSource]
     def source_from_path(input_path, fix_pdf: false)
       Input::Source::PathInputSource.new(input_path, fix_pdf: fix_pdf)
@@ -352,7 +352,7 @@ module Mindee
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [Boolean] Attempts to fix broken pdf if true
+    # @param fix_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::BytesInputSource]
     def source_from_bytes(input_bytes, filename, fix_pdf: false)
       Input::Source::BytesInputSource.new(input_bytes, filename, fix_pdf: fix_pdf)
@@ -361,7 +361,7 @@ module Mindee
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [Boolean] Attempts to fix broken pdf if true
+    # @param fix_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::Base64InputSource]
     def source_from_b64string(base64_string, filename, fix_pdf: false)
       Input::Source::Base64InputSource.new(base64_string, filename, fix_pdf: fix_pdf)
@@ -370,7 +370,7 @@ module Mindee
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [Boolean] Attempts to fix broken pdf if true
+    # @param fix_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::FileInputSource]
     def source_from_file(input_file, filename, fix_pdf: false)
       Input::Source::FileInputSource.new(input_file, filename, fix_pdf: fix_pdf)
@@ -424,7 +424,7 @@ module Mindee
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
-    # @param product_class [Mindee::Inference] class of the product
+    # @param product_class [Mindee::Parsing::Common::Inference] class of the product
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.

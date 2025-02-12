@@ -50,10 +50,10 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean] Whether the full word extraction needs to be performed
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs
-      # @param close_file [Boolean] Whether the file will be closed after reading
-      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param all_words [bool] Whether the full word extraction needs to be performed
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs
+      # @param close_file [bool] Whether the file will be closed after reading
+      # @param cropper [bool] Whether a cropping operation will be applied
       # @return [Array]
       def predict(input_source, all_words, full_text, close_file, cropper)
         check_api_key
@@ -76,10 +76,10 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean] Whether the full word extraction needs to be performed
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [Boolean] Whether the file will be closed after reading
-      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param all_words [bool] Whether the full word extraction needs to be performed
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
+      # @param close_file [bool] Whether the file will be closed after reading
+      # @param cropper [bool] Whether a cropping operation will be applied
       # @return [Array]
       def predict_async(input_source, all_words, full_text, close_file, cropper)
         check_api_key
@@ -112,10 +112,10 @@ module Mindee
       private
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean] Whether the full word extraction needs to be performed
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [Boolean] Whether the file will be closed after reading
-      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param all_words [bool] Whether the full word extraction needs to be performed
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
+      # @param close_file [bool] Whether the file will be closed after reading
+      # @param cropper [bool] Whether a cropping operation will be applied
       # @return [Net::HTTPResponse, nil]
       def predict_req_post(input_source, all_words: false, full_text: false, close_file: true, cropper: false)
         uri = URI("#{@url_root}/predict")
@@ -146,10 +146,10 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
-      # @param all_words [Boolean] Whether the full word extraction needs to be performed
-      # @param full_text [Boolean] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [Boolean] Whether the file will be closed after reading
-      # @param cropper [Boolean] Whether a cropping operation will be applied
+      # @param all_words [bool] Whether the full word extraction needs to be performed
+      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
+      # @param close_file [bool] Whether the file will be closed after reading
+      # @param cropper [bool] Whether a cropping operation will be applied
       # @return [Net::HTTPResponse, nil]
       def document_queue_req_get(input_source, all_words, full_text, close_file, cropper)
         uri = URI("#{@url_root}/predict_async")
