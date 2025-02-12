@@ -4,6 +4,7 @@ module Mindee
     module Common
       class Prediction
         def to_s: -> String
+        def initialize: (untyped?) -> void
       end
     end
   end

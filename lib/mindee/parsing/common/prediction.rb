@@ -10,7 +10,7 @@ module Mindee
           ''
         end
 
-        def initialize(raw = nil); end
+        def initialize(_ = nil); end
       end
     end
   end
