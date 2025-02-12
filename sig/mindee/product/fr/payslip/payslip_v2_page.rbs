@@ -1,14 +1,12 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/payslip/payslip_v2_page.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::Payslip
-        class Product::FR::Payslip::PayslipV2Page # failed to identify its superclass
+    module FR
+      module Payslip
+        class PayslipV2Page # failed to identify its superclass
           def initialize: (untyped) -> nil
         end
-        class Product::FR::Payslip::PayslipV2PagePrediction # failed to identify its superclass
+        class PayslipV2PagePrediction # failed to identify its superclass
           def to_s: -> String
         end
       end

@@ -2,7 +2,7 @@
 
 require 'json'
 require 'net/http'
-require_relative 'error_handler'
+require_relative 'http_error_handler'
 
 module Mindee
   module HTTP
@@ -37,7 +37,7 @@ module Mindee
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
         ResponseValidation.clean_request!(response)
-        error = ErrorHandler.handle_error(@url_name, response)
+        error = Mindee::HTTP::ErrorHandler.handle_error(@url_name, response)
         raise error
       end
 
@@ -50,7 +50,7 @@ module Mindee
       # @return [Net::HTTPResponse, nil]
       def workflow_execution_req_post(input_source, document_alias, priority, full_text, public_url)
         uri = URI(@url)
-        params = {}
+        params = {} # : Hash[Symbol | String, untyped]
         params[:full_text_ocr] = 'true' if full_text
         uri.query = URI.encode_www_form(params)
 

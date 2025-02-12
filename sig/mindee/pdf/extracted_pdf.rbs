@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/pdf/extracted_pdf.rb
 module Mindee
   module PDF
-    module PDF::PDFExtractor
-      class PDF::PDFExtractor::ExtractedPDF
+    module
+      class ::ExtractedPDF
         def pdf_bytes: -> untyped
         def filename: -> untyped
         def initialize: (untyped, untyped) -> untyped

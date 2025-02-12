@@ -1,15 +1,13 @@
-# TypeProf 0.30.1
-
 # lib/mindee/errors/mindee_error.rb
 module Mindee
   module Errors
-    class Errors::MindeeError < StandardError
+    class MindeeError < StandardError
     end
-    class Errors::MindeeAPIError < Errors::MindeeError
+    class MindeeAPIError < MindeeError
     end
-    class Errors::MindeeConfigurationError < Errors::MindeeError
+    class MindeeConfigurationError < MindeeError
     end
-    class Errors::MindeeGeometryError < Errors::MindeeError
+    class MindeeGeometryError < MindeeError
     end
   end
 end

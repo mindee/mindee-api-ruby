@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/pdf/pdf_compressor.rb
 PDFReader: untyped
 module Mindee
   module PDF
-    module PDF::PDFCompressor
+    module
       def self.compress_pdf: (untyped, ?quality: Integer, ?force_source_text_compression: false, ?disable_source_text: true) -> StringIO
       def self.process_pdf_pages: (untyped, Integer) -> untyped
       def self.create_output_pdf: (untyped, true, untyped) -> untyped

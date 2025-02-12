@@ -16,7 +16,7 @@ module Mindee
         # Raw unprocessed value, as it was sent by the server.
 
         def initialize(raw_prediction, page_id = nil)
-          @all_values = {}
+          @all_values = {} # : Hash[Symbol | String, untyped]
           item_page_id = nil
           raw_prediction.each do |name, value|
             case name
@@ -82,7 +82,10 @@ module Mindee
 
         def handle_position_field(name, value, item_page_id)
           @all_values[name.to_s] =
-            PositionField.new({ name.to_s => value }, value_key: name.to_s, page_id: item_page_id)
+            Mindee::Parsing::Standard::PositionField.new(
+              { name.to_s => value },
+              value_key: name.to_s, page_id: item_page_id
+            )
         end
 
         def handle_default_field(name, value)

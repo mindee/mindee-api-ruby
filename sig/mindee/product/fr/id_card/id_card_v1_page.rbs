@@ -1,14 +1,12 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/id_card/id_card_v1_page.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::IdCard
-        class Product::FR::IdCard::IdCardV1Page # failed to identify its superclass
+    module FR
+      module IdCard
+        class IdCardV1Page # failed to identify its superclass
           def initialize: (untyped) -> nil
         end
-        class Product::FR::IdCard::IdCardV1PagePrediction # failed to identify its superclass
+        class IdCardV1PagePrediction # failed to identify its superclass
           def document_side: -> untyped
           def initialize: (untyped, untyped) -> Object
           def to_s: -> String

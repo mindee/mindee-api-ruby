@@ -1,5 +1,3 @@
-# TypeProf 0.30.1
-
 # lib/mindee/input/sources/local_input_source.rb
 module Mindee
   module Input
@@ -9,7 +7,7 @@ module Mindee
         def filename: -> untyped
         def file_mimetype: -> untyped
         def io_stream: -> StringIO
-        def initialize: (untyped, untyped, ?fix_pdf: false) -> nil
+        def initialize: (untyped, untyped, fix_pdf: bool) -> nil
         def rescue_broken_pdf: (StringIO) -> StringIO
         def pdf?: -> untyped
         def process_pdf: (untyped) -> untyped

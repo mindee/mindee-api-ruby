@@ -1,19 +1,17 @@
-# TypeProf 0.30.1
-
 # lib/mindee/errors/mindee_input_error.rb
 module Mindee
   module Errors
-    class Errors::MindeeInputError # failed to identify its superclass
+    class MindeeInputError < MindeeError
     end
-    class Errors::MindeeSourceError < Errors::MindeeInputError
+    class MindeeSourceError < MindeeInputError
     end
-    class Errors::MindeeMimeTypeError < Errors::MindeeSourceError
+    class MindeeMimeTypeError < MindeeSourceError
       def invalid_mimetype: -> untyped
       def initialize: (untyped) -> untyped
     end
-    class Errors::MindeeImageError < Errors::MindeeInputError
+    class MindeeImageError < MindeeInputError
     end
-    class Errors::MindeePDFError < Errors::MindeeInputError
+    class MindeePDFError < MindeeInputError
     end
   end
 end

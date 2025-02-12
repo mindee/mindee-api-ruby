@@ -26,15 +26,15 @@ module Mindee
           super()
           raw_prediction.each do |field_name, field_contents|
             if field_contents.is_a?(Array)
-              @fields[field_name] = UniversalListField.new(field_contents, page_id)
+              @fields[field_name] = Mindee::Parsing::Universal::UniversalListField.new(field_contents, page_id)
             elsif field_contents.is_a?(Hash) && Parsing::Universal.universal_object?(field_contents)
-              @fields[field_name] = UniversalObjectField.new(field_contents, page_id)
+              @fields[field_name] = Mindee::Parsing::Universal::UniversalObjectField.new(field_contents, page_id)
             else
               field_contents_str = field_contents.dup
               if field_contents_str.key?('value') && !field_contents_str['value'].nil?
                 field_contents_str['value'] = field_contents_str['value'].to_s
               end
-              @fields[field_name] = StringField.new(field_contents_str, page_id)
+              @fields[field_name] = Mindee::Parsing::Standard::StringField.new(field_contents_str, page_id)
             end
           end
         end

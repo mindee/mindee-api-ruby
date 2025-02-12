@@ -30,11 +30,16 @@ module Mindee
         # @return [Boolean]
         attr_reader :has_sync
 
+        @endpoint_name = nil
+        @endpoint_version = nil
+        @has_async = false
+        @has_sync = false
+
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)
           @is_rotation_applied = raw_prediction['is_rotation_applied']
           @product = Product.new(raw_prediction['product'])
-          @pages = []
+          @pages = [] # : Array[Page]
         end
 
         # @return [String]

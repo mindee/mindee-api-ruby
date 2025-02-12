@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/standard/abstract_field.rb
 module Mindee
   module Parsing
-    module Parsing::Standard
-      class Parsing::Standard::AbstractField
+    module Standard
+      class AbstractField
         def bounding_box: -> untyped
         def polygon: -> untyped
         def page_id: -> untyped

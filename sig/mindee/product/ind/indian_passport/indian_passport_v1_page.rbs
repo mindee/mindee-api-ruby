@@ -1,14 +1,12 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/ind/indian_passport/indian_passport_v1_page.rb
 module Mindee
   module Product
-    module Product::IND
-      module Product::IND::IndianPassport
-        class Product::IND::IndianPassport::IndianPassportV1Page # failed to identify its superclass
+    module IND
+      module IndianPassport
+        class IndianPassportV1Page # failed to identify its superclass
           def initialize: (untyped) -> nil
         end
-        class Product::IND::IndianPassport::IndianPassportV1PagePrediction # failed to identify its superclass
+        class IndianPassportV1PagePrediction # failed to identify its superclass
           def to_s: -> String
         end
       end

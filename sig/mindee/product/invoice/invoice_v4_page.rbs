@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/invoice/invoice_v4_page.rb
 module Mindee
   module Product
-    module Product::Invoice
-      class Product::Invoice::InvoiceV4Page # failed to identify its superclass
+    module Invoice
+      class InvoiceV4Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::Invoice::InvoiceV4PagePrediction # failed to identify its superclass
+      class InvoiceV4PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

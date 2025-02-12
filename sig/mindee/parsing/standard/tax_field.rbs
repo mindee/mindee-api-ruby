@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/standard/tax_field.rb
 module Mindee
   module Parsing
-    module Parsing::Standard
-      class Parsing::Standard::TaxField # failed to identify its superclass
+    module Standard
+      class TaxField # failed to identify its superclass
         def value: -> untyped
         def rate: -> untyped
         def code: -> untyped
@@ -15,7 +13,7 @@ module Mindee
         def printable_values: -> Hash[untyped, String]
         def to_table_line: -> String
       end
-      class Parsing::Standard::Taxes < Array
+      class Taxes < Array
         def initialize: (untyped, untyped) -> Object
         def line_separator: (String) -> String
         def to_s: -> String

@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/financial_document/financial_document_v1_page.rb
 module Mindee
   module Product
-    module Product::FinancialDocument
-      class Product::FinancialDocument::FinancialDocumentV1Page # failed to identify its superclass
+    module FinancialDocument
+      class FinancialDocumentV1Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::FinancialDocument::FinancialDocumentV1PagePrediction # failed to identify its superclass
+      class FinancialDocumentV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/payslip/payslip_v3_document.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::Payslip
-        class Product::FR::Payslip::PayslipV3Document # failed to identify its superclass
+    module FR
+      module Payslip
+        class PayslipV3Document # failed to identify its superclass
           def bank_account_details: -> untyped
           def employee: -> untyped
           def employer: -> untyped

@@ -38,7 +38,7 @@ module Mindee
           extras_prediction = http_response['inference'].fetch('extras', nil)
           return nil if extras_prediction.nil? || extras_prediction.fetch('mvision-v1', nil).nil?
 
-          Extras::Extras::Extras.new(extras_prediction)
+          Mindee::Parsing::Common::Extras::Extras.new(extras_prediction)
         end
 
         # @param product_class [Mindee::Inference]
@@ -73,7 +73,7 @@ module Mindee
           end
           artificial_text_obj = { 'content' => full_text_ocr }
           if @extras.nil? || @extras.empty?
-            @extras = Extras::Extras.new({ 'full_text_ocr' => artificial_text_obj })
+            @extras = Mindee::Parsing::Common::Extras::Extras.new({ 'full_text_ocr' => artificial_text_obj })
           else
             @extras.add_artificial_extra({ 'full_text_ocr' => artificial_text_obj })
           end

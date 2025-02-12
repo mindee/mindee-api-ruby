@@ -1,16 +1,14 @@
-# TypeProf 0.30.1
-
 # lib/mindee/http/endpoint.rb
 module Mindee
   module HTTP
-    HTTP::API_KEY_ENV_NAME: String
-    HTTP::API_KEY_DEFAULT: nil
-    HTTP::BASE_URL_ENV_NAME: String
-    HTTP::BASE_URL_DEFAULT: String
-    HTTP::REQUEST_TIMEOUT_ENV_NAME: String
-    HTTP::TIMEOUT_DEFAULT: Integer
-    HTTP::USER_AGENT: String
-    class HTTP::Endpoint
+    API_KEY_ENV_NAME: String
+    API_KEY_DEFAULT: nil
+    BASE_URL_ENV_NAME: String
+    BASE_URL_DEFAULT: String
+    REQUEST_TIMEOUT_ENV_NAME: String
+    TIMEOUT_DEFAULT: Integer
+    USER_AGENT: String
+    class Endpoint
       def api_key: -> String?
       def request_timeout: -> Integer
       def url_root: -> String
@@ -18,8 +16,8 @@ module Mindee
       def predict: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
       def predict_async: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
       def parse_async: (untyped) -> [untyped, untyped]
-      def predict_req_post: (untyped, ?all_words: false, ?full_text: false, ?close_file: true, ?cropper: false) -> nil
-      def document_queue_req_get: (untyped, untyped, untyped, untyped, untyped) -> nil
+      def predict_req_post: (untyped, ?all_words: false, ?full_text: false, ?close_file: true, ?cropper: false) -> untyped
+      def document_queue_req_get: (untyped, untyped, untyped, untyped, untyped) -> untyped
       def document_queue_req: (untyped) -> untyped
       def check_api_key: -> nil
     end

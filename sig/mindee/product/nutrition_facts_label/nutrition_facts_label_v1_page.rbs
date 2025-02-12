@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_page.rb
 module Mindee
   module Product
-    module Product::NutritionFactsLabel
-      class Product::NutritionFactsLabel::NutritionFactsLabelV1Page # failed to identify its superclass
+    module NutritionFactsLabel
+      class NutritionFactsLabelV1Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::NutritionFactsLabel::NutritionFactsLabelV1PagePrediction # failed to identify its superclass
+      class NutritionFactsLabelV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

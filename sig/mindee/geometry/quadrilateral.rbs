@@ -1,9 +1,7 @@
-# TypeProf 0.30.1
-
 # lib/mindee/geometry/quadrilateral.rb
 module Mindee
   module Geometry
-    class Geometry::Quadrilateral
+    class Quadrilateral
       def top_left: -> untyped
       def top_left=: (untyped) -> untyped
       def top_right: -> untyped

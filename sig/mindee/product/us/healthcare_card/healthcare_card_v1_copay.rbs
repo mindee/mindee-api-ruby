@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/us/healthcare_card/healthcare_card_v1_copay.rb
 module Mindee
   module Product
-    module Product::US
-      module Product::US::HealthcareCard
-        class Product::US::HealthcareCard::HealthcareCardV1Copay # failed to identify its superclass
+    module US
+      module HealthcareCard
+        class HealthcareCardV1Copay # failed to identify its superclass
           def service_fees: -> untyped
           def service_name: -> untyped
           def initialize: (untyped, untyped) -> untyped

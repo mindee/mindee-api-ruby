@@ -16,7 +16,7 @@ module Mindee
 
         def initialize
           super
-          @fields = {}
+          @fields = {} # : Hash[Symbol | String, untyped]
         end
 
         # String representation.
@@ -24,7 +24,9 @@ module Mindee
           out_str = ''
           pattern = %r{^(\n* *)( {2}):}
           @fields.each do |field_name, field_value|
-            str_value = if field_value.is_a?(UniversalListField) && field_value.values.length.positive?
+            str_value = if field_value.is_a?(
+              Mindee::Parsing::Universal::UniversalListField
+            ) && field_value.values.length.positive?
                           generate_field_string(field_name, field_value, pattern)
                         else
                           field_value.to_s
@@ -66,7 +68,7 @@ module Mindee
         end
 
         def generate_sub_value_string(field_name, sub_value, pattern)
-          if sub_value.is_a?(UniversalObjectField)
+          if sub_value.is_a?(Mindee::Parsing::Universal::UniversalObjectField)
             sub_value.str_level(1).gsub(pattern, '\1* :')
           else
             (' ' * (field_name.length + 2)) + "#{sub_value}\n"
@@ -76,9 +78,9 @@ module Mindee
         # Returns a hash of all fields that aren't a collection
         # @return [Hash<String, StringField>]
         def single_fields
-          single_fields = {}
+          single_fields = {} # : Hash[Symbol | String, untyped]
           @fields.each do |field_name, field_value|
-            single_fields[field_name] = field_value if field_value.is_a?(StringField)
+            single_fields[field_name] = field_value if field_value.is_a?(Mindee::Parsing::Standard::StringField)
           end
           single_fields
         end
@@ -86,9 +88,9 @@ module Mindee
         # Returns a hash of all list-like fields
         # @return [Hash<String, UniversalListField>]
         def list_fields
-          list_fields = {}
+          list_fields = {} # : Hash[Symbol | String, Mindee::Parsing::Universal::UniversalListField]
           @fields.each do |field_name, field_value|
-            list_fields[field_name] = field_value if field_value.is_a?(UniversalListField)
+            list_fields[field_name] = field_value if field_value.is_a?(Mindee::Parsing::Universal::UniversalListField)
           end
           list_fields
         end
@@ -96,9 +98,12 @@ module Mindee
         # Returns a hash of all object-like fields
         # @return [Hash<String, UniversalObjectField>]
         def object_fields
-          object_fields = {}
+          object_fields = {} # : Hash[Symbol | String, untyped]
           @fields.each do |field_name, field_value|
-            object_fields[field_name] = field_value if field_value.is_a?(UniversalObjectField)
+            if field_value.is_a?(Mindee::Parsing::Universal::UniversalObjectField)
+              object_fields[field_name] =
+                field_value
+            end
           end
           object_fields
         end

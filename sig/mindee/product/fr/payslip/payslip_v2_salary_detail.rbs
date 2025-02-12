@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/payslip/payslip_v2_salary_detail.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::Payslip
-        class Product::FR::Payslip::PayslipV2SalaryDetail # failed to identify its superclass
+    module FR
+      module Payslip
+        class PayslipV2SalaryDetail # failed to identify its superclass
           def amount: -> untyped
           def base: -> untyped
           def description: -> untyped

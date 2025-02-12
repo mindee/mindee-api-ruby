@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/input/sources/path_input_source.rb
 module Mindee
   module Input
     module Source
       class PathInputSource # failed to identify its superclass
-        def initialize: (untyped, ?fix_pdf: false) -> untyped
+        def initialize: (untyped, fix_pdf: bool) -> untyped
       end
     end
   end

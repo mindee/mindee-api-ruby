@@ -64,7 +64,7 @@ module Mindee
   class WorkflowOptions
     attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options
 
-    def initialize(params = {})
+    def initialize(params: {})
       @document_alias = params.fetch(:document_alias, nil)
       @priority = params.fetch(:priority, nil)
       @full_text = params.fetch(:full_text, false)
@@ -110,7 +110,7 @@ module Mindee
     # @return [Mindee::Parsing::Common::ApiResponse]
     def parse(input_source, product_class, endpoint: nil, options: {}, enqueue: true)
       opts = normalize_parse_options(options)
-      process_pdf_if_required(input_source, opts)
+      process_pdf_if_required(input_source, opts) if input_source.is_a?(Input::Source::LocalInputSource)
       endpoint ||= initialize_endpoint(product_class)
 
       if enqueue && product_class.has_async
@@ -254,7 +254,7 @@ module Mindee
       end
 
       if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
-        elapsed = options.initial_delay_sec + (polling_attempts * options.delay_sec)
+        elapsed = options.initial_delay_sec + (polling_attempts * options.delay_sec.to_f)
         raise Errors::MindeeAPIError,
               "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
       end
@@ -285,7 +285,7 @@ module Mindee
     #      * `:on_min_pages` Apply the operation only if document has at least this many pa
     # @return [Mindee::Parsing::Common::WorkflowResponse]
     def execute_workflow(input_source, workflow_id, options: {})
-      opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(options)
+      opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(params: options)
       process_pdf_if_required(input_source, opts) if opts.respond_to?(:page_options)
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)

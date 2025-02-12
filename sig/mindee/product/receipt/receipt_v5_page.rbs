@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/receipt/receipt_v5_page.rb
 module Mindee
   module Product
-    module Product::Receipt
-      class Product::Receipt::ReceiptV5Page # failed to identify its superclass
+    module Receipt
+      class ReceiptV5Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::Receipt::ReceiptV5PagePrediction # failed to identify its superclass
+      class ReceiptV5PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

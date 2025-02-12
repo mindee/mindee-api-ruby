@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/resume/resume_v1_education.rb
 module Mindee
   module Product
-    module Product::Resume
-      class Product::Resume::ResumeV1Education # failed to identify its superclass
+    module Resume
+      class ResumeV1Education # failed to identify its superclass
         def degree_domain: -> untyped
         def degree_type: -> untyped
         def end_month: -> untyped

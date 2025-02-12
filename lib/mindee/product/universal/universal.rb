@@ -18,7 +18,7 @@ module Mindee
         def initialize(prediction)
           super
           @prediction = UniversalDocument.new(prediction['prediction'])
-          @pages = []
+          @pages = [] # : Array[Mindee::Parsing::Common::Page]
           prediction['pages'].each do |page|
             if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
               @pages.push(UniversalPage.new(page))

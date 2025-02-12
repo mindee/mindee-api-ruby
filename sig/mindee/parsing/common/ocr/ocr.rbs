@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/common/ocr/ocr.rb
 module Mindee
   module Parsing
-    module Parsing::Common
-      module Parsing::Common::Ocr
-        class Parsing::Common::Ocr::OcrWord
+    module Common
+      module Ocr
+        class OcrWord
           def confidence: -> untyped
           def confidence=: (untyped) -> untyped
           def text: -> untyped
@@ -14,22 +12,22 @@ module Mindee
           def initialize: (untyped) -> nil
           def to_s: -> untyped
         end
-        class Parsing::Common::Ocr::OcrLine < Array
-          def initialize: (?[]?, ?Array[untyped]?) -> Object?
-          def sort_on_x: -> Parsing::Common::Ocr::OcrLine
+        class OcrLine < Array[untyped]
+          def initialize: (?Array[untyped]?, ?Array[untyped]?) -> void
+          def sort_on_x: -> OcrLine
           def to_s: -> String
         end
-        class Parsing::Common::Ocr::OcrPage
-          def all_words: -> []
-          def lines: -> []
+        class OcrPage
+          def all_words: -> Array[untyped]
+          def lines: -> Array[untyped]
           def initialize: (untyped) -> untyped
-          def all_lines: -> []
+          def all_lines: -> Array[untyped]
           def to_s: -> String
-          def parse_one: (Array[Parsing::Common::Ocr::OcrWord], nil, [], []) -> Array[Parsing::Common::Ocr::OcrLine]?
-          def to_lines: -> []
-          def words_on_same_line?: (Parsing::Common::Ocr::OcrWord?, Parsing::Common::Ocr::OcrWord) -> untyped
+          def parse_one: (Array[OcrWord], untyped, Array[untyped], Array[untyped]) -> Array[OcrLine]?
+          def to_lines: -> Array[untyped]
+          def words_on_same_line?: (OcrWord, OcrWord) -> untyped
         end
-        class Parsing::Common::Ocr::Ocr
+        class Ocr
           def mvision_v1: -> untyped
           def initialize: (untyped) -> untyped
           def to_s: -> untyped

@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/business_card/business_card_v1_document.rb
 module Mindee
   module Product
-    module Product::BusinessCard
-      class Product::BusinessCard::BusinessCardV1Document # failed to identify its superclass
+    module BusinessCard
+      class BusinessCardV1Document # failed to identify its superclass
         def address: -> untyped
         def company: -> untyped
         def email: -> untyped

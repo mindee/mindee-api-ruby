@@ -1,25 +1,23 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/common/api_response.rb
 module Mindee
   module Parsing
-    module Parsing::Common
-      module Parsing::Common::JobStatus
-        Parsing::Common::JobStatus::WAITING: :waiting
-        Parsing::Common::JobStatus::PROCESSING: :processing
-        Parsing::Common::JobStatus::COMPLETED: :completed
-        Parsing::Common::JobStatus::FAILURE: :failed
+    module Common
+      module JobStatus
+        WAITING: :waiting
+        PROCESSING: :processing
+        COMPLETED: :completed
+        FAILURE: :failed
       end
-      module Parsing::Common::RequestStatus
-        Parsing::Common::RequestStatus::FAILURE: :failure
-        Parsing::Common::RequestStatus::SUCCESS: :success
+      module RequestStatus
+        FAILURE: :failure
+        SUCCESS: :success
       end
-      class Parsing::Common::ApiResponse
+      class ApiResponse
         def document: -> untyped
         def job: -> untyped
         def api_request: -> untyped
         def raw_http: -> untyped
-        def initialize: (untyped, untyped, untyped) -> nil
+        def initialize: (untyped, untyped, untyped) -> untyped
       end
     end
   end

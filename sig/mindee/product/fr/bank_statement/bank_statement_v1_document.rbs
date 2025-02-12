@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/bank_statement/bank_statement_v1_document.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::BankStatement
-        class Product::FR::BankStatement::BankStatementV1Document # failed to identify its superclass
+    module FR
+      module BankStatement
+        class BankStatementV1Document # failed to identify its superclass
           def account_number: -> untyped
           def bank_address: -> untyped
           def bank_name: -> untyped

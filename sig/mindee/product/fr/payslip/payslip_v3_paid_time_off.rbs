@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/payslip/payslip_v3_paid_time_off.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::Payslip
-        class Product::FR::Payslip::PayslipV3PaidTimeOff # failed to identify its superclass
+    module FR
+      module Payslip
+        class PayslipV3PaidTimeOff # failed to identify its superclass
           def accrued: -> untyped
           def period: -> untyped
           def pto_type: -> untyped

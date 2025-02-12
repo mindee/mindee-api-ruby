@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/business_card/business_card_v1_page.rb
 module Mindee
   module Product
-    module Product::BusinessCard
-      class Product::BusinessCard::BusinessCardV1Page # failed to identify its superclass
+    module BusinessCard
+      class BusinessCardV1Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::BusinessCard::BusinessCardV1PagePrediction # failed to identify its superclass
+      class BusinessCardV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

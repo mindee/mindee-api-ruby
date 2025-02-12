@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/id_card/id_card_v2.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::IdCard
-        class Product::FR::IdCard::IdCardV2 # failed to identify its superclass
+    module FR
+      module IdCard
+        class IdCardV2 # failed to identify its superclass
           def initialize: (untyped) -> untyped
           def endpoint_name: -> untyped
           def endpoint_version: -> untyped

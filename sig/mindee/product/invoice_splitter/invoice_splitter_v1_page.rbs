@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/invoice_splitter/invoice_splitter_v1_page.rb
 module Mindee
   module Product
-    module Product::InvoiceSplitter
-      class Product::InvoiceSplitter::InvoiceSplitterV1Page # failed to identify its superclass
+    module InvoiceSplitter
+      class InvoiceSplitterV1Page # failed to identify its superclass
         def initialize: (untyped) -> untyped
       end
-      class Product::InvoiceSplitter::InvoiceSplitterV1PagePrediction # failed to identify its superclass
+      class InvoiceSplitterV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/bank_account_details/bank_account_details_v2.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::BankAccountDetails
-        class Product::FR::BankAccountDetails::BankAccountDetailsV2 # failed to identify its superclass
+    module FR
+      module BankAccountDetails
+        class BankAccountDetailsV2 # failed to identify its superclass
           def initialize: (untyped) -> untyped
           def endpoint_name: -> untyped
           def endpoint_version: -> untyped

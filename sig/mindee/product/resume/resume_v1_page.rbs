@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/resume/resume_v1_page.rb
 module Mindee
   module Product
-    module Product::Resume
-      class Product::Resume::ResumeV1Page # failed to identify its superclass
+    module Resume
+      class ResumeV1Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::Resume::ResumeV1PagePrediction # failed to identify its superclass
+      class ResumeV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

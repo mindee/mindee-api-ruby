@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/barcode_reader/barcode_reader_v1.rb
 module Mindee
   module Product
-    module Product::BarcodeReader
-      class Product::BarcodeReader::BarcodeReaderV1 # failed to identify its superclass
+    module BarcodeReader
+      class BarcodeReaderV1 # failed to identify its superclass
         def initialize: (untyped) -> untyped
         def endpoint_name: -> untyped
         def endpoint_version: -> untyped

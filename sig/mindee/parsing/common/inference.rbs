@@ -4,10 +4,10 @@ module Mindee
     module Common
       class Inference
         def is_rotation_applied: -> untyped
-        def pages: -> []
+        def pages: -> Array[Page]
         def prediction: -> untyped
         def product: -> untyped
-        def initialize: (untyped) -> []
+        def initialize: (untyped) -> void
         def to_s: -> String
       end
     end

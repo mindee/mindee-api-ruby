@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/standard/date_field.rb
 module Mindee
   module Parsing
-    module Parsing::Standard
-      class Parsing::Standard::DateField # failed to identify its superclass
+    module Standard
+      class DateField # failed to identify its superclass
         def date_object: -> untyped
         def value: -> untyped
         def raw: -> untyped

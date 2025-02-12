@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/carte_grise/carte_grise_v1_document.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::CarteGrise
-        class Product::FR::CarteGrise::CarteGriseV1Document # failed to identify its superclass
+    module FR
+      module CarteGrise
+        class CarteGriseV1Document # failed to identify its superclass
           def a: -> untyped
           def b: -> untyped
           def c1: -> untyped

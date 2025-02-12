@@ -1,12 +1,10 @@
-# TypeProf 0.30.1
-
-# lib/mindee/http/error_handler.rb
+# lib/mindee/http/http_error_handler.rb
 module Mindee
   module HTTP
-    module HTTP::ErrorHandler
+    module ErrorHandler
       def extract_error: (untyped) -> nil
       def create_error_obj: (untyped) -> (Hash[String, String] | Hash[untyped, untyped])?
-      def handle_error: (untyped, untyped) -> untyped
+      def self.handle_error: (untyped, untyped) -> untyped
     end
   end
 end

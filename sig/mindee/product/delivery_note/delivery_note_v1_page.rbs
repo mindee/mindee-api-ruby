@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/delivery_note/delivery_note_v1_page.rb
 module Mindee
   module Product
-    module Product::DeliveryNote
-      class Product::DeliveryNote::DeliveryNoteV1Page # failed to identify its superclass
+    module DeliveryNote
+      class DeliveryNoteV1Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::DeliveryNote::DeliveryNoteV1PagePrediction # failed to identify its superclass
+      class DeliveryNoteV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

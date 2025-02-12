@@ -1,15 +1,13 @@
-# TypeProf 0.30.1
-
 # lib/mindee/http/workflow_endpoint.rb
 module Mindee
   module HTTP
-    class HTTP::WorkflowEndpoint
+    class WorkflowEndpoint
       def api_key: -> String
       def request_timeout: -> Integer
       def url: -> String
       def initialize: (untyped, ?api_key: String) -> String
       def execute_workflow: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
-      def workflow_execution_req_post: (untyped, untyped, untyped, untyped, untyped) -> nil
+      def workflow_execution_req_post: (untyped, untyped, untyped, untyped, untyped) -> untyped
       def check_api_key: -> nil
     end
   end

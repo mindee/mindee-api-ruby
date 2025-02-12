@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/us/w9/w9_v1.rb
 module Mindee
   module Product
-    module Product::US
-      module Product::US::W9
-        class Product::US::W9::W9V1 # failed to identify its superclass
+    module US
+      module W9
+        class W9V1 # failed to identify its superclass
           def initialize: (untyped) -> untyped
           def endpoint_name: -> untyped
           def endpoint_version: -> untyped

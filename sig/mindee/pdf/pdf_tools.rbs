@@ -1,9 +1,7 @@
-# TypeProf 0.30.1
-
 # lib/mindee/pdf/pdf_tools.rb
 module Mindee
   module PDF
-    module PDF::PDFTools
+    module
       def to_io_stream: (?Hash[untyped, untyped]) -> StringIO
       def self.stream_has_text?: (untyped) -> bool
       def self.source_text?: (untyped) -> bool?

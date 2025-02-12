@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/energy_bill/energy_bill_v1_meter_detail.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::EnergyBill
-        class Product::FR::EnergyBill::EnergyBillV1MeterDetail # failed to identify its superclass
+    module FR
+      module EnergyBill
+        class EnergyBillV1MeterDetail # failed to identify its superclass
           def meter_number: -> untyped
           def meter_type: -> untyped
           def unit: -> untyped

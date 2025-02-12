@@ -1,14 +1,13 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/common/extras/extras.rb
 module Mindee
   module Parsing
-    module Parsing::Common
-      module Parsing::Common::Extras
-        class Parsing::Common::Extras::Extras
+    module Common
+      module Extras
+        class Extras
           def cropper: -> untyped
           def full_text_ocr: -> untyped
-          def initialize: (untyped) -> untyped
+          def initialize: (untyped) -> void
+          def new: (untyped) -> void
           def to_s: -> String
           def add_artificial_extra: (untyped) -> nil
         end

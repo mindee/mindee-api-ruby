@@ -1,8 +1,6 @@
-# TypeProf 0.30.1
-
 # lib/mindee/version.rb
 module Mindee
   VERSION: String
-  def self.find_platform: -> (:bsd | :linux | :macos | :solaris | :windows | Hash[:bsd | :linux | :macos | :solaris | :windows, Regexp])
-  PLATFORM: (Hash[:bsd | :linux | :macos | :solaris | :windows, Regexp] | Symbol)
+  def self.find_platform: -> (:bsd | :linux | :macos | :solaris | :windows | Hash[Symbol | String, Regexp])?
+  PLATFORM: (Hash[Symbol | String, Regexp] | Symbol)
 end

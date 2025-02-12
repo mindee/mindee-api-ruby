@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/ind/indian_passport/indian_passport_v1_document.rb
 module Mindee
   module Product
-    module Product::IND
-      module Product::IND::IndianPassport
-        class Product::IND::IndianPassport::IndianPassportV1Document # failed to identify its superclass
+    module IND
+      module IndianPassport
+        class IndianPassportV1Document # failed to identify its superclass
           def address1: -> untyped
           def address2: -> untyped
           def address3: -> untyped

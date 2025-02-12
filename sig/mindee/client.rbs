@@ -1,24 +1,21 @@
 OTS_OWNER: String
 
-type class_of_inference = Class & { new: (^(*untyped) -> Mindee::Parsing::Common::Inference) }
-
 module Mindee
   # Redeclare OTS_OWNER inside the module for internal use.
   OTS_OWNER: String
-
 
   # ParseOptions is defined via a Struct in client.rb.
   class ParseOptions
     attr_accessor all_words: bool
     attr_accessor full_text: bool
     attr_accessor close_file: bool
-    attr_accessor page_options: (Hash[Symbol, untyped] | nil)
+    attr_accessor page_options: (Hash[Symbol | String, untyped] | nil)
     attr_accessor cropper: bool
-    attr_accessor initial_delay_sec: Numeric
-    attr_accessor delay_sec: Numeric
+    attr_accessor initial_delay_sec: Integer | Float
+    attr_accessor delay_sec: Integer | Float
     attr_accessor max_retries: Integer
 
-    def initialize: (params: Hash[Symbol, untyped]) -> void
+    def initialize: (params: Hash[Symbol | String, untyped]) -> void
   end
 
   # WorkflowOptions is defined via a Struct in client.rb.
@@ -27,9 +24,9 @@ module Mindee
     attr_accessor priority: (Symbol | nil)
     attr_accessor full_text: bool
     attr_accessor public_url: (String | nil)
-    attr_accessor page_options: (Hash[Symbol, untyped] | nil)
+    attr_accessor page_options: (Hash[Symbol | String, untyped] | nil)
 
-    def initialize: (params: Hash[Symbol, untyped]?) -> void
+    def initialize: (params: Hash[Symbol | String, untyped]) -> void
   end
 
   class Client
@@ -45,42 +42,42 @@ module Mindee
     #  • endpoint is a keyword (nil allowed).
     #  • options is given as either a Hash with symbol keys or a ParseOptions.
     #  • enqueue is a Boolean.
-    def parse: (untyped, untyped, endpoint: (untyped | nil), options: (Hash[Symbol, untyped] | ParseOptions), enqueue: bool) -> untyped
+    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint | nil), options: ParseOptions | Hash[Symbol | String, untyped]) -> untyped
 
     # Synchronous parsing call.
     # Note: options is expected to be a ParseOptions instance.
-    def parse_sync: (untyped, untyped, untyped, options: ParseOptions) -> untyped
+    def parse_sync: (untyped, untyped, untyped, ParseOptions) -> untyped
 
     # Asynchronous enqueuing of a document.
-    def enqueue: (untyped, untyped, endpoint: (untyped | nil), options: ParseOptions) -> untyped
+    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint | nil), options: ParseOptions|Hash[Symbol | String, untyped]) -> untyped
 
     # Polls for a queued document using its job_id.
-    def parse_queued: (job_id: String, product_class: untyped, endpoint: (untyped | nil)) -> untyped
+    def parse_queued: (String, untyped, ?endpoint: HTTP::Endpoint?) -> untyped
 
     # Enqueue and then continually poll for the parsing result.
-    def enqueue_and_parse: (untyped, untyped, untyped, options: ParseOptions) -> untyped
+    def enqueue_and_parse: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> untyped
 
     # Sends a document to a workflow.
     # The options parameter is either a Hash with symbol keys or a WorkflowOptions.
-    def execute_workflow: (untyped, workflow_id: String, options: (Hash[Symbol, untyped] | WorkflowOptions)) -> untyped
+    def execute_workflow: (untyped, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> untyped
 
     # Loads a prediction from a local response.
     def load_prediction: (untyped, untyped) -> untyped
 
     # Creates an input source from a file path.
-    def source_from_path: (input_path: String, fix_pdf: bool) -> untyped
+    def source_from_path: (String, fix_pdf: bool) -> untyped
 
     # Creates an input source from raw bytes.
-    def source_from_bytes: (input_bytes: String, filename: String, fix_pdf: bool) -> untyped
+    def source_from_bytes: (String, String, fix_pdf: bool) -> untyped
 
     # Creates an input source from a base64 encoded string.
-    def source_from_b64string: (base64_string: String, filename: String, fix_pdf: bool) -> untyped
+    def source_from_b64string: (String, String, fix_pdf: bool) -> untyped
 
     # Creates an input source from a Ruby File.
-    def source_from_file: (input_file: File, filename: String, fix_pdf: bool) -> untyped
+    def source_from_file: (File, String, fix_pdf: bool) -> untyped
 
     # Creates an input source from a URL.
-    def source_from_url: (url: String) -> untyped
+    def source_from_url: (String) -> untyped
 
     # Creates a custom endpoint.
     # The parameters are provided as keywords in client.rb but here they are declared as required.
@@ -89,24 +86,25 @@ module Mindee
     private
 
     # Returns a ParseOptions instance given either a Hash or an existing ParseOptions.
-    def normalize_parse_options: ((Hash[Symbol, untyped] | ParseOptions)) -> ParseOptions
+    def normalize_parse_options: ((Hash[Symbol | String, untyped] | ParseOptions)) -> ParseOptions
 
     # Process the PDF if required.
-    def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions) -> void
+    def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions | WorkflowOptions) -> void
 
     # Creates an endpoint using the product class and supplied values.
-    def initialize_endpoint: (product_class: untyped, endpoint_name: String, account_name: String, version: String) -> untyped
+    def initialize_endpoint: (untyped, ?endpoint_name: String, ?account_name: String, ?version: String) -> HTTP::Endpoint
 
     # Validates asynchronous polling parameters.
-    def validate_async_params: (initial_delay_sec: Numeric, delay_sec: Numeric, max_retries: Integer) -> void
+    def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
 
     # Helper to fix an endpoint name when not provided.
-    def fix_endpoint_name: (product_class: untyped, endpoint_name: String) -> String
+    def fix_endpoint_name: (untyped, String?) -> String?
 
     # Helper to fix the account name.
-    def fix_account_name: (account_name: String) -> String
+    def fix_account_name: (String) -> String
 
     # Helper to fix the version.
-    def fix_version: (class_of_inference, String) -> String
+    # Note: leave untyped, as RBS isn't able to recognize inherited class attributes yet.
+    def fix_version: (untyped, String) -> String
   end
 end

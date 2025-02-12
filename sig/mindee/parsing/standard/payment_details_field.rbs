@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/standard/payment_details_field.rb
 module Mindee
   module Parsing
-    module Parsing::Standard
-      class Parsing::Standard::PaymentDetailsField # failed to identify its superclass
+    module Standard
+      class PaymentDetailsField # failed to identify its superclass
         def account_number: -> untyped
         def iban: -> untyped
         def routing_number: -> untyped

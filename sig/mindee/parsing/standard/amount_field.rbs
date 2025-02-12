@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/standard/amount_field.rb
 module Mindee
   module Parsing
-    module Parsing::Standard
-      class Parsing::Standard::AmountField # failed to identify its superclass
+    module Standard
+      class AmountField # failed to identify its superclass
         def value: -> untyped
         def initialize: (untyped, untyped, ?reconstructed: false) -> nil
         def to_s: -> untyped

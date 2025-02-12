@@ -1,13 +1,11 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/driver_license/driver_license_v1_page.rb
 module Mindee
   module Product
-    module Product::DriverLicense
-      class Product::DriverLicense::DriverLicenseV1Page # failed to identify its superclass
+    module DriverLicense
+      class DriverLicenseV1Page # failed to identify its superclass
         def initialize: (untyped) -> nil
       end
-      class Product::DriverLicense::DriverLicenseV1PagePrediction # failed to identify its superclass
+      class DriverLicenseV1PagePrediction # failed to identify its superclass
         def to_s: -> String
       end
     end

@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/universal/universal_list_field.rb
 module Mindee
   module Parsing
-    module Parsing::Universal
-      class Parsing::Universal::UniversalListField
-        include Parsing::Universal
+    module Universal
+      class UniversalListField
+        include Universal
         def page_id: -> untyped
         def page_id=: (untyped) -> untyped
         def values: -> []

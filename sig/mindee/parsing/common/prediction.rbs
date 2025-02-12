@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/common/prediction.rb
 module Mindee
   module Parsing
-    module Parsing::Common
-      class Parsing::Common::Prediction
+    module Common
+      class Prediction
         def to_s: -> String
       end
     end

@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/payslip/payslip_v2_pto.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::Payslip
-        class Product::FR::Payslip::PayslipV2Pto # failed to identify its superclass
+    module FR
+      module Payslip
+        class PayslipV2Pto # failed to identify its superclass
           def accrued_this_period: -> untyped
           def balance_end_of_period: -> untyped
           def used_this_period: -> untyped

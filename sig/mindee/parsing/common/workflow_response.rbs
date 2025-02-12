@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/parsing/common/workflow_response.rb
 module Mindee
   module Parsing
-    module Parsing::Common
-      class Parsing::Common::WorkflowResponse
+    module Common
+      class WorkflowResponse
         def execution: -> untyped
         def api_request: -> untyped
         def raw_http: -> untyped

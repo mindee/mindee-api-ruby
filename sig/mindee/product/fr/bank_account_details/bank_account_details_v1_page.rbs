@@ -1,14 +1,12 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/bank_account_details/bank_account_details_v1_page.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::BankAccountDetails
-        class Product::FR::BankAccountDetails::BankAccountDetailsV1Page # failed to identify its superclass
+    module FR
+      module BankAccountDetails
+        class BankAccountDetailsV1Page # failed to identify its superclass
           def initialize: (untyped) -> nil
         end
-        class Product::FR::BankAccountDetails::BankAccountDetailsV1PagePrediction # failed to identify its superclass
+        class BankAccountDetailsV1PagePrediction # failed to identify its superclass
           def to_s: -> String
         end
       end

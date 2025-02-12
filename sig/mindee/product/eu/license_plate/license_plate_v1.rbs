@@ -1,11 +1,9 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/eu/license_plate/license_plate_v1.rb
 module Mindee
   module Product
-    module Product::EU
-      module Product::EU::LicensePlate
-        class Product::EU::LicensePlate::LicensePlateV1 # failed to identify its superclass
+    module EU
+      module LicensePlate
+        class LicensePlateV1 # failed to identify its superclass
           def initialize: (untyped) -> untyped
           def endpoint_name: -> untyped
           def endpoint_version: -> untyped

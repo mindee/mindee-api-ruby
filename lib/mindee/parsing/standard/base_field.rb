@@ -7,7 +7,7 @@ module Mindee
   module Parsing
     module Standard
       # Base field object.
-      class BaseField < AbstractField
+      class BaseField < Mindee::Parsing::Standard::AbstractField
         # @return [String, Numeric, Boolean]
         attr_reader :value
         # true if the field was reconstructed or computed using other fields.

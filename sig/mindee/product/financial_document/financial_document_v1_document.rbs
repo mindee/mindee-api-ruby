@@ -1,10 +1,8 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/financial_document/financial_document_v1_document.rb
 module Mindee
   module Product
-    module Product::FinancialDocument
-      class Product::FinancialDocument::FinancialDocumentV1Document # failed to identify its superclass
+    module FinancialDocument
+      class FinancialDocumentV1Document # failed to identify its superclass
         def billing_address: -> untyped
         def category: -> untyped
         def customer_address: -> untyped

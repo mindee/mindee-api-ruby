@@ -1,14 +1,12 @@
-# TypeProf 0.30.1
-
 # lib/mindee/product/fr/carte_grise/carte_grise_v1_page.rb
 module Mindee
   module Product
-    module Product::FR
-      module Product::FR::CarteGrise
-        class Product::FR::CarteGrise::CarteGriseV1Page # failed to identify its superclass
+    module FR
+      module CarteGrise
+        class CarteGriseV1Page # failed to identify its superclass
           def initialize: (untyped) -> nil
         end
-        class Product::FR::CarteGrise::CarteGriseV1PagePrediction # failed to identify its superclass
+        class CarteGriseV1PagePrediction # failed to identify its superclass
           def to_s: -> String
         end
       end
