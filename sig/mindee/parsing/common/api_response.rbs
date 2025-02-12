@@ -12,7 +12,10 @@ module Mindee
         FAILURE: :failure
         SUCCESS: :success
       end
+
+
       class ApiResponse
+        def logger: () -> untyped
         def document: -> untyped
         def job: -> untyped
         def api_request: -> untyped

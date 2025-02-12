@@ -2,7 +2,7 @@
 module Mindee
   module Parsing
     module Standard
-      class CompanyRegistrationField # failed to identify its superclass
+      class CompanyRegistrationField < BaseField
         def type: -> untyped
         def initialize: (untyped, untyped, ?reconstructed: false) -> untyped
         def to_table_line: -> String

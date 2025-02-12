@@ -9,6 +9,7 @@ module Mindee
     TIMEOUT_DEFAULT: Integer
     USER_AGENT: String
     class Endpoint
+      def logger: () -> untyped
       def api_key: -> String?
       def request_timeout: -> Integer
       def url_root: -> String

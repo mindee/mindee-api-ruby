@@ -2,19 +2,19 @@
 module Mindee
   module Parsing
     module Standard
-      class TaxField # failed to identify its superclass
+      class TaxField < BaseField
         def value: -> untyped
         def rate: -> untyped
         def code: -> untyped
         def base: -> untyped
-        def initialize: (untyped, untyped) -> nil
+        def initialize: (untyped, untyped) -> void
         def print_float: (untyped) -> String
         def to_s: -> String
         def printable_values: -> Hash[untyped, String]
         def to_table_line: -> String
       end
-      class Taxes < Array
-        def initialize: (untyped, untyped) -> Object
+      class Taxes < Array[TaxField]
+        def initialize: (untyped, untyped) -> void
         def line_separator: (String) -> String
         def to_s: -> String
       end

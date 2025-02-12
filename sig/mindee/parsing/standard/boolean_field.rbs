@@ -2,9 +2,9 @@
 module Mindee
   module Parsing
     module Standard
-      class BooleanField # failed to identify its superclass
+      class BooleanField < BaseField
         def value: -> untyped
-        def initialize: (untyped, ?nil, ?reconstructed: false) -> Object
+        def initialize: (untyped, ?nil, ?reconstructed: false) -> void
         def to_s: -> String
       end
     end
