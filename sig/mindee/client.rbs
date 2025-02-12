@@ -44,14 +44,14 @@ module Mindee
     def logger: () -> untyped
 
     # Enqueue a document for parsing.
-    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
+    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Synchronous parsing call.
     # Note: options is expected to be a ParseOptions instance.
     def parse_sync: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
 
     # Asynchronous enqueuing of a document.
-    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
+    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Polls for a queued document using its job_id.
     def parse_queued: (String, untyped, ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
@@ -67,16 +67,16 @@ module Mindee
     def load_prediction: (untyped, Input::LocalResponse) -> Parsing::Common::ApiResponse
 
     # Creates an input source from a file path.
-    def source_from_path: (String, fix_pdf: bool) -> Input::Source::PathInputSource
+    def source_from_path: (String, ?fix_pdf: bool) -> Input::Source::PathInputSource
 
     # Creates an input source from raw bytes.
-    def source_from_bytes: (String, String, fix_pdf: bool) -> Input::Source::BytesInputSource
+    def source_from_bytes: (String, String, ?fix_pdf: bool) -> Input::Source::BytesInputSource
 
     # Creates an input source from a base64 encoded string.
-    def source_from_b64string: (String, String, fix_pdf: bool) -> Input::Source::Base64InputSource
+    def source_from_b64string: (String, String, ?fix_pdf: bool) -> Input::Source::Base64InputSource
 
     # Creates an input source from a Ruby File.
-    def source_from_file: (File, String, fix_pdf: bool) -> Input::Source::FileInputSource
+    def source_from_file: (File, String, ?fix_pdf: bool) -> Input::Source::FileInputSource
 
     # Creates an input source from a URL.
     def source_from_url: (String) -> Input::Source::UrlInputSource

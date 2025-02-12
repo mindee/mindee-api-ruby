@@ -12,7 +12,7 @@ module Mindee
       # Default options for pdf documents processing.
       DEFAULT_OPTIONS = {
         page_indexes: [0],
-        operation: :KEEP_O_NLY,
+        operation: :KEEP_ONLY,
         on_min_pages: 0,
       }.freeze
 

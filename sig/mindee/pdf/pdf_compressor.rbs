@@ -2,7 +2,7 @@
 PDFReader: untyped
 module Mindee
   module PDF
-    module
+    module PDFCompressor
       def self.compress_pdf: (untyped, ?quality: Integer, ?force_source_text_compression: false, ?disable_source_text: true) -> StringIO
       def self.process_pdf_pages: (untyped, Integer) -> untyped
       def self.create_output_pdf: (untyped, true, untyped) -> untyped

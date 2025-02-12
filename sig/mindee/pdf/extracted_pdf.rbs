@@ -1,8 +1,8 @@
 # lib/mindee/pdf/extracted_pdf.rb
 module Mindee
   module PDF
-    module
-      class ::ExtractedPDF
+    module PDFExtractor
+      class ExtractedPDF
         def pdf_bytes: -> untyped
         def filename: -> untyped
         def initialize: (untyped, untyped) -> untyped

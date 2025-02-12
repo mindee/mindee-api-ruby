@@ -3,7 +3,7 @@ module Mindee
   module Input
     module Source
       class FileInputSource # failed to identify its superclass
-        def initialize: (untyped, untyped, fix_pdf: bool) -> untyped
+        def initialize: (untyped, untyped, ?fix_pdf: bool) -> untyped
       end
     end
   end
