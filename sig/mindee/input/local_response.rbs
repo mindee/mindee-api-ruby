@@ -1,7 +1,7 @@
 # lib/mindee/input/local_response.rb
 module Mindee
   module Input
-    class Input::LocalResponse
+    class LocalResponse
       def file: -> StringIO
       def initialize: (untyped) -> Integer
       def as_hash: -> nil

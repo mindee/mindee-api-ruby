@@ -9,7 +9,7 @@ module Mindee
     attr_accessor all_words: bool
     attr_accessor full_text: bool
     attr_accessor close_file: bool
-    attr_accessor page_options: (Hash[Symbol | String, untyped] | nil)
+    attr_accessor page_options: (Hash[Symbol | String, untyped]?)
     attr_accessor cropper: bool
     attr_accessor initial_delay_sec: Integer | Float
     attr_accessor delay_sec: Integer | Float
@@ -20,11 +20,11 @@ module Mindee
 
   # WorkflowOptions is defined via a Struct in client.rb.
   class WorkflowOptions
-    attr_accessor document_alias: (String | nil)
-    attr_accessor priority: (Symbol | nil)
+    attr_accessor document_alias: (String?)
+    attr_accessor priority: (Symbol?)
     attr_accessor full_text: bool
-    attr_accessor public_url: (String | nil)
-    attr_accessor page_options: (Hash[Symbol | String, untyped] | nil)
+    attr_accessor public_url: (String?)
+    attr_accessor page_options: (Hash[Symbol | String, untyped]?)
 
     def initialize: (params: Hash[Symbol | String, untyped]) -> void
   end
@@ -42,14 +42,14 @@ module Mindee
     #  • endpoint is a keyword (nil allowed).
     #  • options is given as either a Hash with symbol keys or a ParseOptions.
     #  • enqueue is a Boolean.
-    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint | nil), options: ParseOptions | Hash[Symbol | String, untyped]) -> untyped
+    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> untyped
 
     # Synchronous parsing call.
     # Note: options is expected to be a ParseOptions instance.
-    def parse_sync: (untyped, untyped, untyped, ParseOptions) -> untyped
+    def parse_sync: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
 
     # Asynchronous enqueuing of a document.
-    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint | nil), options: ParseOptions|Hash[Symbol | String, untyped]) -> untyped
+    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> untyped
 
     # Polls for a queued document using its job_id.
     def parse_queued: (String, untyped, ?endpoint: HTTP::Endpoint?) -> untyped
@@ -59,29 +59,29 @@ module Mindee
 
     # Sends a document to a workflow.
     # The options parameter is either a Hash with symbol keys or a WorkflowOptions.
-    def execute_workflow: (untyped, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> untyped
+    def execute_workflow: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> untyped
 
     # Loads a prediction from a local response.
-    def load_prediction: (untyped, untyped) -> untyped
+    def load_prediction: (untyped, Input::LocalResponse) -> Parsing::Common::ApiResponse
 
     # Creates an input source from a file path.
-    def source_from_path: (String, fix_pdf: bool) -> untyped
+    def source_from_path: (String, fix_pdf: bool) -> Input::Source::PathInputSource
 
     # Creates an input source from raw bytes.
-    def source_from_bytes: (String, String, fix_pdf: bool) -> untyped
+    def source_from_bytes: (String, String, fix_pdf: bool) -> Input::Source::BytesInputSource
 
     # Creates an input source from a base64 encoded string.
-    def source_from_b64string: (String, String, fix_pdf: bool) -> untyped
+    def source_from_b64string: (String, String, fix_pdf: bool) -> Input::Source::Base64InputSource
 
     # Creates an input source from a Ruby File.
-    def source_from_file: (File, String, fix_pdf: bool) -> untyped
+    def source_from_file: (File, String, fix_pdf: bool) -> Input::Source::FileInputSource
 
     # Creates an input source from a URL.
-    def source_from_url: (String) -> untyped
+    def source_from_url: (String) -> Input::Source::UrlInputSource
 
     # Creates a custom endpoint.
     # The parameters are provided as keywords in client.rb but here they are declared as required.
-    def create_endpoint: (endpoint_name: String, account_name: String, version: String) -> untyped
+    def create_endpoint: (endpoint_name: String, account_name: String, version: String) -> HTTP::Endpoint
 
     private
 

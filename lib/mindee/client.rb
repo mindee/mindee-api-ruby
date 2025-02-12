@@ -286,7 +286,10 @@ module Mindee
     # @return [Mindee::Parsing::Common::WorkflowResponse]
     def execute_workflow(input_source, workflow_id, options: {})
       opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(params: options)
-      process_pdf_if_required(input_source, opts) if opts.respond_to?(:page_options)
+      if opts.respond_to?(:page_options) && input_source.is_a?(Input::Source::LocalInputSource)
+        process_pdf_if_required(input_source,
+                                opts)
+      end
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
       logger.debug("Sending document to workflow '#{workflow_id}'")
