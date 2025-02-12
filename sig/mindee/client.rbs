@@ -61,7 +61,7 @@ module Mindee
 
     # Sends a document to a workflow.
     # The options parameter is either a Hash with symbol keys or a WorkflowOptions.
-    def execute_workflow: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> untyped
+    def execute_workflow: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
 
     # Loads a prediction from a local response.
     def load_prediction: (untyped, Input::LocalResponse) -> Parsing::Common::ApiResponse
