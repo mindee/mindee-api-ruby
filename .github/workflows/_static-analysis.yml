@@ -18,13 +18,13 @@ jobs:
     - name: set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.1"
+        ruby-version: "3.0"
         bundler-cache: true
 
     - name: Analyse the code with Rubocop
       run: |
         bundle exec rubocop ./
 
-    - name: Attempt to generate the documentation
+    - name: Check types using Steep
       run: |
-        bundle exec rake doc
+        bundle exec steep check

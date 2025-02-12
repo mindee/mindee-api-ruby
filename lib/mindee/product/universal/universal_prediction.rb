@@ -14,7 +14,7 @@ module Mindee
         # @return [Hash<Symbol, Mindee::Parsing::Universal::UniversalListField>]
         attr_reader :fields
 
-        def initialize(raw=nil)
+        def initialize(raw = nil)
           super
           @fields = {} # : Hash[Symbol | String, untyped]
         end
