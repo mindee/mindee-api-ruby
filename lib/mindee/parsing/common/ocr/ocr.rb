@@ -70,8 +70,8 @@ module Mindee
 
           # @param prediction [Hash]
           def initialize(prediction)
-            @lines = []
-            @all_words = []
+            @lines = [] # : Array[Mindee::Parsing::Common::Ocr::OcrLine]
+            @all_words = [] # : Array[Mindee::Parsing::Common::Ocr::OcrWord]
             prediction['all_words'].each do |word_prediction|
               @all_words.push(OcrWord.new(word_prediction))
             end
@@ -125,8 +125,8 @@ module Mindee
           # @return [Array<OcrLine>]
           def to_lines
             current = nil
-            indexes = []
-            lines = []
+            indexes = [] # : Array[Integer]
+            lines = [] # : Array[Mindee::Parsing::Common::Ocr::OcrLine]
 
             # make sure words are sorted from top to bottom
             all_words = @all_words.sort_by { |word| Geometry.get_min_max_y(word.polygon).min }
@@ -140,10 +140,10 @@ module Mindee
           # Determine if two words are on the same line.
           # @param current_word [Mindee::Parsing::Common::Ocr::OcrWord]
           # @param next_word [Mindee::Parsing::Common::Ocr::OcrWord]
-          # @return [Boolean]
+          # @return [bool]
           def words_on_same_line?(current_word, next_word)
             current_in_next = current_word.polygon.point_in_y?(next_word.polygon.centroid)
-            next_in_current = next_word.polygon.point_in_y?(current_word.polygon.centroid)
+            next_in_current = next_word.polygon.point_in_y?(current_word.polygon.centroid) unless current_word.nil?
             current_in_next || next_in_current
           end
         end
@@ -156,7 +156,7 @@ module Mindee
 
           # @param prediction [Hash]
           def initialize(prediction)
-            @mvision_v1 = MVisionV1.new(prediction['mvision-v1'])
+            @mvision_v1 = Mindee::Parsing::Common::Ocr::MVisionV1.new(prediction['mvision-v1'])
           end
 
           # @return [String]

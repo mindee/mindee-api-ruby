@@ -1,0 +1,15 @@
+# lib/mindee/parsing/common/ocr/mvision_v1.rb
+module Mindee
+  module Parsing
+    module Common
+      module Ocr
+        class MVisionV1
+          def pages: -> []
+          def initialize: (untyped) -> untyped
+          def to_s: -> String
+          def reconstruct_vertically: (untyped, untyped, untyped) -> untyped
+        end
+      end
+    end
+  end
+end

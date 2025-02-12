@@ -1,0 +1,12 @@
+# lib/mindee/parsing/standard/amount_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class AmountField # failed to identify its superclass
+        def value: -> untyped
+        def initialize: (untyped, untyped, ?reconstructed: false) -> nil
+        def to_s: -> untyped
+      end
+    end
+  end
+end

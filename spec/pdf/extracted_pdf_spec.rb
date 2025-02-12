@@ -40,7 +40,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
 
     it 'returns the correct page count for a valid PDF' do
       pdf_stream = File.open(valid_pdf_path, 'r')
-      allow(Mindee::PDF::PdfProcessor).to receive(:open_pdf).and_return(double(pages: [1, 2, 3]))
+      allow(Mindee::PDF::PDFProcessor).to receive(:open_pdf).and_return(double(pages: [1, 2, 3]))
       pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
       expect(pdf_wrapper.page_count).to eq(3)

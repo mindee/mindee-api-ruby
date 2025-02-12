@@ -1,0 +1,12 @@
+# Stub for the mini_magick library.
+module MiniMagick
+  class Image
+    def format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
+    def self.format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
+    def self.quality: (String) -> Net::BufferedIO
+    def self.read: (StringIO) -> self
+    def self.resolution: () -> Array[Float | Integer]
+    def self.write: (String) -> Net::BufferedIO
+    def self.to_blob: () -> String
+  end
+end

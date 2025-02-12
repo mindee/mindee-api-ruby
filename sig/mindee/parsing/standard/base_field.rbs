@@ -1,0 +1,12 @@
+# lib/mindee/parsing/standard/base_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class BaseField < Parsing::Standard::AbstractField
+        def value: -> untyped
+        def reconstructed: -> false
+        def initialize: (untyped, untyped, ?reconstructed: false) -> false
+      end
+    end
+  end
+end

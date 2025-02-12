@@ -19,7 +19,7 @@ module Mindee
         def initialize(product_class, http_response, raw_http)
           @raw_http = raw_http.to_s
           @api_request = Mindee::Parsing::Common::ApiRequest.new(http_response['api_request'])
-          product_class ||= Product::Universal::Universal
+          product_class ||= Mindee::Product::Universal::Universal
           @execution = Mindee::Parsing::Common::Execution.new(product_class, http_response['execution'])
         end
       end

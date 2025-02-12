@@ -63,7 +63,7 @@ module Mindee
 
       # @param secret_key [String] Secret key, either a string or a byte/byte array.
       # @param signature [String]
-      # @return [Boolean]
+      # @return [bool]
       def valid_hmac_signature?(secret_key, signature)
         signature == get_hmac_signature(secret_key)
       end

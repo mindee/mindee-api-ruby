@@ -1,0 +1,16 @@
+# lib/mindee/parsing/standard/locale_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class LocaleField
+        def confidence: -> untyped
+        def language: -> untyped
+        def country: -> untyped
+        def currency: -> untyped
+        def value: -> untyped
+        def initialize: (untyped, ?nil) -> untyped
+        def to_s: -> String
+      end
+    end
+  end
+end

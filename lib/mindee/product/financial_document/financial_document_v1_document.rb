@@ -109,13 +109,13 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
+          super(prediction)
           @billing_address = StringField.new(prediction['billing_address'], page_id)
           @category = ClassificationField.new(prediction['category'], page_id)
           @customer_address = StringField.new(prediction['customer_address'], page_id)
           @customer_company_registrations = []
           prediction['customer_company_registrations'].each do |item|
-            @customer_company_registrations.push(CompanyRegistrationField.new(item, page_id))
+            @customer_company_registrations.push(Parsing::Standard::CompanyRegistrationField.new(item, page_id))
           end
           @customer_id = StringField.new(prediction['customer_id'], page_id)
           @customer_name = StringField.new(prediction['customer_name'], page_id)
@@ -126,7 +126,7 @@ module Mindee
           @invoice_number = StringField.new(prediction['invoice_number'], page_id)
           @line_items = []
           prediction['line_items'].each do |item|
-            @line_items.push(FinancialDocumentV1LineItem.new(item, page_id))
+            @line_items.push(FinancialDocument::FinancialDocumentV1LineItem.new(item, page_id))
           end
           @locale = LocaleField.new(prediction['locale'], page_id)
           @payment_date = DateField.new(prediction['payment_date'], page_id)
@@ -134,20 +134,20 @@ module Mindee
           @receipt_number = StringField.new(prediction['receipt_number'], page_id)
           @reference_numbers = []
           prediction['reference_numbers'].each do |item|
-            @reference_numbers.push(StringField.new(item, page_id))
+            @reference_numbers.push(Parsing::Standard::StringField.new(item, page_id))
           end
           @shipping_address = StringField.new(prediction['shipping_address'], page_id)
           @subcategory = ClassificationField.new(prediction['subcategory'], page_id)
           @supplier_address = StringField.new(prediction['supplier_address'], page_id)
           @supplier_company_registrations = []
           prediction['supplier_company_registrations'].each do |item|
-            @supplier_company_registrations.push(CompanyRegistrationField.new(item, page_id))
+            @supplier_company_registrations.push(Parsing::Standard::CompanyRegistrationField.new(item, page_id))
           end
           @supplier_email = StringField.new(prediction['supplier_email'], page_id)
           @supplier_name = StringField.new(prediction['supplier_name'], page_id)
           @supplier_payment_details = []
           prediction['supplier_payment_details'].each do |item|
-            @supplier_payment_details.push(PaymentDetailsField.new(item, page_id))
+            @supplier_payment_details.push(Parsing::Standard::PaymentDetailsField.new(item, page_id))
           end
           @supplier_phone_number = StringField.new(prediction['supplier_phone_number'], page_id)
           @supplier_website = StringField.new(prediction['supplier_website'], page_id)

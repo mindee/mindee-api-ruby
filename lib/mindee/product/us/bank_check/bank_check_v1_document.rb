@@ -31,14 +31,14 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @account_number = StringField.new(prediction['account_number'], page_id)
             @amount = AmountField.new(prediction['amount'], page_id)
             @check_number = StringField.new(prediction['check_number'], page_id)
             @date = DateField.new(prediction['date'], page_id)
             @payees = []
             prediction['payees'].each do |item|
-              @payees.push(StringField.new(item, page_id))
+              @payees.push(Parsing::Standard::StringField.new(item, page_id))
             end
             @routing_number = StringField.new(prediction['routing_number'], page_id)
           end

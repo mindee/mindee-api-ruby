@@ -55,7 +55,7 @@ module Mindee
         begin
           @buffer.rewind
           image = MiniMagick::Image.read(@buffer)
-          image.format file_format.downcase
+          image.format file_format.to_s.downcase
           image.write resolved_path.to_s
           logger.info("File saved successfully to '#{resolved_path}'")
         rescue StandardError

@@ -1,0 +1,19 @@
+# lib/mindee/input/sources/url_input_source.rb
+module Mindee
+  module Input
+    module Source
+      class UrlInputSource
+        def url: -> untyped
+        def initialize: (untyped) -> untyped
+        def write_to_file: (untyped, ?filename: nil, ?username: nil, ?password: nil, ?token: nil, ?max_redirects: Integer) -> String
+        def as_local_input_source: (?filename: nil, ?username: nil, ?password: nil, ?token: nil, ?max_redirects: Integer) -> untyped
+        def fetch_file_content: (?username: nil, ?password: nil, ?token: nil, ?max_redirects: Integer) -> untyped
+        def extract_filename_from_url: (untyped) -> String
+        def fill_filename: (nil) -> String
+        def make_request: (untyped, untyped, Integer) -> untyped
+        def get_file_extension: (String) -> String?
+        def generate_file_name: (?extension: String?) -> String
+      end
+    end
+  end
+end

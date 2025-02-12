@@ -1,0 +1,13 @@
+# lib/mindee/geometry/utils.rb
+module Mindee
+  module Geometry
+    def self.quadrilateral_from_prediction: (untyped) -> untyped
+    def self.polygon_from_prediction: (untyped) -> untyped
+    def self.get_bbox: (untyped) -> [untyped, untyped, untyped, untyped]
+    def self.get_bounding_box: (untyped) -> untyped
+    def self.get_centroid: (untyped) -> untyped
+    def self.get_min_max_y: (untyped) -> untyped
+    def self.get_min_max_x: (untyped) -> untyped
+    def self.below?: (untyped, untyped, untyped, untyped) -> bool
+  end
+end
