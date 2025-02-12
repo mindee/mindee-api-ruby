@@ -109,7 +109,7 @@ module Mindee
       def self.load_input_source_pdf_page_as_stringio(input_file, page_id)
         input_file.io_stream.rewind
         if input_file.pdf?
-          Mindee::PDF::PdfProcessor.get_page(Origami::PDF.read(input_file.io_stream), page_id)
+          Mindee::PDF::PDFProcessor.get_page(Origami::PDF.read(input_file.io_stream), page_id)
         else
           input_file.io_stream
         end

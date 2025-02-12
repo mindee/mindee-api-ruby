@@ -11,12 +11,16 @@ module Mindee
         class Extras
           # @return [CropperExtra, nil]
           attr_reader :cropper
-          # @return [FullTextOCRExtra, nil]
+          # @return [Mindee::Parsing::Common::Extras::FullTextOCRExtra, nil]
           attr_reader :full_text_ocr
 
           def initialize(raw_prediction)
-            @cropper = CropperExtra.new(raw_prediction['cropper']) if raw_prediction['cropper']
-            @full_text_ocr = FullTextOCRExtra.new(raw_prediction['full_text_ocr']) if raw_prediction['full_text_ocr']
+            if raw_prediction['cropper']
+              @cropper = Mindee::Parsing::Common::Extras::CropperExtra.new(raw_prediction['cropper'])
+            end
+            if raw_prediction['full_text_ocr']
+              @full_text_ocr = Mindee::Parsing::Common::Extras::FullTextOCRExtra.new(raw_prediction['full_text_ocr'])
+            end
 
             raw_prediction.each do |key, value|
               instance_variable_set("@#{key}", value) unless ['cropper', 'full_text_ocr'].include?(key)
@@ -38,7 +42,7 @@ module Mindee
           def add_artificial_extra(raw_prediction)
             return unless raw_prediction['full_text_ocr']
 
-            @full_text_ocr << FullTextOCRExtra.new(raw_prediction)
+            @full_text_ocr << Mindee::Parsing::Common::Extras::FullTextOCRExtra.new(raw_prediction)
           end
         end
 

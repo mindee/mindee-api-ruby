@@ -9,6 +9,8 @@ module Mindee
         def to_s
           ''
         end
+
+        def initialize(_ = nil); end
       end
     end
   end

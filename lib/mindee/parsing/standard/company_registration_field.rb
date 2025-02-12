@@ -10,7 +10,7 @@ module Mindee
 
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
-        # @param reconstructed [Boolean]
+        # @param reconstructed [bool]
         def initialize(prediction, page_id, reconstructed: false)
           super
           @type = prediction['type']

@@ -1,0 +1,15 @@
+# lib/mindee/pdf/extracted_pdf.rb
+module Mindee
+  module PDF
+    module PDFExtractor
+      class ExtractedPDF
+        def pdf_bytes: -> untyped
+        def filename: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+        def page_count: -> nil
+        def write_to_file: (untyped, ?override: false) -> Integer
+        def as_input_source: -> untyped
+      end
+    end
+  end
+end

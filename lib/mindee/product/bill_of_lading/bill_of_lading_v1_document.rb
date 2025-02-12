@@ -50,12 +50,12 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
+          super(prediction)
           @bill_of_lading_number = StringField.new(prediction['bill_of_lading_number'], page_id)
           @carrier = BillOfLadingV1Carrier.new(prediction['carrier'], page_id)
           @carrier_items = []
           prediction['carrier_items'].each do |item|
-            @carrier_items.push(BillOfLadingV1CarrierItem.new(item, page_id))
+            @carrier_items.push(BillOfLading::BillOfLadingV1CarrierItem.new(item, page_id))
           end
           @consignee = BillOfLadingV1Consignee.new(prediction['consignee'], page_id)
           @date_of_issue = DateField.new(prediction['date_of_issue'], page_id)

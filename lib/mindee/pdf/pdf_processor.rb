@@ -7,7 +7,7 @@ require_relative 'pdf_tools'
 module Mindee
   module PDF
     # PDF document processing
-    module PdfProcessor
+    module PDFProcessor
       Origami::PDF.class_eval { include PDFTools }
       # Default options for pdf documents processing.
       DEFAULT_OPTIONS = {
@@ -54,7 +54,7 @@ module Mindee
         all_pages.to_set - pages_to_keep
       end
 
-      # @param page_indexes [Array]
+      # @param page_indexes [Array[Integer]]
       # @param all_pages [Array]
       def self.indexes_from_remove(page_indexes, all_pages)
         pages_to_remove = Set.new

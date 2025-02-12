@@ -18,7 +18,7 @@ module Mindee
         def initialize(prediction)
           super
           @prediction = UniversalDocument.new(prediction['prediction'])
-          @pages = []
+          @pages = [] # : Array[Mindee::Parsing::Common::Page]
           prediction['pages'].each do |page|
             if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
               @pages.push(UniversalPage.new(page))
@@ -34,10 +34,10 @@ module Mindee
           # @return [String]
           attr_reader :endpoint_version
           # Whether this product has access to an asynchronous endpoint.
-          # @return [Boolean]
+          # @return [bool]
           attr_reader :has_async
           # Whether this product has access to synchronous endpoint.
-          # @return [Boolean]
+          # @return [bool]
           attr_reader :has_sync
         end
       end

@@ -9,7 +9,7 @@ module Mindee
       class Base64InputSource < LocalInputSource
         # @param base64_string [String]
         # @param filename [String]
-        # @param fix_pdf [Boolean]
+        # @param fix_pdf [bool]
         def initialize(base64_string, filename, fix_pdf: false)
           io_stream = StringIO.new(base64_string.unpack1('m*'))
           io_stream.set_encoding Encoding::BINARY
@@ -17,7 +17,7 @@ module Mindee
         end
 
         # Overload of the same function to prevent a base64 from being re-encoded.
-        # @param close [Boolean]
+        # @param close [bool]
         # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
         def read_contents(close: true)
           @io_stream.seek(0)

@@ -12,7 +12,7 @@ module Mindee
 
           # @param prediction [Hash]
           def initialize(prediction)
-            @pages = []
+            @pages = [] # : Array[Mindee::Parsing::Common::Ocr::OcrPage]
             prediction['pages'].each do |page_prediction|
               @pages.push(OcrPage.new(page_prediction))
             end

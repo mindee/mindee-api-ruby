@@ -1,0 +1,11 @@
+# lib/mindee/parsing/common/prediction.rb
+module Mindee
+  module Parsing
+    module Common
+      class Prediction
+        def to_s: -> String
+        def initialize: (untyped?) -> void
+      end
+    end
+  end
+end

@@ -1,0 +1,12 @@
+# lib/mindee/parsing/common/orientation.rb
+module Mindee
+  module Parsing
+    module Common
+      class Orientation
+        def page_id: -> untyped
+        def value: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+      end
+    end
+  end
+end

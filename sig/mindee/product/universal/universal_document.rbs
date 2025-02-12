@@ -1,0 +1,10 @@
+# lib/mindee/product/universal/universal_document.rb
+module Mindee
+  module Product
+    module Universal
+      class UniversalDocument < Parsing::Common::Document
+        def initialize: (untyped) -> untyped
+      end
+    end
+  end
+end

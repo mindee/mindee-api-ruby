@@ -45,7 +45,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
+          super(prediction)
           @address = StringField.new(prediction['address'], page_id)
           @company = StringField.new(prediction['company'], page_id)
           @email = StringField.new(prediction['email'], page_id)
@@ -57,7 +57,7 @@ module Mindee
           @phone_number = StringField.new(prediction['phone_number'], page_id)
           @social_media = []
           prediction['social_media'].each do |item|
-            @social_media.push(StringField.new(item, page_id))
+            @social_media.push(Parsing::Standard::StringField.new(item, page_id))
           end
           @website = StringField.new(prediction['website'], page_id)
         end

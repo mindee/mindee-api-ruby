@@ -16,7 +16,7 @@ module Mindee
         # Raw unprocessed value, as it was sent by the server.
 
         def initialize(raw_prediction, page_id = nil)
-          @all_values = {}
+          @all_values = {} # : Hash[Symbol | String, untyped]
           item_page_id = nil
           raw_prediction.each do |name, value|
             case name
@@ -67,8 +67,8 @@ module Mindee
         # Otherwise, calls super to fallback to the default behavior.
         #
         # @param method_name [Symbol] The name of the method being checked.
-        # @param include_private [Boolean] Whether to include private methods in the check.
-        # @return [Boolean] True if the method can be responded to, false otherwise.
+        # @param include_private [bool] Whether to include private methods in the check.
+        # @return [bool] True if the method can be responded to, false otherwise.
         def respond_to_missing?(method_name, include_private = false)
           @all_values.key?(method_name.to_s) || super
         end
@@ -82,7 +82,10 @@ module Mindee
 
         def handle_position_field(name, value, item_page_id)
           @all_values[name.to_s] =
-            PositionField.new({ name.to_s => value }, value_key: name.to_s, page_id: item_page_id)
+            Mindee::Parsing::Standard::PositionField.new(
+              { name.to_s => value },
+              value_key: name.to_s, page_id: item_page_id
+            )
         end
 
         def handle_default_field(name, value)

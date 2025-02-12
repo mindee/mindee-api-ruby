@@ -1,0 +1,13 @@
+# lib/mindee/errors/mindee_error.rb
+module Mindee
+  module Errors
+    class MindeeError < StandardError
+    end
+    class MindeeAPIError < MindeeError
+    end
+    class MindeeConfigurationError < MindeeError
+    end
+    class MindeeGeometryError < MindeeError
+    end
+  end
+end

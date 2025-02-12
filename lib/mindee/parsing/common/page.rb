@@ -26,8 +26,10 @@ module Mindee
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)
           @page_id = raw_prediction['id']
-          @orientation = Orientation.new(raw_prediction['orientation'], @page_id)
-          @extras = Extras::Extras.new(raw_prediction['extras']) unless raw_prediction['extras'].nil?
+          @orientation = Mindee::Parsing::Common::Orientation.new(raw_prediction['orientation'], @page_id)
+          return if raw_prediction['extras'].nil?
+
+          @extras = Mindee::Parsing::Common::Extras::Extras.new(raw_prediction['extras'])
         end
 
         # @return [String]

@@ -7,8 +7,8 @@ module Mindee
     module Standard
       # Represents basic text information.
       class BooleanField < BaseField
-        # Value as Boolean
-        # @return [Boolean, nil]
+        # Value as bool
+        # @return [bool, nil]
         attr_reader :value
 
         def initialize(prediction, page_id = nil, reconstructed: false)

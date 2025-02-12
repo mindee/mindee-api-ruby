@@ -1,0 +1,23 @@
+# lib/mindee/pdf/pdf_tools.rb
+module Mindee
+  module PDF
+    module PDFTools
+      def to_io_stream: (?Hash[untyped, untyped]) -> StringIO
+      def self.stream_has_text?: (untyped) -> bool
+      def self.source_text?: (untyped) -> bool?
+      def self.create_xobject: (untyped) -> untyped
+      def self.set_xobject_properties: (untyped, untyped) -> untyped
+      def self.determine_filter: (untyped) -> (:DCTDecode | :FlateDecode | :LZWDecode)
+      def self.determine_colorspace: (untyped) -> (:DeviceCMYK | :DeviceGray | :DeviceRGB)
+      def self.add_content_to_page: (untyped, untyped, untyped, untyped) -> untyped
+      def compile: (untyped) -> untyped
+      def intents_as_pdfa1: () -> untyped
+      def delinearize!: () -> untyped
+      def linearized?: () -> untyped
+      def load_all_objects: () -> untyped
+      def output: (untyped) -> untyped
+      def self.set_page_dimensions: (untyped, untyped, untyped) -> untyped
+      def self.process_image_xobject: (untyped, untyped, untyped, untyped) -> untyped
+    end
+  end
+end

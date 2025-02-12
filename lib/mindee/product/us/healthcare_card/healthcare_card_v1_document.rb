@@ -50,15 +50,15 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @company_name = StringField.new(prediction['company_name'], page_id)
             @copays = []
             prediction['copays'].each do |item|
-              @copays.push(HealthcareCardV1Copay.new(item, page_id))
+              @copays.push(HealthcareCard::HealthcareCardV1Copay.new(item, page_id))
             end
             @dependents = []
             prediction['dependents'].each do |item|
-              @dependents.push(StringField.new(item, page_id))
+              @dependents.push(Parsing::Standard::StringField.new(item, page_id))
             end
             @enrollment_date = DateField.new(prediction['enrollment_date'], page_id)
             @group_number = StringField.new(prediction['group_number'], page_id)

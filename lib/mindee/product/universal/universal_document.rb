@@ -11,10 +11,7 @@ module Mindee
         include Mindee::Parsing::Standard
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)
-          # Universal document.
-
-          # raw_prediction: Dictionary containing the JSON document response
-          super()
+          super
           raw_prediction.each do |field_name, field_contents|
             if field_contents.is_a?(Array)
               @fields[field_name] = Parsing::Universal::UniversalListField.new(field_contents)
@@ -25,7 +22,7 @@ module Mindee
               if field_contents_str.key?('value') && field_contents_str['value'].nil? == false
                 field_contents_str['value'] = field_contents_str['value'].to_s
               end
-              @fields[field_name] = StringField.new(field_contents_str)
+              @fields[field_name] = Mindee::Parsing::Standard::StringField.new(field_contents_str)
             end
           end
         end
