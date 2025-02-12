@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'prism', '~> 1.3'
   spec.add_development_dependency 'rake', '~> 13.2.1'
-  spec.add_development_dependency 'rbs', '~> 3.8', '>= 3.8.1'
+  spec.add_development_dependency 'rbs', '~> 3.6'
   spec.add_development_dependency 'rspec', '~> 3.13.0'
   spec.add_development_dependency 'rubocop', '~> 1.70.0'
   spec.add_development_dependency 'steep', '~> 1.9', '>= 1.9.4'
