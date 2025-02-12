@@ -18,6 +18,7 @@ module Mindee
           delinearize: true,
           recompile: true,
           decrypt: false,
+          noindent: nil,
         }
         options.update(params)
 
@@ -29,7 +30,7 @@ module Mindee
         end
         load_all_objects unless @loaded
 
-        intents_as_pdfa1 if options[:intent] =~ %r{pdf[/-]?A1?/i}
+        intents_as_pdfa1 if options[:intent].to_s =~ %r{pdf[/-]?A1?/i}
         delinearize! if options[:delinearize] && linearized?
         compile(options) if options[:recompile]
 

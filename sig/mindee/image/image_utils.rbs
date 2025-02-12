@@ -4,7 +4,7 @@ module Mindee
     module ImageUtils
       def self.resize_image: (untyped, untyped, untyped) -> nil
       def self.compress_image_quality: (untyped, untyped) -> untyped
-      def self.to_image: (untyped) -> bot
+      def self.to_image: (untyped) -> (singleton(MiniMagick::Image) | MiniMagick::Image)
       def self.image_to_stringio: (untyped, ?String) -> StringIO
       def self.calculate_new_dimensions: (untyped, ?max_width: nil, ?max_height: nil) -> [untyped, untyped]
       def self.calculate_dimensions_from_media_box: (untyped, untyped) -> [untyped, untyped]

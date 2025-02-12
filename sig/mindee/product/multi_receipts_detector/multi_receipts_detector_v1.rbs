@@ -1,8 +1,8 @@
-# lib/mindee/product/universal/universal.rb
+# lib/mindee/product/multi_receipts_detector/multi_receipts_detector_v1.rb
 module Mindee
   module Product
-    module Universal
-      class Universal < Parsing::Common::Inference
+    module MultiReceiptsDetector
+      class MultiReceiptsDetectorV1 < Parsing::Common::Inference
         def initialize: (untyped) -> untyped
         def endpoint_name: -> untyped
         def endpoint_version: -> untyped

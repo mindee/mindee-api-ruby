@@ -23,7 +23,7 @@ module Mindee
         include Mindee::Parsing::Standard
         include Mindee::Parsing::Universal
         def initialize(raw_prediction, page_id = nil)
-          super()
+          super(raw_prediction)
           raw_prediction.each do |field_name, field_contents|
             if field_contents.is_a?(Array)
               @fields[field_name] = Mindee::Parsing::Universal::UniversalListField.new(field_contents, page_id)

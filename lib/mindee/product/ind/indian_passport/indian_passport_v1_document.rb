@@ -82,7 +82,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @address1 = StringField.new(prediction['address1'], page_id)
             @address2 = StringField.new(prediction['address2'], page_id)
             @address3 = StringField.new(prediction['address3'], page_id)

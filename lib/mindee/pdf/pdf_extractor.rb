@@ -24,7 +24,7 @@ module Mindee
         # Retrieves the page count for the Pdf object.
         # @return [Integer]
         def page_count
-          Mindee::PDF::PdfProcessor.open_pdf(@source_pdf).pages.size
+          Mindee::PDF::PDFProcessor.open_pdf(@source_pdf).pages.size
         end
 
         # Creates a new Pdf from pages and save it into a buffer.
@@ -35,7 +35,7 @@ module Mindee
             page_indexes: page_indexes,
           }
 
-          Mindee::PDF::PdfProcessor.parse(@source_pdf, options)
+          Mindee::PDF::PDFProcessor.parse(@source_pdf, options)
         end
 
         # Extract the sub-documents from the main pdf, based on the given list of page indexes.

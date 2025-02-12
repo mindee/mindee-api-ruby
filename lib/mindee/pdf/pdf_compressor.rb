@@ -44,7 +44,7 @@ module Mindee
       # @return [Array<Origami::Page>] Processed pages.
       def self.process_pdf_pages(pdf, quality)
         pdf.pages.map.with_index do |page, index|
-          process_pdf_page(Mindee::PDF::PdfProcessor.get_page(pdf, index), index, quality, page[:MediaBox])
+          process_pdf_page(Mindee::PDF::PDFProcessor.get_page(pdf, index), index, quality, page[:MediaBox])
         end
       end
 

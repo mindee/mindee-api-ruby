@@ -1,6 +1,6 @@
 # lib/mindee/extraction/multi_receipts_extractor.rb
 module Mindee
   module Extraction
-    def self.extract_receipts: (untyped, untyped) -> []
+    def self.extract_receipts: (untyped, untyped) -> Array[untyped]
   end
 end

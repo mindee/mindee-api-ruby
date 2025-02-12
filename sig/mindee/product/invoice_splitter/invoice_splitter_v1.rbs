@@ -1,8 +1,8 @@
-# lib/mindee/product/universal/universal.rb
+# lib/mindee/product/invoice_splitter/invoice_splitter_v1.rb
 module Mindee
   module Product
-    module Universal
-      class Universal < Parsing::Common::Inference
+    module InvoiceSplitter
+      class InvoiceSplitterV1 < Parsing::Common::Inference
         def initialize: (untyped) -> untyped
         def endpoint_name: -> untyped
         def endpoint_version: -> untyped

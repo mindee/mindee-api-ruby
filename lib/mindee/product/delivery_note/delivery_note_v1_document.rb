@@ -33,7 +33,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
+          super(prediction)
           @customer_address = StringField.new(prediction['customer_address'], page_id)
           @customer_name = StringField.new(prediction['customer_name'], page_id)
           @delivery_date = DateField.new(prediction['delivery_date'], page_id)

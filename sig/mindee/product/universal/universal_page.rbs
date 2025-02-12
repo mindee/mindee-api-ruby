@@ -2,10 +2,10 @@
 module Mindee
   module Product
     module Universal
-      class UniversalPage # failed to identify its superclass
+      class UniversalPage < Parsing::Common::Page
         def initialize: (untyped) -> untyped
       end
-      class UniversalPagePrediction # failed to identify its superclass
+      class UniversalPagePrediction < UniversalPrediction
         def initialize: (untyped, ?nil) -> untyped
         def to_s: -> String
       end

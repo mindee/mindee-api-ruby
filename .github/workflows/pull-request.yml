@@ -5,7 +5,7 @@ on:
 
 jobs:
   static_analysis:
-    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@develop/v4.0.0
+    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@develop/add-typing
   test_units:
     uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@develop/v4.0.0
     needs: static_analysis

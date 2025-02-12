@@ -3,6 +3,8 @@
 # Do not mess with it unless Steep fixes the handling of this library.
 
 module Net
+  class BufferedIO
+  end
   class HTTP
     def self.start: [T] (String?, Integer?, use_ssl: bool?, read_timeout: Integer) { (HTTP) -> T } -> T
 
