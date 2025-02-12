@@ -37,6 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rbs', '~> 3.6'
   spec.add_development_dependency 'rspec', '~> 3.13.0'
   spec.add_development_dependency 'rubocop', '~> 1.70.0'
-  spec.add_development_dependency 'steep', '~> 1.7'
+  spec.add_development_dependency 'steep', '~> 1.7.1'
   spec.add_development_dependency 'yard', '~> 0.9.37'
 end

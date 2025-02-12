@@ -109,7 +109,6 @@ target :lib do
 end
 
 target :test do
-  unreferenced! # Skip type checking the `lib` code when types in `test` target is changed
   signature 'sig/test'
   check 'test'
 
