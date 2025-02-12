@@ -1,0 +1,10 @@
+# lib/mindee/input/sources/path_input_source.rb
+module Mindee
+  module Input
+    module Source
+      class PathInputSource # failed to identify its superclass
+        def initialize: (untyped, ?fix_pdf: bool) -> untyped
+      end
+    end
+  end
+end

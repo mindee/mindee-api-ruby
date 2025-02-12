@@ -22,7 +22,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @account_holder_name = StringField.new(prediction['account_holder_name'], page_id)
             @iban = StringField.new(prediction['iban'], page_id)
             @swift = StringField.new(prediction['swift'], page_id)

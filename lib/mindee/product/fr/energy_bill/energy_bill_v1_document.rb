@@ -62,7 +62,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @contract_id = StringField.new(prediction['contract_id'], page_id)
             @delivery_point = StringField.new(prediction['delivery_point'], page_id)
             @due_date = DateField.new(prediction['due_date'], page_id)
@@ -70,18 +70,18 @@ module Mindee
             @energy_supplier = EnergyBillV1EnergySupplier.new(prediction['energy_supplier'], page_id)
             @energy_usage = []
             prediction['energy_usage'].each do |item|
-              @energy_usage.push(EnergyBillV1EnergyUsage.new(item, page_id))
+              @energy_usage.push(EnergyBill::EnergyBillV1EnergyUsage.new(item, page_id))
             end
             @invoice_date = DateField.new(prediction['invoice_date'], page_id)
             @invoice_number = StringField.new(prediction['invoice_number'], page_id)
             @meter_details = EnergyBillV1MeterDetail.new(prediction['meter_details'], page_id)
             @subscription = []
             prediction['subscription'].each do |item|
-              @subscription.push(EnergyBillV1Subscription.new(item, page_id))
+              @subscription.push(EnergyBill::EnergyBillV1Subscription.new(item, page_id))
             end
             @taxes_and_contributions = []
             prediction['taxes_and_contributions'].each do |item|
-              @taxes_and_contributions.push(EnergyBillV1TaxesAndContribution.new(item, page_id))
+              @taxes_and_contributions.push(EnergyBill::EnergyBillV1TaxesAndContribution.new(item, page_id))
             end
             @total_amount = AmountField.new(prediction['total_amount'], page_id)
             @total_before_taxes = AmountField.new(prediction['total_before_taxes'], page_id)

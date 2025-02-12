@@ -67,14 +67,14 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
+          super(prediction)
           @added_sugars = NutritionFactsLabelV1AddedSugar.new(prediction['added_sugars'], page_id)
           @calories = NutritionFactsLabelV1Calorie.new(prediction['calories'], page_id)
           @cholesterol = NutritionFactsLabelV1Cholesterol.new(prediction['cholesterol'], page_id)
           @dietary_fiber = NutritionFactsLabelV1DietaryFiber.new(prediction['dietary_fiber'], page_id)
           @nutrients = []
           prediction['nutrients'].each do |item|
-            @nutrients.push(NutritionFactsLabelV1Nutrient.new(item, page_id))
+            @nutrients.push(NutritionFactsLabel::NutritionFactsLabelV1Nutrient.new(item, page_id))
           end
           @protein = NutritionFactsLabelV1Protein.new(prediction['protein'], page_id)
           @saturated_fat = NutritionFactsLabelV1SaturatedFat.new(prediction['saturated_fat'], page_id)

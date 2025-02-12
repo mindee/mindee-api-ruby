@@ -1,0 +1,26 @@
+# This is a stub of mock type declarations for the net/http standard library, which isn't
+# currently supported by Steep.
+# Do not mess with it unless Steep fixes the handling of this library.
+
+module Net
+  class BufferedIO
+  end
+  class HTTP
+    def self.start: [T] (String?, Integer?, use_ssl: bool?, read_timeout: Integer) { (HTTP) -> T } -> T
+
+    def request: (untyped) -> untyped
+
+    # Stub for the HTTP POST request class.
+    class Post
+      def initialize: (untyped, Hash[String, String]?) -> void
+      def set_form: (untyped, String?) -> void
+      def new: (untyped, untyped) -> void
+    end
+
+    # Stub for the HTTP GET request class.
+    class Get
+      def initialize: (untyped, Hash[String, String]?) -> void
+      def new: (untyped, untyped) -> void
+    end
+  end
+end

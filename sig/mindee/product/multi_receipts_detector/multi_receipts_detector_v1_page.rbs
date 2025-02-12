@@ -1,0 +1,13 @@
+# lib/mindee/product/multi_receipts_detector/multi_receipts_detector_v1_page.rb
+module Mindee
+  module Product
+    module MultiReceiptsDetector
+      class MultiReceiptsDetectorV1Page < Parsing::Common::Page
+        def initialize: (untyped) -> void
+      end
+      class MultiReceiptsDetectorV1PagePrediction < MultiReceiptsDetectorV1Document
+        def to_s: -> String
+      end
+    end
+  end
+end

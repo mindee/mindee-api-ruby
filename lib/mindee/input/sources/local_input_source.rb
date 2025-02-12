@@ -31,7 +31,7 @@ module Mindee
 
         # @param io_stream [StringIO]
         # @param filename [String]
-        # @param fix_pdf [Boolean]
+        # @param fix_pdf [bool]
         def initialize(io_stream, filename, fix_pdf: false)
           @io_stream = io_stream
           @filename = filename
@@ -87,11 +87,11 @@ module Mindee
         #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
         def process_pdf(options)
           @io_stream.seek(0)
-          @io_stream = PdfProcessor.parse(@io_stream, options)
+          @io_stream = PDFProcessor.parse(@io_stream, options)
         end
 
         # Reads a document.
-        # @param close [Boolean]
+        # @param close [bool]
         # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
         def read_contents(close: true)
           logger.debug("Reading data from: #{@filename}")
@@ -109,7 +109,7 @@ module Mindee
           return 1 unless pdf?
 
           @io_stream.seek(0)
-          pdf_processor = Mindee::PDF::PdfProcessor.open_pdf(@io_stream)
+          pdf_processor = Mindee::PDF::PDFProcessor.open_pdf(@io_stream)
           pdf_processor.pages.size
         end
 
@@ -117,10 +117,10 @@ module Mindee
         # @param [Integer] quality Quality of the output file.
         # @param [Integer, nil] max_width Maximum width (Ignored for PDFs).
         # @param [Integer, nil] max_height Maximum height (Ignored for PDFs).
-        # @param [Boolean] force_source_text Whether to force the operation on PDFs with source text.
+        # @param [bool] force_source_text Whether to force the operation on PDFs with source text.
         #   This will attempt to re-render PDF text over the rasterized original. If disabled, ignored the operation.
         #   WARNING: this operation is strongly discouraged.
-        # @param [Boolean] disable_source_text If the PDF has source text, whether to re-apply it to the original or
+        # @param [bool] disable_source_text If the PDF has source text, whether to re-apply it to the original or
         #   not. Needs force_source_text to work.
         def compress!(quality: 85, max_width: nil, max_height: nil, force_source_text: false, disable_source_text: true)
           buffer = if pdf?
@@ -143,7 +143,7 @@ module Mindee
         end
 
         # Checks whether the file has source text if it is a pdf. False otherwise
-        # @return [Boolean] True if the file is a PDF and has source text.
+        # @return [bool] True if the file is a PDF and has source text.
         def source_text?
           Mindee::PDF::PDFTools.source_text?(@io_stream)
         end

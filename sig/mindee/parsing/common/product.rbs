@@ -1,0 +1,13 @@
+# lib/mindee/parsing/common/product.rb
+module Mindee
+  module Parsing
+    module Common
+      class Product
+        def name: -> untyped
+        def type: -> untyped
+        def version: -> untyped
+        def initialize: (Hash[String, untyped]) -> untyped
+      end
+    end
+  end
+end

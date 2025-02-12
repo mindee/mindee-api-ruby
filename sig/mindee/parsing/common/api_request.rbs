@@ -1,0 +1,15 @@
+# lib/mindee/parsing/common/api_request.rb
+module Mindee
+  module Parsing
+    module Common
+      class ApiRequest
+        def error: -> untyped
+        def ressources: -> untyped
+        def status: -> untyped
+        def status_code: -> untyped
+        def url: -> untyped
+        def initialize: (untyped) -> untyped
+      end
+    end
+  end
+end

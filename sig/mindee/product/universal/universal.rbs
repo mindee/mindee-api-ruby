@@ -1,0 +1,14 @@
+# lib/mindee/product/universal/universal.rb
+module Mindee
+  module Product
+    module Universal
+      class Universal < Parsing::Common::Inference
+        def initialize: (untyped) -> untyped
+        def endpoint_name: -> untyped
+        def endpoint_version: -> untyped
+        def has_async: -> untyped
+        def has_sync: -> untyped
+      end
+    end
+  end
+end

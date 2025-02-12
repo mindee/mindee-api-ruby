@@ -1,0 +1,13 @@
+# lib/mindee/product/invoice_splitter/invoice_splitter_v1_page.rb
+module Mindee
+  module Product
+    module InvoiceSplitter
+      class InvoiceSplitterV1Page < Parsing::Common::Page
+        def initialize: (untyped) -> untyped
+      end
+      class InvoiceSplitterV1PagePrediction < InvoiceSplitterV1Document
+        def to_s: -> String
+      end
+    end
+  end
+end

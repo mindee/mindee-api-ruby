@@ -1,0 +1,15 @@
+# lib/mindee/parsing/common/page.rb
+module Mindee
+  module Parsing
+    module Common
+      class Page
+        def page_id: -> untyped
+        def orientation: -> untyped
+        def prediction: -> untyped
+        def extras: -> untyped
+        def initialize: (untyped) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

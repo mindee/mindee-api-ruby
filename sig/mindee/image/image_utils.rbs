@@ -1,0 +1,19 @@
+# lib/mindee/image/image_utils.rb
+module Mindee
+  module Image
+    module ImageUtils
+      def self.resize_image: (untyped, untyped, untyped) -> nil
+      def self.compress_image_quality: (untyped, untyped) -> untyped
+      def self.to_image: (untyped) -> (singleton(MiniMagick::Image) | MiniMagick::Image)
+      def self.image_to_stringio: (untyped, ?String) -> StringIO
+      def self.calculate_new_dimensions: (untyped, ?max_width: nil, ?max_height: nil) -> [untyped, untyped]
+      def self.calculate_dimensions_from_media_box: (untyped, untyped) -> [untyped, untyped]
+      def self.pdf_to_magick_image: (untyped, untyped) -> untyped
+      def self.normalize_polygon: (untyped) -> untyped
+      def self.read_page_content: (untyped) -> untyped
+      def self.crop_image: (untyped, untyped, untyped) -> untyped
+      def self.write_image_to_buffer: (untyped, untyped) -> untyped
+      def self.determine_file_extension: (untyped) -> String?
+    end
+  end
+end

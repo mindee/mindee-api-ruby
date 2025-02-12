@@ -1,0 +1,23 @@
+# lib/mindee/parsing/common/execution.rb
+module Mindee
+  module Parsing
+    module Common
+      class Execution
+        def batch_name: -> untyped
+        def created_at: -> untyped
+        def file: -> untyped
+        def id: -> untyped
+        def inference: -> untyped
+        def priority: -> untyped
+        def reviewed_at: -> untyped
+        def available_at: -> untyped
+        def reviewed_prediction: -> untyped
+        def status: -> untyped
+        def type: -> untyped
+        def uploaded_at: -> untyped
+        def workflow_id: -> untyped
+        def initialize: (untyped, untyped) -> untyped
+      end
+    end
+  end
+end

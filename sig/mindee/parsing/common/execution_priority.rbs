@@ -1,0 +1,13 @@
+# lib/mindee/parsing/common/execution_priority.rb
+module Mindee
+  module Parsing
+    module Common
+      module ExecutionPriority
+        LOW: :low
+        MEDIUM: :medium
+        HIGH: :high
+        def self.to_priority: (untyped) -> (:high | :low | :medium)?
+      end
+    end
+  end
+end

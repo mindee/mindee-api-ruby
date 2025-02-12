@@ -1,0 +1,10 @@
+# lib/mindee/geometry/min_max.rb
+module Mindee
+  module Geometry
+    class MinMax
+      def min: -> untyped
+      def max: -> untyped
+      def initialize: (untyped, untyped) -> untyped
+    end
+  end
+end

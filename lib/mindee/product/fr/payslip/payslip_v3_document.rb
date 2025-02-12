@@ -45,20 +45,20 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
+            super(prediction)
             @bank_account_details = PayslipV3BankAccountDetail.new(prediction['bank_account_details'], page_id)
             @employee = PayslipV3Employee.new(prediction['employee'], page_id)
             @employer = PayslipV3Employer.new(prediction['employer'], page_id)
             @employment = PayslipV3Employment.new(prediction['employment'], page_id)
             @paid_time_off = []
             prediction['paid_time_off'].each do |item|
-              @paid_time_off.push(PayslipV3PaidTimeOff.new(item, page_id))
+              @paid_time_off.push(Payslip::PayslipV3PaidTimeOff.new(item, page_id))
             end
             @pay_detail = PayslipV3PayDetail.new(prediction['pay_detail'], page_id)
             @pay_period = PayslipV3PayPeriod.new(prediction['pay_period'], page_id)
             @salary_details = []
             prediction['salary_details'].each do |item|
-              @salary_details.push(PayslipV3SalaryDetail.new(item, page_id))
+              @salary_details.push(Payslip::PayslipV3SalaryDetail.new(item, page_id))
             end
           end
 
