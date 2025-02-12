@@ -12,6 +12,27 @@ require_relative 'logging'
 OTS_OWNER = 'mindee'
 
 module Mindee
+  # Class for page options in parse calls.
+  #
+  # @!attribute page_indexes [Array[Integer]] Zero-based list of page indexes.
+  # @!attribute operation [:KEEP_ONLY, :REMOVE] Operation to apply on the document, given the specified page indexes:
+  #   * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+  #   * `:REMOVE` - remove the specified pages, and keep all others.
+  # @!attribute on_min_pages [Integer, nil] Apply the operation only if the document has at least this many pages.
+  class PageOptions
+    attr_accessor :page_indexes, :operation, :on_min_pages
+
+    def initialize(params: {})
+      params = params.transform_keys(&:to_sym)
+      @page_indexes = params.fetch(
+        :page_indexes,
+        [] # : Array[Integer]
+      )
+      @operation    = params.fetch(:operation, :KEEP_ONLY)
+      @on_min_pages = params.fetch(:on_min_pages, nil)
+    end
+  end
+
   # Class for configuration options in parse calls.
   #
   # @!attribute all_words [Boolean] Whether to include the full text for each page.
@@ -20,7 +41,7 @@ module Mindee
   #   This performs a full OCR operation on the server and may increase response time.
   # @!attribute close_file [Boolean] Whether to `close()` the file after parsing it.
   #   Set to false if you need to access the file after this operation.
-  # @!attribute page_options [Hash, nil] Page cutting/merge options:
+  # @!attribute page_options [PageOptions, Hash, nil] Page cutting/merge options:
   #   * `:page_indexes` Zero-based list of page indexes.
   #   * `:operation` Operation to apply on the document, given the specified page indexes:
   #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
@@ -36,10 +57,12 @@ module Mindee
                   :initial_delay_sec, :delay_sec, :max_retries
 
     def initialize(params: {})
+      params = params.transform_keys(&:to_sym)
       @all_words = params.fetch(:all_words, false)
       @full_text = params.fetch(:full_text, false)
       @close_file = params.fetch(:close_file, true)
-      @page_options = params.fetch(:page_options, nil) # TODO: convert to dataclass
+      raw_page_options = params.fetch(:page_options, nil)
+      @page_options = raw_page_options.is_a?(Hash) ? PageOptions.new(params: raw_page_options) : raw_page_options
       @cropper = params.fetch(:cropper, false)
       @initial_delay_sec = params.fetch(:initial_delay_sec, 2)
       @delay_sec = params.fetch(:delay_sec, 1.5)
@@ -55,7 +78,7 @@ module Mindee
   #   This performs a full OCR operation on the server and may increase response time.
   # @!attribute public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
   #   requiring authentication.
-  # @!attribute page_options [Hash, nil] Page cutting/merge options:
+  # @!attribute page_options [PageOptions, Hash, nil] Page cutting/merge options:
   #   * `:page_indexes` Zero-based list of page indexes.
   #   * `:operation` Operation to apply on the document, given the specified page indexes:
   #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
@@ -65,11 +88,13 @@ module Mindee
     attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options
 
     def initialize(params: {})
+      params = params.transform_keys(&:to_sym)
       @document_alias = params.fetch(:document_alias, nil)
       @priority = params.fetch(:priority, nil)
       @full_text = params.fetch(:full_text, false)
       @public_url = params.fetch(:public_url, nil)
-      @page_options = params.fetch(:page_options, nil)
+      raw_page_options = params.fetch(:page_options, nil)
+      @page_options = raw_page_options.is_a?(Hash) ? PageOptions.new(params: raw_page_options) : raw_page_options
     end
   end
 

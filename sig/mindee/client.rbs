@@ -4,12 +4,19 @@ module Mindee
   # Redeclare OTS_OWNER inside the module for internal use.
   OTS_OWNER: String
 
-  # ParseOptions is defined via a Struct in client.rb.
+  class PageOptions
+    attr_accessor page_indexes: Array[Integer]
+    attr_accessor operation: :KEEP_ONLY | :REMOVE
+    attr_accessor on_min_pages: Integer?
+
+    def initialize: (params: Hash[Symbol | String, untyped]) -> void
+  end
+
   class ParseOptions
     attr_accessor all_words: bool
     attr_accessor full_text: bool
     attr_accessor close_file: bool
-    attr_accessor page_options: (Hash[Symbol | String, untyped]?)
+    attr_accessor page_options: (PageOptions | Hash[Symbol | String, untyped]?)
     attr_accessor cropper: bool
     attr_accessor initial_delay_sec: Integer | Float
     attr_accessor delay_sec: Integer | Float
@@ -24,7 +31,7 @@ module Mindee
     attr_accessor priority: (Symbol?)
     attr_accessor full_text: bool
     attr_accessor public_url: (String?)
-    attr_accessor page_options: (Hash[Symbol | String, untyped]?)
+    attr_accessor page_options: (PageOptions | Hash[Symbol | String, untyped]?)
 
     def initialize: (params: Hash[Symbol | String, untyped]) -> void
   end
@@ -37,25 +44,20 @@ module Mindee
     def logger: () -> untyped
 
     # Enqueue a document for parsing.
-    # Parameters:
-    #  • input_source and product_class are positional.
-    #  • endpoint is a keyword (nil allowed).
-    #  • options is given as either a Hash with symbol keys or a ParseOptions.
-    #  • enqueue is a Boolean.
-    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> untyped
+    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Synchronous parsing call.
     # Note: options is expected to be a ParseOptions instance.
     def parse_sync: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
 
     # Asynchronous enqueuing of a document.
-    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> untyped
+    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Polls for a queued document using its job_id.
-    def parse_queued: (String, untyped, ?endpoint: HTTP::Endpoint?) -> untyped
+    def parse_queued: (String, untyped, ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
 
     # Enqueue and then continually poll for the parsing result.
-    def enqueue_and_parse: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> untyped
+    def enqueue_and_parse: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
 
     # Sends a document to a workflow.
     # The options parameter is either a Hash with symbol keys or a WorkflowOptions.
