@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = BarcodeReaderV1Document.new(prediction['prediction'], nil)
+          @prediction = BarcodeReaderV1Document.new(prediction, nil)
           @pages = []
           prediction['pages'].each do |page|
             @pages.push(BarcodeReaderV1Page.new(page))

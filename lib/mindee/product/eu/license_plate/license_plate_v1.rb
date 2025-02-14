@@ -19,7 +19,7 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = LicensePlateV1Document.new(prediction['prediction'], nil)
+            @prediction = LicensePlateV1Document.new(prediction, nil)
             @pages = []
             prediction['pages'].each do |page|
               @pages.push(LicensePlateV1Page.new(page))

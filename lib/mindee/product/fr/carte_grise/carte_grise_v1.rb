@@ -19,7 +19,7 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = CarteGriseV1Document.new(prediction['prediction'], nil)
+            @prediction = CarteGriseV1Document.new(prediction, nil)
             @pages = []
             prediction['pages'].each do |page|
               @pages.push(CarteGriseV1Page.new(page))
