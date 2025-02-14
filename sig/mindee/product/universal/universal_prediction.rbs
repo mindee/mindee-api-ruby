@@ -3,13 +3,13 @@ module Mindee
   module Product
     module Universal
       class UniversalPrediction < Parsing::Common::Prediction
-        def fields: -> Hash[untyped, untyped]
+        def fields: -> Hash[Symbol | String, untyped]
         def initialize: (untyped?) -> void
         def to_s: -> String
-        def generate_field_string: (untyped, untyped, Regexp) -> String
-        def generate_list_field_string: (untyped, untyped, untyped) -> String
-        def generate_sub_value_string: (untyped, untyped, untyped) -> String
-        def single_fields: -> Hash[untyped, untyped]
+        def generate_field_string: (String, Parsing::Universal::UniversalListField, Regexp) -> String
+        def generate_list_field_string: (String, Hash[Symbol | String, untyped], Regexp) -> String
+        def generate_sub_value_string: (String, Parsing::Universal::UniversalListField, Regexp) -> String
+        def single_fields: -> Hash[Symbol | String, untyped]
         def list_fields: -> Hash[Symbol | String, Parsing::Universal::UniversalListField]
         def object_fields: -> Hash[Symbol | String, untyped]
         def list_field_names: -> Array[untyped]

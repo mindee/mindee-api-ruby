@@ -8,14 +8,10 @@ module Mindee
     module Common
       # Potential values for queue in asynchronous calls.
       module JobStatus
-        # Document is waiting to be processed.
-        WAITING = :waiting
-        # Document is currently being parsed.
+        WAITING    = :waiting
         PROCESSING = :processing
-        # Document parsing is complete.
-        COMPLETED = :completed
-        # Job failed
-        FAILURE = :failed
+        COMPLETED  = :completed
+        FAILURE    = :failed
       end
 
       # Potential values for requests.
