@@ -19,7 +19,7 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = PayslipV3Document.new(prediction['prediction'], nil)
+            @prediction = PayslipV3Document.new(prediction, nil)
             @pages = []
             prediction['pages'].each do |page|
               @pages.push(PayslipV3Page.new(page))

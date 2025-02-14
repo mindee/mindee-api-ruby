@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = FinancialDocumentV1Document.new(prediction['prediction'], nil)
+          @prediction = FinancialDocumentV1Document.new(prediction, nil)
           @pages = []
           prediction['pages'].each do |page|
             @pages.push(FinancialDocumentV1Page.new(page))
