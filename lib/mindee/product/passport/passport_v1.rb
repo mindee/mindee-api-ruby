@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = PassportV1Document.new(prediction, nil)
+          @prediction = PassportV1Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
             @pages.push(PassportV1Page.new(page))
