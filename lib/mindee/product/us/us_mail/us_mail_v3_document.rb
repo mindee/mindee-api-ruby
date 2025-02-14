@@ -30,18 +30,18 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction)
-            @is_return_to_sender = BooleanField.new(prediction['is_return_to_sender'], page_id)
-            @recipient_addresses = []
+            super(prediction, page_id)
+            @is_return_to_sender = Parsing::Standard::BooleanField.new(prediction['is_return_to_sender'], page_id)
+            @recipient_addresses = [] # : Array[UsMail::UsMailV3RecipientAddress]
             prediction['recipient_addresses'].each do |item|
               @recipient_addresses.push(UsMail::UsMailV3RecipientAddress.new(item, page_id))
             end
-            @recipient_names = []
+            @recipient_names = [] # : Array[Parsing::Standard::StringField]
             prediction['recipient_names'].each do |item|
               @recipient_names.push(Parsing::Standard::StringField.new(item, page_id))
             end
-            @sender_address = UsMailV3SenderAddress.new(prediction['sender_address'], page_id)
-            @sender_name = StringField.new(prediction['sender_name'], page_id)
+            @sender_address = Product::US::UsMail::UsMailV3SenderAddress.new(prediction['sender_address'], page_id)
+            @sender_name = Parsing::Standard::StringField.new(prediction['sender_name'], page_id)
           end
 
           # @return [String]

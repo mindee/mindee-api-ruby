@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module BankStatement
-        # Bank Statement (FR) V1 document prediction.
+        # Bank Statement (FR) API version 1.1 document data.
         class BankStatementV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The unique identifier for a customer's account in the bank's system.
@@ -31,7 +31,7 @@ module Mindee
           # The initial amount of money in an account at the start of the period.
           # @return [Mindee::Parsing::Standard::AmountField]
           attr_reader :opening_balance
-          # The date on which the bank statement was universal.
+          # The date on which the bank statement was generated.
           # @return [Mindee::Parsing::Standard::DateField]
           attr_reader :statement_date
           # The date when the statement period ends.
@@ -53,22 +53,22 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
-            @account_number = StringField.new(prediction['account_number'], page_id)
-            @bank_address = StringField.new(prediction['bank_address'], page_id)
-            @bank_name = StringField.new(prediction['bank_name'], page_id)
-            @client_address = StringField.new(prediction['client_address'], page_id)
-            @client_name = StringField.new(prediction['client_name'], page_id)
-            @closing_balance = AmountField.new(prediction['closing_balance'], page_id)
-            @opening_balance = AmountField.new(prediction['opening_balance'], page_id)
-            @statement_date = DateField.new(prediction['statement_date'], page_id)
-            @statement_end_date = DateField.new(prediction['statement_end_date'], page_id)
-            @statement_start_date = DateField.new(prediction['statement_start_date'], page_id)
-            @total_credits = AmountField.new(prediction['total_credits'], page_id)
-            @total_debits = AmountField.new(prediction['total_debits'], page_id)
-            @transactions = []
+            super(prediction, page_id)
+            @account_number = Parsing::Standard::StringField.new(prediction['account_number'], page_id)
+            @bank_address = Parsing::Standard::StringField.new(prediction['bank_address'], page_id)
+            @bank_name = Parsing::Standard::StringField.new(prediction['bank_name'], page_id)
+            @client_address = Parsing::Standard::StringField.new(prediction['client_address'], page_id)
+            @client_name = Parsing::Standard::StringField.new(prediction['client_name'], page_id)
+            @closing_balance = Parsing::Standard::AmountField.new(prediction['closing_balance'], page_id)
+            @opening_balance = Parsing::Standard::AmountField.new(prediction['opening_balance'], page_id)
+            @statement_date = Parsing::Standard::DateField.new(prediction['statement_date'], page_id)
+            @statement_end_date = Parsing::Standard::DateField.new(prediction['statement_end_date'], page_id)
+            @statement_start_date = Parsing::Standard::DateField.new(prediction['statement_start_date'], page_id)
+            @total_credits = Parsing::Standard::AmountField.new(prediction['total_credits'], page_id)
+            @total_debits = Parsing::Standard::AmountField.new(prediction['total_debits'], page_id)
+            @transactions = [] # : Array[BankStatement::BankStatementV1Transaction]
             prediction['transactions'].each do |item|
-              @transactions.push(BankStatementV1Transaction.new(item, page_id))
+              @transactions.push(BankStatement::BankStatementV1Transaction.new(item, page_id))
             end
           end
 
@@ -100,9 +100,9 @@ module Mindee
           def transactions_separator(char)
             out_str = String.new
             out_str << '  '
-            out_str << "+#{char * 11}"
-            out_str << "+#{char * 12}"
-            out_str << "+#{char * 38}"
+            out_str << "+#{char * 8}"
+            out_str << "+#{char * 6}"
+            out_str << "+#{char * 13}"
             out_str << '+'
             out_str
           end
@@ -115,9 +115,9 @@ module Mindee
             out_str = String.new
             out_str << "\n#{transactions_separator('-')}"
             out_str << "\n  |"
-            out_str << ' Amount    |'
-            out_str << ' Date       |'
-            out_str << ' Description                          |'
+            out_str << ' Amount |'
+            out_str << ' Date |'
+            out_str << ' Description |'
             out_str << "\n#{transactions_separator('=')}"
             out_str << "\n  #{line_items}"
             out_str << "\n#{transactions_separator('-')}"

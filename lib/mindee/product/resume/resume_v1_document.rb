@@ -68,48 +68,48 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction)
-          @address = StringField.new(prediction['address'], page_id)
-          @certificates = []
+          super(prediction, page_id)
+          @address = Parsing::Standard::StringField.new(prediction['address'], page_id)
+          @certificates = [] # : Array[Resume::ResumeV1Certificate]
           prediction['certificates'].each do |item|
             @certificates.push(Resume::ResumeV1Certificate.new(item, page_id))
           end
-          @document_language = StringField.new(prediction['document_language'], page_id)
-          @document_type = ClassificationField.new(prediction['document_type'], page_id)
-          @education = []
+          @document_language = Parsing::Standard::StringField.new(prediction['document_language'], page_id)
+          @document_type = Parsing::Standard::ClassificationField.new(prediction['document_type'], page_id)
+          @education = [] # : Array[Resume::ResumeV1Education]
           prediction['education'].each do |item|
             @education.push(Resume::ResumeV1Education.new(item, page_id))
           end
-          @email_address = StringField.new(prediction['email_address'], page_id)
-          @given_names = []
+          @email_address = Parsing::Standard::StringField.new(prediction['email_address'], page_id)
+          @given_names = [] # : Array[Parsing::Standard::StringField]
           prediction['given_names'].each do |item|
             @given_names.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @hard_skills = []
+          @hard_skills = [] # : Array[Parsing::Standard::StringField]
           prediction['hard_skills'].each do |item|
             @hard_skills.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @job_applied = StringField.new(prediction['job_applied'], page_id)
-          @languages = []
+          @job_applied = Parsing::Standard::StringField.new(prediction['job_applied'], page_id)
+          @languages = [] # : Array[Resume::ResumeV1Language]
           prediction['languages'].each do |item|
             @languages.push(Resume::ResumeV1Language.new(item, page_id))
           end
-          @nationality = StringField.new(prediction['nationality'], page_id)
-          @phone_number = StringField.new(prediction['phone_number'], page_id)
-          @profession = StringField.new(prediction['profession'], page_id)
-          @professional_experiences = []
+          @nationality = Parsing::Standard::StringField.new(prediction['nationality'], page_id)
+          @phone_number = Parsing::Standard::StringField.new(prediction['phone_number'], page_id)
+          @profession = Parsing::Standard::StringField.new(prediction['profession'], page_id)
+          @professional_experiences = [] # : Array[Resume::ResumeV1ProfessionalExperience]
           prediction['professional_experiences'].each do |item|
             @professional_experiences.push(Resume::ResumeV1ProfessionalExperience.new(item, page_id))
           end
-          @social_networks_urls = []
+          @social_networks_urls = [] # : Array[Resume::ResumeV1SocialNetworksUrl]
           prediction['social_networks_urls'].each do |item|
             @social_networks_urls.push(Resume::ResumeV1SocialNetworksUrl.new(item, page_id))
           end
-          @soft_skills = []
+          @soft_skills = [] # : Array[Parsing::Standard::StringField]
           prediction['soft_skills'].each do |item|
             @soft_skills.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @surnames = []
+          @surnames = [] # : Array[Parsing::Standard::StringField]
           prediction['surnames'].each do |item|
             @surnames.push(Parsing::Standard::StringField.new(item, page_id))
           end

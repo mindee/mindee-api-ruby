@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = CropperV1Document.new
+          @prediction = CropperV1Document.new(prediction, nil)
           @pages = []
           prediction['pages'].each do |page|
             @pages.push(CropperV1Page.new(page))

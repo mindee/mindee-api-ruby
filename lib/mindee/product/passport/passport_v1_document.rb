@@ -45,21 +45,21 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction)
-          @birth_date = DateField.new(prediction['birth_date'], page_id)
-          @birth_place = StringField.new(prediction['birth_place'], page_id)
-          @country = StringField.new(prediction['country'], page_id)
-          @expiry_date = DateField.new(prediction['expiry_date'], page_id)
-          @gender = StringField.new(prediction['gender'], page_id)
-          @given_names = []
+          super(prediction, page_id)
+          @birth_date = Parsing::Standard::DateField.new(prediction['birth_date'], page_id)
+          @birth_place = Parsing::Standard::StringField.new(prediction['birth_place'], page_id)
+          @country = Parsing::Standard::StringField.new(prediction['country'], page_id)
+          @expiry_date = Parsing::Standard::DateField.new(prediction['expiry_date'], page_id)
+          @gender = Parsing::Standard::StringField.new(prediction['gender'], page_id)
+          @given_names = [] # : Array[Parsing::Standard::StringField]
           prediction['given_names'].each do |item|
             @given_names.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @id_number = StringField.new(prediction['id_number'], page_id)
-          @issuance_date = DateField.new(prediction['issuance_date'], page_id)
-          @mrz1 = StringField.new(prediction['mrz1'], page_id)
-          @mrz2 = StringField.new(prediction['mrz2'], page_id)
-          @surname = StringField.new(prediction['surname'], page_id)
+          @id_number = Parsing::Standard::StringField.new(prediction['id_number'], page_id)
+          @issuance_date = Parsing::Standard::DateField.new(prediction['issuance_date'], page_id)
+          @mrz1 = Parsing::Standard::StringField.new(prediction['mrz1'], page_id)
+          @mrz2 = Parsing::Standard::StringField.new(prediction['mrz2'], page_id)
+          @surname = Parsing::Standard::StringField.new(prediction['surname'], page_id)
         end
 
         # @return [String]

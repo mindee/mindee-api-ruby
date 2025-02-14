@@ -13,9 +13,7 @@ target :lib do
   signature 'sig/mindee/logging/**/*.rbs'
   signature 'sig/mindee/parsing/**/*.rbs'
   signature 'sig/mindee/pdf/**/*.rbs'
-  signature 'sig/mindee/product/invoice_splitter/*.rbs'
-  signature 'sig/mindee/product/multi_receipts_detector/*.rbs'
-  signature 'sig/mindee/product/universal/*.rbs'
+  signature 'sig/mindee/product/**/*.rbs'
   signature 'sig/mindee/input/**/*.rbs'
 
   check 'lib/mindee/*.rb'
@@ -27,9 +25,7 @@ target :lib do
   check 'lib/mindee/logging/**/*.rb'
   check 'lib/mindee/parsing/**/*.rb'
   check 'lib/mindee/pdf/**/*.rb'
-  check 'lib/mindee/product/invoice_splitter/*.rb'
-  check 'lib/mindee/product/multi_receipts_detector/*.rb'
-  check 'lib/mindee/product/universal/*.rb'
+  check 'lib/mindee/product/**/*.rb'
   check 'lib/mindee/input/**/*.rbs'
   # check 'bin' # CLI files are ignored
   library 'date'

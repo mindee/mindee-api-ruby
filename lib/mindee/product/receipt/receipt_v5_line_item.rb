@@ -36,9 +36,9 @@ module Mindee
         def printable_values
           printable = {}
           printable[:description] = format_for_display(@description)
-          printable[:quantity] = @quantity.nil? ? '' : BaseField.float_to_string(@quantity)
-          printable[:total_amount] = @total_amount.nil? ? '' : BaseField.float_to_string(@total_amount)
-          printable[:unit_price] = @unit_price.nil? ? '' : BaseField.float_to_string(@unit_price)
+          printable[:quantity] = @quantity.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@quantity)
+          printable[:total_amount] = @total_amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@total_amount)
+          printable[:unit_price] = @unit_price.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@unit_price)
           printable
         end
 
@@ -46,9 +46,9 @@ module Mindee
         def table_printable_values
           printable = {}
           printable[:description] = format_for_display(@description, 36)
-          printable[:quantity] = @quantity.nil? ? '' : BaseField.float_to_string(@quantity)
-          printable[:total_amount] = @total_amount.nil? ? '' : BaseField.float_to_string(@total_amount)
-          printable[:unit_price] = @unit_price.nil? ? '' : BaseField.float_to_string(@unit_price)
+          printable[:quantity] = @quantity.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@quantity)
+          printable[:total_amount] = @total_amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@total_amount)
+          printable[:unit_price] = @unit_price.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@unit_price)
           printable
         end
 

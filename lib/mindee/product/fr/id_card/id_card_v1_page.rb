@@ -34,7 +34,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            @document_side = ClassificationField.new(prediction['document_side'], page_id)
+            @document_side = Parsing::Standard::ClassificationField.new(prediction['document_side'], page_id)
             super
           end
 

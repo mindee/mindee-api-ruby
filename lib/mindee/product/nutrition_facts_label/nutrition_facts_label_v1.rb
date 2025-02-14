@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = NutritionFactsLabelV1Document.new(prediction['prediction'], nil)
+          @prediction = NutritionFactsLabelV1Document.new(prediction, nil)
           @pages = []
           prediction['pages'].each do |page|
             @pages.push(NutritionFactsLabelV1Page.new(page))

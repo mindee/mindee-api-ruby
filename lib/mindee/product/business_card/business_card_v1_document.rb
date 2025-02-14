@@ -45,21 +45,21 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction)
-          @address = StringField.new(prediction['address'], page_id)
-          @company = StringField.new(prediction['company'], page_id)
-          @email = StringField.new(prediction['email'], page_id)
-          @fax_number = StringField.new(prediction['fax_number'], page_id)
-          @firstname = StringField.new(prediction['firstname'], page_id)
-          @job_title = StringField.new(prediction['job_title'], page_id)
-          @lastname = StringField.new(prediction['lastname'], page_id)
-          @mobile_number = StringField.new(prediction['mobile_number'], page_id)
-          @phone_number = StringField.new(prediction['phone_number'], page_id)
-          @social_media = []
+          super(prediction, page_id)
+          @address = Parsing::Standard::StringField.new(prediction['address'], page_id)
+          @company = Parsing::Standard::StringField.new(prediction['company'], page_id)
+          @email = Parsing::Standard::StringField.new(prediction['email'], page_id)
+          @fax_number = Parsing::Standard::StringField.new(prediction['fax_number'], page_id)
+          @firstname = Parsing::Standard::StringField.new(prediction['firstname'], page_id)
+          @job_title = Parsing::Standard::StringField.new(prediction['job_title'], page_id)
+          @lastname = Parsing::Standard::StringField.new(prediction['lastname'], page_id)
+          @mobile_number = Parsing::Standard::StringField.new(prediction['mobile_number'], page_id)
+          @phone_number = Parsing::Standard::StringField.new(prediction['phone_number'], page_id)
+          @social_media = [] # : Array[Parsing::Standard::StringField]
           prediction['social_media'].each do |item|
             @social_media.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @website = StringField.new(prediction['website'], page_id)
+          @website = Parsing::Standard::StringField.new(prediction['website'], page_id)
         end
 
         # @return [String]

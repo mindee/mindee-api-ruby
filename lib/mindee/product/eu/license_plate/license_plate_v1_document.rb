@@ -16,8 +16,8 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction)
-            @license_plates = []
+            super(prediction, page_id)
+            @license_plates = [] # : Array[Parsing::Standard::StringField]
             prediction['license_plates'].each do |item|
               @license_plates.push(Parsing::Standard::StringField.new(item, page_id))
             end

@@ -33,14 +33,14 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction)
-          @customer_address = StringField.new(prediction['customer_address'], page_id)
-          @customer_name = StringField.new(prediction['customer_name'], page_id)
-          @delivery_date = DateField.new(prediction['delivery_date'], page_id)
-          @delivery_number = StringField.new(prediction['delivery_number'], page_id)
-          @supplier_address = StringField.new(prediction['supplier_address'], page_id)
-          @supplier_name = StringField.new(prediction['supplier_name'], page_id)
-          @total_amount = AmountField.new(prediction['total_amount'], page_id)
+          super(prediction, page_id)
+          @customer_address = Parsing::Standard::StringField.new(prediction['customer_address'], page_id)
+          @customer_name = Parsing::Standard::StringField.new(prediction['customer_name'], page_id)
+          @delivery_date = Parsing::Standard::DateField.new(prediction['delivery_date'], page_id)
+          @delivery_number = Parsing::Standard::StringField.new(prediction['delivery_number'], page_id)
+          @supplier_address = Parsing::Standard::StringField.new(prediction['supplier_address'], page_id)
+          @supplier_name = Parsing::Standard::StringField.new(prediction['supplier_name'], page_id)
+          @total_amount = Parsing::Standard::AmountField.new(prediction['total_amount'], page_id)
         end
 
         # @return [String]

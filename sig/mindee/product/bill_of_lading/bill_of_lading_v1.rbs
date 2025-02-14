@@ -1,0 +1,11 @@
+# lib/mindee/product/bill_of_lading/bill_of_lading_v1.rb
+
+module Mindee
+  module Product
+    module BillOfLading
+      class BillOfLadingV1 < Parsing::Common::Inference
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+    end
+  end
+end

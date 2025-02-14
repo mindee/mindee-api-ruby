@@ -1,0 +1,15 @@
+module Mindee
+  module Product
+    module Resume
+      class ResumeV1SocialNetworksUrl < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def name: -> String
+        def url: -> String
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

@@ -67,19 +67,19 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            @address = StringField.new(prediction['address'], page_id)
-            @business_name = StringField.new(prediction['business_name'], page_id)
-            @city_state_zip = StringField.new(prediction['city_state_zip'], page_id)
-            @ein = StringField.new(prediction['ein'], page_id)
-            @name = StringField.new(prediction['name'], page_id)
-            @signature_date_position = PositionField.new(prediction['signature_date_position'], page_id)
-            @signature_position = PositionField.new(prediction['signature_position'], page_id)
-            @ssn = StringField.new(prediction['ssn'], page_id)
-            @tax_classification = StringField.new(prediction['tax_classification'], page_id)
-            @tax_classification_llc = StringField.new(prediction['tax_classification_llc'], page_id)
-            @tax_classification_other_details = StringField.new(prediction['tax_classification_other_details'], page_id)
-            @w9_revision_date = StringField.new(prediction['w9_revision_date'], page_id)
-            super()
+            @address = Parsing::Standard::StringField.new(prediction['address'], page_id)
+            @business_name = Parsing::Standard::StringField.new(prediction['business_name'], page_id)
+            @city_state_zip = Parsing::Standard::StringField.new(prediction['city_state_zip'], page_id)
+            @ein = Parsing::Standard::StringField.new(prediction['ein'], page_id)
+            @name = Parsing::Standard::StringField.new(prediction['name'], page_id)
+            @signature_date_position = Parsing::Standard::PositionField.new(prediction['signature_date_position'], page_id)
+            @signature_position = Parsing::Standard::PositionField.new(prediction['signature_position'], page_id)
+            @ssn = Parsing::Standard::StringField.new(prediction['ssn'], page_id)
+            @tax_classification = Parsing::Standard::StringField.new(prediction['tax_classification'], page_id)
+            @tax_classification_llc = Parsing::Standard::StringField.new(prediction['tax_classification_llc'], page_id)
+            @tax_classification_other_details = Parsing::Standard::StringField.new(prediction['tax_classification_other_details'], page_id)
+            @w9_revision_date = Parsing::Standard::StringField.new(prediction['w9_revision_date'], page_id)
+            super(prediction, page_id)
           end
 
           # @return [String]

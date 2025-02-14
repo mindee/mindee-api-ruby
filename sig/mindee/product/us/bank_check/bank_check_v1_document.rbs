@@ -1,0 +1,20 @@
+# lib/mindee/product/../bank_check/bank_check_v1_document.rb
+
+module Mindee
+  module Product
+    module US
+      module BankCheck
+        class BankCheckV1Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def account_number: -> (Parsing::Standard::StringField)
+          def amount: -> (Parsing::Standard::AmountField)
+          def check_number: -> (Parsing::Standard::StringField)
+          def date: -> (Parsing::Standard::DateField)
+          def payees: -> (Array[Parsing::Standard::StringField])
+          def routing_number: -> (Parsing::Standard::StringField)
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

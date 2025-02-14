@@ -18,12 +18,12 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction)
-          @codes_1d = []
+          super(prediction, page_id)
+          @codes_1d = [] # : Array[Parsing::Standard::StringField]
           prediction['codes_1d'].each do |item|
             @codes_1d.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @codes_2d = []
+          @codes_2d = [] # : Array[Parsing::Standard::StringField]
           prediction['codes_2d'].each do |item|
             @codes_2d.push(Parsing::Standard::StringField.new(item, page_id))
           end

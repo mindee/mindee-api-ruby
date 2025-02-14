@@ -1,0 +1,11 @@
+# lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1.rb
+
+module Mindee
+  module Product
+    module NutritionFactsLabel
+      class NutritionFactsLabelV1 < Parsing::Common::Inference
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+    end
+  end
+end

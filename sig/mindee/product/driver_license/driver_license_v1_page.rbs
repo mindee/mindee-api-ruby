@@ -1,0 +1,15 @@
+# lib/mindee/product/driver_license/driver_license_v1_page.rb
+
+module Mindee
+  module Product
+    module DriverLicense
+      class DriverLicenseV1Page < Parsing::Common::Page
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+      class DriverLicenseV1PagePrediction < DriverLicenseV1Document
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

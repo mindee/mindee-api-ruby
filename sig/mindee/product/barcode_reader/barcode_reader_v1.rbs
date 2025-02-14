@@ -1,0 +1,11 @@
+# lib/mindee/product/barcode_reader/barcode_reader_v1.rb
+
+module Mindee
+  module Product
+    module BarcodeReader
+      class BarcodeReaderV1 < Parsing::Common::Inference
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+    end
+  end
+end

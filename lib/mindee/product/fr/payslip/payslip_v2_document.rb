@@ -45,15 +45,15 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction)
-            @bank_account_details = PayslipV2BankAccountDetail.new(prediction['bank_account_details'], page_id)
-            @employee = PayslipV2Employee.new(prediction['employee'], page_id)
-            @employer = PayslipV2Employer.new(prediction['employer'], page_id)
-            @employment = PayslipV2Employment.new(prediction['employment'], page_id)
-            @pay_detail = PayslipV2PayDetail.new(prediction['pay_detail'], page_id)
-            @pay_period = PayslipV2PayPeriod.new(prediction['pay_period'], page_id)
-            @pto = PayslipV2Pto.new(prediction['pto'], page_id)
-            @salary_details = []
+            super(prediction, page_id)
+            @bank_account_details = Product::FR::Payslip::PayslipV2BankAccountDetail.new(prediction['bank_account_details'], page_id)
+            @employee = Product::FR::Payslip::PayslipV2Employee.new(prediction['employee'], page_id)
+            @employer = Product::FR::Payslip::PayslipV2Employer.new(prediction['employer'], page_id)
+            @employment = Product::FR::Payslip::PayslipV2Employment.new(prediction['employment'], page_id)
+            @pay_detail = Product::FR::Payslip::PayslipV2PayDetail.new(prediction['pay_detail'], page_id)
+            @pay_period = Product::FR::Payslip::PayslipV2PayPeriod.new(prediction['pay_period'], page_id)
+            @pto = Product::FR::Payslip::PayslipV2Pto.new(prediction['pto'], page_id)
+            @salary_details = [] # : Array[Payslip::PayslipV2SalaryDetail]
             prediction['salary_details'].each do |item|
               @salary_details.push(Payslip::PayslipV2SalaryDetail.new(item, page_id))
             end

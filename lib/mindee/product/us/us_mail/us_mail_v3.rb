@@ -19,7 +19,7 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = UsMailV3Document.new(prediction['prediction'], nil)
+            @prediction = UsMailV3Document.new(prediction, nil)
             @pages = []
             prediction['pages'].each do |page|
               @pages.push(UsMailV3Page.new(page))

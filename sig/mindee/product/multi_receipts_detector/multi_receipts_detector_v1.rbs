@@ -1,13 +1,10 @@
 # lib/mindee/product/multi_receipts_detector/multi_receipts_detector_v1.rb
+
 module Mindee
   module Product
     module MultiReceiptsDetector
       class MultiReceiptsDetectorV1 < Parsing::Common::Inference
         def initialize: (Hash[Symbol | String, untyped]) -> void
-        def endpoint_name: -> String
-        def endpoint_version: -> String
-        def has_async: -> bool
-        def has_sync: -> bool
       end
     end
   end
