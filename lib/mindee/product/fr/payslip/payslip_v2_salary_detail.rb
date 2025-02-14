@@ -36,20 +36,26 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
-            printable[:base] = @base.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@base)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
+            printable[:base] =
+              @base.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@base)
             printable[:description] = format_for_display(@description)
-            printable[:rate] = @rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@rate)
+            printable[:rate] =
+              @rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@rate)
             printable
           end
 
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
-            printable[:base] = @base.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@base)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
+            printable[:base] =
+              @base.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@base)
             printable[:description] = format_for_display(@description, 36)
-            printable[:rate] = @rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@rate)
+            printable[:rate] =
+              @rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@rate)
             printable
           end
 

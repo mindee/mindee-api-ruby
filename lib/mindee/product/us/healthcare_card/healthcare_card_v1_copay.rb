@@ -28,7 +28,8 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:service_fees] = @service_fees.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@service_fees)
+            printable[:service_fees] =
+              @service_fees.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@service_fees)
             printable[:service_name] = format_for_display(@service_name)
             printable
           end
@@ -36,7 +37,8 @@ module Mindee
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:service_fees] = @service_fees.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@service_fees)
+            printable[:service_fees] =
+              @service_fees.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@service_fees)
             printable[:service_name] = format_for_display(@service_name, nil)
             printable
           end

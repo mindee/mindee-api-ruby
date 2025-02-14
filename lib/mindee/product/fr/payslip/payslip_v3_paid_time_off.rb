@@ -40,22 +40,28 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:accrued] = @accrued.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@accrued)
+            printable[:accrued] =
+              @accrued.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@accrued)
             printable[:period] = format_for_display(@period)
             printable[:pto_type] = format_for_display(@pto_type)
-            printable[:remaining] = @remaining.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@remaining)
-            printable[:used] = @used.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used)
+            printable[:remaining] =
+              @remaining.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@remaining)
+            printable[:used] =
+              @used.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used)
             printable
           end
 
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:accrued] = @accrued.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@accrued)
+            printable[:accrued] =
+              @accrued.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@accrued)
             printable[:period] = format_for_display(@period, 6)
             printable[:pto_type] = format_for_display(@pto_type, 11)
-            printable[:remaining] = @remaining.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@remaining)
-            printable[:used] = @used.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used)
+            printable[:remaining] =
+              @remaining.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@remaining)
+            printable[:used] =
+              @used.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used)
             printable
           end
 

@@ -67,24 +67,63 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
-          @added_sugars = Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar.new(prediction['added_sugars'], page_id)
-          @calories = Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie.new(prediction['calories'], page_id)
-          @cholesterol = Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol.new(prediction['cholesterol'], page_id)
-          @dietary_fiber = Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber.new(prediction['dietary_fiber'], page_id)
+          super
+          @added_sugars = Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar.new(
+            prediction['added_sugars'],
+            page_id
+          )
+          @calories = Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie.new(
+            prediction['calories'],
+            page_id
+          )
+          @cholesterol = Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol.new(
+            prediction['cholesterol'],
+            page_id
+          )
+          @dietary_fiber = Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber.new(
+            prediction['dietary_fiber'],
+            page_id
+          )
           @nutrients = [] # : Array[NutritionFactsLabel::NutritionFactsLabelV1Nutrient]
           prediction['nutrients'].each do |item|
             @nutrients.push(NutritionFactsLabel::NutritionFactsLabelV1Nutrient.new(item, page_id))
           end
-          @protein = Product::NutritionFactsLabel::NutritionFactsLabelV1Protein.new(prediction['protein'], page_id)
-          @saturated_fat = Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat.new(prediction['saturated_fat'], page_id)
-          @serving_per_box = Parsing::Standard::AmountField.new(prediction['serving_per_box'], page_id)
-          @serving_size = Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize.new(prediction['serving_size'], page_id)
-          @sodium = Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium.new(prediction['sodium'], page_id)
-          @total_carbohydrate = Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate.new(prediction['total_carbohydrate'], page_id)
-          @total_fat = Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat.new(prediction['total_fat'], page_id)
-          @total_sugars = Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar.new(prediction['total_sugars'], page_id)
-          @trans_fat = Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat.new(prediction['trans_fat'], page_id)
+          @protein = Product::NutritionFactsLabel::NutritionFactsLabelV1Protein.new(
+            prediction['protein'],
+            page_id
+          )
+          @saturated_fat = Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat.new(
+            prediction['saturated_fat'],
+            page_id
+          )
+          @serving_per_box = Parsing::Standard::AmountField.new(
+            prediction['serving_per_box'],
+            page_id
+          )
+          @serving_size = Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize.new(
+            prediction['serving_size'],
+            page_id
+          )
+          @sodium = Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium.new(
+            prediction['sodium'],
+            page_id
+          )
+          @total_carbohydrate = Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate.new(
+            prediction['total_carbohydrate'],
+            page_id
+          )
+          @total_fat = Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat.new(
+            prediction['total_fat'],
+            page_id
+          )
+          @total_sugars = Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar.new(
+            prediction['total_sugars'],
+            page_id
+          )
+          @trans_fat = Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat.new(
+            prediction['trans_fat'],
+            page_id
+          )
         end
 
         # @return [String]

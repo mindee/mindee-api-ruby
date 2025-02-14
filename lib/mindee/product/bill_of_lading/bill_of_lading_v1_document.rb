@@ -50,21 +50,51 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
-          @bill_of_lading_number = Parsing::Standard::StringField.new(prediction['bill_of_lading_number'], page_id)
-          @carrier = Product::BillOfLading::BillOfLadingV1Carrier.new(prediction['carrier'], page_id)
+          super
+          @bill_of_lading_number = Parsing::Standard::StringField.new(
+            prediction['bill_of_lading_number'],
+            page_id
+          )
+          @carrier = Product::BillOfLading::BillOfLadingV1Carrier.new(
+            prediction['carrier'],
+            page_id
+          )
           @carrier_items = [] # : Array[BillOfLading::BillOfLadingV1CarrierItem]
           prediction['carrier_items'].each do |item|
             @carrier_items.push(BillOfLading::BillOfLadingV1CarrierItem.new(item, page_id))
           end
-          @consignee = Product::BillOfLading::BillOfLadingV1Consignee.new(prediction['consignee'], page_id)
-          @date_of_issue = Parsing::Standard::DateField.new(prediction['date_of_issue'], page_id)
-          @departure_date = Parsing::Standard::DateField.new(prediction['departure_date'], page_id)
-          @notify_party = Product::BillOfLading::BillOfLadingV1NotifyParty.new(prediction['notify_party'], page_id)
-          @place_of_delivery = Parsing::Standard::StringField.new(prediction['place_of_delivery'], page_id)
-          @port_of_discharge = Parsing::Standard::StringField.new(prediction['port_of_discharge'], page_id)
-          @port_of_loading = Parsing::Standard::StringField.new(prediction['port_of_loading'], page_id)
-          @shipper = Product::BillOfLading::BillOfLadingV1Shipper.new(prediction['shipper'], page_id)
+          @consignee = Product::BillOfLading::BillOfLadingV1Consignee.new(
+            prediction['consignee'],
+            page_id
+          )
+          @date_of_issue = Parsing::Standard::DateField.new(
+            prediction['date_of_issue'],
+            page_id
+          )
+          @departure_date = Parsing::Standard::DateField.new(
+            prediction['departure_date'],
+            page_id
+          )
+          @notify_party = Product::BillOfLading::BillOfLadingV1NotifyParty.new(
+            prediction['notify_party'],
+            page_id
+          )
+          @place_of_delivery = Parsing::Standard::StringField.new(
+            prediction['place_of_delivery'],
+            page_id
+          )
+          @port_of_discharge = Parsing::Standard::StringField.new(
+            prediction['port_of_discharge'],
+            page_id
+          )
+          @port_of_loading = Parsing::Standard::StringField.new(
+            prediction['port_of_loading'],
+            page_id
+          )
+          @shipper = Product::BillOfLading::BillOfLadingV1Shipper.new(
+            prediction['shipper'],
+            page_id
+          )
         end
 
         # @return [String]

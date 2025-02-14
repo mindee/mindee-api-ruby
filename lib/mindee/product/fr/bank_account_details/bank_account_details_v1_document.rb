@@ -22,8 +22,11 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
-            @account_holder_name = Parsing::Standard::StringField.new(prediction['account_holder_name'], page_id)
+            super
+            @account_holder_name = Parsing::Standard::StringField.new(
+              prediction['account_holder_name'],
+              page_id
+            )
             @iban = Parsing::Standard::StringField.new(prediction['iban'], page_id)
             @swift = Parsing::Standard::StringField.new(prediction['swift'], page_id)
           end

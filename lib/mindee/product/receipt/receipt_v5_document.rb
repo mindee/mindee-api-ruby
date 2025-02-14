@@ -64,30 +64,63 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
-          @category = Parsing::Standard::ClassificationField.new(prediction['category'], page_id)
+          super
+          @category = Parsing::Standard::ClassificationField.new(
+            prediction['category'],
+            page_id
+          )
           @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
-          @document_type = Parsing::Standard::ClassificationField.new(prediction['document_type'], page_id)
+          @document_type = Parsing::Standard::ClassificationField.new(
+            prediction['document_type'],
+            page_id
+          )
           @line_items = [] # : Array[Receipt::ReceiptV5LineItem]
           prediction['line_items'].each do |item|
             @line_items.push(Receipt::ReceiptV5LineItem.new(item, page_id))
           end
-          @locale = Parsing::Standard::LocaleField.new(prediction['locale'], page_id)
-          @receipt_number = Parsing::Standard::StringField.new(prediction['receipt_number'], page_id)
-          @subcategory = Parsing::Standard::ClassificationField.new(prediction['subcategory'], page_id)
-          @supplier_address = Parsing::Standard::StringField.new(prediction['supplier_address'], page_id)
+          @locale = Parsing::Standard::LocaleField.new(
+            prediction['locale'],
+            page_id
+          )
+          @receipt_number = Parsing::Standard::StringField.new(
+            prediction['receipt_number'],
+            page_id
+          )
+          @subcategory = Parsing::Standard::ClassificationField.new(
+            prediction['subcategory'],
+            page_id
+          )
+          @supplier_address = Parsing::Standard::StringField.new(
+            prediction['supplier_address'],
+            page_id
+          )
           @supplier_company_registrations = [] # : Array[Parsing::Standard::CompanyRegistrationField]
           prediction['supplier_company_registrations'].each do |item|
             @supplier_company_registrations.push(Parsing::Standard::CompanyRegistrationField.new(item, page_id))
           end
-          @supplier_name = Parsing::Standard::StringField.new(prediction['supplier_name'], page_id)
-          @supplier_phone_number = Parsing::Standard::StringField.new(prediction['supplier_phone_number'], page_id)
+          @supplier_name = Parsing::Standard::StringField.new(
+            prediction['supplier_name'],
+            page_id
+          )
+          @supplier_phone_number = Parsing::Standard::StringField.new(
+            prediction['supplier_phone_number'],
+            page_id
+          )
           @taxes = Parsing::Standard::Taxes.new(prediction['taxes'], page_id)
           @time = Parsing::Standard::StringField.new(prediction['time'], page_id)
           @tip = Parsing::Standard::AmountField.new(prediction['tip'], page_id)
-          @total_amount = Parsing::Standard::AmountField.new(prediction['total_amount'], page_id)
-          @total_net = Parsing::Standard::AmountField.new(prediction['total_net'], page_id)
-          @total_tax = Parsing::Standard::AmountField.new(prediction['total_tax'], page_id)
+          @total_amount = Parsing::Standard::AmountField.new(
+            prediction['total_amount'],
+            page_id
+          )
+          @total_net = Parsing::Standard::AmountField.new(
+            prediction['total_net'],
+            page_id
+          )
+          @total_tax = Parsing::Standard::AmountField.new(
+            prediction['total_tax'],
+            page_id
+          )
         end
 
         # @return [String]

@@ -51,19 +51,49 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
-          @category = Parsing::Standard::StringField.new(prediction['category'], page_id)
-          @country_code = Parsing::Standard::StringField.new(prediction['country_code'], page_id)
-          @date_of_birth = Parsing::Standard::DateField.new(prediction['date_of_birth'], page_id)
-          @dd_number = Parsing::Standard::StringField.new(prediction['dd_number'], page_id)
-          @expiry_date = Parsing::Standard::DateField.new(prediction['expiry_date'], page_id)
-          @first_name = Parsing::Standard::StringField.new(prediction['first_name'], page_id)
+          super
+          @category = Parsing::Standard::StringField.new(
+            prediction['category'],
+            page_id
+          )
+          @country_code = Parsing::Standard::StringField.new(
+            prediction['country_code'],
+            page_id
+          )
+          @date_of_birth = Parsing::Standard::DateField.new(
+            prediction['date_of_birth'],
+            page_id
+          )
+          @dd_number = Parsing::Standard::StringField.new(
+            prediction['dd_number'],
+            page_id
+          )
+          @expiry_date = Parsing::Standard::DateField.new(
+            prediction['expiry_date'],
+            page_id
+          )
+          @first_name = Parsing::Standard::StringField.new(
+            prediction['first_name'],
+            page_id
+          )
           @id = Parsing::Standard::StringField.new(prediction['id'], page_id)
-          @issued_date = Parsing::Standard::DateField.new(prediction['issued_date'], page_id)
-          @issuing_authority = Parsing::Standard::StringField.new(prediction['issuing_authority'], page_id)
-          @last_name = Parsing::Standard::StringField.new(prediction['last_name'], page_id)
+          @issued_date = Parsing::Standard::DateField.new(
+            prediction['issued_date'],
+            page_id
+          )
+          @issuing_authority = Parsing::Standard::StringField.new(
+            prediction['issuing_authority'],
+            page_id
+          )
+          @last_name = Parsing::Standard::StringField.new(
+            prediction['last_name'],
+            page_id
+          )
           @mrz = Parsing::Standard::StringField.new(prediction['mrz'], page_id)
-          @place_of_birth = Parsing::Standard::StringField.new(prediction['place_of_birth'], page_id)
+          @place_of_birth = Parsing::Standard::StringField.new(
+            prediction['place_of_birth'],
+            page_id
+          )
           @state = Parsing::Standard::StringField.new(prediction['state'], page_id)
         end
 

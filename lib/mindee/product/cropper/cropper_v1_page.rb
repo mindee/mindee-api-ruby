@@ -37,7 +37,7 @@ module Mindee
           prediction['cropping'].each do |item|
             @cropping.push(Parsing::Standard::PositionField.new(item, page_id))
           end
-          super(prediction, page_id)
+          super
         end
 
         # @return [String]

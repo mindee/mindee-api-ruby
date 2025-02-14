@@ -33,10 +33,19 @@ module Mindee
           def printable_values
             printable = {}
             printable[:accrued_this_period] =
-              @accrued_this_period.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@accrued_this_period)
+              if @accrued_this_period.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@accrued_this_period)
+              end
             printable[:balance_end_of_period] =
-              @balance_end_of_period.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@balance_end_of_period)
-            printable[:used_this_period] = @used_this_period.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used_this_period)
+              if @balance_end_of_period.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@balance_end_of_period)
+              end
+            printable[:used_this_period] =
+              @used_this_period.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used_this_period)
             printable
           end
 

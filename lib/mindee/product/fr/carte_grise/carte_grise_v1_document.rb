@@ -136,7 +136,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @a = Parsing::Standard::StringField.new(prediction['a'], page_id)
             @b = Parsing::Standard::DateField.new(prediction['b'], page_id)
             @c1 = Parsing::Standard::StringField.new(prediction['c1'], page_id)
@@ -149,7 +149,10 @@ module Mindee
             @f1 = Parsing::Standard::StringField.new(prediction['f1'], page_id)
             @f2 = Parsing::Standard::StringField.new(prediction['f2'], page_id)
             @f3 = Parsing::Standard::StringField.new(prediction['f3'], page_id)
-            @formula_number = Parsing::Standard::StringField.new(prediction['formula_number'], page_id)
+            @formula_number = Parsing::Standard::StringField.new(
+              prediction['formula_number'],
+              page_id
+            )
             @g = Parsing::Standard::StringField.new(prediction['g'], page_id)
             @g1 = Parsing::Standard::StringField.new(prediction['g1'], page_id)
             @i = Parsing::Standard::DateField.new(prediction['i'], page_id)
@@ -159,8 +162,14 @@ module Mindee
             @j3 = Parsing::Standard::StringField.new(prediction['j3'], page_id)
             @mrz1 = Parsing::Standard::StringField.new(prediction['mrz1'], page_id)
             @mrz2 = Parsing::Standard::StringField.new(prediction['mrz2'], page_id)
-            @owner_first_name = Parsing::Standard::StringField.new(prediction['owner_first_name'], page_id)
-            @owner_surname = Parsing::Standard::StringField.new(prediction['owner_surname'], page_id)
+            @owner_first_name = Parsing::Standard::StringField.new(
+              prediction['owner_first_name'],
+              page_id
+            )
+            @owner_surname = Parsing::Standard::StringField.new(
+              prediction['owner_surname'],
+              page_id
+            )
             @p1 = Parsing::Standard::StringField.new(prediction['p1'], page_id)
             @p2 = Parsing::Standard::StringField.new(prediction['p2'], page_id)
             @p3 = Parsing::Standard::StringField.new(prediction['p3'], page_id)
