@@ -7,9 +7,9 @@ require_relative 'bank_statement_v1_page'
 module Mindee
   module Product
     module FR
-      # Bank Statement (FR) module.
+      # Bank Statement module.
       module BankStatement
-        # Bank Statement (FR) API version 1 inference prediction.
+        # Bank Statement API version 1 inference prediction.
         class BankStatementV1 < Mindee::Parsing::Common::Inference
           @endpoint_name = 'bank_statement_fr'
           @endpoint_version = '1'
@@ -19,7 +19,7 @@ module Mindee
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = BankStatementV1Document.new(prediction, nil)
+            @prediction = BankStatementV1Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
               @pages.push(BankStatementV1Page.new(page))

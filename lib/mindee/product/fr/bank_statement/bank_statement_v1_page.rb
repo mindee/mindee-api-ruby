@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module BankStatement
-        # Bank Statement (FR) API version 1.1 page data.
+        # Bank Statement API version 1.1 page data.
         class BankStatementV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
@@ -23,7 +23,7 @@ module Mindee
           end
         end
 
-        # Bank Statement (FR) V1 page prediction.
+        # Bank Statement V1 page prediction.
         class BankStatementV1PagePrediction < BankStatementV1Document
           # @return [String]
           def to_s

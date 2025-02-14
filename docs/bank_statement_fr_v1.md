@@ -1,13 +1,13 @@
 ---
-title: FR Bank Statement (FR) OCR Ruby
+title: FR Bank Statement OCR Ruby
 category: 622b805aaec68102ea7fcbc2
-slug: ruby-fr-bank-statement-fr-ocr
+slug: ruby-fr-bank-statement-ocr
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
-The Ruby OCR SDK supports the [Bank Statement (FR) API](https://platform.mindee.com/mindee/bank_statement_fr).
+The Ruby OCR SDK supports the [Bank Statement API](https://platform.mindee.com/mindee/bank_statement_fr).
 
 Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_statement_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
-![Bank Statement (FR) sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_statement_fr/default_sample.jpg?raw=true)
+![Bank Statement sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_statement_fr/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
@@ -148,7 +148,7 @@ A `BankStatementV1Transaction` implements the following attributes:
 * `description` (String): The additional information about the transaction.
 
 # Attributes
-The following fields are extracted for Bank Statement (FR) V1:
+The following fields are extracted for Bank Statement V1:
 
 ## Account Number
 **account_number** ([StringField](#string-field)): The unique identifier for a customer's account in the bank's system.

@@ -42,9 +42,10 @@ module Mindee
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
-            printable[:date] = format_for_display(@date, nil)
-            printable[:description] = format_for_display(@description, nil)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
+            printable[:date] = format_for_display(@date, 10)
+            printable[:description] = format_for_display(@description, 36)
             printable
           end
 
@@ -52,9 +53,9 @@ module Mindee
           def to_table_line
             printable = table_printable_values
             out_str = String.new
-            out_str << format('| %- 7s', printable[:amount])
-            out_str << format('| %- 5s', printable[:date])
-            out_str << format('| %- 12s', printable[:description])
+            out_str << format('| %- 10s', printable[:amount])
+            out_str << format('| %- 11s', printable[:date])
+            out_str << format('| %- 37s', printable[:description])
             out_str << '|'
           end
 
