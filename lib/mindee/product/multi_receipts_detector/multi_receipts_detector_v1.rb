@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         def initialize(prediction)
           super
-          @prediction = MultiReceiptsDetectorV1Document.new(prediction, nil)
+          @prediction = MultiReceiptsDetectorV1Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
             @pages.push(MultiReceiptsDetectorV1Page.new(page))
