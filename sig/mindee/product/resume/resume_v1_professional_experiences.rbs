@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+module Mindee
+  module Product
+    module Resume
+      class ResumeV1ProfessionalExperiences < Array[untyped]
+        def initialize: (Array[untyped], Integer?) -> void
+        def self.line_items_separator: (char) -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

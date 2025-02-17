@@ -18,7 +18,7 @@ module Mindee
           def statement_start_date: -> (Parsing::Standard::DateField)
           def total_credits: -> (Parsing::Standard::AmountField)
           def total_debits: -> (Parsing::Standard::AmountField)
-          def transactions: -> (Array[Product::FR::BankStatement::BankStatementV1Transaction])
+          def transactions: -> (Product::FR::BankStatement::BankStatementV1Transactions)
           def transactions_separator: (String) -> String
           def transactions_to_s: -> String
           def to_s: -> String

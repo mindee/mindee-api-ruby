@@ -8,7 +8,7 @@ module Mindee
         def category: -> (Parsing::Standard::ClassificationField)
         def date: -> (Parsing::Standard::DateField)
         def document_type: -> (Parsing::Standard::ClassificationField)
-        def line_items: -> (Array[Product::Receipt::ReceiptV5LineItem])
+        def line_items: -> (Product::Receipt::ReceiptV5LineItems)
         def locale: -> (Parsing::Standard::LocaleField)
         def receipt_number: -> (Parsing::Standard::StringField)
         def subcategory: -> (Parsing::Standard::ClassificationField)

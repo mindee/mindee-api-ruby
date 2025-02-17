@@ -128,8 +128,10 @@ describe 'FullTextOCR' do
             'confidence' => 0,
           },
           'transactions' => [
-            'value' => nil,
-            'confidence' => 0,
+            {
+              'value' => nil,
+              'confidence' => 0,
+            },
           ],
         },
       },

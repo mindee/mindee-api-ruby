@@ -5,7 +5,7 @@ require_relative 'bill_of_lading_v1_shipper'
 require_relative 'bill_of_lading_v1_consignee'
 require_relative 'bill_of_lading_v1_notify_party'
 require_relative 'bill_of_lading_v1_carrier'
-require_relative 'bill_of_lading_v1_carrier_item'
+require_relative 'bill_of_lading_v1_carrier_items'
 
 module Mindee
   module Product
@@ -20,7 +20,7 @@ module Mindee
         # @return [Mindee::Product::BillOfLading::BillOfLadingV1Carrier]
         attr_reader :carrier
         # The goods being shipped.
-        # @return [Array<Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem>]
+        # @return [Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems]
         attr_reader :carrier_items
         # The party to whom the goods are being shipped.
         # @return [Mindee::Product::BillOfLading::BillOfLadingV1Consignee]
@@ -59,10 +59,7 @@ module Mindee
             prediction['carrier'],
             page_id
           )
-          @carrier_items = [] # : Array[BillOfLading::BillOfLadingV1CarrierItem]
-          prediction['carrier_items'].each do |item|
-            @carrier_items.push(BillOfLading::BillOfLadingV1CarrierItem.new(item, page_id))
-          end
+          @carrier_items = Product::BillOfLading::BillOfLadingV1CarrierItems.new(prediction['carrier_items'], page_id)
           @consignee = Product::BillOfLading::BillOfLadingV1Consignee.new(
             prediction['consignee'],
             page_id

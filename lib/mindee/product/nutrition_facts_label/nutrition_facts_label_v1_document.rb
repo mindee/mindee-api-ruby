@@ -13,7 +13,7 @@ require_relative 'nutrition_facts_label_v1_total_sugar'
 require_relative 'nutrition_facts_label_v1_added_sugar'
 require_relative 'nutrition_facts_label_v1_protein'
 require_relative 'nutrition_facts_label_v1_sodium'
-require_relative 'nutrition_facts_label_v1_nutrient'
+require_relative 'nutrition_facts_label_v1_nutrients'
 
 module Mindee
   module Product
@@ -34,7 +34,7 @@ module Mindee
         # @return [Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber]
         attr_reader :dietary_fiber
         # The amount of nutrients in the product.
-        # @return [Array<Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient>]
+        # @return [Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients]
         attr_reader :nutrients
         # The amount of protein in the product.
         # @return [Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Protein]
@@ -84,10 +84,8 @@ module Mindee
             prediction['dietary_fiber'],
             page_id
           )
-          @nutrients = [] # : Array[NutritionFactsLabel::NutritionFactsLabelV1Nutrient]
-          prediction['nutrients'].each do |item|
-            @nutrients.push(NutritionFactsLabel::NutritionFactsLabelV1Nutrient.new(item, page_id))
-          end
+          @nutrients = Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients.new(prediction['nutrients'],
+                                                                                        page_id)
           @protein = Product::NutritionFactsLabel::NutritionFactsLabelV1Protein.new(
             prediction['protein'],
             page_id
