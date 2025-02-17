@@ -6,7 +6,7 @@ module Mindee
       module BankStatement
         class BankStatementV1Transactions < Array[untyped]
           def initialize: (Array[untyped], Integer?) -> void
-          def self.line_items_separator: (char) -> String
+          def self.line_items_separator: (String) -> String
           def to_s: -> String
         end
       end
