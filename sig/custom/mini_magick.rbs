@@ -4,9 +4,21 @@ module MiniMagick
     def format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
     def self.format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
     def self.quality: (String) -> Net::BufferedIO
-    def self.read: (StringIO) -> self
+    def self.crop: (String) -> Net::BufferedIO
+    def self.height: () -> Integer
+    def height: () -> Integer
+    def self.width: () -> Integer
+    def width: () -> Integer
+    def self.read: (String | StringIO?) -> self
     def self.resolution: () -> Array[Float | Integer]
-    def self.write: (String) -> Net::BufferedIO
+    def self.write: (StringIO | String) -> Net::BufferedIO
+    def write: (StringIO | String) -> Net::BufferedIO
+    def quality: (Integer) -> void
+    def self.resize: (String) -> void
+    def resize: (String) -> void
     def self.to_blob: () -> String
+    def to_blob: () -> String
+    def self.[]: (?untyped) -> untyped
+    def []: (?untyped) -> untyped
   end
 end

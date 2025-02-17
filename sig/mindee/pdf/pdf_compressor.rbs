@@ -5,11 +5,11 @@ module Mindee
   module PDF
     module PDFCompressor
       def self.logger: () -> untyped
-      def self.compress_pdf: (untyped, ?quality: Integer, ?force_source_text_compression: false, ?disable_source_text: true) -> StringIO
-      def self.process_pdf_pages: (untyped, Integer) -> untyped
-      def self.create_output_pdf: (untyped, true, untyped) -> untyped
-      def self.inject_text: (untyped, untyped) -> nil
-      def self.process_pdf_page: (untyped, untyped, Integer, untyped) -> untyped
+      def self.compress_pdf: (StringIO, ?quality: Integer, ?force_source_text_compression: bool, ?disable_source_text: bool) -> StringIO
+      def self.process_pdf_pages: (Origami::PDF, Integer) -> Array[Origami::Page]
+      def self.create_output_pdf: (Array[Origami::Page], bool, StringIO) -> Origami::PDF
+      def self.inject_text: (StringIO, Array[Origami::Page]) -> nil
+      def self.process_pdf_page: (StringIO, Integer, Integer, Array[Integer]?) -> Origami::Page
     end
   end
 end

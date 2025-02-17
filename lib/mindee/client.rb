@@ -62,7 +62,8 @@ module Mindee
       @full_text = params.fetch(:full_text, false)
       @close_file = params.fetch(:close_file, true)
       raw_page_options = params.fetch(:page_options, nil)
-      @page_options = raw_page_options.is_a?(Hash) ? PageOptions.new(params: raw_page_options) : raw_page_options
+      raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
+      @page_options = raw_page_options
       @cropper = params.fetch(:cropper, false)
       @initial_delay_sec = params.fetch(:initial_delay_sec, 2)
       @delay_sec = params.fetch(:delay_sec, 1.5)
@@ -94,7 +95,8 @@ module Mindee
       @full_text = params.fetch(:full_text, false)
       @public_url = params.fetch(:public_url, nil)
       raw_page_options = params.fetch(:page_options, nil)
-      @page_options = raw_page_options.is_a?(Hash) ? PageOptions.new(params: raw_page_options) : raw_page_options
+      raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
+      @page_options = raw_page_options
     end
   end
 

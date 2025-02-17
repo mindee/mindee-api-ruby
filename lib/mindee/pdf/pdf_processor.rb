@@ -9,31 +9,22 @@ module Mindee
     # PDF document processing
     module PDFProcessor
       Origami::PDF.class_eval { include PDFTools }
-      # Default options for pdf documents processing.
-      DEFAULT_OPTIONS = {
-        page_indexes: [0],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }.freeze
-
       # @param io_stream [StreamIO]
-      # @param options [Hash]
+      # @param options [PageOptions, Hash]
       # @return [StringIO]
       def self.parse(io_stream, options)
-        options = DEFAULT_OPTIONS.merge(options)
-
         current_pdf = open_pdf(io_stream)
         pages_count = current_pdf.pages.size
-        return if options[:on_min_pages] > pages_count
+        return current_pdf.to_io_stream if options.on_min_pages.to_i > pages_count
 
         all_pages = (0..pages_count - 1).to_a
 
-        if options[:operation] == :KEEP_ONLY
-          pages_to_remove = indexes_from_keep(options[:page_indexes], all_pages)
-        elsif options[:operation] == :REMOVE
-          pages_to_remove = indexes_from_remove(options[:page_indexes], all_pages)
+        if options.operation == :KEEP_ONLY
+          pages_to_remove = indexes_from_keep(options.page_indexes, all_pages)
+        elsif options.operation == :REMOVE
+          pages_to_remove = indexes_from_remove(options.page_indexes, all_pages)
         else
-          raise ArgumentError, "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{options[:operation]}'"
+          raise ArgumentError, "operation must be one of :KEEP_ONLY or :REMOVE, sent '#{options.operation}'"
         end
 
         current_pdf.delete_pages_at(pages_to_remove) if pages_to_remove.to_a != all_pages.to_a
@@ -84,9 +75,9 @@ module Mindee
         stream = StringIO.new
         pdf_doc.save(stream)
 
-        options = {
-          page_indexes: [page_id - 1],
-        }
+        options = PageOptions.new(params: {
+                                    page_indexes: [page_id - 1],
+                                  })
 
         parse(stream, options)
       end

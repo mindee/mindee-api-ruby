@@ -31,9 +31,9 @@ module Mindee
         # @param page_indexes [Array<Integer>] List of page number to use for merging in the original Pdf.
         # @return [StreamIO] The buffer containing the new Pdf.
         def cut_pages(page_indexes)
-          options = {
-            page_indexes: page_indexes,
-          }
+          options = PageOptions.new(params: {
+                                      page_indexes: page_indexes,
+                                    })
 
           Mindee::PDF::PDFProcessor.parse(@source_pdf, options)
         end
