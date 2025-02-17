@@ -8,11 +8,17 @@ target :lib do
 
   check 'lib/mindee/**/*.rb'
   # check 'bin' # CLI files are ignored
+
+  # NOTE: Steep does not support some libraries:
+  # - net/http.
+  # - marcel
+  # - mini_magick
+  # - origami (my bad)
+  # Do NOT enable them.
+  # Use the stubs located at sig/custom/<library_name>.rbs instead.
   library 'date'
   library 'logger'
   library 'json'
-  # library 'net/http' # NOTE: Steep does not support net/http. Do NOT enable.
-  # Use the stub located at sig/custom/net_http.rbs instead.
   library 'openssl'
   library 'pathname'
   library 'tempfile'

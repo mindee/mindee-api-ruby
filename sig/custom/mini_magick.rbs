@@ -9,7 +9,7 @@ module MiniMagick
     def height: () -> Integer
     def self.width: () -> Integer
     def width: () -> Integer
-    def self.read: (String | StringIO?) -> self
+    def self.read: (untyped) -> self
     def self.resolution: () -> Array[Float | Integer]
     def self.write: (StringIO | String) -> Net::BufferedIO
     def write: (StringIO | String) -> Net::BufferedIO

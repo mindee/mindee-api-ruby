@@ -23,6 +23,7 @@ module Mindee
     attr_accessor :page_indexes, :operation, :on_min_pages
 
     def initialize(params: {})
+      params ||= {}
       params = params.transform_keys(&:to_sym)
       @page_indexes = params.fetch(
         :page_indexes,

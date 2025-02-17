@@ -9,7 +9,7 @@ module Mindee
       def self.calculate_new_dimensions: (singleton(MiniMagick::Image) | MiniMagick::Image, ?max_width: Integer | Float?, ?max_height: Integer | Float?) -> [Integer, Integer]
       def self.calculate_dimensions_from_media_box: (singleton(MiniMagick::Image) | MiniMagick::Image, Array[Integer]?) -> [Integer, Integer]
       def self.pdf_to_magick_image: (StringIO, Integer) -> singleton(MiniMagick::Image)
-      def self.normalize_polygon: (Geometry::Polygon | Array[Geometry::Point]) -> Geometry::Quadrilateral
+      def self.normalize_polygon: (Geometry::Quadrilateral | Geometry::Polygon | Array[Geometry::Point]) -> Geometry::Quadrilateral
       def self.read_page_content: (StringIO) -> singleton(MiniMagick::Image)
       def self.crop_image: (singleton(MiniMagick::Image), Geometry::MinMax, Geometry::MinMax) -> singleton(MiniMagick::Image)
       def self.write_image_to_buffer: (singleton(MiniMagick::Image) | MiniMagick::Image, StringIO) -> Net::BufferedIO

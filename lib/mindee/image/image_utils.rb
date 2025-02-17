@@ -30,11 +30,11 @@ module Mindee
       # @param [MiniMagick::Image, StringIO, File, Tempfile] image The input image
       # @return [MiniMagick::Image]
       def self.to_image(image)
-        if image.is_a?(StringIO)
+        if image.is_a?(MiniMagick::Image)
+          image
+        elsif image.is_a?(StringIO) || image.is_a?(IO) || image.is_a?(File) || image.is_a?(Tempfile)
           image.rewind
           MiniMagick::Image.read(image)
-        elsif image.is_a?(MiniMagick::Image)
-          image
         else
           img_class = image.class ? image.class.to_s : 'unknown format'
           raise Errors::MindeeImageError, "Expected an I/O object or a MiniMagick::Image. '#{img_class}' given instead."
