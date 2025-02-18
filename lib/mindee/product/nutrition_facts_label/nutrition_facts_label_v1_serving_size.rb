@@ -27,7 +27,8 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
-          printable[:amount] = @amount.nil? ? '' : BaseField.float_to_string(@amount)
+          printable[:amount] =
+            @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
           printable[:unit] = format_for_display(@unit)
           printable
         end

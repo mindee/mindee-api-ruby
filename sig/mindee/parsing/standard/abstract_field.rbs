@@ -3,16 +3,16 @@ module Mindee
   module Parsing
     module Standard
       class AbstractField
-        def bounding_box: -> untyped
-        def polygon: -> untyped
-        def page_id: -> untyped
-        def confidence: -> untyped
-        def confidence=: (untyped) -> untyped
-        def initialize: (untyped, untyped) -> untyped
+        def bounding_box: -> Geometry::Polygon?
+        def polygon: -> Geometry::Polygon?
+        def page_id: -> Integer?
+        def confidence: -> Float?
+        def confidence=: (Float?) -> Float?
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
         def to_s: -> String
-        def self.array_confidence: (untyped) -> Float
-        def self.array_sum: (untyped) -> Float
-        def self.float_to_string: (untyped, ?Integer) -> String
+        def self.array_confidence: (Array[untyped]) -> Float
+        def self.array_sum: (Array[untyped]) -> Float
+        def self.float_to_string: (Float, ?Integer) -> String
       end
     end
   end

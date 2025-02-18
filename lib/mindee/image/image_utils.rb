@@ -30,11 +30,11 @@ module Mindee
       # @param [MiniMagick::Image, StringIO, File, Tempfile] image The input image
       # @return [MiniMagick::Image]
       def self.to_image(image)
-        if image.respond_to?(:read) && image.respond_to?(:rewind)
+        if image.is_a?(MiniMagick::Image)
+          image
+        elsif image.is_a?(StringIO) || image.is_a?(IO) || image.is_a?(File) || image.is_a?(Tempfile)
           image.rewind
           MiniMagick::Image.read(image)
-        elsif image.is_a?(MiniMagick::Image)
-          image
         else
           img_class = image.class ? image.class.to_s : 'unknown format'
           raise Errors::MindeeImageError, "Expected an I/O object or a MiniMagick::Image. '#{img_class}' given instead."
@@ -69,8 +69,8 @@ module Mindee
 
         scale_factor = [width_ratio, height_ratio].min
 
-        new_width = (original.width * scale_factor).to_i
-        new_height = (original.height * scale_factor).to_i
+        new_width = (original.width.to_f * scale_factor).to_i
+        new_height = (original.height.to_f * scale_factor).to_i
 
         [new_width, new_height]
       end
@@ -105,10 +105,13 @@ module Mindee
       #
       # @param [Array<Point>, Mindee::Geometry::Polygon] polygon
       def self.normalize_polygon(polygon)
-        if polygon.is_a?(Mindee::Geometry::Polygon)
+        if polygon.is_a?(Mindee::Geometry::Polygon) ||
+           (polygon.is_a?(Array) && polygon[0].is_a?(Mindee::Geometry::Point))
           Mindee::Geometry.get_bounding_box(polygon)
-        else
+        elsif polygon.is_a?(Mindee::Geometry::Quadrilateral)
           polygon
+        else
+          raise Errors::MindeeGeometryError, 'Provided polygon has an invalid type.'
         end
       end
 
@@ -149,12 +152,12 @@ module Mindee
       # Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.
       #
       # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
-      # @return [String] A valid file extension.
+      # @return [String, nil] A valid file extension.
       def self.determine_file_extension(input_source)
         if input_source.pdf? || input_source.filename.downcase.end_with?('pdf')
           'jpg'
         else
-          File.extname(input_source.filename).strip.downcase[1..]
+          File.extname(input_source.filename.to_s).strip.downcase[1..].to_s
         end
       end
     end

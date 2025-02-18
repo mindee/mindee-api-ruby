@@ -123,11 +123,6 @@ DOCUMENTS = {
 }
 
 options = {}
-DEFAULT_CUTTING = {
-  page_indexes: [0, 1, 2, 3, 4],
-  operation: :KEEP_ONLY,
-  on_min_pages: 0,
-}
 
 # Initializes universal-specific options
 # @param cli_parser [OptionParser]
@@ -146,7 +141,7 @@ DOCUMENTS.each do |doc_key, doc_value|
     opts.on('-w', '--all-words', 'Include words in response') do |v|
       options[:all_words] = v
     end
-    opts.on('-c', '--cut-pages', "Don't cut document pages") do |v|
+    opts.on('-c', '--cut-pages', "Cut document pages") do |v|
       options[:cut_pages] = v
     end
     opts.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
@@ -218,7 +213,16 @@ else
   custom_endpoint = nil
 end
 
-page_options = options[:cut_pages].nil? ? nil : :default_cutting
+if options[:cut_pages].nil? || !options[:cut_pages].is_a?(Integer) || options[:cut_pages] < 0
+  page_options = options[:cut_pages].nil?
+else
+  page_options = Mindee::PageOptions.new(params: {
+    page_indexes: (0..options[:cut_pages].to_i).to_a,
+    operation: :KEEP_ONLY,
+    on_min_pages: 0,
+  })
+end
+
 if options[:parse_async].nil?
   if !DOCUMENTS[command][:sync]
     options[:parse_async] = true
@@ -230,7 +234,7 @@ result = mindee_client.parse(
   input_source,
   doc_class,
   options: { endpoint: custom_endpoint,
-             page_options: page_options, enqueue: options[:parse_async] }
+             options: Mindee::ParseOptions.new(params: { page_options: page_options }), enqueue: options[:parse_async] }
 )
 
 if options[:print_full]

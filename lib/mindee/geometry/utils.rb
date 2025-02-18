@@ -4,7 +4,7 @@ module Mindee
   # Various helper functions for geometry.
   module Geometry
     # Transform a prediction into a Quadrilateral.
-    # @param prediction [Hash]
+    # @param prediction [Array<Array<Float>>]
     # @return [Mindee::Geometry::Quadrilateral]
     def self.quadrilateral_from_prediction(prediction)
       throw "Prediction must have exactly 4 points, found #{prediction.size}" if prediction.size != 4

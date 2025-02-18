@@ -2,7 +2,7 @@
 module Mindee
   module Parsing
     module Common
-      module Ocr
+      module OCR
         class MVisionV1
           def pages: -> []
           def initialize: (untyped) -> untyped

@@ -26,7 +26,7 @@ module Mindee
       # @param page_id [Integer] ID of the page the element was found on.
       # @param element_id [Integer, nil] ID of the element in a page.
       def initialize(input_source, page_id, element_id)
-        @buffer = StringIO.new(input_source.io_stream.read)
+        @buffer = StringIO.new(input_source.io_stream.read.to_s)
         @buffer.rewind
         extension = if input_source.pdf?
                       '.jpg'

@@ -73,7 +73,7 @@ module Mindee
           if file_extension == 'pdf'
             cropped_image.format('jpg')
           else
-            cropped_image.format(file_extension)
+            cropped_image.format(file_extension.to_s)
           end
 
           buffer = StringIO.new
@@ -95,7 +95,7 @@ module Mindee
       def self.create_extracted_image(buffer, file_name, page_id, element_id)
         buffer.rewind
         ExtractedImage.new(
-          Mindee::Input::Source::BytesInputSource.new(buffer.read, file_name),
+          Mindee::Input::Source::BytesInputSource.new(buffer.read.to_s, file_name),
           page_id,
           element_id
         )

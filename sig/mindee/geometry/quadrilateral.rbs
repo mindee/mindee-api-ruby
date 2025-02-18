@@ -2,16 +2,16 @@
 module Mindee
   module Geometry
     class Quadrilateral
-      def top_left: -> untyped
-      def top_left=: (untyped) -> untyped
-      def top_right: -> untyped
-      def top_right=: (untyped) -> untyped
-      def bottom_right: -> untyped
-      def bottom_right=: (untyped) -> untyped
-      def bottom_left: -> untyped
-      def bottom_left=: (untyped) -> untyped
-      def initialize: (untyped, untyped, untyped, untyped) -> untyped
-      def []: (untyped) -> bot
+      def top_left: -> Point
+      def top_left=: (Point) -> bool
+      def top_right: -> Point
+      def top_right=: (Point) -> untyped
+      def bottom_right: -> Point
+      def bottom_right=: (Point) -> untyped
+      def bottom_left: -> Point
+      def bottom_left=: (Point) -> untyped
+      def initialize: (Point, Point, Point, Point) -> void
+      def []: (Integer) -> Point
       def size: -> Integer
     end
   end

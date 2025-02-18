@@ -16,24 +16,24 @@ module Mindee
         attr_reader :id
         # @return [Mindee::Parsing::Common::Extras::Extras] Potential Extras fields sent back along the prediction.
         attr_reader :extras
-        # @return [Mindee::Parsing::Common::Ocr::Ocr, nil] OCR text results (limited availability)
+        # @return [Mindee::Parsing::Common::OCR::OCR, nil] OCR text results (limited availability)
         attr_reader :ocr
         # @return [Integer] Amount of pages of the document
         attr_reader :n_pages
 
         # Loads the MVision OCR response.
         # @param http_response [Hash] Full HTTP contents of the response.
-        # @return [Mindee::Parsing::Common::Ocr::Ocr]
+        # @return [Mindee::Parsing::Common::OCR::OCR]
         def self.load_ocr(http_response)
           ocr_prediction = http_response.fetch('ocr', nil)
           return nil if ocr_prediction.nil? || ocr_prediction.fetch('mvision-v1', nil).nil?
 
-          Ocr::Ocr.new(ocr_prediction)
+          OCR::OCR.new(ocr_prediction)
         end
 
         # Loads extras into the document prediction.
         # @param http_response [Hash] Full HTTP contents of the response.
-        # @return [Mindee::Parsing::Common::Ocr::Ocr]
+        # @return [Mindee::Parsing::Common::OCR::OCR]
         def self.extract_extras(http_response)
           extras_prediction = http_response['inference'].fetch('extras', nil)
           return nil if extras_prediction.nil? || extras_prediction.fetch('mvision-v1', nil).nil?
