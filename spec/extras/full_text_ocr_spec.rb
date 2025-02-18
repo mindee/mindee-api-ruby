@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'rspec'
 require_relative 'extras_utils'
 
 shared_context 'load pages' do
@@ -128,8 +127,10 @@ describe 'FullTextOCR' do
             'confidence' => 0,
           },
           'transactions' => [
-            'value' => nil,
-            'confidence' => 0,
+            {
+              'value' => nil,
+              'confidence' => 0,
+            },
           ],
         },
       },

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'rspec'
 require 'mindee'
 require_relative '../../http/mock_http_response'
 
-RSpec.describe Mindee::Input::Source::UrlInputSource do
+describe Mindee::Input::Source::UrlInputSource do
   let(:valid_url) { 'https://validurl/some/file.jpg' }
   let(:valid_url_no_filename) { 'https://validurl/some/' }
   let(:invalid_url) { 'http://invalidurl/some/file.jpg' }
