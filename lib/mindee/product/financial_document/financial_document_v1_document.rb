@@ -151,7 +151,9 @@ module Mindee
             prediction['invoice_number'],
             page_id
           )
-          @line_items = Product::FinancialDocument::FinancialDocumentV1LineItems.new(prediction['line_items'], page_id)
+          @line_items = Product::FinancialDocument::FinancialDocumentV1LineItems.new(
+            prediction['line_items'], page_id
+          )
           @locale = Parsing::Standard::LocaleField.new(
             prediction['locale'],
             page_id

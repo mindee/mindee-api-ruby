@@ -115,8 +115,9 @@ module Mindee
           @professional_experiences = Product::Resume::ResumeV1ProfessionalExperiences.new(
             prediction['professional_experiences'], page_id
           )
-          @social_networks_urls = Product::Resume::ResumeV1SocialNetworksUrls.new(prediction['social_networks_urls'],
-                                                                                  page_id)
+          @social_networks_urls = Product::Resume::ResumeV1SocialNetworksUrls.new(
+            prediction['social_networks_urls'], page_id
+          )
           @soft_skills = [] # : Array[Parsing::Standard::StringField]
           prediction['soft_skills'].each do |item|
             @soft_skills.push(Parsing::Standard::StringField.new(item, page_id))

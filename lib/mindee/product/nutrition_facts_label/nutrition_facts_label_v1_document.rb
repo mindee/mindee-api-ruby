@@ -84,8 +84,9 @@ module Mindee
             prediction['dietary_fiber'],
             page_id
           )
-          @nutrients = Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients.new(prediction['nutrients'],
-                                                                                        page_id)
+          @nutrients = Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients.new(
+            prediction['nutrients'], page_id
+          )
           @protein = Product::NutritionFactsLabel::NutritionFactsLabelV1Protein.new(
             prediction['protein'],
             page_id

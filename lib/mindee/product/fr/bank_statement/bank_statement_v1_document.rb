@@ -102,8 +102,9 @@ module Mindee
               prediction['total_debits'],
               page_id
             )
-            @transactions = Product::FR::BankStatement::BankStatementV1Transactions.new(prediction['transactions'],
-                                                                                        page_id)
+            @transactions = Product::FR::BankStatement::BankStatementV1Transactions.new(
+              prediction['transactions'], page_id
+            )
           end
 
           # @return [String]
