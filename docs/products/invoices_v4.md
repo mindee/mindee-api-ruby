@@ -221,21 +221,6 @@ A `InvoiceV4LineItem` implements the following attributes:
 * `total_amount` (Float): The item total amount.
 * `unit_measure` (String): The item unit of measure.
 * `unit_price` (Float): The item unit price.
-Fields which are specific to this product; they are not used in any other product.
-
-### Line Items Field
-List of line item details.
-
-A `InvoiceV4LineItem` implements the following attributes:
-
-* `description` (String): The item description.
-* `product_code` (String): The product code referring to the item.
-* `quantity` (Float): The item quantity
-* `tax_amount` (Float): The item tax amount.
-* `tax_rate` (Float): The item tax rate in percentage.
-* `total_amount` (Float): The item total amount.
-* `unit_measure` (String): The item unit of measure.
-* `unit_price` (Float): The item unit price.
 
 # Attributes
 The following fields are extracted for Invoice V4:

@@ -135,54 +135,13 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 ## Specific Fields
 Fields which are specific to this product; they are not used in any other product.
 
-### Certificates Field
-The list of certificates obtained by the candidate.
+### Social Networks Field
+The list of social network profiles of the candidate.
 
-A `ResumeV1Certificate` implements the following attributes:
+A `ResumeV1SocialNetworksUrl` implements the following attributes:
 
-* `grade` (String): The grade obtained for the certificate.
-* `name` (String): The name of certification.
-* `provider` (String): The organization or institution that issued the certificate.
-* `year` (String): The year when a certificate was issued or received.
-Fields which are specific to this product; they are not used in any other product.
-
-### Certificates Field
-The list of certificates obtained by the candidate.
-
-A `ResumeV1Certificate` implements the following attributes:
-
-* `grade` (String): The grade obtained for the certificate.
-* `name` (String): The name of certification.
-* `provider` (String): The organization or institution that issued the certificate.
-* `year` (String): The year when a certificate was issued or received.
-Fields which are specific to this product; they are not used in any other product.
-
-### Education Field
-The list of the candidate's educational background.
-
-A `ResumeV1Education` implements the following attributes:
-
-* `degree_domain` (String): The area of study or specialization.
-* `degree_type` (String): The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
-* `end_month` (String): The month when the education program or course was completed.
-* `end_year` (String): The year when the education program or course was completed.
-* `school` (String): The name of the school.
-* `start_month` (String): The month when the education program or course began.
-* `start_year` (String): The year when the education program or course began.
-Fields which are specific to this product; they are not used in any other product.
-
-### Education Field
-The list of the candidate's educational background.
-
-A `ResumeV1Education` implements the following attributes:
-
-* `degree_domain` (String): The area of study or specialization.
-* `degree_type` (String): The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
-* `end_month` (String): The month when the education program or course was completed.
-* `end_year` (String): The year when the education program or course was completed.
-* `school` (String): The name of the school.
-* `start_month` (String): The month when the education program or course began.
-* `start_year` (String): The year when the education program or course began.
+* `name` (String): The name of the social network.
+* `url` (String): The URL of the social network.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Languages Field
@@ -202,21 +161,18 @@ A `ResumeV1Language` implements the following attributes:
 
 Fields which are specific to this product; they are not used in any other product.
 
-### Languages Field
-The list of languages that the candidate is proficient in.
+### Education Field
+The list of the candidate's educational background.
 
-A `ResumeV1Language` implements the following attributes:
+A `ResumeV1Education` implements the following attributes:
 
-* `language` (String): The language's ISO 639 code.
-* `level` (String): The candidate's level for the language.
-
-#### Possible values include:
- - Native
- - Fluent
- - Proficient
- - Intermediate
- - Beginner
-
+* `degree_domain` (String): The area of study or specialization.
+* `degree_type` (String): The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
+* `end_month` (String): The month when the education program or course was completed.
+* `end_year` (String): The year when the education program or course was completed.
+* `school` (String): The name of the school.
+* `start_month` (String): The month when the education program or course began.
+* `start_year` (String): The year when the education program or course began.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Professional Experiences Field
@@ -242,45 +198,15 @@ A `ResumeV1ProfessionalExperience` implements the following attributes:
 * `start_year` (String): The year when the professional experience began.
 Fields which are specific to this product; they are not used in any other product.
 
-### Professional Experiences Field
-The list of the candidate's professional experiences.
+### Certificates Field
+The list of certificates obtained by the candidate.
 
-A `ResumeV1ProfessionalExperience` implements the following attributes:
+A `ResumeV1Certificate` implements the following attributes:
 
-* `contract_type` (String): The type of contract for the professional experience.
-
-#### Possible values include:
- - Full-Time
- - Part-Time
- - Internship
- - Freelance
-
-* `department` (String): The specific department or division within the company.
-* `description` (String): The description of the professional experience as written in the document.
-* `employer` (String): The name of the company or organization.
-* `end_month` (String): The month when the professional experience ended.
-* `end_year` (String): The year when the professional experience ended.
-* `role` (String): The position or job title held by the candidate.
-* `start_month` (String): The month when the professional experience began.
-* `start_year` (String): The year when the professional experience began.
-Fields which are specific to this product; they are not used in any other product.
-
-### Social Networks Field
-The list of social network profiles of the candidate.
-
-A `ResumeV1SocialNetworksUrl` implements the following attributes:
-
-* `name` (String): The name of the social network.
-* `url` (String): The URL of the social network.
-Fields which are specific to this product; they are not used in any other product.
-
-### Social Networks Field
-The list of social network profiles of the candidate.
-
-A `ResumeV1SocialNetworksUrl` implements the following attributes:
-
-* `name` (String): The name of the social network.
-* `url` (String): The URL of the social network.
+* `grade` (String): The grade obtained for the certificate.
+* `name` (String): The name of certification.
+* `provider` (String): The organization or institution that issued the certificate.
+* `year` (String): The year when a certificate was issued or received.
 
 # Attributes
 The following fields are extracted for Resume V1:
