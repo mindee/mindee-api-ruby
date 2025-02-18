@@ -3,9 +3,9 @@
 require_relative '../../../parsing'
 require_relative 'energy_bill_v1_energy_supplier'
 require_relative 'energy_bill_v1_energy_consumer'
-require_relative 'energy_bill_v1_subscription'
-require_relative 'energy_bill_v1_energy_usage'
-require_relative 'energy_bill_v1_taxes_and_contribution'
+require_relative 'energy_bill_v1_subscriptions'
+require_relative 'energy_bill_v1_energy_usages'
+require_relative 'energy_bill_v1_taxes_and_contributions'
 require_relative 'energy_bill_v1_meter_detail'
 
 module Mindee
@@ -32,7 +32,7 @@ module Mindee
           # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1EnergySupplier]
           attr_reader :energy_supplier
           # Details of energy consumption.
-          # @return [Array<Mindee::Product::FR::EnergyBill::EnergyBillV1EnergyUsage>]
+          # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1EnergyUsages]
           attr_reader :energy_usage
           # The date when the energy invoice was issued.
           # @return [Mindee::Parsing::Standard::DateField]
@@ -44,10 +44,10 @@ module Mindee
           # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1MeterDetail]
           attr_reader :meter_details
           # The subscription details fee for the energy service.
-          # @return [Array<Mindee::Product::FR::EnergyBill::EnergyBillV1Subscription>]
+          # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1Subscriptions]
           attr_reader :subscription
           # Details of Taxes and Contributions.
-          # @return [Array<Mindee::Product::FR::EnergyBill::EnergyBillV1TaxesAndContribution>]
+          # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1TaxesAndContributions]
           attr_reader :taxes_and_contributions
           # The total amount to be paid for the energy invoice.
           # @return [Mindee::Parsing::Standard::AmountField]
@@ -83,10 +83,7 @@ module Mindee
               prediction['energy_supplier'],
               page_id
             )
-            @energy_usage = [] # : Array[EnergyBill::EnergyBillV1EnergyUsage]
-            prediction['energy_usage'].each do |item|
-              @energy_usage.push(EnergyBill::EnergyBillV1EnergyUsage.new(item, page_id))
-            end
+            @energy_usage = Product::FR::EnergyBill::EnergyBillV1EnergyUsages.new(prediction['energy_usage'], page_id)
             @invoice_date = Parsing::Standard::DateField.new(
               prediction['invoice_date'],
               page_id
@@ -99,14 +96,10 @@ module Mindee
               prediction['meter_details'],
               page_id
             )
-            @subscription = [] # : Array[EnergyBill::EnergyBillV1Subscription]
-            prediction['subscription'].each do |item|
-              @subscription.push(EnergyBill::EnergyBillV1Subscription.new(item, page_id))
-            end
-            @taxes_and_contributions = [] # : Array[EnergyBill::EnergyBillV1TaxesAndContribution]
-            prediction['taxes_and_contributions'].each do |item|
-              @taxes_and_contributions.push(EnergyBill::EnergyBillV1TaxesAndContribution.new(item, page_id))
-            end
+            @subscription = Product::FR::EnergyBill::EnergyBillV1Subscriptions.new(prediction['subscription'], page_id)
+            @taxes_and_contributions = Product::FR::EnergyBill::EnergyBillV1TaxesAndContributions.new(
+              prediction['taxes_and_contributions'], page_id
+            )
             @total_amount = Parsing::Standard::AmountField.new(
               prediction['total_amount'],
               page_id

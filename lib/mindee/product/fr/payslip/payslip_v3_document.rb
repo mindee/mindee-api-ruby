@@ -6,9 +6,9 @@ require_relative 'payslip_v3_employee'
 require_relative 'payslip_v3_employer'
 require_relative 'payslip_v3_bank_account_detail'
 require_relative 'payslip_v3_employment'
-require_relative 'payslip_v3_salary_detail'
+require_relative 'payslip_v3_salary_details'
 require_relative 'payslip_v3_pay_detail'
-require_relative 'payslip_v3_paid_time_off'
+require_relative 'payslip_v3_paid_time_offs'
 
 module Mindee
   module Product
@@ -30,7 +30,7 @@ module Mindee
           # @return [Mindee::Product::FR::Payslip::PayslipV3Employment]
           attr_reader :employment
           # Information about paid time off.
-          # @return [Array<Mindee::Product::FR::Payslip::PayslipV3PaidTimeOff>]
+          # @return [Mindee::Product::FR::Payslip::PayslipV3PaidTimeOffs]
           attr_reader :paid_time_off
           # Detailed information about the pay.
           # @return [Mindee::Product::FR::Payslip::PayslipV3PayDetail]
@@ -39,7 +39,7 @@ module Mindee
           # @return [Mindee::Product::FR::Payslip::PayslipV3PayPeriod]
           attr_reader :pay_period
           # Detailed information about the earnings.
-          # @return [Array<Mindee::Product::FR::Payslip::PayslipV3SalaryDetail>]
+          # @return [Mindee::Product::FR::Payslip::PayslipV3SalaryDetails]
           attr_reader :salary_details
 
           # @param prediction [Hash]
@@ -62,10 +62,7 @@ module Mindee
               prediction['employment'],
               page_id
             )
-            @paid_time_off = [] # : Array[Payslip::PayslipV3PaidTimeOff]
-            prediction['paid_time_off'].each do |item|
-              @paid_time_off.push(Payslip::PayslipV3PaidTimeOff.new(item, page_id))
-            end
+            @paid_time_off = Product::FR::Payslip::PayslipV3PaidTimeOffs.new(prediction['paid_time_off'], page_id)
             @pay_detail = Product::FR::Payslip::PayslipV3PayDetail.new(
               prediction['pay_detail'],
               page_id
@@ -74,10 +71,7 @@ module Mindee
               prediction['pay_period'],
               page_id
             )
-            @salary_details = [] # : Array[Payslip::PayslipV3SalaryDetail]
-            prediction['salary_details'].each do |item|
-              @salary_details.push(Payslip::PayslipV3SalaryDetail.new(item, page_id))
-            end
+            @salary_details = Product::FR::Payslip::PayslipV3SalaryDetails.new(prediction['salary_details'], page_id)
           end
 
           # @return [String]

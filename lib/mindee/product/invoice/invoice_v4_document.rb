@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'invoice_v4_line_item'
+require_relative 'invoice_v4_line_items'
 
 module Mindee
   module Product
@@ -37,7 +37,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :invoice_number
         # List of line item details.
-        # @return [Array<Mindee::Product::Invoice::InvoiceV4LineItem>]
+        # @return [Mindee::Product::Invoice::InvoiceV4LineItems]
         attr_reader :line_items
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
@@ -125,10 +125,7 @@ module Mindee
             prediction['invoice_number'],
             page_id
           )
-          @line_items = [] # : Array[Invoice::InvoiceV4LineItem]
-          prediction['line_items'].each do |item|
-            @line_items.push(Invoice::InvoiceV4LineItem.new(item, page_id))
-          end
+          @line_items = Product::Invoice::InvoiceV4LineItems.new(prediction['line_items'], page_id)
           @locale = Parsing::Standard::LocaleField.new(
             prediction['locale'],
             page_id
