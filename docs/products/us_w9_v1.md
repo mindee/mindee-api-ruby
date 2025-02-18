@@ -2,7 +2,7 @@
 title: US W9 OCR Ruby
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-w9-ocr
-parentDoc: 6294d97ee723f1008d2ab28e
+parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby OCR SDK supports the [W9 API](https://platform.mindee.com/mindee/us_w9).
 

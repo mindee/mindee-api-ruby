@@ -2,7 +2,7 @@
 title: US US Mail OCR Ruby
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-us-mail-ocr
-parentDoc: 6294d97ee723f1008d2ab28e
+parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby OCR SDK supports the [US Mail API](https://platform.mindee.com/mindee/us_mail).
 
