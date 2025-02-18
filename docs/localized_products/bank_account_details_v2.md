@@ -1,12 +1,12 @@
 ---
-title: FR Bank Account Details OCR Ruby
+title: Ruby Client Library - FR Bank Account Details
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-bank-account-details-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [Bank Account Details API](https://platform.mindee.com/mindee/bank_account_details).
+The Ruby Client Library SDK supports the [Bank Account Details API](https://platform.mindee.com/mindee/bank_account_details).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Bank Account Details sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg?raw=true)
 
 # Quick-Start

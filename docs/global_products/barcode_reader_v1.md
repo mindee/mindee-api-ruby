@@ -1,12 +1,12 @@
 ---
-title: Barcode Reader OCR Ruby
+title: Ruby Client Library - Barcode Reader
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-barcode-reader-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
+The Ruby Client Library SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Barcode Reader sample](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg?raw=true)
 
 # Quick-Start

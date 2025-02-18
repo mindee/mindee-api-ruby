@@ -1,12 +1,12 @@
 ---
-title: Multi Receipts Detector OCR Ruby
+title: Ruby Client Library - Multi Receipts Detector
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-multi-receipts-detector-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
+The Ruby Client Library SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Multi Receipts Detector sample](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg?raw=true)
 
 # Quick-Start

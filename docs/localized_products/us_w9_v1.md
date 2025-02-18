@@ -1,12 +1,12 @@
 ---
-title: US W9 OCR Ruby
+title: Ruby Client Library - US W9
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-w9-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [W9 API](https://platform.mindee.com/mindee/us_w9).
+The Ruby Client Library SDK supports the [W9 API](https://platform.mindee.com/mindee/us_w9).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![W9 sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg?raw=true)
 
 # Quick-Start

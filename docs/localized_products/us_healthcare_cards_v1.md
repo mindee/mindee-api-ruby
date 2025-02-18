@@ -1,12 +1,12 @@
 ---
-title: US Healthcare Card OCR Ruby
+title: Ruby Client Library - US Healthcare Card
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-healthcare-card-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [Healthcare Card API](https://platform.mindee.com/mindee/us_healthcare_cards).
+The Ruby Client Library SDK supports the [Healthcare Card API](https://platform.mindee.com/mindee/us_healthcare_cards).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Healthcare Card sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg?raw=true)
 
 # Quick-Start

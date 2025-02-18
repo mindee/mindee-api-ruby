@@ -1,12 +1,12 @@
 ---
-title: FR Carte Grise OCR Ruby
+title: Ruby Client Library - FR Carte Grise
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-carte-grise-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [Carte Grise API](https://platform.mindee.com/mindee/carte_grise).
+The Ruby Client Library SDK supports the [Carte Grise API](https://platform.mindee.com/mindee/carte_grise).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_grise/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_grise/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Carte Grise sample](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_grise/default_sample.jpg?raw=true)
 
 # Quick-Start
