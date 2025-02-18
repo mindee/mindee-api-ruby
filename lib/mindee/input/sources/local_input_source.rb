@@ -29,7 +29,7 @@ module Mindee
         # @return [StringIO]
         attr_reader :io_stream
 
-        # @param io_stream [StringIO]
+        # @param io_stream [StringIO, File]
         # @param filename [String]
         # @param fix_pdf [bool]
         def initialize(io_stream, filename, fix_pdf: false)
@@ -78,7 +78,7 @@ module Mindee
         end
 
         # Parses a PDF file according to provided options.
-        # @param options [Hash, nil] Page cutting/merge options:
+        # @param options [PageOptions, nil] Page cutting/merge options:
         #
         #  * `:page_indexes` Zero-based list of page indexes.
         #  * `:operation` Operation to apply on the document, given the `page_indexes specified:
@@ -87,7 +87,7 @@ module Mindee
         #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
         def process_pdf(options)
           @io_stream.seek(0)
-          @io_stream = PDFProcessor.parse(@io_stream, options)
+          @io_stream = PDF::PDFProcessor.parse(@io_stream, options)
         end
 
         # Reads a document.
@@ -156,7 +156,7 @@ module Mindee
         unicode_escape_string = ''.dup
         string.each_char do |char|
           unicode_escape_string << if char.bytesize > 1
-                                     "\\u#{char.unpack1('U').to_s(16).rjust(4, '0')}"
+                                     "\\u#{format('%04x', char.unpack1('U'))}"
                                    else
                                      char
                                    end

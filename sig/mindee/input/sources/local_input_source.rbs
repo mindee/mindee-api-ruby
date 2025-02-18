@@ -4,19 +4,20 @@ module Mindee
     module Source
       ALLOWED_MIME_TYPES: Array[String]
       class LocalInputSource
-        def filename: -> untyped
-        def file_mimetype: -> untyped
+        def filename: -> String
+        def file_mimetype: -> String
         def io_stream: -> StringIO
-        def initialize: (untyped, untyped, ?fix_pdf: bool) -> nil
+        def initialize: (StringIO | File, String, ?fix_pdf: bool) -> void
+        def logger: () -> untyped
         def rescue_broken_pdf: (StringIO) -> StringIO
-        def pdf?: -> untyped
-        def process_pdf: (untyped) -> untyped
-        def read_contents: (?close: true) -> [String, String?, Hash[:filename, String]]
+        def pdf?: -> bool
+        def process_pdf: (PageOptions) -> StringIO?
+        def read_contents: (?close: bool) -> [String, String?, Hash[:filename, String]]
         def count_pages: -> Integer
-        def compress!: (?quality: Integer, ?max_width: nil, ?max_height: nil, ?force_source_text: false, ?disable_source_text: true) -> Integer
-        def source_text?: -> untyped
+        def compress!: (?quality: Integer, ?max_width: Integer?, ?max_height: Integer?, ?force_source_text: bool, ?disable_source_text: bool) -> Integer
+        def source_text?: -> bool?
       end
-      def self.convert_to_unicode_escape: (untyped) -> String
+      def self.convert_to_unicode_escape: (String) -> String
     end
   end
 end

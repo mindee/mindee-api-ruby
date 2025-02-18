@@ -2,8 +2,8 @@
 module Mindee
   module Parsing
     module Standard
-      class FeatureField # failed to identify its superclass
-        def format_for_display: (untyped, ?nil) -> String
+      class FeatureField < BaseField
+        def format_for_display: (String | bool?, ?Integer?) -> String
       end
     end
   end

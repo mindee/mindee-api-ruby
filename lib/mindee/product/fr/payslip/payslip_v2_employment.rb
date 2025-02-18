@@ -45,7 +45,8 @@ module Mindee
           def printable_values
             printable = {}
             printable[:category] = format_for_display(@category)
-            printable[:coefficient] = @coefficient.nil? ? '' : BaseField.float_to_string(@coefficient)
+            printable[:coefficient] =
+              @coefficient.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@coefficient)
             printable[:collective_agreement] = format_for_display(@collective_agreement)
             printable[:job_title] = format_for_display(@job_title)
             printable[:position_level] = format_for_display(@position_level)

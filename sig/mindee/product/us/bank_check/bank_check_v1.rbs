@@ -1,0 +1,13 @@
+# lib/mindee/product/../bank_check/bank_check_v1.rb
+
+module Mindee
+  module Product
+    module US
+      module BankCheck
+        class BankCheckV1 < Parsing::Common::Inference
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+      end
+    end
+  end
+end

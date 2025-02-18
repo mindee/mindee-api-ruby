@@ -63,27 +63,69 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction)
-          @address = StringField.new(prediction['address'], page_id)
-          @birth_date = DateField.new(prediction['birth_date'], page_id)
-          @birth_place = StringField.new(prediction['birth_place'], page_id)
-          @country_of_issue = StringField.new(prediction['country_of_issue'], page_id)
-          @document_number = StringField.new(prediction['document_number'], page_id)
-          @document_type = ClassificationField.new(prediction['document_type'], page_id)
-          @expiry_date = DateField.new(prediction['expiry_date'], page_id)
-          @given_names = []
+          super
+          @address = Parsing::Standard::StringField.new(
+            prediction['address'],
+            page_id
+          )
+          @birth_date = Parsing::Standard::DateField.new(
+            prediction['birth_date'],
+            page_id
+          )
+          @birth_place = Parsing::Standard::StringField.new(
+            prediction['birth_place'],
+            page_id
+          )
+          @country_of_issue = Parsing::Standard::StringField.new(
+            prediction['country_of_issue'],
+            page_id
+          )
+          @document_number = Parsing::Standard::StringField.new(
+            prediction['document_number'],
+            page_id
+          )
+          @document_type = Parsing::Standard::ClassificationField.new(
+            prediction['document_type'],
+            page_id
+          )
+          @expiry_date = Parsing::Standard::DateField.new(
+            prediction['expiry_date'],
+            page_id
+          )
+          @given_names = [] # : Array[Parsing::Standard::StringField]
           prediction['given_names'].each do |item|
             @given_names.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @issue_date = DateField.new(prediction['issue_date'], page_id)
-          @mrz_line1 = StringField.new(prediction['mrz_line1'], page_id)
-          @mrz_line2 = StringField.new(prediction['mrz_line2'], page_id)
-          @mrz_line3 = StringField.new(prediction['mrz_line3'], page_id)
-          @nationality = StringField.new(prediction['nationality'], page_id)
-          @personal_number = StringField.new(prediction['personal_number'], page_id)
-          @sex = StringField.new(prediction['sex'], page_id)
-          @state_of_issue = StringField.new(prediction['state_of_issue'], page_id)
-          @surnames = []
+          @issue_date = Parsing::Standard::DateField.new(
+            prediction['issue_date'],
+            page_id
+          )
+          @mrz_line1 = Parsing::Standard::StringField.new(
+            prediction['mrz_line1'],
+            page_id
+          )
+          @mrz_line2 = Parsing::Standard::StringField.new(
+            prediction['mrz_line2'],
+            page_id
+          )
+          @mrz_line3 = Parsing::Standard::StringField.new(
+            prediction['mrz_line3'],
+            page_id
+          )
+          @nationality = Parsing::Standard::StringField.new(
+            prediction['nationality'],
+            page_id
+          )
+          @personal_number = Parsing::Standard::StringField.new(
+            prediction['personal_number'],
+            page_id
+          )
+          @sex = Parsing::Standard::StringField.new(prediction['sex'], page_id)
+          @state_of_issue = Parsing::Standard::StringField.new(
+            prediction['state_of_issue'],
+            page_id
+          )
+          @surnames = [] # : Array[Parsing::Standard::StringField]
           prediction['surnames'].each do |item|
             @surnames.push(Parsing::Standard::StringField.new(item, page_id))
           end

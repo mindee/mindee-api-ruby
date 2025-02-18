@@ -2,10 +2,10 @@
 module Mindee
   module Parsing
     module Standard
-      class StringField # failed to identify its superclass
-        def value: -> untyped
-        def raw_value: -> untyped
-        def initialize: (untyped, ?nil, ?reconstructed: false) -> untyped
+      class StringField < BaseField
+        def value: -> String
+        def raw_value: -> String
+        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: bool) -> void
       end
     end
   end

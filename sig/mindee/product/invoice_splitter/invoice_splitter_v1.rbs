@@ -3,11 +3,11 @@ module Mindee
   module Product
     module InvoiceSplitter
       class InvoiceSplitterV1 < Parsing::Common::Inference
-        def initialize: (untyped) -> untyped
-        def endpoint_name: -> untyped
-        def endpoint_version: -> untyped
-        def has_async: -> untyped
-        def has_sync: -> untyped
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def endpoint_name: -> String
+        def endpoint_version: -> String
+        def has_async: -> bool
+        def has_sync: -> bool
       end
     end
   end

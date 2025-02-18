@@ -41,21 +41,24 @@ module Mindee
         private
 
         def generate_field_string(field_name, field_value, pattern)
-          return '' if field_value.values.empty? || field_value.values.nil?
+          values = field_value.values
+          return '' if values.nil? || values.empty?
 
           str_value = ''
-          str_value += if field_value.values[0].is_a?(Parsing::Universal::UniversalObjectField)
-                         field_value.values[0].str_level(1).sub(pattern, '\\1* :')
+          first_value = values[0]
+          str_value += if first_value.is_a?(Parsing::Universal::UniversalObjectField)
+                         first_value.str_level(1).sub(pattern, '\\1* :')
                        else
-                         "#{field_value.values[0].to_s.sub(pattern, '\\1* :')}\n"
+                         "#{first_value.to_s.sub(pattern, '\\1* :')}\n"
                        end
-          field_value.values[1..].each do |sub_value|
+          Array(values[1..]).each do |sub_value|
             str_value += if sub_value.is_a?(Parsing::Universal::UniversalObjectField)
                            sub_value.str_level(1).sub(pattern, '\\1* :')
                          else
                            "#{' ' * (field_name.length + 2)} #{sub_value}\n"
                          end
           end
+
           str_value.rstrip
         end
 

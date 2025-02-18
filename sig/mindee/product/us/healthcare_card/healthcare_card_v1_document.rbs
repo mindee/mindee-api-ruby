@@ -1,0 +1,28 @@
+# lib/mindee/product/../healthcare_card/healthcare_card_v1_document.rb
+
+module Mindee
+  module Product
+    module US
+      module HealthcareCard
+        class HealthcareCardV1Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def company_name: -> (Parsing::Standard::StringField)
+          def copays: -> (Array[Product::US::HealthcareCard::HealthcareCardV1Copay])
+          def dependents: -> (Array[Parsing::Standard::StringField])
+          def enrollment_date: -> (Parsing::Standard::DateField)
+          def group_number: -> (Parsing::Standard::StringField)
+          def issuer80840: -> (Parsing::Standard::StringField)
+          def member_id: -> (Parsing::Standard::StringField)
+          def member_name: -> (Parsing::Standard::StringField)
+          def payer_id: -> (Parsing::Standard::StringField)
+          def rx_bin: -> (Parsing::Standard::StringField)
+          def rx_grp: -> (Parsing::Standard::StringField)
+          def rx_pcn: -> (Parsing::Standard::StringField)
+          def copays_separator: (String) -> String
+          def copays_to_s: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

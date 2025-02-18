@@ -1,0 +1,23 @@
+# lib/mindee/product/business_card/business_card_v1_document.rb
+
+module Mindee
+  module Product
+    module BusinessCard
+      class BusinessCardV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def address: -> (Parsing::Standard::StringField)
+        def company: -> (Parsing::Standard::StringField)
+        def email: -> (Parsing::Standard::StringField)
+        def fax_number: -> (Parsing::Standard::StringField)
+        def firstname: -> (Parsing::Standard::StringField)
+        def job_title: -> (Parsing::Standard::StringField)
+        def lastname: -> (Parsing::Standard::StringField)
+        def mobile_number: -> (Parsing::Standard::StringField)
+        def phone_number: -> (Parsing::Standard::StringField)
+        def social_media: -> (Array[Parsing::Standard::StringField])
+        def website: -> (Parsing::Standard::StringField)
+        def to_s: -> String
+      end
+    end
+  end
+end

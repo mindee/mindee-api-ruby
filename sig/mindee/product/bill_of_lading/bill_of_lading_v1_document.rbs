@@ -1,0 +1,25 @@
+# lib/mindee/product/bill_of_lading/bill_of_lading_v1_document.rb
+
+module Mindee
+  module Product
+    module BillOfLading
+      class BillOfLadingV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def bill_of_lading_number: -> (Parsing::Standard::StringField)
+        def carrier: -> (Product::BillOfLading::BillOfLadingV1Carrier)
+        def carrier_items: -> (Array[Product::BillOfLading::BillOfLadingV1CarrierItem])
+        def consignee: -> (Product::BillOfLading::BillOfLadingV1Consignee)
+        def date_of_issue: -> (Parsing::Standard::DateField)
+        def departure_date: -> (Parsing::Standard::DateField)
+        def notify_party: -> (Product::BillOfLading::BillOfLadingV1NotifyParty)
+        def place_of_delivery: -> (Parsing::Standard::StringField)
+        def port_of_discharge: -> (Parsing::Standard::StringField)
+        def port_of_loading: -> (Parsing::Standard::StringField)
+        def shipper: -> (Product::BillOfLading::BillOfLadingV1Shipper)
+        def carrier_items_separator: (String) -> String
+        def carrier_items_to_s: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

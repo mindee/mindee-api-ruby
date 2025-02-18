@@ -16,14 +16,14 @@ module Mindee
       def initialize(input_file)
         case input_file
         when IO, StringIO, File, Tempfile
-          str_stripped = input_file.read.gsub(%r{[\r\n]}, '')
+          str_stripped = input_file.read.to_s.gsub(%r{[\r\n]}, '')
           @file = StringIO.new(str_stripped)
           @file.rewind
         when Pathname, String
-          @file = if Pathname(input_file).exist?
-                    StringIO.new(File.read(input_file, encoding: 'utf-8').gsub(%r{[\r\n]}, ''))
+          @file = if Pathname(input_file.to_s).exist?
+                    StringIO.new(File.read(input_file.to_s, encoding: 'utf-8').gsub(%r{[\r\n]}, ''))
                   else
-                    StringIO.new(input_file.gsub(%r{[\r\n]}, ''))
+                    StringIO.new(input_file.to_s.gsub(%r{[\r\n]}, ''))
                   end
           @file.rewind
         else

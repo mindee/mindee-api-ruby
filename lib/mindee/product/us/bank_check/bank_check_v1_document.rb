@@ -31,16 +31,28 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction)
-            @account_number = StringField.new(prediction['account_number'], page_id)
-            @amount = AmountField.new(prediction['amount'], page_id)
-            @check_number = StringField.new(prediction['check_number'], page_id)
-            @date = DateField.new(prediction['date'], page_id)
-            @payees = []
+            super
+            @account_number = Parsing::Standard::StringField.new(
+              prediction['account_number'],
+              page_id
+            )
+            @amount = Parsing::Standard::AmountField.new(
+              prediction['amount'],
+              page_id
+            )
+            @check_number = Parsing::Standard::StringField.new(
+              prediction['check_number'],
+              page_id
+            )
+            @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
+            @payees = [] # : Array[Parsing::Standard::StringField]
             prediction['payees'].each do |item|
               @payees.push(Parsing::Standard::StringField.new(item, page_id))
             end
-            @routing_number = StringField.new(prediction['routing_number'], page_id)
+            @routing_number = Parsing::Standard::StringField.new(
+              prediction['routing_number'],
+              page_id
+            )
           end
 
           # @return [String]

@@ -1,0 +1,13 @@
+# lib/mindee/product/../indian_passport/indian_passport_v1.rb
+
+module Mindee
+  module Product
+    module IND
+      module IndianPassport
+        class IndianPassportV1 < Parsing::Common::Inference
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+      end
+    end
+  end
+end

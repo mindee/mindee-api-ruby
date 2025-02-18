@@ -1,0 +1,23 @@
+# lib/mindee/product/passport/passport_v1_document.rb
+
+module Mindee
+  module Product
+    module Passport
+      class PassportV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def birth_date: -> (Parsing::Standard::DateField)
+        def birth_place: -> (Parsing::Standard::StringField)
+        def country: -> (Parsing::Standard::StringField)
+        def expiry_date: -> (Parsing::Standard::DateField)
+        def gender: -> (Parsing::Standard::StringField)
+        def given_names: -> (Array[Parsing::Standard::StringField])
+        def id_number: -> (Parsing::Standard::StringField)
+        def issuance_date: -> (Parsing::Standard::DateField)
+        def mrz1: -> (Parsing::Standard::StringField)
+        def mrz2: -> (Parsing::Standard::StringField)
+        def surname: -> (Parsing::Standard::StringField)
+        def to_s: -> String
+      end
+    end
+  end
+end

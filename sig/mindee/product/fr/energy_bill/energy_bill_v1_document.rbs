@@ -1,0 +1,34 @@
+# lib/mindee/product/../energy_bill/energy_bill_v1_document.rb
+
+module Mindee
+  module Product
+    module FR
+      module EnergyBill
+        class EnergyBillV1Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def contract_id: -> (Parsing::Standard::StringField)
+          def delivery_point: -> (Parsing::Standard::StringField)
+          def due_date: -> (Parsing::Standard::DateField)
+          def energy_consumer: -> (Product::FR::EnergyBill::EnergyBillV1EnergyConsumer)
+          def energy_supplier: -> (Product::FR::EnergyBill::EnergyBillV1EnergySupplier)
+          def energy_usage: -> (Array[Product::FR::EnergyBill::EnergyBillV1EnergyUsage])
+          def invoice_date: -> (Parsing::Standard::DateField)
+          def invoice_number: -> (Parsing::Standard::StringField)
+          def meter_details: -> (Product::FR::EnergyBill::EnergyBillV1MeterDetail)
+          def subscription: -> (Array[Product::FR::EnergyBill::EnergyBillV1Subscription])
+          def taxes_and_contributions: -> (Array[Product::FR::EnergyBill::EnergyBillV1TaxesAndContribution])
+          def total_amount: -> (Parsing::Standard::AmountField)
+          def total_before_taxes: -> (Parsing::Standard::AmountField)
+          def total_taxes: -> (Parsing::Standard::AmountField)
+          def subscription_separator: (String) -> String
+          def subscription_to_s: -> String
+          def energy_usage_separator: (String) -> String
+          def energy_usage_to_s: -> String
+          def taxes_and_contributions_separator: (String) -> String
+          def taxes_and_contributions_to_s: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

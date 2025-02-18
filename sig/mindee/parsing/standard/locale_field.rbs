@@ -3,12 +3,12 @@ module Mindee
   module Parsing
     module Standard
       class LocaleField
-        def confidence: -> untyped
-        def language: -> untyped
-        def country: -> untyped
-        def currency: -> untyped
-        def value: -> untyped
-        def initialize: (untyped, ?nil) -> untyped
+        def confidence: -> Float?
+        def language: -> String?
+        def country: -> String?
+        def currency: -> String?
+        def value: -> String?
+        def initialize: (Hash[Symbol | String, untyped], ?Integer?) -> void
         def to_s: -> String
       end
     end

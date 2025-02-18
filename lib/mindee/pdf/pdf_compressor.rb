@@ -9,6 +9,7 @@ module Mindee
     # Image compressor module to handle PDF compression.
     module PDFCompressor
       # Compresses each page of a provided PDF stream. Skips if force_source_text isn't set and source text is detected.
+      # @param pdf_data [StringIO] StringIO handle of the file.
       # @param quality [Integer] Compression quality (70-100 for most JPG images in the test dataset).
       # @param force_source_text_compression [bool] If true, attempts to re-write detected text.
       # @param disable_source_text [bool] If true, doesn't re-apply source text to the original PDF.
@@ -44,12 +45,13 @@ module Mindee
       # @return [Array<Origami::Page>] Processed pages.
       def self.process_pdf_pages(pdf, quality)
         pdf.pages.map.with_index do |page, index|
-          process_pdf_page(Mindee::PDF::PDFProcessor.get_page(pdf, index), index, quality, page[:MediaBox])
+          retrieved_page = Mindee::PDF::PDFProcessor.get_page(pdf, index)
+          process_pdf_page(retrieved_page, index, quality, page[:MediaBox])
         end
       end
 
       # Creates the output PDF with processed pages.
-      # @param pages [Array] Processed pages.
+      # @param pages [Array<Origami::Page>] Processed pages.
       # @param disable_source_text [bool] Whether to disable source text.
       # @param pdf_data [StringIO] Original PDF data.
       # @return [Origami::PDF] Output PDF object.

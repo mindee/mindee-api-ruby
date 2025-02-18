@@ -3,7 +3,7 @@ module Mindee
   module Product
     module InvoiceSplitter
       class InvoiceSplitterV1Page < Parsing::Common::Page
-        def initialize: (untyped) -> untyped
+        def initialize: (Hash[Symbol | String, untyped]) -> void
       end
       class InvoiceSplitterV1PagePrediction < InvoiceSplitterV1Document
         def to_s: -> String

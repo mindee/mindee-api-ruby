@@ -60,20 +60,42 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:gross_salary] = @gross_salary.nil? ? '' : BaseField.float_to_string(@gross_salary)
-            printable[:gross_salary_ytd] = @gross_salary_ytd.nil? ? '' : BaseField.float_to_string(@gross_salary_ytd)
-            printable[:income_tax_rate] = @income_tax_rate.nil? ? '' : BaseField.float_to_string(@income_tax_rate)
+            printable[:gross_salary] =
+              @gross_salary.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@gross_salary)
+            printable[:gross_salary_ytd] =
+              @gross_salary_ytd.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@gross_salary_ytd)
+            printable[:income_tax_rate] =
+              @income_tax_rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@income_tax_rate)
             printable[:income_tax_withheld] =
-              @income_tax_withheld.nil? ? '' : BaseField.float_to_string(@income_tax_withheld)
-            printable[:net_paid] = @net_paid.nil? ? '' : BaseField.float_to_string(@net_paid)
+              if @income_tax_withheld.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@income_tax_withheld)
+              end
+            printable[:net_paid] =
+              @net_paid.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@net_paid)
             printable[:net_paid_before_tax] =
-              @net_paid_before_tax.nil? ? '' : BaseField.float_to_string(@net_paid_before_tax)
-            printable[:net_taxable] = @net_taxable.nil? ? '' : BaseField.float_to_string(@net_taxable)
-            printable[:net_taxable_ytd] = @net_taxable_ytd.nil? ? '' : BaseField.float_to_string(@net_taxable_ytd)
+              if @net_paid_before_tax.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@net_paid_before_tax)
+              end
+            printable[:net_taxable] =
+              @net_taxable.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@net_taxable)
+            printable[:net_taxable_ytd] =
+              @net_taxable_ytd.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@net_taxable_ytd)
             printable[:total_cost_employer] =
-              @total_cost_employer.nil? ? '' : BaseField.float_to_string(@total_cost_employer)
+              if @total_cost_employer.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@total_cost_employer)
+              end
             printable[:total_taxes_and_deductions] =
-              @total_taxes_and_deductions.nil? ? '' : BaseField.float_to_string(@total_taxes_and_deductions)
+              if @total_taxes_and_deductions.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@total_taxes_and_deductions)
+              end
             printable
           end
 

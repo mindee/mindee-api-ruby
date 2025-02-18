@@ -1,0 +1,13 @@
+# lib/mindee/product/../payslip/payslip_v2.rb
+
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2 < Parsing::Common::Inference
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+      end
+    end
+  end
+end

@@ -7,7 +7,7 @@ module Mindee
         PROCESSING: :processing
         COMPLETED: :completed
         FAILURE: :failed
-      end
+        end
       module RequestStatus
         FAILURE: :failure
         SUCCESS: :success
@@ -16,11 +16,11 @@ module Mindee
 
       class ApiResponse
         def logger: () -> untyped
-        def document: -> untyped
-        def job: -> untyped
-        def api_request: -> untyped
-        def raw_http: -> untyped
-        def initialize: (untyped, untyped, untyped) -> untyped
+        def document: -> Parsing::Common::Document?
+        def job: -> Parsing::Common::Job?
+        def api_request: -> Parsing::Common::ApiRequest?
+        def raw_http: -> String
+        def initialize: (singleton(Parsing::Common::Inference), Hash[Symbol | String, untyped], String) -> void
       end
     end
   end

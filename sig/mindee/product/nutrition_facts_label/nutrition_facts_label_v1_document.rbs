@@ -1,0 +1,28 @@
+# lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_document.rb
+
+module Mindee
+  module Product
+    module NutritionFactsLabel
+      class NutritionFactsLabelV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def added_sugars: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar)
+        def calories: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie)
+        def cholesterol: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol)
+        def dietary_fiber: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber)
+        def nutrients: -> (Array[Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient])
+        def protein: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Protein)
+        def saturated_fat: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat)
+        def serving_per_box: -> (Parsing::Standard::AmountField)
+        def serving_size: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize)
+        def sodium: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium)
+        def total_carbohydrate: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate)
+        def total_fat: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat)
+        def total_sugars: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar)
+        def trans_fat: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat)
+        def nutrients_separator: (String) -> String
+        def nutrients_to_s: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

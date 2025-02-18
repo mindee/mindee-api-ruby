@@ -72,12 +72,12 @@ These fields are generic and used in several products.
 Each prediction object contains a set of fields that inherit from the generic `Field` class.
 A typical `Field` object will have the following attributes:
 
-* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **value** (`String`, `Float`, `Integer`, `bool`): corresponds to the field value. Can be `nil` if no value was extracted.
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`bool`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
@@ -95,7 +95,22 @@ A `UsMailV3RecipientAddress` implements the following attributes:
 
 * `city` (String): The city of the recipient's address.
 * `complete` (String): The complete address of the recipient.
-* `is_address_change` (Boolean): Indicates if the recipient's address is a change of address.
+* `is_address_change` (bool): Indicates if the recipient's address is a change of address.
+* `postal_code` (String): The postal code of the recipient's address.
+* `private_mailbox_number` (String): The private mailbox number of the recipient's address.
+* `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
+* `street` (String): The street of the recipient's address.
+* `unit` (String): The unit number of the recipient's address.
+Fields which are specific to this product; they are not used in any other product.
+
+### Recipient Addresses Field
+The addresses of the recipients.
+
+A `UsMailV3RecipientAddress` implements the following attributes:
+
+* `city` (String): The city of the recipient's address.
+* `complete` (String): The complete address of the recipient.
+* `is_address_change` (bool): Indicates if the recipient's address is a change of address.
 * `postal_code` (String): The postal code of the recipient's address.
 * `private_mailbox_number` (String): The private mailbox number of the recipient's address.
 * `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
@@ -113,12 +128,24 @@ A `UsMailV3SenderAddress` implements the following attributes:
 * `postal_code` (String): The postal code of the sender's address.
 * `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
 * `street` (String): The street of the sender's address.
+Fields which are specific to this product; they are not used in any other product.
+
+### Sender Address Field
+The address of the sender.
+
+A `UsMailV3SenderAddress` implements the following attributes:
+
+* `city` (String): The city of the sender's address.
+* `complete` (String): The complete address of the sender.
+* `postal_code` (String): The postal code of the sender's address.
+* `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
+* `street` (String): The street of the sender's address.
 
 # Attributes
 The following fields are extracted for US Mail V3:
 
 ## Return to Sender
-**is_return_to_sender** ([BooleanField](#boolean-field)): Whether the mailing is marked as return to sender.
+**is_return_to_sender** ([BooleanField](#bool-field)): Whether the mailing is marked as return to sender.
 
 ```rb
 puts result.document.inference.prediction.is_return_to_sender.value
