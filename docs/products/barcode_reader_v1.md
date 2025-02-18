@@ -2,7 +2,7 @@
 title: Barcode Reader OCR Ruby
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-barcode-reader-ocr
-parentDoc: 6294d97ee723f1008d2ab28e
+parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby OCR SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
 

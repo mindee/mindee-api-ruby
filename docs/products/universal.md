@@ -2,7 +2,7 @@
 title: Universal API Ruby
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-universal-ocr
-parentDoc: 6294d97ee723f1008d2ab28e
+parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby OCR SDK supports a universal wrapper class for all products.
 Universal supports all product in a catch-all generic format.
