@@ -124,24 +124,6 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 ## Specific Fields
 Fields which are specific to this product; they are not used in any other product.
 
-### Energy Consumer Field
-The entity that consumes the energy.
-
-A `EnergyBillV1EnergyConsumer` implements the following attributes:
-
-* `address` (String): The address of the energy consumer.
-* `name` (String): The name of the energy consumer.
-Fields which are specific to this product; they are not used in any other product.
-
-### Energy Consumer Field
-The entity that consumes the energy.
-
-A `EnergyBillV1EnergyConsumer` implements the following attributes:
-
-* `address` (String): The address of the energy consumer.
-* `name` (String): The name of the energy consumer.
-Fields which are specific to this product; they are not used in any other product.
-
 ### Energy Supplier Field
 The company that supplies the energy.
 
@@ -151,13 +133,26 @@ A `EnergyBillV1EnergySupplier` implements the following attributes:
 * `name` (String): The name of the energy supplier.
 Fields which are specific to this product; they are not used in any other product.
 
-### Energy Supplier Field
-The company that supplies the energy.
+### Energy Consumer Field
+The entity that consumes the energy.
 
-A `EnergyBillV1EnergySupplier` implements the following attributes:
+A `EnergyBillV1EnergyConsumer` implements the following attributes:
 
-* `address` (String): The address of the energy supplier.
-* `name` (String): The name of the energy supplier.
+* `address` (String): The address of the energy consumer.
+* `name` (String): The name of the energy consumer.
+Fields which are specific to this product; they are not used in any other product.
+
+### Subscription Field
+The subscription details fee for the energy service.
+
+A `EnergyBillV1Subscription` implements the following attributes:
+
+* `description` (String): Description or details of the subscription.
+* `end_date` (String): The end date of the subscription.
+* `start_date` (String): The start date of the subscription.
+* `tax_rate` (Float): The rate of tax applied to the total cost.
+* `total` (Float): The total cost of subscription.
+* `unit_price` (Float): The price per unit of subscription.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Energy Usage Field
@@ -173,17 +168,17 @@ A `EnergyBillV1EnergyUsage` implements the following attributes:
 * `unit_price` (Float): The price per unit of energy consumed.
 Fields which are specific to this product; they are not used in any other product.
 
-### Energy Usage Field
-Details of energy consumption.
+### Taxes and Contributions Field
+Details of Taxes and Contributions.
 
-A `EnergyBillV1EnergyUsage` implements the following attributes:
+A `EnergyBillV1TaxesAndContribution` implements the following attributes:
 
-* `description` (String): Description or details of the energy usage.
-* `end_date` (String): The end date of the energy usage.
-* `start_date` (String): The start date of the energy usage.
+* `description` (String): Description or details of the Taxes and Contributions.
+* `end_date` (String): The end date of the Taxes and Contributions.
+* `start_date` (String): The start date of the Taxes and Contributions.
 * `tax_rate` (Float): The rate of tax applied to the total cost.
-* `total` (Float): The total cost of energy consumed.
-* `unit_price` (Float): The price per unit of energy consumed.
+* `total` (Float): The total cost of Taxes and Contributions.
+* `unit_price` (Float): The price per unit of Taxes and Contributions.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Meter Details Field
@@ -201,75 +196,6 @@ A `EnergyBillV1MeterDetail` implements the following attributes:
  - None
 
 * `unit` (String): The unit of measurement for energy consumption, which can be kW, m³, or L.
-Fields which are specific to this product; they are not used in any other product.
-
-### Meter Details Field
-Information about the energy meter.
-
-A `EnergyBillV1MeterDetail` implements the following attributes:
-
-* `meter_number` (String): The unique identifier of the energy meter.
-* `meter_type` (String): The type of energy meter.
-
-#### Possible values include:
- - electricity
- - gas
- - water
- - None
-
-* `unit` (String): The unit of measurement for energy consumption, which can be kW, m³, or L.
-Fields which are specific to this product; they are not used in any other product.
-
-### Subscription Field
-The subscription details fee for the energy service.
-
-A `EnergyBillV1Subscription` implements the following attributes:
-
-* `description` (String): Description or details of the subscription.
-* `end_date` (String): The end date of the subscription.
-* `start_date` (String): The start date of the subscription.
-* `tax_rate` (Float): The rate of tax applied to the total cost.
-* `total` (Float): The total cost of subscription.
-* `unit_price` (Float): The price per unit of subscription.
-Fields which are specific to this product; they are not used in any other product.
-
-### Subscription Field
-The subscription details fee for the energy service.
-
-A `EnergyBillV1Subscription` implements the following attributes:
-
-* `description` (String): Description or details of the subscription.
-* `end_date` (String): The end date of the subscription.
-* `start_date` (String): The start date of the subscription.
-* `tax_rate` (Float): The rate of tax applied to the total cost.
-* `total` (Float): The total cost of subscription.
-* `unit_price` (Float): The price per unit of subscription.
-Fields which are specific to this product; they are not used in any other product.
-
-### Taxes and Contributions Field
-Details of Taxes and Contributions.
-
-A `EnergyBillV1TaxesAndContribution` implements the following attributes:
-
-* `description` (String): Description or details of the Taxes and Contributions.
-* `end_date` (String): The end date of the Taxes and Contributions.
-* `start_date` (String): The start date of the Taxes and Contributions.
-* `tax_rate` (Float): The rate of tax applied to the total cost.
-* `total` (Float): The total cost of Taxes and Contributions.
-* `unit_price` (Float): The price per unit of Taxes and Contributions.
-Fields which are specific to this product; they are not used in any other product.
-
-### Taxes and Contributions Field
-Details of Taxes and Contributions.
-
-A `EnergyBillV1TaxesAndContribution` implements the following attributes:
-
-* `description` (String): Description or details of the Taxes and Contributions.
-* `end_date` (String): The end date of the Taxes and Contributions.
-* `start_date` (String): The start date of the Taxes and Contributions.
-* `tax_rate` (Float): The rate of tax applied to the total cost.
-* `total` (Float): The total cost of Taxes and Contributions.
-* `unit_price` (Float): The price per unit of Taxes and Contributions.
 
 # Attributes
 The following fields are extracted for Energy Bill V1:

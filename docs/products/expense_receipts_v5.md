@@ -185,17 +185,6 @@ A `ReceiptV5LineItem` implements the following attributes:
 * `quantity` (Float): The item quantity.
 * `total_amount` (Float): The item total amount.
 * `unit_price` (Float): The item unit price.
-Fields which are specific to this product; they are not used in any other product.
-
-### Line Items Field
-List of line item details.
-
-A `ReceiptV5LineItem` implements the following attributes:
-
-* `description` (String): The item description.
-* `quantity` (Float): The item quantity.
-* `total_amount` (Float): The item total amount.
-* `unit_price` (Float): The item unit price.
 
 # Attributes
 The following fields are extracted for Receipt V5:

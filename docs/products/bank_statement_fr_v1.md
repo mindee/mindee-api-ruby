@@ -136,16 +136,6 @@ A `BankStatementV1Transaction` implements the following attributes:
 * `amount` (Float): The monetary amount of the transaction.
 * `date` (String): The date on which the transaction occurred.
 * `description` (String): The additional information about the transaction.
-Fields which are specific to this product; they are not used in any other product.
-
-### Transactions Field
-The list of values that represent the financial transactions recorded in a bank statement.
-
-A `BankStatementV1Transaction` implements the following attributes:
-
-* `amount` (Float): The monetary amount of the transaction.
-* `date` (String): The date on which the transaction occurred.
-* `description` (String): The additional information about the transaction.
 
 # Attributes
 The following fields are extracted for Bank Statement V1:

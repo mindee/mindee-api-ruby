@@ -88,6 +88,18 @@ The text field `StringField` only has one constraint: it's **value** is a `Strin
 ## Specific Fields
 Fields which are specific to this product; they are not used in any other product.
 
+### Sender Address Field
+The address of the sender.
+
+A `UsMailV3SenderAddress` implements the following attributes:
+
+* `city` (String): The city of the sender's address.
+* `complete` (String): The complete address of the sender.
+* `postal_code` (String): The postal code of the sender's address.
+* `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
+* `street` (String): The street of the sender's address.
+Fields which are specific to this product; they are not used in any other product.
+
 ### Recipient Addresses Field
 The addresses of the recipients.
 
@@ -101,51 +113,12 @@ A `UsMailV3RecipientAddress` implements the following attributes:
 * `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
 * `street` (String): The street of the recipient's address.
 * `unit` (String): The unit number of the recipient's address.
-Fields which are specific to this product; they are not used in any other product.
-
-### Recipient Addresses Field
-The addresses of the recipients.
-
-A `UsMailV3RecipientAddress` implements the following attributes:
-
-* `city` (String): The city of the recipient's address.
-* `complete` (String): The complete address of the recipient.
-* `is_address_change` (bool): Indicates if the recipient's address is a change of address.
-* `postal_code` (String): The postal code of the recipient's address.
-* `private_mailbox_number` (String): The private mailbox number of the recipient's address.
-* `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
-* `street` (String): The street of the recipient's address.
-* `unit` (String): The unit number of the recipient's address.
-Fields which are specific to this product; they are not used in any other product.
-
-### Sender Address Field
-The address of the sender.
-
-A `UsMailV3SenderAddress` implements the following attributes:
-
-* `city` (String): The city of the sender's address.
-* `complete` (String): The complete address of the sender.
-* `postal_code` (String): The postal code of the sender's address.
-* `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
-* `street` (String): The street of the sender's address.
-Fields which are specific to this product; they are not used in any other product.
-
-### Sender Address Field
-The address of the sender.
-
-A `UsMailV3SenderAddress` implements the following attributes:
-
-* `city` (String): The city of the sender's address.
-* `complete` (String): The complete address of the sender.
-* `postal_code` (String): The postal code of the sender's address.
-* `state` (String): Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
-* `street` (String): The street of the sender's address.
 
 # Attributes
 The following fields are extracted for US Mail V3:
 
 ## Return to Sender
-**is_return_to_sender** ([BooleanField](#bool-field)): Whether the mailing is marked as return to sender.
+**is_return_to_sender** ([BooleanField](#boolean-field)): Whether the mailing is marked as return to sender.
 
 ```rb
 puts result.document.inference.prediction.is_return_to_sender.value

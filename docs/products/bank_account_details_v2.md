@@ -104,17 +104,6 @@ A `BankAccountDetailsV2Bban` implements the following attributes:
 * `bban_branch_code` (String): The BBAN branch code outputted as a string.
 * `bban_key` (String): The BBAN key outputted as a string.
 * `bban_number` (String): The BBAN Account number outputted as a string.
-Fields which are specific to this product; they are not used in any other product.
-
-### Basic Bank Account Number Field
-Full extraction of BBAN, including: branch code, bank code, account and key.
-
-A `BankAccountDetailsV2Bban` implements the following attributes:
-
-* `bban_bank_code` (String): The BBAN bank code outputted as a string.
-* `bban_branch_code` (String): The BBAN branch code outputted as a string.
-* `bban_key` (String): The BBAN key outputted as a string.
-* `bban_number` (String): The BBAN Account number outputted as a string.
 
 # Attributes
 The following fields are extracted for Bank Account Details V2:

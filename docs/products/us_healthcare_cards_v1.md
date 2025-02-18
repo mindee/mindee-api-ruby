@@ -111,15 +111,6 @@ A `HealthcareCardV1Copay` implements the following attributes:
 
 * `service_fees` (Float): The price of service.
 * `service_name` (String): The name of service of the copay.
-Fields which are specific to this product; they are not used in any other product.
-
-### copays Field
-Is a fixed amount for a covered service.
-
-A `HealthcareCardV1Copay` implements the following attributes:
-
-* `service_fees` (Float): The price of service.
-* `service_name` (String): The name of service of the copay.
 
 # Attributes
 The following fields are extracted for Healthcare Card V1:
