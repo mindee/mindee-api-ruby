@@ -1,0 +1,21 @@
+# lib/mindee/product/../us_mail/us_mail_v3_document.rb
+
+module Mindee
+  module Product
+    module US
+      module UsMail
+        class UsMailV3Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def is_return_to_sender: -> (Parsing::Standard::BooleanField)
+          def recipient_addresses: -> (Array[Product::US::UsMail::UsMailV3RecipientAddress])
+          def recipient_names: -> (Array[Parsing::Standard::StringField])
+          def sender_address: -> (Product::US::UsMail::UsMailV3SenderAddress)
+          def sender_name: -> (Parsing::Standard::StringField)
+          def recipient_addresses_separator: (String) -> String
+          def recipient_addresses_to_s: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

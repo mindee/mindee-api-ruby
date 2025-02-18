@@ -1,0 +1,24 @@
+# lib/mindee/product/../payslip/payslip_v2_document.rb
+
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def bank_account_details: -> (Product::FR::Payslip::PayslipV2BankAccountDetail)
+          def employee: -> (Product::FR::Payslip::PayslipV2Employee)
+          def employer: -> (Product::FR::Payslip::PayslipV2Employer)
+          def employment: -> (Product::FR::Payslip::PayslipV2Employment)
+          def pay_detail: -> (Product::FR::Payslip::PayslipV2PayDetail)
+          def pay_period: -> (Product::FR::Payslip::PayslipV2PayPeriod)
+          def pto: -> (Product::FR::Payslip::PayslipV2Pto)
+          def salary_details: -> (Array[Product::FR::Payslip::PayslipV2SalaryDetail])
+          def salary_details_separator: (String) -> String
+          def salary_details_to_s: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

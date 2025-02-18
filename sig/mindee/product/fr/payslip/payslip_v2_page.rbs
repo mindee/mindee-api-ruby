@@ -1,0 +1,17 @@
+# lib/mindee/product/../payslip/payslip_v2_page.rb
+
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class PayslipV2PagePrediction < PayslipV2Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,17 @@
+# lib/mindee/product/../energy_bill/energy_bill_v1_page.rb
+
+module Mindee
+  module Product
+    module FR
+      module EnergyBill
+        class EnergyBillV1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class EnergyBillV1PagePrediction < EnergyBillV1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

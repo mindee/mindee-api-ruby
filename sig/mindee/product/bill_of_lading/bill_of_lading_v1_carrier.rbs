@@ -1,0 +1,14 @@
+module Mindee
+  module Product
+    module BillOfLading
+      class BillOfLadingV1Carrier < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def name: -> String
+        def professional_number: -> String
+        def scac: -> String
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def to_s: -> String
+      end
+    end
+  end
+end

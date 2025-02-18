@@ -79,12 +79,12 @@ These fields are generic and used in several products.
 Each prediction object contains a set of fields that inherit from the generic `Field` class.
 A typical `Field` object will have the following attributes:
 
-* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **value** (`String`, `Float`, `Integer`, `bool`): corresponds to the field value. Can be `nil` if no value was extracted.
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`bool`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
@@ -93,6 +93,17 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 The text field `StringField` only has one constraint: it's **value** is a `String` (or `nil`).
 
 ## Specific Fields
+Fields which are specific to this product; they are not used in any other product.
+
+### Basic Bank Account Number Field
+Full extraction of BBAN, including: branch code, bank code, account and key.
+
+A `BankAccountDetailsV2Bban` implements the following attributes:
+
+* `bban_bank_code` (String): The BBAN bank code outputted as a string.
+* `bban_branch_code` (String): The BBAN branch code outputted as a string.
+* `bban_key` (String): The BBAN key outputted as a string.
+* `bban_number` (String): The BBAN Account number outputted as a string.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Basic Bank Account Number Field

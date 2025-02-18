@@ -1,0 +1,18 @@
+# lib/mindee/product/../id_card/id_card_v1_page.rb
+
+module Mindee
+  module Product
+    module FR
+      module IdCard
+        class IdCardV1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class IdCardV1PagePrediction < IdCardV1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def document_side: -> Parsing::Standard::ClassificationField
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

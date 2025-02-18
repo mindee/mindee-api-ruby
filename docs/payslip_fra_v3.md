@@ -122,12 +122,12 @@ These fields are generic and used in several products.
 Each prediction object contains a set of fields that inherit from the generic `Field` class.
 A typical `Field` object will have the following attributes:
 
-* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **value** (`String`, `Float`, `Integer`, `bool`): corresponds to the field value. Can be `nil` if no value was extracted.
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`bool`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
@@ -143,6 +143,30 @@ A `PayslipV3BankAccountDetail` implements the following attributes:
 * `bank_name` (String): The name of the bank.
 * `iban` (String): The IBAN of the bank account.
 * `swift` (String): The SWIFT code of the bank.
+Fields which are specific to this product; they are not used in any other product.
+
+### Bank Account Details Field
+Information about the employee's bank account.
+
+A `PayslipV3BankAccountDetail` implements the following attributes:
+
+* `bank_name` (String): The name of the bank.
+* `iban` (String): The IBAN of the bank account.
+* `swift` (String): The SWIFT code of the bank.
+Fields which are specific to this product; they are not used in any other product.
+
+### Employee Field
+Information about the employee.
+
+A `PayslipV3Employee` implements the following attributes:
+
+* `address` (String): The address of the employee.
+* `date_of_birth` (String): The date of birth of the employee.
+* `first_name` (String): The first name of the employee.
+* `last_name` (String): The last name of the employee.
+* `phone_number` (String): The phone number of the employee.
+* `registration_number` (String): The registration number of the employee.
+* `social_security_number` (String): The social security number of the employee.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Employee Field
@@ -173,6 +197,20 @@ A `PayslipV3Employer` implements the following attributes:
 * `urssaf_number` (String): The URSSAF number of the employer.
 Fields which are specific to this product; they are not used in any other product.
 
+### Employer Field
+Information about the employer.
+
+A `PayslipV3Employer` implements the following attributes:
+
+* `address` (String): The address of the employer.
+* `company_id` (String): The company ID of the employer.
+* `company_site` (String): The site of the company.
+* `naf_code` (String): The NAF code of the employer.
+* `name` (String): The name of the employer.
+* `phone_number` (String): The phone number of the employer.
+* `urssaf_number` (String): The URSSAF number of the employer.
+Fields which are specific to this product; they are not used in any other product.
+
 ### Employment Field
 Information about the employment.
 
@@ -185,6 +223,44 @@ A `PayslipV3Employment` implements the following attributes:
 * `position_level` (String): The position level of the employment.
 * `seniority_date` (String): The seniority date of the employment.
 * `start_date` (String): The start date of the employment.
+Fields which are specific to this product; they are not used in any other product.
+
+### Employment Field
+Information about the employment.
+
+A `PayslipV3Employment` implements the following attributes:
+
+* `category` (String): The category of the employment.
+* `coefficient` (String): The coefficient of the employment.
+* `collective_agreement` (String): The collective agreement of the employment.
+* `job_title` (String): The job title of the employee.
+* `position_level` (String): The position level of the employment.
+* `seniority_date` (String): The seniority date of the employment.
+* `start_date` (String): The start date of the employment.
+Fields which are specific to this product; they are not used in any other product.
+
+### Paid Time Off Field
+Information about paid time off.
+
+A `PayslipV3PaidTimeOff` implements the following attributes:
+
+* `accrued` (Float): The amount of paid time off accrued in the period.
+* `period` (String): The paid time off period.
+
+#### Possible values include:
+ - N
+ - N-1
+ - N-2
+
+* `pto_type` (String): The type of paid time off.
+
+#### Possible values include:
+ - VACATION
+ - RTT
+ - COMPENSATORY
+
+* `remaining` (Float): The remaining amount of paid time off at the end of the period.
+* `used` (Float): The amount of paid time off used in the period.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Paid Time Off Field
@@ -228,6 +304,23 @@ A `PayslipV3PayDetail` implements the following attributes:
 * `total_taxes_and_deductions` (Float): The total taxes and deductions of the employee.
 Fields which are specific to this product; they are not used in any other product.
 
+### Pay Detail Field
+Detailed information about the pay.
+
+A `PayslipV3PayDetail` implements the following attributes:
+
+* `gross_salary` (Float): The gross salary of the employee.
+* `gross_salary_ytd` (Float): The year-to-date gross salary of the employee.
+* `income_tax_rate` (Float): The income tax rate of the employee.
+* `income_tax_withheld` (Float): The income tax withheld from the employee's pay.
+* `net_paid` (Float): The net paid amount of the employee.
+* `net_paid_before_tax` (Float): The net paid amount before tax of the employee.
+* `net_taxable` (Float): The net taxable amount of the employee.
+* `net_taxable_ytd` (Float): The year-to-date net taxable amount of the employee.
+* `total_cost_employer` (Float): The total cost to the employer.
+* `total_taxes_and_deductions` (Float): The total taxes and deductions of the employee.
+Fields which are specific to this product; they are not used in any other product.
+
 ### Pay Period Field
 Information about the pay period.
 
@@ -238,6 +331,30 @@ A `PayslipV3PayPeriod` implements the following attributes:
 * `payment_date` (String): The date of payment for the pay period.
 * `start_date` (String): The start date of the pay period.
 * `year` (String): The year of the pay period.
+Fields which are specific to this product; they are not used in any other product.
+
+### Pay Period Field
+Information about the pay period.
+
+A `PayslipV3PayPeriod` implements the following attributes:
+
+* `end_date` (String): The end date of the pay period.
+* `month` (String): The month of the pay period.
+* `payment_date` (String): The date of payment for the pay period.
+* `start_date` (String): The start date of the pay period.
+* `year` (String): The year of the pay period.
+Fields which are specific to this product; they are not used in any other product.
+
+### Salary Details Field
+Detailed information about the earnings.
+
+A `PayslipV3SalaryDetail` implements the following attributes:
+
+* `amount` (Float): The amount of the earning.
+* `base` (Float): The base rate value of the earning.
+* `description` (String): The description of the earnings.
+* `number` (Float): The number of units in the earning.
+* `rate` (Float): The rate of the earning.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Salary Details Field

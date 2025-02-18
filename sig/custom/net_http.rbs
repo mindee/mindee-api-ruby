@@ -6,7 +6,7 @@ module Net
   class BufferedIO
   end
   class HTTP
-    def self.start: [T] (String?, Integer?, use_ssl: bool?, read_timeout: Integer) { (HTTP) -> T } -> T
+    def self.start: [T] (String?, Integer?, use_ssl: bool?, ?read_timeout: Integer) { (HTTP) -> T } -> T
 
     def request: (untyped) -> untyped
 
@@ -19,8 +19,16 @@ module Net
 
     # Stub for the HTTP GET request class.
     class Get
-      def initialize: (untyped, Hash[String, String]?) -> void
+      def initialize: (untyped, ?Hash[String, String]?) -> void
       def new: (untyped, untyped) -> void
+      def basic_auth: (untyped, untyped) -> void
+      def []=: (?untyped, ?untyped) -> bool
     end
+  end
+
+  class HTTPRedirection
+    def []: (untyped) -> untyped
+    def body: -> untyped
+    def code: -> String?
   end
 end

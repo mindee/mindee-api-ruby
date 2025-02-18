@@ -3,9 +3,9 @@ module Mindee
   module Parsing
     module Standard
       class BaseField < Parsing::Standard::AbstractField
-        def value: -> untyped
-        def reconstructed: -> false
-        def initialize: (untyped, untyped, ?reconstructed: false) -> false
+        def initialize: (Hash[Symbol | String, untyped], Integer?, ?reconstructed: bool) -> void
+        def value: -> (String | Float | Integer | bool)
+        def reconstructed: -> bool
       end
     end
   end

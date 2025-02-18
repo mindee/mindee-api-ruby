@@ -8,7 +8,7 @@ module Mindee
     module Standard
       # Base field object.
       class BaseField < Mindee::Parsing::Standard::AbstractField
-        # @return [String, Numeric, bool]
+        # @return [String, Float, Integer, bool]
         attr_reader :value
         # true if the field was reconstructed or computed using other fields.
         # @return [bool]

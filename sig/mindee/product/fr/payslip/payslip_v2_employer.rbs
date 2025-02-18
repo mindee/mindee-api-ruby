@@ -1,0 +1,20 @@
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2Employer < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def address: -> String
+          def company_id: -> String
+          def company_site: -> String
+          def naf_code: -> String
+          def name: -> String
+          def phone_number: -> String
+          def urssaf_number: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

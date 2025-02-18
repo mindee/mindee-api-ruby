@@ -9,7 +9,7 @@ module Mindee
       class Job
         # @return [String] Mindee ID of the document
         attr_reader :id
-        # @return [Mindee::Parsing::Standard::DateField]
+        # @return [Time]
         attr_reader :issued_at
         # @return [Time, nil]
         attr_reader :available_at

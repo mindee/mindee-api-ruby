@@ -4,11 +4,11 @@ module Mindee
     module Universal
       class UniversalListField
         include Universal
-        def page_id: -> untyped
-        def page_id=: (untyped) -> untyped
-        def values: -> []
-        def values=: (untyped) -> []
-        def initialize: (untyped, ?nil) -> untyped
+        def page_id: -> Integer?
+        def page_id=: (Integer?) -> Integer?
+        def values: -> Array[untyped]
+        def values=: (untyped) -> Array[untyped]
+        def initialize: (Array[Hash[Symbol | String, untyped]], ?nil) -> untyped
         def contents_list: -> Array[untyped]
         def contents_string: (?String) -> String
         def to_s: -> String

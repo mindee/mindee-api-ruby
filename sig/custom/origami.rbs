@@ -8,16 +8,21 @@ module Origami
     def self.read: (StringIO) -> untyped
     def initialize: () -> void
     def append_page: (Page) -> void
+    def delete_pages_at: (::Array[Integer]) -> void
+    def pages: () -> untyped
+    def save: (StringIO) -> void
+    def to_io_stream: -> StringIO
     class LinearParser
       def initialize: (Hash[Symbol, untyped]) -> void
       def new: (Hash[Symbol, untyped]) -> void
-      def parse: (StringIO) -> untyped
+      def parse: (StringIO?) -> PDF
     end
   end
 
   class Page
     def initialize: () -> void
     def add_xobject: (Graphics::ImageXObject, String) -> untyped
+    def Contents: (?untyped?) -> untyped
   end
 
   module Graphics

@@ -2,8 +2,8 @@
 module Mindee
   module Input
     module Source
-      class PathInputSource # failed to identify its superclass
-        def initialize: (untyped, ?fix_pdf: bool) -> untyped
+      class PathInputSource < LocalInputSource
+        def initialize: (String, ?fix_pdf: bool) -> void
       end
     end
   end

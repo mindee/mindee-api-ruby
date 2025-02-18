@@ -1,0 +1,55 @@
+# lib/mindee/product/../carte_grise/carte_grise_v1_document.rb
+
+module Mindee
+  module Product
+    module FR
+      module CarteGrise
+        class CarteGriseV1Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def a: -> (Parsing::Standard::StringField)
+          def b: -> (Parsing::Standard::DateField)
+          def c1: -> (Parsing::Standard::StringField)
+          def c3: -> (Parsing::Standard::StringField)
+          def c41: -> (Parsing::Standard::StringField)
+          def c4a: -> (Parsing::Standard::StringField)
+          def d1: -> (Parsing::Standard::StringField)
+          def d3: -> (Parsing::Standard::StringField)
+          def e: -> (Parsing::Standard::StringField)
+          def f1: -> (Parsing::Standard::StringField)
+          def f2: -> (Parsing::Standard::StringField)
+          def f3: -> (Parsing::Standard::StringField)
+          def formula_number: -> (Parsing::Standard::StringField)
+          def g: -> (Parsing::Standard::StringField)
+          def g1: -> (Parsing::Standard::StringField)
+          def i: -> (Parsing::Standard::DateField)
+          def j: -> (Parsing::Standard::StringField)
+          def j1: -> (Parsing::Standard::StringField)
+          def j2: -> (Parsing::Standard::StringField)
+          def j3: -> (Parsing::Standard::StringField)
+          def mrz1: -> (Parsing::Standard::StringField)
+          def mrz2: -> (Parsing::Standard::StringField)
+          def owner_first_name: -> (Parsing::Standard::StringField)
+          def owner_surname: -> (Parsing::Standard::StringField)
+          def p1: -> (Parsing::Standard::StringField)
+          def p2: -> (Parsing::Standard::StringField)
+          def p3: -> (Parsing::Standard::StringField)
+          def p6: -> (Parsing::Standard::StringField)
+          def q: -> (Parsing::Standard::StringField)
+          def s1: -> (Parsing::Standard::StringField)
+          def s2: -> (Parsing::Standard::StringField)
+          def u1: -> (Parsing::Standard::StringField)
+          def u2: -> (Parsing::Standard::StringField)
+          def v7: -> (Parsing::Standard::StringField)
+          def x1: -> (Parsing::Standard::StringField)
+          def y1: -> (Parsing::Standard::StringField)
+          def y2: -> (Parsing::Standard::StringField)
+          def y3: -> (Parsing::Standard::StringField)
+          def y4: -> (Parsing::Standard::StringField)
+          def y5: -> (Parsing::Standard::StringField)
+          def y6: -> (Parsing::Standard::StringField)
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

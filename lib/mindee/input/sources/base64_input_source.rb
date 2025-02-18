@@ -11,7 +11,7 @@ module Mindee
         # @param filename [String]
         # @param fix_pdf [bool]
         def initialize(base64_string, filename, fix_pdf: false)
-          io_stream = StringIO.new(base64_string.unpack1('m*'))
+          io_stream = StringIO.new(base64_string.unpack1('m*').to_s)
           io_stream.set_encoding Encoding::BINARY
           super(io_stream, filename, fix_pdf: fix_pdf)
         end

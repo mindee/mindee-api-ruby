@@ -69,12 +69,11 @@ describe 'FullTextOCR' do
           'version' => 'mock_version',
         },
         'pages' => [
-          {},
           {
             'extras' => {},
             'id' => 0,
             'orientation' => {
-              'value' => nil,
+              'value' => 0,
             },
             'prediction' => {},
           },

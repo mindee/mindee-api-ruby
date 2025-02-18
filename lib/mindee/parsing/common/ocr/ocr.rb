@@ -6,9 +6,9 @@ module Mindee
   module Parsing
     module Common
       # Ocr-specific parsing fields and options
-      module Ocr
+      module OCR
         # A single word.
-        class OcrWord
+        class OCRWord
           # The confidence score, value will be between 0.0 and 1.0
           # @return [Float]
           attr_accessor :confidence
@@ -34,24 +34,24 @@ module Mindee
         end
 
         # A list of words which are on the same line.
-        class OcrLine < Array
+        class OCRLine < Array
           # @param prediction [Hash, nil]
           # @param from_array [Array, nil]
           def initialize(prediction = nil, from_array = nil)
             if !prediction.nil?
-              super(prediction.map { |word_prediction| OcrWord.new(word_prediction) })
+              super(prediction.map { |word_prediction| OCRWord.new(word_prediction) })
             elsif !from_array.nil?
               super(from_array)
             end
           end
 
           # Sort the words on the line from left to right.
-          # @return [OcrLine]
+          # @return [OCRLine]
           def sort_on_x
             from_array = sort do |word1, word2|
               Geometry.get_min_max_x(word1.polygon).min <=> Geometry.get_min_max_x(word2.polygon).min
             end
-            OcrLine.new(nil, from_array)
+            OCRLine.new(nil, from_array)
           end
 
           # @return [String]
@@ -61,24 +61,24 @@ module Mindee
         end
 
         # OCR extraction for a single page.
-        class OcrPage
+        class OCRPage
           # All the words on the page, in semi-random order.
-          # @return [Array<OcrWord>]
+          # @return [Array<OCRWord>]
           attr_reader :all_words
-          # @return [Array<OcrLine>]
+          # @return [Array<OCRLine>]
           attr_reader :lines
 
           # @param prediction [Hash]
           def initialize(prediction)
-            @lines = [] # : Array[Mindee::Parsing::Common::Ocr::OcrLine]
-            @all_words = [] # : Array[Mindee::Parsing::Common::Ocr::OcrWord]
+            @lines = [] # : Array[Mindee::Parsing::Common::OCR::OCRLine]
+            @all_words = [] # : Array[Mindee::Parsing::Common::OCR::OCRWord]
             prediction['all_words'].each do |word_prediction|
-              @all_words.push(OcrWord.new(word_prediction))
+              @all_words.push(OCRWord.new(word_prediction))
             end
           end
 
           # All the words on the page, ordered in lines.
-          # @return [Array<OcrLine>]
+          # @return [Array<OCRLine>]
           def all_lines
             @lines = to_lines if @lines.empty?
             @lines
@@ -99,19 +99,19 @@ module Mindee
           private
 
           # Helper function that iterates through all the words and compares them to a candidate
-          # @param sorted_words [Array<OcrWord>]
-          # @param current [OcrWord]
+          # @param sorted_words [Array<OCRWord>]
+          # @param current [OCRWord]
           # @param indexes [Array<Integer>]
-          # @param lines [Array<OcrLine>]
+          # @param lines [Array<OCRLine>]
           def parse_one(sorted_words, current, indexes, lines)
-            line = OcrLine.new([])
+            line = OCRLine.new([])
             sorted_words.each_with_index do |word, idx|
               next if indexes.include?(idx)
 
               if current.nil?
                 current = word
                 indexes.push(idx)
-                line = OcrLine.new([])
+                line = OCRLine.new([])
                 line.push(word)
               elsif words_on_same_line?(current, word)
                 line.push(word)
@@ -122,11 +122,11 @@ module Mindee
           end
 
           # Order all the words on the page into lines.
-          # @return [Array<OcrLine>]
+          # @return [Array<OCRLine>]
           def to_lines
             current = nil
             indexes = [] # : Array[Integer]
-            lines = [] # : Array[Mindee::Parsing::Common::Ocr::OcrLine]
+            lines = [] # : Array[Mindee::Parsing::Common::OCR::OCRLine]
 
             # make sure words are sorted from top to bottom
             all_words = @all_words.sort_by { |word| Geometry.get_min_max_y(word.polygon).min }
@@ -138,8 +138,8 @@ module Mindee
           end
 
           # Determine if two words are on the same line.
-          # @param current_word [Mindee::Parsing::Common::Ocr::OcrWord]
-          # @param next_word [Mindee::Parsing::Common::Ocr::OcrWord]
+          # @param current_word [Mindee::Parsing::Common::OCR::OCRWord]
+          # @param next_word [Mindee::Parsing::Common::OCR::OCRWord]
           # @return [bool]
           def words_on_same_line?(current_word, next_word)
             current_in_next = current_word.polygon.point_in_y?(next_word.polygon.centroid)
@@ -149,14 +149,14 @@ module Mindee
         end
 
         # OCR extraction from the entire document.
-        class Ocr
+        class OCR
           # Mindee Vision v1 results.
-          # @return [Mindee::Parsing::Common::Ocr::MVisionV1]
+          # @return [Mindee::Parsing::Common::OCR::MVisionV1]
           attr_reader :mvision_v1
 
           # @param prediction [Hash]
           def initialize(prediction)
-            @mvision_v1 = Mindee::Parsing::Common::Ocr::MVisionV1.new(prediction['mvision-v1'])
+            @mvision_v1 = Mindee::Parsing::Common::OCR::MVisionV1.new(prediction['mvision-v1'])
           end
 
           # @return [String]
@@ -169,7 +169,7 @@ module Mindee
           # start
           # @param page_id [Integer] ID of the page to start at
           # @param x_margin [Float] Margin of misalignment for the x coordinate (default 10%)
-          # @return [Mindee::Parsing::Common::Ocr::OcrLine]
+          # @return [Mindee::Parsing::Common::OCR::OCRLine]
           def reconstruct_vertically(coordinates, page_id, x_margin = 0.05)
             @mvision_v1.reconstruct_vertically(coordinates, page_id, x_margin)
           end

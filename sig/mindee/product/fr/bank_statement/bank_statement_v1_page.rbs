@@ -1,0 +1,17 @@
+# lib/mindee/product/../bank_statement/bank_statement_v1_page.rb
+
+module Mindee
+  module Product
+    module FR
+      module BankStatement
+        class BankStatementV1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class BankStatementV1PagePrediction < BankStatementV1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

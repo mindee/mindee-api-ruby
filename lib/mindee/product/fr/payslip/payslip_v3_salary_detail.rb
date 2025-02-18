@@ -40,22 +40,30 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : BaseField.float_to_string(@amount)
-            printable[:base] = @base.nil? ? '' : BaseField.float_to_string(@base)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
+            printable[:base] =
+              @base.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@base)
             printable[:description] = format_for_display(@description)
-            printable[:number] = @number.nil? ? '' : BaseField.float_to_string(@number)
-            printable[:rate] = @rate.nil? ? '' : BaseField.float_to_string(@rate)
+            printable[:number] =
+              @number.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@number)
+            printable[:rate] =
+              @rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@rate)
             printable
           end
 
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : BaseField.float_to_string(@amount)
-            printable[:base] = @base.nil? ? '' : BaseField.float_to_string(@base)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
+            printable[:base] =
+              @base.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@base)
             printable[:description] = format_for_display(@description, 36)
-            printable[:number] = @number.nil? ? '' : BaseField.float_to_string(@number)
-            printable[:rate] = @rate.nil? ? '' : BaseField.float_to_string(@rate)
+            printable[:number] =
+              @number.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@number)
+            printable[:rate] =
+              @rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@rate)
             printable
           end
 

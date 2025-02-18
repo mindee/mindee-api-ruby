@@ -1,0 +1,14 @@
+# lib/mindee/product/../w9/w9_v1_document.rb
+
+module Mindee
+  module Product
+    module US
+      module W9
+        class W9V1Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

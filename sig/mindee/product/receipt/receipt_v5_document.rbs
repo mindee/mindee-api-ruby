@@ -1,0 +1,31 @@
+# lib/mindee/product/receipt/receipt_v5_document.rb
+
+module Mindee
+  module Product
+    module Receipt
+      class ReceiptV5Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def category: -> (Parsing::Standard::ClassificationField)
+        def date: -> (Parsing::Standard::DateField)
+        def document_type: -> (Parsing::Standard::ClassificationField)
+        def line_items: -> (Array[Product::Receipt::ReceiptV5LineItem])
+        def locale: -> (Parsing::Standard::LocaleField)
+        def receipt_number: -> (Parsing::Standard::StringField)
+        def subcategory: -> (Parsing::Standard::ClassificationField)
+        def supplier_address: -> (Parsing::Standard::StringField)
+        def supplier_company_registrations: -> (Array[Parsing::Standard::CompanyRegistrationField])
+        def supplier_name: -> (Parsing::Standard::StringField)
+        def supplier_phone_number: -> (Parsing::Standard::StringField)
+        def taxes: -> (Parsing::Standard::Taxes)
+        def time: -> (Parsing::Standard::StringField)
+        def tip: -> (Parsing::Standard::AmountField)
+        def total_amount: -> (Parsing::Standard::AmountField)
+        def total_net: -> (Parsing::Standard::AmountField)
+        def total_tax: -> (Parsing::Standard::AmountField)
+        def line_items_separator: (String) -> String
+        def line_items_to_s: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end
