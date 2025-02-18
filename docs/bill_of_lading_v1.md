@@ -88,12 +88,12 @@ These fields are generic and used in several products.
 Each prediction object contains a set of fields that inherit from the generic `Field` class.
 A typical `Field` object will have the following attributes:
 
-* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **value** (`String`, `Float`, `Integer`, `bool`): corresponds to the field value. Can be `nil` if no value was extracted.
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`bool`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
@@ -117,6 +117,27 @@ A `BillOfLadingV1Carrier` implements the following attributes:
 * `name` (String): The name of the carrier.
 * `professional_number` (String): The professional number of the carrier.
 * `scac` (String): The Standard Carrier Alpha Code (SCAC) of the carrier.
+Fields which are specific to this product; they are not used in any other product.
+
+### Carrier Field
+The shipping company responsible for transporting the goods.
+
+A `BillOfLadingV1Carrier` implements the following attributes:
+
+* `name` (String): The name of the carrier.
+* `professional_number` (String): The professional number of the carrier.
+* `scac` (String): The Standard Carrier Alpha Code (SCAC) of the carrier.
+Fields which are specific to this product; they are not used in any other product.
+
+### Consignee Field
+The party to whom the goods are being shipped.
+
+A `BillOfLadingV1Consignee` implements the following attributes:
+
+* `address` (String): The address of the consignee.
+* `email` (String): The  email of the shipper.
+* `name` (String): The name of the consignee.
+* `phone` (String): The phone number of the consignee.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Consignee Field
@@ -143,6 +164,19 @@ A `BillOfLadingV1CarrierItem` implements the following attributes:
 * `weight_unit` (String): The unit of measurement for weights.
 Fields which are specific to this product; they are not used in any other product.
 
+### Items Field
+The goods being shipped.
+
+A `BillOfLadingV1CarrierItem` implements the following attributes:
+
+* `description` (String): A description of the item.
+* `gross_weight` (Float): The gross weight of the item.
+* `measurement` (Float): The measurement of the item.
+* `measurement_unit` (String): The unit of measurement for the measurement.
+* `quantity` (Float): The quantity of the item being shipped.
+* `weight_unit` (String): The unit of measurement for weights.
+Fields which are specific to this product; they are not used in any other product.
+
 ### Notify Party Field
 The party to be notified of the arrival of the goods.
 
@@ -152,6 +186,28 @@ A `BillOfLadingV1NotifyParty` implements the following attributes:
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the notify party.
 * `phone` (String): The phone number of the notify party.
+Fields which are specific to this product; they are not used in any other product.
+
+### Notify Party Field
+The party to be notified of the arrival of the goods.
+
+A `BillOfLadingV1NotifyParty` implements the following attributes:
+
+* `address` (String): The address of the notify party.
+* `email` (String): The  email of the shipper.
+* `name` (String): The name of the notify party.
+* `phone` (String): The phone number of the notify party.
+Fields which are specific to this product; they are not used in any other product.
+
+### Shipper Field
+The party responsible for shipping the goods.
+
+A `BillOfLadingV1Shipper` implements the following attributes:
+
+* `address` (String): The address of the shipper.
+* `email` (String): The  email of the shipper.
+* `name` (String): The name of the shipper.
+* `phone` (String): The phone number of the shipper.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Shipper Field

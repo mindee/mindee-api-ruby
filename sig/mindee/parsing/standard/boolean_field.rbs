@@ -3,8 +3,8 @@ module Mindee
   module Parsing
     module Standard
       class BooleanField < BaseField
-        def value: -> untyped
-        def initialize: (untyped, ?nil, ?reconstructed: false) -> void
+        def value: -> bool?
+        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: false) -> void
         def to_s: -> String
       end
     end

@@ -56,7 +56,7 @@ module Mindee
                                              max_redirects: max_redirects)
           bytes = StringIO.new(response_body)
 
-          BytesInputSource.new(bytes.read, filename)
+          BytesInputSource.new(bytes.read || '', filename || '')
         end
 
         # Fetches the file content from the URL.
@@ -86,7 +86,7 @@ module Mindee
         private
 
         def extract_filename_from_url(uri)
-          filename = File.basename(uri.path)
+          filename = File.basename(uri.path.to_s)
           filename.empty? ? '' : filename
         end
 

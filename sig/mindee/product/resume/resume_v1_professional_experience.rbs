@@ -1,0 +1,22 @@
+module Mindee
+  module Product
+    module Resume
+      class ResumeV1ProfessionalExperience < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def contract_type: -> String
+        def department: -> String
+        def description: -> String
+        def employer: -> String
+        def end_month: -> String
+        def end_year: -> String
+        def role: -> String
+        def start_month: -> String
+        def start_year: -> String
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

@@ -17,11 +17,11 @@ describe Mindee::PDF do
     it 'Should grab the first page' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [0],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [0],
+                                          operation: :KEEP_ONLY,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
@@ -30,11 +30,11 @@ describe Mindee::PDF do
     it 'Should grab the last page' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [-1],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [-1],
+                                          operation: :KEEP_ONLY,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
@@ -47,11 +47,11 @@ describe Mindee::PDF do
     it 'Should grab the first page' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [0],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [0],
+                                          operation: :KEEP_ONLY,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
@@ -60,11 +60,11 @@ describe Mindee::PDF do
     it 'Should grab the last page' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [-1],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [-1],
+                                          operation: :KEEP_ONLY,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(1)
@@ -73,11 +73,11 @@ describe Mindee::PDF do
     it 'Should grab the first 2, and the last page' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [0, 1, -1],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [0, 1, -1],
+                                          operation: :KEEP_ONLY,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(3)
@@ -86,11 +86,11 @@ describe Mindee::PDF do
     it 'Should grab the first 5 pages' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [0, 1, 2, 3, 4],
-        operation: :KEEP_ONLY,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [0, 1, 2, 3, 4],
+                                          operation: :KEEP_ONLY,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(5)
@@ -99,11 +99,11 @@ describe Mindee::PDF do
     it 'Should remove the first 3 pages' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [0, 1, 2],
-        operation: :REMOVE,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [0, 1, 2],
+                                          operation: :REMOVE,
+                                          on_min_pages: 0,
+                                        })
       new_stream = Mindee::PDF::PDFProcessor.parse(io_stream, options)
       new_pdf = open_pdf(new_stream)
       expect(new_pdf.pages.size).to eq(9)
@@ -112,11 +112,11 @@ describe Mindee::PDF do
     it 'Should fail on invalid operation' do
       io_stream = File.open(filepath, 'rb')
       io_stream.seek(0)
-      options = {
-        page_indexes: [1],
-        operation: :broken,
-        on_min_pages: 0,
-      }
+      options = Mindee::PageOptions.new(params: {
+                                          page_indexes: [1],
+                                          operation: :broken,
+                                          on_min_pages: 0,
+                                        })
       expect do
         Mindee::PDF::PDFProcessor.parse(io_stream, options)
       end.to raise_error ArgumentError

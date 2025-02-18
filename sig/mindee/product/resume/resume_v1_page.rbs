@@ -1,0 +1,15 @@
+# lib/mindee/product/resume/resume_v1_page.rb
+
+module Mindee
+  module Product
+    module Resume
+      class ResumeV1Page < Parsing::Common::Page
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+      class ResumeV1PagePrediction < ResumeV1Document
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

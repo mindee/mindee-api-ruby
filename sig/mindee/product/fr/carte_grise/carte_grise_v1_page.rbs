@@ -1,0 +1,17 @@
+# lib/mindee/product/../carte_grise/carte_grise_v1_page.rb
+
+module Mindee
+  module Product
+    module FR
+      module CarteGrise
+        class CarteGriseV1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class CarteGriseV1PagePrediction < CarteGriseV1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Mindee
+  module Product
+    module Resume
+      class ResumeV1Language < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def language: -> String
+        def level: -> String
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

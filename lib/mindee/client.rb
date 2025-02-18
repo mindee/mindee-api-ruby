@@ -23,6 +23,7 @@ module Mindee
     attr_accessor :page_indexes, :operation, :on_min_pages
 
     def initialize(params: {})
+      params ||= {}
       params = params.transform_keys(&:to_sym)
       @page_indexes = params.fetch(
         :page_indexes,
@@ -62,7 +63,8 @@ module Mindee
       @full_text = params.fetch(:full_text, false)
       @close_file = params.fetch(:close_file, true)
       raw_page_options = params.fetch(:page_options, nil)
-      @page_options = raw_page_options.is_a?(Hash) ? PageOptions.new(params: raw_page_options) : raw_page_options
+      raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
+      @page_options = raw_page_options
       @cropper = params.fetch(:cropper, false)
       @initial_delay_sec = params.fetch(:initial_delay_sec, 2)
       @delay_sec = params.fetch(:delay_sec, 1.5)
@@ -94,7 +96,8 @@ module Mindee
       @full_text = params.fetch(:full_text, false)
       @public_url = params.fetch(:public_url, nil)
       raw_page_options = params.fetch(:page_options, nil)
-      @page_options = raw_page_options.is_a?(Hash) ? PageOptions.new(params: raw_page_options) : raw_page_options
+      raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
+      @page_options = raw_page_options
     end
   end
 
@@ -264,21 +267,28 @@ module Mindee
     def enqueue_and_parse(input_source, product_class, endpoint, options)
       validate_async_params(options.initial_delay_sec, options.delay_sec, options.max_retries)
       enqueue_res = enqueue(input_source, product_class, endpoint: endpoint, options: options)
-      job_id = enqueue_res.job.id
+      job = enqueue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
+      job_id = job.id
 
       sleep(options.initial_delay_sec)
       polling_attempts = 1
       logger.debug("Successfully enqueued document with job id: '#{job_id}'")
       queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
-      while queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED &&
-            polling_attempts < options.max_retries
+      queue_res_job = queue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
+      valid_statuses = [
+        Mindee::Parsing::Common::JobStatus::WAITING,
+        Mindee::Parsing::Common::JobStatus::PROCESSING,
+      ]
+      # @type var valid_statuses: Array[(:waiting | :processing | :completed | :failed)]
+      while valid_statuses.include?(queue_res_job.status) && polling_attempts < options.max_retries
         logger.debug("Polling server for parsing result with job id: '#{job_id}'. Attempt #{polling_attempts}")
         sleep(options.delay_sec)
         queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
+        queue_res_job = queue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
         polling_attempts += 1
       end
 
-      if queue_res.job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
+      if queue_res_job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
         elapsed = options.initial_delay_sec + (polling_attempts * options.delay_sec.to_f)
         raise Errors::MindeeAPIError,
               "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
@@ -336,7 +346,12 @@ module Mindee
     # @param local_response [Mindee::Input::LocalResponse]
     # @return [Mindee::Parsing::Common::ApiResponse]
     def load_prediction(product_class, local_response)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, local_response.as_hash, local_response.as_hash.to_json)
+      raise Errors::MindeeAPIError, 'Expected LocalResponse to not be nil.' if local_response.nil?
+
+      response_hash = local_response.as_hash || {}
+      raise Errors::MindeeAPIError, 'Expected LocalResponse#as_hash to return a hash.' if response_hash.nil?
+
+      Mindee::Parsing::Common::ApiResponse.new(product_class, response_hash, response_hash.to_json)
     rescue KeyError, Errors::MindeeAPIError
       raise Errors::MindeeInputError, 'No prediction found in local response.'
     end

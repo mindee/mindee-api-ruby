@@ -149,15 +149,8 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
   puts field_data.to_s
 end
 ```
-## Asynchronously Parsing a File
+## Enqueue and Parse a Webhook Response
 
-This allows for easier handling of bursts of documents sent.
-
-Some products are only available asynchronously, check the example code
-directly on the Mindee platform.
-
-
-### Enqueue and Parse a Webhook Response
 This is an optional way of handling asynchronous APIs.
 
 ```rb

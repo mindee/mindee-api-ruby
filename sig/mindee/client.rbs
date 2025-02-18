@@ -16,7 +16,7 @@ module Mindee
     attr_accessor all_words: bool
     attr_accessor full_text: bool
     attr_accessor close_file: bool
-    attr_accessor page_options: (PageOptions | Hash[Symbol | String, untyped]?)
+    attr_accessor page_options: PageOptions
     attr_accessor cropper: bool
     attr_accessor initial_delay_sec: Integer | Float
     attr_accessor delay_sec: Integer | Float
@@ -31,7 +31,7 @@ module Mindee
     attr_accessor priority: (Symbol?)
     attr_accessor full_text: bool
     attr_accessor public_url: (String?)
-    attr_accessor page_options: (PageOptions | Hash[Symbol | String, untyped]?)
+    attr_accessor page_options: (PageOptions)
 
     def initialize: (params: Hash[Symbol | String, untyped]) -> void
   end

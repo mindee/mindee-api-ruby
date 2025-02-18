@@ -3,10 +3,10 @@ module Mindee
   module Product
     module Universal
       class UniversalPage < Parsing::Common::Page
-        def initialize: (untyped) -> untyped
+        def initialize: (Hash[Symbol | String, untyped]) -> void
       end
       class UniversalPagePrediction < UniversalPrediction
-        def initialize: (untyped, ?nil) -> untyped
+        def initialize: (Hash[Symbol | String, untyped], ?nil) -> void
         def to_s: -> String
       end
     end

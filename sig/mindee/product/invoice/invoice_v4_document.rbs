@@ -1,0 +1,40 @@
+# lib/mindee/product/invoice/invoice_v4_document.rb
+
+module Mindee
+  module Product
+    module Invoice
+      class InvoiceV4Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def billing_address: -> (Parsing::Standard::StringField)
+        def customer_address: -> (Parsing::Standard::StringField)
+        def customer_company_registrations: -> (Array[Parsing::Standard::CompanyRegistrationField])
+        def customer_id: -> (Parsing::Standard::StringField)
+        def customer_name: -> (Parsing::Standard::StringField)
+        def date: -> (Parsing::Standard::DateField)
+        def document_type: -> (Parsing::Standard::ClassificationField)
+        def due_date: -> (Parsing::Standard::DateField)
+        def invoice_number: -> (Parsing::Standard::StringField)
+        def line_items: -> (Array[Product::Invoice::InvoiceV4LineItem])
+        def locale: -> (Parsing::Standard::LocaleField)
+        def payment_date: -> (Parsing::Standard::DateField)
+        def po_number: -> (Parsing::Standard::StringField)
+        def reference_numbers: -> (Array[Parsing::Standard::StringField])
+        def shipping_address: -> (Parsing::Standard::StringField)
+        def supplier_address: -> (Parsing::Standard::StringField)
+        def supplier_company_registrations: -> (Array[Parsing::Standard::CompanyRegistrationField])
+        def supplier_email: -> (Parsing::Standard::StringField)
+        def supplier_name: -> (Parsing::Standard::StringField)
+        def supplier_payment_details: -> (Array[Parsing::Standard::PaymentDetailsField])
+        def supplier_phone_number: -> (Parsing::Standard::StringField)
+        def supplier_website: -> (Parsing::Standard::StringField)
+        def taxes: -> (Parsing::Standard::Taxes)
+        def total_amount: -> (Parsing::Standard::AmountField)
+        def total_net: -> (Parsing::Standard::AmountField)
+        def total_tax: -> (Parsing::Standard::AmountField)
+        def line_items_separator: (String) -> String
+        def line_items_to_s: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end
