@@ -357,16 +357,19 @@ The PDF compression allows you to reduce their size by compressing each page lik
     File.write(output_file_path, pdf_input.io_stream.read)
 ```
 
-> 🚧 Be warned that the source text (the text embedded in the PDF itself) might not render properly.
-> You can either not re-render it, or force an approximate re-rendering of the characters using:
+> 🚧 Be warned that the source text (the text embedded in the PDF itself) might not render properly, 
+> and so source PDFs will be ignored by default.
+> You can bypass this using:
 
 ```ruby
-    pdf_input.compress!(quality: 50)
-
-    # Write the output file locally for visual checking:
-    File.write(output_file_path, pdf_input.io_stream.read)
+    pdf_input.compress!(quality: 50, force_source_text: true)
 ```
 
+Or alternatively, you can try to approximate the re-rendering of the source-text using:
+
+```ruby
+    pdf_input.compress!(quality: 50, force_source_text: true, disable_source_text: false)
+```
 
 ## Questions?
 [Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-2d0ds7dtz-DPAF81ZqTy20chsYpQBW5g)

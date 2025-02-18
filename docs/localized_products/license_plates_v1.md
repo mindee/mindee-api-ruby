@@ -1,12 +1,12 @@
 ---
-title: EU License Plate OCR Ruby
+title: Ruby Client Library - EU License Plate
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-eu-license-plate-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [License Plate API](https://platform.mindee.com/mindee/license_plates).
+The Ruby Client Library SDK supports the [License Plate API](https://platform.mindee.com/mindee/license_plates).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/license_plates/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/license_plates/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![License Plate sample](https://github.com/mindee/client-lib-test-data/blob/main/products/license_plates/default_sample.jpg?raw=true)
 
 # Quick-Start

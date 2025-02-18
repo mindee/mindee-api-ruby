@@ -1,12 +1,12 @@
 ---
-title: Financial Document OCR Ruby
+title: Ruby Client Library - Financial Document
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-financial-document-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Financial Document API](https://platform.mindee.com/mindee/financial_document).
+The Ruby Client Library SDK supports the [Financial Document API](https://platform.mindee.com/mindee/financial_document).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/financial_document/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/financial_document/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Financial Document sample](https://github.com/mindee/client-lib-test-data/blob/main/products/financial_document/default_sample.jpg?raw=true)
 
 # Quick-Start

@@ -1,12 +1,12 @@
 ---
-title: Delivery note OCR Ruby
+title: Ruby Client Library - Delivery note
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-delivery-note-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Delivery note API](https://platform.mindee.com/mindee/delivery_notes).
+The Ruby Client Library SDK supports the [Delivery note API](https://platform.mindee.com/mindee/delivery_notes).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/delivery_notes/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/delivery_notes/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Delivery note sample](https://github.com/mindee/client-lib-test-data/blob/main/products/delivery_notes/default_sample.jpg?raw=true)
 
 # Quick-Start

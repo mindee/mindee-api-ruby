@@ -1,12 +1,12 @@
 ---
-title: FR Carte Nationale d'Identité OCR Ruby
+title: Ruby Client Library - FR Carte Nationale d'Identité
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-carte-nationale-didentite-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [Carte Nationale d'Identité API](https://platform.mindee.com/mindee/idcard_fr).
+The Ruby Client Library SDK supports the [Carte Nationale d'Identité API](https://platform.mindee.com/mindee/idcard_fr).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Carte Nationale d'Identité sample](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg?raw=true)
 
 # Quick-Start

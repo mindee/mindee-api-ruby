@@ -1,12 +1,12 @@
 ---
-title: FR Energy Bill OCR Ruby
+title: Ruby Client Library - FR Energy Bill
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-energy-bill-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby OCR SDK supports the [Energy Bill API](https://platform.mindee.com/mindee/energy_bill_fra).
+The Ruby Client Library SDK supports the [Energy Bill API](https://platform.mindee.com/mindee/energy_bill_fra).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/energy_bill_fra/default_sample.pdf), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/energy_bill_fra/default_sample.pdf), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Energy Bill sample](https://github.com/mindee/client-lib-test-data/blob/main/products/energy_bill_fra/default_sample.pdf?raw=true)
 
 # Quick-Start

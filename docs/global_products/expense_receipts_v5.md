@@ -1,12 +1,12 @@
 ---
-title: Receipt OCR Ruby
+title: Ruby Client Library - Receipt
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-receipt-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Receipt API](https://platform.mindee.com/mindee/expense_receipts).
+The Ruby Client Library SDK supports the [Receipt API](https://platform.mindee.com/mindee/expense_receipts).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/expense_receipts/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/expense_receipts/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Receipt sample](https://github.com/mindee/client-lib-test-data/blob/main/products/expense_receipts/default_sample.jpg?raw=true)
 
 # Quick-Start

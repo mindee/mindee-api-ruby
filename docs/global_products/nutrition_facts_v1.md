@@ -1,12 +1,12 @@
 ---
-title: Nutrition Facts Label OCR Ruby
+title: Ruby Client Library - Nutrition Facts Label
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-nutrition-facts-label-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Nutrition Facts Label API](https://platform.mindee.com/mindee/nutrition_facts).
+The Ruby Client Library SDK supports the [Nutrition Facts Label API](https://platform.mindee.com/mindee/nutrition_facts).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Nutrition Facts Label sample](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg?raw=true)
 
 # Quick-Start
