@@ -2,7 +2,7 @@
 
 require_relative '../../../parsing'
 require_relative 'us_mail_v3_sender_address'
-require_relative 'us_mail_v3_recipient_address'
+require_relative 'us_mail_v3_recipient_addresses'
 
 module Mindee
   module Product
@@ -15,7 +15,7 @@ module Mindee
           # @return [Mindee::Parsing::Standard::BooleanField]
           attr_reader :is_return_to_sender
           # The addresses of the recipients.
-          # @return [Array<Mindee::Product::US::UsMail::UsMailV3RecipientAddress>]
+          # @return [Mindee::Product::US::UsMail::UsMailV3RecipientAddresses]
           attr_reader :recipient_addresses
           # The names of the recipients.
           # @return [Array<Mindee::Parsing::Standard::StringField>]
@@ -35,10 +35,9 @@ module Mindee
               prediction['is_return_to_sender'],
               page_id
             )
-            @recipient_addresses = [] # : Array[UsMail::UsMailV3RecipientAddress]
-            prediction['recipient_addresses'].each do |item|
-              @recipient_addresses.push(UsMail::UsMailV3RecipientAddress.new(item, page_id))
-            end
+            @recipient_addresses = Product::US::UsMail::UsMailV3RecipientAddresses.new(
+              prediction['recipient_addresses'], page_id
+            )
             @recipient_names = [] # : Array[Parsing::Standard::StringField]
             prediction['recipient_names'].each do |item|
               @recipient_names.push(Parsing::Standard::StringField.new(item, page_id))

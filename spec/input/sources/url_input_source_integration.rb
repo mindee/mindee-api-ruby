@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rspec'
 require 'mindee'
 
 describe Mindee::Input::Source::UrlInputSource do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'receipt_v5_line_item'
+require_relative 'receipt_v5_line_items'
 
 module Mindee
   module Product
@@ -19,7 +19,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # List of line item details.
-        # @return [Array<Mindee::Product::Receipt::ReceiptV5LineItem>]
+        # @return [Mindee::Product::Receipt::ReceiptV5LineItems]
         attr_reader :line_items
         # The locale detected on the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
@@ -74,10 +74,7 @@ module Mindee
             prediction['document_type'],
             page_id
           )
-          @line_items = [] # : Array[Receipt::ReceiptV5LineItem]
-          prediction['line_items'].each do |item|
-            @line_items.push(Receipt::ReceiptV5LineItem.new(item, page_id))
-          end
+          @line_items = Product::Receipt::ReceiptV5LineItems.new(prediction['line_items'], page_id)
           @locale = Parsing::Standard::LocaleField.new(
             prediction['locale'],
             page_id

@@ -7,7 +7,7 @@ module Mindee
         def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
         def bill_of_lading_number: -> (Parsing::Standard::StringField)
         def carrier: -> (Product::BillOfLading::BillOfLadingV1Carrier)
-        def carrier_items: -> (Array[Product::BillOfLading::BillOfLadingV1CarrierItem])
+        def carrier_items: -> (Product::BillOfLading::BillOfLadingV1CarrierItems)
         def consignee: -> (Product::BillOfLading::BillOfLadingV1Consignee)
         def date_of_issue: -> (Parsing::Standard::DateField)
         def departure_date: -> (Parsing::Standard::DateField)
