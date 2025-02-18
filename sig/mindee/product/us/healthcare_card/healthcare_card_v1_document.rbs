@@ -7,7 +7,7 @@ module Mindee
         class HealthcareCardV1Document < Parsing::Common::Prediction
           def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
           def company_name: -> (Parsing::Standard::StringField)
-          def copays: -> (Array[Product::US::HealthcareCard::HealthcareCardV1Copay])
+          def copays: -> (Product::US::HealthcareCard::HealthcareCardV1Copays)
           def dependents: -> (Array[Parsing::Standard::StringField])
           def enrollment_date: -> (Parsing::Standard::DateField)
           def group_number: -> (Parsing::Standard::StringField)

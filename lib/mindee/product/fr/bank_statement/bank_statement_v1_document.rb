@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_statement_v1_transaction'
+require_relative 'bank_statement_v1_transactions'
 
 module Mindee
   module Product
@@ -47,7 +47,7 @@ module Mindee
           # @return [Mindee::Parsing::Standard::AmountField]
           attr_reader :total_debits
           # The list of values that represent the financial transactions recorded in a bank statement.
-          # @return [Array<Mindee::Product::FR::BankStatement::BankStatementV1Transaction>]
+          # @return [Mindee::Product::FR::BankStatement::BankStatementV1Transactions]
           attr_reader :transactions
 
           # @param prediction [Hash]
@@ -102,10 +102,9 @@ module Mindee
               prediction['total_debits'],
               page_id
             )
-            @transactions = [] # : Array[BankStatement::BankStatementV1Transaction]
-            prediction['transactions'].each do |item|
-              @transactions.push(BankStatement::BankStatementV1Transaction.new(item, page_id))
-            end
+            @transactions = Product::FR::BankStatement::BankStatementV1Transactions.new(
+              prediction['transactions'], page_id
+            )
           end
 
           # @return [String]

@@ -9,7 +9,7 @@ module Mindee
         def calories: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie)
         def cholesterol: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol)
         def dietary_fiber: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber)
-        def nutrients: -> (Array[Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient])
+        def nutrients: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients)
         def protein: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Protein)
         def saturated_fat: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat)
         def serving_per_box: -> (Parsing::Standard::AmountField)

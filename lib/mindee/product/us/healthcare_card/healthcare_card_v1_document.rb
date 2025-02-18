@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'healthcare_card_v1_copay'
+require_relative 'healthcare_card_v1_copays'
 
 module Mindee
   module Product
@@ -14,7 +14,7 @@ module Mindee
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :company_name
           # Is a fixed amount for a covered service.
-          # @return [Array<Mindee::Product::US::HealthcareCard::HealthcareCardV1Copay>]
+          # @return [Mindee::Product::US::HealthcareCard::HealthcareCardV1Copays]
           attr_reader :copays
           # The list of dependents covered by the healthcare plan.
           # @return [Array<Mindee::Parsing::Standard::StringField>]
@@ -55,10 +55,7 @@ module Mindee
               prediction['company_name'],
               page_id
             )
-            @copays = [] # : Array[HealthcareCard::HealthcareCardV1Copay]
-            prediction['copays'].each do |item|
-              @copays.push(HealthcareCard::HealthcareCardV1Copay.new(item, page_id))
-            end
+            @copays = Product::US::HealthcareCard::HealthcareCardV1Copays.new(prediction['copays'], page_id)
             @dependents = [] # : Array[Parsing::Standard::StringField]
             prediction['dependents'].each do |item|
               @dependents.push(Parsing::Standard::StringField.new(item, page_id))
