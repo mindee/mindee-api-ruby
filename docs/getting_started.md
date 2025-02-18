@@ -228,6 +228,22 @@ result = mindee_client.parse(
 )
 ```
 
+#### Specific call method
+Some products, such as InvoiceV4, ReceiptV5 & FinancialDocumentV1 support both asynchronous polling and synchronous HTTP calls.
+We recommend letting the client library decide which is better by default, but you can override the behavior by setting the `enqueue` parameter to `true` or `false`.
+
+```ruby
+
+result = mindee_client.parse(
+  input_source,
+  Mindee::Product::Invoice::InvoiceV4,
+  enqueue: false
+)
+
+> 🚧 WARNING: this feature is not available for all products, and may result in errors if used inappropriately.
+  Only use it if you are certain of what you are doing.
+```
+
 ### Universal Documents (docTI)
 For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
 
@@ -322,6 +338,35 @@ input_source = mindee_client.source_from_file(input_file, "name-of-my-file.ext",
 ```
 
 Note: This only works for local files, files sent by URL will not be processed.
+
+### PDF compression
+
+In some instances, you might be hindered by your PDF files holding too many large images inside.
+The PDF compression allows you to reduce their size by compressing each page like an image.
+
+```ruby
+    # Load a local input source.
+    input_file_path = "path/to/your/file.pdf"
+    output_file_path = "path/to/the/compressed/file.pdf"
+    pdf_input = Mindee::Input::Source::PathInputSource.new(input_file_path)
+
+    # We advise you test the quality value yourself, as results may vary greatly depending on the input file
+    pdf_input.compress!(quality: 50)
+
+    # Write the output file locally for visual checking:
+    File.write(output_file_path, pdf_input.io_stream.read)
+```
+
+> 🚧 Be warned that the source text (the text embedded in the PDF itself) might not render properly.
+> You can either not re-render it, or force an approximate re-rendering of the characters using:
+
+```ruby
+    pdf_input.compress!(quality: 50)
+
+    # Write the output file locally for visual checking:
+    File.write(output_file_path, pdf_input.io_stream.read)
+```
+
 
 ## Questions?
 [Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-2d0ds7dtz-DPAF81ZqTy20chsYpQBW5g)
