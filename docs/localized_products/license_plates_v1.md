@@ -6,7 +6,20 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [License Plate API](https://platform.mindee.com/mindee/license_plates).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/license_plates/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `license_plates`                                   |
+> | Recommended Version            | `v1.1`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🇪🇺 Europe                                          |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/license_plates/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![License Plate sample](https://github.com/mindee/client-lib-test-data/blob/main/products/license_plates/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -85,7 +98,7 @@ The following fields are extracted for License Plate V1:
 **license_plates** (Array<[StringField](#string-field)>): List of all license plates found in the image.
 
 ```rb
-for license_plates_elem in result.document.inference.prediction.license_plates do
+result.document.inference.prediction.license_plates do |license_plates_elem|
   puts license_plates_elem.value
 end
 ```

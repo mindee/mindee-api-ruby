@@ -6,7 +6,28 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Bill of Lading API](https://platform.mindee.com/mindee/bill_of_lading).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bill_of_lading/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `bill_of_lading`                                   |
+> | Recommended Version            | `v1.1`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🌐 Global                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bill_of_lading/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Bill of Lading sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bill_of_lading/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -99,7 +120,7 @@ A typical `Field` object will have the following attributes:
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
@@ -113,7 +134,7 @@ Fields which are specific to this product; they are not used in any other produc
 The party responsible for shipping the goods.
 
 A `BillOfLadingV1Shipper` implements the following attributes:
-
+      
 * `address` (String): The address of the shipper.
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the shipper.
@@ -124,7 +145,7 @@ Fields which are specific to this product; they are not used in any other produc
 The party to whom the goods are being shipped.
 
 A `BillOfLadingV1Consignee` implements the following attributes:
-
+      
 * `address` (String): The address of the consignee.
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the consignee.
@@ -135,7 +156,7 @@ Fields which are specific to this product; they are not used in any other produc
 The party to be notified of the arrival of the goods.
 
 A `BillOfLadingV1NotifyParty` implements the following attributes:
-
+      
 * `address` (String): The address of the notify party.
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the notify party.
@@ -146,7 +167,7 @@ Fields which are specific to this product; they are not used in any other produc
 The shipping company responsible for transporting the goods.
 
 A `BillOfLadingV1Carrier` implements the following attributes:
-
+      
 * `name` (String): The name of the carrier.
 * `professional_number` (String): The professional number of the carrier.
 * `scac` (String): The Standard Carrier Alpha Code (SCAC) of the carrier.
@@ -156,7 +177,7 @@ Fields which are specific to this product; they are not used in any other produc
 The goods being shipped.
 
 A `BillOfLadingV1CarrierItem` implements the following attributes:
-
+      
 * `description` (String): A description of the item.
 * `gross_weight` (Float): The gross weight of the item.
 * `measurement` (Float): The measurement of the item.
@@ -185,7 +206,7 @@ puts result.document.inference.prediction.carrier.value
 **carrier_items** (Array<[BillOfLadingV1CarrierItem](#items-field)>): The goods being shipped.
 
 ```rb
-for carrier_items_elem in result.document.inference.prediction.carrier_items do
+result.document.inference.prediction.carrier_items do |carrier_items_elem|
   puts carrier_items_elem.value
 end
 ```

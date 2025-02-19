@@ -6,7 +6,20 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `barcode_reader`                                   |
+> | Recommended Version            | `v1.0`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🌐 Global                                          |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Barcode Reader sample](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -89,7 +102,7 @@ The following fields are extracted for Barcode Reader V1:
 **codes_1d** (Array<[StringField](#string-field)>): List of decoded 1D barcodes.
 
 ```rb
-for codes_1d_elem in result.document.inference.prediction.codes_1d do
+result.document.inference.prediction.codes_1d do |codes_1d_elem|
   puts codes_1d_elem.value
 end
 ```
@@ -98,7 +111,7 @@ end
 **codes_2d** (Array<[StringField](#string-field)>): List of decoded 2D barcodes.
 
 ```rb
-for codes_2d_elem in result.document.inference.prediction.codes_2d do
+result.document.inference.prediction.codes_2d do |codes_2d_elem|
   puts codes_2d_elem.value
 end
 ```

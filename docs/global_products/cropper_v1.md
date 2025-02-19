@@ -6,7 +6,20 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Cropper API](https://platform.mindee.com/mindee/cropper).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `cropper`                                          |
+> | Recommended Version            | `v1.1`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🌐 Global                                          |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Cropper sample](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -74,9 +87,11 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Position Field
-The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**, **polygon** and **page_id**. On top of these, it has access to:
+The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**,
+**polygon** and **page_id**. On top of these, it has access to:
 
-* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond canvas).
+* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond
+canvas).
 * **quadrangle** (`Mindee::Geometry::Quadrilateral`): a free polygon made up of four points.
 
 ## Page-Level Fields
@@ -89,14 +104,14 @@ The following fields are extracted for Cropper V1:
 [📄](#page-level-fields "This field is only present on individual pages.")**cropping** (Array<[PositionField](#position-field)>): List of documents found in the image.
 
 ```rb
-for page in result.document.inference.pages do
-  for cropping_elem in page.prediction.cropping do
-    puts cropping_elem.polygon.to_s
+  result.document.inference.pages do |page|
+    page.prediction.cropping do |cropping_elem|
+      puts cropping_elem.polygon.to_s
     puts cropping_elem.quadrangle.to_s
     puts cropping_elem.rectangle.to_s
     puts cropping_elem.boundingBox.to_s
+    end
   end
-end
 ```
 
 # Questions?

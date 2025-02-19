@@ -6,7 +6,20 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [Carte Nationale d'Identité API](https://platform.mindee.com/mindee/idcard_fr).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `idcard_fr`                                        |
+> | Recommended Version            | `v2.0`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🇫🇷 France                                          |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Carte Nationale d'Identité sample](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -109,12 +122,13 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Classification Field
-The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements
+**value**, **confidence** and **page_id**.
 
 > Note: a classification field's `value is always a `String`.
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
@@ -178,9 +192,9 @@ puts result.document.inference.prediction.document_number.value
  - RECTO & VERSO
 
 ```rb
-for document_side_elem in result.document.document_side do
-  puts document_side_elem.value
-end
+  result.document.document_side.each do |document_side_elem|
+    puts document_side_elem.value
+  end
 ```
 
 ## Document Type
@@ -191,9 +205,9 @@ end
  - OLD
 
 ```rb
-for document_type_elem in result.document.document_type do
-  puts document_type_elem.value
-end
+  result.document.document_type.each do |document_type_elem|
+    puts document_type_elem.value
+  end
 ```
 
 ## Expiry Date
@@ -214,7 +228,7 @@ puts result.document.inference.prediction.gender.value
 **given_names** (Array<[StringField](#string-field)>): The given name(s) of the card holder.
 
 ```rb
-for given_names_elem in result.document.inference.prediction.given_names do
+result.document.inference.prediction.given_names do |given_names_elem|
   puts given_names_elem.value
 end
 ```

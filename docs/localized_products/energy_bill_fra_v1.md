@@ -6,7 +6,28 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [Energy Bill API](https://platform.mindee.com/mindee/energy_bill_fra).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/energy_bill_fra/default_sample.pdf), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `energy_bill_fra`                                  |
+> | Recommended Version            | `v1.0`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🇫🇷 France                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/energy_bill_fra/default_sample.pdf), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Energy Bill sample](https://github.com/mindee/client-lib-test-data/blob/main/products/energy_bill_fra/default_sample.pdf?raw=true)
 
 # Quick-Start
@@ -114,7 +135,7 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 The amount field `AmountField` only has one constraint: its **value** is a `Float` (or `nil`).
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
@@ -128,7 +149,7 @@ Fields which are specific to this product; they are not used in any other produc
 The company that supplies the energy.
 
 A `EnergyBillV1EnergySupplier` implements the following attributes:
-
+      
 * `address` (String): The address of the energy supplier.
 * `name` (String): The name of the energy supplier.
 Fields which are specific to this product; they are not used in any other product.
@@ -137,7 +158,7 @@ Fields which are specific to this product; they are not used in any other produc
 The entity that consumes the energy.
 
 A `EnergyBillV1EnergyConsumer` implements the following attributes:
-
+      
 * `address` (String): The address of the energy consumer.
 * `name` (String): The name of the energy consumer.
 Fields which are specific to this product; they are not used in any other product.
@@ -146,7 +167,7 @@ Fields which are specific to this product; they are not used in any other produc
 The subscription details fee for the energy service.
 
 A `EnergyBillV1Subscription` implements the following attributes:
-
+      
 * `description` (String): Description or details of the subscription.
 * `end_date` (String): The end date of the subscription.
 * `start_date` (String): The start date of the subscription.
@@ -159,7 +180,7 @@ Fields which are specific to this product; they are not used in any other produc
 Details of energy consumption.
 
 A `EnergyBillV1EnergyUsage` implements the following attributes:
-
+      
 * `description` (String): Description or details of the energy usage.
 * `end_date` (String): The end date of the energy usage.
 * `start_date` (String): The start date of the energy usage.
@@ -172,7 +193,7 @@ Fields which are specific to this product; they are not used in any other produc
 Details of Taxes and Contributions.
 
 A `EnergyBillV1TaxesAndContribution` implements the following attributes:
-
+      
 * `description` (String): Description or details of the Taxes and Contributions.
 * `end_date` (String): The end date of the Taxes and Contributions.
 * `start_date` (String): The start date of the Taxes and Contributions.
@@ -185,7 +206,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about the energy meter.
 
 A `EnergyBillV1MeterDetail` implements the following attributes:
-
+      
 * `meter_number` (String): The unique identifier of the energy meter.
 * `meter_type` (String): The type of energy meter.
 
@@ -194,7 +215,7 @@ A `EnergyBillV1MeterDetail` implements the following attributes:
  - gas
  - water
  - None
-
+        
 * `unit` (String): The unit of measurement for energy consumption, which can be kW, m³, or L.
 
 # Attributes
@@ -239,7 +260,7 @@ puts result.document.inference.prediction.energy_supplier.value
 **energy_usage** (Array<[EnergyBillV1EnergyUsage](#energy-usage-field)>): Details of energy consumption.
 
 ```rb
-for energy_usage_elem in result.document.inference.prediction.energy_usage do
+result.document.inference.prediction.energy_usage do |energy_usage_elem|
   puts energy_usage_elem.value
 end
 ```
@@ -269,7 +290,7 @@ puts result.document.inference.prediction.meter_details.value
 **subscription** (Array<[EnergyBillV1Subscription](#subscription-field)>): The subscription details fee for the energy service.
 
 ```rb
-for subscription_elem in result.document.inference.prediction.subscription do
+result.document.inference.prediction.subscription do |subscription_elem|
   puts subscription_elem.value
 end
 ```
@@ -278,7 +299,7 @@ end
 **taxes_and_contributions** (Array<[EnergyBillV1TaxesAndContribution](#taxes-and-contributions-field)>): Details of Taxes and Contributions.
 
 ```rb
-for taxes_and_contributions_elem in result.document.inference.prediction.taxes_and_contributions do
+result.document.inference.prediction.taxes_and_contributions do |taxes_and_contributions_elem|
   puts taxes_and_contributions_elem.value
 end
 ```

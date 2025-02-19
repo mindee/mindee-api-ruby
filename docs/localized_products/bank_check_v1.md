@@ -6,7 +6,20 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [Bank Check API](https://platform.mindee.com/mindee/bank_check).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_check/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `bank_check`                                       |
+> | Recommended Version            | `v1.1`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🇺🇸 United States                                   |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_check/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Bank Check sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_check/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -94,15 +107,17 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 The amount field `AmountField` only has one constraint: its **value** is a `Float` (or `nil`).
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
 
 ### Position Field
-The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**, **polygon** and **page_id**. On top of these, it has access to:
+The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**,
+**polygon** and **page_id**. On top of these, it has access to:
 
-* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond canvas).
+* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond
+canvas).
 * **quadrangle** (`Mindee::Geometry::Quadrilateral`): a free polygon made up of four points.
 
 ### String Field
@@ -139,9 +154,9 @@ puts result.document.inference.prediction.check_number.value
 [📄](#page-level-fields "This field is only present on individual pages.")**check_position** ([PositionField](#position-field)): The position of the check on the document.
 
 ```rb
-for check_position_elem in result.document.check_position do
-  puts check_position_elem.polygon
-end
+  result.document.check_position.each do |check_position_elem|
+    puts check_position_elem.polygon
+  end
 ```
 
 ## Check Issue Date
@@ -155,7 +170,7 @@ puts result.document.inference.prediction.date.value
 **payees** (Array<[StringField](#string-field)>): List of the check's payees (recipients).
 
 ```rb
-for payees_elem in result.document.inference.prediction.payees do
+result.document.inference.prediction.payees do |payees_elem|
   puts payees_elem.value
 end
 ```
@@ -171,14 +186,14 @@ puts result.document.inference.prediction.routing_number.value
 [📄](#page-level-fields "This field is only present on individual pages.")**signatures_positions** (Array<[PositionField](#position-field)>): List of signature positions
 
 ```rb
-for page in result.document.inference.pages do
-  for signatures_positions_elem in page.prediction.signatures_positions do
-    puts signatures_positions_elem.polygon.to_s
+  result.document.inference.pages do |page|
+    page.prediction.signatures_positions do |signatures_positions_elem|
+      puts signatures_positions_elem.polygon.to_s
     puts signatures_positions_elem.quadrangle.to_s
     puts signatures_positions_elem.rectangle.to_s
     puts signatures_positions_elem.boundingBox.to_s
+    end
   end
-end
 ```
 
 # Questions?
