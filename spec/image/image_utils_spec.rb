@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # spec/image_utils_spec.rb
-require 'rspec'
 require 'mini_magick'
 require 'stringio'
 require 'mindee'

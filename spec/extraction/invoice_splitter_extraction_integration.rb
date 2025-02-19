@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'mindee'
-require 'rspec'
 require_relative '../data'
 require_relative '../test_utilities'
 
