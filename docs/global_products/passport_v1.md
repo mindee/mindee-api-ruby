@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-passport-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby Client Library SDK supports the [Passport API](https://platform.mindee.com/mindee/passport).
+The Ruby Client Library supports the [Passport API](https://platform.mindee.com/mindee/passport).
 
 
 > 📝 Product Specs

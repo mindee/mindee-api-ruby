@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-multi-receipts-detector-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby Client Library SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
+The Ruby Client Library supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
 
 
 > 📝 Product Specs

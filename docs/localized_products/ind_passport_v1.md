@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-ind-passport---india-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby Client Library SDK supports the [Passport - India API](https://platform.mindee.com/mindee/ind_passport).
+The Ruby Client Library supports the [Passport - India API](https://platform.mindee.com/mindee/ind_passport).
 
 
 > 📝 Product Specs

@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-bill-of-lading-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby Client Library SDK supports the [Bill of Lading API](https://platform.mindee.com/mindee/bill_of_lading).
+The Ruby Client Library supports the [Bill of Lading API](https://platform.mindee.com/mindee/bill_of_lading).
 
 
 > 📝 Product Specs

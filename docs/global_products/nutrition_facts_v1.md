@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-nutrition-facts-label-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby Client Library SDK supports the [Nutrition Facts Label API](https://platform.mindee.com/mindee/nutrition_facts).
+The Ruby Client Library supports the [Nutrition Facts Label API](https://platform.mindee.com/mindee/nutrition_facts).
 
 
 > 📝 Product Specs

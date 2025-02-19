@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-bank-account-details-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby Client Library SDK supports the [Bank Account Details API](https://platform.mindee.com/mindee/bank_account_details).
+The Ruby Client Library supports the [Bank Account Details API](https://platform.mindee.com/mindee/bank_account_details).
 
 
 > 📝 Product Specs

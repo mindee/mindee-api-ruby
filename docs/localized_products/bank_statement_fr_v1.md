@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-bank-statement-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby Client Library SDK supports the [Bank Statement API](https://platform.mindee.com/mindee/bank_statement_fr).
+The Ruby Client Library supports the [Bank Statement API](https://platform.mindee.com/mindee/bank_statement_fr).
 
 
 > 📝 Product Specs
