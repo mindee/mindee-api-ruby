@@ -3,14 +3,14 @@ module Mindee
   module Parsing
     module Standard
       class PositionField
-        def polygon: -> untyped
-        def value: -> untyped
-        def quadrangle: -> nil
-        def rectangle: -> nil
-        def bounding_box: -> nil
-        def initialize: (untyped, untyped) -> untyped
+        def polygon: -> Geometry::Polygon
+        def value: -> Geometry::Polygon
+        def quadrangle: -> Geometry::Quadrilateral
+        def rectangle: -> Geometry::Quadrilateral
+        def bounding_box: -> Geometry::Quadrilateral
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
         def to_s: -> String
-        def to_quadrilateral: (untyped, String) -> nil
+        def to_quadrilateral: (Hash[Symbol | String, Array[untyped]], String) -> Geometry::Quadrilateral?
       end
     end
   end

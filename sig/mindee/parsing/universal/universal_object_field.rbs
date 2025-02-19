@@ -3,21 +3,21 @@ module Mindee
   module Parsing
     module Universal
       class UniversalObjectField
-        def page_id: -> untyped
-        def page_id=: (untyped) -> untyped
-        def confidence: -> untyped
-        def confidence=: (untyped) -> untyped
-        def raw_value: -> untyped
-        def raw_value=: (untyped) -> untyped
-        def initialize: (untyped, ?nil) -> untyped
+        def page_id: -> Integer?
+        def page_id=: (Integer?) -> untyped
+        def confidence: -> Float?
+        def confidence=: (Float?) -> untyped
+        def raw_value: -> Hash[Symbol | String, untyped]
+        def raw_value=: (Hash[Symbol | String, untyped]) -> untyped
+        def initialize: (Hash[Symbol | String, untyped], ?Integer?) -> void
         def str_level: (?Integer) -> String
-        def method_missing: (untyped, *untyped) -> nil
-        def respond_to_missing?: (untyped, ?false) -> bool
+        def method_missing: (Symbol, *Array[untyped]) -> Object
+        def respond_to_missing?: (Symbol, ?bool) -> bool
         def to_s: -> String
-        def handle_position_field: (untyped, untyped, untyped) -> untyped
-        def handle_default_field: (untyped, untyped) -> nil
+        def handle_position_field: (String | Symbol, untyped, Integer?) -> void
+        def handle_default_field: (String | Symbol, untyped) -> void
       end
-      def self.universal_object?: (untyped) -> bool
+      def self.universal_object?: (Hash[Symbol | String, untyped]) -> bool
     end
   end
 end

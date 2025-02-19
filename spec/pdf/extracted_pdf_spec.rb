@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'mindee'
-require 'rspec'
 
 describe Mindee::PDF::PDFExtractor::ExtractedPDF do
   let(:product_data_dir) { File.join(DATA_DIR, 'products') }

@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'mindee/product'
-require 'mindee/parsing'
+require 'mindee'
 
 require_relative '../data'
 
@@ -14,7 +13,7 @@ Universal = Mindee::Product::Universal.const_get(:Universal)
 UniversalPage = Mindee::Product::Universal.const_get(:UniversalPage)
 Document = Mindee::Parsing::Common.const_get(:Document)
 
-RSpec.describe 'International ID v1 document' do
+describe 'International ID v1 document' do
   let(:international_id_v1_complete_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',
@@ -231,7 +230,7 @@ RSpec.describe 'International ID v1 document' do
   end
 end
 
-RSpec.describe 'Invoice V4 document' do
+describe 'Invoice V4 document' do
   let(:invoice_v4_complete_doc) do
     parsed_file = JSON.parse(File.read(File.join(DATA_DIR,
                                                  'products',

@@ -8,8 +8,15 @@ module Mindee
     module Universal
       # A JSON-like object, with miscellaneous values.
       class UniversalObjectField
-        include Mindee::Parsing::Standard
-        attr_accessor :page_id, :confidence, :raw_value
+        # ID of the page (as given by the API).
+        # @return [Integer]
+        attr_reader :page_id
+        # The confidence score, value will be between 0.0 and 1.0
+        # @return [Float]
+        attr_reader :confidence
+        # Value as String
+        # @return [Hash<Symbol | String, untyped>, nil]
+        attr_accessor :raw_value
 
         # ID of the page the object was found on.
         # Confidence with which the value was assessed.
@@ -47,7 +54,7 @@ module Mindee
         end
 
         # Necessary overload of the method_missing method to allow for direct access to dynamic attributes without
-        # complicating usage too much
+        # changing the user usage too much.
         # Returns the corresponding attribute when asked.
         #
         # Otherwise, raises a NoMethodError.
@@ -61,7 +68,7 @@ module Mindee
         end
 
         # Necessary overload of the respond_to_missing? method to allow for direct access to dynamic attributes without
-        # complicating usage too much
+        # changing the user usage too much.
         # Returns true if the method name exists as a key in @all_values,
         # indicating that the object can respond to the method.
         # Otherwise, calls super to fallback to the default behavior.
@@ -83,8 +90,7 @@ module Mindee
         def handle_position_field(name, value, item_page_id)
           @all_values[name.to_s] =
             Mindee::Parsing::Standard::PositionField.new(
-              { name.to_s => value },
-              value_key: name.to_s, page_id: item_page_id
+              { name.to_s => value }, item_page_id
             )
         end
 
@@ -104,7 +110,7 @@ module Mindee
           'values',
           'raw_value',
         ]
-        str_dict.each_key { |key| return true unless common_keys.include?(key) }
+        str_dict.each_key { |key| return true unless common_keys.include?(key.to_s) }
         false
       end
     end
