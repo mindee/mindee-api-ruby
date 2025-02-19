@@ -6,7 +6,20 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [W9 API](https://platform.mindee.com/mindee/us_w9).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `us_w9`                                            |
+> | Recommended Version            | `v1.0`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🇺🇸 United States                                   |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![W9 sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_w9/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -84,9 +97,11 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Position Field
-The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**, **polygon** and **page_id**. On top of these, it has access to:
+The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**,
+**polygon** and **page_id**. On top of these, it has access to:
 
-* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond canvas).
+* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond
+canvas).
 * **quadrangle** (`Mindee::Geometry::Quadrilateral`): a free polygon made up of four points.
 
 ### String Field
@@ -102,108 +117,108 @@ The following fields are extracted for W9 V1:
 [📄](#page-level-fields "This field is only present on individual pages.")**address** ([StringField](#string-field)): The street address (number, street, and apt. or suite no.) of the applicant.
 
 ```rb
-for address_elem in result.document.address do
-  puts address_elem.value
-end
+  result.document.address.each do |address_elem|
+    puts address_elem.value
+  end
 ```
 
 ## Business Name
 [📄](#page-level-fields "This field is only present on individual pages.")**business_name** ([StringField](#string-field)): The business name or disregarded entity name, if different from Name.
 
 ```rb
-for business_name_elem in result.document.business_name do
-  puts business_name_elem.value
-end
+  result.document.business_name.each do |business_name_elem|
+    puts business_name_elem.value
+  end
 ```
 
 ## City State Zip
 [📄](#page-level-fields "This field is only present on individual pages.")**city_state_zip** ([StringField](#string-field)): The city, state, and ZIP code of the applicant.
 
 ```rb
-for city_state_zip_elem in result.document.city_state_zip do
-  puts city_state_zip_elem.value
-end
+  result.document.city_state_zip.each do |city_state_zip_elem|
+    puts city_state_zip_elem.value
+  end
 ```
 
 ## EIN
 [📄](#page-level-fields "This field is only present on individual pages.")**ein** ([StringField](#string-field)): The employer identification number.
 
 ```rb
-for ein_elem in result.document.ein do
-  puts ein_elem.value
-end
+  result.document.ein.each do |ein_elem|
+    puts ein_elem.value
+  end
 ```
 
 ## Name
 [📄](#page-level-fields "This field is only present on individual pages.")**name** ([StringField](#string-field)): Name as shown on the applicant's income tax return.
 
 ```rb
-for name_elem in result.document.name do
-  puts name_elem.value
-end
+  result.document.name.each do |name_elem|
+    puts name_elem.value
+  end
 ```
 
 ## Signature Date Position
 [📄](#page-level-fields "This field is only present on individual pages.")**signature_date_position** ([PositionField](#position-field)): Position of the signature date on the document.
 
 ```rb
-for signature_date_position_elem in result.document.signature_date_position do
-  puts signature_date_position_elem.polygon
-end
+  result.document.signature_date_position.each do |signature_date_position_elem|
+    puts signature_date_position_elem.polygon
+  end
 ```
 
 ## Signature Position
 [📄](#page-level-fields "This field is only present on individual pages.")**signature_position** ([PositionField](#position-field)): Position of the signature on the document.
 
 ```rb
-for signature_position_elem in result.document.signature_position do
-  puts signature_position_elem.polygon
-end
+  result.document.signature_position.each do |signature_position_elem|
+    puts signature_position_elem.polygon
+  end
 ```
 
 ## SSN
 [📄](#page-level-fields "This field is only present on individual pages.")**ssn** ([StringField](#string-field)): The applicant's social security number.
 
 ```rb
-for ssn_elem in result.document.ssn do
-  puts ssn_elem.value
-end
+  result.document.ssn.each do |ssn_elem|
+    puts ssn_elem.value
+  end
 ```
 
 ## Tax Classification
 [📄](#page-level-fields "This field is only present on individual pages.")**tax_classification** ([StringField](#string-field)): The federal tax classification, which can vary depending on the revision date.
 
 ```rb
-for tax_classification_elem in result.document.tax_classification do
-  puts tax_classification_elem.value
-end
+  result.document.tax_classification.each do |tax_classification_elem|
+    puts tax_classification_elem.value
+  end
 ```
 
 ## Tax Classification LLC
 [📄](#page-level-fields "This field is only present on individual pages.")**tax_classification_llc** ([StringField](#string-field)): Depending on revision year, among S, C, P or D for Limited Liability Company Classification.
 
 ```rb
-for tax_classification_llc_elem in result.document.tax_classification_llc do
-  puts tax_classification_llc_elem.value
-end
+  result.document.tax_classification_llc.each do |tax_classification_llc_elem|
+    puts tax_classification_llc_elem.value
+  end
 ```
 
 ## Tax Classification Other Details
 [📄](#page-level-fields "This field is only present on individual pages.")**tax_classification_other_details** ([StringField](#string-field)): Tax Classification Other Details.
 
 ```rb
-for tax_classification_other_details_elem in result.document.tax_classification_other_details do
-  puts tax_classification_other_details_elem.value
-end
+  result.document.tax_classification_other_details.each do |tax_classification_other_details_elem|
+    puts tax_classification_other_details_elem.value
+  end
 ```
 
 ## W9 Revision Date
 [📄](#page-level-fields "This field is only present on individual pages.")**w9_revision_date** ([StringField](#string-field)): The Revision month and year of the W9 form.
 
 ```rb
-for w9_revision_date_elem in result.document.w9_revision_date do
-  puts w9_revision_date_elem.value
-end
+  result.document.w9_revision_date.each do |w9_revision_date_elem|
+    puts w9_revision_date_elem.value
+  end
 ```
 
 # Questions?

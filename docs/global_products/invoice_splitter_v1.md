@@ -4,9 +4,28 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-invoice-splitter-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports the [Invoice Splitter API](https://platform.mindee.com/mindee/invoice_splitter).
+The Ruby Client Library supports the [Invoice Splitter API](https://platform.mindee.com/mindee/invoice_splitter).
 
-Using [this sample](https://github.com/mindee/client-lib-test-data/blob/main/products/invoice_splitter/default_sample.pdf), we are going to illustrate how to detect the pages of multiple invoices within the same document.
+> 📝 Product Specs
+>
+> | Specification                  | Details            |
+> | ------------------------------ |--------------------|
+> | Endpoint                       | `invoice_splitter` |
+> | Recommended Version            | `v1.2`             |
+> | Supports Polling/Webhooks      | ✔️ Yes             |
+> | Support Synchronous HTTP Calls | ❌ No               |
+> | Geography                      | 🌐 Global          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+Using [this sample](https://github.com/mindee/client-lib-test-data/blob/main/products/invoice_splitter/default_sample.pdf), we are going to illustrate detect the pages of multiple invoices within the same document using the
+Ruby Client Library.
 
 # Quick-Start
 
@@ -79,7 +98,7 @@ The following fields are extracted for Invoice Splitter V1:
 **invoice_page_groups** (Array<[InvoiceSplitterV1PageGroup](#invoice-splitter-v1-page-group)>): List of page indexes that belong to the same invoice in the PDF.
 
 ```rb
-for invoice_page_groups_elem in result.document.inference.prediction.invoice_page_groups do 
+result.document.inference.prediction.invoice_page_groups.each do |invoice_page_groups_elem|
   puts invoice_page_groups_elem.page_indexes.join(', ')
 end
 ```

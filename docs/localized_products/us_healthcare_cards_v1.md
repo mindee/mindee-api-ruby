@@ -6,7 +6,28 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [Healthcare Card API](https://platform.mindee.com/mindee/us_healthcare_cards).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `us_healthcare_cards`                              |
+> | Recommended Version            | `v1.0`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🇺🇸 United States                                   |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Healthcare Card sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -94,7 +115,7 @@ A typical `Field` object will have the following attributes:
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
@@ -108,7 +129,7 @@ Fields which are specific to this product; they are not used in any other produc
 Is a fixed amount for a covered service.
 
 A `HealthcareCardV1Copay` implements the following attributes:
-
+      
 * `service_fees` (Float): The price of service.
 * `service_name` (String): The name of service of the copay.
 
@@ -126,7 +147,7 @@ puts result.document.inference.prediction.company_name.value
 **copays** (Array<[HealthcareCardV1Copay](#copays-field)>): Is a fixed amount for a covered service.
 
 ```rb
-for copays_elem in result.document.inference.prediction.copays do
+result.document.inference.prediction.copays do |copays_elem|
   puts copays_elem.value
 end
 ```
@@ -135,7 +156,7 @@ end
 **dependents** (Array<[StringField](#string-field)>): The list of dependents covered by the healthcare plan.
 
 ```rb
-for dependents_elem in result.document.inference.prediction.dependents do
+result.document.inference.prediction.dependents do |dependents_elem|
   puts dependents_elem.value
 end
 ```

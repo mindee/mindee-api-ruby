@@ -6,7 +6,28 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [International ID API](https://platform.mindee.com/mindee/international_id).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/international_id/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `international_id`                                 |
+> | Recommended Version            | `v2.1`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🌐 Global                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/international_id/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![International ID sample](https://github.com/mindee/client-lib-test-data/blob/main/products/international_id/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -87,12 +108,13 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Classification Field
-The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements
+**value**, **confidence** and **page_id**.
 
 > Note: a classification field's `value is always a `String`.
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
@@ -163,7 +185,7 @@ puts result.document.inference.prediction.expiry_date.value
 **given_names** (Array<[StringField](#string-field)>): The list of the document holder's given names.
 
 ```rb
-for given_names_elem in result.document.inference.prediction.given_names do
+result.document.inference.prediction.given_names do |given_names_elem|
   puts given_names_elem.value
 end
 ```
@@ -228,7 +250,7 @@ puts result.document.inference.prediction.state_of_issue.value
 **surnames** (Array<[StringField](#string-field)>): The list of the document holder's family names.
 
 ```rb
-for surnames_elem in result.document.inference.prediction.surnames do
+result.document.inference.prediction.surnames do |surnames_elem|
   puts surnames_elem.value
 end
 ```

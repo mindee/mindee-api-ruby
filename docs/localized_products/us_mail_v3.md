@@ -6,7 +6,28 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [US Mail API](https://platform.mindee.com/mindee/us_mail).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_mail/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `us_mail`                                          |
+> | Recommended Version            | `v3.0`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🇺🇸 United States                                   |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_mail/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![US Mail sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_mail/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -92,7 +113,7 @@ Fields which are specific to this product; they are not used in any other produc
 The address of the sender.
 
 A `UsMailV3SenderAddress` implements the following attributes:
-
+      
 * `city` (String): The city of the sender's address.
 * `complete` (String): The complete address of the sender.
 * `postal_code` (String): The postal code of the sender's address.
@@ -104,7 +125,7 @@ Fields which are specific to this product; they are not used in any other produc
 The addresses of the recipients.
 
 A `UsMailV3RecipientAddress` implements the following attributes:
-
+      
 * `city` (String): The city of the recipient's address.
 * `complete` (String): The complete address of the recipient.
 * `is_address_change` (bool): Indicates if the recipient's address is a change of address.
@@ -128,7 +149,7 @@ puts result.document.inference.prediction.is_return_to_sender.value
 **recipient_addresses** (Array<[UsMailV3RecipientAddress](#recipient-addresses-field)>): The addresses of the recipients.
 
 ```rb
-for recipient_addresses_elem in result.document.inference.prediction.recipient_addresses do
+result.document.inference.prediction.recipient_addresses do |recipient_addresses_elem|
   puts recipient_addresses_elem.value
 end
 ```
@@ -137,7 +158,7 @@ end
 **recipient_names** (Array<[StringField](#string-field)>): The names of the recipients.
 
 ```rb
-for recipient_names_elem in result.document.inference.prediction.recipient_names do
+result.document.inference.prediction.recipient_names do |recipient_names_elem|
   puts recipient_names_elem.value
 end
 ```

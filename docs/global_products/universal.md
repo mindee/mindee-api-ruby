@@ -4,8 +4,27 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-universal-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby OCR SDK supports a universal wrapper class for all products.
-Universal supports all product in a catch-all generic format.
+The Ruby Client Library implements a universal wrapper class for all products.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                                         |
+> | ------------------------------ |-----------------------------------------------------------------|
+> | Endpoint                       | `<name_of_the_endpoint>`                                        |
+> | Recommended Version            | `v<version_of_the_endpoint>` Defaults to 1 for custom products. |
+> | Supports Polling/Webhooks      | ❓️ Variable                                                     |
+> | Support Synchronous HTTP Calls | ❓ Variable                                                      |
+> | Geography                      | ❓ Variable                                                     |
+
+> 🔐 Polling Limitations (Polling only)
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+The `Universal` product supports all products in a catch-all generic format, and can be used in the following manner:
 
 # Quick-Start
 

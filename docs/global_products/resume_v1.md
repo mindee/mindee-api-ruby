@@ -6,7 +6,28 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Resume API](https://platform.mindee.com/mindee/resume).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/resume/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `resume`                                           |
+> | Recommended Version            | `v1.2`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🌐 Global                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/resume/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Resume sample](https://github.com/mindee/client-lib-test-data/blob/main/products/resume/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -125,7 +146,8 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Classification Field
-The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements
+**value**, **confidence** and **page_id**.
 
 > Note: a classification field's `value is always a `String`.
 
@@ -139,7 +161,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of social network profiles of the candidate.
 
 A `ResumeV1SocialNetworksUrl` implements the following attributes:
-
+      
 * `name` (String): The name of the social network.
 * `url` (String): The URL of the social network.
 Fields which are specific to this product; they are not used in any other product.
@@ -148,7 +170,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of languages that the candidate is proficient in.
 
 A `ResumeV1Language` implements the following attributes:
-
+      
 * `language` (String): The language's ISO 639 code.
 * `level` (String): The candidate's level for the language.
 
@@ -158,14 +180,14 @@ A `ResumeV1Language` implements the following attributes:
  - Proficient
  - Intermediate
  - Beginner
-
+        
 Fields which are specific to this product; they are not used in any other product.
 
 ### Education Field
 The list of the candidate's educational background.
 
 A `ResumeV1Education` implements the following attributes:
-
+      
 * `degree_domain` (String): The area of study or specialization.
 * `degree_type` (String): The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
 * `end_month` (String): The month when the education program or course was completed.
@@ -179,7 +201,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of the candidate's professional experiences.
 
 A `ResumeV1ProfessionalExperience` implements the following attributes:
-
+      
 * `contract_type` (String): The type of contract for the professional experience.
 
 #### Possible values include:
@@ -187,7 +209,7 @@ A `ResumeV1ProfessionalExperience` implements the following attributes:
  - Part-Time
  - Internship
  - Freelance
-
+        
 * `department` (String): The specific department or division within the company.
 * `description` (String): The description of the professional experience as written in the document.
 * `employer` (String): The name of the company or organization.
@@ -202,7 +224,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of certificates obtained by the candidate.
 
 A `ResumeV1Certificate` implements the following attributes:
-
+      
 * `grade` (String): The grade obtained for the certificate.
 * `name` (String): The name of certification.
 * `provider` (String): The organization or institution that issued the certificate.
@@ -222,7 +244,7 @@ puts result.document.inference.prediction.address.value
 **certificates** (Array<[ResumeV1Certificate](#certificates-field)>): The list of certificates obtained by the candidate.
 
 ```rb
-for certificates_elem in result.document.inference.prediction.certificates do
+result.document.inference.prediction.certificates do |certificates_elem|
   puts certificates_elem.value
 end
 ```
@@ -250,7 +272,7 @@ puts result.document.inference.prediction.document_type.value
 **education** (Array<[ResumeV1Education](#education-field)>): The list of the candidate's educational background.
 
 ```rb
-for education_elem in result.document.inference.prediction.education do
+result.document.inference.prediction.education do |education_elem|
   puts education_elem.value
 end
 ```
@@ -266,7 +288,7 @@ puts result.document.inference.prediction.email_address.value
 **given_names** (Array<[StringField](#string-field)>): The candidate's first or given names.
 
 ```rb
-for given_names_elem in result.document.inference.prediction.given_names do
+result.document.inference.prediction.given_names do |given_names_elem|
   puts given_names_elem.value
 end
 ```
@@ -275,7 +297,7 @@ end
 **hard_skills** (Array<[StringField](#string-field)>): The list of the candidate's technical abilities and knowledge.
 
 ```rb
-for hard_skills_elem in result.document.inference.prediction.hard_skills do
+result.document.inference.prediction.hard_skills do |hard_skills_elem|
   puts hard_skills_elem.value
 end
 ```
@@ -291,7 +313,7 @@ puts result.document.inference.prediction.job_applied.value
 **languages** (Array<[ResumeV1Language](#languages-field)>): The list of languages that the candidate is proficient in.
 
 ```rb
-for languages_elem in result.document.inference.prediction.languages do
+result.document.inference.prediction.languages do |languages_elem|
   puts languages_elem.value
 end
 ```
@@ -321,7 +343,7 @@ puts result.document.inference.prediction.profession.value
 **professional_experiences** (Array<[ResumeV1ProfessionalExperience](#professional-experiences-field)>): The list of the candidate's professional experiences.
 
 ```rb
-for professional_experiences_elem in result.document.inference.prediction.professional_experiences do
+result.document.inference.prediction.professional_experiences do |professional_experiences_elem|
   puts professional_experiences_elem.value
 end
 ```
@@ -330,7 +352,7 @@ end
 **social_networks_urls** (Array<[ResumeV1SocialNetworksUrl](#social-networks-field)>): The list of social network profiles of the candidate.
 
 ```rb
-for social_networks_urls_elem in result.document.inference.prediction.social_networks_urls do
+result.document.inference.prediction.social_networks_urls do |social_networks_urls_elem|
   puts social_networks_urls_elem.value
 end
 ```
@@ -339,7 +361,7 @@ end
 **soft_skills** (Array<[StringField](#string-field)>): The list of the candidate's interpersonal and communication abilities.
 
 ```rb
-for soft_skills_elem in result.document.inference.prediction.soft_skills do
+result.document.inference.prediction.soft_skills do |soft_skills_elem|
   puts soft_skills_elem.value
 end
 ```
@@ -348,7 +370,7 @@ end
 **surnames** (Array<[StringField](#string-field)>): The candidate's last names.
 
 ```rb
-for surnames_elem in result.document.inference.prediction.surnames do
+result.document.inference.prediction.surnames do |surnames_elem|
   puts surnames_elem.value
 end
 ```

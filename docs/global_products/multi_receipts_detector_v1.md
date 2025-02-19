@@ -6,7 +6,20 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Multi Receipts Detector API](https://platform.mindee.com/mindee/multi_receipts_detector).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `multi_receipts_detector`                          |
+> | Recommended Version            | `v1.1`                                             |
+> | Supports Polling/Webhooks      | ❌ No                                              |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🌐 Global                                          |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Multi Receipts Detector sample](https://github.com/mindee/client-lib-test-data/blob/main/products/multi_receipts_detector/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -87,9 +100,11 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Position Field
-The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**, **polygon** and **page_id**. On top of these, it has access to:
+The position field `PositionField` does not implement all the basic `Field` attributes, only **bounding_box**,
+**polygon** and **page_id**. On top of these, it has access to:
 
-* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond canvas).
+* **rectangle** (`Mindee::Geometry::Quadrilateral`): a Polygon with four points that may be oriented (even beyond
+canvas).
 * **quadrangle** (`Mindee::Geometry::Quadrilateral`): a free polygon made up of four points.
 
 # Attributes
@@ -99,11 +114,11 @@ The following fields are extracted for Multi Receipts Detector V1:
 **receipts** (Array<[PositionField](#position-field)>): Positions of the receipts on the document.
 
 ```rb
-for receipts_elem in result.document.inference.prediction.receipts do
+result.document.inference.prediction.receipts do |receipts_elem|
   puts receipts_elem.polygon.to_s
-    puts receipts_elem.quadrangle.to_s
-    puts receipts_elem.rectangle.to_s
-    puts receipts_elem.boundingBox.to_s
+  puts receipts_elem.quadrangle.to_s
+  puts receipts_elem.rectangle.to_s
+  puts receipts_elem.boundingBox.to_s
 end
 ```
 

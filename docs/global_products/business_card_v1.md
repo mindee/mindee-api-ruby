@@ -6,7 +6,28 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Business Card API](https://platform.mindee.com/mindee/business_card).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/business_card/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `business_card`                                    |
+> | Recommended Version            | `v1.0`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🌐 Global                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/business_card/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Business Card sample](https://github.com/mindee/client-lib-test-data/blob/main/products/business_card/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -152,7 +173,7 @@ puts result.document.inference.prediction.phone_number.value
 **social_media** (Array<[StringField](#string-field)>): The social media profiles of the person or company.
 
 ```rb
-for social_media_elem in result.document.inference.prediction.social_media do
+result.document.inference.prediction.social_media do |social_media_elem|
   puts social_media_elem.value
 end
 ```

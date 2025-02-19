@@ -6,7 +6,28 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Financial Document API](https://platform.mindee.com/mindee/financial_document).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/financial_document/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `financial_document`                               |
+> | Recommended Version            | `v1.11`                                            |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ✔️ Yes                                             |
+> | Geography                      | 🌐 Global                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/financial_document/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Financial Document sample](https://github.com/mindee/client-lib-test-data/blob/main/products/financial_document/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -171,30 +192,35 @@ The amount field `AmountField` only has one constraint: its **value** is a `Floa
 
 
 ### Classification Field
-The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements
+**value**, **confidence** and **page_id**.
 
 > Note: a classification field's `value is always a `String`.
 
 
 ### Company Registration Field
-Aside from the basic `Field` attributes, the company registration field `CompanyRegistrationField` also implements the following:
+Aside from the basic `Field` attributes, the company registration field `CompanyRegistrationField` also implements the
+following:
 
 * **type** (`String`): the type of company.
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
 ### Locale Field
-The locale field `LocaleField` only implements the **value**, **confidence** and **page_id** base `Field` attributes, but it comes with its own:
+The locale field `LocaleField` only implements the **value**, **confidence** and **page_id** base `Field` attributes,
+but it comes with its own:
 
 * **language** (`String`): ISO 639-1 language code (e.g.: `en` for English). Can be `nil`.
-* **country** (`String`): ISO 3166-1 alpha-2 or ISO 3166-1 alpha-3 code for countries (e.g.: `GRB` or `GB` for "Great Britain"). Can be `nil`.
+* **country** (`String`): ISO 3166-1 alpha-2 or ISO 3166-1 alpha-3 code for countries (e.g.: `GRB` or `GB` for "Great
+Britain"). Can be `nil`.
 * **currency** (`String`): ISO 4217 code for currencies (e.g.: `USD` for "US Dollars"). Can be `nil`.
 
 ### Payment Details Field
-Aside from the basic `Field` attributes, the payment details field `PaymentDetailsField` also implements the following:
+Aside from the basic `Field` attributes, the payment details field `PaymentDetailsField` also implements the
+following:
 
 * **account_number** (`String`): number of an account, expressed as a string. Can be `nil`.
 * **iban** (`String`): International Bank Account Number. Can be `nil`.
@@ -212,10 +238,12 @@ Aside from the basic `Field` attributes, the tax field `TaxField` also implement
 * **code** (`String`): tax code (or equivalent, depending on the origin of the document). Can be `nil`.
 * **base** (`Float`): base amount used for the tax. Can be `nil`.
 
-> Note: currently `TaxField` is not used on its own, and is accessed through a parent `Taxes` object, an array-like structure.
+> Note: currently `TaxField` is not used on its own, and is accessed through a parent `Taxes` object, an array-like
+structure.
 
 #### Taxes (Array)
-The `Taxes` field represents an array-like collection of `TaxField` objects. As it is the representation of several objects, it has access to a custom `to_s` method that can render a `TaxField` object as a table line.
+The `Taxes` field represents an array-like collection of `TaxField` objects. As it is the representation of several
+objects, it has access to a custom `to_s` method that can render a `TaxField` object as a table line.
 
 ## Specific Fields
 Fields which are specific to this product; they are not used in any other product.
@@ -224,7 +252,7 @@ Fields which are specific to this product; they are not used in any other produc
 List of line item details.
 
 A `FinancialDocumentV1LineItem` implements the following attributes:
-
+      
 * `description` (String): The item description.
 * `product_code` (String): The product code referring to the item.
 * `quantity` (Float): The item quantity
@@ -272,7 +300,7 @@ puts result.document.inference.prediction.customer_address.value
 **customer_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the customer.
 
 ```rb
-for customer_company_registrations_elem in result.document.inference.prediction.customer_company_registrations do
+result.document.inference.prediction.customer_company_registrations do |customer_company_registrations_elem|
   puts customer_company_registrations_elem.value
 end
 ```
@@ -336,7 +364,7 @@ puts result.document.inference.prediction.invoice_number.value
 **line_items** (Array<[FinancialDocumentV1LineItem](#line-items-field)>): List of line item details.
 
 ```rb
-for line_items_elem in result.document.inference.prediction.line_items do
+result.document.inference.prediction.line_items do |line_items_elem|
   puts line_items_elem.value
 end
 ```
@@ -373,7 +401,7 @@ puts result.document.inference.prediction.receipt_number.value
 **reference_numbers** (Array<[StringField](#string-field)>): List of Reference numbers, including PO number.
 
 ```rb
-for reference_numbers_elem in result.document.inference.prediction.reference_numbers do
+result.document.inference.prediction.reference_numbers do |reference_numbers_elem|
   puts reference_numbers_elem.value
 end
 ```
@@ -410,7 +438,7 @@ puts result.document.inference.prediction.supplier_address.value
 **supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
 
 ```rb
-for supplier_company_registrations_elem in result.document.inference.prediction.supplier_company_registrations do
+result.document.inference.prediction.supplier_company_registrations do |supplier_company_registrations_elem|
   puts supplier_company_registrations_elem.value
 end
 ```
@@ -433,11 +461,11 @@ puts result.document.inference.prediction.supplier_name.value
 **supplier_payment_details** (Array<[PaymentDetailsField](#payment-details-field)>): List of payment details associated to the supplier.
 
 ```rb
-for supplier_payment_details_elem in result.document.inference.prediction.supplier_payment_details do
+result.document.inference.prediction.supplier_payment_details do |supplier_payment_details_elem|
   puts supplier_payment_details_elem.value
-    puts supplier_payment_details_elem.rate
-    puts supplier_payment_details_elem.code
-    puts supplier_payment_details_elem.basis
+  puts supplier_payment_details_elem.rate
+  puts supplier_payment_details_elem.code
+  puts supplier_payment_details_elem.basis
 end
 ```
 
@@ -459,7 +487,7 @@ puts result.document.inference.prediction.supplier_website.value
 **taxes** (Array<[TaxField](#taxes-field)>): List of tax lines information.
 
 ```rb
-for taxes_elem in result.document.inference.prediction.taxes do
+result.document.inference.prediction.taxes do |taxes_elem|
   puts taxes_elem.value
 end
 ```

@@ -6,7 +6,28 @@ parentDoc: 67b49df15b843f3fa9cd622b
 ---
 The Ruby Client Library SDK supports the [Delivery note API](https://platform.mindee.com/mindee/delivery_notes).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/delivery_notes/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `delivery_notes`                                   |
+> | Recommended Version            | `v1.1`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🌐 Global                                          |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/delivery_notes/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Delivery note sample](https://github.com/mindee/client-lib-test-data/blob/main/products/delivery_notes/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -79,7 +100,7 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 The amount field `AmountField` only has one constraint: its **value** is a `Float` (or `nil`).
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 

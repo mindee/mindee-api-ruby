@@ -6,7 +6,28 @@ parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
 The Ruby Client Library SDK supports the [Passport - India API](https://platform.mindee.com/mindee/ind_passport).
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/ind_passport/default_sample.jpg), we are going to illustrate how to extract the data that we want using the Ruby Client Library.
+
+> 📝 Product Specs
+>
+> | Specification                  | Details                                            |
+> | ------------------------------ | -------------------------------------------------- |
+> | Endpoint                       | `ind_passport`                                     |
+> | Recommended Version            | `v1.2`                                             |
+> | Supports Polling/Webhooks      | ✔️ Yes                                             |
+> | Support Synchronous HTTP Calls | ❌ No                                              |
+> | Geography                      | 🇮🇳 India                                           |
+
+> 🔐 Polling Limitations
+>
+> | Setting                         | Parameter name          | Value       |
+> | ------------------------------- | ----------------------- | ----------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+
+
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/ind_passport/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
+Ruby Client Library.
 ![Passport - India sample](https://github.com/mindee/client-lib-test-data/blob/main/products/ind_passport/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -92,12 +113,13 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 
 
 ### Classification Field
-The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements **value**, **confidence** and **page_id**.
+The classification field `ClassificationField` does not implement all the basic `Field` attributes. It only implements
+**value**, **confidence** and **page_id**.
 
 > Note: a classification field's `value is always a `String`.
 
 ### Date Field
-Aside from the basic `Field` attributes, the date field `DateField` also implements the following: 
+Aside from the basic `Field` attributes, the date field `DateField` also implements the following:
 
 * **date_object** (`Date`): an accessible representation of the value as a JavaScript object.
 
