@@ -1,0 +1,15 @@
+# lib/mindee/image/extracted_image.rb
+module Mindee
+  module Image
+    class ExtractedImage
+      def logger: () -> untyped
+      def page_id: -> Integer
+      def element_id: -> Integer
+      def buffer: -> StringIO
+      def internal_file_name: -> String
+      def initialize: (Input::Source::LocalInputSource, Integer, Integer) -> Integer
+      def write_to_file: (String, ?String?) -> nil
+      def as_source: -> Input::Source::BytesInputSource
+    end
+  end
+end

@@ -1,0 +1,18 @@
+# lib/mindee/parsing/common/extras/extras.rb
+module Mindee
+  module Parsing
+    module Common
+      module Extras
+        class Extras
+          def cropper: -> untyped
+          def full_text_ocr: -> untyped
+          def initialize: (untyped) -> void
+          def new: (untyped) -> void
+          def to_s: -> String
+          def add_artificial_extra: (untyped) -> nil
+        end
+        def empty?: -> bool
+      end
+    end
+  end
+end

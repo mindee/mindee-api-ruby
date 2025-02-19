@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
-require_relative 'resume_v1_social_networks_url'
-require_relative 'resume_v1_language'
-require_relative 'resume_v1_education'
-require_relative 'resume_v1_professional_experience'
-require_relative 'resume_v1_certificate'
+require_relative 'resume_v1_social_networks_urls'
+require_relative 'resume_v1_languages'
+require_relative 'resume_v1_educations'
+require_relative 'resume_v1_professional_experiences'
+require_relative 'resume_v1_certificates'
 
 module Mindee
   module Product
@@ -17,7 +17,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :address
         # The list of certificates obtained by the candidate.
-        # @return [Array<Mindee::Product::Resume::ResumeV1Certificate>]
+        # @return [Mindee::Product::Resume::ResumeV1Certificates]
         attr_reader :certificates
         # The ISO 639 code of the language in which the document is written.
         # @return [Mindee::Parsing::Standard::StringField]
@@ -26,7 +26,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # The list of the candidate's educational background.
-        # @return [Array<Mindee::Product::Resume::ResumeV1Education>]
+        # @return [Mindee::Product::Resume::ResumeV1Educations]
         attr_reader :education
         # The email address of the candidate.
         # @return [Mindee::Parsing::Standard::StringField]
@@ -41,7 +41,7 @@ module Mindee
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :job_applied
         # The list of languages that the candidate is proficient in.
-        # @return [Array<Mindee::Product::Resume::ResumeV1Language>]
+        # @return [Mindee::Product::Resume::ResumeV1Languages]
         attr_reader :languages
         # The ISO 3166 code for the country of citizenship of the candidate.
         # @return [Mindee::Parsing::Standard::StringField]
@@ -53,10 +53,10 @@ module Mindee
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :profession
         # The list of the candidate's professional experiences.
-        # @return [Array<Mindee::Product::Resume::ResumeV1ProfessionalExperience>]
+        # @return [Mindee::Product::Resume::ResumeV1ProfessionalExperiences]
         attr_reader :professional_experiences
         # The list of social network profiles of the candidate.
-        # @return [Array<Mindee::Product::Resume::ResumeV1SocialNetworksUrl>]
+        # @return [Mindee::Product::Resume::ResumeV1SocialNetworksUrls]
         attr_reader :social_networks_urls
         # The list of the candidate's interpersonal and communication abilities.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
@@ -68,50 +68,63 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
-          @address = StringField.new(prediction['address'], page_id)
-          @certificates = []
-          prediction['certificates'].each do |item|
-            @certificates.push(ResumeV1Certificate.new(item, page_id))
-          end
-          @document_language = StringField.new(prediction['document_language'], page_id)
-          @document_type = ClassificationField.new(prediction['document_type'], page_id)
-          @education = []
-          prediction['education'].each do |item|
-            @education.push(ResumeV1Education.new(item, page_id))
-          end
-          @email_address = StringField.new(prediction['email_address'], page_id)
-          @given_names = []
+          super
+          @address = Parsing::Standard::StringField.new(
+            prediction['address'],
+            page_id
+          )
+          @certificates = Product::Resume::ResumeV1Certificates.new(prediction['certificates'], page_id)
+          @document_language = Parsing::Standard::StringField.new(
+            prediction['document_language'],
+            page_id
+          )
+          @document_type = Parsing::Standard::ClassificationField.new(
+            prediction['document_type'],
+            page_id
+          )
+          @education = Product::Resume::ResumeV1Educations.new(prediction['education'], page_id)
+          @email_address = Parsing::Standard::StringField.new(
+            prediction['email_address'],
+            page_id
+          )
+          @given_names = [] # : Array[Parsing::Standard::StringField]
           prediction['given_names'].each do |item|
-            @given_names.push(StringField.new(item, page_id))
+            @given_names.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @hard_skills = []
+          @hard_skills = [] # : Array[Parsing::Standard::StringField]
           prediction['hard_skills'].each do |item|
-            @hard_skills.push(StringField.new(item, page_id))
+            @hard_skills.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @job_applied = StringField.new(prediction['job_applied'], page_id)
-          @languages = []
-          prediction['languages'].each do |item|
-            @languages.push(ResumeV1Language.new(item, page_id))
-          end
-          @nationality = StringField.new(prediction['nationality'], page_id)
-          @phone_number = StringField.new(prediction['phone_number'], page_id)
-          @profession = StringField.new(prediction['profession'], page_id)
-          @professional_experiences = []
-          prediction['professional_experiences'].each do |item|
-            @professional_experiences.push(ResumeV1ProfessionalExperience.new(item, page_id))
-          end
-          @social_networks_urls = []
-          prediction['social_networks_urls'].each do |item|
-            @social_networks_urls.push(ResumeV1SocialNetworksUrl.new(item, page_id))
-          end
-          @soft_skills = []
+          @job_applied = Parsing::Standard::StringField.new(
+            prediction['job_applied'],
+            page_id
+          )
+          @languages = Product::Resume::ResumeV1Languages.new(prediction['languages'], page_id)
+          @nationality = Parsing::Standard::StringField.new(
+            prediction['nationality'],
+            page_id
+          )
+          @phone_number = Parsing::Standard::StringField.new(
+            prediction['phone_number'],
+            page_id
+          )
+          @profession = Parsing::Standard::StringField.new(
+            prediction['profession'],
+            page_id
+          )
+          @professional_experiences = Product::Resume::ResumeV1ProfessionalExperiences.new(
+            prediction['professional_experiences'], page_id
+          )
+          @social_networks_urls = Product::Resume::ResumeV1SocialNetworksUrls.new(
+            prediction['social_networks_urls'], page_id
+          )
+          @soft_skills = [] # : Array[Parsing::Standard::StringField]
           prediction['soft_skills'].each do |item|
-            @soft_skills.push(StringField.new(item, page_id))
+            @soft_skills.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @surnames = []
+          @surnames = [] # : Array[Parsing::Standard::StringField]
           prediction['surnames'].each do |item|
-            @surnames.push(StringField.new(item, page_id))
+            @surnames.push(Parsing::Standard::StringField.new(item, page_id))
           end
         end
 

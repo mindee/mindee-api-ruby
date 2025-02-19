@@ -1,0 +1,13 @@
+# lib/mindee/geometry/point.rb
+module Mindee
+  module Geometry
+    class Point
+      def x: -> untyped
+      def x=: (untyped) -> untyped
+      def y: -> untyped
+      def y=: (untyped) -> untyped
+      def initialize: (untyped, untyped) -> untyped
+      def []: (untyped) -> bot
+    end
+  end
+end

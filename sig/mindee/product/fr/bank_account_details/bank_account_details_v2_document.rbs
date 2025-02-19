@@ -1,0 +1,18 @@
+# lib/mindee/product/../bank_account_details/bank_account_details_v2_document.rb
+
+module Mindee
+  module Product
+    module FR
+      module BankAccountDetails
+        class BankAccountDetailsV2Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def account_holders_names: -> (Parsing::Standard::StringField)
+          def bban: -> (Product::FR::BankAccountDetails::BankAccountDetailsV2Bban)
+          def iban: -> (Parsing::Standard::StringField)
+          def swift_code: -> (Parsing::Standard::StringField)
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

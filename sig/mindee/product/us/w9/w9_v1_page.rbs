@@ -1,0 +1,29 @@
+# lib/mindee/product/../w9/w9_v1_page.rb
+
+module Mindee
+  module Product
+    module US
+      module W9
+        class W9V1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class W9V1PagePrediction < W9V1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def address: -> Parsing::Standard::StringField
+          def business_name: -> Parsing::Standard::StringField
+          def city_state_zip: -> Parsing::Standard::StringField
+          def ein: -> Parsing::Standard::StringField
+          def name: -> Parsing::Standard::StringField
+          def signature_date_position: -> Parsing::Standard::PositionField
+          def signature_position: -> Parsing::Standard::PositionField
+          def ssn: -> Parsing::Standard::StringField
+          def tax_classification: -> Parsing::Standard::StringField
+          def tax_classification_llc: -> Parsing::Standard::StringField
+          def tax_classification_other_details: -> Parsing::Standard::StringField
+          def w9_revision_date: -> Parsing::Standard::StringField
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

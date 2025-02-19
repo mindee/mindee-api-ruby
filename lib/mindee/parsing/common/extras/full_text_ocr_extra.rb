@@ -22,6 +22,7 @@ module Mindee
             @language = raw_prediction['language']
           end
 
+          # @return [String]
           def to_s
             @contents || ''
           end

@@ -1,0 +1,29 @@
+# lib/mindee/product/../id_card/id_card_v2_document.rb
+
+module Mindee
+  module Product
+    module FR
+      module IdCard
+        class IdCardV2Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def alternate_name: -> (Parsing::Standard::StringField)
+          def authority: -> (Parsing::Standard::StringField)
+          def birth_date: -> (Parsing::Standard::DateField)
+          def birth_place: -> (Parsing::Standard::StringField)
+          def card_access_number: -> (Parsing::Standard::StringField)
+          def document_number: -> (Parsing::Standard::StringField)
+          def expiry_date: -> (Parsing::Standard::DateField)
+          def gender: -> (Parsing::Standard::StringField)
+          def given_names: -> (Array[Parsing::Standard::StringField])
+          def issue_date: -> (Parsing::Standard::DateField)
+          def mrz1: -> (Parsing::Standard::StringField)
+          def mrz2: -> (Parsing::Standard::StringField)
+          def mrz3: -> (Parsing::Standard::StringField)
+          def nationality: -> (Parsing::Standard::StringField)
+          def surname: -> (Parsing::Standard::StringField)
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

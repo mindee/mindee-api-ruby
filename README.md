@@ -6,7 +6,7 @@ Quickly and easily connect to Mindee's API services using Ruby.
 
 ## Requirements
 
-The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2
+The following Ruby versions are tested and supported: 3.0, 3.1, 3.2, 3.3
 
 ## Quick Start
 
@@ -62,8 +62,8 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
+        input_source,
+        Mindee::Product::Invoice::InvoiceV4
 )
 
 # Print a full summary of the parsed data in RST format
@@ -108,15 +108,17 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 result = mindee_client.parse(
-  input_source,
-  Mindee::Product::EU::LicensePlate::LicensePlateV1
+        input_source,
+        Mindee::Product::EU::LicensePlate::LicensePlateV1
 )
 
 # Print a full summary of the parsed data in RST format
 puts result.document
 ```
 
-### Custom Documents (docTI & Custom APIs)
+### Universal - All Other Documents
+
+The Universal product acts as a catch-all for every and any API if it doesn't have an assigned product name.
 
 ```ruby
 require 'mindee'
@@ -131,9 +133,9 @@ endpoint = mindee_client.create_endpoint(
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: endpoint
 )
 
@@ -147,15 +149,8 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
   puts field_data.to_s
 end
 ```
-## Asynchronously Parsing a File
+## Enqueue and Parse a Webhook Response
 
-This allows for easier handling of bursts of documents sent.
-
-Some products are only available asynchronously, check the example code
-directly on the Mindee platform.
-
-
-### Enqueue and Parse a Webhook Response
 This is an optional way of handling asynchronous APIs.
 
 ```rb
@@ -225,23 +220,19 @@ There's more to it than that for those that need more features, or want to
 customize the experience.
 
 * [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-* [Custom OCR Ruby (Deprecated)](https://developers.mindee.com/docs/ruby-api-builder-ocr)
-* [Generated API Ruby](https://developers.mindee.com/docs/ruby-generated-ocr)
+* [Universal API Ruby](https://developers.mindee.com/docs/ruby-universal-ocr)
 * [Invoice OCR Ruby](https://developers.mindee.com/docs/ruby-invoice-ocr)
 * [International Id OCR Ruby](https://developers.mindee.com/docs/ruby-international-id-ocr)
 * [Financial Document OCR Ruby](https://developers.mindee.com/docs/ruby-financial-document-ocr)
 * [Passport OCR Ruby](https://developers.mindee.com/docs/ruby-passport-ocr)
-* [Proof of Address OCR Ruby](https://developers.mindee.com/docs/ruby-proof-of-address-ocr)
 * [Receipt OCR Ruby](https://developers.mindee.com/docs/ruby-receipt-ocr)
 * [Resume OCR Ruby](https://developers.mindee.com/docs/ruby-resume-ocr)
 * [EU License Plate OCR Ruby](https://developers.mindee.com/docs/ruby-eu-license-plate-ocr)
-* [EU Driver License OCR Ruby](https://developers.mindee.com/docs/ruby-eu-driver-license-ocr)
 * [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-account-details-ocr)
 * [FR Bank Statement OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-statement-ocr)
 * [FR Health Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-health-card-ocr)
 * [FR ID Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-carte-nationale-didentite-ocr)
 * [US Bank Check OCR Ruby](https://developers.mindee.com/docs/ruby-us-bank-check-ocr)
-* [US Driver License OCR Ruby](https://developers.mindee.com/docs/ruby-us-driver-license-ocr)
 * [US W9 API Ruby](https://developers.mindee.com/docs/ruby-us-w9-ocr)
 * [Barcode Reader API Ruby](https://developers.mindee.com/docs/ruby-barcode-reader-ocr)
 * [Cropper API Ruby](https://developers.mindee.com/docs/ruby-cropper-ocr)

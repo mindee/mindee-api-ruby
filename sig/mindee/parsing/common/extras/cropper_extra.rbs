@@ -1,0 +1,14 @@
+# lib/mindee/parsing/common/extras/cropper_extra.rb
+module Mindee
+  module Parsing
+    module Common
+      module Extras
+        class CropperExtra
+          def croppings: -> Array[Standard::PositionField]
+          def initialize: (untyped, ?nil) -> untyped
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

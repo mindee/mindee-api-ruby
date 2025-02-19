@@ -1,0 +1,39 @@
+# lib/mindee/parsing/common/ocr/ocr.rb
+module Mindee
+  module Parsing
+    module Common
+      module OCR
+        class OCRWord
+          def confidence: -> untyped
+          def confidence=: (untyped) -> untyped
+          def text: -> untyped
+          def bounding_box: -> untyped
+          def polygon: -> untyped
+          def initialize: (untyped) -> void
+          def to_s: -> untyped
+        end
+        class OCRLine < Array[untyped]
+          def initialize: (?Array[untyped]?, ?Array[untyped]?) -> void
+          def sort_on_x: -> OCRLine
+          def to_s: -> String
+        end
+        class OCRPage
+          def all_words: -> Array[untyped]
+          def lines: -> Array[untyped]
+          def initialize: (untyped) -> untyped
+          def all_lines: -> Array[untyped]
+          def to_s: -> String
+          def parse_one: (Array[OCRWord], untyped, Array[untyped], Array[untyped]) -> Array[OCRLine]?
+          def to_lines: -> Array[untyped]
+          def words_on_same_line?: (OCRWord, OCRWord) -> untyped
+        end
+        class OCR
+          def mvision_v1: -> untyped
+          def initialize: (untyped) -> untyped
+          def to_s: -> untyped
+          def reconstruct_vertically: (untyped, untyped, ?Float) -> untyped
+        end
+      end
+    end
+  end
+end

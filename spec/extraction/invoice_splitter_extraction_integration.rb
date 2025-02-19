@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'mindee'
-require 'rspec'
 require_relative '../data'
 require_relative '../test_utilities'
 
@@ -25,12 +24,12 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
     invoice_splitter_input = Mindee::Input::Source::PathInputSource.new(
       File.join(product_data_dir, 'invoice_splitter', 'default_sample.pdf')
     )
-    response = client.enqueue_and_parse(
-      invoice_splitter_input, Mindee::Product::InvoiceSplitter::InvoiceSplitterV1, close_file: false
+    response = client.parse(
+      invoice_splitter_input, Mindee::Product::InvoiceSplitter::InvoiceSplitterV1, options: { close_file: false }
     )
     inference = response.document.inference
 
-    pdf_extractor = Mindee::Extraction::PdfExtractor::PdfExtractor.new(invoice_splitter_input)
+    pdf_extractor = Mindee::PDF::PDFExtractor::PDFExtractor.new(invoice_splitter_input)
     expect(pdf_extractor.page_count).to eq(2)
 
     extracted_pdfs_strict = pdf_extractor.extract_invoices(inference.prediction.invoice_page_groups, strict: true)

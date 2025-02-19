@@ -6,7 +6,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents tax information.
-      class AmountField < Field
+      class AmountField < BaseField
         # Amount value as 3 decimal float
         # @return [Float, nil]
         attr_reader :value
@@ -18,7 +18,7 @@ module Mindee
 
         # @return [String]
         def to_s
-          Field.float_to_string(@value)
+          BaseField.float_to_string(@value)
         end
       end
     end

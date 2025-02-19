@@ -1,0 +1,39 @@
+# lib/mindee/product/resume/resume_v1_document.rb
+
+module Mindee
+  module Product
+    module Resume
+      class ResumeV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def address: -> (Parsing::Standard::StringField)
+        def certificates: -> (Product::Resume::ResumeV1Certificates)
+        def document_language: -> (Parsing::Standard::StringField)
+        def document_type: -> (Parsing::Standard::ClassificationField)
+        def education: -> (Product::Resume::ResumeV1Educations)
+        def email_address: -> (Parsing::Standard::StringField)
+        def given_names: -> (Array[Parsing::Standard::StringField])
+        def hard_skills: -> (Array[Parsing::Standard::StringField])
+        def job_applied: -> (Parsing::Standard::StringField)
+        def languages: -> (Product::Resume::ResumeV1Languages)
+        def nationality: -> (Parsing::Standard::StringField)
+        def phone_number: -> (Parsing::Standard::StringField)
+        def profession: -> (Parsing::Standard::StringField)
+        def professional_experiences: -> (Product::Resume::ResumeV1ProfessionalExperiences)
+        def social_networks_urls: -> (Product::Resume::ResumeV1SocialNetworksUrls)
+        def soft_skills: -> (Array[Parsing::Standard::StringField])
+        def surnames: -> (Array[Parsing::Standard::StringField])
+        def social_networks_urls_separator: (String) -> String
+        def social_networks_urls_to_s: -> String
+        def languages_separator: (String) -> String
+        def languages_to_s: -> String
+        def education_separator: (String) -> String
+        def education_to_s: -> String
+        def professional_experiences_separator: (String) -> String
+        def professional_experiences_to_s: -> String
+        def certificates_separator: (String) -> String
+        def certificates_to_s: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

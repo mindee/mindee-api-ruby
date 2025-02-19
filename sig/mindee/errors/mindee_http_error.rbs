@@ -1,0 +1,16 @@
+# lib/mindee/errors/mindee_http_error.rb
+module Mindee
+  module Errors
+    class MindeeHTTPError < Errors::MindeeError
+      def status_code: -> untyped
+      def api_code: -> untyped
+      def api_details: -> untyped
+      def api_message: -> untyped
+      def initialize: (untyped, untyped, untyped) -> untyped
+    end
+    class MindeeHTTPClientError < MindeeHTTPError
+    end
+    class MindeeHTTPServerError < MindeeHTTPError
+    end
+  end
+end

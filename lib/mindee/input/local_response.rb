@@ -16,18 +16,18 @@ module Mindee
       def initialize(input_file)
         case input_file
         when IO, StringIO, File, Tempfile
-          str_stripped = input_file.read.gsub(%r{[\r\n]}, '')
+          str_stripped = input_file.read.to_s.gsub(%r{[\r\n]}, '')
           @file = StringIO.new(str_stripped)
           @file.rewind
         when Pathname, String
-          @file = if Pathname(input_file).exist?
-                    StringIO.new(File.read(input_file, encoding: 'utf-8').gsub(%r{[\r\n]}, ''))
+          @file = if Pathname(input_file.to_s).exist?
+                    StringIO.new(File.read(input_file.to_s, encoding: 'utf-8').gsub(%r{[\r\n]}, ''))
                   else
-                    StringIO.new(input_file.gsub(%r{[\r\n]}, ''))
+                    StringIO.new(input_file.to_s.gsub(%r{[\r\n]}, ''))
                   end
           @file.rewind
         else
-          raise "Incompatible type for input '#{input_file.class}'."
+          raise Errors::MindeeInputError, "Incompatible type for input '#{input_file.class}'."
         end
       end
 
@@ -38,7 +38,7 @@ module Mindee
         file_str = @file.read
         JSON.parse(file_str, object_class: Hash)
       rescue JSON::ParserError
-        raise "File is not a valid dict. #{file_str}"
+        raise Errors::MindeeInputError, "File is not a valid dict. #{file_str}"
       end
 
       # Processes the secret key
@@ -56,14 +56,14 @@ module Mindee
           @file.rewind
           mac = OpenSSL::HMAC.hexdigest(algorithm, self.class.process_secret_key(secret_key), @file.read)
         rescue StandardError
-          raise 'Could not get HMAC signature from payload.'
+          raise Errors::MindeeInputError, 'Could not get HMAC signature from payload.'
         end
         mac
       end
 
       # @param secret_key [String] Secret key, either a string or a byte/byte array.
       # @param signature [String]
-      # @return [Boolean]
+      # @return [bool]
       def valid_hmac_signature?(secret_key, signature)
         signature == get_hmac_signature(secret_key)
       end

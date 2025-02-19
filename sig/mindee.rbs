@@ -1,0 +1,59 @@
+class Object
+  private
+  def logger: -> Logger
+end
+
+module Mindee
+  module Errors
+  end
+
+  module Extraction
+  end
+
+  module HTTP
+  end
+
+  module PDF
+  end
+
+  module Input
+    module Source
+    end
+  end
+
+  module Image
+    module ImageUtils
+    end
+
+    module ImageCompressor
+    end
+  end
+
+  module Logging
+  end
+
+  module Parsing
+    module Common
+    end
+
+    module Standard
+    end
+
+    module Universal
+    end
+  end
+
+  module Product
+    module EU
+    end
+
+    module FR
+    end
+
+    module IND
+    end
+
+    module US
+    end
+  end
+end

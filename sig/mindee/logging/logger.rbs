@@ -1,0 +1,9 @@
+module Mindee
+  module Logging
+    @logger: Logger
+
+    def self.logger: -> Logger
+
+    def self.logger=: (Logger) -> Logger
+  end
+end

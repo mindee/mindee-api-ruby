@@ -6,15 +6,16 @@ module Mindee
   module Parsing
     module Standard
       # Represents basic text information.
-      class BooleanField < Field
-        # Value as Boolean
-        # @return [Boolean, nil]
+      class BooleanField < BaseField
+        # Value as bool
+        # @return [bool, nil]
         attr_reader :value
 
         def initialize(prediction, page_id = nil, reconstructed: false)
           super
         end
 
+        # @return [String]
         def to_s
           return '' if value.nil?
 

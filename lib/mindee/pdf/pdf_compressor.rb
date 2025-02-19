@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'pdf-reader'
+# Shorthand for pdf-reader's PDF namespace, to avoid mixups with the local Origami fork.
 PDFReader = PDF
 
 module Mindee
@@ -8,20 +9,21 @@ module Mindee
     # Image compressor module to handle PDF compression.
     module PDFCompressor
       # Compresses each page of a provided PDF stream. Skips if force_source_text isn't set and source text is detected.
+      # @param pdf_data [StringIO] StringIO handle of the file.
       # @param quality [Integer] Compression quality (70-100 for most JPG images in the test dataset).
-      # @param force_source_text_compression [Boolean] If true, attempts to re-write detected text.
-      # @param disable_source_text [Boolean] If true, doesn't re-apply source text to the original PDF.
+      # @param force_source_text_compression [bool] If true, attempts to re-write detected text.
+      # @param disable_source_text [bool] If true, doesn't re-apply source text to the original PDF.
       def self.compress_pdf(pdf_data, quality: 85, force_source_text_compression: false, disable_source_text: true)
         if PDFTools.source_text?(pdf_data)
           if force_source_text_compression
             if disable_source_text
-              puts "\e[33m[WARNING] Re-writing PDF source-text is an EXPERIMENTAL feature.\e[0m"
+              logger.warn('Re-writing PDF source-text is an EXPERIMENTAL feature.')
             else
-              puts "\e[33m[WARNING] Source-file contains text, but disable_source_text flag is ignored. " \
-                   "Resulting file will not contain any embedded text.\e[0m"
+              logger.warn('Source-file contains text, but disable_source_text flag is ignored. ' \
+                          'Resulting file will not contain any embedded text.')
             end
           else
-            puts "\e[33m[WARNING] Source-text detected in input PDF. Aborting operation.\e[0m"
+            logger.warn('Source-text detected in input PDF. Aborting operation.')
             return pdf_data
           end
         end
@@ -43,18 +45,18 @@ module Mindee
       # @return [Array<Origami::Page>] Processed pages.
       def self.process_pdf_pages(pdf, quality)
         pdf.pages.map.with_index do |page, index|
-          process_pdf_page(Mindee::PDF::PdfProcessor.get_page(pdf, index), index, quality, page[:MediaBox])
+          retrieved_page = Mindee::PDF::PDFProcessor.get_page(pdf, index)
+          process_pdf_page(retrieved_page, index, quality, page[:MediaBox])
         end
       end
 
       # Creates the output PDF with processed pages.
-      # @param pages [Array] Processed pages.
-      # @param disable_source_text [Boolean] Whether to disable source text.
+      # @param pages [Array<Origami::Page>] Processed pages.
+      # @param disable_source_text [bool] Whether to disable source text.
       # @param pdf_data [StringIO] Original PDF data.
       # @return [Origami::PDF] Output PDF object.
       def self.create_output_pdf(pages, disable_source_text, pdf_data)
         output_pdf = Origami::PDF.new
-        # NOTE: Page order and XObject handling require adjustment due to origami adding the last page first.
         pages.rotate!(1) if pages.count >= 2
 
         inject_text(pdf_data, pages) unless disable_source_text

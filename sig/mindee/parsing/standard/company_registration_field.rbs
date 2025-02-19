@@ -1,0 +1,14 @@
+# lib/mindee/parsing/standard/company_registration_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class CompanyRegistrationField < BaseField
+        def type: -> untyped
+        def initialize: (untyped, untyped, ?reconstructed: false) -> untyped
+        def to_table_line: -> String
+        def to_s: -> String
+        def printable_values: -> Hash[String, untyped]
+      end
+    end
+  end
+end

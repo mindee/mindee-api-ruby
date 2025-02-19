@@ -1,0 +1,15 @@
+# lib/mindee/parsing/standard/payment_details_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class PaymentDetailsField # failed to identify its superclass
+        def account_number: -> untyped
+        def iban: -> untyped
+        def routing_number: -> untyped
+        def swift: -> untyped
+        def initialize: (untyped, untyped, ?reconstructed: false) -> untyped
+        def to_s: -> String
+      end
+    end
+  end
+end

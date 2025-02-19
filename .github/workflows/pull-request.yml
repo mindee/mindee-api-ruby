@@ -5,16 +5,16 @@ on:
 
 jobs:
   static_analysis:
-    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@develop/v4.0.0
   test_units:
-    uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@develop/v4.0.0
     needs: static_analysis
     secrets: inherit
   test_integrations:
-    uses: mindee/mindee-api-ruby/.github/workflows/_test-integrations.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_test-integrations.yml@develop/v4.0.0
     needs: test_units
     secrets: inherit
   test_code_samples:
-    uses: mindee/mindee-api-ruby/.github/workflows/_test-code-samples.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_test-code-samples.yml@develop/v4.0.0
     needs: test_units
     secrets: inherit

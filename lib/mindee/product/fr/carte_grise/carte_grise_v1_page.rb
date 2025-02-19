@@ -11,11 +11,15 @@ module Mindee
         class CarteGriseV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
-            @prediction = CarteGriseV1PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            super
+            @prediction = if prediction['prediction'].empty?
+                            nil
+                          else
+                            CarteGriseV1PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 

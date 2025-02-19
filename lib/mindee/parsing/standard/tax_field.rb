@@ -6,7 +6,7 @@ module Mindee
   module Parsing
     module Standard
       # Represents tax information.
-      class TaxField < Field
+      class TaxField < BaseField
         # Tax value as 3 decimal float
         # @return [Float, nil]
         attr_reader :value

@@ -12,6 +12,8 @@ module Mindee
       class ResumeV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'resume'
         @endpoint_version = '1'
+        @has_async = true
+        @has_sync = false
 
         # @param prediction [Hash]
         def initialize(prediction)
@@ -19,9 +21,7 @@ module Mindee
           @prediction = ResumeV1Document.new(prediction['prediction'], nil)
           @pages = []
           prediction['pages'].each do |page|
-            if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
-              @pages.push(ResumeV1Page.new(page))
-            end
+            @pages.push(ResumeV1Page.new(page))
           end
         end
 
@@ -32,6 +32,12 @@ module Mindee
           # Version for this product.
           # @return [String]
           attr_reader :endpoint_version
+          # Whether this product has access to an asynchronous endpoint.
+          # @return [bool]
+          attr_reader :has_async
+          # Whether this product has access to synchronous endpoint.
+          # @return [bool]
+          attr_reader :has_sync
         end
       end
     end

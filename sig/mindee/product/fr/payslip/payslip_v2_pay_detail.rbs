@@ -1,0 +1,23 @@
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2PayDetail < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def gross_salary: -> Float
+          def gross_salary_ytd: -> Float
+          def income_tax_rate: -> Float
+          def income_tax_withheld: -> Float
+          def net_paid: -> Float
+          def net_paid_before_tax: -> Float
+          def net_taxable: -> Float
+          def net_taxable_ytd: -> Float
+          def total_cost_employer: -> Float
+          def total_taxes_and_deductions: -> Float
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

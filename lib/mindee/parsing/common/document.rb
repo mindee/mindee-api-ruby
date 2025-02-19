@@ -16,25 +16,29 @@ module Mindee
         attr_reader :id
         # @return [Mindee::Parsing::Common::Extras::Extras] Potential Extras fields sent back along the prediction.
         attr_reader :extras
-        # @return [Mindee::Parsing::Common::Ocr::Ocr, nil] OCR text results (limited availability)
+        # @return [Mindee::Parsing::Common::OCR::OCR, nil] OCR text results (limited availability)
         attr_reader :ocr
         # @return [Integer] Amount of pages of the document
         attr_reader :n_pages
 
-        # @param http_response [Hash]
-        # @return [Mindee::Parsing::Common::Ocr::Ocr]
+        # Loads the MVision OCR response.
+        # @param http_response [Hash] Full HTTP contents of the response.
+        # @return [Mindee::Parsing::Common::OCR::OCR]
         def self.load_ocr(http_response)
           ocr_prediction = http_response.fetch('ocr', nil)
           return nil if ocr_prediction.nil? || ocr_prediction.fetch('mvision-v1', nil).nil?
 
-          Ocr::Ocr.new(ocr_prediction)
+          OCR::OCR.new(ocr_prediction)
         end
 
-        def self.load_extras(http_response)
+        # Loads extras into the document prediction.
+        # @param http_response [Hash] Full HTTP contents of the response.
+        # @return [Mindee::Parsing::Common::OCR::OCR]
+        def self.extract_extras(http_response)
           extras_prediction = http_response['inference'].fetch('extras', nil)
           return nil if extras_prediction.nil? || extras_prediction.fetch('mvision-v1', nil).nil?
 
-          Extras::Extras::Extras.new(extras_prediction)
+          Mindee::Parsing::Common::Extras::Extras.new(extras_prediction)
         end
 
         # @param product_class [Mindee::Inference]
@@ -44,7 +48,7 @@ module Mindee
           @name = http_response['name']
           @inference = product_class.new(http_response['inference'])
           @ocr = self.class.load_ocr(http_response)
-          @extras = self.class.load_extras(http_response)
+          @extras = self.class.extract_extras(http_response)
           inject_full_text_ocr(http_response)
           @n_pages = http_response['n_pages']
         end
@@ -69,7 +73,7 @@ module Mindee
           end
           artificial_text_obj = { 'content' => full_text_ocr }
           if @extras.nil? || @extras.empty?
-            @extras = Extras::Extras.new({ 'full_text_ocr' => artificial_text_obj })
+            @extras = Mindee::Parsing::Common::Extras::Extras.new({ 'full_text_ocr' => artificial_text_obj })
           else
             @extras.add_artificial_extra({ 'full_text_ocr' => artificial_text_obj })
           end

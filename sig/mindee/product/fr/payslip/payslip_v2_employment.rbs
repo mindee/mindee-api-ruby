@@ -1,0 +1,19 @@
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2Employment < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def category: -> String
+          def coefficient: -> Float
+          def collective_agreement: -> String
+          def job_title: -> String
+          def position_level: -> String
+          def start_date: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

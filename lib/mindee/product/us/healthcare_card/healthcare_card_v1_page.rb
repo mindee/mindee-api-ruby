@@ -11,11 +11,15 @@ module Mindee
         class HealthcareCardV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
-            @prediction = HealthcareCardV1PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            super
+            @prediction = if prediction['prediction'].empty?
+                            nil
+                          else
+                            HealthcareCardV1PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 

@@ -11,11 +11,15 @@ module Mindee
         class PayslipV2Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
-            @prediction = PayslipV2PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            super
+            @prediction = if prediction['prediction'].empty?
+                            nil
+                          else
+                            PayslipV2PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 

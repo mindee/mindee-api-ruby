@@ -5,8 +5,14 @@ module Mindee
     module Common
       # Execution policy priority values.
       module ExecutionPriority
+        # Low priority execution.
+        # @return [Symbol] :low
         LOW = :low
+        # Medium priority execution.
+        # @return [Symbol] :low
         MEDIUM = :medium
+        # High priority execution.
+        # @return [Symbol] :low
         HIGH = :high
 
         # Sets the priority to one of its possibly values, defaults to nil otherwise.

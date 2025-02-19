@@ -22,7 +22,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @bank_name = prediction['bank_name']
             @iban = prediction['iban']
             @swift = prediction['swift']

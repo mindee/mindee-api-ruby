@@ -30,13 +30,14 @@ module Mindee
       # @param [MiniMagick::Image, StringIO, File, Tempfile] image The input image
       # @return [MiniMagick::Image]
       def self.to_image(image)
-        if image.respond_to?(:read) && image.respond_to?(:rewind)
+        if image.is_a?(MiniMagick::Image)
+          image
+        elsif image.is_a?(StringIO) || image.is_a?(IO) || image.is_a?(File) || image.is_a?(Tempfile)
           image.rewind
           MiniMagick::Image.read(image)
-        elsif image.is_a?(MiniMagick::Image)
-          image
         else
-          raise "Expected an I/O object or a MiniMagick::Image. '#{image.class}' given instead."
+          img_class = image.class ? image.class.to_s : 'unknown format'
+          raise Errors::MindeeImageError, "Expected an I/O object or a MiniMagick::Image. '#{img_class}' given instead."
         end
       end
 
@@ -59,7 +60,7 @@ module Mindee
       # @param max_width [Integer] Maximum width. If not specified, the horizontal ratio will remain the same.
       # @param max_height [Integer] Maximum height. If not specified, the vertical ratio will remain the same.
       def self.calculate_new_dimensions(original, max_width: nil, max_height: nil)
-        raise 'Provided image could not be processed for resizing.' if original.nil?
+        raise Errors::MindeeImageError, 'Provided image could not be processed for resizing.' if original.nil?
 
         return [original.width, original.height] if max_width.nil? && max_height.nil?
 
@@ -68,8 +69,8 @@ module Mindee
 
         scale_factor = [width_ratio, height_ratio].min
 
-        new_width = (original.width * scale_factor).to_i
-        new_height = (original.height * scale_factor).to_i
+        new_width = (original.width.to_f * scale_factor).to_i
+        new_height = (original.height.to_f * scale_factor).to_i
 
         [new_width, new_height]
       end
@@ -98,6 +99,66 @@ module Mindee
         compressed_image.format('jpg')
         compressed_image.quality image_quality.to_s
         compressed_image
+      end
+
+      # Retrieves the bounding box of a polygon.
+      #
+      # @param [Array<Point>, Mindee::Geometry::Polygon] polygon
+      def self.normalize_polygon(polygon)
+        if polygon.is_a?(Mindee::Geometry::Polygon) ||
+           (polygon.is_a?(Array) && polygon[0].is_a?(Mindee::Geometry::Point))
+          Mindee::Geometry.get_bounding_box(polygon)
+        elsif polygon.is_a?(Mindee::Geometry::Quadrilateral)
+          polygon
+        else
+          raise Errors::MindeeGeometryError, 'Provided polygon has an invalid type.'
+        end
+      end
+
+      # Loads a buffer into a MiniMagick Image.
+      #
+      # @param [StringIO] pdf_stream Buffer containg the PDF
+      # @return [MiniMagick::Image] a valid MiniMagick image handle.
+      def self.read_page_content(pdf_stream)
+        pdf_stream.rewind
+        MiniMagick::Image.read(pdf_stream)
+      end
+
+      # Crops a MiniMagick Image from a the given bounding box.
+      #
+      # @param [MiniMagick::Image] image Input Image.
+      # @param [Mindee::Geometry::MinMax] min_max_x minimum & maximum values for the x coordinates.
+      # @param [Mindee::Geometry::MinMax] min_max_y minimum & maximum values for the y coordinates.
+      def self.crop_image(image, min_max_x, min_max_y)
+        width = image[:width].to_i
+        height = image[:height].to_i
+
+        image.format('jpg')
+        new_width = (min_max_x.max - min_max_x.min) * width
+        new_height = (min_max_y.max - min_max_y.min) * height
+        image.crop("#{new_width}x#{new_height}+#{min_max_x.min * width}+#{min_max_y.min * height}")
+
+        image
+      end
+
+      # Writes a MiniMagick::Image to a buffer.
+      #
+      # @param [MiniMagick::Image] image a valid MiniMagick image.
+      # @param [StringIO] buffer
+      def self.write_image_to_buffer(image, buffer)
+        image.write(buffer)
+      end
+
+      # Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.
+      #
+      # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
+      # @return [String, nil] A valid file extension.
+      def self.determine_file_extension(input_source)
+        if input_source.pdf? || input_source.filename.downcase.end_with?('pdf')
+          'jpg'
+        else
+          File.extname(input_source.filename.to_s).strip.downcase[1..].to_s
+        end
       end
     end
   end

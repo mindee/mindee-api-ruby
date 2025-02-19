@@ -5,25 +5,12 @@ require 'bundler/setup'
 require 'optparse'
 require 'mindee'
 
-options = {}
 DOCUMENTS = {
-  "custom" => {
-    description: "Custom document type from API builder",
-    doc_class: Mindee::Product::Custom::CustomV1,
-    sync: true,
-    async: false,
-  },
-  "generated" => {
-    description: "Generated document type from API builder",
-    doc_class: Mindee::Product::Generated::GeneratedV1,
+  "universal" => {
+    description: "Universal document type from API builder",
+    doc_class: Mindee::Product::Universal::Universal,
     sync: true,
     async: true,
-  },
-  "proof-of-address" => {
-    description: 'Proof of Address',
-    doc_class: Mindee::Product::ProofOfAddress::ProofOfAddressV1,
-    sync: true,
-    async: false,
   },
   "cropper" => {
     description: 'Cropper',
@@ -79,12 +66,6 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
-  "eu-driver-license" => {
-    description: "EU Driver License",
-    doc_class: Mindee::Product::EU::DriverLicense::DriverLicenseV1,
-    sync: true,
-    async: false,
-  },
   "fr-bank-account-details" => {
     description: "FR Bank Account Details",
     doc_class: Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2,
@@ -121,12 +102,6 @@ DOCUMENTS = {
     sync: true,
     async: false,
   },
-  "us-driver-license" => {
-    description: "US Driver License",
-    doc_class: Mindee::Product::US::DriverLicense::DriverLicenseV1,
-    sync: true,
-    async: false,
-  },
   "us-heathcare-card" => {
     description: "US Healthcare Card",
     doc_class: Mindee::Product::US::HealthcareCard::HealthcareCardV1,
@@ -148,13 +123,8 @@ DOCUMENTS = {
 }
 
 options = {}
-DEFAULT_CUTTING = {
-  page_indexes: [0, 1, 2, 3, 4],
-  operation: :KEEP_ONLY,
-  on_min_pages: 0,
-}
 
-# Initializes custom & generated-specific options
+# Initializes universal-specific options
 # @param cli_parser [OptionParser]
 def custom_subcommand(cli_parser, options)
   cli_parser.on('-v [VERSION]', '--version [VERSION]', 'Model version for the API') do |v|
@@ -171,7 +141,7 @@ DOCUMENTS.each do |doc_key, doc_value|
     opts.on('-w', '--all-words', 'Include words in response') do |v|
       options[:all_words] = v
     end
-    opts.on('-c', '--cut-pages', "Don't cut document pages") do |v|
+    opts.on('-c', '--cut-pages', "Cut document pages") do |v|
       options[:cut_pages] = v
     end
     opts.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') do |v|
@@ -183,10 +153,8 @@ DOCUMENTS.each do |doc_key, doc_value|
     opts.on('-F', '--fix-pdf', "Attempts to fix broken PDF files before sending them to the server.") do |v|
       options[:fix_pdf] = true
     end
-    if (doc_key != 'custom' && doc_key != 'generated')
-      opts.banner = "Product: #{doc_value[:description]}. \nUsage: mindee.rb #{doc_key} [options] file"
-    else
-      opts.banner = "#{doc_value[:description]}. \nUsage: \nmindee.rb custom [options] endpoint_name file\nor\nmindee.rb generated [options] endpoint_name file"
+    if doc_key != 'universal'
+      opts.banner = "#{doc_value[:description]}. \nUsage: \nmindee.rb universal [options] endpoint_name file\nor\nmindee.rb universal [options] endpoint_name file"
       custom_subcommand(opts, options)
     end
     if doc_value[:async]
@@ -206,13 +174,13 @@ global_parser = OptionParser.new do |opts|
 end
 
 command = ARGV.shift
-if !DOCUMENTS.include?(command)
+unless DOCUMENTS.include?(command)
   abort(global_parser.help)
 end
 doc_class = DOCUMENTS[command][:doc_class]
 product_parser[command].parse!
 
-if command == 'custom' || command == 'generated'
+if command == 'universal'
   if ARGV.length < 2
     $stderr.puts "The '#{command}' command requires both ENDPOINT_NAME and file arguments."
     abort(product_parser[command].help)
@@ -229,13 +197,13 @@ else
 end
 
 mindee_client = Mindee::Client.new(api_key: options[:api_key])
-if (options[:file_path].start_with?("https://"))
+if options[:file_path].start_with?("https://")
   input_source = mindee_client.source_from_url(options[:file_path])
 else
   input_source = mindee_client.source_from_path(options[:file_path], fix_pdf: options[:fix_pdf])
 end
 
-if command == 'custom' || command == 'generated'
+if command == 'universal'
   custom_endpoint = mindee_client.create_endpoint(
     endpoint_name: endpoint_name,
     account_name: options[:account_name],
@@ -245,7 +213,16 @@ else
   custom_endpoint = nil
 end
 
-page_options = options[:cut_pages].nil? ? nil : default_cutting
+if options[:cut_pages].nil? || !options[:cut_pages].is_a?(Integer) || options[:cut_pages] < 0
+  page_options = options[:cut_pages].nil?
+else
+  page_options = Mindee::PageOptions.new(params: {
+    page_indexes: (0..options[:cut_pages].to_i).to_a,
+    operation: :KEEP_ONLY,
+    on_min_pages: 0,
+  })
+end
+
 if options[:parse_async].nil?
   if !DOCUMENTS[command][:sync]
     options[:parse_async] = true
@@ -253,21 +230,12 @@ if options[:parse_async].nil?
     options[:parse_async] = false
   end
 end
-if options[:parse_async]
-  result = mindee_client.enqueue_and_parse(
-    input_source,
-    DOCUMENTS[command][:doc_class],
-    endpoint: custom_endpoint,
-    page_options: page_options,
-  )
-else
-  result = mindee_client.parse(
-    input_source,
-    DOCUMENTS[command][:doc_class],
-    endpoint: custom_endpoint,
-    page_options: page_options,
-  )
-end
+result = mindee_client.parse(
+  input_source,
+  doc_class,
+  options: { endpoint: custom_endpoint,
+             options: Mindee::ParseOptions.new(params: { page_options: page_options }), enqueue: options[:parse_async] }
+)
 
 if options[:print_full]
   puts result.document

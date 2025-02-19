@@ -3,6 +3,7 @@
 require 'net/http'
 require 'uri'
 require 'fileutils'
+require_relative '../../logging'
 
 module Mindee
   module Input
@@ -13,7 +14,9 @@ module Mindee
         attr_reader :url
 
         def initialize(url)
-          raise 'URL must be HTTPS' unless url.start_with? 'https://'
+          raise Errors::MindeeInputError, 'URL must be HTTPS' unless url.start_with? 'https://'
+
+          logger.debug("URL input: #{url}")
 
           @url = url
         end
@@ -27,7 +30,7 @@ module Mindee
         # @param token [String, nil] Optional token for JWT-based authentication.
         # @param max_redirects [Integer] Maximum amount of redirects to follow.
         # @return [String] The full path of the saved file.
-        def save_to_file(path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
+        def write_to_file(path, filename: nil, username: nil, password: nil, token: nil, max_redirects: 3)
           response_body = fetch_file_content(username: username, password: password, token: token,
                                              max_redirects: max_redirects)
 
@@ -53,7 +56,7 @@ module Mindee
                                              max_redirects: max_redirects)
           bytes = StringIO.new(response_body)
 
-          BytesInputSource.new(bytes.read, filename)
+          BytesInputSource.new(bytes.read || '', filename || '')
         end
 
         # Fetches the file content from the URL.
@@ -72,9 +75,9 @@ module Mindee
 
           response = make_request(uri, request, max_redirects)
           if response.code.to_i > 299
-            raise "Failed to download file: HTTP status code #{response.code}"
+            raise Errors::MindeeAPIError, "Failed to download file: HTTP status code #{response.code}"
           elsif response.code.to_i < 200
-            raise "Failed to download file: Invalid response code #{response.code}."
+            raise Errors::MindeeAPIError, "Failed to download file: Invalid response code #{response.code}."
           end
 
           response.body
@@ -83,7 +86,7 @@ module Mindee
         private
 
         def extract_filename_from_url(uri)
-          filename = File.basename(uri.path)
+          filename = File.basename(uri.path.to_s)
           filename.empty? ? '' : filename
         end
 
@@ -100,7 +103,7 @@ module Mindee
             response = http.request(request)
             if response.is_a?(Net::HTTPRedirection) && max_redirects.positive?
               location = response['location']
-              raise 'No location in redirection header.' if location.nil?
+              raise Errors::MindeeInputError, 'No location in redirection header.' if location.nil?
 
               new_uri = URI.parse(location)
               request = Net::HTTP::Get.new(new_uri)

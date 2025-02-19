@@ -1,0 +1,10 @@
+# lib/mindee/input/sources/bytes_input_source.rb
+module Mindee
+  module Input
+    module Source
+      class BytesInputSource < LocalInputSource
+        def initialize: (String, String, ?fix_pdf: bool) -> void
+      end
+    end
+  end
+end

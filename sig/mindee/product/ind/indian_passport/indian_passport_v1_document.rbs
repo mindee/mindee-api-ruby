@@ -1,0 +1,37 @@
+# lib/mindee/product/../indian_passport/indian_passport_v1_document.rb
+
+module Mindee
+  module Product
+    module IND
+      module IndianPassport
+        class IndianPassportV1Document < Parsing::Common::Prediction
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def address1: -> (Parsing::Standard::StringField)
+          def address2: -> (Parsing::Standard::StringField)
+          def address3: -> (Parsing::Standard::StringField)
+          def birth_date: -> (Parsing::Standard::DateField)
+          def birth_place: -> (Parsing::Standard::StringField)
+          def country: -> (Parsing::Standard::StringField)
+          def expiry_date: -> (Parsing::Standard::DateField)
+          def file_number: -> (Parsing::Standard::StringField)
+          def gender: -> (Parsing::Standard::ClassificationField)
+          def given_names: -> (Parsing::Standard::StringField)
+          def id_number: -> (Parsing::Standard::StringField)
+          def issuance_date: -> (Parsing::Standard::DateField)
+          def issuance_place: -> (Parsing::Standard::StringField)
+          def legal_guardian: -> (Parsing::Standard::StringField)
+          def mrz1: -> (Parsing::Standard::StringField)
+          def mrz2: -> (Parsing::Standard::StringField)
+          def name_of_mother: -> (Parsing::Standard::StringField)
+          def name_of_spouse: -> (Parsing::Standard::StringField)
+          def old_passport_date_of_issue: -> (Parsing::Standard::DateField)
+          def old_passport_number: -> (Parsing::Standard::StringField)
+          def old_passport_place_of_issue: -> (Parsing::Standard::StringField)
+          def page_number: -> (Parsing::Standard::ClassificationField)
+          def surname: -> (Parsing::Standard::StringField)
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

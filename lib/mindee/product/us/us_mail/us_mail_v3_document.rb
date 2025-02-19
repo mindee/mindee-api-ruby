@@ -2,7 +2,7 @@
 
 require_relative '../../../parsing'
 require_relative 'us_mail_v3_sender_address'
-require_relative 'us_mail_v3_recipient_address'
+require_relative 'us_mail_v3_recipient_addresses'
 
 module Mindee
   module Product
@@ -15,7 +15,7 @@ module Mindee
           # @return [Mindee::Parsing::Standard::BooleanField]
           attr_reader :is_return_to_sender
           # The addresses of the recipients.
-          # @return [Array<Mindee::Product::US::UsMail::UsMailV3RecipientAddress>]
+          # @return [Mindee::Product::US::UsMail::UsMailV3RecipientAddresses]
           attr_reader :recipient_addresses
           # The names of the recipients.
           # @return [Array<Mindee::Parsing::Standard::StringField>]
@@ -30,18 +30,26 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
-            @is_return_to_sender = BooleanField.new(prediction['is_return_to_sender'], page_id)
-            @recipient_addresses = []
-            prediction['recipient_addresses'].each do |item|
-              @recipient_addresses.push(UsMailV3RecipientAddress.new(item, page_id))
-            end
-            @recipient_names = []
+            super
+            @is_return_to_sender = Parsing::Standard::BooleanField.new(
+              prediction['is_return_to_sender'],
+              page_id
+            )
+            @recipient_addresses = Product::US::UsMail::UsMailV3RecipientAddresses.new(
+              prediction['recipient_addresses'], page_id
+            )
+            @recipient_names = [] # : Array[Parsing::Standard::StringField]
             prediction['recipient_names'].each do |item|
-              @recipient_names.push(StringField.new(item, page_id))
+              @recipient_names.push(Parsing::Standard::StringField.new(item, page_id))
             end
-            @sender_address = UsMailV3SenderAddress.new(prediction['sender_address'], page_id)
-            @sender_name = StringField.new(prediction['sender_name'], page_id)
+            @sender_address = Product::US::UsMail::UsMailV3SenderAddress.new(
+              prediction['sender_address'],
+              page_id
+            )
+            @sender_name = Parsing::Standard::StringField.new(
+              prediction['sender_name'],
+              page_id
+            )
           end
 
           # @return [String]

@@ -1,0 +1,13 @@
+# lib/mindee/product/../energy_bill/energy_bill_v1.rb
+
+module Mindee
+  module Product
+    module FR
+      module EnergyBill
+        class EnergyBillV1 < Parsing::Common::Inference
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+      end
+    end
+  end
+end

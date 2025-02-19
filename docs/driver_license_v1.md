@@ -6,7 +6,7 @@ parentDoc: 6294d97ee723f1008d2ab28e
 ---
 The Ruby OCR SDK supports the [Driver License API](https://platform.mindee.com/mindee/driver_license).
 
-The [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/driver_license/default_sample.jpg) can be used for testing purposes.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/driver_license/default_sample.jpg), we are going to illustrate how to extract the data that we want using the OCR SDK.
 ![Driver License sample](https://github.com/mindee/client-lib-test-data/blob/main/products/driver_license/default_sample.jpg?raw=true)
 
 # Quick-Start
@@ -20,7 +20,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 # Parse the file
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
   Mindee::Product::DriverLicense::DriverLicenseV1
 )
@@ -30,8 +30,38 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
-
 ```
+
+**Output (RST):**
+```rst
+########
+Document
+########
+:Mindee ID: fbdeae38-ada3-43ac-aa58-e01a3d47e474
+:Filename: default_sample.jpg
+
+Inference
+#########
+:Product: mindee/driver_license v1.0
+:Rotation applied: Yes
+
+Prediction
+==========
+:Country Code: USA
+:State: AZ
+:ID: D12345678
+:Category: D
+:Last Name: Sample
+:First Name: Jelani
+:Date of Birth: 1957-02-01
+:Place of Birth:
+:Expiry Date: 2018-02-01
+:Issued Date: 2013-01-10
+:Issuing Authority:
+:MRZ:
+:DD Number: DD1234567890123456
+```
+
 # Field Types
 ## Standard Fields
 These fields are generic and used in several products.
@@ -40,12 +70,12 @@ These fields are generic and used in several products.
 Each prediction object contains a set of fields that inherit from the generic `Field` class.
 A typical `Field` object will have the following attributes:
 
-* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **value** (`String`, `Float`, `Integer`, `bool`): corresponds to the field value. Can be `nil` if no value was extracted.
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`bool`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.

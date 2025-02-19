@@ -10,11 +10,15 @@ module Mindee
       class InternationalIdV2Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          super(prediction)
-          @prediction = InternationalIdV2PagePrediction.new(
-            prediction['prediction'],
-            prediction['id']
-          )
+          super
+          @prediction = if prediction['prediction'].empty?
+                          nil
+                        else
+                          InternationalIdV2PagePrediction.new(
+                            prediction['prediction'],
+                            prediction['id']
+                          )
+                        end
         end
       end
 

@@ -1,0 +1,9 @@
+# lib/mindee/geometry/polygon.rb
+module Mindee
+  module Geometry
+    class Polygon < Array[untyped]
+      def centroid: -> untyped
+      def point_in_y?: (untyped) -> untyped
+    end
+  end
+end

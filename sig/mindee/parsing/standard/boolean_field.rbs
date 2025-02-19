@@ -1,0 +1,12 @@
+# lib/mindee/parsing/standard/boolean_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class BooleanField < BaseField
+        def value: -> bool?
+        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: false) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

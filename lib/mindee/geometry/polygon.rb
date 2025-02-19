@@ -13,7 +13,7 @@ module Mindee
 
       # Determine if the Point is in the Polygon's Y-axis.
       # @param point [Mindee::Geometry::Point]
-      # @return [Boolean]
+      # @return [bool]
       def point_in_y?(point)
         min_max = Geometry.get_min_max_y(self)
         min_max.min <= point.y && point.y <= min_max.max

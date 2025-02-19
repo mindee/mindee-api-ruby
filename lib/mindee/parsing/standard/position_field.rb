@@ -49,7 +49,9 @@ module Mindee
         private
 
         def to_quadrilateral(prediction, key)
-          Geometry.quadrilateral_from_prediction(prediction[key]) unless prediction[key].nil? || prediction[key].empty?
+          return if prediction[key].nil? || prediction[key].empty?
+
+          Mindee::Geometry.quadrilateral_from_prediction(prediction[key])
         end
       end
     end

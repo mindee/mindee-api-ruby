@@ -1,0 +1,25 @@
+# lib/mindee/product/driver_license/driver_license_v1_document.rb
+
+module Mindee
+  module Product
+    module DriverLicense
+      class DriverLicenseV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def category: -> (Parsing::Standard::StringField)
+        def country_code: -> (Parsing::Standard::StringField)
+        def date_of_birth: -> (Parsing::Standard::DateField)
+        def dd_number: -> (Parsing::Standard::StringField)
+        def expiry_date: -> (Parsing::Standard::DateField)
+        def first_name: -> (Parsing::Standard::StringField)
+        def id: -> (Parsing::Standard::StringField)
+        def issued_date: -> (Parsing::Standard::DateField)
+        def issuing_authority: -> (Parsing::Standard::StringField)
+        def last_name: -> (Parsing::Standard::StringField)
+        def mrz: -> (Parsing::Standard::StringField)
+        def place_of_birth: -> (Parsing::Standard::StringField)
+        def state: -> (Parsing::Standard::StringField)
+        def to_s: -> String
+      end
+    end
+  end
+end

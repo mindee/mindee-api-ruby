@@ -1,0 +1,17 @@
+# lib/mindee/product/../license_plate/license_plate_v1_page.rb
+
+module Mindee
+  module Product
+    module EU
+      module LicensePlate
+        class LicensePlateV1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class LicensePlateV1PagePrediction < LicensePlateV1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

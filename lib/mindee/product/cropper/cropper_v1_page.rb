@@ -10,11 +10,15 @@ module Mindee
       class CropperV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          super(prediction)
-          @prediction = CropperV1PagePrediction.new(
-            prediction['prediction'],
-            prediction['id']
-          )
+          super
+          @prediction = if prediction['prediction'].empty?
+                          nil
+                        else
+                          CropperV1PagePrediction.new(
+                            prediction['prediction'],
+                            prediction['id']
+                          )
+                        end
         end
       end
 
@@ -31,9 +35,9 @@ module Mindee
         def initialize(prediction, page_id)
           @cropping = []
           prediction['cropping'].each do |item|
-            @cropping.push(PositionField.new(item, page_id))
+            @cropping.push(Parsing::Standard::PositionField.new(item, page_id))
           end
-          super()
+          super
         end
 
         # @return [String]

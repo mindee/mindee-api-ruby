@@ -6,7 +6,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
   Mindee::Product::InvoiceSplitter::InvoiceSplitterV1
 )

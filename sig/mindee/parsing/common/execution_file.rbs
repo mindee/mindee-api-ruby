@@ -1,0 +1,12 @@
+# lib/mindee/parsing/common/execution_file.rb
+module Mindee
+  module Parsing
+    module Common
+      class ExecutionFile
+        def name: -> untyped
+        def alias: -> untyped
+        def initialize: (untyped) -> untyped
+      end
+    end
+  end
+end

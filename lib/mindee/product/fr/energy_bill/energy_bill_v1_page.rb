@@ -11,11 +11,15 @@ module Mindee
         class EnergyBillV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
-            @prediction = EnergyBillV1PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            super
+            @prediction = if prediction['prediction'].empty?
+                            nil
+                          else
+                            EnergyBillV1PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 

@@ -30,7 +30,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
+          super
           @description = prediction['description']
           @gross_weight = prediction['gross_weight']
           @measurement = prediction['measurement']
@@ -44,10 +44,13 @@ module Mindee
         def printable_values
           printable = {}
           printable[:description] = format_for_display(@description)
-          printable[:gross_weight] = @gross_weight.nil? ? '' : Field.float_to_string(@gross_weight)
-          printable[:measurement] = @measurement.nil? ? '' : Field.float_to_string(@measurement)
+          printable[:gross_weight] =
+            @gross_weight.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@gross_weight)
+          printable[:measurement] =
+            @measurement.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@measurement)
           printable[:measurement_unit] = format_for_display(@measurement_unit)
-          printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
+          printable[:quantity] =
+            @quantity.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@quantity)
           printable[:weight_unit] = format_for_display(@weight_unit)
           printable
         end
@@ -56,10 +59,13 @@ module Mindee
         def table_printable_values
           printable = {}
           printable[:description] = format_for_display(@description, 36)
-          printable[:gross_weight] = @gross_weight.nil? ? '' : Field.float_to_string(@gross_weight)
-          printable[:measurement] = @measurement.nil? ? '' : Field.float_to_string(@measurement)
+          printable[:gross_weight] =
+            @gross_weight.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@gross_weight)
+          printable[:measurement] =
+            @measurement.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@measurement)
           printable[:measurement_unit] = format_for_display(@measurement_unit, nil)
-          printable[:quantity] = @quantity.nil? ? '' : Field.float_to_string(@quantity)
+          printable[:quantity] =
+            @quantity.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@quantity)
           printable[:weight_unit] = format_for_display(@weight_unit, nil)
           printable
         end

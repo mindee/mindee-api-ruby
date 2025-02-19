@@ -1,0 +1,11 @@
+# lib/mindee/product/receipt/receipt_v5.rb
+
+module Mindee
+  module Product
+    module Receipt
+      class ReceiptV5 < Parsing::Common::Inference
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+    end
+  end
+end

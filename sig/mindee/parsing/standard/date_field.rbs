@@ -1,0 +1,14 @@
+# lib/mindee/parsing/standard/date_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class DateField # failed to identify its superclass
+        def date_object: -> untyped
+        def value: -> untyped
+        def raw: -> untyped
+        def is_computed: -> untyped
+        def initialize: (untyped, untyped) -> nil
+      end
+    end
+  end
+end

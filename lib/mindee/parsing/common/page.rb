@@ -10,7 +10,7 @@ module Mindee
       # Abstract wrapper class for prediction Pages
       # Holds prediction for a page as well as it's orientation and  id.
       class Page
-        # Id of the page (as given by the API).
+        # ID of the page (as given by the API).
         # @return [Integer]
         attr_reader :page_id
         # Orientation of the page.
@@ -26,8 +26,10 @@ module Mindee
         # @param raw_prediction [Hash]
         def initialize(raw_prediction)
           @page_id = raw_prediction['id']
-          @orientation = Orientation.new(raw_prediction['orientation'], @page_id)
-          @extras = Extras::Extras.new(raw_prediction['extras']) unless raw_prediction['extras'].nil?
+          @orientation = Mindee::Parsing::Common::Orientation.new(raw_prediction['orientation'], @page_id)
+          return if raw_prediction['extras'].nil?
+
+          @extras = Mindee::Parsing::Common::Extras::Extras.new(raw_prediction['extras'])
         end
 
         # @return [String]

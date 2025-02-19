@@ -1,0 +1,13 @@
+module Mindee
+  module Product
+    module NutritionFactsLabel
+      class NutritionFactsLabelV1ServingSize < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def amount: -> Float
+        def unit: -> String
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def to_s: -> String
+      end
+    end
+  end
+end

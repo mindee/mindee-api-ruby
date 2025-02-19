@@ -3,9 +3,9 @@
 require_relative '../../../parsing'
 require_relative 'energy_bill_v1_energy_supplier'
 require_relative 'energy_bill_v1_energy_consumer'
-require_relative 'energy_bill_v1_subscription'
-require_relative 'energy_bill_v1_energy_usage'
-require_relative 'energy_bill_v1_taxes_and_contribution'
+require_relative 'energy_bill_v1_subscriptions'
+require_relative 'energy_bill_v1_energy_usages'
+require_relative 'energy_bill_v1_taxes_and_contributions'
 require_relative 'energy_bill_v1_meter_detail'
 
 module Mindee
@@ -32,7 +32,7 @@ module Mindee
           # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1EnergySupplier]
           attr_reader :energy_supplier
           # Details of energy consumption.
-          # @return [Array<Mindee::Product::FR::EnergyBill::EnergyBillV1EnergyUsage>]
+          # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1EnergyUsages]
           attr_reader :energy_usage
           # The date when the energy invoice was issued.
           # @return [Mindee::Parsing::Standard::DateField]
@@ -44,10 +44,10 @@ module Mindee
           # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1MeterDetail]
           attr_reader :meter_details
           # The subscription details fee for the energy service.
-          # @return [Array<Mindee::Product::FR::EnergyBill::EnergyBillV1Subscription>]
+          # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1Subscriptions]
           attr_reader :subscription
           # Details of Taxes and Contributions.
-          # @return [Array<Mindee::Product::FR::EnergyBill::EnergyBillV1TaxesAndContribution>]
+          # @return [Mindee::Product::FR::EnergyBill::EnergyBillV1TaxesAndContributions]
           attr_reader :taxes_and_contributions
           # The total amount to be paid for the energy invoice.
           # @return [Mindee::Parsing::Standard::AmountField]
@@ -62,30 +62,56 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
-            @contract_id = StringField.new(prediction['contract_id'], page_id)
-            @delivery_point = StringField.new(prediction['delivery_point'], page_id)
-            @due_date = DateField.new(prediction['due_date'], page_id)
-            @energy_consumer = EnergyBillV1EnergyConsumer.new(prediction['energy_consumer'], page_id)
-            @energy_supplier = EnergyBillV1EnergySupplier.new(prediction['energy_supplier'], page_id)
-            @energy_usage = []
-            prediction['energy_usage'].each do |item|
-              @energy_usage.push(EnergyBillV1EnergyUsage.new(item, page_id))
-            end
-            @invoice_date = DateField.new(prediction['invoice_date'], page_id)
-            @invoice_number = StringField.new(prediction['invoice_number'], page_id)
-            @meter_details = EnergyBillV1MeterDetail.new(prediction['meter_details'], page_id)
-            @subscription = []
-            prediction['subscription'].each do |item|
-              @subscription.push(EnergyBillV1Subscription.new(item, page_id))
-            end
-            @taxes_and_contributions = []
-            prediction['taxes_and_contributions'].each do |item|
-              @taxes_and_contributions.push(EnergyBillV1TaxesAndContribution.new(item, page_id))
-            end
-            @total_amount = AmountField.new(prediction['total_amount'], page_id)
-            @total_before_taxes = AmountField.new(prediction['total_before_taxes'], page_id)
-            @total_taxes = AmountField.new(prediction['total_taxes'], page_id)
+            super
+            @contract_id = Parsing::Standard::StringField.new(
+              prediction['contract_id'],
+              page_id
+            )
+            @delivery_point = Parsing::Standard::StringField.new(
+              prediction['delivery_point'],
+              page_id
+            )
+            @due_date = Parsing::Standard::DateField.new(
+              prediction['due_date'],
+              page_id
+            )
+            @energy_consumer = Product::FR::EnergyBill::EnergyBillV1EnergyConsumer.new(
+              prediction['energy_consumer'],
+              page_id
+            )
+            @energy_supplier = Product::FR::EnergyBill::EnergyBillV1EnergySupplier.new(
+              prediction['energy_supplier'],
+              page_id
+            )
+            @energy_usage = Product::FR::EnergyBill::EnergyBillV1EnergyUsages.new(prediction['energy_usage'], page_id)
+            @invoice_date = Parsing::Standard::DateField.new(
+              prediction['invoice_date'],
+              page_id
+            )
+            @invoice_number = Parsing::Standard::StringField.new(
+              prediction['invoice_number'],
+              page_id
+            )
+            @meter_details = Product::FR::EnergyBill::EnergyBillV1MeterDetail.new(
+              prediction['meter_details'],
+              page_id
+            )
+            @subscription = Product::FR::EnergyBill::EnergyBillV1Subscriptions.new(prediction['subscription'], page_id)
+            @taxes_and_contributions = Product::FR::EnergyBill::EnergyBillV1TaxesAndContributions.new(
+              prediction['taxes_and_contributions'], page_id
+            )
+            @total_amount = Parsing::Standard::AmountField.new(
+              prediction['total_amount'],
+              page_id
+            )
+            @total_before_taxes = Parsing::Standard::AmountField.new(
+              prediction['total_before_taxes'],
+              page_id
+            )
+            @total_taxes = Parsing::Standard::AmountField.new(
+              prediction['total_taxes'],
+              page_id
+            )
           end
 
           # @return [String]

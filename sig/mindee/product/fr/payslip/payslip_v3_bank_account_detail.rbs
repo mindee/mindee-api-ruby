@@ -1,0 +1,16 @@
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV3BankAccountDetail < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def bank_name: -> String
+          def iban: -> String
+          def swift: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

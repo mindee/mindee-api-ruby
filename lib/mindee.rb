@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
-require 'mindee/extraction'
+require 'mindee/logging'
 
 module Mindee
+  # Mindee internal error module.
+  module Errors
+  end
+
+  # Custom extraction module
+  module Extraction
+  end
+
   # Mindee internal http module.
   module HTTP
   end
@@ -29,8 +37,8 @@ module Mindee
     end
   end
 
-  # Custom extraction module
-  module Extraction
+  # Logging
+  module Logging
   end
 
   # Parsing internals and fields.
@@ -39,16 +47,12 @@ module Mindee
     module Common
     end
 
-    # Custom fields and functions.
-    module Custom
-    end
-
     # Standard fields and functions.
     module Standard
     end
 
-    # Generated fields and functions.
-    module Generated
+    # Universal fields and functions.
+    module Universal
     end
   end
 
@@ -66,8 +70,17 @@ module Mindee
     module FR
     end
 
+    # Indian-specific products.
+    module IND
+    end
+
     # US-specific products.
     module US
     end
   end
+end
+
+# Shorthand to call the logger from anywhere.
+def logger
+  Mindee::Logging.logger
 end

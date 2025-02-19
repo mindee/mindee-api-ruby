@@ -1,0 +1,8 @@
+# lib/mindee/image/image_compressor.rb
+module Mindee
+  module Image
+    module ImageCompressor
+      def self.compress_image: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO, ?quality: Integer, ?max_width: Integer?, ?max_height: Integer?) -> StringIO
+    end
+  end
+end

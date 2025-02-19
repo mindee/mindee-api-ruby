@@ -10,11 +10,15 @@ module Mindee
       class InvoiceV4Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
-          super(prediction)
-          @prediction = InvoiceV4PagePrediction.new(
-            prediction['prediction'],
-            prediction['id']
-          )
+          super
+          @prediction = if prediction['prediction'].empty?
+                          nil
+                        else
+                          InvoiceV4PagePrediction.new(
+                            prediction['prediction'],
+                            prediction['id']
+                          )
+                        end
         end
       end
 

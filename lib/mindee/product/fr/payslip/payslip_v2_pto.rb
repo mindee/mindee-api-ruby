@@ -22,7 +22,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @accrued_this_period = prediction['accrued_this_period']
             @balance_end_of_period = prediction['balance_end_of_period']
             @used_this_period = prediction['used_this_period']
@@ -33,10 +33,19 @@ module Mindee
           def printable_values
             printable = {}
             printable[:accrued_this_period] =
-              @accrued_this_period.nil? ? '' : Field.float_to_string(@accrued_this_period)
+              if @accrued_this_period.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@accrued_this_period)
+              end
             printable[:balance_end_of_period] =
-              @balance_end_of_period.nil? ? '' : Field.float_to_string(@balance_end_of_period)
-            printable[:used_this_period] = @used_this_period.nil? ? '' : Field.float_to_string(@used_this_period)
+              if @balance_end_of_period.nil?
+                ''
+              else
+                Parsing::Standard::BaseField.float_to_string(@balance_end_of_period)
+              end
+            printable[:used_this_period] =
+              @used_this_period.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@used_this_period)
             printable
           end
 

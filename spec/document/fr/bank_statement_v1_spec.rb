@@ -9,7 +9,7 @@ require_relative '../../data'
 DIR_FR_BANK_STATEMENT_V1 = File.join(DATA_DIR, 'products', 'bank_statement_fr', 'response_v1').freeze
 
 describe Mindee::Product::FR::BankStatement::BankStatementV1 do
-  context 'A Bank Statement (FR) V1' do
+  context 'A Bank Statement V1' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_FR_BANK_STATEMENT_V1, 'empty.json')
       inference = Mindee::Parsing::Common::Document.new(

@@ -1,0 +1,17 @@
+# lib/mindee/product/../us_mail/us_mail_v3_page.rb
+
+module Mindee
+  module Product
+    module US
+      module UsMail
+        class UsMailV3Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class UsMailV3PagePrediction < UsMailV3Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

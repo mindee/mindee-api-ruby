@@ -1,0 +1,18 @@
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2PayPeriod < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def end_date: -> String
+          def month: -> String
+          def payment_date: -> String
+          def start_date: -> String
+          def year: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

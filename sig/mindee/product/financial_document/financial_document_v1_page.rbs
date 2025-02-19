@@ -1,0 +1,15 @@
+# lib/mindee/product/financial_document/financial_document_v1_page.rb
+
+module Mindee
+  module Product
+    module FinancialDocument
+      class FinancialDocumentV1Page < Parsing::Common::Page
+        def initialize: (Hash[Symbol | String, untyped]) -> void
+      end
+      class FinancialDocumentV1PagePrediction < FinancialDocumentV1Document
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

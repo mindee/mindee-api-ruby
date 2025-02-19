@@ -15,10 +15,10 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super()
-          @receipts = []
+          super
+          @receipts = [] # : Array[Parsing::Standard::PositionField]
           prediction['receipts'].each do |item|
-            @receipts.push(PositionField.new(item, page_id))
+            @receipts.push(Parsing::Standard::PositionField.new(item, page_id))
           end
         end
 

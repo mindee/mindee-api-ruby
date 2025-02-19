@@ -1,0 +1,21 @@
+module Mindee
+  module Product
+    module FinancialDocument
+      class FinancialDocumentV1LineItem < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def description: -> String
+        def product_code: -> String
+        def quantity: -> Float
+        def tax_amount: -> Float
+        def tax_rate: -> Float
+        def total_amount: -> Float
+        def unit_measure: -> String
+        def unit_price: -> Float
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

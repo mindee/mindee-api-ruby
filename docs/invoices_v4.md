@@ -30,32 +30,6 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
-
-```
-
-You can also call this product asynchronously:
-
-```rb
-require 'mindee'
-
-# Init a new client
-mindee_client = Mindee::Client.new(api_key: 'my-api-key')
-
-# Load a file from disk
-input_source = mindee_client.source_from_path('/path/to/the/file.ext')
-
-# Parse the file
-result = mindee_client.enqueue_and_parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
-)
-
-# Print a full summary of the parsed data in RST format
-puts result.document
-
-# Print the document-level parsed data
-# puts result.document.inference.prediction
-
 ```
 
 **Output (RST):**
@@ -63,7 +37,7 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: a67b70ea-4b1e-4eac-ae75-dda47a7064ae
+:Mindee ID: 86b1833f-138b-4a01-8387-860204b0e631
 :Filename: default_sample.jpg
 
 Inference
@@ -78,8 +52,8 @@ Prediction
 :Purchase Order Number: AD29094
 :Reference Numbers: AD29094
 :Purchase Date: 2018-09-25
-:Due Date: 2011-12-01
-:Payment Date: 2011-12-01
+:Due Date:
+:Payment Date:
 :Total Net: 2145.00
 :Total Amount: 2608.20
 :Total Tax: 193.20
@@ -124,8 +98,8 @@ Page 0
 :Purchase Order Number: AD29094
 :Reference Numbers: AD29094
 :Purchase Date: 2018-09-25
-:Due Date: 2011-12-01
-:Payment Date: 2011-12-01
+:Due Date:
+:Payment Date:
 :Total Net: 2145.00
 :Total Amount: 2608.20
 :Total Tax: 193.20
@@ -169,12 +143,12 @@ These fields are generic and used in several products.
 Each prediction object contains a set of fields that inherit from the generic `Field` class.
 A typical `Field` object will have the following attributes:
 
-* **value** (`String`, `Float`, `Integer`, `Boolean`): corresponds to the field value. Can be `nil` if no value was extracted.
+* **value** (`String`, `Float`, `Integer`, `bool`): corresponds to the field value. Can be `nil` if no value was extracted.
 * **confidence** (Float, nil): the confidence score of the field prediction.
 * **bounding_box** (`Mindee::Geometry::Quadrilateral`, `nil`): contains exactly 4 relative vertices (points) coordinates of a right rectangle containing the field in the document.
 * **polygon** (`Mindee::Geometry::Polygon`, `nil`): contains the relative vertices coordinates (`Point`) of a polygon containing the field in the image.
 * **page_id** (`Integer`, `nil`): the ID of the page, always `nil` when at document-level.
-* **reconstructed** (`Boolean`): indicates whether an object was reconstructed (not extracted as the API gave it).
+* **reconstructed** (`bool`): indicates whether an object was reconstructed (not extracted as the API gave it).
 
 
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
@@ -232,6 +206,21 @@ Aside from the basic `Field` attributes, the tax field `TaxField` also implement
 The `Taxes` field represents an array-like collection of `TaxField` objects. As it is the representation of several objects, it has access to a custom `to_s` method that can render a `TaxField` object as a table line.
 
 ## Specific Fields
+Fields which are specific to this product; they are not used in any other product.
+
+### Line Items Field
+List of line item details.
+
+A `InvoiceV4LineItem` implements the following attributes:
+
+* `description` (String): The item description.
+* `product_code` (String): The product code referring to the item.
+* `quantity` (Float): The item quantity
+* `tax_amount` (Float): The item tax amount.
+* `tax_rate` (Float): The item tax rate in percentage.
+* `total_amount` (Float): The item total amount.
+* `unit_measure` (String): The item unit of measure.
+* `unit_price` (Float): The item unit price.
 Fields which are specific to this product; they are not used in any other product.
 
 ### Line Items Field

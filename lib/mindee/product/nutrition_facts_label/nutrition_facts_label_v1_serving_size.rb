@@ -18,7 +18,7 @@ module Mindee
         # @param prediction [Hash]
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
-          super(prediction, page_id)
+          super
           @amount = prediction['amount']
           @unit = prediction['unit']
           @page_id = page_id
@@ -27,7 +27,8 @@ module Mindee
         # @return [Hash]
         def printable_values
           printable = {}
-          printable[:amount] = @amount.nil? ? '' : Field.float_to_string(@amount)
+          printable[:amount] =
+            @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
           printable[:unit] = format_for_display(@unit)
           printable
         end

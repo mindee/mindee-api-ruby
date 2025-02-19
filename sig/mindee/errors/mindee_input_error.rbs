@@ -1,0 +1,17 @@
+# lib/mindee/errors/mindee_input_error.rb
+module Mindee
+  module Errors
+    class MindeeInputError < MindeeError
+    end
+    class MindeeSourceError < MindeeInputError
+    end
+    class MindeeMimeTypeError < MindeeSourceError
+      def invalid_mimetype: -> untyped
+      def initialize: (untyped) -> untyped
+    end
+    class MindeeImageError < MindeeInputError
+    end
+    class MindeePDFError < MindeeInputError
+    end
+  end
+end

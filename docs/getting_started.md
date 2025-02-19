@@ -9,7 +9,7 @@ This guide will help you get the most out of the Mindee Ruby client library to e
 ## Installation
 
 ### Requirements
-The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2
+The following Ruby versions are tested and supported: 3.0, 3.1, 3.2, 3.3
 
 ### Standard Installation
 To quickly get started with the Ruby OCR SDK, Install by adding this line to your application's Gemfile:
@@ -75,7 +75,7 @@ Using Mindee's APIs can be broken down into the following steps:
 Let's take a deep dive into how this works.
 
 ## Initializing the Client
-The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for Custom APIs).
+The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for Universal APIs).
 
 The `Client` requires your [API key](https://developers.mindee.com/docs/make-your-first-request#create-an-api-key).
 
@@ -183,7 +183,7 @@ Requires raw bytes.
 **Note**: The original filename is required when calling the method.
 
 ```ruby
-raw_bytes = b"%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
+raw_bytes = b "%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
 input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
 
 result = mindee_client.parse(
@@ -196,6 +196,7 @@ result = mindee_client.parse(
 Requires an url as a String.
 
 **Note**: the url must start with `https://`.
+
 ```ruby
 input_source = mindee_client.source_from_url("https://www.example.com/invoice.pdf")
 
@@ -218,6 +219,7 @@ This is detailed in each document-specific guide.
 
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
+
 ```ruby
 
 result = mindee_client.parse(
@@ -226,23 +228,23 @@ result = mindee_client.parse(
 )
 ```
 
-### Custom Documents (docTI)
+### Universal Documents (docTI)
 For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
 
 ```ruby
 endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine', account_name: 'my-account')
 
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: endpoint
 )
 ```
 
-This is because the `GeneratedV1` class is enough to handle the return processing, but the actual endpoint needs to be specified.
+This is because the `Universal` class is enough to handle the return processing, but the actual endpoint needs to be specified.
 
 ## Process the Result
-The response object is common to all documents, including custom documents. The main properties are:
+The response object is common to all documents, including custom documents (using the Universal product). The main properties are:
 
 * `id` — Mindee ID of the document
 * `name` — Filename sent to the API

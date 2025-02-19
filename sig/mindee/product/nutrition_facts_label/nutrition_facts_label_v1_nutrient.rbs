@@ -1,0 +1,18 @@
+module Mindee
+  module Product
+    module NutritionFactsLabel
+      class NutritionFactsLabelV1Nutrient < Parsing::Standard::FeatureField
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def daily_value: -> Float
+        def name: -> String
+        def per_100g: -> Float
+        def per_serving: -> Float
+        def unit: -> String
+        def printable_values: -> Hash[Symbol | String, untyped]
+        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def to_table_line: -> String
+        def to_s: -> String
+      end
+    end
+  end
+end

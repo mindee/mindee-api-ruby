@@ -16,7 +16,7 @@ module Mindee
           # @return [String]
           attr_reader :complete
           # Indicates if the recipient's address is a change of address.
-          # @return [Boolean]
+          # @return [bool]
           attr_reader :is_address_change
           # The postal code of the recipient's address.
           # @return [String]
@@ -37,7 +37,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @city = prediction['city']
             @complete = prediction['complete']
             @is_address_change = prediction['is_address_change']

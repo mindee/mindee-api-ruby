@@ -1,0 +1,17 @@
+module Mindee
+  module Product
+    module US
+      module HealthcareCard
+        class HealthcareCardV1Copay < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def service_fees: -> Float
+          def service_name: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def table_printable_values: -> Hash[Symbol | String, untyped]
+          def to_table_line: -> String
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

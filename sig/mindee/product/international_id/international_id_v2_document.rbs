@@ -1,0 +1,29 @@
+# lib/mindee/product/international_id/international_id_v2_document.rb
+
+module Mindee
+  module Product
+    module InternationalId
+      class InternationalIdV2Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def address: -> (Parsing::Standard::StringField)
+        def birth_date: -> (Parsing::Standard::DateField)
+        def birth_place: -> (Parsing::Standard::StringField)
+        def country_of_issue: -> (Parsing::Standard::StringField)
+        def document_number: -> (Parsing::Standard::StringField)
+        def document_type: -> (Parsing::Standard::ClassificationField)
+        def expiry_date: -> (Parsing::Standard::DateField)
+        def given_names: -> (Array[Parsing::Standard::StringField])
+        def issue_date: -> (Parsing::Standard::DateField)
+        def mrz_line1: -> (Parsing::Standard::StringField)
+        def mrz_line2: -> (Parsing::Standard::StringField)
+        def mrz_line3: -> (Parsing::Standard::StringField)
+        def nationality: -> (Parsing::Standard::StringField)
+        def personal_number: -> (Parsing::Standard::StringField)
+        def sex: -> (Parsing::Standard::StringField)
+        def state_of_issue: -> (Parsing::Standard::StringField)
+        def surnames: -> (Array[Parsing::Standard::StringField])
+        def to_s: -> String
+      end
+    end
+  end
+end

@@ -1,0 +1,19 @@
+# lib/mindee/product/delivery_note/delivery_note_v1_document.rb
+
+module Mindee
+  module Product
+    module DeliveryNote
+      class DeliveryNoteV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def customer_address: -> (Parsing::Standard::StringField)
+        def customer_name: -> (Parsing::Standard::StringField)
+        def delivery_date: -> (Parsing::Standard::DateField)
+        def delivery_number: -> (Parsing::Standard::StringField)
+        def supplier_address: -> (Parsing::Standard::StringField)
+        def supplier_name: -> (Parsing::Standard::StringField)
+        def total_amount: -> (Parsing::Standard::AmountField)
+        def to_s: -> String
+      end
+    end
+  end
+end

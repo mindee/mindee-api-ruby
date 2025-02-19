@@ -1,0 +1,26 @@
+# lib/mindee/http/endpoint.rb
+module Mindee
+  module HTTP
+    API_KEY_ENV_NAME: String
+    API_KEY_DEFAULT: nil
+    BASE_URL_ENV_NAME: String
+    BASE_URL_DEFAULT: String
+    REQUEST_TIMEOUT_ENV_NAME: String
+    TIMEOUT_DEFAULT: Integer
+    USER_AGENT: String
+    class Endpoint
+      def logger: () -> untyped
+      def api_key: -> String?
+      def request_timeout: -> Integer
+      def url_root: -> String
+      def initialize: (untyped, untyped, untyped, ?api_key: String) -> String
+      def predict: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
+      def predict_async: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
+      def parse_async: (untyped) -> [untyped, untyped]
+      def predict_req_post: (untyped, ?all_words: false, ?full_text: false, ?close_file: true, ?cropper: false) -> untyped
+      def document_queue_req_get: (untyped, untyped, untyped, untyped, untyped) -> untyped
+      def document_queue_req: (untyped) -> untyped
+      def check_api_key: -> nil
+    end
+  end
+end

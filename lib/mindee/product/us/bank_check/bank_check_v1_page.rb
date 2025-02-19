@@ -11,11 +11,15 @@ module Mindee
         class BankCheckV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
-            super(prediction)
-            @prediction = BankCheckV1PagePrediction.new(
-              prediction['prediction'],
-              prediction['id']
-            )
+            super
+            @prediction = if prediction['prediction'].empty?
+                            nil
+                          else
+                            BankCheckV1PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
           end
         end
 
@@ -33,12 +37,15 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            @check_position = PositionField.new(prediction['check_position'], page_id)
+            @check_position = Parsing::Standard::PositionField.new(
+              prediction['check_position'],
+              page_id
+            )
             @signatures_positions = []
             prediction['signatures_positions'].each do |item|
-              @signatures_positions.push(PositionField.new(item, page_id))
+              @signatures_positions.push(Parsing::Standard::PositionField.new(item, page_id))
             end
-            super(prediction, page_id)
+            super
           end
 
           # @return [String]

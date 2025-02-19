@@ -31,7 +31,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @category = prediction['category']
             @coefficient = prediction['coefficient']
             @collective_agreement = prediction['collective_agreement']
@@ -45,7 +45,8 @@ module Mindee
           def printable_values
             printable = {}
             printable[:category] = format_for_display(@category)
-            printable[:coefficient] = @coefficient.nil? ? '' : Field.float_to_string(@coefficient)
+            printable[:coefficient] =
+              @coefficient.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@coefficient)
             printable[:collective_agreement] = format_for_display(@collective_agreement)
             printable[:job_title] = format_for_display(@job_title)
             printable[:position_level] = format_for_display(@position_level)

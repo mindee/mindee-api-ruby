@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_statement_v1_transaction'
+require_relative 'bank_statement_v1_transactions'
 
 module Mindee
   module Product
     module FR
       module BankStatement
-        # Bank Statement (FR) V1 document prediction.
+        # Bank Statement API version 1.1 document data.
         class BankStatementV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The unique identifier for a customer's account in the bank's system.
@@ -47,29 +47,64 @@ module Mindee
           # @return [Mindee::Parsing::Standard::AmountField]
           attr_reader :total_debits
           # The list of values that represent the financial transactions recorded in a bank statement.
-          # @return [Array<Mindee::Product::FR::BankStatement::BankStatementV1Transaction>]
+          # @return [Mindee::Product::FR::BankStatement::BankStatementV1Transactions]
           attr_reader :transactions
 
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
-            @account_number = StringField.new(prediction['account_number'], page_id)
-            @bank_address = StringField.new(prediction['bank_address'], page_id)
-            @bank_name = StringField.new(prediction['bank_name'], page_id)
-            @client_address = StringField.new(prediction['client_address'], page_id)
-            @client_name = StringField.new(prediction['client_name'], page_id)
-            @closing_balance = AmountField.new(prediction['closing_balance'], page_id)
-            @opening_balance = AmountField.new(prediction['opening_balance'], page_id)
-            @statement_date = DateField.new(prediction['statement_date'], page_id)
-            @statement_end_date = DateField.new(prediction['statement_end_date'], page_id)
-            @statement_start_date = DateField.new(prediction['statement_start_date'], page_id)
-            @total_credits = AmountField.new(prediction['total_credits'], page_id)
-            @total_debits = AmountField.new(prediction['total_debits'], page_id)
-            @transactions = []
-            prediction['transactions'].each do |item|
-              @transactions.push(BankStatementV1Transaction.new(item, page_id))
-            end
+            super
+            @account_number = Parsing::Standard::StringField.new(
+              prediction['account_number'],
+              page_id
+            )
+            @bank_address = Parsing::Standard::StringField.new(
+              prediction['bank_address'],
+              page_id
+            )
+            @bank_name = Parsing::Standard::StringField.new(
+              prediction['bank_name'],
+              page_id
+            )
+            @client_address = Parsing::Standard::StringField.new(
+              prediction['client_address'],
+              page_id
+            )
+            @client_name = Parsing::Standard::StringField.new(
+              prediction['client_name'],
+              page_id
+            )
+            @closing_balance = Parsing::Standard::AmountField.new(
+              prediction['closing_balance'],
+              page_id
+            )
+            @opening_balance = Parsing::Standard::AmountField.new(
+              prediction['opening_balance'],
+              page_id
+            )
+            @statement_date = Parsing::Standard::DateField.new(
+              prediction['statement_date'],
+              page_id
+            )
+            @statement_end_date = Parsing::Standard::DateField.new(
+              prediction['statement_end_date'],
+              page_id
+            )
+            @statement_start_date = Parsing::Standard::DateField.new(
+              prediction['statement_start_date'],
+              page_id
+            )
+            @total_credits = Parsing::Standard::AmountField.new(
+              prediction['total_credits'],
+              page_id
+            )
+            @total_debits = Parsing::Standard::AmountField.new(
+              prediction['total_debits'],
+              page_id
+            )
+            @transactions = Product::FR::BankStatement::BankStatementV1Transactions.new(
+              prediction['transactions'], page_id
+            )
           end
 
           # @return [String]

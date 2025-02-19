@@ -1,0 +1,16 @@
+module Mindee
+  module Product
+    module FR
+      module EnergyBill
+        class EnergyBillV1MeterDetail < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def meter_number: -> String
+          def meter_type: -> String
+          def unit: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

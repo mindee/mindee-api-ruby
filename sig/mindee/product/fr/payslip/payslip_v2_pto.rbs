@@ -1,0 +1,16 @@
+module Mindee
+  module Product
+    module FR
+      module Payslip
+        class PayslipV2Pto < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def accrued_this_period: -> Float
+          def balance_end_of_period: -> Float
+          def used_this_period: -> Float
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

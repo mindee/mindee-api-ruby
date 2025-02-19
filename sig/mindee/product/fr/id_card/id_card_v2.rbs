@@ -1,0 +1,13 @@
+# lib/mindee/product/../id_card/id_card_v2.rb
+
+module Mindee
+  module Product
+    module FR
+      module IdCard
+        class IdCardV2 < Parsing::Common::Inference
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,10 @@
+# lib/mindee/input/sources/file_input_source.rb
+module Mindee
+  module Input
+    module Source
+      class FileInputSource < LocalInputSource
+        def initialize: (File, String, ?fix_pdf: bool) -> void
+      end
+    end
+  end
+end

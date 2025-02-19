@@ -1,0 +1,17 @@
+# lib/mindee/product/../indian_passport/indian_passport_v1_page.rb
+
+module Mindee
+  module Product
+    module IND
+      module IndianPassport
+        class IndianPassportV1Page < Parsing::Common::Page
+          def initialize: (Hash[Symbol | String, untyped]) -> void
+        end
+        class IndianPassportV1PagePrediction < IndianPassportV1Document
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

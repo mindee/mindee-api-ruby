@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'healthcare_card_v1_copay'
+require_relative 'healthcare_card_v1_copays'
 
 module Mindee
   module Product
@@ -14,7 +14,7 @@ module Mindee
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :company_name
           # Is a fixed amount for a covered service.
-          # @return [Array<Mindee::Product::US::HealthcareCard::HealthcareCardV1Copay>]
+          # @return [Mindee::Product::US::HealthcareCard::HealthcareCardV1Copays]
           attr_reader :copays
           # The list of dependents covered by the healthcare plan.
           # @return [Array<Mindee::Parsing::Standard::StringField>]
@@ -50,25 +50,52 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
-            @company_name = StringField.new(prediction['company_name'], page_id)
-            @copays = []
-            prediction['copays'].each do |item|
-              @copays.push(HealthcareCardV1Copay.new(item, page_id))
-            end
-            @dependents = []
+            super
+            @company_name = Parsing::Standard::StringField.new(
+              prediction['company_name'],
+              page_id
+            )
+            @copays = Product::US::HealthcareCard::HealthcareCardV1Copays.new(prediction['copays'], page_id)
+            @dependents = [] # : Array[Parsing::Standard::StringField]
             prediction['dependents'].each do |item|
-              @dependents.push(StringField.new(item, page_id))
+              @dependents.push(Parsing::Standard::StringField.new(item, page_id))
             end
-            @enrollment_date = DateField.new(prediction['enrollment_date'], page_id)
-            @group_number = StringField.new(prediction['group_number'], page_id)
-            @issuer80840 = StringField.new(prediction['issuer_80840'], page_id)
-            @member_id = StringField.new(prediction['member_id'], page_id)
-            @member_name = StringField.new(prediction['member_name'], page_id)
-            @payer_id = StringField.new(prediction['payer_id'], page_id)
-            @rx_bin = StringField.new(prediction['rx_bin'], page_id)
-            @rx_grp = StringField.new(prediction['rx_grp'], page_id)
-            @rx_pcn = StringField.new(prediction['rx_pcn'], page_id)
+            @enrollment_date = Parsing::Standard::DateField.new(
+              prediction['enrollment_date'],
+              page_id
+            )
+            @group_number = Parsing::Standard::StringField.new(
+              prediction['group_number'],
+              page_id
+            )
+            @issuer80840 = Parsing::Standard::StringField.new(
+              prediction['issuer_80840'],
+              page_id
+            )
+            @member_id = Parsing::Standard::StringField.new(
+              prediction['member_id'],
+              page_id
+            )
+            @member_name = Parsing::Standard::StringField.new(
+              prediction['member_name'],
+              page_id
+            )
+            @payer_id = Parsing::Standard::StringField.new(
+              prediction['payer_id'],
+              page_id
+            )
+            @rx_bin = Parsing::Standard::StringField.new(
+              prediction['rx_bin'],
+              page_id
+            )
+            @rx_grp = Parsing::Standard::StringField.new(
+              prediction['rx_grp'],
+              page_id
+            )
+            @rx_pcn = Parsing::Standard::StringField.new(
+              prediction['rx_pcn'],
+              page_id
+            )
           end
 
           # @return [String]
