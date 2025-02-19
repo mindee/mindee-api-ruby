@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-us-mail-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby Client Library SDK supports the [US Mail API](https://platform.mindee.com/mindee/us_mail).
+The Ruby Client Library supports the [US Mail API](https://platform.mindee.com/mindee/us_mail).
 
 
 > 📝 Product Specs

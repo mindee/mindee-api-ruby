@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-fr-payslip-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby Client Library SDK supports the [Payslip API](https://platform.mindee.com/mindee/payslip_fra).
+The Ruby Client Library supports the [Payslip API](https://platform.mindee.com/mindee/payslip_fra).
 
 
 > 📝 Product Specs

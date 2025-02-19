@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-barcode-reader-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby Client Library SDK supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
+The Ruby Client Library supports the [Barcode Reader API](https://platform.mindee.com/mindee/barcode_reader).
 
 
 > 📝 Product Specs

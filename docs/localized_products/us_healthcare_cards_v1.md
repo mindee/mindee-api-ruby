@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-healthcare-card-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
 ---
-The Ruby Client Library SDK supports the [Healthcare Card API](https://platform.mindee.com/mindee/us_healthcare_cards).
+The Ruby Client Library supports the [Healthcare Card API](https://platform.mindee.com/mindee/us_healthcare_cards).
 
 
 > 📝 Product Specs

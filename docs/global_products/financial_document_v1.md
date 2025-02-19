@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-financial-document-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
 ---
-The Ruby Client Library SDK supports the [Financial Document API](https://platform.mindee.com/mindee/financial_document).
+The Ruby Client Library supports the [Financial Document API](https://platform.mindee.com/mindee/financial_document).
 
 
 > 📝 Product Specs
