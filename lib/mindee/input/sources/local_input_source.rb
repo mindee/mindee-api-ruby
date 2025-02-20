@@ -105,11 +105,13 @@ module Mindee
         end
 
         # Write the file to a given path. Uses the initial file name by default.
-        # @param file_path [String] Path to write the file to.
-        # @param file_name [String, nil] Optional name to give the file.
-        def write_to_file(file_path, file_name: nil)
-          file_name ||= @filename
-          full_path = File.join(file_path, file_name)
+        # @param path [String] Path to write the file to.
+        def write_to_file(path)
+          full_path = if File.directory?(path) || path.end_with?('/')
+                        File.join(path, @filename)
+                      else
+                        path
+                      end
           FileUtils.mkdir_p(File.dirname(full_path))
           @io_stream.rewind
           File.binwrite(full_path, @io_stream.read)
