@@ -39,15 +39,12 @@ specific reason. Accidentally overwriting them can lead to unexpected behavior.
 Before making any changes, we recommend reviewing the following information to understand the purpose and potential
 impact of each environment variable:
 
-* `MINDEE_API_KEY`: 
-  * **Description**: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!
-  * **Default Value**: `nil`
-* `MINDEE_BASE_URL`:
-  * **Description**: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.
-  * **Default Value**: `https://api.mindee.net/v1`
-* `MINDEE_REQUEST_TIMEOUT`:
-  * **Description**: The default timeout for HTTP requests (in seconds).
-  * **Default Value**: `120`
+| Environment Variable     | Description                                                     | Default Value               |
+|--------------------------|-----------------------------------------------------------------|-----------------------------|
+| `MINDEE_API_KEY`         | Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly! | `nil`                       |
+| `MINDEE_BASE_URL`        | The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location. | `https://api.mindee.net/v1` |
+| `MINDEE_REQUEST_TIMEOUT` | The default timeout for HTTP requests (in seconds).             | `120`                       |
+| `MINDEE_LOG_LEVEL`       | The default logging level for the mindee logger.                | `WARN`                      |
 
 ### Loading a File and Parsing It
 
@@ -149,6 +146,8 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
   puts field_data.to_s
 end
 ```
+
+
 ## Enqueue and Parse a Webhook Response
 
 This is an optional way of handling asynchronous APIs.
