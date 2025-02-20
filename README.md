@@ -220,24 +220,9 @@ There's more to it than that for those that need more features, or want to
 customize the experience.
 
 * [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-* [Universal API Ruby](https://developers.mindee.com/docs/ruby-universal-ocr)
-* [Invoice OCR Ruby](https://developers.mindee.com/docs/ruby-invoice-ocr)
-* [International Id OCR Ruby](https://developers.mindee.com/docs/ruby-international-id-ocr)
-* [Financial Document OCR Ruby](https://developers.mindee.com/docs/ruby-financial-document-ocr)
-* [Passport OCR Ruby](https://developers.mindee.com/docs/ruby-passport-ocr)
-* [Receipt OCR Ruby](https://developers.mindee.com/docs/ruby-receipt-ocr)
-* [Resume OCR Ruby](https://developers.mindee.com/docs/ruby-resume-ocr)
-* [EU License Plate OCR Ruby](https://developers.mindee.com/docs/ruby-eu-license-plate-ocr)
-* [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-account-details-ocr)
-* [FR Bank Statement OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-statement-ocr)
-* [FR Health Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-health-card-ocr)
-* [FR ID Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-carte-nationale-didentite-ocr)
-* [US Bank Check OCR Ruby](https://developers.mindee.com/docs/ruby-us-bank-check-ocr)
-* [US W9 API Ruby](https://developers.mindee.com/docs/ruby-us-w9-ocr)
-* [Barcode Reader API Ruby](https://developers.mindee.com/docs/ruby-barcode-reader-ocr)
-* [Cropper API Ruby](https://developers.mindee.com/docs/ruby-cropper-ocr)
-* [Invoice Splitter API Ruby](https://developers.mindee.com/docs/ruby-invoice-splitter-ocr)
-* [Multi Receipts Detector API Ruby](https://developers.mindee.com/docs/ruby-multi-receipts-detector-ocr)
+* [Common file operations](https://developers.mindee.com/docs/ruby-common-file-operations)
+* [Global products](https://developers.mindee.com/docs/ruby-global-products)
+* [Localized products](https://developers.mindee.com/docs/ruby-localized-products)
 
 You can also take a look at the
 [Reference Documentation](https://mindee.github.io/mindee-api-ruby/).

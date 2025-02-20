@@ -1,7 +1,7 @@
 ---
 title: Ruby Common File Operations
 category: 622b805aaec68102ea7fcbc2
-slug: ruby-common-file-compression
+slug: ruby-common-file-operations
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
 
@@ -82,12 +82,17 @@ result = mindee_client.execute_workflow(
 )
 ```
 
-## Image operations
+## File operations
+
+> ❗️ Disclaimer: the file operations listed below do not directly manipulate the files you will pass to the library, 
+they will instead create a copy before applying any operations, 
+> which means that the file you send may not be an exact copy of the file the server will receive.
+> To avoid any unexpected or unwanted result, you can save a copy of the created file locally to inspect it visually before sending it.
+
+### Image operations
 
 Image operations mainly include the compression functionality for image files (JPEG, PNG, etc.) via the `compress!` method available on a LocalInputSource.
 This method allows you to reduce file size by specifying quality and dimension constraints.
-
-> 
 
 Example:
 
@@ -103,35 +108,74 @@ input_source.compress!(quality: 85, max_width: 1024, max_height: 768)
 > input_source.write_to_file('path/to/my/compressed/file_50.jpg')
 > ```
 
+For reference, here's what the following levels of compression on this image will look like:
 
-## PDF operations
+Original:
+![Invoice sample](https://github.com/mindee/client-lib-test-data/blob/main/products/invoices/default_sample.jpg?raw=true)
 
-PDF operations include both compression and fixing features. These are specifically designed to handle challenges associated with PDF files, such as large file sizes and formatting issues.
 
-### PDF compression
+85% compressed:
+![85% sample](https://github.com/mindee/client-lib-test-data/blob/main/misc/compression/compressed_ruby_85.jpg?raw=true)
 
-PDF compression is an experimental feature that essentially rasterizes each page of the PDF (similar to how images are compressed) to reduce its overall size. Because the process involves re-rendering the PDF’s contents, some source text may be lost or rendered differently. Use this feature with caution.
+50% compressed:
+![50% sample](https://github.com/mindee/client-lib-test-data/blob/main/misc/compression/compressed_ruby_50.jpg?raw=true)
+
+10% compressed:
+![10% sample](https://github.com/mindee/client-lib-test-data/blob/main/misc/compression/compressed_ruby_10.jpg?raw=true)
+
+
+### PDF operations
+
+PDF operations include both compression and fixing features.
+These are specifically designed to handle challenges associated with PDF files, such as large file sizes and formatting issues.
+
+#### PDF compression
+
+> 🧪 PDF compression is an **experimental** feature that rasterizes each page of the PDF (similar to how images are compressed) to reduce its overall size.
+> Because the process involves re-rendering the PDF’s contents, some source text may be lost or rendered differently.
+> Use this feature with caution.
+
+
+```ruby
+# Load a local input source.
+input_file_path = "path/to/your/file.pdf"
+output_file_path = "path/to/the/compressed/file.pdf"
+pdf_input = Mindee::Input::Source::PathInputSource.new(input_file_path)
+
+# We advise you test the quality value yourself, as results may vary greatly depending on the input file
+pdf_input.compress!(quality: 50)
+
+# Write the output file locally for visual checking:
+File.write(output_file_path, pdf_input.io_stream.read)
+```
+
+> 🚧 Be warned that the source text (the text embedded in the PDF itself) might not render properly,
+> and so source PDFs will be ignored by default.
+> You can bypass this using:
+
+```ruby
+pdf_input.compress!(quality: 50, force_source_text: true)
+```
+
+Or alternatively, you can try to approximate the re-rendering of the source-text using:
+
+```ruby
+pdf_input.compress!(quality: 50, force_source_text: true, disable_source_text: false)
+```
+
+#### PDF fixing
+
+The PDF fixing feature helps to rescue PDFs with invalid or broken header information.
+This can sometimes help when files get rejected by the server.
 
 Example:
+```ruby
+# Load a PDF file with the fix_pdf flag enabled.
+input_source = mindee_client.source_from_file(file, "document.pdf", fix_pdf: true)
+```
 
-    pdf_input = mindee_client.source_from_path("/path/to/document.pdf")
-    
-    # Compress the PDF file (experimental feature).
-    pdf_input.compress!(quality: 50)
-    
-    # Optionally, force the compression of source text (if necessary):
-    # pdf_input.compress!(quality: 50, force_source_text: true, disable_source_text: false)
-    > ⚠️ Warning: This experimental feature modifies the PDF file data. There is a risk that the re-rendered file might not accurately represent the original document, especially with regards to embedded text.
-
-### PDF fixing
-
-The PDF fixing feature helps to rescue PDFs with invalid or broken header information. This is particularly useful when third-party applications have injected invalid headers, leading to rejection by the server. The feature cleans up such issues so that the PDF can be processed correctly.
-
-Example:
-
-    # Load a PDF file with the fix_pdf flag enabled.
-    input_source = mindee_client.source_from_file(file, "document.pdf", fix_pdf: true)
-    > ⚠️ Warning: PDF fixing alters the input file by re-writing header information. Use this feature only when required, as it might affect the integrity of the original file.
+> ⚠️ Warning: PDF fixing alters the input file by re-writing header information.
+> Use this feature only when required, as it might affect the integrity of the document file.
 
 ---
 
