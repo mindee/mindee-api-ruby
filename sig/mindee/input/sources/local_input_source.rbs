@@ -14,6 +14,7 @@ module Mindee
         def process_pdf: (PageOptions) -> StringIO?
         def read_contents: (?close: bool) -> [String, String?, Hash[:filename, String]]
         def count_pages: -> Integer
+        def write_to_file: (String, file_name: String?) -> void
         def compress!: (?quality: Integer, ?max_width: Integer?, ?max_height: Integer?, ?force_source_text: bool, ?disable_source_text: bool) -> Integer
         def source_text?: -> bool?
       end

@@ -17,6 +17,7 @@ target :lib do
   # Do NOT enable them.
   # Use the stubs located at sig/custom/<library_name>.rbs instead.
   library 'date'
+  library 'fileutils'
   library 'logger'
   library 'json'
   library 'openssl'
