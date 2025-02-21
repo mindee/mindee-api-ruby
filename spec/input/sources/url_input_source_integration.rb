@@ -2,11 +2,11 @@
 
 require 'mindee'
 
-describe Mindee::Input::Source::UrlInputSource do
+describe Mindee::Input::Source::URLInputSource do
   it 'retrieves response from a remote file' do
     api_key = ENV.fetch('MINDEE_API_KEY', nil)
     client = Mindee::Client.new(api_key: api_key)
-    remote_input = Mindee::Input::Source::UrlInputSource.new('https://github.com/mindee/client-lib-test-data/blob/main/products/invoice_splitter/invoice_5p.pdf?raw=true')
+    remote_input = Mindee::Input::Source::URLInputSource.new('https://github.com/mindee/client-lib-test-data/blob/main/products/invoice_splitter/invoice_5p.pdf?raw=true')
 
     local_input = remote_input.as_local_input_source
     expect(local_input.filename).to eq('invoice_5p.pdf')

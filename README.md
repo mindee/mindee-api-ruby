@@ -39,15 +39,18 @@ specific reason. Accidentally overwriting them can lead to unexpected behavior.
 Before making any changes, we recommend reviewing the following information to understand the purpose and potential
 impact of each environment variable:
 
-* `MINDEE_API_KEY`: 
-  * **Description**: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!
-  * **Default Value**: `nil`
+* `MINDEE_API_KEY`:
+    * **Description**: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!
+    * **Default Value**: `nil`
 * `MINDEE_BASE_URL`:
-  * **Description**: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.
-  * **Default Value**: `https://api.mindee.net/v1`
+    * **Description**: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.
+    * **Default Value**: `https://api.mindee.net/v1`
 * `MINDEE_REQUEST_TIMEOUT`:
-  * **Description**: The default timeout for HTTP requests (in seconds).
-  * **Default Value**: `120`
+    * **Description**: The default timeout for HTTP requests (in seconds).
+    * **Default Value**: `120`
+* `MINDEE_LOG_LEVEL`:
+    * **Description**: The default logging level for the mindee logger.
+    * **Default Value**: `WARN`
 
 ### Loading a File and Parsing It
 
@@ -149,7 +152,9 @@ result.document.inference.prediction.fields.each do |field_name, field_data|
   puts field_data.to_s
 end
 ```
-## Enqueue and Parse a Webhook Response
+
+
+## Enqueueing and Parse a Webhook Response
 
 This is an optional way of handling asynchronous APIs.
 
@@ -163,7 +168,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 
-# Parse the file
+# Send the file to the server
 enqueue_response = mindee_client.enqueue(
   input_source,
   Mindee::Product::InternationalId::InternationalIdV2
@@ -220,24 +225,9 @@ There's more to it than that for those that need more features, or want to
 customize the experience.
 
 * [Ruby Overview](https://developers.mindee.com/docs/ruby-getting-started)
-* [Universal API Ruby](https://developers.mindee.com/docs/ruby-universal-ocr)
-* [Invoice OCR Ruby](https://developers.mindee.com/docs/ruby-invoice-ocr)
-* [International Id OCR Ruby](https://developers.mindee.com/docs/ruby-international-id-ocr)
-* [Financial Document OCR Ruby](https://developers.mindee.com/docs/ruby-financial-document-ocr)
-* [Passport OCR Ruby](https://developers.mindee.com/docs/ruby-passport-ocr)
-* [Receipt OCR Ruby](https://developers.mindee.com/docs/ruby-receipt-ocr)
-* [Resume OCR Ruby](https://developers.mindee.com/docs/ruby-resume-ocr)
-* [EU License Plate OCR Ruby](https://developers.mindee.com/docs/ruby-eu-license-plate-ocr)
-* [FR Bank Account Details OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-account-details-ocr)
-* [FR Bank Statement OCR Ruby](https://developers.mindee.com/docs/ruby-fr-bank-statement-ocr)
-* [FR Health Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-health-card-ocr)
-* [FR ID Card OCR Ruby](https://developers.mindee.com/docs/ruby-fr-carte-nationale-didentite-ocr)
-* [US Bank Check OCR Ruby](https://developers.mindee.com/docs/ruby-us-bank-check-ocr)
-* [US W9 API Ruby](https://developers.mindee.com/docs/ruby-us-w9-ocr)
-* [Barcode Reader API Ruby](https://developers.mindee.com/docs/ruby-barcode-reader-ocr)
-* [Cropper API Ruby](https://developers.mindee.com/docs/ruby-cropper-ocr)
-* [Invoice Splitter API Ruby](https://developers.mindee.com/docs/ruby-invoice-splitter-ocr)
-* [Multi Receipts Detector API Ruby](https://developers.mindee.com/docs/ruby-multi-receipts-detector-ocr)
+* [Common file operations](https://developers.mindee.com/docs/ruby-common-file-operations)
+* [Global products](https://developers.mindee.com/docs/ruby-global-products)
+* [Localized products](https://developers.mindee.com/docs/ruby-localized-products)
 
 You can also take a look at the
 [Reference Documentation](https://mindee.github.io/mindee-api-ruby/).

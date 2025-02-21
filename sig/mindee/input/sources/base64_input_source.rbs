@@ -3,7 +3,7 @@ module Mindee
   module Input
     module Source
       class Base64InputSource < LocalInputSource
-        def initialize: (String, String, ?fix_pdf: bool) -> void
+        def initialize: (String, String, ?repair_pdf: bool) -> void
         def read_contents: (?close: bool) -> [String, String, Hash[Symbol, untyped]]
       end
     end

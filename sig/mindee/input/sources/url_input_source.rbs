@@ -2,7 +2,7 @@
 module Mindee
   module Input
     module Source
-      class UrlInputSource
+      class URLInputSource
         def url: -> String
         def logger: () -> untyped
         def initialize: (String) -> void

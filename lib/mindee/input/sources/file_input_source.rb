@@ -9,10 +9,10 @@ module Mindee
       class FileInputSource < LocalInputSource
         # @param input_file [File]
         # @param filename [String]
-        # @param fix_pdf [bool]
-        def initialize(input_file, filename, fix_pdf: false)
+        # @param repair_pdf [bool]
+        def initialize(input_file, filename, repair_pdf: false)
           io_stream = input_file
-          super(io_stream, filename, fix_pdf: fix_pdf)
+          super(io_stream, filename, repair_pdf: repair_pdf)
         end
       end
     end
