@@ -2,6 +2,7 @@
 
 require 'stringio'
 require 'marcel'
+require 'fileutils'
 
 require_relative '../../pdf'
 require_relative '../../image'
@@ -98,8 +99,24 @@ module Mindee
           @io_stream.seek(0)
           # Avoids needlessly re-packing some files
           data = @io_stream.read
+          @io_stream.rewind
           @io_stream.close if close
           ['document', data, { filename: Mindee::Input::Source.convert_to_unicode_escape(@filename) }]
+        end
+
+        # Write the file to a given path. Uses the initial file name by default.
+        # @param path [String] Path to write the file to.
+        def write_to_file(path)
+          full_path = if File.directory?(path) || path.end_with?('/')
+                        File.join(path, @filename)
+                      else
+                        path
+                      end
+          FileUtils.mkdir_p(File.dirname(full_path))
+          @io_stream.rewind
+          File.binwrite(full_path, @io_stream.read)
+          logger.debug("Wrote file successfully to #{full_path}")
+          @io_stream.rewind
         end
 
         # Returns the page count for a document.
