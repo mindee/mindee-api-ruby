@@ -113,7 +113,7 @@ module Mindee
     #
     # Accepts options either as a Hash or as a ParseOptions struct.
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param product_class [Mindee::Inference] The class of the product.
     # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
@@ -150,7 +150,7 @@ module Mindee
 
     # Call prediction API on a document and parse the results.
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
@@ -185,7 +185,7 @@ module Mindee
 
     # Enqueue a document for async parsing
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param product_class [Mindee::Inference] The class of the product.
     # @param options [Hash] A hash of options to configure the enqueue behavior. Possible keys:
@@ -239,7 +239,7 @@ module Mindee
 
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param product_class [Mindee::Inference] The class of the product.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
@@ -303,7 +303,7 @@ module Mindee
     #
     # Accepts options either as a Hash or as a WorkflowOptions struct.
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param workflow_id [String]
     # @param options [Hash, WorkflowOptions] Options to configure workflow behavior.  Possible keys:
     #   * `document_alias` [String, nil] Alias to give to the document.
@@ -392,10 +392,10 @@ module Mindee
     end
 
     # Load a document from a secure remote source (HTTPS).
-    # @param url [String] Url of the file
-    # @return [Mindee::Input::Source::UrlInputSource]
+    # @param url [String] URL of the file
+    # @return [Mindee::Input::Source::URLInputSource]
     def source_from_url(url)
-      Input::Source::UrlInputSource.new(url)
+      Input::Source::URLInputSource.new(url)
     end
 
     # Creates a custom endpoint with the given values.
@@ -494,7 +494,7 @@ module Mindee
     end
 
     # Processes a PDF if parameters were provided.
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param opts [ParseOptions]
     def process_pdf_if_required(input_source, opts)
       return unless input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
