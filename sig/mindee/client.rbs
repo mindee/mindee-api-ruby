@@ -44,24 +44,24 @@ module Mindee
     def logger: () -> untyped
 
     # Enqueue a document for parsing.
-    def parse: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
+    def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Synchronous parsing call.
     # Note: options is expected to be a ParseOptions instance.
-    def parse_sync: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
+    def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
 
     # Asynchronous enqueuing of a document.
-    def enqueue: (Input::Source::LocalInputSource | Input::Source::UrlInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
+    def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
 
     # Polls for a queued document using its job_id.
     def parse_queued: (String, singleton(Parsing::Common::Inference), ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
 
     # Enqueue and then continually poll for the parsing result.
-    def enqueue_and_parse: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
+    def enqueue_and_parse: (Input::Source::URLInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
 
     # Sends a document to a workflow.
     # The options parameter is either a Hash with symbol keys or a WorkflowOptions.
-    def execute_workflow: (Input::Source::UrlInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
+    def execute_workflow: (Input::Source::URLInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
 
     # Loads a prediction from a local response.
     def load_prediction: (singleton(Parsing::Common::Inference), Input::LocalResponse) -> Parsing::Common::ApiResponse
@@ -79,7 +79,7 @@ module Mindee
     def source_from_file: (File, String, ?fix_pdf: bool) -> Input::Source::FileInputSource
 
     # Creates an input source from a URL.
-    def source_from_url: (String) -> Input::Source::UrlInputSource
+    def source_from_url: (String) -> Input::Source::URLInputSource
 
     # Creates a custom endpoint.
     # The parameters are provided as keywords in client.rb but here they are declared as required.

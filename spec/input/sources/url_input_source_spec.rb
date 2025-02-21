@@ -3,7 +3,7 @@
 require 'mindee'
 require_relative '../../http/mock_http_response'
 
-describe Mindee::Input::Source::UrlInputSource do
+describe Mindee::Input::Source::URLInputSource do
   let(:valid_url) { 'https://validurl/some/file.jpg' }
   let(:valid_url_no_filename) { 'https://validurl/some/' }
   let(:invalid_url) { 'http://invalidurl/some/file.jpg' }
