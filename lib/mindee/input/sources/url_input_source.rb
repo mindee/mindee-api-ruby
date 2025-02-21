@@ -9,7 +9,7 @@ module Mindee
   module Input
     module Source
       # Load a remote document from a file url.
-      class UrlInputSource
+      class URLInputSource
         # @return [String]
         attr_reader :url
 
