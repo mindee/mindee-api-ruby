@@ -1,5 +1,5 @@
 ---
-title: Ruby Common File Operations
+title: Common File Operations
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-common-file-operations
 parentDoc: 6294d97ee723f1008d2ab28e
@@ -86,14 +86,13 @@ result = mindee_client.execute_workflow(
 
 ## File operations
 
-> ❗️ Disclaimer: the file operations listed below do not directly manipulate the files you will pass to the library, 
-they will instead create a copy before applying any operations, 
+> ❗️ Disclaimer: the file operations listed below do not directly manipulate the files you will pass to the library, they will instead create a copy before applying any operations, 
 > which means that the file you send may not be an exact copy of the file the server will receive.
 > To avoid any unexpected or unwanted result, you can save a copy of the created file locally to inspect it visually before sending it.
 
-### Image operations
+### Image compression
 
-Image operations mainly include the compression functionality for image files (JPEG, PNG, etc.) via the `compress!` method available on a LocalInputSource.
+The compression functionality for image files (JPEG, PNG, etc.) via the `compress!` method available on a LocalInputSource.
 This method allows you to reduce file size by specifying quality and dimension constraints.
 
 Example:
@@ -182,3 +181,6 @@ input_source = mindee_client.source_from_file(file, "document.pdf", fix_pdf: tru
 ---
 
 Feel free to expand these examples and adjust the parameters as needed for your projects. For further details on authentication and usage, you can refer to the [Getting Started Guide](getting_started.md).
+
+## Questions?
+[Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-2d0ds7dtz-DPAF81ZqTy20chsYpQBW5g)

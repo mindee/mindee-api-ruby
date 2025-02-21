@@ -1,5 +1,5 @@
 ---
-title: Ruby Getting Started
+title: Getting Started
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-getting-started
 parentDoc: 6294d97ee723f1008d2ab28e
@@ -118,93 +118,15 @@ all supported types automatically.
 Once a document is loaded, interacting with it is done in exactly the same way, regardless
 of how it was loaded.
 
-There are a few different ways of loading a document file, depending on your use case:
+There are a few different ways of loading a document file, depending on your use case, you can use a:
 
-* [Path](#path)
-* [File Object](#file-object)
-* [Base64](#base64)
-* [Bytes](#bytes)
-* [Urls](#url)
+* [File path](https://developers.mindee.com/docs/ruby-document-loading#loading-from-a-local-path): using the Mindee Client's `source_from_path()` method.
+* [File Object](https://developers.mindee.com/docs/ruby-document-loading#loading-from-a-file-object): using the Mindee Client's `source_from_file()` method.
+* [Base64 String](https://developers.mindee.com/docs/ruby-document-loading#loading-from-a-base64-encoded-string): using the Mindee Client's `source_from_b64string()` method.
+* [Raw Byte sequence](https://developers.mindee.com/docs/ruby-document-loading#loading-from-raw-bytes): using the Mindee Client's `source_from_bytes()` method.
+* [URL](https://developers.mindee.com/docs/ruby-document-loading#loading-by-url): using the Mindee Client's `source_from_url()` method.
 
-### Path
-Load from a file directly from disk. Requires an absolute path, as a string.
-
-```ruby
-# Init a new client
-mindee_client = Mindee::Client.new(api_key: 'my-api-key')
-
-# Load a file from disk
-input_source = mindee_client.source_from_path('/path/to/the/file.ext')
-
-# Parse the file
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
-)
-# Print a full summary of the parsed data in RST format
-puts result.document
-```
-
-### File Object
-A normal Ruby file object with a path. Must be in binary mode.
-
-**Note**: The original filename is required when calling the method.
-
-```ruby
-File.open(INVOICE_FILE, 'rb') do |fo|
-  input_source = mindee_client.source_from_file(fo, "invoice.jpg")
-end
-
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
-)
-```
-
-### Base64
-Load file contents from a base64-encoded string.
-
-**Note**: The original filename is required when calling the method.
-
-```ruby
-b64_string = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLD...."
-
-input_source = mindee_client.source_from_b64string(b64_string, "receipt.jpg")
-
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Receipt::ReceiptV5
-)
-```
-
-### Bytes
-Requires raw bytes.
-
-**Note**: The original filename is required when calling the method.
-
-```ruby
-raw_bytes = b "%PDF-1.3\n%\xbf\xf7\xa2\xfe\n1 0 ob..."
-input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
-
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
-)
-```
-
-### URL
-Requires an url as a String.
-
-**Note**: the url must start with `https://`.
-
-```ruby
-input_source = mindee_client.source_from_url("https://www.example.com/invoice.pdf")
-
-result = mindee_client.parse(
-  input_source,
-  Mindee::Product::Invoice::InvoiceV4
-)
-```
+More details about file loading on the [dedicated page](https://developers.mindee.com/docs/ruby-document-loading).
 
 ## Sending a File
 To send a file to the API, we need to specify how to process the document.
@@ -320,5 +242,7 @@ response.document.inference.pages.each do |page|
   puts page.orientation.value
 end
 ```
+
+
 ## Questions?
 [Join our Slack](https://join.slack.com/t/mindee-community/shared_invite/zt-2d0ds7dtz-DPAF81ZqTy20chsYpQBW5g)
