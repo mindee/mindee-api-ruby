@@ -115,13 +115,13 @@ Original:
 
 
 85% compressed:
-![85% sample](https://github.com/mindee/client-lib-test-data/blob/main/misc/compression/compressed_ruby_85.jpg?raw=true)
+![85% sample](https://github.com/mindee/client-lib-test-data/blob/main/file_operations/compression/compressed_ruby_85.jpg?raw=true)
 
 50% compressed:
-![50% sample](https://github.com/mindee/client-lib-test-data/blob/main/misc/compression/compressed_ruby_50.jpg?raw=true)
+![50% sample](https://github.com/mindee/client-lib-test-data/blob/main/file_operations/compression/compressed_ruby_50.jpg?raw=true)
 
 10% compressed:
-![10% sample](https://github.com/mindee/client-lib-test-data/blob/main/misc/compression/compressed_ruby_10.jpg?raw=true)
+![10% sample](https://github.com/mindee/client-lib-test-data/blob/main/file_operations/compression/compressed_ruby_10.jpg?raw=true)
 
 
 ### PDF operations
