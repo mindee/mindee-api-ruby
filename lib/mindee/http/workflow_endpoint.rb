@@ -23,7 +23,7 @@ module Mindee
       end
 
       # Sends a document to the workflow.
-      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       # @param document_alias [String, nil] Alias to give to the document.
       # @param priority [Symbol, nil] Priority to give to the document.
       # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
@@ -41,7 +41,7 @@ module Mindee
         raise error
       end
 
-      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       # @param document_alias [String, nil] Alias to give to the document.
       # @param priority [Symbol, nil] Priority to give to the document.
       # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
@@ -59,7 +59,7 @@ module Mindee
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::Source::UrlInputSource)
+        form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['document', input_source.url]]
                     else
                       [input_source.read_contents]

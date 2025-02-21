@@ -113,7 +113,7 @@ module Mindee
     #
     # Accepts options either as a Hash or as a ParseOptions struct.
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param product_class [Mindee::Inference] The class of the product.
     # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
@@ -150,7 +150,7 @@ module Mindee
 
     # Call prediction API on a document and parse the results.
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param product_class [Mindee::Inference] class of the product
     # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
@@ -185,7 +185,7 @@ module Mindee
 
     # Enqueue a document for async parsing
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param product_class [Mindee::Inference] The class of the product.
     # @param options [Hash] A hash of options to configure the enqueue behavior. Possible keys:
@@ -239,7 +239,7 @@ module Mindee
 
     # Enqueue a document for async parsing and automatically try to retrieve it
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param product_class [Mindee::Inference] The class of the product.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
@@ -303,7 +303,7 @@ module Mindee
     #
     # Accepts options either as a Hash or as a WorkflowOptions struct.
     #
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param workflow_id [String]
     # @param options [Hash, WorkflowOptions] Options to configure workflow behavior.  Possible keys:
     #   * `document_alias` [String, nil] Alias to give to the document.
@@ -358,44 +358,44 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::PathInputSource]
-    def source_from_path(input_path, fix_pdf: false)
-      Input::Source::PathInputSource.new(input_path, fix_pdf: fix_pdf)
+    def source_from_path(input_path, repair_pdf: false)
+      Input::Source::PathInputSource.new(input_path, repair_pdf: repair_pdf)
     end
 
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::BytesInputSource]
-    def source_from_bytes(input_bytes, filename, fix_pdf: false)
-      Input::Source::BytesInputSource.new(input_bytes, filename, fix_pdf: fix_pdf)
+    def source_from_bytes(input_bytes, filename, repair_pdf: false)
+      Input::Source::BytesInputSource.new(input_bytes, filename, repair_pdf: repair_pdf)
     end
 
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::Base64InputSource]
-    def source_from_b64string(base64_string, filename, fix_pdf: false)
-      Input::Source::Base64InputSource.new(base64_string, filename, fix_pdf: fix_pdf)
+    def source_from_b64string(base64_string, filename, repair_pdf: false)
+      Input::Source::Base64InputSource.new(base64_string, filename, repair_pdf: repair_pdf)
     end
 
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::FileInputSource]
-    def source_from_file(input_file, filename, fix_pdf: false)
-      Input::Source::FileInputSource.new(input_file, filename, fix_pdf: fix_pdf)
+    def source_from_file(input_file, filename, repair_pdf: false)
+      Input::Source::FileInputSource.new(input_file, filename, repair_pdf: repair_pdf)
     end
 
     # Load a document from a secure remote source (HTTPS).
-    # @param url [String] Url of the file
-    # @return [Mindee::Input::Source::UrlInputSource]
+    # @param url [String] URL of the file
+    # @return [Mindee::Input::Source::URLInputSource]
     def source_from_url(url)
-      Input::Source::UrlInputSource.new(url)
+      Input::Source::URLInputSource.new(url)
     end
 
     # Creates a custom endpoint with the given values.
@@ -494,7 +494,7 @@ module Mindee
     end
 
     # Processes a PDF if parameters were provided.
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::UrlInputSource]
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param opts [ParseOptions]
     def process_pdf_if_required(input_source, opts)
       return unless input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&

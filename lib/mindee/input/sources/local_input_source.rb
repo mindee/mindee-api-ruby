@@ -32,11 +32,11 @@ module Mindee
 
         # @param io_stream [StringIO, File]
         # @param filename [String]
-        # @param fix_pdf [bool]
-        def initialize(io_stream, filename, fix_pdf: false)
+        # @param repair_pdf [bool]
+        def initialize(io_stream, filename, repair_pdf: false)
           @io_stream = io_stream
           @filename = filename
-          @file_mimetype = if fix_pdf
+          @file_mimetype = if repair_pdf
                              Marcel::MimeType.for @io_stream
                            else
                              Marcel::MimeType.for @io_stream, name: @filename
@@ -46,7 +46,7 @@ module Mindee
             return
           end
 
-          if filename.end_with?('.pdf') && fix_pdf
+          if filename.end_with?('.pdf') && repair_pdf
             rescue_broken_pdf(@io_stream)
             @file_mimetype = Marcel::MimeType.for @io_stream
 

@@ -3,7 +3,7 @@ module Mindee
   module Input
     module Source
       class BytesInputSource < LocalInputSource
-        def initialize: (String, String, ?fix_pdf: bool) -> void
+        def initialize: (String, String, ?repair_pdf: bool) -> void
       end
     end
   end
