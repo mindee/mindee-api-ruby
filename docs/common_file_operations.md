@@ -68,17 +68,19 @@ Workflow operations are similar to parsing operations, but they apply to calls m
 
 Example:
 ```ruby
-result = mindee_client.execute_workflow(
-  input_source,
-  "workflow_id",
-  options: {
+workflow_options = {
     document_alias: "my_document",
     priority: :high,
     page_options: {
-            page_indexes:[0, 1], 
-            operation: :REMOVE
+          page_indexes:[0, 1],
+          operation: :REMOVE
     }
   }
+
+result = mindee_client.execute_workflow(
+  input_source,
+  "workflow_id",
+  options: workflow_options
 )
 ```
 
