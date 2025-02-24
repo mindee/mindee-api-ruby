@@ -9,11 +9,11 @@ module Mindee
       class BytesInputSource < LocalInputSource
         # @param raw_bytes [String]
         # @param filename [String]
-        # @param fix_pdf [bool]
-        def initialize(raw_bytes, filename, fix_pdf: false)
+        # @param repair_pdf [bool]
+        def initialize(raw_bytes, filename, repair_pdf: false)
           io_stream = StringIO.new(raw_bytes)
           io_stream.set_encoding Encoding::BINARY
-          super(io_stream, filename, fix_pdf: fix_pdf)
+          super(io_stream, filename, repair_pdf: repair_pdf)
         end
       end
     end

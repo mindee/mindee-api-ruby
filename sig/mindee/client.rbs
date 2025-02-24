@@ -1,7 +1,6 @@
 OTS_OWNER: String
 
 module Mindee
-  # Redeclare OTS_OWNER inside the module for internal use.
   OTS_OWNER: String
 
   class PageOptions
@@ -25,7 +24,6 @@ module Mindee
     def initialize: (params: Hash[Symbol | String, untyped]) -> void
   end
 
-  # WorkflowOptions is defined via a Struct in client.rb.
   class WorkflowOptions
     attr_accessor document_alias: (String?)
     attr_accessor priority: (Symbol?)
@@ -37,76 +35,29 @@ module Mindee
   end
 
   class Client
-    # Clients are initialized with a keyword api_key.
     def initialize: (api_key: String) -> void
-
-    # The client internally uses a logger; its return type is left untyped.
     def logger: () -> untyped
-
-    # Enqueue a document for parsing.
     def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
-
-    # Synchronous parsing call.
-    # Note: options is expected to be a ParseOptions instance.
     def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
-
-    # Asynchronous enqueuing of a document.
     def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
-
-    # Polls for a queued document using its job_id.
     def parse_queued: (String, singleton(Parsing::Common::Inference), ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
-
-    # Enqueue and then continually poll for the parsing result.
     def enqueue_and_parse: (Input::Source::URLInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
-
-    # Sends a document to a workflow.
-    # The options parameter is either a Hash with symbol keys or a WorkflowOptions.
     def execute_workflow: (Input::Source::URLInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
-
-    # Loads a prediction from a local response.
     def load_prediction: (singleton(Parsing::Common::Inference), Input::LocalResponse) -> Parsing::Common::ApiResponse
-
-    # Creates an input source from a file path.
-    def source_from_path: (String, ?fix_pdf: bool) -> Input::Source::PathInputSource
-
-    # Creates an input source from raw bytes.
-    def source_from_bytes: (String, String, ?fix_pdf: bool) -> Input::Source::BytesInputSource
-
-    # Creates an input source from a base64 encoded string.
-    def source_from_b64string: (String, String, ?fix_pdf: bool) -> Input::Source::Base64InputSource
-
-    # Creates an input source from a Ruby File.
-    def source_from_file: (File, String, ?fix_pdf: bool) -> Input::Source::FileInputSource
-
-    # Creates an input source from a URL.
+    def source_from_path: (String, ?repair_pdf: bool) -> Input::Source::PathInputSource
+    def source_from_bytes: (String, String, ?repair_pdf: bool) -> Input::Source::BytesInputSource
+    def source_from_b64string: (String, String, ?repair_pdf: bool) -> Input::Source::Base64InputSource
+    def source_from_file: (File, String, ?repair_pdf: bool) -> Input::Source::FileInputSource
     def source_from_url: (String) -> Input::Source::URLInputSource
-
-    # Creates a custom endpoint.
-    # The parameters are provided as keywords in client.rb but here they are declared as required.
     def create_endpoint: (endpoint_name: String, account_name: String, version: String) -> HTTP::Endpoint
 
     private
-
-    # Returns a ParseOptions instance given either a Hash or an existing ParseOptions.
     def normalize_parse_options: ((Hash[Symbol | String, untyped] | ParseOptions)) -> ParseOptions
-
-    # Process the PDF if required.
     def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions | WorkflowOptions) -> void
-
-    # Creates an endpoint using the product class and supplied values.
     def initialize_endpoint: (singleton(Parsing::Common::Inference), ?endpoint_name: String, ?account_name: String, ?version: String) -> HTTP::Endpoint
-
-    # Validates asynchronous polling parameters.
     def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
-
-    # Helper to fix an endpoint name when not provided.
     def fix_endpoint_name: (singleton(Parsing::Common::Inference), String?) -> String?
-
-    # Helper to fix the account name.
     def fix_account_name: (String) -> String
-
-    # Helper to fix the version.
-    # Note: leave untyped, as RBS isn't able to recognize inherited class attributes yet.
     def fix_version: (singleton(Parsing::Common::Inference), String) -> String
   end
 end

@@ -358,37 +358,37 @@ module Mindee
 
     # Load a document from an absolute path, as a string.
     # @param input_path [String] Path of file to open
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::PathInputSource]
-    def source_from_path(input_path, fix_pdf: false)
-      Input::Source::PathInputSource.new(input_path, fix_pdf: fix_pdf)
+    def source_from_path(input_path, repair_pdf: false)
+      Input::Source::PathInputSource.new(input_path, repair_pdf: repair_pdf)
     end
 
     # Load a document from raw bytes.
     # @param input_bytes [String] Encoding::BINARY byte input
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::BytesInputSource]
-    def source_from_bytes(input_bytes, filename, fix_pdf: false)
-      Input::Source::BytesInputSource.new(input_bytes, filename, fix_pdf: fix_pdf)
+    def source_from_bytes(input_bytes, filename, repair_pdf: false)
+      Input::Source::BytesInputSource.new(input_bytes, filename, repair_pdf: repair_pdf)
     end
 
     # Load a document from a base64 encoded string.
     # @param base64_string [String] Input to parse as base64 string
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::Base64InputSource]
-    def source_from_b64string(base64_string, filename, fix_pdf: false)
-      Input::Source::Base64InputSource.new(base64_string, filename, fix_pdf: fix_pdf)
+    def source_from_b64string(base64_string, filename, repair_pdf: false)
+      Input::Source::Base64InputSource.new(base64_string, filename, repair_pdf: repair_pdf)
     end
 
     # Load a document from a normal Ruby `File`.
     # @param input_file [File] Input file handle
     # @param filename [String] The name of the file (without the path)
-    # @param fix_pdf [bool] Attempts to fix broken pdf if true
+    # @param repair_pdf [bool] Attempts to fix broken pdf if true
     # @return [Mindee::Input::Source::FileInputSource]
-    def source_from_file(input_file, filename, fix_pdf: false)
-      Input::Source::FileInputSource.new(input_file, filename, fix_pdf: fix_pdf)
+    def source_from_file(input_file, filename, repair_pdf: false)
+      Input::Source::FileInputSource.new(input_file, filename, repair_pdf: repair_pdf)
     end
 
     # Load a document from a secure remote source (HTTPS).
