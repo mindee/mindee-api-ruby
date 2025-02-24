@@ -28,7 +28,7 @@ The `Universal` product supports all products in a catch-all generic format, and
 
 # Quick-Start
 
-```ruby
+```rb
 require 'mindee'
 
 # Init a new client
@@ -103,7 +103,7 @@ Universal builds always have access to at least two attributes:
 
 **fields** (`Hash<String, Array<`[UniversalListField](#universal-list-field),[UniversalObjectField](#universal-object-field), `(#stringfield)[StringField]>>`):
 
-```ruby
+```rb
 puts result.document.inference.prediction.fields["my-field"].to_s
 ```
 

@@ -39,12 +39,18 @@ specific reason. Accidentally overwriting them can lead to unexpected behavior.
 Before making any changes, we recommend reviewing the following information to understand the purpose and potential
 impact of each environment variable:
 
-| Environment Variable     | Description                                                     | Default Value               |
-|--------------------------|-----------------------------------------------------------------|-----------------------------|
-| `MINDEE_API_KEY`         | Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly! | `nil`                       |
-| `MINDEE_BASE_URL`        | The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location. | `https://api.mindee.net/v1` |
-| `MINDEE_REQUEST_TIMEOUT` | The default timeout for HTTP requests (in seconds).             | `120`                       |
-| `MINDEE_LOG_LEVEL`       | The default logging level for the mindee logger.                | `WARN`                      |
+* `MINDEE_API_KEY`:
+    * **Description**: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!
+    * **Default Value**: `nil`
+* `MINDEE_BASE_URL`:
+    * **Description**: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.
+    * **Default Value**: `https://api.mindee.net/v1`
+* `MINDEE_REQUEST_TIMEOUT`:
+    * **Description**: The default timeout for HTTP requests (in seconds).
+    * **Default Value**: `120`
+* `MINDEE_LOG_LEVEL`:
+    * **Description**: The default logging level for the mindee logger.
+    * **Default Value**: `WARN`
 
 ### Loading a File and Parsing It
 
@@ -148,7 +154,7 @@ end
 ```
 
 
-## Enqueue and Parse a Webhook Response
+## Enqueueing and Parse a Webhook Response
 
 This is an optional way of handling asynchronous APIs.
 
@@ -162,7 +168,7 @@ mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 
 
-# Parse the file
+# Send the file to the server
 enqueue_response = mindee_client.enqueue(
   input_source,
   Mindee::Product::InternationalId::InternationalIdV2

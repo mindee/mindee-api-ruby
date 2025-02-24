@@ -55,7 +55,7 @@ describe Mindee::Input::Source do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
     it 'Should not raise a mime error' do
       expect do
-        mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_fixable.pdf", fix_pdf: true)
+        mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_fixable.pdf", repair_pdf: true)
       end.not_to raise_error
     end
   end
@@ -64,7 +64,7 @@ describe Mindee::Input::Source do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
     it 'Should raise an error' do
       expect do
-        mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_unfixable.pdf", fix_pdf: true)
+        mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_unfixable.pdf", repair_pdf: true)
       end.to raise_error Mindee::Errors::MindeePDFError
     end
   end
@@ -75,7 +75,7 @@ describe Mindee::Input::Source do
       source_doc_original = mindee_client.source_from_path("#{DATA_DIR}/products/invoices/invoice.pdf")
       expect do
         source_doc_fixed = mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_invoice.pdf",
-                                                          fix_pdf: true)
+                                                          repair_pdf: true)
         expect(source_doc_fixed.read_contents[1].to_s).to eq(source_doc_original.read_contents[1].to_s)
       end.not_to raise_error
     end

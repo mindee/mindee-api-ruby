@@ -44,10 +44,10 @@ module Mindee
     def enqueue_and_parse: (Input::Source::URLInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
     def execute_workflow: (Input::Source::URLInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
     def load_prediction: (singleton(Parsing::Common::Inference), Input::LocalResponse) -> Parsing::Common::ApiResponse
-    def source_from_path: (String, ?fix_pdf: bool) -> Input::Source::PathInputSource
-    def source_from_bytes: (String, String, ?fix_pdf: bool) -> Input::Source::BytesInputSource
-    def source_from_b64string: (String, String, ?fix_pdf: bool) -> Input::Source::Base64InputSource
-    def source_from_file: (File, String, ?fix_pdf: bool) -> Input::Source::FileInputSource
+    def source_from_path: (String, ?repair_pdf: bool) -> Input::Source::PathInputSource
+    def source_from_bytes: (String, String, ?repair_pdf: bool) -> Input::Source::BytesInputSource
+    def source_from_b64string: (String, String, ?repair_pdf: bool) -> Input::Source::Base64InputSource
+    def source_from_file: (File, String, ?repair_pdf: bool) -> Input::Source::FileInputSource
     def source_from_url: (String) -> Input::Source::URLInputSource
     def create_endpoint: (endpoint_name: String, account_name: String, version: String) -> HTTP::Endpoint
 

@@ -75,7 +75,8 @@ Using Mindee's APIs can be broken down into the following steps:
 Let's take a deep dive into how this works.
 
 ## Initializing the Client
-The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for Universal APIs).
+The `Client` automatically connects to the default endpoints for each product (or creates one with given parameters for
+Universal APIs).
 
 The `Client` requires your [API key](https://developers.mindee.com/docs/make-your-first-request#create-an-api-key).
 
@@ -83,7 +84,7 @@ You can either pass these directly to the constructor or through environment var
 
 
 ### Pass the API key directly
-```ruby
+```rb
 # Init a new client and passing the key directly
 mindee_client = Mindee::Client.new(api_key: 'my-api-key')
 ```
@@ -97,7 +98,7 @@ MINDEE_API_KEY=my-api-key
 ```
  
 Then in your code:
-```ruby
+```rb
 # Init a new client without an API key
 mindee_client = Mindee::Client.new
 ```
@@ -136,13 +137,15 @@ More specifically, we need to set a `Mindee::Product` class as the first paramet
 
 This is because the `Endpoint`'s urls will be set according to it
 
-Each document type available in the library has its corresponding class, which inherit from the base `Mindee::Parsing::Common::Predict` class.
+Each document type available in the library has its corresponding class, which inherit from the base
+`Mindee::Parsing::Common::Predict` class.
+
 This is detailed in each document-specific guide.
 
 ### Off-the-Shelf Documents
 Simply setting the correct class is enough:
 
-```ruby
+```rb
 
 result = mindee_client.parse(
   input_source,
@@ -151,10 +154,12 @@ result = mindee_client.parse(
 ```
 
 #### Specific call method
-Some products, such as InvoiceV4, ReceiptV5 & FinancialDocumentV1 support both asynchronous polling and synchronous HTTP calls.
-We recommend letting the client library decide which is better by default, but you can override the behavior by setting the `enqueue` parameter to `true` or `false`.
+Some products, such as InvoiceV4, ReceiptV5 & FinancialDocumentV1 support both asynchronous polling and synchronous
+HTTP calls.
+We recommend letting the client library decide which is better by default, but you can override the behavior by setting
+the `enqueue` parameter to `true` or `false`.
 
-```ruby
+```rb
 
 result = mindee_client.parse(
   input_source,
@@ -168,7 +173,7 @@ result = mindee_client.parse(
 ### Universal Documents (docTI)
 For custom documents, the endpoint to use must also be set, and it must take in an `endpoint_name`:
 
-```ruby
+```rb
 endpoint = mindee_client.create_endpoint(endpoint_name: 'wnine', account_name: 'my-account')
 
 result = mindee_client.parse(
@@ -178,10 +183,12 @@ result = mindee_client.parse(
 )
 ```
 
-This is because the `Universal` class is enough to handle the return processing, but the actual endpoint needs to be specified.
+This is because the `Universal` class is enough to handle the return processing, but the actual endpoint needs to be
+specified.
 
 ## Process the Result
-The response object is common to all documents, including custom documents (using the Universal product). The main properties are:
+The response object is common to all documents, including custom documents (using the Universal product). The main
+properties are:
 
 * `id` — Mindee ID of the document
 * `name` — Filename sent to the API
@@ -200,7 +207,7 @@ It contains the data extracted from the entire document, all pages combined.
 It's possible to have the same field in various pages, but at the document level,
 only the highest confidence field data will be shown (this is all done automatically at the API level).
 
-```ruby
+```rb
 # as an object, complete
 pp result.document.inference.prediction
 
@@ -218,7 +225,7 @@ All response objects have this property, regardless of the number of pages.
 Single page documents will have a single entry.
 
 Iteration is done like any Ruby array:
-```ruby
+```rb
 response.document.inference.pages.each do |page|
     # as an object, complete
     pp page.prediction
@@ -229,15 +236,17 @@ end
 ```
 
 #### Page Orientation
-The orientation field is only available at the page level as it describes whether the page image should be rotated to be upright.
+The orientation field is only available at the page level as it describes whether the page image should be rotated to
+be upright.
 
-If the page requires rotation for correct display, the orientation field gives a prediction among these 3 possible outputs:
+If the page requires rotation for correct display, the orientation field gives a prediction among these 3 possible
+outputs:
 
 * 0 degrees: the page is already upright
 * 90 degrees: the page must be rotated clockwise to be upright
 * 270 degrees: the page must be rotated counterclockwise to be upright
 
-```ruby
+```rb
 response.document.inference.pages.each do |page|
   puts page.orientation.value
 end

@@ -151,7 +151,7 @@ DOCUMENTS.each do |doc_key, doc_value|
       options[:print_full] = true
     end
     opts.on('-F', '--fix-pdf', "Attempts to fix broken PDF files before sending them to the server.") do |v|
-      options[:fix_pdf] = true
+      options[:repair_pdf] = true
     end
     if doc_key != 'universal'
       opts.banner = "#{doc_value[:description]}. \nUsage: \nmindee.rb universal [options] endpoint_name file\nor\nmindee.rb universal [options] endpoint_name file"
@@ -200,7 +200,7 @@ mindee_client = Mindee::Client.new(api_key: options[:api_key])
 if options[:file_path].start_with?("https://")
   input_source = mindee_client.source_from_url(options[:file_path])
 else
-  input_source = mindee_client.source_from_path(options[:file_path], fix_pdf: options[:fix_pdf])
+  input_source = mindee_client.source_from_path(options[:file_path], repair_pdf: options[:repair_pdf])
 end
 
 if command == 'universal'

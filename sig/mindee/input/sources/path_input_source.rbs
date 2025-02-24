@@ -3,7 +3,7 @@ module Mindee
   module Input
     module Source
       class PathInputSource < LocalInputSource
-        def initialize: (String, ?fix_pdf: bool) -> void
+        def initialize: (String, ?repair_pdf: bool) -> void
       end
     end
   end
