@@ -95,8 +95,8 @@ This can sometimes help when files get rejected by the server.
 
 Example:
 ```rb
-# Load a PDF file with the fix_pdf flag enabled.
-input_source = mindee_client.source_from_file(file, "document.pdf", fix_pdf: true)
+# Load a PDF file with the repair_pdf flag enabled.
+input_source = mindee_client.source_from_file(file, "document.pdf", repair_pdf: true)
 ```
 
 > ⚠️ Warning: PDF fixing alters the input file by re-writing header information.

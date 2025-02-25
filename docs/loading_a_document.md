@@ -306,7 +306,7 @@ When loading using from either a path, file, raw byte sequence or base64 string,
 [Mindee::Input::Source::LocalInputSource](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html). Key features include:
 
 * Automatic MIME Type Validation using Marcel to check for server file format compliance. 
-* An option ([fix_pdf](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#initialize-instance_method)) to attempt recovery of PDFs with broken header information.
+* An option ([repair_pdf](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#initialize-instance_method)) to attempt recovery of PDFs with broken header information.
 * File Operations:
   * [compress!](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#compress!-instance_method) – Compresses the file by invoking either the PDFCompressor for PDFs or the ImageCompressor for images. Parameters such as quality, max dimensions, and options to force or disable source text (for PDFs) are available.  
   * `write_to_file` ([URLInputSource version](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/URLInputSource.html#write_to_file-instance_method), [LocalInputSource version](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#write_to_file-instance_method)) – Saves the current state of the input (after possible operations) to disk. This is handy for inspection before parsing.
