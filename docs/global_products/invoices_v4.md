@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -240,7 +245,7 @@ Fields which are specific to this product; they are not used in any other produc
 List of line item details.
 
 A `InvoiceV4LineItem` implements the following attributes:
-      
+
 * `description` (String): The item description.
 * `product_code` (String): The product code referring to the item.
 * `quantity` (Float): The item quantity

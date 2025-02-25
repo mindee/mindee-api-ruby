@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Bank Statement API](https://platform.minde
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint                       | `bank_statement_fr`                                |
-> | Recommended Version            | `v1.1`                                             |
+> | Recommended Version            | `v2.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🇫🇷 France                                          |
@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -43,7 +48,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::FR::BankStatement::BankStatementV1
+  Mindee::Product::FR::BankStatement::BankStatementV2
 )
 
 # Print a full summary of the parsed data in RST format
@@ -58,20 +63,20 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: b9bdb0fd-87bd-4a76-b488-1da3ce53d11d
+:Mindee ID: 3c1811c0-9876-45ae-91ad-c2e9cd75dd83
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/bank_statement_fr v1.0
-:Rotation applied: No
+:Product: mindee/bank_statement_fr v2.0
+:Rotation applied: Yes
 
 Prediction
 ==========
-:Account Number: XXXXXXXXXXXXX
-:Bank Name: lafinancepourtous
+:Account Number: XXXXXXXXXXXXXX
+:Bank Name: Banque lafinancepourtous
 :Bank Address: 1 rue de la Banque, 100210 Cassette
-:Client Name: Karine Plume
+:Client Names: Karine Plume
 :Client Address: 1 rue des Cigales, 100210 Cassette
 :Statement Date: 2002-02-28
 :Statement Start Date: 2002-02-01
@@ -79,39 +84,43 @@ Prediction
 :Opening Balance: 22.15
 :Closing Balance: -278.96
 :Transactions:
-  +-----------+------------+--------------------------------------+
-  | Amount    | Date       | Description                          |
-  +===========+============+======================================+
-  | 1240.00   | 2002-02-01 | Virement salaire                     |
-  +-----------+------------+--------------------------------------+
-  | 520.00    | 2002-02-02 | Virement loyer                       |
-  +-----------+------------+--------------------------------------+
-  | -312.00   | 2002-02-03 | Débit Carte nºxxxxx xxxxxxxxxxxx     |
-  +-----------+------------+--------------------------------------+
-  | 65.00     | 2002-02-05 | Virement APL                         |
-  +-----------+------------+--------------------------------------+
-  | -3.30     | 2002-02-08 | Cotisation mensuelle carte bancaire  |
-  +-----------+------------+--------------------------------------+
-  | -120.00   | 2002-02-09 | Chèque nº xxxxxxx98                  |
-  +-----------+------------+--------------------------------------+
-  | -60.00    | 2002-02-09 | Retrait espèces DAB                  |
-  +-----------+------------+--------------------------------------+
-  | -55.00    | 2002-02-15 | Chèque n ° xxxxxxXx99                |
-  +-----------+------------+--------------------------------------+
-  | -80.00    | 2002-02-16 | Prélèvement supercrédit              |
-  +-----------+------------+--------------------------------------+
-  | -120.00   | 2002-02-17 | Chèque n ° xxxxx100                  |
-  +-----------+------------+--------------------------------------+
-  | -163.25   | 2002-02-20 | Débit Carte n ° xxxxxxxxxxxxxxxxxx   |
-  +-----------+------------+--------------------------------------+
-  | -25.50    | 2002-02-21 | Débit Carte nºxxxxxxxxxxxxxxxxx      |
-  +-----------+------------+--------------------------------------+
-  | -30.00    | 2002-02-24 | Prélèvement Opérateur téléphonique   |
-  +-----------+------------+--------------------------------------+
-  | -6.53     | 2002-02-25 | Agios                                |
-  +-----------+------------+--------------------------------------+
-  | -13.00    | 2002-02-28 | Frais irrégularités et incidents ... |
-  +-----------+------------+--------------------------------------+
+  +------------+------------+--------------------------------------+
+  | Amount     | Date       | Description                          |
+  +============+============+======================================+
+  | 1240.00    | 2002-02-01 | Virement salaire                     |
+  +------------+------------+--------------------------------------+
+  | -520.00    | 2002-02-02 | Virement loyer                       |
+  +------------+------------+--------------------------------------+
+  | -312.00    | 2002-02-03 | Débit Carte nºxxxx                   |
+  +------------+------------+--------------------------------------+
+  | 12.47      | 2002-02-04 | Virement CPAM                        |
+  +------------+------------+--------------------------------------+
+  | 65.00      | 2002-02-05 | Virement APL                         |
+  +------------+------------+--------------------------------------+
+  | -110.00    | 2002-02-07 | Débit Carte nxxxxxxxxxxxxxxxx        |
+  +------------+------------+--------------------------------------+
+  | -3.30      | 2002-02-08 | Cotisation mensuelle carte bancaire  |
+  +------------+------------+--------------------------------------+
+  | -120.00    | 2002-02-09 | Chèque n° xxxxxx98                   |
+  +------------+------------+--------------------------------------+
+  | -60.00     | 2002-02-09 | Retrait espèces DAB                  |
+  +------------+------------+--------------------------------------+
+  | -55.00     | 2002-02-15 | Chèque n° xxxxxx99                   |
+  +------------+------------+--------------------------------------+
+  | -80.00     | 2002-02-16 | Prélèvement supercrédit              |
+  +------------+------------+--------------------------------------+
+  | -120.00    | 2002-02-17 | Chèque n° xxxxx 100                  |
+  +------------+------------+--------------------------------------+
+  | -163.25    | 2002-02-20 | Débit Carte nºxxxxxxxxxxxxx          |
+  +------------+------------+--------------------------------------+
+  | -25.50     | 2002-02-21 | Débit Carte n°xxxxxxxxxxxxxxxxxx     |
+  +------------+------------+--------------------------------------+
+  | -30.00     | 2002-02-24 | Prélèvement Opérateur téléphonique   |
+  +------------+------------+--------------------------------------+
+  | -6.53      | 2002-02-25 | Agios                                |
+  +------------+------------+--------------------------------------+
+  | -13.00     | 2002-02-28 | Frais irrégularités et incidents ... |
+  +------------+------------+--------------------------------------+
 :Total Debits: 1618.58
 :Total Credits: 1339.62
 ```
@@ -152,14 +161,14 @@ Fields which are specific to this product; they are not used in any other produc
 ### Transactions Field
 The list of values that represent the financial transactions recorded in a bank statement.
 
-A `BankStatementV1Transaction` implements the following attributes:
-      
+A `BankStatementV2Transaction` implements the following attributes:
+
 * `amount` (Float): The monetary amount of the transaction.
 * `date` (String): The date on which the transaction occurred.
 * `description` (String): The additional information about the transaction.
 
 # Attributes
-The following fields are extracted for Bank Statement V1:
+The following fields are extracted for Bank Statement V2:
 
 ## Account Number
 **account_number** ([StringField](#string-field)): The unique identifier for a customer's account in the bank's system.
@@ -189,11 +198,13 @@ puts result.document.inference.prediction.bank_name.value
 puts result.document.inference.prediction.client_address.value
 ```
 
-## Client Name
-**client_name** ([StringField](#string-field)): The name of the client who owns the bank statement.
+## Client Names
+**client_names** (Array<[StringField](#string-field)>): The name of the clients who own the bank statement.
 
 ```rb
-puts result.document.inference.prediction.client_name.value
+result.document.inference.prediction.client_names do |client_names_elem|
+  puts client_names_elem.value
+end
 ```
 
 ## Closing Balance
@@ -246,7 +257,7 @@ puts result.document.inference.prediction.total_debits.value
 ```
 
 ## Transactions
-**transactions** (Array<[BankStatementV1Transaction](#transactions-field)>): The list of values that represent the financial transactions recorded in a bank statement.
+**transactions** (Array<[BankStatementV2Transaction](#transactions-field)>): The list of values that represent the financial transactions recorded in a bank statement.
 
 ```rb
 result.document.inference.prediction.transactions do |transactions_elem|

@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -129,7 +134,7 @@ Fields which are specific to this product; they are not used in any other produc
 Is a fixed amount for a covered service.
 
 A `HealthcareCardV1Copay` implements the following attributes:
-      
+
 * `service_fees` (Float): The price of service.
 * `service_name` (String): The name of service of the copay.
 

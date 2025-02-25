@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -113,7 +118,7 @@ Fields which are specific to this product; they are not used in any other produc
 The address of the sender.
 
 A `UsMailV3SenderAddress` implements the following attributes:
-      
+
 * `city` (String): The city of the sender's address.
 * `complete` (String): The complete address of the sender.
 * `postal_code` (String): The postal code of the sender's address.
@@ -125,7 +130,7 @@ Fields which are specific to this product; they are not used in any other produc
 The addresses of the recipients.
 
 A `UsMailV3RecipientAddress` implements the following attributes:
-      
+
 * `city` (String): The city of the recipient's address.
 * `complete` (String): The complete address of the recipient.
 * `is_address_change` (bool): Indicates if the recipient's address is a change of address.

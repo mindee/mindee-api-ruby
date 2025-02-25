@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -207,7 +212,7 @@ Fields which are specific to this product; they are not used in any other produc
 List of line item details.
 
 A `ReceiptV5LineItem` implements the following attributes:
-      
+
 * `description` (String): The item description.
 * `quantity` (Float): The item quantity.
 * `total_amount` (Float): The item total amount.

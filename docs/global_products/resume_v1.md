@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -161,7 +166,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of social network profiles of the candidate.
 
 A `ResumeV1SocialNetworksUrl` implements the following attributes:
-      
+
 * `name` (String): The name of the social network.
 * `url` (String): The URL of the social network.
 Fields which are specific to this product; they are not used in any other product.
@@ -170,7 +175,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of languages that the candidate is proficient in.
 
 A `ResumeV1Language` implements the following attributes:
-      
+
 * `language` (String): The language's ISO 639 code.
 * `level` (String): The candidate's level for the language.
 
@@ -187,7 +192,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of the candidate's educational background.
 
 A `ResumeV1Education` implements the following attributes:
-      
+
 * `degree_domain` (String): The area of study or specialization.
 * `degree_type` (String): The type of degree obtained, such as Bachelor's, Master's, or Doctorate.
 * `end_month` (String): The month when the education program or course was completed.
@@ -201,7 +206,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of the candidate's professional experiences.
 
 A `ResumeV1ProfessionalExperience` implements the following attributes:
-      
+
 * `contract_type` (String): The type of contract for the professional experience.
 
 #### Possible values include:
@@ -224,7 +229,7 @@ Fields which are specific to this product; they are not used in any other produc
 The list of certificates obtained by the candidate.
 
 A `ResumeV1Certificate` implements the following attributes:
-      
+
 * `grade` (String): The grade obtained for the certificate.
 * `name` (String): The name of certification.
 * `provider` (String): The organization or institution that issued the certificate.

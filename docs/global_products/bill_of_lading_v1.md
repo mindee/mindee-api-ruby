@@ -32,6 +32,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -134,7 +139,7 @@ Fields which are specific to this product; they are not used in any other produc
 The party responsible for shipping the goods.
 
 A `BillOfLadingV1Shipper` implements the following attributes:
-      
+
 * `address` (String): The address of the shipper.
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the shipper.
@@ -145,7 +150,7 @@ Fields which are specific to this product; they are not used in any other produc
 The party to whom the goods are being shipped.
 
 A `BillOfLadingV1Consignee` implements the following attributes:
-      
+
 * `address` (String): The address of the consignee.
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the consignee.
@@ -156,7 +161,7 @@ Fields which are specific to this product; they are not used in any other produc
 The party to be notified of the arrival of the goods.
 
 A `BillOfLadingV1NotifyParty` implements the following attributes:
-      
+
 * `address` (String): The address of the notify party.
 * `email` (String): The  email of the shipper.
 * `name` (String): The name of the notify party.
@@ -167,7 +172,7 @@ Fields which are specific to this product; they are not used in any other produc
 The shipping company responsible for transporting the goods.
 
 A `BillOfLadingV1Carrier` implements the following attributes:
-      
+
 * `name` (String): The name of the carrier.
 * `professional_number` (String): The professional number of the carrier.
 * `scac` (String): The Standard Carrier Alpha Code (SCAC) of the carrier.
@@ -177,7 +182,7 @@ Fields which are specific to this product; they are not used in any other produc
 The goods being shipped.
 
 A `BillOfLadingV1CarrierItem` implements the following attributes:
-      
+
 * `description` (String): A description of the item.
 * `gross_weight` (Float): The gross weight of the item.
 * `measurement` (Float): The measurement of the item.

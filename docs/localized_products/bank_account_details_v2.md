@@ -24,6 +24,11 @@ Ruby Client Library.
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -112,7 +117,7 @@ Fields which are specific to this product; they are not used in any other produc
 Full extraction of BBAN, including: branch code, bank code, account and key.
 
 A `BankAccountDetailsV2Bban` implements the following attributes:
-      
+
 * `bban_bank_code` (String): The BBAN bank code outputted as a string.
 * `bban_branch_code` (String): The BBAN branch code outputted as a string.
 * `bban_key` (String): The BBAN key outputted as a string.
