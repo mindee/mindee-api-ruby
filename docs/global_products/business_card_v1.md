@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Business Card API](https://platform.mindee
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `business_card`                                    |
+> | Endpoint Name                  | `business_card`                                    |
 > | Recommended Version            | `v1.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,19 +19,24 @@ The Ruby Client Library supports the [Business Card API](https://platform.mindee
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/business_card/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/business_card/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Business Card sample](https://github.com/mindee/client-lib-test-data/blob/main/products/business_card/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client

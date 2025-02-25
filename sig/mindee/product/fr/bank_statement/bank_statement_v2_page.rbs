@@ -1,13 +1,13 @@
-# lib/mindee/product/../bank_statement/bank_statement_v1_page.rb
+# lib/mindee/product/../bank_statement/bank_statement_v2_page.rb
 
 module Mindee
   module Product
     module FR
       module BankStatement
-        class BankStatementV1Page < Parsing::Common::Page
+        class BankStatementV2Page < Parsing::Common::Page
           def initialize: (Hash[Symbol | String, untyped]) -> void
         end
-        class BankStatementV1PagePrediction < BankStatementV1Document
+        class BankStatementV2PagePrediction < BankStatementV2Document
           def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
           def to_s: -> String
         end

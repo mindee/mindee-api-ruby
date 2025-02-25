@@ -22,7 +22,7 @@ module Mindee
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super(prediction, page_id)
+            super
             @amount = prediction['amount']
             @date = prediction['date']
             @description = prediction['description']
@@ -32,7 +32,8 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : Field.float_to_string(@amount)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
             printable[:date] = format_for_display(@date)
             printable[:description] = format_for_display(@description)
             printable
@@ -41,7 +42,8 @@ module Mindee
           # @return [Hash]
           def table_printable_values
             printable = {}
-            printable[:amount] = @amount.nil? ? '' : Field.float_to_string(@amount)
+            printable[:amount] =
+              @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
             printable[:date] = format_for_display(@date, 10)
             printable[:description] = format_for_display(@description, 36)
             printable

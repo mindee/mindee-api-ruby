@@ -2,7 +2,7 @@ module Mindee
   module Product
     module FR
       module BankStatement
-        class BankStatementV1Transaction < Parsing::Standard::FeatureField
+        class BankStatementV2Transaction < Parsing::Standard::FeatureField
           def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
           def amount: -> Float
           def date: -> String

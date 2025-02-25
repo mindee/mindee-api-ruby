@@ -74,7 +74,7 @@ DOCUMENTS = {
   },
   "fr-bank-statement" => {
     description: "FR Bank Statement",
-    doc_class: Mindee::Product::FR::BankStatement::BankStatementV1,
+    doc_class: Mindee::Product::FR::BankStatement::BankStatementV2,
     sync: false,
     async: true,
   },

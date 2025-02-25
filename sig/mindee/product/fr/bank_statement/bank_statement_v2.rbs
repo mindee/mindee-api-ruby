@@ -1,10 +1,10 @@
-# lib/mindee/product/../bank_statement/bank_statement_v1.rb
+# lib/mindee/product/../bank_statement/bank_statement_v2.rb
 
 module Mindee
   module Product
     module FR
       module BankStatement
-        class BankStatementV1 < Parsing::Common::Inference
+        class BankStatementV2 < Parsing::Common::Inference
           def initialize: (Hash[Symbol | String, untyped]) -> void
         end
       end

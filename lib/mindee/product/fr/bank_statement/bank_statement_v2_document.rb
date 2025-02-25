@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'bank_statement_v2_transaction'
+require_relative 'bank_statement_v2_transactions'
 
 module Mindee
   module Product
@@ -47,32 +47,64 @@ module Mindee
           # @return [Mindee::Parsing::Standard::AmountField]
           attr_reader :total_debits
           # The list of values that represent the financial transactions recorded in a bank statement.
-          # @return [Array<Mindee::Product::FR::BankStatement::BankStatementV2Transaction>]
+          # @return [Mindee::Product::FR::BankStatement::BankStatementV2Transactions]
           attr_reader :transactions
 
           # @param prediction [Hash]
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
-            super()
-            @account_number = StringField.new(prediction['account_number'], page_id)
-            @bank_address = StringField.new(prediction['bank_address'], page_id)
-            @bank_name = StringField.new(prediction['bank_name'], page_id)
-            @client_address = StringField.new(prediction['client_address'], page_id)
-            @client_names = []
+            super
+            @account_number = Parsing::Standard::StringField.new(
+              prediction['account_number'],
+              page_id
+            )
+            @bank_address = Parsing::Standard::StringField.new(
+              prediction['bank_address'],
+              page_id
+            )
+            @bank_name = Parsing::Standard::StringField.new(
+              prediction['bank_name'],
+              page_id
+            )
+            @client_address = Parsing::Standard::StringField.new(
+              prediction['client_address'],
+              page_id
+            )
+            @client_names = [] # : Array[Parsing::Standard::StringField]
             prediction['client_names'].each do |item|
-              @client_names.push(StringField.new(item, page_id))
+              @client_names.push(Parsing::Standard::StringField.new(item, page_id))
             end
-            @closing_balance = AmountField.new(prediction['closing_balance'], page_id)
-            @opening_balance = AmountField.new(prediction['opening_balance'], page_id)
-            @statement_date = DateField.new(prediction['statement_date'], page_id)
-            @statement_end_date = DateField.new(prediction['statement_end_date'], page_id)
-            @statement_start_date = DateField.new(prediction['statement_start_date'], page_id)
-            @total_credits = AmountField.new(prediction['total_credits'], page_id)
-            @total_debits = AmountField.new(prediction['total_debits'], page_id)
-            @transactions = []
-            prediction['transactions'].each do |item|
-              @transactions.push(BankStatementV2Transaction.new(item, page_id))
-            end
+            @closing_balance = Parsing::Standard::AmountField.new(
+              prediction['closing_balance'],
+              page_id
+            )
+            @opening_balance = Parsing::Standard::AmountField.new(
+              prediction['opening_balance'],
+              page_id
+            )
+            @statement_date = Parsing::Standard::DateField.new(
+              prediction['statement_date'],
+              page_id
+            )
+            @statement_end_date = Parsing::Standard::DateField.new(
+              prediction['statement_end_date'],
+              page_id
+            )
+            @statement_start_date = Parsing::Standard::DateField.new(
+              prediction['statement_start_date'],
+              page_id
+            )
+            @total_credits = Parsing::Standard::AmountField.new(
+              prediction['total_credits'],
+              page_id
+            )
+            @total_debits = Parsing::Standard::AmountField.new(
+              prediction['total_debits'],
+              page_id
+            )
+            @transactions = Product::FR::BankStatement::BankStatementV2Transactions.new(
+              prediction['transactions'], page_id
+            )
           end
 
           # @return [String]

@@ -11,19 +11,24 @@ The Ruby Client Library supports the [Carte Grise API](https://platform.mindee.c
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `carte_grise`                                      |
+> | Endpoint Name                  | `carte_grise`                                      |
 > | Recommended Version            | `v1.1`                                             |
 > | Supports Polling/Webhooks      | ❌ No                                              |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🇫🇷 France                                          |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_grise/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_grise/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Carte Grise sample](https://github.com/mindee/client-lib-test-data/blob/main/products/carte_grise/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client

@@ -7,11 +7,11 @@ on:
 
 jobs:
   static_analysis:
-    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@develop/v4.0.0
+    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@main
   test_units:
-    uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@develop/v4.0.0
+    uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@main
     needs: static_analysis
     secrets: inherit
   tag:
-    uses: mindee/client-lib-actions/.github/workflows/tag-version.yml@develop/v4.0.0
+    uses: mindee/client-lib-actions/.github/workflows/tag-version.yml@main
     needs: test_units

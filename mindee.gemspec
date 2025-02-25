@@ -27,9 +27,10 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
 
+  spec.add_dependency 'base64', '~> 0.1.0'
   spec.add_dependency 'marcel', '~> 1.0.4'
   spec.add_dependency 'mini_magick', '>= 4', '< 6'
-  spec.add_dependency 'origamindee', '~> 3.1.0'
+  spec.add_dependency 'origamindee', '~> 4.0.0'
   spec.add_dependency 'pdf-reader', '~> 2.13.0'
 
   spec.add_development_dependency 'prism', '~> 1.3'

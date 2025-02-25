@@ -25,10 +25,10 @@ shared_context 'load document' do
   end
   let(:load_invalid_document) do
     prediction_data = JSON.parse(
-      File.read(File.join(DIR_PRODUCTS, 'bank_statement_fr', 'response_v1', 'complete.json'))
+      File.read(File.join(DIR_PRODUCTS, 'bank_statement_fr', 'response_v2', 'complete.json'))
     )
     Mindee::Parsing::Common::ApiResponse.new(
-      Mindee::Product::FR::BankStatement::BankStatementV1,
+      Mindee::Product::FR::BankStatement::BankStatementV2,
       prediction_data,
       prediction_data
     ).document
@@ -94,10 +94,10 @@ describe 'FullTextOCR' do
             'value' => nil,
             'confidence' => 0,
           },
-          'client_name' => {
+          'client_names' => [{
             'value' => nil,
             'confidence' => 0,
-          },
+          }],
           'closing_balance' => {
             'value' => nil,
             'confidence' => 0,
@@ -138,7 +138,7 @@ describe 'FullTextOCR' do
       'n_pages' => 0,
     }
     built_doc = Mindee::Parsing::Common::Document.new(
-      Mindee::Product::FR::BankStatement::BankStatementV1,
+      Mindee::Product::FR::BankStatement::BankStatementV2,
       synthetic_response
     )
     expect(built_doc.extras).to be_nil

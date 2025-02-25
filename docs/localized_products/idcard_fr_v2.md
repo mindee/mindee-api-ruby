@@ -11,19 +11,24 @@ The Ruby Client Library supports the [Carte Nationale d'Identité API](https://p
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `idcard_fr`                                        |
+> | Endpoint Name                  | `idcard_fr`                                        |
 > | Recommended Version            | `v2.0`                                             |
 > | Supports Polling/Webhooks      | ❌ No                                              |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🇫🇷 France                                          |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Carte Nationale d'Identité sample](https://github.com/mindee/client-lib-test-data/blob/main/products/idcard_fr/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
