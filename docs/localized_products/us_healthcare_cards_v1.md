@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Healthcare Card API](https://platform.mind
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `us_healthcare_cards`                              |
+> | Endpoint Name                  | `us_healthcare_cards`                              |
 > | Recommended Version            | `v1.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,19 +19,24 @@ The Ruby Client Library supports the [Healthcare Card API](https://platform.mind
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Healthcare Card sample](https://github.com/mindee/client-lib-test-data/blob/main/products/us_healthcare_cards/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -129,7 +134,7 @@ Fields which are specific to this product; they are not used in any other produc
 Is a fixed amount for a covered service.
 
 A `HealthcareCardV1Copay` implements the following attributes:
-      
+
 * `service_fees` (Float): The price of service.
 * `service_name` (String): The name of service of the copay.
 

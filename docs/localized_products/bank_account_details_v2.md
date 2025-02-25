@@ -11,19 +11,24 @@ The Ruby Client Library supports the [Bank Account Details API](https://platform
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `bank_account_details`                             |
+> | Endpoint Name                  | `bank_account_details`                             |
 > | Recommended Version            | `v2.0`                                             |
 > | Supports Polling/Webhooks      | ❌ No                                              |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🇫🇷 France                                          |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Bank Account Details sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -112,7 +117,7 @@ Fields which are specific to this product; they are not used in any other produc
 Full extraction of BBAN, including: branch code, bank code, account and key.
 
 A `BankAccountDetailsV2Bban` implements the following attributes:
-      
+
 * `bban_bank_code` (String): The BBAN bank code outputted as a string.
 * `bban_branch_code` (String): The BBAN branch code outputted as a string.
 * `bban_key` (String): The BBAN key outputted as a string.

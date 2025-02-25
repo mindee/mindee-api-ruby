@@ -1,16 +1,16 @@
-# lib/mindee/product/../bank_statement/bank_statement_v1_document.rb
+# lib/mindee/product/../bank_statement/bank_statement_v2_document.rb
 
 module Mindee
   module Product
     module FR
       module BankStatement
-        class BankStatementV1Document < Parsing::Common::Prediction
+        class BankStatementV2Document < Parsing::Common::Prediction
           def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
           def account_number: -> (Parsing::Standard::StringField)
           def bank_address: -> (Parsing::Standard::StringField)
           def bank_name: -> (Parsing::Standard::StringField)
           def client_address: -> (Parsing::Standard::StringField)
-          def client_name: -> (Parsing::Standard::StringField)
+          def client_names: -> (Array[Parsing::Standard::StringField])
           def closing_balance: -> (Parsing::Standard::AmountField)
           def opening_balance: -> (Parsing::Standard::AmountField)
           def statement_date: -> (Parsing::Standard::DateField)
@@ -18,7 +18,7 @@ module Mindee
           def statement_start_date: -> (Parsing::Standard::DateField)
           def total_credits: -> (Parsing::Standard::AmountField)
           def total_debits: -> (Parsing::Standard::AmountField)
-          def transactions: -> (Product::FR::BankStatement::BankStatementV1Transactions)
+          def transactions: -> (Product::FR::BankStatement::BankStatementV2Transactions)
           def transactions_separator: (String) -> String
           def transactions_to_s: -> String
           def to_s: -> String

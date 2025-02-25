@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Nutrition Facts Label API](https://platfor
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `nutrition_facts`                                  |
+> | Endpoint Name                  | `nutrition_facts`                                  |
 > | Recommended Version            | `v1.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,19 +19,24 @@ The Ruby Client Library supports the [Nutrition Facts Label API](https://platfor
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Nutrition Facts Label sample](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -160,7 +165,7 @@ Fields which are specific to this product; they are not used in any other produc
 The size of a single serving of the product.
 
 A `NutritionFactsLabelV1ServingSize` implements the following attributes:
-      
+
 * `amount` (Float): The amount of a single serving.
 * `unit` (String): The unit for the amount of a single serving.
 Fields which are specific to this product; they are not used in any other product.
@@ -169,7 +174,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of calories in the product.
 
 A `NutritionFactsLabelV1Calorie` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of calories to consume or not to exceed each day.
 * `per_100g` (Float): The amount of calories per 100g of the product.
 * `per_serving` (Float): The amount of calories per serving of the product.
@@ -179,7 +184,7 @@ Fields which are specific to this product; they are not used in any other produc
 The total amount of fat in the product.
 
 A `NutritionFactsLabelV1TotalFat` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of total fat to consume or not to exceed each day.
 * `per_100g` (Float): The amount of total fat per 100g of the product.
 * `per_serving` (Float): The amount of total fat per serving of the product.
@@ -189,7 +194,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of saturated fat in the product.
 
 A `NutritionFactsLabelV1SaturatedFat` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of saturated fat to consume or not to exceed each day.
 * `per_100g` (Float): The amount of saturated fat per 100g of the product.
 * `per_serving` (Float): The amount of saturated fat per serving of the product.
@@ -199,7 +204,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of trans fat in the product.
 
 A `NutritionFactsLabelV1TransFat` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of trans fat to consume or not to exceed each day.
 * `per_100g` (Float): The amount of trans fat per 100g of the product.
 * `per_serving` (Float): The amount of trans fat per serving of the product.
@@ -209,7 +214,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of cholesterol in the product.
 
 A `NutritionFactsLabelV1Cholesterol` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of cholesterol to consume or not to exceed each day.
 * `per_100g` (Float): The amount of cholesterol per 100g of the product.
 * `per_serving` (Float): The amount of cholesterol per serving of the product.
@@ -219,7 +224,7 @@ Fields which are specific to this product; they are not used in any other produc
 The total amount of carbohydrates in the product.
 
 A `NutritionFactsLabelV1TotalCarbohydrate` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of total carbohydrates to consume or not to exceed each day.
 * `per_100g` (Float): The amount of total carbohydrates per 100g of the product.
 * `per_serving` (Float): The amount of total carbohydrates per serving of the product.
@@ -229,7 +234,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of dietary fiber in the product.
 
 A `NutritionFactsLabelV1DietaryFiber` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of dietary fiber to consume or not to exceed each day.
 * `per_100g` (Float): The amount of dietary fiber per 100g of the product.
 * `per_serving` (Float): The amount of dietary fiber per serving of the product.
@@ -239,7 +244,7 @@ Fields which are specific to this product; they are not used in any other produc
 The total amount of sugars in the product.
 
 A `NutritionFactsLabelV1TotalSugar` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of total sugars to consume or not to exceed each day.
 * `per_100g` (Float): The amount of total sugars per 100g of the product.
 * `per_serving` (Float): The amount of total sugars per serving of the product.
@@ -249,7 +254,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of added sugars in the product.
 
 A `NutritionFactsLabelV1AddedSugar` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of added sugars to consume or not to exceed each day.
 * `per_100g` (Float): The amount of added sugars per 100g of the product.
 * `per_serving` (Float): The amount of added sugars per serving of the product.
@@ -259,7 +264,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of protein in the product.
 
 A `NutritionFactsLabelV1Protein` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of protein to consume or not to exceed each day.
 * `per_100g` (Float): The amount of protein per 100g of the product.
 * `per_serving` (Float): The amount of protein per serving of the product.
@@ -269,7 +274,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of sodium in the product.
 
 A `NutritionFactsLabelV1Sodium` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of sodium to consume or not to exceed each day.
 * `per_100g` (Float): The amount of sodium per 100g of the product.
 * `per_serving` (Float): The amount of sodium per serving of the product.
@@ -280,7 +285,7 @@ Fields which are specific to this product; they are not used in any other produc
 The amount of nutrients in the product.
 
 A `NutritionFactsLabelV1Nutrient` implements the following attributes:
-      
+
 * `daily_value` (Float): DVs are the recommended amounts of nutrients to consume or not to exceed each day.
 * `name` (String): The name of nutrients of the product.
 * `per_100g` (Float): The amount of nutrients per 100g of the product.

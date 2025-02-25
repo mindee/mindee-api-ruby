@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Payslip API](https://platform.mindee.com/m
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `payslip_fra`                                      |
+> | Endpoint Name                  | `payslip_fra`                                      |
 > | Recommended Version            | `v3.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,19 +19,24 @@ The Ruby Client Library supports the [Payslip API](https://platform.mindee.com/m
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/payslip_fra/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/payslip_fra/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Payslip sample](https://github.com/mindee/client-lib-test-data/blob/main/products/payslip_fra/default_sample.jpg?raw=true)
 
 # Quick-Start
 ```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -160,7 +165,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about the pay period.
 
 A `PayslipV3PayPeriod` implements the following attributes:
-      
+
 * `end_date` (String): The end date of the pay period.
 * `month` (String): The month of the pay period.
 * `payment_date` (String): The date of payment for the pay period.
@@ -172,7 +177,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about the employee.
 
 A `PayslipV3Employee` implements the following attributes:
-      
+
 * `address` (String): The address of the employee.
 * `date_of_birth` (String): The date of birth of the employee.
 * `first_name` (String): The first name of the employee.
@@ -186,7 +191,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about the employer.
 
 A `PayslipV3Employer` implements the following attributes:
-      
+
 * `address` (String): The address of the employer.
 * `company_id` (String): The company ID of the employer.
 * `company_site` (String): The site of the company.
@@ -200,7 +205,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about the employee's bank account.
 
 A `PayslipV3BankAccountDetail` implements the following attributes:
-      
+
 * `bank_name` (String): The name of the bank.
 * `iban` (String): The IBAN of the bank account.
 * `swift` (String): The SWIFT code of the bank.
@@ -210,7 +215,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about the employment.
 
 A `PayslipV3Employment` implements the following attributes:
-      
+
 * `category` (String): The category of the employment.
 * `coefficient` (String): The coefficient of the employment.
 * `collective_agreement` (String): The collective agreement of the employment.
@@ -224,7 +229,7 @@ Fields which are specific to this product; they are not used in any other produc
 Detailed information about the earnings.
 
 A `PayslipV3SalaryDetail` implements the following attributes:
-      
+
 * `amount` (Float): The amount of the earning.
 * `base` (Float): The base rate value of the earning.
 * `description` (String): The description of the earnings.
@@ -236,7 +241,7 @@ Fields which are specific to this product; they are not used in any other produc
 Detailed information about the pay.
 
 A `PayslipV3PayDetail` implements the following attributes:
-      
+
 * `gross_salary` (Float): The gross salary of the employee.
 * `gross_salary_ytd` (Float): The year-to-date gross salary of the employee.
 * `income_tax_rate` (Float): The income tax rate of the employee.
@@ -253,7 +258,7 @@ Fields which are specific to this product; they are not used in any other produc
 Information about paid time off.
 
 A `PayslipV3PaidTimeOff` implements the following attributes:
-      
+
 * `accrued` (Float): The amount of paid time off accrued in the period.
 * `period` (String): The paid time off period.
 
