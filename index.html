@@ -205,17 +205,11 @@
 <span class='kw'>end</span>
 </code></pre>
 
-<h2 id="label-CLI+Tool">CLI Tool</h2>
+<h2 id="label-Asynchronously+Parsing+a+File">Asynchronously Parsing a File</h2>
 
-<p>A command-line interface tool is available to quickly test documents:</p>
+<p>This allows for easier handling of bursts of documents sent.</p>
 
-<pre class="code ruby"><code class="ruby">ruby ./bin/mindee.rb invoice path/to/your/file.ext
-</code></pre>
-
-<p>Using the ruby bundler:</p>
-
-<pre class="code ruby"><code class="ruby">bundle exec ruby ./bin/mindee.rb invoice path/to/your/file.ext
-</code></pre>
+<p>Some products are only available asynchronously, check the example code directly on the Mindee platform.</p>
 
 <h3 id="label-Enqueue+and+Parse+a+Webhook+Response">Enqueue and Parse a Webhook Response</h3>
 
@@ -263,6 +257,20 @@
 <span class='comment'># Print a full summary of the parsed data in RST format
 </span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_document'>document</span>
 </code></pre>
+
+<h2 id="label-CLI+Tool">CLI Tool</h2>
+
+<p>A command-line interface tool is available to quickly test documents:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_ruby'>ruby</span> <span class='period'>.</span><span class='op'>/</span><span class='id identifier rubyid_bin'>bin</span><span class='op'>/</span><span class='id identifier rubyid_mindee'>mindee</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span> <span class='op'>&lt;</span><span class='id identifier rubyid_product_name'>product_name</span><span class='op'>&gt;</span> <span class='id identifier rubyid_path'>path</span><span class='op'>/</span><span class='id identifier rubyid_to'>to</span><span class='op'>/</span><span class='id identifier rubyid_your'>your</span><span class='op'>/</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_ext'>ext</span>
+</code></pre>
+
+<p>Using the ruby bundler:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_ruby'>ruby</span> <span class='period'>.</span><span class='op'>/</span><span class='id identifier rubyid_bin'>bin</span><span class='op'>/</span><span class='id identifier rubyid_mindee'>mindee</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span> <span class='op'>&lt;</span><span class='id identifier rubyid_product_name'>product_name</span><span class='op'>&gt;</span> <span class='id identifier rubyid_path'>path</span><span class='op'>/</span><span class='id identifier rubyid_to'>to</span><span class='op'>/</span><span class='id identifier rubyid_your'>your</span><span class='op'>/</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_ext'>ext</span>
+</code></pre>
+
+<p>Where possible values for <code>&lt;product_name&gt;</code> can be displayed by running the command with no arguments.</p>
 
 <h2 id="label-Further+Reading">Further Reading</h2>
 
@@ -329,7 +337,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Tue Jan 21 16:24:21 2025 by
+  Generated on Wed Feb 26 15:41:00 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
