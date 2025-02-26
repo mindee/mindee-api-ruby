@@ -63,7 +63,7 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: a67b70ea-4b1e-4eac-ae75-dda47a7064ae
+:Mindee ID: 86b1833f-138b-4a01-8387-860204b0e631
 :Filename: default_sample.jpg
 
 Inference
@@ -78,8 +78,8 @@ Prediction
 :Purchase Order Number: AD29094
 :Reference Numbers: AD29094
 :Purchase Date: 2018-09-25
-:Due Date: 2011-12-01
-:Payment Date: 2011-12-01
+:Due Date:
+:Payment Date:
 :Total Net: 2145.00
 :Total Amount: 2608.20
 :Total Tax: 193.20
@@ -124,8 +124,8 @@ Page 0
 :Purchase Order Number: AD29094
 :Reference Numbers: AD29094
 :Purchase Date: 2018-09-25
-:Due Date: 2011-12-01
-:Payment Date: 2011-12-01
+:Due Date:
+:Payment Date:
 :Total Net: 2145.00
 :Total Amount: 2608.20
 :Total Tax: 193.20
