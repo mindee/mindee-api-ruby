@@ -18,12 +18,11 @@ jobs:
           - "ubuntu-22.04"
           - "macos-latest"
         ruby:
-          - "2.6"
-          - "2.7"
           - "3.0"
           - "3.1"
           - "3.2"
           - "3.3"
+          - "3.4"
     steps:
     - uses: actions/checkout@v4
       with:
@@ -53,5 +52,7 @@ jobs:
         sudo sed -i "s/$SRC/$RPL/" /etc/ImageMagick-6/policy.xml
 
     - name: Run Rspec
+      env:
+        MINDEE_LOG_LEVEL: DEBUG
       run: |
         bundle exec rake spec
