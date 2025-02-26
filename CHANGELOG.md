@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v3.20.0 - 2025-02-26
+### Changes
+* :sparkles: add support for FR Banks Statement V2
+
+
 ## v3.19.1 - 2025-01-21
 ### Changes
 * :bug: fix extras failing at document level if missing from prediction
