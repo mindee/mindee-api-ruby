@@ -186,6 +186,54 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#crop_image-class_method" title="crop_image (class method)">.<strong>crop_image</strong>(image, min_max_x, min_max_y)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Crops a MiniMagick Image from a the given bounding box.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#determine_file_extension-class_method" title="determine_file_extension (class method)">.<strong>determine_file_extension</strong>(input_source)  &#x21d2; String<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the file extension from the main file to apply it to the extracted images.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#image_to_stringio-class_method" title="image_to_stringio (class method)">.<strong>image_to_stringio</strong>(image, format = &#39;JPEG&#39;)  &#x21d2; StringIO </a>
     
 
@@ -210,6 +258,30 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#normalize_polygon-class_method" title="normalize_polygon (class method)">.<strong>normalize_polygon</strong>(polygon)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves the bounding box of a polygon.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#pdf_to_magick_image-class_method" title="pdf_to_magick_image (class method)">.<strong>pdf_to_magick_image</strong>(pdf_stream, image_quality)  &#x21d2; MiniMagick::Image </a>
     
 
@@ -226,6 +298,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Transforms a PDF into a MagickImage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_page_content-class_method" title="read_page_content (class method)">.<strong>read_page_content</strong>(pdf_stream)  &#x21d2; MiniMagick::Image </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Loads a buffer into a MiniMagick Image.</p>
 </div></span>
   
 </li>
@@ -274,6 +370,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Mostly here so that IDEs don’t get confused on the type (@type annotation fails sometimes.).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_image_to_buffer-class_method" title="write_image_to_buffer (class method)">.<strong>write_image_to_buffer</strong>(image, buffer)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Writes a MiniMagick::Image to a buffer.</p>
 </div></span>
   
 </li>
@@ -358,7 +478,6 @@
       <pre class="lines">
 
 
-81
 82
 83
 84
@@ -367,10 +486,11 @@
 87
 88
 89
-90</pre>
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_calculate_dimensions_from_media_box'>calculate_dimensions_from_media_box</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='id identifier rubyid_media_box'>media_box</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_media_box'>media_box</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_media_box'>media_box</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -462,6 +582,19 @@
   
 </ul>
 
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Errors/MindeeImageError.html" title="Mindee::Errors::MindeeImageError (class)">Errors::MindeeImageError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -469,7 +602,6 @@
       <pre class="lines">
 
 
-61
 62
 63
 64
@@ -483,13 +615,14 @@
 72
 73
 74
-75</pre>
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_calculate_new_dimensions'>calculate_new_dimensions</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='comma'>,</span> <span class='label'>max_width:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_height:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Provided image could not be processed for resizing.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MindeeImageError.html" title="Mindee::Errors::MindeeImageError (class)">MindeeImageError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Provided image could not be processed for resizing.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_max_width'>max_width</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_max_height'>max_height</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 
@@ -498,8 +631,8 @@
 
   <span class='id identifier rubyid_scale_factor'>scale_factor</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_width_ratio'>width_ratio</span><span class='comma'>,</span> <span class='id identifier rubyid_height_ratio'>height_ratio</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
 
-  <span class='id identifier rubyid_new_width'>new_width</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span> <span class='op'>*</span> <span class='id identifier rubyid_scale_factor'>scale_factor</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
-  <span class='id identifier rubyid_new_height'>new_height</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span> <span class='op'>*</span> <span class='id identifier rubyid_scale_factor'>scale_factor</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='id identifier rubyid_new_width'>new_width</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='op'>*</span> <span class='id identifier rubyid_scale_factor'>scale_factor</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='id identifier rubyid_new_height'>new_height</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='op'>*</span> <span class='id identifier rubyid_scale_factor'>scale_factor</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
 
   <span class='lbracket'>[</span><span class='id identifier rubyid_new_width'>new_width</span><span class='comma'>,</span> <span class='id identifier rubyid_new_height'>new_height</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
@@ -586,6 +719,202 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="crop_image-class_method">
+  
+    .<strong>crop_image</strong>(image, min_max_x, min_max_y)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Crops a MiniMagick Image from a the given bounding box.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>MiniMagick::Image</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Input Image.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>min_max_x</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">Mindee::Geometry::MinMax</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>minimum &amp; maximum values for the x coordinates.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>min_max_y</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">Mindee::Geometry::MinMax</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>minimum &amp; maximum values for the y coordinates.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_crop_image'>crop_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='id identifier rubyid_min_max_x'>min_max_x</span><span class='comma'>,</span> <span class='id identifier rubyid_min_max_y'>min_max_y</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_width'>width</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='lbracket'>[</span><span class='symbol'>:width</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='id identifier rubyid_height'>height</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='lbracket'>[</span><span class='symbol'>:height</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+
+  <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jpg</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new_width'>new_width</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_min_max_x'>min_max_x</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span> <span class='op'>-</span> <span class='id identifier rubyid_min_max_x'>min_max_x</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_width'>width</span>
+  <span class='id identifier rubyid_new_height'>new_height</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_min_max_y'>min_max_y</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span> <span class='op'>-</span> <span class='id identifier rubyid_min_max_y'>min_max_y</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_height'>height</span>
+  <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_crop'>crop</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_width'>new_width</span><span class='embexpr_end'>}</span><span class='tstring_content'>x</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_height'>new_height</span><span class='embexpr_end'>}</span><span class='tstring_content'>+</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_min_max_x'>min_max_x</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>*</span> <span class='id identifier rubyid_width'>width</span><span class='embexpr_end'>}</span><span class='tstring_content'>+</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_min_max_y'>min_max_y</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>*</span> <span class='id identifier rubyid_height'>height</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_image'>image</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="determine_file_extension-class_method">
+  
+    .<strong>determine_file_extension</strong>(input_source)  &#x21d2; <tt>String</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Local input source.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A valid file extension.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159
+160
+161
+162</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_determine_file_extension'>determine_file_extension</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_pdf?'>pdf?</span> <span class='op'>||</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_filename'>filename</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='period'>.</span><span class='id identifier rubyid_end_with?'>end_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>pdf</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jpg</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>else</span>
+    <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_extname'>extname</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_filename'>filename</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="image_to_stringio-class_method">
   
     .<strong>image_to_stringio</strong>(image, format = &#39;JPEG&#39;)  &#x21d2; <tt>StringIO</tt> 
@@ -662,17 +991,17 @@
       <pre class="lines">
 
 
-47
 48
 49
 50
 51
 52
 53
-54</pre>
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_image_to_stringio'>image_to_stringio</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>JPEG</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='id identifier rubyid_format'>format</span>
@@ -681,6 +1010,76 @@
   <span class='id identifier rubyid_stringio'>stringio</span><span class='period'>.</span><span class='id identifier rubyid_rewind'>rewind</span>
 
   <span class='id identifier rubyid_stringio'>stringio</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="normalize_polygon-class_method">
+  
+    .<strong>normalize_polygon</strong>(polygon)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the bounding box of a polygon.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>polygon</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Point&gt;</tt>, <tt><span class='object_link'><a href="../Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_normalize_polygon'>normalize_polygon</span><span class='lparen'>(</span><span class='id identifier rubyid_polygon'>polygon</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_polygon'>polygon</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Polygon</a></span></span><span class='rparen'>)</span> <span class='op'>||</span>
+     <span class='lparen'>(</span><span class='id identifier rubyid_polygon'>polygon</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_polygon'>polygon</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry/Point.html" title="Mindee::Geometry::Point (class)">Point</a></span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_bounding_box'><span class='object_link'><a href="../Geometry.html#get_bounding_box-class_method" title="Mindee::Geometry.get_bounding_box (method)">get_bounding_box</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_polygon'>polygon</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_polygon'>polygon</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Geometry/Quadrilateral.html" title="Mindee::Geometry::Quadrilateral (class)">Quadrilateral</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_polygon'>polygon</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MindeeGeometryError.html" title="Mindee::Errors::MindeeGeometryError (class)">MindeeGeometryError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Provided polygon has an invalid type.</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -762,21 +1161,102 @@
       <pre class="lines">
 
 
-96
 97
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pdf_to_magick_image'>pdf_to_magick_image</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_stream'>pdf_stream</span><span class='comma'>,</span> <span class='id identifier rubyid_image_quality'>image_quality</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_compressed_image'>compressed_image</span> <span class='op'>=</span> <span class='const'>MiniMagick</span><span class='op'>::</span><span class='const'>Image</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_stream'>pdf_stream</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_compressed_image'>compressed_image</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jpg</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_compressed_image'>compressed_image</span><span class='period'>.</span><span class='id identifier rubyid_quality'>quality</span> <span class='id identifier rubyid_image_quality'>image_quality</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_compressed_image'>compressed_image</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_page_content-class_method">
+  
+    .<strong>read_page_content</strong>(pdf_stream)  &#x21d2; <tt>MiniMagick::Image</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Loads a buffer into a MiniMagick Image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pdf_stream</span>
+      
+      
+        <span class='type'>(<tt>StringIO</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Buffer containg the PDF</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>MiniMagick::Image</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid MiniMagick image handle.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_read_page_content'>read_page_content</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_stream'>pdf_stream</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_pdf_stream'>pdf_stream</span><span class='period'>.</span><span class='id identifier rubyid_rewind'>rewind</span>
+  <span class='const'>MiniMagick</span><span class='op'>::</span><span class='const'>Image</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_stream'>pdf_stream</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -956,20 +1436,94 @@
 38
 39
 40
-41</pre>
+41
+42</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to_image'>to_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:read</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:rewind</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>MiniMagick</span><span class='op'>::</span><span class='const'>Image</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_image'>image</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>StringIO</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>IO</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>File</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Tempfile</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_rewind'>rewind</span>
     <span class='const'>MiniMagick</span><span class='op'>::</span><span class='const'>Image</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>MiniMagick</span><span class='op'>::</span><span class='const'>Image</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_image'>image</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected an I/O object or a MiniMagick::Image. &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39; given instead.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_img_class'>img_class</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>?</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown format</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MindeeImageError.html" title="Mindee::Errors::MindeeImageError (class)">MindeeImageError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected an I/O object or a MiniMagick::Image. &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_img_class'>img_class</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39; given instead.</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_image_to_buffer-class_method">
+  
+    .<strong>write_image_to_buffer</strong>(image, buffer)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Writes a MiniMagick::Image to a buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>MiniMagick::Image</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a valid MiniMagick image.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>StringIO</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/image/image_utils.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_write_image_to_buffer'>write_image_to_buffer</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='id identifier rubyid_buffer'>buffer</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_buffer'>buffer</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -981,7 +1535,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:00 2025 by
+  Generated on Thu Feb 27 14:07:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

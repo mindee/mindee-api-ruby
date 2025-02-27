@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/extraction/common/extracted_image.rb,<br /> lib/mindee/extraction/common/image_extractor.rb,<br /> lib/mindee/extraction/pdf_extractor/extracted_pdf.rb,<br /> lib/mindee/extraction/pdf_extractor/pdf_extractor.rb,<br /> lib/mindee/extraction/tax_extractor/ocr_extractor.rb,<br /> lib/mindee/extraction/tax_extractor/tax_extractor.rb,<br /> lib/mindee/extraction/multi_receipts_extractor/multi_receipts_extractor.rb</span>
+  lib/mindee/extraction/multi_receipts_extractor.rb</span>
 </dd>
   </dl>
   
@@ -88,7 +88,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Image Extraction Module.</p>
+<p>Custom extraction module</p>
 
 
   </div>
@@ -96,31 +96,183 @@
 <div class="tags">
   
 
-</div><h2>Defined Under Namespace</h2>
-<p class="children">
+</div>
+
+
+
+
+
+
   
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Extraction/ImageExtractor.html" title="Mindee::Extraction::ImageExtractor (module)">ImageExtractor</a></span>, <span class='object_link'><a href="Extraction/PdfExtractor.html" title="Mindee::Extraction::PdfExtractor (module)">PdfExtractor</a></span>
+      <a href="#extract_receipts-class_method" title="extract_receipts (class method)">.<strong>extract_receipts</strong>(input_source, inference)  &#x21d2; Array&lt;ExtractedImage&gt; </a>
     
+
+    
+  </span>
   
-    
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Extraction/ExtractedImage.html" title="Mindee::Extraction::ExtractedImage (class)">ExtractedImage</a></span>, <span class='object_link'><a href="Extraction/MultiReceiptsExtractor.html" title="Mindee::Extraction::MultiReceiptsExtractor (class)">MultiReceiptsExtractor</a></span>, <span class='object_link'><a href="Extraction/OcrExtractor.html" title="Mindee::Extraction::OcrExtractor (class)">OcrExtractor</a></span>, <span class='object_link'><a href="Extraction/TaxExtractor.html" title="Mindee::Extraction::TaxExtractor (class)">TaxExtractor</a></span>
-    
   
-</p>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Multi-receipts extraction Extracts individual receipts from multi-receipts documents.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
 
 
 
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="extract_receipts-class_method">
+  
+    .<strong>extract_receipts</strong>(input_source, inference)  &#x21d2; <tt>Array&lt;ExtractedImage&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Multi-receipts extraction Extracts individual receipts from multi-receipts documents.</p>
 
 
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_source</span>
+      
+      
+        <span class='type'>(<tt>LocalInputSource</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Local Input Source to extract sub-receipts from.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>inference</span>
+      
+      
+        <span class='type'>(<tt>Inference</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Results of the inference.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;ExtractedImage&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Individual extracted receipts as an array of ExtractedMultiReceiptsImage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
 
 
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/extraction/multi_receipts_extractor.rb', line 12</span>
 
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extract_receipts'>extract_receipts</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_inference'>inference</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_images'>images</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_receipts'>receipts</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Errors/MindeeInputError.html" title="Mindee::Errors::MindeeInputError (class)">MindeeInputError</a></span></span><span class='comma'>,</span>
+          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>No possible receipts candidates found for Multi-Receipts extraction.</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='lparen'>(</span><span class='int'>0</span><span class='op'>...</span><span class='id identifier rubyid_input_source'>input_source</span><span class='period'>.</span><span class='id identifier rubyid_count_pages'>count_pages</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page_id'>page_id</span><span class='op'>|</span>
+    <span class='id identifier rubyid_receipt_positions'>receipt_positions</span> <span class='op'>=</span> <span class='id identifier rubyid_inference'>inference</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='lbracket'>[</span><span class='id identifier rubyid_page_id'>page_id</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_receipts'>receipts</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:bounding_box</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_images'>images</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span>
+      <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Image/ImageExtractor.html" title="Mindee::Image::ImageExtractor (module)">ImageExtractor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_extract_multiple_images_from_source'><span class='object_link'><a href="Image/ImageExtractor.html#extract_multiple_images_from_source-class_method" title="Mindee::Image::ImageExtractor.extract_multiple_images_from_source (method)">extract_multiple_images_from_source</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span> <span class='op'>+</span> <span class='int'>1</span><span class='comma'>,</span>
+                                                                        <span class='id identifier rubyid_receipt_positions'>receipt_positions</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_images'>images</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:00 2025 by
+  Generated on Thu Feb 27 14:07:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

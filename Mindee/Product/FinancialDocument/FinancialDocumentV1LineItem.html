@@ -593,7 +593,7 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='kw'>super</span>
   <span class='ivar'>@description</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@product_code</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>product_code</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@quantity</span> <span class='op'>=</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>quantity</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -1117,7 +1117,12 @@
 60
 61
 62
-63</pre>
+63
+64
+65
+66
+67
+68</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 52</span>
@@ -1126,12 +1131,17 @@
   <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@description</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:product_code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@product_code</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@quantity</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@tax_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_amount</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@tax_rate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_rate</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@total_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@total_amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@quantity</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@tax_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@tax_rate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_rate</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@total_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@total_amount</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_measure</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@unit_measure</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@unit_price</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@unit_price</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@unit_price</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@unit_price</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_printable'>printable</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1176,32 +1186,42 @@
       <pre class="lines">
 
 
-66
-67
-68
-69
-70
 71
 72
 73
 74
 75
 76
-77</pre>
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_table_printable_values'>table_printable_values</span>
   <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:description</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@description</span><span class='comma'>,</span> <span class='int'>36</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:product_code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@product_code</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@quantity</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@tax_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_amount</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@tax_rate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_rate</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@total_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@total_amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@quantity</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@quantity</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_amount</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@tax_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:tax_rate</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@tax_rate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@tax_rate</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:total_amount</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@total_amount</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@total_amount</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_measure</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_format_for_display'>format_for_display</span><span class='lparen'>(</span><span class='ivar'>@unit_measure</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@unit_price</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/Field.html" title="Mindee::Parsing::Standard::Field (class)">Field</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@unit_price</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable'>printable</span><span class='lbracket'>[</span><span class='symbol'>:unit_price</span><span class='rbracket'>]</span> <span class='op'>=</span>
+    <span class='ivar'>@unit_price</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html" title="Mindee::Parsing::Standard::BaseField (class)">BaseField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_float_to_string'><span class='object_link'><a href="../../Parsing/Standard/AbstractField.html#float_to_string-class_method" title="Mindee::Parsing::Standard::AbstractField.float_to_string (method)">float_to_string</a></span></span><span class='lparen'>(</span><span class='ivar'>@unit_price</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_printable'>printable</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1246,22 +1266,22 @@
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
-107</pre>
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='id identifier rubyid_printable_values'>printable_values</span>
@@ -1318,22 +1338,22 @@
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
 90
 91
-92</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_line_item.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_table_line'>to_table_line</span>
   <span class='id identifier rubyid_printable'>printable</span> <span class='op'>=</span> <span class='id identifier rubyid_table_printable_values'>table_printable_values</span>
@@ -1358,7 +1378,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:12 2025 by
+  Generated on Thu Feb 27 14:08:11 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

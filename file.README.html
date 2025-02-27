@@ -66,7 +66,7 @@
 
 <h2 id="label-Requirements">Requirements</h2>
 
-<p>The following Ruby versions are tested and supported: 2.6, 2.7, 3.0, 3.1, 3.2</p>
+<p>The following Ruby versions are tested and supported: 3.0, 3.1, 3.2, 3.3, 3.4</p>
 
 <h2 id="label-Quick+Start">Quick Start</h2>
 
@@ -95,22 +95,32 @@
 <p>Before making any changes, we recommend reviewing the following information to understand the purpose and potential impact of each environment variable:</p>
 <ul><li>
 <p><code>MINDEE_API_KEY</code>:</p>
-</li><li>
+<ul><li>
 <p><strong>Description</strong>: Your personal Mindee API Key as shown on the platform. Be careful not to show this publicly!</p>
 </li><li>
 <p><strong>Default Value</strong>: <code>nil</code></p>
+</li></ul>
 </li><li>
 <p><code>MINDEE_BASE_URL</code>:</p>
-</li><li>
+<ul><li>
 <p><strong>Description</strong>: The default base URL of the API endpoint. Use this variable to specify the root URL for API requests. Modify as needed for proxy configurations or changes in API endpoint location.</p>
 </li><li>
 <p><strong>Default Value</strong>: <code>https://api.mindee.net/v1</code></p>
+</li></ul>
 </li><li>
 <p><code>MINDEE_REQUEST_TIMEOUT</code>:</p>
-</li><li>
+<ul><li>
 <p><strong>Description</strong>: The default timeout for HTTP requests (in seconds).</p>
 </li><li>
 <p><strong>Default Value</strong>: <code>120</code></p>
+</li></ul>
+</li><li>
+<p><code>MINDEE_LOG_LEVEL</code>:</p>
+<ul><li>
+<p><strong>Description</strong>: The default logging level for the mindee logger.</p>
+</li><li>
+<p><strong>Default Value</strong>: <code>WARN</code></p>
+</li></ul>
 </li></ul>
 
 <h3 id="label-Loading+a+File+and+Parsing+It">Loading a File and Parsing It</h3>
@@ -125,8 +135,8 @@
 <span class='comment'># Load a file from disk
 </span><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span>
-  <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
-  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Invoice.html" title="Mindee::Product::Invoice (module)">Invoice</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Invoice/InvoiceV4.html" title="Mindee::Product::Invoice::InvoiceV4 (class)">InvoiceV4</a></span></span>
+        <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Invoice.html" title="Mindee::Product::Invoice (module)">Invoice</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Invoice/InvoiceV4.html" title="Mindee::Product::Invoice::InvoiceV4 (class)">InvoiceV4</a></span></span>
 <span class='rparen'>)</span>
 
 <span class='comment'># Print a full summary of the parsed data in RST format
@@ -166,15 +176,17 @@
 </span><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
 <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span>
-  <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
-  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/EU.html" title="Mindee::Product::EU (module)">EU</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/EU/LicensePlate.html" title="Mindee::Product::EU::LicensePlate (module)">LicensePlate</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/EU/LicensePlate/LicensePlateV1.html" title="Mindee::Product::EU::LicensePlate::LicensePlateV1 (class)">LicensePlateV1</a></span></span>
+        <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/EU.html" title="Mindee::Product::EU (module)">EU</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/EU/LicensePlate.html" title="Mindee::Product::EU::LicensePlate (module)">LicensePlate</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/EU/LicensePlate/LicensePlateV1.html" title="Mindee::Product::EU::LicensePlate::LicensePlateV1 (class)">LicensePlateV1</a></span></span>
 <span class='rparen'>)</span>
 
 <span class='comment'># Print a full summary of the parsed data in RST format
 </span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_document'>document</span>
 </code></pre>
 
-<h3 id="label-Custom+Documents+-28docTI+-26+Custom+APIs-29">Custom Documents (docTI &amp; Custom APIs)</h3>
+<h3 id="label-Universal+-+All+Other+Documents">Universal - All Other Documents</h3>
+
+<p>The Universal product acts as a catch-all for every and any API if it doesn’t have an assigned product name.</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mindee</span><span class='tstring_end'>&#39;</span></span>
 
@@ -188,9 +200,9 @@
 <span class='comment'># Load a file from disk
 </span><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
-<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_enqueue_and_parse'>enqueue_and_parse</span><span class='lparen'>(</span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span>
   <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
-  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Generated.html" title="Mindee::Product::Generated (module)">Generated</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Generated/GeneratedV1.html" title="Mindee::Product::Generated::GeneratedV1 (class)">GeneratedV1</a></span></span><span class='comma'>,</span>
+  <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Universal.html" title="Mindee::Product::Universal (module)">Universal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/Universal/Universal.html" title="Mindee::Product::Universal::Universal (class)">Universal</a></span></span><span class='comma'>,</span>
   <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span>
 <span class='rparen'>)</span>
 
@@ -205,13 +217,7 @@
 <span class='kw'>end</span>
 </code></pre>
 
-<h2 id="label-Asynchronously+Parsing+a+File">Asynchronously Parsing a File</h2>
-
-<p>This allows for easier handling of bursts of documents sent.</p>
-
-<p>Some products are only available asynchronously, check the example code directly on the Mindee platform.</p>
-
-<h3 id="label-Enqueue+and+Parse+a+Webhook+Response">Enqueue and Parse a Webhook Response</h3>
+<h2 id="label-Enqueueing+and+Parse+a+Webhook+Response">Enqueueing and Parse a Webhook Response</h2>
 
 <p>This is an optional way of handling asynchronous APIs.</p>
 
@@ -224,7 +230,7 @@
 </span><span class='id identifier rubyid_input_source'>input_source</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/path/to/the/file.ext</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
 
-<span class='comment'># Parse the file
+<span class='comment'># Send the file to the server
 </span><span class='id identifier rubyid_enqueue_response'>enqueue_response</span> <span class='op'>=</span> <span class='id identifier rubyid_mindee_client'>mindee_client</span><span class='period'>.</span><span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span>
   <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
   <span class='const'><span class='object_link'><a href="Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/InternationalId.html" title="Mindee::Product::InternationalId (module)">InternationalId</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Mindee/Product/InternationalId/InternationalIdV2.html" title="Mindee::Product::InternationalId::InternationalIdV2 (class)">InternationalIdV2</a></span></span>
@@ -278,49 +284,11 @@
 <ul><li>
 <p><a href="https://developers.mindee.com/docs/ruby-getting-started">Ruby Overview</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-api-builder-ocr">Custom OCR Ruby (Deprecated)</a></p>
+<p><a href="https://developers.mindee.com/docs/ruby-common-file-operations">Common file operations</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-generated-ocr">Generated API Ruby</a></p>
+<p><a href="https://developers.mindee.com/docs/ruby-global-products">Global products</a></p>
 </li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-invoice-ocr">Invoice OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-international-id-ocr">International Id OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-financial-document-ocr">Financial Document OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-passport-ocr">Passport OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-proof-of-address-ocr">Proof of Address OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-receipt-ocr">Receipt OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-resume-ocr">Resume OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-eu-license-plate-ocr">EU License Plate OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-eu-driver-license-ocr">EU Driver License OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-fr-bank-account-details-ocr">FR Bank Account Details OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-fr-bank-statement-ocr">FR Bank Statement OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-fr-health-card-ocr">FR Health Card OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-fr-carte-nationale-didentite-ocr">FR ID Card OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-us-bank-check-ocr">US Bank Check OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-us-driver-license-ocr">US Driver License OCR Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-us-w9-ocr">US W9 API Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-barcode-reader-ocr">Barcode Reader API Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-cropper-ocr">Cropper API Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-invoice-splitter-ocr">Invoice Splitter API Ruby</a></p>
-</li><li>
-<p><a href="https://developers.mindee.com/docs/ruby-multi-receipts-detector-ocr">Multi Receipts Detector API Ruby</a></p>
+<p><a href="https://developers.mindee.com/docs/ruby-localized-products">Localized products</a></p>
 </li></ul>
 
 <p>You can also take a look at the <a href="https://mindee.github.io/mindee-api-ruby/">Reference Documentation</a>.</p>
@@ -337,7 +305,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:00 2025 by
+  Generated on Thu Feb 27 14:07:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

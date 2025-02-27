@@ -86,7 +86,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Monkey-patching for Origami</p>
+<p>Collection of miscellaneous PDF operations,as well as some monkey-patching for Origami.</p>
 
 
   </div>
@@ -126,7 +126,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a content stream to the specified PDF page to display an image XObject.</p>
+</div></span>
   
 </li>
 
@@ -134,7 +136,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_xobject-class_method" title="create_xobject (class method)">.<strong>create_xobject</strong>(image)  &#x21d2; Object </a>
+      <a href="#create_xobject-class_method" title="create_xobject (class method)">.<strong>create_xobject</strong>(image)  &#x21d2; Origami::Graphics::ImageXObject </a>
     
 
     
@@ -148,7 +150,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates an image XObject from the provided image.</p>
+</div></span>
   
 </li>
 
@@ -156,7 +160,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#determine_colorspace-class_method" title="determine_colorspace (class method)">.<strong>determine_colorspace</strong>(image)  &#x21d2; Object </a>
+      <a href="#determine_colorspace-class_method" title="determine_colorspace (class method)">.<strong>determine_colorspace</strong>(image)  &#x21d2; Symbol </a>
     
 
     
@@ -170,7 +174,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the colorspace for an image based on its metadata.</p>
+</div></span>
   
 </li>
 
@@ -178,7 +184,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#determine_filter-class_method" title="determine_filter (class method)">.<strong>determine_filter</strong>(image)  &#x21d2; Object </a>
+      <a href="#determine_filter-class_method" title="determine_filter (class method)">.<strong>determine_filter</strong>(image)  &#x21d2; Symbol </a>
     
 
     
@@ -192,7 +198,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Determines the appropriate filter for an image based on its properties.</p>
+</div></span>
   
 </li>
 
@@ -200,7 +208,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#process_image_xobject-class_method" title="process_image_xobject (class method)">.<strong>process_image_xobject</strong>(image_data, image_quality, width, height)  &#x21d2; Object </a>
+      <a href="#process_image_xobject-class_method" title="process_image_xobject (class method)">.<strong>process_image_xobject</strong>(image_data, image_quality, width, height)  &#x21d2; Origami::Graphics::ImageXObject </a>
     
 
     
@@ -214,7 +222,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Processes an image into an image XObject for PDF embedding.</p>
+</div></span>
   
 </li>
 
@@ -236,7 +246,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the dimensions for the specified PDF page.</p>
+</div></span>
   
 </li>
 
@@ -258,7 +270,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Sets properties on the provided image XObject based on image metadata.</p>
+</div></span>
   
 </li>
 
@@ -266,7 +280,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#source_text%3F-class_method" title="source_text? (class method)">.<strong>source_text?</strong>(pdf_data)  &#x21d2; Boolean </a>
+      <a href="#source_text%3F-class_method" title="source_text? (class method)">.<strong>source_text?</strong>(pdf_data)  &#x21d2; bool </a>
     
 
     
@@ -290,7 +304,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#stream_has_text%3F-class_method" title="stream_has_text? (class method)">.<strong>stream_has_text?</strong>(stream)  &#x21d2; Boolean </a>
+      <a href="#stream_has_text%3F-class_method" title="stream_has_text? (class method)">.<strong>stream_has_text?</strong>(stream)  &#x21d2; bool </a>
     
 
     
@@ -337,7 +351,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Converts the current PDF document into a binary-encoded StringIO stream.</p>
+</div></span>
   
 </li>
 
@@ -360,20 +376,99 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a content stream to the specified PDF page to display an image XObject.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt>Origami::Page</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The PDF page to which content will be added.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>xobject_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name identifying the XObject.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The width for the transformation matrix.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The height for the transformation matrix.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-104
-105
-106
-107
-108</pre>
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 138</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_content_to_page'>add_content_to_page</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_xobject_name'>xobject_name</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>q\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_width'>width</span><span class='embexpr_end'>}</span><span class='tstring_content'> 0 0 </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_height'>height</span><span class='embexpr_end'>}</span><span class='tstring_content'> 0 0 cm\n/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_xobject_name'>xobject_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> Do\nQ\n</span><span class='tstring_end'>&quot;</span></span>
@@ -388,25 +483,76 @@
       <div class="method_details ">
   <h3 class="signature " id="create_xobject-class_method">
   
-    .<strong>create_xobject</strong>(image)  &#x21d2; <tt>Object</tt> 
+    .<strong>create_xobject</strong>(image)  &#x21d2; <tt>Origami::Graphics::ImageXObject</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates an image XObject from the provided image.</p>
+
+<p>Converts the given image to a binary stream using Mindee’s image utilities, then creates an Origami::Graphics::ImageXObject with a JPEG filter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>Minimagick::Image</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An image object with the necessary data and structure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Origami::Graphics::ImageXObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The created image XObject.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-73
-74
-75
-76</pre>
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_xobject'>create_xobject</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_image_io'>image_io</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Image/ImageUtils.html" title="Mindee::Image::ImageUtils (module)">ImageUtils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_image_to_stringio'><span class='object_link'><a href="../Image/ImageUtils.html#image_to_stringio-class_method" title="Mindee::Image::ImageUtils.image_to_stringio (method)">image_to_stringio</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
@@ -420,29 +566,78 @@
       <div class="method_details ">
   <h3 class="signature " id="determine_colorspace-class_method">
   
-    .<strong>determine_colorspace</strong>(image)  &#x21d2; <tt>Object</tt> 
+    .<strong>determine_colorspace</strong>(image)  &#x21d2; <tt>Symbol</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the colorspace for an image based on its metadata.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The image data hash.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>One of :DeviceCMYK, :DeviceGray or :DeviceRGB.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
-102</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_determine_colorspace'>determine_colorspace</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_colorspace'>colorspace</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>colorspace</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -460,29 +655,78 @@
       <div class="method_details ">
   <h3 class="signature " id="determine_filter-class_method">
   
-    .<strong>determine_filter</strong>(image)  &#x21d2; <tt>Object</tt> 
+    .<strong>determine_filter</strong>(image)  &#x21d2; <tt>Symbol</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines the appropriate filter for an image based on its properties.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The image data hash containing properties.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>One of :FlateDecode, :LZWDecode or :DCTDecode.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-86
-87
-88
-89
-90
-91
-92
-93</pre>
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_determine_filter'>determine_filter</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_filter'>filter</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>properties</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>filter</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -500,38 +744,135 @@
       <div class="method_details ">
   <h3 class="signature " id="process_image_xobject-class_method">
   
-    .<strong>process_image_xobject</strong>(image_data, image_quality, width, height)  &#x21d2; <tt>Object</tt> 
+    .<strong>process_image_xobject</strong>(image_data, image_quality, width, height)  &#x21d2; <tt>Origami::Graphics::ImageXObject</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Processes an image into an image XObject for PDF embedding.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image_data</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The raw image data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>image_quality</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The quality setting for image compression.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The desired width of the output image.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The desired height of the output image.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Origami::Graphics::ImageXObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The resulting image XObject.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131</pre>
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_image_xobject'>process_image_xobject</span><span class='lparen'>(</span><span class='id identifier rubyid_image_data'>image_data</span><span class='comma'>,</span> <span class='id identifier rubyid_image_quality'>image_quality</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_compressed_data'>compressed_data</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Image/ImageCompressor.html" title="Mindee::Image::ImageCompressor (module)">ImageCompressor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_compress_image'><span class='object_link'><a href="../Image/ImageCompressor.html#compress_image-class_method" title="Mindee::Image::ImageCompressor.compress_image (method)">compress_image</a></span></span><span class='lparen'>(</span>
@@ -564,19 +905,82 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the dimensions for the specified PDF page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt>Origami::Page</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The PDF page whose dimensions are being set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The target width of the page.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The target height of the page.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-110
-111
-112
-113</pre>
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_page_dimensions'>set_page_dimensions</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='symbol'>:MediaBox</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rbracket'>]</span>
@@ -596,22 +1000,69 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets properties on the provided image XObject based on image metadata.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xobject</span>
+      
+      
+        <span class='type'>(<tt>Origami::Graphics::ImageXObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The image XObject to update.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>image</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash containing image metadata (such as width, height, properties, etc.).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-78
-79
-80
-81
-82
-83
-84</pre>
+98
+99
+100
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_xobject_properties'>set_xobject_properties</span><span class='lparen'>(</span><span class='id identifier rubyid_xobject'>xobject</span><span class='comma'>,</span> <span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_xobject'>xobject</span><span class='period'>.</span><span class='id identifier rubyid_dictionary'>dictionary</span><span class='lbracket'>[</span><span class='symbol'>:BitsPerComponent</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>8</span>
@@ -628,7 +1079,7 @@
       <div class="method_details ">
   <h3 class="signature " id="source_text?-class_method">
   
-    .<strong>source_text?</strong>(pdf_data)  &#x21d2; <tt>Boolean</tt> 
+    .<strong>source_text?</strong>(pdf_data)  &#x21d2; <tt>bool</tt> 
   
 
   
@@ -655,6 +1106,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>Abinary-encoded stream representing the PDF file.</p>
+</div>
+      
     </li>
   
 </ul>
@@ -665,7 +1121,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -684,15 +1140,6 @@
       <pre class="lines">
 
 
-48
-49
-50
-51
-52
-53
-54
-55
-56
 57
 58
 59
@@ -707,10 +1154,19 @@
 68
 69
 70
-71</pre>
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_source_text?'>source_text?</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
   <span class='kw'>begin</span>
@@ -744,7 +1200,7 @@
       <div class="method_details ">
   <h3 class="signature " id="stream_has_text?-class_method">
   
-    .<strong>stream_has_text?</strong>(stream)  &#x21d2; <tt>Boolean</tt> 
+    .<strong>stream_has_text?</strong>(stream)  &#x21d2; <tt>bool</tt> 
   
 
   
@@ -786,7 +1242,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -805,16 +1261,16 @@
       <pre class="lines">
 
 
-37
-38
-39
-40
-41
-42
-43</pre>
+46
+47
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stream_has_text?'>stream_has_text?</span><span class='lparen'>(</span><span class='id identifier rubyid_stream'>stream</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_stream'>stream</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
@@ -846,11 +1302,35 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Converts the current PDF document into a binary-encoded StringIO stream.</p>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional settings to override default processing flags. - :delinearize [bool] (default: true) Whether to convert a linearized PDF to its full form. - :recompile [bool] (default: true) Whether to recompile the PDF after processing. - :decrypt [bool] (default: false) Whether to attempt to decrypt the PDF. - Other keys such as :intent, :rebuild_xrefs, :noindent, and :obfuscate may be modified automatically.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -860,6 +1340,11 @@
         <span class='type'>(<tt>StringIO</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>A binary-encoded stream representing the processed PDF.</p>
+</div>
       
     </li>
   
@@ -871,14 +1356,6 @@
       <pre class="lines">
 
 
-8
-9
-10
-11
-12
-13
-14
-15
 16
 17
 18
@@ -894,16 +1371,26 @@
 28
 29
 30
-31</pre>
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_io_stream'>to_io_stream</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>delinearize:</span> <span class='kw'>true</span><span class='comma'>,</span>
     <span class='label'>recompile:</span> <span class='kw'>true</span><span class='comma'>,</span>
     <span class='label'>decrypt:</span> <span class='kw'>false</span><span class='comma'>,</span>
+    <span class='label'>noindent:</span> <span class='kw'>nil</span><span class='comma'>,</span>
   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
 
@@ -915,7 +1402,7 @@
   <span class='kw'>end</span>
   <span class='id identifier rubyid_load_all_objects'>load_all_objects</span> <span class='kw'>unless</span> <span class='ivar'>@loaded</span>
 
-  <span class='id identifier rubyid_intents_as_pdfa1'>intents_as_pdfa1</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:intent</span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>%r{</span><span class='tstring_content'>pdf[/-]?A1?/i</span><span class='regexp_end'>}</span></span>
+  <span class='id identifier rubyid_intents_as_pdfa1'>intents_as_pdfa1</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:intent</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>%r{</span><span class='tstring_content'>pdf[/-]?A1?/i</span><span class='regexp_end'>}</span></span>
   <span class='id identifier rubyid_delinearize!'>delinearize!</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:delinearize</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_linearized?'>linearized?</span>
   <span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:recompile</span><span class='rbracket'>]</span>
 
@@ -933,7 +1420,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:01 2025 by
+  Generated on Thu Feb 27 14:07:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

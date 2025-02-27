@@ -247,7 +247,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#nutrients-instance_method" title="#nutrients (instance method)">#<strong>nutrients</strong>  &#x21d2; Array&lt;Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient&gt; </a>
+      <a href="#nutrients-instance_method" title="#nutrients (instance method)">#<strong>nutrients</strong>  &#x21d2; Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients </a>
     
 
     
@@ -684,30 +684,106 @@
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_document.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
-  <span class='ivar'>@added_sugars</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1AddedSugar.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar (class)">NutritionFactsLabelV1AddedSugar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1AddedSugar.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>added_sugars</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@calories</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Calorie.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie (class)">NutritionFactsLabelV1Calorie</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Calorie.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>calories</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@cholesterol</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Cholesterol.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol (class)">NutritionFactsLabelV1Cholesterol</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Cholesterol.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>cholesterol</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@dietary_fiber</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1DietaryFiber.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber (class)">NutritionFactsLabelV1DietaryFiber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1DietaryFiber.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dietary_fiber</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@nutrients</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nutrients</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
-    <span class='ivar'>@nutrients</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Nutrient.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient (class)">NutritionFactsLabelV1Nutrient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Nutrient.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='ivar'>@protein</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Protein.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Protein (class)">NutritionFactsLabelV1Protein</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Protein.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Protein#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>protein</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@saturated_fat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1SaturatedFat.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat (class)">NutritionFactsLabelV1SaturatedFat</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1SaturatedFat.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>saturated_fat</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@serving_per_box</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html" title="Mindee::Parsing::Standard::AmountField (class)">AmountField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html#initialize-instance_method" title="Mindee::Parsing::Standard::AmountField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>serving_per_box</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@serving_size</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1ServingSize.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize (class)">NutritionFactsLabelV1ServingSize</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1ServingSize.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>serving_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@sodium</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Sodium.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium (class)">NutritionFactsLabelV1Sodium</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Sodium.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sodium</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@total_carbohydrate</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TotalCarbohydrate.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate (class)">NutritionFactsLabelV1TotalCarbohydrate</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TotalCarbohydrate.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_carbohydrate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@total_fat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TotalFat.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat (class)">NutritionFactsLabelV1TotalFat</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TotalFat.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_fat</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@total_sugars</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TotalSugar.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar (class)">NutritionFactsLabelV1TotalSugar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TotalSugar.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_sugars</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@trans_fat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TransFat.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat (class)">NutritionFactsLabelV1TransFat</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TransFat.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>trans_fat</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@added_sugars</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1AddedSugar.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar (class)">NutritionFactsLabelV1AddedSugar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1AddedSugar.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>added_sugars</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@calories</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Calorie.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie (class)">NutritionFactsLabelV1Calorie</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Calorie.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>calories</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@cholesterol</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Cholesterol.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol (class)">NutritionFactsLabelV1Cholesterol</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Cholesterol.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>cholesterol</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@dietary_fiber</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1DietaryFiber.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber (class)">NutritionFactsLabelV1DietaryFiber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1DietaryFiber.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1DietaryFiber#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dietary_fiber</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@nutrients</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Nutrients.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients (class)">NutritionFactsLabelV1Nutrients</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Nutrients.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nutrients</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@protein</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Protein.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Protein (class)">NutritionFactsLabelV1Protein</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Protein.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Protein#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>protein</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@saturated_fat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1SaturatedFat.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat (class)">NutritionFactsLabelV1SaturatedFat</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1SaturatedFat.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>saturated_fat</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@serving_per_box</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html" title="Mindee::Parsing::Standard::AmountField (class)">AmountField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/AmountField.html#initialize-instance_method" title="Mindee::Parsing::Standard::AmountField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>serving_per_box</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@serving_size</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1ServingSize.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize (class)">NutritionFactsLabelV1ServingSize</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1ServingSize.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>serving_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@sodium</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1Sodium.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium (class)">NutritionFactsLabelV1Sodium</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1Sodium.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Sodium#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sodium</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@total_carbohydrate</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TotalCarbohydrate.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate (class)">NutritionFactsLabelV1TotalCarbohydrate</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TotalCarbohydrate.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalCarbohydrate#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_carbohydrate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@total_fat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TotalFat.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat (class)">NutritionFactsLabelV1TotalFat</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TotalFat.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalFat#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_fat</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@total_sugars</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TotalSugar.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar (class)">NutritionFactsLabelV1TotalSugar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TotalSugar.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TotalSugar#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>total_sugars</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@trans_fat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NutritionFactsLabel.html" title="Mindee::Product::NutritionFactsLabel (module)">NutritionFactsLabel</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="NutritionFactsLabelV1TransFat.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat (class)">NutritionFactsLabelV1TransFat</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="NutritionFactsLabelV1TransFat.html#initialize-instance_method" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1TransFat#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>trans_fat</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -948,7 +1024,7 @@
       <div class="method_details ">
   <h3 class="signature " id="nutrients-instance_method">
   
-    #<strong>nutrients</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="NutritionFactsLabelV1Nutrient.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient (class)">Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+    #<strong>nutrients</strong>  &#x21d2; <tt><span class='object_link'><a href="NutritionFactsLabelV1Nutrients.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients (class)">Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -970,7 +1046,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="NutritionFactsLabelV1Nutrient.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient (class)">Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrient</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="NutritionFactsLabelV1Nutrients.html" title="Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients (class)">Mindee::Product::NutritionFactsLabel::NutritionFactsLabelV1Nutrients</a></span></tt>)</span>
       
       
       
@@ -1547,53 +1623,53 @@
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
 129
 130
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_document.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_document.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_serving_size'>serving_size</span> <span class='op'>=</span> <span class='ivar'>@serving_size</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1649,7 +1725,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:13 2025 by
+  Generated on Thu Feb 27 14:08:12 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

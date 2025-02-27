@@ -222,17 +222,25 @@
 16
 17
 18
-19</pre>
+19
+20
+21
+22
+23</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/product/fr/id_card/id_card_v1_page.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
-  <span class='ivar'>@prediction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="IdCardV1PagePrediction.html" title="Mindee::Product::FR::IdCard::IdCardV1PagePrediction (class)">IdCardV1PagePrediction</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="IdCardV1PagePrediction.html#initialize-instance_method" title="Mindee::Product::FR::IdCard::IdCardV1PagePrediction#initialize (method)">new</a></span></span><span class='lparen'>(</span>
-    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='rparen'>)</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@prediction</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+                  <span class='kw'>nil</span>
+                <span class='kw'>else</span>
+                  <span class='const'><span class='object_link'><a href="IdCardV1PagePrediction.html" title="Mindee::Product::FR::IdCard::IdCardV1PagePrediction (class)">IdCardV1PagePrediction</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="IdCardV1PagePrediction.html#initialize-instance_method" title="Mindee::Product::FR::IdCard::IdCardV1PagePrediction#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+                    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+                    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+                  <span class='rparen'>)</span>
+                <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -245,7 +253,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:04 2025 by
+  Generated on Thu Feb 27 14:08:03 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

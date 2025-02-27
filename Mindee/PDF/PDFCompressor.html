@@ -261,6 +261,22 @@
   
     <li>
       
+        <span class='name'>pdf_data</span>
+      
+      
+        <span class='type'>(<tt>StringIO</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>StringIO handle of the file.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>quality</span>
       
       
@@ -282,7 +298,7 @@
         <span class='name'>force_source_text_compression</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>false</tt>)</em>
@@ -300,7 +316,7 @@
         <span class='name'>disable_source_text</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>true</tt>)</em>
@@ -322,8 +338,6 @@
       <pre class="lines">
 
 
-14
-15
 16
 17
 18
@@ -346,22 +360,24 @@
 35
 36
 37
-38</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_compress_pdf'>compress_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='comma'>,</span> <span class='label'>quality:</span> <span class='int'>85</span><span class='comma'>,</span> <span class='label'>force_source_text_compression:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>disable_source_text:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="PDFTools.html" title="Mindee::PDF::PDFTools (module)">PDFTools</a></span></span><span class='period'>.</span><span class='id identifier rubyid_source_text?'><span class='object_link'><a href="PDFTools.html#source_text%3F-class_method" title="Mindee::PDF::PDFTools.source_text? (method)">source_text?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_force_source_text_compression'>force_source_text_compression</span>
       <span class='kw'>if</span> <span class='id identifier rubyid_disable_source_text'>disable_source_text</span>
-        <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\e[33m[WARNING] Re-writing PDF source-text is an EXPERIMENTAL feature.\e[0m</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Re-writing PDF source-text is an EXPERIMENTAL feature.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
       <span class='kw'>else</span>
-        <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\e[33m[WARNING] Source-file contains text, but disable_source_text flag is ignored. </span><span class='tstring_end'>&quot;</span></span> \
-             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Resulting file will not contain any embedded text.\e[0m</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Source-file contains text, but disable_source_text flag is ignored. </span><span class='tstring_end'>&#39;</span></span> \
+                    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Resulting file will not contain any embedded text.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
       <span class='kw'>end</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\e[33m[WARNING] Source-text detected in input PDF. Aborting operation.\e[0m</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Source-text detected in input PDF. Aborting operation.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
       <span class='kw'>return</span> <span class='id identifier rubyid_pdf_data'>pdf_data</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -407,7 +423,7 @@
         <span class='name'>pages</span>
       
       
-        <span class='type'>(<tt>Array</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Origami::Page&gt;</tt>)</span>
       
       
       
@@ -423,7 +439,7 @@
         <span class='name'>disable_source_text</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -477,9 +493,6 @@
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -487,15 +500,16 @@
 62
 63
 64
-65</pre>
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_output_pdf'>create_output_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_pages'>pages</span><span class='comma'>,</span> <span class='id identifier rubyid_disable_source_text'>disable_source_text</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_output_pdf'>output_pdf</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>PDF</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='comment'># NOTE: Page order and XObject handling require adjustment due to origami adding the last page first.
-</span>  <span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_rotate!'>rotate!</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>&gt;=</span> <span class='int'>2</span>
+  <span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_rotate!'>rotate!</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>&gt;=</span> <span class='int'>2</span>
 
   <span class='id identifier rubyid_inject_text'>inject_text</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='comma'>,</span> <span class='id identifier rubyid_pages'>pages</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_disable_source_text'>disable_source_text</span>
 
@@ -570,8 +584,6 @@
       <pre class="lines">
 
 
-70
-71
 72
 73
 74
@@ -592,10 +604,12 @@
 89
 90
 91
-92</pre>
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inject_text'>inject_text</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='comma'>,</span> <span class='id identifier rubyid_pages'>pages</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_reader'>reader</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../top-level-namespace.html#PDFReader-constant" title="PDFReader (constant)">PDFReader</a></span></span><span class='op'>::</span><span class='const'>Reader</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
@@ -732,8 +746,6 @@
       <pre class="lines">
 
 
-100
-101
 102
 103
 104
@@ -746,10 +758,12 @@
 111
 112
 113
-114</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_pdf_page'>process_pdf_page</span><span class='lparen'>(</span><span class='id identifier rubyid_page_stream'>page_stream</span><span class='comma'>,</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='comma'>,</span> <span class='id identifier rubyid_image_quality'>image_quality</span><span class='comma'>,</span> <span class='id identifier rubyid_media_box'>media_box</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new_page'>new_page</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>Page</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -851,18 +865,20 @@
       <pre class="lines">
 
 
-44
-45
 46
 47
-48</pre>
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_pdf_pages'>process_pdf_pages</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf'>pdf</span><span class='comma'>,</span> <span class='id identifier rubyid_quality'>quality</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pdf'>pdf</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='period'>.</span><span class='id identifier rubyid_with_index'>with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='op'>|</span>
-    <span class='id identifier rubyid_process_pdf_page'>process_pdf_page</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PDF.html" title="Mindee::PDF (module)">PDF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="PdfProcessor.html" title="Mindee::PDF::PdfProcessor (module)">PdfProcessor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_page'><span class='object_link'><a href="PdfProcessor.html#get_page-class_method" title="Mindee::PDF::PdfProcessor.get_page (method)">get_page</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_pdf'>pdf</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='id identifier rubyid_quality'>quality</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='symbol'>:MediaBox</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_retrieved_page'>retrieved_page</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PDF.html" title="Mindee::PDF (module)">PDF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="PDFProcessor.html" title="Mindee::PDF::PDFProcessor (module)">PDFProcessor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_page'><span class='object_link'><a href="PDFProcessor.html#get_page-class_method" title="Mindee::PDF::PDFProcessor.get_page (method)">get_page</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_pdf'>pdf</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_process_pdf_page'>process_pdf_page</span><span class='lparen'>(</span><span class='id identifier rubyid_retrieved_page'>retrieved_page</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='id identifier rubyid_quality'>quality</span><span class='comma'>,</span> <span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='symbol'>:MediaBox</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -875,7 +891,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:01 2025 by
+  Generated on Thu Feb 27 14:07:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

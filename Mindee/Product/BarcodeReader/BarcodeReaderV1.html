@@ -177,6 +177,64 @@
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_async-class_method" title="has_async (class method)">.<strong>has_async</strong>  &#x21d2; bool </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether this product has access to an asynchronous endpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_sync-class_method" title="has_sync (class method)">.<strong>has_sync</strong>  &#x21d2; bool </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Whether this product has access to synchronous endpoint.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -184,7 +242,7 @@
   
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../../Parsing/Common/Inference.html" title="Mindee::Parsing::Common::Inference (class)">Mindee::Parsing::Common::Inference</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../Parsing/Common/Inference.html#is_rotation_applied-instance_method" title="Mindee::Parsing::Common::Inference#is_rotation_applied (method)">#is_rotation_applied</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#pages-instance_method" title="Mindee::Parsing::Common::Inference#pages (method)">#pages</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#prediction-instance_method" title="Mindee::Parsing::Common::Inference#prediction (method)">#prediction</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#product-instance_method" title="Mindee::Parsing::Common::Inference#product (method)">#product</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../../Parsing/Common/Inference.html#endpoint_name-instance_method" title="Mindee::Parsing::Common::Inference#endpoint_name (method)">#endpoint_name</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#endpoint_version-instance_method" title="Mindee::Parsing::Common::Inference#endpoint_version (method)">#endpoint_version</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#has_async-instance_method" title="Mindee::Parsing::Common::Inference#has_async (method)">#has_async</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#has_sync-instance_method" title="Mindee::Parsing::Common::Inference#has_sync (method)">#has_sync</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#is_rotation_applied-instance_method" title="Mindee::Parsing::Common::Inference#is_rotation_applied (method)">#is_rotation_applied</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#pages-instance_method" title="Mindee::Parsing::Common::Inference#pages (method)">#pages</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#prediction-instance_method" title="Mindee::Parsing::Common::Inference#prediction (method)">#prediction</a></span>, <span class='object_link'><a href="../../Parsing/Common/Inference.html#product-instance_method" title="Mindee::Parsing::Common::Inference#product (method)">#product</a></span></p>
 
 
   
@@ -279,8 +337,6 @@
       <pre class="lines">
 
 
-17
-18
 19
 20
 21
@@ -291,16 +347,14 @@
 26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/barcode_reader/barcode_reader_v1.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/barcode_reader/barcode_reader_v1.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
   <span class='ivar'>@prediction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BarcodeReaderV1Document.html" title="Mindee::Product::BarcodeReader::BarcodeReaderV1Document (class)">BarcodeReaderV1Document</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BarcodeReaderV1Document.html#initialize-instance_method" title="Mindee::Product::BarcodeReader::BarcodeReaderV1Document#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@pages</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>pages</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>prediction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-      <span class='ivar'>@pages</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="BarcodeReaderV1Page.html" title="Mindee::Product::BarcodeReader::BarcodeReaderV1Page (class)">BarcodeReaderV1Page</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BarcodeReaderV1Page.html#initialize-instance_method" title="Mindee::Product::BarcodeReader::BarcodeReaderV1Page#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='rparen'>)</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
+    <span class='ivar'>@pages</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="BarcodeReaderV1Page.html" title="Mindee::Product::BarcodeReader::BarcodeReaderV1Page (class)">BarcodeReaderV1Page</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BarcodeReaderV1Page.html#initialize-instance_method" title="Mindee::Product::BarcodeReader::BarcodeReaderV1Page#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -425,13 +479,125 @@
 </table>
 </div>
     
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="has_async-class_method">
+  
+    .<strong>has_async</strong>  &#x21d2; <tt>bool</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether this product has access to an asynchronous endpoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>bool</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/barcode_reader/barcode_reader_v1.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_async'>has_async</span>
+  <span class='ivar'>@has_async</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="has_sync-class_method">
+  
+    .<strong>has_sync</strong>  &#x21d2; <tt>bool</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Whether this product has access to synchronous endpoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>bool</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/barcode_reader/barcode_reader_v1.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_sync'>has_sync</span>
+  <span class='ivar'>@has_sync</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:07 2025 by
+  Generated on Thu Feb 27 14:08:05 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

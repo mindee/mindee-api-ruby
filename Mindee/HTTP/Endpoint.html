@@ -349,7 +349,10 @@
 43
 44
 45
-46</pre>
+46
+47
+48
+49</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 38</span>
@@ -359,6 +362,9 @@
   <span class='ivar'>@url_name</span> <span class='op'>=</span> <span class='id identifier rubyid_url_name'>url_name</span>
   <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_version'>version</span>
   <span class='ivar'>@request_timeout</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#REQUEST_TIMEOUT_ENV_NAME-constant" title="Mindee::HTTP::REQUEST_TIMEOUT_ENV_NAME (constant)">REQUEST_TIMEOUT_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#TIMEOUT_DEFAULT-constant" title="Mindee::HTTP::TIMEOUT_DEFAULT (constant)">TIMEOUT_DEFAULT</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_api_key'>api_key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#API_KEY_ENV_NAME-constant" title="Mindee::HTTP::API_KEY_ENV_NAME (constant)">API_KEY_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#API_KEY_DEFAULT-constant" title="Mindee::HTTP::API_KEY_DEFAULT (constant)">API_KEY_DEFAULT</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>API key set from environment</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
   <span class='ivar'>@api_key</span> <span class='op'>=</span> <span class='id identifier rubyid_api_key'>api_key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_api_key'>api_key</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#API_KEY_ENV_NAME-constant" title="Mindee::HTTP::API_KEY_ENV_NAME (constant)">API_KEY_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#API_KEY_DEFAULT-constant" title="Mindee::HTTP::API_KEY_DEFAULT (constant)">API_KEY_DEFAULT</a></span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_api_key'>api_key</span>
   <span class='id identifier rubyid_base_url'>base_url</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../HTTP.html#BASE_URL_ENV_NAME-constant" title="Mindee::HTTP::BASE_URL_ENV_NAME (constant)">BASE_URL_ENV_NAME</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../HTTP.html#BASE_URL_DEFAULT-constant" title="Mindee::HTTP::BASE_URL_DEFAULT (constant)">BASE_URL_DEFAULT</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@url_root</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_url'>base_url</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>/products/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@owner</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@url_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/v</span><span class='embexpr_beg'>#{</span><span class='ivar'>@version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -596,19 +602,19 @@
       <pre class="lines">
 
 
-93
-94
-95
-96
-97
-98
-99
-100
 101
-102</pre>
+102
+103
+104
+105
+106
+107
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -617,7 +623,7 @@
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_async_response?'><span class='object_link'><a href="ResponseValidation.html#valid_async_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_async_response? (method)">valid_async_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_clean_request!'><span class='object_link'><a href="ResponseValidation.html#clean_request!-class_method" title="Mindee::HTTP::ResponseValidation.clean_request! (method)">clean_request!</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Error.html" title="Mindee::HTTP::Error (module)">Error</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_error'><span class='object_link'><a href="Error.html#handle_error-class_method" title="Mindee::HTTP::Error.handle_error (method)">handle_error</a></span></span><span class='lparen'>(</span><span class='ivar'>@url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ErrorHandler.html" title="Mindee::HTTP::ErrorHandler (module)">ErrorHandler</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_error'><span class='object_link'><a href="ErrorHandler.html#handle_error-class_method" title="Mindee::HTTP::ErrorHandler.handle_error (method)">handle_error</a></span></span><span class='lparen'>(</span><span class='ivar'>@url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_error'>error</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -651,7 +657,7 @@
         <span class='name'>input_source</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="../Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="../Input/Source/URLInputSource.html" title="Mindee::Input::Source::URLInputSource (class)">Mindee::Input::Source::URLInputSource</a></span></tt>)</span>
       
       
       
@@ -662,7 +668,7 @@
         <span class='name'>all_words</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -678,7 +684,7 @@
         <span class='name'>full_text</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -694,7 +700,7 @@
         <span class='name'>close_file</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -710,7 +716,7 @@
         <span class='name'>cropper</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -743,9 +749,6 @@
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -758,10 +761,15 @@
 67
 68
 69
-70</pre>
+70
+71
+72
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_predict'>predict</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
@@ -772,11 +780,13 @@
     <span class='label'>close_file:</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span>
     <span class='label'>cropper:</span> <span class='id identifier rubyid_cropper'>cropper</span>
   <span class='rparen'>)</span>
-  <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_sync_response?'><span class='object_link'><a href="ResponseValidation.html#valid_sync_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_sync_response? (method)">valid_sync_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:body</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_sync_response?'><span class='object_link'><a href="ResponseValidation.html#valid_sync_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_sync_response? (method)">valid_sync_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
 
-  <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_clean_request!'><span class='object_link'><a href="ResponseValidation.html#clean_request!-class_method" title="Mindee::HTTP::ResponseValidation.clean_request! (method)">clean_request!</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Error.html" title="Mindee::HTTP::Error (module)">Error</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_error'><span class='object_link'><a href="Error.html#handle_error-class_method" title="Mindee::HTTP::Error.handle_error (method)">handle_error</a></span></span><span class='lparen'>(</span><span class='ivar'>@url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_clean_request!'><span class='object_link'><a href="ResponseValidation.html#clean_request!-class_method" title="Mindee::HTTP::ResponseValidation.clean_request! (method)">clean_request!</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ErrorHandler.html" title="Mindee::HTTP::ErrorHandler (module)">ErrorHandler</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_error'><span class='object_link'><a href="ErrorHandler.html#handle_error-class_method" title="Mindee::HTTP::ErrorHandler.handle_error (method)">handle_error</a></span></span><span class='lparen'>(</span><span class='ivar'>@url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_error'>error</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -810,7 +820,7 @@
         <span class='name'>input_source</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="../Input/Source/UrlInputSource.html" title="Mindee::Input::Source::UrlInputSource (class)">Mindee::Input::Source::UrlInputSource</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>, <tt><span class='object_link'><a href="../Input/Source/URLInputSource.html" title="Mindee::Input::Source::URLInputSource (class)">Mindee::Input::Source::URLInputSource</a></span></tt>)</span>
       
       
       
@@ -821,7 +831,7 @@
         <span class='name'>all_words</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -837,7 +847,7 @@
         <span class='name'>full_text</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -853,7 +863,7 @@
         <span class='name'>close_file</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -869,7 +879,7 @@
         <span class='name'>cropper</span>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>bool</tt>)</span>
       
       
       
@@ -902,28 +912,34 @@
       <pre class="lines">
 
 
-79
-80
-81
-82
-83
 84
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/endpoint.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_check_api_key'>check_api_key</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_document_queue_req_get'>document_queue_req_get</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span> <span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span> <span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span> <span class='id identifier rubyid_cropper'>cropper</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_async_response?'><span class='object_link'><a href="ResponseValidation.html#valid_async_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_async_response? (method)">valid_async_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:body</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_hashed_response'>hashed_response</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='label'>object_class:</span> <span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_async_response?'><span class='object_link'><a href="ResponseValidation.html#valid_async_response%3F-class_method" title="Mindee::HTTP::ResponseValidation.valid_async_response? (method)">valid_async_response?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
 
-  <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_clean_request!'><span class='object_link'><a href="ResponseValidation.html#clean_request!-class_method" title="Mindee::HTTP::ResponseValidation.clean_request! (method)">clean_request!</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Error.html" title="Mindee::HTTP::Error (module)">Error</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_error'><span class='object_link'><a href="Error.html#handle_error-class_method" title="Mindee::HTTP::Error.handle_error (method)">handle_error</a></span></span><span class='lparen'>(</span><span class='ivar'>@url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="ResponseValidation.html" title="Mindee::HTTP::ResponseValidation (module)">ResponseValidation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_clean_request!'><span class='object_link'><a href="ResponseValidation.html#clean_request!-class_method" title="Mindee::HTTP::ResponseValidation.clean_request! (method)">clean_request!</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ErrorHandler.html" title="Mindee::HTTP::ErrorHandler (module)">ErrorHandler</a></span></span><span class='period'>.</span><span class='id identifier rubyid_handle_error'><span class='object_link'><a href="ErrorHandler.html#handle_error-class_method" title="Mindee::HTTP::ErrorHandler.handle_error (method)">handle_error</a></span></span><span class='lparen'>(</span><span class='ivar'>@url_name</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_error'>error</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -936,7 +952,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:01 2025 by
+  Generated on Thu Feb 27 14:07:59 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

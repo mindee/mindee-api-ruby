@@ -1,3 +1,8 @@
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
 require 'mindee'
 
 # Init a new client
@@ -14,9 +19,9 @@ custom_endpoint = mindee_client.create_endpoint(
 )
 
 # Parse the file
-result = mindee_client.enqueue_and_parse(
+result = mindee_client.parse(
   input_source,
-  Mindee::Product::Generated::GeneratedV1,
+  Mindee::Product::Universal::Universal,
   endpoint: custom_endpoint
 )
 

@@ -326,6 +326,19 @@
   
 </ul>
 
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Errors/MindeeAPIError.html" title="Mindee::Errors::MindeeAPIError (class)">Errors::MindeeAPIError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -333,27 +346,29 @@
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122</pre>
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Handling API response</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@raw_http</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Invalid response format.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Errors/MindeeAPIError.html" title="Mindee::Errors::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Invalid response format.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_http_response'>http_response</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
   <span class='ivar'>@api_request</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ApiRequest.html" title="Mindee::Parsing::Common::ApiRequest (class)">ApiRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ApiRequest.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiRequest#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_http_response'>http_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
 
@@ -414,12 +429,12 @@
       <pre class="lines">
 
 
-102
-103
-104</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_api_request'>api_request</span>
   <span class='ivar'>@api_request</span>
@@ -468,12 +483,12 @@
       <pre class="lines">
 
 
-98
-99
-100</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_document'>document</span>
   <span class='ivar'>@document</span>
@@ -522,12 +537,12 @@
       <pre class="lines">
 
 
-100
-101
-102</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_job'>job</span>
   <span class='ivar'>@job</span>
@@ -576,12 +591,12 @@
       <pre class="lines">
 
 
-104
-105
-106</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/api_response.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raw_http'>raw_http</span>
   <span class='ivar'>@raw_http</span>
@@ -597,7 +612,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:03 2025 by
+  Generated on Thu Feb 27 14:08:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

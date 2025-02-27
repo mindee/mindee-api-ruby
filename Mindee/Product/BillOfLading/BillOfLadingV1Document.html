@@ -189,7 +189,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#carrier_items-instance_method" title="#carrier_items (instance method)">#<strong>carrier_items</strong>  &#x21d2; Array&lt;Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem&gt; </a>
+      <a href="#carrier_items-instance_method" title="#carrier_items (instance method)">#<strong>carrier_items</strong>  &#x21d2; Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems </a>
     
 
     
@@ -594,27 +594,81 @@
 65
 66
 67
-68</pre>
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/product/bill_of_lading/bill_of_lading_v1_document.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
-  <span class='ivar'>@bill_of_lading_number</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bill_of_lading_number</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@carrier</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BillOfLadingV1Carrier.html" title="Mindee::Product::BillOfLading::BillOfLadingV1Carrier (class)">BillOfLadingV1Carrier</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1Carrier.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1Carrier#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>carrier</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@carrier_items</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>carrier_items</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
-    <span class='ivar'>@carrier_items</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="BillOfLadingV1CarrierItem.html" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem (class)">BillOfLadingV1CarrierItem</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1CarrierItem.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='ivar'>@consignee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BillOfLadingV1Consignee.html" title="Mindee::Product::BillOfLading::BillOfLadingV1Consignee (class)">BillOfLadingV1Consignee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1Consignee.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1Consignee#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>consignee</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@date_of_issue</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/DateField.html" title="Mindee::Parsing::Standard::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/DateField.html#initialize-instance_method" title="Mindee::Parsing::Standard::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>date_of_issue</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@departure_date</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/DateField.html" title="Mindee::Parsing::Standard::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/DateField.html#initialize-instance_method" title="Mindee::Parsing::Standard::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>departure_date</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@notify_party</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BillOfLadingV1NotifyParty.html" title="Mindee::Product::BillOfLading::BillOfLadingV1NotifyParty (class)">BillOfLadingV1NotifyParty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1NotifyParty.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1NotifyParty#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>notify_party</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@place_of_delivery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>place_of_delivery</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@port_of_discharge</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>port_of_discharge</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@port_of_loading</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>port_of_loading</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
-  <span class='ivar'>@shipper</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BillOfLadingV1Shipper.html" title="Mindee::Product::BillOfLading::BillOfLadingV1Shipper (class)">BillOfLadingV1Shipper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1Shipper.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1Shipper#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>shipper</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@bill_of_lading_number</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bill_of_lading_number</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@carrier</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BillOfLading.html" title="Mindee::Product::BillOfLading (module)">BillOfLading</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BillOfLadingV1Carrier.html" title="Mindee::Product::BillOfLading::BillOfLadingV1Carrier (class)">BillOfLadingV1Carrier</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1Carrier.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1Carrier#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>carrier</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@carrier_items</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BillOfLading.html" title="Mindee::Product::BillOfLading (module)">BillOfLading</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BillOfLadingV1CarrierItems.html" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems (class)">BillOfLadingV1CarrierItems</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1CarrierItems.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>carrier_items</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@consignee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BillOfLading.html" title="Mindee::Product::BillOfLading (module)">BillOfLading</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BillOfLadingV1Consignee.html" title="Mindee::Product::BillOfLading::BillOfLadingV1Consignee (class)">BillOfLadingV1Consignee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1Consignee.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1Consignee#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>consignee</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@date_of_issue</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/DateField.html" title="Mindee::Parsing::Standard::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/DateField.html#initialize-instance_method" title="Mindee::Parsing::Standard::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>date_of_issue</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@departure_date</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/DateField.html" title="Mindee::Parsing::Standard::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/DateField.html#initialize-instance_method" title="Mindee::Parsing::Standard::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>departure_date</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@notify_party</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BillOfLading.html" title="Mindee::Product::BillOfLading (module)">BillOfLading</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BillOfLadingV1NotifyParty.html" title="Mindee::Product::BillOfLading::BillOfLadingV1NotifyParty (class)">BillOfLadingV1NotifyParty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1NotifyParty.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1NotifyParty#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>notify_party</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@place_of_delivery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>place_of_delivery</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@port_of_discharge</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>port_of_discharge</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@port_of_loading</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/StringField.html" title="Mindee::Parsing::Standard::StringField (class)">StringField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/StringField.html#initialize-instance_method" title="Mindee::Parsing::Standard::StringField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>port_of_loading</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@shipper</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BillOfLading.html" title="Mindee::Product::BillOfLading (module)">BillOfLading</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BillOfLadingV1Shipper.html" title="Mindee::Product::BillOfLading::BillOfLadingV1Shipper (class)">BillOfLadingV1Shipper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BillOfLadingV1Shipper.html#initialize-instance_method" title="Mindee::Product::BillOfLading::BillOfLadingV1Shipper#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>shipper</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -743,7 +797,7 @@
       <div class="method_details ">
   <h3 class="signature " id="carrier_items-instance_method">
   
-    #<strong>carrier_items</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="BillOfLadingV1CarrierItem.html" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem (class)">Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+    #<strong>carrier_items</strong>  &#x21d2; <tt><span class='object_link'><a href="BillOfLadingV1CarrierItems.html" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems (class)">Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -765,7 +819,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="BillOfLadingV1CarrierItem.html" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem (class)">Mindee::Product::BillOfLading::BillOfLadingV1CarrierItem</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="BillOfLadingV1CarrierItems.html" title="Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems (class)">Mindee::Product::BillOfLading::BillOfLadingV1CarrierItems</a></span></tt>)</span>
       
       
       
@@ -1286,34 +1340,34 @@
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95</pre>
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/bill_of_lading/bill_of_lading_v1_document.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/bill_of_lading/bill_of_lading_v1_document.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_shipper'>shipper</span> <span class='op'>=</span> <span class='ivar'>@shipper</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1350,7 +1404,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 26 15:41:10 2025 by
+  Generated on Thu Feb 27 14:08:09 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
