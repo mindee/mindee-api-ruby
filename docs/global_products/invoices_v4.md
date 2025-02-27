@@ -57,7 +57,6 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
-
 ```
 
 You can also call this product asynchronously:
@@ -87,7 +86,6 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
-
 ```
 
 **Output (RST):**

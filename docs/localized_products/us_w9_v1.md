@@ -45,7 +45,6 @@ result = mindee_client.parse(
 
 # Print a full summary of the parsed data in RST format
 puts result.document
-
 ```
 
 **Output (RST):**
