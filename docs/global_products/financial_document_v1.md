@@ -48,6 +48,36 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
+  Mindee::Product::FinancialDocument::FinancialDocumentV1,
+  enqueue: false
+)
+
+# Print a full summary of the parsed data in RST format
+puts result.document
+
+# Print the document-level parsed data
+# puts result.document.inference.prediction
+```
+
+You can also call this product asynchronously:
+
+```rb
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
+require 'mindee'
+
+# Init a new client
+mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+
+# Load a file from disk
+input_source = mindee_client.source_from_path('/path/to/the/file.ext')
+
+# Parse the file
+result = mindee_client.parse(
+  input_source,
   Mindee::Product::FinancialDocument::FinancialDocumentV1
 )
 

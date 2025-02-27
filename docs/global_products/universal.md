@@ -49,6 +49,7 @@ result = mindee_client.parse(
   input_source,
   Mindee::Product::Universal::Universal,
   endpoint: custom_endpoint
+  # Note: On compatible APIs, you can run this HTTP call synchronously by setting `enqueue: false`
 )
 
 # Print a full summary of the parsed data in RST format
