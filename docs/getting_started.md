@@ -4,7 +4,7 @@ category: 622b805aaec68102ea7fcbc2
 slug: ruby-getting-started
 parentDoc: 6294d97ee723f1008d2ab28e
 ---
-This guide will help you get the most out of the Mindee Ruby client library to easily extract data from your documents.
+> 📘 This guide will help you get the most out of the Mindee Ruby client library to easily extract data from your documents.
 
 ## Installation
 

@@ -8,7 +8,7 @@ parentDoc: 6294d97ee723f1008d2ab28e
 ## Calling the Mindee API using webhooks
 
 > 🚧 This feature is only available for compatible products, see the see `Supports Polling/Webhooks` on the product's
-> documentation.
+documentation.
 
 After [setting up a webhook for your account](https://developers.mindee.com/docs/webhooks), you can send a document,
 and then retrieve the results from an API call in the following fashion:
@@ -57,10 +57,10 @@ puts result.document
 ## Enqueueing and polling manually
 
 > ❗️ We _strongly_ recommend you rely on a webhook setup, or a simple `parse()` call for most operations. Only use
-> manual polling if you are certain that it is the best solution for you.
+manual polling if you are certain that it is the best solution for you.
 
 > 🚧 This feature is only available for compatible products, see the see `Supports Polling/Webhooks` on the product's
-> documentation.
+documentation.
 
 Instead of relying on the `parse()` method, you can enqueue documents and poll
 the server manually:
@@ -123,7 +123,7 @@ result = mindee_client.parse(
 )
 ```
 > ⚠️ Warning: Setting `delay_sec` too low might lead to insufficient wait time between polls, causing the server to
-> block your API calls for a short time.
+block your API calls for a short time.
 
 ### Page operations
 
@@ -155,7 +155,7 @@ result = mindee_client.parse(
 )
 ```
 > ⚠️ Warning: Page operations alter the document's content. Ensure that this behavior is acceptable for your use case,
-> as there is no undo once the pages are modified.
+as there is no undo once the pages are modified.
 
 ## Workflow operations
 
