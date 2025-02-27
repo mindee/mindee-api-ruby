@@ -48,8 +48,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::InternationalId::InternationalIdV2,
-  enqueue: false
+  Mindee::Product::InternationalId::InternationalIdV2
 )
 
 # Print a full summary of the parsed data in RST format
@@ -57,6 +56,7 @@ puts result.document
 
 # Print the document-level parsed data
 # puts result.document.inference.prediction
+
 ```
 
 **Output (RST):**
