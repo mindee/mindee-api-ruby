@@ -1,5 +1,28 @@
 # Mindee Ruby API Library Changelog
 
+## v4.0.0 - 2025-02-27
+### ¡Breaking Changes!
+* :boom: drop support for ruby versions < 3.0
+* :boom: refactor error-handling
+* :boom: merge enqueue_and_parse() into parse()
+* :boom: allow access to page-level extras, even when the page predictions are empty
+* :boom: deprecate CustomV1 & GeneratedV1 in favor of Universal
+### Changes
+* :sparkles: add support for logging
+* :sparkles: add typing support through RBS
+* :sparkles: add support for multiple feature classes, inheriting from Array
+* :recycle: refactor internal modules
+* :recycle: refactor test module
+* :coffin: remove support for US Mail V2
+* :coffin: remove support for FR Bank Statement V1
+* :recycle: update `UrlInputSource` to `URLInputSource`
+* :memo: update documentation structure
+### Fixes
+* :bug: fix miscellaneous bugs relating to image extraction
+* :bug: fix miscellaneous bugs relating to pdf extraction
+* :bug: fix improper saving mechanism
+
+
 ## v3.20.0 - 2025-02-26
 ### Changes
 * :sparkles: add support for FR Banks Statement V2
