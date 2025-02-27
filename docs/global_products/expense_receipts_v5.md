@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Receipt
+title: Receipt
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-receipt-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Delivery note
+title: Delivery note
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-delivery-note-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

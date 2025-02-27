@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Bill of Lading
+title: Bill of Lading
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-bill-of-lading-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

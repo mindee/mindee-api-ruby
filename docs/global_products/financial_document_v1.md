@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Financial Document
+title: Financial Document
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-financial-document-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

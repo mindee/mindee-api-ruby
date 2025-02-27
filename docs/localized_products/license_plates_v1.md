@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - EU License Plate
+title: EU License Plate
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-eu-license-plate-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8
