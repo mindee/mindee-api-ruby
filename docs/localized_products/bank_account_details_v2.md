@@ -11,15 +11,15 @@ The Ruby Client Library supports the [Bank Account Details API](https://platform
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `bank_account_details`                             |
+> | Endpoint Name                  | `bank_account_details`                             |
 > | Recommended Version            | `v2.0`                                             |
 > | Supports Polling/Webhooks      | ❌ No                                              |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🇫🇷 France                                          |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Bank Account Details sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_account_details/default_sample.jpg?raw=true)
 
 # Quick-Start

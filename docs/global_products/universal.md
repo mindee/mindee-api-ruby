@@ -10,19 +10,19 @@ The Ruby Client Library implements a universal wrapper class for all products.
 >
 > | Specification                  | Details                                                         |
 > | ------------------------------ |-----------------------------------------------------------------|
-> | Endpoint                       | `<name_of_the_endpoint>`                                        |
+> | Endpoint Name                  | `<name_of_the_endpoint>`                                        |
 > | Recommended Version            | `v<version_of_the_endpoint>` Defaults to 1 for custom products. |
 > | Supports Polling/Webhooks      | ❓️ Variable                                                     |
 > | Support Synchronous HTTP Calls | ❓ Variable                                                      |
 > | Geography                      | ❓ Variable                                                     |
 
-> 🔐 Polling Limitations (Polling only)
+> 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- |---------------|
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 The `Universal` product supports all products in a catch-all generic format, and can be used in the following manner:
 

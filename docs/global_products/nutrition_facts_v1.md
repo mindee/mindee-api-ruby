@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Nutrition Facts Label API](https://platfor
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `nutrition_facts`                                  |
+> | Endpoint Name                  | `nutrition_facts`                                  |
 > | Recommended Version            | `v1.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,15 +19,15 @@ The Ruby Client Library supports the [Nutrition Facts Label API](https://platfor
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Nutrition Facts Label sample](https://github.com/mindee/client-lib-test-data/blob/main/products/nutrition_facts/default_sample.jpg?raw=true)
 
 # Quick-Start

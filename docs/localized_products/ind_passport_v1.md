@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Passport - India API](https://platform.min
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `ind_passport`                                     |
+> | Endpoint Name                  | `ind_passport`                                     |
 > | Recommended Version            | `v1.2`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,15 +19,15 @@ The Ruby Client Library supports the [Passport - India API](https://platform.min
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/ind_passport/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/ind_passport/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Passport - India sample](https://github.com/mindee/client-lib-test-data/blob/main/products/ind_passport/default_sample.jpg?raw=true)
 
 # Quick-Start

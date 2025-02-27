@@ -11,7 +11,7 @@ The Ruby Client Library supports the [Bank Statement API](https://platform.minde
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `bank_statement_fr`                                |
+> | Endpoint Name                  | `bank_statement_fr`                                |
 > | Recommended Version            | `v2.0`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
@@ -19,15 +19,15 @@ The Ruby Client Library supports the [Bank Statement API](https://platform.minde
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- | ------------- |
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_statement_fr/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_statement_fr/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Bank Statement sample](https://github.com/mindee/client-lib-test-data/blob/main/products/bank_statement_fr/default_sample.jpg?raw=true)
 
 # Quick-Start

@@ -10,7 +10,7 @@ The Ruby Client Library supports the [Invoice Splitter API](https://platform.min
 >
 > | Specification                  | Details            |
 > | ------------------------------ |--------------------|
-> | Endpoint                       | `invoice_splitter` |
+> | Endpoint Name                  | `invoice_splitter` |
 > | Recommended Version            | `v1.2`             |
 > | Supports Polling/Webhooks      | ✔️ Yes             |
 > | Support Synchronous HTTP Calls | ❌ No               |
@@ -18,11 +18,11 @@ The Ruby Client Library supports the [Invoice Splitter API](https://platform.min
 
 > 🔐 Polling Limitations
 >
-> | Setting                         | Parameter name          | Value       |
-> | ------------------------------- | ----------------------- | ----------- |
-> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds   |
-> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds |
-> | Polling Attempts Before Timeout | `max_retries`           | 80 retries  |
+> | Setting                         | Parameter name          | Default Value |
+> | ------------------------------- | ----------------------- |---------------|
+> | Initial Delay Before Polling    | `initial_delay_seconds` | 2 seconds     |
+> | Default Delay Between Calls     | `delay_sec`             | 1.5 seconds   |
+> | Polling Attempts Before Timeout | `max_retries`           | 80 retries    |
 
 Using [this sample](https://github.com/mindee/client-lib-test-data/blob/main/products/invoice_splitter/default_sample.pdf), we are going to illustrate detect the pages of multiple invoices within the same document using the
 Ruby Client Library.

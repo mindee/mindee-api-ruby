@@ -11,15 +11,15 @@ The Ruby Client Library supports the [Barcode Reader API](https://platform.minde
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `barcode_reader`                                   |
+> | Endpoint Name                  | `barcode_reader`                                   |
 > | Recommended Version            | `v1.0`                                             |
 > | Supports Polling/Webhooks      | ❌ No                                              |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🌐 Global                                          |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Barcode Reader sample](https://github.com/mindee/client-lib-test-data/blob/main/products/barcode_reader/default_sample.jpg?raw=true)
 
 # Quick-Start

@@ -11,15 +11,15 @@ The Ruby Client Library supports the [Cropper API](https://platform.mindee.com/m
 >
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
-> | Endpoint                       | `cropper`                                          |
+> | Endpoint Name                  | `cropper`                                          |
 > | Recommended Version            | `v1.1`                                             |
 > | Supports Polling/Webhooks      | ❌ No                                              |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🌐 Global                                          |
 
 
-Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg), we are going to illustrate how to extract the data that we want using the
-Ruby Client Library.
+Using the [sample below](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg),
+we are going to illustrate how to extract the data that we want using the Ruby Client Library.
 ![Cropper sample](https://github.com/mindee/client-lib-test-data/blob/main/products/cropper/default_sample.jpg?raw=true)
 
 # Quick-Start
