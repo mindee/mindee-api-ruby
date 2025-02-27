@@ -48,7 +48,8 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::US::UsMail::UsMailV3
+  Mindee::Product::US::UsMail::UsMailV3,
+  enqueue: false
 )
 
 # Print a full summary of the parsed data in RST format

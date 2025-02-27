@@ -48,7 +48,8 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::InternationalId::InternationalIdV2
+  Mindee::Product::InternationalId::InternationalIdV2,
+  enqueue: false
 )
 
 # Print a full summary of the parsed data in RST format
