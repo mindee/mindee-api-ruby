@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - US Bank Check
+title: US Bank Check
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-bank-check-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8

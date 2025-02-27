@@ -1,5 +1,5 @@
 ---
-title: Universal API Ruby
+title: Universal
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-universal-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

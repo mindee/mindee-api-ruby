@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Cropper
+title: Cropper
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-cropper-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

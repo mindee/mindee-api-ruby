@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - IND Passport - India
+title: IND Passport - India
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-ind-passport---india-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8

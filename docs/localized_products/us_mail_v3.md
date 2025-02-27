@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - US US Mail
+title: US US Mail
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-us-us-mail-ocr
 parentDoc: 67b49e29a2cd6f08d69a40d8

@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Passport
+title: Passport
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-passport-ocr
 parentDoc: 67b49df15b843f3fa9cd622b

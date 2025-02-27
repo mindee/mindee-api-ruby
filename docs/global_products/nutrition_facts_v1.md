@@ -1,5 +1,5 @@
 ---
-title: Ruby Client Library - Nutrition Facts Label
+title: Nutrition Facts Label
 category: 622b805aaec68102ea7fcbc2
 slug: ruby-nutrition-facts-label-ocr
 parentDoc: 67b49df15b843f3fa9cd622b
