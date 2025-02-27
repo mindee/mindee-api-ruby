@@ -23,6 +23,8 @@ jobs:
       env:
         RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
       run: |
+        mkdir ~/.gem
+        touch ~/.gem/credentials
         echo -e "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}" > ~/.gem/credentials
         chmod 600 ~/.gem/credentials
 
