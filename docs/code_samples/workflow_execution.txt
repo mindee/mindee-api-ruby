@@ -18,7 +18,7 @@ result = mindee_client.execute_workflow(
   input_source,
   workflow_id,
 # options: { # Optionally, you can provide the following parameters:
-#   document_alis: 'my-document-alias', # Potential alias for the document
+#   document_alias: 'my-document-alias', # Potential alias for the document
 #   priority: Mindee::Parsing::Common::ExecutionPriority::LOW, # Priority of the execution
 #   rag: true # Whether to enable Retrieval-Augmented Generation
 # }
