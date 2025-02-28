@@ -1,0 +1,28 @@
+#
+# Install the Ruby client library by running:
+# gem install mindee
+#
+
+require_relative 'mindee'
+
+workflow_id = 'workflow-id'
+
+# Init a new client
+mindee_client = Mindee::Client.new
+
+# Load a file from disk
+input_source = mindee_client.source_from_path('path/to/my/file.ext')
+
+# Send the file to the workflow
+result = mindee_client.execute_workflow(
+  input_source,
+  workflow_id,
+# options: { # Optionally, you can provide the following parameters:
+#   document_alis: 'my-document-alias', # Potential alias for the document
+#   priority: Mindee::Parsing::Common::ExecutionPriority::LOW, # Priority of the execution
+#   rag: true # Whether to enable Retrieval-Augmented Generation
+# }
+)
+
+# Print the execution's ID to make sure it worked
+puts result.execution.id

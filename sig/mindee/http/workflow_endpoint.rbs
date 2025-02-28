@@ -3,11 +3,17 @@ module Mindee
   module HTTP
     class WorkflowEndpoint
       def api_key: -> String
+
       def request_timeout: -> Integer
+
       def url: -> String
+
       def initialize: (untyped, ?api_key: String) -> String
-      def execute_workflow: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
-      def workflow_execution_req_post: (untyped, untyped, untyped, untyped, untyped) -> untyped
+
+      def execute_workflow: (Input::Source::LocalInputSource | Input::Source::URLInputSource, WorkflowOptions) -> [untyped, untyped]
+
+      def workflow_execution_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, WorkflowOptions) -> Net::HTTPResponse?
+
       def check_api_key: -> nil
     end
   end

@@ -7,8 +7,7 @@ parentDoc: 6294d97ee723f1008d2ab28e
 
 ## Calling the Mindee API using webhooks
 
-> 🚧 This feature is only available for compatible products, see the see `Supports Polling/Webhooks` on the product's
-documentation.
+> 🚧 This feature is only available for compatible products, see the `Supports Polling/Webhooks` section on the product's documentation.
 
 After [setting up a webhook for your account](https://developers.mindee.com/docs/webhooks), you can send a document,
 and then retrieve the results from an API call in the following fashion:
@@ -59,7 +58,7 @@ puts result.document
 > ❗️ We _strongly_ recommend you rely on a webhook setup, or a simple `parse()` call for most operations. Only use
 manual polling if you are certain that it is the best solution for you.
 
-> 🚧 This feature is only available for compatible products, see the see `Supports Polling/Webhooks` on the product's
+> 🚧 This feature is only available for compatible products, see the `Supports Polling/Webhooks` section on the product's
 documentation.
 
 Instead of relying on the `parse()` method, you can enqueue documents and poll
