@@ -6,10 +6,8 @@ parentDoc: 6294d97ee723f1008d2ab28e
 ---
 
 > ❗️ Disclaimer: the file operations listed below do not directly manipulate the files you will pass to the library,
-they will instead create a copy before applying any operations, which means that the file you send may not be an
-exact copy of the file the server will receive.
-> To avoid any unexpected or unwanted result, you can save a copy of the created file locally to inspect it visually
-before sending it.
+> They will instead create a copy before applying any operations, which means that the file you send may not be an exact copy of the file the server will receive.
+> To avoid any unexpected or unwanted result, you can save a copy of the created file locally to inspect it visually before sending it.
 
 ## Image compression
 

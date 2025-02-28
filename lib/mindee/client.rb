@@ -80,6 +80,7 @@ module Mindee
   #   This performs a full OCR operation on the server and may increase response time.
   # @!attribute public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
   #   requiring authentication.
+  # @!attribute rag [bool, nil] Whether to enable Retrieval-Augmented Generation.
   # @!attribute page_options [PageOptions, Hash, nil] Page cutting/merge options:
   #   * `:page_indexes` Zero-based list of page indexes.
   #   * `:operation` Operation to apply on the document, given the specified page indexes:
@@ -87,7 +88,7 @@ module Mindee
   #       * `:REMOVE` - remove the specified pages, and keep all others.
   #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
   class WorkflowOptions
-    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options
+    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options, :rag
 
     def initialize(params: {})
       params = params.transform_keys(&:to_sym)
@@ -95,6 +96,7 @@ module Mindee
       @priority = params.fetch(:priority, nil)
       @full_text = params.fetch(:full_text, false)
       @public_url = params.fetch(:public_url, nil)
+      @rag = params.fetch(:rag, nil)
       raw_page_options = params.fetch(:page_options, nil)
       raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
       @page_options = raw_page_options
@@ -297,8 +299,6 @@ module Mindee
       queue_res
     end
 
-    # Same idea applies to execute_workflow:
-    #
     # Sends a document to a workflow.
     #
     # Accepts options either as a Hash or as a WorkflowOptions struct.
@@ -309,6 +309,7 @@ module Mindee
     #   * `document_alias` [String, nil] Alias to give to the document.
     #   * `priority` [Symbol, nil] Priority to give to the document.
     #   * `full_text` [bool] Whether to include the full OCR text response in compatible APIs.
+    #   * `rag` [bool, nil] Whether to enable Retrieval-Augmented Generation.
     #
     #   * `public_url` [String, nil] A unique, encrypted URL for accessing the document validation interface without
     # requiring authentication.
@@ -317,7 +318,7 @@ module Mindee
     #       * `:operation` Operation to apply on the document, given the `page_indexes specified:
     #          * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #          * `:REMOVE` - remove the specified pages, and keep all others.
-    #      * `:on_min_pages` Apply the operation only if document has at least this many pa
+    #      * `:on_min_pages` Apply the operation only if document has at least this many pages.
     # @return [Mindee::Parsing::Common::WorkflowResponse]
     def execute_workflow(input_source, workflow_id, options: {})
       opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(params: options)
@@ -331,10 +332,7 @@ module Mindee
 
       prediction, raw_http = workflow_endpoint.execute_workflow(
         input_source,
-        opts.full_text,
-        opts.document_alias,
-        opts.priority,
-        opts.public_url
+        opts
       )
 
       Mindee::Parsing::Common::WorkflowResponse.new(Product::Universal::Universal, prediction, raw_http)

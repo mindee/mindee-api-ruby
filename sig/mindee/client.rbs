@@ -28,6 +28,7 @@ module Mindee
     attr_accessor document_alias: (String?)
     attr_accessor priority: (Symbol?)
     attr_accessor full_text: bool
+    attr_accessor rag: bool?
     attr_accessor public_url: (String?)
     attr_accessor page_options: (PageOptions)
 

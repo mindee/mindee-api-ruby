@@ -26,6 +26,11 @@ module Net
     end
   end
 
+  class HTTPResponse
+    def self.body: -> untyped
+    def body: -> untyped
+  end
+
   class HTTPRedirection
     def []: (untyped) -> untyped
     def body: -> untyped
