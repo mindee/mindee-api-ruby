@@ -21,7 +21,7 @@ describe Mindee::Client do
         invoice_splitter_input,
         ENV.fetch('WORKFLOW_ID'),
         options: { document_alias: document_alias,
-                   priority: priority }
+                   priority: priority, rag: true }
       )
 
       expect(response.execution.file.alias).to eq(document_alias)

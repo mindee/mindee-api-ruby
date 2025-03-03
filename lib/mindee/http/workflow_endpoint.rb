@@ -24,15 +24,17 @@ module Mindee
 
       # Sends a document to the workflow.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param document_alias [String, nil] Alias to give to the document.
-      # @param priority [Symbol, nil] Priority to give to the document.
-      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
-      # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
-      # requiring authentication.
+      # @param opts [WorkflowOptions] Options to configure workflow execution behavior.
       # @return [Array]
-      def execute_workflow(input_source, full_text, document_alias, priority, public_url)
+      def execute_workflow(input_source, opts)
         check_api_key
-        response = workflow_execution_req_post(input_source, document_alias, priority, full_text, public_url)
+        response = workflow_execution_req_post(input_source, opts)
+        if response.nil?
+          raise Mindee::Errors::MindeeHTTPError.new(
+            { code: 0, details: 'Server response was nil.', message: 'Unknown error.' }, @url, 0
+          )
+        end
+
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
@@ -42,31 +44,29 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param document_alias [String, nil] Alias to give to the document.
-      # @param priority [Symbol, nil] Priority to give to the document.
-      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
-      # @param public_url [String, nil] A unique, encrypted URL for accessing the document validation interface without
-      # requiring authentication.
+      # @param opts [WorkflowOptions] Options to configure workflow execution behavior.
       # @return [Net::HTTPResponse, nil]
-      def workflow_execution_req_post(input_source, document_alias, priority, full_text, public_url)
+      def workflow_execution_req_post(input_source, opts)
         uri = URI(@url)
         params = {} # : Hash[Symbol | String, untyped]
-        params[:full_text_ocr] = 'true' if full_text
-        uri.query = URI.encode_www_form(params)
+        params[:full_text_ocr] = 'true' if opts.full_text
+        params[:rag] = 'true' if opts.rag
+        uri.query = URI.encode_www_form(params) if params.any?
 
         headers = {
           'Authorization' => "Token #{@api_key}",
           'User-Agent' => USER_AGENT,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                      [['document', input_source.url]]
-                    else
-                      [input_source.read_contents]
-                    end
-        form_data.push ['alias', document_alias] if document_alias
-        form_data.push ['public_url', public_url] if public_url
-        form_data.push ['priority', priority.to_s] if priority
+        form_data = [] # : Array[untyped]
+        if input_source.is_a?(Mindee::Input::Source::URLInputSource)
+          form_data.push ['document', input_source.url]
+        else
+          form_data.push input_source.read_contents
+        end
+        form_data.push ['alias', opts.document_alias] if opts.document_alias
+        form_data.push ['public_url', opts.public_url] if opts.public_url
+        form_data.push ['priority', opts.priority.to_s] if opts.priority
 
         req.set_form(form_data, 'multipart/form-data')
 
