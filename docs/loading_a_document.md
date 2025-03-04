@@ -65,9 +65,9 @@ The parsing process supports both synchronous and asynchronous modes, and you ca
 When performing an asynchronous parse (i.e. when the document is enqueued), the client will poll the API for the result.
 The following options control the polling behavior:
 
-- `initial_delay_sec`: The initial delay (in seconds) before the first polling attempt.
-- `delay_sec`: The delay (in seconds) between subsequent polls.
-- `max_retries`: The maximum number of polling attempts before timing out.
+* `initial_delay_sec`: The initial delay (in seconds) before the first polling attempt.
+* `delay_sec`: The delay (in seconds) between subsequent polls.
+* `max_retries`: The maximum number of polling attempts before timing out.
 
 These parameters ensure that the client does not overload the API with too-frequent requests and also avoid premature  
 timeouts.
@@ -98,11 +98,11 @@ This is especially useful if your document contains extraneous pages that you do
 
 The available options are:
 
-- `page_indexes`: An array of zero-based page indexes.
-- `operation`: The operation to perform—either:
-  - `:KEEP_ONLY` (keep only the specified pages)
-  - `:REMOVE` (remove the specified pages).
-- `on_min_pages`: Apply the operation only if the document has at least the specified number of pages.
+* `page_indexes`: An array of zero-based page indexes.
+* `operation`: The operation to perform—either:
+  * `:KEEP_ONLY` (keep only the specified pages)
+  * `:REMOVE` (remove the specified pages).
+* `on_min_pages`: Apply the operation only if the document has at least the specified number of pages.
 
 Example:
 
@@ -195,9 +195,9 @@ end
 Before sending a document to Mindee’s API, you first need to load the file into one of our input source wrappers.  
 These wrappers not only validate the file type (using a trusted MIME type check) but also give you access the following helper methods:
 
-- [image compression](https://developers.mindee.com/docs/ruby-advanced-file-operations#image-compression)
-- [pdf compression](https://developers.mindee.com/docs/ruby-advanced-file-operations#pdf-compression)
-- [PDF fixing](https://developers.mindee.com/docs/ruby-advanced-file-operations#pdf-fixing)
+* [image compression](https://developers.mindee.com/docs/ruby-advanced-file-operations#image-compression)
+* [pdf compression](https://developers.mindee.com/docs/ruby-advanced-file-operations#pdf-compression)
+* [PDF fixing](https://developers.mindee.com/docs/ruby-advanced-file-operations#pdf-fixing)
 
 > 📘 Regardless of how a document is loaded, the subsequent parsing or workflow operations remain the same.
 
@@ -205,10 +205,10 @@ Mindee’s Ruby client supports several methods for loading a document.
 
 These can either be done locally:
 
-- Loading from a [local path](#loading-from-a-local-path)
-- Loading from a [File object](#loading-from-a-file-object)
-- Loading from a [Base64-encoded string](#loading-from-a-base64-encoded-string)
-- Loading from a [raw sequence of bytes](#loading-from-raw-bytes)
+* Loading from a [local path](#loading-from-a-local-path)
+* Loading from a [File object](#loading-from-a-file-object)
+* Loading from a [Base64-encoded string](#loading-from-a-base64-encoded-string)
+* Loading from a [raw sequence of bytes](#loading-from-raw-bytes)
 
 These four methods inherit from the `LocalInputSource` class, which provides a few common utility features described  
 [here](#under-the-hood---local-input-source-details).
@@ -273,9 +273,9 @@ input_source = mindee_client.source_from_bytes(raw_bytes, "invoice.pdf")
 
 For remote documents, you can load a file through its URL. The server will accept direct urls if:
 
-- They begin with "https\://".
-- They point to a valid file.
-- They do not redirect the request (e.g. Google Drive documents or proxies).
+* They begin with "https\://".
+* They point to a valid file.
+* They do not redirect the request (e.g. Google Drive documents or proxies).
 
 Under the hood, the  
 [Mindee::Input::Source::URLInputSource](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/URLInputSource.html)  
@@ -294,11 +294,11 @@ You can optionally download and save the file locally or convert it into a local
 
 Additional URL features include:
 
-- Validation: The URLInputSource throws an error if the URL does not start with “https\://”.
-- Authentication: You can supply basic authentication (username/password) or a bearer token.
-- Local Conversion: Methods such as `write_to_file` let you download and inspect the file locally. Alternatively,
-- `as_local_input_source` converts the downloaded content into a LocalInputSource so you can apply operations like
-- compression.
+* Validation: The URLInputSource throws an error if the URL does not start with “https\://”.
+* Authentication: You can supply basic authentication (username/password) or a bearer token.
+* Local Conversion: Methods such as `write_to_file` let you download and inspect the file locally. Alternatively,
+* `as_local_input_source` converts the downloaded content into a LocalInputSource so you can apply operations like
+* compression.
 
 Example:
 
@@ -318,12 +318,12 @@ local_downloaded_file_path = remote_input_source.write_to_file("path/to/my/downl
 When loading using from either a path, file, raw byte sequence or base64 string, the created object inherits from  
 [Mindee::Input::Source::LocalInputSource](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html). Key features include:
 
-- Automatic MIME Type Validation using Marcel to check for server file format compliance. 
-- An option ([repair_pdf](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#initialize-instance_method)) to attempt recovery of PDFs with broken header information.
-- File Operations:
-  - [compress!](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#compress!-instance_method) – Compresses the file by invoking either the PDFCompressor for PDFs or the ImageCompressor for images. Parameters such as quality, max dimensions, and options to force or disable source text (for PDFs) are available.  
-  - `write_to_file` ([URLInputSource version](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/URLInputSource.html#write_to_file-instance_method), [LocalInputSource version](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#write_to_file-instance_method)) – Saves the current state of the input (after possible operations) to disk. This is handy for inspection before parsing.
-  - [count_pages](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#count_pages-instance_method) – For PDF files, returns the total page count; by default, non-PDF files are assumed to be single-page documents.
+* Automatic MIME Type Validation using Marcel to check for server file format compliance. 
+* An option ([repair_pdf](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#initialize-instance_method)) to attempt recovery of PDFs with broken header information.
+* File Operations:
+  * [compress!](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#compress!-instance_method) – Compresses the file by invoking either the PDFCompressor for PDFs or the ImageCompressor for images. Parameters such as quality, max dimensions, and options to force or disable source text (for PDFs) are available.  
+  * `write_to_file` ([URLInputSource version](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/URLInputSource.html#write_to_file-instance_method), [LocalInputSource version](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#write_to_file-instance_method)) – Saves the current state of the input (after possible operations) to disk. This is handy for inspection before parsing.
+  * [count_pages](https://mindee.github.io/mindee-api-ruby/Mindee/Input/Source/LocalInputSource.html#count_pages-instance_method) – For PDF files, returns the total page count; by default, non-PDF files are assumed to be single-page documents.
 
 ## Questions?
 
