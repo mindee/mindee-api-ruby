@@ -3,7 +3,7 @@
 module Mindee
   module Product
     module BillOfLading
-      class BillOfLadingV1CarrierItems < Array[untyped]
+      class BillOfLadingV1CarrierItems < Array[BillOfLadingV1CarrierItem]
         def initialize: (Array[untyped], Integer?) -> void
         def self.line_items_separator: (String) -> String
         def to_s: -> String

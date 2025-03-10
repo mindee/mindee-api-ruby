@@ -3,7 +3,7 @@
 module Mindee
   module Product
     module Resume
-      class ResumeV1Certificates < Array[untyped]
+      class ResumeV1Certificates < Array[ResumeV1Certificate]
         def initialize: (Array[untyped], Integer?) -> void
         def self.line_items_separator: (String) -> String
         def to_s: -> String

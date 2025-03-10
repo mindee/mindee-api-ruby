@@ -3,7 +3,7 @@
 module Mindee
   module Product
     module Resume
-      class ResumeV1Languages < Array[untyped]
+      class ResumeV1Languages < Array[ResumeV1Language]
         def initialize: (Array[untyped], Integer?) -> void
         def self.line_items_separator: (String) -> String
         def to_s: -> String

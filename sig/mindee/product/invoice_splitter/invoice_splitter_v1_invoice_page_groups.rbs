@@ -2,8 +2,8 @@
 
 module Mindee
   module Product
-    module NutritionFactsLabel
-      class NutritionFactsLabelV1Nutrients < Array[NutritionFactsLabelV1Nutrient]
+    module InvoiceSplitter
+      class InvoiceSplitterV1InvoicePageGroups < Array[InvoiceSplitterV1InvoicePageGroup]
         def initialize: (Array[untyped], Integer?) -> void
         def self.line_items_separator: (String) -> String
         def to_s: -> String
