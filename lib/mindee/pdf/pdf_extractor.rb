@@ -46,7 +46,7 @@ module Mindee
           extension = File.extname(@filename)
           basename = File.basename(@filename, extension)
           page_indexes.each do |page_index_list|
-            if page_index_list.empty? || page_index_list.nil?
+            if page_index_list.nil? || page_index_list.empty?
               raise Errors::MindeePDFError, "Empty indexes aren't allowed for extraction #{page_index_list}"
             end
 
@@ -70,12 +70,12 @@ module Mindee
         # rubocop:disable Metrics/PerceivedComplexity
 
         # Extracts invoices as complete PDFs from the document.
-        # @param page_indexes [Array<Array<Integer>, InvoiceSplitterV1PageGroup>]
+        # @param page_indexes [Array<Array<Integer>, InvoiceSplitterV1InvoicePageGroup>]
         # @param strict [bool]
         # @return [Array<Mindee::PDF::PDFExtractor::ExtractedPDF>]
         def extract_invoices(page_indexes, strict: false)
           raise Errors::MindeePDFError, 'No indexes provided.' if page_indexes.empty?
-          unless page_indexes[0].is_a?(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup)
+          if page_indexes[0].is_a?(Array) && page_indexes[0].all? { |i| i.is_a?(Integer) }
             return extract_sub_documents(page_indexes)
           end
           return extract_sub_documents(page_indexes.map(&:page_indexes)) unless strict

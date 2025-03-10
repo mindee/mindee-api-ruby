@@ -1,17 +1,13 @@
 # lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb
+
 module Mindee
   module Product
     module InvoiceSplitter
-      class InvoiceSplitterV1PageGroup
-        def page_indexes: -> Array[Integer]
-        def confidence: -> Float?
-        def initialize: (Hash[Symbol | String, untyped]) -> void
-        def to_s: -> String
-      end
       class InvoiceSplitterV1Document < Parsing::Common::Prediction
-        def invoice_page_groups: -> Array[InvoiceSplitterV1PageGroup]
-        def initialize: (Hash[Symbol | String, untyped], ?Integer?) -> void
-        def construct_invoice_page_groups_from_prediction: (Hash[Symbol | String, untyped]) -> nil
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def invoice_page_groups: -> (Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups)
+        def invoice_page_groups_separator: (String) -> String
+        def invoice_page_groups_to_s: -> String
         def to_s: -> String
       end
     end

@@ -8,12 +8,12 @@ module Mindee
   module Product
     # Invoice Splitter module.
     module InvoiceSplitter
-      # Invoice Splitter V1 prediction inference.
+      # Invoice Splitter API version 1 inference prediction.
       class InvoiceSplitterV1 < Mindee::Parsing::Common::Inference
         @endpoint_name = 'invoice_splitter'
         @endpoint_version = '1'
-        @has_sync = false
         @has_async = true
+        @has_sync = false
 
         # @param prediction [Hash]
         def initialize(prediction)

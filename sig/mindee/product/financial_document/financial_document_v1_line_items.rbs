@@ -3,7 +3,7 @@
 module Mindee
   module Product
     module FinancialDocument
-      class FinancialDocumentV1LineItems < Array[untyped]
+      class FinancialDocumentV1LineItems < Array[FinancialDocumentV1LineItem]
         def initialize: (Array[untyped], Integer?) -> void
         def self.line_items_separator: (String) -> String
         def to_s: -> String

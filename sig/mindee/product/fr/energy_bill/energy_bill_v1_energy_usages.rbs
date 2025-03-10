@@ -4,7 +4,7 @@ module Mindee
   module Product
     module FR
       module EnergyBill
-        class EnergyBillV1EnergyUsages < Array[untyped]
+        class EnergyBillV1EnergyUsages < Array[EnergyBillV1EnergyUsage]
           def initialize: (Array[untyped], Integer?) -> void
           def self.line_items_separator: (String) -> String
           def to_s: -> String

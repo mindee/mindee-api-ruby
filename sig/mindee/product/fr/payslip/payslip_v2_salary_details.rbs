@@ -4,7 +4,7 @@ module Mindee
   module Product
     module FR
       module Payslip
-        class PayslipV2SalaryDetails < Array[untyped]
+        class PayslipV2SalaryDetails < Array[PayslipV2SalaryDetail]
           def initialize: (Array[untyped], Integer?) -> void
           def self.line_items_separator: (String) -> String
           def to_s: -> String
