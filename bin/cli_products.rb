@@ -43,7 +43,7 @@ PRODUCTS = {
     sync: false,
     async: true,
   },
-  "license-plate" => {
+  "eu-license-plate" => {
     description: "License Plate",
     doc_class: Mindee::Product::EU::LicensePlate::LicensePlateV1,
     sync: true,
@@ -55,49 +55,49 @@ PRODUCTS = {
     sync: true,
     async: true,
   },
-  "bank-account-details" => {
+  "fr-bank-account-details" => {
     description: "Bank Account Details",
     doc_class: Mindee::Product::FR::BankAccountDetails::BankAccountDetailsV2,
     sync: true,
     async: false,
   },
-  "bank-statement" => {
+  "fr-bank-statement" => {
     description: "Bank Statement",
     doc_class: Mindee::Product::FR::BankStatement::BankStatementV2,
     sync: false,
     async: true,
   },
-  "carte-grise" => {
+  "fr-carte-grise" => {
     description: "Carte Grise",
     doc_class: Mindee::Product::FR::CarteGrise::CarteGriseV1,
     sync: true,
     async: false,
   },
-  "energy-bill" => {
+  "fr-energy-bill" => {
     description: "Energy Bill",
     doc_class: Mindee::Product::FR::EnergyBill::EnergyBillV1,
     sync: false,
     async: true,
   },
-  "health-card" => {
+  "fr-health-card" => {
     description: "Health Card",
     doc_class: Mindee::Product::FR::HealthCard::HealthCardV1,
     sync: false,
     async: true,
   },
-  "carte-nationale-d-identite" => {
+  "fr-carte-nationale-d-identite" => {
     description: "Carte Nationale d'Identité",
     doc_class: Mindee::Product::FR::IdCard::IdCardV2,
     sync: true,
     async: false,
   },
-  "payslip" => {
+  "fr-payslip" => {
     description: "Payslip",
     doc_class: Mindee::Product::FR::Payslip::PayslipV3,
     sync: false,
     async: true,
   },
-  "passport-india" => {
+  "ind-passport-india" => {
     description: "Passport - India",
     doc_class: Mindee::Product::IND::IndianPassport::IndianPassportV1,
     sync: false,
@@ -151,25 +151,25 @@ PRODUCTS = {
     sync: false,
     async: true,
   },
-  "bank-check" => {
+  "us-bank-check" => {
     description: "Bank Check",
     doc_class: Mindee::Product::US::BankCheck::BankCheckV1,
     sync: true,
     async: false,
   },
-  "healthcare-card" => {
+  "us-healthcare-card" => {
     description: "Healthcare Card",
     doc_class: Mindee::Product::US::HealthcareCard::HealthcareCardV1,
     sync: false,
     async: true,
   },
-  "us-mail" => {
+  "us-us-mail" => {
     description: "US Mail",
     doc_class: Mindee::Product::US::UsMail::UsMailV3,
     sync: false,
     async: true,
   },
-  "w9" => {
+  "us-w9" => {
     description: "W9",
     doc_class: Mindee::Product::US::W9::W9V1,
     sync: true,
