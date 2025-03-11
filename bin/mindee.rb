@@ -5,7 +5,7 @@ require 'bundler/setup'
 require 'optparse'
 require 'mindee'
 
-require_relative 'products'
+require_relative 'cli_products'
 
 options = {}
 
