@@ -3,7 +3,7 @@
 module Mindee
   module Product
     module Invoice
-      class InvoiceV4LineItems < Array[untyped]
+      class InvoiceV4LineItems < Array[InvoiceV4LineItem]
         def initialize: (Array[untyped], Integer?) -> void
         def self.line_items_separator: (String) -> String
         def to_s: -> String

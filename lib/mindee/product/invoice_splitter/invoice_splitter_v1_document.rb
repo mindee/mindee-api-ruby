@@ -1,65 +1,61 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing'
+require_relative 'invoice_splitter_v1_invoice_page_groups'
 
 module Mindee
   module Product
     module InvoiceSplitter
-      # Page Group for Invoice Splitter class
-      class InvoiceSplitterV1PageGroup
-        # @return[Array<Integer>]
-        attr_reader :page_indexes
-
-        # @return[Float, nil]
-        attr_reader :confidence
-
-        # @param prediction[Hash]
-        def initialize(prediction)
-          @page_indexes = prediction['page_indexes']
-          @confidence = prediction['confidence'].nil? ? 0.0 : Float(prediction['confidence'])
-        end
-
-        # @return [String]
-        def to_s
-          out_str = String.new
-          out_str << ":Page indexes: #{@page_indexes.join(', ')}"
-          out_str
-        end
-      end
-
-      # Invoice Splitter V1 document prediction.
+      # Invoice Splitter API version 1.2 document data.
       class InvoiceSplitterV1Document < Mindee::Parsing::Common::Prediction
-        # @return[Array<Mindee::Product::InvoiceSplitter::InvoiceSplitterV1PageGroup>]
+        include Mindee::Parsing::Standard
+        # List of page groups. Each group represents a single invoice within a multi-invoice document.
+        # @return [Mindee::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups]
         attr_reader :invoice_page_groups
 
         # @param prediction [Hash]
-        # @param _page_id [Integer, nil]
-        def initialize(prediction, _page_id = nil)
-          super(prediction, nil)
-          construct_invoice_page_groups_from_prediction(prediction)
-        end
-
-        # Reconstructs the page groups of a prediction
-        # @param prediction [hash]
-        def construct_invoice_page_groups_from_prediction(prediction)
-          @invoice_page_groups = []
-          return unless prediction.key?('invoice_page_groups') && prediction['invoice_page_groups'].any?
-
-          prediction['invoice_page_groups'].each do |page_group_prediction|
-            @invoice_page_groups.append(InvoiceSplitterV1PageGroup.new(page_group_prediction))
-          end
+        # @param page_id [Integer, nil]
+        def initialize(prediction, page_id)
+          super
+          @invoice_page_groups = Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups.new(
+            prediction['invoice_page_groups'], page_id
+          )
         end
 
         # @return [String]
         def to_s
+          invoice_page_groups = invoice_page_groups_to_s
           out_str = String.new
           out_str << "\n:Invoice Page Groups:"
-          if !@invoice_page_groups.nil? && @invoice_page_groups.any?
-            @invoice_page_groups.map do |page|
-              out_str << "\n  #{page}"
-            end
-          end
+          out_str << invoice_page_groups
           out_str[1..].to_s
+        end
+
+        private
+
+        # @param char [String]
+        # @return [String]
+        def invoice_page_groups_separator(char)
+          out_str = String.new
+          out_str << '  '
+          out_str << "+#{char * 74}"
+          out_str << '+'
+          out_str
+        end
+
+        # @return [String]
+        def invoice_page_groups_to_s
+          return '' if @invoice_page_groups.empty?
+
+          line_items = @invoice_page_groups.map(&:to_table_line).join("\n#{invoice_page_groups_separator('-')}\n  ")
+          out_str = String.new
+          out_str << "\n#{invoice_page_groups_separator('-')}"
+          out_str << "\n  |"
+          out_str << ' Page Indexes                                                             |'
+          out_str << "\n#{invoice_page_groups_separator('=')}"
+          out_str << "\n  #{line_items}"
+          out_str << "\n#{invoice_page_groups_separator('-')}"
+          out_str
         end
       end
     end

@@ -1,13 +1,10 @@
 # lib/mindee/product/invoice_splitter/invoice_splitter_v1.rb
+
 module Mindee
   module Product
     module InvoiceSplitter
       class InvoiceSplitterV1 < Parsing::Common::Inference
         def initialize: (Hash[Symbol | String, untyped]) -> void
-        def endpoint_name: -> String
-        def endpoint_version: -> String
-        def has_async: -> bool
-        def has_sync: -> bool
       end
     end
   end

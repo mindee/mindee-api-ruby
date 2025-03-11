@@ -4,7 +4,7 @@ module Mindee
   module Product
     module FR
       module Payslip
-        class PayslipV3PaidTimeOffs < Array[untyped]
+        class PayslipV3PaidTimeOffs < Array[PayslipV3PaidTimeOff]
           def initialize: (Array[untyped], Integer?) -> void
           def self.line_items_separator: (String) -> String
           def to_s: -> String

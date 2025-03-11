@@ -1,4 +1,5 @@
 # lib/mindee/product/invoice_splitter/invoice_splitter_v1_page.rb
+
 module Mindee
   module Product
     module InvoiceSplitter
@@ -6,6 +7,7 @@ module Mindee
         def initialize: (Hash[Symbol | String, untyped]) -> void
       end
       class InvoiceSplitterV1PagePrediction < InvoiceSplitterV1Document
+        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
         def to_s: -> String
       end
     end
