@@ -43,12 +43,6 @@ PRODUCTS = {
     sync: false,
     async: true,
   },
-  "eu-license-plate" => {
-    description: "License Plate",
-    doc_class: Mindee::Product::EU::LicensePlate::LicensePlateV1,
-    sync: true,
-    async: false,
-  },
   "financial-document" => {
     description: "Financial Document",
     doc_class: Mindee::Product::FinancialDocument::FinancialDocumentV1,

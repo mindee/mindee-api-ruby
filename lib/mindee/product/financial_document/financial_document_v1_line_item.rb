@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module FinancialDocument
-      # List of line item details.
+      # List of line item present on the document.
       class FinancialDocumentV1LineItem < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
         # The item description.

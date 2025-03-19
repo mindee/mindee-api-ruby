@@ -194,8 +194,8 @@ puts result.document.inference.prediction.file_number.value
 **gender** ([ClassificationField](#classification-field)): The gender of the passport holder.
 
 #### Possible values include:
- - M
- - F
+ - 'M'
+ - 'F'
 
 ```rb
 puts result.document.inference.prediction.gender.value
@@ -289,8 +289,8 @@ puts result.document.inference.prediction.old_passport_place_of_issue.value
 **page_number** ([ClassificationField](#classification-field)): The page number of the passport document.
 
 #### Possible values include:
- - 1
- - 2
+ - '1'
+ - '2'
 
 ```rb
 puts result.document.inference.prediction.page_number.value

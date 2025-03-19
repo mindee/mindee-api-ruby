@@ -12,7 +12,7 @@ module Mindee
   module Product
     module FR
       module EnergyBill
-        # Energy Bill API version 1.0 document data.
+        # Energy Bill API version 1.2 document data.
         class EnergyBillV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The unique identifier associated with a specific contract.
@@ -188,11 +188,13 @@ module Mindee
           def energy_usage_separator(char)
             out_str = String.new
             out_str << '  '
+            out_str << "+#{char * 13}"
             out_str << "+#{char * 38}"
             out_str << "+#{char * 12}"
             out_str << "+#{char * 12}"
             out_str << "+#{char * 10}"
             out_str << "+#{char * 11}"
+            out_str << "+#{char * 17}"
             out_str << "+#{char * 12}"
             out_str << '+'
             out_str
@@ -206,11 +208,13 @@ module Mindee
             out_str = String.new
             out_str << "\n#{energy_usage_separator('-')}"
             out_str << "\n  |"
+            out_str << ' Consumption |'
             out_str << ' Description                          |'
             out_str << ' End Date   |'
             out_str << ' Start Date |'
             out_str << ' Tax Rate |'
             out_str << ' Total     |'
+            out_str << ' Unit of Measure |'
             out_str << ' Unit Price |'
             out_str << "\n#{energy_usage_separator('=')}"
             out_str << "\n  #{line_items}"

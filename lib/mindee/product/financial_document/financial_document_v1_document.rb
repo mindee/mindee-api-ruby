@@ -12,13 +12,13 @@ module Mindee
         # The customer's address used for billing.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :billing_address
-        # The purchase category among predefined classes.
+        # The purchase category, only for receipts.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :category
         # The address of the customer.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
-        # List of company registrations associated to the customer.
+        # List of company registration numbers associated to the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :customer_company_registrations
         # The customer account number or identifier from the supplier.
@@ -30,10 +30,11 @@ module Mindee
         # The date the purchase was made.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
-        # The document number or identifier.
+        # The document number or identifier (invoice number or receipt number).
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :document_number
-        # One of: 'INVOICE', 'CREDIT NOTE', 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
+        # The type of the document: INVOICE or CREDIT NOTE if it is an invoice, CREDIT CARD RECEIPT or EXPENSE
+        # RECEIPT if it is a receipt.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # The date on which the payment is due.
@@ -42,34 +43,34 @@ module Mindee
         # The invoice number or identifier only if document is an invoice.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :invoice_number
-        # List of line item details.
+        # List of line item present on the document.
         # @return [Mindee::Product::FinancialDocument::FinancialDocumentV1LineItems]
         attr_reader :line_items
-        # The locale detected on the document.
+        # The locale of the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # The date on which the payment is due / fullfilled.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :payment_date
-        # The purchase order number.
+        # The purchase order number, only if the document is an invoice.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :po_number
         # The receipt number or identifier only if document is a receipt.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :receipt_number
-        # List of Reference numbers, including PO number.
+        # List of Reference numbers, including PO number, only if the document is an invoice.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
         # The customer's address used for shipping.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :shipping_address
-        # The purchase subcategory among predefined classes for transport and food.
+        # The purchase subcategory for transport and food, only for receipts.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
         # The address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
-        # List of company registrations associated to the supplier.
+        # List of company registration numbers associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
         # The email of the supplier or merchant.
@@ -78,7 +79,7 @@ module Mindee
         # The name of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_name
-        # List of payment details associated to the supplier.
+        # List of payment details associated to the supplier (only for invoices).
         # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
         attr_reader :supplier_payment_details
         # The phone number of the supplier or merchant.
@@ -87,10 +88,10 @@ module Mindee
         # The website URL of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_website
-        # List of tax lines information.
+        # List of all taxes on the document.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
-        # The time the purchase was made.
+        # The time the purchase was made (only for receipts).
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :time
         # The total amount of tip and gratuity
@@ -102,7 +103,7 @@ module Mindee
         # The net amount paid: does not include taxes, fees, and discounts.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_net
-        # The total amount of taxes.
+        # The sum of all taxes present on the document.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_tax
 

@@ -15,7 +15,7 @@ module Mindee
           # The type of energy meter.
           # @return [String]
           attr_reader :meter_type
-          # The unit of measurement for energy consumption, which can be kW, m³, or L.
+          # The unit of power for energy consumption.
           # @return [String]
           attr_reader :unit
 
@@ -44,7 +44,7 @@ module Mindee
             out_str = String.new
             out_str << "\n  :Meter Number: #{printable[:meter_number]}"
             out_str << "\n  :Meter Type: #{printable[:meter_type]}"
-            out_str << "\n  :Unit of Measure: #{printable[:unit]}"
+            out_str << "\n  :Unit of Power: #{printable[:unit]}"
             out_str
           end
         end

@@ -9,6 +9,9 @@ module Mindee
         # Details of energy consumption.
         class EnergyBillV1EnergyUsage < Mindee::Parsing::Standard::FeatureField
           include Mindee::Parsing::Standard
+          # The price per unit of energy consumed.
+          # @return [Float]
+          attr_reader :consumption
           # Description or details of the energy usage.
           # @return [String]
           attr_reader :description
@@ -24,6 +27,9 @@ module Mindee
           # The total cost of energy consumed.
           # @return [Float]
           attr_reader :total
+          # The unit of measurement for energy consumption.
+          # @return [String]
+          attr_reader :unit
           # The price per unit of energy consumed.
           # @return [Float]
           attr_reader :unit_price
@@ -32,11 +38,13 @@ module Mindee
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super
+            @consumption = prediction['consumption']
             @description = prediction['description']
             @end_date = prediction['end_date']
             @start_date = prediction['start_date']
             @tax_rate = prediction['tax_rate']
             @total = prediction['total']
+            @unit = prediction['unit']
             @unit_price = prediction['unit_price']
             @page_id = page_id
           end
@@ -44,6 +52,8 @@ module Mindee
           # @return [Hash]
           def printable_values
             printable = {}
+            printable[:consumption] =
+              @consumption.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@consumption)
             printable[:description] = format_for_display(@description)
             printable[:end_date] = format_for_display(@end_date)
             printable[:start_date] = format_for_display(@start_date)
@@ -51,6 +61,7 @@ module Mindee
               @tax_rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@tax_rate)
             printable[:total] =
               @total.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@total)
+            printable[:unit] = format_for_display(@unit)
             printable[:unit_price] =
               @unit_price.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@unit_price)
             printable
@@ -59,6 +70,8 @@ module Mindee
           # @return [Hash]
           def table_printable_values
             printable = {}
+            printable[:consumption] =
+              @consumption.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@consumption)
             printable[:description] = format_for_display(@description, 36)
             printable[:end_date] = format_for_display(@end_date, 10)
             printable[:start_date] = format_for_display(@start_date, nil)
@@ -66,6 +79,7 @@ module Mindee
               @tax_rate.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@tax_rate)
             printable[:total] =
               @total.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@total)
+            printable[:unit] = format_for_display(@unit, nil)
             printable[:unit_price] =
               @unit_price.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@unit_price)
             printable
@@ -75,11 +89,13 @@ module Mindee
           def to_table_line
             printable = table_printable_values
             out_str = String.new
+            out_str << format('| %- 12s', printable[:consumption])
             out_str << format('| %- 37s', printable[:description])
             out_str << format('| %- 11s', printable[:end_date])
             out_str << format('| %- 11s', printable[:start_date])
             out_str << format('| %- 9s', printable[:tax_rate])
             out_str << format('| %- 10s', printable[:total])
+            out_str << format('| %- 16s', printable[:unit])
             out_str << format('| %- 11s', printable[:unit_price])
             out_str << '|'
           end
@@ -88,11 +104,13 @@ module Mindee
           def to_s
             printable = printable_values
             out_str = String.new
+            out_str << "\n  :Consumption: #{printable[:consumption]}"
             out_str << "\n  :Description: #{printable[:description]}"
             out_str << "\n  :End Date: #{printable[:end_date]}"
             out_str << "\n  :Start Date: #{printable[:start_date]}"
             out_str << "\n  :Tax Rate: #{printable[:tax_rate]}"
             out_str << "\n  :Total: #{printable[:total]}"
+            out_str << "\n  :Unit of Measure: #{printable[:unit]}"
             out_str << "\n  :Unit Price: #{printable[:unit_price]}"
             out_str
           end

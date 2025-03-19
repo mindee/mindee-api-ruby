@@ -239,7 +239,7 @@ objects, it has access to a custom `to_s` method that can render a `TaxField` ob
 Fields which are specific to this product; they are not used in any other product.
 
 ### Line Items Field
-List of line item details.
+List of all line items on the receipt.
 
 A `ReceiptV5LineItem` implements the following attributes:
 
@@ -252,17 +252,17 @@ A `ReceiptV5LineItem` implements the following attributes:
 The following fields are extracted for Receipt V5:
 
 ## Purchase Category
-**category** ([ClassificationField](#classification-field)): The purchase category among predefined classes.
+**category** ([ClassificationField](#classification-field)): The purchase category of the receipt.
 
 #### Possible values include:
- - toll
- - food
- - parking
- - transport
- - accommodation
- - gasoline
- - telecom
- - miscellaneous
+ - 'toll'
+ - 'food'
+ - 'parking'
+ - 'transport'
+ - 'accommodation'
+ - 'gasoline'
+ - 'telecom'
+ - 'miscellaneous'
 
 ```rb
 puts result.document.inference.prediction.category.value
@@ -276,18 +276,18 @@ puts result.document.inference.prediction.date.value
 ```
 
 ## Document Type
-**document_type** ([ClassificationField](#classification-field)): One of: 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
+**document_type** ([ClassificationField](#classification-field)): The type of receipt: EXPENSE RECEIPT or CREDIT CARD RECEIPT.
 
 #### Possible values include:
- - expense_receipt
- - credit_card_receipt
+ - 'EXPENSE RECEIPT'
+ - 'CREDIT CARD RECEIPT'
 
 ```rb
 puts result.document.inference.prediction.document_type.value
 ```
 
 ## Line Items
-**line_items** (Array<[ReceiptV5LineItem](#line-items-field)>): List of line item details.
+**line_items** (Array<[ReceiptV5LineItem](#line-items-field)>): List of all line items on the receipt.
 
 ```rb
 result.document.inference.prediction.line_items do |line_items_elem|
@@ -296,7 +296,7 @@ end
 ```
 
 ## Expense Locale
-**locale** ([LocaleField](#locale-field)): The locale detected on the document.
+**locale** ([LocaleField](#locale-field)): The locale of the document.
 
 ```rb
 puts result.document.inference.prediction.locale.value
@@ -310,14 +310,15 @@ puts result.document.inference.prediction.receipt_number.value
 ```
 
 ## Purchase Subcategory
-**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory among predefined classes for transport and food.
+**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory of the receipt for transport and food.
 
 #### Possible values include:
- - plane
- - taxi
- - train
- - restaurant
- - shopping
+ - 'plane'
+ - 'taxi'
+ - 'train'
+ - 'restaurant'
+ - 'shopping'
+ - nil
 
 ```rb
 puts result.document.inference.prediction.subcategory.value
@@ -331,7 +332,7 @@ puts result.document.inference.prediction.supplier_address.value
 ```
 
 ## Supplier Company Registrations
-**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
+**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registration numbers associated to the supplier.
 
 ```rb
 result.document.inference.prediction.supplier_company_registrations do |supplier_company_registrations_elem|
@@ -354,7 +355,7 @@ puts result.document.inference.prediction.supplier_phone_number.value
 ```
 
 ## Taxes
-**taxes** (Array<[TaxField](#taxes-field)>): List of tax lines information.
+**taxes** (Array<[TaxField](#taxes-field)>): The list of taxes present on the receipt.
 
 ```rb
 result.document.inference.prediction.taxes do |taxes_elem|
@@ -391,7 +392,7 @@ puts result.document.inference.prediction.total_net.value
 ```
 
 ## Total Tax
-**total_tax** ([AmountField](#amount-field)): The total amount of taxes.
+**total_tax** ([AmountField](#amount-field)): The sum of all taxes.
 
 ```rb
 puts result.document.inference.prediction.total_tax.value

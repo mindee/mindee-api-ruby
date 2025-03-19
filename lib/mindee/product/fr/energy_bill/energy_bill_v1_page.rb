@@ -7,7 +7,7 @@ module Mindee
   module Product
     module FR
       module EnergyBill
-        # Energy Bill API version 1.0 page data.
+        # Energy Bill API version 1.2 page data.
         class EnergyBillV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

@@ -9,13 +9,13 @@ module Mindee
       # Invoice API version 4.9 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
-        # The customer's address used for billing.
+        # The customer billing address.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :billing_address
         # The address of the customer.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
-        # List of company registrations associated to the customer.
+        # List of company registration numbers associated to the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :customer_company_registrations
         # The customer account number or identifier from the supplier.
@@ -27,7 +27,7 @@ module Mindee
         # The date the purchase was made.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
-        # One of: 'INVOICE', 'CREDIT NOTE'.
+        # Document type: INVOICE or CREDIT NOTE.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
         # The date on which the payment is due.
@@ -36,19 +36,19 @@ module Mindee
         # The invoice number or identifier.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :invoice_number
-        # List of line item details.
+        # List of all the line items present on the invoice.
         # @return [Mindee::Product::Invoice::InvoiceV4LineItems]
         attr_reader :line_items
-        # The locale detected on the document.
+        # The locale of the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
-        # The date on which the payment is due/ was full-filled.
+        # The date on which the payment is due / was full-filled.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :payment_date
         # The purchase order number.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :po_number
-        # List of Reference numbers, including PO number.
+        # List of all reference numbers on the invoice, including the purchase order number.
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
         # Customer's delivery address.
@@ -57,16 +57,16 @@ module Mindee
         # The address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
-        # List of company registrations associated to the supplier.
+        # List of company registration numbers associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
-        # The email of the supplier or merchant.
+        # The email address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_email
         # The name of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_name
-        # List of payment details associated to the supplier.
+        # List of payment details associated to the supplier of the invoice.
         # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
         attr_reader :supplier_payment_details
         # The phone number of the supplier or merchant.
@@ -75,16 +75,16 @@ module Mindee
         # The website URL of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_website
-        # List of tax line details.
+        # List of taxes. Each item contains the detail of the tax.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
-        # The total amount paid: includes taxes, tips, fees, and other charges.
+        # The total amount of the invoice: includes taxes, tips, fees, and other charges.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_amount
-        # The net amount paid: does not include taxes, fees, and discounts.
+        # The net amount of the invoice: does not include taxes, fees, and discounts.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_net
-        # The total tax: includes all the taxes paid for this invoice.
+        # The total tax: the sum of all the taxes for this invoice.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_tax
 

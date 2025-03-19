@@ -192,9 +192,9 @@ puts result.document.inference.prediction.document_number.value
 [📄](#page-level-fields "This field is only present on individual pages.")**document_side** ([ClassificationField](#classification-field)): The sides of the document which are visible.
 
 #### Possible values include:
- - RECTO
- - VERSO
- - RECTO & VERSO
+ - 'RECTO'
+ - 'VERSO'
+ - 'RECTO & VERSO'
 
 ```rb
   result.document.document_side.each do |document_side_elem|
@@ -206,8 +206,8 @@ puts result.document.inference.prediction.document_number.value
 [📄](#page-level-fields "This field is only present on individual pages.")**document_type** ([ClassificationField](#classification-field)): The document type or format.
 
 #### Possible values include:
- - NEW
- - OLD
+ - 'NEW'
+ - 'OLD'
 
 ```rb
   result.document.document_type.each do |document_type_elem|

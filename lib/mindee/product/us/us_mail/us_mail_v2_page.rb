@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'healthcare_card_v1_document'
+require_relative 'us_mail_v2_document'
 
 module Mindee
   module Product
     module US
-      module HealthcareCard
-        # Healthcare Card API version 1.1 page data.
-        class HealthcareCardV1Page < Mindee::Parsing::Common::Page
+      module UsMail
+        # US Mail API version 2.0 page data.
+        class UsMailV2Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super
             @prediction = if prediction['prediction'].empty?
                             nil
                           else
-                            HealthcareCardV1PagePrediction.new(
+                            UsMailV2PagePrediction.new(
                               prediction['prediction'],
                               prediction['id']
                             )
@@ -23,8 +23,8 @@ module Mindee
           end
         end
 
-        # Healthcare Card V1 page prediction.
-        class HealthcareCardV1PagePrediction < HealthcareCardV1Document
+        # US Mail V2 page prediction.
+        class UsMailV2PagePrediction < UsMailV2Document
           # @return [String]
           def to_s
             out_str = String.new

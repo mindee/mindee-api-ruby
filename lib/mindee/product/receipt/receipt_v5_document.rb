@@ -9,31 +9,31 @@ module Mindee
       # Receipt API version 5.3 document data.
       class ReceiptV5Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
-        # The purchase category among predefined classes.
+        # The purchase category of the receipt.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :category
         # The date the purchase was made.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :date
-        # One of: 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
+        # The type of receipt: EXPENSE RECEIPT or CREDIT CARD RECEIPT.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
-        # List of line item details.
+        # List of all line items on the receipt.
         # @return [Mindee::Product::Receipt::ReceiptV5LineItems]
         attr_reader :line_items
-        # The locale detected on the document.
+        # The locale of the document.
         # @return [Mindee::Parsing::Standard::LocaleField]
         attr_reader :locale
         # The receipt number or identifier.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :receipt_number
-        # The purchase subcategory among predefined classes for transport and food.
+        # The purchase subcategory of the receipt for transport and food.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
         # The address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
-        # List of company registrations associated to the supplier.
+        # List of company registration numbers associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
         attr_reader :supplier_company_registrations
         # The name of the supplier or merchant.
@@ -42,7 +42,7 @@ module Mindee
         # The phone number of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_phone_number
-        # List of tax lines information.
+        # The list of taxes present on the receipt.
         # @return [Mindee::Parsing::Standard::Taxes]
         attr_reader :taxes
         # The time the purchase was made.
@@ -57,7 +57,7 @@ module Mindee
         # The net amount paid: does not include taxes, fees, and discounts.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_net
-        # The total amount of taxes.
+        # The sum of all taxes.
         # @return [Mindee::Parsing::Standard::AmountField]
         attr_reader :total_tax
 

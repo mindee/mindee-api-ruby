@@ -4,11 +4,13 @@ module Mindee
       module EnergyBill
         class EnergyBillV1EnergyUsage < Parsing::Standard::FeatureField
           def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def consumption: -> Float
           def description: -> String
           def end_date: -> String
           def start_date: -> String
           def tax_rate: -> Float
           def total: -> Float
+          def unit: -> String
           def unit_price: -> Float
           def printable_values: -> Hash[Symbol | String, untyped]
           def table_printable_values: -> Hash[Symbol | String, untyped]
