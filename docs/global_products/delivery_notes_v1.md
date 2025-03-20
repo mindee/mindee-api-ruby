@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Delivery note API](https://platform.mindee
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `delivery_notes`                                   |
-> | Recommended Version            | `v1.1`                                             |
+> | Recommended Version            | `v1.2`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🌐 Global                                          |

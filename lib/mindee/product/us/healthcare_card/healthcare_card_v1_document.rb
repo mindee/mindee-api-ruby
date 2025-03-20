@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module HealthcareCard
-        # Healthcare Card API version 1.0 document data.
+        # Healthcare Card API version 1.1 document data.
         class HealthcareCardV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The name of the company that provides the healthcare plan.

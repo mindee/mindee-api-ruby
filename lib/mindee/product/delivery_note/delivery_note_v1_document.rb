@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module DeliveryNote
-      # Delivery note API version 1.1 document data.
+      # Delivery note API version 1.2 document data.
       class DeliveryNoteV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The address of the customer receiving the goods.

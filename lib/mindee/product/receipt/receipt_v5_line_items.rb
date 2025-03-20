@@ -5,7 +5,7 @@ require_relative 'receipt_v5_line_item'
 module Mindee
   module Product
     module Receipt
-      # List of line item details.
+      # List of all line items on the receipt.
       class ReceiptV5LineItems < Array
         # Entries.
         # @return [Array<ReceiptV5LineItem>]

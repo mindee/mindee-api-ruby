@@ -5,7 +5,7 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Receipt
-      # List of line item details.
+      # List of all line items on the receipt.
       class ReceiptV5LineItem < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
         # The item description.

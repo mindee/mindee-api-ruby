@@ -1,28 +1,28 @@
 # frozen_string_literal: true
 
 require_relative '../../../parsing'
-require_relative 'license_plate_v1_document'
-require_relative 'license_plate_v1_page'
+require_relative 'us_mail_v2_document'
+require_relative 'us_mail_v2_page'
 
 module Mindee
   module Product
-    module EU
-      # License Plate module.
-      module LicensePlate
-        # License Plate API version 1 inference prediction.
-        class LicensePlateV1 < Mindee::Parsing::Common::Inference
-          @endpoint_name = 'license_plates'
-          @endpoint_version = '1'
-          @has_async = false
-          @has_sync = true
+    module US
+      # US Mail module.
+      module UsMail
+        # US Mail API version 2 inference prediction.
+        class UsMailV2 < Mindee::Parsing::Common::Inference
+          @endpoint_name = 'us_mail'
+          @endpoint_version = '2'
+          @has_async = true
+          @has_sync = false
 
           # @param prediction [Hash]
           def initialize(prediction)
             super
-            @prediction = LicensePlateV1Document.new(prediction['prediction'], nil)
+            @prediction = UsMailV2Document.new(prediction['prediction'], nil)
             @pages = []
             prediction['pages'].each do |page|
-              @pages.push(LicensePlateV1Page.new(page))
+              @pages.push(UsMailV2Page.new(page))
             end
           end
 

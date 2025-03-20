@@ -284,7 +284,7 @@ objects, it has access to a custom `to_s` method that can render a `TaxField` ob
 Fields which are specific to this product; they are not used in any other product.
 
 ### Line Items Field
-List of line item details.
+List of line item present on the document.
 
 A `FinancialDocumentV1LineItem` implements the following attributes:
 
@@ -308,17 +308,17 @@ puts result.document.inference.prediction.billing_address.value
 ```
 
 ## Purchase Category
-**category** ([ClassificationField](#classification-field)): The purchase category among predefined classes.
+**category** ([ClassificationField](#classification-field)): The purchase category, only for receipts.
 
 #### Possible values include:
- - toll
- - food
- - parking
- - transport
- - accommodation
- - gasoline
- - telecom
- - miscellaneous
+ - 'toll'
+ - 'food'
+ - 'parking'
+ - 'transport'
+ - 'accommodation'
+ - 'gasoline'
+ - 'telecom'
+ - 'miscellaneous'
 
 ```rb
 puts result.document.inference.prediction.category.value
@@ -332,7 +332,7 @@ puts result.document.inference.prediction.customer_address.value
 ```
 
 ## Customer Company Registrations
-**customer_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the customer.
+**customer_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registration numbers associated to the customer.
 
 ```rb
 result.document.inference.prediction.customer_company_registrations do |customer_company_registrations_elem|
@@ -362,20 +362,20 @@ puts result.document.inference.prediction.date.value
 ```
 
 ## Document Number
-**document_number** ([StringField](#string-field)): The document number or identifier.
+**document_number** ([StringField](#string-field)): The document number or identifier (invoice number or receipt number).
 
 ```rb
 puts result.document.inference.prediction.document_number.value
 ```
 
 ## Document Type
-**document_type** ([ClassificationField](#classification-field)): One of: 'INVOICE', 'CREDIT NOTE', 'CREDIT CARD RECEIPT', 'EXPENSE RECEIPT'.
+**document_type** ([ClassificationField](#classification-field)): The type of the document: INVOICE or CREDIT NOTE if it is an invoice, CREDIT CARD RECEIPT or EXPENSE RECEIPT if it is a receipt.
 
 #### Possible values include:
- - INVOICE
- - CREDIT NOTE
- - CREDIT CARD RECEIPT
- - EXPENSE RECEIPT
+ - 'INVOICE'
+ - 'CREDIT NOTE'
+ - 'CREDIT CARD RECEIPT'
+ - 'EXPENSE RECEIPT'
 
 ```rb
 puts result.document.inference.prediction.document_type.value
@@ -396,7 +396,7 @@ puts result.document.inference.prediction.invoice_number.value
 ```
 
 ## Line Items
-**line_items** (Array<[FinancialDocumentV1LineItem](#line-items-field)>): List of line item details.
+**line_items** (Array<[FinancialDocumentV1LineItem](#line-items-field)>): List of line item present on the document.
 
 ```rb
 result.document.inference.prediction.line_items do |line_items_elem|
@@ -405,7 +405,7 @@ end
 ```
 
 ## Locale
-**locale** ([LocaleField](#locale-field)): The locale detected on the document.
+**locale** ([LocaleField](#locale-field)): The locale of the document.
 
 ```rb
 puts result.document.inference.prediction.locale.value
@@ -419,7 +419,7 @@ puts result.document.inference.prediction.payment_date.value
 ```
 
 ## Purchase Order Number
-**po_number** ([StringField](#string-field)): The purchase order number.
+**po_number** ([StringField](#string-field)): The purchase order number, only if the document is an invoice.
 
 ```rb
 puts result.document.inference.prediction.po_number.value
@@ -433,7 +433,7 @@ puts result.document.inference.prediction.receipt_number.value
 ```
 
 ## Reference Numbers
-**reference_numbers** (Array<[StringField](#string-field)>): List of Reference numbers, including PO number.
+**reference_numbers** (Array<[StringField](#string-field)>): List of Reference numbers, including PO number, only if the document is an invoice.
 
 ```rb
 result.document.inference.prediction.reference_numbers do |reference_numbers_elem|
@@ -449,14 +449,15 @@ puts result.document.inference.prediction.shipping_address.value
 ```
 
 ## Purchase Subcategory
-**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory among predefined classes for transport and food.
+**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory for transport and food, only for receipts.
 
 #### Possible values include:
- - plane
- - taxi
- - train
- - restaurant
- - shopping
+ - 'plane'
+ - 'taxi'
+ - 'train'
+ - 'restaurant'
+ - 'shopping'
+ - nil
 
 ```rb
 puts result.document.inference.prediction.subcategory.value
@@ -470,7 +471,7 @@ puts result.document.inference.prediction.supplier_address.value
 ```
 
 ## Supplier Company Registrations
-**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registrations associated to the supplier.
+**supplier_company_registrations** (Array<[CompanyRegistrationField](#company-registration-field)>): List of company registration numbers associated to the supplier.
 
 ```rb
 result.document.inference.prediction.supplier_company_registrations do |supplier_company_registrations_elem|
@@ -493,7 +494,7 @@ puts result.document.inference.prediction.supplier_name.value
 ```
 
 ## Supplier Payment Details
-**supplier_payment_details** (Array<[PaymentDetailsField](#payment-details-field)>): List of payment details associated to the supplier.
+**supplier_payment_details** (Array<[PaymentDetailsField](#payment-details-field)>): List of payment details associated to the supplier (only for invoices).
 
 ```rb
 result.document.inference.prediction.supplier_payment_details do |supplier_payment_details_elem|
@@ -519,7 +520,7 @@ puts result.document.inference.prediction.supplier_website.value
 ```
 
 ## Taxes
-**taxes** (Array<[TaxField](#taxes-field)>): List of tax lines information.
+**taxes** (Array<[TaxField](#taxes-field)>): List of all taxes on the document.
 
 ```rb
 result.document.inference.prediction.taxes do |taxes_elem|
@@ -528,7 +529,7 @@ end
 ```
 
 ## Purchase Time
-**time** ([StringField](#string-field)): The time the purchase was made.
+**time** ([StringField](#string-field)): The time the purchase was made (only for receipts).
 
 ```rb
 puts result.document.inference.prediction.time.value
@@ -556,7 +557,7 @@ puts result.document.inference.prediction.total_net.value
 ```
 
 ## Total Tax
-**total_tax** ([AmountField](#amount-field)): The total amount of taxes.
+**total_tax** ([AmountField](#amount-field)): The sum of all taxes present on the document.
 
 ```rb
 puts result.document.inference.prediction.total_tax.value

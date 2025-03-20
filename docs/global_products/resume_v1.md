@@ -265,9 +265,9 @@ puts result.document.inference.prediction.document_language.value
 **document_type** ([ClassificationField](#classification-field)): The type of the document sent.
 
 #### Possible values include:
- - RESUME
- - MOTIVATION_LETTER
- - RECOMMENDATION_LETTER
+ - 'RESUME'
+ - 'MOTIVATION_LETTER'
+ - 'RECOMMENDATION_LETTER'
 
 ```rb
 puts result.document.inference.prediction.document_type.value

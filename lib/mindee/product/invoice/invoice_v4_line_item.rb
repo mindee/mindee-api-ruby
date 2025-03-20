@@ -5,13 +5,13 @@ require_relative '../../parsing'
 module Mindee
   module Product
     module Invoice
-      # List of line item details.
+      # List of all the line items present on the invoice.
       class InvoiceV4LineItem < Mindee::Parsing::Standard::FeatureField
         include Mindee::Parsing::Standard
         # The item description.
         # @return [String]
         attr_reader :description
-        # The product code referring to the item.
+        # The product code of the item.
         # @return [String]
         attr_reader :product_code
         # The item quantity

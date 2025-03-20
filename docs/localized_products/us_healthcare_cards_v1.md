@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Healthcare Card API](https://platform.mind
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `us_healthcare_cards`                              |
-> | Recommended Version            | `v1.0`                                             |
+> | Recommended Version            | `v1.1`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🇺🇸 United States                                   |

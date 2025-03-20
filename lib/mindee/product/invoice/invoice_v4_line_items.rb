@@ -5,7 +5,7 @@ require_relative 'invoice_v4_line_item'
 module Mindee
   module Product
     module Invoice
-      # List of line item details.
+      # List of all the line items present on the invoice.
       class InvoiceV4LineItems < Array
         # Entries.
         # @return [Array<InvoiceV4LineItem>]

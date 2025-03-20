@@ -1,0 +1,18 @@
+module Mindee
+  module Product
+    module US
+      module UsMail
+        class UsMailV2SenderAddress < Parsing::Standard::FeatureField
+          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def city: -> String
+          def complete: -> String
+          def postal_code: -> String
+          def state: -> String
+          def street: -> String
+          def printable_values: -> Hash[Symbol | String, untyped]
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

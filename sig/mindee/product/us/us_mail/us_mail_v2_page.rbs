@@ -1,13 +1,13 @@
-# lib/mindee/product/../license_plate/license_plate_v1_page.rb
+# lib/mindee/product/../us_mail/us_mail_v2_page.rb
 
 module Mindee
   module Product
-    module EU
-      module LicensePlate
-        class LicensePlateV1Page < Parsing::Common::Page
+    module US
+      module UsMail
+        class UsMailV2Page < Parsing::Common::Page
           def initialize: (Hash[Symbol | String, untyped]) -> void
         end
-        class LicensePlateV1PagePrediction < LicensePlateV1Document
+        class UsMailV2PagePrediction < UsMailV2Document
           def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
           def to_s: -> String
         end

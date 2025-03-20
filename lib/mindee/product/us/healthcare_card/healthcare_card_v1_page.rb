@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module HealthcareCard
-        # Healthcare Card API version 1.0 page data.
+        # Healthcare Card API version 1.1 page data.
         class HealthcareCardV1Page < Mindee::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)

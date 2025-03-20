@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Energy Bill API](https://platform.mindee.c
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `energy_bill_fra`                                  |
-> | Recommended Version            | `v1.0`                                             |
+> | Recommended Version            | `v1.2`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🇫🇷 France                                          |
@@ -186,11 +186,19 @@ Details of energy consumption.
 
 A `EnergyBillV1EnergyUsage` implements the following attributes:
 
+* `consumption` (Float): The price per unit of energy consumed.
 * `description` (String): Description or details of the energy usage.
 * `end_date` (String): The end date of the energy usage.
 * `start_date` (String): The start date of the energy usage.
 * `tax_rate` (Float): The rate of tax applied to the total cost.
 * `total` (Float): The total cost of energy consumed.
+* `unit` (String): The unit of measurement for energy consumption.
+
+#### Possible values include:
+ - kWh
+ - m3
+ - L
+        
 * `unit_price` (Float): The price per unit of energy consumed.
 Fields which are specific to this product; they are not used in any other product.
 
@@ -221,7 +229,7 @@ A `EnergyBillV1MeterDetail` implements the following attributes:
  - water
  - None
         
-* `unit` (String): The unit of measurement for energy consumption, which can be kW, m³, or L.
+* `unit` (String): The unit of power for energy consumption.
 
 # Attributes
 The following fields are extracted for Energy Bill V1:

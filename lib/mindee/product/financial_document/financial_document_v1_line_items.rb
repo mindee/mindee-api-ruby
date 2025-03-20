@@ -5,7 +5,7 @@ require_relative 'financial_document_v1_line_item'
 module Mindee
   module Product
     module FinancialDocument
-      # List of line item details.
+      # List of line item present on the document.
       class FinancialDocumentV1LineItems < Array
         # Entries.
         # @return [Array<FinancialDocumentV1LineItem>]

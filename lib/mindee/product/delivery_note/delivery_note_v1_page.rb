@@ -6,7 +6,7 @@ require_relative 'delivery_note_v1_document'
 module Mindee
   module Product
     module DeliveryNote
-      # Delivery note API version 1.1 page data.
+      # Delivery note API version 1.2 page data.
       class DeliveryNoteV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)
