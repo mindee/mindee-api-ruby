@@ -215,7 +215,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Same idea applies to execute_workflow:.</p>
+<p>Sends a document to a workflow.</p>
 </div></span>
   
 </li>
@@ -488,12 +488,12 @@
       <pre class="lines">
 
 
-108
-109
-110</pre>
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@api_key</span> <span class='op'>=</span> <span class='id identifier rubyid_api_key'>api_key</span>
@@ -607,17 +607,17 @@
       <pre class="lines">
 
 
+410
+411
 412
 413
 414
 415
 416
-417
-418
-419</pre>
+417</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 412</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 410</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_endpoint'>create_endpoint</span><span class='lparen'>(</span><span class='label'>endpoint_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>account_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span>
@@ -743,8 +743,6 @@
       <pre class="lines">
 
 
-210
-211
 212
 213
 214
@@ -756,10 +754,12 @@
 220
 221
 222
-223</pre>
+223
+224
+225</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 212</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_parse_options'>normalize_parse_options</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -887,8 +887,6 @@
       <pre class="lines">
 
 
-267
-268
 269
 270
 271
@@ -918,10 +916,12 @@
 295
 296
 297
-298</pre>
+298
+299
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 269</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enqueue_and_parse'>enqueue_and_parse</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_validate_async_params'>validate_async_params</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_initial_delay_sec'>initial_delay_sec</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delay_sec'>delay_sec</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_max_retries'>max_retries</span><span class='rparen'>)</span>
@@ -972,13 +972,11 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Same idea applies to execute_workflow:</p>
-
 <p>Sends a document to a workflow.</p>
 
 <p>Accepts options either as a Hash or as a WorkflowOptions struct.</p>
 
-<p>requiring authentication.  * <code>page_options</code> [Hash, nil] Page cutting/merge options:  * <code>:page_indexes</code> Zero-based list of page indexes.  * <code>:operation</code> Operation to apply on the document, given the <code>page_indexes specified:          *</code>:KEEP_ONLY<code>- keep only the specified pages, and remove all others.          *</code>:REMOVE<code>- remove the specified pages, and keep all others.      *</code>:on_min_pages` Apply the operation only if document has at least this many pa</p>
+<p>requiring authentication.  * <code>page_options</code> [Hash, nil] Page cutting/merge options:  * <code>:page_indexes</code> Zero-based list of page indexes.  * <code>:operation</code> Operation to apply on the document, given the <code>page_indexes specified:          *</code>:KEEP_ONLY<code>- keep only the specified pages, and remove all others.          *</code>:REMOVE<code>- remove the specified pages, and keep all others.      *</code>:on_min_pages` Apply the operation only if document has at least this many pages.</p>
 
 
   </div>
@@ -1022,7 +1020,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Options to configure workflow behavior. Possible keys: * <code>document_alias</code> [String, nil] Alias to give to the document. * <code>priority</code> [Symbol, nil] Priority to give to the document. * <code>full_text</code> [bool] Whether to include the full OCR text response in compatible APIs.</p>
+<p>Options to configure workflow behavior. Possible keys: * <code>document_alias</code> [String, nil] Alias to give to the document. * <code>priority</code> [Symbol, nil] Priority to give to the document. * <code>full_text</code> [bool] Whether to include the full OCR text response in compatible APIs. * <code>rag</code> [bool, nil] Whether to enable Retrieval-Augmented Generation.</p>
 <ul><li>
 <p><code>public_url</code> [String, nil] A unique, encrypted URL for accessing the document validation interface without</p>
 </li></ul>
@@ -1052,7 +1050,6 @@
       <pre class="lines">
 
 
-322
 323
 324
 325
@@ -1069,12 +1066,10 @@
 336
 337
 338
-339
-340
-341</pre>
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 322</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_workflow'>execute_workflow</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_workflow_id'>workflow_id</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="WorkflowOptions.html" title="Mindee::WorkflowOptions (class)">WorkflowOptions</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="WorkflowOptions.html" title="Mindee::WorkflowOptions (class)">WorkflowOptions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WorkflowOptions.html#initialize-instance_method" title="Mindee::WorkflowOptions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -1088,10 +1083,7 @@
 
   <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span> <span class='op'>=</span> <span class='id identifier rubyid_workflow_endpoint'>workflow_endpoint</span><span class='period'>.</span><span class='id identifier rubyid_execute_workflow'>execute_workflow</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_document_alias'>document_alias</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_priority'>priority</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_public_url'>public_url</span>
+    <span class='id identifier rubyid_opts'>opts</span>
   <span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/WorkflowResponse.html" title="Mindee::Parsing::Common::WorkflowResponse (class)">WorkflowResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/WorkflowResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::WorkflowResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Product.html" title="Mindee::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Product/Universal.html" title="Mindee::Product::Universal (module)">Universal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Product/Universal/Universal.html" title="Mindee::Product::Universal::Universal (class)">Universal</a></span></span><span class='comma'>,</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='rparen'>)</span>
@@ -1171,6 +1163,8 @@
       <pre class="lines">
 
 
+346
+347
 348
 349
 350
@@ -1178,12 +1172,10 @@
 352
 353
 354
-355
-356
-357</pre>
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 348</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 346</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load_prediction'>load_prediction</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_local_response'>local_response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Errors/MindeeAPIError.html" title="Mindee::Errors::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Expected LocalResponse to not be nil.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_local_response'>local_response</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1326,8 +1318,6 @@
       <pre class="lines">
 
 
-139
-140
 141
 142
 143
@@ -1336,10 +1326,12 @@
 146
 147
 148
-149</pre>
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>enqueue:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_parse_options'>normalize_parse_options</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -1452,15 +1444,15 @@
       <pre class="lines">
 
 
-233
-234
 235
 236
 237
-238</pre>
+238
+239
+240</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 233</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 235</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_queued'>parse_queued</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1566,12 +1558,12 @@
       <pre class="lines">
 
 
-381
-382
-383</pre>
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 381</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_b64string'>source_from_b64string</span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/Base64InputSource.html" title="Mindee::Input::Source::Base64InputSource (class)">Base64InputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/Base64InputSource.html#initialize-instance_method" title="Mindee::Input::Source::Base64InputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1674,12 +1666,12 @@
       <pre class="lines">
 
 
-372
-373
-374</pre>
+370
+371
+372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 372</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 370</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_bytes'>source_from_bytes</span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/BytesInputSource.html" title="Mindee::Input::Source::BytesInputSource (class)">BytesInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/BytesInputSource.html#initialize-instance_method" title="Mindee::Input::Source::BytesInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1782,12 +1774,12 @@
       <pre class="lines">
 
 
-390
-391
-392</pre>
+388
+389
+390</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 390</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 388</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_file'>source_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/FileInputSource.html" title="Mindee::Input::Source::FileInputSource (class)">FileInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/FileInputSource.html#initialize-instance_method" title="Mindee::Input::Source::FileInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1874,12 +1866,12 @@
       <pre class="lines">
 
 
-363
-364
-365</pre>
+361
+362
+363</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 363</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 361</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/PathInputSource.html" title="Mindee::Input::Source::PathInputSource (class)">PathInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/PathInputSource.html#initialize-instance_method" title="Mindee::Input::Source::PathInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1948,12 +1940,12 @@
       <pre class="lines">
 
 
-397
-398
-399</pre>
+395
+396
+397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 397</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_url'>source_from_url</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Input/Source/URLInputSource.html" title="Mindee::Input::Source::URLInputSource (class)">URLInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Input/Source/URLInputSource.html#initialize-instance_method" title="Mindee::Input::Source::URLInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
@@ -1968,7 +1960,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Feb 27 15:34:26 2025 by
+  Generated on Tue Mar 25 14:37:22 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>

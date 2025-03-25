@@ -180,7 +180,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The purchase category among predefined classes.</p>
+<p>The purchase category, only for receipts.</p>
 </div></span>
   
 </li>
@@ -238,7 +238,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of company registrations associated to the customer.</p>
+<p>List of company registration numbers associated to the customer.</p>
 </div></span>
   
 </li>
@@ -354,7 +354,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The document number or identifier.</p>
+<p>The document number or identifier (invoice number or receipt number).</p>
 </div></span>
   
 </li>
@@ -383,7 +383,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>One of: ‘INVOICE’, ‘CREDIT NOTE’, ‘CREDIT CARD RECEIPT’, ‘EXPENSE RECEIPT’.</p>
+<p>The type of the document: INVOICE or CREDIT NOTE if it is an invoice, CREDIT CARD RECEIPT or EXPENSE RECEIPT if it is a receipt.</p>
 </div></span>
   
 </li>
@@ -470,7 +470,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of line item details.</p>
+<p>List of line item present on the document.</p>
 </div></span>
   
 </li>
@@ -499,7 +499,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The locale detected on the document.</p>
+<p>The locale of the document.</p>
 </div></span>
   
 </li>
@@ -557,7 +557,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The purchase order number.</p>
+<p>The purchase order number, only if the document is an invoice.</p>
 </div></span>
   
 </li>
@@ -615,7 +615,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of Reference numbers, including PO number.</p>
+<p>List of Reference numbers, including PO number, only if the document is an invoice.</p>
 </div></span>
   
 </li>
@@ -673,7 +673,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The purchase subcategory among predefined classes for transport and food.</p>
+<p>The purchase subcategory for transport and food, only for receipts.</p>
 </div></span>
   
 </li>
@@ -731,7 +731,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of company registrations associated to the supplier.</p>
+<p>List of company registration numbers associated to the supplier.</p>
 </div></span>
   
 </li>
@@ -818,7 +818,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of payment details associated to the supplier.</p>
+<p>List of payment details associated to the supplier (only for invoices).</p>
 </div></span>
   
 </li>
@@ -905,7 +905,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>List of tax lines information.</p>
+<p>List of all taxes on the document.</p>
 </div></span>
   
 </li>
@@ -934,7 +934,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The time the purchase was made.</p>
+<p>The time the purchase was made (only for receipts).</p>
 </div></span>
   
 </li>
@@ -1050,7 +1050,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The total amount of taxes.</p>
+<p>The sum of all taxes present on the document.</p>
 </div></span>
   
 </li>
@@ -1187,7 +1187,6 @@
       <pre class="lines">
 
 
-111
 112
 113
 114
@@ -1304,10 +1303,11 @@
 225
 226
 227
-228</pre>
+228
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
@@ -1507,7 +1507,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The purchase category among predefined classes.</p>
+<p>The purchase category, only for receipts.</p>
 
 
   </div>
@@ -1619,7 +1619,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of company registrations associated to the customer.</p>
+<p>List of company registration numbers associated to the customer.</p>
 
 
   </div>
@@ -1843,7 +1843,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The document number or identifier.</p>
+<p>The document number or identifier (invoice number or receipt number).</p>
 
 
   </div>
@@ -1899,7 +1899,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>One of: ‘INVOICE’, ‘CREDIT NOTE’, ‘CREDIT CARD RECEIPT’, ‘EXPENSE RECEIPT’.</p>
+<p>The type of the document: INVOICE or CREDIT NOTE if it is an invoice, CREDIT CARD RECEIPT or EXPENSE RECEIPT if it is a receipt.</p>
 
 
   </div>
@@ -1926,12 +1926,12 @@
       <pre class="lines">
 
 
-38
 39
-40</pre>
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_document_type'>document_type</span>
   <span class='ivar'>@document_type</span>
@@ -1982,12 +1982,12 @@
       <pre class="lines">
 
 
-41
 42
-43</pre>
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_due_date'>due_date</span>
   <span class='ivar'>@due_date</span>
@@ -2038,12 +2038,12 @@
       <pre class="lines">
 
 
-44
 45
-46</pre>
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_invoice_number'>invoice_number</span>
   <span class='ivar'>@invoice_number</span>
@@ -2067,7 +2067,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of line item details.</p>
+<p>List of line item present on the document.</p>
 
 
   </div>
@@ -2094,12 +2094,12 @@
       <pre class="lines">
 
 
-47
 48
-49</pre>
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_line_items'>line_items</span>
   <span class='ivar'>@line_items</span>
@@ -2123,7 +2123,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The locale detected on the document.</p>
+<p>The locale of the document.</p>
 
 
   </div>
@@ -2150,12 +2150,12 @@
       <pre class="lines">
 
 
-50
 51
-52</pre>
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale'>locale</span>
   <span class='ivar'>@locale</span>
@@ -2206,12 +2206,12 @@
       <pre class="lines">
 
 
-53
 54
-55</pre>
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_payment_date'>payment_date</span>
   <span class='ivar'>@payment_date</span>
@@ -2235,7 +2235,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The purchase order number.</p>
+<p>The purchase order number, only if the document is an invoice.</p>
 
 
   </div>
@@ -2262,12 +2262,12 @@
       <pre class="lines">
 
 
-56
 57
-58</pre>
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_po_number'>po_number</span>
   <span class='ivar'>@po_number</span>
@@ -2318,12 +2318,12 @@
       <pre class="lines">
 
 
-59
 60
-61</pre>
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_receipt_number'>receipt_number</span>
   <span class='ivar'>@receipt_number</span>
@@ -2347,7 +2347,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of Reference numbers, including PO number.</p>
+<p>List of Reference numbers, including PO number, only if the document is an invoice.</p>
 
 
   </div>
@@ -2374,12 +2374,12 @@
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference_numbers'>reference_numbers</span>
   <span class='ivar'>@reference_numbers</span>
@@ -2430,12 +2430,12 @@
       <pre class="lines">
 
 
-65
 66
-67</pre>
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shipping_address'>shipping_address</span>
   <span class='ivar'>@shipping_address</span>
@@ -2459,7 +2459,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The purchase subcategory among predefined classes for transport and food.</p>
+<p>The purchase subcategory for transport and food, only for receipts.</p>
 
 
   </div>
@@ -2486,12 +2486,12 @@
       <pre class="lines">
 
 
-68
 69
-70</pre>
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subcategory'>subcategory</span>
   <span class='ivar'>@subcategory</span>
@@ -2542,12 +2542,12 @@
       <pre class="lines">
 
 
-71
 72
-73</pre>
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_address'>supplier_address</span>
   <span class='ivar'>@supplier_address</span>
@@ -2571,7 +2571,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of company registrations associated to the supplier.</p>
+<p>List of company registration numbers associated to the supplier.</p>
 
 
   </div>
@@ -2598,12 +2598,12 @@
       <pre class="lines">
 
 
-74
 75
-76</pre>
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_company_registrations'>supplier_company_registrations</span>
   <span class='ivar'>@supplier_company_registrations</span>
@@ -2654,12 +2654,12 @@
       <pre class="lines">
 
 
-77
 78
-79</pre>
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_email'>supplier_email</span>
   <span class='ivar'>@supplier_email</span>
@@ -2710,12 +2710,12 @@
       <pre class="lines">
 
 
-80
 81
-82</pre>
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_name'>supplier_name</span>
   <span class='ivar'>@supplier_name</span>
@@ -2739,7 +2739,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of payment details associated to the supplier.</p>
+<p>List of payment details associated to the supplier (only for invoices).</p>
 
 
   </div>
@@ -2766,12 +2766,12 @@
       <pre class="lines">
 
 
-83
 84
-85</pre>
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_payment_details'>supplier_payment_details</span>
   <span class='ivar'>@supplier_payment_details</span>
@@ -2822,12 +2822,12 @@
       <pre class="lines">
 
 
-86
 87
-88</pre>
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_phone_number'>supplier_phone_number</span>
   <span class='ivar'>@supplier_phone_number</span>
@@ -2878,12 +2878,12 @@
       <pre class="lines">
 
 
-89
 90
-91</pre>
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_website'>supplier_website</span>
   <span class='ivar'>@supplier_website</span>
@@ -2907,7 +2907,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>List of tax lines information.</p>
+<p>List of all taxes on the document.</p>
 
 
   </div>
@@ -2934,12 +2934,12 @@
       <pre class="lines">
 
 
-92
 93
-94</pre>
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_taxes'>taxes</span>
   <span class='ivar'>@taxes</span>
@@ -2963,7 +2963,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The time the purchase was made.</p>
+<p>The time the purchase was made (only for receipts).</p>
 
 
   </div>
@@ -2990,12 +2990,12 @@
       <pre class="lines">
 
 
-95
 96
-97</pre>
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time'>time</span>
   <span class='ivar'>@time</span>
@@ -3046,12 +3046,12 @@
       <pre class="lines">
 
 
-98
 99
-100</pre>
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tip'>tip</span>
   <span class='ivar'>@tip</span>
@@ -3102,12 +3102,12 @@
       <pre class="lines">
 
 
-101
 102
-103</pre>
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_amount'>total_amount</span>
   <span class='ivar'>@total_amount</span>
@@ -3158,12 +3158,12 @@
       <pre class="lines">
 
 
-104
 105
-106</pre>
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_net'>total_net</span>
   <span class='ivar'>@total_net</span>
@@ -3187,7 +3187,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>The total amount of taxes.</p>
+<p>The sum of all taxes present on the document.</p>
 
 
   </div>
@@ -3214,12 +3214,12 @@
       <pre class="lines">
 
 
-107
 108
-109</pre>
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_tax'>total_tax</span>
   <span class='ivar'>@total_tax</span>
@@ -3273,7 +3273,6 @@
       <pre class="lines">
 
 
-231
 232
 233
 234
@@ -3314,10 +3313,11 @@
 269
 270
 271
-272</pre>
+272
+273</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 232</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_reference_numbers'>reference_numbers</span> <span class='op'>=</span> <span class='ivar'>@reference_numbers</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>19</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -3371,7 +3371,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Feb 27 15:34:37 2025 by
+  Generated on Tue Mar 25 14:37:34 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.6).
 </div>
