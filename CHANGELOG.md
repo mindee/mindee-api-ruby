@@ -1,5 +1,14 @@
 # Mindee Ruby API Library Changelog
 
+## v4.1.0 - 2025-03-25
+### Changes
+* :sparkles: bump FR EnergyBillV1 to V1.2 & US HealthcareCardV1 to V1.1
+* :sparkles: restore support for US Mail V2
+* :sparkles: add support for RAG in workflow executions
+### Fixes
+* :wrench: loosen pinning on base64 dependency
+* :recycle: update CLI syntax for easier product creation
+
 ## v4.0.0 - 2025-02-27
 ### ¡Breaking Changes!
 * :boom: drop support for ruby versions < 3.0
