@@ -16,7 +16,7 @@ module Mindee
       # @return [bool]
       def point_in_y?(point)
         min_max = Geometry.get_min_max_y(self)
-        min_max.min <= point.y && point.y <= min_max.max
+        point.y.between?(min_max.min, min_max.max)
       end
     end
   end
