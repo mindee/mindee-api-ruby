@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.1.2 - 2025-03-26
+### Fixes
+* :wrench: loosen version restrictions on most dependencies
+
+
 ## v4.1.1 - 2025-03-25
 ### Fixes
 * :wrench: loosen pinning on base64 dependency
