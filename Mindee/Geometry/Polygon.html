@@ -303,7 +303,7 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_point_in_y?'>point_in_y?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_min_max'>min_max</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Geometry.html" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_y'><span class='object_link'><a href="../Geometry.html#get_min_max_y-class_method" title="Mindee::Geometry.get_min_max_y (method)">get_min_max_y</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_min_max'>min_max</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_min_max'>min_max</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+  <span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span><span class='period'>.</span><span class='id identifier rubyid_between?'>between?</span><span class='lparen'>(</span><span class='id identifier rubyid_min_max'>min_max</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='comma'>,</span> <span class='id identifier rubyid_min_max'>min_max</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -315,9 +315,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Mar 25 15:33:54 2025 by
+  Generated on Wed Mar 26 10:43:18 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.6).
+  0.9.37 (ruby-3.1.7).
 </div>
 
     </div>
