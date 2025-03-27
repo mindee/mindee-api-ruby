@@ -260,6 +260,7 @@ Aside from the basic `Field` attributes, the tax field `TaxField` also implement
 * **rate** (`Float`): the tax rate applied to an item can be expressed as a percentage. Can be `nil`.
 * **code** (`String`): tax code (or equivalent, depending on the origin of the document). Can be `nil`.
 * **base** (`Float`): base amount used for the tax. Can be `nil`.
+* **value** (`Float`): the value of the tax. Can be `nil`.
 
 > Note: currently `TaxField` is not used on its own, and is accessed through a parent `Taxes` object, an array-like
 structure.

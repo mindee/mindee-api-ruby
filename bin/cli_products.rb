@@ -163,10 +163,4 @@ PRODUCTS = {
     sync: false,
     async: true,
   },
-  "us-w9" => {
-    description: "W9",
-    doc_class: Mindee::Product::US::W9::W9V1,
-    sync: true,
-    async: false,
-  },
 }
