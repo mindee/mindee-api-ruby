@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.2.0 - 2025-03-28
+### Changes
+* :coffin: remove support for US W9
+
+
 ## v4.1.2 - 2025-03-26
 ### Fixes
 * :wrench: loosen version restrictions on most dependencies
@@ -17,6 +22,7 @@
 * :sparkles: add support for RAG in workflow executions
 ### Fixes
 * :recycle: update CLI syntax for easier product creation
+
 
 ## v4.0.0 - 2025-02-27
 ### ¡Breaking Changes!
