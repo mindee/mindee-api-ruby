@@ -6,7 +6,7 @@ require_relative 'financial_document_v1_line_items'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.11 document data.
+      # Financial Document API version 1.12 document data.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
@@ -37,6 +37,9 @@ module Mindee
         # RECEIPT if it is a receipt.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
+        # Document type extended.
+        # @return [Mindee::Parsing::Standard::ClassificationField]
+        attr_reader :document_type_extended
         # The date on which the payment is due.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :due_date
@@ -142,6 +145,10 @@ module Mindee
           )
           @document_type = Parsing::Standard::ClassificationField.new(
             prediction['document_type'],
+            page_id
+          )
+          @document_type_extended = Parsing::Standard::ClassificationField.new(
+            prediction['document_type_extended'],
             page_id
           )
           @due_date = Parsing::Standard::DateField.new(
@@ -262,6 +269,7 @@ module Mindee
           out_str << "\n:Shipping Address: #{@shipping_address}".rstrip
           out_str << "\n:Billing Address: #{@billing_address}".rstrip
           out_str << "\n:Document Type: #{@document_type}".rstrip
+          out_str << "\n:Document Type Extended: #{@document_type_extended}".rstrip
           out_str << "\n:Purchase Subcategory: #{@subcategory}".rstrip
           out_str << "\n:Purchase Category: #{@category}".rstrip
           out_str << "\n:Total Tax: #{@total_tax}".rstrip

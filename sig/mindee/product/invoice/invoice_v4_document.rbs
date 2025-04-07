@@ -12,6 +12,7 @@ module Mindee
         def customer_name: -> (Parsing::Standard::StringField)
         def date: -> (Parsing::Standard::DateField)
         def document_type: -> (Parsing::Standard::ClassificationField)
+        def document_type_extended: -> (Parsing::Standard::ClassificationField)
         def due_date: -> (Parsing::Standard::DateField)
         def invoice_number: -> (Parsing::Standard::StringField)
         def line_items: -> (Product::Invoice::InvoiceV4LineItems)

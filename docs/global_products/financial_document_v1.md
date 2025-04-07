@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Financial Document API](https://platform.m
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `financial_document`                               |
-> | Recommended Version            | `v1.11`                                            |
+> | Recommended Version            | `v1.12`                                            |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🌐 Global                                          |
@@ -93,7 +93,7 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: f469a24d-3875-4a83-ad43-e0d5aa9da604
+:Mindee ID: a80ac0ee-26f6-4e2e-988a-960b240d5ba7
 :Filename: default_sample.jpg
 
 Inference
@@ -118,7 +118,7 @@ Prediction
   +---------------+--------+----------+---------------+
   | Base          | Code   | Rate (%) | Amount        |
   +===============+========+==========+===============+
-  |               |        | 5.00     | 9.75          |
+  | 195.00        |        | 5.00     | 9.75          |
   +---------------+--------+----------+---------------+
 :Supplier Payment Details:
 :Supplier Name: JOHN SMITH
@@ -170,7 +170,7 @@ Page 0
   +---------------+--------+----------+---------------+
   | Base          | Code   | Rate (%) | Amount        |
   +===============+========+==========+===============+
-  |               |        | 5.00     | 9.75          |
+  | 195.00        |        | 5.00     | 9.75          |
   +---------------+--------+----------+---------------+
 :Supplier Payment Details:
 :Supplier Name: JOHN SMITH
@@ -380,6 +380,24 @@ puts result.document.inference.prediction.document_number.value
 
 ```rb
 puts result.document.inference.prediction.document_type.value
+```
+
+## Document Type Extended
+**document_type_extended** ([ClassificationField](#classification-field)): Document type extended.
+
+#### Possible values include:
+ - 'CREDIT NOTE'
+ - 'INVOICE'
+ - 'OTHER'
+ - 'OTHER_FINANCIAL'
+ - 'PAYSLIP'
+ - 'PURCHASE ORDER'
+ - 'QUOTE'
+ - 'RECEIPT'
+ - 'STATEMENT'
+
+```rb
+puts result.document.inference.prediction.document_type_extended.value
 ```
 
 ## Due Date

@@ -17,6 +17,7 @@ module Mindee
           def payer_id: -> (Parsing::Standard::StringField)
           def rx_bin: -> (Parsing::Standard::StringField)
           def rx_grp: -> (Parsing::Standard::StringField)
+          def rx_id: -> (Parsing::Standard::StringField)
           def rx_pcn: -> (Parsing::Standard::StringField)
           def copays_separator: (String) -> String
           def copays_to_s: -> String

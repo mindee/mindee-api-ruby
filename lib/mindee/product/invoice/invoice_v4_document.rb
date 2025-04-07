@@ -6,7 +6,7 @@ require_relative 'invoice_v4_line_items'
 module Mindee
   module Product
     module Invoice
-      # Invoice API version 4.9 document data.
+      # Invoice API version 4.10 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer billing address.
@@ -30,6 +30,9 @@ module Mindee
         # Document type: INVOICE or CREDIT NOTE.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :document_type
+        # Document type extended.
+        # @return [Mindee::Parsing::Standard::ClassificationField]
+        attr_reader :document_type_extended
         # The date on which the payment is due.
         # @return [Mindee::Parsing::Standard::DateField]
         attr_reader :due_date
@@ -115,6 +118,10 @@ module Mindee
           @date = Parsing::Standard::DateField.new(prediction['date'], page_id)
           @document_type = Parsing::Standard::ClassificationField.new(
             prediction['document_type'],
+            page_id
+          )
+          @document_type_extended = Parsing::Standard::ClassificationField.new(
+            prediction['document_type_extended'],
             page_id
           )
           @due_date = Parsing::Standard::DateField.new(
@@ -222,6 +229,7 @@ module Mindee
           out_str << "\n:Shipping Address: #{@shipping_address}".rstrip
           out_str << "\n:Billing Address: #{@billing_address}".rstrip
           out_str << "\n:Document Type: #{@document_type}".rstrip
+          out_str << "\n:Document Type Extended: #{@document_type_extended}".rstrip
           out_str << "\n:Line Items:"
           out_str << line_items
           out_str[1..].to_s
