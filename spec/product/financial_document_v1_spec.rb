@@ -22,6 +22,26 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
         expect(prediction.invoice_number.bounding_box).to be_nil
         expect(prediction.date.value).to be_nil
         expect(prediction.date.page_id).to be_nil
+        expect(prediction.locale.value).to be_nil
+        expect(prediction.total_amount.value).to be_nil
+        expect(prediction.total_net.value).to be_nil
+        expect(prediction.total_tax.value).to be_nil
+        expect(prediction.billing_address.value).to be_nil
+        expect(prediction.due_date.value).to be_nil
+        expect(prediction.document_number.value).to be_nil
+        expect(prediction.document_type.value).to eq('EXPENSE RECEIPT')
+        expect(prediction.document_type_extended.value).to eq('EXPENSE RECEIPT')
+        expect(prediction.supplier_name.value).to be_nil
+        expect(prediction.supplier_address.value).to be_nil
+        expect(prediction.customer_id.value).to be_nil
+        expect(prediction.customer_name.value).to be_nil
+        expect(prediction.customer_address.value).to be_nil
+        expect(prediction.customer_company_registrations.length).to eq(0)
+        expect(prediction.taxes.length).to eq(0)
+        expect(prediction.supplier_payment_details.length).to eq(0)
+        expect(prediction.supplier_company_registrations.length).to eq(0)
+        expect(prediction.tip.value).to be_nil
+        expect(prediction.time.value).to be_nil
       end
 
       it 'should load a complete document prediction' do
