@@ -27,7 +27,7 @@ module Mindee
           def self.line_items_separator(char)
             out_str = String.new
             out_str << "+#{char * 14}"
-            out_str << "+#{char * 14}"
+            out_str << "+#{char * 22}"
             out_str
           end
 
@@ -41,7 +41,7 @@ module Mindee
             out_str = String.new
             out_str << ("\n#{self.class.line_items_separator('-')}\n ")
             out_str << ' | Service Fees'
-            out_str << ' | Service Name'
+            out_str << ' | Service Name        '
             out_str << (" |\n#{self.class.line_items_separator('=')}")
             out_str + lines
           end

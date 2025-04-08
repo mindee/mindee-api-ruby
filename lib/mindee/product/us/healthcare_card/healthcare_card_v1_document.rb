@@ -132,7 +132,7 @@ module Mindee
             out_str = String.new
             out_str << '  '
             out_str << "+#{char * 14}"
-            out_str << "+#{char * 14}"
+            out_str << "+#{char * 22}"
             out_str << '+'
             out_str
           end
@@ -146,7 +146,7 @@ module Mindee
             out_str << "\n#{copays_separator('-')}"
             out_str << "\n  |"
             out_str << ' Service Fees |'
-            out_str << ' Service Name |'
+            out_str << ' Service Name         |'
             out_str << "\n#{copays_separator('=')}"
             out_str << "\n  #{line_items}"
             out_str << "\n#{copays_separator('-')}"

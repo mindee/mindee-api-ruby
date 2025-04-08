@@ -39,7 +39,7 @@ module Mindee
             printable = {}
             printable[:service_fees] =
               @service_fees.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@service_fees)
-            printable[:service_name] = format_for_display(@service_name, nil)
+            printable[:service_name] = format_for_display(@service_name, 20)
             printable
           end
 
@@ -48,7 +48,7 @@ module Mindee
             printable = table_printable_values
             out_str = String.new
             out_str << format('| %- 13s', printable[:service_fees])
-            out_str << format('| %- 13s', printable[:service_name])
+            out_str << format('| %- 21s', printable[:service_name])
             out_str << '|'
           end
 
