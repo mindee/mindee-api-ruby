@@ -7,7 +7,7 @@ module Mindee
   module Product
     module US
       module HealthcareCard
-        # Healthcare Card API version 1.1 document data.
+        # Healthcare Card API version 1.2 document data.
         class HealthcareCardV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The name of the company that provides the healthcare plan.
@@ -43,6 +43,9 @@ module Mindee
           # The group number for prescription drug coverage.
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :rx_grp
+          # The ID number for prescription drug coverage.
+          # @return [Mindee::Parsing::Standard::StringField]
+          attr_reader :rx_id
           # The PCN number for prescription drug coverage.
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :rx_pcn
@@ -92,6 +95,7 @@ module Mindee
               prediction['rx_grp'],
               page_id
             )
+            @rx_id = Parsing::Standard::StringField.new(prediction['rx_id'], page_id)
             @rx_pcn = Parsing::Standard::StringField.new(
               prediction['rx_pcn'],
               page_id
@@ -111,6 +115,7 @@ module Mindee
             out_str << "\n:Group Number: #{@group_number}".rstrip
             out_str << "\n:Payer ID: #{@payer_id}".rstrip
             out_str << "\n:RX BIN: #{@rx_bin}".rstrip
+            out_str << "\n:RX ID: #{@rx_id}".rstrip
             out_str << "\n:RX GRP: #{@rx_grp}".rstrip
             out_str << "\n:RX PCN: #{@rx_pcn}".rstrip
             out_str << "\n:copays:"
@@ -127,7 +132,7 @@ module Mindee
             out_str = String.new
             out_str << '  '
             out_str << "+#{char * 14}"
-            out_str << "+#{char * 14}"
+            out_str << "+#{char * 22}"
             out_str << '+'
             out_str
           end
@@ -141,7 +146,7 @@ module Mindee
             out_str << "\n#{copays_separator('-')}"
             out_str << "\n  |"
             out_str << ' Service Fees |'
-            out_str << ' Service Name |'
+            out_str << ' Service Name         |'
             out_str << "\n#{copays_separator('=')}"
             out_str << "\n  #{line_items}"
             out_str << "\n#{copays_separator('-')}"

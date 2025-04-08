@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Healthcare Card API](https://platform.mind
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `us_healthcare_cards`                              |
-> | Recommended Version            | `v1.1`                                             |
+> | Recommended Version            | `v1.2`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🇺🇸 United States                                   |
@@ -138,6 +138,15 @@ A `HealthcareCardV1Copay` implements the following attributes:
 * `service_fees` (Float): The price of service.
 * `service_name` (String): The name of service of the copay.
 
+#### Possible values include:
+ - primary_care
+ - emergency_room
+ - urgent_care
+ - specialist
+ - office_visit
+ - prescription
+        
+
 # Attributes
 The following fields are extracted for Healthcare Card V1:
 
@@ -220,6 +229,13 @@ puts result.document.inference.prediction.rx_bin.value
 
 ```rb
 puts result.document.inference.prediction.rx_grp.value
+```
+
+## RX ID
+**rx_id** ([StringField](#string-field)): The ID number for prescription drug coverage.
+
+```rb
+puts result.document.inference.prediction.rx_id.value
 ```
 
 ## RX PCN
