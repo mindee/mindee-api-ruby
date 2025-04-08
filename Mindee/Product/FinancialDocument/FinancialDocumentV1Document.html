@@ -109,7 +109,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Financial Document API version 1.11 document data.</p>
+<p>Financial Document API version 1.12 document data.</p>
 
 
   </div>
@@ -384,6 +384,35 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>The type of the document: INVOICE or CREDIT NOTE if it is an invoice, CREDIT CARD RECEIPT or EXPENSE RECEIPT if it is a receipt.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#document_type_extended-instance_method" title="#document_type_extended (instance method)">#<strong>document_type_extended</strong>  &#x21d2; Mindee::Parsing::Standard::ClassificationField </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Document type extended.</p>
 </div></span>
   
 </li>
@@ -1187,9 +1216,6 @@
       <pre class="lines">
 
 
-112
-113
-114
 115
 116
 117
@@ -1304,10 +1330,17 @@
 226
 227
 228
-229</pre>
+229
+230
+231
+232
+233
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
@@ -1342,6 +1375,10 @@
   <span class='rparen'>)</span>
   <span class='ivar'>@document_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">ClassificationField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html#initialize-instance_method" title="Mindee::Parsing::Standard::BaseField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
     <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>document_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_page_id'>page_id</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@document_type_extended</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">ClassificationField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/BaseField.html#initialize-instance_method" title="Mindee::Parsing::Standard::BaseField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>document_type_extended</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
     <span class='id identifier rubyid_page_id'>page_id</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@due_date</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard.html" title="Mindee::Parsing::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Parsing/Standard/DateField.html" title="Mindee::Parsing::Standard::DateField (class)">DateField</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Parsing/Standard/DateField.html#initialize-instance_method" title="Mindee::Parsing::Standard::DateField#initialize (method)">new</a></span></span><span class='lparen'>(</span>
@@ -1944,6 +1981,62 @@
       
       <span id=""></span>
       <div class="method_details ">
+  <h3 class="signature " id="document_type_extended-instance_method">
+  
+    #<strong>document_type_extended</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">Mindee::Parsing::Standard::ClassificationField</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Document type extended.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Parsing/Standard/ClassificationField.html" title="Mindee::Parsing::Standard::ClassificationField (class)">Mindee::Parsing::Standard::ClassificationField</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_document_type_extended'>document_type_extended</span>
+  <span class='ivar'>@document_type_extended</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
   <h3 class="signature " id="due_date-instance_method">
   
     #<strong>due_date</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Parsing/Standard/DateField.html" title="Mindee::Parsing::Standard::DateField (class)">Mindee::Parsing::Standard::DateField</a></span></tt>  <span class="extras">(readonly)</span>
@@ -1982,12 +2075,12 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_due_date'>due_date</span>
   <span class='ivar'>@due_date</span>
@@ -2038,12 +2131,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_invoice_number'>invoice_number</span>
   <span class='ivar'>@invoice_number</span>
@@ -2094,12 +2187,12 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_line_items'>line_items</span>
   <span class='ivar'>@line_items</span>
@@ -2150,12 +2243,12 @@
       <pre class="lines">
 
 
-51
-52
-53</pre>
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_locale'>locale</span>
   <span class='ivar'>@locale</span>
@@ -2206,12 +2299,12 @@
       <pre class="lines">
 
 
-54
-55
-56</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_payment_date'>payment_date</span>
   <span class='ivar'>@payment_date</span>
@@ -2262,12 +2355,12 @@
       <pre class="lines">
 
 
-57
-58
-59</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_po_number'>po_number</span>
   <span class='ivar'>@po_number</span>
@@ -2318,12 +2411,12 @@
       <pre class="lines">
 
 
-60
-61
-62</pre>
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_receipt_number'>receipt_number</span>
   <span class='ivar'>@receipt_number</span>
@@ -2374,12 +2467,12 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference_numbers'>reference_numbers</span>
   <span class='ivar'>@reference_numbers</span>
@@ -2430,12 +2523,12 @@
       <pre class="lines">
 
 
-66
-67
-68</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shipping_address'>shipping_address</span>
   <span class='ivar'>@shipping_address</span>
@@ -2486,12 +2579,12 @@
       <pre class="lines">
 
 
-69
-70
-71</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subcategory'>subcategory</span>
   <span class='ivar'>@subcategory</span>
@@ -2542,12 +2635,12 @@
       <pre class="lines">
 
 
-72
-73
-74</pre>
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_address'>supplier_address</span>
   <span class='ivar'>@supplier_address</span>
@@ -2598,12 +2691,12 @@
       <pre class="lines">
 
 
-75
-76
-77</pre>
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_company_registrations'>supplier_company_registrations</span>
   <span class='ivar'>@supplier_company_registrations</span>
@@ -2654,12 +2747,12 @@
       <pre class="lines">
 
 
-78
-79
-80</pre>
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_email'>supplier_email</span>
   <span class='ivar'>@supplier_email</span>
@@ -2710,12 +2803,12 @@
       <pre class="lines">
 
 
-81
-82
-83</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_name'>supplier_name</span>
   <span class='ivar'>@supplier_name</span>
@@ -2766,12 +2859,12 @@
       <pre class="lines">
 
 
-84
-85
-86</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_payment_details'>supplier_payment_details</span>
   <span class='ivar'>@supplier_payment_details</span>
@@ -2822,12 +2915,12 @@
       <pre class="lines">
 
 
-87
-88
-89</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_phone_number'>supplier_phone_number</span>
   <span class='ivar'>@supplier_phone_number</span>
@@ -2878,12 +2971,12 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supplier_website'>supplier_website</span>
   <span class='ivar'>@supplier_website</span>
@@ -2934,12 +3027,12 @@
       <pre class="lines">
 
 
-93
-94
-95</pre>
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_taxes'>taxes</span>
   <span class='ivar'>@taxes</span>
@@ -2990,12 +3083,12 @@
       <pre class="lines">
 
 
-96
-97
-98</pre>
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time'>time</span>
   <span class='ivar'>@time</span>
@@ -3046,12 +3139,12 @@
       <pre class="lines">
 
 
-99
-100
-101</pre>
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tip'>tip</span>
   <span class='ivar'>@tip</span>
@@ -3102,12 +3195,12 @@
       <pre class="lines">
 
 
-102
-103
-104</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_amount'>total_amount</span>
   <span class='ivar'>@total_amount</span>
@@ -3158,12 +3251,12 @@
       <pre class="lines">
 
 
-105
-106
-107</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_net'>total_net</span>
   <span class='ivar'>@total_net</span>
@@ -3214,12 +3307,12 @@
       <pre class="lines">
 
 
-108
-109
-110</pre>
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_tax'>total_tax</span>
   <span class='ivar'>@total_tax</span>
@@ -3273,13 +3366,6 @@
       <pre class="lines">
 
 
-232
-233
-234
-235
-236
-237
-238
 239
 240
 241
@@ -3314,10 +3400,18 @@
 270
 271
 272
-273</pre>
+273
+274
+275
+276
+277
+278
+279
+280
+281</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 232</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/product/financial_document/financial_document_v1_document.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_reference_numbers'>reference_numbers</span> <span class='op'>=</span> <span class='ivar'>@reference_numbers</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>19</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -3352,6 +3446,7 @@
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Shipping Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@shipping_address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Billing Address: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@billing_address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Document Type: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@document_type</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
+  <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Document Type Extended: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@document_type_extended</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Purchase Subcategory: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@subcategory</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Purchase Category: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@category</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
   <span class='id identifier rubyid_out_str'>out_str</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n:Total Tax: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@total_tax</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_rstrip'>rstrip</span>
@@ -3371,7 +3466,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Mar 28 15:25:50 2025 by
+  Generated on Tue Apr  8 14:52:02 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.7).
 </div>
