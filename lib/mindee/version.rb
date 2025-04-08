@@ -3,7 +3,7 @@
 # Mindee
 module Mindee
   # Current version.
-  VERSION = '4.2.0'
+  VERSION = '4.3.0'
 
   # Finds and return the current platform.
   # @return [Symbol, Hash[Symbol | String, Regexp], Nil?]

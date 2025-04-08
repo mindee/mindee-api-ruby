@@ -1,5 +1,12 @@
 # Mindee Ruby API Library Changelog
 
+## v4.3.0 - 2025-04-08
+### Changes
+* :sparkles: add support for Financial Document V1.12
+* :sparkles: add support for Invoices V4.10
+* :sparkles: add support for US Healthcare Cards V1.2
+
+
 ## v4.2.0 - 2025-03-28
 ### Changes
 * :coffin: remove support for US W9
