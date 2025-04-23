@@ -1,11 +1,11 @@
-# lib/mindee/parsing/common/extras/full_text_ocr_extra.rb
+# lib/mindee/parsing/common/extras/rag_extra.rb
+
 module Mindee
   module Parsing
     module Common
       module Extras
-        class FullTextOCRExtra
-          def contents: -> String?
-          def language: -> String?
+        class RAGExtra
+          def matching_document_id: -> String?
           def initialize: (untyped) -> nil
           def to_s: -> String
         end

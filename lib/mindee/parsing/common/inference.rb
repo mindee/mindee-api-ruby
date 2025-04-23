@@ -29,6 +29,8 @@ module Mindee
         # Whether this product has access to synchronous endpoint.
         # @return [bool]
         attr_reader :has_sync
+        # @return [Mindee::Parsing::Common::Extras::Extras] Potential Extras fields sent back along the prediction.
+        attr_reader :extras
 
         @endpoint_name = nil
         @endpoint_version = nil
@@ -40,6 +42,7 @@ module Mindee
           @is_rotation_applied = raw_prediction['is_rotation_applied']
           @product = Product.new(raw_prediction['product'])
           @pages = [] # : Array[Page]
+          @extras = Extras::Extras.new(raw_prediction['extras'])
         end
 
         # @return [String]

@@ -38,7 +38,7 @@ module Mindee
   end
 
   class Client
-    def initialize: (api_key: String) -> void
+    def initialize: (?api_key: String) -> void
     def logger: () -> untyped
     def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
     def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse

@@ -147,6 +147,7 @@ module Mindee
         params = {} # : Hash[Symbol | String, untyped]
         params[:cropper] = 'true' if opts.cropper
         params[:full_text_ocr] = 'true' if opts.full_text
+        params[:rag] = 'true' if opts.rag
         uri.query = URI.encode_www_form(params)
 
         headers = {
@@ -189,11 +190,9 @@ module Mindee
           req = Net::HTTP::Get.new(response['location'], headers)
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
             response = http.request(req)
-            response
           end
         end
-        error = ErrorHandler.handle_error(@url_name, response)
-        raise error
+        response
       end
 
       # Checks API key

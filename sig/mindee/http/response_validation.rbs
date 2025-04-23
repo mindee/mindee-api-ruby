@@ -2,9 +2,9 @@
 module Mindee
   module HTTP
     module ResponseValidation
-      def self.valid_sync_response?: (untyped) -> bool
-      def self.valid_async_response?: (untyped) -> bool
-      def self.clean_request!: (untyped) -> nil
+      def self.valid_sync_response?: (Net::HTTPResponse) -> bool
+      def self.valid_async_response?: (Net::HTTPResponse) -> bool
+      def self.clean_request!: (Net::HTTPResponse) -> void
     end
   end
 end
