@@ -29,6 +29,9 @@ module Net
   class HTTPResponse
     def self.body: -> untyped
     def body: -> untyped
+    def []: (untyped) -> untyped
+    def key?: (untyped) -> bool
+    def code: -> String
   end
 
   class HTTPRedirection

@@ -46,14 +46,14 @@ module Mindee
             "\n  #{entry.to_table_line}\n#{self.class.line_items_separator('-')}"
           end.join
           out_str = String.new
-          out_str << ("\n#{self.class.line_items_separator('-')}\n ")
+          out_str << "\n#{self.class.line_items_separator('-')}\n "
           out_str << ' | Description                         '
           out_str << ' | Gross Weight'
           out_str << ' | Measurement'
           out_str << ' | Measurement Unit'
           out_str << ' | Quantity'
           out_str << ' | Weight Unit'
-          out_str << (" |\n#{self.class.line_items_separator('=')}")
+          out_str << " |\n#{self.class.line_items_separator('=')}"
           out_str + lines
         end
       end

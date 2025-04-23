@@ -46,7 +46,7 @@ module Mindee
               "\n  #{entry.to_table_line}\n#{self.class.line_items_separator('-')}"
             end.join
             out_str = String.new
-            out_str << ("\n#{self.class.line_items_separator('-')}\n ")
+            out_str << "\n#{self.class.line_items_separator('-')}\n "
             out_str << ' | City           '
             out_str << ' | Complete Address                   '
             out_str << ' | Is Address Change'
@@ -55,7 +55,7 @@ module Mindee
             out_str << ' | State'
             out_str << ' | Street                   '
             out_str << ' | Unit           '
-            out_str << (" |\n#{self.class.line_items_separator('=')}")
+            out_str << " |\n#{self.class.line_items_separator('=')}"
             out_str + lines
           end
         end

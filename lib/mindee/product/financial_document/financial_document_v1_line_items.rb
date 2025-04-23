@@ -44,7 +44,7 @@ module Mindee
             "\n  #{entry.to_table_line}\n#{self.class.line_items_separator('-')}"
           end.join
           out_str = String.new
-          out_str << ("\n#{self.class.line_items_separator('-')}\n ")
+          out_str << "\n#{self.class.line_items_separator('-')}\n "
           out_str << ' | Description                         '
           out_str << ' | Product code'
           out_str << ' | Quantity'
@@ -53,7 +53,7 @@ module Mindee
           out_str << ' | Total Amount'
           out_str << ' | Unit of measure'
           out_str << ' | Unit Price'
-          out_str << (" |\n#{self.class.line_items_separator('=')}")
+          out_str << " |\n#{self.class.line_items_separator('=')}"
           out_str + lines
         end
       end

@@ -17,6 +17,8 @@ module Mindee
     attr_accessor close_file: bool
     attr_accessor page_options: PageOptions
     attr_accessor cropper: bool
+    attr_accessor rag: bool
+    attr_accessor workflow_id: String | nil
     attr_accessor initial_delay_sec: Integer | Float
     attr_accessor delay_sec: Integer | Float
     attr_accessor max_retries: Integer
@@ -36,7 +38,7 @@ module Mindee
   end
 
   class Client
-    def initialize: (api_key: String) -> void
+    def initialize: (?api_key: String) -> void
     def logger: () -> untyped
     def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
     def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
@@ -57,7 +59,7 @@ module Mindee
     def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions | WorkflowOptions) -> void
     def initialize_endpoint: (singleton(Parsing::Common::Inference), ?endpoint_name: String, ?account_name: String, ?version: String) -> HTTP::Endpoint
     def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
-    def fix_endpoint_name: (singleton(Parsing::Common::Inference), String?) -> String?
+    def fix_endpoint_name: (singleton(Parsing::Common::Inference), String?) -> String
     def fix_account_name: (String) -> String
     def fix_version: (singleton(Parsing::Common::Inference), String) -> String
   end

@@ -9,7 +9,7 @@ shared_context 'load pages' do
     Mindee::Parsing::Common::ApiResponse.new(
       Mindee::Product::InternationalId::InternationalIdV2,
       prediction_data,
-      prediction_data
+      prediction_data.to_json
     ).document.inference.pages
   end
 end
@@ -20,7 +20,7 @@ shared_context 'load document' do
     Mindee::Parsing::Common::ApiResponse.new(
       Mindee::Product::InternationalId::InternationalIdV2,
       prediction_data,
-      prediction_data
+      prediction_data.to_json
     ).document
   end
   let(:load_invalid_document) do
@@ -30,7 +30,7 @@ shared_context 'load document' do
     Mindee::Parsing::Common::ApiResponse.new(
       Mindee::Product::FR::BankStatement::BankStatementV2,
       prediction_data,
-      prediction_data
+      prediction_data.to_json
     ).document
   end
 end

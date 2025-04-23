@@ -9,7 +9,7 @@ API_KEY=$3
 if [ -z "${ACCOUNT}" ]; then echo "ACCOUNT is required"; exit 1; fi
 if [ -z "${ENDPOINT}" ]; then echo "ENDPOINT is required"; exit 1; fi
 
-for f in $(find ./docs/code_samples -maxdepth 1 -name "*.txt" -not -name "workflow_execution.txt" | sort -h)
+for f in $(find ./docs/code_samples -maxdepth 1 -name "*.txt" -not -name "workflow_*.txt" | sort -h)
 do
   echo
   echo "###############################################"

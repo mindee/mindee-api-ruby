@@ -54,8 +54,8 @@ module Mindee
   # @!attribute delay_sec [Numeric] Delay between polling attempts. Defaults to 1.5.
   # @!attribute max_retries [Integer] Maximum number of retries. Defaults to 80.
   class ParseOptions
-    attr_accessor :all_words, :full_text, :close_file, :page_options, :cropper,
-                  :initial_delay_sec, :delay_sec, :max_retries
+    attr_accessor :all_words, :full_text, :close_file, :page_options, :cropper, :rag,
+                  :workflow_id, :initial_delay_sec, :delay_sec, :max_retries
 
     def initialize(params: {})
       params = params.transform_keys(&:to_sym)
@@ -66,6 +66,8 @@ module Mindee
       raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
       @page_options = raw_page_options
       @cropper = params.fetch(:cropper, false)
+      @rag = params.fetch(:rag, false)
+      @workflow_id = params.fetch(:workflow_id, nil)
       @initial_delay_sec = params.fetch(:initial_delay_sec, 2)
       @delay_sec = params.fetch(:delay_sec, 1.5)
       @max_retries = params.fetch(:max_retries, 80)
@@ -176,13 +178,10 @@ module Mindee
 
       prediction, raw_http = endpoint.predict(
         input_source,
-        options.all_words,
-        options.full_text,
-        options.close_file,
-        options.cropper
+        options
       )
 
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http.to_s)
     end
 
     # Enqueue a document for async parsing
@@ -207,6 +206,8 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [bool] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
+    #   * `:rag` [bool] Whether to enable Retrieval-Augmented Generation. Only works if a Workflow ID is provided.
+    #   * `:workflow_id` [String, nil] ID of the workflow to use.
     # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue(input_source, product_class, endpoint: nil, options: {})
@@ -216,12 +217,9 @@ module Mindee
 
       prediction, raw_http = endpoint.predict_async(
         input_source,
-        opts.all_words,
-        opts.full_text,
-        opts.close_file,
-        opts.cropper
+        opts
       )
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http.to_json)
     end
 
     # Parses a queued document
@@ -236,7 +234,7 @@ module Mindee
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
       logger.debug("Fetching queued document as '#{endpoint.url_root}'")
       prediction, raw_http = endpoint.parse_async(job_id)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http.to_json)
     end
 
     # Enqueue a document for async parsing and automatically try to retrieve it
@@ -261,6 +259,8 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [bool, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
+    #   * `:rag` [bool] Whether to enable Retrieval-Augmented Generation. Only works if a Workflow ID is provided.
+    #   * `:workflow_id` [String, nil] ID of the workflow to use.
     #   * `:initial_delay_sec` [Numeric] Initial delay before polling. Defaults to 2.
     #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.

@@ -69,7 +69,7 @@ module Mindee
 
           full_text_ocr = String.new
           raw_prediction.dig('inference', 'pages').each do |page|
-            full_text_ocr << (page['extras']['full_text_ocr']['content'])
+            full_text_ocr << page['extras']['full_text_ocr']['content']
           end
           artificial_text_obj = { 'content' => full_text_ocr }
           if @extras.nil? || @extras.empty?

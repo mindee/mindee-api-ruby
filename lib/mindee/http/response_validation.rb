@@ -42,7 +42,7 @@ module Mindee
       # Checks and correct the response object depending on the possible kinds of returns.
       # @param response [Net::HTTPResponse]
       def self.clean_request!(response)
-        return response if (response.code.to_i < 200) || (response.code.to_i > 302)
+        return response if (response.code.to_i < 200) || (response.code.to_i > 302) # : Net::HTTPResponse
 
         return response if response.body.empty?
 
