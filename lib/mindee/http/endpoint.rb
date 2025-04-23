@@ -34,6 +34,8 @@ module Mindee
       attr_reader :request_timeout
       # @return [String]
       attr_reader :url_root
+      # @return [String]
+      attr_reader :base_url
 
       def initialize(owner, url_name, version, api_key: '')
         @owner = owner
@@ -44,25 +46,19 @@ module Mindee
           logger.debug('API key set from environment')
         end
         @api_key = api_key.nil? || api_key.empty? ? ENV.fetch(API_KEY_ENV_NAME, API_KEY_DEFAULT) : api_key
-        base_url = ENV.fetch(BASE_URL_ENV_NAME, BASE_URL_DEFAULT)
-        @url_root = "#{base_url.chomp('/')}/products/#{@owner}/#{@url_name}/v#{@version}"
+        @base_url = ENV.fetch(BASE_URL_ENV_NAME, BASE_URL_DEFAULT).chomp('/')
+        @url_root = "#{@base_url}/products/#{@owner}/#{@url_name}/v#{@version}"
       end
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param all_words [bool] Whether the full word extraction needs to be performed
-      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs
-      # @param close_file [bool] Whether the file will be closed after reading
-      # @param cropper [bool] Whether a cropping operation will be applied
+      # @param opts [ParseOptions] Parse options.
       # @return [Array]
-      def predict(input_source, all_words, full_text, close_file, cropper)
+      def predict(input_source, opts)
         check_api_key
         response = predict_req_post(
           input_source,
-          all_words: all_words,
-          full_text: full_text,
-          close_file: close_file,
-          cropper: cropper
+          opts
         )
         if !response.nil? && response.respond_to?(:body)
           hashed_response = JSON.parse(response.body, object_class: Hash)
@@ -76,14 +72,11 @@ module Mindee
 
       # Call the prediction API.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param all_words [bool] Whether the full word extraction needs to be performed
-      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [bool] Whether the file will be closed after reading
-      # @param cropper [bool] Whether a cropping operation will be applied
+      # @param opts [ParseOptions, Hash] Parse options.
       # @return [Array]
-      def predict_async(input_source, all_words, full_text, close_file, cropper)
+      def predict_async(input_source, opts)
         check_api_key
-        response = document_queue_req_get(input_source, all_words, full_text, close_file, cropper)
+        response = document_queue_req_post(input_source, opts)
         if !response.nil? && response.respond_to?(:body)
           hashed_response = JSON.parse(response.body, object_class: Hash)
           return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
@@ -100,7 +93,7 @@ module Mindee
       # @return [Array]
       def parse_async(job_id)
         check_api_key
-        response = document_queue_req(job_id)
+        response = document_queue_req_get(job_id)
         hashed_response = JSON.parse(response.body, object_class: Hash)
         return [hashed_response, response.body] if ResponseValidation.valid_async_response?(response)
 
@@ -112,17 +105,14 @@ module Mindee
       private
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param all_words [bool] Whether the full word extraction needs to be performed
-      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [bool] Whether the file will be closed after reading
-      # @param cropper [bool] Whether a cropping operation will be applied
+      # @param opts [ParseOptions] Parse options.
       # @return [Net::HTTPResponse, nil]
-      def predict_req_post(input_source, all_words: false, full_text: false, close_file: true, cropper: false)
+      def predict_req_post(input_source, opts)
         uri = URI("#{@url_root}/predict")
 
         params = {} # : Hash[Symbol | String, untyped]
-        params[:cropper] = 'true' if cropper
-        params[:full_text_ocr] = 'true' if full_text
+        params[:cropper] = 'true' if opts.cropper
+        params[:full_text_ocr] = 'true' if opts.full_text
         uri.query = URI.encode_www_form(params)
 
         headers = {
@@ -131,32 +121,32 @@ module Mindee
         }
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                      [['document', input_source.url]]
+                      [['document', input_source.url]] # : Array[untyped]
                     else
-                      [input_source.read_contents(close: close_file)]
+                      [input_source.read_contents(close: opts.close_file)] # : Array[untyped]
                     end
-        form_data.push ['include_mvision', 'true'] if all_words
+        form_data.push ['include_mvision', 'true'] if opts.all_words
 
         req.set_form(form_data, 'multipart/form-data')
-        response = nil
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
-          response = http.request(req)
+          return http.request(req)
         end
-        response
+        raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param all_words [bool] Whether the full word extraction needs to be performed
-      # @param full_text [bool] Whether to include the full OCR text response in compatible APIs.
-      # @param close_file [bool] Whether the file will be closed after reading
-      # @param cropper [bool] Whether a cropping operation will be applied
-      # @return [Net::HTTPResponse, nil]
-      def document_queue_req_get(input_source, all_words, full_text, close_file, cropper)
-        uri = URI("#{@url_root}/predict_async")
+      # @param opts [ParseOptions] Parse options.
+      # @return [Net::HTTPResponse]
+      def document_queue_req_post(input_source, opts)
+        uri = if opts.workflow_id
+                URI("#{@base_url}/workflows/#{opts.workflow_id}/predict_async")
+              else
+                URI("#{@url_root}/predict_async")
+              end
 
         params = {} # : Hash[Symbol | String, untyped]
-        params[:cropper] = 'true' if cropper
-        params[:full_text_ocr] = 'true' if full_text
+        params[:cropper] = 'true' if opts.cropper
+        params[:full_text_ocr] = 'true' if opts.full_text
         uri.query = URI.encode_www_form(params)
 
         headers = {
@@ -165,24 +155,23 @@ module Mindee
         }
         req = Net::HTTP::Post.new(uri, headers)
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                      [['document', input_source.url]]
+                      [['document', input_source.url]] # : Array[untyped]
                     else
-                      [input_source.read_contents(close: close_file)]
+                      [input_source.read_contents(close: opts.close_file)] # : Array[untyped]
                     end
-        form_data.push ['include_mvision', 'true'] if all_words
+        form_data.push ['include_mvision', 'true'] if opts.all_words
 
         req.set_form(form_data, 'multipart/form-data')
 
-        response = nil
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
-          response = http.request(req)
+          return http.request(req)
         end
-        response
+        raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
       end
 
       # @param job_id [String]
       # @return [Net::HTTPResponse, nil]
-      def document_queue_req(job_id)
+      def document_queue_req_get(job_id)
         uri = URI("#{@url_root}/documents/queue/#{job_id}")
 
         headers = {
@@ -200,9 +189,11 @@ module Mindee
           req = Net::HTTP::Get.new(response['location'], headers)
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
             response = http.request(req)
+            response
           end
         end
-        response
+        error = ErrorHandler.handle_error(@url_name, response)
+        raise error
       end
 
       # Checks API key

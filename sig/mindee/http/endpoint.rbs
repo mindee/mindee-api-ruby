@@ -13,14 +13,15 @@ module Mindee
       def api_key: -> String?
       def request_timeout: -> Integer
       def url_root: -> String
-      def initialize: (untyped, untyped, untyped, ?api_key: String) -> String
-      def predict: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
-      def predict_async: (untyped, untyped, untyped, untyped, untyped) -> [untyped, untyped]
-      def parse_async: (untyped) -> [untyped, untyped]
-      def predict_req_post: (untyped, ?all_words: false, ?full_text: false, ?close_file: true, ?cropper: false) -> untyped
-      def document_queue_req_get: (untyped, untyped, untyped, untyped, untyped) -> untyped
-      def document_queue_req: (untyped) -> untyped
-      def check_api_key: -> nil
+      def base_url: -> String
+      def initialize: (String, String, String | nil, ?api_key: String) -> String
+      def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
+      def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
+      def parse_async: (String) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
+      def predict_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
+      def document_queue_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
+      def document_queue_req_get: (untyped) -> Net::HTTPResponse
+      def check_api_key: -> void
     end
   end
 end

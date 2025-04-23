@@ -11,7 +11,7 @@ describe Mindee::Parsing::Common::ApiResponse do
       response = load_json(DIR_PRODUCTS, 'invoices/response_v4/complete.json')
       rst_response = read_file(DIR_PRODUCTS, 'invoices/response_v4/summary_full.rst')
       parsed_response = Mindee::Parsing::Common::ApiResponse.new(Mindee::Product::Invoice::InvoiceV4,
-                                                                 response, response)
+                                                                 response, response.to_s)
       expect(parsed_response.document.inference).to be_a Mindee::Product::Invoice::InvoiceV4
       expect(parsed_response.document.inference.prediction).to be_a Mindee::Product::Invoice::InvoiceV4Document
       expect(parsed_response.raw_http).to eq(response.to_s)

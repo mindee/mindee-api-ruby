@@ -35,7 +35,7 @@ module Mindee
 
         # @param product_class [Mindee::Inference]
         # @param http_response [Hash]
-        # @param raw_http [String]
+        # @param raw_http [Hash]
         def initialize(product_class, http_response, raw_http)
           logger.debug('Handling API response')
           @raw_http = raw_http.to_s

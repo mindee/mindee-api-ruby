@@ -20,7 +20,7 @@ module Mindee
         def job: -> Parsing::Common::Job?
         def api_request: -> Parsing::Common::ApiRequest?
         def raw_http: -> String
-        def initialize: (singleton(Parsing::Common::Inference), Hash[Symbol | String, untyped], String) -> void
+        def initialize: (singleton(Parsing::Common::Inference), Hash[Symbol | String, untyped] | Net::HTTPResponse, String) -> void
       end
     end
   end
