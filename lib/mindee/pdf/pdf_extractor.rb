@@ -58,7 +58,7 @@ module Mindee
             end
             formatted_max_index = format('%03d', page_index_list[page_index_list.length - 1] + 1).to_s
             field_filename = "#{basename}_#{format('%03d',
-                                                   (page_index_list[0] + 1))}-#{formatted_max_index}#{extension}"
+                                                   page_index_list[0] + 1)}-#{formatted_max_index}#{extension}"
             extracted_pdf = Mindee::PDF::PDFExtractor::ExtractedPDF.new(cut_pages(page_index_list),
                                                                         field_filename)
             extracted_pdfs << extracted_pdf

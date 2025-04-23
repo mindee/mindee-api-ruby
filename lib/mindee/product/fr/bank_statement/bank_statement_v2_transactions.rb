@@ -40,11 +40,11 @@ module Mindee
               "\n  #{entry.to_table_line}\n#{self.class.line_items_separator('-')}"
             end.join
             out_str = String.new
-            out_str << ("\n#{self.class.line_items_separator('-')}\n ")
+            out_str << "\n#{self.class.line_items_separator('-')}\n "
             out_str << ' | Amount    '
             out_str << ' | Date      '
             out_str << ' | Description                         '
-            out_str << (" |\n#{self.class.line_items_separator('=')}")
+            out_str << " |\n#{self.class.line_items_separator('=')}"
             out_str + lines
           end
         end

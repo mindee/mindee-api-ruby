@@ -39,10 +39,10 @@ module Mindee
         def to_s
           printable = printable_values
           out_str = String.new
-          out_str << ("Base: #{printable[:base]}")
-          out_str << (", Code: #{printable[:code]}")
-          out_str << (", Rate (%): #{printable[:rate]}")
-          out_str << (", Amount: #{printable[:value]}")
+          out_str << "Base: #{printable[:base]}"
+          out_str << ", Code: #{printable[:code]}"
+          out_str << ", Rate (%): #{printable[:rate]}"
+          out_str << ", Amount: #{printable[:value]}"
           out_str.strip
         end
 
@@ -60,10 +60,10 @@ module Mindee
         def to_table_line
           printable = printable_values
           out_str = String.new
-          out_str << ("| #{printable[:base].ljust(13, ' ')}")
-          out_str << (" | #{printable[:code].ljust(6, ' ')}")
-          out_str << (" | #{printable[:rate].ljust(8, ' ')}")
-          out_str << (" | #{printable[:value].ljust(13, ' ')} |")
+          out_str << "| #{printable[:base].ljust(13, ' ')}"
+          out_str << " | #{printable[:code].ljust(6, ' ')}"
+          out_str << " | #{printable[:rate].ljust(8, ' ')}"
+          out_str << " | #{printable[:value].ljust(13, ' ')} |"
           out_str.strip
         end
       end
@@ -94,7 +94,7 @@ module Mindee
           return '' if nil? || empty?
 
           out_str = String.new
-          out_str << ("\n#{line_separator('-')}")
+          out_str << "\n#{line_separator('-')}"
           out_str << "\n  | Base          | Code   | Rate (%) | Amount        |"
           out_str << "\n#{line_separator('=')}"
           each do |entry|
