@@ -5,7 +5,7 @@ on:
 
 jobs:
   static_analysis:
-    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@main
+    uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@add-rag-polling
   test_units:
     uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@main
     needs: static_analysis
