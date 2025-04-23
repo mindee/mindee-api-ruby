@@ -10,7 +10,7 @@ AllCops:
     - local_test/*
     - Steepfile
 
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.0.0
   SuggestExtensions: false
 
 Gemspec/DevelopmentDependencies:
