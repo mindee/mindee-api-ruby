@@ -488,12 +488,12 @@
       <pre class="lines">
 
 
-110
-111
-112</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>api_key:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@api_key</span> <span class='op'>=</span> <span class='id identifier rubyid_api_key'>api_key</span>
@@ -698,7 +698,7 @@
       
         &mdash;
         <div class='inline'>
-<p>A hash of options to configure the enqueue behavior. Possible keys: * <code>:endpoint</code> [HTTP::Endpoint, nil] Endpoint of the API.  Doesn’t need to be set in the case of OTS APIs. * <code>:all_words</code> [bool] Whether to extract all the words on each page.  This performs a full OCR operation on the server and will increase response time. * <code>:full_text</code> [bool] Whether to include the full OCR text response in compatible APIs.  This performs a full OCR operation on the server and may increase response time. * <code>:close_file</code> [bool] Whether to <code>close()</code> the file after parsing it.  Set to false if you need to access the file after this operation. * <code>:page_options</code> [Hash, nil] Page cutting/merge options:  - <code>:page_indexes</code> [Array&lt;Integer&gt;] Zero-based list of page indexes.  - <code>:operation</code> [Symbol] Operation to apply on the document, given the <code>page_indexes</code> specified:  - <code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.  - <code>:REMOVE</code> - remove the specified pages, and keep all others.  - <code>:on_min_pages</code> [Integer] Apply the operation only if the document has at least this many pages. * <code>:cropper</code> [bool] Whether to include cropper results for each page.  This performs a cropping operation on the server and will increase response time.</p>
+<p>A hash of options to configure the enqueue behavior. Possible keys: * <code>:endpoint</code> [HTTP::Endpoint, nil] Endpoint of the API.  Doesn’t need to be set in the case of OTS APIs. * <code>:all_words</code> [bool] Whether to extract all the words on each page.  This performs a full OCR operation on the server and will increase response time. * <code>:full_text</code> [bool] Whether to include the full OCR text response in compatible APIs.  This performs a full OCR operation on the server and may increase response time. * <code>:close_file</code> [bool] Whether to <code>close()</code> the file after parsing it.  Set to false if you need to access the file after this operation. * <code>:page_options</code> [Hash, nil] Page cutting/merge options:  - <code>:page_indexes</code> [Array&lt;Integer&gt;] Zero-based list of page indexes.  - <code>:operation</code> [Symbol] Operation to apply on the document, given the <code>page_indexes</code> specified:  - <code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.  - <code>:REMOVE</code> - remove the specified pages, and keep all others.  - <code>:on_min_pages</code> [Integer] Apply the operation only if the document has at least this many pages. * <code>:cropper</code> [bool] Whether to include cropper results for each page.  This performs a cropping operation on the server and will increase response time. * <code>:rag</code> [bool] Whether to enable Retrieval-Augmented Generation. Only works if a Workflow ID is provided. * <code>:workflow_id</code> [String, nil] ID of the workflow to use.</p>
 </div>
       
     </li>
@@ -743,7 +743,6 @@
       <pre class="lines">
 
 
-212
 213
 214
 215
@@ -754,12 +753,10 @@
 220
 221
 222
-223
-224
-225</pre>
+223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 212</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 213</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_parse_options'>normalize_parse_options</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -768,12 +765,9 @@
 
   <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span> <span class='op'>=</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_predict_async'>predict_async</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_all_words'>all_words</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_full_text'>full_text</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_close_file'>close_file</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_cropper'>cropper</span>
+    <span class='id identifier rubyid_opts'>opts</span>
   <span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -844,7 +838,7 @@
       
         &mdash;
         <div class='inline'>
-<p>A hash of options to configure the parsing behavior. Possible keys: * <code>:endpoint</code> [HTTP::Endpoint, nil] Endpoint of the API.  Doesn’t need to be set in the case of OTS APIs. * <code>:all_words</code> [bool] Whether to extract all the words on each page.  This performs a full OCR operation on the server and will increase response time. * <code>:full_text</code> [bool] Whether to include the full OCR text response in compatible APIs.  This performs a full OCR operation on the server and may increase response time. * <code>:close_file</code> [bool] Whether to <code>close()</code> the file after parsing it.  Set to false if you need to access the file after this operation. * <code>:page_options</code> [Hash, nil] Page cutting/merge options:  - <code>:page_indexes</code> [Array&lt;Integer&gt;] Zero-based list of page indexes.  - <code>:operation</code> [Symbol] Operation to apply on the document, given the <code>page_indexes</code> specified:  - <code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.  - <code>:REMOVE</code> - remove the specified pages, and keep all others.  - <code>:on_min_pages</code> [Integer] Apply the operation only if the document has at least this many pages. * <code>:cropper</code> [bool, nil] Whether to include cropper results for each page.  This performs a cropping operation on the server and will increase response time. * <code>:initial_delay_sec</code> [Numeric] Initial delay before polling. Defaults to 2. * <code>:delay_sec</code> [Numeric] Delay between polling attempts. Defaults to 1.5. * <code>:max_retries</code> [Integer] Maximum number of retries. Defaults to 80.</p>
+<p>A hash of options to configure the parsing behavior. Possible keys: * <code>:endpoint</code> [HTTP::Endpoint, nil] Endpoint of the API.  Doesn’t need to be set in the case of OTS APIs. * <code>:all_words</code> [bool] Whether to extract all the words on each page.  This performs a full OCR operation on the server and will increase response time. * <code>:full_text</code> [bool] Whether to include the full OCR text response in compatible APIs.  This performs a full OCR operation on the server and may increase response time. * <code>:close_file</code> [bool] Whether to <code>close()</code> the file after parsing it.  Set to false if you need to access the file after this operation. * <code>:page_options</code> [Hash, nil] Page cutting/merge options:  - <code>:page_indexes</code> [Array&lt;Integer&gt;] Zero-based list of page indexes.  - <code>:operation</code> [Symbol] Operation to apply on the document, given the <code>page_indexes</code> specified:  - <code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.  - <code>:REMOVE</code> - remove the specified pages, and keep all others.  - <code>:on_min_pages</code> [Integer] Apply the operation only if the document has at least this many pages. * <code>:cropper</code> [bool, nil] Whether to include cropper results for each page.  This performs a cropping operation on the server and will increase response time. * <code>:rag</code> [bool] Whether to enable Retrieval-Augmented Generation. Only works if a Workflow ID is provided. * <code>:workflow_id</code> [String, nil] ID of the workflow to use. * <code>:initial_delay_sec</code> [Numeric] Initial delay before polling. Defaults to 2. * <code>:delay_sec</code> [Numeric] Delay between polling attempts. Defaults to 1.5. * <code>:max_retries</code> [Integer] Maximum number of retries. Defaults to 80.</p>
 </div>
       
     </li>
@@ -1318,8 +1312,6 @@
       <pre class="lines">
 
 
-141
-142
 143
 144
 145
@@ -1328,10 +1320,12 @@
 148
 149
 150
-151</pre>
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 143</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>enqueue:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_parse_options'>normalize_parse_options</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -1444,21 +1438,21 @@
       <pre class="lines">
 
 
+233
+234
 235
 236
 237
-238
-239
-240</pre>
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 235</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 233</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_queued'>parse_queued</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_logger'><span class='object_link'><a href="../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Fetching queued document as &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_url_root'>url_root</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span> <span class='op'>=</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='period'>.</span><span class='id identifier rubyid_parse_async'>parse_async</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing.html" title="Mindee::Parsing (module)">Parsing</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common.html" title="Mindee::Parsing::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::Parsing::Common::ApiResponse (class)">ApiResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Parsing/Common/ApiResponse.html#initialize-instance_method" title="Mindee::Parsing::Common::ApiResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_raw_http'>raw_http</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1960,7 +1954,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Apr  8 14:51:49 2025 by
+  Generated on Thu Apr 24 08:52:17 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.7).
 </div>

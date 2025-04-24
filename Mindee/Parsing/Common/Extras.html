@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/mindee/parsing/common/extras/extras.rb<span class="defines">,<br />
-  lib/mindee/parsing/common/extras/cropper_extra.rb,<br /> lib/mindee/parsing/common/extras/full_text_ocr_extra.rb</span>
+  lib/mindee/parsing/common/extras/rag_extra.rb,<br /> lib/mindee/parsing/common/extras/cropper_extra.rb,<br /> lib/mindee/parsing/common/extras/full_text_ocr_extra.rb</span>
 </dd>
   </dl>
   
@@ -102,7 +102,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Extras/CropperExtra.html" title="Mindee::Parsing::Common::Extras::CropperExtra (class)">CropperExtra</a></span>, <span class='object_link'><a href="Extras/Extras.html" title="Mindee::Parsing::Common::Extras::Extras (class)">Extras</a></span>, <span class='object_link'><a href="Extras/FullTextOCRExtra.html" title="Mindee::Parsing::Common::Extras::FullTextOCRExtra (class)">FullTextOCRExtra</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Extras/CropperExtra.html" title="Mindee::Parsing::Common::Extras::CropperExtra (class)">CropperExtra</a></span>, <span class='object_link'><a href="Extras/Extras.html" title="Mindee::Parsing::Common::Extras::Extras (class)">Extras</a></span>, <span class='object_link'><a href="Extras/FullTextOCRExtra.html" title="Mindee::Parsing::Common::Extras::FullTextOCRExtra (class)">FullTextOCRExtra</a></span>, <span class='object_link'><a href="Extras/RAGExtra.html" title="Mindee::Parsing::Common::Extras::RAGExtra (class)">RAGExtra</a></span>
     
   
 </p>
@@ -189,12 +189,12 @@
       <pre class="lines">
 
 
-49
-50
-51</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/extras/extras.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/parsing/common/extras/extras.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_instance_variables'>instance_variables</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_var'>var</span><span class='op'>|</span> <span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='id identifier rubyid_var'>var</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
@@ -209,7 +209,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Apr  8 14:51:48 2025 by
+  Generated on Thu Apr 24 08:52:16 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.7).
 </div>

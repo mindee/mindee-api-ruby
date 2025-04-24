@@ -333,6 +333,60 @@
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rag-instance_method" title="#rag (instance method)">#<strong>rag</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute rag.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#workflow_id-instance_method" title="#workflow_id (instance method)">#<strong>workflow_id</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute workflow_id.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -416,7 +470,9 @@
 69
 70
 71
-72</pre>
+72
+73
+74</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 60</span>
@@ -430,6 +486,8 @@
   <span class='id identifier rubyid_raw_page_options'>raw_page_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="PageOptions.html#initialize-instance_method" title="Mindee::PageOptions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@page_options</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span>
   <span class='ivar'>@cropper</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='ivar'>@rag</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:rag</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='ivar'>@workflow_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@initial_delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
   <span class='ivar'>@delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='float'>1.5</span><span class='rparen'>)</span>
   <span class='ivar'>@max_retries</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:max_retries</span><span class='comma'>,</span> <span class='int'>80</span><span class='rparen'>)</span>
@@ -618,14 +676,16 @@
 70
 71
 72
-73</pre>
+73
+74
+75</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Mindee::ParseOptions (class)">ParseOptions</a></span></span>
-  <span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:all_words</span><span class='comma'>,</span> <span class='symbol'>:full_text</span><span class='comma'>,</span> <span class='symbol'>:close_file</span><span class='comma'>,</span> <span class='symbol'>:page_options</span><span class='comma'>,</span> <span class='symbol'>:cropper</span><span class='comma'>,</span>
-                <span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='symbol'>:max_retries</span>
+  <span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:all_words</span><span class='comma'>,</span> <span class='symbol'>:full_text</span><span class='comma'>,</span> <span class='symbol'>:close_file</span><span class='comma'>,</span> <span class='symbol'>:page_options</span><span class='comma'>,</span> <span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='symbol'>:rag</span><span class='comma'>,</span>
+                <span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='symbol'>:max_retries</span>
 
   <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>params:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_sym</span><span class='rparen'>)</span>
@@ -636,6 +696,8 @@
     <span class='id identifier rubyid_raw_page_options'>raw_page_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="PageOptions.html#initialize-instance_method" title="Mindee::PageOptions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='rparen'>)</span>
     <span class='ivar'>@page_options</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span>
     <span class='ivar'>@cropper</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@rag</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:rag</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@workflow_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
     <span class='ivar'>@initial_delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
     <span class='ivar'>@delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='float'>1.5</span><span class='rparen'>)</span>
     <span class='ivar'>@max_retries</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:max_retries</span><span class='comma'>,</span> <span class='int'>80</span><span class='rparen'>)</span>
@@ -734,14 +796,16 @@
 70
 71
 72
-73</pre>
+73
+74
+75</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Mindee::ParseOptions (class)">ParseOptions</a></span></span>
-  <span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:all_words</span><span class='comma'>,</span> <span class='symbol'>:full_text</span><span class='comma'>,</span> <span class='symbol'>:close_file</span><span class='comma'>,</span> <span class='symbol'>:page_options</span><span class='comma'>,</span> <span class='symbol'>:cropper</span><span class='comma'>,</span>
-                <span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='symbol'>:max_retries</span>
+  <span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:all_words</span><span class='comma'>,</span> <span class='symbol'>:full_text</span><span class='comma'>,</span> <span class='symbol'>:close_file</span><span class='comma'>,</span> <span class='symbol'>:page_options</span><span class='comma'>,</span> <span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='symbol'>:rag</span><span class='comma'>,</span>
+                <span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='symbol'>:max_retries</span>
 
   <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>params:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_sym</span><span class='rparen'>)</span>
@@ -752,6 +816,8 @@
     <span class='id identifier rubyid_raw_page_options'>raw_page_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="PageOptions.html#initialize-instance_method" title="Mindee::PageOptions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='rparen'>)</span>
     <span class='ivar'>@page_options</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span>
     <span class='ivar'>@cropper</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@rag</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:rag</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@workflow_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
     <span class='ivar'>@initial_delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
     <span class='ivar'>@delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='float'>1.5</span><span class='rparen'>)</span>
     <span class='ivar'>@max_retries</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:max_retries</span><span class='comma'>,</span> <span class='int'>80</span><span class='rparen'>)</span>
@@ -807,14 +873,16 @@
 70
 71
 72
-73</pre>
+73
+74
+75</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Mindee::ParseOptions (class)">ParseOptions</a></span></span>
-  <span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:all_words</span><span class='comma'>,</span> <span class='symbol'>:full_text</span><span class='comma'>,</span> <span class='symbol'>:close_file</span><span class='comma'>,</span> <span class='symbol'>:page_options</span><span class='comma'>,</span> <span class='symbol'>:cropper</span><span class='comma'>,</span>
-                <span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='symbol'>:max_retries</span>
+  <span class='id identifier rubyid_attr_accessor'>attr_accessor</span> <span class='symbol'>:all_words</span><span class='comma'>,</span> <span class='symbol'>:full_text</span><span class='comma'>,</span> <span class='symbol'>:close_file</span><span class='comma'>,</span> <span class='symbol'>:page_options</span><span class='comma'>,</span> <span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='symbol'>:rag</span><span class='comma'>,</span>
+                <span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='symbol'>:max_retries</span>
 
   <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>params:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_sym</span><span class='rparen'>)</span>
@@ -825,6 +893,8 @@
     <span class='id identifier rubyid_raw_page_options'>raw_page_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="PageOptions.html#initialize-instance_method" title="Mindee::PageOptions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="PageOptions.html" title="Mindee::PageOptions (class)">PageOptions</a></span></span><span class='rparen'>)</span>
     <span class='ivar'>@page_options</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_page_options'>raw_page_options</span>
     <span class='ivar'>@cropper</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:cropper</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@rag</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:rag</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='ivar'>@workflow_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:workflow_id</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
     <span class='ivar'>@initial_delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:initial_delay_sec</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
     <span class='ivar'>@delay_sec</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:delay_sec</span><span class='comma'>,</span> <span class='float'>1.5</span><span class='rparen'>)</span>
     <span class='ivar'>@max_retries</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:max_retries</span><span class='comma'>,</span> <span class='int'>80</span><span class='rparen'>)</span>
@@ -878,13 +948,99 @@
 </table>
 </div>
     
+      
+      <span id="rag=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="rag-instance_method">
+  
+    #<strong>rag</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute rag.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rag'>rag</span>
+  <span class='ivar'>@rag</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="workflow_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="workflow_id-instance_method">
+  
+    #<strong>workflow_id</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute workflow_id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/client.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_workflow_id'>workflow_id</span>
+  <span class='ivar'>@workflow_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 
 </div>
 
       <div id="footer">
-  Generated on Tue Apr  8 14:51:49 2025 by
+  Generated on Thu Apr 24 08:52:17 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.1.7).
 </div>
