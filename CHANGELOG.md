@@ -1,5 +1,14 @@
 # Mindee Ruby API Library Changelog
 
+## v4.4.0 - 2025-04-23
+### Changes
+* :sparkles: add support for workflow polling
+* :sparkles: add extras accessor from inference
+### Fixes
+* :recycle: fix misc typing issues
+* :bug: fix improper return format for `raw_http`
+
+
 ## v4.3.0 - 2025-04-08
 ### Changes
 * :sparkles: add support for Financial Document V1.12
