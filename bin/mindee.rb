@@ -99,7 +99,7 @@ else
 end
 
 if options[:cut_pages].nil? || !options[:cut_pages].is_a?(Integer) || options[:cut_pages] < 0
-  page_options = options[:cut_pages].nil?
+  page_options = nil
 else
   page_options = Mindee::PageOptions.new(params: {
     page_indexes: (0..options[:cut_pages].to_i).to_a,
