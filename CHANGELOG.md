@@ -1,5 +1,12 @@
 # Mindee Ruby API Library Changelog
 
+
+## v4.4.1 - 2025-05-13
+### Fixes
+* :bug: fix bad option in CLI
+* :bug: don't open the PDF unless needed
+
+
 ## v4.4.0 - 2025-04-23
 ### Changes
 * :sparkles: add support for workflow polling
