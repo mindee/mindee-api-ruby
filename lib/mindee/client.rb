@@ -323,8 +323,7 @@ module Mindee
     def execute_workflow(input_source, workflow_id, options: {})
       opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(params: options)
       if opts.respond_to?(:page_options) && input_source.is_a?(Input::Source::LocalInputSource)
-        process_pdf_if_required(input_source,
-                                opts)
+        process_pdf_if_required(input_source, opts)
       end
 
       workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
@@ -496,7 +495,7 @@ module Mindee
     # @param opts [ParseOptions]
     def process_pdf_if_required(input_source, opts)
       return unless input_source.is_a?(Mindee::Input::Source::LocalInputSource) &&
-                    opts.page_options &&
+                    opts.page_options.on_min_pages &&
                     input_source.pdf?
 
       input_source.process_pdf(opts.page_options)
