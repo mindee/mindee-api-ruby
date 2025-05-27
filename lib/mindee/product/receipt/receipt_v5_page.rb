@@ -6,7 +6,7 @@ require_relative 'receipt_v5_document'
 module Mindee
   module Product
     module Receipt
-      # Receipt API version 5.3 page data.
+      # Receipt API version 5.4 page data.
       class ReceiptV5Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

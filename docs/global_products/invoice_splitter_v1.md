@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Invoice Splitter API](https://platform.min
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `invoice_splitter`                                 |
-> | Recommended Version            | `v1.2`                                             |
+> | Recommended Version            | `v1.4`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🌐 Global                                          |

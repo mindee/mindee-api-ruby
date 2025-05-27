@@ -6,7 +6,7 @@ require_relative 'invoice_splitter_v1_document'
 module Mindee
   module Product
     module InvoiceSplitter
-      # Invoice Splitter API version 1.2 page data.
+      # Invoice Splitter API version 1.4 page data.
       class InvoiceSplitterV1Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

@@ -6,7 +6,7 @@ module Mindee
   module Product
     module US
       module HealthcareCard
-        # Is a fixed amount for a covered service.
+        # Copayments for covered services.
         class HealthcareCardV1Copays < Array
           # Entries.
           # @return [Array<HealthcareCardV1Copay>]

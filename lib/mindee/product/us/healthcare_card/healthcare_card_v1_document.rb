@@ -7,13 +7,13 @@ module Mindee
   module Product
     module US
       module HealthcareCard
-        # Healthcare Card API version 1.2 document data.
+        # Healthcare Card API version 1.3 document data.
         class HealthcareCardV1Document < Mindee::Parsing::Common::Prediction
           include Mindee::Parsing::Standard
           # The name of the company that provides the healthcare plan.
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :company_name
-          # Is a fixed amount for a covered service.
+          # Copayments for covered services.
           # @return [Mindee::Product::US::HealthcareCard::HealthcareCardV1Copays]
           attr_reader :copays
           # The list of dependents covered by the healthcare plan.
@@ -37,6 +37,9 @@ module Mindee
           # The unique identifier for the payer in the healthcare system.
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :payer_id
+          # The name of the healthcare plan.
+          # @return [Mindee::Parsing::Standard::StringField]
+          attr_reader :plan_name
           # The BIN number for prescription drug coverage.
           # @return [Mindee::Parsing::Standard::StringField]
           attr_reader :rx_bin
@@ -87,6 +90,10 @@ module Mindee
               prediction['payer_id'],
               page_id
             )
+            @plan_name = Parsing::Standard::StringField.new(
+              prediction['plan_name'],
+              page_id
+            )
             @rx_bin = Parsing::Standard::StringField.new(
               prediction['rx_bin'],
               page_id
@@ -108,6 +115,7 @@ module Mindee
             copays = copays_to_s
             out_str = String.new
             out_str << "\n:Company Name: #{@company_name}".rstrip
+            out_str << "\n:Plan Name: #{@plan_name}".rstrip
             out_str << "\n:Member Name: #{@member_name}".rstrip
             out_str << "\n:Member ID: #{@member_id}".rstrip
             out_str << "\n:Issuer 80840: #{@issuer80840}".rstrip
@@ -118,7 +126,7 @@ module Mindee
             out_str << "\n:RX ID: #{@rx_id}".rstrip
             out_str << "\n:RX GRP: #{@rx_grp}".rstrip
             out_str << "\n:RX PCN: #{@rx_pcn}".rstrip
-            out_str << "\n:copays:"
+            out_str << "\n:Copays:"
             out_str << copays
             out_str << "\n:Enrollment Date: #{@enrollment_date}".rstrip
             out_str[1..].to_s

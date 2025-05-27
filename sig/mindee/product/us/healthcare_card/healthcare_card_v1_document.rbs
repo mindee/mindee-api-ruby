@@ -15,6 +15,7 @@ module Mindee
           def member_id: -> (Parsing::Standard::StringField)
           def member_name: -> (Parsing::Standard::StringField)
           def payer_id: -> (Parsing::Standard::StringField)
+          def plan_name: -> (Parsing::Standard::StringField)
           def rx_bin: -> (Parsing::Standard::StringField)
           def rx_grp: -> (Parsing::Standard::StringField)
           def rx_id: -> (Parsing::Standard::StringField)
