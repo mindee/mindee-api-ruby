@@ -1,5 +1,13 @@
 # Mindee Ruby API Library Changelog
 
+## v4.5.0 - 2025-05-27
+### Changes
+* :sparkles: add support for Financial Document v1.14
+* :sparkles: add support for US Healthcare Cards v1.3
+* :sparkles: add support for Invoice v4.11
+### Fixes
+* :recycle: switch to 'Transfer-Encoding: chunked' to prevent Net::HTTP from writing temporary files
+
 
 ## v4.4.1 - 2025-05-13
 ### Fixes
