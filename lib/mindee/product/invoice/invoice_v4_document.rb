@@ -6,12 +6,15 @@ require_relative 'invoice_v4_line_items'
 module Mindee
   module Product
     module Invoice
-      # Invoice API version 4.10 document data.
+      # Invoice API version 4.11 document data.
       class InvoiceV4Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer billing address.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :billing_address
+        # The purchase category.
+        # @return [Mindee::Parsing::Standard::ClassificationField]
+        attr_reader :category
         # The address of the customer.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :customer_address
@@ -57,6 +60,9 @@ module Mindee
         # Customer's delivery address.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :shipping_address
+        # The purchase subcategory for transport, food and shopping.
+        # @return [Mindee::Parsing::Standard::ClassificationField]
+        attr_reader :subcategory
         # The address of the supplier or merchant.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :supplier_address
@@ -97,6 +103,10 @@ module Mindee
           super
           @billing_address = Parsing::Standard::StringField.new(
             prediction['billing_address'],
+            page_id
+          )
+          @category = Parsing::Standard::ClassificationField.new(
+            prediction['category'],
             page_id
           )
           @customer_address = Parsing::Standard::StringField.new(
@@ -151,6 +161,10 @@ module Mindee
           end
           @shipping_address = Parsing::Standard::StringField.new(
             prediction['shipping_address'],
+            page_id
+          )
+          @subcategory = Parsing::Standard::ClassificationField.new(
+            prediction['subcategory'],
             page_id
           )
           @supplier_address = Parsing::Standard::StringField.new(
@@ -230,6 +244,8 @@ module Mindee
           out_str << "\n:Billing Address: #{@billing_address}".rstrip
           out_str << "\n:Document Type: #{@document_type}".rstrip
           out_str << "\n:Document Type Extended: #{@document_type_extended}".rstrip
+          out_str << "\n:Purchase Subcategory: #{@subcategory}".rstrip
+          out_str << "\n:Purchase Category: #{@category}".rstrip
           out_str << "\n:Line Items:"
           out_str << line_items
           out_str[1..].to_s

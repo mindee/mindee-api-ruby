@@ -6,13 +6,13 @@ module Mindee
   module Product
     module US
       module HealthcareCard
-        # Is a fixed amount for a covered service.
+        # Copayments for covered services.
         class HealthcareCardV1Copay < Mindee::Parsing::Standard::FeatureField
           include Mindee::Parsing::Standard
-          # The price of service.
+          # The price of the service.
           # @return [Float]
           attr_reader :service_fees
-          # The name of service of the copay.
+          # The name of the service.
           # @return [String]
           attr_reader :service_name
 

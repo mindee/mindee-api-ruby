@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Receipt API](https://platform.mindee.com/m
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `expense_receipts`                                 |
-> | Recommended Version            | `v5.3`                                             |
+> | Recommended Version            | `v5.4`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🌐 Global                                          |
@@ -264,6 +264,9 @@ The following fields are extracted for Receipt V5:
  - 'gasoline'
  - 'telecom'
  - 'miscellaneous'
+ - 'software'
+ - 'shopping'
+ - 'energy'
 
 ```rb
 puts result.document.inference.prediction.category.value
@@ -319,6 +322,15 @@ puts result.document.inference.prediction.receipt_number.value
  - 'train'
  - 'restaurant'
  - 'shopping'
+ - 'other'
+ - 'groceries'
+ - 'cultural'
+ - 'electronics'
+ - 'office_supplies'
+ - 'micromobility'
+ - 'car_rental'
+ - 'public'
+ - 'delivery'
  - nil
 
 ```rb

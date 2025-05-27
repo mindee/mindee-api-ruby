@@ -192,10 +192,10 @@ module Mindee
             out_str << "\n:Name of Mother: #{@name_of_mother}".rstrip
             out_str << "\n:Old Passport Date of Issue: #{@old_passport_date_of_issue}".rstrip
             out_str << "\n:Old Passport Number: #{@old_passport_number}".rstrip
+            out_str << "\n:Old Passport Place of Issue: #{@old_passport_place_of_issue}".rstrip
             out_str << "\n:Address Line 1: #{@address1}".rstrip
             out_str << "\n:Address Line 2: #{@address2}".rstrip
             out_str << "\n:Address Line 3: #{@address3}".rstrip
-            out_str << "\n:Old Passport Place of Issue: #{@old_passport_place_of_issue}".rstrip
             out_str << "\n:File Number: #{@file_number}".rstrip
             out_str[1..].to_s
           end

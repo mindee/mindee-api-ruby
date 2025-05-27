@@ -6,7 +6,7 @@ require_relative 'invoice_v4_document'
 module Mindee
   module Product
     module Invoice
-      # Invoice API version 4.10 page data.
+      # Invoice API version 4.11 page data.
       class InvoiceV4Page < Mindee::Parsing::Common::Page
         # @param prediction [Hash]
         def initialize(prediction)

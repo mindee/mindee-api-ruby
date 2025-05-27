@@ -6,13 +6,13 @@ require_relative 'financial_document_v1_line_items'
 module Mindee
   module Product
     module FinancialDocument
-      # Financial Document API version 1.12 document data.
+      # Financial Document API version 1.14 document data.
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :billing_address
-        # The purchase category, only for receipts.
+        # The purchase category.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :category
         # The address of the customer.
@@ -67,7 +67,7 @@ module Mindee
         # The customer's address used for shipping.
         # @return [Mindee::Parsing::Standard::StringField]
         attr_reader :shipping_address
-        # The purchase subcategory for transport and food, only for receipts.
+        # The purchase subcategory for transport, food and shooping.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
         # The address of the supplier or merchant.

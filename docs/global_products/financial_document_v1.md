@@ -12,7 +12,7 @@ The Ruby Client Library supports the [Financial Document API](https://platform.m
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `financial_document`                               |
-> | Recommended Version            | `v1.12`                                            |
+> | Recommended Version            | `v1.14`                                            |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ✔️ Yes                                             |
 > | Geography                      | 🌐 Global                                          |
@@ -93,12 +93,12 @@ puts result.document
 ########
 Document
 ########
-:Mindee ID: a80ac0ee-26f6-4e2e-988a-960b240d5ba7
+:Mindee ID: 6dd26385-719b-4527-bf6f-87d9da619de5
 :Filename: default_sample.jpg
 
 Inference
 #########
-:Product: mindee/financial_document v1.11
+:Product: mindee/financial_document v1.14
 :Rotation applied: Yes
 
 Prediction
@@ -134,6 +134,7 @@ Prediction
 :Shipping Address: 2019 Redbud Drive New York, NY 10011
 :Billing Address: 4312 Wood Road New York, NY 10031
 :Document Type: INVOICE
+:Document Type Extended: INVOICE
 :Purchase Subcategory:
 :Purchase Category: miscellaneous
 :Total Tax: 9.75
@@ -186,6 +187,7 @@ Page 0
 :Shipping Address: 2019 Redbud Drive New York, NY 10011
 :Billing Address: 4312 Wood Road New York, NY 10031
 :Document Type: INVOICE
+:Document Type Extended: INVOICE
 :Purchase Subcategory:
 :Purchase Category: miscellaneous
 :Total Tax: 9.75
@@ -309,7 +311,7 @@ puts result.document.inference.prediction.billing_address.value
 ```
 
 ## Purchase Category
-**category** ([ClassificationField](#classification-field)): The purchase category, only for receipts.
+**category** ([ClassificationField](#classification-field)): The purchase category.
 
 #### Possible values include:
  - 'toll'
@@ -320,6 +322,9 @@ puts result.document.inference.prediction.billing_address.value
  - 'gasoline'
  - 'telecom'
  - 'miscellaneous'
+ - 'software'
+ - 'shopping'
+ - 'energy'
 
 ```rb
 puts result.document.inference.prediction.category.value
@@ -468,7 +473,7 @@ puts result.document.inference.prediction.shipping_address.value
 ```
 
 ## Purchase Subcategory
-**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory for transport and food, only for receipts.
+**subcategory** ([ClassificationField](#classification-field)): The purchase subcategory for transport, food and shooping.
 
 #### Possible values include:
  - 'plane'
@@ -476,6 +481,15 @@ puts result.document.inference.prediction.shipping_address.value
  - 'train'
  - 'restaurant'
  - 'shopping'
+ - 'other'
+ - 'groceries'
+ - 'cultural'
+ - 'electronics'
+ - 'office_supplies'
+ - 'micromobility'
+ - 'car_rental'
+ - 'public'
+ - 'delivery'
  - nil
 
 ```rb

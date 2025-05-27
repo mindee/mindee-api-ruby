@@ -12,7 +12,7 @@ The Ruby Client Library supports the [International ID API](https://platform.min
 > | Specification                  | Details                                            |
 > | ------------------------------ | -------------------------------------------------- |
 > | Endpoint Name                  | `international_id`                                 |
-> | Recommended Version            | `v2.1`                                             |
+> | Recommended Version            | `v2.2`                                             |
 > | Supports Polling/Webhooks      | ✔️ Yes                                             |
 > | Support Synchronous HTTP Calls | ❌ No                                              |
 > | Geography                      | 🌐 Global                                          |
