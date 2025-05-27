@@ -15,6 +15,7 @@ module Net
       def initialize: (untyped, Hash[String, String]?) -> void
       def set_form: (untyped, String?) -> void
       def new: (untyped, untyped) -> void
+      def []=: (?untyped, ?untyped) -> bool
     end
 
     # Stub for the HTTP GET request class.
