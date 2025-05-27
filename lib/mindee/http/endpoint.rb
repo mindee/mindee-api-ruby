@@ -128,6 +128,8 @@ module Mindee
         form_data.push ['include_mvision', 'true'] if opts.all_words
 
         req.set_form(form_data, 'multipart/form-data')
+        req['Transfer-Encoding'] = 'chunked'
+
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
           return http.request(req)
         end
@@ -163,6 +165,7 @@ module Mindee
         form_data.push ['include_mvision', 'true'] if opts.all_words
 
         req.set_form(form_data, 'multipart/form-data')
+        req['Transfer-Encoding'] = 'chunked'
 
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
           return http.request(req)
