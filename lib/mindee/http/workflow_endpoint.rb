@@ -69,6 +69,7 @@ module Mindee
         form_data.push ['priority', opts.priority.to_s] if opts.priority
 
         req.set_form(form_data, 'multipart/form-data')
+        req['Transfer-Encoding'] = 'chunked'
 
         response = nil
         Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
