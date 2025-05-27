@@ -42,7 +42,7 @@ module Mindee
           @is_rotation_applied = raw_prediction['is_rotation_applied']
           @product = Product.new(raw_prediction['product'])
           @pages = [] # : Array[Page]
-          @extras = Extras::Extras.new(raw_prediction['extras'])
+          @extras = Extras::Extras.new(raw_prediction['extras']) if raw_prediction.include?('extras')
         end
 
         # @return [String]

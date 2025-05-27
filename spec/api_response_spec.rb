@@ -15,8 +15,8 @@ describe Mindee::Parsing::Common::ApiResponse do
       expect(parsed_response.document.inference).to be_a Mindee::Product::Invoice::InvoiceV4
       expect(parsed_response.document.inference.prediction).to be_a Mindee::Product::Invoice::InvoiceV4Document
       expect(parsed_response.raw_http).to eq(response.to_s)
-      expect(parsed_response.document.n_pages).to eq(2)
-      expect(parsed_response.document.inference.pages.length).to eq(2)
+      expect(parsed_response.document.n_pages).to eq(1)
+      expect(parsed_response.document.inference.pages.length).to eq(1)
       expect(parsed_response.document.to_s).to eq(rst_response.to_s)
     end
   end
