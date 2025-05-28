@@ -1,0 +1,18 @@
+# lib/mindee/parsing/standard/address_field.rb
+module Mindee
+  module Parsing
+    module Standard
+      class AddressField < StringField
+        def street_number: -> String
+        def street_name: -> String
+        def po_box: -> String
+        def address_complement: -> String
+        def city: -> String
+        def postal_code: -> String
+        def state: -> String
+        def country: -> String
+        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: bool) -> void
+      end
+    end
+  end
+end

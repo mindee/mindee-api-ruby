@@ -5,9 +5,9 @@ module Mindee
     module Invoice
       class InvoiceV4Document < Parsing::Common::Prediction
         def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
-        def billing_address: -> (Parsing::Standard::StringField)
+        def billing_address: -> (Parsing::Standard::AddressField)
         def category: -> (Parsing::Standard::ClassificationField)
-        def customer_address: -> (Parsing::Standard::StringField)
+        def customer_address: -> (Parsing::Standard::AddressField)
         def customer_company_registrations: -> (Array[Parsing::Standard::CompanyRegistrationField])
         def customer_id: -> (Parsing::Standard::StringField)
         def customer_name: -> (Parsing::Standard::StringField)
@@ -21,9 +21,9 @@ module Mindee
         def payment_date: -> (Parsing::Standard::DateField)
         def po_number: -> (Parsing::Standard::StringField)
         def reference_numbers: -> (Array[Parsing::Standard::StringField])
-        def shipping_address: -> (Parsing::Standard::StringField)
+        def shipping_address: -> (Parsing::Standard::AddressField)
         def subcategory: -> (Parsing::Standard::ClassificationField)
-        def supplier_address: -> (Parsing::Standard::StringField)
+        def supplier_address: -> (Parsing::Standard::AddressField)
         def supplier_company_registrations: -> (Array[Parsing::Standard::CompanyRegistrationField])
         def supplier_email: -> (Parsing::Standard::StringField)
         def supplier_name: -> (Parsing::Standard::StringField)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'standard/address_field'
 require_relative 'standard/amount_field'
 require_relative 'standard/base_field'
 require_relative 'standard/boolean_field'

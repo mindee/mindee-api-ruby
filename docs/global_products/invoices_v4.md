@@ -216,6 +216,21 @@ A typical `Field` object will have the following attributes:
 Aside from the previous attributes, all basic fields have access to a `to_s` method that can be used to print their value as a string.
 
 
+### AddressField
+Aside from the basic `BaseField` attributes, the address field `AddressField` also implements the following:
+
+* **street_number** (`String`): String representation of the string number. Can be `nil`.
+* **street_name** (`String`): Name of the street. Can be `nil`.
+* **po_box** (`String`): String representation of the PO Box number. Can be `nil`.
+* **address_complement** (`String`): Address complement. Can be `nil`.
+* **city** (`String`): City name. Can be `nil`.
+* **postal_code** (`String`): String representation of the postal code. Can be `nil`.
+* **state** (`String`): State name. Can be `nil`.
+* **country** (`String`): Country name. Can be `nil`.
+
+Note: The `value` field of an AddressField should be a concatenation of the rest of the values.
+
+
 ### Amount Field
 The amount field `AmountField` only has one constraint: its **value** is a `Float` (or `nil`).
 
@@ -296,7 +311,7 @@ A `InvoiceV4LineItem` implements the following attributes:
 The following fields are extracted for Invoice V4:
 
 ## Billing Address
-**billing_address** ([StringField](#string-field)): The customer billing address.
+**billing_address** ([AddressField](#address-field)): The customer billing address.
 
 ```rb
 puts result.document.inference.prediction.billing_address.value
@@ -322,7 +337,7 @@ puts result.document.inference.prediction.category.value
 ```
 
 ## Customer Address
-**customer_address** ([StringField](#string-field)): The address of the customer.
+**customer_address** ([AddressField](#address-field)): The address of the customer.
 
 ```rb
 puts result.document.inference.prediction.customer_address.value
@@ -441,7 +456,7 @@ end
 ```
 
 ## Shipping Address
-**shipping_address** ([StringField](#string-field)): Customer's delivery address.
+**shipping_address** ([AddressField](#address-field)): Customer's delivery address.
 
 ```rb
 puts result.document.inference.prediction.shipping_address.value
@@ -472,7 +487,7 @@ puts result.document.inference.prediction.subcategory.value
 ```
 
 ## Supplier Address
-**supplier_address** ([StringField](#string-field)): The address of the supplier or merchant.
+**supplier_address** ([AddressField](#address-field)): The address of the supplier or merchant.
 
 ```rb
 puts result.document.inference.prediction.supplier_address.value
