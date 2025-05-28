@@ -10,13 +10,13 @@ module Mindee
       class FinancialDocumentV1Document < Mindee::Parsing::Common::Prediction
         include Mindee::Parsing::Standard
         # The customer's address used for billing.
-        # @return [Mindee::Parsing::Standard::StringField]
+        # @return [Mindee::Parsing::Standard::AddressField]
         attr_reader :billing_address
         # The purchase category.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :category
         # The address of the customer.
-        # @return [Mindee::Parsing::Standard::StringField]
+        # @return [Mindee::Parsing::Standard::AddressField]
         attr_reader :customer_address
         # List of company registration numbers associated to the customer.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
@@ -65,13 +65,13 @@ module Mindee
         # @return [Array<Mindee::Parsing::Standard::StringField>]
         attr_reader :reference_numbers
         # The customer's address used for shipping.
-        # @return [Mindee::Parsing::Standard::StringField]
+        # @return [Mindee::Parsing::Standard::AddressField]
         attr_reader :shipping_address
         # The purchase subcategory for transport, food and shooping.
         # @return [Mindee::Parsing::Standard::ClassificationField]
         attr_reader :subcategory
         # The address of the supplier or merchant.
-        # @return [Mindee::Parsing::Standard::StringField]
+        # @return [Mindee::Parsing::Standard::AddressField]
         attr_reader :supplier_address
         # List of company registration numbers associated to the supplier.
         # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
@@ -114,7 +114,7 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           super
-          @billing_address = Parsing::Standard::StringField.new(
+          @billing_address = Parsing::Standard::AddressField.new(
             prediction['billing_address'],
             page_id
           )
@@ -122,7 +122,7 @@ module Mindee
             prediction['category'],
             page_id
           )
-          @customer_address = Parsing::Standard::StringField.new(
+          @customer_address = Parsing::Standard::AddressField.new(
             prediction['customer_address'],
             page_id
           )
@@ -182,7 +182,7 @@ module Mindee
           prediction['reference_numbers'].each do |item|
             @reference_numbers.push(Parsing::Standard::StringField.new(item, page_id))
           end
-          @shipping_address = Parsing::Standard::StringField.new(
+          @shipping_address = Parsing::Standard::AddressField.new(
             prediction['shipping_address'],
             page_id
           )
@@ -190,7 +190,7 @@ module Mindee
             prediction['subcategory'],
             page_id
           )
-          @supplier_address = Parsing::Standard::StringField.new(
+          @supplier_address = Parsing::Standard::AddressField.new(
             prediction['supplier_address'],
             page_id
           )
