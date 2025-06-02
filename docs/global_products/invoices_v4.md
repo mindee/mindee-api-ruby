@@ -219,7 +219,7 @@ Aside from the previous attributes, all basic fields have access to a `to_s` met
 ### AddressField
 Aside from the basic `BaseField` attributes, the address field `AddressField` also implements the following:
 
-* **street_number** (`String`): String representation of the string number. Can be `nil`.
+* **street_number** (`String`): String representation of the street number. Can be `nil`.
 * **street_name** (`String`): Name of the street. Can be `nil`.
 * **po_box** (`String`): String representation of the PO Box number. Can be `nil`.
 * **address_complement** (`String`): Address complement. Can be `nil`.
