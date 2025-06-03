@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.6.0 - 2025-06-03
+### Changes
+* :sparkles: add support for address fields
+
+
 ## v4.5.0 - 2025-05-27
 ### Changes
 * :sparkles: add support for Financial Document v1.14
