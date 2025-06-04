@@ -24,6 +24,7 @@ jobs:
 
     - name: Analyse the code with Rubocop
       run: |
+        bundle install
         bundle exec rubocop ./
 
     - name: Attempt to generate the documentation
