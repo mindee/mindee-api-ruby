@@ -95,7 +95,7 @@ module Mindee
         end
 
         def handle_default_field(name, value)
-          @all_values[name] = value.nil? ? nil : value.to_s
+          @all_values[name] = value&.to_s
         end
       end
 
