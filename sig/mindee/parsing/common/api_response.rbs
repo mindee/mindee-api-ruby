@@ -15,7 +15,7 @@ module Mindee
 
 
       class ApiResponse
-        def logger: () -> untyped
+        def logger: () -> Logger
         def document: -> Parsing::Common::Document?
         def job: -> Parsing::Common::Job?
         def api_request: -> Parsing::Common::ApiRequest?
