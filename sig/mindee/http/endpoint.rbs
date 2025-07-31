@@ -2,14 +2,21 @@
 module Mindee
   module HTTP
     API_KEY_ENV_NAME: String
-    API_KEY_DEFAULT: nil
+    API_KEY_DEFAULT: String | nil
     BASE_URL_ENV_NAME: String
     BASE_URL_DEFAULT: String
     REQUEST_TIMEOUT_ENV_NAME: String
     TIMEOUT_DEFAULT: Integer
     USER_AGENT: String
     class Endpoint
-      def logger: () -> untyped
+      attr_reader api_key: String | nil
+
+      attr_reader base_url: String
+      attr_reader request_timeout: Integer
+
+      attr_reader url_root: String
+
+      def logger: () -> Logger
       def api_key: -> String?
       def request_timeout: -> Integer
       def url_root: -> String
@@ -20,7 +27,7 @@ module Mindee
       def parse_async: (String) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
       def predict_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
       def document_queue_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
-      def document_queue_req_get: (untyped) -> Net::HTTPResponse
+      def document_queue_req_get: (String) -> Net::HTTPResponse
       def check_api_key: -> void
     end
   end

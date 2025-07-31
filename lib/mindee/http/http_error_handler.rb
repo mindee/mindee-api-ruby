@@ -88,6 +88,19 @@ module Mindee
           Errors::MindeeHTTPError.new(error_obj, url, code)
         end
       end
+
+      # Creates an appropriate HTTP error exception for a V2 API response, based on retrieved http error code.
+      # @param hashed_response [Hash] dictionary response retrieved by the server
+      def generate_v2_error(hashed_response)
+        code = hashed_response.code.to_i
+        if hashed_response.key?('status')
+          Errors::MindeeHTTPErrorV2.new(hashed_response)
+        elsif code < 200 || code > 399
+          Errors::MindeeHTTPErrorV2.new({ 'status' => code, 'detail' => 'No details available.' })
+        else
+          Errors::MindeeHTTPErrorV2.new({ 'status' => -1, 'detail' => 'Unknown Error.' })
+        end
+      end
     end
   end
 end

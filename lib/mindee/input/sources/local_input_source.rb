@@ -93,7 +93,7 @@ module Mindee
 
         # Reads a document.
         # @param close [bool]
-        # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
+        # @return [Array<>]
         def read_contents(close: true)
           logger.debug("Reading data from: #{@filename}")
           @io_stream.seek(0)
@@ -101,7 +101,7 @@ module Mindee
           data = @io_stream.read
           @io_stream.rewind
           @io_stream.close if close
-          ['document', data, { filename: Mindee::Input::Source.convert_to_unicode_escape(@filename) }]
+          [data, { filename: Mindee::Input::Source.convert_to_unicode_escape(@filename) }]
         end
 
         # Write the file to a given path. Uses the initial file name by default.

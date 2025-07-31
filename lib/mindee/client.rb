@@ -89,8 +89,9 @@ module Mindee
   #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
   #       * `:REMOVE` - remove the specified pages, and keep all others.
   #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
+  # @!attribute close_file [bool, nil] Whether to close the file after sending it. Defaults to true.
   class WorkflowOptions
-    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options, :rag
+    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options, :rag, :close_file
 
     def initialize(params: {})
       params = params.transform_keys(&:to_sym)
@@ -102,6 +103,7 @@ module Mindee
       raw_page_options = params.fetch(:page_options, nil)
       raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
       @page_options = raw_page_options
+      @close_file = params.fetch(:close_file, true)
     end
   end
 
