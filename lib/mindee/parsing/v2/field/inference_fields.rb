@@ -48,10 +48,13 @@ module Mindee
             key?(method_name.to_s) || super
           end
 
+          # rubocop:disable Metrics/CyclomaticComplexity
+          # rubocop:disable Metrics/PerceivedComplexity
           # Convert the fields to a string representation.
-          # @param indent [Integer, nil] Optional indentation level.
+          # @param original_indent [Integer, nil] Optional indentation level.
           # @return [String] String representation of all fields.
-          def to_s(indent = nil)
+          def to_s(original_indent = nil)
+            indent = indent.nil? ? 0 : original_indent
             return '' if empty?
 
             indent ||= @indent_level
@@ -74,6 +77,8 @@ module Mindee
                 if defined?(field_value.value) && field_value.value && !field_value.value.to_s.empty?
                   line += " #{field_value.value}"
                 end
+              else
+                logger.debug("Unknown value was passed to the field creator: #{field_key} : #{field_value}")
               end
 
               lines << line
@@ -81,6 +86,8 @@ module Mindee
 
             lines.join("\n").rstrip
           end
+          # rubocop:enable Metrics/CyclomaticComplexity
+          # rubocop:enable Metrics/PerceivedComplexity
         end
       end
     end

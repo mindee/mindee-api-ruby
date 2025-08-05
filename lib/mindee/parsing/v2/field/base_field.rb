@@ -10,16 +10,13 @@ module Mindee
           attr_reader :indent_level
 
           # @return [FieldConfidence, nil] Confidence score for the field.
-          attr_accessor :confidence
+          attr_reader :confidence
 
           # @param raw_prediction [Hash] Raw prediction hash.
           # @param indent_level [Integer] Level of indentation for rst display.
           def initialize(raw_prediction, indent_level = 0)
             @indent_level = indent_level
-            @confidence = nil
-
-            # Process confidence if present
-            @confidence = raw_prediction['confidence'] if raw_prediction.key?('confidence')
+            @confidence = raw_prediction['confidence'] ? raw_prediction.key?('confidence') : nil
           end
 
           # Factory method to create appropriate field types.

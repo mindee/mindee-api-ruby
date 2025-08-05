@@ -46,7 +46,9 @@ module Mindee
         @user_agent = USER_AGENT
       end
 
-      # Checks API key
+      # Checks API key for a value.
+      # @return
+      # @raise [Errors::MindeeAPIError] Raises if the api key is empty or nil.
       def check_api_key
         return unless @api_key.nil? || @api_key.empty?
 

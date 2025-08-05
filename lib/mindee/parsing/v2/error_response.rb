@@ -21,6 +21,15 @@ module Mindee
         def to_s
           "Error\n=====\n:Status: #{@status}\n:Detail: #{@detail}"
         end
+
+        # Hash representation
+        # @return [Hash] Hash representation of the object.
+        def as_hash
+          {
+            status: @status,
+            detail: @detail,
+          }
+        end
       end
     end
   end

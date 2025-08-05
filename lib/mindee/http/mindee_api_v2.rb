@@ -19,7 +19,7 @@ module Mindee
 
       # Sends a file to the inference queue.
       #
-      # @param input_source [Input::Source::BaseSource]
+      # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
       # @param params [Input::InferenceParameters]
       # @return [Mindee::Parsing::V2::JobResponse]
       # @raise [Mindee::Errors::MindeeHttpErrorV2]
@@ -60,7 +60,7 @@ module Mindee
 
       # Converts an HTTP response to a parsed response object.
       #
-      # @param response [Net::HTTP::Response, nil]
+      # @param response [Net::HTTPResponse, nil]
       # @return [Hash<String | Symbol, untyped>]
       # @raise Throws if the server returned an error.
       def process_response(response)
@@ -79,7 +79,7 @@ module Mindee
 
       # Polls a queue for either a result or a job.
       # @param url [String] URL, passed as a string.
-      # @return [Net::HTTP::Response]
+      # @return [Net::HTTPResponse]
       def poll(url)
         uri = URI(url)
         headers = {
@@ -98,7 +98,7 @@ module Mindee
       # Polls the API for the status of a job.
       #
       # @param job_id [String] ID of the job.
-      # @return [Net::HTTP::Response]
+      # @return [Net::HTTPResponse]
       def inference_job_req_get(job_id)
         poll("#{@url_root}/jobs/#{job_id}")
       end
@@ -106,7 +106,7 @@ module Mindee
       # Polls the API for the result of an inference.
       #
       # @param queue_id [String] ID of the queue.
-      # @return [Net::HTTP::Response]
+      # @return [Net::HTTPResponse]
       def inference_result_req_get(queue_id)
         poll("#{@url_root}/inferences/#{queue_id}")
       end

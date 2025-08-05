@@ -7,8 +7,8 @@ module Mindee
     module V2
       module Field
         # A field containing a list of other fields.
-        class ListField < BaseField
-          # @return [Array<BaseField>] Items contained in the list.
+        class ListField < DynamicField
+          # @return [Array<ListField | ObjectField | SimpleField>] Items contained in the list.
           attr_reader :items
 
           # @param server_response [Hash] Raw server response hash.
@@ -67,7 +67,7 @@ module Mindee
 
           # Iterate over the items in the list.
           # @yield [BaseField] Each item in the list.
-          # @return [Enumerator] If no block is given.
+          # @return [Array, Enumerator] If no block is given.
           def each(&block)
             return @items.to_enum unless block_given?
 

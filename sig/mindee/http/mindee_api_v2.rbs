@@ -1,0 +1,18 @@
+# lib/mindee/http/mindee_api_v2.rb
+module Mindee
+  module HTTP
+    class MindeeApiV2
+      attr_reader settings: ApiSettingsV2
+
+      def initialize: (String?) -> void
+      def req_post_inference_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::InferenceParameters) -> Parsing::V2::JobResponse
+      def req_get_inference: (String) -> Parsing::V2::InferenceResponse
+      def req_get_job: (String) -> Parsing::V2::JobResponse
+      def process_response: (Net::HTTPResponse?) -> Hash[String | Symbol, untyped]
+      def poll: (String) -> Net::HTTPResponse
+      def inference_job_req_get: (String) -> Net::HTTPResponse
+      def inference_result_req_get: (String) -> Net::HTTPResponse
+      def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::InferenceParameters) -> Net::HTTPResponse?
+    end
+  end
+end

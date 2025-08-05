@@ -1,0 +1,27 @@
+# lib/mindee/parsing/v2/field/field_confidence.rb
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        class FieldConfidence
+          attr_reader value: String
+          CERTAIN: String
+          HIGH: String
+          MEDIUM: String
+          LOW: String
+          VALID_VALUES: Array[String]
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def self.from_string: (String) -> FieldConfidence
+          def certain?: -> bool
+          def high?: -> bool
+          def medium?: -> bool
+          def low?: -> bool
+          def to_s: -> String
+          def ==: (FieldConfidence) -> bool
+          def eql?: (FieldConfidence) -> bool
+          def inspect: -> String
+        end
+      end
+    end
+  end
+end

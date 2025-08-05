@@ -71,12 +71,6 @@ module Mindee
             other.is_a?(FieldConfidence) && @value == other.value
           end
 
-          # Hash code for the confidence level.
-          # @return [Integer] Hash code based on the value.
-          def hash
-            @value.hash
-          end
-
           # Make instances comparable and hashable
           alias eql? ==
 

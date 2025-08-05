@@ -1,0 +1,21 @@
+# TypeProf 0.30.1
+
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        # A field containing a nested set of inference fields.
+        class ObjectField < DynamicField
+          attr_reader fields: InferenceFields
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def multi_str: -> String
+          def respond_to_missing?: (Symbol, bool) -> bool
+          def single_str: -> String
+          def to_s: -> String
+          def to_s_from_list: -> String
+          def method_missing: (Symbol, *untyped, untyped) -> (ObjectField | nil)
+        end
+      end
+    end
+  end
+end

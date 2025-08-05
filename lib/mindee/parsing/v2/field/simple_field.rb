@@ -9,7 +9,7 @@ module Mindee
         # A simple field with a scalar value.
         class SimpleField < DynamicField
           # @return [String, Integer, Float, Boolean, nil] Value contained in the field.
-          attr_accessor :value
+          attr_reader :value
 
           # @param server_response [Hash] Raw server response hash.
           # @param indent_level [Integer] Level of indentation for rst display.

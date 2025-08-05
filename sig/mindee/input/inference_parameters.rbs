@@ -1,0 +1,15 @@
+# lib/mindee/input/inference_parameters.rb
+module Mindee
+  module Input
+    class InferenceParameters
+      attr_reader close_file: bool
+      attr_reader file_alias: String?
+      attr_reader model_id: String
+      attr_reader polling_options: PollingOptions
+      attr_reader rag: bool?
+      attr_reader webhook_ids: Array[String]?
+
+      def initialize: (params: Hash[String | Symbol, untyped]) -> void
+    end
+  end
+end

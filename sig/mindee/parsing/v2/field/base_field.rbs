@@ -1,0 +1,16 @@
+# lib/mindee/parsing/v2/field/base_field.rb
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        class BaseField
+          attr_reader indent_level: Integer
+          attr_reader confidence: FieldConfidence?
+
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def self.create_field: (Hash[String | Symbol, untyped], ?Integer) -> (ListField | Field::ObjectField | Field::SimpleField)
+        end
+      end
+    end
+  end
+end

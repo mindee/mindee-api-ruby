@@ -1,0 +1,12 @@
+# lib/mindee/input/polling_options.rb
+module Mindee
+  module Input
+    class PollingOptions
+      attr_reader delay_sec: Integer | Float
+      attr_reader initial_delay_sec: Integer | Float
+      attr_reader max_retries: Integer
+
+      def initialize: (?initial_delay_sec: Float, ?delay_sec: Float, ?max_retries: Integer) -> Integer
+    end
+  end
+end

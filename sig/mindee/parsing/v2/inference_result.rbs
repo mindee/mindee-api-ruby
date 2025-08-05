@@ -1,0 +1,13 @@
+# lib/mindee/parsing/v2/inference_result.rb
+module Mindee
+  module Parsing
+    module V2
+      class InferenceResult
+        attr_reader fields: Field::InferenceFields
+        attr_reader options: InferenceResultOptions?
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

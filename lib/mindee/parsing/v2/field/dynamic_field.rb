@@ -7,7 +7,7 @@ module Mindee
         # Extension of the base field class for V2 fields, with location data.
         class DynamicField < BaseField
           # @return [Array<FieldLocation>, nil] List of possible locations for a field.
-          attr_accessor :locations
+          attr_reader :locations
 
           # @param raw_prediction [Hash] Raw prediction hash.
           # @param indent_level [Integer] Level of indentation for rst display.

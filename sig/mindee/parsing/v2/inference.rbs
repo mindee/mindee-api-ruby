@@ -1,0 +1,16 @@
+# lib/mindee/parsing/v2/inference.rb
+module Mindee
+  module Parsing
+    module V2
+      class Inference
+        attr_reader file: InferenceFile
+        attr_reader id: String
+        attr_reader model: InferenceModel
+        attr_reader result: InferenceResult
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

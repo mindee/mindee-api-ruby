@@ -1,0 +1,17 @@
+# lib/mindee/parsing/v2/job_webhook.rb
+module Mindee
+  module Parsing
+    module V2
+      class JobWebhook
+        attr_reader created_at: DateTime | nil
+        attr_reader error: ErrorResponse
+        attr_reader id: String
+        attr_reader status: String
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+        def parse_date: (String?) -> DateTime?
+      end
+    end
+  end
+end

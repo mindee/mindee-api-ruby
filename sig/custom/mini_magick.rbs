@@ -1,8 +1,8 @@
 # Stub for the mini_magick library.
 module MiniMagick
   class Image
-    def format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
-    def self.format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
+    def format: (String, Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
+    def self.format: (String, Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
     def self.quality: (String) -> Net::BufferedIO
     def self.crop: (String) -> Net::BufferedIO
     def self.height: () -> Integer

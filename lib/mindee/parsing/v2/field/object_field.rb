@@ -12,12 +12,12 @@ module Mindee
           # @return [InferenceFields] Fields contained in the object.
           attr_reader :fields
 
-          # @param server_response [Hash] Raw server response hash.
+          # @param raw_prediction [Hash] Raw server response hash.
           # @param indent_level [Integer] Level of indentation for rst display.
-          def initialize(server_response, indent_level = 0)
+          def initialize(raw_prediction, indent_level = 0)
             super
 
-            inner_fields = server_response.fetch('fields', server_response)
+            inner_fields = raw_prediction.fetch('fields', raw_prediction)
             @fields = InferenceFields.new(inner_fields, @indent_level + 1)
           end
 
@@ -80,7 +80,7 @@ module Mindee
 
           # Allow dot notation access to nested fields.
           # @param method_name [Symbol] The method name (field key).
-          # @return [BaseField, nil] The field or nil if not found.
+          # @return [ObjectField, nil] The field or nil if not found.
           def method_missing(method_name, ...)
             if @fields.respond_to?(method_name)
               @fields.send(method_name, ...)

@@ -1,0 +1,14 @@
+# lib/mindee/parsing/v2/field/dynamic_field.rb
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        class DynamicField < BaseField
+          attr_reader locations: Array[FieldLocation]?
+
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+        end
+      end
+    end
+  end
+end

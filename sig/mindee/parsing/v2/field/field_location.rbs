@@ -1,0 +1,16 @@
+# lib/mindee/parsing/v2/field/field_location.rb
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        class FieldLocation
+          attr_reader page: Integer?
+          attr_reader polygon: Geometry::Polygon?
+
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

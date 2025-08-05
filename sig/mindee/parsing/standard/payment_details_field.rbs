@@ -2,12 +2,13 @@
 module Mindee
   module Parsing
     module Standard
-      class PaymentDetailsField # failed to identify its superclass
-        def account_number: -> untyped
-        def iban: -> untyped
-        def routing_number: -> untyped
-        def swift: -> untyped
-        def initialize: (untyped, untyped, ?reconstructed: false) -> untyped
+      class PaymentDetailsField < BaseField
+        attr_reader account_number: String ?
+        attr_reader iban: String?
+        attr_reader routing_number: String?
+        attr_reader swift: String?
+
+        def initialize: (Hash[String | Symbol, untyped], Integer?, ?reconstructed: bool) -> void
         def to_s: -> String
       end
     end

@@ -18,7 +18,7 @@ module Mindee
         attr_reader :file
         # @return [InferenceResult] Result contents.
         attr_reader :result
-        # @return [String, nil] Identifier of the inference (when provided by API).
+        # @return [String] Identifier of the inference (when provided by API).
         attr_reader :id
 
         # @param server_response [Hash] Hash representation of the JSON returned by the service.
@@ -29,7 +29,7 @@ module Mindee
           @file   = InferenceFile.new(server_response['file'])
           @result = InferenceResult.new(server_response['result'])
 
-          @id = server_response['id'] if server_response.key?('id')
+          @id = server_response['id']
         end
 
         # RST-style string representation (keeps parity with TS implementation).
