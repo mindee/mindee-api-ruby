@@ -10,8 +10,8 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'file_types/receipt.jpg')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
-      expect(read_f.length).to eq(3)
-      expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
+      expect(read_f.length).to eq(2)
+      expect(read_f[0]).to eq(File.read(file, mode: 'rb'))
     end
   end
 
@@ -20,8 +20,8 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'file_types/receipt.jpga')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
-      expect(read_f.length).to eq(3)
-      expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
+      expect(read_f.length).to eq(2)
+      expect(read_f[0]).to eq(File.read(file, mode: 'rb'))
     end
   end
 
@@ -30,8 +30,8 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'file_types/receipt.heic')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
-      expect(read_f.length).to eq(3)
-      expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
+      expect(read_f.length).to eq(2)
+      expect(read_f[0]).to eq(File.read(file, mode: 'rb'))
     end
   end
 
@@ -40,8 +40,8 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'file_types/receipt.tif')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
-      expect(read_f.length).to eq(3)
-      expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
+      expect(read_f.length).to eq(2)
+      expect(read_f[0]).to eq(File.read(file, mode: 'rb'))
     end
   end
 
@@ -50,8 +50,8 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'file_types/receipt.tiff')
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
-      expect(read_f.length).to eq(3)
-      expect(read_f[1]).to eq(File.read(file, mode: 'rb'))
+      expect(read_f.length).to eq(2)
+      expect(read_f[0]).to eq(File.read(file, mode: 'rb'))
     end
   end
 
@@ -60,8 +60,8 @@ describe Mindee::Input::Source::LocalInputSource do
       file = File.join(DATA_DIR, 'file_types/receipt.txt')
       input = Mindee::Input::Source::Base64InputSource.new(File.read(file), 'receipt.txt')
       read_f = input.read_contents
-      expect(read_f.length).to eq(3)
-      expect(read_f[1].gsub("\n", '')).to eq(File.read(file).gsub("\n", ''))
+      expect(read_f.length).to eq(2)
+      expect(read_f[0].gsub("\n", '')).to eq(File.read(file).gsub("\n", ''))
     end
   end
 
@@ -71,9 +71,9 @@ describe Mindee::Input::Source::LocalInputSource do
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
       file_contents = File.read(file)
-      expect(read_f[1]).to_not eq(Base64.encode64(file_contents))
-      expect(read_f.length).to eq(3)
-      expect(Base64.decode64(read_f[1])).to eq(Base64.decode64(file_contents))
+      expect(read_f[0]).to_not eq(Base64.encode64(file_contents))
+      expect(read_f.length).to eq(2)
+      expect(Base64.decode64(read_f[0])).to eq(Base64.decode64(file_contents))
     end
   end
 
@@ -83,9 +83,9 @@ describe Mindee::Input::Source::LocalInputSource do
       input = Mindee::Input::Source::PathInputSource.new(file)
       read_f = input.read_contents
       file_contents = File.read(file)
-      expect(read_f[1]).to_not eq(Base64.encode64(file_contents))
-      expect(read_f.length).to eq(3)
-      expect(Base64.decode64(read_f[1])).to eq(Base64.decode64(file_contents))
+      expect(read_f[0]).to_not eq(Base64.encode64(file_contents))
+      expect(read_f.length).to eq(2)
+      expect(Base64.decode64(read_f[0])).to eq(Base64.decode64(file_contents))
     end
   end
 end

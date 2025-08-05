@@ -1,0 +1,9 @@
+# lib/mindee/page_options.rb
+
+class PageOptions
+  attr_accessor page_indexes: Array[Integer]
+  attr_accessor operation: :KEEP_ONLY | :REMOVE
+  attr_accessor on_min_pages: Integer?
+
+  def initialize: (params: Hash[Symbol | String, untyped]) -> void
+end

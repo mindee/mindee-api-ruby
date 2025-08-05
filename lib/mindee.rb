@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
+require 'mindee/page_options'
 require 'mindee/logging'
 
 module Mindee

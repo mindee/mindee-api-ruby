@@ -4,6 +4,10 @@ module Mindee
     module Source
       ALLOWED_MIME_TYPES: Array[String]
       class LocalInputSource
+        attr_reader file_mimetype: String
+        attr_reader filename: String
+        attr_reader io_stream: StringIO|File
+
         def filename: -> String
         def file_mimetype: -> String
         def io_stream: -> StringIO
@@ -11,8 +15,9 @@ module Mindee
         def logger: () -> untyped
 
 
-        def rescue_broken_pdf: (StringIO) -> StringIO
+        def rescue_broken_pdf: (StringIO|File) -> StringIO
         def pdf?: -> bool
+        def apply_page_options: (PageOptions) -> StringIO?
         def process_pdf: (PageOptions) -> StringIO?
         def read_contents: (?close: bool) -> [String?, Hash[:filename, String]]
         def count_pages: -> Integer

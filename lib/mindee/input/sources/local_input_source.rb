@@ -60,7 +60,7 @@ module Mindee
         # Attempts to fix pdf files if mimetype is rejected.
         # "Broken PDFs" are often a result of third-party injecting invalid headers.
         # This attempts to remove them and send the file
-        # @param stream [StringIO]
+        # @param stream [StringIO, File]
         def rescue_broken_pdf(stream)
           stream.gets('%PDF-')
           raise Errors::MindeePDFError if stream.eof? || stream.pos > 500
@@ -78,7 +78,7 @@ module Mindee
           @file_mimetype.to_s == 'application/pdf'
         end
 
-        # Parses a PDF file according to provided options.
+        # Cuts a PDF file according to provided options.
         # @param options [PageOptions, nil] Page cutting/merge options:
         #
         #  * `:page_indexes` Zero-based list of page indexes.
@@ -86,9 +86,15 @@ module Mindee
         #      * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
         #      * `:REMOVE` - remove the specified pages, and keep all others.
         #  * `:on_min_pages` Apply the operation only if document has at least this many pages.
-        def process_pdf(options)
+        def apply_page_options(options)
           @io_stream.seek(0)
           @io_stream = PDF::PDFProcessor.parse(@io_stream, options)
+        end
+
+        # @deprecated Use {#apply_page_options} instead.
+        # @see #apply_page_options
+        def process_pdf(options)
+          apply_page_options(options)
         end
 
         # Reads a document.
