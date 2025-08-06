@@ -3,7 +3,7 @@ module Mindee
   module Parsing
     module V2
       module Field
-        class ListField < DynamicField
+        class ListField < BaseField
           include Enumerable[untyped]
           attr_reader items: Array[ListField | ObjectField | SimpleField | nil]
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void

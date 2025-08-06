@@ -46,6 +46,26 @@ module Mindee
         @polling_options = polling_options
         @close_file = params.fetch(:close_file, true)
       end
+
+      # Validates the parameters for async auto-polling
+      def validate_async_params
+        min_delay_sec = 1
+        min_initial_delay_sec = 1
+        min_retries = 2
+
+        if @polling_options.delay_sec < min_delay_sec
+          raise ArgumentError,
+                "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)"
+        end
+        if @polling_options.initial_delay_sec < min_initial_delay_sec
+          raise ArgumentError,
+                "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
+        end
+        return unless @polling_options.max_retries < min_retries
+
+        raise ArgumentError,
+              "Cannot set auto-poll retries to less than #{min_retries}"
+      end
     end
   end
 end

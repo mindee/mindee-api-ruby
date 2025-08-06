@@ -7,7 +7,7 @@ module Mindee
     module V2
       module Field
         # A field containing a list of other fields.
-        class ListField < DynamicField
+        class ListField < BaseField
           # @return [Array<ListField | ObjectField | SimpleField>] Items contained in the list.
           attr_reader :items
 

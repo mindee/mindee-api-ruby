@@ -7,7 +7,7 @@ module Mindee
     module V2
       module Field
         # A simple field with a scalar value.
-        class SimpleField < DynamicField
+        class SimpleField < BaseField
           # @return [String, Integer, Float, Boolean, nil] Value contained in the field.
           attr_reader :value
 

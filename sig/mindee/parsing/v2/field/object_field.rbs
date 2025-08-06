@@ -5,7 +5,7 @@ module Mindee
     module V2
       module Field
         # A field containing a nested set of inference fields.
-        class ObjectField < DynamicField
+        class ObjectField < BaseField
           attr_reader fields: InferenceFields
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
           def multi_str: -> String

@@ -6,6 +6,7 @@ module Mindee
         class BaseField
           attr_reader indent_level: Integer
           attr_reader confidence: FieldConfidence?
+          attr_reader locations: Array[FieldLocation]
 
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
           def self.create_field: (Hash[String | Symbol, untyped], ?Integer) -> (ListField | Field::ObjectField | Field::SimpleField)

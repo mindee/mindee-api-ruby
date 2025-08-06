@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'field/base_field'
-require_relative 'field/dynamic_field'
 require_relative 'field/field_confidence'
 require_relative 'field/field_location'
 require_relative 'field/inference_fields'

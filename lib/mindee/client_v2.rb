@@ -58,8 +58,7 @@ module Mindee
     # @return [Mindee::Parsing::V2::InferenceResponse]
     def enqueue_and_get_inference(input_source, params)
       normalized_params = normalize_inference_parameters(params)
-      validate_async_params(normalized_params.initial_delay_sec, normalized_params.delay_sec,
-                            normalized_params.max_retries)
+      normalized_params.validate_async_params
       enqueue_response = enqueue_inference(input_source, normalized_params)
 
       if enqueue_response.job.id.nil? || enqueue_response.job.id.empty?
@@ -67,12 +66,12 @@ module Mindee
         raise Mindee::Errors::MindeeError, 'Enqueueing of the document failed.'
       end
 
-      queue_id = enqueue_response.job.id
-      logger.debug("Successfully enqueued document with job id: #{queue_id}.")
+      job_id = enqueue_response.job.id
+      logger.debug("Successfully enqueued document with job id: #{job_id}.")
 
       sleep(normalized_params.polling_options.initial_delay_sec)
       retry_counter = 1
-      poll_results = get_job(queue_id)
+      poll_results = get_job(job_id)
 
       while retry_counter < normalized_params.polling_options.max_retries
         if poll_results.job.status == 'Failed'
@@ -82,13 +81,13 @@ module Mindee
         end
 
         logger.debug(
-          "Polling server for parsing result with queueId: #{queue_id}.\n" \
+          "Successfully enqueued inference with job id: #{job_id}.\n" \
           "Attempt n°#{retry_counter}/#{normalized_params.polling_options.max_retries}.\n" \
           "Job status: #{poll_results.job.status}."
         )
 
         sleep(normalized_params.polling_options.delay_sec)
-        poll_results = get_job(queue_id)
+        poll_results = get_job(job_id)
         retry_counter += 1
       end
 
@@ -102,26 +101,6 @@ module Mindee
       sec_count = normalized_params.polling_options.delay_sec * retry_counter
       raise Mindee::Errors::MindeeError,
             "Asynchronous parsing request timed out after #{sec_count} seconds"
-    end
-
-    # Validates the parameters for async auto-polling
-    # @param initial_delay_sec [Integer, Float] initial delay before polling
-    # @param delay_sec [Integer, Float] delay between polling attempts
-    # @param max_retries [Integer] maximum amount of retries.
-    def validate_async_params(initial_delay_sec, delay_sec, max_retries)
-      min_delay_sec = 1
-      min_initial_delay_sec = 1
-      min_retries = 2
-
-      if delay_sec < min_delay_sec
-        raise ArgumentError,
-              "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)"
-      end
-      if initial_delay_sec < min_initial_delay_sec
-        raise ArgumentError,
-              "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
-      end
-      raise ArgumentError, "Cannot set auto-poll retries to less than #{min_retries}" if max_retries < min_retries
     end
 
     # If needed, converts the parsing options provided as a hash into a proper InferenceParameters object.

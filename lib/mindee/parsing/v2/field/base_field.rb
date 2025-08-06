@@ -12,11 +12,21 @@ module Mindee
           # @return [FieldConfidence, nil] Confidence score for the field.
           attr_reader :confidence
 
+          # @return [Array<FieldLocation>] List of locations the field was found at.
+          attr_reader :locations
+
           # @param raw_prediction [Hash] Raw prediction hash.
           # @param indent_level [Integer] Level of indentation for rst display.
           def initialize(raw_prediction, indent_level = 0)
             @indent_level = indent_level
-            @confidence = raw_prediction['confidence'] ? raw_prediction.key?('confidence') : nil
+            @confidence = raw_prediction.key?('confidence') ? raw_prediction['confidence'] : nil
+            @locations = if raw_prediction.key?('locations')
+                           raw_prediction['locations'].map do |location|
+                             FieldLocation.new(location)
+                           end
+                         else
+                           []
+                         end
           end
 
           # Factory method to create appropriate field types.

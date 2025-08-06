@@ -10,6 +10,8 @@ module Mindee
       attr_reader webhook_ids: Array[String]?
 
       def initialize: (params: Hash[String | Symbol, untyped]) -> void
+
+      def validate_async_params: -> void
     end
   end
 end

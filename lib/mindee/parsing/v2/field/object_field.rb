@@ -8,7 +8,7 @@ module Mindee
     module V2
       module Field
         # A field containing a nested set of inference fields.
-        class ObjectField < DynamicField
+        class ObjectField < BaseField
           # @return [InferenceFields] Fields contained in the object.
           attr_reader :fields
 
