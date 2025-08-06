@@ -36,14 +36,19 @@ module Mindee
 
           @id          = server_response['id']
           @status      = server_response['status'] if server_response.key?('status')
-          @error       = build_error(server_response['error'])
+          unless server_response['error'].nil? || server_response['error'].empty?
+            @error = ErrorResponse.new(server_response['error'])
+          end
           @created_at  = Time.iso8601(server_response['created_at'])
           @model_id    = server_response['model_id']
           @polling_url = server_response['polling_url']
           @filename    = server_response['filename']
           @result_url  = server_response['result_url']
           @alias       = server_response['alias']
-          @webhooks    = JobWebhook.new(server_response['webhooks'])
+          @webhooks = []
+          server_response['webhooks'].each do |webhook|
+            @webhooks.push JobWebhook.new(webhook)
+          end
         end
 
         # RST-style string representation, useful for debugging or logs.

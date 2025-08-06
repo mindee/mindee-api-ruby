@@ -50,7 +50,7 @@ module Mindee
       # @return [Mindee::Parsing::V2::JobResponse]
       def req_get_job(job_id)
         @settings.check_api_key
-        response = inference_result_req_get(
+        response = inference_job_req_get(
           job_id
         )
         Parsing::V2::JobResponse.new(process_response(response))
@@ -100,7 +100,7 @@ module Mindee
       # @param job_id [String] ID of the job.
       # @return [Net::HTTPResponse]
       def inference_job_req_get(job_id)
-        poll("#{@url_root}/jobs/#{job_id}")
+        poll("#{@settings.base_url}/jobs/#{job_id}")
       end
 
       # Polls the API for the result of an inference.
@@ -108,31 +108,32 @@ module Mindee
       # @param queue_id [String] ID of the queue.
       # @return [Net::HTTPResponse]
       def inference_result_req_get(queue_id)
-        poll("#{@url_root}/inferences/#{queue_id}")
+        poll("#{@settings.base_url}/inferences/#{queue_id}")
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       # @param params [Input::InferenceParameters] Parse options.
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
-        uri = URI("#{@settings.url_root}/inferences/enqueue")
+        uri = URI("#{@settings.base_url}/inferences/enqueue")
 
-        req_params = { model_id: params[:model_id] }
-        req_params[:rag] = 'true' if params.rag
-        req_params[:file_alias] = params.full_text if params.full_text
-        req_params[:webhook_ids] = params.webhook_ids.join(',') if params.webhook_ids
-        uri.query = URI.encode_www_form(req_params)
-
+        form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
+                      [['url', input_source.url]] # : Array[untyped]
+                    else
+                      file_data, file_metadata = input_source.read_contents(close: params.close_file)
+                      [['file', file_data, file_metadata]] # : Array[untyped]
+                    end
+        form_data.push ['model_id', params.model_id]
+        form_data.push ['rag', 'true'] if params.rag
+        form_data.push ['file_alias', params.file_alias] if params.file_alias
+        unless params.webhook_ids.nil? || params.webhook_ids.empty?
+          form_data.push ['webhook_ids', params.webhook_ids.join(',')]
+        end
         headers = {
           'Authorization' => @settings.api_key,
           'User-Agent' => @settings.user_agent,
         }
         req = Net::HTTP::Post.new(uri, headers)
-        form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                      [['url', input_source.url]] # : Array[untyped]
-                    else
-                      ['file', input_source.read_contents(close: params.close_file)] # : Array[untyped]
-                    end
 
         req.set_form(form_data, 'multipart/form-data')
         req['Transfer-Encoding'] = 'chunked'

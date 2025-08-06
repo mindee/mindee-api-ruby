@@ -8,9 +8,6 @@ require_relative 'parsing/common/job'
 require_relative 'parsing/common/workflow_response'
 require_relative 'logging'
 
-# Default owner for products.
-OTS_OWNER = 'mindee'
-
 module Mindee
   # Mindee API Client.
   # See: https://developers.mindee.com/docs
@@ -107,7 +104,7 @@ module Mindee
     # @param params [Hash, InferenceParameters] Params.
     # @return [InferenceParameters]
     def normalize_inference_parameters(params)
-      return params if params.is_a?(InferenceParameters)
+      return params if params.is_a?(Mindee::Input::InferenceParameters)
 
       InferenceParameters.new(params: params)
     end
