@@ -3,11 +3,12 @@ module Mindee
   module Parsing
     module Common
       class Page
-        def page_id: -> untyped
-        def orientation: -> untyped
-        def prediction: -> untyped
-        def extras: -> untyped
-        def initialize: (untyped) -> void
+        attr_reader extras: Extras::Extras
+        attr_reader orientation: Common::Orientation
+        attr_reader page_id: Integer
+        attr_reader prediction: Common::Prediction
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
         def to_s: -> String
       end
     end

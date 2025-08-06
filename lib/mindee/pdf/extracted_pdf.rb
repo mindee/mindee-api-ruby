@@ -7,14 +7,14 @@ module Mindee
       # An extracted sub-Pdf.
       class ExtractedPDF
         # Byte contents of the pdf
-        # @return [StreamIO]
+        # @return [StringIO]
         attr_reader :pdf_bytes
 
         # Name of the file.
         # @return [String]
         attr_reader :filename
 
-        # @param pdf_bytes [StreamIO]
+        # @param pdf_bytes [StringIO]
         # @param filename [String]
         def initialize(pdf_bytes, filename)
           @pdf_bytes = pdf_bytes
@@ -50,6 +50,8 @@ module Mindee
         # Returns the current PDF object as a usable BytesInputSource.
         # @return [Mindee::Input::Source::BytesInputSource]
         def as_input_source
+          raise Errors::MindeePDFError, 'Bytes object is nil.' if @pdf_bytes.nil?
+
           Mindee::Input::Source::BytesInputSource.new(@pdf_bytes.read, @filename)
         end
       end

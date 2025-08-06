@@ -3,10 +3,10 @@ module Mindee
   module Parsing
     module Common
       class Product
-        def name: -> untyped
-        def type: -> untyped
-        def version: -> untyped
-        def initialize: (Hash[String, untyped]) -> untyped
+        attr_reader name: String
+        attr_reader type: String?
+        attr_reader version: String
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
   end

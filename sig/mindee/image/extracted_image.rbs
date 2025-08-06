@@ -2,7 +2,7 @@
 module Mindee
   module Image
     class ExtractedImage
-      def logger: () -> untyped
+      def logger: () -> Logger
       def page_id: -> Integer
       def element_id: -> Integer
       def buffer: -> StringIO

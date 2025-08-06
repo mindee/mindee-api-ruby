@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'origami'
+
 module Mindee
   module PDF
     # Collection of miscellaneous PDF operations,as well as some monkey-patching for Origami.
@@ -84,7 +86,7 @@ module Mindee
       # Converts the given image to a binary stream using Mindee's image utilities, then creates
       # an Origami::Graphics::ImageXObject with a JPEG filter.
       #
-      # @param [Minimagick::Image] image An image object with the necessary data and structure.
+      # @param [MiniMagick::Image] image An image object with the necessary data and structure.
       # @return [Origami::Graphics::ImageXObject] The created image XObject.
       def self.create_xobject(image)
         image_io = Mindee::Image::ImageUtils.image_to_stringio(image)
@@ -153,7 +155,7 @@ module Mindee
 
       # Processes an image into an image XObject for PDF embedding.
       #
-      # @param [Hash] image_data The raw image data.
+      # @param [MiniMagick::Image, StringIO] image_data The raw image data.
       # @param [Integer] image_quality The quality setting for image compression.
       # @param [Numeric] width The desired width of the output image.
       # @param [Numeric] height The desired height of the output image.

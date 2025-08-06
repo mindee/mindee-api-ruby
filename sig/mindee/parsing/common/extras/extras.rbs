@@ -4,12 +4,13 @@ module Mindee
     module Common
       module Extras
         class Extras
-          def cropper: -> untyped
-          def full_text_ocr: -> untyped
-          def initialize: (untyped) -> void
-          def new: (untyped) -> void
+          attr_reader cropper: CropperExtra?
+          attr_reader full_text_ocr: FullTextOCRExtra?
+          attr_reader rag: RAGExtra?
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String
-          def add_artificial_extra: (untyped) -> nil
+          def add_artificial_extra: (Hash[String | Symbol, untyped]) -> void
         end
         def empty?: -> bool
       end

@@ -3,11 +3,10 @@ module Mindee
   module Parsing
     module Universal
       class UniversalListField
-        def page_id: -> Integer?
-        def page_id=: (Integer?) -> untyped
-        def values: -> Array[UniversalObjectField | Standard::StringField]
-        def values=: (Array[UniversalObjectField | Standard::StringField]) -> Array[UniversalObjectField | Standard::StringField]
-        def initialize: (Array[Hash[Symbol | String, untyped]], ?nil) -> untyped
+        attr_reader page_id: Integer
+        attr_reader values: Array[UniversalObjectField | Standard::StringField]
+
+        def initialize: (Array[Hash[Symbol | String, untyped]], Integer?) -> void
         def contents_list: -> Array[String]
         def contents_string: (?String) -> String
         def to_s: -> String

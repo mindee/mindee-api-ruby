@@ -2,11 +2,12 @@
 module Mindee
   module Errors
     class MindeeHTTPError < Errors::MindeeError
-      def status_code: -> untyped
-      def api_code: -> untyped
-      def api_details: -> untyped
-      def api_message: -> untyped
-      def initialize: (untyped, untyped, untyped) -> untyped
+      attr_reader api_code: Integer
+      attr_reader api_details: String
+      attr_reader api_message: String
+      attr_reader status_code: Integer
+
+      def initialize: (Hash[String | Symbol, untyped], String, Integer) -> void
     end
     class MindeeHTTPClientError < MindeeHTTPError
     end

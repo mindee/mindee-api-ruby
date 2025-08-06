@@ -4,7 +4,7 @@ module Mindee
     module Source
       class URLInputSource
         def url: -> String
-        def logger: () -> untyped
+        def logger: () -> Logger
         def initialize: (String) -> void
         def write_to_file: (String, ?filename: String?, ?username: String?, ?password: String?, ?token: String?, ?max_redirects: Integer) -> String
         def as_local_input_source: (?filename: String?, ?username: String?, ?password: String?, ?token: String?, ?max_redirects: Integer) -> BytesInputSource?

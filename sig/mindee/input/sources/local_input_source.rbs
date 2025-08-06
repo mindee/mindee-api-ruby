@@ -12,7 +12,7 @@ module Mindee
         def file_mimetype: -> String
         def io_stream: -> StringIO
         def initialize: (StringIO | File, String, ?repair_pdf: bool) -> void
-        def logger: () -> untyped
+        def logger: () -> Logger
 
 
         def rescue_broken_pdf: (StringIO|File) -> StringIO

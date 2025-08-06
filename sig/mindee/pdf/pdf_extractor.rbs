@@ -3,13 +3,16 @@ module Mindee
   module PDF
     module PDFExtractor
       class PDFExtractor
-        def initialize: (untyped) -> StringIO
-        def page_count: -> untyped
-        def cut_pages: (Array[untyped]) -> untyped
-        def extract_sub_documents: (Array[untyped]) -> Array[untyped]
-        def extract_invoices: (untyped, ?strict: bool) -> Array[untyped]
+        attr_reader filename: String
+        attr_reader source_pdf: StringIO
+
+        def initialize: (Input::Source::LocalInputSource) -> void
+        def page_count: -> Integer
+        def cut_pages: (Array[Integer]) -> StringIO
+        def extract_sub_documents: (Array[Array[Integer]]) -> Array[ExtractedPDF]
+        def extract_invoices: (Array[Array[Integer]], ?strict: bool) -> Array[ExtractedPDF]
         def source_pdf: -> StringIO
-        def filename: -> untyped
+        def filename: -> String
       end
     end
   end

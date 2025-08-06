@@ -29,7 +29,7 @@ module Mindee
 
         # Creates a new Pdf from pages and save it into a buffer.
         # @param page_indexes [Array<Integer>] List of page number to use for merging in the original Pdf.
-        # @return [StreamIO] The buffer containing the new Pdf.
+        # @return [StringIO] The buffer containing the new Pdf.
         def cut_pages(page_indexes)
           options = PageOptions.new(params: {
                                       page_indexes: page_indexes,

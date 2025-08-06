@@ -6,9 +6,9 @@ module Mindee
     # A relative set of coordinates (X, Y) on the document.
     class Point
       # @return [Float]
-      attr_accessor :x
+      attr_reader :x
       # @return [Float]
-      attr_accessor :y
+      attr_reader :y
 
       # rubocop:disable Naming/MethodParameterName
 

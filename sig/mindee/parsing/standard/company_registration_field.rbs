@@ -3,8 +3,9 @@ module Mindee
   module Parsing
     module Standard
       class CompanyRegistrationField < BaseField
-        def type: -> untyped
-        def initialize: (untyped, untyped, ?reconstructed: false) -> untyped
+        attr_reader type: String
+
+        def initialize: (Hash[String | Symbol, untyped], Integer?, ?reconstructed: false) -> void
         def to_table_line: -> String
         def to_s: -> String
         def printable_values: -> Hash[String, untyped]

@@ -3,18 +3,19 @@ module Mindee
   module Parsing
     module Standard
       class TaxField < BaseField
-        def value: -> untyped
-        def rate: -> untyped
-        def code: -> untyped
-        def base: -> untyped
-        def initialize: (untyped, untyped) -> void
-        def print_float: (untyped) -> String
+        attr_reader base: Float
+        attr_reader code: String
+        attr_reader rate: Float
+        attr_reader value: Float?
+
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def print_float: (Float) -> String
         def to_s: -> String
         def printable_values: -> Hash[untyped, String]
         def to_table_line: -> String
       end
       class Taxes < Array[TaxField]
-        def initialize: (untyped, untyped) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def line_separator: (String) -> String
         def to_s: -> String
       end

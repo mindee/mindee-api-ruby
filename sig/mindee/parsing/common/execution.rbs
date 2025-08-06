@@ -3,20 +3,21 @@ module Mindee
   module Parsing
     module Common
       class Execution
-        def batch_name: -> untyped
-        def created_at: -> untyped
-        def file: -> untyped
-        def id: -> untyped
-        def inference: -> untyped
-        def priority: -> untyped
-        def reviewed_at: -> untyped
-        def available_at: -> untyped
-        def reviewed_prediction: -> untyped
-        def status: -> untyped
-        def type: -> untyped
-        def uploaded_at: -> untyped
-        def workflow_id: -> untyped
-        def initialize: (untyped, untyped) -> untyped
+        attr_reader available_at: Time?
+        attr_reader batch_name: String
+        attr_reader created_at: Time
+        attr_reader file: ExecutionFile
+        attr_reader id: String
+        attr_reader inference: Inference
+        attr_reader priority: Symbol?
+        attr_reader reviewed_at: Time?
+        attr_reader reviewed_prediction: Prediction?
+        attr_reader status: Symbol
+        attr_reader type: String?
+        attr_reader uploaded_at: Time?
+        attr_reader workflow_id: String
+
+        def initialize: (singleton(Parsing::Common::Inference), Hash[String | Symbol, untyped]) -> void
       end
     end
   end

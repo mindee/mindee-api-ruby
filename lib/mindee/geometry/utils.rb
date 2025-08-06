@@ -83,6 +83,7 @@ module Mindee
     # @param anchor [Array<Mindee::Geometry::Point] Reference polygon
     # @param margin_left [Float] Margin tolerance on the left of the anchor
     # @param margin_right [Float] Margin tolerance on the right of the anchor
+    # @return bool
     def self.below?(candidate, anchor, margin_left, margin_right)
       return false if Geometry.get_min_max_y(candidate).min < Geometry.get_min_max_y(anchor).min
       if Geometry.get_min_max_x(candidate).min <

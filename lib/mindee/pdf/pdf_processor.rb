@@ -31,8 +31,8 @@ module Mindee
         current_pdf.to_io_stream
       end
 
-      # @param page_indexes [Array]
-      # @param all_pages [Array]
+      # @param page_indexes [Array<Integer>]
+      # @param all_pages [Array<Integer>]
       def self.indexes_from_keep(page_indexes, all_pages)
         pages_to_keep = Set.new
         page_indexes.each do |idx|
@@ -42,11 +42,11 @@ module Mindee
 
           pages_to_keep << page
         end
-        all_pages.to_set - pages_to_keep
+        (all_pages.to_set - pages_to_keep).to_a
       end
 
-      # @param page_indexes [Array[Integer]]
-      # @param all_pages [Array]
+      # @param page_indexes [Array<Integer>]
+      # @param all_pages [Array<Integer>]
       def self.indexes_from_remove(page_indexes, all_pages)
         pages_to_remove = Set.new
         page_indexes.each do |idx|

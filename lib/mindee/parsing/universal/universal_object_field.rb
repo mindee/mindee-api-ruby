@@ -15,8 +15,11 @@ module Mindee
         # @return [Float]
         attr_reader :confidence
         # Value as String
-        # @return [Hash<Symbol | String, untyped>, nil]
-        attr_accessor :raw_value
+        # @return [String]
+        attr_reader :raw_value
+        # All values
+        # @return [Hash]
+        attr_reader :all_values
 
         # ID of the page the object was found on.
         # Confidence with which the value was assessed.

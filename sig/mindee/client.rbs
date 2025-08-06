@@ -31,10 +31,10 @@ module Mindee
   end
 
   class Client
-    @api_key: string |nil
+    @api_key: string | nil
 
     def initialize: (?api_key: String) -> void
-    def logger: () -> untyped
+    def logger: () -> Logging
     def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, singleton(Parsing::Common::Inference), ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
     def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, singleton(Parsing::Common::Inference), HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
     def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, singleton(Parsing::Common::Inference), ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse

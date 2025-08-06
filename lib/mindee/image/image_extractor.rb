@@ -32,7 +32,7 @@ module Mindee
       #
       # @param [Mindee::Input::Source::LocalInputSource] input_source
       # @param [Integer] page_id ID of the Page to extract from.
-      # @param [Array<Array<Mindee::Geometry::Point>>, Array<Mindee::Geometry::Quadrangle>] polygons List of coordinates
+      # @param [Array<Array<Mindee::Geometry::Point>>, Array<Mindee::Geometry::Quadrilateral>] List of coordinates
       # to extract.
       # @return [Array<Mindee::Image::ExtractedImage>] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
@@ -47,7 +47,7 @@ module Mindee
       # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
       # @param [StringIO] pdf_stream Buffer of the PDF.
       # @param [Integer] page_id Page ID.
-      # @param [Array<Mindee::Geometry::Point, Mindee::Geometry::Polygon, Mindee::Geometry::Quadrangle>] polygons
+      # @param [Array<Mindee::Geometry::Point, Mindee::Geometry::Polygon, Mindee::Geometry::Quadrilateral>] polygons
       # @return [Array<Mindee::Image::ExtractedImage>] Extracted Images.
       def self.extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
         extracted_elements = []
@@ -90,8 +90,8 @@ module Mindee
       #
       # @param [StringIO] buffer Buffer containing the image.
       # @param [String] file_name Name for the file.
-      # @param [Object] page_id ID of the page the file was universal from.
-      # @param [Object] element_id ID of the element of a given page.
+      # @param [Integer] page_id ID of the page the file was universal from.
+      # @param [Integer] element_id ID of the element of a given page.
       def self.create_extracted_image(buffer, file_name, page_id, element_id)
         buffer.rewind
         ExtractedImage.new(

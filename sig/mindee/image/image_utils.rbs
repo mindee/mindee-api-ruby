@@ -3,7 +3,7 @@ module Mindee
   module Image
     module ImageUtils
       def self.resize_image: (singleton(MiniMagick::Image) | MiniMagick::Image, Integer, Integer) -> void
-      def self.compress_image_quality: (singleton(MiniMagick::Image) | MiniMagick::Image, untyped) -> untyped
+      def self.compress_image_quality: (singleton(MiniMagick::Image) | MiniMagick::Image, untyped) -> void
       def self.to_image: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO | IO | File | Tempfile?) -> (singleton(MiniMagick::Image) | MiniMagick::Image)
       def self.image_to_stringio: (singleton(MiniMagick::Image) | MiniMagick::Image, ?String) -> StringIO
       def self.calculate_new_dimensions: (singleton(MiniMagick::Image) | MiniMagick::Image, ?max_width: Integer | Float?, ?max_height: Integer | Float?) -> [Integer, Integer]

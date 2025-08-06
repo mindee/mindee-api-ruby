@@ -11,7 +11,7 @@ module Mindee
         class OCRWord
           # The confidence score, value will be between 0.0 and 1.0
           # @return [Float]
-          attr_accessor :confidence
+          attr_reader :confidence
           # @return [String]
           attr_reader :text
           # @return [Mindee::Geometry::Quadrilateral]
@@ -36,7 +36,7 @@ module Mindee
         # A list of words which are on the same line.
         class OCRLine < Array
           # @param prediction [Hash, nil]
-          # @param from_array [Array, nil]
+          # @param from_array [Array<OCRWord, nil]
           def initialize(prediction = nil, from_array = nil)
             if !prediction.nil?
               super(prediction.map { |word_prediction| OCRWord.new(word_prediction) })
@@ -104,7 +104,7 @@ module Mindee
           # @param indexes [Array<Integer>]
           # @param lines [Array<OCRLine>]
           def parse_one(sorted_words, current, indexes, lines)
-            line = OCRLine.new([])
+            line = OCRLine.new(nil, [])
             sorted_words.each_with_index do |word, idx|
               next if indexes.include?(idx)
 

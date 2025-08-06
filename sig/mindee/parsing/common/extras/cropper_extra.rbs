@@ -4,8 +4,9 @@ module Mindee
     module Common
       module Extras
         class CropperExtra
-          def croppings: -> Array[Standard::PositionField]
-          def initialize: (untyped, ?nil) -> untyped
+          attr_reader croppings: Array[Standard::PositionField]
+
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def to_s: -> String
         end
       end

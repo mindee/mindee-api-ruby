@@ -12,11 +12,11 @@ module Mindee
 
         # ID of the page (as given by the API).
         # @return [Integer]
-        attr_accessor :page_id
+        attr_reader :page_id
 
         # List of word values
         # @return [Array<UniversalObjectField, StringField>]
-        attr_accessor :values
+        attr_reader :values
 
         # ID of the page the object was found on.
         # List of word values.

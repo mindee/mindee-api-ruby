@@ -2,22 +2,21 @@
 module Mindee
   module PDF
     module PDFTools
-      def to_io_stream: (?Hash[untyped, untyped]) -> StringIO
-      def self.stream_has_text?: (untyped) -> bool
-      def self.source_text?: (untyped) -> bool?
-      def self.create_xobject: (untyped) -> untyped
-      def self.set_xobject_properties: (untyped, untyped) -> untyped
-      def self.determine_filter: (untyped) -> (:DCTDecode | :FlateDecode | :LZWDecode)
-      def self.determine_colorspace: (untyped) -> (:DeviceCMYK | :DeviceGray | :DeviceRGB)
-      def self.add_content_to_page: (untyped, untyped, untyped, untyped) -> untyped
-      def compile: (untyped) -> untyped
-      def intents_as_pdfa1: () -> untyped
-      def delinearize!: () -> untyped
-      def linearized?: () -> untyped
-      def load_all_objects: () -> untyped
-      def output: (untyped) -> untyped
-      def self.set_page_dimensions: (untyped, untyped, untyped) -> untyped
-      def self.process_image_xobject: (untyped, untyped, untyped, untyped) -> untyped
+      BitsPerComponent: Integer
+      ColorSpace: Symbol
+      Height: Integer | Float
+      Width: Integer | Float
+
+      def to_io_stream: (?Hash[String | Symbol, untyped]) -> StringIO
+      def self.stream_has_text?: (StringIO) -> bool
+      def self.source_text?: (StringIO) -> bool
+      def self.create_xobject: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO) -> Origami::Graphics::ImageXObject
+      def self.set_xobject_properties: (Origami::Graphics::ImageXObject, Hash[String | Symbol, untyped]) -> void
+      def self.determine_filter: (Hash[String | Symbol, untyped]) -> (:DCTDecode | :FlateDecode | :LZWDecode)
+      def self.determine_colorspace: (Hash[String | Symbol, untyped]) -> (:DeviceCMYK | :DeviceGray | :DeviceRGB)
+      def self.add_content_to_page: (Origami::Page, String, Integer, Integer) -> void
+      def self.set_page_dimensions: (Origami::Page, Integer | Float, Integer | Float) -> void
+      def self.process_image_xobject: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO, Integer, Integer | Float, Integer | Float) -> Origami::Graphics::ImageXObject
     end
   end
 end

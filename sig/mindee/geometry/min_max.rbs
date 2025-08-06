@@ -2,9 +2,10 @@
 module Mindee
   module Geometry
     class MinMax
-      def min: -> untyped
-      def max: -> untyped
-      def initialize: (untyped, untyped) -> untyped
+      attr_reader max: Float
+      attr_reader min: Float
+
+      def initialize: (Float, Float) -> void
     end
   end
 end

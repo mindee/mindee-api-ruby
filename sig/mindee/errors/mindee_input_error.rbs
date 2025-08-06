@@ -6,8 +6,9 @@ module Mindee
     class MindeeSourceError < MindeeInputError
     end
     class MindeeMimeTypeError < MindeeSourceError
-      def invalid_mimetype: -> untyped
-      def initialize: (untyped) -> untyped
+      attr_reader invalid_mimetype: String
+
+      def initialize: (String) -> void
     end
     class MindeeImageError < MindeeInputError
     end
