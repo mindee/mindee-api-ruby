@@ -17,7 +17,7 @@ module Mindee
         pages_count = current_pdf.pages.size
         return current_pdf.to_io_stream if options.on_min_pages.to_i > pages_count
 
-        all_pages = (0..pages_count - 1).to_a
+        all_pages = (0..(pages_count - 1)).to_a
 
         if options.operation == :KEEP_ONLY
           pages_to_remove = indexes_from_keep(options.page_indexes, all_pages)
