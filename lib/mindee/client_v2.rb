@@ -17,7 +17,7 @@ module Mindee
 
     # @param api_key [String]
     def initialize(api_key: '')
-      @mindee_api = Mindee::HTTP::MindeeApiV2.new(api_key)
+      @mindee_api = Mindee::HTTP::MindeeApiV2.new(api_key: api_key)
     end
 
     # Retrieves an inference.
@@ -104,9 +104,9 @@ module Mindee
     # @param params [Hash, InferenceParameters] Params.
     # @return [InferenceParameters]
     def normalize_inference_parameters(params)
-      return params if params.is_a?(Mindee::Input::InferenceParameters)
+      return params if params.is_a?(Input::InferenceParameters)
 
-      InferenceParameters.new(params: params)
+      Input::InferenceParameters.new(params: params)
     end
   end
 end

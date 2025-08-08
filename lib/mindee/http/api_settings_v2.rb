@@ -31,7 +31,7 @@ module Mindee
       # @return [String]
       attr_reader :user_agent
 
-      def initialize(api_key: '')
+      def initialize(api_key: nil)
         @request_timeout = ENV.fetch(MINDEE_V2_REQUEST_TIMEOUT_ENV_NAME, MINDEE_V2_TIMEOUT_DEFAULT).to_i
         if api_key.nil? && !ENV.fetch(MINDEE_V2_API_KEY_ENV_NAME, MINDEE_V2_API_KEY_DEFAULT).to_s.empty?
           logger.debug('API key set from environment')
@@ -50,7 +50,7 @@ module Mindee
       # @return
       # @raise [Errors::MindeeAPIError] Raises if the api key is empty or nil.
       def check_api_key
-        return unless @api_key.nil? || @api_key.empty?
+        return unless @api_key.nil? || @api_key.to_s.empty?
 
         raise Errors::MindeeAPIError,
               "Missing API key. check your Client Configuration.\nYou can set this using the " \

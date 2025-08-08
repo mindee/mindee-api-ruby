@@ -15,7 +15,7 @@ module Mindee
         def to_table_line: -> String
       end
       class Taxes < Array[TaxField]
-        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def initialize: (Array[untyped], Integer?) -> void
         def line_separator: (String) -> String
         def to_s: -> String
       end

@@ -28,8 +28,10 @@ module Mindee
               'True'
             when FalseClass
               'False'
-            when Numeric
-              format_numeric_value(@value)
+            when Integer, Float
+              # NOTE: explicitly typing because steep is very, very dumb
+              num = @value # @type var num: Integer | Float
+              format_numeric_value(num)
             else
               @value.to_s
             end

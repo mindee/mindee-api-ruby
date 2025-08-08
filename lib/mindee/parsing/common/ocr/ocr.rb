@@ -48,9 +48,7 @@ module Mindee
           # Sort the words on the line from left to right.
           # @return [OCRLine]
           def sort_on_x
-            from_array = sort do |word1, word2|
-              Geometry.get_min_max_x(word1.polygon).min <=> Geometry.get_min_max_x(word2.polygon).min
-            end
+            from_array = sort_by { |word| Geometry.get_min_max_x(word.polygon).min }
             OCRLine.new(nil, from_array)
           end
 

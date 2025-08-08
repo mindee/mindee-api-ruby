@@ -66,6 +66,9 @@ module Mindee
 
           ResponseValidation.clean_request!(response)
         end
+
+        raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+
         error = ErrorHandler.handle_error(@url_name, response)
         raise error
       end
@@ -84,8 +87,9 @@ module Mindee
           ResponseValidation.clean_request!(response)
         end
 
-        error = ErrorHandler.handle_error(@url_name, response)
-        raise error
+        raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+
+        raise ErrorHandler.handle_error(@url_name, response)
       end
 
       # Calls the parsed async doc.
@@ -188,6 +192,8 @@ module Mindee
         response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
           http.request(req)
         end
+
+        raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
 
         if response.code.to_i > 299 && response.code.to_i < 400
           req = Net::HTTP::Get.new(response['location'], headers)

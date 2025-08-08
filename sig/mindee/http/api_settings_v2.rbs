@@ -10,12 +10,13 @@ module Mindee
       MINDEE_V2_TIMEOUT_DEFAULT: Integer
       USER_AGENT: String
 
+      def logger: () -> Logger
       attr_reader api_key: String?
       attr_reader base_url: String
       attr_reader request_timeout: Integer
       attr_reader user_agent: String
 
-      def initialize: (?api_key: String) -> void
+      def initialize: (?api_key: String?) -> void
       def check_api_key: -> void
     end
   end

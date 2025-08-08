@@ -65,7 +65,7 @@ module Mindee
                       end
 
         end
-        error_obj.nil? ? {} : error_obj
+        error_obj
       end
 
       # Creates an appropriate HTTP error exception, based on retrieved http error code
@@ -81,18 +81,18 @@ module Mindee
         error_obj = create_error_obj(parsed_hash)
         case code
         when 400..499
-          Errors::MindeeHTTPClientError.new(error_obj, url, code)
+          Errors::MindeeHTTPClientError.new(error_obj || {}, url, code)
         when 500..599
-          Errors::MindeeHTTPServerError.new(error_obj, url, code)
+          Errors::MindeeHTTPServerError.new(error_obj || {}, url, code)
         else
-          Errors::MindeeHTTPError.new(error_obj, url, code)
+          Errors::MindeeHTTPError.new(error_obj || {}, url, code)
         end
       end
 
       # Creates an appropriate HTTP error exception for a V2 API response, based on retrieved http error code.
       # @param hashed_response [Hash] dictionary response retrieved by the server
       def generate_v2_error(hashed_response)
-        code = hashed_response.code.to_i
+        code = hashed_response['code'].to_i
         if hashed_response.key?('status')
           Errors::MindeeHTTPErrorV2.new(hashed_response)
         elsif code < 200 || code > 399

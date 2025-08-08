@@ -4,16 +4,23 @@ module Mindee
     module PDFTools
       BitsPerComponent: Integer
       ColorSpace: Symbol
+      Contents: Origami::Stream
       Height: Integer | Float
       Width: Integer | Float
 
-      def to_io_stream: (?Hash[String | Symbol, untyped]) -> StringIO
-      def self.stream_has_text?: (StringIO) -> bool
-      def self.source_text?: (StringIO) -> bool
-      def self.create_xobject: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO) -> Origami::Graphics::ImageXObject
-      def self.set_xobject_properties: (Origami::Graphics::ImageXObject, Hash[String | Symbol, untyped]) -> void
-      def self.determine_filter: (Hash[String | Symbol, untyped]) -> (:DCTDecode | :FlateDecode | :LZWDecode)
-      def self.determine_colorspace: (Hash[String | Symbol, untyped]) -> (:DeviceCMYK | :DeviceGray | :DeviceRGB)
+      def to_io_stream: (?Hash[Symbol, untyped]) -> StringIO
+      def intents_as_pdfa1: () -> void
+      def delinearize!: () -> void
+      def linearized?: () -> bool
+      def compile: (Hash[String | Symbol, untyped]) -> StringIO
+      def output: (Hash[String | Symbol, untyped]) -> String
+      def load_all_objects: () -> void
+      def self.stream_has_text?: (Origami::Stream) -> bool
+      def self.source_text?: (StringIO | File) -> bool
+      def self.create_xobject: (singleton(MiniMagick::Image) | MiniMagick::Image) -> Origami::Graphics::ImageXObject
+      def self.set_xobject_properties: (Origami::Graphics::ImageXObject, MiniMagick::Image | singleton(MiniMagick::Image)) -> void
+      def self.determine_filter: (singleton(MiniMagick::Image) | MiniMagick::Image) -> (:DCTDecode | :FlateDecode | :LZWDecode)
+      def self.determine_colorspace: (singleton(MiniMagick::Image) | MiniMagick::Image) -> (:DeviceCMYK | :DeviceGray | :DeviceRGB)
       def self.add_content_to_page: (Origami::Page, String, Integer, Integer) -> void
       def self.set_page_dimensions: (Origami::Page, Integer | Float, Integer | Float) -> void
       def self.process_image_xobject: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO, Integer, Integer | Float, Integer | Float) -> Origami::Graphics::ImageXObject

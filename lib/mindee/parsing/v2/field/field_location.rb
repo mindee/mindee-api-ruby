@@ -20,7 +20,7 @@ module Mindee
             @polygon = polygon_data ? Mindee::Geometry::Polygon.new(polygon_data) : nil
 
             page_id = server_response['page'] || server_response[:page]
-            @page = page_id.is_a?(Numeric) ? page_id.to_i : nil
+            @page = page_id.is_a?(Float) || page_id.is_a?(Integer) ? page_id.to_i : nil
           end
 
           # String representation of the polygon (empty string when none).

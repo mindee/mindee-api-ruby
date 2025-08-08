@@ -32,11 +32,11 @@ module Mindee
           # String representation suitable for list display.
           # @return [String] String representation without leading spaces.
           def to_s_from_list
+            return '' if @fields.nil?
             return '' unless @fields && !@fields.empty?
 
             field_str = @fields.to_s(2)
-            # Remove the first 4 characters
-            field_str.length > 4 ? field_str[4..] : ''
+            field_str.length > 4 ? (field_str[4..] || '') : ''
           end
 
           # String representation of a single object field

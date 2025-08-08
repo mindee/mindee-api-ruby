@@ -13,7 +13,7 @@ module Mindee
       attr_reader :settings
 
       # @param api_key [String, nil]
-      def initialize(api_key = nil)
+      def initialize(api_key: nil)
         @settings = ApiSettingsV2.new(api_key: api_key)
       end
 
@@ -61,7 +61,7 @@ module Mindee
       # Converts an HTTP response to a parsed response object.
       #
       # @param response [Net::HTTPResponse, nil]
-      # @return [Hash<String | Symbol, untyped>]
+      # @return [Hash]
       # @raise Throws if the server returned an error.
       def process_response(response)
         if !response.nil? && response.respond_to?(:body) && ResponseValidation.valid_v2_response?(response)
@@ -74,7 +74,8 @@ module Mindee
                         else
                           response.body
                         end
-        raise ErrorHandler.generate_v2_error(response_body)
+        error = ErrorHandler.generate_v2_error(response_body.to_hash) # @type error: Errors::MindeeHTTPErrorV2
+        raise error
       end
 
       # Polls a queue for either a result or a job.

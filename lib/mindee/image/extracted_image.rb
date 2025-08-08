@@ -69,7 +69,7 @@ module Mindee
       # @return [FileInputSource] A BufferInput source.
       def as_source
         @buffer.rewind
-        Mindee::Input::Source::BytesInputSource.new(@buffer.read, @internal_file_name)
+        Mindee::Input::Source::BytesInputSource.new(@buffer.read || '', @internal_file_name)
       end
     end
   end

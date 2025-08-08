@@ -7,21 +7,17 @@ module Mindee
         attr_reader file_mimetype: String
         attr_reader filename: String
         attr_reader io_stream: StringIO|File
-
-        def filename: -> String
-        def file_mimetype: -> String
-        def io_stream: -> StringIO
         def initialize: (StringIO | File, String, ?repair_pdf: bool) -> void
         def logger: () -> Logger
 
 
-        def rescue_broken_pdf: (StringIO|File) -> StringIO
+        def rescue_broken_pdf: (StringIO|File) -> (StringIO | File)
         def pdf?: -> bool
         def apply_page_options: (PageOptions) -> StringIO?
         def process_pdf: (PageOptions) -> StringIO?
         def read_contents: (?close: bool) -> [String?, Hash[:filename, String]]
         def count_pages: -> Integer
-        def write_to_file: (String) -> void
+        def write_to_file: (String?) -> void
         def compress!: (?quality: Integer, ?max_width: Integer?, ?max_height: Integer?, ?force_source_text: bool, ?disable_source_text: bool) -> Integer
         def source_text?: -> bool?
       end

@@ -4,7 +4,7 @@ module Mindee
     class MindeeApiV2
       attr_reader settings: ApiSettingsV2
 
-      def initialize: (String?) -> void
+      def initialize: (?api_key: String?) -> void
       def req_post_inference_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::InferenceParameters) -> Parsing::V2::JobResponse
       def req_get_inference: (String) -> Parsing::V2::InferenceResponse
       def req_get_job: (String) -> Parsing::V2::JobResponse

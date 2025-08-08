@@ -52,7 +52,7 @@ module Mindee
         def as_input_source
           raise Errors::MindeePDFError, 'Bytes object is nil.' if @pdf_bytes.nil?
 
-          Mindee::Input::Source::BytesInputSource.new(@pdf_bytes.read, @filename)
+          Mindee::Input::Source::BytesInputSource.new(@pdf_bytes.read || '', @filename)
         end
       end
     end

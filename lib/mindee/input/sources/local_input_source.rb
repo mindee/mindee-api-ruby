@@ -27,7 +27,7 @@ module Mindee
         attr_reader :filename
         # @return [String]
         attr_reader :file_mimetype
-        # @return [StringIO]
+        # @return [StringIO | File]
         attr_reader :io_stream
 
         # @param io_stream [StringIO, File]
@@ -113,14 +113,15 @@ module Mindee
         # Write the file to a given path. Uses the initial file name by default.
         # @param path [String] Path to write the file to.
         def write_to_file(path)
-          full_path = if File.directory?(path) || path.end_with?('/')
-                        File.join(path, @filename)
-                      else
-                        path
-                      end
+          t_path = if File.directory?(path || '') || path.to_s.end_with?('/')
+                     File.join(path || '', @filename)
+                   else
+                     path
+                   end
+          full_path = File.expand_path(t_path || '')
           FileUtils.mkdir_p(File.dirname(full_path))
           @io_stream.rewind
-          File.binwrite(full_path, @io_stream.read)
+          File.binwrite(full_path, @io_stream.read || '')
           logger.debug("Wrote file successfully to #{full_path}")
           @io_stream.rewind
         end

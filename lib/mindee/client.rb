@@ -307,7 +307,7 @@ module Mindee
         process_pdf_if_required(input_source, opts)
       end
 
-      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
+      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key.to_s)
       logger.debug("Sending document to workflow '#{workflow_id}'")
 
       prediction, raw_http = workflow_endpoint.execute_workflow(
@@ -436,11 +436,11 @@ module Mindee
       account_name = fix_account_name(account_name)
       version = fix_version(product_class, version)
 
-      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
+      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key.to_s)
     end
 
     def fix_endpoint_name(product_class, endpoint_name)
-      endpoint_name.nil? || endpoint_name.empty? ? product_class.endpoint_name : endpoint_name
+      endpoint_name.nil? || endpoint_name.empty? ? product_class.endpoint_name.to_s : endpoint_name.to_s
     end
 
     def fix_account_name(account_name)
@@ -455,11 +455,11 @@ module Mindee
     def fix_version(product_class, version)
       return version unless version.nil? || version.empty?
 
-      if product_class.endpoint_version.nil? || product_class.endpoint_version.empty?
+      if product_class.endpoint_version.nil? || product_class.endpoint_version.to_s.empty?
         logger.debug('No version provided for a custom build, will attempt to poll version 1 by default.')
         return '1'
       end
-      product_class.endpoint_version
+      product_class.endpoint_version || ''
     end
 
     # If needed, converts the parsing options provided as a hash into a proper ParseOptions object.

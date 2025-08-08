@@ -31,7 +31,7 @@ module Mindee
   end
 
   class Client
-    @api_key: string | nil
+    @api_key: String?
 
     def initialize: (?api_key: String) -> void
     def logger: () -> Logging

@@ -3,6 +3,8 @@ module Mindee
     @logger: Logger
 
     def self.logger: -> Logger
+    def debug: (?untyped?) -> void
+    def info: (?untyped?) -> void
 
     def self.logger=: (Logger) -> Logger
   end

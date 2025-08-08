@@ -13,7 +13,10 @@ module Mindee
 
       # @param http_error [Hash, Parsing::V2::ErrorResponse]
       def initialize(http_error)
-        http_error = http_error.as_hash if http_error.is_a?(Parsing::V2::ErrorResponse)
+        if http_error.is_a?(Parsing::V2::ErrorResponse)
+          http_error = { 'detail' => http_error.detail,
+                         'status' => http_error.status }
+        end
         @status = http_error['status']
         @detail = http_error['detail']
         super("HTTP error: #{@status} - #{@detail}")

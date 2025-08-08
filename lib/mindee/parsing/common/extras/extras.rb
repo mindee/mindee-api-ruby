@@ -11,7 +11,7 @@ module Mindee
         class Extras
           # @return [CropperExtra, nil]
           attr_reader :cropper
-          # @return [Mindee::Parsing::Common::Extras::FullTextOCRExtra, nil]
+          # @return [Mindee::Parsing::Common::Extras::FullTextOCRExtra]
           attr_reader :full_text_ocr
           # @return [RAGExtra, nil]
           attr_reader :rag
@@ -26,7 +26,7 @@ module Mindee
             @rag = Mindee::Parsing::Common::Extras::RAGExtra.new(raw_prediction['rag']) if raw_prediction['rag']
 
             raw_prediction.each do |key, value|
-              instance_variable_set("@#{key}", value) unless ['cropper', 'full_text_ocr', 'rag'].include?(key)
+              instance_variable_set("@#{key}", value) unless ['cropper', 'full_text_ocr', 'rag'].include?(key.to_s)
             end
           end
 

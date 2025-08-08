@@ -6,7 +6,7 @@ module Mindee
         attr_reader page_id: Integer
         attr_reader values: Array[UniversalObjectField | Standard::StringField]
 
-        def initialize: (Array[Hash[Symbol | String, untyped]], Integer?) -> void
+        def initialize: (Array[Hash[Symbol | String, untyped]], ?Integer?) -> void
         def contents_list: -> Array[String]
         def contents_string: (?String) -> String
         def to_s: -> String

@@ -8,6 +8,7 @@ module Mindee
       module Field
         # A field containing a list of other fields.
         class ListField < BaseField
+          include Enumerable
           # @return [Array<ListField | ObjectField | SimpleField>] Items contained in the list.
           attr_reader :items
 
@@ -18,7 +19,7 @@ module Mindee
             super
 
             unless server_response.key?('items') && server_response['items'].is_a?(Array)
-              raise MindeeError,
+              raise Errors::MindeeError,
                     "Expected \"items\" to be an array in #{server_response.to_json}."
             end
 
@@ -65,15 +66,6 @@ module Mindee
             @items.length
           end
 
-          # Iterate over the items in the list.
-          # @yield [BaseField] Each item in the list.
-          # @return [Array, Enumerator] If no block is given.
-          def each(&block)
-            return @items.to_enum unless block_given?
-
-            @items.each(&block)
-          end
-
           # Get an item by index.
           # @param index [Integer] The index of the item to retrieve.
           # @return [BaseField, nil] The item at the given index.
@@ -81,8 +73,12 @@ module Mindee
             @items[index]
           end
 
-          # Array-like access methods
-          include Enumerable
+          def each(&block)
+            return to_enum(:each) unless block_given?
+
+            @items.each(&block)
+            self
+          end
         end
       end
     end

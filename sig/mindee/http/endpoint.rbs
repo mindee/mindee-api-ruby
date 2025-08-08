@@ -9,18 +9,12 @@ module Mindee
     TIMEOUT_DEFAULT: Integer
     USER_AGENT: String
     class Endpoint
-      attr_reader api_key: String | nil
-
+      attr_reader api_key: String
       attr_reader base_url: String
       attr_reader request_timeout: Integer
-
       attr_reader url_root: String
 
       def logger: () -> Logger
-      def api_key: -> String?
-      def request_timeout: -> Integer
-      def url_root: -> String
-      def base_url: -> String
       def initialize: (String, String, String | nil, ?api_key: String) -> String
       def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
       def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Net::HTTPResponse, Hash[Symbol, untyped]]

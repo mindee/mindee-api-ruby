@@ -50,7 +50,7 @@ module Mindee
               return SimpleField.new(raw_prediction, indent_level)
             end
 
-            raise MindeeError, "Unrecognized field format in #{raw_prediction.to_json}"
+            raise Errors::MindeeError, "Unrecognized field format in #{raw_prediction.to_json}"
           end
         end
       end

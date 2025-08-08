@@ -4,15 +4,17 @@ module Mindee
     module V2
       module Field
         class ListField < BaseField
-          include Enumerable[untyped]
-          attr_reader items: Array[ListField | ObjectField | SimpleField | nil]
+          include Enumerable[BaseField]
+
+          attr_reader items: Array[BaseField]
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
           def to_s: -> String
           def empty?: -> bool
           def size: -> Integer
           def length: -> Integer
-          def each: { (untyped) -> Object } -> (Array[ListField | ObjectField | SimpleField | nil] | Enumerator[ListField | ObjectField | SimpleField | nil, Array[ListField | ObjectField | SimpleField | nil]])
-          def []: (Integer) -> (ListField | ObjectField | SimpleField | nil)
+          # NOTE: Steep is incapable of handling typing of `each` when multiple types are used.
+          def each: () { (untyped) -> untyped } -> untyped
+          def []: (Integer) -> (BaseField)
         end
       end
     end

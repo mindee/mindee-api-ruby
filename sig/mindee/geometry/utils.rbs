@@ -2,7 +2,7 @@
 module Mindee
   module Geometry
     def self.quadrilateral_from_prediction: (Array[Array[Float]]) -> Quadrilateral
-    def self.polygon_from_prediction: (Hash[String | Symbol, untyped]) -> Polygon
+    def self.polygon_from_prediction: (Array[Array[Float]]) -> Polygon
     def self.get_bbox: (Array[Point]) -> [Float, Float, Float, Float]
     def self.get_bounding_box: (Array[Point]) -> Quadrilateral
     def self.get_centroid: (Array[Point]) -> Point

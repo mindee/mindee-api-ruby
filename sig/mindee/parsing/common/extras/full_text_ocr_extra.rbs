@@ -6,8 +6,9 @@ module Mindee
         class FullTextOCRExtra
           def contents: -> String?
           def language: -> String?
-          def initialize: (untyped) -> nil
+          def initialize: (Hash[String | Symbol, untyped]) -> nil
           def to_s: -> String
+          def <<: (?untyped?) -> untyped
         end
       end
     end

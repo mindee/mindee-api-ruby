@@ -7,7 +7,7 @@ module Mindee
         def value: -> String?
         def raw: -> String?
         def is_computed: -> bool
-        def initialize: (Hash[String | Symbol, untyped], Integer?, ?reconstructed: bool) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
       end
     end
   end

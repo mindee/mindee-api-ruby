@@ -18,7 +18,7 @@ module Mindee
             @indent_level = indent_level
 
             server_response.each do |key, value|
-              self[key] = BaseField.create_field(value, 1)
+              self[key.to_s] = BaseField.create_field(value, 1)
             end
           end
 
@@ -51,10 +51,9 @@ module Mindee
           # rubocop:disable Metrics/CyclomaticComplexity
           # rubocop:disable Metrics/PerceivedComplexity
           # Convert the fields to a string representation.
-          # @param original_indent [Integer, nil] Optional indentation level.
+          # @param indent [Integer, nil] Optional indentation level.
           # @return [String] String representation of all fields.
-          def to_s(original_indent = nil)
-            indent = indent.nil? ? 0 : original_indent
+          def to_s(indent = 0)
             return '' if empty?
 
             indent ||= @indent_level
@@ -64,18 +63,20 @@ module Mindee
             each do |field_key, field_value|
               line = "#{padding}:#{field_key}:"
 
-              case field_value.class.name.split('::').last
+              case (field_value.class.name || '').split('::').last
               when 'ListField'
                 # Check if ListField has items and they're not empty
-                if defined?(field_value.items) && field_value.items && !field_value.items.empty?
-                  line += field_value.to_s
+                list_f = field_value # @type var list_f: ListField
+                if defined?(list_f.items) && list_f.items && !list_f.items.empty?
+                  line += list_f.to_s
                 end
               when 'ObjectField'
                 line += field_value.to_s
               when 'SimpleField'
                 # Check if SimpleField has a non-empty value
-                if defined?(field_value.value) && field_value.value && !field_value.value.to_s.empty?
-                  line += " #{field_value.value}"
+                simple_f = field_value # @type var simple_f: SimpleField
+                if defined?(simple_f.value) && simple_f.value && !simple_f.value.to_s.empty?
+                  line += " #{simple_f.value}"
                 end
               else
                 logger.debug("Unknown value was passed to the field creator: #{field_key} : #{field_value}")

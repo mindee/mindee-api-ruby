@@ -50,7 +50,7 @@ module Mindee
         def parse_date(str)
           return nil if str.to_s.empty?
 
-          DateTime.iso8601(str)
+          DateTime.iso8601(str || '')
         rescue ArgumentError
           nil
         end

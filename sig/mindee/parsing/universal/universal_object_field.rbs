@@ -3,14 +3,21 @@ module Mindee
   module Parsing
     module Universal
       class UniversalObjectField
-        attr_reader all_values: Hash[String | Symbol, Hash[String | Symbol, untyped] | Integer | String | Float | bool | nil]
+        attr_reader all_values: Hash[String | Symbol, String | Standard::PositionField | nil]
         attr_reader confidence: Float
         attr_reader page_id: Integer
         attr_reader raw_value: String
 
         def initialize: (Hash[Symbol | String, untyped], ?Integer?) -> void
         def str_level: (?Integer) -> String
-        def method_missing: (Symbol, *Array[untyped]) -> (Hash[String | Symbol, untyped] | Integer | String | Float | bool | nil)
+        def method_missing: (Symbol, *untyped, untyped)
+          -> (String
+            | Integer
+            | Float
+            | bool
+            | Standard::PositionField
+            | Hash[String | Symbol, untyped]
+            | nil)
         def respond_to_missing?: (Symbol, ?bool) -> bool
         def to_s: -> String
         def handle_position_field: (String | Symbol, Hash[String | Symbol, untyped] | Integer | String | Float | bool | nil, Integer?) -> void

@@ -6,7 +6,7 @@ module Mindee
         class CropperExtra
           attr_reader croppings: Array[Standard::PositionField]
 
-          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], ?Integer?) -> void
           def to_s: -> String
         end
       end

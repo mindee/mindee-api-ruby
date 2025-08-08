@@ -5,6 +5,7 @@ module Mindee
   class ClientV2
     attr_reader mindee_api: HTTP::MindeeApiV2
 
+    def logger: () -> Logger
     def initialize: (?api_key: String) -> void
     def get_inference: (String) -> Parsing::V2::InferenceResponse
     def get_job: (String) -> Parsing::V2::JobResponse

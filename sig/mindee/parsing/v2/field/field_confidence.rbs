@@ -10,7 +10,7 @@ module Mindee
           MEDIUM: String
           LOW: String
           VALID_VALUES: Array[String]
-          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def initialize: (String) -> void
           def self.from_string: (String) -> FieldConfidence
           def certain?: -> bool
           def high?: -> bool

@@ -7,7 +7,7 @@ module Mindee
           attr_reader page: Integer?
           attr_reader polygon: Geometry::Polygon?
 
-          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String
         end
       end

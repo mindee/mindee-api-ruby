@@ -8,7 +8,7 @@ module Mindee
       def buffer: -> StringIO
       def internal_file_name: -> String
       def initialize: (Input::Source::LocalInputSource, Integer, Integer) -> Integer
-      def write_to_file: (String, ?String?) -> nil
+      def write_to_file: (String, ?String?) -> void
       def as_source: -> Input::Source::BytesInputSource
     end
   end

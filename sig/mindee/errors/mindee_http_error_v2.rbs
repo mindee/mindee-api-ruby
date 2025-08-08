@@ -6,7 +6,7 @@ module Mindee
 
       attr_reader detail: String
       attr_reader status: Integer
-      def initialize: (Hash[String | Symbol, untyped] | Parsing::V2::ErrorResponse) -> void
+      def initialize: (Hash[String, untyped] | Parsing::V2::ErrorResponse) -> void
     end
   end
 end

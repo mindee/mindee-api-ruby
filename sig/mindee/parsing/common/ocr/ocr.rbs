@@ -24,7 +24,7 @@ module Mindee
           def initialize: (Hash[String | Symbol, untyped]) -> void
           def all_lines: -> Array[OCRLine]
           def to_s: -> String
-          def parse_one: (Array[OCRWord], OCRWord, Array[Integer], Array[OCRLine]) -> Array[OCRLine]?
+          def parse_one: (Array[OCRWord], OCRWord?, Array[Integer], Array[OCRLine]) -> Array[OCRLine]?
           def to_lines: -> Array[OCRLine]
           def words_on_same_line?: (OCRWord, OCRWord) -> bool
         end

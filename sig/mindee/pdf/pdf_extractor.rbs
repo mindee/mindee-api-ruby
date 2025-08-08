@@ -10,9 +10,7 @@ module Mindee
         def page_count: -> Integer
         def cut_pages: (Array[Integer]) -> StringIO
         def extract_sub_documents: (Array[Array[Integer]]) -> Array[ExtractedPDF]
-        def extract_invoices: (Array[Array[Integer]], ?strict: bool) -> Array[ExtractedPDF]
-        def source_pdf: -> StringIO
-        def filename: -> String
+        def extract_invoices: (Array[Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup] | Array [Array[Integer]], ?strict: bool) -> Array[ExtractedPDF]
       end
     end
   end

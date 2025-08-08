@@ -5,7 +5,7 @@ module Mindee
       module Extras
         class Extras
           attr_reader cropper: CropperExtra?
-          attr_reader full_text_ocr: FullTextOCRExtra?
+          attr_reader full_text_ocr: FullTextOCRExtra
           attr_reader rag: RAGExtra?
 
           def initialize: (Hash[String | Symbol, untyped]) -> void

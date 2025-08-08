@@ -12,7 +12,7 @@ module Net
 
     # Stub for the HTTP POST request class.
     class Post
-      def initialize: (untyped, Hash[String, String]?) -> void
+      def initialize: (untyped, Hash[String, String?]?) -> void
       def set_form: (untyped, String?) -> void
       def new: (untyped, untyped) -> void
       def []=: (?untyped, ?untyped) -> bool
@@ -20,7 +20,7 @@ module Net
 
     # Stub for the HTTP GET request class.
     class Get
-      def initialize: (untyped, ?Hash[String, String]?) -> void
+      def initialize: (untyped, ?Hash[String, String?]?) -> void
       def new: (untyped, untyped) -> void
       def basic_auth: (untyped, untyped) -> void
       def []=: (?untyped, ?untyped) -> bool
@@ -29,6 +29,7 @@ module Net
 
   class HTTPResponse
     def self.body: -> untyped
+    def body: -> untyped
     def []: (untyped) -> untyped
     def key?: (untyped) -> bool
     def code: -> String
