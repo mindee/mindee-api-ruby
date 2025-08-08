@@ -9,11 +9,16 @@ module Mindee
           # @return [String] The confidence level value.
           attr_reader :value
 
+          # Absolute certainty about the field's extraction.
           CERTAIN = 'Certain'
+          # High certainty about the field's extraction.
           HIGH = 'High'
+          # Medium certainty about the field's extraction.
           MEDIUM = 'Medium'
+          # Low certainty about the field's extraction.
           LOW = 'Low'
 
+          # List of valid values, as frozen strings.
           VALID_VALUES = [CERTAIN, HIGH, MEDIUM, LOW].freeze
 
           # @param value [String] The confidence level value.

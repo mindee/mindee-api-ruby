@@ -30,11 +30,11 @@ module Mindee
 
       # Extracts multiple images from a given local input source.
       #
-      # @param [Mindee::Input::Source::LocalInputSource] input_source
+      # @param [Input::Source::LocalInputSource] input_source
       # @param [Integer] page_id ID of the Page to extract from.
-      # @param [Array<Array<Mindee::Geometry::Point>>, Array<Mindee::Geometry::Quadrilateral>] List of coordinates
+      # @param [Array<Array<Geometry::Point>>, Array<Geometry::Quadrilateral>] polygons List of coordinates.
       # to extract.
-      # @return [Array<Mindee::Image::ExtractedImage>] Extracted Images.
+      # @return [Array<Image::ExtractedImage>] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
         new_stream = load_input_source_pdf_page_as_stringio(input_source, page_id)
         new_stream.seek(0)
@@ -44,11 +44,11 @@ module Mindee
 
       # Extracts images from their positions on a file (as polygons).
       #
-      # @param [Mindee::Input::Source::LocalInputSource] input_source Local input source.
+      # @param [Input::Source::LocalInputSource] input_source Local input source.
       # @param [StringIO] pdf_stream Buffer of the PDF.
       # @param [Integer] page_id Page ID.
-      # @param [Array<Mindee::Geometry::Point, Mindee::Geometry::Polygon, Mindee::Geometry::Quadrilateral>] polygons
-      # @return [Array<Mindee::Image::ExtractedImage>] Extracted Images.
+      # @param [Array<Geometry::Point, Geometry::Polygon, Geometry::Quadrilateral>] polygons
+      # @return [Array<Image::ExtractedImage>] Extracted Images.
       def self.extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
         extracted_elements = []
 
@@ -95,7 +95,7 @@ module Mindee
       def self.create_extracted_image(buffer, file_name, page_id, element_id)
         buffer.rewind
         ExtractedImage.new(
-          Mindee::Input::Source::BytesInputSource.new(buffer.read.to_s, file_name),
+          Input::Source::BytesInputSource.new(buffer.read.to_s, file_name),
           page_id,
           element_id
         )
@@ -109,7 +109,7 @@ module Mindee
       def self.load_input_source_pdf_page_as_stringio(input_file, page_id)
         input_file.io_stream.rewind
         if input_file.pdf?
-          Mindee::PDF::PDFProcessor.get_page(Origami::PDF.read(input_file.io_stream), page_id)
+          PDF::PDFProcessor.get_page(Origami::PDF.read(input_file.io_stream), page_id)
         else
           input_file.io_stream
         end

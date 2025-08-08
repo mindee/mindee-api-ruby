@@ -3,6 +3,7 @@
 module Mindee
   module Parsing
     module V2
+      # Field submodule for V2.
       module Field
         # Base class for V2 fields.
         class BaseField

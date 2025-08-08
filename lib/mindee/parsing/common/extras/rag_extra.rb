@@ -14,6 +14,8 @@ module Mindee
             @matching_document_id = raw_prediction['matching_document_id'] if raw_prediction['matching_document_id']
           end
 
+          # String representation.
+          # @return [String]
           def to_s
             @matching_document_id || ''
           end

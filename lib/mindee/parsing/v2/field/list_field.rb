@@ -6,7 +6,10 @@ module Mindee
   module Parsing
     module V2
       module Field
-        # A field containing a list of other fields.
+        # Represents a field that contains a list of items.
+        # The list can include various field types such as ListField, ObjectField,
+        # or SimpleField. Implements the Enumerable module for traversal and
+        # manipulation.
         class ListField < BaseField
           include Enumerable
           # @return [Array<ListField | ObjectField | SimpleField>] Items contained in the list.
@@ -73,6 +76,8 @@ module Mindee
             @items[index]
           end
 
+          # Iterator for Enumerator inheritance.
+          # Untyped due to incomplete support in steep.
           def each(&block)
             return to_enum(:each) unless block_given?
 
