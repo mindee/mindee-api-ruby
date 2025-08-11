@@ -5,7 +5,7 @@ module Mindee
     module FR
       module HealthCard
         class HealthCardV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def given_names: -> (Array[Parsing::Standard::StringField])
           def issuance_date: -> (Parsing::Standard::DateField)
           def social_security: -> (Parsing::Standard::StringField)

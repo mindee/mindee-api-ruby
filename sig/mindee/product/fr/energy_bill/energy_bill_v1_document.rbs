@@ -5,7 +5,7 @@ module Mindee
     module FR
       module EnergyBill
         class EnergyBillV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def contract_id: -> (Parsing::Standard::StringField)
           def delivery_point: -> (Parsing::Standard::StringField)
           def due_date: -> (Parsing::Standard::DateField)

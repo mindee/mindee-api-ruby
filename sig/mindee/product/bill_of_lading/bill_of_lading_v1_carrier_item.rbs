@@ -2,15 +2,15 @@ module Mindee
   module Product
     module BillOfLading
       class BillOfLadingV1CarrierItem < Parsing::Standard::FeatureField
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def description: -> String
         def gross_weight: -> Float
         def measurement: -> Float
         def measurement_unit: -> String
         def quantity: -> Float
         def weight_unit: -> String
-        def printable_values: -> Hash[Symbol | String, untyped]
-        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def printable_values: -> Hash[String | Symbol, untyped]
+        def table_printable_values: -> Hash[String | Symbol, untyped]
         def to_table_line: -> String
         def to_s: -> String
       end

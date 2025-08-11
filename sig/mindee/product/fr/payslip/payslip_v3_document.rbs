@@ -5,7 +5,7 @@ module Mindee
     module FR
       module Payslip
         class PayslipV3Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def bank_account_details: -> (Product::FR::Payslip::PayslipV3BankAccountDetail)
           def employee: -> (Product::FR::Payslip::PayslipV3Employee)
           def employer: -> (Product::FR::Payslip::PayslipV3Employer)

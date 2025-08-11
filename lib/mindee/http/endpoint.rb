@@ -114,7 +114,7 @@ module Mindee
       def predict_req_post(input_source, opts)
         uri = URI("#{@url_root}/predict")
 
-        params = {} # : Hash[Symbol | String, untyped]
+        params = {} # : Hash[String | Symbol, untyped]
         params[:cropper] = 'true' if opts.cropper
         params[:full_text_ocr] = 'true' if opts.full_text
         uri.query = URI.encode_www_form(params)
@@ -150,7 +150,7 @@ module Mindee
                 URI("#{@url_root}/predict_async")
               end
 
-        params = {} # : Hash[Symbol | String, untyped]
+        params = {} # : Hash[String | Symbol, untyped]
         params[:cropper] = 'true' if opts.cropper
         params[:full_text_ocr] = 'true' if opts.full_text
         params[:rag] = 'true' if opts.rag

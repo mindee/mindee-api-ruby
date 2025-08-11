@@ -5,7 +5,7 @@ module Mindee
     module US
       module HealthcareCard
         class HealthcareCardV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def company_name: -> (Parsing::Standard::StringField)
           def copays: -> (Product::US::HealthcareCard::HealthcareCardV1Copays)
           def dependents: -> (Array[Parsing::Standard::StringField])

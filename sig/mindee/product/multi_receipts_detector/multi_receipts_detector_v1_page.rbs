@@ -4,10 +4,10 @@ module Mindee
   module Product
     module MultiReceiptsDetector
       class MultiReceiptsDetectorV1Page < Parsing::Common::Page
-        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
       class MultiReceiptsDetectorV1PagePrediction < MultiReceiptsDetectorV1Document
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def to_s: -> String
       end
     end

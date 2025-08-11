@@ -5,10 +5,10 @@ module Mindee
     module US
       module UsMail
         class UsMailV2Page < Parsing::Common::Page
-          def initialize: (Hash[Symbol | String, untyped]) -> void
+          def initialize: (Hash[String | Symbol, untyped]) -> void
         end
         class UsMailV2PagePrediction < UsMailV2Document
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def to_s: -> String
         end
       end

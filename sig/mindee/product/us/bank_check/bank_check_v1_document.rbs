@@ -5,7 +5,7 @@ module Mindee
     module US
       module BankCheck
         class BankCheckV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def account_number: -> (Parsing::Standard::StringField)
           def amount: -> (Parsing::Standard::AmountField)
           def check_number: -> (Parsing::Standard::StringField)

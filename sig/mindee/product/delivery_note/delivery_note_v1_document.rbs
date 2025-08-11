@@ -4,7 +4,7 @@ module Mindee
   module Product
     module DeliveryNote
       class DeliveryNoteV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def customer_address: -> (Parsing::Standard::StringField)
         def customer_name: -> (Parsing::Standard::StringField)
         def delivery_date: -> (Parsing::Standard::DateField)

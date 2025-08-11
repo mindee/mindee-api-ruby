@@ -5,7 +5,7 @@ module Mindee
     module US
       module UsMail
         class UsMailV3Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def is_return_to_sender: -> (Parsing::Standard::BooleanField)
           def recipient_addresses: -> (Product::US::UsMail::UsMailV3RecipientAddresses)
           def recipient_names: -> (Array[Parsing::Standard::StringField])

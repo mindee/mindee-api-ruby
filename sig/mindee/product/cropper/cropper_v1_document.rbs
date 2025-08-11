@@ -4,7 +4,7 @@ module Mindee
   module Product
     module Cropper
       class CropperV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def to_s: -> String
       end
     end

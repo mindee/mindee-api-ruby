@@ -4,7 +4,7 @@ module Mindee
   module Product
     module Receipt
       class ReceiptV5Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def category: -> (Parsing::Standard::ClassificationField)
         def date: -> (Parsing::Standard::DateField)
         def document_type: -> (Parsing::Standard::ClassificationField)

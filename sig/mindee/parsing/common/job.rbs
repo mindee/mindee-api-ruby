@@ -8,8 +8,8 @@ module Mindee
         def available_at: -> Time
         def status: () -> (:waiting | :processing | :completed | :failed)
         def millisecs_taken: -> Integer
-        def error: -> Hash[Symbol | String, untyped]
-        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def error: -> Hash[String | Symbol, untyped]
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
   end

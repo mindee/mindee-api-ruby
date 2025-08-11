@@ -4,7 +4,7 @@ module Mindee
   module Product
     module DriverLicense
       class DriverLicenseV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def category: -> (Parsing::Standard::StringField)
         def country_code: -> (Parsing::Standard::StringField)
         def date_of_birth: -> (Parsing::Standard::DateField)

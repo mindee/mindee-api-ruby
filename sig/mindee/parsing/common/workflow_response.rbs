@@ -10,7 +10,7 @@ module Mindee
         def execution: -> Execution
         def api_request: -> ApiRequest
         def raw_http: -> String
-        def initialize: (singleton(Parsing::Common::Inference), Hash[Symbol | String, untyped] | Net::HTTPResponse, String) -> void
+        def initialize: (singleton(Parsing::Common::Inference), Hash[String | Symbol, untyped] | Net::HTTPResponse, String) -> void
       end
     end
   end

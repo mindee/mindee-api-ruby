@@ -48,7 +48,7 @@ module Mindee
       # @return [Net::HTTPResponse, nil]
       def workflow_execution_req_post(input_source, opts)
         uri = URI(@url)
-        params = {} # : Hash[Symbol | String, untyped]
+        params = {} # : Hash[String | Symbol, untyped]
         params[:full_text_ocr] = 'true' if opts.full_text
         params[:rag] = 'true' if opts.rag
         uri.query = URI.encode_www_form(params) if params.any?

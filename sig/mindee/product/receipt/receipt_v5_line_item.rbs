@@ -2,13 +2,13 @@ module Mindee
   module Product
     module Receipt
       class ReceiptV5LineItem < Parsing::Standard::FeatureField
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def description: -> String
         def quantity: -> Float
         def total_amount: -> Float
         def unit_price: -> Float
-        def printable_values: -> Hash[Symbol | String, untyped]
-        def table_printable_values: -> Hash[Symbol | String, untyped]
+        def printable_values: -> Hash[String | Symbol, untyped]
+        def table_printable_values: -> Hash[String | Symbol, untyped]
         def to_table_line: -> String
         def to_s: -> String
       end

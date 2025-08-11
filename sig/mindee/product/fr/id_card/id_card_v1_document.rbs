@@ -5,7 +5,7 @@ module Mindee
     module FR
       module IdCard
         class IdCardV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def authority: -> (Parsing::Standard::StringField)
           def birth_date: -> (Parsing::Standard::DateField)
           def birth_place: -> (Parsing::Standard::StringField)

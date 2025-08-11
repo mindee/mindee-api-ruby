@@ -16,9 +16,9 @@ module Mindee
 
       def logger: () -> Logger
       def initialize: (String, String, String | nil, ?api_key: String) -> String
-      def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[Symbol | String, untyped], String]
-      def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[Symbol | String, untyped], String]
-      def parse_async: (String) -> [Hash[Symbol | String, untyped], String]
+      def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[String | Symbol, untyped], String]
+      def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[String | Symbol, untyped], String]
+      def parse_async: (String) -> [Hash[String | Symbol, untyped], String]
       def predict_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
       def document_queue_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
       def document_queue_req_get: (String) -> Net::HTTPResponse

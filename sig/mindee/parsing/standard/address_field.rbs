@@ -11,7 +11,7 @@ module Mindee
         def postal_code: -> String
         def state: -> String
         def country: -> String
-        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: bool) -> void
+        def initialize: (Hash[String | Symbol, untyped], ?Integer?, ?reconstructed: bool) -> void
       end
     end
   end

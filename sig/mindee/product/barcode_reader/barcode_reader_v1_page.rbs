@@ -4,10 +4,10 @@ module Mindee
   module Product
     module BarcodeReader
       class BarcodeReaderV1Page < Parsing::Common::Page
-        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
       class BarcodeReaderV1PagePrediction < BarcodeReaderV1Document
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def to_s: -> String
       end
     end

@@ -26,7 +26,7 @@ module Mindee
         # Raw unprocessed value, as it was sent by the server.
 
         def initialize(raw_prediction, page_id = nil)
-          @all_values = {} # : Hash[Symbol | String, untyped]
+          @all_values = {} # : Hash[String | Symbol, untyped]
           item_page_id = nil
           raw_prediction.each do |name, value|
             case name

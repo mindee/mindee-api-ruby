@@ -5,7 +5,7 @@ module Mindee
       class StringField < BaseField
         def value: -> String
         def raw_value: -> String
-        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: bool) -> void
+        def initialize: (Hash[String | Symbol, untyped], ?Integer?, ?reconstructed: bool) -> void
       end
     end
   end

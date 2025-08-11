@@ -5,7 +5,7 @@ module Mindee
     module FR
       module BankAccountDetails
         class BankAccountDetailsV2Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def account_holders_names: -> (Parsing::Standard::StringField)
           def bban: -> (Product::FR::BankAccountDetails::BankAccountDetailsV2Bban)
           def iban: -> (Parsing::Standard::StringField)
