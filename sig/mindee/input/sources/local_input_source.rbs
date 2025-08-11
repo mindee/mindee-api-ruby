@@ -6,12 +6,12 @@ module Mindee
       class LocalInputSource
         attr_reader file_mimetype: String
         attr_reader filename: String
-        attr_reader io_stream: StringIO|File
+        attr_reader io_stream: StringIO | File
         def initialize: (StringIO | File, String, ?repair_pdf: bool) -> void
         def logger: () -> Logger
 
 
-        def rescue_broken_pdf: (StringIO|File) -> (StringIO | File)
+        def rescue_broken_pdf: (StringIO | File) -> (StringIO | File)
         def pdf?: -> bool
         def apply_page_options: (PageOptions) -> StringIO?
         def process_pdf: (PageOptions) -> StringIO?
