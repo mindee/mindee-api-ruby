@@ -24,7 +24,7 @@ module Mindee
 
       # @param params [Hash]
       def initialize(params: {})
-        params = params.transform_keys(&:to_sym)
+        params.transform_keys!(&:to_sym)
 
         if params.empty? || params[:model_id].nil? || params[:model_id].empty?
           raise Errors::MindeeInputError, 'Model ID is required.'
