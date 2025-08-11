@@ -13,7 +13,7 @@ module Mindee
           def single_str: -> String
           def to_s: -> String
           def to_s_from_list: -> String
-          def method_missing: (Symbol, *untyped, untyped) -> (ObjectField | nil)
+          def method_missing: (Symbol, *untyped, untyped) -> (ObjectField?)
         end
       end
     end

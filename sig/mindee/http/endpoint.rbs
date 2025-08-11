@@ -2,7 +2,7 @@
 module Mindee
   module HTTP
     API_KEY_ENV_NAME: String
-    API_KEY_DEFAULT: String | nil
+    API_KEY_DEFAULT: String?
     BASE_URL_ENV_NAME: String
     BASE_URL_DEFAULT: String
     REQUEST_TIMEOUT_ENV_NAME: String
@@ -15,7 +15,7 @@ module Mindee
       attr_reader url_root: String
 
       def logger: () -> Logger
-      def initialize: (String, String, String | nil, ?api_key: String) -> String
+      def initialize: (String, String, String?, ?api_key: String) -> String
       def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[String | Symbol, untyped], String]
       def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[String | Symbol, untyped], String]
       def parse_async: (String) -> [Hash[String | Symbol, untyped], String]

@@ -10,7 +10,7 @@ module Mindee
     attr_accessor page_options: PageOptions
     attr_accessor cropper: bool
     attr_accessor rag: bool
-    attr_accessor workflow_id: String | nil
+    attr_accessor workflow_id: String?
     attr_accessor initial_delay_sec: Integer | Float
     attr_accessor delay_sec: Integer | Float
     attr_accessor max_retries: Integer

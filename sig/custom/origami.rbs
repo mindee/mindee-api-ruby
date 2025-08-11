@@ -16,7 +16,7 @@ module Origami
     class LinearParser
       def initialize: (Hash[Symbol, untyped]) -> void
       def new: (Hash[Symbol, untyped]) -> void
-      def parse: (StringIO | File | nil) -> PDF
+      def parse: (StringIO | File?) -> PDF
     end
   end
 

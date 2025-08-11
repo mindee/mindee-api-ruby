@@ -3,7 +3,7 @@ module Mindee
   module Parsing
     module V2
       class JobWebhook
-        attr_reader created_at: DateTime | nil
+        attr_reader created_at: DateTime?
         attr_reader error: ErrorResponse
         attr_reader id: String
         attr_reader status: String
