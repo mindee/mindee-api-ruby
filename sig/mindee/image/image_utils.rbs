@@ -2,17 +2,17 @@
 module Mindee
   module Image
     module ImageUtils
-      def self.resize_image: (singleton(MiniMagick::Image) | MiniMagick::Image, Integer, Integer) -> void
-      def self.compress_image_quality: (singleton(MiniMagick::Image) | MiniMagick::Image, untyped) -> void
-      def self.to_image: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO | IO | File | Tempfile?) -> (singleton(MiniMagick::Image) | MiniMagick::Image)
-      def self.image_to_stringio: (singleton(MiniMagick::Image) | MiniMagick::Image, ?String) -> StringIO
-      def self.calculate_new_dimensions: (singleton(MiniMagick::Image) | MiniMagick::Image, ?max_width: Integer | Float?, ?max_height: Integer | Float?) -> [Integer, Integer]
-      def self.calculate_dimensions_from_media_box: (singleton(MiniMagick::Image) | MiniMagick::Image, Array[Integer]?) -> [Integer, Integer]
+      def self.resize_image: (MiniMagick::Image, Integer, Integer) -> void
+      def self.compress_image_quality: (MiniMagick::Image, untyped) -> void
+      def self.to_image: (MiniMagick::Image | StringIO | IO | File | Tempfile?) -> (MiniMagick::Image)
+      def self.image_to_stringio: (MiniMagick::Image, ?String) -> StringIO
+      def self.calculate_new_dimensions: (MiniMagick::Image, ?max_width: Integer | Float?, ?max_height: Integer | Float?) -> [Integer, Integer]
+      def self.calculate_dimensions_from_media_box: (MiniMagick::Image, Array[Integer]?) -> [Integer, Integer]
       def self.pdf_to_magick_image: (StringIO | File, Integer) -> MiniMagick::Image
       def self.normalize_polygon: (Geometry::Quadrilateral | Geometry::Polygon | Array[Geometry::Point]) -> Geometry::Quadrilateral
-      def self.read_page_content: (StringIO | File) -> (singleton(MiniMagick::Image) | MiniMagick::Image)
-      def self.crop_image: (singleton(MiniMagick::Image) | MiniMagick::Image, Geometry::MinMax, Geometry::MinMax) -> (singleton(MiniMagick::Image) | MiniMagick::Image)
-      def self.write_image_to_buffer: (singleton(MiniMagick::Image) | MiniMagick::Image, StringIO) -> void
+      def self.read_page_content: (StringIO | File) -> (MiniMagick::Image)
+      def self.crop_image: (MiniMagick::Image, Geometry::MinMax, Geometry::MinMax) -> (MiniMagick::Image)
+      def self.write_image_to_buffer: (MiniMagick::Image, StringIO) -> void
       def self.determine_file_extension: (Input::Source::LocalInputSource) -> String?
     end
   end

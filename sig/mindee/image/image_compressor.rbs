@@ -2,7 +2,7 @@
 module Mindee
   module Image
     module ImageCompressor
-      def self.compress_image: (singleton(MiniMagick::Image) | MiniMagick::Image | StringIO | File, ?quality: Integer | Float | nil, ?max_width: Integer | Float | nil, ?max_height: Integer | Float | nil) -> StringIO
+      def self.compress_image: (MiniMagick::Image | StringIO | File, ?quality: Integer | Float | nil, ?max_width: Integer | Float | nil, ?max_height: Integer | Float | nil) -> StringIO
     end
   end
 end
