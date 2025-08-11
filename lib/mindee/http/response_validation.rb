@@ -31,7 +31,11 @@ module Mindee
 
         return false if hashed_response.dig('job', 'status').to_s == 'Failed'
 
-        return false if hashed_response.dig('job', 'error') && !hashed_response.dig('job', 'error').empty?
+        return false if hashed_response.dig('job',
+                                            'error') && !(hashed_response.dig('job',
+                                                                              'error').empty? || hashed_response.dig(
+                                                                                'job', 'error'
+                                                                              ).nil?)
 
         true
       end
@@ -67,7 +71,7 @@ module Mindee
         end
 
         return if !hashed_response.dig('job', 'error').empty? &&
-                  (hashed_response.dig('job', 'status') != Mindee::Parsing::Common::JobStatus::FAILURE.to_s)
+                  (hashed_response.dig('job', 'status').downcase != Mindee::Parsing::Common::JobStatus::FAILURE.to_s)
 
         response.instance_variable_set(:@code, '500')
       end

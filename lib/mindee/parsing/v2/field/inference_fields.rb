@@ -76,7 +76,7 @@ module Mindee
                 # Check if SimpleField has a non-empty value
                 simple_f = field_value # @type var simple_f: SimpleField
                 if defined?(simple_f.value) && simple_f.value && !simple_f.value.to_s.empty?
-                  line += " #{simple_f.value}"
+                  line += " #{simple_f}"
                 end
               else
                 logger.debug("Unknown value was passed to the field creator: #{field_key} : #{field_value}")

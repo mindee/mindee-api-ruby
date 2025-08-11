@@ -28,8 +28,8 @@ module Net
   end
 
   class HTTPResponse
-    def self.body: -> untyped
-    def body: -> untyped
+    def self.body: -> String
+    def body: -> String
     def []: (untyped) -> untyped
     def key?: (untyped) -> bool
     def code: -> String

@@ -69,13 +69,12 @@ module Mindee
         end
 
         response_body = if response.nil? || !response.respond_to?(:body)
-                          { 'status' => -1,
-                            'detail' => 'Empty server response.' }
+                          '{ "status": -1,
+                            "detail": "Empty server response." }'
                         else
                           response.body
                         end
-        error = ErrorHandler.generate_v2_error(response_body.to_hash) # @type error: Errors::MindeeHTTPErrorV2
-        raise error
+        raise ErrorHandler.generate_v2_error(JSON.parse(response_body).transform_keys(&:to_sym))
       end
 
       # Polls a queue for either a result or a job.

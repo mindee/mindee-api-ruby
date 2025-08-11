@@ -30,7 +30,7 @@ module Mindee
             ":Name: #{@name}\n" \
             ":Alias:#{" #{@file_alias}" if @file_alias}\n" \
             ":Page Count: #{@page_count}\n" \
-            ":MIME Type: #{@mime_type}"
+            ":MIME Type: #{@mime_type}\n"
         end
       end
     end

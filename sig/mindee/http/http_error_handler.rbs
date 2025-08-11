@@ -5,7 +5,7 @@ module Mindee
       def extract_error: (Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]?
       def create_error_obj: (Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
       def self.generate_v2_error: (Hash[String, Integer | String]) -> Errors::MindeeHTTPErrorV2
-      def generate_v2_error: (Hash[String, String | Integer]) -> Errors::MindeeHTTPErrorV2
+      def generate_v2_error: (Hash[Symbol, String | Integer]) -> Errors::MindeeHTTPErrorV2
 
       def self.handle_error: (String, Net::HTTPResponse) -> Errors::MindeeHTTPError
       def handle_error:      (String, Net::HTTPResponse) -> Errors::MindeeHTTPError
