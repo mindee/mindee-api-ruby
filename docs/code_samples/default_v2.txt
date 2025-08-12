@@ -9,12 +9,10 @@ mindee_client = Mindee::ClientV2.new(api_key: api_key)
 
 # Set inference parameters
 params = Mindee::Input::InferenceParameters.new(
-    params: {
-        # ID of the model, required.
-        model_id: model_id,
-        # If set to `True`, will enable Retrieval-Augmented Generation.
-        rag: false,
-    }
+    # ID of the model, required.
+    model_id,
+    # If set to `True`, will enable Retrieval-Augmented Generation.
+    rag: false,
 )
 
 # Load a file from disk

@@ -9,9 +9,22 @@ module Mindee
       attr_reader rag: bool?
       attr_reader webhook_ids: Array[String]?
 
-      def initialize: (params: Hash[String | Symbol, untyped]) -> void
+      def initialize: (
+          String,
+          ?rag: bool?,
+          ?file_alias: String?,
+          ?webhook_ids: Array[String]?,
+          ?polling_options: Hash[Symbol | String, untyped] | PollingOptions?,
+          ?close_file: bool?
+        ) -> void
+
+      def self.from_hash: (params: Hash[String | Symbol, untyped]) -> InferenceParameters
 
       def validate_async_params: -> void
+
+      private
+
+      def get_clean_polling_options: (Hash[String | Symbol, untyped] | PollingOptions?) -> PollingOptions
     end
   end
 end

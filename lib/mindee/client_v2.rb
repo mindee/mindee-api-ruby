@@ -106,7 +106,7 @@ module Mindee
     def normalize_inference_parameters(params)
       return params if params.is_a?(Input::InferenceParameters)
 
-      Input::InferenceParameters.new(params: params)
+      Input::InferenceParameters.from_hash(params: params)
     end
   end
 end
