@@ -3,14 +3,14 @@ module Mindee
     module FR
       module Payslip
         class PayslipV3PaidTimeOff < Parsing::Standard::FeatureField
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def accrued: -> Float
           def period: -> String
           def pto_type: -> String
           def remaining: -> Float
           def used: -> Float
-          def printable_values: -> Hash[Symbol | String, untyped]
-          def table_printable_values: -> Hash[Symbol | String, untyped]
+          def printable_values: -> Hash[String | Symbol, untyped]
+          def table_printable_values: -> Hash[String | Symbol, untyped]
           def to_table_line: -> String
           def to_s: -> String
         end

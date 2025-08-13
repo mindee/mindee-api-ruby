@@ -13,12 +13,12 @@ module Mindee
 
         def initialize(prediction, page_id, reconstructed: false)
           super
-          @value = @value.round(3) unless @value.nil?
+          @value = @value.to_f.round(3).to_f unless @value.to_s.empty?
         end
 
         # @return [String]
         def to_s
-          BaseField.float_to_string(@value)
+          @value.nil? ? '' : BaseField.float_to_string(@value.to_f)
         end
       end
     end

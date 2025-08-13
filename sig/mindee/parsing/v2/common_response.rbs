@@ -1,0 +1,11 @@
+# lib/mindee/parsing/v2/common_response.rb
+module Mindee
+  module Parsing
+    module V2
+      class CommonResponse
+        attr_reader raw_http: Hash[String | Symbol, untyped]
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

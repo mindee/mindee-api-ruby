@@ -4,10 +4,10 @@ module Mindee
   module Product
     module Invoice
       class InvoiceV4Page < Parsing::Common::Page
-        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
       class InvoiceV4PagePrediction < InvoiceV4Document
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def to_s: -> String
       end
     end

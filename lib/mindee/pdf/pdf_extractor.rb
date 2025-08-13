@@ -29,7 +29,7 @@ module Mindee
 
         # Creates a new Pdf from pages and save it into a buffer.
         # @param page_indexes [Array<Integer>] List of page number to use for merging in the original Pdf.
-        # @return [StreamIO] The buffer containing the new Pdf.
+        # @return [StringIO] The buffer containing the new Pdf.
         def cut_pages(page_indexes)
           options = PageOptions.new(params: {
                                       page_indexes: page_indexes,
@@ -75,24 +75,28 @@ module Mindee
         # @return [Array<Mindee::PDF::PDFExtractor::ExtractedPDF>]
         def extract_invoices(page_indexes, strict: false)
           raise Errors::MindeePDFError, 'No indexes provided.' if page_indexes.empty?
+
           if page_indexes[0].is_a?(Array) && page_indexes[0].all? { |i| i.is_a?(Integer) }
-            return extract_sub_documents(page_indexes)
+            page_indexes_as_array = page_indexes # @type var page_indexes : Array[Array[Integer]]
+            return extract_sub_documents(page_indexes_as_array)
           end
-          return extract_sub_documents(page_indexes.map(&:page_indexes)) unless strict
+          p_ids = page_indexes # @type var page_indexes: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups
+          return extract_sub_documents(p_ids.map(&:page_indexes)) unless strict
 
           correct_page_indexes = []
           current_list = []
           previous_confidence = nil
-          page_indexes.each_with_index do |page_index, i|
-            confidence = page_index.confidence
+          p_ids.each_with_index do |p_i, i|
+            page_index = p_i # @type var page_index: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup
+            confidence = page_index.confidence.to_f
             page_list = page_index.page_indexes
 
             if confidence >= 0.5 && previous_confidence.nil?
               current_list = page_list
-            elsif confidence >= 0.5 && i < page_indexes.length - 1
+            elsif confidence >= 0.5 && i < p_ids.length - 1
               correct_page_indexes << current_list
               current_list = page_list
-            elsif confidence < 0.5 && i == page_indexes.length - 1
+            elsif confidence < 0.5 && i == p_ids.length - 1
               current_list.concat page_list
               correct_page_indexes << current_list
             else

@@ -4,7 +4,7 @@ module Mindee
   module Product
     module DriverLicense
       class DriverLicenseV1 < Parsing::Common::Inference
-        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
   end

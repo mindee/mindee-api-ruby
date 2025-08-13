@@ -66,6 +66,9 @@ module Mindee
 
           ResponseValidation.clean_request!(response)
         end
+
+        raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+
         error = ErrorHandler.handle_error(@url_name, response)
         raise error
       end
@@ -84,8 +87,9 @@ module Mindee
           ResponseValidation.clean_request!(response)
         end
 
-        error = ErrorHandler.handle_error(@url_name, response)
-        raise error
+        raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+
+        raise ErrorHandler.handle_error(@url_name, response)
       end
 
       # Calls the parsed async doc.
@@ -110,7 +114,7 @@ module Mindee
       def predict_req_post(input_source, opts)
         uri = URI("#{@url_root}/predict")
 
-        params = {} # : Hash[Symbol | String, untyped]
+        params = {} # : Hash[String | Symbol, untyped]
         params[:cropper] = 'true' if opts.cropper
         params[:full_text_ocr] = 'true' if opts.full_text
         uri.query = URI.encode_www_form(params)
@@ -123,7 +127,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['document', input_source.url]] # : Array[untyped]
                     else
-                      [input_source.read_contents(close: opts.close_file)] # : Array[untyped]
+                      [['document', *input_source.read_contents(close: opts.close_file)]] # : Array[untyped]
                     end
         form_data.push ['include_mvision', 'true'] if opts.all_words
 
@@ -146,7 +150,7 @@ module Mindee
                 URI("#{@url_root}/predict_async")
               end
 
-        params = {} # : Hash[Symbol | String, untyped]
+        params = {} # : Hash[String | Symbol, untyped]
         params[:cropper] = 'true' if opts.cropper
         params[:full_text_ocr] = 'true' if opts.full_text
         params[:rag] = 'true' if opts.rag
@@ -160,7 +164,7 @@ module Mindee
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['document', input_source.url]] # : Array[untyped]
                     else
-                      [input_source.read_contents(close: opts.close_file)] # : Array[untyped]
+                      [['document', *input_source.read_contents(close: opts.close_file)]] # : Array[untyped]
                     end
         form_data.push ['include_mvision', 'true'] if opts.all_words
 
@@ -188,6 +192,8 @@ module Mindee
         response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
           http.request(req)
         end
+
+        raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
 
         if response.code.to_i > 299 && response.code.to_i < 400
           req = Net::HTTP::Get.new(response['location'], headers)

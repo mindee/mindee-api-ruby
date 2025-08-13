@@ -1,0 +1,12 @@
+# lib/mindee/errors/mindee_http_error_v2.rb
+module Mindee
+  module Errors
+    # API V2 HttpError
+    class MindeeHTTPErrorV2 < MindeeError
+
+      attr_reader detail: String
+      attr_reader status: Integer
+      def initialize: (Hash[String, untyped] | Parsing::V2::ErrorResponse) -> void
+    end
+  end
+end

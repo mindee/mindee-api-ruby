@@ -1,0 +1,22 @@
+# lib/mindee/parsing/v2/field/list_field.rb
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        class ListField < BaseField
+          include Enumerable[BaseField]
+
+          attr_reader items: Array[BaseField]
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def to_s: -> String
+          def empty?: -> bool
+          def size: -> Integer
+          def length: -> Integer
+          # NOTE: Steep is incapable of handling typing of `each` when multiple types are used.
+          def each: () { (untyped) -> untyped } -> untyped
+          def []: (Integer) -> (BaseField)
+        end
+      end
+    end
+  end
+end

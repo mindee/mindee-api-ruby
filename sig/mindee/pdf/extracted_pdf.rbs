@@ -3,12 +3,12 @@ module Mindee
   module PDF
     module PDFExtractor
       class ExtractedPDF
-        def pdf_bytes: -> untyped
-        def filename: -> untyped
-        def initialize: (untyped, untyped) -> untyped
-        def page_count: -> nil
-        def write_to_file: (untyped, ?override: false) -> Integer
-        def as_input_source: -> untyped
+        attr_reader pdf_bytes: StringIO
+        attr_reader filename: String
+        def initialize: (StringIO, String) -> void
+        def page_count: -> Integer
+        def write_to_file: (String, ?override: bool) -> Integer
+        def as_input_source: -> Input::Source::BytesInputSource
       end
     end
   end

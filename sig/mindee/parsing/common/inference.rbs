@@ -3,16 +3,23 @@ module Mindee
   module Parsing
     module Common
       class Inference
-        def is_rotation_applied: -> untyped
-        def pages: -> Array[Page]
-        def prediction: -> untyped
-        def product: -> untyped
-        def initialize: (untyped) -> void
+        def self.endpoint_name: () -> String?
+        def self.endpoint_version: () -> String?
+        def self.has_async: () -> bool
+        def self.has_sync: () -> bool
+
+        attr_reader endpoint_name: String
+        attr_reader endpoint_version: String
+        attr_reader extras: Extras::Extras
+        attr_reader has_async: bool
+        attr_reader has_sync: bool
+        attr_reader is_rotation_applied: bool
+        attr_reader pages: Array[Page]
+        attr_reader prediction: Prediction
+        attr_reader product: Product
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
         def to_s: -> String
-        def self.endpoint_name: -> String
-        def self.endpoint_version: -> String
-        def self.has_async: -> bool
-        def self.has_sync: -> bool
       end
     end
   end

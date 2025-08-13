@@ -3,9 +3,9 @@ module Mindee
   module Parsing
     module Common
       class ExecutionFile
-        def name: -> untyped
-        def alias: -> untyped
-        def initialize: (untyped) -> untyped
+        def name: -> String
+        def alias: -> String?
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
   end

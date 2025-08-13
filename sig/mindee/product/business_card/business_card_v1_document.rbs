@@ -4,7 +4,7 @@ module Mindee
   module Product
     module BusinessCard
       class BusinessCardV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def address: -> (Parsing::Standard::StringField)
         def company: -> (Parsing::Standard::StringField)
         def email: -> (Parsing::Standard::StringField)

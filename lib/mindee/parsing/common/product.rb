@@ -5,7 +5,12 @@ module Mindee
     module Common
       # Product information
       class Product
-        attr_reader :name, :type, :version
+        # @return [String] Name of the product.
+        attr_reader :name
+        # @return [String?] Type of product.
+        attr_reader :type
+        # @return [String] Product version.
+        attr_reader :version
 
         # @param prediction [Hash]
         def initialize(prediction)

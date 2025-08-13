@@ -4,7 +4,7 @@ module Mindee
     module Standard
       class BooleanField < BaseField
         def value: -> bool?
-        def initialize: (Hash[Symbol | String, untyped], ?Integer?, ?reconstructed: false) -> void
+        def initialize: (Hash[String | Symbol, untyped], ?Integer?, ?reconstructed: false) -> void
         def to_s: -> String
       end
     end

@@ -1,15 +1,7 @@
-OTS_OWNER: String
+# lib/mindee/client.rb
 
 module Mindee
   OTS_OWNER: String
-
-  class PageOptions
-    attr_accessor page_indexes: Array[Integer]
-    attr_accessor operation: :KEEP_ONLY | :REMOVE
-    attr_accessor on_min_pages: Integer?
-
-    def initialize: (params: Hash[Symbol | String, untyped]) -> void
-  end
 
   class ParseOptions
     attr_accessor all_words: bool
@@ -18,12 +10,12 @@ module Mindee
     attr_accessor page_options: PageOptions
     attr_accessor cropper: bool
     attr_accessor rag: bool
-    attr_accessor workflow_id: String | nil
+    attr_accessor workflow_id: String?
     attr_accessor initial_delay_sec: Integer | Float
     attr_accessor delay_sec: Integer | Float
     attr_accessor max_retries: Integer
 
-    def initialize: (params: Hash[Symbol | String, untyped]) -> void
+    def initialize: (params: Hash[String | Symbol, untyped]) -> void
   end
 
   class WorkflowOptions
@@ -33,19 +25,22 @@ module Mindee
     attr_accessor rag: bool?
     attr_accessor public_url: (String?)
     attr_accessor page_options: (PageOptions)
+    attr_accessor close_file: bool
 
-    def initialize: (params: Hash[Symbol | String, untyped]) -> void
+    def initialize: (params: Hash[String | Symbol, untyped]) -> void
   end
 
   class Client
+    @api_key: String?
+
     def initialize: (?api_key: String) -> void
-    def logger: () -> untyped
-    def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
-    def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
-    def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, untyped, ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[Symbol | String, untyped]) -> Parsing::Common::ApiResponse
+    def logger: () -> Logging
+    def parse: (Input::Source::LocalInputSource | Input::Source::URLInputSource, singleton(Parsing::Common::Inference), ?endpoint: (HTTP::Endpoint?), options: ParseOptions | Hash[String | Symbol, untyped]) -> Parsing::Common::ApiResponse
+    def parse_sync: (Input::Source::LocalInputSource | Input::Source::URLInputSource, singleton(Parsing::Common::Inference), HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
+    def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, singleton(Parsing::Common::Inference), ?endpoint: (HTTP::Endpoint?), options: ParseOptions|Hash[String | Symbol, untyped]) -> Parsing::Common::ApiResponse
     def parse_queued: (String, singleton(Parsing::Common::Inference), ?endpoint: HTTP::Endpoint?) -> Parsing::Common::ApiResponse
-    def enqueue_and_parse: (Input::Source::URLInputSource|Input::Source::LocalInputSource, untyped, HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
-    def execute_workflow: (Input::Source::URLInputSource|Input::Source::LocalInputSource, String, options: (Hash[Symbol | String, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
+    def enqueue_and_parse: (Input::Source::URLInputSource|Input::Source::LocalInputSource, singleton(Parsing::Common::Inference), HTTP::Endpoint, ParseOptions) -> Parsing::Common::ApiResponse
+    def execute_workflow: (Input::Source::URLInputSource|Input::Source::LocalInputSource, String, options: (Hash[String | Symbol, untyped] | WorkflowOptions)) -> Parsing::Common::WorkflowResponse
     def load_prediction: (singleton(Parsing::Common::Inference), Input::LocalResponse) -> Parsing::Common::ApiResponse
     def source_from_path: (String, ?repair_pdf: bool) -> Input::Source::PathInputSource
     def source_from_bytes: (String, String, ?repair_pdf: bool) -> Input::Source::BytesInputSource
@@ -55,7 +50,7 @@ module Mindee
     def create_endpoint: (endpoint_name: String, account_name: String, version: String) -> HTTP::Endpoint
 
     private
-    def normalize_parse_options: ((Hash[Symbol | String, untyped] | ParseOptions)) -> ParseOptions
+    def normalize_parse_options: ((Hash[String | Symbol, untyped] | ParseOptions)) -> ParseOptions
     def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions | WorkflowOptions) -> void
     def initialize_endpoint: (singleton(Parsing::Common::Inference), ?endpoint_name: String, ?account_name: String, ?version: String) -> HTTP::Endpoint
     def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void

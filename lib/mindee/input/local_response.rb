@@ -62,10 +62,19 @@ module Mindee
       end
 
       # @param secret_key [String] Secret key, either a string or a byte/byte array.
-      # @param signature [String]
+      # @param signature [String] Signature to match
       # @return [bool]
       def valid_hmac_signature?(secret_key, signature)
         signature == get_hmac_signature(secret_key)
+      end
+
+      # Deserializes a loaded response
+      # @param response_class [Parsing::V2::JobResponse, Parsing::V2::InferenceResponse] class to return.
+      # @return [Parsing::V2::JobResponse, Parsing::V2::InferenceResponse]
+      def deserialize_response(response_class)
+        response_class.new(as_hash)
+      rescue StandardError
+        raise Errors::MindeeInputError, 'Invalid response provided.'
       end
     end
   end

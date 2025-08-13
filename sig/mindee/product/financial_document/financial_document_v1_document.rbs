@@ -4,7 +4,7 @@ module Mindee
   module Product
     module FinancialDocument
       class FinancialDocumentV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def billing_address: -> (Parsing::Standard::AddressField)
         def category: -> (Parsing::Standard::ClassificationField)
         def customer_address: -> (Parsing::Standard::AddressField)

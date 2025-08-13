@@ -48,7 +48,7 @@ module Mindee
       # @return [Net::HTTPResponse, nil]
       def workflow_execution_req_post(input_source, opts)
         uri = URI(@url)
-        params = {} # : Hash[Symbol | String, untyped]
+        params = {} # : Hash[String | Symbol, untyped]
         params[:full_text_ocr] = 'true' if opts.full_text
         params[:rag] = 'true' if opts.rag
         uri.query = URI.encode_www_form(params) if params.any?
@@ -62,7 +62,7 @@ module Mindee
         if input_source.is_a?(Mindee::Input::Source::URLInputSource)
           form_data.push ['document', input_source.url]
         else
-          form_data.push input_source.read_contents
+          form_data.push ['document', *input_source.read_contents(close: opts.close_file)]
         end
         form_data.push ['alias', opts.document_alias] if opts.document_alias
         form_data.push ['public_url', opts.public_url] if opts.public_url

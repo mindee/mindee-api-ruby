@@ -3,7 +3,7 @@ module Mindee
     module FR
       module Payslip
         class PayslipV3Employment < Parsing::Standard::FeatureField
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def category: -> String
           def coefficient: -> String
           def collective_agreement: -> String
@@ -11,7 +11,7 @@ module Mindee
           def position_level: -> String
           def seniority_date: -> String
           def start_date: -> String
-          def printable_values: -> Hash[Symbol | String, untyped]
+          def printable_values: -> Hash[String | Symbol, untyped]
           def to_s: -> String
         end
       end

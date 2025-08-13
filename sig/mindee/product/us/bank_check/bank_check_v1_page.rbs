@@ -5,10 +5,10 @@ module Mindee
     module US
       module BankCheck
         class BankCheckV1Page < Parsing::Common::Page
-          def initialize: (Hash[Symbol | String, untyped]) -> void
+          def initialize: (Hash[String | Symbol, untyped]) -> void
         end
         class BankCheckV1PagePrediction < BankCheckV1Document
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def check_position: -> Parsing::Standard::PositionField
           def signatures_positions: -> Array[Parsing::Standard::PositionField]
           def to_s: -> String

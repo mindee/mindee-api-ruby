@@ -3,9 +3,10 @@ module Mindee
   module Parsing
     module Common
       class Orientation
-        def page_id: -> untyped
-        def value: -> untyped
-        def initialize: (untyped, untyped) -> untyped
+        attr_reader page_id: Integer?
+        attr_reader value: Integer?
+
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
       end
     end
   end

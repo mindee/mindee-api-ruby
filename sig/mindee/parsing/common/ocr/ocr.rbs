@@ -4,34 +4,36 @@ module Mindee
     module Common
       module OCR
         class OCRWord
-          def confidence: -> untyped
-          def confidence=: (untyped) -> untyped
-          def text: -> untyped
-          def bounding_box: -> untyped
-          def polygon: -> untyped
-          def initialize: (untyped) -> void
-          def to_s: -> untyped
+          attr_reader bounding_box: Geometry::Quadrilateral
+          attr_accessor confidence: Float
+          attr_reader polygon: Geometry::Polygon
+          attr_reader text: String
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def to_s: -> String
         end
-        class OCRLine < Array[untyped]
-          def initialize: (?Array[untyped]?, ?Array[untyped]?) -> void
+        class OCRLine < Array[OCRWord]
+          def initialize: (?Array[untyped]?, ?Array[OCRWord]?) -> void
           def sort_on_x: -> OCRLine
           def to_s: -> String
         end
         class OCRPage
-          def all_words: -> Array[untyped]
-          def lines: -> Array[untyped]
-          def initialize: (untyped) -> untyped
-          def all_lines: -> Array[untyped]
+          attr_reader all_words: Array[OCRWord]
+          attr_reader lines: Array[OCRLine]
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def all_lines: -> Array[OCRLine]
           def to_s: -> String
-          def parse_one: (Array[OCRWord], untyped, Array[untyped], Array[untyped]) -> Array[OCRLine]?
-          def to_lines: -> Array[untyped]
-          def words_on_same_line?: (OCRWord, OCRWord) -> untyped
+          def parse_one: (Array[OCRWord], OCRWord?, Array[Integer], Array[OCRLine]) -> Array[OCRLine]?
+          def to_lines: -> Array[OCRLine]
+          def words_on_same_line?: (OCRWord, OCRWord) -> bool
         end
         class OCR
-          def mvision_v1: -> untyped
-          def initialize: (untyped) -> untyped
-          def to_s: -> untyped
-          def reconstruct_vertically: (untyped, untyped, ?Float) -> untyped
+          attr_reader mvision_v1: MVisionV1
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def to_s: -> String
+          def reconstruct_vertically: (Array[Geometry::Point], Integer, ?Float) -> OCRLine
         end
       end
     end

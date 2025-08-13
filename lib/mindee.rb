@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
+require 'mindee/client_v2'
+require 'mindee/page_options'
 require 'mindee/logging'
 
 module Mindee
@@ -53,6 +55,10 @@ module Mindee
 
     # Universal fields and functions.
     module Universal
+    end
+
+    # V2-specific module.
+    module V2
     end
   end
 

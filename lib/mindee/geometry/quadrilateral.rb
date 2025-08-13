@@ -6,13 +6,13 @@ module Mindee
     # Contains exactly 4 relative vertices coordinates (Points).
     class Quadrilateral
       # @return [Mindee::Geometry::Point]
-      attr_accessor :top_left
+      attr_reader :top_left
       # @return [Mindee::Geometry::Point]
-      attr_accessor :top_right
+      attr_reader :top_right
       # @return [Mindee::Geometry::Point]
-      attr_accessor :bottom_right
+      attr_reader :bottom_right
       # @return [Mindee::Geometry::Point]
-      attr_accessor :bottom_left
+      attr_reader :bottom_left
 
       # @param top_left [Mindee::Geometry::Point]
       # @param top_right [Mindee::Geometry::Point]

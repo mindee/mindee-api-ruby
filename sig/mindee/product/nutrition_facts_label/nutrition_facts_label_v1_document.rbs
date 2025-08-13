@@ -4,7 +4,7 @@ module Mindee
   module Product
     module NutritionFactsLabel
       class NutritionFactsLabelV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def added_sugars: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar)
         def calories: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Calorie)
         def cholesterol: -> (Product::NutritionFactsLabel::NutritionFactsLabelV1Cholesterol)

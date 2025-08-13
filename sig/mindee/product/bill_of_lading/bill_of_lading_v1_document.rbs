@@ -4,7 +4,7 @@ module Mindee
   module Product
     module BillOfLading
       class BillOfLadingV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def bill_of_lading_number: -> (Parsing::Standard::StringField)
         def carrier: -> (Product::BillOfLading::BillOfLadingV1Carrier)
         def carrier_items: -> (Product::BillOfLading::BillOfLadingV1CarrierItems)

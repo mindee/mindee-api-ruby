@@ -1,0 +1,12 @@
+# lib/mindee/parsing/v2/inference_response.rb
+module Mindee
+  module Parsing
+    module V2
+      class InferenceResponse < CommonResponse
+        attr_reader inference: V2::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

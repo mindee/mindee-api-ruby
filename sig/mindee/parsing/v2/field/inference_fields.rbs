@@ -1,0 +1,19 @@
+# lib/mindee/parsing/v2/field/inference_fields.rb
+module Mindee
+  module Parsing
+    module V2
+      module Field
+        class InferenceFields < Hash[String, ListField | ObjectField | SimpleField?]
+          attr_reader indent_level: Integer
+
+          def logger: () -> Logger
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def get: (String) -> (ListField | ObjectField | SimpleField?)
+          def method_missing: (Symbol, *untyped) -> (ListField | ObjectField | SimpleField?)
+          def respond_to_missing?: (Symbol, ?bool) -> bool
+          def to_s: (?Integer) -> String
+        end
+      end
+    end
+  end
+end

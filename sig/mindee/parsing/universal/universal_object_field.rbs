@@ -3,21 +3,27 @@ module Mindee
   module Parsing
     module Universal
       class UniversalObjectField
-        def page_id: -> Integer?
-        def page_id=: (Integer?) -> untyped
-        def confidence: -> Float?
-        def confidence=: (Float?) -> untyped
-        def raw_value: -> Hash[Symbol | String, untyped]
-        def raw_value=: (Hash[Symbol | String, untyped]) -> untyped
-        def initialize: (Hash[Symbol | String, untyped], ?Integer?) -> void
+        attr_reader all_values: Hash[String | Symbol, String | Standard::PositionField?]
+        attr_reader confidence: Float
+        attr_reader page_id: Integer
+        attr_reader raw_value: String
+
+        def initialize: (Hash[String | Symbol, untyped], ?Integer?) -> void
         def str_level: (?Integer) -> String
-        def method_missing: (Symbol, *Array[untyped]) -> Object
+        def method_missing: (Symbol, *untyped, untyped)
+          -> (String
+            | Integer
+            | Float
+            | bool
+            | Standard::PositionField
+            | Hash[String | Symbol, untyped]
+           ?)
         def respond_to_missing?: (Symbol, ?bool) -> bool
         def to_s: -> String
-        def handle_position_field: (String | Symbol, untyped, Integer?) -> void
-        def handle_default_field: (String | Symbol, untyped) -> void
+        def handle_position_field: (String | Symbol, Hash[String | Symbol, untyped] | Integer | String | Float | bool?, Integer?) -> void
+        def handle_default_field: (String | Symbol, Hash[String | Symbol, untyped] | Integer | String | Float | bool?) -> void
       end
-      def self.universal_object?: (Hash[Symbol | String, untyped]) -> bool
+      def self.universal_object?: (Hash[String | Symbol, untyped]) -> bool
     end
   end
 end

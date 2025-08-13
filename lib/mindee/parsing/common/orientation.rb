@@ -5,7 +5,7 @@ module Mindee
     module Common
       # Page orientation
       class Orientation
-        # @return [Integer]
+        # @return [Integer, nil]
         attr_reader :page_id
         # A prediction among these 3 possible outputs:
         #   * 0 degrees: the page is already upright
@@ -15,7 +15,7 @@ module Mindee
         attr_reader :value
 
         # @param prediction [Hash]
-        # @param page_id [Integer]
+        # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           @value = prediction['value']
           @page_id = page_id

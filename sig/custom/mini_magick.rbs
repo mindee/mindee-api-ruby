@@ -1,24 +1,31 @@
 # Stub for the mini_magick library.
+# Note: though typing annotations for the MiniMagick library now exist, it seems that they aren't strict enough
+# to match the rules we have on the repo, hence the existence of this file and the overrides present below.
 module MiniMagick
   class Image
-    def format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
     def self.format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
+    def format: (String, ?Integer?, ?Hash[Symbol, untyped]?) -> Net::BufferedIO
     def self.quality: (String) -> Net::BufferedIO
     def self.crop: (String) -> Net::BufferedIO
+    def crop: (String) -> Net::BufferedIO
     def self.height: () -> Integer
-    def height: () -> Integer
     def self.width: () -> Integer
+    def height: () -> Integer
     def width: () -> Integer
-    def self.read: (untyped) -> self
+    def self.data: (?untyped?, ?untyped?) -> untyped
+    def data: (?untyped?, ?untyped) -> instance
+    def self.read: (?untyped?, ?untyped?) -> Image
+    def read: (?untyped?, ?untyped) -> Image
     def self.resolution: () -> Array[Float | Integer]
+    def resolution: () -> Array[Float | Integer]
     def self.write: (StringIO | String) -> Net::BufferedIO
     def write: (StringIO | String) -> Net::BufferedIO
-    def quality: (Integer) -> void
+    def quality: (String) -> void
     def self.resize: (String) -> void
     def resize: (String) -> void
     def self.to_blob: () -> String
     def to_blob: () -> String
-    def self.[]: (?untyped) -> untyped
-    def []: (?untyped) -> untyped
+    def self.[]: (*untyped) -> untyped
+    def []: (*untyped) -> untyped
   end
 end

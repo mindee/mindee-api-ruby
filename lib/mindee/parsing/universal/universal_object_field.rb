@@ -15,15 +15,18 @@ module Mindee
         # @return [Float]
         attr_reader :confidence
         # Value as String
-        # @return [Hash<Symbol | String, untyped>, nil]
-        attr_accessor :raw_value
+        # @return [String]
+        attr_reader :raw_value
+        # All values
+        # @return [Hash]
+        attr_reader :all_values
 
         # ID of the page the object was found on.
         # Confidence with which the value was assessed.
         # Raw unprocessed value, as it was sent by the server.
 
         def initialize(raw_prediction, page_id = nil)
-          @all_values = {} # : Hash[Symbol | String, untyped]
+          @all_values = {} # : Hash[String | Symbol, untyped]
           item_page_id = nil
           raw_prediction.each do |name, value|
             case name

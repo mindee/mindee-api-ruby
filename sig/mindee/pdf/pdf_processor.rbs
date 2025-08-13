@@ -2,10 +2,10 @@
 module Mindee
   module PDF
     module PDFProcessor
-      def self.parse: (StringIO, PageOptions) -> StringIO
-      def self.indexes_from_keep: (Array[Integer], Array[untyped]) -> (Array[Integer] | Array[untyped])
-      def self.indexes_from_remove: (Array[Integer], Array[untyped]) -> (Array[Integer] | Array[untyped])
-      def self.open_pdf: (StringIO) -> Origami::PDF
+      def self.parse: (StringIO | File, PageOptions) -> StringIO
+      def self.indexes_from_keep: (Array[Integer], Array[Integer]) -> (Array[Integer])
+      def self.indexes_from_remove: (Array[Integer], Array[Integer]) -> (Array[Integer])
+      def self.open_pdf: (StringIO | File) -> Origami::PDF
       def self.get_page: (Origami::PDF, Integer) -> StringIO
     end
   end

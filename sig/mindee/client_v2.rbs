@@ -1,0 +1,17 @@
+# lib/mindee/client_v2.rb
+
+OTS_OWNER: String
+module Mindee
+  class ClientV2
+    attr_reader mindee_api: HTTP::MindeeApiV2
+
+    def logger: () -> Logger
+    def initialize: (?api_key: String) -> void
+    def get_inference: (String) -> Parsing::V2::InferenceResponse
+    def get_job: (String) -> Parsing::V2::JobResponse
+    def enqueue_inference: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::InferenceParameters) -> Parsing::V2::JobResponse
+    def enqueue_and_get_inference: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::InferenceParameters) -> Parsing::V2::InferenceResponse
+    def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
+    def normalize_inference_parameters: (Hash[String | Symbol, untyped] | Input::InferenceParameters) -> Input::InferenceParameters
+  end
+end

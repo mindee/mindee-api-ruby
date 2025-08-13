@@ -10,7 +10,7 @@ module Mindee
 
       def initialize: (untyped, ?api_key: String) -> String
 
-      def execute_workflow: (Input::Source::LocalInputSource | Input::Source::URLInputSource, WorkflowOptions) -> [untyped, untyped]
+      def execute_workflow: (Input::Source::LocalInputSource | Input::Source::URLInputSource, WorkflowOptions) -> [Hash[String, untyped], String]
 
       def workflow_execution_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, WorkflowOptions) -> Net::HTTPResponse?
 

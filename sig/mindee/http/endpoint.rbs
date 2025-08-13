@@ -2,25 +2,26 @@
 module Mindee
   module HTTP
     API_KEY_ENV_NAME: String
-    API_KEY_DEFAULT: nil
+    API_KEY_DEFAULT: String?
     BASE_URL_ENV_NAME: String
     BASE_URL_DEFAULT: String
     REQUEST_TIMEOUT_ENV_NAME: String
     TIMEOUT_DEFAULT: Integer
     USER_AGENT: String
     class Endpoint
-      def logger: () -> untyped
-      def api_key: -> String?
-      def request_timeout: -> Integer
-      def url_root: -> String
-      def base_url: -> String
-      def initialize: (String, String, String | nil, ?api_key: String) -> String
-      def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
-      def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
-      def parse_async: (String) -> [Net::HTTPResponse, Hash[Symbol, untyped]]
+      attr_reader api_key: String
+      attr_reader base_url: String
+      attr_reader request_timeout: Integer
+      attr_reader url_root: String
+
+      def logger: () -> Logger
+      def initialize: (String, String, String?, ?api_key: String) -> String
+      def predict: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[String | Symbol, untyped], String]
+      def predict_async: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> [Hash[String | Symbol, untyped], String]
+      def parse_async: (String) -> [Hash[String | Symbol, untyped], String]
       def predict_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
       def document_queue_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
-      def document_queue_req_get: (untyped) -> Net::HTTPResponse
+      def document_queue_req_get: (String) -> Net::HTTPResponse
       def check_api_key: -> void
     end
   end

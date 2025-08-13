@@ -21,7 +21,7 @@ module Mindee
         # @return [Mindee::Inference]
         attr_reader :inference
         # Priority of the execution.
-        # @return [ExecutionPriority]
+        # @return [ExecutionPriority, Symbol, nil]
         attr_reader :priority
         # The time at which the file was tagged as reviewed.
         # @return [Time, nil]

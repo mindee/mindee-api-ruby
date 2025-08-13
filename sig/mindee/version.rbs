@@ -1,6 +1,6 @@
 # lib/mindee/version.rb
 module Mindee
   VERSION: String
-  def self.find_platform: -> (Symbol | Hash[Symbol | String, Regexp])?
-  PLATFORM: (Hash[Symbol | String, Regexp] | Symbol)
+  def self.find_platform: -> (Symbol | Hash[String | Symbol, Regexp])?
+  PLATFORM: (Hash[String | Symbol, Regexp] | Symbol)
 end

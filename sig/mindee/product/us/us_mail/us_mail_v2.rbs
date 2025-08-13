@@ -5,7 +5,7 @@ module Mindee
     module US
       module UsMail
         class UsMailV2 < Parsing::Common::Inference
-          def initialize: (Hash[Symbol | String, untyped]) -> void
+          def initialize: (Hash[String | Symbol, untyped]) -> void
         end
       end
     end

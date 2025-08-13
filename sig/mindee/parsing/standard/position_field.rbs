@@ -8,9 +8,9 @@ module Mindee
         def quadrangle: -> Geometry::Quadrilateral
         def rectangle: -> Geometry::Quadrilateral
         def bounding_box: -> Geometry::Quadrilateral
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def to_s: -> String
-        def to_quadrilateral: (Hash[Symbol | String, Array[untyped]], String) -> Geometry::Quadrilateral?
+        def to_quadrilateral: (Hash[String | Symbol, Array[untyped]], String) -> Geometry::Quadrilateral?
       end
     end
   end

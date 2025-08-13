@@ -1,21 +1,22 @@
 # Stubs for the origami library.
 # This one _should_ exist, but it would take too long, so this is a stub.
 module Origami
+  def compile: (Hash[Symbol, untyped]) -> void
   class Array
     def each: { (untyped) -> untyped } -> untyped
   end
   class PDF
-    def self.read: (StringIO) -> untyped
+    def self.read: (StringIO | File) -> untyped
     def initialize: () -> void
     def append_page: (Page) -> void
     def delete_pages_at: (::Array[Integer]) -> void
-    def pages: () -> untyped
-    def save: (StringIO) -> void
+    def pages: () -> ::Array[Page]
+    def save: (StringIO | File) -> void
     def to_io_stream: -> StringIO
     class LinearParser
       def initialize: (Hash[Symbol, untyped]) -> void
       def new: (Hash[Symbol, untyped]) -> void
-      def parse: (StringIO?) -> PDF
+      def parse: (StringIO | File?) -> PDF
     end
   end
 
@@ -23,6 +24,9 @@ module Origami
     def initialize: () -> void
     def add_xobject: (Graphics::ImageXObject, String) -> untyped
     def Contents: (?untyped?) -> untyped
+    def Contents=: (?untyped?, untyped?) -> untyped
+    def []: (untyped) -> untyped
+    def []=: (untyped, untyped) -> bool
   end
 
   module Graphics
@@ -31,6 +35,7 @@ module Origami
 
       def BitsPerComponent=: (Integer) -> untyped
       def ColorSpace=: (Symbol) -> untyped
+      def dictionary: () -> Hash[Symbol, untyped]
       def data=: (StringIO) -> untyped
       def self.from_image_file: (StringIO, String) -> untyped
       def Height=: (Integer | Float) -> untyped

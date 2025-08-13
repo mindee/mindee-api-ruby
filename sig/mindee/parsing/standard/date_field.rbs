@@ -2,12 +2,12 @@
 module Mindee
   module Parsing
     module Standard
-      class DateField # failed to identify its superclass
-        def date_object: -> untyped
-        def value: -> untyped
-        def raw: -> untyped
-        def is_computed: -> untyped
-        def initialize: (untyped, untyped) -> nil
+      class DateField < BaseField
+        def date_object: -> DateTime
+        def value: -> String?
+        def raw: -> String?
+        def is_computed: -> bool
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
       end
     end
   end

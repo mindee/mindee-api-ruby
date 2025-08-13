@@ -8,9 +8,13 @@ module Mindee
     module Common
       # Potential values for queue in asynchronous calls.
       module JobStatus
+        # Job is waiting.
         WAITING    = :waiting
+        # Job is processing.
         PROCESSING = :processing
+        # Job is done.
         COMPLETED  = :completed
+        # Job failed.
         FAILURE    = :failed
       end
 

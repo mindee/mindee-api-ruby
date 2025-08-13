@@ -5,7 +5,7 @@ module Mindee
     module IND
       module IndianPassport
         class IndianPassportV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def address1: -> (Parsing::Standard::StringField)
           def address2: -> (Parsing::Standard::StringField)
           def address3: -> (Parsing::Standard::StringField)

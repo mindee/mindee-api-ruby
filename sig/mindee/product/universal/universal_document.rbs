@@ -3,7 +3,7 @@ module Mindee
   module Product
     module Universal
       class UniversalDocument < Parsing::Common::Document
-        def initialize: (Hash[Symbol | String, untyped]) -> void
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
   end

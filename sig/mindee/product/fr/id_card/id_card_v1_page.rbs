@@ -5,10 +5,10 @@ module Mindee
     module FR
       module IdCard
         class IdCardV1Page < Parsing::Common::Page
-          def initialize: (Hash[Symbol | String, untyped]) -> void
+          def initialize: (Hash[String | Symbol, untyped]) -> void
         end
         class IdCardV1PagePrediction < IdCardV1Document
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def document_side: -> Parsing::Standard::ClassificationField
           def to_s: -> String
         end

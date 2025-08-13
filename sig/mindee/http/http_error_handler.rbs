@@ -2,9 +2,14 @@
 module Mindee
   module HTTP
     module ErrorHandler
-      def extract_error: (untyped) -> nil
-      def create_error_obj: (untyped) -> (Hash[String, String] | Hash[untyped, untyped])?
-      def self.handle_error: (untyped, untyped) -> untyped
+      def extract_error: (Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]?
+      def create_error_obj: (Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
+      def self.generate_v2_error: (Hash[String, Integer | String]) -> Errors::MindeeHTTPErrorV2
+      def generate_v2_error: (Hash[Symbol, String | Integer]) -> Errors::MindeeHTTPErrorV2
+
+      def self.handle_error: (String, Net::HTTPResponse) -> Errors::MindeeHTTPError
+      def handle_error:      (String, Net::HTTPResponse) -> Errors::MindeeHTTPError
+      def handle_v2_error: (Hash[String | Symbol, untyped]) -> void
     end
   end
 end

@@ -8,7 +8,7 @@ module Mindee
         # @return [Hash]
         attr_reader :error
         # @return [Array<String>]
-        attr_reader :ressources
+        attr_reader :resources
         # @return [RequestStatus, Symbol]
         attr_reader :status
         # @return [Integer]
@@ -18,7 +18,7 @@ module Mindee
 
         def initialize(server_response)
           @error = server_response['error']
-          @ressources = server_response['ressources']
+          @resources = server_response['resources']
 
           @status = if server_response['status'] == 'failure'
                       RequestStatus::FAILURE

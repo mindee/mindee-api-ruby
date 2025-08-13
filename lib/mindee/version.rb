@@ -6,7 +6,7 @@ module Mindee
   VERSION = '4.6.0'
 
   # Finds and return the current platform.
-  # @return [Symbol, Hash[Symbol | String, Regexp], Nil?]
+  # @return [Symbol, Hash[String | Symbol, Regexp], Nil?]
   def self.find_platform
     host = RbConfig::CONFIG['host_os']
     platforms = {

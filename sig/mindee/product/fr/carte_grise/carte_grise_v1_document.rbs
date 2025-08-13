@@ -5,7 +5,7 @@ module Mindee
     module FR
       module CarteGrise
         class CarteGriseV1Document < Parsing::Common::Prediction
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def a: -> (Parsing::Standard::StringField)
           def b: -> (Parsing::Standard::DateField)
           def c1: -> (Parsing::Standard::StringField)

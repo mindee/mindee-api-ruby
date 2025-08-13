@@ -3,7 +3,7 @@ module Mindee
     module FR
       module EnergyBill
         class EnergyBillV1EnergyUsage < Parsing::Standard::FeatureField
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def consumption: -> Float
           def description: -> String
           def end_date: -> String
@@ -12,8 +12,8 @@ module Mindee
           def total: -> Float
           def unit: -> String
           def unit_price: -> Float
-          def printable_values: -> Hash[Symbol | String, untyped]
-          def table_printable_values: -> Hash[Symbol | String, untyped]
+          def printable_values: -> Hash[String | Symbol, untyped]
+          def table_printable_values: -> Hash[String | Symbol, untyped]
           def to_table_line: -> String
           def to_s: -> String
         end

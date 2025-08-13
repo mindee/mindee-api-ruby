@@ -18,12 +18,12 @@ module Mindee
 
         # Overload of the same function to prevent a base64 from being re-encoded.
         # @param close [bool]
-        # @return [Array<String, [String, aBinaryString ], [Hash, nil] >]
+        # @return [Array<[String, aBinaryString ], [Hash, nil] >]
         def read_contents(close: true)
           @io_stream.seek(0)
           data = @io_stream.read
           @io_stream.close if close
-          ['document', [data].pack('m'), { filename: Source.convert_to_unicode_escape(@filename) }]
+          [[data].pack('m'), { filename: Source.convert_to_unicode_escape(@filename) }]
         end
       end
     end

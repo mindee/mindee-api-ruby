@@ -5,9 +5,9 @@ module Mindee
       module OCR
         class MVisionV1
           def pages: -> []
-          def initialize: (untyped) -> untyped
+          def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String
-          def reconstruct_vertically: (untyped, untyped, untyped) -> untyped
+          def reconstruct_vertically: (Array[Geometry::Point], Integer, Float) -> OCRLine
         end
       end
     end

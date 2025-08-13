@@ -2,12 +2,12 @@
 module Mindee
   module Image
     module ImageExtractor
-      def self.attach_image_as_new_file: (untyped, ?format: String) -> untyped
+      def self.attach_image_as_new_file: (StringIO | File, ?format: String) -> Origami::PDF
       def self.to_blob: () -> String
-      def self.extract_multiple_images_from_source: (untyped, untyped, untyped) -> Array[untyped]
-      def self.extract_images_from_polygons: (untyped, untyped, untyped, untyped) -> Array[untyped]
-      def self.create_extracted_image: (StringIO, String, untyped, untyped) -> untyped
-      def self.load_input_source_pdf_page_as_stringio: (untyped, untyped) -> untyped
+      def self.extract_multiple_images_from_source: (Input::Source::LocalInputSource, Integer, Array[Array[Geometry::Point] |Geometry::Polygon | Geometry::Quadrilateral]) -> Array[ExtractedImage]
+      def self.extract_images_from_polygons: (Input::Source::LocalInputSource, StringIO | File, Integer, Array[Array[Geometry::Point] | Geometry::Polygon | Geometry::Quadrilateral]) -> Array[ExtractedImage]
+      def self.create_extracted_image: (StringIO | File, String, Integer, Integer) -> void
+      def self.load_input_source_pdf_page_as_stringio: (Input::Source::LocalInputSource, Integer) -> (StringIO | File)
     end
   end
 end

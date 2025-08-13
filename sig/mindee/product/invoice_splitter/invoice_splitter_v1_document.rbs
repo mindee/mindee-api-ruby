@@ -4,7 +4,7 @@ module Mindee
   module Product
     module InvoiceSplitter
       class InvoiceSplitterV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def invoice_page_groups: -> (Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups)
         def invoice_page_groups_separator: (String) -> String
         def invoice_page_groups_to_s: -> String

@@ -3,12 +3,12 @@ module Mindee
   module Parsing
     module Common
       class ApiRequest
-        def error: -> untyped
-        def ressources: -> untyped
-        def status: -> untyped
-        def status_code: -> untyped
-        def url: -> untyped
-        def initialize: (untyped) -> untyped
+        def error: -> Hash[String, untyped]
+        def ressources: -> Array[String]
+        def status: -> [RequestStatus, Symbol]
+        def status_code: -> Integer
+        def url: -> String
+        def initialize: (Hash[String, untyped]) -> void
       end
     end
   end

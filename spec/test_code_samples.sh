@@ -5,6 +5,8 @@ OUTPUT_FILE='./_test.rb'
 ACCOUNT=$1
 ENDPOINT=$2
 API_KEY=$3
+API_KEY_V2=$4
+MODEL_ID=$5
 
 if [ -z "${ACCOUNT}" ]; then echo "ACCOUNT is required"; exit 1; fi
 if [ -z "${ENDPOINT}" ]; then echo "ENDPOINT is required"; exit 1; fi
@@ -19,6 +21,14 @@ do
 
   sed "s/my-api-key/${API_KEY}/" "$f" > $OUTPUT_FILE
   sed -i 's/\/path\/to\/the\/file.ext/.\/spec\/data\/file_types\/pdf\/blank_1.pdf/' $OUTPUT_FILE
+
+  if echo "${f}" | grep -q "default_v2.txt"
+  then
+    sed -i "s/MY_API_KEY/$API_KEY_V2/" $OUTPUT_FILE
+    sed -i "s/MY_MODEL_ID/$MODEL_ID/" $OUTPUT_FILE
+  else
+    sed -i "s/my-api-key/$API_KEY/" $OUTPUT_FILE
+  fi
 
   if echo "$f" | grep -q "custom_v1.txt"
   then

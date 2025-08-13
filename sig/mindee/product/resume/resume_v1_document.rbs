@@ -4,7 +4,7 @@ module Mindee
   module Product
     module Resume
       class ResumeV1Document < Parsing::Common::Prediction
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def address: -> (Parsing::Standard::StringField)
         def certificates: -> (Product::Resume::ResumeV1Certificates)
         def document_language: -> (Parsing::Standard::StringField)

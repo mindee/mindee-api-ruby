@@ -8,7 +8,7 @@ module Mindee
         def page_id: -> Integer?
         def confidence: -> Float?
         def confidence=: (Float?) -> Float?
-        def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
         def to_s: -> String
         def self.array_confidence: (Array[untyped]) -> Float
         def self.array_sum: (Array[untyped]) -> Float

@@ -2,38 +2,17 @@
 
 require_relative 'input'
 require_relative 'http'
-require_relative 'product'
+require_relative 'logging'
+require_relative 'page_options'
 require_relative 'parsing/common/api_response'
 require_relative 'parsing/common/job'
 require_relative 'parsing/common/workflow_response'
-require_relative 'logging'
+require_relative 'product'
 
 # Default owner for products.
 OTS_OWNER = 'mindee'
 
 module Mindee
-  # Class for page options in parse calls.
-  #
-  # @!attribute page_indexes [Array[Integer]] Zero-based list of page indexes.
-  # @!attribute operation [:KEEP_ONLY, :REMOVE] Operation to apply on the document, given the specified page indexes:
-  #   * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-  #   * `:REMOVE` - remove the specified pages, and keep all others.
-  # @!attribute on_min_pages [Integer, nil] Apply the operation only if the document has at least this many pages.
-  class PageOptions
-    attr_accessor :page_indexes, :operation, :on_min_pages
-
-    def initialize(params: {})
-      params ||= {}
-      params = params.transform_keys(&:to_sym)
-      @page_indexes = params.fetch(
-        :page_indexes,
-        [] # : Array[Integer]
-      )
-      @operation    = params.fetch(:operation, :KEEP_ONLY)
-      @on_min_pages = params.fetch(:on_min_pages, nil)
-    end
-  end
-
   # Class for configuration options in parse calls.
   #
   # @!attribute all_words [bool] Whether to include the full text for each page.
@@ -89,8 +68,9 @@ module Mindee
   #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
   #       * `:REMOVE` - remove the specified pages, and keep all others.
   #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
+  # @!attribute close_file [bool, nil] Whether to close the file after sending it. Defaults to true.
   class WorkflowOptions
-    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options, :rag
+    attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options, :rag, :close_file
 
     def initialize(params: {})
       params = params.transform_keys(&:to_sym)
@@ -102,6 +82,7 @@ module Mindee
       raw_page_options = params.fetch(:page_options, nil)
       raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
       @page_options = raw_page_options
+      @close_file = params.fetch(:close_file, true)
     end
   end
 
@@ -326,7 +307,7 @@ module Mindee
         process_pdf_if_required(input_source, opts)
       end
 
-      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key)
+      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key.to_s)
       logger.debug("Sending document to workflow '#{workflow_id}'")
 
       prediction, raw_http = workflow_endpoint.execute_workflow(
@@ -455,11 +436,11 @@ module Mindee
       account_name = fix_account_name(account_name)
       version = fix_version(product_class, version)
 
-      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key)
+      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key.to_s)
     end
 
     def fix_endpoint_name(product_class, endpoint_name)
-      endpoint_name.nil? || endpoint_name.empty? ? product_class.endpoint_name : endpoint_name
+      endpoint_name.nil? || endpoint_name.empty? ? product_class.endpoint_name.to_s : endpoint_name.to_s
     end
 
     def fix_account_name(account_name)
@@ -474,11 +455,11 @@ module Mindee
     def fix_version(product_class, version)
       return version unless version.nil? || version.empty?
 
-      if product_class.endpoint_version.nil? || product_class.endpoint_version.empty?
+      if product_class.endpoint_version.nil? || product_class.endpoint_version.to_s.empty?
         logger.debug('No version provided for a custom build, will attempt to poll version 1 by default.')
         return '1'
       end
-      product_class.endpoint_version
+      product_class.endpoint_version || ''
     end
 
     # If needed, converts the parsing options provided as a hash into a proper ParseOptions object.

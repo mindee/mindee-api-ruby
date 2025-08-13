@@ -5,10 +5,10 @@ module Mindee
     module FR
       module CarteGrise
         class CarteGriseV1Page < Parsing::Common::Page
-          def initialize: (Hash[Symbol | String, untyped]) -> void
+          def initialize: (Hash[String | Symbol, untyped]) -> void
         end
         class CarteGriseV1PagePrediction < CarteGriseV1Document
-          def initialize: (Hash[Symbol | String, untyped], Integer?) -> void
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
           def to_s: -> String
         end
       end

@@ -2,14 +2,11 @@
 module Mindee
   module Geometry
     class Quadrilateral
-      def top_left: -> Point
-      def top_left=: (Point) -> bool
-      def top_right: -> Point
-      def top_right=: (Point) -> untyped
-      def bottom_right: -> Point
-      def bottom_right=: (Point) -> untyped
-      def bottom_left: -> Point
-      def bottom_left=: (Point) -> untyped
+      attr_accessor bottom_left: Point
+      attr_accessor bottom_right: Point
+      attr_accessor top_left: Point
+      attr_accessor top_right: Point
+
       def initialize: (Point, Point, Point, Point) -> void
       def []: (Integer) -> Point
       def size: -> Integer

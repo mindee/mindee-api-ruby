@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+require_relative 'v2/common_response'
+require_relative 'v2/error_response'
+require_relative 'v2/field'
+require_relative 'v2/inference'
+require_relative 'v2/inference_file'
+require_relative 'v2/inference_model'
+require_relative 'v2/inference_response'
+require_relative 'v2/inference_result'
+require_relative 'v2/inference_result_options'
+require_relative 'v2/job'
+require_relative 'v2/job_response'
+require_relative 'v2/job_webhook'
+require_relative 'v2/raw_text'
