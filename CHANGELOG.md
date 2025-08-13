@@ -1,5 +1,17 @@
 # Mindee Ruby API Library Changelog
 
+## v4.7.0-rc1 - 2025-08-13
+### Changes
+* :sparkles: add support for client V2 & associated features
+
+### Fixes
+* :recycle: add many missing internal types
+* :bug: fix invalid types for many V1 features
+* :bug: fix V1 errors sometimes having the wrong code
+* :bug: fix many presumably immutable fields having non-readonly parameters
+* :bug: fix broken `resources` accessor in `ApiRequest` object
+
+
 ## v4.6.0 - 2025-06-03
 ### Changes
 * :sparkles: add support for address fields
