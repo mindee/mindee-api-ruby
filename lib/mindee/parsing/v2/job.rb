@@ -51,8 +51,7 @@ module Mindee
           end
         end
 
-        # RST-style string representation, useful for debugging or logs.
-        #
+        # String representation.
         # @return [String]
         def to_s
           lines = [

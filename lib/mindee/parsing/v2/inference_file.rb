@@ -22,7 +22,7 @@ module Mindee
           @mime_type  = server_response['mime_type']
         end
 
-        # RST-style string representation.
+        # String representation.
         # @return [String]
         def to_s
           "File\n" \

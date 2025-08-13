@@ -16,7 +16,7 @@ module Mindee
           @detail = server_response['detail']
         end
 
-        # String representation, useful when embedding in larger objects.
+        # String representation.
         # @return [String]
         def to_s
           "Error\n=====\n:Status: #{@status}\n:Detail: #{@detail}"

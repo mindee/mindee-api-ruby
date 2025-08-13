@@ -5,7 +5,7 @@ module Mindee
     module V2
       # Base class for inference and job responses on the V2 API.
       class CommonResponse
-        # @return [Hash<String | Symbol, untyped>]
+        # @return [Hash]
         attr_reader :raw_http
 
         # @param http_response [Hash]

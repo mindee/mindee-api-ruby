@@ -59,6 +59,9 @@ module Mindee
               "Cannot set auto-poll retries to less than #{min_retries}"
       end
 
+      # Loads a prediction from a Hash.
+      # @param [Hash] params Parameters to provide as a hash.
+      # @return [InferenceParameters]
       def self.from_hash(params: {})
         params.transform_keys!(&:to_sym)
 
@@ -86,6 +89,9 @@ module Mindee
 
       private
 
+      # Cleans a proper polling options object potentially from a hash.
+      # @param [Hash, PollingOptions, nil] polling_options Polling options.
+      # @return [PollingOptions] Valid polling options object.
       def get_clean_polling_options(polling_options)
         return PollingOptions.new if polling_options.is_a?(PollingOptions)
 

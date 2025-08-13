@@ -19,8 +19,7 @@ module Mindee
           @inference = Inference.new(server_response['inference'])
         end
 
-        # Delegates to CommonResponse's string representation and appends the inference details.
-        #
+        # String representation.
         # @return [String]
         def to_s
           @inference.to_s

@@ -36,7 +36,7 @@ module Mindee
         # A list of words which are on the same line.
         class OCRLine < Array
           # @param prediction [Hash, nil]
-          # @param from_array [Array<OCRWord, nil]
+          # @param from_array [Array<OCRWord>, nil]
           def initialize(prediction = nil, from_array = nil)
             if !prediction.nil?
               super(prediction.map { |word_prediction| OCRWord.new(word_prediction) })

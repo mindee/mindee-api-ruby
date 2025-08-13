@@ -24,8 +24,7 @@ module Mindee
           @options = InferenceResultOptions.new(server_response['options'])
         end
 
-        # RST-style string representation.
-        #
+        # String representation.
         # @return [String]
         def to_s
           parts = [

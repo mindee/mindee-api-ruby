@@ -9,8 +9,7 @@ require_relative 'parsing/common/workflow_response'
 require_relative 'logging'
 
 module Mindee
-  # Mindee API Client.
-  # See: https://developers.mindee.com/docs
+  # Mindee V2 API Client.
   class ClientV2
     # @return [HTTP::MindeeApiV2]
     private attr_reader :mindee_api
@@ -34,8 +33,7 @@ module Mindee
       @mindee_api.req_get_job(job_id)
     end
 
-    # Enqueue a document for async parsing
-    #
+    # Enqueue a document for async parsing.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param params [Hash, InferenceParameters]
@@ -47,8 +45,7 @@ module Mindee
       @mindee_api.req_post_inference_enqueue(input_source, normalized_params)
     end
 
-    # Enqueue a document for async parsing and automatically try to retrieve it
-    #
+    # Enqueue a document for async parsing and automatically try to retrieve it.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param params [Hash, InferenceParameters] Parameters for the inference.

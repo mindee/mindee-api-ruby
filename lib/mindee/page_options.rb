@@ -2,7 +2,6 @@
 
 module Mindee
   # Class for page options in parse calls.
-  #
   # @!attribute page_indexes [Array[Integer]] Zero-based list of page indexes.
   # @!attribute operation [:KEEP_ONLY, :REMOVE] Operation to apply on the document, given the specified page indexes:
   #   * `:KEEP_ONLY` - keep only the specified pages, and remove all others.

@@ -20,7 +20,8 @@ input_source = Mindee::Input::Source::PathInputSource.new(input_path)
 
 # Send for processing
 response = mindee_client.enqueue_and_get_inference(
-    input_source, params
+    input_source,
+    params # Note: this parameter can also be provided as a Hash.
 )
 
 # Print a brief summary of the parsed data

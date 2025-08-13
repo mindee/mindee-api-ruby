@@ -19,8 +19,7 @@ module Mindee
           @job = Job.new(server_response['job'])
         end
 
-        # Delegates to CommonResponse's string representation and appends the job details.
-        #
+        # String representation.
         # @return [String]
         def to_s
           @job.to_s

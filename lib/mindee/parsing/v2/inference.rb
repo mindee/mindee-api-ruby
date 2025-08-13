@@ -7,10 +7,7 @@ require_relative 'inference_result'
 module Mindee
   module Parsing
     module V2
-      # Complete data returned by an inference request:
-      #  • model information
-      #  • file information
-      #  • inference result (fields, options, …)
+      # Complete data returned by an inference request.
       class Inference
         # @return [InferenceModel] Information about the model used.
         attr_reader :model
@@ -32,8 +29,7 @@ module Mindee
           @id = server_response['id']
         end
 
-        # RST-style string representation (keeps parity with TS implementation).
-        #
+        # String representation.
         # @return [String]
         def to_s
           [

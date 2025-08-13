@@ -36,17 +36,15 @@ module Mindee
 
           private
 
-          # Format numeric values according to the PHP implementation logic.
+          # Format numeric values to display '.0' in string reps.
           # @param value [Numeric] The numeric value to format.
           # @return [String] Formatted numeric string.
           def format_numeric_value(value)
             float_value = value.to_f
 
-            # If it's effectively an integer, show with .0
             if float_value == float_value.to_i
               format('%.1f', float_value)
             else
-              # Format with up to 5 decimal places, removing trailing zeros
               formatted = format('%.5f', float_value)
               formatted.sub(%r{\.?0+$}, '')
             end
