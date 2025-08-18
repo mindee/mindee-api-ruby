@@ -166,8 +166,8 @@ module Mindee
           @io_stream.rewind
         end
 
-        # Checks whether the file has source text if it is a pdf. False otherwise
-        # @return [bool] True if the file is a PDF and has source text.
+        # Checks whether the file has source text if it is a pdf. `false` otherwise
+        # @return [bool] `true` if the file is a PDF and has source text.
         def source_text?
           Mindee::PDF::PDFTools.source_text?(@io_stream)
         end

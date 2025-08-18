@@ -11,7 +11,7 @@ mindee_client = Mindee::ClientV2.new(api_key: api_key)
 params = Mindee::Input::InferenceParameters.new(
     # ID of the model, required.
     model_id,
-    # If set to `True`, will enable Retrieval-Augmented Generation.
+    # If set to `true`, will enable Retrieval-Augmented Generation.
     rag: false,
 )
 
