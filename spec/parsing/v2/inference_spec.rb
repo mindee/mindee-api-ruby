@@ -92,7 +92,6 @@ RSpec.describe 'inference' do
       first_tax_item = taxes_list.items.first
       expect(first_tax_item).to be_a(object_field)
 
-
       expect(fields).to have_key('line_items')
       expect(fields['line_items']).not_to be_nil
       expect(fields['line_items']).to be_a(list_field)
