@@ -78,7 +78,7 @@ module Mindee
         #
         # @param method_name [Symbol] The name of the method being checked.
         # @param include_private [bool] Whether to include private methods in the check.
-        # @return [bool] True if the method can be responded to, false otherwise.
+        # @return [bool] `true` if the method can be responded to, false otherwise.
         def respond_to_missing?(method_name, include_private = false)
           @all_values.key?(method_name.to_s) || super
         end

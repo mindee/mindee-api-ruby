@@ -43,7 +43,7 @@ module Mindee
 
           # Check if method_missing should handle the method.
           # @param method_name [Symbol] The method name.
-          # @return [Boolean] True if the method should be handled.
+          # @return [Boolean] `true` if the method should be handled.
           def respond_to_missing?(method_name, include_private = false)
             key?(method_name.to_s) || super
           end

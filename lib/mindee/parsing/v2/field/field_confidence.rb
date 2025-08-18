@@ -40,25 +40,25 @@ module Mindee
           end
 
           # Check if this is a certain confidence level.
-          # @return [Boolean] True if confidence is certain.
+          # @return [Boolean] `true` if confidence is certain.
           def certain?
             @value == CERTAIN
           end
 
           # Check if this is a high confidence level.
-          # @return [Boolean] True if confidence is high.
+          # @return [Boolean] `true` if confidence is high.
           def high?
             @value == HIGH
           end
 
           # Check if this is a medium confidence level.
-          # @return [Boolean] True if confidence is medium.
+          # @return [Boolean] `true` if confidence is medium.
           def medium?
             @value == MEDIUM
           end
 
           # Check if this is a low confidence level.
-          # @return [Boolean] True if confidence is low.
+          # @return [Boolean] `true` if confidence is low.
           def low?
             @value == LOW
           end
@@ -71,7 +71,7 @@ module Mindee
 
           # Compare two FieldConfidence instances.
           # @param other [FieldConfidence] The other confidence to compare.
-          # @return [Boolean] True if they have the same value.
+          # @return [Boolean] `true` if they have the same value.
           def ==(other)
             other.is_a?(FieldConfidence) && @value == other.value
           end

@@ -44,7 +44,7 @@ module Mindee
       # Checks a PDFs stream content for text operators
       # See https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf page 243-251.
       # @param [StringIO] stream Stream object from a PDFs page.
-      # @return [bool] True if a text operator is found in the stream.
+      # @return [bool] `true` if a text operator is found in the stream.
       def self.stream_has_text?(stream)
         data = stream.data
         return false if data.nil? || data.empty?
@@ -55,7 +55,7 @@ module Mindee
 
       # Checks whether the file has source_text. Sends false if the file isn't a PDF.
       # @param [StringIO] pdf_data Abinary-encoded stream representing the PDF file.
-      # @return [bool] True if the pdf has source text, false otherwise.
+      # @return [bool] `true` if the pdf has source text, false otherwise.
       def self.source_text?(pdf_data)
         begin
           pdf_data.rewind

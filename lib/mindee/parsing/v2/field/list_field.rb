@@ -49,7 +49,7 @@ module Mindee
           end
 
           # Check if the list is empty.
-          # @return [Boolean] True if the list has no items.
+          # @return [Boolean] `true` if the list has no items.
           def empty?
             @items.empty?
           end
