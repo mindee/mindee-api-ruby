@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'marcel', '~> 1.0.2'
   spec.add_runtime_dependency 'mini_magick', '>=4', '< 6'
-  spec.add_runtime_dependency 'origamindee', '~> 3.1.0'
+  spec.add_runtime_dependency 'origamindee', '~> 4.2.0'
   spec.add_runtime_dependency 'pdf-reader', '~> 2.12.0'
 
   spec.add_development_dependency 'rake', '~> 12.3.3'
