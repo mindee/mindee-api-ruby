@@ -1,5 +1,13 @@
 # Mindee Ruby API Library Changelog
 
+## v4.7.0-rc2 - 2025-08-20
+### Changes
+* :recycle: add missing accessors for pdf fixing options in `LocalInputSource`
+### Fixes
+* :recycle: update existing PDF fixing syntax
+* :memo: fix typos & documentation
+
+
 ## v4.7.0-rc1 - 2025-08-13
 ### Changes
 * :sparkles: add support for client V2 & associated features
