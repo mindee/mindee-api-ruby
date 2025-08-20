@@ -2,7 +2,7 @@
 
 ## v4.7.0-rc2 - 2025-08-20
 ### Changes
-* :recycle: add missing accessors for pdf fixing options in `LocalInputSource`
+* :sparkles: add missing accessors for PDF fixing options in `LocalInputSource`
 ### Fixes
 * :recycle: update existing PDF fixing syntax
 * :memo: fix typos & documentation
