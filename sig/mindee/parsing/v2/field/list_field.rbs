@@ -12,7 +12,6 @@ module Mindee
           def empty?: -> bool
           def size: -> Integer
           def length: -> Integer
-          # NOTE: Steep is incapable of handling typing of `each` when multiple types are used.
           def each: () { (untyped) -> untyped } -> untyped
           def []: (Integer) -> (BaseField)
         end

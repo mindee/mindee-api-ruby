@@ -1,5 +1,5 @@
 # Stub for the mini_magick library.
-# Note: though typing annotations for the MiniMagick library now exist, it seems that they aren't strict enough
+# NOTE: though typing annotations for the MiniMagick library now exist, it seems that they aren't strict enough
 # to match the rules we have on the repo, hence the existence of this file and the overrides present below.
 module MiniMagick
   class Image

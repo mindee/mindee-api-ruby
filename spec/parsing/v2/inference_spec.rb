@@ -98,6 +98,12 @@ RSpec.describe 'inference' do
       expect(fields['line_items'][0]).to be_a(object_field)
       expect(fields['line_items'][0]['quantity'].value).to eq(1.0)
 
+      expect(fields).to have_key('line_items')
+      expect(fields['line_items']).not_to be_nil
+      expect(fields['line_items']).to be_a(list_field)
+      expect(fields['line_items'][0]).to be_a(object_field)
+      expect(fields['line_items'][0]['quantity'].value).to eq(1.0)
+
       tax_item_obj = first_tax_item
       expect(tax_item_obj.fields.size).to eq(3)
 
