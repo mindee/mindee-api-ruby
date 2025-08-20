@@ -26,7 +26,6 @@ module Mindee
             if @value.is_a?(TrueClass) || @value.is_a?(FalseClass)
               @value ? 'True' : 'False'
             elsif @value.is_a?(Integer) || @value.is_a?(Float)
-              # NOTE: explicitly typing because steep is very, very dumb
               num = @value # @type var num: Integer | Float
               format_numeric_value(num)
             else

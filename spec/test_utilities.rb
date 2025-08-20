@@ -17,7 +17,7 @@ module Mindee
     end
 
     # Implementation of the levenshtein algorithm from here: https://rosettacode.org/wiki/Levenshtein_distance#Ruby
-    # Note: removes the downcase operation since we care about case in the return strings.
+    # Without the downcase operation since we care about case in the return strings.
     # @param [String] ref_string First String.
     # @param [String] target_string Second String.
     # @return [Integer] Levenshtein distance between the strings.

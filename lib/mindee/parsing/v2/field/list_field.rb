@@ -74,7 +74,7 @@ module Mindee
           end
 
           # Iterator for Enumerator inheritance.
-          # NOTE: Untyped due to incomplete support in steep.
+          # NOTE: Untyped due to incomplete support in current supported version of RBS.
           def each(&block)
             return to_enum(:each) unless block_given?
 

@@ -47,8 +47,7 @@ module Mindee
           end
 
           if filename.end_with?('.pdf') && repair_pdf
-            rescue_broken_pdf(@io_stream)
-            @file_mimetype = Marcel::MimeType.for @io_stream
+            fix_pdf!
 
             logger.debug("Loaded new input #{@filename} from #{self.class}")
             return if ALLOWED_MIME_TYPES.include? @file_mimetype
@@ -57,25 +56,38 @@ module Mindee
           raise Errors::MindeeMimeTypeError, @file_mimetype.to_s
         end
 
-        # Attempts to fix pdf files if mimetype is rejected.
-        # "Broken PDFs" are often a result of third-party injecting invalid headers.
-        # This attempts to remove them and send the file
-        # @param stream [StringIO, File]
-        def rescue_broken_pdf(stream)
-          stream.gets('%PDF-')
-          raise Errors::MindeePDFError if stream.eof? || stream.pos > 500
-
-          stream.pos = stream.pos - 5
-          data = stream.read
-          @io_stream.close
-
-          @io_stream = StringIO.new
-          @io_stream << data
+        # @deprecated See {#fix_pdf!} or {#self.fix_pdf} instead.
+        def rescue_broken_pdf(_)
+          fix_pdf!
         end
 
-        # Shorthand for pdf mimetype validation.
+        # Shorthand for PDF mimetype validation.
         def pdf?
           @file_mimetype.to_s == 'application/pdf'
+        end
+
+        # Attempts to fix the PDF data in the file.
+        # @param maximum_offset [Integer] Maximum offset to look for the PDF header.
+        # @return [void]
+        # @raise [Mindee::Errors::MindeePDFError]
+        def fix_pdf!(maximum_offset: 500)
+          @io_stream = LocalInputSource.fix_pdf(@io_stream, maximum_offset: maximum_offset)
+          @io_stream.rewind
+          @file_mimetype = Marcel::MimeType.for @io_stream
+        end
+
+        # Attempt to fix the PDF data in the given stream.
+        # @param stream [StringIO] The stream to fix.
+        # @param maximum_offset [Integer] Maximum offset to look for the PDF header.
+        # @return [StringIO] The fixed stream.
+        # @raise [Mindee::Errors::MindeePDFError]
+        def self.fix_pdf(stream, maximum_offset: 500)
+          out_stream = StringIO.new
+          stream.gets('%PDF-')
+          raise Errors::MindeePDFError if stream.eof? || stream.pos > maximum_offset
+
+          stream.pos = stream.pos - 5
+          out_stream << stream.read
         end
 
         # Cuts a PDF file according to provided options.

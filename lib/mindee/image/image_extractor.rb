@@ -18,12 +18,10 @@ module Mindee
       # @return [Origami::PDF] A PdfDocument handle.
       def self.attach_image_as_new_file(input_buffer, format: 'jpg')
         magick_image = MiniMagick::Image.read(input_buffer)
-        # NOTE: some jpeg images get rendered as three different versions of themselves per output if the format isn't
-        # converted.
+        # NOTE: We force format consolidation to a single format to avoid frames being interpreted as the final output.
         magick_image.format(format)
         original_density = magick_image.resolution
-        scale_factor = original_density[0].to_f / 4.166666 # No clue why the resolution needs to be reduced for
-        # the pdf otherwise the resulting image shrinks.
+        scale_factor = original_density[0].to_f / 4.166666 # Convert from default 300 DPI to 72.
         magick_image.format('pdf', 0, { density: scale_factor.to_s })
         Origami::PDF.read(StringIO.new(magick_image.to_blob))
       end
@@ -32,8 +30,7 @@ module Mindee
       #
       # @param [Input::Source::LocalInputSource] input_source
       # @param [Integer] page_id ID of the Page to extract from.
-      # @param [Array<Array<Geometry::Point>>, Array<Geometry::Quadrilateral>] polygons List of coordinates.
-      # to extract.
+      # @param [Array<Array<Geometry::Point>>, Array<Geometry::Quadrilateral>] polygons List of coordinates to extract.
       # @return [Array<Image::ExtractedImage>] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
         new_stream = load_input_source_pdf_page_as_stringio(input_source, page_id)

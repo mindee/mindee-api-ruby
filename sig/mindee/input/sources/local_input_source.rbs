@@ -8,10 +8,14 @@ module Mindee
         attr_reader filename: String
         attr_reader io_stream: StringIO | File
         def initialize: (StringIO | File, String, ?repair_pdf: bool) -> void
+
+        def fix_pdf!: (?maximum_offset: Integer) -> void
+        def self.fix_pdf: (StringIO | File, ?maximum_offset: Integer) -> StringIO
+
         def logger: () -> Logger
 
 
-        def rescue_broken_pdf: (StringIO | File) -> (StringIO | File)
+        def rescue_broken_pdf: (untyped) -> void
         def pdf?: -> bool
         def apply_page_options: (PageOptions) -> StringIO?
         def process_pdf: (PageOptions) -> StringIO?
