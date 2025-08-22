@@ -3,6 +3,8 @@
 require 'mindee'
 
 RSpec.describe 'inference' do
+  include Mindee::Parsing::V2::Field
+
   let(:v2_data_dir) { File.join(DATA_DIR, 'v2') }
   let(:findoc_path) { File.join(v2_data_dir, 'products', 'financial_document') }
   let(:inference_path) { File.join(v2_data_dir, 'inference') }
@@ -19,11 +21,6 @@ RSpec.describe 'inference' do
     local_response.deserialize_response(Mindee::Parsing::V2::InferenceResponse)
   end
 
-  simple_field = Mindee::Parsing::V2::Field::SimpleField
-  object_field = Mindee::Parsing::V2::Field::ObjectField
-  list_field   = Mindee::Parsing::V2::Field::ListField
-  field_conf   = Mindee::Parsing::V2::Field::FieldConfidence
-
   describe 'simple' do
     it 'loads a blank inference with valid properties' do
       response = load_v2_inference(blank_path)
@@ -33,20 +30,20 @@ RSpec.describe 'inference' do
       expect(fields.size).to eq(21)
       expect(fields).to have_key('taxes')
       expect(fields['taxes']).not_to be_nil
-      expect(fields['taxes']).to be_a(list_field)
+      expect(fields['taxes']).to be_a(ListField)
 
       expect(fields['supplier_address']).not_to be_nil
-      expect(fields['supplier_address']).to be_a(object_field)
+      expect(fields['supplier_address']).to be_a(ObjectField)
 
       fields.each_value do |entry|
-        next if entry.is_a?(simple_field) && entry.value.nil?
+        next if entry.is_a?(SimpleField) && entry.value.nil?
 
         case entry
-        when simple_field
+        when SimpleField
           expect(entry.value).not_to be_nil
-        when object_field
+        when ObjectField
           expect(entry.fields).not_to be_nil
-        when list_field
+        when ListField
           expect(entry.items).not_to be_nil
         else
           raise "Unknown field type: #{entry.class}"
@@ -77,12 +74,12 @@ RSpec.describe 'inference' do
       expect(fields.size).to eq(21)
 
       date_field = fields['date']
-      expect(date_field).to be_a(simple_field)
+      expect(date_field).to be_a(SimpleField)
       expect(date_field.value).to eq('2019-11-02')
 
       expect(fields).to have_key('taxes')
       taxes = fields['taxes']
-      expect(taxes).to be_a(list_field)
+      expect(taxes).to be_a(ListField)
 
       taxes_list = taxes
       expect(taxes_list.items.length).to eq(1)
@@ -90,7 +87,7 @@ RSpec.describe 'inference' do
       expect(taxes_list.to_s).to_not be_empty
 
       first_tax_item = taxes_list.items.first
-      expect(first_tax_item).to be_a(object_field)
+      expect(first_tax_item).to be_a(ObjectField)
 
       expect(fields).to have_key('line_items')
       expect(fields['line_items']).not_to be_nil
@@ -100,33 +97,33 @@ RSpec.describe 'inference' do
 
       expect(fields).to have_key('line_items')
       expect(fields['line_items']).not_to be_nil
-      expect(fields['line_items']).to be_a(list_field)
-      expect(fields['line_items'][0]).to be_a(object_field)
+      expect(fields['line_items']).to be_a(ListField)
+      expect(fields['line_items'][0]).to be_a(ObjectField)
       expect(fields['line_items'][0]['quantity'].value).to eq(1.0)
 
       tax_item_obj = first_tax_item
       expect(tax_item_obj.fields.size).to eq(3)
 
       base_field = tax_item_obj.fields['base']
-      expect(base_field).to be_a(simple_field)
+      expect(base_field).to be_a(SimpleField)
       expect(base_field.value).to eq(31.5)
 
       expect(fields).to have_key('supplier_address')
       supplier_address = fields['supplier_address']
-      expect(supplier_address).to be_a(object_field)
+      expect(supplier_address).to be_a(ObjectField)
 
       supplier_obj = supplier_address
       country_field = supplier_obj.fields['country']
-      expect(country_field).to be_a(simple_field)
+      expect(country_field).to be_a(SimpleField)
       expect(country_field.value).to eq('USA')
       expect(country_field.to_s).to eq('USA')
       expect(supplier_address.to_s).to be_a(String)
       expect(supplier_address.to_s).to_not be_empty
 
       customer_addr = fields['customer_address']
-      expect(customer_addr).to be_a(object_field)
+      expect(customer_addr).to be_a(ObjectField)
       city_field = customer_addr.fields['city']
-      expect(city_field).to be_a(simple_field)
+      expect(city_field).to be_a(SimpleField)
       expect(city_field.value).to eq('New York')
 
       expect(inf.result.options).to be_nil
@@ -138,28 +135,28 @@ RSpec.describe 'inference' do
       response = load_v2_inference(deep_nested_field_path)
       fields = response.inference.result.fields
 
-      expect(fields['field_simple']).to be_a(simple_field)
-      expect(fields['field_object']).to be_a(object_field)
+      expect(fields['field_simple']).to be_a(SimpleField)
+      expect(fields['field_object']).to be_a(ObjectField)
 
       field_object = fields['field_object']
       lvl1 = field_object.fields
 
-      expect(lvl1['sub_object_list']).to be_a(list_field)
-      expect(lvl1['sub_object_object']).to be_a(object_field)
+      expect(lvl1['sub_object_list']).to be_a(ListField)
+      expect(lvl1['sub_object_object']).to be_a(ObjectField)
 
       sub_object_object = lvl1['sub_object_object']
       lvl2 = sub_object_object.fields
 
-      expect(lvl2['sub_object_object_sub_object_list']).to be_a(list_field)
+      expect(lvl2['sub_object_object_sub_object_list']).to be_a(ListField)
 
       nested_list = lvl2['sub_object_object_sub_object_list']
       expect(nested_list.items).not_to be_empty
-      expect(nested_list.items.first).to be_a(object_field)
+      expect(nested_list.items.first).to be_a(ObjectField)
 
       first_item_obj = nested_list.items.first
       deep_simple = first_item_obj.fields['sub_object_object_sub_object_list_simple']
 
-      expect(deep_simple).to be_a(simple_field)
+      expect(deep_simple).to be_a(SimpleField)
       expect(deep_simple.value).to eq('value_9')
     end
   end
@@ -169,27 +166,28 @@ RSpec.describe 'inference' do
       response = load_v2_inference(standard_field_path)
       fields = response.inference.result.fields
 
-      expect(fields['field_simple_string']).to be_a(simple_field)
+      expect(fields['field_simple_string']).to be_a(SimpleField)
       expect(fields['field_simple_string'].value).to eq('field_simple_string-value')
+      expect(fields['field_simple_string'].confidence).to eq(FieldConfidence::MEDIUM)
 
-      expect(fields['field_simple_float']).to be_a(simple_field)
+      expect(fields['field_simple_float']).to be_a(SimpleField)
       expect(fields['field_simple_float'].value).to eq(1.1)
 
-      expect(fields['field_simple_int']).to be_a(simple_field)
+      expect(fields['field_simple_int']).to be_a(SimpleField)
       expect(fields['field_simple_int'].value).to eq(12.0)
 
-      expect(fields['field_simple_zero']).to be_a(simple_field)
+      expect(fields['field_simple_zero']).to be_a(SimpleField)
       expect(fields['field_simple_zero'].value).to eq(0)
 
-      expect(fields['field_simple_bool']).to be_a(simple_field)
+      expect(fields['field_simple_bool']).to be_a(SimpleField)
       expect(fields['field_simple_bool'].value).to eq(true)
 
-      expect(fields['field_simple_null']).to be_a(simple_field)
+      expect(fields['field_simple_null']).to be_a(SimpleField)
       expect(fields['field_simple_null'].value).to be_nil
 
-      expect(fields['field_object']).to be_a(object_field)
-      expect(fields['field_simple_list']).to be_a(list_field)
-      expect(fields['field_object_list']).to be_a(list_field)
+      expect(fields['field_object']).to be_a(ObjectField)
+      expect(fields['field_simple_list']).to be_a(ListField)
+      expect(fields['field_object_list']).to be_a(ListField)
     end
   end
 
@@ -237,7 +235,7 @@ RSpec.describe 'inference' do
       expect(response.inference).not_to be_nil
 
       date_field = response.inference.result.fields['date']
-      expect(date_field).to be_a(simple_field)
+      expect(date_field).to be_a(SimpleField)
       expect(date_field.locations).to be_an(Array)
       expect(date_field.locations[0]).not_to be_nil
       expect(date_field.locations[0].page).to eq(0)
@@ -267,8 +265,8 @@ RSpec.describe 'inference' do
       expect(conf_value).to eq('Medium')
 
       # Optional strict check if equality supports comparing with FieldConfidence constants:
-      if defined?(field_conf) && field_conf.respond_to?(:from_string)
-        expect(conf_value).to eq(field_conf.from_string('Medium').to_s)
+      if defined?(FieldConfidence) && FieldConfidence.respond_to?(:from_string)
+        expect(conf_value).to eq(FieldConfidence.from_string('Medium').to_s)
       end
     end
   end
