@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.7.0-rc3 - 2025-08-29
+### Fixes
+* :bug: fix user agent not being able to access version number
+
+
 ## v4.7.0-rc2 - 2025-08-20
 ### Changes
 * :sparkles: add missing accessors for PDF fixing options in `LocalInputSource`
