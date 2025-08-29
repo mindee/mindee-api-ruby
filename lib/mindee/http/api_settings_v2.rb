@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../version'
+
 module Mindee
   module HTTP
     # API client for version 2.
