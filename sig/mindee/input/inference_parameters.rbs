@@ -3,15 +3,21 @@ module Mindee
   module Input
     class InferenceParameters
       attr_reader close_file: bool
+      attr_reader confidence: bool?
       attr_reader file_alias: String?
       attr_reader model_id: String
       attr_reader polling_options: PollingOptions
+      attr_reader polygon: bool?
       attr_reader rag: bool?
+      attr_reader raw_text: bool?
       attr_reader webhook_ids: Array[String]?
 
       def initialize: (
           String,
           ?rag: bool?,
+          ?raw_text: bool?,
+          ?polygon: bool?,
+          ?confidence: bool?,
           ?file_alias: String?,
           ?webhook_ids: Array[String]?,
           ?polling_options: Hash[Symbol | String, untyped] | PollingOptions?,

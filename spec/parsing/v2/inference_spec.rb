@@ -27,10 +27,12 @@ RSpec.describe 'inference' do
   describe 'simple' do
     it 'loads a blank inference with valid properties' do
       response = load_v2_inference(blank_path)
-      fields = response.inference.result.fields
 
+      fields = response.inference.result.fields
       expect(fields).not_to be_empty
+      expect(fields).to be_a(Mindee::Parsing::V2::Field::InferenceFields)
       expect(fields.size).to eq(21)
+
       expect(fields).to have_key('taxes')
       expect(fields['taxes']).not_to be_nil
       expect(fields['taxes']).to be_a(list_field)
@@ -180,6 +182,7 @@ RSpec.describe 'inference' do
       expect(active_options.raw_text).to eq(true)
 
       fields = response.inference.result.fields
+      expect(fields).to be_a(Mindee::Parsing::V2::Field::InferenceFields)
 
       expect(fields['field_simple_string']).to be_a(simple_field)
       expect(fields['field_simple_string'].value).to eq('field_simple_string-value')

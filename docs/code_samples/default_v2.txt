@@ -11,8 +11,18 @@ mindee_client = Mindee::ClientV2.new(api_key: api_key)
 inference_params = Mindee::Input::InferenceParameters.new(
     # ID of the model, required.
     model_id,
-    # If set to `true`, will enable Retrieval-Augmented Generation.
-    rag: false,
+
+    # Options: set to `true` or `false` to override defaults
+
+    # Enhance extraction accuracy with Retrieval-Augmented Generation.
+    rag: nil,
+    # Extract the full text content from the document as strings.
+    raw_text: nil,
+    # Calculate bounding box polygons for all fields.
+    polygon: nil,
+    # Boost the precision and accuracy of all extractions.
+    # Calculate confidence scores for all fields.
+    confidence: nil,
 )
 
 # Load a file from disk
