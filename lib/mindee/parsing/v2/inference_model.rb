@@ -12,6 +12,18 @@ module Mindee
         def initialize(server_response)
           @id = server_response['id']
         end
+
+        # String representation.
+        # @return [String]
+        def to_s
+          parts = [
+            'Model',
+            '=====',
+            ":ID: #{@id}",
+            '',
+          ]
+          parts.join("\n")
+        end
       end
     end
   end

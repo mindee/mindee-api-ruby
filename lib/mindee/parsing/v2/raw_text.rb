@@ -3,17 +3,17 @@
 module Mindee
   module Parsing
     module V2
-      # Raw text extracted from a given page.
+      # Raw text extracted from all pages in the document.
       class RawText
-        # @return [Integer] Page number where the text was found.
-        attr_reader :page
-        # @return [String] Text content.
-        attr_reader :content
+        # @return [Array[Mindee::Parsing::V2::RawTextPage]] List of pages with their extracted text content.
+        attr_reader :pages
 
         # @param server_response [Hash] Raw JSON parsed into a Hash.
         def initialize(server_response)
-          @page = server_response['page']
-          @content = server_response['content']
+          @pages = []
+          server_response.fetch('pages', []).each do |page|
+            @pages.push RawTextPage.new(page)
+          end
         end
       end
     end

@@ -22,19 +22,22 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
                                                     file_alias: 'ruby-integration-test',
                                                     polling_options: polling)
 
-    resp = client.enqueue_and_get_inference(input, params)
+    response = client.enqueue_and_get_inference(input, params)
 
-    expect(resp).not_to be_nil
-    expect(resp.inference).not_to be_nil
+    expect(response).not_to be_nil
+    expect(response.inference).not_to be_nil
 
-    expect(resp.inference.file).not_to be_nil
-    expect(resp.inference.file.name).to eq('multipage_cut-2.pdf')
+    expect(response.inference.file).not_to be_nil
+    expect(response.inference.file.name).to eq('multipage_cut-2.pdf')
 
-    expect(resp.inference.model).not_to be_nil
-    expect(resp.inference.model.id).to eq(model_id)
+    expect(response.inference.model).not_to be_nil
+    expect(response.inference.model.id).to eq(model_id)
 
-    expect(resp.inference.result).not_to be_nil
-    expect(resp.inference.result.options).to be_nil
+    expect(response.inference.active_options).not_to be_nil
+
+    expect(response.inference.result).not_to be_nil
+    expect(response.inference.result.raw_text).to be_nil
+    expect(response.inference.result.fields).not_to be_nil
   end
 
   it 'parses a filled single-page image successfully' do
@@ -45,13 +48,18 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
                                                     rag: false,
                                                     file_alias: 'ruby-integration-test')
 
-    resp = client.enqueue_and_get_inference(input, params)
+    response = client.enqueue_and_get_inference(input, params)
+    expect(response).not_to be_nil
 
-    expect(resp).not_to be_nil
-    expect(resp.inference.file.name).to eq('default_sample.jpg')
-    expect(resp.inference.model.id).to eq(model_id)
+    expect(response.inference).not_to be_nil
+    expect(response.inference.file.name).to eq('default_sample.jpg')
 
-    fields = resp.inference.result.fields
+    expect(response.inference.model).not_to be_nil
+    expect(response.inference.model.id).to eq(model_id)
+
+    expect(response.inference.active_options).not_to be_nil
+
+    fields = response.inference.result.fields
     expect(fields).not_to be_nil
     expect(fields['supplier_name']).not_to be_nil
     expect(fields['supplier_name'].value).to eq('John Smith')
@@ -91,9 +99,9 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
 
     params = Mindee::Input::InferenceParameters.new(model_id)
 
-    resp = client.enqueue_and_get_inference(url_input, params)
+    response = client.enqueue_and_get_inference(url_input, params)
 
-    expect(resp).not_to be_nil
-    expect(resp.inference).not_to be_nil
+    expect(response).not_to be_nil
+    expect(response.inference).not_to be_nil
   end
 end

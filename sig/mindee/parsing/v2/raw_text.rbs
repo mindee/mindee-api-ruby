@@ -3,8 +3,8 @@ module Mindee
   module Parsing
     module V2
       class RawText
-        attr_reader page: Integer?
-        attr_reader content: String?
+        attr_reader pages: Array[RawTextPage]
+
         def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
