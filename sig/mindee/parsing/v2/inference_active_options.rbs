@@ -1,0 +1,14 @@
+module Mindee
+  module Parsing
+    module V2
+      class InferenceActiveOptions
+        attr_reader confidence: bool
+        attr_reader polygon: bool
+        attr_reader rag: bool
+        attr_reader raw_text: bool
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

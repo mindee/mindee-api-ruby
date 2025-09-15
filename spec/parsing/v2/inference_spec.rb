@@ -56,23 +56,30 @@ RSpec.describe 'inference' do
 
     it 'loads a complete inference with valid properties' do
       response = load_v2_inference(complete_path)
-      inf = response.inference
+      inference = response.inference
 
-      expect(inf).not_to be_nil
-      expect(inf.id).to eq('12345678-1234-1234-1234-123456789abc')
+      expect(inference).not_to be_nil
+      expect(inference.id).to eq('12345678-1234-1234-1234-123456789abc')
 
-      model = inf.model
+      model = inference.model
       expect(model).not_to be_nil
       expect(model.id).to eq('12345678-1234-1234-1234-123456789abc')
 
-      file = inf.file
+      file = inference.file
       expect(file).not_to be_nil
       expect(file.name).to eq('complete.jpg')
       expect(file.file_alias).to be_nil
       expect(file.page_count).to eq(1)
       expect(file.mime_type).to eq('image/jpeg')
 
-      fields = inf.result.fields
+      active_options = inference.active_options
+      expect(active_options).not_to be_nil
+      expect(active_options.raw_text).to eq(false)
+      expect(active_options.polygon).to eq(false)
+      expect(active_options.confidence).to eq(false)
+      expect(active_options.rag).to eq(false)
+
+      fields = inference.result.fields
       expect(fields).not_to be_empty
       expect(fields.size).to eq(21)
 
@@ -129,7 +136,7 @@ RSpec.describe 'inference' do
       expect(city_field).to be_a(simple_field)
       expect(city_field.value).to eq('New York')
 
-      expect(inf.result.options).to be_nil
+      expect(inference.result.raw_text).to be_nil
     end
   end
 
@@ -167,6 +174,11 @@ RSpec.describe 'inference' do
   describe 'standard field types' do
     it 'recognizes all field variants' do
       response = load_v2_inference(standard_field_path)
+
+      active_options = response.inference.active_options
+      expect(active_options).not_to be_nil
+      expect(active_options.raw_text).to eq(true)
+
       fields = response.inference.result.fields
 
       expect(fields['field_simple_string']).to be_a(simple_field)
@@ -193,30 +205,22 @@ RSpec.describe 'inference' do
     end
   end
 
-  describe 'options' do
+  describe 'raw_text' do
     it 'exposes raw texts' do
       response = load_v2_inference(raw_text_path)
-      opts = response.inference.result.options
 
-      expect(opts).not_to be_nil
-      raw_texts =
-        if opts.respond_to?(:raw_texts)
-          opts.raw_texts
-        elsif opts.respond_to?(:get_raw_texts)
-          opts.get_raw_texts
-        else
-          []
-        end
+      active_options = response.inference.active_options
+      expect(active_options).not_to be_nil
+      expect(active_options.raw_text).to eq(true)
 
-      expect(raw_texts).to be_a(Array)
-      expect(raw_texts.length).to eq(2)
+      raw_text = response.inference.result.raw_text
+      expect(raw_text).not_to be_nil
+      expect(raw_text).to be_a(Mindee::Parsing::V2::RawText)
 
-      first = raw_texts.first
-      page = first.respond_to?(:page) ? first.page : first[:page]
-      content = first.respond_to?(:content) ? first.content : first[:content]
-
-      expect(page).to eq(0)
-      expect(content).to eq('This is the raw text of the first page...')
+      expect(raw_text.pages.length).to eq(2)
+      first = raw_text.pages.first
+      expect(first).to be_a(Mindee::Parsing::V2::RawTextPage)
+      expect(first.content).to eq('This is the raw text of the first page...')
     end
   end
 

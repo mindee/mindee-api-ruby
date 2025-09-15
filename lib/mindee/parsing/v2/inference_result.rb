@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'field/inference_fields'
-require_relative 'inference_result_options'
+require_relative 'raw_text'
 
 module Mindee
   module Parsing
@@ -10,8 +10,8 @@ module Mindee
       class InferenceResult
         # @return [Mindee::Parsing::V2::Field::InferenceFields] Fields produced by the model.
         attr_reader :fields
-        # @return [Mindee::Parsing::V2::InferenceResultOptions, nil] Optional extra data.
-        attr_reader :options
+        # @return [Mindee::Parsing::V2::RawText, nil] Optional extra data.
+        attr_reader :raw_text
 
         # @param server_response [Hash] Hash version of the JSON returned by the API.
         def initialize(server_response)
@@ -19,9 +19,7 @@ module Mindee
 
           @fields = Field::InferenceFields.new(server_response['fields'])
 
-          return unless server_response.key?('options') && server_response['options']
-
-          @options = InferenceResultOptions.new(server_response['options'])
+          @raw_text = server_response['raw_text'] ? RawText.new(server_response['raw_text']) : nil
         end
 
         # String representation.
@@ -32,15 +30,6 @@ module Mindee
             '======',
             @fields.to_s,
           ]
-
-          if @options
-            parts += [
-              'Options',
-              '=======',
-              @options.to_s,
-            ]
-          end
-
           parts.join("\n")
         end
       end
