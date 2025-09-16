@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'mindee'
 
 input_path = '/path/to/the/file.ext'
@@ -22,7 +24,7 @@ inference_params = Mindee::Input::InferenceParameters.new(
     polygon: nil,
     # Boost the precision and accuracy of all extractions.
     # Calculate confidence scores for all fields.
-    confidence: nil,
+    confidence: nil
 )
 
 # Load a file from disk

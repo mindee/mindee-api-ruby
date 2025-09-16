@@ -78,22 +78,12 @@ module Mindee
             out_str
           end
 
-          # Allow dot notation access to nested fields.
-          # @param method_name [Symbol] The method name (field key).
-          # @return [ObjectField, nil] The field or nil if not found.
-          def method_missing(method_name, ...)
-            if @fields.respond_to?(method_name)
-              @fields.send(method_name, ...)
-            else
-              super
-            end
-          end
-
-          # Check if method_missing should handle the method.
-          # @param method_name [Symbol] The method name.
-          # @return [Boolean] `true` if the method should be handled.
-          def respond_to_missing?(method_name, include_private = false)
-            @fields.respond_to?(method_name) || super
+          # Get a field by key and ensure it is a SimpleField.
+          # @param key [String] Field key to retrieve.
+          # @return [SimpleField] The SimpleField.
+          # @raise [TypeError] If the field is not a SimpleField.
+          def get_simple_field(key)
+            @fields.get_simple_field(key)
           end
         end
       end

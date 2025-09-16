@@ -6,8 +6,10 @@ module Mindee
         class ListField < BaseField
           include Enumerable[BaseField]
 
-          attr_reader items: Array[BaseField]
+          attr_reader items: Array[SimpleField | ObjectField | ListField]
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def object_items: -> Array[ObjectField]
+          def simple_items: -> Array[SimpleField]
           def to_s: -> String
           def empty?: -> bool
           def size: -> Integer

@@ -6,11 +6,12 @@ module Mindee
         class InferenceFields < Hash[String, ListField | ObjectField | SimpleField?]
           attr_reader indent_level: Integer
 
+          def get_list_field: (String) -> ListField
+          def get_simple_field: (String) -> SimpleField
+          def get_object_field: (String) -> ObjectField
           def logger: () -> Logger
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
           def get: (String) -> (ListField | ObjectField | SimpleField?)
-          def method_missing: (Symbol, *untyped) -> (ListField | ObjectField | SimpleField?)
-          def respond_to_missing?: (Symbol, ?bool) -> bool
           def to_s: (?Integer) -> String
         end
       end

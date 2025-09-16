@@ -6,7 +6,8 @@ module Mindee
   module Parsing
     module V2
       module Field
-        # Collection of inference fields that extends Hash functionality.
+        # Represents a hash-like collection of inference fields, providing methods for
+        # retrieval and string representation.
         class InferenceFields < Hash
           # @return [Integer] Level of indentation for rst display.
           attr_reader :indent_level
@@ -29,23 +30,37 @@ module Mindee
             self[key]
           end
 
-          # Allow dot notation access to fields.
-          # @param method_name [Symbol] The method name (field key).
-          # @return [BaseField, nil] The field or nil if not found.
-          def method_missing(method_name, *args, &block)
-            key = method_name.to_s
-            if key?(key)
-              self[key]
-            else
-              super
-            end
+          # Get a field by key and ensure it is a SimpleField.
+          # @param key [String] Field key to retrieve.
+          # @return [SimpleField] The SimpleField.
+          # @raise [TypeError] If the field is not a SimpleField.
+          def get_simple_field(key)
+            field = self[key]
+            raise TypeError, "Field #{key} is not a SimpleField" unless field.is_a?(SimpleField)
+
+            field
           end
 
-          # Check if method_missing should handle the method.
-          # @param method_name [Symbol] The method name.
-          # @return [Boolean] `true` if the method should be handled.
-          def respond_to_missing?(method_name, include_private = false)
-            key?(method_name.to_s) || super
+          # Get a field by key and ensure it is a ListField.
+          # @param key [String] Field key to retrieve.
+          # @return [ListField] The ListField.
+          # @raise [TypeError] If the field is not a ListField.
+          def get_list_field(key)
+            field = self[key]
+            raise TypeError, "Field #{key} is not a ListField" unless field.is_a?(ListField)
+
+            field
+          end
+
+          # Get a field by key and ensure it is an ObjectField.
+          # @param key [String] Field key to retrieve.
+          # @return [ObjectField] The ObjectField.
+          # @raise [TypeError] If the field is not an ObjectField.
+          def get_object_field(key)
+            field = self[key]
+            raise TypeError, "Field #{key} is not a ObjectField" unless field.is_a?(ObjectField)
+
+            field
           end
 
           # rubocop:disable Metrics/CyclomaticComplexity
@@ -64,13 +79,7 @@ module Mindee
               line = "#{padding}:#{field_key}:"
 
               case (field_value.class.name || '').split('::').last
-              when 'ListField'
-                # Check if ListField has items and they're not empty
-                list_f = field_value # @type var list_f: ListField
-                if defined?(list_f.items) && list_f.items && !list_f.items.empty?
-                  line += list_f.to_s
-                end
-              when 'ObjectField'
+              when 'ListField', 'ObjectField'
                 line += field_value.to_s
               when 'SimpleField'
                 # Check if SimpleField has a non-empty value
