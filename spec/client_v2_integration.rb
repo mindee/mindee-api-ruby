@@ -17,49 +17,90 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
       max_retries: 80
     )
 
-    params = Mindee::Input::InferenceParameters.new(model_id,
-                                                    rag: false,
-                                                    file_alias: 'ruby-integration-test',
-                                                    polling_options: polling)
+    params = Mindee::Input::InferenceParameters.new(
+      model_id,
+      rag: false,
+      raw_text: true,
+      polygon: false,
+      confidence: false,
+      file_alias: 'ruby-integration-test',
+      polling_options: polling
+    )
 
     response = client.enqueue_and_get_inference(input, params)
 
     expect(response).not_to be_nil
     expect(response.inference).not_to be_nil
 
-    expect(response.inference.file).not_to be_nil
-    expect(response.inference.file.name).to eq('multipage_cut-2.pdf')
+    file = response.inference.file
+    expect(file).not_to be_nil
+    expect(file).to be_a(Mindee::Parsing::V2::InferenceFile)
+    expect(file.name).to eq('multipage_cut-2.pdf')
+    expect(file.page_count).to eq(2)
 
-    expect(response.inference.model).not_to be_nil
-    expect(response.inference.model.id).to eq(model_id)
+    model = response.inference.model
+    expect(model).not_to be_nil
+    expect(model).to be_a(Mindee::Parsing::V2::InferenceModel)
+    expect(model.id).to eq(model_id)
 
-    expect(response.inference.active_options).not_to be_nil
+    active_options = response.inference.active_options
+    expect(active_options).not_to be_nil
+    expect(active_options).to be_a(Mindee::Parsing::V2::InferenceActiveOptions)
+    expect(active_options.raw_text).to eq(true)
+    expect(active_options.polygon).to eq(false)
+    expect(active_options.confidence).to eq(false)
+    expect(active_options.rag).to eq(false)
 
-    expect(response.inference.result).not_to be_nil
-    expect(response.inference.result.raw_text).to be_nil
-    expect(response.inference.result.fields).not_to be_nil
+    result = response.inference.result
+    expect(result).not_to be_nil
+
+    expect(result.raw_text).not_to be_nil
+    expect(result.raw_text.pages.length).to eq(2)
+
+    expect(result.fields).not_to be_nil
   end
 
   it 'parses a filled single-page image successfully' do
     src_path = File.join(__dir__ || './', 'data', 'products', 'financial_document', 'default_sample.jpg')
     input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'default_sample.jpg')
 
-    params = Mindee::Input::InferenceParameters.new(model_id,
-                                                    rag: false,
-                                                    file_alias: 'ruby-integration-test')
+    params = Mindee::Input::InferenceParameters.new(
+      model_id,
+      raw_text: false,
+      polygon: false,
+      confidence: false,
+      rag: false,
+      file_alias: 'ruby-integration-test'
+    )
 
     response = client.enqueue_and_get_inference(input, params)
     expect(response).not_to be_nil
 
-    expect(response.inference).not_to be_nil
-    expect(response.inference.file.name).to eq('default_sample.jpg')
+    file = response.inference.file
+    expect(file).not_to be_nil
+    expect(file).to be_a(Mindee::Parsing::V2::InferenceFile)
+    expect(file.name).to eq('default_sample.jpg')
+    expect(file.page_count).to eq(1)
 
-    expect(response.inference.model).not_to be_nil
-    expect(response.inference.model.id).to eq(model_id)
+    model = response.inference.model
+    expect(model).not_to be_nil
+    expect(model).to be_a(Mindee::Parsing::V2::InferenceModel)
+    expect(model.id).to eq(model_id)
 
-    expect(response.inference.active_options).not_to be_nil
+    active_options = response.inference.active_options
+    expect(active_options).not_to be_nil
+    expect(active_options).to be_a(Mindee::Parsing::V2::InferenceActiveOptions)
+    expect(active_options.raw_text).to eq(false)
+    expect(active_options.polygon).to eq(false)
+    expect(active_options.confidence).to eq(false)
+    expect(active_options.rag).to eq(false)
 
-    fields = response.inference.result.fields
+    result = response.inference.result
+    expect(result).not_to be_nil
+
+    expect(result.raw_text).to be_nil
+
+    fields = result.fields
     expect(fields).not_to be_nil
     expect(fields['supplier_name']).not_to be_nil
     expect(fields['supplier_name'].value).to eq('John Smith')

@@ -7,8 +7,20 @@ module Mindee
       # @return [String] ID of the model (required).
       attr_reader :model_id
 
-      # @return [Boolean, nil] Enable Retrieval-Augmented Generation.
+      # @return [Boolean, nil] Enhance extraction accuracy with Retrieval-Augmented Generation.
       attr_reader :rag
+
+      # @return [Boolean, nil] Extract the full text content from the document as strings,
+      #   and fill the raw_text` attribute.
+      attr_reader :raw_text
+
+      # @return [Boolean, nil] Calculate bounding box polygons for all fields,
+      #   and fill their `locations` attribute.
+      attr_reader :polygon
+
+      # @return [Boolean, nil] Boost the precision and accuracy of all extractions.
+      #   Calculate confidence scores for all fields, and fill their confidence attribute.
+      attr_reader :confidence
 
       # @return [String, nil] Optional alias for the file.
       attr_reader :file_alias
@@ -22,21 +34,39 @@ module Mindee
       # @return [Boolean, nil] Whether to close the file after parsing.
       attr_reader :close_file
 
+      # rubocop:disable Metrics/ParameterLists
       # @param [String] model_id ID of the model
-      # @param [FalseClass] rag Whether to enable rag.
+      # @param [nil] rag Whether to enable RAG.
+      # @param [nil] raw_text Whether to enable rax text.
+      # @param [nil] polygon Whether to enable polygons.
+      # @param [nil] confidence Whether to enable confidence scores.
       # @param [nil] file_alias File alias, if applicable.
       # @param [nil] webhook_ids
       # @param [nil] polling_options
       # @param [TrueClass] close_file
-      def initialize(model_id, rag: false, file_alias: nil, webhook_ids: nil, polling_options: nil, close_file: true)
+      def initialize(
+        model_id,
+        rag: nil,
+        raw_text: nil,
+        polygon: nil,
+        confidence: nil,
+        file_alias: nil,
+        webhook_ids: nil,
+        polling_options: nil,
+        close_file: true
+      )
         raise Errors::MindeeInputError, 'Model ID is required.' if model_id.empty? || model_id.nil?
 
         @model_id = model_id
-        @rag = rag || false
+        @rag = rag
+        @raw_text = raw_text
+        @polygon = polygon
+        @confidence = confidence
         @file_alias = file_alias
         @webhook_ids = webhook_ids || []
         @polling_options = get_clean_polling_options(polling_options)
         @close_file = close_file.nil? || close_file
+        # rubocop:enable Metrics/ParameterLists
       end
 
       # Validates the parameters for async auto-polling
@@ -70,7 +100,10 @@ module Mindee
         end
 
         model_id = params.fetch(:model_id)
-        rag = params.fetch(:rag, false)
+        rag = params.fetch(:rag, nil)
+        raw_text = params.fetch(:raw_text, nil)
+        polygon = params.fetch(:polygon, nil)
+        confidence = params.fetch(:confidence, nil)
         file_alias = params.fetch(:file_alias, nil)
         webhook_ids = params.fetch(:webhook_ids, [])
         polling_options_input = params.fetch(:page_options, PollingOptions.new)
@@ -83,8 +116,8 @@ module Mindee
           )
         end
         close_file = params.fetch(:close_file, true)
-        InferenceParameters.new(model_id, rag: rag, file_alias: file_alias, webhook_ids: webhook_ids,
-                                          close_file: close_file)
+        InferenceParameters.new(model_id, rag: rag, raw_text: raw_text, polygon: polygon, confidence: confidence,
+                                          file_alias: file_alias, webhook_ids: webhook_ids, close_file: close_file)
       end
 
       private

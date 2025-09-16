@@ -123,8 +123,14 @@ module Mindee
                       file_data, file_metadata = input_source.read_contents(close: params.close_file)
                       [['file', file_data, file_metadata]] # : Array[untyped]
                     end
-        form_data.push ['model_id', params.model_id]
-        form_data.push ['rag', 'true'] if params.rag
+        form_data.push(['model_id', params.model_id])
+
+        # deal with optional features
+        form_data.push(['rag', params.rag.to_s]) unless params.rag.nil?
+        form_data.push(['raw_text', params.raw_text.to_s]) unless params.raw_text.nil?
+        form_data.push(['polygon', params.polygon.to_s]) unless params.polygon.nil?
+        form_data.push(['confidence', params.confidence.to_s]) unless params.confidence.nil?
+
         form_data.push ['file_alias', params.file_alias] if params.file_alias
         unless params.webhook_ids.nil? || params.webhook_ids.empty?
           form_data.push ['webhook_ids', params.webhook_ids.join(',')]
