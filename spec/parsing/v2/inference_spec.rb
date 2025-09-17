@@ -22,7 +22,7 @@ RSpec.describe 'inference' do
   simple_field = Mindee::Parsing::V2::Field::SimpleField
   object_field = Mindee::Parsing::V2::Field::ObjectField
   list_field   = Mindee::Parsing::V2::Field::ListField
-  field_conf   = Mindee::Parsing::V2::Field::FieldConfidence
+  field_confidence = Mindee::Parsing::V2::Field::FieldConfidence
 
   describe 'simple' do
     it 'loads a blank inference with valid properties' do
@@ -264,19 +264,20 @@ RSpec.describe 'inference' do
       expect(polygon[3][0]).to be_within(1e-12).of(0.948849)
       expect(polygon[3][1]).to be_within(1e-12).of(0.244565)
 
-      # Confidence can be a FieldConfidence instance or a String depending on implementation.
-      conf_value =
-        if date_field.confidence.respond_to?(:to_s)
-          date_field.confidence.to_s
-        else
-          date_field.confidence
-        end
-      expect(conf_value).to eq('Medium')
-
-      # Optional strict check if equality supports comparing with FieldConfidence constants:
-      if defined?(field_conf) && field_conf.respond_to?(:from_string)
-        expect(conf_value).to eq(field_conf.from_string('Medium').to_s)
-      end
+      confidence = date_field.confidence
+      expect(confidence).to be_a(field_confidence)
+      # equality
+      expect(confidence).to eq(field_confidence::MEDIUM)
+      expect(confidence).to eq('Medium')
+      expect(confidence).to eq(2)
+      # less than or equal
+      expect(confidence).to be_lteql(field_confidence::HIGH)
+      expect(confidence).to be_lteql('High')
+      expect(confidence).to be_lteql(3)
+      # greater than or equal
+      expect(confidence).to be_gteql(field_confidence::LOW)
+      expect(confidence).to be_gteql('Low')
+      expect(confidence).to be_gteql(1)
     end
   end
 end
