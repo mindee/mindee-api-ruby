@@ -12,14 +12,17 @@ module Mindee
           VALID_VALUES: Array[String]
           def initialize: (String) -> void
           def self.from_string: (String) -> FieldConfidence
-          def certain?: -> bool
-          def high?: -> bool
-          def medium?: -> bool
-          def low?: -> bool
+          def to_i: -> Integer
           def to_s: -> String
-          def ==: (FieldConfidence) -> bool
-          def eql?: (FieldConfidence) -> bool
+          def ==: (String | Integer | FieldConfidence) -> bool
+          def eql?: (String | Integer | FieldConfidence) -> bool
+          def <=: (String | Integer | FieldConfidence) -> bool
+          def lteql? : (String | Integer | FieldConfidence) -> bool
+          def >=: (String | Integer | FieldConfidence) -> bool
+          def gteql?: (String | Integer | FieldConfidence) -> bool
           def inspect: -> String
+
+          def val_to_i: (String) -> Integer
         end
       end
     end

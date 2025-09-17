@@ -19,48 +19,22 @@ module Mindee
           LOW = 'Low'
 
           # List of valid values, as frozen strings.
-          VALID_VALUES = [CERTAIN, HIGH, MEDIUM, LOW].freeze
+          VALID_VALUES = ['Certain', 'High', 'Medium', 'Low'].freeze
 
           # @param value [String] The confidence level value.
           # @raise [ArgumentError] If the value is not a valid confidence level.
           def initialize(value)
-            unless VALID_VALUES.include?(value)
+            case value
+            when 'Certain' then @value = CERTAIN
+            when 'High' then @value = HIGH
+            when 'Medium' then @value = MEDIUM
+            when 'Low' then @value = LOW
+            else
               raise ArgumentError,
-                    "Invalid confidence level: #{value}. Must be one of: #{VALID_VALUES.join(', ')}"
+                    "Invalid confidence level: '#{value}'. Must be one of: #{VALID_VALUES.join(', ')}"
             end
 
             @value = value
-          end
-
-          # Create a FieldConfidence from a string value.
-          # @param value [String] The confidence level string.
-          # @return [FieldConfidence] The confidence instance.
-          def self.from_string(value)
-            new(value)
-          end
-
-          # Check if this is a certain confidence level.
-          # @return [Boolean] `true` if confidence is certain.
-          def certain?
-            @value == CERTAIN
-          end
-
-          # Check if this is a high confidence level.
-          # @return [Boolean] `true` if confidence is high.
-          def high?
-            @value == HIGH
-          end
-
-          # Check if this is a medium confidence level.
-          # @return [Boolean] `true` if confidence is medium.
-          def medium?
-            @value == MEDIUM
-          end
-
-          # Check if this is a low confidence level.
-          # @return [Boolean] `true` if confidence is low.
-          def low?
-            @value == LOW
           end
 
           # String representation of the confidence level.
@@ -69,20 +43,83 @@ module Mindee
             @value
           end
 
-          # Compare two FieldConfidence instances.
-          # @param other [FieldConfidence] The other confidence to compare.
-          # @return [Boolean] `true` if they have the same value.
-          def ==(other)
-            other.is_a?(FieldConfidence) && @value == other.value
+          # String representation of the confidence level.
+          # @return [Integer] The confidence level value as an integer: 1 is LOW, 4 is HIGH.
+          def to_i
+            val_to_i(@value)
           end
-
-          # Make instances comparable and hashable
-          alias eql? ==
 
           # Inspect method for debugging.
           # @return [String] Debug representation.
           def inspect
             "#<#{self.class.name}:#{@value}>"
+          end
+
+          # Using 'case' breaks steep ...
+          # rubocop:disable Style/CaseLikeIf
+
+          # Equality of two FieldConfidence instances.
+          # @param other [String, Integer, FieldConfidence] The other confidence to compare.
+          # @return [Boolean] `true` if they have the same value.
+          def ==(other)
+            if other.is_a?(FieldConfidence)
+              @value == other.value
+            elsif other.is_a?(String)
+              @value == other
+            elsif other.is_a?(Integer)
+              to_i == other
+            else
+              raise ArgumentError, "Invalid type: #{other.class}"
+            end
+          end
+
+          # Greater than or equality of two FieldConfidence instances.
+          # @param other [String, Integer, FieldConfidence] The other confidence to compare.
+          def >=(other)
+            if other.is_a?(FieldConfidence)
+              to_i >= val_to_i(other.value)
+            elsif other.is_a?(String)
+              to_i >= val_to_i(other)
+            elsif other.is_a?(Integer)
+              to_i >= other
+            else
+              raise ArgumentError, "Invalid type: #{other.class}"
+            end
+          end
+
+          # less than or equality of two FieldConfidence instances.
+          # # @param other [String, Integer, FieldConfidence] The other confidence to compare.
+          def <=(other)
+            if other.is_a?(FieldConfidence)
+              to_i <= val_to_i(other.value)
+            elsif other.is_a?(String)
+              to_i <= val_to_i(other)
+            elsif other.is_a?(Integer)
+              to_i <= other
+            else
+              raise ArgumentError, "Invalid type: #{other.class}"
+            end
+          end
+
+          # rubocop:enable Style/CaseLikeIf
+
+          # Aliases for the comparison operators.
+          alias eql? ==
+          alias gteql? >=
+          alias lteql? <=
+
+          protected
+
+          def val_to_i(value)
+            case value
+            when CERTAIN then 4
+            when HIGH then 3
+            when MEDIUM then 2
+            when LOW then 1
+            else
+              raise ArgumentError,
+                    "Invalid confidence level: '#{value}'. Must be one of: #{VALID_VALUES.join(', ')}"
+            end
           end
         end
       end

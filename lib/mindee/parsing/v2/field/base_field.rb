@@ -20,13 +20,16 @@ module Mindee
           # @param indent_level [Integer] Level of indentation for rst display.
           def initialize(raw_prediction, indent_level = 0)
             @indent_level = indent_level
-            @confidence = raw_prediction.key?('confidence') ? raw_prediction['confidence'] : nil
-            @locations = if raw_prediction.key?('locations')
-                           raw_prediction['locations'].map do |location|
+            confidence = raw_prediction['confidence']
+            @confidence = FieldConfidence.new(confidence) unless confidence.nil? || confidence.empty?
+
+            locations = raw_prediction['locations']
+            @locations = if locations.nil? || locations.empty?
+                           []
+                         else
+                           locations.map do |location|
                              FieldLocation.new(location)
                            end
-                         else
-                           []
                          end
           end
 
