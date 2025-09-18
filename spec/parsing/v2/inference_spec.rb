@@ -10,7 +10,8 @@ RSpec.describe 'inference' do
   let(:standard_field_path) { File.join(inference_path, 'standard_field_types.json') }
   let(:standard_field_rst_path) { File.join(inference_path, 'standard_field_types.rst') }
   let(:location_field_path) { File.join(findoc_path, 'complete_with_coordinates.json') }
-  let(:raw_text_path) { File.join(inference_path, 'raw_texts.json') }
+  let(:raw_text_json_path) { File.join(inference_path, 'raw_texts.json') }
+  let(:raw_text_str_path) { File.join(inference_path, 'raw_texts.txt') }
   let(:blank_path) { File.join(findoc_path, 'blank.json') }
   let(:complete_path) { File.join(findoc_path, 'complete.json') }
 
@@ -268,7 +269,7 @@ RSpec.describe 'inference' do
 
   describe 'raw_text' do
     it 'exposes raw texts' do
-      response = load_v2_inference(raw_text_path)
+      response = load_v2_inference(raw_text_json_path)
 
       active_options = response.inference.active_options
       expect(active_options).not_to be_nil
@@ -278,10 +279,16 @@ RSpec.describe 'inference' do
       expect(raw_text).not_to be_nil
       expect(raw_text).to be_a(Mindee::Parsing::V2::RawText)
 
+      expect(raw_text.to_s).to eq(File.read(raw_text_str_path, encoding: 'UTF-8'))
+
       expect(raw_text.pages.length).to eq(2)
       first = raw_text.pages.first
       expect(first).to be_a(Mindee::Parsing::V2::RawTextPage)
       expect(first.content).to eq('This is the raw text of the first page...')
+
+      raw_text.pages.each do |page|
+        expect(page.content).to be_a(String)
+      end
     end
   end
 
