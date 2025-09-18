@@ -85,56 +85,50 @@ RSpec.describe 'inference' do
       expect(fields).not_to be_empty
       expect(fields.size).to eq(21)
 
-      date_field = fields['date']
+      date_field = fields.get_simple_field('date')
       expect(date_field).to be_a(simple_field)
       expect(date_field.value).to eq('2019-11-02')
 
       expect(fields).to have_key('taxes')
-      taxes = fields['taxes']
+      taxes = fields.get_list_field('taxes')
       expect(taxes).to be_a(list_field)
 
-      taxes_list = taxes
-      expect(taxes_list.items.length).to eq(1)
-      expect(taxes_list.to_s).to be_a(String)
-      expect(taxes_list.to_s).to_not be_empty
+      expect(taxes.items.length).to eq(1)
+      expect(taxes.to_s).to be_a(String)
+      expect(taxes.to_s).to_not be_empty
 
-      first_tax_item = taxes_list.items.first
+      first_tax_item = taxes.items.first
       expect(first_tax_item).to be_a(object_field)
-
-      expect(fields).to have_key('line_items')
-      expect(fields['line_items']).not_to be_nil
-      expect(fields['line_items']).to be_a(list_field)
-      expect(fields['line_items'][0]).to be_a(object_field)
-      expect(fields['line_items'][0]['quantity'].value).to eq(1.0)
-
-      expect(fields).to have_key('line_items')
-      expect(fields['line_items']).not_to be_nil
-      expect(fields['line_items']).to be_a(list_field)
-      expect(fields['line_items'][0]).to be_a(object_field)
-      expect(fields['line_items'][0]['quantity'].value).to eq(1.0)
 
       tax_item_obj = first_tax_item
       expect(tax_item_obj.fields.size).to eq(3)
 
-      base_field = tax_item_obj.fields['base']
+      expect(fields).to have_key('line_items')
+      line_items = fields.get_list_field('line_items')
+      expect(line_items).not_to be_nil
+      expect(line_items).to be_a(list_field)
+      first_line_item = line_items.object_items[0]
+      expect(first_line_item).to be_a(object_field)
+      expect(first_line_item.get_simple_field('quantity').value).to eq(1.0)
+
+      base_field = tax_item_obj.fields.get_simple_field('base')
       expect(base_field).to be_a(simple_field)
       expect(base_field.value).to eq(31.5)
 
       expect(fields).to have_key('supplier_address')
-      supplier_address = fields['supplier_address']
+      supplier_address = fields.get_object_field('supplier_address')
       expect(supplier_address).to be_a(object_field)
-
-      supplier_obj = supplier_address
-      country_field = supplier_obj.fields['country']
-      expect(country_field).to be_a(simple_field)
-      expect(country_field.value).to eq('USA')
-      expect(country_field.to_s).to eq('USA')
       expect(supplier_address.to_s).to be_a(String)
       expect(supplier_address.to_s).to_not be_empty
 
-      customer_addr = fields['customer_address']
+      country_field = supplier_address.fields.get_simple_field('country')
+      expect(country_field).to be_a(simple_field)
+      expect(country_field.value).to eq('USA')
+      expect(country_field.to_s).to eq('USA')
+
+      customer_addr = fields.get_object_field('customer_address')
       expect(customer_addr).to be_a(object_field)
-      city_field = customer_addr.fields['city']
+      city_field = customer_addr.fields.get_simple_field('city')
       expect(city_field).to be_a(simple_field)
       expect(city_field.value).to eq('New York')
 
@@ -150,18 +144,18 @@ RSpec.describe 'inference' do
       expect(fields['field_simple']).to be_a(simple_field)
       expect(fields['field_object']).to be_a(object_field)
 
-      field_object = fields['field_object']
+      field_object = fields.get_object_field('field_object')
       lvl1 = field_object.fields
 
       expect(lvl1['sub_object_list']).to be_a(list_field)
       expect(lvl1['sub_object_object']).to be_a(object_field)
 
-      sub_object_object = lvl1['sub_object_object']
+      sub_object_object = lvl1.get_object_field('sub_object_object')
       lvl2 = sub_object_object.fields
 
       expect(lvl2['sub_object_object_sub_object_list']).to be_a(list_field)
 
-      nested_list = lvl2['sub_object_object_sub_object_list']
+      nested_list = lvl2.get_list_field('sub_object_object_sub_object_list')
       expect(nested_list.items).not_to be_empty
       expect(nested_list.items.first).to be_a(object_field)
 
@@ -174,7 +168,7 @@ RSpec.describe 'inference' do
   end
 
   describe 'standard field types' do
-    it 'recognizes all field variants' do
+    def load_standard_fields
       response = load_v2_inference(standard_field_path)
 
       active_options = response.inference.active_options
@@ -184,27 +178,91 @@ RSpec.describe 'inference' do
       fields = response.inference.result.fields
       expect(fields).to be_a(Mindee::Parsing::V2::Field::InferenceFields)
 
+      fields
+    end
+
+    it 'recognizes simple fields' do
+      fields = load_standard_fields
+
+      # low-level access
       expect(fields['field_simple_string']).to be_a(simple_field)
-      expect(fields['field_simple_string'].value).to eq('field_simple_string-value')
+      expect(fields.get('field_simple_string')).to be_a(simple_field)
 
-      expect(fields['field_simple_float']).to be_a(simple_field)
-      expect(fields['field_simple_float'].value).to eq(1.1)
+      field_simple_string = fields.get_simple_field('field_simple_string')
+      expect(field_simple_string).to be_a(simple_field)
+      expect(field_simple_string.value).to eq('field_simple_string-value')
+      expect(field_simple_string.confidence).to eq(field_confidence::CERTAIN)
+      expect(field_simple_string.to_s).to eq('field_simple_string-value')
 
-      expect(fields['field_simple_int']).to be_a(simple_field)
-      expect(fields['field_simple_int'].value).to eq(12.0)
+      field_simple_int = fields.get_simple_field('field_simple_int')
+      expect(field_simple_int).to be_a(simple_field)
+      expect(field_simple_int.value).to be_a(Float)
 
-      expect(fields['field_simple_zero']).to be_a(simple_field)
-      expect(fields['field_simple_zero'].value).to eq(0)
+      field_simple_float = fields.get_simple_field('field_simple_float')
+      expect(field_simple_float).to be_a(simple_field)
+      expect(field_simple_float.value).to be_a(Float)
 
-      expect(fields['field_simple_bool']).to be_a(simple_field)
-      expect(fields['field_simple_bool'].value).to eq(true)
+      field_simple_bool = fields.get_simple_field('field_simple_bool')
+      expect(field_simple_bool).to be_a(simple_field)
+      expect(field_simple_bool.value).to eq(true)
+      expect(field_simple_bool.to_s).to eq('True')
 
-      expect(fields['field_simple_null']).to be_a(simple_field)
-      expect(fields['field_simple_null'].value).to be_nil
+      field_simple_null = fields.get_simple_field('field_simple_null')
+      expect(field_simple_null).to be_a(simple_field)
+      expect(field_simple_null.value).to be_nil
+      expect(field_simple_null.to_s).to eq('')
+    end
 
-      expect(fields['field_object']).to be_a(object_field)
+    it 'recognizes simple list fields' do
+      fields = load_standard_fields
+
+      # low-level access
       expect(fields['field_simple_list']).to be_a(list_field)
+      expect(fields.get('field_simple_list')).to be_a(list_field)
+
+      field_simple_list = fields.get_list_field('field_simple_list')
+      expect(field_simple_list).to be_a(list_field)
+
+      expect(field_simple_list.items[0]).to be_a(simple_field)
+      expect(field_simple_list.simple_items[0]).to be_a(simple_field)
+      field_simple_list.simple_items.each do |entry|
+        expect(entry).to be_a(simple_field)
+        expect(entry.value).not_to be_nil
+      end
+    end
+
+    it 'recognizes object fields' do
+      fields = load_standard_fields
+
+      # low-level access
+      expect(fields['field_object']).to be_a(object_field)
+      expect(fields.get('field_object')).to be_a(object_field)
+
+      field_object = fields.get_object_field('field_object')
+      expect(field_object).to be_a(object_field)
+      expect(field_object.get_simple_field('subfield_1')).to be_a(simple_field)
+      field_object.fields.each_value do |entry|
+        expect(entry).to be_a(simple_field)
+        expect(entry.value).not_to be_nil
+      end
+    end
+
+    it 'recognizes object list fields' do
+      fields = load_standard_fields
+
+      # low-level access
       expect(fields['field_object_list']).to be_a(list_field)
+      expect(fields.get('field_object_list')).to be_a(list_field)
+
+      field_object_list = fields.get_list_field('field_object_list')
+      expect(field_object_list).to be_a(list_field)
+
+      expect(field_object_list.items[0]).to be_a(object_field)
+      expect(field_object_list.object_items[0]).to be_a(object_field)
+      field_object_list.object_items.each do |entry|
+        expect(entry).to be_a(object_field)
+        expect(entry.fields).not_to be_nil
+      end
     end
   end
 
@@ -243,7 +301,7 @@ RSpec.describe 'inference' do
 
       expect(response.inference).not_to be_nil
 
-      date_field = response.inference.result.fields['date']
+      date_field = response.inference.result.fields.get_simple_field('date')
       expect(date_field).to be_a(simple_field)
       expect(date_field.locations).to be_an(Array)
       expect(date_field.locations[0]).not_to be_nil

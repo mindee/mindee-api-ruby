@@ -15,7 +15,12 @@ module Mindee
           # @param indent_level [Integer] Level of indentation for rst display.
           def initialize(server_response, indent_level = 0)
             super
-            @value = server_response.key?('value') ? server_response['value'] : nil
+            value = server_response['value']
+            @value = if value.is_a?(Integer)
+                       value.to_f
+                     else
+                       value
+                     end
           end
 
           # String representation of the field value.

@@ -8,7 +8,6 @@ module Mindee
       module Field
         # Represents a field that contains a list of items.
         class ListField < BaseField
-          include Enumerable
           # @return [Array<ListField | ObjectField | SimpleField>] Items contained in the list.
           attr_reader :items
 
@@ -29,10 +28,36 @@ module Mindee
             end
           end
 
+          # Return only simple fields.
+          # @return [Array<SimpleField>] Simple fields contained in the list.
+          # @raise [TypeError] If the fields are not SimpleField.
+          def simple_items
+            fields = []
+            @items.each do |item|
+              raise TypeError, "Invalid field type detected: #{item.class}" unless item.is_a?(SimpleField)
+
+              fields << item
+            end
+            fields
+          end
+
+          # Return only object fields.
+          # @return [Array<ObjectField>] Object fields contained in the list.
+          # @raise [TypeError] If the fields are not ObjectField.
+          def object_items
+            fields = []
+            @items.each do |item|
+              raise TypeError, "Invalid field type detected: #{item.class}" unless item.is_a?(ObjectField)
+
+              fields << item
+            end
+            fields
+          end
+
           # String representation of the list field.
           # @return [String] Formatted string with bullet points for each item.
           def to_s
-            return "\n" if @items.empty?
+            return '' unless @items && !@items.empty?
 
             parts = ['']
             @items.each do |item|
@@ -46,40 +71,6 @@ module Mindee
             end
 
             parts.join("\n  * ")
-          end
-
-          # Check if the list is empty.
-          # @return [Boolean] `true` if the list has no items.
-          def empty?
-            @items.empty?
-          end
-
-          # Get the number of items in the list.
-          # @return [Integer] Number of items.
-          def size
-            @items.size
-          end
-
-          # Get the number of items in the list (alias for size).
-          # @return [Integer] Number of items.
-          def length
-            @items.length
-          end
-
-          # Get an item by index.
-          # @param index [Integer] The index of the item to retrieve.
-          # @return [BaseField, nil] The item at the given index.
-          def [](index)
-            @items[index]
-          end
-
-          # Iterator for Enumerator inheritance.
-          # NOTE: Untyped due to incomplete support in current supported version of RBS.
-          def each(&block)
-            return to_enum(:each) unless block_given?
-
-            @items.each(&block)
-            self
           end
         end
       end
