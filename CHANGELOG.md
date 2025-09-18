@@ -1,5 +1,21 @@
 # Mindee Ruby API Library Changelog
 
+## v4.7.0 - 2025-09-18
+Including RC changes and fixes. 
+### Changes
+* :sparkles: add support for V2 Mindee API
+* :sparkles: add missing accessors for PDF fixing options in `LocalInputSource`
+* * :recycle: add many missing internal types
+### Fixes
+* :recycle: update existing PDF fixing syntax
+* :bug: fix for polygon points not correctly initialized
+* :bug: fix user agent not being able to access version number
+* :bug: fix invalid types for many V1 features
+* :bug: fix V1 errors sometimes having the wrong code
+* :bug: fix many presumably immutable fields having non-readonly parameters
+* :bug: fix broken `resources` accessor in `ApiRequest` object
+
+
 ## v4.7.0-rc3 - 2025-08-29
 ### Fixes
 * :bug: fix user agent not being able to access version number
@@ -16,7 +32,6 @@
 ## v4.7.0-rc1 - 2025-08-13
 ### Changes
 * :sparkles: add support for client V2 & associated features
-
 ### Fixes
 * :recycle: add many missing internal types
 * :bug: fix invalid types for many V1 features
@@ -178,7 +193,6 @@
 * :sparkles: add support for cropper Extra
 * :sparkles: add support for full text Extra
 * :sparkles: add support for invoice splitter auto-extraction
-
 ### Fixes
 * :bug: fixed a bug that prevented longer decimals from appearing in the string representation of some objects
 * :bug: fixed a bug that caused non-table elements to unexpectedly appear truncated when printed to the console
@@ -249,7 +263,6 @@
 * :sparkles: add support for EU Driver License V1
 * :recycle: update existing products
 * :arrow_up: upgrade test lib
-
 ### Fixes
 * :memo: add missing default async sample code
 * :bug: fix rst display issues
@@ -277,7 +290,6 @@
 * :sparkles: add support for Carte Grise V1
 * :sparkles: add page number attributes to doc
 * :arrow_up: update tests, docs & display format for some products
-
 ### Fixes
 * :bug: fix page id not working on newer custom models
 
@@ -293,7 +305,6 @@
 * :sparkles: add direct access to `raw_http` response
 * :memo: upgrade reference & guide documentation
 * :test_tube: **EXPERIMENTAL** add PDF repair option
-
 ### Fixes
 * :bug: fix display issues with `PositionField`
 
@@ -308,7 +319,6 @@
 * :sparkles: add support for US Driver License
 * :recycle: update unit tests & dependencies
 * :arrow_up: update Bank Checks (#46)
-
 ### Fixes
 * :bug: fix `all_words` display (#47)
 * :bug: fix empty `position_field` (#47)
@@ -323,7 +333,6 @@
 * :recycle: harmonize naming with other client libraries
 * :art: moved most parsing modules into their own respective modules
 * :art: separated common, standard & custom parsing features into their own modules
-
 ### Changes
 * :sparkles: add support for asynchronous endpoints
 * :sparkles: add support for Invoice Splitter V1
@@ -337,7 +346,6 @@
 * :pencil2: document all previously non-documented class
 * :recycle: match file hierarchy with module nesting
 * :recycle: rewrite tutorials to match new syntax
-
 ### Fixes
 * :bug: fix: pages now use the proper `orientation` property
 * :zap: optimize: only a single endpoint is now created on document upload
@@ -374,8 +382,7 @@
 * :boom: it should be up to the user to handle API errors
 * :wastebasket: remove deprecated APIs
 * :recycle: refactor CLI tool
-
-### Additions
+### Changes
 * :sparkles: add support for Invoice v4.1 and Receipt v4.1
 * :sparkles: add EU license plates
 * :sparkles: add shipping containers support
