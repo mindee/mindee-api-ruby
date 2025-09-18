@@ -308,19 +308,23 @@ RSpec.describe 'inference' do
       expect(date_field.locations[0].page).to eq(0)
 
       polygon = date_field.locations[0].polygon
-      expect(polygon[0].length).to eq(2)
+      expect(polygon[0]).to be_a(Mindee::Geometry::Point)
 
-      expect(polygon[0][0]).to be_within(1e-12).of(0.948979073166918)
-      expect(polygon[0][1]).to be_within(1e-12).of(0.23097924535067715)
+      expect(polygon[0].x).to eq(0.948979073166918)
+      expect(polygon[0].y).to eq(0.23097924535067715)
 
-      expect(polygon[1][0]).to be_within(1e-12).of(0.85422)
-      expect(polygon[1][1]).to be_within(1e-12).of(0.230072)
+      expect(polygon[1][0]).to eq(0.85422)
+      expect(polygon[1][1]).to eq(0.230072)
 
-      expect(polygon[2][0]).to be_within(1e-12).of(0.8540899268330819)
-      expect(polygon[2][1]).to be_within(1e-12).of(0.24365775464932288)
+      expect(polygon[2][0]).to eq(0.8540899268330819)
+      expect(polygon[2][1]).to eq(0.24365775464932288)
 
-      expect(polygon[3][0]).to be_within(1e-12).of(0.948849)
-      expect(polygon[3][1]).to be_within(1e-12).of(0.244565)
+      expect(polygon[3][0]).to eq(0.948849)
+      expect(polygon[3][1]).to eq(0.244565)
+
+      centroid = polygon.centroid
+      expect(centroid.x).to eq(0.9015345)
+      expect(centroid.y).to eq(0.23731850000000002)
 
       confidence = date_field.confidence
       expect(confidence).to be_a(field_confidence)

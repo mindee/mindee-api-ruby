@@ -5,6 +5,15 @@ module Mindee
   module Geometry
     # Contains any number of vertex coordinates (Points).
     class Polygon < Array
+      # @param server_response [Hash] Raw server response hash.
+      def initialize(server_response)
+        points = []
+        server_response.map do |point|
+          points << Point.new(point[0], point[1])
+        end
+        super(points)
+      end
+
       # Get the central point (centroid) of the polygon.
       # @return [Mindee::Geometry::Point]
       def centroid

@@ -16,11 +16,8 @@ module Mindee
 
           # @param server_response [Hash] Raw server response hash.
           def initialize(server_response)
-            polygon_data = server_response['polygon'] || server_response[:polygon]
-            @polygon = polygon_data ? Mindee::Geometry::Polygon.new(polygon_data) : nil
-
-            page_id = server_response['page'] || server_response[:page]
-            @page = page_id.is_a?(Float) || page_id.is_a?(Integer) ? page_id.to_i : nil
+            @polygon = Mindee::Geometry::Polygon.new(server_response['polygon'])
+            @page = server_response['page']
           end
 
           # String representation of the polygon (empty string when none).

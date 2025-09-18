@@ -21,7 +21,7 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           @confidence = prediction['confidence'] if prediction.key?('confidence')
-          @polygon = Geometry.polygon_from_prediction(prediction['polygon']) if prediction.key?('polygon')
+          @polygon = Mindee::Geometry::Polygon.new(prediction['polygon']) if prediction.key?('polygon')
           @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
           @page_id = page_id || prediction['page_id']
         end
