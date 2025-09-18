@@ -2,7 +2,7 @@ module Mindee
   module Parsing
     module V2
       class RawTextPage
-        attr_reader content: string
+        attr_reader content: String
 
         def initialize: (Hash[String | Symbol, untyped]) -> void
       end

@@ -15,6 +15,10 @@ module Mindee
             @pages.push RawTextPage.new(page)
           end
         end
+
+        def to_s
+          "#{@pages.map(&:to_s).join("\n\n")}\n"
+        end
       end
     end
   end
