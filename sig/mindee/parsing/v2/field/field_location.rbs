@@ -4,8 +4,8 @@ module Mindee
     module V2
       module Field
         class FieldLocation
-          attr_reader page: Integer?
-          attr_reader polygon: Geometry::Polygon?
+          attr_reader page: Integer
+          attr_reader polygon: Geometry::Polygon
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String

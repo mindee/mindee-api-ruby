@@ -2,6 +2,7 @@
 module Mindee
   module Geometry
     class Polygon < Array[Point]
+      def initialize: (Array[::Mindee::Geometry::Point | Array[Float]]) -> void
       def centroid: -> Point
       def point_in_y?: (Point) -> bool
     end

@@ -20,7 +20,7 @@ module Mindee
         # @param page_id [Integer, nil]
         def initialize(prediction, page_id)
           unless prediction['polygon'].nil? || prediction['polygon'].empty?
-            @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
+            @polygon = Mindee::Geometry::Polygon.new(prediction['polygon'])
           end
           @quadrangle = to_quadrilateral(prediction, 'quadrangle')
           @rectangle = to_quadrilateral(prediction, 'rectangle')

@@ -17,19 +17,6 @@ module Mindee
       )
     end
 
-    # Transform a prediction into a Polygon.
-    # @param prediction [Hash]
-    # @return [Mindee::Geometry::Polygon]
-    def self.polygon_from_prediction(prediction)
-      polygon = Polygon.new
-      return polygon if prediction.nil?
-
-      prediction.each do |point|
-        polygon << Point.new(point[0], point[1])
-      end
-      polygon
-    end
-
     # Gets the points of a bounding box for a given set of points
     # @param vertices [Array<Mindee::Geometry::Point>]
     # @return [Array<Float>]
@@ -39,7 +26,7 @@ module Mindee
       [x_coords.min, y_coords.min, x_coords.max, y_coords.max]
     end
 
-    # Creates the bounding bounding box for a given set of points
+    # Creates the bounding box for a given set of points
     # @param vertices [Array<Mindee::Geometry::Point>]
     # @return [Mindee::Geometry::Quadrilateral]
     def self.get_bounding_box(vertices)

@@ -23,7 +23,7 @@ module Mindee
           def initialize(prediction)
             @text = prediction['text']
             @confidence = prediction['confidence']
-            @polygon = Geometry.polygon_from_prediction(prediction['polygon'])
+            @polygon = Mindee::Geometry::Polygon.new(prediction['polygon'])
             @bounding_box = Geometry.get_bounding_box(@polygon) unless @polygon.nil? || @polygon.empty?
           end
 
