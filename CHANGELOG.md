@@ -5,7 +5,7 @@ Including RC changes and fixes.
 ### Changes
 * :sparkles: add support for V2 Mindee API
 * :sparkles: add missing accessors for PDF fixing options in `LocalInputSource`
-* * :recycle: add many missing internal types
+* :recycle: add many missing internal types
 ### Fixes
 * :recycle: update existing PDF fixing syntax
 * :bug: fix for polygon points not correctly initialized
