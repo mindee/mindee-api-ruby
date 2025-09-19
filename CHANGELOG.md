@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.7.1 - 2025-09-19
+### Fixes
+* :sparkles: add missing `to_s` method on raw_text
+
+
 ## v4.7.0 - 2025-09-18
 Including RC changes and fixes. 
 ### Changes
