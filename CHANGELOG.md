@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.7.2 - 2025-10-13
+### Changes
+* :recycle: harmonize getting page count from a local input source
+
+
 ## v4.7.1 - 2025-09-19
 ### Fixes
 * :sparkles: add missing `to_s` method on raw_text
