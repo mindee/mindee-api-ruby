@@ -10,44 +10,69 @@ require_relative '../../data'
 describe Mindee::Input::Source do
   context 'An image input file' do
     it 'should load a JPEG from a path' do
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'file_types/receipt.jpg'))
-      expect(input.file_mimetype).to eq('image/jpeg')
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'file_types/receipt.jpg')
+      )
+      expect(input_source.file_mimetype).to eq('image/jpeg')
+      expect(input_source.page_count).to eq(1)
+      expect(input_source.pdf?).to eq(false)
 
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'file_types/receipt.jpga'))
-      expect(input.file_mimetype).to eq('image/jpeg')
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'file_types/receipt.jpga')
+      )
+      expect(input_source.file_mimetype).to eq('image/jpeg')
+      expect(input_source.page_count).to eq(1)
+      expect(input_source.pdf?).to eq(false)
     end
 
     it 'should load a TIFF from a path' do
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'file_types/receipt.tif'))
-      expect(input.file_mimetype).to eq('image/tiff')
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'file_types/receipt.tif')
+      )
+      expect(input_source.file_mimetype).to eq('image/tiff')
+      expect(input_source.page_count).to eq(1)
+      expect(input_source.pdf?).to eq(false)
 
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'file_types/receipt.tiff'))
-      expect(input.file_mimetype).to eq('image/tiff')
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'file_types/receipt.tiff')
+      )
+      expect(input_source.file_mimetype).to eq('image/tiff')
+      expect(input_source.page_count).to eq(1)
+      expect(input_source.pdf?).to eq(false)
     end
 
     it 'should load a HEIC from a path' do
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'file_types/receipt.heic'))
-      expect(input.file_mimetype).to eq('image/heic')
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'file_types/receipt.heic')
+      )
+      expect(input_source.file_mimetype).to eq('image/heic')
+      expect(input_source.page_count).to eq(1)
+      expect(input_source.pdf?).to eq(false)
     end
   end
 
   context 'A PDF input file' do
     it 'should load a multi-page PDF from a path' do
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'products/invoices/invoice.pdf'))
-      expect(input.file_mimetype).to eq('application/pdf')
-      expect(input.pdf?).to eq(true)
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'products/invoices/invoice.pdf')
+      )
+      expect(input_source.file_mimetype).to eq('application/pdf')
+      expect(input_source.page_count).to eq(2)
+      expect(input_source.pdf?).to eq(true)
 
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'products/invoices/invoice.pdf'))
-      expect(input.file_mimetype).to eq('application/pdf')
-      expect(input.pdf?).to eq(true)
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'products/invoices/invoice.pdf')
+      )
+      expect(input_source.file_mimetype).to eq('application/pdf')
+      expect(input_source.page_count).to eq(2)
+      expect(input_source.pdf?).to eq(true)
 
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'products/invoices/invoice_10p.pdf'))
-      expect(input.file_mimetype).to eq('application/pdf')
-      expect(input.pdf?).to eq(true)
-
-      input = Mindee::Input::Source::PathInputSource.new(File.join(DATA_DIR, 'products/invoices/invoice_10p.pdf'))
-      expect(input.file_mimetype).to eq('application/pdf')
-      expect(input.pdf?).to eq(true)
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(DATA_DIR, 'products/invoices/invoice_10p.pdf')
+      )
+      expect(input_source.file_mimetype).to eq('application/pdf')
+      expect(input_source.page_count).to eq(10)
+      expect(input_source.pdf?).to eq(true)
     end
   end
 
@@ -55,7 +80,9 @@ describe Mindee::Input::Source do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
     it 'Should not raise a mime error' do
       expect do
-        mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_fixable.pdf", repair_pdf: true)
+        mindee_client.source_from_path(
+          "#{DATA_DIR}/file_types/pdf/broken_fixable.pdf", repair_pdf: true
+        )
       end.not_to raise_error
     end
   end
@@ -64,7 +91,9 @@ describe Mindee::Input::Source do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
     it 'Should raise an error' do
       expect do
-        mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_unfixable.pdf", repair_pdf: true)
+        mindee_client.source_from_path(
+          "#{DATA_DIR}/file_types/pdf/broken_unfixable.pdf", repair_pdf: true
+        )
       end.to raise_error Mindee::Errors::MindeePDFError
     end
   end

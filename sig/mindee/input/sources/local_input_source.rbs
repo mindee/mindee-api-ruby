@@ -14,12 +14,12 @@ module Mindee
 
         def logger: () -> Logger
 
-
         def rescue_broken_pdf: (untyped) -> void
         def pdf?: -> bool
         def apply_page_options: (PageOptions) -> StringIO?
         def process_pdf: (PageOptions) -> StringIO?
         def read_contents: (?close: bool) -> [String?, Hash[:filename, String]]
+        def page_count: -> Integer
         def count_pages: -> Integer
         def write_to_file: (String?) -> void
         def compress!: (?quality: Integer, ?max_width: Integer?, ?max_height: Integer?, ?force_source_text: bool, ?disable_source_text: bool) -> Integer

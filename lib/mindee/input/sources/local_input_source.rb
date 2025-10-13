@@ -141,12 +141,20 @@ module Mindee
         # Returns the page count for a document.
         # Defaults to one for images.
         # @return [Integer]
-        def count_pages
+        def page_count
           return 1 unless pdf?
 
           @io_stream.seek(0)
           pdf_processor = Mindee::PDF::PDFProcessor.open_pdf(@io_stream)
           pdf_processor.pages.size
+        end
+
+        # Returns the page count for a document.
+        # Defaults to one for images.
+        # @return [Integer]
+        # @deprecated Use {#page_count} instead.
+        def count_pages
+          page_count
         end
 
         # Compresses the file, according to the provided info.

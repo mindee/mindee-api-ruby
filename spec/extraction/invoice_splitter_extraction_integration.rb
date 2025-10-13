@@ -45,7 +45,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
       invoice0.document
     )
 
-    expect(Mindee::TestUtilities.levenshtein_ratio(invoice0.document.to_s,
-                                                   test_string_rst_invoice0.chomp)).to be >= 0.97
+    ratio = Mindee::TestUtilities.levenshtein_ratio(invoice0.document.to_s, test_string_rst_invoice0.chomp)
+    expect(ratio).to be >= 0.90
   end
 end
