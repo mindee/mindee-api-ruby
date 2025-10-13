@@ -14,6 +14,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'file_types/receipt.jpg')
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
+      expect(input_source.filename).to eq('receipt.jpg')
       expect(input_source.page_count).to eq(1)
       expect(input_source.pdf?).to eq(false)
 
@@ -21,6 +22,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'file_types/receipt.jpga')
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
+      expect(input_source.filename).to eq('receipt.jpga')
       expect(input_source.page_count).to eq(1)
       expect(input_source.pdf?).to eq(false)
     end
@@ -30,6 +32,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'file_types/receipt.tif')
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
+      expect(input_source.filename).to eq('receipt.tif')
       expect(input_source.page_count).to eq(1)
       expect(input_source.pdf?).to eq(false)
 
@@ -37,6 +40,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'file_types/receipt.tiff')
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
+      expect(input_source.filename).to eq('receipt.tiff')
       expect(input_source.page_count).to eq(1)
       expect(input_source.pdf?).to eq(false)
     end
@@ -46,6 +50,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'file_types/receipt.heic')
       )
       expect(input_source.file_mimetype).to eq('image/heic')
+      expect(input_source.filename).to eq('receipt.heic')
       expect(input_source.page_count).to eq(1)
       expect(input_source.pdf?).to eq(false)
     end
@@ -57,6 +62,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'products/invoices/invoice.pdf')
       )
       expect(input_source.file_mimetype).to eq('application/pdf')
+      expect(input_source.filename).to eq('invoice.pdf')
       expect(input_source.page_count).to eq(2)
       expect(input_source.pdf?).to eq(true)
 
@@ -64,6 +70,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'products/invoices/invoice.pdf')
       )
       expect(input_source.file_mimetype).to eq('application/pdf')
+      expect(input_source.filename).to eq('invoice.pdf')
       expect(input_source.page_count).to eq(2)
       expect(input_source.pdf?).to eq(true)
 
@@ -71,6 +78,7 @@ describe Mindee::Input::Source do
         File.join(DATA_DIR, 'products/invoices/invoice_10p.pdf')
       )
       expect(input_source.file_mimetype).to eq('application/pdf')
+      expect(input_source.filename).to eq('invoice_10p.pdf')
       expect(input_source.page_count).to eq(10)
       expect(input_source.pdf?).to eq(true)
     end
