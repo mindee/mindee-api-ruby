@@ -19,7 +19,7 @@ Consult the
 
 
 ### V1
-This is the legacy platform located here:
+This is the platform located here:
 
 https://platform.mindee.com/
 
