@@ -7,18 +7,18 @@ Quickly and easily connect to Mindee's API services using Ruby.
 ## Mindee API Versions
 This client library has support for both Mindee platform versions.
 
-### Latest - V2
-This is the new platform located here:
+### V2 - Latest
+This is the latest platform located here:
 
 https://app.mindee.com
 
 It uses **API version 2**.
 
 Consult the
-**[Latest Documentation](https://docs.mindee.com/integrations/client-libraries-sdk)**
+**[V2 Documentation](https://docs.mindee.com/integrations/client-libraries-sdk)**
 
 
-### Legacy - V1
+### V1
 This is the legacy platform located here:
 
 https://platform.mindee.com/
@@ -26,7 +26,7 @@ https://platform.mindee.com/
 It uses **API version 1**.
 
 Consult the
-**[Legacy Documentation](https://developers.mindee.com/docs/ruby-getting-started)**
+[V1 Documentation](https://docs.mindee.com/v1/libraries/ruby-sdk)
 
 ## Additional Information
 
