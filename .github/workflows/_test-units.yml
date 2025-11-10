@@ -44,8 +44,7 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew install ghostscript imagemagick
-        sudo dscacheutil -flushcache
-        sudo killall -HUP mDNSResponder
+        export SSL_CERT_FILE=/usr/local/etc/openssl@1.1/cert.pem
     - name: Change ImageMagick security policy on Ubuntu
       if: runner.os == 'Linux'
       run: |
