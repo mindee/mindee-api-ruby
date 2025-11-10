@@ -53,6 +53,7 @@ jobs:
 
     - name: Run Rspec
       env:
+        MINDEE_SKIP_CRL_CHECK: true
         MINDEE_LOG_LEVEL: DEBUG
       run: |
         bundle exec rake spec
