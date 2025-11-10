@@ -12,7 +12,7 @@ describe Mindee::PDF do
   end
 
   context 'A single page PDF' do
-    filepath = File.join(DATA_DIR, 'file_types/pdf/blank.pdf').freeze
+    filepath = File.join(FILE_TYPES_DIR, 'pdf/blank.pdf').freeze
 
     it 'Should grab the first page' do
       io_stream = File.open(filepath, 'rb')
@@ -42,7 +42,7 @@ describe Mindee::PDF do
   end
 
   context 'A multi-page PDF' do
-    filepath = File.join(DATA_DIR, 'file_types/pdf/multipage.pdf').freeze
+    filepath = File.join(FILE_TYPES_DIR, 'pdf/multipage.pdf').freeze
 
     it 'Should grab the first page' do
       io_stream = File.open(filepath, 'rb')

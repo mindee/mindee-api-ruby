@@ -6,8 +6,8 @@ require_relative '../data'
 
 describe Mindee::Image::ImageCompressor do
   describe 'Image Quality Compression' do
-    let(:input_receipt_path) { "#{DATA_DIR}/file_types/receipt.jpg" }
-    let(:output_dir) { "#{DATA_DIR}/output/" }
+    let(:input_receipt_path) { "#{FILE_TYPES_DIR}/receipt.jpg" }
+    let(:output_dir) { "#{ROOT_DATA_DIR}/output/" }
 
     it 'should compress the image from input source' do
       receipt_input = Mindee::Input::Source::PathInputSource.new(input_receipt_path)

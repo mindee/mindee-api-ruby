@@ -3,8 +3,8 @@
 require 'mindee'
 
 describe Mindee::Input::Source::PathInputSource do
-  let(:input_file) { "#{DATA_DIR}/products/invoices/default_sample.jpg" }
-  let(:output_dir) { "#{DATA_DIR}/output/" }
+  let(:input_file) { "#{V1_DATA_DIR}/products/invoices/default_sample.jpg" }
+  let(:output_dir) { "#{ROOT_DATA_DIR}/output/" }
 
   describe '#write_to_file' do
     let(:local_input_source) { described_class.new(input_file) }

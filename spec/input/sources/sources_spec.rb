@@ -11,7 +11,7 @@ describe Mindee::Input::Source do
   context 'An image input file' do
     it 'should load a JPEG from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'file_types/receipt.jpg')
+        File.join(FILE_TYPES_DIR, 'receipt.jpg')
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpg')
@@ -19,7 +19,7 @@ describe Mindee::Input::Source do
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'file_types/receipt.jpga')
+        File.join(FILE_TYPES_DIR, 'receipt.jpga')
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpga')
@@ -29,7 +29,7 @@ describe Mindee::Input::Source do
 
     it 'should load a TIFF from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'file_types/receipt.tif')
+        File.join(FILE_TYPES_DIR, 'receipt.tif')
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tif')
@@ -37,7 +37,7 @@ describe Mindee::Input::Source do
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'file_types/receipt.tiff')
+        File.join(FILE_TYPES_DIR, 'receipt.tiff')
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tiff')
@@ -47,7 +47,7 @@ describe Mindee::Input::Source do
 
     it 'should load a HEIC from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'file_types/receipt.heic')
+        File.join(FILE_TYPES_DIR, 'receipt.heic')
       )
       expect(input_source.file_mimetype).to eq('image/heic')
       expect(input_source.filename).to eq('receipt.heic')
@@ -59,7 +59,7 @@ describe Mindee::Input::Source do
   context 'A PDF input file' do
     it 'should load a multi-page PDF from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'products/invoices/invoice.pdf')
+        File.join(V1_DATA_DIR, 'products/invoices/invoice.pdf')
       )
       expect(input_source.file_mimetype).to eq('application/pdf')
       expect(input_source.filename).to eq('invoice.pdf')
@@ -67,7 +67,7 @@ describe Mindee::Input::Source do
       expect(input_source.pdf?).to eq(true)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'products/invoices/invoice.pdf')
+        File.join(V1_DATA_DIR, 'products/invoices/invoice.pdf')
       )
       expect(input_source.file_mimetype).to eq('application/pdf')
       expect(input_source.filename).to eq('invoice.pdf')
@@ -75,7 +75,7 @@ describe Mindee::Input::Source do
       expect(input_source.pdf?).to eq(true)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
-        File.join(DATA_DIR, 'products/invoices/invoice_10p.pdf')
+        File.join(V1_DATA_DIR, 'products/invoices/invoice_10p.pdf')
       )
       expect(input_source.file_mimetype).to eq('application/pdf')
       expect(input_source.filename).to eq('invoice_10p.pdf')
@@ -89,7 +89,7 @@ describe Mindee::Input::Source do
     it 'Should not raise a mime error' do
       expect do
         mindee_client.source_from_path(
-          "#{DATA_DIR}/file_types/pdf/broken_fixable.pdf", repair_pdf: true
+          "#{FILE_TYPES_DIR}/pdf/broken_fixable.pdf", repair_pdf: true
         )
       end.not_to raise_error
     end
@@ -100,7 +100,7 @@ describe Mindee::Input::Source do
     it 'Should raise an error' do
       expect do
         mindee_client.source_from_path(
-          "#{DATA_DIR}/file_types/pdf/broken_unfixable.pdf", repair_pdf: true
+          "#{FILE_TYPES_DIR}/pdf/broken_unfixable.pdf", repair_pdf: true
         )
       end.to raise_error Mindee::Errors::MindeePDFError
     end
@@ -109,9 +109,9 @@ describe Mindee::Input::Source do
   context 'A broken fixable invoice PDF' do
     mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
     it 'Should send correct results' do
-      source_doc_original = mindee_client.source_from_path("#{DATA_DIR}/products/invoices/invoice.pdf")
+      source_doc_original = mindee_client.source_from_path("#{V1_DATA_DIR}/products/invoices/invoice.pdf")
       expect do
-        source_doc_fixed = mindee_client.source_from_path("#{DATA_DIR}/file_types/pdf/broken_invoice.pdf",
+        source_doc_fixed = mindee_client.source_from_path("#{FILE_TYPES_DIR}/pdf/broken_invoice.pdf",
                                                           repair_pdf: true)
         expect(source_doc_fixed.read_contents[0].to_s).to eq(source_doc_original.read_contents[0].to_s)
       end.not_to raise_error
