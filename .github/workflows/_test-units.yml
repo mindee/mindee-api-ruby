@@ -42,7 +42,10 @@ jobs:
 
     - name: Install Ghostscript and ImageMagick on macOS
       if: runner.os == 'macOS'
-      run: brew install ghostscript imagemagick openssl ca-certificates
+      run: |
+        brew install ghostscript imagemagick
+        sudo dscacheutil -flushcache
+        sudo killall -HUP mDNSResponder
     - name: Change ImageMagick security policy on Ubuntu
       if: runner.os == 'Linux'
       run: |
