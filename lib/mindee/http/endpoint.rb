@@ -191,7 +191,6 @@ module Mindee
         req = Net::HTTP::Get.new(uri, headers)
 
         response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
-          configure_ssl(http)
           http.request(req)
         end
 
@@ -215,20 +214,6 @@ module Mindee
               "check your Client Configuration.\nYou can set this using the " \
               "'#{HTTP::API_KEY_ENV_NAME}' environment variable."
       end
-    end
-
-    # Configures SSL settings for HTTP connections
-    # @param http [Net::HTTP]
-    def configure_ssl(http)
-      return unless http.use_ssl?
-
-      # Skip CRL checks in test/CI environments
-      return unless ENV['MINDEE_SKIP_CRL_CHECK']&.downcase == 'true' || ENV['CI']
-
-      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-      # rubocop:disable Naming/VariableNumber
-      http.ssl_version = :TLSv1_2
-      # rubocop:enable Naming/VariableNumber
     end
   end
 end
