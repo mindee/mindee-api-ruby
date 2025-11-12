@@ -3,8 +3,8 @@
 require 'json'
 require 'mindee'
 require_relative 'extras_utils'
-require_relative '../data'
-require_relative '../test_utilities'
+require_relative '../../data'
+require_relative '../../test_utilities'
 
 describe 'cropper extra' do
   let(:invoice_path) { File.join(V1_DATA_DIR, 'products', 'invoices', 'default_sample.jpg') }

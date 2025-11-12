@@ -2,7 +2,7 @@
 
 require 'mindee'
 require_relative '../../data'
-require_relative '../test_utilities'
+require_relative '../../test_utilities'
 
 describe 'PDF Invoice Extraction (Strict Mode)' do
   let(:invoice_splitter_5p_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'invoice_5p.pdf') }
