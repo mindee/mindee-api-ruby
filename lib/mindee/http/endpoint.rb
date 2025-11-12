@@ -7,6 +7,7 @@ require_relative '../version'
 require_relative 'response_validation'
 
 module Mindee
+  # Mindee internal HTTP module.
   module HTTP
     # API key's default environment key name.
     API_KEY_ENV_NAME = 'MINDEE_API_KEY'
@@ -225,7 +226,9 @@ module Mindee
       return unless ENV['MINDEE_SKIP_CRL_CHECK']&.downcase == 'true' || ENV['CI']
 
       http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      # rubocop:disable Naming/VariableNumber
       http.ssl_version = :TLSv1_2
+      # rubocop:enable Naming/VariableNumber
     end
   end
 end
