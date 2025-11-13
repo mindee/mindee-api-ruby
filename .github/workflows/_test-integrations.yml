@@ -54,16 +54,21 @@ jobs:
         run: |
           brew update
           brew install openssl@3 || true
-          BREW_PREFIX=$(brew --prefix)
-          # path used by Homebrew's OpenSSL; adapt for runner architecture
-          CERT_PEM="$BREW_PREFIX/etc/openssl@3/cert.pem"
+          
+          # Prefer the CA bundle that ships with Homebrew's OpenSSL
+          CERT_PEM="$(brew --prefix openssl@3)/etc/openssl@3/cert.pem"
+          
           if [ -f "$CERT_PEM" ]; then
-            echo "SSL_CERT_FILE=$CERT_PEM" >> $GITHUB_ENV
+            echo "Using Homebrew OpenSSL CA bundle at $CERT_PEM"
+            echo "SSL_CERT_FILE=$CERT_PEM" >> "$GITHUB_ENV"
           else
-            # Fallback: export system root certs to a PEM file and use it
-            sudo security find-certificate -a -p /System/Library/Keychains/SystemRootCertificates.keychain > /tmp/cacert.pem
-            echo "SSL_CERT_FILE=/tmp/cacert.pem" >> $GITHUB_ENV
+            echo "Homebrew CA bundle not found, exporting system roots..."
+            security find-certificate -a -p \
+              /System/Library/Keychains/SystemRootCertificates.keychain \
+              > "$RUNNER_TEMP/cacert.pem"
+            echo "SSL_CERT_FILE=$RUNNER_TEMP/cacert.pem" >> "$GITHUB_ENV"
           fi
+
 
       - name: Run Rspec for integration tests
         env:
