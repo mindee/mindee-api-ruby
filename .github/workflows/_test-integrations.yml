@@ -49,9 +49,21 @@ jobs:
           RPL="rights=${DQT}read|write${DQT} pattern=${DQT}PDF${DQT}"
           sudo sed -i "s/$SRC/$RPL/" /etc/ImageMagick-6/policy.xml
 
-      - name: Update Homebrew CA certificates (macOS)
-        run: brew install openssl && brew update && brew upgrade && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /etc/ssl/certs/ca-certificates.crt
+      - name: Ensure OpenSSL & CA certificate bundle (macOS)
         if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install openssl@3 || true
+          BREW_PREFIX=$(brew --prefix)
+          # path used by Homebrew's OpenSSL; adapt for runner architecture
+          CERT_PEM="$BREW_PREFIX/etc/openssl@3/cert.pem"
+          if [ -f "$CERT_PEM" ]; then
+            echo "SSL_CERT_FILE=$CERT_PEM" >> $GITHUB_ENV
+          else
+            # Fallback: export system root certs to a PEM file and use it
+            sudo security find-certificate -a -p /System/Library/Keychains/SystemRootCertificates.keychain > /tmp/cacert.pem
+            echo "SSL_CERT_FILE=/tmp/cacert.pem" >> $GITHUB_ENV
+          fi
 
       - name: Run Rspec for integration tests
         env:
