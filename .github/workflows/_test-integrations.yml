@@ -49,6 +49,10 @@ jobs:
           RPL="rights=${DQT}read|write${DQT} pattern=${DQT}PDF${DQT}"
           sudo sed -i "s/$SRC/$RPL/" /etc/ImageMagick-6/policy.xml
 
+      - name: Update Homebrew CA certificates (macOS)
+        run: brew install openssl && brew update && brew upgrade && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /etc/ssl/certs/ca-certificates.crt
+        if: runner.os == 'macOS'
+
       - name: Run Rspec for integration tests
         env:
           MINDEE_API_KEY: ${{ secrets.MINDEE_API_KEY_SE_TESTS }}
