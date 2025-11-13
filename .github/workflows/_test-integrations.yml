@@ -49,29 +49,6 @@ jobs:
           RPL="rights=${DQT}read|write${DQT} pattern=${DQT}PDF${DQT}"
           sudo sed -i "s/$SRC/$RPL/" /etc/ImageMagick-6/policy.xml
 
-      - name: Configure CA bundle for Ruby (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          brew update
-          brew install openssl@3 || true
-
-          CERT_PEM="$(brew --prefix openssl@3)/etc/openssl@3/cert.pem"
-
-          if [ -f "$CERT_PEM" ]; then
-            echo "Using Homebrew OpenSSL CA bundle at $CERT_PEM"
-            echo "SSL_CERT_FILE=$CERT_PEM" >> "$GITHUB_ENV"
-            echo "BUNDLE_SSL_CA_CERT=$CERT_PEM" >> "$GITHUB_ENV"
-            echo "RUBYSSL_CERT_FILE=$CERT_PEM" >> "$GITHUB_ENV"
-          else
-            echo "Homebrew CA bundle not found, exporting system roots..."
-            security find-certificate -a -p \
-              /System/Library/Keychains/SystemRootCertificates.keychain \
-              > "$RUNNER_TEMP/cacert.pem"
-            echo "SSL_CERT_FILE=$RUNNER_TEMP/cacert.pem" >> "$GITHUB_ENV"
-            echo "BUNDLE_SSL_CA_CERT=$RUNNER_TEMP/cacert.pem" >> "$GITHUB_ENV"
-            echo "RUBYSSL_CERT_FILE=$RUNNER_TEMP/cacert.pem" >> "$GITHUB_ENV"
-          fi
-
       - name: Run Rspec for integration tests
         env:
           MINDEE_API_KEY: ${{ secrets.MINDEE_API_KEY_SE_TESTS }}
