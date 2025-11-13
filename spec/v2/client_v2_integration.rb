@@ -8,7 +8,7 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
   let(:client) { Mindee::ClientV2.new(api_key: api_key) }
 
   it 'parses an empty multi-page PDF successfully' do
-    src_path = File.join(__dir__ || './', 'data', 'file_types', 'pdf', 'multipage_cut-2.pdf')
+    src_path = File.join(FILE_TYPES_DIR, 'pdf', 'multipage_cut-2.pdf')
     input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'multipage_cut-2.pdf')
 
     polling = Mindee::Input::PollingOptions.new(
@@ -61,7 +61,7 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
   end
 
   it 'parses a filled single-page image successfully' do
-    src_path = File.join(__dir__ || './', 'data', 'products', 'financial_document', 'default_sample.jpg')
+    src_path = File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')
     input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'default_sample.jpg')
 
     params = Mindee::Input::InferenceParameters.new(
@@ -107,7 +107,7 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
   end
 
   it 'raises MindeeHTTPErrorV2 (422) on invalid model id' do
-    src_path = File.join(__dir__ || './', 'data', 'file_types', 'pdf', 'blank_1.pdf')
+    src_path = File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf')
     input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'blank_1.pdf')
 
     params = Mindee::Input::InferenceParameters.new('INVALID_MODEL_ID')
@@ -118,7 +118,7 @@ RSpec.describe 'Mindee::ClientV2 – integration tests (V2)', :integration, orde
   end
 
   it 'raises MindeeHTTPErrorV2 (422) on invalid webhook id' do
-    src_path = File.join(__dir__ || './', 'data', 'file_types', 'pdf', 'blank_1.pdf')
+    src_path = File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf')
     input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'blank_1.pdf')
 
     params = Mindee::Input::InferenceParameters.new(model_id,
