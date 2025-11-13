@@ -7,11 +7,11 @@ require_relative '../data'
 describe Mindee::Image do
   include Mindee::Image
   let(:barcode_path) do
-    File.join(DATA_DIR, 'products', 'barcode_reader', 'default_sample.jpg')
+    File.join(V1_DATA_DIR, 'products', 'barcode_reader', 'default_sample.jpg')
   end
 
   let(:barcode_json_path) do
-    File.join(DATA_DIR, 'products', 'barcode_reader', 'response_v1', 'complete.json')
+    File.join(V1_DATA_DIR, 'products', 'barcode_reader', 'response_v1', 'complete.json')
   end
 
   context 'an image extractor' do

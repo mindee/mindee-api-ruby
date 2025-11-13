@@ -23,6 +23,7 @@ end
 desc 'Run integration tests'
 RSpec::Core::RakeTask.new(:integration) do |t|
   t.pattern = 'spec/**/*_integration.rb'
+  t.rspec_opts = ['--require', 'integration_helper']
 end
 
 Rake::Task[:doc].enhance do

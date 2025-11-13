@@ -7,7 +7,7 @@ describe Mindee::Input::Source::URLInputSource do
   let(:valid_url) { 'https://validurl/some/file.jpg' }
   let(:valid_url_no_filename) { 'https://validurl/some/' }
   let(:invalid_url) { 'http://invalidurl/some/file.jpg' }
-  let(:output_dir) { "#{DATA_DIR}/output/" }
+  let(:output_dir) { "#{ROOT_DATA_DIR}/output/" }
 
   describe '#initialize' do
     context 'with valid URL' do

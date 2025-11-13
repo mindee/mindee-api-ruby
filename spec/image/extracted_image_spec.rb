@@ -8,14 +8,14 @@ require_relative '../data'
 
 describe Mindee::Image::ExtractedImage do
   let(:file_path) do
-    File.join(DATA_DIR, 'products', 'invoices', 'default_sample.jpg')
+    File.join(V1_DATA_DIR, 'products', 'invoices', 'default_sample.jpg')
   end
   let(:input_source) do
     Mindee::Input::Source::PathInputSource.new(file_path)
   end
   let(:page_id) { 1 }
   let(:element_id) { 42 }
-  let(:output_dir) { "#{DATA_DIR}/output" }
+  let(:output_dir) { "#{ROOT_DATA_DIR}/output" }
 
   describe '#initialize' do
     it 'initializes with correct attributes' do

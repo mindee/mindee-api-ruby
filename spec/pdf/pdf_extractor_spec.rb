@@ -3,10 +3,9 @@
 require 'mindee'
 
 describe 'Invoice extraction' do
-  let(:product_data_dir) { File.join(DATA_DIR, 'products') }
-  let(:invoice_default_sample_path) { File.join(product_data_dir, 'invoices', 'default_sample.jpg') }
-  let(:invoice_splitter_5p_path) { File.join(product_data_dir, 'invoice_splitter', 'invoice_5p.pdf') }
-  let(:loaded_prediction_path) { File.join(product_data_dir, 'invoice_splitter', 'response_v1', 'complete.json') }
+  let(:invoice_default_sample_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoices', 'default_sample.jpg') }
+  let(:invoice_splitter_5p_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'invoice_5p.pdf') }
+  let(:loaded_prediction_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'response_v1', 'complete.json') }
 
   let(:loaded_prediction) do
     dummy_client = Mindee::Client.new(api_key: 'dummy_key')

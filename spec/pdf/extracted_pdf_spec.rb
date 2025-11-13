@@ -3,11 +3,9 @@
 require 'mindee'
 
 describe Mindee::PDF::PDFExtractor::ExtractedPDF do
-  let(:product_data_dir) { File.join(DATA_DIR, 'products') }
-  let(:output_dir) { File.join(DATA_DIR, 'output') }
-  let(:file_types_dir) { File.join(DATA_DIR, 'file_types') }
-  let(:valid_pdf_path) { "#{product_data_dir}/invoices/invoice.pdf" }
-  let(:invalid_pdf_path) { "#{file_types_dir}/receipt.txt" }
+  let(:output_dir) { File.join(V1_DATA_DIR, 'output') }
+  let(:valid_pdf_path) { "#{V1_PRODUCT_DATA_DIR}/invoices/invoice.pdf" }
+  let(:invalid_pdf_path) { "#{FILE_TYPES_DIR}/receipt.txt" }
   let(:output_path) { "#{output_dir}/sample_output.pdf" }
 
   before do

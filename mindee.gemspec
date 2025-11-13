@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'origamindee', '~> 4.0'
   spec.add_dependency 'pdf-reader', '~> 2.14'
 
+  spec.add_development_dependency 'openssl', '~> 3.3.2'
   spec.add_development_dependency 'prism', '~> 1.3'
   spec.add_development_dependency 'rake', '~> 13.2'
   spec.add_development_dependency 'rbs', '~> 3.6'

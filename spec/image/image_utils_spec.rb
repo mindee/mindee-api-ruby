@@ -6,7 +6,7 @@ require 'stringio'
 require 'mindee'
 
 describe Mindee::Image::ImageUtils do
-  let(:sample_image_path) { "#{DATA_DIR}/file_types/receipt.jpg" }
+  let(:sample_image_path) { "#{FILE_TYPES_DIR}/receipt.jpg" }
   let(:sample_image) { MiniMagick::Image.open(sample_image_path) }
 
   describe 'Image utility module' do

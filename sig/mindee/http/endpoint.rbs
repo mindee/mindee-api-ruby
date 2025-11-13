@@ -23,6 +23,7 @@ module Mindee
       def document_queue_req_post: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ParseOptions) -> Net::HTTPResponse
       def document_queue_req_get: (String) -> Net::HTTPResponse
       def check_api_key: -> void
+      def configure_ssl: (Net::HTTP) -> void
     end
   end
 end

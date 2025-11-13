@@ -7,6 +7,7 @@ require_relative '../version'
 require_relative 'response_validation'
 
 module Mindee
+  # Mindee internal HTTP module.
   module HTTP
     # API key's default environment key name.
     API_KEY_ENV_NAME = 'MINDEE_API_KEY'
