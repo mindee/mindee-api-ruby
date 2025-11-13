@@ -49,26 +49,13 @@ jobs:
           RPL="rights=${DQT}read|write${DQT} pattern=${DQT}PDF${DQT}"
           sudo sed -i "s/$SRC/$RPL/" /etc/ImageMagick-6/policy.xml
 
-      - name: Ensure OpenSSL & CA certificate bundle (macOS)
+      - name: Add custom root CA (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew update
-          brew install openssl@3 || true
-          
-          # Prefer the CA bundle that ships with Homebrew's OpenSSL
-          CERT_PEM="$(brew --prefix openssl@3)/etc/openssl@3/cert.pem"
-          
-          if [ -f "$CERT_PEM" ]; then
-            echo "Using Homebrew OpenSSL CA bundle at $CERT_PEM"
-            echo "SSL_CERT_FILE=$CERT_PEM" >> "$GITHUB_ENV"
-          else
-            echo "Homebrew CA bundle not found, exporting system roots..."
-            security find-certificate -a -p \
-              /System/Library/Keychains/SystemRootCertificates.keychain \
-              > "$RUNNER_TEMP/cacert.pem"
-            echo "SSL_CERT_FILE=$RUNNER_TEMP/cacert.pem" >> "$GITHUB_ENV"
-          fi
-
+          sudo security add-trusted-cert \
+            -d -r trustRoot \
+            -k /Library/Keychains/System.keychain \
+            ./certs/my-root-ca.pem
 
       - name: Run Rspec for integration tests
         env:
