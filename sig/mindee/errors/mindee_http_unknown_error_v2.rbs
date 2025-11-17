@@ -1,0 +1,9 @@
+# lib/mindee/errors/mindee_http_unknown_error_v2.rb
+module Mindee
+  module Errors
+    # Unknown HTTP error for the V2 API.
+    class MindeeHTTPUnknownErrorV2 < MindeeHTTPErrorV2
+      def initialize: (Hash[String|Symbol, untyped]) -> void
+    end
+  end
+end

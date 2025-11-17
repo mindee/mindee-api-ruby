@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'field/inference_fields'
-require_relative 'rag_metadata'
 require_relative 'raw_text'
+require_relative 'rag_metadata'
 
 module Mindee
   module Parsing
@@ -13,7 +13,7 @@ module Mindee
         attr_reader :fields
         # @return [Mindee::Parsing::V2::RawText, nil] Optional extra data.
         attr_reader :raw_text
-        # @return [Mindee::Parsing::V2::RagMetadata, nil] Optional RAG metadata.
+        # @return [Mindee::Parsing::V2::RAGMetadata, nil] Optional RAG metadata.
         attr_reader :rag
 
         # @param server_response [Hash] Hash version of the JSON returned by the API.
@@ -23,7 +23,7 @@ module Mindee
           @fields = Field::InferenceFields.new(server_response['fields'])
 
           @raw_text = server_response['raw_text'] ? RawText.new(server_response['raw_text']) : nil
-          @rag = server_response.key?('rag') && server_response['rag'] ? RagMetadata.new(server_response['rag']) : nil
+          @rag = (V2::RAGMetadata.new(server_response['rag']) if server_response.key?('rag') && server_response['rag'])
         end
 
         # String representation.
