@@ -11,11 +11,11 @@ module Mindee
       attr_reader :status
       # @return [String] A human-readable explanation specific to the occurrence of the problem.
       attr_reader :detail
-      # @return [String, nil] A short, human-readable summary of the problem.
+      # @return [String] A short, human-readable summary of the problem.
       attr_reader :title
-      # @return [String, nil] A machine-readable code specific to the occurrence of the problem.
+      # @return [String] A machine-readable code specific to the occurrence of the problem.
       attr_reader :code
-      # @return [Array<ErrorItem>, nil] A list of explicit error details.
+      # @return [Array<ErrorItem>] A list of explicit error details.
       attr_reader :errors
 
       # @param http_error [Hash, Parsing::V2::ErrorResponse]
@@ -35,6 +35,8 @@ module Mindee
                     http_error['errors'].map do |error|
                       Parsing::V2::ErrorItem.new(error)
                     end
+                  else
+                    []
                   end
         super("HTTP #{@status} - #{@title} :: #{@code} - #{@detail}")
       end

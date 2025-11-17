@@ -5,7 +5,7 @@ module Mindee
     module V2
       # Metadata about the RAG operation.
       class RAGMetadata
-        # ID of the matched document, if present.
+        # The UUID of the matched document used during the RAG operation.
         attr_accessor :retrieved_document_id
 
         def initialize(server_response)
