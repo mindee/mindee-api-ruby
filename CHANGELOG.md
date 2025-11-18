@@ -1,5 +1,13 @@
 # Mindee Ruby API Library Changelog
 
+## v4.8.0 - 2025-11-18
+### Changes
+* :sparkles: add support for better errors
+* :sparkles: add support for RAG metadata
+### Fixes
+* :recycle: harmonize test structure with other libraries
+
+
 ## v4.7.2 - 2025-10-13
 ### Changes
 * :recycle: harmonize getting page count from a local input source
