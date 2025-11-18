@@ -5,6 +5,7 @@ module Mindee
       class InferenceResult
         attr_reader fields: Field::InferenceFields
         attr_reader raw_text: RawText?
+        attr_reader rag: RAGMetadata?
 
         def initialize: (Hash[String | Symbol, untyped]) -> void
         def to_s: -> String

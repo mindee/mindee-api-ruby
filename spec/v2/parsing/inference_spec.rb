@@ -13,6 +13,8 @@ RSpec.describe 'inference' do
   let(:raw_text_str_path) { File.join(inference_path, 'raw_texts.txt') }
   let(:blank_path) { File.join(findoc_path, 'blank.json') }
   let(:complete_path) { File.join(findoc_path, 'complete.json') }
+  let(:rag_matched_path) { File.join(inference_path, 'rag_matched.json') }
+  let(:rag_not_matched_path) { File.join(inference_path, 'rag_not_matched.json') }
 
   def load_v2_inference(resource_path)
     local_response = Mindee::Input::LocalResponse.new(resource_path)
@@ -21,7 +23,7 @@ RSpec.describe 'inference' do
 
   simple_field = Mindee::Parsing::V2::Field::SimpleField
   object_field = Mindee::Parsing::V2::Field::ObjectField
-  list_field   = Mindee::Parsing::V2::Field::ListField
+  list_field = Mindee::Parsing::V2::Field::ListField
   field_confidence = Mindee::Parsing::V2::Field::FieldConfidence
 
   describe 'simple' do
@@ -346,6 +348,19 @@ RSpec.describe 'inference' do
       expect(confidence).to be_gteql(field_confidence::LOW)
       expect(confidence).to be_gteql('Low')
       expect(confidence).to be_gteql(1)
+    end
+  end
+  describe 'RAG Metadata' do
+    it 'when matched' do
+      response = load_v2_inference(rag_matched_path)
+      expect(response.inference).not_to be_nil
+      expect(response.inference.result.rag.retrieved_document_id).to eq('12345abc-1234-1234-1234-123456789abc')
+    end
+
+    it 'when not matched' do
+      response = load_v2_inference(rag_not_matched_path)
+      expect(response.inference).not_to be_nil
+      expect(response.inference.result.rag.retrieved_document_id).to be_nil
     end
   end
 end
