@@ -25,6 +25,10 @@ module Mindee
       # @return [String, nil] Optional alias for the file.
       attr_reader :file_alias
 
+      # @return [String, nil] Additional text context used by the model during inference.
+      #   Not recommended, for specific use only.
+      attr_reader :text_context
+
       # @return [Array<String>, nil] Optional list of Webhooks IDs to propagate the API response to.
       attr_reader :webhook_ids
 
@@ -52,6 +56,7 @@ module Mindee
         confidence: nil,
         file_alias: nil,
         webhook_ids: nil,
+        text_context: nil,
         polling_options: nil,
         close_file: true
       )
@@ -64,6 +69,7 @@ module Mindee
         @confidence = confidence
         @file_alias = file_alias
         @webhook_ids = webhook_ids || []
+        @text_context = text_context
         @polling_options = get_clean_polling_options(polling_options)
         @close_file = close_file.nil? || close_file
         # rubocop:enable Metrics/ParameterLists
