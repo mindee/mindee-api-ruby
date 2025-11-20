@@ -45,7 +45,12 @@ RSpec.describe Mindee::ClientV2 do
   it 'enqueue(path) raises MindeeHTTPErrorV2 on 4xx' do
     expect do
       stub_next_request_with(:enqueue, hash: JSON.generate(json400))
-      client.enqueue_inference(input_doc, model_id: 'dummy-model')
+      inference_params = Mindee::Input::InferenceParameters.new(
+        'dummy-model',
+        raw_text: false,
+        text_context: 'Hello my name is mud.'
+      )
+      client.enqueue_inference(input_doc, inference_params)
     end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
       expect(e.status).to eq(400)
       expect(e.detail).to eq('Unsupported content.')
@@ -55,7 +60,8 @@ RSpec.describe Mindee::ClientV2 do
   it 'enqueue_and_get_inference(path) raises MindeeHTTPErrorV2 on 4xx' do
     expect do
       stub_next_request_with(:enqueue, hash: JSON.generate(json400))
-      client.enqueue_and_get_inference(input_doc, model_id: 'dummy-model')
+      inference_params = Mindee::Input::InferenceParameters.new('dummy-model')
+      client.enqueue_and_get_inference(input_doc, inference_params)
     end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
       expect(e.status).to eq(400)
       expect(e.detail).to eq('Unsupported content.')
@@ -67,7 +73,8 @@ RSpec.describe Mindee::ClientV2 do
 
     expect do
       stub_next_request_with(:enqueue, hash: JSON.generate(error_hash))
-      client.enqueue_inference(input_doc, model_id: 'dummy-model')
+      inference_params = Mindee::Input::InferenceParameters.new('dummy-model')
+      client.enqueue_inference(input_doc, inference_params)
     end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
       expect(e.status).to eq(413)
       expect(e.detail).to include('File exceeds size limit')

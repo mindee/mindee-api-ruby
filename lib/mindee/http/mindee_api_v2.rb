@@ -111,8 +111,25 @@ module Mindee
         poll("#{@settings.base_url}/inferences/#{queue_id}")
       end
 
+      # Handle parameters for the enqueue form
+      # @param form_data [Array] Array of form fields
+      # @param params [Input::InferenceParameters] Inference options.
+      def enqueue_form_options(form_data, params)
+        # deal with optional features
+        form_data.push(['rag', params.rag.to_s]) unless params.rag.nil?
+        form_data.push(['raw_text', params.raw_text.to_s]) unless params.raw_text.nil?
+        form_data.push(['polygon', params.polygon.to_s]) unless params.polygon.nil?
+        form_data.push(['confidence', params.confidence.to_s]) unless params.confidence.nil?
+        form_data.push ['file_alias', params.file_alias] if params.file_alias
+        form_data.push ['text_context', params.text_context] if params.text_context
+        unless params.webhook_ids.nil? || params.webhook_ids.empty?
+          form_data.push ['webhook_ids', params.webhook_ids.join(',')]
+        end
+        form_data
+      end
+
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param params [Input::InferenceParameters] Parse options.
+      # @param params [Input::InferenceParameters] Inference options.
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
         uri = URI("#{@settings.base_url}/inferences/enqueue")
@@ -125,16 +142,9 @@ module Mindee
                     end
         form_data.push(['model_id', params.model_id])
 
-        # deal with optional features
-        form_data.push(['rag', params.rag.to_s]) unless params.rag.nil?
-        form_data.push(['raw_text', params.raw_text.to_s]) unless params.raw_text.nil?
-        form_data.push(['polygon', params.polygon.to_s]) unless params.polygon.nil?
-        form_data.push(['confidence', params.confidence.to_s]) unless params.confidence.nil?
+        # deal with other parameters
+        form_data = enqueue_form_options(form_data, params)
 
-        form_data.push ['file_alias', params.file_alias] if params.file_alias
-        unless params.webhook_ids.nil? || params.webhook_ids.empty?
-          form_data.push ['webhook_ids', params.webhook_ids.join(',')]
-        end
         headers = {
           'Authorization' => @settings.api_key,
           'User-Agent' => @settings.user_agent,

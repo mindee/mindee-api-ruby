@@ -13,6 +13,10 @@ module Mindee
       def inference_job_req_get: (String) -> Net::HTTPResponse
       def inference_result_req_get: (String) -> Net::HTTPResponse
       def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::InferenceParameters) -> Net::HTTPResponse?
+
+      private
+
+      def enqueue_form_options: (Array[untyped], Input::InferenceParameters) -> Array[untyped]
     end
   end
 end
