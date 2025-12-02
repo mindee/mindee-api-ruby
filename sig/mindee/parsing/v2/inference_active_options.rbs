@@ -6,6 +6,7 @@ module Mindee
         attr_reader polygon: bool
         attr_reader rag: bool
         attr_reader raw_text: bool
+        attr_reader text_context: bool
 
         def initialize: (Hash[String | Symbol, untyped]) -> void
       end

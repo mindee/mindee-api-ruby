@@ -24,7 +24,8 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
         polygon: false,
         confidence: false,
         file_alias: 'ruby-integration-test',
-        polling_options: polling
+        polling_options: polling,
+        text_context: 'this is a test'
       )
 
       response = client.enqueue_and_get_inference(input, inference_params)
@@ -50,6 +51,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
       expect(active_options.polygon).to eq(false)
       expect(active_options.confidence).to eq(false)
       expect(active_options.rag).to eq(false)
+      expect(active_options.text_context).to eq(true)
 
       result = response.inference.result
       expect(result).not_to be_nil
@@ -94,6 +96,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
       expect(active_options.polygon).to eq(false)
       expect(active_options.confidence).to eq(false)
       expect(active_options.rag).to eq(false)
+      expect(active_options.text_context).to eq(false)
 
       result = response.inference.result
       expect(result).not_to be_nil

@@ -13,6 +13,8 @@ module Mindee
         attr_reader :confidence
         # @return [Boolean] Whether the Retrieval-Augmented Generation feature was activated.
         attr_reader :rag
+        # @return [Boolean] Whether the text context feature was activated.
+        attr_reader :text_context
 
         # @param server_response [Hash] Raw JSON parsed into a Hash.
         def initialize(server_response)
@@ -20,6 +22,7 @@ module Mindee
           @polygon = server_response['polygon']
           @confidence = server_response['confidence']
           @rag = server_response['rag']
+          @text_context = server_response['text_context']
         end
 
         # String representation.
