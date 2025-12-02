@@ -3,7 +3,7 @@ module Mindee
   module Input
     class LocalResponse
       def file: -> StringIO
-      def initialize: (File | IO | StringIO | String | Pathname) -> void
+      def initialize: (File | IO | StringIO | String | Pathname | Tempfile) -> void
       def as_hash: -> Hash[String | Symbol, untyped]
       def self.process_secret_key: (String) -> String
       def get_hmac_signature: (String) -> String

@@ -15,6 +15,7 @@ RSpec.describe 'inference' do
   let(:complete_path) { File.join(findoc_path, 'complete.json') }
   let(:rag_matched_path) { File.join(inference_path, 'rag_matched.json') }
   let(:rag_not_matched_path) { File.join(inference_path, 'rag_not_matched.json') }
+  let(:text_context_path) { File.join(inference_path, 'text_context_enabled.json') }
 
   def load_v2_inference(resource_path)
     local_response = Mindee::Input::LocalResponse.new(resource_path)
@@ -81,6 +82,7 @@ RSpec.describe 'inference' do
       expect(active_options.raw_text).to eq(false)
       expect(active_options.polygon).to eq(false)
       expect(active_options.confidence).to eq(false)
+      expect(active_options.text_context).to eq(false)
       expect(active_options.rag).to eq(false)
 
       fields = inference.result.fields
@@ -361,6 +363,14 @@ RSpec.describe 'inference' do
       response = load_v2_inference(rag_not_matched_path)
       expect(response.inference).not_to be_nil
       expect(response.inference.result.rag.retrieved_document_id).to be_nil
+    end
+  end
+
+  describe 'text context' do
+    it 'when enabled' do
+      response = load_v2_inference(text_context_path)
+      expect(response.inference).not_to be_nil
+      expect(response.inference.active_options.text_context).to be_truthy
     end
   end
 end
