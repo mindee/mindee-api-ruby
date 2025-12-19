@@ -23,7 +23,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
         raw_text: true,
         polygon: false,
         confidence: false,
-        file_alias: 'ruby-integration-test',
+        file_alias: 'rb_integration_test',
         polling_options: polling,
         text_context: 'this is a test'
       )
@@ -72,7 +72,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
         polygon: false,
         confidence: false,
         rag: false,
-        file_alias: 'ruby-integration-test'
+        file_alias: 'rb_integration_test'
       )
 
       response = client.enqueue_and_get_inference(input, inference_params)
@@ -191,7 +191,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
           polygon: false,
           confidence: false,
           rag: false,
-          file_alias: 'ruby-integration-test'
+          file_alias: 'rb_integration_test'
         )
         client.enqueue_and_get_inference(input, inference_params)
       end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
@@ -214,6 +214,52 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
 
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil
+    end
+  end
+
+  context 'A Data Schema Override' do
+    it 'Overrides successfully' do
+      data_schema_replace = File.read(File.join(V2_DATA_DIR, 'inference', 'data_schema_replace_param.json'))
+      input = Mindee::Input::Source::PathInputSource.new(blank_pdf_url)
+
+      inference_params = Mindee::Input::InferenceParameters.new(
+        model_id,
+        raw_text: false,
+        polygon: false,
+        confidence: false,
+        rag: false,
+        file_alias: 'rb_integration_data_schema_replace',
+        data_schema: data_schema_replace
+      )
+
+      response = client.enqueue_and_get_inference(input, inference_params)
+      expect(response).not_to be_nil
+
+      model = response.inference.model
+      expect(model).not_to be_nil
+      expect(model).to be_a(Mindee::Parsing::V2::InferenceModel)
+      expect(model.id).to eq(model_id)
+
+      active_options = response.inference.active_options
+      expect(active_options).not_to be_nil
+      expect(active_options).to be_a(Mindee::Parsing::V2::InferenceActiveOptions)
+      expect(active_options.raw_text).to eq(false)
+      expect(active_options.polygon).to eq(false)
+      expect(active_options.confidence).to eq(false)
+      expect(active_options.rag).to eq(false)
+      expect(active_options.text_context).to eq(false)
+      expect(active_options.data_schema).to_not be_nil
+      expect(active_options.data_schema.replace).to eq(true)
+
+      result = response.inference.result
+      expect(result).not_to be_nil
+
+      expect(result.raw_text).to be_nil
+
+      fields = result.fields
+      expect(fields).not_to be_nil
+      expect(fields['test_replace']).not_to be_nil
+      expect(fields['test_replace'].value).to eq('a test value')
     end
   end
 end

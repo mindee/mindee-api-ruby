@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'data_schema'
+
 module Mindee
   module Input
     # Parameters to set when sending a file for inference.
@@ -35,6 +37,9 @@ module Mindee
       # @return [PollingOptions] Options for polling. Set only if having timeout issues.
       attr_reader :polling_options
 
+      # @return [DataSchemaField]
+      attr_reader :data_schema
+
       # @return [Boolean, nil] Whether to close the file after parsing.
       attr_reader :close_file
 
@@ -58,7 +63,8 @@ module Mindee
         webhook_ids: nil,
         text_context: nil,
         polling_options: nil,
-        close_file: true
+        close_file: true,
+        data_schema: nil
       )
         raise Errors::MindeeInputError, 'Model ID is required.' if model_id.empty? || model_id.nil?
 
@@ -72,6 +78,7 @@ module Mindee
         @text_context = text_context
         @polling_options = get_clean_polling_options(polling_options)
         @close_file = close_file.nil? || close_file
+        @data_schema = DataSchema.new(data_schema) unless data_schema.nil?
         # rubocop:enable Metrics/ParameterLists
       end
 
