@@ -12,6 +12,7 @@ module Mindee
       attr_reader raw_text: bool?
       attr_reader text_context: String?
       attr_reader webhook_ids: Array[String]?
+      attr_reader data_schema: DataSchema?
 
       def initialize: (
           String,
@@ -23,7 +24,8 @@ module Mindee
           ?text_context: String?,
           ?webhook_ids: Array[String]?,
           ?polling_options: Hash[Symbol | String, untyped] | PollingOptions?,
-          ?close_file: bool?
+          ?close_file: bool?,
+          ?data_schema: DataSchema|String|Hash[Symbol | String, untyped]?
         ) -> void
 
       def self.from_hash: (params: Hash[String | Symbol, untyped]) -> InferenceParameters

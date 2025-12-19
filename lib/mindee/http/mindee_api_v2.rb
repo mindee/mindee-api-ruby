@@ -122,6 +122,7 @@ module Mindee
         form_data.push(['confidence', params.confidence.to_s]) unless params.confidence.nil?
         form_data.push ['file_alias', params.file_alias] if params.file_alias
         form_data.push ['text_context', params.text_context] if params.text_context
+        form_data.push ['data_schema', params.data_schema.to_s] if params.data_schema
         unless params.webhook_ids.nil? || params.webhook_ids.empty?
           form_data.push ['webhook_ids', params.webhook_ids.join(',')]
         end

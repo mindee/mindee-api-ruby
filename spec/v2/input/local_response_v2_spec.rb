@@ -5,7 +5,7 @@ require_relative '../../data'
 
 def assert_local_response(local_response)
   dummy_secret_key = 'ogNjY44MhvKPGTtVsI8zG82JqWQa68woYQH'
-  signature = 'b82a515c832fd2c4f4ce3a7e6f53c12e8d10e19223f6cf0e3a9809a7a3da26be'
+  signature = '1df388c992d87897fe61dfc56c444c58fc3c7369c31e2b5fd20d867695e93e85'
   expect(local_response.file).to_not be(nil)
   expect(local_response.valid_hmac_signature?(
            dummy_secret_key, 'invalid signature'
