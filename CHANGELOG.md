@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.10.0 - 2025-12-19
+### Changes
+:sparkles: add support for dataschema parameter
+
+
 ## v4.9.0 - 2025-12-02
 ### Changes
 * :sparkles: add support for text_context parameter
