@@ -23,9 +23,7 @@ module Mindee
           @id = server_response['id']
           @created_at = parse_date(server_response['created_at'])
           @status     = server_response['status']
-          unless server_response['error'].nil? || server_response['error'].empty?
-            @error = ErrorResponse.new(server_response['error'])
-          end
+          @error = ErrorResponse.new(server_response['error']) unless server_response['error'].nil?
         end
 
         # RST display.

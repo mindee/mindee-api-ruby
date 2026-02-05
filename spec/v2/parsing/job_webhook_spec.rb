@@ -9,23 +9,7 @@ RSpec.describe Mindee::Parsing::V2::JobWebhook do
         server_response = {
           'id' => '12345678-1234-1234-1234-123456789012',
           'status' => 'Processing',
-          'error' => nil
-        }
-
-        webhook = described_class.new(server_response)
-
-        expect(webhook.id).to eq('12345678-1234-1234-1234-123456789012')
-        expect(webhook.status).to eq('Processing')
-        expect(webhook.error).to be_nil
-      end
-    end
-
-    context 'when error key is present with empty hash' do
-      it 'does not raise an error and sets @error to nil' do
-        server_response = {
-          'id' => '12345678-1234-1234-1234-123456789012',
-          'status' => 'Processing',
-          'error' => {}
+          'error' => nil,
         }
 
         webhook = described_class.new(server_response)
@@ -40,7 +24,7 @@ RSpec.describe Mindee::Parsing::V2::JobWebhook do
       it 'does not raise an error and sets @error to nil' do
         server_response = {
           'id' => '12345678-1234-1234-1234-123456789012',
-          'status' => 'Processing'
+          'status' => 'Processing',
         }
 
         webhook = described_class.new(server_response)
@@ -60,8 +44,8 @@ RSpec.describe Mindee::Parsing::V2::JobWebhook do
             'status' => 500,
             'detail' => 'Internal server error',
             'title' => 'Server Error',
-            'code' => 'INTERNAL_ERROR'
-          }
+            'code' => 'INTERNAL_ERROR',
+          },
         }
 
         webhook = described_class.new(server_response)
