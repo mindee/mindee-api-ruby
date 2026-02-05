@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v4.10.1 - 2026-02-05
+### Fixes
+* :bug: fix NoMethodError in JobWebhook when error is nil (#222) (Co-authored-by: haris_delalic <haris.delalic@datamolino.com>)
+
+
 ## v4.10.0 - 2025-12-19
 ### Changes
 :sparkles: add support for dataschema parameter
