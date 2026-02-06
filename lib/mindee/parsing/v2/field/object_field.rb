@@ -85,6 +85,17 @@ module Mindee
           def get_simple_field(key)
             @fields.get_simple_field(key)
           end
+
+          # Get a field by key and ensure it is a ListField.
+          # @param key [String] Field key to retrieve.
+          # @return [ListField] The ListField.
+          # @raise [TypeError] If the field is not a ListField.
+          def get_list_field(key)
+            field = @fields.get_list_field(key)
+            raise TypeError, "Field #{key} is not a ListField" unless field.is_a?(ListField)
+
+            field
+          end
         end
       end
     end

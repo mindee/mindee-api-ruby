@@ -8,6 +8,9 @@ module Mindee
         class ObjectField < BaseField
           attr_reader fields: InferenceFields
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+
+          def get_list_field: (String) -> ListField
+
           def get_simple_field: (String) -> SimpleField
           def multi_str: -> String
           def single_str: -> String

@@ -149,9 +149,11 @@ RSpec.describe 'inference' do
       expect(fields['field_object']).to be_a(object_field)
 
       field_object = fields.get_object_field('field_object')
+      expect(field_object.get_list_field('sub_object_list')).to be_a(list_field)
       lvl1 = field_object.fields
-
       expect(lvl1['sub_object_list']).to be_a(list_field)
+      expect(lvl1['sub_object_list'].items).not_to be_empty
+      expect(lvl1['sub_object_list'].items[0]).to be_a(object_field)
       expect(lvl1['sub_object_object']).to be_a(object_field)
 
       sub_object_object = lvl1.get_object_field('sub_object_object')
