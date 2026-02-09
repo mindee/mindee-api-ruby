@@ -96,6 +96,38 @@ module Mindee
 
             field
           end
+
+          # Get a field by key and ensure it is an ObjectField.
+          # @param key [String] Field key to retrieve.
+          # @return [ObjectField] The ObjectField.
+          # @raise [TypeError] If the field is not an ObjectField.
+          def get_object_field(key)
+            field = @fields.get_object_field(key)
+            raise TypeError, "Field #{key} is not an ObjectField" unless field.is_a?(ObjectField)
+
+            field
+          end
+
+          # Get all simple fields.
+          # @return [Hash<String, SimpleField>] Simple fields contained in the object.
+          def simple_fields
+            # @type var fields: Hash<String, SimpleField>
+            @fields.select { |_, value| value.is_a?(SimpleField) }
+          end
+
+          # Get all list fields.
+          # @return [Hash<String, ListField>] List fields contained in the object.
+          def list_fields
+            # @type var fields: Hash<String, ListField>
+            @fields.select { |_, value| value.is_a?(ListField) }
+          end
+
+          # Get all object fields.
+          # @return [Hash<String, ObjectField>] Object fields contained in the object.
+          def object_fields
+            # @type var fields: Hash<String, ObjectField>
+            @fields.select { |_, value| value.is_a?(ObjectField) }
+          end
         end
       end
     end

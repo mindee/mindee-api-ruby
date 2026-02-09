@@ -1,5 +1,4 @@
-# TypeProf 0.30.1
-
+# lib/mindee/parsing/v2/field/object_field.rb
 module Mindee
   module Parsing
     module V2
@@ -9,9 +8,14 @@ module Mindee
           attr_reader fields: InferenceFields
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
 
-          def get_list_field: (String) -> ListField
-
           def get_simple_field: (String) -> SimpleField
+          def get_list_field: (String) -> ListField
+          def get_object_field: (String) -> ObjectField
+
+          def simple_fields: () -> Hash[String, SimpleField]
+          def list_fields: () -> Hash[String, ListField]
+          def object_fields: () -> Hash[String, ObjectField]
+
           def multi_str: -> String
           def single_str: -> String
           def to_s: -> String
