@@ -1,5 +1,9 @@
 # Mindee Ruby API Library Changelog
 
+## v4.11.0 - 2026-02-11
+### Changes
+* :sparkles: add complementary accessors for ObjectField
+
 ## v4.10.1 - 2026-02-05
 ### Fixes
 * :bug: fix NoMethodError in JobWebhook when error is nil (#222) (Co-authored-by: haris_delalic <haris.delalic@datamolino.com>)
