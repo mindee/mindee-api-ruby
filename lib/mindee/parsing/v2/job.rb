@@ -11,10 +11,8 @@ module Mindee
       class Job
         # @return [String] Unique job identifier.
         attr_reader :id
-        # @return [DateTime] Timestamp of creation.
+        # @return [DateTime, nil] Timestamp of creation.
         attr_reader :created_at
-        # @return [DateTime, nil] Timestamp of job completion.
-        attr_reader :completed_at
         # @return [String] Identifier of the model used.
         attr_reader :model_id
         # @return [String] Name of the processed file.
@@ -32,7 +30,6 @@ module Mindee
         # @return [ErrorResponse, nil] Error details when the job failed.
         attr_reader :error
 
-        # rubocop:disable Metrics/CyclomaticComplexity
         # @param server_response [Hash] Parsed JSON payload from the API.
         def initialize(server_response)
           raise ArgumentError, 'server_response must be a Hash' unless server_response.is_a?(Hash)
@@ -42,10 +39,7 @@ module Mindee
           unless server_response['error'].nil? || server_response['error'].empty?
             @error = ErrorResponse.new(server_response['error'])
           end
-          @created_at = Time.iso8601(server_response['created_at'])
-          if server_response.key?('completed_at') && !server_response['completed_at'].nil?
-            @completed_at = Time.iso8601(server_response['completed_at'])
-          end
+          @created_at  = Time.iso8601(server_response['created_at'])
           @model_id    = server_response['model_id']
           @polling_url = server_response['polling_url']
           @filename    = server_response['filename']
@@ -56,7 +50,6 @@ module Mindee
             @webhooks.push JobWebhook.new(webhook)
           end
         end
-        # rubocop:enable Metrics/CyclomaticComplexity
 
         # String representation.
         # @return [String]

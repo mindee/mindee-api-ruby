@@ -89,29 +89,6 @@ RSpec.describe Mindee::ClientV2 do
     resp = client.get_job('123e4567-e89b-12d3-a456-426614174000')
     expect(resp).to be_a(Mindee::Parsing::V2::JobResponse)
     expect(resp.job.status).to eq('Processing')
-    expect(
-      resp.job.created_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
-    ).to eq('2025-07-03T14:27:58.974451')
-    expect(resp.job.completed_at).to be_nil
-  end
-
-  it 'should deserialize a job properly' do
-    json_path = File.join(V2_DATA_DIR, 'job', 'ok_processed_webhooks_ok.json')
-    parsed = File.read(json_path)
-    stub_next_request_with(:inference_job_req_get, hash: parsed, status_code: 200)
-
-    resp = client.get_job('123e4567-e89b-12d3-a456-426614174000')
-    expect(resp).to be_a(Mindee::Parsing::V2::JobResponse)
-    expect(resp.job.status).to eq('Processed')
-    expect(resp.job.model_id).to eq('87654321-4321-4321-4321-CBA987654321')
-    expect(resp.job.filename).to eq('default_sample.jpg')
-    expect(resp.job.alias).to eq('dummy-alias.jpg')
-    expect(
-      resp.job.created_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
-    ).to eq('2026-04-20T18:27:58.974451')
-    expect(
-      resp.job.completed_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
-    ).to eq('2026-04-20T18:32:02.734312')
   end
   ENV.delete('MINDEE_V2_BASE_URL')
 end

@@ -5,7 +5,7 @@ require_relative '../../data'
 
 def assert_local_response(local_response)
   dummy_secret_key = 'ogNjY44MhvKPGTtVsI8zG82JqWQa68woYQH'
-  signature = 'e51bdf80f1a08ed44ee161100fc30a25cb35b4ede671b0a575dc9064a3f5dbf1'
+  signature = 'f390d9f7f57ac04f47b6309d8a40236b0182610804fc20e91b1f6028aaca07a7'
   expect(local_response.file).to_not be(nil)
   expect(local_response.valid_hmac_signature?(
            dummy_secret_key, 'invalid signature'
@@ -18,7 +18,7 @@ def assert_local_response(local_response)
 end
 
 describe Mindee::Input::LocalResponse do
-  let(:file_path) { File.join(V2_DATA_DIR, 'products', 'extraction', 'standard_field_types.json') }
+  let(:file_path) { File.join(V2_DATA_DIR, 'inference', 'standard_field_types.json') }
   context 'A V2 local response' do
     it 'should load from a path' do
       response = Mindee::Input::LocalResponse.new(file_path)
