@@ -11,9 +11,9 @@ module Mindee
       class Job
         # @return [String] Unique job identifier.
         attr_reader :id
-        # @return [DateTime] Timestamp of creation.
+        # @return [Time] Date and time of the Job creation.
         attr_reader :created_at
-        # @return [DateTime, nil] Timestamp of job completion.
+        # @return [Time, nil] Date and time of the Job completion. Filled once processing is finished.
         attr_reader :completed_at
         # @return [String] Identifier of the model used.
         attr_reader :model_id
