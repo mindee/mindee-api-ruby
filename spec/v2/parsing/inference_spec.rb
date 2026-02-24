@@ -62,6 +62,10 @@ RSpec.describe 'inference' do
     it 'loads a complete inference with valid properties' do
       response = load_v2_inference(complete_path)
       inference = response.inference
+      job = inference.job
+      expect(job).not_to be_nil
+      expect(job).to be_a(Mindee::Parsing::V2::InferenceJob)
+      expect(job.id).to eq('12345678-1234-1234-1234-jobid1234567')
 
       expect(inference).not_to be_nil
       expect(inference.id).to eq('12345678-1234-1234-1234-123456789abc')
