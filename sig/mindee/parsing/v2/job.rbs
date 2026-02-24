@@ -4,7 +4,8 @@ module Mindee
     module V2
       class Job
         attr_reader alias: String
-        attr_reader created_at: DateTime?
+        attr_reader created_at: Time
+        attr_reader completed_at: Time?
         attr_reader error: ErrorResponse?
         attr_reader filename: String
         attr_reader id: String
