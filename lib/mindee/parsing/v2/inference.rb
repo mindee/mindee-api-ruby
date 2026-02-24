@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'inference_job'
 require_relative 'inference_model'
 require_relative 'inference_file'
 require_relative 'inference_result'
@@ -12,6 +13,8 @@ module Mindee
       class Inference
         # @return [String] Identifier of the inference (when provided by API).
         attr_reader :id
+        # @return [InferenceJob] Metadata about the job.
+        attr_reader :job
         # @return [InferenceModel] Information about the model used.
         attr_reader :model
         # @return [InferenceFile] Information about the processed file.
@@ -26,6 +29,7 @@ module Mindee
           raise ArgumentError, 'server_response must be a Hash' unless server_response.is_a?(Hash)
 
           @model  = InferenceModel.new(server_response['model'])
+          @job    = InferenceJob.new(server_response['job']) if server_response.key?('job')
           @file   = InferenceFile.new(server_response['file'])
           @active_options = InferenceActiveOptions.new(server_response['active_options'])
           @result = InferenceResult.new(server_response['result'])
@@ -39,6 +43,7 @@ module Mindee
           [
             'Inference',
             '#########',
+            @job.to_s,
             @model.to_s,
             @file.to_s,
             @active_options.to_s,
