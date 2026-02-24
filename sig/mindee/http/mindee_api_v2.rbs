@@ -1,10 +1,19 @@
 # lib/mindee/http/mindee_api_v2.rb
 module Mindee
   module HTTP
+    interface _ResponseFactory[T]
+      def new: (Hash[String | Symbol, untyped]) -> T
+    end
+
     class MindeeApiV2
       attr_reader settings: ApiSettingsV2
 
       def initialize: (?api_key: String?) -> void
+
+      def req_get_job_url: (String) -> Parsing::V2::JobResponse
+      def req_get_result: [T] (_ResponseFactory[T] response_class, String inference_id) -> T
+      def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
+
       def req_post_inference_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::InferenceParameters) -> Parsing::V2::JobResponse
       def req_get_inference: (String) -> Parsing::V2::InferenceResponse
       def req_get_job: (String) -> Parsing::V2::JobResponse

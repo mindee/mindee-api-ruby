@@ -36,22 +36,28 @@ module Mindee
     # Enqueue a document for async parsing.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
-    # @param params [Hash, InferenceParameters]
+    # @param params [Hash, BaseParameters]
     # @return [Mindee::Parsing::V2::JobResponse]
     def enqueue_inference(input_source, params)
-      normalized_params = normalize_inference_parameters(params)
+      normalized_params = normalize_inference_parameters(Input::InferenceParameters, params)
       logger.debug("Enqueueing document to model '#{normalized_params.model_id}'.")
 
       @mindee_api.req_post_inference_enqueue(input_source, normalized_params)
     end
 
-    # Enqueue a document for async parsing and automatically try to retrieve it.
+    # Enqueues to an asynchronous endpoint and automatically polls for a response.
+    #
+    # @param response_type [Mindee::V2::BaseResponse] The return class.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param params [Hash, InferenceParameters] Parameters for the inference.
-    # @return [Mindee::Parsing::V2::InferenceResponse]
-    def enqueue_and_get_inference(input_source, params)
-      normalized_params = normalize_inference_parameters(params)
+    # @return [Mindee::Parsing::Common::ApiResponse]
+    def enqueue_and_get_result(
+      response_type,
+      input_source,
+      params
+    )
+      normalized_params = normalize_inference_parameters(response_type._params_type, params)
       normalized_params.validate_async_params
       enqueue_response = enqueue_inference(input_source, normalized_params)
 
@@ -97,13 +103,29 @@ module Mindee
             "Asynchronous parsing request timed out after #{sec_count} seconds"
     end
 
-    # If needed, converts the parsing options provided as a hash into a proper InferenceParameters object.
-    # @param params [Hash, InferenceParameters] Params.
-    # @return [InferenceParameters]
-    def normalize_inference_parameters(params)
-      return params if params.is_a?(Input::InferenceParameters)
+    # Enqueue a document for async parsing and automatically try to retrieve it.
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
+    #   The source of the input document (local file or URL).
+    # @param params [Hash, InferenceParameters] Parameters for the inference.
+    # @return [Mindee::Parsing::V2::InferenceResponse]
+    def enqueue_and_get_inference(input_source, params)
+      warn '[DEPRECATION] `enqueue_and_get_inference` is deprecated; use `enqueue_and_get_result` instead.'
 
-      Input::InferenceParameters.from_hash(params: params)
+      response = enqueue_and_get_result(Mindee::Parsing::V2::InferenceResponse, input_source, params)
+      unless response.is_a?(Mindee::Parsing::V2::InferenceResponse)
+        raise TypeError, "Invalid response type \"#{response.class}\""
+      end
+
+      response
+    end
+
+    # If needed, converts the parsing options provided as a hash into a proper InferenceParameters object.
+    # @param params [Hash, Class<BaseParameters>] Params.
+    # @return [BaseParameters]
+    def normalize_inference_parameters(param_class, params)
+      return param_class.from_hash(params: params) if params.is_a?(Hash)
+
+      params
     end
   end
 end

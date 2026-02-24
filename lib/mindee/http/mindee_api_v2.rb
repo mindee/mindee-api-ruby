@@ -29,7 +29,7 @@ module Mindee
           input_source,
           params
         )
-        Parsing::V2::JobResponse.new(process_response(response))
+        Mindee::Parsing::V2::JobResponse.new(process_response(response))
       end
 
       # Retrieves a queued inference.
@@ -37,11 +37,19 @@ module Mindee
       # @param inference_id [String]
       # @return [Mindee::Parsing::V2::InferenceResponse]
       def req_get_inference(inference_id)
+        req_get_result(Mindee::Parsing::V2::InferenceResponse, inference_id)
+      end
+
+      # Retrieves a result from a given queue.
+      # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
+      # @param inference_id [String]
+      # @return [Mindee::Parsing::V2::BaseResponse]
+      def req_get_result(response_class, inference_id)
         @settings.check_api_key
         response = inference_result_req_get(
           inference_id
         )
-        Parsing::V2::InferenceResponse.new(process_response(response))
+        response_class.new(process_response(response))
       end
 
       # Retrieves a queued job.
@@ -53,7 +61,28 @@ module Mindee
         response = inference_job_req_get(
           job_id
         )
-        Parsing::V2::JobResponse.new(process_response(response))
+        Mindee::Parsing::V2::JobResponse.new(process_response(response))
+      end
+
+      # Retrieves a queued job.
+      #
+      # @param url [String]
+      # @return [Mindee::Parsing::V2::JobResponse]
+      def req_get_job_url(url)
+        @settings.check_api_key
+        response = poll(url)
+        Mindee::Parsing::V2::JobResponse.new(process_response(response))
+      end
+
+      # Retrieves a queued job.
+      #
+      # @param result_class [Mindee::V2::Parsing::BaseResponse]
+      # @param url [String]
+      # @return [Mindee::Parsing::V2::JobResponse]
+      def req_get_result_url(result_class, url)
+        @settings.check_api_key
+        response = poll(url)
+        result_class.new(process_response(response))
       end
 
       private

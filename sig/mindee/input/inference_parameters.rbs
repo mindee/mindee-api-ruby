@@ -1,17 +1,14 @@
 # lib/mindee/input/inference_parameters.rb
 module Mindee
   module Input
-    class InferenceParameters
-      attr_reader close_file: bool
+    class InferenceParameters < BaseParameters
+      self.@_slug: String
+
       attr_reader confidence: bool?
-      attr_reader file_alias: String?
-      attr_reader model_id: String
-      attr_reader polling_options: PollingOptions
       attr_reader polygon: bool?
       attr_reader rag: bool?
       attr_reader raw_text: bool?
       attr_reader text_context: String?
-      attr_reader webhook_ids: Array[String]?
       attr_reader data_schema: DataSchema?
 
       def initialize: (
@@ -31,10 +28,6 @@ module Mindee
       def self.from_hash: (params: Hash[String | Symbol, untyped]) -> InferenceParameters
 
       def validate_async_params: -> void
-
-      private
-
-      def get_clean_polling_options: (Hash[String | Symbol, untyped] | PollingOptions?) -> PollingOptions
     end
   end
 end

@@ -70,9 +70,9 @@ module Mindee
 
       # Deserializes a loaded response
       # @param response_class [Parsing::V2::CommonResponse] class to return.
-      # @return [Parsing::V2::JobResponse, Parsing::V2::InferenceResponse]
+      # @return [Parsing::V2::JobResponse, Mindee::Parsing::V2::InferenceResponse]
       def deserialize_response(response_class)
-        response_class.new(as_hash) # : Parsing::V2::JobResponse | Parsing::V2::InferenceResponse
+        response_class.new(as_hash) # : Mindee::Parsing::V2::JobResponse | Mindee::Parsing::V2::InferenceResponse
       rescue StandardError
         raise Errors::MindeeInputError, 'Invalid response provided.'
       end

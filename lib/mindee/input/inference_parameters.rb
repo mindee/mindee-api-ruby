@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 require_relative 'data_schema'
+require_relative '../input/base_parameters'
 
 module Mindee
   module Input
     # Parameters to set when sending a file for inference.
-    class InferenceParameters
-      # @return [String] ID of the model (required).
-      attr_reader :model_id
-
+    class InferenceParameters < Mindee::Input::BaseParameters
       # @return [Boolean, nil] Enhance extraction accuracy with Retrieval-Augmented Generation.
       attr_reader :rag
 
@@ -24,35 +22,27 @@ module Mindee
       #   Calculate confidence scores for all fields, and fill their confidence attribute.
       attr_reader :confidence
 
-      # @return [String, nil] Optional alias for the file.
-      attr_reader :file_alias
-
       # @return [String, nil] Additional text context used by the model during inference.
       #   Not recommended, for specific use only.
       attr_reader :text_context
 
-      # @return [Array<String>, nil] Optional list of Webhooks IDs to propagate the API response to.
-      attr_reader :webhook_ids
-
-      # @return [PollingOptions] Options for polling. Set only if having timeout issues.
-      attr_reader :polling_options
-
       # @return [DataSchemaField]
       attr_reader :data_schema
 
-      # @return [Boolean, nil] Whether to close the file after parsing.
-      attr_reader :close_file
+      @_slug = 'extraction'
 
       # rubocop:disable Metrics/ParameterLists
       # @param [String] model_id ID of the model
-      # @param [nil] rag Whether to enable RAG.
-      # @param [nil] raw_text Whether to enable rax text.
-      # @param [nil] polygon Whether to enable polygons.
-      # @param [nil] confidence Whether to enable confidence scores.
-      # @param [nil] file_alias File alias, if applicable.
-      # @param [nil] webhook_ids
-      # @param [nil] polling_options
-      # @param [TrueClass] close_file
+      # @param [Boolean, nil] rag Whether to enable RAG.
+      # @param [Boolean, nil] raw_text Whether to enable rax text.
+      # @param [Boolean, nil] polygon Whether to enable polygons.
+      # @param [Boolean, nil] confidence Whether to enable confidence scores.
+      # @param [String, nil] file_alias File alias, if applicable.
+      # @param [Array<String>, nil] webhook_ids
+      # @param [String, nil] text_context
+      # @param [Hash, nil] polling_options
+      # @param [Boolean, nil] close_file
+      # @param [DataSchemaField, String, Hash nil] data_schema
       def initialize(
         model_id,
         rag: nil,
@@ -66,18 +56,19 @@ module Mindee
         close_file: true,
         data_schema: nil
       )
-        raise Errors::MindeeInputError, 'Model ID is required.' if model_id.empty? || model_id.nil?
+        super(
+          model_id,
+          file_alias: file_alias,
+          webhook_ids: webhook_ids,
+          polling_options: polling_options,
+          close_file: close_file
+        )
 
-        @model_id = model_id
         @rag = rag
         @raw_text = raw_text
         @polygon = polygon
         @confidence = confidence
-        @file_alias = file_alias
-        @webhook_ids = webhook_ids || []
         @text_context = text_context
-        @polling_options = get_clean_polling_options(polling_options)
-        @close_file = close_file.nil? || close_file
         @data_schema = DataSchema.new(data_schema) unless data_schema.nil?
         # rubocop:enable Metrics/ParameterLists
       end
@@ -106,56 +97,23 @@ module Mindee
       # @param [Hash] params Parameters to provide as a hash.
       # @return [InferenceParameters]
       def self.from_hash(params: {})
-        params.transform_keys!(&:to_sym)
-
-        if params.empty? || params[:model_id].nil? || params[:model_id].empty?
-          raise Errors::MindeeInputError, 'Model ID is required.'
-        end
-
-        model_id = params.fetch(:model_id)
         rag = params.fetch(:rag, nil)
         raw_text = params.fetch(:raw_text, nil)
         polygon = params.fetch(:polygon, nil)
         confidence = params.fetch(:confidence, nil)
-        file_alias = params.fetch(:file_alias, nil)
-        webhook_ids = params.fetch(:webhook_ids, [])
-        polling_options_input = params.fetch(:page_options, PollingOptions.new)
-        if polling_options_input.is_a?(Hash)
-          polling_options_input = polling_options_input.transform_keys(&:to_sym)
-          PollingOptions.new(
-            initial_delay_sec: polling_options_input.fetch(:initial_delay_sec, 2.0),
-            delay_sec: polling_options_input.fetch(:delay_sec, 1.5),
-            max_retries: polling_options_input.fetch(:max_retries, 80)
-          )
-        end
-        close_file = params.fetch(:close_file, true)
-        InferenceParameters.new(model_id, rag: rag, raw_text: raw_text, polygon: polygon, confidence: confidence,
-                                          file_alias: file_alias, webhook_ids: webhook_ids, close_file: close_file)
-      end
+        base_params = super
+        new_params = base_params.merge(rag: rag, raw_text: raw_text, polygon: polygon, confidence: confidence)
+        model_id = new_params.fetch(:model_id)
 
-      private
-
-      # Cleans a proper polling options object potentially from a hash.
-      # @param [Hash, PollingOptions, nil] polling_options Polling options.
-      # @return [PollingOptions] Valid polling options object.
-      def get_clean_polling_options(polling_options)
-        return PollingOptions.new if polling_options.is_a?(PollingOptions)
-
-        if polling_options.is_a?(Hash)
-          polling_options = polling_options.transform_keys(&:to_sym)
-          output_polling_options = PollingOptions.new(
-            initial_delay_sec: polling_options.fetch(:initial_delay_sec, 2.0),
-            delay_sec: polling_options.fetch(:delay_sec, 1.5),
-            max_retries: polling_options.fetch(:max_retries, 80)
-          )
-        else
-          output_polling_options = if polling_options.is_a?(PollingOptions)
-                                     polling_options || PollingOptions.new
-                                   else
-                                     PollingOptions.new
-                                   end
-        end
-        output_polling_options
+        InferenceParameters.new(
+          model_id, rag: rag,
+                    raw_text: raw_text,
+                    polygon: polygon,
+                    confidence: confidence,
+                    file_alias: params.fetch(:file_alias, nil),
+                    webhook_ids: params.fetch(:webhook_ids, nil),
+                    close_file: params.fetch(:close_file, true)
+        )
       end
     end
   end
