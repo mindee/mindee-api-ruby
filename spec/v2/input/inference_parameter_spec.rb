@@ -4,7 +4,9 @@ require 'mindee/input/inference_parameters'
 require 'mindee/input/data_schema'
 
 describe Mindee::Input::InferenceParameters do
-  let(:extracted_schema_content) { File.read(File.join(V2_DATA_DIR, 'inference', 'data_schema_replace_param.json')) }
+  let(:extracted_schema_content) do
+    File.read(File.join(V2_DATA_DIR, 'products', 'extraction', 'data_schema_replace_param.json'))
+  end
   let(:extracted_schema_hash) { JSON.parse(extracted_schema_content) }
   let(:extracted_schema_str) { extracted_schema_hash.to_json }
   let(:extracted_schema_object) { Mindee::Input::DataSchema.new(extracted_schema_hash) }

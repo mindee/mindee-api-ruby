@@ -3,19 +3,19 @@
 require 'mindee'
 
 RSpec.describe 'inference' do
-  let(:findoc_path) { File.join(V2_DATA_DIR, 'products', 'financial_document') }
-  let(:inference_path) { File.join(V2_DATA_DIR, 'inference') }
-  let(:deep_nested_field_path) { File.join(inference_path, 'deep_nested_fields.json') }
-  let(:standard_field_path) { File.join(inference_path, 'standard_field_types.json') }
-  let(:standard_field_rst_path) { File.join(inference_path, 'standard_field_types.rst') }
+  let(:findoc_path) { File.join(V2_DATA_DIR, 'products', 'extraction', 'financial_document') }
+  let(:extraction_path) { File.join(V2_DATA_DIR, 'products', 'extraction') }
+  let(:deep_nested_field_path) { File.join(extraction_path, 'deep_nested_fields.json') }
+  let(:standard_field_path) { File.join(extraction_path, 'standard_field_types.json') }
+  let(:standard_field_rst_path) { File.join(extraction_path, 'standard_field_types.rst') }
   let(:location_field_path) { File.join(findoc_path, 'complete_with_coordinates.json') }
-  let(:raw_text_json_path) { File.join(inference_path, 'raw_texts.json') }
-  let(:raw_text_str_path) { File.join(inference_path, 'raw_texts.txt') }
+  let(:raw_text_json_path) { File.join(extraction_path, 'raw_texts.json') }
+  let(:raw_text_str_path) { File.join(extraction_path, 'raw_texts.txt') }
   let(:blank_path) { File.join(findoc_path, 'blank.json') }
   let(:complete_path) { File.join(findoc_path, 'complete.json') }
-  let(:rag_matched_path) { File.join(inference_path, 'rag_matched.json') }
-  let(:rag_not_matched_path) { File.join(inference_path, 'rag_not_matched.json') }
-  let(:text_context_path) { File.join(inference_path, 'text_context_enabled.json') }
+  let(:rag_matched_path) { File.join(extraction_path, 'rag_matched.json') }
+  let(:rag_not_matched_path) { File.join(extraction_path, 'rag_not_matched.json') }
+  let(:text_context_path) { File.join(extraction_path, 'text_context_enabled.json') }
 
   def load_v2_inference(resource_path)
     local_response = Mindee::Input::LocalResponse.new(resource_path)
