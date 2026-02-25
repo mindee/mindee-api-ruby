@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee'
+require 'mindee/v2/product'
 
 describe Mindee::ClientV2, :integration, :v2 do
   let(:classification_model_id) do
@@ -16,7 +17,7 @@ describe Mindee::ClientV2, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'classification', 'default_invoice.jpg')
     )
 
-    params = Mindee::Input::InferenceParameters.new(classification_model_id)
+    params = ClassificationParameters.new(classification_model_id)
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Classification::ClassificationResponse,

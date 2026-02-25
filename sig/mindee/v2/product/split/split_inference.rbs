@@ -1,0 +1,14 @@
+module Mindee
+  module V2
+    module Product
+      module Split
+        class SplitInference
+          attr_reader result: SplitResult
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Mindee
+  module V2
+    module Product
+      module Split
+        class SplitRange
+          attr_reader page_range: Array[int]
+          attr_reader document_type: String
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end
