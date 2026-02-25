@@ -15,6 +15,8 @@ module Mindee
         attr_reader :id
 
         def initialize(http_response)
+          raise ArgumentError, 'Server response must be a Hash' unless http_response.is_a?(Hash)
+
           @model = Mindee::Parsing::V2::InferenceModel.new(http_response['model'])
           @file = Mindee::Parsing::V2::InferenceFile.new(http_response['file'])
           @id = http_response['id']

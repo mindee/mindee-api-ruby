@@ -24,9 +24,9 @@ module Mindee
 
       # @param [String] model_id ID of the model
       # @param [String, nil] file_alias File alias, if applicable.
-      # @param [Array<String>, nil] webhook_ids
-      # @param [Hash, nil] polling_options
-      # @param [Boolean, nil] close_file
+      # @param [Array<String>, nil] webhook_ids List of webhook IDs to propagate the API response to.
+      # @param [Hash, nil] polling_options Options for polling. Set only if having timeout issues.
+      # @param [Boolean, nil] close_file Whether to close the file after parsing.
       def initialize(
         model_id,
         file_alias: nil,
@@ -93,6 +93,26 @@ module Mindee
         end
 
         @_slug
+      end
+
+      # Validates the parameters for async auto-polling
+      def validate_async_params
+        min_delay_sec = 1
+        min_initial_delay_sec = 1
+        min_retries = 2
+
+        if @polling_options.delay_sec < min_delay_sec
+          raise ArgumentError,
+                "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)"
+        end
+        if @polling_options.initial_delay_sec < min_initial_delay_sec
+          raise ArgumentError,
+                "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
+        end
+        return unless @polling_options.max_retries < min_retries
+
+        raise ArgumentError,
+              "Cannot set auto-poll retries to less than #{min_retries}"
       end
 
       private

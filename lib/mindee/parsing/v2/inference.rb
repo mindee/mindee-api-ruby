@@ -19,8 +19,6 @@ module Mindee
 
         # @param server_response [Hash] Hash representation of the JSON returned by the service.
         def initialize(server_response)
-          raise ArgumentError, 'server_response must be a Hash' unless server_response.is_a?(Hash)
-
           super
           @active_options = InferenceActiveOptions.new(server_response['active_options'])
           @result = InferenceResult.new(server_response['result'])
