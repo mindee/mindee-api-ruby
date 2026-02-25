@@ -1,8 +1,15 @@
 # Mindee Ruby API Library Changelog
 
+## v4.12.0 - 2026-02-25
+### Changes
+* :sparkles: add job information to inference
+* :sparkles: add more inference info
+
+
 ## v4.11.0 - 2026-02-11
 ### Changes
 * :sparkles: add complementary accessors for ObjectField
+
 
 ## v4.10.1 - 2026-02-05
 ### Fixes
