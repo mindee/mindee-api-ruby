@@ -29,7 +29,10 @@ module Mindee
       # @return [DataSchemaField]
       attr_reader :data_schema
 
-      @_slug = 'extraction'
+      # @return [String] Slug for the endpoint.
+      def self._slug
+        'extraction'
+      end
 
       # rubocop:disable Metrics/ParameterLists
       # @param [String] model_id ID of the model
@@ -89,7 +92,7 @@ module Mindee
         new_form_data
       end
 
-      # Loads the parameters from a Hash.
+      # Loads a prediction from a Hash.
       # @param [Hash] params Parameters to provide as a hash.
       # @return [InferenceParameters]
       def self.from_hash(params: {})

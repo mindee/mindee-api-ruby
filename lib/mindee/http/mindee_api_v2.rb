@@ -172,6 +172,7 @@ module Mindee
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
         uri = URI("#{@settings.base_url}/products/#{params._slug}/enqueue")
+        puts "POST #{uri} from #{params.class}"
 
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['url', input_source.url]] # : Array[untyped]

@@ -19,9 +19,6 @@ module Mindee
       # @return [Boolean, nil] Whether to close the file after parsing.
       attr_reader :close_file
 
-      # @return [String] Slug for the endpoint.
-      @_slug = ''
-
       # @param [String] model_id ID of the model
       # @param [String, nil] file_alias File alias, if applicable.
       # @param [Array<String>, nil] webhook_ids List of webhook IDs to propagate the API response to.
@@ -41,6 +38,15 @@ module Mindee
         @webhook_ids = webhook_ids || []
         @polling_options = get_clean_polling_options(polling_options)
         @close_file = close_file.nil? || close_file
+      end
+
+      # @return [String] Slug for the endpoint.
+      def self._slug
+        if self == BaseParameters
+          raise NotImplementedError, 'Cannot access `_slug` directly on the BaseParameters class.'
+        end
+
+        ''
       end
 
       def self.from_hash(params: {})
@@ -88,11 +94,7 @@ module Mindee
 
       # @return [String] Slug for the endpoint.
       def _slug
-        if self == BaseParameters
-          raise NotImplementedError, 'Cannot access `slug` directly on the BaseParameters class. Please use a subclass.'
-        end
-
-        @_slug
+        self.class._slug
       end
 
       # Validates the parameters for async auto-polling

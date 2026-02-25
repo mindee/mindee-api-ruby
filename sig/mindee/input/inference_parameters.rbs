@@ -2,7 +2,7 @@
 module Mindee
   module Input
     class InferenceParameters < BaseParameters
-      self.@_slug: String
+      def self._slug: -> String
 
       attr_reader confidence: bool?
       attr_reader polygon: bool?
