@@ -22,6 +22,18 @@ module Mindee
           @id = http_response['id']
           @job = Mindee::Parsing::V2::InferenceJob.new(http_response['job']) if http_response.key?('job')
         end
+
+        # String representation.
+        # @return [String]
+        def to_s
+          [
+            'Inference',
+            '#########',
+            @job.to_s,
+            @model.to_s,
+            @file.to_s,
+          ].join("\n")
+        end
       end
     end
   end

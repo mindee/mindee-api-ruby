@@ -3,7 +3,7 @@
 require 'mindee'
 require 'mindee/v2/product'
 
-require_relative '../../data'
+require_relative '../../../data'
 
 describe Mindee::ClientV2, :integration, :v2 do
   let(:crop_model_id) do

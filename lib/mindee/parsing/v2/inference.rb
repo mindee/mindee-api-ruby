@@ -28,11 +28,7 @@ module Mindee
         # @return [String]
         def to_s
           [
-            'Inference',
-            '#########',
-            @job.to_s,
-            @model.to_s,
-            @file.to_s,
+            super,
             @active_options.to_s,
             @result.to_s,
             '',

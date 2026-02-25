@@ -3,10 +3,10 @@
 require 'json'
 require 'mindee/v2/product'
 
-require_relative '../../data'
+require_relative '../../../data'
 
 describe Mindee::V2::Product::Crop::CropResponse do
-  let(:crop_data_dir) { File.join(V2_PRODUCTS_DATA_DIR, 'crop') }
+  let(:crop_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'crop') }
 
   it 'parses a single crop properly' do
     json_path = File.join(crop_data_dir, 'crop_single.json')

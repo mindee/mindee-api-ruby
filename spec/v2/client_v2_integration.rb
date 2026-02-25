@@ -221,7 +221,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
 
   context 'A Data Schema Override' do
     it 'Overrides successfully' do
-      data_schema_replace = File.read(File.join(V2_PRODUCTS_DATA_DIR, 'extraction',
+      data_schema_replace = File.read(File.join(V2_PRODUCT_DATA_DIR, 'extraction',
                                                 'data_schema_replace_param.json'))
       input = Mindee::Input::Source::PathInputSource.new(File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf'))
 

@@ -10,6 +10,8 @@ module Mindee
         attr_reader model: Mindee::Parsing::V2::InferenceModel
 
         def initialize: (Hash[String | Symbol, untyped]) -> void
+
+        def to_s: -> String
       end
     end
   end

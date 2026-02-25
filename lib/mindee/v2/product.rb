@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'product/classification/classification_response'
+require_relative 'product/classification/params/classification_parameters'
 require_relative 'product/crop/crop_response'
 require_relative 'product/crop/params/crop_parameters'

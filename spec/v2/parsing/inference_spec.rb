@@ -3,8 +3,8 @@
 require 'mindee'
 
 RSpec.describe 'inference' do
-  let(:findoc_path) { File.join(V2_PRODUCTS_DATA_DIR, 'extraction', 'financial_document') }
-  let(:extraction_path) { File.join(V2_PRODUCTS_DATA_DIR, 'extraction') }
+  let(:findoc_path) { File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'financial_document') }
+  let(:extraction_path) { File.join(V2_PRODUCT_DATA_DIR, 'extraction') }
   let(:deep_nested_field_path) { File.join(extraction_path, 'deep_nested_fields.json') }
   let(:standard_field_path) { File.join(extraction_path, 'standard_field_types.json') }
   let(:standard_field_rst_path) { File.join(extraction_path, 'standard_field_types.rst') }
