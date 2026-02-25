@@ -34,6 +34,14 @@ module Mindee
       @mindee_api.req_get_result(response_class, inference_id)
     end
 
+    # Retrieves a result from a given URL.
+    # @param url [String]
+    # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
+    # @return [Mindee::Parsing::V2::BaseResponse]
+    def get_result_url(response_class, url)
+      @mindee_api.req_get_result_url(response_class, url)
+    end
+
     # Retrieves an inference.
     # @param job_id [String]
     # @return [Mindee::Parsing::V2::JobResponse]
@@ -96,8 +104,8 @@ module Mindee
       while retry_counter < normalized_params.polling_options.max_retries
         if poll_results.job.status == 'Failed'
           break
-        elsif poll_results.job.status == 'Processed'
-          return get_result(response_type, poll_results.job.id)
+        elsif !poll_results.job.result_url.nil?
+          return get_result_url(response_type, poll_results.job.result_url)
         end
 
         logger.debug(

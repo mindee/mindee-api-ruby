@@ -3,20 +3,18 @@ module Mindee
     module Product
       module Crop
         module Params
-          module CropParameters
-            class CropParameters
-              self.@_slug: String
+          class CropParameters
+            def self._slug: -> String
 
-              def self.from_hash: (params: Hash[String | Symbol, untyped]) -> CropParameters
+            def self.from_hash: (params: Hash[String | Symbol, untyped]) -> CropParameters
 
-              def initialize: (
-                  String,
-                  ?file_alias: String?,
-                  ?webhook_ids: Array[String]?,
-                  ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions?,
-                  ?close_file: bool?
-                ) -> void
-            end
+            def initialize: (
+                String,
+                ?file_alias: String?,
+                ?webhook_ids: Array[String]?,
+                ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions?,
+                ?close_file: bool?
+              ) -> void
           end
         end
       end

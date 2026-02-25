@@ -49,6 +49,11 @@ module Mindee
         ''
       end
 
+      # @return [String] Slug for the endpoint.
+      def _slug
+        self.class._slug
+      end
+
       def self.from_hash(params: {})
         load_from_hash(params: params)
         new(
@@ -90,11 +95,6 @@ module Mindee
         webhook_ids = @webhook_ids || []
         form_data.push(['webhook_ids', webhook_ids.join(',')]) unless @webhook_ids.nil? || webhook_ids.empty?
         form_data
-      end
-
-      # @return [String] Slug for the endpoint.
-      def _slug
-        self.class._slug
       end
 
       # Validates the parameters for async auto-polling

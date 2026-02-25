@@ -46,8 +46,9 @@ module Mindee
       # @return [Mindee::Parsing::V2::BaseResponse]
       def req_get_result(response_class, inference_id)
         @settings.check_api_key
-        response = inference_result_req_get(
-          inference_id
+        response = result_req_get(
+          inference_id,
+          response_class
         )
         response_class.new(process_response(response))
       end
@@ -172,7 +173,6 @@ module Mindee
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
         uri = URI("#{@settings.base_url}/products/#{params._slug}/enqueue")
-        puts "POST #{uri} from #{params.class}"
 
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['url', input_source.url]] # : Array[untyped]
