@@ -1,0 +1,25 @@
+module Mindee
+  module V2
+    module Product
+      module Ocr
+        module Params
+          module OcrParameters
+            class OcrParameters
+              self.@_slug: String
+
+              def self.from_hash: (params: Hash[String | Symbol, untyped]) -> OcrParameters
+
+              def initialize: (
+                  String,
+                  ?file_alias: String?,
+                  ?webhook_ids: Array[String]?,
+                  ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions?,
+                  ?close_file: bool?
+                ) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

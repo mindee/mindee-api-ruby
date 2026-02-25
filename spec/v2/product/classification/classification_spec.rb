@@ -3,7 +3,7 @@
 require 'json'
 require 'mindee/v2/product'
 
-RSpec.describe Mindee::V2::Product::Classification::ClassificationResponse, :v2 do
+describe Mindee::V2::Product::Classification::ClassificationResponse, :v2 do
   let(:classification_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'classification') }
 
   it 'parses a single classification properly' do
@@ -14,7 +14,9 @@ RSpec.describe Mindee::V2::Product::Classification::ClassificationResponse, :v2 
 
     expect(response.inference).to be_a(Mindee::V2::Product::Classification::ClassificationInference)
     expect(response.inference.result).to be_a(Mindee::V2::Product::Classification::ClassificationResult)
-    expect(response.inference.result.classification).to be_a(Mindee::V2::Product::Classification::ClassificationClassifier)
+    expect(
+      response.inference.result.classification
+    ).to be_a(Mindee::V2::Product::Classification::ClassificationClassifier)
 
     expect(response.inference.result.classification.document_type).to eq('invoice')
   end

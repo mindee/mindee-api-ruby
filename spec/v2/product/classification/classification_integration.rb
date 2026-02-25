@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-RSpec.describe Mindee::ClientV2, :integration, :v2 do
+describe Mindee::ClientV2, :integration, :v2 do
   let(:classification_model_id) do
     ENV.fetch('MINDEE_V2_SE_TESTS_CLASSIFICATION_MODEL_ID', nil)
   end
