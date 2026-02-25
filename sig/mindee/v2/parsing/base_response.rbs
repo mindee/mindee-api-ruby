@@ -3,9 +3,15 @@
 module Mindee
   module V2
     module Parsing
+      interface _ParametersFactory[T]
+        def new: (Hash[String | Symbol, untyped]) -> T
+        def from_hash: (params: untyped) -> T
+      end
       class BaseResponse[T] < Mindee::Parsing::V2::CommonResponse
         self.@_slug: String
         self.@_params_type: singleton(Input::BaseParameters)
+        def self._params_type: () -> singleton(Input::BaseParameters)
+        def self._slug: () -> String
         attr_reader inference: T
       end
     end

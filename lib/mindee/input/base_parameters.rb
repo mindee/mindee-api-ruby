@@ -20,6 +20,7 @@ module Mindee
       attr_reader :close_file
 
       # @return [String] Slug for the endpoint.
+      @_slug = ''
 
       # @param [String] model_id ID of the model
       # @param [String, nil] file_alias File alias, if applicable.
@@ -42,10 +43,21 @@ module Mindee
         @close_file = close_file.nil? || close_file
       end
 
+      def self.from_hash(params: {})
+        load_from_hash(params: params)
+        new(
+          params[:model_id],
+          file_alias: params[:file_alias],
+          webhook_ids: params[:webhook_ids],
+          polling_options: params[:polling_options],
+          close_file: params[:close_file]
+        )
+      end
+
       # Loads a prediction from a Hash.
       # @param [Hash] params Parameters to provide as a hash.
       # @return [Hash]
-      def self.from_hash(params: {})
+      def self.load_from_hash(params: {})
         params.transform_keys!(&:to_sym)
 
         if params.empty? || params[:model_id].nil? || params[:model_id].empty?
@@ -62,6 +74,25 @@ module Mindee
           )
         end
         params
+      end
+
+      # Appends base form data to the provided array.
+      # @param [Array] form_data Array of form fields
+      # @return [Array]
+      def append_form_data(form_data)
+        form_data.push(['file_alias', @file_alias]) if @file_alias
+        webhook_ids = @webhook_ids || []
+        form_data.push(['webhook_ids', webhook_ids.join(',')]) unless @webhook_ids.nil? || webhook_ids.empty?
+        form_data
+      end
+
+      # @return [String] Slug for the endpoint.
+      def _slug
+        if self == BaseParameters
+          raise NotImplementedError, 'Cannot access `slug` directly on the BaseParameters class. Please use a subclass.'
+        end
+
+        @_slug
       end
 
       private

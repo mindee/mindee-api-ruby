@@ -26,6 +26,7 @@ module Mindee
         ) -> void
 
       def self.from_hash: (params: Hash[String | Symbol, untyped]) -> InferenceParameters
+      def append_form_data: (Array[Array[untyped]]) -> Array[Array[untyped]]
 
       def validate_async_params: -> void
     end

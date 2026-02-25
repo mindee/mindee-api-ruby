@@ -3,14 +3,19 @@
 module Mindee
   module Input
     class BaseParameters
-      def self.from_hash: (params: Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
+      self.@_slug: String
+
+      def self.from_hash: (params: Hash[String | Symbol, untyped]) -> instance
+      def self.load_from_hash: (params: Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
+
+      def _slug: -> String
 
       attr_reader model_id: String
       attr_reader file_alias: String?
       attr_reader webhook_ids: Array[String]?
       attr_reader polling_options: PollingOptions
       attr_reader close_file: bool
-      @slug: String
+      self.@slug: String
 
       def initialize: (
           String,
@@ -19,6 +24,10 @@ module Mindee
           ?polling_options: Hash[Symbol | String, untyped] | PollingOptions?,
           ?close_file: bool?
         ) -> void
+
+      def append_form_data: (Array[Array[untyped]]) -> Array[Array[untyped]]
+
+      def validate_async_params: () -> void
 
       private
 

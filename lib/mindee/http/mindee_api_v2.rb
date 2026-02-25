@@ -23,7 +23,7 @@ module Mindee
       # @param params [Input::InferenceParameters]
       # @return [Mindee::Parsing::V2::JobResponse]
       # @raise [Mindee::Errors::MindeeHttpErrorV2]
-      def req_post_inference_enqueue(input_source, params)
+      def req_post_enqueue(input_source, params)
         @settings.check_api_key
         response = enqueue(
           input_source,
@@ -140,6 +140,15 @@ module Mindee
         poll("#{@settings.base_url}/inferences/#{queue_id}")
       end
 
+      # Polls the API for the result of an inference.
+      #
+      # @param queue_id [String] ID of the queue.
+      # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
+      # @return [Net::HTTPResponse]
+      def result_req_get(queue_id, response_class)
+        poll("#{@settings.base_url}/products/#{response_class._slug}/results/#{queue_id}")
+      end
+
       # Handle parameters for the enqueue form
       # @param form_data [Array] Array of form fields
       # @param params [Input::InferenceParameters] Inference options.
@@ -159,10 +168,10 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param params [Input::InferenceParameters] Inference options.
+      # @param params [Input::BaseParameters] Inference options.
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
-        uri = URI("#{@settings.base_url}/inferences/enqueue")
+        uri = URI("#{@settings.base_url}/products/#{params._slug}/enqueue")
 
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['url', input_source.url]] # : Array[untyped]
@@ -172,8 +181,7 @@ module Mindee
                     end
         form_data.push(['model_id', params.model_id])
 
-        # deal with other parameters
-        form_data = enqueue_form_options(form_data, params)
+        form_data = params.append_form_data(form_data)
 
         headers = {
           'Authorization' => @settings.api_key,

@@ -73,6 +73,22 @@ module Mindee
         # rubocop:enable Metrics/ParameterLists
       end
 
+      # Appends inference-specific form data to the provided array.
+      # @param [Array] form_data Array of form fields
+      # @return [Array]
+      def append_form_data(form_data)
+        new_form_data = super
+
+        new_form_data.push(['rag', @rag.to_s]) unless @rag.nil?
+        new_form_data.push(['raw_text', @raw_text.to_s]) unless @raw_text.nil?
+        new_form_data.push(['polygon', @polygon.to_s]) unless @polygon.nil?
+        new_form_data.push(['confidence', @confidence.to_s]) unless @confidence.nil?
+        new_form_data.push(['text_context', @text_context]) if @text_context
+        new_form_data.push(['data_schema', @data_schema.to_s]) if @data_schema
+
+        new_form_data
+      end
+
       # Validates the parameters for async auto-polling
       def validate_async_params
         min_delay_sec = 1
@@ -101,7 +117,7 @@ module Mindee
         raw_text = params.fetch(:raw_text, nil)
         polygon = params.fetch(:polygon, nil)
         confidence = params.fetch(:confidence, nil)
-        base_params = super
+        base_params = load_from_hash(params: params)
         new_params = base_params.merge(rag: rag, raw_text: raw_text, polygon: polygon, confidence: confidence)
         model_id = new_params.fetch(:model_id)
 

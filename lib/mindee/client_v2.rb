@@ -26,6 +26,14 @@ module Mindee
       @mindee_api.req_get_inference(inference_id)
     end
 
+    # Retrieves a result from a given queue.
+    # @param inference_id [String]
+    # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
+    # @return [Mindee::Parsing::V2::BaseResponse]
+    def get_result(response_class, inference_id)
+      @mindee_api.req_get_result(response_class, inference_id)
+    end
+
     # Retrieves an inference.
     # @param job_id [String]
     # @return [Mindee::Parsing::V2::JobResponse]
@@ -36,13 +44,25 @@ module Mindee
     # Enqueue a document for async parsing.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
-    # @param params [Hash, BaseParameters]
+    # @param params [Hash, InferenceParameters]
     # @return [Mindee::Parsing::V2::JobResponse]
-    def enqueue_inference(input_source, params)
-      normalized_params = normalize_inference_parameters(Input::InferenceParameters, params)
-      logger.debug("Enqueueing document to model '#{normalized_params.model_id}'.")
+    def enqueue_inference(input_source, params, disable_redundant_warnings: false)
+      unless disable_redundant_warnings
+        warn '[DEPRECATION] `enqueue_inference` is deprecated; use `enqueue` instead.', uplevel: 1
+      end
+      normalized_params = normalize_parameters(Input::InferenceParameters, params)
+      enqueue(input_source, normalized_params)
+    end
 
-      @mindee_api.req_post_inference_enqueue(input_source, normalized_params)
+    # Enqueue a document for async parsing.
+    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
+    #   The source of the input document (local file or URL).
+    # @param params [BaseParameters]
+    # @return [Mindee::Parsing::V2::JobResponse]
+    def enqueue(input_source, params)
+      logger.debug("Enqueueing document to model '#{params.model_id}'.")
+
+      @mindee_api.req_post_enqueue(input_source, params)
     end
 
     # Enqueues to an asynchronous endpoint and automatically polls for a response.
@@ -57,9 +77,9 @@ module Mindee
       input_source,
       params
     )
-      normalized_params = normalize_inference_parameters(response_type._params_type, params)
+      normalized_params = normalize_parameters(response_type._params_type, params)
       normalized_params.validate_async_params
-      enqueue_response = enqueue_inference(input_source, normalized_params)
+      enqueue_response = enqueue(input_source, normalized_params)
 
       if enqueue_response.job.id.nil? || enqueue_response.job.id.empty?
         logger.error("Failed enqueueing:\n#{enqueue_response.raw_http}")
@@ -77,7 +97,7 @@ module Mindee
         if poll_results.job.status == 'Failed'
           break
         elsif poll_results.job.status == 'Processed'
-          return get_inference(poll_results.job.id)
+          return get_result(response_type, poll_results.job.id)
         end
 
         logger.debug(
@@ -122,7 +142,7 @@ module Mindee
     # If needed, converts the parsing options provided as a hash into a proper InferenceParameters object.
     # @param params [Hash, Class<BaseParameters>] Params.
     # @return [BaseParameters]
-    def normalize_inference_parameters(param_class, params)
+    def normalize_parameters(param_class, params)
       return param_class.from_hash(params: params) if params.is_a?(Hash)
 
       params
