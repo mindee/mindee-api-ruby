@@ -27,6 +27,11 @@ module Mindee
         min_max = Geometry.get_min_max_y(self)
         point.y.between?(min_max.min, min_max.max)
       end
+
+      # @return [String] Polygon as a string.
+      def to_s
+        "(#{map(&:to_s).join(', ')})"
+      end
     end
   end
 end

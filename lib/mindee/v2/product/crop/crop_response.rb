@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative '../../parsing/base_response'
+require_relative 'params/crop_parameters'
+require_relative 'crop_inference'
 
 module Mindee
   module V2
@@ -12,7 +14,7 @@ module Mindee
           attr_reader :inference
 
           @_slug = 'crop'
-          @_params_type = Params::CropParameters
+          @_params_type = Crop::Params::CropParameters
 
           # @param server_response [Hash] Hash parsed from the API JSON response.
           def initialize(server_response)

@@ -3,7 +3,7 @@ module Mindee
     module Product
       module Crop
         class CropResult
-          @crops: Array[CropItem]
+          attr_reader crops: Array[CropItem]
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'crop_result'
+
 module Mindee
   module V2
     module Product
       module Crop
         # The inference result for a crop utility request.
-        class CropInference
+        class CropInference < Mindee::V2::Parsing::BaseInference
           # @return [CropResult] Parsed inference payload.
           attr_reader :result
 
@@ -20,8 +22,12 @@ module Mindee
           # @return [String]
           def to_s
             [
-              super,
-              @result,
+              'Inference',
+              '#########',
+              @job.to_s,
+              @model.to_s,
+              @file.to_s,
+              result.to_s,
               '',
             ].join("\n")
           end

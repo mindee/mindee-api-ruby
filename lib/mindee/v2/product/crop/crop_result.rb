@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'crop_item'
+
 module Mindee
   module V2
     module Product
@@ -12,11 +14,9 @@ module Mindee
           # @param server_response [Hash] Hash representation of the JSON returned by the service.
           def initialize(server_response)
             @crops = if server_response.key?('crops')
-                       server_response['crop'].map do |crop|
+                       server_response['crops'].map do |crop|
                          CropItem.new(crop)
                        end
-                     else
-                       []
                      end
           end
 

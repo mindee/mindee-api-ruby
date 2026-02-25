@@ -31,6 +31,11 @@ module Mindee
           throw '0 or 1 only'
         end
       end
+
+      # @return [String] Point as a string.
+      def to_s
+        "(#{@x},#{@y})"
+      end
     end
   end
 end

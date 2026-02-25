@@ -87,6 +87,9 @@ module Mindee
 
   # V2-specific module.
   module V2
+    # Product-specific module.
+    module Product
+    end
   end
 end
 
