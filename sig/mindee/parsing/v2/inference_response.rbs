@@ -9,8 +9,12 @@ module Mindee
 
         attr_reader inference: Mindee::Parsing::V2::Inference
         def initialize: (Hash[String | Symbol, untyped]) -> void
+
+        def _params_type: -> singleton(Input::BaseParameters)
+
         def to_s: -> String
-        def self.result_slug: -> String
+        def self._params_type: () -> singleton(Input::BaseParameters)
+        def self._slug: () -> String
       end
     end
   end

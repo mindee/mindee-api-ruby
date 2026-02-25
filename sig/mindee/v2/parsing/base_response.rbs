@@ -10,6 +10,7 @@ module Mindee
       class BaseResponse[T] < Mindee::Parsing::V2::CommonResponse
         self.@_slug: String
         self.@_params_type: singleton(Input::BaseParameters)
+
         def self._params_type: () -> singleton(Input::BaseParameters)
         def self._slug: () -> String
         attr_reader inference: T

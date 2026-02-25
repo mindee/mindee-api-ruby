@@ -27,11 +27,6 @@ module Mindee
         def to_s
           @inference.to_s
         end
-
-        # @return[String] Getter for the inference slug.
-        def self.result_slug
-          @_slug
-        end
       end
     end
   end

@@ -9,9 +9,13 @@ module Mindee
         attr_reader :inference
 
         # @return [String] The slug of the endpoint used for this response
-        @_slug = 'extraction/results'
+        @_slug = ''
         # @return [Class<BaseParameters>] The class of the parameters used for this response
-        @_params_type
+        @_params_type = Mindee::Input::BaseParameters
+
+        class << self
+          attr_reader :_params_type, :_slug
+        end
       end
     end
   end
