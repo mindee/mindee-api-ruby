@@ -17,7 +17,7 @@ describe Mindee::ClientV2, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'ocr', 'default_sample.jpg')
     )
 
-    params = OcrParameters.new(ocr_model_id)
+    params = Mindee::V2::Product::Ocr::Params::OcrParameters.new(ocr_model_id)
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Ocr::OcrResponse,

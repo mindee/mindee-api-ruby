@@ -17,7 +17,7 @@ describe Mindee::ClientV2, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'classification', 'default_invoice.jpg')
     )
 
-    params = ClassificationParameters.new(classification_model_id)
+    params = Mindee::V2::Product::Classification::Params::ClassificationParameters.new(classification_model_id)
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Classification::ClassificationResponse,

@@ -17,7 +17,7 @@ describe Mindee::ClientV2, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'crop', 'default_sample.jpg')
     )
 
-    params = CropParameters.new(crop_model_id)
+    params = Mindee::V2::Product::Crop::Params::CropParameters.new(crop_model_id)
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Crop::CropResponse,
