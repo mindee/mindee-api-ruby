@@ -15,7 +15,6 @@ describe Mindee::ClientV2, :integration, :v2 do
   end
 
   it 'processes crop default sample correctly' do
-
     input_source = Mindee::Input::Source::PathInputSource.new(
       File.join(V2_PRODUCT_DATA_DIR, 'crop', 'default_sample.jpg')
     )
