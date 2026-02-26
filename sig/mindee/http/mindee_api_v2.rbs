@@ -11,9 +11,7 @@ module Mindee
 
       def initialize: (?api_key: String?) -> void
 
-      def req_get_job_url: (String) -> Parsing::V2::JobResponse
       def req_get_result: [T] (_ResponseFactory[T] response_class, String inference_id) -> T
-      def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
 
       def req_post_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Parsing::V2::JobResponse
       def req_get_inference: (String) -> Parsing::V2::InferenceResponse
@@ -25,8 +23,11 @@ module Mindee
       def result_req_get: [T] (String, _ResponseFactory[T] result_class) -> Net::HTTPResponse
       def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Net::HTTPResponse?
 
-      private
 
+      private
+      def req_get_job_url: (String) -> Parsing::V2::JobResponse
+      def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
+      def uri?: (String) -> bool
       def enqueue_form_options: (Array[untyped], Input::InferenceParameters) -> Array[untyped]
 
     end

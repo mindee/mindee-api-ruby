@@ -42,12 +42,14 @@ module Mindee
 
       # Retrieves a result from a given queue.
       # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
-      # @param inference_id [String]
+      # @param resource [String] ID of the inference or URL to the result.
       # @return [Mindee::Parsing::V2::BaseResponse]
-      def req_get_result(response_class, inference_id)
+      def req_get_result(response_class, resource)
+        return req_get_result_url(response_class, resource) if uri?(resource)
+
         @settings.check_api_key
         response = result_req_get(
-          inference_id,
+          resource,
           response_class
         )
         response_class.new(process_response(response))
@@ -55,15 +57,19 @@ module Mindee
 
       # Retrieves a queued job.
       #
-      # @param job_id [String]
+      # @param resource [String] ID of the job or URL to the job.
       # @return [Mindee::Parsing::V2::JobResponse]
-      def req_get_job(job_id)
+      def req_get_job(resource)
+        return req_get_job_url(resource) if uri?(resource)
+
         @settings.check_api_key
         response = inference_job_req_get(
-          job_id
+          resource
         )
         Mindee::Parsing::V2::JobResponse.new(process_response(response))
       end
+
+      private
 
       # Retrieves a queued job.
       #
@@ -86,7 +92,15 @@ module Mindee
         result_class.new(process_response(response))
       end
 
-      private
+      # @param resource [String] Resource to check.
+      # @return [Boolean]
+      def uri?(resource)
+        uri = URI.parse(resource)
+        throw Mindee::Errors::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
+        uri.scheme == 'https'
+      rescue URI::BadURIError, URI::InvalidURIError
+        false
+      end
 
       # Converts an HTTP response to a parsed response object.
       #

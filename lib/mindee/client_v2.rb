@@ -26,27 +26,19 @@ module Mindee
       @mindee_api.req_get_inference(inference_id)
     end
 
-    # Retrieves a result from a given queue.
-    # @param inference_id [String]
+    # Retrieves a result from a given queue or URL to the result.
+    # @param resource [String] ID of the inference or URL to the result.
     # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
     # @return [Mindee::Parsing::V2::BaseResponse]
-    def get_result(response_class, inference_id)
-      @mindee_api.req_get_result(response_class, inference_id)
+    def get_result(response_class, resource)
+      @mindee_api.req_get_result(response_class, resource)
     end
 
-    # Retrieves a result from a given URL.
-    # @param url [String]
-    # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
-    # @return [Mindee::Parsing::V2::BaseResponse]
-    def get_result_url(response_class, url)
-      @mindee_api.req_get_result_url(response_class, url)
-    end
-
-    # Retrieves an inference.
-    # @param job_id [String]
+    # Retrieves an inference from a given queue or URL to the job.
+    # @param resource [String] ID of the job or URL to the job.
     # @return [Mindee::Parsing::V2::JobResponse]
-    def get_job(job_id)
-      @mindee_api.req_get_job(job_id)
+    def get_job(resource)
+      @mindee_api.req_get_job(resource)
     end
 
     # Enqueue a document for async parsing.
@@ -105,7 +97,7 @@ module Mindee
         if poll_results.job.status == 'Failed'
           break
         elsif !poll_results.job.result_url.nil?
-          return get_result_url(response_type, poll_results.job.result_url)
+          return get_result(response_type, poll_results.job.result_url)
         end
 
         logger.debug(
