@@ -28,5 +28,5 @@ response = mindee_client.enqueue_and_get_result(
     crop_params
 )
 
-# Print a brief summary of the parsed data
-puts response.inference
+# Access the result crops
+puts response.inference.result.crops

@@ -28,5 +28,5 @@ response = mindee_client.enqueue_and_get_result(
     split_params
 )
 
-# Print a brief summary of the parsed data
-puts response.inference
+# Access the result splits
+puts response.inference.result.splits

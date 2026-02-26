@@ -28,5 +28,5 @@ response = mindee_client.enqueue_and_get_result(
     classification_params
 )
 
-# Print a brief summary of the parsed data
-puts response.inference
+# Access the classification result
+puts response.inference.result.classification

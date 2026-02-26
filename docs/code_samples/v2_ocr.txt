@@ -28,5 +28,5 @@ response = mindee_client.enqueue_and_get_result(
     ocr_params
 )
 
-# Print a brief summary of the parsed data
-puts response.inference
+# Access the result OCR pages
+puts response.inference.result.pages
