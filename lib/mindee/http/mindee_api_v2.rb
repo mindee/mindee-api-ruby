@@ -73,16 +73,6 @@ module Mindee
 
       # Retrieves a queued job.
       #
-      # @param url [String]
-      # @return [Mindee::Parsing::V2::JobResponse]
-      def req_get_job_url(url)
-        @settings.check_api_key
-        response = poll(url)
-        Mindee::Parsing::V2::JobResponse.new(process_response(response))
-      end
-
-      # Retrieves a queued job.
-      #
       # @param result_class [Mindee::V2::Parsing::BaseResponse]
       # @param url [String]
       # @return [Mindee::Parsing::V2::JobResponse]
