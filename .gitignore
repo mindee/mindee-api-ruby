@@ -16,6 +16,8 @@
 /test/version_tmp/
 /tmp/
 _test.rb
+_test_v1.rb
+_test_v2.rb
 /vendor
 /mindee-*/
 local-test

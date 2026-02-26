@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+require 'mindee'
+require 'mindee/v2/product'
+
+include Mindee::V2::Product::Ocr
+
+input_path = '/path/to/the/file.ext'
+api_key = 'MY_API_KEY'
+model_id = 'MY_MODEL_ID'
+
+# Init a new client
+mindee_client = Mindee::ClientV2.new(api_key: api_key)
+
+# Set inference parameters
+ocr_params = Params::OcrParameters.new(
+    # ID of the model, required.
+    model_id,
+)
+
+# Load a file from disk
+input_source = Mindee::Input::Source::PathInputSource.new(input_path)
+
+# Send for processing
+response = mindee_client.enqueue_and_get_result(
+    OcrResponse,
+    input_source,
+    ocr_params
+)
+
+# Print a brief summary of the parsed data
+puts response.inference
