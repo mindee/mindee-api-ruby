@@ -57,14 +57,12 @@ module Mindee
 
       # Retrieves a queued job.
       #
-      # @param resource [String] ID of the job or URL to the job.
+      # @param job_id [String] ID of the job or URL to the job.
       # @return [Mindee::Parsing::V2::JobResponse]
-      def req_get_job(resource)
-        return req_get_job_url(resource) if uri?(resource)
-
+      def req_get_job(job_id)
         @settings.check_api_key
         response = inference_job_req_get(
-          resource
+          job_id
         )
         Mindee::Parsing::V2::JobResponse.new(process_response(response))
       end

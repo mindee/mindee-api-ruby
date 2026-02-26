@@ -35,10 +35,10 @@ module Mindee
     end
 
     # Retrieves an inference from a given queue or URL to the job.
-    # @param resource [String] ID of the job or URL to the job.
+    # @param job_id [String] ID of the job.
     # @return [Mindee::Parsing::V2::JobResponse]
-    def get_job(resource)
-      @mindee_api.req_get_job(resource)
+    def get_job(job_id)
+      @mindee_api.req_get_job(job_id)
     end
 
     # Enqueue a document for async parsing.
