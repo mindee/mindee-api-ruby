@@ -25,6 +25,7 @@ module Mindee
 
 
       private
+      def req_get_job_url: (String) -> Parsing::V2::JobResponse
       def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
       def uri?: (String) -> bool
       def enqueue_form_options: (Array[untyped], Input::InferenceParameters) -> Array[untyped]
