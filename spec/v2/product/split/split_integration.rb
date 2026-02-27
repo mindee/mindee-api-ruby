@@ -17,7 +17,7 @@ describe Mindee::ClientV2, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'split', 'default_sample.pdf')
     )
 
-    params = { model: split_model_id }
+    params = { model_id: split_model_id }
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Split::Split,

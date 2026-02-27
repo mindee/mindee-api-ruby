@@ -32,7 +32,8 @@ inference_params = Mindee::Input::InferenceParameters.new(
 input_source = Mindee::Input::Source::PathInputSource.new(input_path)
 
 # Send for processing
-response = mindee_client.enqueue_inference(
+response = mindee_client.enqueue(
+    Mindee::Parsing::V2::Inference,
     input_source,
     inference_params # This parameter can also be provided as a Hash.
 )

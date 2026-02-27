@@ -20,7 +20,7 @@ module Mindee
       # Sends a file to the inference queue.
       #
       # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
-      # @param params [Input::InferenceParameters]
+      # @param params [Input::BaseParameters]
       # @return [Mindee::Parsing::V2::JobResponse]
       # @raise [Mindee::Errors::MindeeHttpErrorV2]
       def req_post_enqueue(input_source, params)
@@ -41,18 +41,18 @@ module Mindee
       end
 
       # Retrieves a result from a given queue.
-      # @param product_type [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param resource [String] ID of the inference or URL to the result.
       # @return [Mindee::Parsing::V2::BaseResponse]
-      def req_get_result(product_type, resource)
-        return req_get_result_url(product_type.response_type, resource) if uri?(resource)
+      def req_get_result(product, resource)
+        return req_get_result_url(product.response_type, resource) if uri?(resource)
 
         @settings.check_api_key
         response = result_req_get(
           resource,
-          product_type
+          product
         )
-        product_type.response_type.new(process_response(response))
+        product.response_type.new(process_response(response))
       end
 
       # Retrieves a queued job.
@@ -156,10 +156,10 @@ module Mindee
       # Polls the API for the result of an inference.
       #
       # @param queue_id [String] ID of the queue.
-      # @param product_type [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @return [Net::HTTPResponse]
-      def result_req_get(queue_id, product_type)
-        poll("#{@settings.base_url}/products/#{product_type.slug}/results/#{queue_id}")
+      def result_req_get(queue_id, product)
+        poll("#{@settings.base_url}/products/#{product.slug}/results/#{queue_id}")
       end
 
       # Handle parameters for the enqueue form

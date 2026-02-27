@@ -16,7 +16,7 @@ module Mindee
 
       def initialize: (?api_key: String?) -> void
 
-      def req_get_result: [T] (_ProductClass[T] product_type, String resource) -> T
+      def req_get_result: [T] (_ProductClass[T] product, String resource) -> T
 
       def req_post_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Parsing::V2::JobResponse
       def req_get_inference: (String) -> Parsing::V2::InferenceResponse
@@ -25,7 +25,7 @@ module Mindee
       def poll: (String) -> Net::HTTPResponse
       def inference_job_req_get: (String) -> Net::HTTPResponse
       def inference_result_req_get: (String) -> Net::HTTPResponse
-      def result_req_get: [T] (String, _ProductClass[T] product_type) -> Net::HTTPResponse
+      def result_req_get: [T] (String, _ProductClass[T] product) -> Net::HTTPResponse
       def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Net::HTTPResponse?
 
       private
