@@ -3,7 +3,7 @@
 require 'json'
 require 'mindee'
 
-describe Mindee::V2::Product::Ocr::OcrResponse, :v2 do
+describe Mindee::V2::Product::Ocr::Ocr, :v2 do
   let(:ocr_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'ocr') }
 
   it 'parses a single page OCR response properly' do

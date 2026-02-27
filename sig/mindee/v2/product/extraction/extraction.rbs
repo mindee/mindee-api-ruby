@@ -1,0 +1,12 @@
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        class Extraction
+          self.@params_type: singleton(Mindee::V2::Product::Extraction::Params::ExtractionParameters)
+          self.@response_type: singleton(Mindee::V2::Product::Extraction::ExtractionResponse)
+        end
+      end
+    end
+  end
+end

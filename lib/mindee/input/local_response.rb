@@ -35,7 +35,7 @@ module Mindee
       # @return [Hash]
       def as_hash
         @file.rewind
-        file_str = @file.read
+        file_str = @file.read or raise 'File could not be read'
         JSON.parse(file_str, object_class: Hash)
       rescue JSON::ParserError
         raise Errors::MindeeInputError, "File is not a valid dict. #{file_str}"
@@ -54,7 +54,8 @@ module Mindee
         algorithm = OpenSSL::Digest.new('sha256')
         begin
           @file.rewind
-          mac = OpenSSL::HMAC.hexdigest(algorithm, self.class.process_secret_key(secret_key), @file.read)
+          mac = OpenSSL::HMAC.hexdigest(algorithm, self.class.process_secret_key(secret_key),
+                                        @file.read || raise('File could not be read'))
         rescue StandardError
           raise Errors::MindeeInputError, 'Could not get HMAC signature from payload.'
         end
@@ -70,7 +71,7 @@ module Mindee
 
       # Deserializes a loaded response
       # @param response_class [Parsing::V2::CommonResponse] class to return.
-      # @return [Parsing::V2::JobResponse, Mindee::Parsing::V2::InferenceResponse]
+      # @return [Parsing::V2::JobResponse, Mindee::V2::Parsing::CommonResponse]
       def deserialize_response(response_class)
         response_class.new(as_hash) # : Mindee::Parsing::V2::JobResponse | Mindee::Parsing::V2::InferenceResponse
       rescue StandardError

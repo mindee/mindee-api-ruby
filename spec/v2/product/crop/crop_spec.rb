@@ -5,7 +5,7 @@ require 'mindee/v2/product'
 
 require_relative '../../../data'
 
-describe Mindee::V2::Product::Crop::CropResponse do
+describe Mindee::V2::Product::Crop::Crop do
   let(:crop_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'crop') }
 
   it 'parses a single crop properly' do

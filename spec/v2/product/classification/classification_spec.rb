@@ -3,7 +3,7 @@
 require 'json'
 require 'mindee/v2/product'
 
-describe Mindee::V2::Product::Classification::ClassificationResponse, :v2 do
+describe Mindee::V2::Product::Classification::Classification, :v2 do
   let(:classification_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'classification') }
 
   it 'parses a single classification properly' do

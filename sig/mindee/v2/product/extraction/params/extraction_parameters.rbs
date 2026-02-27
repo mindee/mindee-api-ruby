@@ -1,0 +1,12 @@
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module Params
+          class ExtractionParameters < Input::InferenceParameters
+          end
+        end
+      end
+    end
+  end
+end
