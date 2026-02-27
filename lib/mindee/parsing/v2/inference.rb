@@ -17,6 +17,10 @@ module Mindee
         # @return [InferenceResult] Result contents.
         attr_reader :result
 
+        @params_type = Input::InferenceParameters
+        @slug = 'extraction'
+        @response_type = InferenceResponse
+
         # @param server_response [Hash] Hash representation of the JSON returned by the service.
         def initialize(server_response)
           super

@@ -13,9 +13,6 @@ module Mindee
           # @return [SplitInference] Parsed inference payload.
           attr_reader :inference
 
-          @_slug = 'split'
-          @_params_type = Split::Params::SplitParameters
-
           # @param server_response [Hash] Hash parsed from the API JSON response.
           def initialize(server_response)
             super

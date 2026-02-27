@@ -8,7 +8,7 @@ module Mindee
           # Parameters accepted by the ocr utility v2 endpoint.
           class OcrParameters < Mindee::Input::BaseParameters
             # @return [String] Slug for the endpoint.
-            def self._slug
+            def self.slug
               'ocr'
             end
 

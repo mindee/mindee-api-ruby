@@ -1,9 +1,14 @@
-# lib/mindee/http/mindee_api_v2.rb
+# lib/mindee/http/mindee_api_v2.rbs
 module Mindee
   module HTTP
     interface _ResponseFactory[T]
       def new: (Hash[String | Symbol, untyped]) -> T
-      def _slug: () -> String
+    end
+
+    interface _ProductClass[T]
+      def slug: () -> String
+      def response_type: () -> _ResponseFactory[T]
+      def params_type: () -> singleton(Input::BaseParameters)
     end
 
     class MindeeApiV2
@@ -11,7 +16,7 @@ module Mindee
 
       def initialize: (?api_key: String?) -> void
 
-      def req_get_result: [T] (_ResponseFactory[T] response_class, String inference_id) -> T
+      def req_get_result: [T] (_ProductClass[T] product_type, String resource) -> T
 
       def req_post_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Parsing::V2::JobResponse
       def req_get_inference: (String) -> Parsing::V2::InferenceResponse
@@ -20,16 +25,14 @@ module Mindee
       def poll: (String) -> Net::HTTPResponse
       def inference_job_req_get: (String) -> Net::HTTPResponse
       def inference_result_req_get: (String) -> Net::HTTPResponse
-      def result_req_get: [T] (String, _ResponseFactory[T] result_class) -> Net::HTTPResponse
+      def result_req_get: [T] (String, _ProductClass[T] product_type) -> Net::HTTPResponse
       def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Net::HTTPResponse?
-
 
       private
       def req_get_job_url: (String) -> Parsing::V2::JobResponse
       def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
       def uri?: (String) -> bool
       def enqueue_form_options: (Array[untyped], Input::InferenceParameters) -> Array[untyped]
-
     end
   end
 end

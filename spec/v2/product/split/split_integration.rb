@@ -17,10 +17,10 @@ describe Mindee::ClientV2, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'split', 'default_sample.pdf')
     )
 
-    params = Mindee::V2::Product::Split::Params::SplitParameters.new(split_model_id)
+    params = { model: split_model_id }
 
     response = v2_client.enqueue_and_get_result(
-      Mindee::V2::Product::Split::SplitResponse,
+      Mindee::V2::Product::Split::Split,
       input_source,
       params
     )

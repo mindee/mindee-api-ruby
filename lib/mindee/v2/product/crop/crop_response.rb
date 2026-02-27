@@ -13,9 +13,6 @@ module Mindee
           # @return [CropInference] Parsed inference payload.
           attr_reader :inference
 
-          @_slug = 'crop'
-          @_params_type = Crop::Params::CropParameters
-
           # @param server_response [Hash] Hash parsed from the API JSON response.
           def initialize(server_response)
             super

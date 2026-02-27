@@ -1,0 +1,10 @@
+module Mindee
+  module V2
+    module Product
+      module Split
+        class Split < BaseProduct
+        end
+      end
+    end
+  end
+end

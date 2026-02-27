@@ -5,7 +5,7 @@ module Mindee
     module Product
       module Ocr
         class OcrResponse
-          self.@_slug: String
+          self.@slug: String
           self.@_params_type: singleton(Params::OcrParameters)
 
           attr_reader inference: Mindee::V2::Product::Ocr::OcrInference
@@ -15,7 +15,7 @@ module Mindee
 
           def to_s: -> String
           def self._params_type: () -> singleton(Params::OcrParameters)
-          def self._slug: () -> String
+          def self.slug: () -> String
         end
       end
     end

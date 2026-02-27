@@ -1,0 +1,10 @@
+module Mindee
+  module V2
+    module Product
+      module Crop
+        class Crop < BaseProduct
+        end
+      end
+    end
+  end
+end

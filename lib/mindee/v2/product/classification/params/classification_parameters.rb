@@ -8,7 +8,7 @@ module Mindee
           # Parameters accepted by the classification utility v2 endpoint.
           class ClassificationParameters < Mindee::Input::BaseParameters
             # @return [String] Slug for the endpoint.
-            def self._slug
+            def self.slug
               'classification'
             end
 

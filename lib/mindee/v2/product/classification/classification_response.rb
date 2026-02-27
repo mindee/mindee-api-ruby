@@ -13,9 +13,6 @@ module Mindee
           # @return [ClassificationInference] Parsed inference payload.
           attr_reader :inference
 
-          @_slug = 'classification'
-          @_params_type = Classification::Params::ClassificationParameters
-
           # @param server_response [Hash] Hash parsed from the API JSON response.
           def initialize(server_response)
             super

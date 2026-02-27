@@ -3,6 +3,10 @@ module Mindee
   module Parsing
     module V2
       class Inference < Mindee::V2::Parsing::BaseInference
+        attr_reader self.params_type: singleton(Input::InferenceParameters)
+        attr_reader self.response_type: singleton(InferenceResponse)
+        attr_reader self.slug: String
+
         attr_reader active_options: InferenceActiveOptions
         attr_reader result: InferenceResult
 

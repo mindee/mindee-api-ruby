@@ -27,11 +27,11 @@ module Mindee
     end
 
     # Retrieves a result from a given queue or URL to the result.
+    # @param product_type [Class<Mindee::V2::Product::BaseProduct>] The return class.
     # @param resource [String] ID of the inference or URL to the result.
-    # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
     # @return [Mindee::Parsing::V2::BaseResponse]
-    def get_result(response_class, resource)
-      @mindee_api.req_get_result(response_class, resource)
+    def get_result(product_type, resource)
+      @mindee_api.req_get_result(product_type, resource)
     end
 
     # Retrieves an inference from a given queue or URL to the job.
@@ -67,17 +67,17 @@ module Mindee
 
     # Enqueues to an asynchronous endpoint and automatically polls for a response.
     #
-    # @param response_type [Mindee::V2::BaseResponse] The return class.
+    # @param product_type [Class<Mindee::V2::Product::BaseProduct>] The return class.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
     # @param params [Hash, InferenceParameters] Parameters for the inference.
     # @return [Mindee::Parsing::Common::ApiResponse]
     def enqueue_and_get_result(
-      response_type,
+      product_type,
       input_source,
       params
     )
-      normalized_params = normalize_parameters(response_type._params_type, params)
+      normalized_params = normalize_parameters(product_type.params_type, params)
       normalized_params.validate_async_params
       enqueue_response = enqueue(input_source, normalized_params)
 
@@ -97,7 +97,7 @@ module Mindee
         if poll_results.job.status == 'Failed'
           break
         elsif !poll_results.job.result_url.nil?
-          return get_result(response_type, poll_results.job.result_url)
+          return get_result(product_type, poll_results.job.result_url)
         end
 
         logger.debug(
@@ -131,7 +131,7 @@ module Mindee
     def enqueue_and_get_inference(input_source, params)
       warn '[DEPRECATION] `enqueue_and_get_inference` is deprecated; use `enqueue_and_get_result` instead.'
 
-      response = enqueue_and_get_result(Mindee::Parsing::V2::InferenceResponse, input_source, params)
+      response = enqueue_and_get_result(Mindee::Parsing::V2::Inference, input_source, params)
       unless response.is_a?(Mindee::Parsing::V2::InferenceResponse)
         raise TypeError, "Invalid response type \"#{response.class}\""
       end

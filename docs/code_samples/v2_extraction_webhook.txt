@@ -14,7 +14,7 @@ inference_params = Mindee::Input::InferenceParameters.new(
     # ID of the model, required.
     model_id,
     # Add any number of webhook IDs here.
-    webhook_ids: ["MY_WEBHOOK_ID"],
+    webhook_ids: ['MY_WEBHOOK_ID'],
     # Options: set to `true` or `false` to override defaults
 
     # Enhance extraction accuracy with Retrieval-Augmented Generation.

@@ -13,9 +13,6 @@ module Mindee
           # @return [OcrInference] Parsed inference payload.
           attr_reader :inference
 
-          @_slug = 'ocr'
-          @_params_type = Ocr::Params::OcrParameters
-
           # @param server_response [Hash] Hash parsed from the API JSON response.
           def initialize(server_response)
             super

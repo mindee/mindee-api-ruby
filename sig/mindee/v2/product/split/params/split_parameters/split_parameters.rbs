@@ -4,7 +4,7 @@ module Mindee
       module Split
         module Params
           class SplitParameters
-            def self._slug: -> String
+            def self.slug: -> String
 
             def self.from_hash: (params: Hash[String | Symbol, untyped]) -> SplitParameters
 

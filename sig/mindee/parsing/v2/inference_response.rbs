@@ -4,7 +4,7 @@ module Mindee
     module V2
       class InferenceResponse < Mindee::V2::Parsing::BaseResponse[Mindee::Parsing::V2::Inference]
 
-        self.@_slug: String
+        self.@slug: String
         self.@_params_type: singleton(Input::BaseParameters)
 
         attr_reader inference: Mindee::Parsing::V2::Inference
@@ -14,7 +14,7 @@ module Mindee
 
         def to_s: -> String
         def self._params_type: () -> singleton(Input::InferenceParameters)
-        def self._slug: () -> String
+        def self.slug: () -> String
       end
     end
   end

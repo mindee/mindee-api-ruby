@@ -3,12 +3,12 @@
 module Mindee
   module Input
     class BaseParameters
-      attr_reader self._slug: String
+      attr_reader self.slug: String
 
       def self.from_hash: (params: Hash[String | Symbol, untyped]) -> instance
       def self.load_from_hash: (params: Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
 
-      def _slug: -> String
+      def slug: -> String
 
       attr_reader model_id: String
       attr_reader file_alias: String?

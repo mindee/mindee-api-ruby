@@ -5,7 +5,7 @@ module Mindee
     module Product
       module Split
         class SplitResponse
-          self.@_slug: String
+          self.@slug: String
           self.@_params_type: singleton(Params::SplitParameters)
 
           attr_reader inference: Mindee::V2::Product::Split::SplitInference
@@ -15,7 +15,7 @@ module Mindee
 
           def to_s: -> String
           def self._params_type: () -> singleton(Params::SplitParameters)
-          def self._slug: () -> String
+          def self.slug: () -> String
         end
       end
     end

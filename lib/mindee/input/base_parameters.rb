@@ -41,17 +41,17 @@ module Mindee
       end
 
       # @return [String] Slug for the endpoint.
-      def self._slug
+      def self.slug
         if self == BaseParameters
-          raise NotImplementedError, 'Cannot access `_slug` directly on the BaseParameters class.'
+          raise NotImplementedError, 'Cannot access `slug` directly on the BaseParameters class.'
         end
 
         ''
       end
 
       # @return [String] Slug for the endpoint.
-      def _slug
-        self.class._slug
+      def slug
+        self.class.slug
       end
 
       def self.from_hash(params: {})

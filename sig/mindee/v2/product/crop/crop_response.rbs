@@ -5,7 +5,7 @@ module Mindee
     module Product
       module Crop
         class CropResponse
-          self.@_slug: String
+          self.@slug: String
           self.@_params_type: singleton(Params::CropParameters)
 
           attr_reader inference: Mindee::V2::Product::Crop::CropInference
@@ -15,7 +15,7 @@ module Mindee
 
           def to_s: -> String
           def self._params_type: () -> singleton(Params::CropParameters)
-          def self._slug: () -> String
+          def self.slug: () -> String
         end
       end
     end

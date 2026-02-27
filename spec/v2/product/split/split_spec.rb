@@ -2,8 +2,9 @@
 
 require 'json'
 require 'mindee'
+require 'mindee/v2/product'
 
-describe Mindee::V2::Product::Split::SplitResponse, :v2 do
+describe Mindee::V2::Product::Split::Split, :v2 do
   let(:split_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'split') }
 
   it 'parses a single split properly' do

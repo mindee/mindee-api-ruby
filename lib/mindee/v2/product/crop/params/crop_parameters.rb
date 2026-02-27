@@ -8,7 +8,7 @@ module Mindee
           # Parameters accepted by the crop utility v2 endpoint.
           class CropParameters < Mindee::Input::BaseParameters
             # @return [String] Slug for the endpoint.
-            def self._slug
+            def self.slug
               'crop'
             end
 

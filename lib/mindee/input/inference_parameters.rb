@@ -30,7 +30,7 @@ module Mindee
       attr_reader :data_schema
 
       # @return [String] Slug for the endpoint.
-      def self._slug
+      def self.slug
         'extraction'
       end
 

@@ -37,22 +37,22 @@ module Mindee
       # @param inference_id [String]
       # @return [Mindee::Parsing::V2::InferenceResponse]
       def req_get_inference(inference_id)
-        req_get_result(Mindee::Parsing::V2::InferenceResponse, inference_id)
+        req_get_result(Parsing::V2::Inference, inference_id)
       end
 
       # Retrieves a result from a given queue.
-      # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
+      # @param product_type [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param resource [String] ID of the inference or URL to the result.
       # @return [Mindee::Parsing::V2::BaseResponse]
-      def req_get_result(response_class, resource)
-        return req_get_result_url(response_class, resource) if uri?(resource)
+      def req_get_result(product_type, resource)
+        return req_get_result_url(product_type.response_type, resource) if uri?(resource)
 
         @settings.check_api_key
         response = result_req_get(
           resource,
-          response_class
+          product_type
         )
-        response_class.new(process_response(response))
+        product_type.response_type.new(process_response(response))
       end
 
       # Retrieves a queued job.
@@ -156,10 +156,10 @@ module Mindee
       # Polls the API for the result of an inference.
       #
       # @param queue_id [String] ID of the queue.
-      # @param response_class [Class<Mindee::Parsing::V2::BaseResponse>]
+      # @param product_type [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @return [Net::HTTPResponse]
-      def result_req_get(queue_id, response_class)
-        poll("#{@settings.base_url}/products/#{response_class._slug}/results/#{queue_id}")
+      def result_req_get(queue_id, product_type)
+        poll("#{@settings.base_url}/products/#{product_type.slug}/results/#{queue_id}")
       end
 
       # Handle parameters for the enqueue form
@@ -184,7 +184,7 @@ module Mindee
       # @param params [Input::BaseParameters] Inference options.
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
-        uri = URI("#{@settings.base_url}/products/#{params._slug}/enqueue")
+        uri = URI("#{@settings.base_url}/products/#{params.slug}/enqueue")
 
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['url', input_source.url]] # : Array[untyped]
