@@ -1,0 +1,11 @@
+# lib/mindee/v2/parsing/base_response.rb
+
+module Mindee
+  module V2
+    module Parsing
+      class BaseResponse[T] < Mindee::Parsing::V2::CommonResponse
+        attr_reader inference: T
+      end
+    end
+  end
+end

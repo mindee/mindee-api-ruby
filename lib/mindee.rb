@@ -84,6 +84,13 @@ module Mindee
     module US
     end
   end
+
+  # V2-specific module.
+  module V2
+    # Product-specific module.
+    module Product
+    end
+  end
 end
 
 # Shorthand to call the logger from anywhere.

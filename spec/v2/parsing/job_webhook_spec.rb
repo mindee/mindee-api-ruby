@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-RSpec.describe Mindee::Parsing::V2::JobWebhook do
+describe Mindee::Parsing::V2::JobWebhook do
   describe '#initialize' do
     context 'when error key is present but value is nil' do
       it 'does not raise an error and sets @error to nil' do

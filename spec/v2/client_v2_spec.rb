@@ -4,7 +4,7 @@ require 'json'
 require 'mindee'
 require_relative '../http/mock_http_response' # <- the original helper
 
-RSpec.describe Mindee::ClientV2 do
+describe Mindee::ClientV2 do
   let(:input_doc)      { Mindee::Input::Source::PathInputSource.new(File.join(FILE_TYPES_DIR, 'pdf', 'blank.pdf')) }
   let(:base_url)       { 'https://dummy-url' }
   let(:api_key)        { 'dummy-api-key' }

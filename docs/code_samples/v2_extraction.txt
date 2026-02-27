@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee'
+require 'mindee/v2/product'
 
 input_path = '/path/to/the/file.ext'
 api_key = 'MY_API_KEY'
@@ -10,9 +11,9 @@ model_id = 'MY_MODEL_ID'
 mindee_client = Mindee::ClientV2.new(api_key: api_key)
 
 # Set inference parameters
-inference_params = Mindee::Input::InferenceParameters.new(
+inference_params = {
     # ID of the model, required.
-    model_id,
+    model_id: model_id,
 
     # Options: set to `true` or `false` to override defaults
 
@@ -25,15 +26,16 @@ inference_params = Mindee::Input::InferenceParameters.new(
     # Boost the precision and accuracy of all extractions.
     # Calculate confidence scores for all fields.
     confidence: nil
-)
+}
 
 # Load a file from disk
 input_source = Mindee::Input::Source::PathInputSource.new(input_path)
 
 # Send for processing
-response = mindee_client.enqueue_and_get_inference(
+response = mindee_client.enqueue_and_get_result(
+    Mindee::V2::Product::Extraction::Extraction,
     input_source,
-    inference_params # This parameter can also be provided as a Hash.
+    inference_params
 )
 
 # Print a brief summary of the parsed data

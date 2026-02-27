@@ -18,7 +18,7 @@ def assert_local_response(local_response)
 end
 
 describe Mindee::Input::LocalResponse do
-  let(:file_path) { File.join(V2_DATA_DIR, 'products', 'extraction', 'standard_field_types.json') }
+  let(:file_path) { File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'standard_field_types.json') }
   context 'A V2 local response' do
     it 'should load from a path' do
       response = Mindee::Input::LocalResponse.new(file_path)

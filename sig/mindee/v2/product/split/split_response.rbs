@@ -1,0 +1,23 @@
+# lib/mindee/v2/product/split/split_response.rb
+
+module Mindee
+  module V2
+    module Product
+      module Split
+        class SplitResponse
+          self.@slug: String
+          self.@_params_type: singleton(Params::SplitParameters)
+
+          attr_reader inference: Mindee::V2::Product::Split::SplitInference
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def _params_type: -> singleton(Params::SplitParameters)
+
+          def to_s: -> String
+          def self._params_type: () -> singleton(Params::SplitParameters)
+          def self.slug: () -> String
+        end
+      end
+    end
+  end
+end

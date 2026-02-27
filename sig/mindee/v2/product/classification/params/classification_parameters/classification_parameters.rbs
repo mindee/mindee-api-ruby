@@ -1,0 +1,23 @@
+module Mindee
+  module V2
+    module Product
+      module Classification
+        module Params
+          class ClassificationParameters
+            def self.slug: -> String
+
+            def self.from_hash: (params: Hash[String | Symbol, untyped]) -> ClassificationParameters
+
+            def initialize: (
+                String,
+                ?file_alias: String?,
+                ?webhook_ids: Array[String]?,
+                ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions?,
+                ?close_file: bool?
+              ) -> void
+          end
+        end
+      end
+    end
+  end
+end

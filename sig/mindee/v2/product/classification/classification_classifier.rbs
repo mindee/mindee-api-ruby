@@ -1,0 +1,15 @@
+# lib/mindee/v2/product/classification/classification_classifier.rb
+
+module Mindee
+  module V2
+    module Product
+      module Classification
+        class ClassificationClassifier
+          attr_reader document_type: String
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
+      end
+    end
+  end
+end

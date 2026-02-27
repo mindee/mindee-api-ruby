@@ -1,0 +1,10 @@
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        class ExtractionResult < Mindee::Parsing::V2::InferenceResult
+        end
+      end
+    end
+  end
+end

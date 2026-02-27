@@ -2,13 +2,13 @@
 module Mindee
   module Input
     class LocalResponse
-      def file: -> StringIO
+      attr_reader file: StringIO
       def initialize: (File | IO | StringIO | String | Pathname | Tempfile) -> void
       def as_hash: -> Hash[String | Symbol, untyped]
       def self.process_secret_key: (String) -> String
       def get_hmac_signature: (String) -> String
       def valid_hmac_signature?: (String, String) -> bool
-      def deserialize_response: (singleton(Parsing::V2::CommonResponse))-> (Parsing::V2::JobResponse | Parsing::V2::InferenceResponse)
+      def deserialize_response: (singleton(Parsing::V2::CommonResponse))-> (Parsing::V2::JobResponse | Mindee::Parsing::V2::InferenceResponse)
     end
   end
 end

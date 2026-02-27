@@ -2,10 +2,19 @@
 module Mindee
   module Parsing
     module V2
-      class InferenceResponse < CommonResponse
-        attr_reader inference: V2::Inference
+      class InferenceResponse < Mindee::V2::Parsing::BaseResponse[Mindee::Parsing::V2::Inference]
+
+        self.@slug: String
+        self.@_params_type: singleton(Input::BaseParameters)
+
+        attr_reader inference: Mindee::Parsing::V2::Inference
         def initialize: (Hash[String | Symbol, untyped]) -> void
+
+        def _params_type: -> singleton(Input::InferenceParameters)
+
         def to_s: -> String
+        def self._params_type: () -> singleton(Input::InferenceParameters)
+        def self.slug: () -> String
       end
     end
   end

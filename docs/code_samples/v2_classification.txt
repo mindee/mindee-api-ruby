@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+require 'mindee'
+require 'mindee/v2/product'
+
+input_path = '/path/to/the/file.ext'
+api_key = 'MY_API_KEY'
+model_id = 'MY_MODEL_ID'
+
+# Init a new client
+mindee_client = Mindee::ClientV2.new(api_key: api_key)
+
+# Set inference parameters
+classification_params = {
+    # ID of the model, required.
+    model_id: model_id,
+}
+
+# Load a file from disk
+input_source = Mindee::Input::Source::PathInputSource.new(input_path)
+
+# Send for processing
+response = mindee_client.enqueue_and_get_result(
+    Mindee::V2::Product::Classification::Classification,
+    input_source,
+    classification_params
+)
+
+# Access the classification result
+puts response.inference.result.classification

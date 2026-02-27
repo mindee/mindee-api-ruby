@@ -6,7 +6,7 @@ AllCops:
     - 'tmp/**/*'
     - '.git/**/*'
     - 'bin/*'
-    - _test.rb
+    - _test*.rb
     - local_test/*
     - Steepfile
 

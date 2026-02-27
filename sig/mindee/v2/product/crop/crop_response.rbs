@@ -1,0 +1,23 @@
+# lib/mindee/v2/product/crop/crop_response.rb
+
+module Mindee
+  module V2
+    module Product
+      module Crop
+        class CropResponse
+          self.@slug: String
+          self.@_params_type: singleton(Params::CropParameters)
+
+          attr_reader inference: Mindee::V2::Product::Crop::CropInference
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def _params_type: -> singleton(Params::CropParameters)
+
+          def to_s: -> String
+          def self._params_type: () -> singleton(Params::CropParameters)
+          def self.slug: () -> String
+        end
+      end
+    end
+  end
+end

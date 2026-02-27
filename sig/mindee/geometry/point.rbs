@@ -7,6 +7,8 @@ module Mindee
 
       def initialize: (Float, Float) -> void
       def []: (Integer) -> Float
+
+      def to_s: -> String
     end
   end
 end

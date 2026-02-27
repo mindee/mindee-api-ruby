@@ -1,0 +1,23 @@
+# lib/mindee/v2/product/classification/classification_response.rb
+
+module Mindee
+  module V2
+    module Product
+      module Classification
+        class ClassificationResponse
+          self.@slug: String
+          self.@_params_type: singleton(Params::ClassificationParameters)
+
+          attr_reader inference: Mindee::V2::Product::Classification::ClassificationInference
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def _params_type: -> singleton(Params::ClassificationParameters)
+
+          def to_s: -> String
+          def self._params_type: () -> singleton(Params::ClassificationParameters)
+          def self.slug: () -> String
+        end
+      end
+    end
+  end
+end

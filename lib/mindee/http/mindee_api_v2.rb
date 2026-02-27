@@ -20,16 +20,16 @@ module Mindee
       # Sends a file to the inference queue.
       #
       # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
-      # @param params [Input::InferenceParameters]
+      # @param params [Input::BaseParameters]
       # @return [Mindee::Parsing::V2::JobResponse]
       # @raise [Mindee::Errors::MindeeHttpErrorV2]
-      def req_post_inference_enqueue(input_source, params)
+      def req_post_enqueue(input_source, params)
         @settings.check_api_key
         response = enqueue(
           input_source,
           params
         )
-        Parsing::V2::JobResponse.new(process_response(response))
+        Mindee::Parsing::V2::JobResponse.new(process_response(response))
       end
 
       # Retrieves a queued inference.
@@ -37,26 +37,68 @@ module Mindee
       # @param inference_id [String]
       # @return [Mindee::Parsing::V2::InferenceResponse]
       def req_get_inference(inference_id)
+        req_get_result(Parsing::V2::Inference, inference_id)
+      end
+
+      # Retrieves a result from a given queue.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @param resource [String] ID of the inference or URL to the result.
+      # @return [Mindee::Parsing::V2::BaseResponse]
+      def req_get_result(product, resource)
+        return req_get_result_url(product.response_type, resource) if uri?(resource)
+
         @settings.check_api_key
-        response = inference_result_req_get(
-          inference_id
+        response = result_req_get(
+          resource,
+          product
         )
-        Parsing::V2::InferenceResponse.new(process_response(response))
+        product.response_type.new(process_response(response))
       end
 
       # Retrieves a queued job.
       #
-      # @param job_id [String]
+      # @param job_id [String] ID of the job or URL to the job.
       # @return [Mindee::Parsing::V2::JobResponse]
       def req_get_job(job_id)
         @settings.check_api_key
         response = inference_job_req_get(
           job_id
         )
-        Parsing::V2::JobResponse.new(process_response(response))
+        Mindee::Parsing::V2::JobResponse.new(process_response(response))
       end
 
       private
+
+      # Retrieves a queued job.
+      #
+      # @param url [String]
+      # @return [Mindee::Parsing::V2::JobResponse]
+      def req_get_job_url(url)
+        @settings.check_api_key
+        response = poll(url)
+        Mindee::Parsing::V2::JobResponse.new(process_response(response))
+      end
+
+      # Retrieves a queued job.
+      #
+      # @param result_class [Mindee::V2::Parsing::BaseResponse]
+      # @param url [String]
+      # @return [Mindee::Parsing::V2::JobResponse]
+      def req_get_result_url(result_class, url)
+        @settings.check_api_key
+        response = poll(url)
+        result_class.new(process_response(response))
+      end
+
+      # @param resource [String] Resource to check.
+      # @return [Boolean]
+      def uri?(resource)
+        uri = URI.parse(resource)
+        throw Mindee::Errors::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
+        uri.scheme == 'https'
+      rescue URI::BadURIError, URI::InvalidURIError
+        false
+      end
 
       # Converts an HTTP response to a parsed response object.
       #
@@ -111,6 +153,15 @@ module Mindee
         poll("#{@settings.base_url}/inferences/#{queue_id}")
       end
 
+      # Polls the API for the result of an inference.
+      #
+      # @param queue_id [String] ID of the queue.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @return [Net::HTTPResponse]
+      def result_req_get(queue_id, product)
+        poll("#{@settings.base_url}/products/#{product.slug}/results/#{queue_id}")
+      end
+
       # Handle parameters for the enqueue form
       # @param form_data [Array] Array of form fields
       # @param params [Input::InferenceParameters] Inference options.
@@ -130,10 +181,10 @@ module Mindee
       end
 
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param params [Input::InferenceParameters] Inference options.
+      # @param params [Input::BaseParameters] Inference options.
       # @return [Net::HTTPResponse, nil]
       def enqueue(input_source, params)
-        uri = URI("#{@settings.base_url}/inferences/enqueue")
+        uri = URI("#{@settings.base_url}/products/#{params.slug}/enqueue")
 
         form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
                       [['url', input_source.url]] # : Array[untyped]
@@ -143,8 +194,7 @@ module Mindee
                     end
         form_data.push(['model_id', params.model_id])
 
-        # deal with other parameters
-        form_data = enqueue_form_options(form_data, params)
+        form_data = params.append_form_data(form_data)
 
         headers = {
           'Authorization' => @settings.api_key,

@@ -24,7 +24,7 @@ module Mindee
           #
           # @return [String]
           def to_s
-            @polygon ? @polygon.to_s : ''
+            "#{polygon} on page #{page}"
           end
         end
       end

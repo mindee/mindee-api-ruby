@@ -1,0 +1,18 @@
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        class ExtractionResponse
+          self.@_params_type: singleton(Params::ExtractionParameters)
+          attr_reader inference: Mindee::V2::Product::Extraction::ExtractionInference
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def _params_type: -> singleton(Params::ExtractionParameters)
+
+          def self._params_type: () -> singleton(Params::ExtractionParameters)
+        end
+      end
+    end
+  end
+end

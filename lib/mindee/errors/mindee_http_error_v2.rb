@@ -18,7 +18,7 @@ module Mindee
       # @return [Array<ErrorItem>] A list of explicit error details.
       attr_reader :errors
 
-      # @param http_error [Hash, Parsing::V2::ErrorResponse]
+      # @param http_error [Hash, Mindee::Parsing::V2::ErrorResponse]
       def initialize(http_error)
         if http_error.is_a?(Parsing::V2::ErrorResponse)
           http_error = { 'detail' => http_error.detail,
@@ -33,7 +33,7 @@ module Mindee
         @code = http_error['code']
         @errors = if http_error.key?('errors')
                     http_error['errors'].map do |error|
-                      Parsing::V2::ErrorItem.new(error)
+                      Mindee::Parsing::V2::ErrorItem.new(error)
                     end
                   else
                     []

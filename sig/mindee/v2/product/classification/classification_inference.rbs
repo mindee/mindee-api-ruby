@@ -1,0 +1,15 @@
+module Mindee
+  module V2
+    module Product
+      module Classification
+        class ClassificationInference
+          attr_reader result: ClassificationResult
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

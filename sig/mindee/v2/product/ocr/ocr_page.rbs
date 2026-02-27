@@ -1,0 +1,15 @@
+module Mindee
+  module V2
+    module Product
+      module Ocr
+        class OcrPage
+          attr_reader words: Array[OcrWord]
+          attr_reader content: String
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,23 @@
+# lib/mindee/v2/product/ocr/ocr_response.rb
+
+module Mindee
+  module V2
+    module Product
+      module Ocr
+        class OcrResponse
+          self.@slug: String
+          self.@_params_type: singleton(Params::OcrParameters)
+
+          attr_reader inference: Mindee::V2::Product::Ocr::OcrInference
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def _params_type: -> singleton(Params::OcrParameters)
+
+          def to_s: -> String
+          def self._params_type: () -> singleton(Params::OcrParameters)
+          def self.slug: () -> String
+        end
+      end
+    end
+  end
+end

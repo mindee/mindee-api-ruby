@@ -9,7 +9,7 @@ module Mindee
       attr_reader title: String
       attr_reader errors: Array[Parsing::V2::ErrorItem]
 
-      def initialize: (Hash[String, untyped] | Parsing::V2::ErrorResponse) -> void
+      def initialize: (Hash[String, untyped] | Mindee::Parsing::V2::ErrorResponse) -> void
     end
   end
 end
