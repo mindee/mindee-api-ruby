@@ -1,5 +1,18 @@
 # Mindee Ruby API Library Changelog
 
+## v4.13.0 - 2026-03-03
+### Changes
+* :sparkles: add support for V2 Classification product
+* :sparkles: add support for V2 Crop product
+* :sparkles: add support for V2 Ocr product
+* :sparkles: add support for V2 Split product
+* :recycle: make polling follow API urls instead of re-constructing them
+* :sparkles: add support for generic product accessors in V2
+* :recycle: add proper tests for ruby 4
+### Fixes 
+* :recycle: fix tests file paths 
+
+
 ## v4.12.0 - 2026-02-25
 ### Changes
 * :sparkles: add job information to inference
