@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+module Mindee
+  module V2
+    module Parsing
+      # ID of the model that produced the inference.
+      class InferenceModel
+        # @return [String] Identifier of the model.
+        attr_reader :id
+
+        # @param server_response [Hash] Raw JSON parsed into a Hash.
+        def initialize(server_response)
+          @id = server_response['id']
+        end
+
+        # String representation.
+        # @return [String]
+        def to_s
+          parts = [
+            'Model',
+            '=====',
+            ":ID: #{@id}",
+            '',
+          ]
+          parts.join("\n")
+        end
+      end
+    end
+  end
+end

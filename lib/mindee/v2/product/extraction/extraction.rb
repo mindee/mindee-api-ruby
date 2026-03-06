@@ -9,7 +9,8 @@ module Mindee
       module Extraction
         # Extraction product.
         # Note: currently a placeholder for the `Inference` class.
-        class Extraction < Mindee::Parsing::V2::Inference
+        class Extraction < Product::BaseProduct
+          @slug = 'extraction'
           @params_type = Product::Extraction::Params::ExtractionParameters
           @response_type = Product::Extraction::ExtractionResponse
         end

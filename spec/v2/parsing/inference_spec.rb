@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee'
+require 'mindee/v2/parsing/field'
 
 describe 'inference' do
   let(:findoc_path) { File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'financial_document') }
@@ -19,13 +20,13 @@ describe 'inference' do
 
   def load_v2_inference(resource_path)
     local_response = Mindee::Input::LocalResponse.new(resource_path)
-    local_response.deserialize_response(Mindee::Parsing::V2::InferenceResponse)
+    local_response.deserialize_response(Mindee::V2::Product::Extraction::ExtractionResponse)
   end
 
-  simple_field = Mindee::Parsing::V2::Field::SimpleField
-  object_field = Mindee::Parsing::V2::Field::ObjectField
-  list_field = Mindee::Parsing::V2::Field::ListField
-  field_confidence = Mindee::Parsing::V2::Field::FieldConfidence
+  simple_field = Mindee::V2::Parsing::Field::SimpleField
+  object_field = Mindee::V2::Parsing::Field::ObjectField
+  list_field = Mindee::V2::Parsing::Field::ListField
+  field_confidence = Mindee::V2::Parsing::Field::FieldConfidence
 
   describe 'simple' do
     it 'loads a blank inference with valid properties' do
@@ -33,7 +34,7 @@ describe 'inference' do
 
       fields = response.inference.result.fields
       expect(fields).not_to be_empty
-      expect(fields).to be_a(Mindee::Parsing::V2::Field::InferenceFields)
+      expect(fields).to be_a(Mindee::V2::Parsing::Field::InferenceFields)
       expect(fields.size).to eq(21)
 
       expect(fields).to have_key('taxes')
@@ -64,7 +65,7 @@ describe 'inference' do
       inference = response.inference
       job = inference.job
       expect(job).not_to be_nil
-      expect(job).to be_a(Mindee::Parsing::V2::InferenceJob)
+      expect(job).to be_a(Mindee::V2::Parsing::InferenceJob)
       expect(job.id).to eq('12345678-1234-1234-1234-jobid1234567')
 
       expect(inference).not_to be_nil
@@ -191,7 +192,7 @@ describe 'inference' do
       expect(active_options.raw_text).to eq(true)
 
       fields = response.inference.result.fields
-      expect(fields).to be_a(Mindee::Parsing::V2::Field::InferenceFields)
+      expect(fields).to be_a(Mindee::V2::Parsing::Field::InferenceFields)
 
       fields
     end
@@ -291,13 +292,13 @@ describe 'inference' do
 
       raw_text = response.inference.result.raw_text
       expect(raw_text).not_to be_nil
-      expect(raw_text).to be_a(Mindee::Parsing::V2::RawText)
+      expect(raw_text).to be_a(Mindee::V2::Parsing::RawText)
 
       expect(raw_text.to_s).to eq(File.read(raw_text_str_path, encoding: 'UTF-8'))
 
       expect(raw_text.pages.length).to eq(2)
       first = raw_text.pages.first
-      expect(first).to be_a(Mindee::Parsing::V2::RawTextPage)
+      expect(first).to be_a(Mindee::V2::Parsing::RawTextPage)
       expect(first.content).to eq('This is the raw text of the first page...')
 
       raw_text.pages.each do |page|

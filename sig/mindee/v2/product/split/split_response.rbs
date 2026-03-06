@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Product
       module Split
-        class SplitResponse
+        class SplitResponse < Parsing::BaseResponse[SplitInference]
           self.@slug: String
           self.@_params_type: singleton(Params::SplitParameters)
 

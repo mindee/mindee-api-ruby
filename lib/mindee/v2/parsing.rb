@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+require_relative 'parsing/common_response'
+require_relative 'parsing/error_response'
+require_relative 'parsing/field'
+require_relative 'parsing/inference_file'
+require_relative 'parsing/inference_job'
+require_relative 'parsing/inference_model'
+require_relative 'parsing/inference_active_options'
+require_relative 'parsing/job'
+require_relative 'parsing/job_response'
+require_relative 'parsing/job_webhook'
+require_relative 'parsing/rag_metadata'
+require_relative 'parsing/raw_text'
+require_relative 'parsing/raw_text_page'

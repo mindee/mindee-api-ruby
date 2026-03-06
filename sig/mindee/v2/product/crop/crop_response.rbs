@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Product
       module Crop
-        class CropResponse
+        class CropResponse < Parsing::BaseResponse[CropInference]
           self.@slug: String
           self.@_params_type: singleton(Params::CropParameters)
 

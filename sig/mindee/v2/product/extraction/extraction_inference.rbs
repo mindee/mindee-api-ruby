@@ -3,6 +3,11 @@ module Mindee
     module Product
       module Extraction
         class ExtractionInference
+          attr_reader self.params_type: singleton(Params::ExtractionParameters)
+          attr_reader self.response_type: singleton(ExtractionResponse)
+          attr_reader self.slug: String
+
+          attr_reader active_options: Mindee::V2::Parsing::InferenceActiveOptions
           attr_reader result: ExtractionResult
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
