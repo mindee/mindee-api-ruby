@@ -11,8 +11,8 @@ def assert_local_response(local_response)
            dummy_secret_key, 'invalid signature'
          )).to be(false)
   expect(local_response.get_hmac_signature(dummy_secret_key)).to eq(signature)
-  inference_response = local_response.deserialize_response(Mindee::Parsing::V2::InferenceResponse)
-  expect(inference_response).to be_a(Mindee::Parsing::V2::InferenceResponse)
+  inference_response = local_response.deserialize_response(Mindee::V2::Product::Extraction::ExtractionResponse)
+  expect(inference_response).to be_a(Mindee::V2::Product::Extraction::ExtractionResponse)
   expect(inference_response).not_to be_nil
   expect(inference_response.inference).not_to be_nil
 end

@@ -3,7 +3,7 @@
 module Mindee
   module V2
     module Parsing
-      class BaseResponse[T] < Mindee::Parsing::V2::CommonResponse
+      class BaseResponse[T] < Mindee::V2::Parsing::CommonResponse
         attr_reader inference: T
       end
     end

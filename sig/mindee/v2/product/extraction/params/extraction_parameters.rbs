@@ -3,7 +3,33 @@ module Mindee
     module Product
       module Extraction
         module Params
-          class ExtractionParameters < Input::InferenceParameters
+          class ExtractionParameters < Input::BaseParameters
+
+            def self.slug: -> String
+
+            attr_reader confidence: bool?
+            attr_reader polygon: bool?
+            attr_reader rag: bool?
+            attr_reader raw_text: bool?
+            attr_reader text_context: String?
+            attr_reader data_schema: Input::DataSchema?
+
+            def initialize: (
+                String,
+                ?rag: bool?,
+                ?raw_text: bool?,
+                ?polygon: bool?,
+                ?confidence: bool?,
+                ?file_alias: String?,
+                ?text_context: String?,
+                ?webhook_ids: Array[String]?,
+                ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions?,
+                ?close_file: bool?,
+                ?data_schema: Input::DataSchema|String|Hash[Symbol | String, untyped]?
+              ) -> void
+
+            def self.from_hash: (params: Hash[String | Symbol, untyped]) -> ExtractionParameters
+            def append_form_data: (Array[Array[untyped]]) -> Array[Array[untyped]]
           end
         end
       end

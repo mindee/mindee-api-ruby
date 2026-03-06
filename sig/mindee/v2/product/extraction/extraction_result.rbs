@@ -1,8 +1,16 @@
+# lib/mindee/v2/product/extraction/extraction_result.rb
+
 module Mindee
   module V2
     module Product
       module Extraction
-        class ExtractionResult < Mindee::Parsing::V2::InferenceResult
+        class ExtractionResult
+          attr_reader fields: Parsing::Field::InferenceFields
+          attr_reader raw_text: Parsing::RawText?
+          attr_reader rag: Parsing::RAGMetadata?
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          def to_s: -> String
         end
       end
     end

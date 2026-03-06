@@ -19,47 +19,27 @@ module Mindee
       @mindee_api = Mindee::HTTP::MindeeApiV2.new(api_key: api_key)
     end
 
-    # Retrieves an inference.
-    # @param inference_id [String]
-    # @return [Mindee::Parsing::V2::InferenceResponse]
-    def get_inference(inference_id)
-      @mindee_api.req_get_inference(inference_id)
-    end
-
     # Retrieves a result from a given queue or URL to the result.
     # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
     # @param resource [String] ID of the inference or URL to the result.
-    # @return [Mindee::Parsing::V2::BaseResponse]
+    # @return [Mindee::V2::Parsing::BaseResponse]
     def get_result(product, resource)
       @mindee_api.req_get_result(product, resource)
     end
 
     # Retrieves an inference from a given queue or URL to the job.
     # @param job_id [String] ID of the job.
-    # @return [Mindee::Parsing::V2::JobResponse]
+    # @return [Mindee::V2::Parsing::JobResponse]
     def get_job(job_id)
       @mindee_api.req_get_job(job_id)
-    end
-
-    # Enqueue a document for async parsing.
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-    #   The source of the input document (local file or URL).
-    # @param params [Hash, InferenceParameters]
-    # @return [Mindee::Parsing::V2::JobResponse]
-    def enqueue_inference(input_source, params, disable_redundant_warnings: false)
-      unless disable_redundant_warnings
-        warn '[DEPRECATION] `enqueue_inference` is deprecated; use `enqueue` instead.', uplevel: 1
-      end
-      normalized_params = normalize_parameters(Input::InferenceParameters, params)
-      enqueue(Mindee::Parsing::V2::Inference, input_source, normalized_params)
     end
 
     # Enqueue a document for async parsing.
     # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
-    # @param params [Hash, InferenceParameters] Parameters for the inference.
-    # @return [Mindee::Parsing::V2::JobResponse]
+    # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+    # @return [Mindee::V2::Parsing::JobResponse]
     def enqueue(
       product,
       input_source,
@@ -77,8 +57,8 @@ module Mindee
     # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     #   The source of the input document (local file or URL).
-    # @param params [Hash, InferenceParameters] Parameters for the inference.
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+    # @return [Parsing::BaseResponse]
     def enqueue_and_get_result(
       product,
       input_source,
@@ -130,26 +110,7 @@ module Mindee
             "Asynchronous parsing request timed out after #{sec_count} seconds"
     end
 
-    # Enqueue a document for async parsing and automatically try to retrieve it.
-    # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-    #   The source of the input document (local file or URL).
-    # @param params [Hash, InferenceParameters] Parameters for the inference.
-    # @return [Mindee::Parsing::V2::InferenceResponse]
-    def enqueue_and_get_inference(input_source, params, disable_redundant_warnings: false)
-      unless disable_redundant_warnings
-        warn '[DEPRECATION] `enqueue_and_get_inference` is deprecated; use `enqueue_and_get_result` instead.',
-             uplevel: 1
-      end
-
-      response = enqueue_and_get_result(Mindee::Parsing::V2::Inference, input_source, params)
-      unless response.is_a?(Mindee::Parsing::V2::InferenceResponse)
-        raise TypeError, "Invalid response type \"#{response.class}\""
-      end
-
-      response
-    end
-
-    # If needed, converts the parsing options provided as a hash into a proper InferenceParameters object.
+    # If needed, converts the parsing options provided as a hash into a proper BaseParameters subclass object.
     # @param params [Hash, Class<BaseParameters>] Params.
     # @return [BaseParameters]
     def normalize_parameters(param_class, params)

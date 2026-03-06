@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'mindee'
+require 'mindee/v2/parsing/job_webhook'
 
-describe Mindee::Parsing::V2::JobWebhook do
+describe Mindee::V2::Parsing::JobWebhook do
   describe '#initialize' do
     context 'when error key is present but value is nil' do
       it 'does not raise an error and sets @error to nil' do
@@ -52,7 +53,7 @@ describe Mindee::Parsing::V2::JobWebhook do
 
         expect(webhook.id).to eq('12345678-1234-1234-1234-123456789012')
         expect(webhook.status).to eq('Failed')
-        expect(webhook.error).to be_a(Mindee::Parsing::V2::ErrorResponse)
+        expect(webhook.error).to be_a(Mindee::V2::Parsing::ErrorResponse)
         expect(webhook.error.status).to eq(500)
         expect(webhook.error.detail).to eq('Internal server error')
       end
