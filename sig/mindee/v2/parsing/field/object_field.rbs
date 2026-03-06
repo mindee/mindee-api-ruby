@@ -1,7 +1,7 @@
-# lib/mindee/parsing/v2/field/object_field.rb
+# lib/mindee/v2/parsing/field/object_field.rb
 module Mindee
-  module Parsing
-    module V2
+  module V2
+    module Parsing
       module Field
         # A field containing a nested set of inference fields.
         class ObjectField < BaseField

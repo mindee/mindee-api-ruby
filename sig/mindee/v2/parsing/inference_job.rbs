@@ -1,0 +1,12 @@
+module Mindee
+  module V2
+    module Parsing
+      class InferenceJob
+        attr_reader id: String
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

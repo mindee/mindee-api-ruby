@@ -1,7 +1,7 @@
-# lib/mindee/parsing/v2/field/field_confidence.rb
+# lib/mindee/v2/parsing/field/field_confidence.rb
 module Mindee
-  module Parsing
-    module V2
+  module V2
+    module Parsing
       module Field
         class FieldConfidence
           attr_reader value: String

@@ -1,7 +1,7 @@
-# lib/mindee/parsing/v2/field/inference_fields.rb
+# lib/mindee/v2/parsing/field/inference_fields.rb
 module Mindee
-  module Parsing
-    module V2
+  module V2
+    module Parsing
       module Field
         class InferenceFields < Hash[String, ListField | ObjectField | SimpleField?]
           attr_reader indent_level: Integer

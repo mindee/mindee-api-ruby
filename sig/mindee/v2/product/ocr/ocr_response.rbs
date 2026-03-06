@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Product
       module Ocr
-        class OcrResponse
+        class OcrResponse < Parsing::BaseResponse[OcrInference]
           self.@slug: String
           self.@_params_type: singleton(Params::OcrParameters)
 

@@ -1,7 +1,7 @@
-# lib/mindee/parsing/v2/field/simple_field.rb
+# lib/mindee/v2/parsing/field/simple_field.rb
 module Mindee
-  module Parsing
-    module V2
+  module V2
+    module Parsing
       module Field
         class SimpleField < BaseField
           attr_reader value: String | Integer | Float | bool | nil
