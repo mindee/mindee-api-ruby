@@ -3,8 +3,8 @@
 require 'mindee'
 require 'mindee/v2/product'
 
-using Mindee::V2::Product::Extraction::Params::ExtractionParameters
-using Mindee::V2::Product::Extraction::Extraction
+using Mindee::V2::Product::Extraction::Params
+using Mindee::V2::Product::Extraction
 
 describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :defined do
   let(:api_key) { ENV.fetch('MINDEE_V2_API_KEY') }
