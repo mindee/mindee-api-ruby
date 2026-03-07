@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'classification_result'
+require_relative '../../parsing/base_inference'
 
 module Mindee
   module V2

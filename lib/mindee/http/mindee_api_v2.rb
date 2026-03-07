@@ -3,7 +3,6 @@
 require_relative 'api_settings_v2'
 require_relative '../input'
 require_relative '../errors'
-require_relative '../parsing/v2'
 
 module Mindee
   module HTTP
@@ -17,11 +16,11 @@ module Mindee
         @settings = ApiSettingsV2.new(api_key: api_key)
       end
 
-      # Sends a file to the inference queue.
+      # Sends a file to the queue.
       #
       # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
       # @param params [Input::BaseParameters]
-      # @return [Mindee::Parsing::V2::JobResponse]
+      # @return [Mindee::V2::Parsing::JobResponse]
       # @raise [Mindee::Errors::MindeeHttpErrorV2]
       def req_post_enqueue(input_source, params)
         @settings.check_api_key
@@ -29,21 +28,13 @@ module Mindee
           input_source,
           params
         )
-        Mindee::Parsing::V2::JobResponse.new(process_response(response))
-      end
-
-      # Retrieves a queued inference.
-      #
-      # @param inference_id [String]
-      # @return [Mindee::Parsing::V2::InferenceResponse]
-      def req_get_inference(inference_id)
-        req_get_result(Parsing::V2::Inference, inference_id)
+        Mindee::V2::Parsing::JobResponse.new(process_response(response))
       end
 
       # Retrieves a result from a given queue.
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param resource [String] ID of the inference or URL to the result.
-      # @return [Mindee::Parsing::V2::BaseResponse]
+      # @return [Mindee::V2::Parsing::BaseResponse]
       def req_get_result(product, resource)
         return req_get_result_url(product.response_type, resource) if uri?(resource)
 
@@ -58,13 +49,11 @@ module Mindee
       # Retrieves a queued job.
       #
       # @param job_id [String] ID of the job or URL to the job.
-      # @return [Mindee::Parsing::V2::JobResponse]
+      # @return [Mindee::V2::Parsing::JobResponse]
       def req_get_job(job_id)
         @settings.check_api_key
-        response = inference_job_req_get(
-          job_id
-        )
-        Mindee::Parsing::V2::JobResponse.new(process_response(response))
+        response = poll("#{@settings.base_url}/jobs/#{job_id}")
+        Mindee::V2::Parsing::JobResponse.new(process_response(response))
       end
 
       private
@@ -72,18 +61,18 @@ module Mindee
       # Retrieves a queued job.
       #
       # @param url [String]
-      # @return [Mindee::Parsing::V2::JobResponse]
+      # @return [Mindee::V2::Parsing::JobResponse]
       def req_get_job_url(url)
         @settings.check_api_key
         response = poll(url)
-        Mindee::Parsing::V2::JobResponse.new(process_response(response))
+        Mindee::V2::Parsing::JobResponse.new(process_response(response))
       end
 
       # Retrieves a queued job.
       #
-      # @param result_class [Mindee::V2::Parsing::BaseResponse]
+      # @param result_class [Class<Mindee::V2::Parsing::BaseResponse>]
       # @param url [String]
-      # @return [Mindee::Parsing::V2::JobResponse]
+      # @return [Mindee::V2::Parsing::BaseResponse]
       def req_get_result_url(result_class, url)
         @settings.check_api_key
         response = poll(url)
@@ -137,22 +126,6 @@ module Mindee
         raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
       end
 
-      # Polls the API for the status of a job.
-      #
-      # @param job_id [String] ID of the job.
-      # @return [Net::HTTPResponse]
-      def inference_job_req_get(job_id)
-        poll("#{@settings.base_url}/jobs/#{job_id}")
-      end
-
-      # Polls the API for the result of an inference.
-      #
-      # @param queue_id [String] ID of the queue.
-      # @return [Net::HTTPResponse]
-      def inference_result_req_get(queue_id)
-        poll("#{@settings.base_url}/inferences/#{queue_id}")
-      end
-
       # Polls the API for the result of an inference.
       #
       # @param queue_id [String] ID of the queue.
@@ -164,7 +137,7 @@ module Mindee
 
       # Handle parameters for the enqueue form
       # @param form_data [Array] Array of form fields
-      # @param params [Input::InferenceParameters] Inference options.
+      # @param params [Input::BaseParameters] Inference options.
       def enqueue_form_options(form_data, params)
         # deal with optional features
         form_data.push(['rag', params.rag.to_s]) unless params.rag.nil?

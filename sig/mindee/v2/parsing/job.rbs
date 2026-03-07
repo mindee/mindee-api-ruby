@@ -1,0 +1,23 @@
+# lib/mindee/v2/parsing/job.rb
+module Mindee
+  module V2
+    module Parsing
+      class Job
+        attr_reader alias: String
+        attr_reader created_at: Time
+        attr_reader completed_at: Time?
+        attr_reader error: ErrorResponse?
+        attr_reader filename: String
+        attr_reader id: String
+        attr_reader model_id: String
+        attr_reader polling_url: String
+        attr_reader result_url: String?
+        attr_reader status: String
+        attr_reader webhooks: Array[JobWebhook]
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end

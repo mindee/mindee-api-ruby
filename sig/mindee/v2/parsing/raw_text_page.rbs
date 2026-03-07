@@ -1,0 +1,11 @@
+module Mindee
+  module V2
+    module Parsing
+      class RawTextPage
+        attr_reader content: String
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

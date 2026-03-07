@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Product
       module Classification
-        class ClassificationResponse
+        class ClassificationResponse < Parsing::BaseResponse[ClassificationInference]
           self.@slug: String
           self.@_params_type: singleton(Params::ClassificationParameters)
 

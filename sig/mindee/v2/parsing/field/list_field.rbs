@@ -1,0 +1,23 @@
+# lib/mindee/v2/parsing/field/list_field.rb
+module Mindee
+  module V2
+    module Parsing
+      module Field
+        class ListField < BaseField
+          include Enumerable[BaseField]
+
+          attr_reader items: Array[SimpleField | ObjectField | ListField]
+          def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def object_items: -> Array[ObjectField]
+          def simple_items: -> Array[SimpleField]
+          def to_s: -> String
+          def empty?: -> bool
+          def size: -> Integer
+          def length: -> Integer
+          def each: () { (untyped) -> untyped } -> untyped
+          def []: (Integer) -> (BaseField)
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,12 @@
+# lib/mindee/v2/parsing/job_response.rb
+module Mindee
+  module V2
+    module Parsing
+      class JobResponse < CommonResponse
+        attr_reader job: Job
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+        def to_s: -> String
+      end
+    end
+  end
+end
