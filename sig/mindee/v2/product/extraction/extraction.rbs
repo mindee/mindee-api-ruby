@@ -7,6 +7,7 @@ module Mindee
         class Extraction
           self.@params_type: singleton(Mindee::V2::Product::Extraction::Params::ExtractionParameters)
           self.@response_type: singleton(Mindee::V2::Product::Extraction::ExtractionResponse)
+          self.@slug: String
         end
       end
     end

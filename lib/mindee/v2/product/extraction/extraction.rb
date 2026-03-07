@@ -10,6 +10,7 @@ module Mindee
         # Extraction product.
         # Note: currently a placeholder for the `Inference` class.
         class Extraction < Product::BaseProduct
+          @slug = 'extraction'
           @params_type = Product::Extraction::Params::ExtractionParameters
           @response_type = Product::Extraction::ExtractionResponse
         end
