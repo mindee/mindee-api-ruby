@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'mindee_error'
+require_relative '../v2/parsing/error_item'
 
 module Mindee
   module Errors

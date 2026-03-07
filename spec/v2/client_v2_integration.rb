@@ -34,7 +34,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
         text_context: 'this is a test'
       )
 
-      response = client.enqueue_and_get_result(Extraction, input, inference_params)
+      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
 
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil
@@ -81,7 +81,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
         file_alias: 'rb_integration_test'
       )
 
-      response = client.enqueue_and_get_result(Extraction, input, inference_params)
+      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
       expect(response).not_to be_nil
 
       file = response.inference.file
@@ -123,7 +123,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
       inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new('INVALID_MODEL_ID')
 
       expect do
-        client.enqueue(Extraction, input, inference_params)
+        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
       end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e| expect(e.status).to eq(422) }
     end
 
@@ -137,7 +137,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
       )
 
       expect do
-        client.enqueue(Extraction, input, params)
+        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, params)
       end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(422)
         expect(e.code).to start_with('422-')
@@ -158,7 +158,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
       )
 
       expect do
-        client.enqueue(Extraction, input, inference_params)
+        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
       end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(422)
         expect(e.code).to start_with('422-')
@@ -172,7 +172,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
 
     it 'raises MindeeHTTPErrorV2 on invalid job id' do
       expect do
-        client.get_result(Extraction, 'INVALID_JOB_ID')
+        client.get_result(Mindee::V2::Product::Extraction::Extraction, 'INVALID_JOB_ID')
       end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(422)
         expect(e.code).to start_with('422-')
@@ -199,7 +199,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
           rag: false,
           file_alias: 'rb_integration_test'
         )
-        client.enqueue_and_get_result(Extraction, input, inference_params)
+        client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
       end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(404)
         expect(e.code).to start_with('404-')
@@ -216,7 +216,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
 
       inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(model_id)
 
-      response = client.enqueue_and_get_result(Extraction, url_input, inference_params)
+      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, url_input, inference_params)
 
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil
@@ -239,7 +239,7 @@ describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :de
         data_schema: data_schema_replace
       )
 
-      response = client.enqueue_and_get_result(Extraction, input, inference_params)
+      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
       expect(response).not_to be_nil
 
       model = response.inference.model
