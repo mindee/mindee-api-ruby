@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(.github|spec|features)/}) }
   end
   spec.bindir = 'bin'
-  spec.executables = Dir['bin/*'].map { |f| File.basename(f) }.reject { |f| f == 'cli_products.rb' }
+  spec.executables = Dir['bin/**/*'].map { |f| File.basename(f) }.reject { |f| f == 'products.rb' }
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
