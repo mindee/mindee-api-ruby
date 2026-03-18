@@ -4,7 +4,7 @@ module Mindee
       module Crop
         class CropItem
           attr_reader object_type: String
-          attr_reader location: Mindee::Parsing::V2::Field::FieldLocation
+          attr_reader location: Mindee::V2::Parsing::Field::FieldLocation
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String
