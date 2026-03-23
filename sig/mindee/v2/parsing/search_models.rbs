@@ -1,0 +1,14 @@
+# lib/mindee/v2/parsing/search/search_models.rb
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class SearchModels < Array[SearchModel]
+          def initialize: (Array[untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

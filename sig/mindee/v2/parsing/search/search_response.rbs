@@ -1,0 +1,17 @@
+# lib/mindee/v2/search/search_response.rb
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class SearchResponse
+          attr_reader models: Array[SearchResponse]
+          attr_reader pagination_metadata: PaginationMetadata
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

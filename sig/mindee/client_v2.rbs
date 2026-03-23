@@ -11,6 +11,9 @@ module Mindee
     def get_job: (String job_id) -> V2::Parsing::JobResponse
     def enqueue: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> V2::Parsing::JobResponse
     def enqueue_and_get_result: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> T
+
+    def search_models: (String?, String?) -> Mindee::V2::Parsing::Search::SearchResponse
+
     def validate_async_params:  (Integer | Float, Integer | Float, Integer) -> void
     def normalize_parameters: (singleton(Input::BaseParameters) param_class, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> Input::BaseParameters
   end
