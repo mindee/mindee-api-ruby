@@ -16,12 +16,88 @@ module MindeeCLI
     # @return [Parser]
     attr_reader :product_parser
 
+    # @return [Parser]
+    attr_reader :search_parser
+
     def initialize(arguments)
       @arguments = arguments
       @options_parser = OptionParser.new do |opts|
-        opts.banner = 'Usage: mindee v2 product [options] filepath'
+        opts.banner = 'Usage: mindee v2 command [options]'
       end
       @product_parser = init_product_parser
+      @search_parser = init_search_parser
+    end
+
+    # Summarize the result of the command.
+    # @param command [String]
+    # @return [String]
+    def summarize_result(command)
+      if command == 'search-models'
+        @search_parser.parse!(@arguments)
+        @result = search(@options)
+        summarized_result = @options[:print_full] ? @result.to_s : @result.models.to_s
+      else
+        @product_parser[command].parse!(@arguments)
+        @options[:file_path] = @arguments.shift
+        if @options[:file_path].nil?
+          warn 'file missing'
+          abort(@product_parser[command].help)
+        end
+        @result = send(command, @options)
+        summarized_result = @options[:print_full] ? @result.inference.to_s : @result.inference.result.to_s
+      end
+      summarized_result
+    end
+
+    # Executes the command.
+    # @return [void]
+    def execute
+      @options = {}
+      command = @arguments.shift
+
+      validate_command!(command)
+      summarized_result = summarize_result(command)
+
+      if @options[:raw_json]
+        puts JSON.pretty_generate(@result.raw_http)
+      else
+        puts summarized_result
+      end
+    rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
+      if command == 'search-models'
+        abort("#{e.message}\n\n#{@search_parser.help}")
+      else
+        abort("#{e.message}\n\n#{@product_parser[command].help}")
+      end
+    end
+
+    private
+
+    def validate_command!(command)
+      return if V2_PRODUCTS.include?(command) || command == 'search-models'
+
+      error_msg = "#{@options_parser.help}\nAvailable commands:\n"
+      error_msg += "  #{'search-models'.ljust(50)}Search for available models for this API key\n"
+
+      V2_PRODUCTS.each do |product_key, product_values|
+        error_msg += "  #{product_key.to_s.ljust(50)}#{product_values[:description]}\n"
+      end
+      abort(error_msg)
+    end
+
+    def init_search_parser
+      OptionParser.new do |options_parser|
+        options_parser.banner = 'Usage: mindee v2 search-models [options]'
+        init_common_options(options_parser)
+        options_parser.on('-n [NAME]', '--name [NAME]',
+                          'Search for partial matches in model name. Note: case insensitive') do |v|
+          @options[:model_name] = v
+        end
+        options_parser.on('-t [NAME]', '--type [NAME]',
+                          'Search for EXACT matches in model type. Note: case sensitive') do |v|
+          @options[:model_type] = v
+        end
+      end
     end
 
     def setup_specific_options(options_parser, doc_value)
@@ -49,6 +125,14 @@ module MindeeCLI
       end
     end
 
+    # Initialize common options for search and product commands.
+    # @param options_parser [OptionParser]
+    def init_common_options(options_parser)
+      options_parser.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') { |v| @options[:api_key] = v }
+      options_parser.on('-f', '--full', 'Print the full data') { @options[:print_full] = true }
+      options_parser.on('-j', '--raw-json', 'Print the full raw jason data') { @options[:raw_json] = true }
+    end
+
     # @return [Hash]
     def init_product_parser
       v2_product_parser = {}
@@ -59,9 +143,8 @@ module MindeeCLI
           options_parser.on('-a ALIAS', '--alias ALIAS', 'Add a file alias to the response') do |v|
             @options[:alias] = v
           end
+          init_common_options(options_parser)
           options_parser.on('-C PAGES', '--cut-pages PAGES', 'Cut document pages') { |v| @options[:cut_pages] = v }
-          options_parser.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') { |v| @options[:api_key] = v }
-          options_parser.on('-f', '--full', 'Print the full data') { @options[:print_full] = true }
           options_parser.on('-F', '--fix-pdf', 'Repair PDF') { @options[:repair_pdf] = true }
           setup_specific_options(options_parser, product_values)
         end
@@ -69,7 +152,9 @@ module MindeeCLI
       v2_product_parser
     end
 
-    def setup_params(options, page_options)
+    # @param options [Hash] General options.
+    # @return page_options [Hash] Page options.
+    def setup_product_params(options, page_options)
       params = { model_id: options[:model_id] }
       params[:options] = Mindee::ParseOptions.new(params: page_options) unless page_options.nil?
       params
@@ -78,12 +163,12 @@ module MindeeCLI
     # @param product_command [String]
     # @param options [Hash]
     # @return [Mindee::Parsing::Common::ApiResponse]
-    def send(product_command, _endpoint_name, options)
+    def send(product_command, options)
       mindee_client = Mindee::ClientV2.new(api_key: options[:api_key])
       response_class = V2_PRODUCTS[product_command][:response_class]
       input_source = setup_input_source(options)
       page_options = setup_page_options(options)
-      params = setup_params(options, page_options)
+      params = setup_product_params(options, page_options)
 
       mindee_client.enqueue_and_get_result(
         response_class,
@@ -92,42 +177,12 @@ module MindeeCLI
       )
     end
 
-    # @param product_command [String]
-    def execute
-      @options = {}
-      product_command = @arguments.shift
-
-      unless V2_PRODUCTS.include?(product_command)
-        error_msg = "#{@options_parser.help}\nAvailable products:\n"
-        V2_PRODUCTS.each do |product_key, product_values|
-          error_msg += "  #{product_key}#{product_values[:description].rjust(50 - product_key.length, ' ')}\n"
-        end
-        abort(error_msg)
-      end
-      @product_parser[product_command].parse!
-
-      if product_command == 'universal'
-        if @arguments.length < 2
-          warn "The 'universal' command requires both ENDPOINT_NAME and file arguments."
-          abort(@product_parser[product_command].help)
-        end
-        endpoint_name = @arguments[0]
-        @options[:file_path] = @arguments[1]
-      else
-        if @arguments.empty?
-          warn 'File missing'
-          abort(@product_parser[product_command].help)
-        end
-        endpoint_name = nil
-        @options[:file_path] = @arguments[0]
-      end
-
-      result = send(product_command, endpoint_name, @options)
-
-      puts @options[:print_full] ? result.inference : result.inference.result
+    # @param options [Hash]
+    # @return [Mindee::V2::Parsing::Search::SearchResponse]
+    def search(options)
+      mindee_client = Mindee::ClientV2.new(api_key: options[:api_key])
+      mindee_client.search_models(options[:model_name], options[:model_type])
     end
-
-    private
 
     # @param options [Hash]
     # @return [Mindee::Input::InputSource]
@@ -137,21 +192,6 @@ module MindeeCLI
       else
         Mindee::Input::Source::PathInputSource.new(options[:file_path], repair_pdf: options[:repair_pdf])
       end
-    end
-
-    # @param mindee_client [Mindee::V1::Client]
-    # @param product_command [String]
-    # @param endpoint_name [String, nil]
-    # @param options [Hash]
-    # @return [Mindee::HTTP::Endpoint, nil]
-    def setup_endpoint(mindee_client, product_command, endpoint_name, options)
-      return unless product_command == 'universal'
-
-      mindee_client.create_endpoint(
-        endpoint_name: endpoint_name,
-        account_name: options[:account_name],
-        version: options[:endpoint_version] || '1'
-      )
     end
 
     # @param options [Hash]

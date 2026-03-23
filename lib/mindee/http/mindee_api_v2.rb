@@ -56,7 +56,51 @@ module Mindee
         Mindee::V2::Parsing::JobResponse.new(process_response(response))
       end
 
+      # Retrieves a list of models.
+      # @param model_name [String, nil]
+      # @param model_type [String, nil]
+      # @return [Mindee::V2::Parsing::Search::SearchResponse]
+      def search_models(model_name, model_type)
+        Mindee::V2::Parsing::Search::SearchResponse.new(process_response(req_get_search_models(model_name, model_type)))
+      end
+
       private
+
+      # Retrieves a list of models.
+      # @param model_name [String, nil]
+      # @param model_type [String, nil]
+      # @return [Net::HTTPResponse]
+      def req_get_search_models(model_name, model_type)
+        url = "#{@settings.base_url}/v2/search/models"
+        uri = URI(url)
+
+        query_params = {}
+        query_params[:name] = model_name if model_name
+        query_params[:model_type] = model_type if model_type
+        uri.query = URI.encode_www_form(query_params) unless query_params.empty?
+
+        headers = {
+          'Authorization' => @settings.api_key,
+          'User-Agent' => @settings.user_agent,
+        }
+        req = Net::HTTP::Get.new(uri, headers)
+        req['Transfer-Encoding'] = 'chunked'
+
+        Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
+          return http.request(req)
+        end
+        raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
+      end
+
+      # @param resource [String] Resource to check.
+      # @return [Boolean]
+      def uri?(resource)
+        uri = URI.parse(resource)
+        throw Mindee::Errors::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
+        uri.scheme == 'https'
+      rescue URI::BadURIError, URI::InvalidURIError
+        false
+      end
 
       # Retrieves a queued job.
       #
@@ -77,16 +121,6 @@ module Mindee
         @settings.check_api_key
         response = poll(url)
         result_class.new(process_response(response))
-      end
-
-      # @param resource [String] Resource to check.
-      # @return [Boolean]
-      def uri?(resource)
-        uri = URI.parse(resource)
-        throw Mindee::Errors::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
-        uri.scheme == 'https'
-      rescue URI::BadURIError, URI::InvalidURIError
-        false
       end
 
       # Converts an HTTP response to a parsed response object.

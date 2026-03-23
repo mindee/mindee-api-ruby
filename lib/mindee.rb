@@ -90,6 +90,13 @@ module Mindee
     # Product-specific module.
     module Product
     end
+
+    # V2 parsing module.
+    module Parsing
+      # V2 search module.
+      module Search
+      end
+    end
   end
 end
 
