@@ -41,14 +41,15 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Tests V1 code samples
-        env:
-          MINDEE_LOG_LEVEL: DEBUG
-        run: |
-          ./spec/test_code_samples_v1.sh ${{ secrets.MINDEE_ACCOUNT_SE_TESTS }} ${{ secrets.MINDEE_ENDPOINT_SE_TESTS }}
-
       - name: Tests V2 code samples
         env:
           MINDEE_LOG_LEVEL: DEBUG
         run: |
-          ./spec/test_code_samples_v2.sh
+          ./spec/test_v2_code_samples.sh
+
+      - name: Tests V1 code samples
+        env:
+          MINDEE_LOG_LEVEL: DEBUG
+        run: |
+          ./spec/test_v1_code_samples.sh ${{ secrets.MINDEE_ACCOUNT_SE_TESTS }} ${{ secrets.MINDEE_ENDPOINT_SE_TESTS }}
+

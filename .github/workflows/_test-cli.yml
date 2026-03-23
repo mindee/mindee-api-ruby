@@ -1,0 +1,55 @@
+name: CLI Test
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  MINDEE_ENDPOINT_SE_TESTS: ${{ secrets.MINDEE_ENDPOINT_SE_TESTS }}
+  MINDEE_ACCOUNT_SE_TESTS: ${{ secrets.MINDEE_ACCOUNT_SE_TESTS }}
+  MINDEE_API_KEY: ${{ secrets.MINDEE_API_KEY_SE_TESTS }}
+  MINDEE_V2_API_KEY: ${{ secrets.MINDEE_V2_SE_TESTS_API_KEY }}
+  MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID: ${{ secrets.MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID }}
+  MINDEE_V2_SE_TESTS_BLANK_PDF_URL: ${{ secrets.MINDEE_V2_SE_TESTS_BLANK_PDF_URL }}
+  MINDEE_V2_SE_TESTS_CLASSIFICATION_MODEL_ID: ${{ secrets.MINDEE_V2_SE_TESTS_CLASSIFICATION_MODEL_ID }}
+  MINDEE_V2_SE_TESTS_CROP_MODEL_ID: ${{ secrets.MINDEE_V2_SE_TESTS_CROP_MODEL_ID }}
+  MINDEE_V2_SE_TESTS_FAILURE_WEBHOOK_ID: ${{ secrets.MINDEE_V2_SE_TESTS_FAILURE_WEBHOOK_ID }}
+  MINDEE_V2_SE_TESTS_OCR_MODEL_ID: ${{ secrets.MINDEE_V2_SE_TESTS_OCR_MODEL_ID }}
+  MINDEE_V2_SE_TESTS_SPLIT_MODEL_ID: ${{ secrets.MINDEE_V2_SE_TESTS_SPLIT_MODEL_ID }}
+
+jobs:
+  test:
+    name: Run Tests
+    timeout-minutes: 30
+    strategy:
+      max-parallel: 4
+      matrix:
+        os_config:
+          - os: "ubuntu-24.04"
+            rid: "linux-x64"
+          - os: "macos-latest"
+            rid: "osx-x64"
+          - os: "windows-latest"
+            rid: "win-x64"
+        ruby:
+          - "3.0"
+          - "4.0"
+    runs-on: ${{ matrix.os_config.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Tests V2 CLI
+        run: |
+          ./spec/test_v2_cli.sh ./spec/data/file_types/pdf/blank_1.pdf ${{ matrix.os_config.rid }} 
+
+      - name: Tests V1 CLI
+        run: |
+          ./spec/test_v1_cli.sh ./spec/data/file_types/pdf/blank_1.pdf ${{ matrix.os_config.rid }}
