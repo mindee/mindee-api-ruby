@@ -110,6 +110,16 @@ module Mindee
             "Asynchronous parsing request timed out after #{sec_count} seconds"
     end
 
+    # Searches for a list of available models for the given API key.
+    # @param model_name [String]
+    # @param model_type [String]
+    # @return [Mindee::V2::Parsing::Search::SearchResponse]
+    def search_models(model_name, model_type)
+      @mindee_api.search_models(model_name, model_type)
+    end
+
+    private
+
     # If needed, converts the parsing options provided as a hash into a proper BaseParameters subclass object.
     # @param params [Hash, Class<BaseParameters>] Params.
     # @return [BaseParameters]
