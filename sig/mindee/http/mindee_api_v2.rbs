@@ -25,12 +25,17 @@ module Mindee
       def result_req_get: [T] (String, _ProductClass[T] product) -> Net::HTTPResponse
       def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Input::BaseParameters) -> Net::HTTPResponse?
 
+      def search_models: (String?, String?) -> Mindee::V2::Parsing::Search::SearchResponse
+
       private
 
       def enqueue_form_options: (Array[Array[untyped]], V2::Product::Extraction::Params::ExtractionParameters) -> Array[Array[untyped]]
 
       def req_get_job_url: (String) -> V2::Parsing::JobResponse
       def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
+
+      def req_get_search_models: (String?, String?) -> Net::HTTPResponse
+
       def uri?: (String) -> bool
     end
   end
