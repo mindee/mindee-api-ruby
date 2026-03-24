@@ -7,14 +7,13 @@ module Mindee
 
     def logger: () -> Logger
     def initialize: (?api_key: String) -> void
-    def get_inference: (String inference_id) -> Parsing::V2::InferenceResponse
     def get_result: [T] (HTTP::_ProductClass[T] product, String resource) -> T
-    def get_result_url: [T] (HTTP::_ResponseFactory[T] response_class, String inference_id) -> T
-    def get_job: (String job_id) -> Parsing::V2::JobResponse
-    def enqueue_inference: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::InferenceParameters params, ?disable_redundant_warnings: bool) -> Parsing::V2::JobResponse
-    def enqueue: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> Parsing::V2::JobResponse
+    def get_job: (String job_id) -> V2::Parsing::JobResponse
+    def enqueue: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> V2::Parsing::JobResponse
     def enqueue_and_get_result: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> T
-    def enqueue_and_get_inference: (Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::InferenceParameters params, ?disable_redundant_warnings: bool) -> Parsing::V2::InferenceResponse
+
+    def search_models: (String?, String?) -> Mindee::V2::Parsing::Search::SearchResponse
+
     def validate_async_params:  (Integer | Float, Integer | Float, Integer) -> void
     def normalize_parameters: (singleton(Input::BaseParameters) param_class, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> Input::BaseParameters
   end

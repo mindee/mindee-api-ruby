@@ -14,7 +14,7 @@ module Mindee
       # V2 base URL default environment key name.
       MINDEE_V2_BASE_URL_ENV_NAME = 'MINDEE_V2_BASE_URL'
       # V2 base URL default value.
-      MINDEE_V2_BASE_URL_DEFAULT = 'https://api-v2.mindee.net/v2'
+      MINDEE_V2_BASE_URL_DEFAULT = 'https://api-v2.mindee.net'
 
       # HTTP request timeout default environment key name.
       MINDEE_V2_REQUEST_TIMEOUT_ENV_NAME = 'MINDEE_V2_REQUEST_TIMEOUT'

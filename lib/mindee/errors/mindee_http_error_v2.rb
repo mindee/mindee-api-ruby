@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'mindee_error'
-require_relative '../parsing/v2/error_item'
+require_relative '../v2/parsing/error_item'
 
 module Mindee
   module Errors
@@ -18,9 +18,9 @@ module Mindee
       # @return [Array<ErrorItem>] A list of explicit error details.
       attr_reader :errors
 
-      # @param http_error [Hash, Mindee::Parsing::V2::ErrorResponse]
+      # @param http_error [Hash, Mindee::V2::Parsing::ErrorResponse]
       def initialize(http_error)
-        if http_error.is_a?(Parsing::V2::ErrorResponse)
+        if http_error.is_a?(V2::Parsing::ErrorResponse)
           http_error = { 'detail' => http_error.detail,
                          'status' => http_error.status,
                          'title' => http_error.title,
@@ -33,7 +33,7 @@ module Mindee
         @code = http_error['code']
         @errors = if http_error.key?('errors')
                     http_error['errors'].map do |error|
-                      Mindee::Parsing::V2::ErrorItem.new(error)
+                      Mindee::V2::Parsing::ErrorItem.new(error)
                     end
                   else
                     []

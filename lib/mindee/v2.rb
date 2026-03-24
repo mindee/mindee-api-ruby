@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require_relative 'parsing'
-require_relative 'product'
+require_relative 'v2/parsing'
+require_relative 'v2/product'

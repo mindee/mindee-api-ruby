@@ -15,11 +15,12 @@ module Mindee
 
 
       class ApiResponse
+        attr_reader document: Parsing::Common::Document?
+        attr_reader job: Parsing::Common::Job?
+        attr_reader api_request: Parsing::Common::ApiRequest
+        attr_reader raw_http: String
+
         def logger: () -> Logger
-        def document: -> Parsing::Common::Document?
-        def job: -> Parsing::Common::Job?
-        def api_request: -> Parsing::Common::ApiRequest?
-        def raw_http: -> String
         def initialize: (singleton(Parsing::Common::Inference), Hash[String | Symbol, untyped] | Net::HTTPResponse, String) -> void
       end
     end
