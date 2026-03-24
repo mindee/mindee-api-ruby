@@ -42,9 +42,11 @@ module MindeeCLI
       V1_PRODUCTS.each do |doc_key, doc_value|
         v1_product_parser[doc_key] = OptionParser.new do |options_parser|
           options_parser.on('-w', '--all-words', 'Include words in response') { |v| @options[:all_words] = v }
-          options_parser.on('-c', '--cut-pages', 'Cut document pages') { |v| @options[:cut_pages] = v }
           options_parser.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') { |v| @options[:api_key] = v }
-          options_parser.on('-f', '--full', 'Print the full data') { @options[:print_full] = true }
+          options_parser.on('-o FORMAT', '--output-format FORMAT', ['raw', 'full', 'summary'],
+                            'Format of the output (raw, full, summary). Default: summary') do |format|
+            @options[:output_format] = format
+          end
           options_parser.on('-F', '--fix-pdf', 'Repair PDF') { @options[:repair_pdf] = true }
 
           if doc_key != 'universal'
@@ -69,23 +71,27 @@ module MindeeCLI
       doc_class = V1_PRODUCTS[product_command][:doc_class]
       input_source = setup_input_source(mindee_client, options)
       custom_endpoint = setup_endpoint(mindee_client, product_command, endpoint_name, options)
-      page_options = setup_page_options(options)
       options[:parse_async] = !V1_PRODUCTS[product_command][:sync] if options[:parse_async].nil?
 
       mindee_client.parse(
         input_source,
         doc_class,
         options: { endpoint: custom_endpoint,
-                   options: Mindee::ParseOptions.new(
-                     params: { page_options: page_options }
-                   ),
                    enqueue: options[:parse_async] }
       )
     end
 
+    def print_result(result, output_format)
+      if output_format == :raw
+        puts JSON.pretty_generate(JSON.parse(result.raw_http))
+      else
+        puts output_format == :full ? result.document : result.document.inference.prediction
+      end
+    end
+
     # @param product_command [String]
     def execute
-      options = {}
+      @options = { output_format: :summary }
       product_command = @arguments.shift
 
       abort(@options_parser.help) unless V1_PRODUCTS.include?(product_command)
@@ -97,22 +103,26 @@ module MindeeCLI
           abort(@product_parser[product_command].help)
         end
         endpoint_name = @arguments[0]
-        options[:file_path] = @arguments[1]
+        @options[:file_path] = @arguments[1]
       else
         if @arguments.empty?
           warn 'file missing'
           abort(@product_parser[product_command].help)
         end
         endpoint_name = nil
-        options[:file_path] = @arguments[0]
+        @options[:file_path] = @arguments[0]
       end
 
-      result = send(product_command, endpoint_name, options)
-
-      puts options[:print_full] ? result.document : result.document.inference.prediction
+      result = send(product_command, endpoint_name, @options)
+      print_result(result, output_format)
     end
 
     private
+
+    # @return [Symbol]
+    def output_format
+      @options[:output_format]&.to_sym || :summary
+    end
 
     # @param mindee_client [Mindee::V1::Client]
     # @param options [Hash]
@@ -138,23 +148,6 @@ module MindeeCLI
         account_name: options[:account_name],
         version: options[:endpoint_version] || '1'
       )
-    end
-
-    # @param options [Hash]
-    # @return [Hash]
-    def setup_page_options(options)
-      if options[:cut_pages].nil? || !options[:cut_pages].is_a?(Integer) ||
-         options[:cut_pages].negative?
-        nil
-      else
-
-        { params: {
-          page_indexes: (0..options[:cut_pages].to_i).to_a,
-          operation: :KEEP_ONLY,
-          on_min_pages: 0,
-        } }
-
-      end
     end
   end
 end

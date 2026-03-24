@@ -162,7 +162,7 @@ module Mindee
         options
       )
 
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http.to_s)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Enqueue a document for async parsing
@@ -200,7 +200,7 @@ module Mindee
         input_source,
         opts
       )
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http.to_json)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Parses a queued document
@@ -215,7 +215,7 @@ module Mindee
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
       logger.debug("Fetching queued document as '#{endpoint.url_root}'")
       prediction, raw_http = endpoint.parse_async(job_id)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http.to_json)
+      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Enqueue a document for async parsing and automatically try to retrieve it
