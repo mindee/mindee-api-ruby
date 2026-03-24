@@ -30,8 +30,7 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
     it 'returns no models for non-existent name' do
       stdout, stderr, status = run_cli('v2', 'search-models', '-n', 'supercalifragilisticexpialidocious')
       expect(status.success?).to eq(true), stderr
-      expect(['D, [2026-03-24T13:35:16.393819 #3543] DEBUG -- : API key set from environment',
-              '']).to include(stdout.strip)
+      expect(stdout.strip).to eq('')
     end
 
     it 'returns models for name filter' do
