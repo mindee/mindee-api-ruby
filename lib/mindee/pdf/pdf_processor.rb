@@ -61,6 +61,11 @@ module Mindee
       # @param io_stream [StringIO]
       # @return [Origami::PDF]
       def self.open_pdf(io_stream)
+        unless PDFTools.pdf_header?(io_stream)
+          raise Origami::InvalidPDFError,
+                'Input stream does not contain a PDF header.'
+        end
+
         pdf_parser = Origami::PDF::LinearParser.new({ verbosity: Origami::Parser::VERBOSE_QUIET })
         io_stream.seek(0)
         pdf_parser.parse(io_stream)
