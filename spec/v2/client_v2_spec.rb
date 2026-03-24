@@ -92,6 +92,7 @@ describe Mindee::ClientV2 do
 
     resp = client.get_job('123e4567-e89b-12d3-a456-426614174000')
     expect(resp).to be_a(Mindee::V2::Parsing::JobResponse)
+    expect(resp.raw_http).to eq(JSON.generate(JSON.parse(parsed)))
     expect(resp.job.status).to eq('Processing')
     expect(
       resp.job.created_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
@@ -106,6 +107,7 @@ describe Mindee::ClientV2 do
 
     resp = client.get_job('123e4567-e89b-12d3-a456-426614174000')
     expect(resp).to be_a(Mindee::V2::Parsing::JobResponse)
+    expect(resp.raw_http).to eq(JSON.generate(JSON.parse(parsed)))
     expect(resp.job.status).to eq('Processed')
     expect(resp.job.model_id).to eq('87654321-4321-4321-4321-CBA987654321')
     expect(resp.job.filename).to eq('default_sample.jpg')
