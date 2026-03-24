@@ -28,14 +28,13 @@ module MindeeCLI
       @search_parser = init_search_parser
     end
 
-    # Summarize the result of the command.
+    # Summarize and print the result of the command.
     # @param command [String]
-    # @return [String]
-    def summarize_result(command)
+    def print_result(command)
       if command == 'search-models'
         @search_parser.parse!(@arguments)
-        @result = search(@options)
-        summarized_result = @options[:print_full] ? @result.to_s : @result.models.to_s
+        result = search(@options)
+        summarized_result = output_format == :full ? result.to_s : result.models.to_s
       else
         @product_parser[command].parse!(@arguments)
         @options[:file_path] = @arguments.shift
@@ -43,26 +42,25 @@ module MindeeCLI
           warn 'file missing'
           abort(@product_parser[command].help)
         end
-        @result = send(command, @options)
-        summarized_result = @options[:print_full] ? @result.inference.to_s : @result.inference.result.to_s
+        result = send(command, @options)
+        summarized_result = output_format == :full ? result.inference.to_s : result.inference.result.to_s
       end
-      summarized_result
+
+      if output_format == :raw
+        puts JSON.pretty_generate(raw_payload(result.raw_http))
+      else
+        puts summarized_result
+      end
     end
 
     # Executes the command.
     # @return [void]
     def execute
-      @options = {}
+      @options = { output_format: :summary }
       command = @arguments.shift
 
       validate_command!(command)
-      summarized_result = summarize_result(command)
-
-      if @options[:raw_json]
-        puts JSON.pretty_generate(@result.raw_http)
-      else
-        puts summarized_result
-      end
+      print_result(command)
     rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
       if command == 'search-models'
         abort("#{e.message}\n\n#{@search_parser.help}")
@@ -101,24 +99,24 @@ module MindeeCLI
     end
 
     def setup_specific_options(options_parser, doc_value)
-      options_parser.on('-r', '--rag', 'Enable RAG') { @options[:rag] = true } if doc_value[:rag]
-      if doc_value[:raw_text]
+      options_parser.on('-r', '--rag', 'Enable RAG') { @options[:rag] = true } if doc_value.key?(:rag)
+      if doc_value.key?(:raw_text)
         options_parser.on('-R', '--raw-text', 'Enable Raw Text retrieval') do
           @options[:raw_text] = true
         end
       end
-      if doc_value[:confidence]
+      if doc_value.key?(:confidence)
         options_parser.on('-c', '--confidence', 'Enable confidence scores') do
           @options[:confidence] = true
         end
       end
-      options_parser.on('-p', '--polygon', 'Enable polygons') { @options[:polygon] = true } if doc_value[:polygon]
-      if doc_value[:text_context]
+      options_parser.on('-p', '--polygon', 'Enable polygons') { @options[:polygon] = true } if doc_value.key?(:polygon)
+      if doc_value.key?(:text_context)
         options_parser.on('-t [TEXT CONTEXT]', '--text-context [TEXT CONTEXT]', 'Add Text Context') do |v|
           @options[:text_context] = v
         end
       end
-      return unless doc_value[:data_schema]
+      return unless doc_value.key?(:data_schema)
 
       options_parser.on('-d [DATA SCHEMA]', '--data-schema [DATA SCHEMA]', 'Add Data Schema') do |v|
         @options[:data_schema] = v
@@ -129,8 +127,31 @@ module MindeeCLI
     # @param options_parser [OptionParser]
     def init_common_options(options_parser)
       options_parser.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') { |v| @options[:api_key] = v }
-      options_parser.on('-f', '--full', 'Print the full data') { @options[:print_full] = true }
-      options_parser.on('-j', '--raw-json', 'Print the full raw jason data') { @options[:raw_json] = true }
+      options_parser.on('-o FORMAT', '--output-format FORMAT', ['raw', 'full', 'summary'],
+                        'Format of the output (raw, full, summary). Default: summary') do |format|
+        @options[:output_format] = format
+      end
+    end
+
+    # @return [Symbol]
+    def output_format
+      @options[:output_format]&.to_sym || :summary
+    end
+
+    # Handles JSON payloads represented either as a string or an already-parsed hash.
+    # Also tolerates one extra JSON encoding layer.
+    # @param payload [String, Hash]
+    # @return [Hash, Array, String]
+    def raw_payload(payload)
+      parsed_payload = payload
+      2.times do
+        break unless parsed_payload.is_a?(String)
+
+        parsed_payload = JSON.parse(parsed_payload)
+      rescue JSON::ParserError
+        break
+      end
+      parsed_payload
     end
 
     # @return [Hash]
@@ -144,19 +165,21 @@ module MindeeCLI
             @options[:alias] = v
           end
           init_common_options(options_parser)
-          options_parser.on('-C PAGES', '--cut-pages PAGES', 'Cut document pages') { |v| @options[:cut_pages] = v }
-          options_parser.on('-F', '--fix-pdf', 'Repair PDF') { @options[:repair_pdf] = true }
+          options_parser.on('-F', '--fix-pdf', 'Attempt to repair PDF before enqueueing') do
+            @options[:repair_pdf] = true
+          end
           setup_specific_options(options_parser, product_values)
         end
       end
       v2_product_parser
     end
 
-    # @param options [Hash] General options.
-    # @return page_options [Hash] Page options.
-    def setup_product_params(options, page_options)
-      params = { model_id: options[:model_id] }
-      params[:options] = Mindee::ParseOptions.new(params: page_options) unless page_options.nil?
+    # @return [Hash]
+    def setup_product_params
+      params = { model_id: @options[:model_id] }
+      @options.each_pair do |key, value|
+        params[key] = value if V2_PRODUCTS['extraction'].include?(key)
+      end
       params
     end
 
@@ -167,8 +190,7 @@ module MindeeCLI
       mindee_client = Mindee::ClientV2.new(api_key: options[:api_key])
       response_class = V2_PRODUCTS[product_command][:response_class]
       input_source = setup_input_source(options)
-      page_options = setup_page_options(options)
-      params = setup_product_params(options, page_options)
+      params = setup_product_params
 
       mindee_client.enqueue_and_get_result(
         response_class,
