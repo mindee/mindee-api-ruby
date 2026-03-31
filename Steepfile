@@ -28,4 +28,3 @@ target :lib do
 
   configure_code_diagnostics(D::Ruby.default) # `default` diagnostics setting (applies by default)
 end
-

@@ -88,3 +88,20 @@ Examples:
 
 We keep our code base consistent and expect Ruby code to adhere to our Rubocop styleguide,
 see the `.rubocop` file.
+
+### Local Quality Checks
+
+We use [`pre-commit`](https://pre-commit.com/) hooks to run quality and security checks before
+changes are pushed:
+
+1. Install `pre-commit`, either using `pip` or `brew`:
+   - `pip install pre-commit`
+   - `brew install pre-commit`
+2. Install project hooks:
+   - `pre-commit install`
+   - `pre-commit install --hook-type pre-push`
+
+Run hooks manually:
+
+* `pre-commit run --all-files`
+* `pre-commit run --all-files --hook-stage pre-push`
