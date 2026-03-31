@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'energy_bill_v1_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module FR
         module EnergyBill
           # Energy Bill API version 1.2 page data.
-          class EnergyBillV1Page < Mindee::Parsing::Common::Page
+          class EnergyBillV1Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super

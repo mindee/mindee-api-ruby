@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'healthcare_card_v1_copays'
 
 module Mindee
@@ -9,49 +9,49 @@ module Mindee
       module US
         module HealthcareCard
           # Healthcare Card API version 1.3 document data.
-          class HealthcareCardV1Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class HealthcareCardV1Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The name of the company that provides the healthcare plan.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :company_name
             # Copayments for covered services.
             # @return [Mindee::V1::Product::US::HealthcareCard::HealthcareCardV1Copays]
             attr_reader :copays
             # The list of dependents covered by the healthcare plan.
-            # @return [Array<Mindee::Parsing::Standard::StringField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
             attr_reader :dependents
             # The date when the member enrolled in the healthcare plan.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :enrollment_date
             # The group number associated with the healthcare plan.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :group_number
             # The organization that issued the healthcare plan.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :issuer80840
             # The unique identifier for the member in the healthcare system.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :member_id
             # The name of the member covered by the healthcare plan.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :member_name
             # The unique identifier for the payer in the healthcare system.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :payer_id
             # The name of the healthcare plan.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :plan_name
             # The BIN number for prescription drug coverage.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :rx_bin
             # The group number for prescription drug coverage.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :rx_grp
             # The ID number for prescription drug coverage.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :rx_id
             # The PCN number for prescription drug coverage.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :rx_pcn
 
             # @param prediction [Hash]

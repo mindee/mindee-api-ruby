@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'bank_account_details_v1_document'
 require_relative 'bank_account_details_v1_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Bank Account Details module.
         module BankAccountDetails
           # Bank Account Details API version 1 inference prediction.
-          class BankAccountDetailsV1 < Mindee::Parsing::Common::Inference
+          class BankAccountDetailsV1 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'bank_account_details'
             @endpoint_version = '1'
             @has_async = false

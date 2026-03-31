@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module NutritionFactsLabel
         # The amount of calories in the product.
-        class NutritionFactsLabelV1Calorie < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class NutritionFactsLabelV1Calorie < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # DVs are the recommended amounts of calories to consume or not to exceed each day.
           # @return [Float]
           attr_reader :daily_value

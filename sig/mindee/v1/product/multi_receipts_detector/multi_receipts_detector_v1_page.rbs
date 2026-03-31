@@ -1,4 +1,4 @@
-# lib/mindee/product/multi_receipts_detector/multi_receipts_detector_v1_page.rb
+# lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1_page.rb
 
 module Mindee
   module V1

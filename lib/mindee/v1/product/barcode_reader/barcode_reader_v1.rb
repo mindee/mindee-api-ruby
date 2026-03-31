@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'barcode_reader_v1_document'
 require_relative 'barcode_reader_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Barcode Reader module.
       module BarcodeReader
         # Barcode Reader API version 1 inference prediction.
-        class BarcodeReaderV1 < Mindee::Parsing::Common::Inference
+        class BarcodeReaderV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'barcode_reader'
           @endpoint_version = '1'
           @has_async = false

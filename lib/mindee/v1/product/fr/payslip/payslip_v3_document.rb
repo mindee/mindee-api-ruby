@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'payslip_v3_pay_period'
 require_relative 'payslip_v3_employee'
 require_relative 'payslip_v3_employer'
@@ -16,8 +16,8 @@ module Mindee
       module FR
         module Payslip
           # Payslip API version 3.0 document data.
-          class PayslipV3Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class PayslipV3Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # Information about the employee's bank account.
             # @return [Mindee::V1::Product::FR::Payslip::PayslipV3BankAccountDetail]
             attr_reader :bank_account_details

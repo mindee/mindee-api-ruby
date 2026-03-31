@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,16 +8,16 @@ module Mindee
       module FR
         module BankAccountDetails
           # Bank Account Details API version 1.0 document data.
-          class BankAccountDetailsV1Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class BankAccountDetailsV1Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The name of the account holder as seen on the document.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :account_holder_name
             # The International Bank Account Number (IBAN).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :iban
             # The bank's SWIFT Business Identifier Code (BIC).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :swift
 
             # @param prediction [Hash]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'business_card_v1_document'
 require_relative 'business_card_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Business Card module.
       module BusinessCard
         # Business Card API version 1 inference prediction.
-        class BusinessCardV1 < Mindee::Parsing::Common::Inference
+        class BusinessCardV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'business_card'
           @endpoint_version = '1'
           @has_async = true

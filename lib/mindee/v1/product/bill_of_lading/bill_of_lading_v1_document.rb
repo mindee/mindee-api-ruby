@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'bill_of_lading_v1_shipper'
 require_relative 'bill_of_lading_v1_consignee'
 require_relative 'bill_of_lading_v1_notify_party'
@@ -12,10 +12,10 @@ module Mindee
     module Product
       module BillOfLading
         # Bill of Lading API version 1.1 document data.
-        class BillOfLadingV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class BillOfLadingV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # A unique identifier assigned to a Bill of Lading document.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :bill_of_lading_number
           # The shipping company responsible for transporting the goods.
           # @return [Mindee::V1::Product::BillOfLading::BillOfLadingV1Carrier]
@@ -27,22 +27,22 @@ module Mindee
           # @return [Mindee::V1::Product::BillOfLading::BillOfLadingV1Consignee]
           attr_reader :consignee
           # The date when the bill of lading is issued.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :date_of_issue
           # The date when the vessel departs from the port of loading.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :departure_date
           # The party to be notified of the arrival of the goods.
           # @return [Mindee::V1::Product::BillOfLading::BillOfLadingV1NotifyParty]
           attr_reader :notify_party
           # The place where the goods are to be delivered.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :place_of_delivery
           # The port where the goods are unloaded from the vessel.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :port_of_discharge
           # The port where the goods are loaded onto the vessel.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :port_of_loading
           # The party responsible for shipping the goods.
           # @return [Mindee::V1::Product::BillOfLading::BillOfLadingV1Shipper]

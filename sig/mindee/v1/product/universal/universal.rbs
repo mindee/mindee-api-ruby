@@ -1,4 +1,4 @@
-# lib/mindee/product/universal/universal.rb
+# lib/mindee/v1/product/universal/universal.rb
 module Mindee
   module V1
     module Product

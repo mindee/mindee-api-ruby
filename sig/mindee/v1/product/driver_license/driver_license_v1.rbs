@@ -1,4 +1,4 @@
-# lib/mindee/product/driver_license/driver_license_v1.rb
+# lib/mindee/v1/product/driver_license/driver_license_v1.rb
 
 module Mindee
   module V1

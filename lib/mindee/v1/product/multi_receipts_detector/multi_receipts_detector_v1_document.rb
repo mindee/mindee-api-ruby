@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module MultiReceiptsDetector
         # Multi Receipts Detector API version 1.1 document data.
-        class MultiReceiptsDetectorV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class MultiReceiptsDetectorV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # Positions of the receipts on the document.
-          # @return [Array<Mindee::Parsing::Standard::PositionField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::PositionField>]
           attr_reader :receipts
 
           # @param prediction [Hash]

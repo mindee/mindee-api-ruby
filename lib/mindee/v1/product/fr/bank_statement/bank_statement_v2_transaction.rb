@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module BankStatement
           # The list of values that represent the financial transactions recorded in a bank statement.
-          class BankStatementV2Transaction < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class BankStatementV2Transaction < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The monetary amount of the transaction.
             # @return [Float]
             attr_reader :amount

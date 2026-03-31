@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'delivery_note_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module DeliveryNote
         # Delivery note API version 1.2 page data.
-        class DeliveryNoteV1Page < Mindee::Parsing::Common::Page
+        class DeliveryNoteV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

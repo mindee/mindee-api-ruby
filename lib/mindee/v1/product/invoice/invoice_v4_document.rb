@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'invoice_v4_line_items'
 
 module Mindee
@@ -8,94 +8,94 @@ module Mindee
     module Product
       module Invoice
         # Invoice API version 4.11 document data.
-        class InvoiceV4Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class InvoiceV4Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The customer billing address.
-          # @return [Mindee::Parsing::Standard::AddressField]
+          # @return [Mindee::V1::Parsing::Standard::AddressField]
           attr_reader :billing_address
           # The purchase category.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :category
           # The address of the customer.
-          # @return [Mindee::Parsing::Standard::AddressField]
+          # @return [Mindee::V1::Parsing::Standard::AddressField]
           attr_reader :customer_address
           # List of company registration numbers associated to the customer.
-          # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::CompanyRegistrationField>]
           attr_reader :customer_company_registrations
           # The customer account number or identifier from the supplier.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :customer_id
           # The name of the customer or client.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :customer_name
           # The date the purchase was made.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :date
           # Document type: INVOICE or CREDIT NOTE.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :document_type
           # Document type extended.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :document_type_extended
           # The date on which the payment is due.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :due_date
           # The invoice number or identifier.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :invoice_number
           # List of all the line items present on the invoice.
           # @return [Mindee::V1::Product::Invoice::InvoiceV4LineItems]
           attr_reader :line_items
           # The locale of the document.
-          # @return [Mindee::Parsing::Standard::LocaleField]
+          # @return [Mindee::V1::Parsing::Standard::LocaleField]
           attr_reader :locale
           # The date on which the payment is due / was full-filled.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :payment_date
           # The purchase order number.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :po_number
           # List of all reference numbers on the invoice, including the purchase order number.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :reference_numbers
           # Customer's delivery address.
-          # @return [Mindee::Parsing::Standard::AddressField]
+          # @return [Mindee::V1::Parsing::Standard::AddressField]
           attr_reader :shipping_address
           # The purchase subcategory for transport, food and shopping.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :subcategory
           # The address of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::AddressField]
+          # @return [Mindee::V1::Parsing::Standard::AddressField]
           attr_reader :supplier_address
           # List of company registration numbers associated to the supplier.
-          # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::CompanyRegistrationField>]
           attr_reader :supplier_company_registrations
           # The email address of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_email
           # The name of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_name
           # List of payment details associated to the supplier of the invoice.
-          # @return [Array<Mindee::Parsing::Standard::PaymentDetailsField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::PaymentDetailsField>]
           attr_reader :supplier_payment_details
           # The phone number of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_phone_number
           # The website URL of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_website
           # List of taxes. Each item contains the detail of the tax.
-          # @return [Mindee::Parsing::Standard::Taxes]
+          # @return [Mindee::V1::Parsing::Standard::Taxes]
           attr_reader :taxes
           # The total amount of the invoice: includes taxes, tips, fees, and other charges.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_amount
           # The net amount of the invoice: does not include taxes, fees, and discounts.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_net
           # The total tax: the sum of all the taxes for this invoice.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_tax
 
           # @param prediction [Hash]

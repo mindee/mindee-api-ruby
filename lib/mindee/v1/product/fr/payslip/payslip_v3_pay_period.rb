@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module Payslip
           # Information about the pay period.
-          class PayslipV3PayPeriod < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class PayslipV3PayPeriod < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The end date of the pay period.
             # @return [String]
             attr_reader :end_date

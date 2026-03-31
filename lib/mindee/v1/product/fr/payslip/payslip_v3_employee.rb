@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module Payslip
           # Information about the employee.
-          class PayslipV3Employee < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class PayslipV3Employee < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The address of the employee.
             # @return [String]
             attr_reader :address

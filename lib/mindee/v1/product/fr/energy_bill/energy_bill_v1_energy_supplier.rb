@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module EnergyBill
           # The company that supplies the energy.
-          class EnergyBillV1EnergySupplier < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class EnergyBillV1EnergySupplier < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The address of the energy supplier.
             # @return [String]
             attr_reader :address

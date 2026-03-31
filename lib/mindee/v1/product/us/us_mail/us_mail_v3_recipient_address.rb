@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module US
         module UsMail
           # The addresses of the recipients.
-          class UsMailV3RecipientAddress < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class UsMailV3RecipientAddress < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The city of the recipient's address.
             # @return [String]
             attr_reader :city

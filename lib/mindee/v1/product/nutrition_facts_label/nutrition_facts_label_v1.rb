@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'nutrition_facts_label_v1_document'
 require_relative 'nutrition_facts_label_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Nutrition Facts Label module.
       module NutritionFactsLabel
         # Nutrition Facts Label API version 1 inference prediction.
-        class NutritionFactsLabelV1 < Mindee::Parsing::Common::Inference
+        class NutritionFactsLabelV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'nutrition_facts'
           @endpoint_version = '1'
           @has_async = true

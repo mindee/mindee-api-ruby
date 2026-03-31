@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Receipt
         # List of all line items on the receipt.
-        class ReceiptV5LineItem < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class ReceiptV5LineItem < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The item description.
           # @return [String]
           attr_reader :description

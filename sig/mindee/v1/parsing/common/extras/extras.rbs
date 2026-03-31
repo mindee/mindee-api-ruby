@@ -1,0 +1,24 @@
+# lib/mindee/v1/parsing/common/extras/extras.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        module Extras
+          class Extras
+            attr_reader cropper: CropperExtra?
+            attr_reader full_text_ocr: FullTextOCRExtra
+            attr_reader rag: RAGExtra?
+
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+
+            def to_s: -> String
+
+            def add_artificial_extra: (Hash[String | Symbol, untyped]) -> void
+          end
+
+          def empty?: -> bool
+        end
+      end
+    end
+  end
+end

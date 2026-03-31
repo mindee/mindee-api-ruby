@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-describe Mindee::Parsing::Standard::StringField do
+describe Mindee::V1::Parsing::Standard::StringField do
   describe 'constructor without raw_value' do
     let(:field_dict) do
       {
@@ -18,7 +18,7 @@ describe Mindee::Parsing::Standard::StringField do
     end
 
     it 'sets value and raw_value to nil' do
-      field = Mindee::Parsing::Standard::StringField.new(field_dict)
+      field = Mindee::V1::Parsing::Standard::StringField.new(field_dict)
       expect(field.value).to eq('hello world')
       expect(field.raw_value).to be_nil
     end
@@ -40,7 +40,7 @@ describe Mindee::Parsing::Standard::StringField do
     end
 
     it 'sets value and raw_value accordingly' do
-      field = Mindee::Parsing::Standard::StringField.new(field_dict)
+      field = Mindee::V1::Parsing::Standard::StringField.new(field_dict)
       expect(field.value).to eq('hello world')
       expect(field.raw_value).to eq('HelLO wOrld')
     end

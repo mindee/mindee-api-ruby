@@ -1,4 +1,4 @@
-# lib/mindee/product/receipt/receipt_v5.rb
+# lib/mindee/v1/product/receipt/receipt_v5.rb
 
 module Mindee
   module V1

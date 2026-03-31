@@ -1,46 +1,46 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Passport
         # Passport API version 1.1 document data.
-        class PassportV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class PassportV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The date of birth of the passport holder.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :birth_date
           # The place of birth of the passport holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :birth_place
           # The country's 3 letter code (ISO 3166-1 alpha-3).
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :country
           # The expiry date of the passport.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :expiry_date
           # The gender of the passport holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :gender
           # The given name(s) of the passport holder.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :given_names
           # The passport's identification number.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :id_number
           # The date the passport was issued.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :issuance_date
           # Machine Readable Zone, first line
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :mrz1
           # Machine Readable Zone, second line
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :mrz2
           # The surname of the passport holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :surname
 
           # @param prediction [Hash]

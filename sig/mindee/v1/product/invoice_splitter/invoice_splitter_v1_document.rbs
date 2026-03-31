@@ -1,4 +1,4 @@
-# lib/mindee/product/invoice_splitter/invoice_splitter_v1_document.rb
+# lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_document.rb
 
 module Mindee
   module V1

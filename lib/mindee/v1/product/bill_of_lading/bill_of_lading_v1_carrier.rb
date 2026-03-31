@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module BillOfLading
         # The shipping company responsible for transporting the goods.
-        class BillOfLadingV1Carrier < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class BillOfLadingV1Carrier < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The name of the carrier.
           # @return [String]
           attr_reader :name

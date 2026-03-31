@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-describe Mindee::Parsing::Universal::UniversalObjectField do
+describe Mindee::V1::Parsing::Universal::UniversalObjectField do
   let(:raw_prediction) do
     {
       'page_id' => 3,
@@ -71,7 +71,7 @@ describe Mindee::Parsing::Universal::UniversalObjectField do
 
     it 'handles the position key by setting it as a PositionField instance' do
       position_field = object_field_with_rect.rectangle
-      expect(position_field).to be_a(Mindee::Parsing::Standard::PositionField)
+      expect(position_field).to be_a(Mindee::V1::Parsing::Standard::PositionField)
     end
   end
 

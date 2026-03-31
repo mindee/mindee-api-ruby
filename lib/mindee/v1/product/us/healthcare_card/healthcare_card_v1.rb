@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'healthcare_card_v1_document'
 require_relative 'healthcare_card_v1_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Healthcare Card module.
         module HealthcareCard
           # Healthcare Card API version 1 inference prediction.
-          class HealthcareCardV1 < Mindee::Parsing::Common::Inference
+          class HealthcareCardV1 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'us_healthcare_cards'
             @endpoint_version = '1'
             @has_async = true

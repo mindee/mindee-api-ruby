@@ -51,7 +51,7 @@ module Mindee
 
         hashed_response = JSON.parse(response.body, object_class: Hash)
 
-        return false if hashed_response.dig('job', 'status') == Mindee::Parsing::Common::JobStatus::FAILURE
+        return false if hashed_response.dig('job', 'status') == Mindee::V1::Parsing::Common::JobStatus::FAILURE
 
         return false if hashed_response.dig('job', 'error') && !hashed_response.dig('job', 'error').empty?
 
@@ -71,7 +71,8 @@ module Mindee
         end
 
         return if !hashed_response.dig('job', 'error').empty? &&
-                  (hashed_response.dig('job', 'status').downcase != Mindee::Parsing::Common::JobStatus::FAILURE.to_s)
+                  (hashed_response.dig('job',
+                                       'status').downcase != Mindee::V1::Parsing::Common::JobStatus::FAILURE.to_s)
 
         response.instance_variable_set(:@code, '500')
       end

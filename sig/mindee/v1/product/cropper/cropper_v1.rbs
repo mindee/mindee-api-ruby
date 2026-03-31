@@ -1,4 +1,4 @@
-# lib/mindee/product/cropper/cropper_v1.rb
+# lib/mindee/v1/product/cropper/cropper_v1.rb
 
 module Mindee
   module V1
