@@ -9,7 +9,9 @@ module Mindee
         attr_reader status: String
 
         def initialize: (Hash[String | Symbol, untyped]) -> void
+
         def to_s: -> String
+
         def parse_date: (String?) -> DateTime?
       end
     end

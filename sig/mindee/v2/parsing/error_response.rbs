@@ -8,6 +8,7 @@ module Mindee
         attr_reader code: String
         attr_reader title: String
         attr_reader errors: Array[ErrorItem]
+
         def initialize: (Hash[String | Symbol, untyped]) -> void
 
         def as_hash: -> Hash[Symbol, String | Integer]

@@ -1,0 +1,15 @@
+# lib/mindee/v1/product/healthcare_card/healthcare_card_v1.rb
+
+module Mindee
+  module V1
+    module Product
+      module US
+        module HealthcareCard
+          class HealthcareCardV1 < Parsing::Common::Inference
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+          end
+        end
+      end
+    end
+  end
+end

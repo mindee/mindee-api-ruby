@@ -37,7 +37,7 @@ describe 'multi-receipts extraction' do
     it 'splits receipts correctly' do
       input_sample = Mindee::Input::Source::PathInputSource.new(multi_receipts_single_page_path)
       response = load_json(multi_receipts_single_page_json_path, 'complete.json')
-      doc = Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
+      doc = Mindee::V1::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
       extracted_receipts = Mindee::Extraction.extract_receipts(input_sample, doc)
 
       expect(extracted_receipts.size).to eq(6)
@@ -85,7 +85,7 @@ describe 'multi-receipts extraction' do
     it 'splits receipts correctly' do
       input_sample = Mindee::Input::Source::PathInputSource.new(multi_receipts_multi_page_path)
       response = load_json(multi_receipts_multi_page_json_path, 'multipage_sample.json')
-      doc = Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
+      doc = Mindee::V1::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
       extracted_receipts = Mindee::Extraction.extract_receipts(input_sample, doc)
 
       expect(extracted_receipts.size).to eq(5)

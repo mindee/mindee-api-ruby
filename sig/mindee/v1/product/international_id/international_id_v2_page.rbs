@@ -1,0 +1,17 @@
+# lib/mindee/product/international_id/international_id_v2_page.rb
+
+module Mindee
+  module V1
+    module Product
+    module InternationalId
+      class InternationalIdV2Page < Parsing::Common::Page
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      class InternationalIdV2PagePrediction < InternationalIdV2Document
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end

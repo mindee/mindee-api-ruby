@@ -1,0 +1,13 @@
+# lib/mindee/product/international_id/international_id_v2.rb
+
+module Mindee
+  module V1
+    module Product
+    module InternationalId
+      class InternationalIdV2 < Parsing::Common::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

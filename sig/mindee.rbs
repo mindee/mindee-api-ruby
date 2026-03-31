@@ -1,5 +1,6 @@
 class Object
   private
+
   def logger: -> Logger
 end
 
@@ -43,17 +44,20 @@ module Mindee
     end
   end
 
-  module Product
-    module EU
-    end
+  module V1
+    module Product
+      module EU
+      end
 
-    module FR
-    end
+      module FR
+      end
 
-    module IND
-    end
+      module IND
+      end
 
-    module US
+      module US
+      end
     end
   end
 end
+

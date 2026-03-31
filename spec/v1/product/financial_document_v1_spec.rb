@@ -8,12 +8,12 @@ require_relative '../../data'
 
 DIR_FINANCIAL_DOCUMENT_V1 = File.join(V1_DATA_DIR, 'products', 'financial_document', 'response_v1').freeze
 
-describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
+describe Mindee::V1::Product::FinancialDocument::FinancialDocumentV1 do
   context 'A FinancialDocumentV1' do
     context 'when processing an invoice' do
       it 'should load an empty document prediction' do
         response = load_json(DIR_FINANCIAL_DOCUMENT_V1, 'empty.json')
-        document = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        document = Mindee::Parsing::Common::Document.new(Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
                                                          response['document'])
         expect(document.inference.product.type).to eq('standard')
         prediction = document.inference.prediction
@@ -47,7 +47,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
       it 'should load a complete document prediction' do
         to_string = read_file(DIR_FINANCIAL_DOCUMENT_V1, 'summary_full_invoice.rst')
         response = load_json(DIR_FINANCIAL_DOCUMENT_V1, 'complete_invoice.json')
-        document = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        document = Mindee::Parsing::Common::Document.new(Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
                                                          response['document'])
         prediction = document.inference.prediction
         expect(prediction.invoice_number.bounding_box.top_left.x).to eq(prediction.invoice_number.polygon[0][0])
@@ -57,7 +57,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
       it 'should load a complete page 0 prediction' do
         to_string = read_file(DIR_FINANCIAL_DOCUMENT_V1, 'summary_page0_invoice.rst')
         response = load_json(DIR_FINANCIAL_DOCUMENT_V1, 'complete_invoice.json')
-        document = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        document = Mindee::Parsing::Common::Document.new(Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
                                                          response['document'])
         page = document.inference.pages[0]
         expect(page.orientation.value).to eq(0)
@@ -69,7 +69,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
     context 'when processing a receipt' do
       it 'should load an empty document prediction' do
         response = load_json(DIR_FINANCIAL_DOCUMENT_V1, 'empty.json')
-        inference = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        inference = Mindee::Parsing::Common::Document.new(Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
                                                           response['document']).inference
         expect(inference.product.type).to eq('standard')
         expect(inference.prediction.date.value).to be_nil
@@ -80,7 +80,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
       it 'should load a complete document prediction' do
         to_string = read_file(DIR_FINANCIAL_DOCUMENT_V1, 'summary_full_receipt.rst')
         response = load_json(DIR_FINANCIAL_DOCUMENT_V1, 'complete_receipt.json')
-        document = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        document = Mindee::Parsing::Common::Document.new(Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
                                                          response['document'])
         expect(document.inference.prediction.date.page_id).to eq(0)
         expect(document.to_s).to eq(to_string)
@@ -89,7 +89,7 @@ describe Mindee::Product::FinancialDocument::FinancialDocumentV1 do
       it 'should load a complete page 0 prediction' do
         to_string = read_file(DIR_FINANCIAL_DOCUMENT_V1, 'summary_page0_receipt.rst')
         response = load_json(DIR_FINANCIAL_DOCUMENT_V1, 'complete_receipt.json')
-        document = Mindee::Parsing::Common::Document.new(Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        document = Mindee::Parsing::Common::Document.new(Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
                                                          response['document'])
         page = document.inference.pages[0]
         expect(page.orientation.value).to eq(0)

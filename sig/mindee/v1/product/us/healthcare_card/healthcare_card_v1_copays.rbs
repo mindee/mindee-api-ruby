@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+module Mindee
+  module V1
+    module Product
+      module US
+        module HealthcareCard
+          class HealthcareCardV1Copays < Array[HealthcareCardV1Copay]
+            def initialize: (Array[untyped], Integer?) -> void
+
+            def self.line_items_separator: (String) -> String
+
+            def to_s: -> String
+          end
+        end
+      end
+    end
+  end
+end

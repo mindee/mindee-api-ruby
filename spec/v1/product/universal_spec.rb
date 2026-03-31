@@ -9,8 +9,8 @@ StringField = Mindee::Parsing::Standard.const_get(:StringField)
 PositionField = Mindee::Parsing::Standard.const_get(:PositionField)
 UniversalListField = Mindee::Parsing::Universal.const_get(:UniversalListField)
 UniversalObjectField = Mindee::Parsing::Universal.const_get(:UniversalObjectField)
-Universal = Mindee::Product::Universal.const_get(:Universal)
-UniversalPage = Mindee::Product::Universal.const_get(:UniversalPage)
+Universal = Mindee::V1::Product::Universal.const_get(:Universal)
+UniversalPage = Mindee::V1::Product::Universal.const_get(:UniversalPage)
 Document = Mindee::Parsing::Common.const_get(:Document)
 
 describe 'International ID v1 document' do

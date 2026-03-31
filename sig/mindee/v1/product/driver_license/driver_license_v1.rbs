@@ -1,0 +1,13 @@
+# lib/mindee/product/driver_license/driver_license_v1.rb
+
+module Mindee
+  module V1
+    module Product
+    module DriverLicense
+      class DriverLicenseV1 < Parsing::Common::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

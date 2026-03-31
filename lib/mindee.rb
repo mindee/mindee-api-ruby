@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
-require 'mindee/client_v2'
+require 'mindee/v2'
 require 'mindee/page_options'
 require 'mindee/logging'
 

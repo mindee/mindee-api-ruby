@@ -1,0 +1,12 @@
+# lib/mindee/product/universal/universal_document.rb
+module Mindee
+  module V1
+    module Product
+    module Universal
+      class UniversalDocument < Parsing::Common::Document
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+# lib/mindee/v1/product/w9/w9_v1.rb
+
+module Mindee
+  module V1
+    module Product
+      module US
+        module W9
+          class W9V1 < Parsing::Common::Inference
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+          end
+        end
+      end
+    end
+  end
+end

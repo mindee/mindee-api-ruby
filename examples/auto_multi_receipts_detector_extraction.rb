@@ -8,7 +8,7 @@ def multi_receipts_detection(file_path, mindee_client)
 
   result_multi_receipts = mindee_client.parse(
     input_source,
-    Mindee::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1,
+    Mindee::V1::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1,
     options: { close_file: false }
   )
 
@@ -19,7 +19,7 @@ def multi_receipts_detection(file_path, mindee_client)
 
     result_receipt = mindee_client.parse(
       sub_image.as_source,
-      Mindee::Product::Receipt::ReceiptV5,
+      Mindee::V1::Product::Receipt::ReceiptV5,
       options: { close_file: false }
     )
     puts result_receipt.document
