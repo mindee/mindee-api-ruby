@@ -5,7 +5,7 @@ OTS_OWNER: String
 module Mindee
   module V2
     class Client
-      private attr_reader mindee_api: HTTP::MindeeApiV2
+      private attr_reader mindee_api: V2::HTTP::MindeeApi
 
       def logger: () -> Logger
 

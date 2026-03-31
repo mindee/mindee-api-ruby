@@ -34,7 +34,7 @@ describe Mindee::V2::Client do
 
   def stub_next_request_with(method, hash:, status_code: 0)
     fake_response = build_mock_http_response(hash, status_code)
-    allow_any_instance_of(Mindee::HTTP::MindeeApiV2)
+    allow_any_instance_of(Mindee::V2::HTTP::MindeeApi)
       .to receive(method)
       .and_return(fake_response)
   end

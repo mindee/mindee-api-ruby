@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
+require 'mindee/logging'
+require 'mindee/page_options'
 require 'mindee/v1'
 require 'mindee/v2'
-require 'mindee/page_options'
-require 'mindee/logging'
 
 module Mindee
   # Mindee internal error module.
@@ -91,6 +91,10 @@ module Mindee
 
   # V2-specific module.
   module V2
+    # Mindee internal http module.
+    module HTTP
+    end
+
     # Product-specific module.
     module Product
     end
