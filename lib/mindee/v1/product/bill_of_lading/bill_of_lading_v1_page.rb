@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'bill_of_lading_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module BillOfLading
         # Bill of Lading API version 1.1 page data.
-        class BillOfLadingV1Page < Mindee::Parsing::Common::Page
+        class BillOfLadingV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

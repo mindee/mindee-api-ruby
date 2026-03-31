@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'receipt_v5_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module Receipt
         # Receipt API version 5.4 page data.
-        class ReceiptV5Page < Mindee::Parsing::Common::Page
+        class ReceiptV5Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

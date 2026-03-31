@@ -12,7 +12,7 @@ describe 'cropper extra' do
   let(:complete_doc) do
     complete_doc_file = File.read(File.join(cropper_dir, 'complete.json'))
     complete_doc_json = JSON.parse(complete_doc_file)
-    Mindee::Parsing::Common::Document.new(Mindee::V1::Product::Receipt::ReceiptV5, complete_doc_json['document'])
+    Mindee::V1::Parsing::Common::Document.new(Mindee::V1::Product::Receipt::ReceiptV5, complete_doc_json['document'])
   end
 
   describe 'cropper extra' do
@@ -20,7 +20,7 @@ describe 'cropper extra' do
       expect(complete_doc.inference.pages[0].extras.cropper.croppings.count).to eq(1)
 
       cropping = complete_doc.inference.pages[0].extras.cropper.croppings[0]
-      expect(cropping).to be_a Mindee::Parsing::Standard::PositionField
+      expect(cropping).to be_a Mindee::V1::Parsing::Standard::PositionField
 
       expect(cropping.bounding_box[0].x).to be_within(0.001).of(0.057)
       expect(cropping.bounding_box[0].y).to be_within(0.001).of(0.008)

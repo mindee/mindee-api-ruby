@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'resume_v1_document'
 require_relative 'resume_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Resume module.
       module Resume
         # Resume API version 1 inference prediction.
-        class ResumeV1 < Mindee::Parsing::Common::Inference
+        class ResumeV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'resume'
           @endpoint_version = '1'
           @has_async = true

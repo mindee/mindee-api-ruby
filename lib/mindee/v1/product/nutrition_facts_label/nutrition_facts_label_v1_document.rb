@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'nutrition_facts_label_v1_serving_size'
 require_relative 'nutrition_facts_label_v1_calorie'
 require_relative 'nutrition_facts_label_v1_total_fat'
@@ -20,8 +20,8 @@ module Mindee
     module Product
       module NutritionFactsLabel
         # Nutrition Facts Label API version 1.0 document data.
-        class NutritionFactsLabelV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class NutritionFactsLabelV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The amount of added sugars in the product.
           # @return [Mindee::V1::Product::NutritionFactsLabel::NutritionFactsLabelV1AddedSugar]
           attr_reader :added_sugars
@@ -44,7 +44,7 @@ module Mindee
           # @return [Mindee::V1::Product::NutritionFactsLabel::NutritionFactsLabelV1SaturatedFat]
           attr_reader :saturated_fat
           # The number of servings in each box of the product.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :serving_per_box
           # The size of a single serving of the product.
           # @return [Mindee::V1::Product::NutritionFactsLabel::NutritionFactsLabelV1ServingSize]

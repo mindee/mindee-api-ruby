@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module NutritionFactsLabel
         # The amount of trans fat in the product.
-        class NutritionFactsLabelV1TransFat < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class NutritionFactsLabelV1TransFat < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # DVs are the recommended amounts of trans fat to consume or not to exceed each day.
           # @return [Float]
           attr_reader :daily_value

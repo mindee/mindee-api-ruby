@@ -1,4 +1,4 @@
-# lib/mindee/product/invoice/invoice_v4.rb
+# lib/mindee/v1/product/invoice/invoice_v4.rb
 
 module Mindee
   module V1

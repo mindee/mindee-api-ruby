@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'bank_statement_v2_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module FR
         module BankStatement
           # Bank Statement API version 2.0 page data.
-          class BankStatementV2Page < Mindee::Parsing::Common::Page
+          class BankStatementV2Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super

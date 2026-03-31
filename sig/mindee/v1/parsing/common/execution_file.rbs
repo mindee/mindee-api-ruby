@@ -1,0 +1,16 @@
+# lib/mindee/v1/parsing/common/execution_file.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        class ExecutionFile
+          def name: -> String
+
+          def alias: -> String?
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
+      end
+    end
+  end
+end

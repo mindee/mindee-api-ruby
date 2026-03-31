@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module Payslip
           # Information about paid time off.
-          class PayslipV3PaidTimeOff < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class PayslipV3PaidTimeOff < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The amount of paid time off accrued in the period.
             # @return [Float]
             attr_reader :accrued

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'us_mail_v3_sender_address'
 require_relative 'us_mail_v3_recipient_addresses'
 
@@ -10,22 +10,22 @@ module Mindee
       module US
         module UsMail
           # US Mail API version 3.0 document data.
-          class UsMailV3Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class UsMailV3Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # Whether the mailing is marked as return to sender.
-            # @return [Mindee::Parsing::Standard::BooleanField]
+            # @return [Mindee::V1::Parsing::Standard::BooleanField]
             attr_reader :is_return_to_sender
             # The addresses of the recipients.
             # @return [Mindee::V1::Product::US::UsMail::UsMailV3RecipientAddresses]
             attr_reader :recipient_addresses
             # The names of the recipients.
-            # @return [Array<Mindee::Parsing::Standard::StringField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
             attr_reader :recipient_names
             # The address of the sender.
             # @return [Mindee::V1::Product::US::UsMail::UsMailV3SenderAddress]
             attr_reader :sender_address
             # The name of the sender.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :sender_name
 
             # @param prediction [Hash]

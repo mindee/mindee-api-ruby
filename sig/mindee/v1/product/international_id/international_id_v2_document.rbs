@@ -1,4 +1,4 @@
-# lib/mindee/product/international_id/international_id_v2_document.rb
+# lib/mindee/v1/product/international_id/international_id_v2_document.rb
 
 module Mindee
   module V1

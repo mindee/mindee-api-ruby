@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'energy_bill_v1_energy_supplier'
 require_relative 'energy_bill_v1_energy_consumer'
 require_relative 'energy_bill_v1_subscriptions'
@@ -14,17 +14,17 @@ module Mindee
       module FR
         module EnergyBill
           # Energy Bill API version 1.2 document data.
-          class EnergyBillV1Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class EnergyBillV1Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The unique identifier associated with a specific contract.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :contract_id
             # The unique identifier assigned to each electricity or gas consumption point. It specifies the exact
             # location where the energy is delivered.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :delivery_point
             # The date by which the payment for the energy invoice is due.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :due_date
             # The entity that consumes the energy.
             # @return [Mindee::V1::Product::FR::EnergyBill::EnergyBillV1EnergyConsumer]
@@ -36,10 +36,10 @@ module Mindee
             # @return [Mindee::V1::Product::FR::EnergyBill::EnergyBillV1EnergyUsages]
             attr_reader :energy_usage
             # The date when the energy invoice was issued.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :invoice_date
             # The unique identifier of the energy invoice.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :invoice_number
             # Information about the energy meter.
             # @return [Mindee::V1::Product::FR::EnergyBill::EnergyBillV1MeterDetail]
@@ -51,13 +51,13 @@ module Mindee
             # @return [Mindee::V1::Product::FR::EnergyBill::EnergyBillV1TaxesAndContributions]
             attr_reader :taxes_and_contributions
             # The total amount to be paid for the energy invoice.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :total_amount
             # The total amount to be paid for the energy invoice before taxes.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :total_before_taxes
             # Total of taxes applied to the invoice.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :total_taxes
 
             # @param prediction [Hash]

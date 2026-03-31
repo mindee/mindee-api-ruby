@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Resume
         # The list of the candidate's professional experiences.
-        class ResumeV1ProfessionalExperience < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class ResumeV1ProfessionalExperience < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The type of contract for the professional experience.
           # @return [String]
           attr_reader :contract_type

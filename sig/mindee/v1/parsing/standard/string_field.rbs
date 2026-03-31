@@ -1,0 +1,16 @@
+# lib/mindee/v1/parsing/standard/string_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class StringField < BaseField
+          def value: -> String
+
+          def raw_value: -> String
+
+          def initialize: (Hash[String | Symbol, untyped], ?Integer?, ?reconstructed: bool) -> void
+        end
+      end
+    end
+  end
+end

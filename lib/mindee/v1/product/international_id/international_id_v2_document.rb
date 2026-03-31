@@ -1,64 +1,64 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module InternationalId
         # International ID API version 2.2 document data.
-        class InternationalIdV2Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class InternationalIdV2Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The physical address of the document holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :address
           # The date of birth of the document holder.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :birth_date
           # The place of birth of the document holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :birth_place
           # The country where the document was issued.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :country_of_issue
           # The unique identifier assigned to the document.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :document_number
           # The type of personal identification document.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :document_type
           # The date when the document becomes invalid.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :expiry_date
           # The list of the document holder's given names.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :given_names
           # The date when the document was issued.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :issue_date
           # The Machine Readable Zone, first line.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :mrz_line1
           # The Machine Readable Zone, second line.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :mrz_line2
           # The Machine Readable Zone, third line.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :mrz_line3
           # The country of citizenship of the document holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :nationality
           # The unique identifier assigned to the document holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :personal_number
           # The biological sex of the document holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :sex
           # The state or territory where the document was issued.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :state_of_issue
           # The list of the document holder's family names.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :surnames
 
           # @param prediction [Hash]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'universal_prediction'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module Universal
         # Universal Document V1 prediction
         class UniversalDocument < Mindee::V1::Product::Universal::UniversalPrediction
-          include Mindee::Parsing::Standard
+          include Mindee::V1::Parsing::Standard
           # @param raw_prediction [Hash]
           def initialize(raw_prediction)
             super
@@ -23,7 +23,7 @@ module Mindee
                 if field_contents_str.key?('value') && field_contents_str['value'].nil? == false
                   field_contents_str['value'] = field_contents_str['value'].to_s
                 end
-                @fields[field_name] = Mindee::Parsing::Standard::StringField.new(field_contents_str)
+                @fields[field_name] = Mindee::V1::Parsing::Standard::StringField.new(field_contents_str)
               end
             end
           end

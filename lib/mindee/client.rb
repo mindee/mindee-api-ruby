@@ -4,10 +4,10 @@ require_relative 'input'
 require_relative 'http'
 require_relative 'logging'
 require_relative 'page_options'
-require_relative 'parsing/common/api_response'
-require_relative 'parsing/common/job'
-require_relative 'parsing/common/workflow_response'
-require_relative 'product'
+require_relative 'v1/parsing/common/api_response'
+require_relative 'v1/parsing/common/job'
+require_relative 'v1/parsing/common/workflow_response'
+require_relative 'v1/product'
 
 # Default owner for products.
 OTS_OWNER = 'mindee'
@@ -120,7 +120,7 @@ module Mindee
     #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
     # @param enqueue [bool] Whether to enqueue the file.
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def parse(input_source, product_class, endpoint: nil, options: {}, enqueue: true)
       opts = normalize_parse_options(options)
       process_pdf_if_required(input_source, opts) if input_source.is_a?(Input::Source::LocalInputSource)
@@ -153,7 +153,7 @@ module Mindee
     #       - `:on_min_pages` [Integer] Apply the operation only if the document has at least this many pages.
     #   * `:cropper` [bool, nil] Whether to include cropper results for each page.
     #       This performs a cropping operation on the server and will increase response time.
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def parse_sync(input_source, product_class, endpoint, options)
       logger.debug("Parsing document as '#{endpoint.url_root}'")
 
@@ -162,7 +162,7 @@ module Mindee
         options
       )
 
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
+      Mindee::V1::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Enqueue a document for async parsing
@@ -190,7 +190,7 @@ module Mindee
     #   * `:rag` [bool] Whether to enable Retrieval-Augmented Generation. Only works if a Workflow ID is provided.
     #   * `:workflow_id` [String, nil] ID of the workflow to use.
     # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def enqueue(input_source, product_class, endpoint: nil, options: {})
       opts = normalize_parse_options(options)
       endpoint ||= initialize_endpoint(product_class)
@@ -200,7 +200,7 @@ module Mindee
         input_source,
         opts
       )
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
+      Mindee::V1::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Parses a queued document
@@ -210,12 +210,12 @@ module Mindee
     # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
     #
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def parse_queued(job_id, product_class, endpoint: nil)
       endpoint = initialize_endpoint(product_class) if endpoint.nil?
       logger.debug("Fetching queued document as '#{endpoint.url_root}'")
       prediction, raw_http = endpoint.parse_async(job_id)
-      Mindee::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
+      Mindee::V1::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
     end
 
     # Enqueue a document for async parsing and automatically try to retrieve it
@@ -246,7 +246,7 @@ module Mindee
     #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
     # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def enqueue_and_parse(input_source, product_class, endpoint, options)
       validate_async_params(options.initial_delay_sec, options.delay_sec, options.max_retries)
       enqueue_res = enqueue(input_source, product_class, endpoint: endpoint, options: options)
@@ -259,8 +259,8 @@ module Mindee
       queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
       queue_res_job = queue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
       valid_statuses = [
-        Mindee::Parsing::Common::JobStatus::WAITING,
-        Mindee::Parsing::Common::JobStatus::PROCESSING,
+        Mindee::V1::Parsing::Common::JobStatus::WAITING,
+        Mindee::V1::Parsing::Common::JobStatus::PROCESSING,
       ]
       # @type var valid_statuses: Array[(:waiting | :processing | :completed | :failed)]
       while valid_statuses.include?(queue_res_job.status) && polling_attempts < options.max_retries
@@ -271,7 +271,7 @@ module Mindee
         polling_attempts += 1
       end
 
-      if queue_res_job.status != Mindee::Parsing::Common::JobStatus::COMPLETED
+      if queue_res_job.status != Mindee::V1::Parsing::Common::JobStatus::COMPLETED
         elapsed = options.initial_delay_sec + (polling_attempts * options.delay_sec.to_f)
         raise Errors::MindeeAPIError,
               "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
@@ -300,7 +300,7 @@ module Mindee
     #          * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
     #          * `:REMOVE` - remove the specified pages, and keep all others.
     #      * `:on_min_pages` Apply the operation only if document has at least this many pages.
-    # @return [Mindee::Parsing::Common::WorkflowResponse]
+    # @return [Mindee::V1::Parsing::Common::WorkflowResponse]
     def execute_workflow(input_source, workflow_id, options: {})
       opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(params: options)
       if opts.respond_to?(:page_options) && input_source.is_a?(Input::Source::LocalInputSource)
@@ -315,21 +315,21 @@ module Mindee
         opts
       )
 
-      Mindee::Parsing::Common::WorkflowResponse.new(V1::Product::Universal::Universal, prediction, raw_http)
+      Mindee::V1::Parsing::Common::WorkflowResponse.new(V1::Product::Universal::Universal, prediction, raw_http)
     end
 
     # Load a prediction.
     #
     # @param product_class [Mindee::Inference] class of the product
     # @param local_response [Mindee::Input::LocalResponse]
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def load_prediction(product_class, local_response)
       raise Errors::MindeeAPIError, 'Expected LocalResponse to not be nil.' if local_response.nil?
 
       response_hash = local_response.as_hash || {}
       raise Errors::MindeeAPIError, 'Expected LocalResponse#as_hash to return a hash.' if response_hash.nil?
 
-      Mindee::Parsing::Common::ApiResponse.new(product_class, response_hash, response_hash.to_json)
+      Mindee::V1::Parsing::Common::ApiResponse.new(product_class, response_hash, response_hash.to_json)
     rescue KeyError, Errors::MindeeAPIError
       raise Errors::MindeeInputError, 'No prediction found in local response.'
     end
@@ -417,7 +417,7 @@ module Mindee
     end
 
     # Creates an endpoint with the given values. Raises an error if the endpoint is invalid.
-    # @param product_class [Mindee::Parsing::Common::Inference] class of the product
+    # @param product_class [Mindee::V1::Parsing::Common::Inference] class of the product
     #
     # @param endpoint_name [String] For custom endpoints, the "API name" field in the "Settings" page of the
     #  API Builder. Do not set for standard (off the shelf) endpoints.

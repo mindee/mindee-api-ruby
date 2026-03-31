@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'indian_passport_v1_document'
 require_relative 'indian_passport_v1_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Passport - India module.
         module IndianPassport
           # Passport - India API version 1 inference prediction.
-          class IndianPassportV1 < Mindee::Parsing::Common::Inference
+          class IndianPassportV1 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'ind_passport'
             @endpoint_version = '1'
             @has_async = true

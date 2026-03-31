@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'passport_v1_document'
 require_relative 'passport_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Passport module.
       module Passport
         # Passport API version 1 inference prediction.
-        class PassportV1 < Mindee::Parsing::Common::Inference
+        class PassportV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'passport'
           @endpoint_version = '1'
           @has_async = false

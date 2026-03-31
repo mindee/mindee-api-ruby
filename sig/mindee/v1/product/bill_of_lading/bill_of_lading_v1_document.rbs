@@ -1,4 +1,4 @@
-# lib/mindee/product/bill_of_lading/bill_of_lading_v1_document.rb
+# lib/mindee/v1/product/bill_of_lading/bill_of_lading_v1_document.rb
 
 module Mindee
   module V1

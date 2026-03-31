@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'id_card_v1_document'
 require_relative 'id_card_v1_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Carte Nationale d'Identité module.
         module IdCard
           # Carte Nationale d'Identité API version 1 inference prediction.
-          class IdCardV1 < Mindee::Parsing::Common::Inference
+          class IdCardV1 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'idcard_fr'
             @endpoint_version = '1'
             @has_async = false

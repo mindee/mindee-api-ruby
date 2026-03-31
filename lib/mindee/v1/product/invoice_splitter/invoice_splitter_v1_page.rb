@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'invoice_splitter_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module InvoiceSplitter
         # Invoice Splitter API version 1.4 page data.
-        class InvoiceSplitterV1Page < Mindee::Parsing::Common::Page
+        class InvoiceSplitterV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

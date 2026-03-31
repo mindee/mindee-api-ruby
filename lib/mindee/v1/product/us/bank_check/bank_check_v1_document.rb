@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,25 +8,25 @@ module Mindee
       module US
         module BankCheck
           # Bank Check API version 1.1 document data.
-          class BankCheckV1Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class BankCheckV1Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The check payer's account number.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :account_number
             # The amount of the check.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :amount
             # The issuer's check number.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :check_number
             # The date the check was issued.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :date
             # List of the check's payees (recipients).
-            # @return [Array<Mindee::Parsing::Standard::StringField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
             attr_reader :payees
             # The check issuer's routing number.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :routing_number
 
             # @param prediction [Hash]

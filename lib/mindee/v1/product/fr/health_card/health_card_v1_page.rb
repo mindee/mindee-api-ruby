@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'health_card_v1_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module FR
         module HealthCard
           # Health Card API version 1.0 page data.
-          class HealthCardV1Page < Mindee::Parsing::Common::Page
+          class HealthCardV1Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super

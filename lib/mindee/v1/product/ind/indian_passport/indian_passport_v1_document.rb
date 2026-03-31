@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,76 +8,76 @@ module Mindee
       module IND
         module IndianPassport
           # Passport - India API version 1.2 document data.
-          class IndianPassportV1Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class IndianPassportV1Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The first line of the address of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :address1
             # The second line of the address of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :address2
             # The third line of the address of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :address3
             # The birth date of the passport holder, ISO format: YYYY-MM-DD.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :birth_date
             # The birth place of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :birth_place
             # ISO 3166-1 alpha-3 country code (3 letters format).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :country
             # The date when the passport will expire, ISO format: YYYY-MM-DD.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :expiry_date
             # The file number of the passport document.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :file_number
             # The gender of the passport holder.
-            # @return [Mindee::Parsing::Standard::ClassificationField]
+            # @return [Mindee::V1::Parsing::Standard::ClassificationField]
             attr_reader :gender
             # The given names of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :given_names
             # The identification number of the passport document.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :id_number
             # The date when the passport was issued, ISO format: YYYY-MM-DD.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :issuance_date
             # The place where the passport was issued.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :issuance_place
             # The name of the legal guardian of the passport holder (if applicable).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :legal_guardian
             # The first line of the machine-readable zone (MRZ) of the passport document.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :mrz1
             # The second line of the machine-readable zone (MRZ) of the passport document.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :mrz2
             # The name of the mother of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :name_of_mother
             # The name of the spouse of the passport holder (if applicable).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :name_of_spouse
             # The date of issue of the old passport (if applicable), ISO format: YYYY-MM-DD.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :old_passport_date_of_issue
             # The number of the old passport (if applicable).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :old_passport_number
             # The place of issue of the old passport (if applicable).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :old_passport_place_of_issue
             # The page number of the passport document.
-            # @return [Mindee::Parsing::Standard::ClassificationField]
+            # @return [Mindee::V1::Parsing::Standard::ClassificationField]
             attr_reader :page_number
             # The surname of the passport holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :surname
 
             # @param prediction [Hash]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'international_id_v2_document'
 require_relative 'international_id_v2_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # International ID module.
       module InternationalId
         # International ID API version 2 inference prediction.
-        class InternationalIdV2 < Mindee::Parsing::Common::Inference
+        class InternationalIdV2 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'international_id'
           @endpoint_version = '2'
           @has_async = true

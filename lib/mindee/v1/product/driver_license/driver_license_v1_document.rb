@@ -1,52 +1,52 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module DriverLicense
         # Driver License API version 1.0 document data.
-        class DriverLicenseV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class DriverLicenseV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The category or class of the driver license.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :category
           # The alpha-3 ISO 3166 code of the country where the driver license was issued.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :country_code
           # The date of birth of the driver license holder.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :date_of_birth
           # The DD number of the driver license.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :dd_number
           # The expiry date of the driver license.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :expiry_date
           # The first name of the driver license holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :first_name
           # The unique identifier of the driver license.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :id
           # The date when the driver license was issued.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :issued_date
           # The authority that issued the driver license.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :issuing_authority
           # The last name of the driver license holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :last_name
           # The Machine Readable Zone (MRZ) of the driver license.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :mrz
           # The place of birth of the driver license holder.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :place_of_birth
           # Second part of the ISO 3166-2 code, consisting of two letters indicating the US State.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :state
 
           # @param prediction [Hash]

@@ -1,4 +1,4 @@
-# lib/mindee/product/delivery_note/delivery_note_v1.rb
+# lib/mindee/v1/product/delivery_note/delivery_note_v1.rb
 
 module Mindee
   module V1
