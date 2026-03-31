@@ -1,0 +1,36 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
+        exclude: ^(spec/data/|docs/code_samples/|local_test/)
+
+  - repo: local
+    hooks:
+      - id: rubocop
+        name: RuboCop
+        entry: bundle exec rubocop --force-exclusion --no-server
+        language: system
+        pass_filenames: false
+      - id: steep
+        name: Steep
+        entry: bundle exec steep check
+        language: system
+        pass_filenames: false
+        stages: [pre-commit, pre-push]
+      - id: bundle-audit
+        name: Bundle Audit
+        entry: bundle exec bundle-audit check
+        language: system
+        pass_filenames: false
+        stages: [pre-commit, pre-push]
