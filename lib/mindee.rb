@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee/client'
+require 'mindee/v1'
 require 'mindee/v2'
 require 'mindee/page_options'
 require 'mindee/logging'
@@ -68,6 +69,10 @@ module Mindee
 
   # V1-specific module.
   module V1
+    # HTTP module for V1.
+    module HTTP
+    end
+
     # Parsing internals and fields.
     module Parsing
       # Common fields and functions.
