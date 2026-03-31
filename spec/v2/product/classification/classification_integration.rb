@@ -3,13 +3,13 @@
 require 'mindee'
 require 'mindee/v2/product'
 
-describe Mindee::ClientV2, :integration, :v2 do
+describe Mindee::V2::Product::Classification, :integration, :v2 do
   let(:classification_model_id) do
     ENV.fetch('MINDEE_V2_SE_TESTS_CLASSIFICATION_MODEL_ID', nil)
   end
 
   let(:v2_client) do
-    Mindee::ClientV2.new
+    Mindee::V2::Client.new
   end
 
   it 'processes classification default sample correctly' do

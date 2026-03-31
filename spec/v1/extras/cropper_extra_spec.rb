@@ -12,7 +12,7 @@ describe 'cropper extra' do
   let(:complete_doc) do
     complete_doc_file = File.read(File.join(cropper_dir, 'complete.json'))
     complete_doc_json = JSON.parse(complete_doc_file)
-    Mindee::Parsing::Common::Document.new(Mindee::Product::Receipt::ReceiptV5, complete_doc_json['document'])
+    Mindee::Parsing::Common::Document.new(Mindee::V1::Product::Receipt::ReceiptV5, complete_doc_json['document'])
   end
 
   describe 'cropper extra' do

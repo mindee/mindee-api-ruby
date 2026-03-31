@@ -4,6 +4,7 @@ module Mindee
     module Parsing
       class InferenceModel
         attr_reader id: String
+
         def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end

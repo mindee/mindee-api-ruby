@@ -1,0 +1,13 @@
+# lib/mindee/product/financial_document/financial_document_v1.rb
+
+module Mindee
+  module V1
+    module Product
+    module FinancialDocument
+      class FinancialDocumentV1 < Parsing::Common::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

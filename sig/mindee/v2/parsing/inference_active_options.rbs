@@ -4,9 +4,11 @@ module Mindee
       class DataSchemaActiveOption
         attr_reader replace: bool
 
-        def initialize: (Hash[Symbol |string, untyped]) -> void
+        def initialize: (Hash[Symbol | string, untyped]) -> void
+
         def to_s: () -> String
       end
+
       class InferenceActiveOptions
         attr_reader confidence: bool
         attr_reader polygon: bool
@@ -16,6 +18,7 @@ module Mindee
         attr_reader data_schema: DataSchemaActiveOption
 
         def initialize: (Hash[String | Symbol, untyped]) -> void
+
         def to_s: () -> String
       end
     end

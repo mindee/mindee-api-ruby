@@ -1,0 +1,38 @@
+# frozen_string_literal: true
+
+require_relative '../../../parsing'
+require_relative 'international_id_v2_document'
+
+module Mindee
+  module V1
+    module Product
+      module InternationalId
+        # International ID API version 2.2 page data.
+        class InternationalIdV2Page < Mindee::Parsing::Common::Page
+          # @param prediction [Hash]
+          def initialize(prediction)
+            super
+            @prediction = if prediction['prediction'].empty?
+                            nil
+                          else
+                            InternationalIdV2PagePrediction.new(
+                              prediction['prediction'],
+                              prediction['id']
+                            )
+                          end
+          end
+        end
+
+        # International ID V2 page prediction.
+        class InternationalIdV2PagePrediction < InternationalIdV2Document
+          # @return [String]
+          def to_s
+            out_str = String.new
+            out_str << "\n#{super}"
+            out_str
+          end
+        end
+      end
+    end
+  end
+end

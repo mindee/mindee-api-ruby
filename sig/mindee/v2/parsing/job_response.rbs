@@ -4,7 +4,9 @@ module Mindee
     module Parsing
       class JobResponse < CommonResponse
         attr_reader job: Job
+
         def initialize: (Hash[String | Symbol, untyped]) -> void
+
         def to_s: -> String
       end
     end

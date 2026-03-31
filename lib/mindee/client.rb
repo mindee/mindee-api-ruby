@@ -315,7 +315,7 @@ module Mindee
         opts
       )
 
-      Mindee::Parsing::Common::WorkflowResponse.new(Product::Universal::Universal, prediction, raw_http)
+      Mindee::Parsing::Common::WorkflowResponse.new(V1::Product::Universal::Universal, prediction, raw_http)
     end
 
     # Load a prediction.
@@ -389,7 +389,7 @@ module Mindee
     # @return [Mindee::HTTP::Endpoint]
     def create_endpoint(endpoint_name: '', account_name: '', version: '')
       initialize_endpoint(
-        Mindee::Product::Universal::Universal,
+        Mindee::V1::Product::Universal::Universal,
         endpoint_name: endpoint_name,
         account_name: account_name,
         version: version
@@ -428,7 +428,7 @@ module Mindee
     # @param version [String] For custom endpoints, version of the product.
     # @return [Mindee::HTTP::Endpoint]
     def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
-      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::Product::Universal::Universal
+      if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::V1::Product::Universal::Universal
         raise Mindee::Errors::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
       end
 

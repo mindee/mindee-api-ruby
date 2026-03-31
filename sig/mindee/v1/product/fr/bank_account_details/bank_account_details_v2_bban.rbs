@@ -1,0 +1,25 @@
+module Mindee
+  module V1
+    module Product
+      module FR
+        module BankAccountDetails
+          class BankAccountDetailsV2Bban < Parsing::Standard::FeatureField
+            def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+
+            def bban_bank_code: -> String
+
+            def bban_branch_code: -> String
+
+            def bban_key: -> String
+
+            def bban_number: -> String
+
+            def printable_values: -> Hash[String | Symbol, untyped]
+
+            def to_s: -> String
+          end
+        end
+      end
+    end
+  end
+end

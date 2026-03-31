@@ -1,0 +1,18 @@
+# lib/mindee/product/universal/universal_page.rb
+module Mindee
+  module V1
+    module Product
+      module Universal
+        class UniversalPage < Parsing::Common::Page
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
+
+        class UniversalPagePrediction < UniversalPrediction
+          def initialize: (Hash[String | Symbol, untyped], ?nil) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

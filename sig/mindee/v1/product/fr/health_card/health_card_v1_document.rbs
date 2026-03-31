@@ -1,0 +1,20 @@
+# lib/mindee/v1/product/health_card/health_card_v1_document.rb
+
+module Mindee
+  module V1
+    module Product
+    module FR
+      module HealthCard
+        class HealthCardV1Document < Parsing::Common::Prediction
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+          def given_names: -> (Array[Parsing::Standard::StringField])
+          def issuance_date: -> (Parsing::Standard::DateField)
+          def social_security: -> (Parsing::Standard::StringField)
+          def surname: -> (Parsing::Standard::StringField)
+          def to_s: -> String
+          end
+        end
+      end
+    end
+  end
+end

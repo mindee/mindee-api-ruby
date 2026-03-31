@@ -1,0 +1,17 @@
+# lib/mindee/product/nutrition_facts_label/nutrition_facts_label_v1_page.rb
+
+module Mindee
+  module V1
+    module Product
+    module NutritionFactsLabel
+      class NutritionFactsLabelV1Page < Parsing::Common::Page
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      class NutritionFactsLabelV1PagePrediction < NutritionFactsLabelV1Document
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end
