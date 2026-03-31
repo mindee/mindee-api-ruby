@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'indian_passport_v1_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module IND
         module IndianPassport
           # Passport - India API version 1.2 page data.
-          class IndianPassportV1Page < Mindee::Parsing::Common::Page
+          class IndianPassportV1Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super

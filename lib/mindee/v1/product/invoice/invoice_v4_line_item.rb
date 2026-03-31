@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Invoice
         # List of all the line items present on the invoice.
-        class InvoiceV4LineItem < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class InvoiceV4LineItem < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The item description.
           # @return [String]
           attr_reader :description

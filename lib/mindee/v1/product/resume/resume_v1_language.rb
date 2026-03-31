@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Resume
         # The list of languages that the candidate is proficient in.
-        class ResumeV1Language < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class ResumeV1Language < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The language's ISO 639 code.
           # @return [String]
           attr_reader :language

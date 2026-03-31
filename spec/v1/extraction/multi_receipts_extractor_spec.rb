@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'mindee/product'
+require 'mindee/v1/product'
 require 'mindee/input/sources'
-require 'mindee/extraction'
+require 'mindee/v1/extraction'
 require_relative '../../data'
 
 describe 'multi-receipts extraction' do
@@ -38,7 +38,7 @@ describe 'multi-receipts extraction' do
       input_sample = Mindee::Input::Source::PathInputSource.new(multi_receipts_single_page_path)
       response = load_json(multi_receipts_single_page_json_path, 'complete.json')
       doc = Mindee::V1::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
-      extracted_receipts = Mindee::Extraction.extract_receipts(input_sample, doc)
+      extracted_receipts = Mindee::V1::Extraction.extract_receipts(input_sample, doc)
 
       expect(extracted_receipts.size).to eq(6)
 
@@ -86,7 +86,7 @@ describe 'multi-receipts extraction' do
       input_sample = Mindee::Input::Source::PathInputSource.new(multi_receipts_multi_page_path)
       response = load_json(multi_receipts_multi_page_json_path, 'multipage_sample.json')
       doc = Mindee::V1::Product::MultiReceiptsDetector::MultiReceiptsDetectorV1.new(response['document']['inference'])
-      extracted_receipts = Mindee::Extraction.extract_receipts(input_sample, doc)
+      extracted_receipts = Mindee::V1::Extraction.extract_receipts(input_sample, doc)
 
       expect(extracted_receipts.size).to eq(5)
 
@@ -125,7 +125,7 @@ describe 'multi-receipts extraction' do
   context 'when no receipts are found in inference' do
     it 'raises a MindeeInputError' do
       expect do
-        Mindee::Extraction.extract_receipts(empty_input_source, empty_inference)
+        Mindee::V1::Extraction.extract_receipts(empty_input_source, empty_inference)
       end.to raise_error(Mindee::Errors::MindeeInputError,
                          'No possible receipts candidates found for Multi-Receipts extraction.')
     end
@@ -133,8 +133,8 @@ describe 'multi-receipts extraction' do
 
   context 'when input source has no pages' do
     it 'returns an empty array' do
-      extracted_receipts = Mindee::Extraction.extract_receipts(empty_input_source,
-                                                               valid_inference_with_no_receipts)
+      extracted_receipts = Mindee::V1::Extraction.extract_receipts(empty_input_source,
+                                                                   valid_inference_with_no_receipts)
       expect(extracted_receipts).to eq([])
     end
   end

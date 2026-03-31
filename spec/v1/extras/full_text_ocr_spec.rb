@@ -6,7 +6,7 @@ require_relative 'extras_utils'
 shared_context 'load pages' do
   let(:load_pages) do
     prediction_data = JSON.parse(File.read(File.join(EXTRAS_DIR, 'full_text_ocr', 'complete.json')))
-    Mindee::Parsing::Common::ApiResponse.new(
+    Mindee::V1::Parsing::Common::ApiResponse.new(
       Mindee::V1::Product::InternationalId::InternationalIdV2,
       prediction_data,
       prediction_data.to_json
@@ -17,7 +17,7 @@ end
 shared_context 'load document' do
   let(:load_document) do
     prediction_data = JSON.parse(File.read(File.join(EXTRAS_DIR, 'full_text_ocr', 'complete.json')))
-    Mindee::Parsing::Common::ApiResponse.new(
+    Mindee::V1::Parsing::Common::ApiResponse.new(
       Mindee::V1::Product::InternationalId::InternationalIdV2,
       prediction_data,
       prediction_data.to_json
@@ -27,7 +27,7 @@ shared_context 'load document' do
     prediction_data = JSON.parse(
       File.read(File.join(V1_PRODUCT_DATA_DIR, 'bank_statement_fr', 'response_v2', 'complete.json'))
     )
-    Mindee::Parsing::Common::ApiResponse.new(
+    Mindee::V1::Parsing::Common::ApiResponse.new(
       Mindee::V1::Product::FR::BankStatement::BankStatementV2,
       prediction_data,
       prediction_data.to_json
@@ -137,7 +137,7 @@ describe 'FullTextOCR' do
       'extras' => {},
       'n_pages' => 0,
     }
-    built_doc = Mindee::Parsing::Common::Document.new(
+    built_doc = Mindee::V1::Parsing::Common::Document.new(
       Mindee::V1::Product::FR::BankStatement::BankStatementV2,
       synthetic_response
     )

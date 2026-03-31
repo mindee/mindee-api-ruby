@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,52 +8,52 @@ module Mindee
       module FR
         module IdCard
           # Carte Nationale d'Identité API version 2.0 document data.
-          class IdCardV2Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class IdCardV2Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The alternate name of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :alternate_name
             # The name of the issuing authority.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :authority
             # The date of birth of the card holder.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :birth_date
             # The place of birth of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :birth_place
             # The card access number (CAN).
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :card_access_number
             # The document number.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :document_number
             # The expiry date of the identification card.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :expiry_date
             # The gender of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :gender
             # The given name(s) of the card holder.
-            # @return [Array<Mindee::Parsing::Standard::StringField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
             attr_reader :given_names
             # The date of issue of the identification card.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :issue_date
             # The Machine Readable Zone, first line.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :mrz1
             # The Machine Readable Zone, second line.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :mrz2
             # The Machine Readable Zone, third line.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :mrz3
             # The nationality of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :nationality
             # The surname of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :surname
 
             # @param prediction [Hash]

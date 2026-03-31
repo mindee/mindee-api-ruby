@@ -1,0 +1,31 @@
+# lib/mindee/v1/parsing/common/api_response.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        module JobStatus
+          WAITING: :waiting
+          PROCESSING: :processing
+          COMPLETED: :completed
+          FAILURE: :failed
+        end
+
+        module RequestStatus
+          FAILURE: :failure
+          SUCCESS: :success
+        end
+
+        class ApiResponse
+          attr_reader document: Parsing::Common::Document?
+          attr_reader job: Parsing::Common::Job?
+          attr_reader api_request: Parsing::Common::ApiRequest
+          attr_reader raw_http: String
+
+          def logger: () -> Logger
+
+          def initialize: (singleton(Parsing::Common::Inference), Hash[String | Symbol, untyped] | Net::HTTPResponse, String) -> void
+        end
+      end
+    end
+  end
+end

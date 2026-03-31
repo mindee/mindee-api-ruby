@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,19 +8,19 @@ module Mindee
       module FR
         module HealthCard
           # Health Card API version 1.0 document data.
-          class HealthCardV1Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class HealthCardV1Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The given names of the card holder.
-            # @return [Array<Mindee::Parsing::Standard::StringField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
             attr_reader :given_names
             # The date when the carte vitale document was issued.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :issuance_date
             # The social security number of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :social_security
             # The surname of the card holder.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :surname
 
             # @param prediction [Hash]

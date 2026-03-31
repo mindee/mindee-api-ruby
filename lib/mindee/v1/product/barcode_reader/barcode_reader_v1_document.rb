@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module BarcodeReader
         # Barcode Reader API version 1.0 document data.
-        class BarcodeReaderV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class BarcodeReaderV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # List of decoded 1D barcodes.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :codes_1d
           # List of decoded 2D barcodes.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :codes_2d
 
           # @param prediction [Hash]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'barcode_reader_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module BarcodeReader
         # Barcode Reader API version 1.0 page data.
-        class BarcodeReaderV1Page < Mindee::Parsing::Common::Page
+        class BarcodeReaderV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

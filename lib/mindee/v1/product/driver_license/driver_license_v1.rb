@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'driver_license_v1_document'
 require_relative 'driver_license_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Driver License module.
       module DriverLicense
         # Driver License API version 1 inference prediction.
-        class DriverLicenseV1 < Mindee::Parsing::Common::Inference
+        class DriverLicenseV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'driver_license'
           @endpoint_version = '1'
           @has_async = true

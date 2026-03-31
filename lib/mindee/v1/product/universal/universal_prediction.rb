@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Universal
         # Universal Document V1 page.
-        class UniversalPrediction < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Common
-          include Mindee::Parsing::Standard
-          include Mindee::Parsing::Universal
+        class UniversalPrediction < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Common
+          include Mindee::V1::Parsing::Standard
+          include Mindee::V1::Parsing::Universal
           # All value fields in the document
-          # @return [Hash<Symbol, Mindee::Parsing::Universal::UniversalListField>]
+          # @return [Hash<Symbol, Mindee::V1::Parsing::Universal::UniversalListField>]
           attr_reader :fields
 
           def initialize(_ = nil)
@@ -26,7 +26,7 @@ module Mindee
             pattern = %r{^(\n* *)( {2}):}
             @fields.each do |field_name, field_value|
               str_value = if field_value.is_a?(
-                Mindee::Parsing::Universal::UniversalListField
+                Mindee::V1::Parsing::Universal::UniversalListField
               ) && field_value.values.length.positive?
                             generate_field_string(field_name, field_value, pattern)
                           else
@@ -72,7 +72,7 @@ module Mindee
           end
 
           def generate_sub_value_string(field_name, sub_value, pattern)
-            if sub_value.is_a?(Mindee::Parsing::Universal::UniversalObjectField)
+            if sub_value.is_a?(Mindee::V1::Parsing::Universal::UniversalObjectField)
               sub_value.str_level(1).gsub(pattern, '\1* :')
             else
               (' ' * (field_name.length + 2)) + "#{sub_value}\n"
@@ -84,7 +84,7 @@ module Mindee
           def single_fields
             single_fields = {} # : Hash[String | Symbol, untyped]
             @fields.each do |field_name, field_value|
-              single_fields[field_name] = field_value if field_value.is_a?(Mindee::Parsing::Standard::StringField)
+              single_fields[field_name] = field_value if field_value.is_a?(Mindee::V1::Parsing::Standard::StringField)
             end
             single_fields
           end
@@ -92,9 +92,12 @@ module Mindee
           # Returns a hash of all list-like fields
           # @return [Hash<String, UniversalListField>]
           def list_fields
-            list_fields = {} # : Hash[String | Symbol, Mindee::Parsing::Universal::UniversalListField]
+            list_fields = {} # : Hash[String | Symbol, Mindee::V1::Parsing::Universal::UniversalListField]
             @fields.each do |field_name, field_value|
-              list_fields[field_name] = field_value if field_value.is_a?(Mindee::Parsing::Universal::UniversalListField)
+              if field_value.is_a?(Mindee::V1::Parsing::Universal::UniversalListField)
+                list_fields[field_name] =
+                  field_value
+              end
             end
             list_fields
           end
@@ -104,7 +107,7 @@ module Mindee
           def object_fields
             object_fields = {} # : Hash[String | Symbol, untyped]
             @fields.each do |field_name, field_value|
-              if field_value.is_a?(Mindee::Parsing::Universal::UniversalObjectField)
+              if field_value.is_a?(Mindee::V1::Parsing::Universal::UniversalObjectField)
                 object_fields[field_name] =
                   field_value
               end

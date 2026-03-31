@@ -1,0 +1,22 @@
+# lib/mindee/v1/parsing/common/extras/full_text_ocr_extra.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        module Extras
+          class FullTextOCRExtra
+            def contents: -> String?
+
+            def language: -> String?
+
+            def initialize: (Hash[String | Symbol, untyped]) -> nil
+
+            def to_s: -> String
+
+            def <<: (?untyped?) -> untyped
+          end
+        end
+      end
+    end
+  end
+end

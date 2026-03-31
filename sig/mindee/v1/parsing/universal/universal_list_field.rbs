@@ -1,0 +1,21 @@
+# lib/mindee/v1/parsing/universal/universal_list_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Universal
+        class UniversalListField
+          attr_reader page_id: Integer
+          attr_reader values: Array[UniversalObjectField | Standard::StringField]
+
+          def initialize: (Array[Hash[String | Symbol, untyped]], ?Integer?) -> void
+
+          def contents_list: -> Array[String]
+
+          def contents_string: (?String) -> String
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

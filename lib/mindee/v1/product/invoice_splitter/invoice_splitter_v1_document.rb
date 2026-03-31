@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'invoice_splitter_v1_invoice_page_groups'
 
 module Mindee
@@ -8,8 +8,8 @@ module Mindee
     module Product
       module InvoiceSplitter
         # Invoice Splitter API version 1.4 document data.
-        class InvoiceSplitterV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class InvoiceSplitterV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # List of page groups. Each group represents a single invoice within a multi-invoice document.
           # @return [Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups]
           attr_reader :invoice_page_groups

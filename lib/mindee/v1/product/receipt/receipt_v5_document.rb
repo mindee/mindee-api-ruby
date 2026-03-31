@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'receipt_v5_line_items'
 
 module Mindee
@@ -8,58 +8,58 @@ module Mindee
     module Product
       module Receipt
         # Receipt API version 5.4 document data.
-        class ReceiptV5Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class ReceiptV5Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The purchase category of the receipt.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :category
           # The date the purchase was made.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :date
           # The type of receipt: EXPENSE RECEIPT or CREDIT CARD RECEIPT.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :document_type
           # List of all line items on the receipt.
           # @return [Mindee::V1::Product::Receipt::ReceiptV5LineItems]
           attr_reader :line_items
           # The locale of the document.
-          # @return [Mindee::Parsing::Standard::LocaleField]
+          # @return [Mindee::V1::Parsing::Standard::LocaleField]
           attr_reader :locale
           # The receipt number or identifier.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :receipt_number
           # The purchase subcategory of the receipt for transport and food.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :subcategory
           # The address of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_address
           # List of company registration numbers associated to the supplier.
-          # @return [Array<Mindee::Parsing::Standard::CompanyRegistrationField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::CompanyRegistrationField>]
           attr_reader :supplier_company_registrations
           # The name of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_name
           # The phone number of the supplier or merchant.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_phone_number
           # The list of taxes present on the receipt.
-          # @return [Mindee::Parsing::Standard::Taxes]
+          # @return [Mindee::V1::Parsing::Standard::Taxes]
           attr_reader :taxes
           # The time the purchase was made.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :time
           # The total amount of tip and gratuity.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :tip
           # The total amount paid: includes taxes, discounts, fees, tips, and gratuity.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_amount
           # The net amount paid: does not include taxes, fees, and discounts.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_net
           # The sum of all taxes.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_tax
 
           # @param prediction [Hash]

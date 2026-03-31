@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Resume
         # The list of the candidate's educational background.
-        class ResumeV1Education < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class ResumeV1Education < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The area of study or specialization.
           # @return [String]
           attr_reader :degree_domain

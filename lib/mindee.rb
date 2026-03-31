@@ -43,25 +43,6 @@ module Mindee
   module Logging
   end
 
-  # Parsing internals and fields.
-  module Parsing
-    # Common fields and functions.
-    module Common
-    end
-
-    # Standard fields and functions.
-    module Standard
-    end
-
-    # Universal fields and functions.
-    module Universal
-    end
-
-    # V2-specific module.
-    module V2
-    end
-  end
-
   # Document input-related internals.
   module Input
   end
@@ -82,6 +63,24 @@ module Mindee
 
     # US-specific products.
     module US
+    end
+  end
+
+  # V1-specific module.
+  module V1
+    # Parsing internals and fields.
+    module Parsing
+      # Common fields and functions.
+      module Common
+      end
+
+      # Standard fields and functions.
+      module Standard
+      end
+
+      # Universal fields and functions.
+      module Universal
+      end
     end
   end
 

@@ -1,34 +1,34 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module DeliveryNote
         # Delivery note API version 1.2 document data.
-        class DeliveryNoteV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class DeliveryNoteV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The address of the customer receiving the goods.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :customer_address
           # The name of the customer receiving the goods.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :customer_name
           # The date on which the delivery is scheduled to arrive.
-          # @return [Mindee::Parsing::Standard::DateField]
+          # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :delivery_date
           # A unique identifier for the delivery note.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :delivery_number
           # The address of the supplier providing the goods.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_address
           # The name of the supplier providing the goods.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :supplier_name
           # The total monetary value of the goods being delivered.
-          # @return [Mindee::Parsing::Standard::AmountField]
+          # @return [Mindee::V1::Parsing::Standard::AmountField]
           attr_reader :total_amount
 
           # @param prediction [Hash]

@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module InvoiceSplitter
         # List of page groups. Each group represents a single invoice within a multi-invoice document.
-        class InvoiceSplitterV1InvoicePageGroup < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class InvoiceSplitterV1InvoicePageGroup < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # List of page indexes that belong to the same invoice (group).
           # @return [Array<Integer>]
           attr_reader :page_indexes

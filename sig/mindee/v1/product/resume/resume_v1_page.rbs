@@ -1,4 +1,4 @@
-# lib/mindee/product/resume/resume_v1_page.rb
+# lib/mindee/v1/product/resume/resume_v1_page.rb
 
 module Mindee
   module V1

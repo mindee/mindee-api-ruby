@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'bank_statement_v2_document'
 require_relative 'bank_statement_v2_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Bank Statement module.
         module BankStatement
           # Bank Statement API version 2 inference prediction.
-          class BankStatementV2 < Mindee::Parsing::Common::Inference
+          class BankStatementV2 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'bank_statement_fr'
             @endpoint_version = '2'
             @has_async = true

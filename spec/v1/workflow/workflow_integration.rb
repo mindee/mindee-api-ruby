@@ -16,7 +16,7 @@ describe Mindee::Client do
     it 'should return a valid response' do
       current_date_time = Time.now.strftime('%Y-%m-%d-%H:%M:%S')
       document_alias = "ruby-#{current_date_time}"
-      priority = Mindee::Parsing::Common::ExecutionPriority::LOW
+      priority = Mindee::V1::Parsing::Common::ExecutionPriority::LOW
 
       response = client.execute_workflow(
         sample_input,

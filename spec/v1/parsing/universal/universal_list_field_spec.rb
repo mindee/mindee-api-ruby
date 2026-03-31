@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-describe Mindee::Parsing::Universal::UniversalListField do
+describe Mindee::V1::Parsing::Universal::UniversalListField do
   let(:raw_prediction) { [{ 'value' => 'Item1' }, { 'value' => 'Item2' }] }
   subject(:universal_list_field) { described_class.new(raw_prediction) }
 

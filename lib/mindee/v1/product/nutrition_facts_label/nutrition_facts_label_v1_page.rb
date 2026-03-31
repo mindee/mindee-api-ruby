@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'nutrition_facts_label_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module NutritionFactsLabel
         # Nutrition Facts Label API version 1.0 page data.
-        class NutritionFactsLabelV1Page < Mindee::Parsing::Common::Page
+        class NutritionFactsLabelV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

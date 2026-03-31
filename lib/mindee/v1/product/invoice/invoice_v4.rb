@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'invoice_v4_document'
 require_relative 'invoice_v4_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Invoice module.
       module Invoice
         # Invoice API version 4 inference prediction.
-        class InvoiceV4 < Mindee::Parsing::Common::Inference
+        class InvoiceV4 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'invoices'
           @endpoint_version = '4'
           @has_async = true

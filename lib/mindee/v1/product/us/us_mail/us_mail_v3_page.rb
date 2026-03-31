@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'us_mail_v3_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module US
         module UsMail
           # US Mail API version 3.0 page data.
-          class UsMailV3Page < Mindee::Parsing::Common::Page
+          class UsMailV3Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super

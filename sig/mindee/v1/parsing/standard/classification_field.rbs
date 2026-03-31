@@ -1,0 +1,12 @@
+# lib/mindee/v1/parsing/standard/classification_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class ClassificationField < BaseField
+          def value: -> String
+        end
+      end
+    end
+  end
+end

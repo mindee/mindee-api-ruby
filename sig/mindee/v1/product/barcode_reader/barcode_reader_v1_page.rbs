@@ -1,4 +1,4 @@
-# lib/mindee/product/barcode_reader/barcode_reader_v1_page.rb
+# lib/mindee/v1/product/barcode_reader/barcode_reader_v1_page.rb
 
 module Mindee
   module V1

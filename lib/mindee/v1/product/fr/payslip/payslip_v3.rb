@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'payslip_v3_document'
 require_relative 'payslip_v3_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Payslip module.
         module Payslip
           # Payslip API version 3 inference prediction.
-          class PayslipV3 < Mindee::Parsing::Common::Inference
+          class PayslipV3 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'payslip_fra'
             @endpoint_version = '3'
             @has_async = true

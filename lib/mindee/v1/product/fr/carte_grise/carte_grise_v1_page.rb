@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'carte_grise_v1_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module FR
         module CarteGrise
           # Carte Grise API version 1.1 page data.
-          class CarteGriseV1Page < Mindee::Parsing::Common::Page
+          class CarteGriseV1Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super

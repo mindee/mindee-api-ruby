@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'receipt_v5_document'
 require_relative 'receipt_v5_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Receipt module.
       module Receipt
         # Receipt API version 5 inference prediction.
-        class ReceiptV5 < Mindee::Parsing::Common::Inference
+        class ReceiptV5 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'expense_receipts'
           @endpoint_version = '5'
           @has_async = true

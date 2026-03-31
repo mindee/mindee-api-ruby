@@ -1,0 +1,12 @@
+# lib/mindee/v1/parsing/standard/feature_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class FeatureField < BaseField
+          def format_for_display: (String | bool?, ?Integer?) -> String
+        end
+      end
+    end
+  end
+end

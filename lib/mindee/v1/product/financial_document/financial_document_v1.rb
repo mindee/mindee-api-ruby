@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'financial_document_v1_document'
 require_relative 'financial_document_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Financial Document module.
       module FinancialDocument
         # Financial Document API version 1 inference prediction.
-        class FinancialDocumentV1 < Mindee::Parsing::Common::Inference
+        class FinancialDocumentV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'financial_document'
           @endpoint_version = '1'
           @has_async = true

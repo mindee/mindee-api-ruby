@@ -1,0 +1,19 @@
+# lib/mindee/v1/parsing/standard/payment_details_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class PaymentDetailsField < BaseField
+          attr_reader account_number: String?
+          attr_reader iban: String?
+          attr_reader routing_number: String?
+          attr_reader swift: String?
+
+          def initialize: (Hash[String | Symbol, untyped], Integer?, ?reconstructed: bool) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

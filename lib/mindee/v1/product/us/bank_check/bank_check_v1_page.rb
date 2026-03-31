@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'bank_check_v1_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module US
         module BankCheck
           # Bank Check API version 1.1 page data.
-          class BankCheckV1Page < Mindee::Parsing::Common::Page
+          class BankCheckV1Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super
@@ -26,13 +26,13 @@ module Mindee
 
           # Bank Check V1 page prediction.
           class BankCheckV1PagePrediction < BankCheckV1Document
-            include Mindee::Parsing::Standard
+            include Mindee::V1::Parsing::Standard
 
             # The position of the check on the document.
-            # @return [Mindee::Parsing::Standard::PositionField]
+            # @return [Mindee::V1::Parsing::Standard::PositionField]
             attr_reader :check_position
             # List of signature positions
-            # @return [Array<Mindee::Parsing::Standard::PositionField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::PositionField>]
             attr_reader :signatures_positions
 
             # @param prediction [Hash]
