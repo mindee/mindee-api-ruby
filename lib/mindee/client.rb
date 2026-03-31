@@ -100,7 +100,7 @@ module Mindee
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param product_class [Mindee::Inference] The class of the product.
-    # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
+    # @param endpoint [Mindee::V1::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
     #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
@@ -137,7 +137,7 @@ module Mindee
     #
     # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
     # @param product_class [Mindee::Inference] class of the product
-    # @param endpoint [Mindee::HTTP::Endpoint, nil] Endpoint of the API.
+    # @param endpoint [Mindee::V1::HTTP::Endpoint, nil] Endpoint of the API.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
     #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
@@ -171,7 +171,7 @@ module Mindee
     #   The source of the input document (local file or URL).
     # @param product_class [Mindee::Inference] The class of the product.
     # @param options [Hash] A hash of options to configure the enqueue behavior. Possible keys:
-    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #   * `:endpoint` [V1::HTTP::Endpoint, nil] Endpoint of the API.
     #       Doesn't need to be set in the case of OTS APIs.
     #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
@@ -189,7 +189,7 @@ module Mindee
     #       This performs a cropping operation on the server and will increase response time.
     #   * `:rag` [bool] Whether to enable Retrieval-Augmented Generation. Only works if a Workflow ID is provided.
     #   * `:workflow_id` [String, nil] ID of the workflow to use.
-    # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
+    # @param endpoint [Mindee::V1::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def enqueue(input_source, product_class, endpoint: nil, options: {})
       opts = normalize_parse_options(options)
@@ -207,7 +207,7 @@ module Mindee
     #
     # @param job_id [String] ID of the job (queue) to poll from
     # @param product_class [Mindee::Inference] class of the product
-    # @param endpoint [HTTP::Endpoint, nil] Endpoint of the API
+    # @param endpoint [V1::HTTP::Endpoint, nil] Endpoint of the API
     # Doesn't need to be set in the case of OTS APIs.
     #
     # @return [Mindee::V1::Parsing::Common::ApiResponse]
@@ -224,7 +224,7 @@ module Mindee
     #   The source of the input document (local file or URL).
     # @param product_class [Mindee::Inference] The class of the product.
     # @param options [Hash] A hash of options to configure the parsing behavior. Possible keys:
-    #   * `:endpoint` [HTTP::Endpoint, nil] Endpoint of the API.
+    #   * `:endpoint` [V1::HTTP::Endpoint, nil] Endpoint of the API.
     #       Doesn't need to be set in the case of OTS APIs.
     #   * `:all_words` [bool] Whether to extract all the words on each page.
     #       This performs a full OCR operation on the server and will increase response time.
@@ -245,7 +245,7 @@ module Mindee
     #   * `:initial_delay_sec` [Numeric] Initial delay before polling. Defaults to 2.
     #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
     #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
-    # @param endpoint [Mindee::HTTP::Endpoint] Endpoint of the API.
+    # @param endpoint [Mindee::V1::HTTP::Endpoint] Endpoint of the API.
     # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def enqueue_and_parse(input_source, product_class, endpoint, options)
       validate_async_params(options.initial_delay_sec, options.delay_sec, options.max_retries)
@@ -307,7 +307,7 @@ module Mindee
         process_pdf_if_required(input_source, opts)
       end
 
-      workflow_endpoint = Mindee::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key.to_s)
+      workflow_endpoint = V1::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key.to_s)
       logger.debug("Sending document to workflow '#{workflow_id}'")
 
       prediction, raw_http = workflow_endpoint.execute_workflow(
@@ -386,7 +386,7 @@ module Mindee
     #  This is normally not required unless you have a custom endpoint which has the same name as a
     #  standard (off the shelf) endpoint.
     # @param version [String] For custom endpoints, version of the product
-    # @return [Mindee::HTTP::Endpoint]
+    # @return [Mindee::V1::HTTP::Endpoint]
     def create_endpoint(endpoint_name: '', account_name: '', version: '')
       initialize_endpoint(
         Mindee::V1::Product::Universal::Universal,
@@ -426,7 +426,7 @@ module Mindee
     #  This is normally not required unless you have a custom endpoint which has the same name as a
     #  standard (off the shelf) endpoint.
     # @param version [String] For custom endpoints, version of the product.
-    # @return [Mindee::HTTP::Endpoint]
+    # @return [Mindee::V1::HTTP::Endpoint]
     def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
       if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::V1::Product::Universal::Universal
         raise Mindee::Errors::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
@@ -436,7 +436,7 @@ module Mindee
       account_name = fix_account_name(account_name)
       version = fix_version(product_class, version)
 
-      HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key.to_s)
+      V1::HTTP::Endpoint.new(account_name, endpoint_name, version, api_key: @api_key.to_s)
     end
 
     def fix_endpoint_name(product_class, endpoint_name)
