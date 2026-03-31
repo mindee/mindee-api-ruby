@@ -3,7 +3,7 @@
 require 'mindee'
 
 describe Mindee::Input::Source::URLInputSource do
-  let(:client) { Mindee::Client.new(api_key: ENV.fetch('MINDEE_API_KEY')) }
+  let(:client) { Mindee::V1::Client.new(api_key: ENV.fetch('MINDEE_API_KEY')) }
 
   it 'retrieves response from a remote file' do
     remote_input = Mindee::Input::Source::URLInputSource.new(ENV.fetch('MINDEE_V2_SE_TESTS_BLANK_PDF_URL'))

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../../input/base_parameters'
+require_relative 'data_schema'
 
 module Mindee
   module V2
@@ -74,7 +75,7 @@ module Mindee
               @polygon = polygon
               @confidence = confidence
               @text_context = text_context
-              @data_schema = Input::DataSchema.new(data_schema) unless data_schema.nil?
+              @data_schema = DataSchema.new(data_schema) unless data_schema.nil?
               # rubocop:enable Metrics/ParameterLists
             end
 

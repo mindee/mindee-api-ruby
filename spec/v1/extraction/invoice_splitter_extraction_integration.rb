@@ -19,7 +19,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
   end
 
   it 'should extract invoices from a PDF (strict mode)' do
-    client = Mindee::Client.new
+    client = Mindee::V1::Client.new
     invoice_splitter_input = Mindee::Input::Source::PathInputSource.new(
       File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'default_sample.pdf')
     )

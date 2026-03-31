@@ -6,7 +6,7 @@
 require 'mindee'
 
 # Init a new client
-mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+mindee_client = Mindee::V1::Client.new(api_key: 'my-api-key')
 
 # Load a file from disk
 input_source = mindee_client.source_from_path('/path/to/the/file.ext')
@@ -14,7 +14,7 @@ input_source = mindee_client.source_from_path('/path/to/the/file.ext')
 # Parse the file
 result = mindee_client.parse(
   input_source,
-  Mindee::Product::US::BankCheck::BankCheckV1
+  Mindee::V1::Product::US::BankCheck::BankCheckV1
 )
 
 # Print a full summary of the parsed data in RST format

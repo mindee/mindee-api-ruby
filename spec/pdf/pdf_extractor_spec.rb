@@ -8,7 +8,7 @@ describe 'Invoice extraction' do
   let(:loaded_prediction_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'response_v1', 'complete.json') }
 
   let(:loaded_prediction) do
-    dummy_client = Mindee::Client.new(api_key: 'dummy_key')
+    dummy_client = Mindee::V1::Client.new(api_key: 'dummy_key')
     input_response = Mindee::Input::LocalResponse.new(loaded_prediction_path)
     response = dummy_client.load_prediction(Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1, input_response)
     response.document.inference.prediction
