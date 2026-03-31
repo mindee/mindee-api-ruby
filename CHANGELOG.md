@@ -9,8 +9,8 @@
 * :recycle: make polling follow API urls instead of re-constructing them
 * :sparkles: add support for generic product accessors in V2
 * :recycle: add proper tests for ruby 4
-### Fixes 
-* :recycle: fix tests file paths 
+### Fixes
+* :recycle: fix tests file paths
 
 
 ## v4.12.0 - 2026-02-25
@@ -58,7 +58,7 @@
 
 
 ## v4.7.0 - 2025-09-18
-Including RC changes and fixes. 
+Including RC changes and fixes.
 ### Changes
 * :sparkles: add support for V2 Mindee API
 * :sparkles: add missing accessors for PDF fixing options in `LocalInputSource`

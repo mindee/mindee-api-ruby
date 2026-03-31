@@ -40,7 +40,7 @@ jobs:
 
       - name: Tests V2 CLI
         run: |
-          ./spec/test_v2_cli.sh ./spec/data/file_types/pdf/blank_1.pdf ${{ matrix.os_config.rid }} 
+          ./spec/test_v2_cli.sh ./spec/data/file_types/pdf/blank_1.pdf ${{ matrix.os_config.rid }}
 
       - name: Tests V1 CLI
         run: |
