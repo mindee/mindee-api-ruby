@@ -24,7 +24,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
       File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'default_sample.pdf')
     )
     response = client.parse(
-      invoice_splitter_input, Mindee::Product::InvoiceSplitter::InvoiceSplitterV1, options: { close_file: false }
+      invoice_splitter_input, Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1, options: { close_file: false }
     )
     inference = response.document.inference
 
@@ -37,7 +37,7 @@ describe 'PDF Invoice Extraction (Strict Mode)' do
     expect(extracted_pdfs_strict[0].filename).to eq('default_sample_001-001.pdf')
     expect(extracted_pdfs_strict[1].filename).to eq('default_sample_002-002.pdf')
 
-    invoice0 = client.parse(extracted_pdfs_strict[0].as_input_source, Mindee::Product::Invoice::InvoiceV4)
+    invoice0 = client.parse(extracted_pdfs_strict[0].as_input_source, Mindee::V1::Product::Invoice::InvoiceV4)
 
     test_string_rst_invoice0 = prepare_invoice_return(
       File.join(V1_PRODUCT_DATA_DIR, 'invoices', 'response_v4', 'summary_full_invoice_p1.rst'),

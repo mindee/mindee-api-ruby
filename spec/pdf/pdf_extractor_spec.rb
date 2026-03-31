@@ -10,7 +10,7 @@ describe 'Invoice extraction' do
   let(:loaded_prediction) do
     dummy_client = Mindee::Client.new(api_key: 'dummy_key')
     input_response = Mindee::Input::LocalResponse.new(loaded_prediction_path)
-    response = dummy_client.load_prediction(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1, input_response)
+    response = dummy_client.load_prediction(Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1, input_response)
     response.document.inference.prediction
   end
 

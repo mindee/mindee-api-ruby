@@ -1,0 +1,17 @@
+# lib/mindee/product/passport/passport_v1_page.rb
+
+module Mindee
+  module V1
+    module Product
+    module Passport
+      class PassportV1Page < Parsing::Common::Page
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      class PassportV1PagePrediction < PassportV1Document
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end

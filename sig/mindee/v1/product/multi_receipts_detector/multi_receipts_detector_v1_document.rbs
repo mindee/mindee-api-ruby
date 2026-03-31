@@ -1,0 +1,15 @@
+# lib/mindee/product/multi_receipts_detector/multi_receipts_detector_v1_document.rb
+
+module Mindee
+  module V1
+    module Product
+    module MultiReceiptsDetector
+      class MultiReceiptsDetectorV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def receipts: -> (Array[Parsing::Standard::PositionField])
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end

@@ -1,0 +1,13 @@
+# lib/mindee/product/delivery_note/delivery_note_v1.rb
+
+module Mindee
+  module V1
+    module Product
+    module DeliveryNote
+      class DeliveryNoteV1 < Parsing::Common::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

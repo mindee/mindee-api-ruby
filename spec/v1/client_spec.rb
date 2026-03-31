@@ -60,14 +60,14 @@ describe Mindee::Client do
 
     it 'should load a local response' do
       local_resp = Mindee::Input::LocalResponse.new("#{V1_DATA_DIR}/products/invoices/response_v4/complete.json")
-      mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
+      mindee_client.load_prediction(Mindee::V1::Product::Invoice::InvoiceV4, local_resp)
       expect(mindee_client).to_not be_nil
     end
 
     it 'should not load an invalid local response' do
       local_resp = Mindee::Input::LocalResponse.new("#{V1_DATA_DIR}/geometry/polygon.json")
       expect do
-        mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
+        mindee_client.load_prediction(Mindee::V1::Product::Invoice::InvoiceV4, local_resp)
       end.to raise_error Mindee::Errors::MindeeInputError
     end
 
@@ -77,21 +77,21 @@ describe Mindee::Client do
       expect do
         mindee_client.parse(
           input_source,
-          Mindee::Product::Invoice::InvoiceV4,
+          Mindee::V1::Product::Invoice::InvoiceV4,
           options: { max_retries: 0 }
         )
       end.to raise_error ArgumentError
       expect do
         mindee_client.parse(
           input_source,
-          Mindee::Product::Invoice::InvoiceV4,
+          Mindee::V1::Product::Invoice::InvoiceV4,
           options: { initial_delay_sec: 0.5 }
         )
       end.to raise_error ArgumentError
       expect do
         mindee_client.parse(
           input_source,
-          Mindee::Product::Invoice::InvoiceV4,
+          Mindee::V1::Product::Invoice::InvoiceV4,
           options: { delay_sec: 0.5 }
         )
       end.to raise_error ArgumentError
@@ -101,7 +101,7 @@ describe Mindee::Client do
       expect do
         mindee_client.send(
           :initialize_endpoint,
-          Mindee::Product::Universal::Universal,
+          Mindee::V1::Product::Universal::Universal,
           endpoint_name: '',
           account_name: 'account_name',
           version: 'version'
@@ -111,7 +111,7 @@ describe Mindee::Client do
       expect do
         mindee_client.send(
           :initialize_endpoint,
-          Mindee::Product::Universal::Universal,
+          Mindee::V1::Product::Universal::Universal,
           endpoint_name: '',
           account_name: 'account_name',
           version: 'version'

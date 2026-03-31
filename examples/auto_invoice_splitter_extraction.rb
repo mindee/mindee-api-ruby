@@ -16,7 +16,7 @@ end
 def parse_single_page(mindee_client, input_source)
   invoice_result = mindee_client.parse(
     input_source,
-    Mindee::Product::Invoice::InvoiceV4
+    Mindee::V1::Product::Invoice::InvoiceV4
   )
   puts invoice_result.document
 end
@@ -25,7 +25,7 @@ def parse_multi_page(mindee_client, input_source)
   pdf_extractor = Mindee::PDF::PDFExtractor::PDFExtractor.new(input_source)
   invoice_splitter_response = mindee_client.parse(
     input_source,
-    Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
+    Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,
     options: { close_file: false }
   )
   page_groups = invoice_splitter_response.document.inference.prediction.invoice_page_groups
@@ -37,7 +37,7 @@ def parse_multi_page(mindee_client, input_source)
 
     invoice_result = mindee_client.parse(
       extracted_pdf.as_input_source,
-      Mindee::Product::Invoice::InvoiceV4,
+      Mindee::V1::Product::Invoice::InvoiceV4,
       options: { close_file: false }
     )
     puts invoice_result.document

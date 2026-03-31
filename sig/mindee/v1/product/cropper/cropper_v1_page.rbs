@@ -1,0 +1,18 @@
+# lib/mindee/product/cropper/cropper_v1_page.rb
+
+module Mindee
+  module V1
+    module Product
+    module Cropper
+      class CropperV1Page < Parsing::Common::Page
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      class CropperV1PagePrediction < CropperV1Document
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def cropping: -> Array[Parsing::Standard::PositionField]
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end

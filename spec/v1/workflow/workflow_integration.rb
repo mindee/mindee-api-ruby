@@ -33,7 +33,7 @@ describe Mindee::Client do
       options = { workflow_id: workflow_id, rag: true }
       response = client.parse(
         sample_input,
-        Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
         options: options
       )
       expect(response.document.to_s).to_not be_empty
@@ -44,7 +44,7 @@ describe Mindee::Client do
       options = { workflow_id: workflow_id }
       response = client.parse(
         sample_input,
-        Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
         options: options
       )
       expect(response.document.to_s).to_not be_empty
