@@ -13,35 +13,11 @@ V1_PRODUCTS = {
     sync: true,
     async: false,
   },
-  'bill-of-lading' => {
-    description: 'Bill of Lading',
-    doc_class: Mindee::V1::Product::BillOfLading::BillOfLadingV1,
-    sync: false,
-    async: true,
-  },
-  'business-card' => {
-    description: 'Business Card',
-    doc_class: Mindee::V1::Product::BusinessCard::BusinessCardV1,
-    sync: false,
-    async: true,
-  },
   'cropper' => {
     description: 'Cropper',
     doc_class: Mindee::V1::Product::Cropper::CropperV1,
     sync: true,
     async: false,
-  },
-  'delivery-note' => {
-    description: 'Delivery note',
-    doc_class: Mindee::V1::Product::DeliveryNote::DeliveryNoteV1,
-    sync: false,
-    async: true,
-  },
-  'driver-license' => {
-    description: 'Driver License',
-    doc_class: Mindee::V1::Product::DriverLicense::DriverLicenseV1,
-    sync: false,
-    async: true,
   },
   'financial-document' => {
     description: 'Financial Document',
@@ -61,41 +37,11 @@ V1_PRODUCTS = {
     sync: false,
     async: true,
   },
-  'fr-carte-grise' => {
-    description: 'Carte Grise',
-    doc_class: Mindee::V1::Product::FR::CarteGrise::CarteGriseV1,
-    sync: true,
-    async: false,
-  },
-  'fr-energy-bill' => {
-    description: 'Energy Bill',
-    doc_class: Mindee::V1::Product::FR::EnergyBill::EnergyBillV1,
-    sync: false,
-    async: true,
-  },
-  'fr-health-card' => {
-    description: 'Health Card',
-    doc_class: Mindee::V1::Product::FR::HealthCard::HealthCardV1,
-    sync: false,
-    async: true,
-  },
   'fr-carte-nationale-d-identite' => {
     description: "Carte Nationale d'Identité",
     doc_class: Mindee::V1::Product::FR::IdCard::IdCardV2,
     sync: true,
     async: false,
-  },
-  'fr-payslip' => {
-    description: 'Payslip',
-    doc_class: Mindee::V1::Product::FR::Payslip::PayslipV3,
-    sync: false,
-    async: true,
-  },
-  'ind-passport-india' => {
-    description: 'Passport - India',
-    doc_class: Mindee::V1::Product::IND::IndianPassport::IndianPassportV1,
-    sync: false,
-    async: true,
   },
   'international-id' => {
     description: 'International ID',
@@ -121,12 +67,6 @@ V1_PRODUCTS = {
     sync: true,
     async: false,
   },
-  'nutrition-facts-label' => {
-    description: 'Nutrition Facts Label',
-    doc_class: Mindee::V1::Product::NutritionFactsLabel::NutritionFactsLabelV1,
-    sync: false,
-    async: true,
-  },
   'passport' => {
     description: 'Passport',
     doc_class: Mindee::V1::Product::Passport::PassportV1,
@@ -142,24 +82,6 @@ V1_PRODUCTS = {
   'resume' => {
     description: 'Resume',
     doc_class: Mindee::V1::Product::Resume::ResumeV1,
-    sync: false,
-    async: true,
-  },
-  'us-bank-check' => {
-    description: 'Bank Check',
-    doc_class: Mindee::V1::Product::US::BankCheck::BankCheckV1,
-    sync: true,
-    async: false,
-  },
-  'us-healthcare-card' => {
-    description: 'Healthcare Card',
-    doc_class: Mindee::V1::Product::US::HealthcareCard::HealthcareCardV1,
-    sync: false,
-    async: true,
-  },
-  'us-us-mail' => {
-    description: 'US Mail',
-    doc_class: Mindee::V1::Product::US::UsMail::UsMailV3,
     sync: false,
     async: true,
   },
