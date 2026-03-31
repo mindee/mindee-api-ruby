@@ -7,7 +7,7 @@ require_relative '../../http/mock_http_response'
 describe Mindee::HTTP::ErrorHandler do
   context 'An HTTP call' do
     it 'should make an invalid API sync parse call raising an exception' do
-      mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
+      mindee_client1 = Mindee::V1::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{FILE_TYPES_DIR}/receipt.jpg", 'rb')
       input_source = mindee_client1.source_from_file(file, 'receipt.jpg')
       doc_class = Mindee::V1::Product::Receipt::ReceiptV5
@@ -17,7 +17,7 @@ describe Mindee::HTTP::ErrorHandler do
     end
 
     it 'should make an invalid API async enqueue call raising an exception' do
-      mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
+      mindee_client1 = Mindee::V1::Client.new(api_key: 'invalid-api-key')
       file = File.open("#{V1_DATA_DIR}/products/invoice_splitter/default_sample.pdf", 'rb')
       input_source = mindee_client1.source_from_file(file, 'default_sample.pdf')
       doc_class = Mindee::V1::Product::Invoice::InvoiceV4
@@ -27,7 +27,7 @@ describe Mindee::HTTP::ErrorHandler do
     end
 
     it 'should make an invalid API async parse call raising an exception' do
-      mindee_client1 = Mindee::Client.new(api_key: 'invalid-api-key')
+      mindee_client1 = Mindee::V1::Client.new(api_key: 'invalid-api-key')
       doc_class = Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1
       expect do
         mindee_client1.parse_queued('invalid-job-id', doc_class)
