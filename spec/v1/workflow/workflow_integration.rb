@@ -4,9 +4,9 @@ require 'json'
 require 'mindee'
 require_relative '../../data'
 
-describe Mindee::Client do
+describe Mindee::V1::Client do
   describe 'execute_workflow call to API' do
-    let(:client) { Mindee::Client.new }
+    let(:client) { Mindee::V1::Client.new }
     let(:sample_input) do
       Mindee::Input::Source::PathInputSource.new(
         File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')

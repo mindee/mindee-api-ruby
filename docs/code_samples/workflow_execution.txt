@@ -8,7 +8,7 @@ require 'mindee'
 workflow_id = 'workflow-id'
 
 # Init a new client
-mindee_client = Mindee::Client.new
+mindee_client = Mindee::V1::Client.new
 
 # Load a file from disk
 input_source = mindee_client.source_from_path('path/to/my/file.ext')

@@ -8,7 +8,7 @@ require_relative '../../test_utilities'
 
 describe 'cropper extra' do
   let(:invoice_path) { File.join(V1_DATA_DIR, 'products', 'invoices', 'default_sample.jpg') }
-  let(:client) { Mindee::Client.new }
+  let(:client) { Mindee::V1::Client.new }
   it 'should send correctly' do
     cropper_extra = Mindee::Input::Source::PathInputSource.new(
       File.join(invoice_path)
@@ -21,7 +21,7 @@ end
 
 describe 'Full Text OCR extra' do
   let(:invoice_path) { File.join(V1_DATA_DIR, 'products', 'invoices', 'default_sample.jpg') }
-  let(:client) { Mindee::Client.new }
+  let(:client) { Mindee::V1::Client.new }
   it 'should send correctly' do
     full_text_ocr_input = Mindee::Input::Source::PathInputSource.new(
       File.join(invoice_path)

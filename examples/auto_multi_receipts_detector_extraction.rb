@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-mindee_client = Mindee::Client.new(api_key: 'my-api-key')
+mindee_client = Mindee::V1::Client.new(api_key: 'my-api-key')
 def multi_receipts_detection(file_path, mindee_client)
   input_source = mindee_client.source_from_path(file_path)
 
