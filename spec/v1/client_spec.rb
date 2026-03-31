@@ -4,9 +4,9 @@ require 'mindee'
 
 require_relative '../data'
 
-describe Mindee::Client do
+describe Mindee::V1::Client do
   context 'A client' do
-    mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
+    mindee_client = Mindee::V1::Client.new(api_key: 'invalid-api-key')
 
     it 'should open PDF files from a path' do
       input_source = mindee_client.source_from_path("#{V1_DATA_DIR}/products/invoices/invoice.pdf")

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'mindee/input/data_schema'
+require 'mindee/v2/product/extraction/params/data_schema'
 require 'mindee/v2/product/extraction/params/extraction_parameters'
 
 describe Mindee::V2::Product::Extraction::Params::ExtractionParameters do
@@ -9,7 +9,7 @@ describe Mindee::V2::Product::Extraction::Params::ExtractionParameters do
   end
   let(:extracted_schema_hash) { JSON.parse(extracted_schema_content) }
   let(:extracted_schema_str) { extracted_schema_hash.to_json }
-  let(:extracted_schema_object) { Mindee::Input::DataSchema.new(extracted_schema_hash) }
+  let(:extracted_schema_object) { Mindee::V2::Product::Extraction::Params::DataSchema.new(extracted_schema_hash) }
 
   describe 'Data Schema' do
     describe "shouldn't replace when unset" do

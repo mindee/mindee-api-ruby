@@ -8,7 +8,7 @@ using Mindee::V2::Product::Extraction
 
 describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :defined do
   let(:api_key) { ENV.fetch('MINDEE_V2_API_KEY') }
-  let(:model_id) { ENV.fetch('MINDEE_V2_FINDOC_MODEL_ID') }
+  let(:model_id) { ENV.fetch('MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID') }
   let(:blank_pdf_url) { ENV.fetch('MINDEE_V2_SE_TESTS_BLANK_PDF_URL') }
 
   let(:client) { Mindee::V2::Client.new(api_key: api_key) }
