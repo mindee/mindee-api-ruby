@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'mindee/client'
 require 'mindee/logging'
 require 'mindee/page_options'
 require 'mindee/v1'
