@@ -187,7 +187,7 @@ module MindeeCLI
     # @param options [Hash]
     # @return [Mindee::Parsing::Common::ApiResponse]
     def send(product_command, options)
-      mindee_client = Mindee::ClientV2.new(api_key: options[:api_key])
+      mindee_client = Mindee::V2::Client.new(api_key: options[:api_key])
       response_class = V2_PRODUCTS[product_command][:response_class]
       input_source = setup_input_source(options)
       params = setup_product_params
@@ -202,7 +202,7 @@ module MindeeCLI
     # @param options [Hash]
     # @return [Mindee::V2::Parsing::Search::SearchResponse]
     def search(options)
-      mindee_client = Mindee::ClientV2.new(api_key: options[:api_key])
+      mindee_client = Mindee::V2::Client.new(api_key: options[:api_key])
       mindee_client.search_models(options[:model_name], options[:model_type])
     end
 

@@ -8,14 +8,14 @@ require_relative '../http/mock_http_response' # <- the original helper
 using Mindee::V2::Product::Extraction::Params
 using Mindee::V2::Product::Extraction
 
-describe Mindee::ClientV2 do
+describe Mindee::V2::Client do
   let(:input_doc)      { Mindee::Input::Source::PathInputSource.new(File.join(FILE_TYPES_DIR, 'pdf', 'blank.pdf')) }
   let(:base_url)       { 'https://dummy-url' }
   let(:api_key)        { 'dummy-api-key' }
 
   let(:client) do
     ENV['MINDEE_V2_BASE_URL'] = 'https://dummy-url'
-    Mindee::ClientV2.new(api_key: api_key)
+    Mindee::V2::Client.new(api_key: api_key)
   end
   let(:api) do
     client.instance_variable_get(:@mindee_api)

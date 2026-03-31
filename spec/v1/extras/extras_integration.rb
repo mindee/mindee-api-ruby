@@ -13,8 +13,8 @@ describe 'cropper extra' do
     cropper_extra = Mindee::Input::Source::PathInputSource.new(
       File.join(invoice_path)
     )
-    cropper_result = client.parse(cropper_extra, Mindee::Product::Invoice::InvoiceV4, options: { cropper: true },
-                                                                                      enqueue: false)
+    cropper_result = client.parse(cropper_extra, Mindee::V1::Product::Invoice::InvoiceV4, options: { cropper: true },
+                                                                                          enqueue: false)
     expect(cropper_result.document.inference.pages[0].extras.cropper).to_not be_nil
   end
 end
@@ -28,7 +28,7 @@ describe 'Full Text OCR extra' do
     )
     full_text_ocr_result = client.parse(
       full_text_ocr_input,
-      Mindee::Product::InternationalId::InternationalIdV2,
+      Mindee::V1::Product::InternationalId::InternationalIdV2,
       options: { full_text: true }
     )
     expect(full_text_ocr_result.document.extras.full_text_ocr).to_not be_nil

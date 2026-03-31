@@ -8,12 +8,12 @@ require_relative '../../../data'
 
 DIR_FR_ID_CARD_V2 = File.join(V1_DATA_DIR, 'products', 'idcard_fr', 'response_v2').freeze
 
-describe Mindee::Product::FR::IdCard::IdCardV2 do
+describe Mindee::V1::Product::FR::IdCard::IdCardV2 do
   context 'A Carte Nationale d\'Identité V2' do
     it 'should load an empty document prediction' do
       response = load_json(DIR_FR_ID_CARD_V2, 'empty.json')
       inference = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::FR::IdCard::IdCardV2,
+        Mindee::V1::Product::FR::IdCard::IdCardV2,
         response['document']
       ).inference
       expect(inference.product.type).to eq('standard')
@@ -23,7 +23,7 @@ describe Mindee::Product::FR::IdCard::IdCardV2 do
       to_string = read_file(DIR_FR_ID_CARD_V2, 'summary_full.rst')
       response = load_json(DIR_FR_ID_CARD_V2, 'complete.json')
       document = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::FR::IdCard::IdCardV2,
+        Mindee::V1::Product::FR::IdCard::IdCardV2,
         response['document']
       )
       expect(document.to_s).to eq(to_string)
@@ -32,7 +32,7 @@ describe Mindee::Product::FR::IdCard::IdCardV2 do
       to_string = read_file(DIR_FR_ID_CARD_V2, 'summary_page0.rst')
       response = load_json(DIR_FR_ID_CARD_V2, 'complete.json')
       document = Mindee::Parsing::Common::Document.new(
-        Mindee::Product::FR::IdCard::IdCardV2,
+        Mindee::V1::Product::FR::IdCard::IdCardV2,
         response['document']
       )
       page = document.inference.pages[0]

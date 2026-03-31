@@ -3,13 +3,13 @@
 require 'mindee'
 require 'mindee/v2/product'
 
-describe Mindee::ClientV2, :integration, :v2 do
+describe Mindee::V2::Client, :integration, :v2 do
   let(:split_model_id) do
     ENV.fetch('MINDEE_V2_SE_TESTS_SPLIT_MODEL_ID')
   end
 
   let(:v2_client) do
-    Mindee::ClientV2.new
+    Mindee::V2::Client.new
   end
 
   it 'processes split default sample correctly' do

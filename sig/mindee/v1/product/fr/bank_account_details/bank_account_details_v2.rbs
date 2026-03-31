@@ -1,0 +1,15 @@
+# lib/mindee/v1/product/bank_account_details/bank_account_details_v2.rb
+
+module Mindee
+  module V1
+    module Product
+    module FR
+      module BankAccountDetails
+        class BankAccountDetailsV2 < Parsing::Common::Inference
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+          end
+        end
+      end
+    end
+  end
+end

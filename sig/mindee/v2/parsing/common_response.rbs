@@ -4,6 +4,7 @@ module Mindee
     module Parsing
       class CommonResponse
         attr_reader raw_http: String
+
         def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end

@@ -1,0 +1,13 @@
+# lib/mindee/product/invoice/invoice_v4.rb
+
+module Mindee
+  module V1
+    module Product
+    module Invoice
+      class InvoiceV4 < Parsing::Common::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

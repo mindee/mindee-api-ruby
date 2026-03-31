@@ -6,12 +6,12 @@ require 'mindee/v2/product'
 using Mindee::V2::Product::Extraction::Params
 using Mindee::V2::Product::Extraction
 
-describe 'Mindee::ClientV2 – integration tests (V2)', :integration, order: :defined do
+describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :defined do
   let(:api_key) { ENV.fetch('MINDEE_V2_API_KEY') }
   let(:model_id) { ENV.fetch('MINDEE_V2_FINDOC_MODEL_ID') }
   let(:blank_pdf_url) { ENV.fetch('MINDEE_V2_SE_TESTS_BLANK_PDF_URL') }
 
-  let(:client) { Mindee::ClientV2.new(api_key: api_key) }
+  let(:client) { Mindee::V2::Client.new(api_key: api_key) }
   context 'An input file' do
     it 'parses an empty multi-page PDF successfully' do
       src_path = File.join(FILE_TYPES_DIR, 'pdf', 'multipage_cut-2.pdf')

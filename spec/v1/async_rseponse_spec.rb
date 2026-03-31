@@ -12,8 +12,10 @@ describe Mindee::Parsing::Common::ApiResponse do
       fake_response = MockHTTPResponse.new('1.0', response['api_request']['status_code'].to_s, 'OK',
                                            JSON.generate(response))
       expect(Mindee::HTTP::ResponseValidation.valid_async_response?(fake_response)).to eq(true)
-      parsed_response = Mindee::Parsing::Common::ApiResponse.new(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
-                                                                 response, fake_response.body)
+      parsed_response = Mindee::Parsing::Common::ApiResponse.new(
+        Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,
+        response, fake_response.body
+      )
 
       expect(parsed_response.job.status).to eq(Mindee::Parsing::Common::JobStatus::WAITING)
       expect(parsed_response.job.id).to eq('76c90710-3a1b-4b91-8a39-31a6543e347c')
@@ -28,8 +30,10 @@ describe Mindee::Parsing::Common::ApiResponse do
       fake_response = MockHTTPResponse.new('1.0', response['api_request']['status_code'].to_s, 'NOT OK',
                                            JSON.generate(response))
       expect(Mindee::HTTP::ResponseValidation.valid_async_response?(fake_response)).to eq(false)
-      parsed_response = Mindee::Parsing::Common::ApiResponse.new(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
-                                                                 response, fake_response.body)
+      parsed_response = Mindee::Parsing::Common::ApiResponse.new(
+        Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,
+        response, fake_response.body
+      )
       expect(parsed_response.job).to be(nil)
     end
 
@@ -38,8 +42,10 @@ describe Mindee::Parsing::Common::ApiResponse do
       fake_response = MockHTTPResponse.new('1.0', response['api_request']['status_code'].to_s, 'OK',
                                            JSON.generate(response))
       expect(Mindee::HTTP::ResponseValidation.valid_async_response?(fake_response)).to eq(true)
-      parsed_response = Mindee::Parsing::Common::ApiResponse.new(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
-                                                                 response, fake_response.body)
+      parsed_response = Mindee::Parsing::Common::ApiResponse.new(
+        Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,
+        response, fake_response.body
+      )
       expect(parsed_response.job.issued_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')).to eq('2023-03-16T12:33:49.602947')
       expect(parsed_response.job.status).to eq(Mindee::Parsing::Common::JobStatus::PROCESSING)
       expect(parsed_response.job.id).to eq('76c90710-3a1b-4b91-8a39-31a6543e347c')
@@ -54,8 +60,10 @@ describe Mindee::Parsing::Common::ApiResponse do
       fake_response = MockHTTPResponse.new('1.0', response['api_request']['status_code'].to_s, 'OK',
                                            JSON.generate(response))
       expect(Mindee::HTTP::ResponseValidation.valid_async_response?(fake_response)).to eq(true)
-      parsed_response = Mindee::Parsing::Common::ApiResponse.new(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
-                                                                 response, fake_response.body)
+      parsed_response = Mindee::Parsing::Common::ApiResponse.new(
+        Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,
+        response, fake_response.body
+      )
       expect(parsed_response.job.issued_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')).to eq('2023-03-21T13:52:56.326107')
       expect(parsed_response.job.status).to eq(Mindee::Parsing::Common::JobStatus::COMPLETED)
       expect(parsed_response.job.id).to eq('b6caf9e8-9bcc-4412-bcb7-f5b416678f0d')
@@ -71,8 +79,10 @@ describe Mindee::Parsing::Common::ApiResponse do
       fake_response = MockHTTPResponse.new('1.0', response['api_request']['status_code'].to_s, 'NOT OK',
                                            JSON.generate(response))
       expect(Mindee::HTTP::ResponseValidation.valid_async_response?(fake_response)).to eq(false)
-      parsed_response = Mindee::Parsing::Common::ApiResponse.new(Mindee::Product::InvoiceSplitter::InvoiceSplitterV1,
-                                                                 response, fake_response.body)
+      parsed_response = Mindee::Parsing::Common::ApiResponse.new(
+        Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,
+        response, fake_response.body
+      )
       expect(parsed_response.job.issued_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')).to eq('2024-02-20T10:31:06.878599')
       expect(parsed_response.job.available_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')).to eq('2024-02-20T10:31:06.878599')
       expect(parsed_response.api_request.status).to eq(Mindee::Parsing::Common::RequestStatus::SUCCESS)

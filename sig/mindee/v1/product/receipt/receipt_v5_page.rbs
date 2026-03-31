@@ -1,0 +1,17 @@
+# lib/mindee/product/receipt/receipt_v5_page.rb
+
+module Mindee
+  module V1
+    module Product
+    module Receipt
+      class ReceiptV5Page < Parsing::Common::Page
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      class ReceiptV5PagePrediction < ReceiptV5Document
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end
