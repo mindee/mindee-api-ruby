@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'bill_of_lading_v1_document'
 require_relative 'bill_of_lading_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Bill of Lading module.
       module BillOfLading
         # Bill of Lading API version 1 inference prediction.
-        class BillOfLadingV1 < Mindee::Parsing::Common::Inference
+        class BillOfLadingV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'bill_of_lading'
           @endpoint_version = '1'
           @has_async = true

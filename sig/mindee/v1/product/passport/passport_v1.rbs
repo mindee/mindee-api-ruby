@@ -1,4 +1,4 @@
-# lib/mindee/product/passport/passport_v1.rb
+# lib/mindee/v1/product/passport/passport_v1.rb
 
 module Mindee
   module V1

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module US
         module HealthcareCard
           # Copayments for covered services.
-          class HealthcareCardV1Copay < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class HealthcareCardV1Copay < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The price of the service.
             # @return [Float]
             attr_reader :service_fees

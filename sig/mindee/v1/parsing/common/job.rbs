@@ -1,0 +1,24 @@
+# lib/mindee/v1/parsing/common/job.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        class Job
+          def id: -> String
+
+          def issued_at: -> Time
+
+          def available_at: -> Time
+
+          def status: () -> (:waiting | :processing | :completed | :failed)
+
+          def millisecs_taken: -> Integer
+
+          def error: -> Hash[String | Symbol, untyped]
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
+      end
+    end
+  end
+end

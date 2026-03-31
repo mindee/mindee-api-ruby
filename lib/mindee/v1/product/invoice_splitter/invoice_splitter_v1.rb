@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'invoice_splitter_v1_document'
 require_relative 'invoice_splitter_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Invoice Splitter module.
       module InvoiceSplitter
         # Invoice Splitter API version 1 inference prediction.
-        class InvoiceSplitterV1 < Mindee::Parsing::Common::Inference
+        class InvoiceSplitterV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'invoice_splitter'
           @endpoint_version = '1'
           @has_async = true

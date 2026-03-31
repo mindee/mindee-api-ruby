@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'cropper_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module Cropper
         # Cropper API version 1.1 page data.
-        class CropperV1Page < Mindee::Parsing::Common::Page
+        class CropperV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super
@@ -25,10 +25,10 @@ module Mindee
 
         # Cropper V1 page prediction.
         class CropperV1PagePrediction < CropperV1Document
-          include Mindee::Parsing::Standard
+          include Mindee::V1::Parsing::Standard
 
           # List of documents found in the image.
-          # @return [Array<Mindee::Parsing::Standard::PositionField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::PositionField>]
           attr_reader :cropping
 
           # @param prediction [Hash]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module BankAccountDetails
           # Full extraction of BBAN, including: branch code, bank code, account and key.
-          class BankAccountDetailsV2Bban < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class BankAccountDetailsV2Bban < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The BBAN bank code outputted as a string.
             # @return [String]
             attr_reader :bban_bank_code

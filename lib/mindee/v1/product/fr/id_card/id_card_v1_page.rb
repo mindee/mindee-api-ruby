@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'id_card_v1_document'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module FR
         module IdCard
           # Carte Nationale d'Identité API version 1.1 page data.
-          class IdCardV1Page < Mindee::Parsing::Common::Page
+          class IdCardV1Page < Mindee::V1::Parsing::Common::Page
             # @param prediction [Hash]
             def initialize(prediction)
               super
@@ -26,10 +26,10 @@ module Mindee
 
           # Carte Nationale d'Identité V1 page prediction.
           class IdCardV1PagePrediction < IdCardV1Document
-            include Mindee::Parsing::Standard
+            include Mindee::V1::Parsing::Standard
 
             # The side of the document which is visible.
-            # @return [Mindee::Parsing::Standard::ClassificationField]
+            # @return [Mindee::V1::Parsing::Standard::ClassificationField]
             attr_reader :document_side
 
             # @param prediction [Hash]

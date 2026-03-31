@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'resume_v1_social_networks_urls'
 require_relative 'resume_v1_languages'
 require_relative 'resume_v1_educations'
@@ -12,46 +12,46 @@ module Mindee
     module Product
       module Resume
         # Resume API version 1.2 document data.
-        class ResumeV1Document < Mindee::Parsing::Common::Prediction
-          include Mindee::Parsing::Standard
+        class ResumeV1Document < Mindee::V1::Parsing::Common::Prediction
+          include Mindee::V1::Parsing::Standard
           # The location information of the candidate, including city, state, and country.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :address
           # The list of certificates obtained by the candidate.
           # @return [Mindee::V1::Product::Resume::ResumeV1Certificates]
           attr_reader :certificates
           # The ISO 639 code of the language in which the document is written.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :document_language
           # The type of the document sent.
-          # @return [Mindee::Parsing::Standard::ClassificationField]
+          # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :document_type
           # The list of the candidate's educational background.
           # @return [Mindee::V1::Product::Resume::ResumeV1Educations]
           attr_reader :education
           # The email address of the candidate.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :email_address
           # The candidate's first or given names.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :given_names
           # The list of the candidate's technical abilities and knowledge.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :hard_skills
           # The position that the candidate is applying for.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :job_applied
           # The list of languages that the candidate is proficient in.
           # @return [Mindee::V1::Product::Resume::ResumeV1Languages]
           attr_reader :languages
           # The ISO 3166 code for the country of citizenship of the candidate.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :nationality
           # The phone number of the candidate.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :phone_number
           # The candidate's current profession.
-          # @return [Mindee::Parsing::Standard::StringField]
+          # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :profession
           # The list of the candidate's professional experiences.
           # @return [Mindee::V1::Product::Resume::ResumeV1ProfessionalExperiences]
@@ -60,10 +60,10 @@ module Mindee
           # @return [Mindee::V1::Product::Resume::ResumeV1SocialNetworksUrls]
           attr_reader :social_networks_urls
           # The list of the candidate's interpersonal and communication abilities.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :soft_skills
           # The candidate's last names.
-          # @return [Array<Mindee::Parsing::Standard::StringField>]
+          # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :surnames
 
           # @param prediction [Hash]

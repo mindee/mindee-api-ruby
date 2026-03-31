@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'multi_receipts_detector_v1_document'
 require_relative 'multi_receipts_detector_v1_page'
 
@@ -10,7 +10,7 @@ module Mindee
       # Multi Receipts Detector module.
       module MultiReceiptsDetector
         # Multi Receipts Detector API version 1 inference prediction.
-        class MultiReceiptsDetectorV1 < Mindee::Parsing::Common::Inference
+        class MultiReceiptsDetectorV1 < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = 'multi_receipts_detector'
           @endpoint_version = '1'
           @has_async = false

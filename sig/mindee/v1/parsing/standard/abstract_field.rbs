@@ -1,0 +1,30 @@
+# lib/mindee/v1/parsing/standard/abstract_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class AbstractField
+          def bounding_box: -> Geometry::Polygon?
+
+          def polygon: -> Geometry::Polygon?
+
+          def page_id: -> Integer?
+
+          def confidence: -> Float?
+
+          def confidence=: (Float?) -> Float?
+
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+
+          def to_s: -> String
+
+          def self.array_confidence: (Array[untyped]) -> Float
+
+          def self.array_sum: (Array[untyped]) -> Float
+
+          def self.float_to_string: (Float, ?Integer) -> String
+        end
+      end
+    end
+  end
+end

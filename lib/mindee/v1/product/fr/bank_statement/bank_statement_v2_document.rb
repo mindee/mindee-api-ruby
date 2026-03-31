@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'bank_statement_v2_transactions'
 
 module Mindee
@@ -9,43 +9,43 @@ module Mindee
       module FR
         module BankStatement
           # Bank Statement API version 2.0 document data.
-          class BankStatementV2Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class BankStatementV2Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # The unique identifier for a customer's account in the bank's system.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :account_number
             # The physical location of the bank where the statement was issued.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :bank_address
             # The name of the bank that issued the statement.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :bank_name
             # The address of the client associated with the bank statement.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :client_address
             # The name of the clients who own the bank statement.
-            # @return [Array<Mindee::Parsing::Standard::StringField>]
+            # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
             attr_reader :client_names
             # The final amount of money in the account at the end of the statement period.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :closing_balance
             # The initial amount of money in an account at the start of the period.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :opening_balance
             # The date on which the bank statement was generated.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :statement_date
             # The date when the statement period ends.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :statement_end_date
             # The date when the bank statement period begins.
-            # @return [Mindee::Parsing::Standard::DateField]
+            # @return [Mindee::V1::Parsing::Standard::DateField]
             attr_reader :statement_start_date
             # The total amount of money deposited into the account.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :total_credits
             # The total amount of money debited from the account.
-            # @return [Mindee::Parsing::Standard::AmountField]
+            # @return [Mindee::V1::Parsing::Standard::AmountField]
             attr_reader :total_debits
             # The list of values that represent the financial transactions recorded in a bank statement.
             # @return [Mindee::V1::Product::FR::BankStatement::BankStatementV2Transactions]

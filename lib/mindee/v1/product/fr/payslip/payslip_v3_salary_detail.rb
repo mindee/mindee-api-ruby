@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module Payslip
           # Detailed information about the earnings.
-          class PayslipV3SalaryDetail < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class PayslipV3SalaryDetail < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The amount of the earning.
             # @return [Float]
             attr_reader :amount

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module EnergyBill
           # The subscription details fee for the energy service.
-          class EnergyBillV1Subscription < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class EnergyBillV1Subscription < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # Description or details of the subscription.
             # @return [String]
             attr_reader :description

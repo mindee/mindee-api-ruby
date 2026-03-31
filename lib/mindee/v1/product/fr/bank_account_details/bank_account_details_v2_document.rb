@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'bank_account_details_v2_bban'
 
 module Mindee
@@ -9,19 +9,19 @@ module Mindee
       module FR
         module BankAccountDetails
           # Bank Account Details API version 2.0 document data.
-          class BankAccountDetailsV2Document < Mindee::Parsing::Common::Prediction
-            include Mindee::Parsing::Standard
+          class BankAccountDetailsV2Document < Mindee::V1::Parsing::Common::Prediction
+            include Mindee::V1::Parsing::Standard
             # Full extraction of the account holders names.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :account_holders_names
             # Full extraction of BBAN, including: branch code, bank code, account and key.
             # @return [Mindee::V1::Product::FR::BankAccountDetails::BankAccountDetailsV2Bban]
             attr_reader :bban
             # Full extraction of the IBAN number.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :iban
             # Full extraction of the SWIFT code.
-            # @return [Mindee::Parsing::Standard::StringField]
+            # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :swift_code
 
             # @param prediction [Hash]

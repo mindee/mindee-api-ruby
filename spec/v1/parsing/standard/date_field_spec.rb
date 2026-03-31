@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-describe Mindee::Parsing::Standard::DateField do
+describe Mindee::V1::Parsing::Standard::DateField do
   describe 'constructor with date' do
     let(:field_dict) do
       {
@@ -19,7 +19,7 @@ describe Mindee::Parsing::Standard::DateField do
     end
 
     it 'sets value' do
-      field = Mindee::Parsing::Standard::DateField.new(field_dict, 0)
+      field = Mindee::V1::Parsing::Standard::DateField.new(field_dict, 0)
       expect(field.value).to eq('2018-04-01')
       expect(field.date_object).to be_a(Date)
       expect(field.is_computed).to be(true)
@@ -35,7 +35,7 @@ describe Mindee::Parsing::Standard::DateField do
     end
 
     it 'sets no date' do
-      field = Mindee::Parsing::Standard::DateField.new(field_dict, 0)
+      field = Mindee::V1::Parsing::Standard::DateField.new(field_dict, 0)
       expect(field.value).to be_nil
     end
   end

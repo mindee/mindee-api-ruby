@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'international_id_v2_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module InternationalId
         # International ID API version 2.2 page data.
-        class InternationalIdV2Page < Mindee::Parsing::Common::Page
+        class InternationalIdV2Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

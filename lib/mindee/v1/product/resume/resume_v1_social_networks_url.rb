@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module Resume
         # The list of social network profiles of the candidate.
-        class ResumeV1SocialNetworksUrl < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class ResumeV1SocialNetworksUrl < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The name of the social network.
           # @return [String]
           attr_reader :name

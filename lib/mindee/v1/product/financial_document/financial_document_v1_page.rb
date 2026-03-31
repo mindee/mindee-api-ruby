@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'financial_document_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module FinancialDocument
         # Financial Document API version 1.14 page data.
-        class FinancialDocumentV1Page < Mindee::Parsing::Common::Page
+        class FinancialDocumentV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super

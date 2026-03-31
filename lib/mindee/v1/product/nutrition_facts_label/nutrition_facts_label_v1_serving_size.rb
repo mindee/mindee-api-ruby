@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module NutritionFactsLabel
         # The size of a single serving of the product.
-        class NutritionFactsLabelV1ServingSize < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class NutritionFactsLabelV1ServingSize < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # The amount of a single serving.
           # @return [Float]
           attr_reader :amount

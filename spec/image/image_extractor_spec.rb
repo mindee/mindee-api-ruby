@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'mindee/product'
+require 'mindee/v1/product'
 require 'mindee/input/sources'
 require_relative '../data'
 

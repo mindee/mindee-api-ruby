@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module BillOfLading
         # The goods being shipped.
-        class BillOfLadingV1CarrierItem < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class BillOfLadingV1CarrierItem < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # A description of the item.
           # @return [String]
           attr_reader :description

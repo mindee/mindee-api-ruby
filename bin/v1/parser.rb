@@ -65,7 +65,7 @@ module MindeeCLI
     # @param product_command [String]
     # @param endpoint_name [String, nil]
     # @param options [Hash]
-    # @return [Mindee::Parsing::Common::ApiResponse]
+    # @return [Mindee::V1::Parsing::Common::ApiResponse]
     def send(product_command, endpoint_name, options)
       mindee_client = Mindee::Client.new(api_key: options[:api_key])
       doc_class = V1_PRODUCTS[product_command][:doc_class]

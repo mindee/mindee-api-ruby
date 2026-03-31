@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 require_relative 'energy_bill_v1_document'
 require_relative 'energy_bill_v1_page'
 
@@ -11,7 +11,7 @@ module Mindee
         # Energy Bill module.
         module EnergyBill
           # Energy Bill API version 1 inference prediction.
-          class EnergyBillV1 < Mindee::Parsing::Common::Inference
+          class EnergyBillV1 < Mindee::V1::Parsing::Common::Inference
             @endpoint_name = 'energy_bill_fra'
             @endpoint_version = '1'
             @has_async = true

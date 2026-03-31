@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module EnergyBill
           # Details of Taxes and Contributions.
-          class EnergyBillV1TaxesAndContribution < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class EnergyBillV1TaxesAndContribution < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # Description or details of the Taxes and Contributions.
             # @return [String]
             attr_reader :description

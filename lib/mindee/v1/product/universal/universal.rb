@@ -9,7 +9,7 @@ module Mindee
       # Universal product module.
       module Universal
         # Universal Document V1 prediction inference.
-        class Universal < Mindee::Parsing::Common::Inference
+        class Universal < Mindee::V1::Parsing::Common::Inference
           @endpoint_name = ''
           @endpoint_version = ''
           @has_sync = true
@@ -19,7 +19,7 @@ module Mindee
           def initialize(prediction)
             super
             @prediction = UniversalDocument.new(prediction['prediction'])
-            @pages = [] # : Array[Mindee::Parsing::Common::Page]
+            @pages = [] # : Array[Mindee::V1::Parsing::Common::Page]
             prediction['pages'].each do |page|
               if page.key?('prediction') && !page['prediction'].nil? && !page['prediction'].empty?
                 @pages.push(UniversalPage.new(page))

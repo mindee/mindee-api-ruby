@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../parsing'
+require_relative '../../../parsing'
 
 module Mindee
   module V1
@@ -8,8 +8,8 @@ module Mindee
       module FR
         module EnergyBill
           # Information about the energy meter.
-          class EnergyBillV1MeterDetail < Mindee::Parsing::Standard::FeatureField
-            include Mindee::Parsing::Standard
+          class EnergyBillV1MeterDetail < Mindee::V1::Parsing::Standard::FeatureField
+            include Mindee::V1::Parsing::Standard
             # The unique identifier of the energy meter.
             # @return [String]
             attr_reader :meter_number

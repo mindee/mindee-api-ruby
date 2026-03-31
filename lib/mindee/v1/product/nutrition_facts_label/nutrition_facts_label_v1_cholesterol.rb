@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 
 module Mindee
   module V1
     module Product
       module NutritionFactsLabel
         # The amount of cholesterol in the product.
-        class NutritionFactsLabelV1Cholesterol < Mindee::Parsing::Standard::FeatureField
-          include Mindee::Parsing::Standard
+        class NutritionFactsLabelV1Cholesterol < Mindee::V1::Parsing::Standard::FeatureField
+          include Mindee::V1::Parsing::Standard
           # DVs are the recommended amounts of cholesterol to consume or not to exceed each day.
           # @return [Float]
           attr_reader :daily_value

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../parsing'
+require_relative '../../parsing'
 require_relative 'passport_v1_document'
 
 module Mindee
@@ -8,7 +8,7 @@ module Mindee
     module Product
       module Passport
         # Passport API version 1.1 page data.
-        class PassportV1Page < Mindee::Parsing::Common::Page
+        class PassportV1Page < Mindee::V1::Parsing::Common::Page
           # @param prediction [Hash]
           def initialize(prediction)
             super
