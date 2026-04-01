@@ -27,10 +27,10 @@ module Mindee
       end
     end
 
-    # Base class for all client-side error.
+    # Base class for all client-side errors.
     class MindeeHTTPClientError < MindeeHTTPError; end
 
-    # Base class for all server-side error.
+    # Base class for all server-side errors.
     class MindeeHTTPServerError < MindeeHTTPError; end
   end
 end

@@ -2,7 +2,7 @@
 
 module Mindee
   module Error
-    # Base class for all custom mindee error.
+    # Base class for all custom mindee errors.
     class MindeeError < StandardError; end
 
     # Errors relating to library issues.
