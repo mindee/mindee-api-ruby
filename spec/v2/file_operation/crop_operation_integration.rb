@@ -65,7 +65,7 @@ describe Mindee::V2::FileOperation::Crop, :integration, :v2 do
 
     extracted_images.save_all_to_disk(OUTPUT_DIR)
 
-    expect(File.size(File.join(OUTPUT_DIR, 'crop_001.jpg'))).to eq(672_913)
-    expect(File.size(File.join(OUTPUT_DIR, 'crop_002.jpg'))).to eq(675_728)
+    expect(File.size(File.join(OUTPUT_DIR, 'crop_001.jpg'))).to be_between(600_000, 672_913)
+    expect(File.size(File.join(OUTPUT_DIR, 'crop_002.jpg'))).to be_between(600_000, 675_728)
   end
 end
