@@ -25,6 +25,16 @@ module Mindee
           def to_s
             @inference.to_s
           end
+
+          # Extracts the crops from the input source.
+          # @param input_source [Mindee::Input::Source::LocalInputSource] Path to the file or a File object.
+          # @return [FileOperation::SplitFiles]
+          def extract_from_file(input_source)
+            crop_files = @inference.result.splits.map do |crop|
+              crop.extract_from_file(input_source)
+            end
+            FileOperation::SplitFiles.new(crop_files)
+          end
         end
       end
     end

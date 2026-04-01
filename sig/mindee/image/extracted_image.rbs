@@ -6,10 +6,16 @@ module Mindee
       def page_id: -> Integer
       def element_id: -> Integer
       def buffer: -> StringIO
-      def internal_file_name: -> String
-      def initialize: (Input::Source::LocalInputSource, Integer, Integer) -> Integer
+      def filename: -> String
+      def initialize: (
+        Input::Source::LocalInputSource | Input::Source::BytesInputSource,
+        Integer,
+        Integer?,
+        ?preserve_input_filename: bool
+      ) -> Integer
       def write_to_file: (String, ?String?) -> void
       def as_source: -> Input::Source::BytesInputSource
+      def as_input_source: -> Input::Source::BytesInputSource
     end
   end
 end

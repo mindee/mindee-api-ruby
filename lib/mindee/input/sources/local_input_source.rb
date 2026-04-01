@@ -53,7 +53,7 @@ module Mindee
             return if ALLOWED_MIME_TYPES.include? @file_mimetype
           end
 
-          raise Errors::MindeeMimeTypeError, @file_mimetype.to_s
+          raise Error::MindeeMimeTypeError, @file_mimetype.to_s
         end
 
         # @deprecated See {#fix_pdf!} or {#self.fix_pdf} instead.
@@ -69,7 +69,7 @@ module Mindee
         # Attempts to fix the PDF data in the file.
         # @param maximum_offset [Integer] Maximum offset to look for the PDF header.
         # @return [void]
-        # @raise [Mindee::Errors::MindeePDFError]
+        # @raise [Mindee::Error::MindeePDFError]
         def fix_pdf!(maximum_offset: 500)
           @io_stream = LocalInputSource.fix_pdf(@io_stream, maximum_offset: maximum_offset)
           @io_stream.rewind
@@ -80,11 +80,11 @@ module Mindee
         # @param stream [StringIO] The stream to fix.
         # @param maximum_offset [Integer] Maximum offset to look for the PDF header.
         # @return [StringIO] The fixed stream.
-        # @raise [Mindee::Errors::MindeePDFError]
+        # @raise [Mindee::Error::MindeePDFError]
         def self.fix_pdf(stream, maximum_offset: 500)
           out_stream = StringIO.new
           stream.gets('%PDF-')
-          raise Errors::MindeePDFError if stream.eof? || stream.pos > maximum_offset
+          raise Error::MindeePDFError if stream.eof? || stream.pos > maximum_offset
 
           stream.pos = stream.pos - 5
           out_stream << stream.read

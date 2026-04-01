@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ROOT_DATA_DIR = File.join(__dir__, 'data').freeze
+OUTPUT_DIR = File.join(ROOT_DATA_DIR, 'output').freeze
 FILE_TYPES_DIR = File.join(ROOT_DATA_DIR, 'file_types').freeze
 V1_DATA_DIR = File.join(ROOT_DATA_DIR, 'v1').freeze
 V2_DATA_DIR = File.join(ROOT_DATA_DIR, 'v2').freeze

@@ -23,6 +23,14 @@ module Mindee
           def to_s
             "* :Page Range: #{@page_range}\n  :Document Type: #{@document_type}"
           end
+
+          # Apply the split range inference to a file and return a single extracted PDF.
+          #
+          # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
+          # @return [Image::ExtractedImage]
+          def extract_from_file(input_source)
+            FileOperation::Split.extract_single_split(input_source, @page_range)
+          end
         end
       end
     end

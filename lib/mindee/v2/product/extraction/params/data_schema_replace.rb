@@ -16,7 +16,7 @@ module Mindee
             def initialize(data_schema_replace)
               data_schema_replace.transform_keys!(&:to_sym)
               fields_list = data_schema_replace[:fields]
-              raise Mindee::Errors::MindeeError, 'Invalid Data Schema provided.' if fields_list.nil?
+              raise Mindee::Error::MindeeError, 'Invalid Data Schema provided.' if fields_list.nil?
               raise TypeError, 'Data Schema replacement fields cannot be empty.' if fields_list.empty?
 
               @fields = fields_list.map { |field| DataSchemaField.new(field) }

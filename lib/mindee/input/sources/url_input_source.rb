@@ -14,7 +14,7 @@ module Mindee
         attr_reader :url
 
         def initialize(url)
-          raise Errors::MindeeInputError, 'URL must be HTTPS' unless url.start_with? 'https://'
+          raise Error::MindeeInputError, 'URL must be HTTPS' unless url.start_with? 'https://'
 
           logger.debug("URL input: #{url}")
 
@@ -75,9 +75,9 @@ module Mindee
 
           response = make_request(uri, request, max_redirects)
           if response.code.to_i > 299
-            raise Errors::MindeeAPIError, "Failed to download file: HTTP status code #{response.code}"
+            raise Error::MindeeAPIError, "Failed to download file: HTTP status code #{response.code}"
           elsif response.code.to_i < 200
-            raise Errors::MindeeAPIError, "Failed to download file: Invalid response code #{response.code}."
+            raise Error::MindeeAPIError, "Failed to download file: Invalid response code #{response.code}."
           end
 
           response.body
@@ -103,7 +103,7 @@ module Mindee
             response = http.request(request)
             if response.is_a?(Net::HTTPRedirection) && max_redirects.positive?
               location = response['location']
-              raise Errors::MindeeInputError, 'No location in redirection header.' if location.nil?
+              raise Error::MindeeInputError, 'No location in redirection header.' if location.nil?
 
               new_uri = URI.parse(location)
               request = Net::HTTP::Get.new(new_uri)

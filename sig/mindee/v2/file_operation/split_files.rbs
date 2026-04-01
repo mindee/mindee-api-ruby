@@ -1,0 +1,9 @@
+module Mindee
+  module V2
+    module FileOperation
+      class SplitFiles < Array[PDF::ExtractedPDF]
+        def save_all_to_disk: (String | Pathname, ?prefix: String?) -> void
+      end
+    end
+  end
+end

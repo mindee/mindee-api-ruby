@@ -7,6 +7,9 @@ module Mindee
           attr_reader location: Mindee::V2::Parsing::Field::FieldLocation
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def extract_from_file: (Input::Source::LocalInputSource) -> Image::ExtractedImage
+
           def to_s: -> String
         end
       end

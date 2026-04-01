@@ -3,7 +3,7 @@
 require_relative 'mindee_error'
 
 module Mindee
-  module Errors
+  module Error
     # API HttpError
     class MindeeHTTPError < MindeeError
       # @return [String]
@@ -27,10 +27,10 @@ module Mindee
       end
     end
 
-    # Base class for all client-side errors.
+    # Base class for all client-side error.
     class MindeeHTTPClientError < MindeeHTTPError; end
 
-    # Base class for all server-side errors.
+    # Base class for all server-side error.
     class MindeeHTTPServerError < MindeeHTTPError; end
   end
 end

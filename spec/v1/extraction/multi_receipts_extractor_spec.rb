@@ -126,7 +126,7 @@ describe 'multi-receipts extraction' do
     it 'raises a MindeeInputError' do
       expect do
         Mindee::V1::Extraction.extract_receipts(empty_input_source, empty_inference)
-      end.to raise_error(Mindee::Errors::MindeeInputError,
+      end.to raise_error(Mindee::Error::MindeeInputError,
                          'No possible receipts candidates found for Multi-Receipts extraction.')
     end
   end
