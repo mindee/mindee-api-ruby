@@ -22,8 +22,8 @@ module Mindee
           @detail = server_response['detail']
           @title = server_response['title']
           @code = server_response['code']
-          @errors = if server_response.key?('error')
-                      server_response['error'].map do |error|
+          @errors = if server_response.key?('errors')
+                      server_response['errors'].map do |error|
                         ErrorItem.new(error)
                       end
                     else

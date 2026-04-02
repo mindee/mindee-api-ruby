@@ -11,7 +11,7 @@ module Mindee
                 'status' => -1,
                 'title' => 'Unknown Error',
                 'code' => '000-000',
-                'error' => nil })
+                'errors' => nil })
       end
     end
   end
