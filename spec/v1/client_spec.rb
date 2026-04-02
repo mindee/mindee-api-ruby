@@ -16,9 +16,10 @@ describe Mindee::V1::Client do
     end
 
     it 'should open PDF files from a file handle' do
-      file = File.open("#{V1_DATA_DIR}/products/invoices/invoice_10p.pdf", 'rb')
-      input_source = mindee_client.source_from_file(file, 'invoice_10p.pdf')
-      expect(input_source).to respond_to(:read_contents)
+      File.open("#{V1_DATA_DIR}/products/invoices/invoice_10p.pdf", 'rb') do |file|
+        input_source = mindee_client.source_from_file(file, 'invoice_10p.pdf')
+        expect(input_source).to respond_to(:read_contents)
+      end
     end
 
     it 'should open PDF files from raw bytes' do
@@ -41,9 +42,10 @@ describe Mindee::V1::Client do
     end
 
     it 'should open JPG files from a file handle' do
-      file = File.open("#{FILE_TYPES_DIR}/receipt.jpg", 'rb')
-      input_source = mindee_client.source_from_file(file, 'receipt.jpg')
-      expect(input_source).to respond_to(:read_contents)
+      File.open("#{FILE_TYPES_DIR}/receipt.jpg", 'rb') do |file|
+        input_source = mindee_client.source_from_file(file, 'receipt.jpg')
+        expect(input_source).to respond_to(:read_contents)
+      end
     end
 
     it 'should open JPG files from raw bytes' do

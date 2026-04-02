@@ -6,7 +6,7 @@ module Mindee
   module V1
     module Parsing
       module Common
-        # Ocr-specific parsing fields and options
+        # OCR-specific parsing fields and options
         module OCR
           # A single word.
           class OCRWord

@@ -4,6 +4,7 @@ module Mindee
   module V2
     module Product
       module Crop
+        # Crop parameters.
         module Params
           # Parameters accepted by the crop utility v2 endpoint.
           class CropParameters < Mindee::Input::BaseParameters

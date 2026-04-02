@@ -9,6 +9,7 @@ module Mindee
         # Passport API version 1.1 document data.
         class PassportV1Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # The date of birth of the passport holder.
           # @return [Mindee::V1::Parsing::Standard::DateField]
           attr_reader :birth_date

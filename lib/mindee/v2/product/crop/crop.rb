@@ -6,6 +6,7 @@ require_relative 'params/crop_parameters'
 module Mindee
   module V2
     module Product
+      # Crop module.
       module Crop
         # Crop product.
         class Crop < BaseProduct

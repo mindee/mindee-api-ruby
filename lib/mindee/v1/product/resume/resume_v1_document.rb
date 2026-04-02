@@ -14,6 +14,7 @@ module Mindee
         # Resume API version 1.2 document data.
         class ResumeV1Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # The location information of the candidate, including city, state, and country.
           # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :address

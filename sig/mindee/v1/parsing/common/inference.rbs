@@ -19,7 +19,6 @@ module Mindee
           attr_reader has_sync: bool
           attr_reader is_rotation_applied: bool
           attr_reader pages: Array[Page]
-          attr_reader prediction: Prediction
           attr_reader product: Product
 
           def initialize: (Hash[String | Symbol, untyped]) -> void

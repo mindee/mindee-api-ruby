@@ -10,6 +10,7 @@ module Mindee
         # Invoice API version 4.11 document data.
         class InvoiceV4Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # The customer billing address.
           # @return [Mindee::V1::Parsing::Standard::AddressField]
           attr_reader :billing_address

@@ -3,7 +3,7 @@
 require 'openssl'
 
 # Workaround for errors in SSL certificates validations on macOS.
-params = OpenSSL::SSL::SSLContext::DEFAULT_PARAMS
+params = OpenSSL::SSL::SSLContext::DEFAULT_PARAMS.dup
 
 params[:verify_mode] = OpenSSL::SSL::VERIFY_PEER
 

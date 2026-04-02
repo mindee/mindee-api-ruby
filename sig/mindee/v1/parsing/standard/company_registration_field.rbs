@@ -12,7 +12,7 @@ module Mindee
 
           def to_s: -> String
 
-          def printable_values: -> Hash[String, untyped]
+          def printable_values: -> Hash[Symbol, string]
         end
       end
     end

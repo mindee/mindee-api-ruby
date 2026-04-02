@@ -9,7 +9,7 @@ module Mindee
 
           def level: -> String
 
-          def printable_values: -> Hash[String | Symbol, untyped]
+          def printable_values: -> Hash[Symbol, String]
 
           def table_printable_values: -> Hash[String | Symbol, untyped]
 

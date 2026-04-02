@@ -11,7 +11,7 @@ module Mindee
       # @param inference [Inference] Results of the inference.
       # @return [Array<ExtractedImage>] Individual extracted receipts as an array of ExtractedMultiReceiptsImage.
       def self.extract_receipts(input_source, inference)
-        images = []
+        images = [] # @type var images: Array[Image::ExtractedImage]
         unless inference.prediction.receipts
           raise Error::MindeeInputError,
                 'No possible receipts candidates found for Multi-Receipts extraction.'

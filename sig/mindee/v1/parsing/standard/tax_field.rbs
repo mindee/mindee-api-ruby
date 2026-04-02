@@ -15,7 +15,7 @@ module Mindee
 
           def to_s: -> String
 
-          def printable_values: -> Hash[untyped, String]
+          def printable_values: -> Hash[Symbol, String]
 
           def to_table_line: -> String
         end

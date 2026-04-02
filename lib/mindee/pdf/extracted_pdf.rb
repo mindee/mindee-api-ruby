@@ -13,11 +13,17 @@ module Mindee
       # @return [String]
       attr_reader :filename
 
-      # @param pdf_bytes [StringIO]
+      # @param pdf_stream [StringIO, File]
       # @param filename [String]
-      def initialize(pdf_bytes, filename)
-        @pdf_bytes = pdf_bytes
+      def initialize(pdf_stream, filename)
         @filename = filename
+
+        if pdf_stream.is_a?(File)
+          pdf_stream.rewind
+          @pdf_bytes = StringIO.new(pdf_stream.read)
+        else
+          @pdf_bytes = pdf_stream
+        end
       end
 
       # Retrieves the page count for a given pdf.

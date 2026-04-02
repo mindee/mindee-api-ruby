@@ -8,8 +8,9 @@ module Mindee
         def initialize: (Hash[String | Symbol, untyped]) -> void
       end
       class CropperV1PagePrediction < CropperV1Document
+        attr_reader cropping: Array[Parsing::Standard::PositionField]
+
         def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
-        def cropping: -> Array[Parsing::Standard::PositionField]
         def to_s: -> String
       end
       end

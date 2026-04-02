@@ -9,6 +9,7 @@ module Mindee
         # The list of social network profiles of the candidate.
         class ResumeV1SocialNetworksUrl < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # The name of the social network.
           # @return [String]
           attr_reader :name
@@ -27,7 +28,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:name] = format_for_display(@name)
             printable[:url] = format_for_display(@url)
             printable
@@ -35,7 +36,7 @@ module Mindee
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:name] = format_for_display(@name, 20)
             printable[:url] = format_for_display(@url, 50)
             printable

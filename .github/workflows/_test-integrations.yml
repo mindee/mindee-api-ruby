@@ -32,7 +32,7 @@ jobs:
           - "ubuntu-24.04"
           - "macos-latest"
         ruby:
-          - "3.0"
+          - "3.2"
           - "4.0"
     steps:
       - uses: actions/checkout@v5

@@ -6,12 +6,13 @@ require_relative 'params/ocr_parameters'
 module Mindee
   module V2
     module Product
-      module Ocr
-        # Ocr product.
-        class Ocr < BaseProduct
+      # OCR module.
+      module OCR
+        # OCR product.
+        class OCR < BaseProduct
           @slug = 'ocr'
-          @params_type = Mindee::V2::Product::Ocr::Params::OcrParameters
-          @response_type = Mindee::V2::Product::Ocr::OcrResponse
+          @params_type = Mindee::V2::Product::OCR::Params::OCRParameters
+          @response_type = Mindee::V2::Product::OCR::OCRResponse
         end
       end
     end

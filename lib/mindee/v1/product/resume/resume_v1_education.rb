@@ -9,6 +9,7 @@ module Mindee
         # The list of the candidate's educational background.
         class ResumeV1Education < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # The area of study or specialization.
           # @return [String]
           attr_reader :degree_domain
@@ -47,7 +48,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:degree_domain] = format_for_display(@degree_domain)
             printable[:degree_type] = format_for_display(@degree_type)
             printable[:end_month] = format_for_display(@end_month)
@@ -60,7 +61,7 @@ module Mindee
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:degree_domain] = format_for_display(@degree_domain, 15)
             printable[:degree_type] = format_for_display(@degree_type, 25)
             printable[:end_month] = format_for_display(@end_month, nil)

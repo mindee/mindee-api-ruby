@@ -54,6 +54,9 @@ module Mindee
         self.class.slug
       end
 
+      # Load from a hash
+      # @param [Hash] params Parameters to provide as a hash.
+      # @return [BaseParameters]
       def self.from_hash(params: {})
         load_from_hash(params: params)
         new(
