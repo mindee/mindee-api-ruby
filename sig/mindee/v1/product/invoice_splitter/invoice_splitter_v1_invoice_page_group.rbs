@@ -7,7 +7,7 @@ module Mindee
 
           def page_indexes: -> Array[Integer]
 
-          def printable_values: -> Hash[String | Symbol, untyped]
+          def printable_values: -> Hash[Symbol, String]
 
           def table_printable_values: -> Hash[String | Symbol, untyped]
 

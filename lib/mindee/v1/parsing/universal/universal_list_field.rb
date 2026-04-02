@@ -46,7 +46,7 @@ module Mindee
 
           # Return a string representation of all values.
           def contents_string(separator = ' ')
-            @values.map(&:to_s).join(separator)
+            @values.join(separator)
           end
 
           # String representation

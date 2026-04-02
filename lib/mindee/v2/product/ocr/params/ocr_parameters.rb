@@ -3,10 +3,11 @@
 module Mindee
   module V2
     module Product
-      module Ocr
+      module OCR
+        # OCR Parameters.
         module Params
           # Parameters accepted by the ocr utility v2 endpoint.
-          class OcrParameters < Mindee::Input::BaseParameters
+          class OCRParameters < Mindee::Input::BaseParameters
             # @return [String] Slug for the endpoint.
             def self.slug
               'ocr'
@@ -29,9 +30,9 @@ module Mindee
 
             # Loads the parameters from a Hash.
             # @param [Hash] params Parameters to provide as a hash.
-            # @return [OcrParameters]
+            # @return [OCRParameters]
             def self.from_hash(params: {})
-              OcrParameters.new(
+              OCRParameters.new(
                 params.fetch(:model_id),
                 file_alias: params.fetch(:file_alias, nil),
                 webhook_ids: params.fetch(:webhook_ids, nil),

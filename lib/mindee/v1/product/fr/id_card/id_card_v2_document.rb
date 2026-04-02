@@ -10,6 +10,7 @@ module Mindee
           # Carte Nationale d'Identité API version 2.0 document data.
           class IdCardV2Document < Mindee::V1::Parsing::Common::Prediction
             include Mindee::V1::Parsing::Standard
+
             # The alternate name of the card holder.
             # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :alternate_name

@@ -81,7 +81,7 @@ module Mindee
               '',
               'Webhooks',
               '=========',
-              @webhooks.map(&:to_s).join("\n\n"),
+              @webhooks.join("\n\n"),
             ]
           end
 

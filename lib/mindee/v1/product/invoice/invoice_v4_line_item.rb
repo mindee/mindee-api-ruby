@@ -9,6 +9,7 @@ module Mindee
         # List of all the line items present on the invoice.
         class InvoiceV4LineItem < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # The item description.
           # @return [String]
           attr_reader :description
@@ -51,7 +52,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:description] = format_for_display(@description)
             printable[:product_code] = format_for_display(@product_code)
             printable[:quantity] =
@@ -70,7 +71,7 @@ module Mindee
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:description] = format_for_display(@description, 36)
             printable[:product_code] = format_for_display(@product_code, nil)
             printable[:quantity] =

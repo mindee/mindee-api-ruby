@@ -10,6 +10,7 @@ module Mindee
         # Financial Document API version 1.14 document data.
         class FinancialDocumentV1Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # The customer's address used for billing.
           # @return [Mindee::V1::Parsing::Standard::AddressField]
           attr_reader :billing_address

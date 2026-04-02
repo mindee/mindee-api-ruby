@@ -27,21 +27,21 @@ Gem::Specification.new do |spec|
                         .reject { |f| f == 'products.rb' }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.2')
 
-  spec.add_dependency 'base64', '~> 0.1'
+  spec.add_dependency 'base64', '~> 0.3'
   spec.add_dependency 'bundle-audit', '~> 0.2.0'
-  spec.add_dependency 'marcel', '~> 1.0'
+  spec.add_dependency 'marcel', '~> 1.1'
   spec.add_dependency 'mini_magick', '>= 4', '< 6'
   spec.add_dependency 'origamindee', '~> 4.0'
-  spec.add_dependency 'pdf-reader', '~> 2.14'
+  spec.add_dependency 'pdf-reader', '~> 2.15'
 
-  spec.add_development_dependency 'openssl', '~> 3.3.2'
+  spec.add_development_dependency 'openssl', '~> 4.0'
   spec.add_development_dependency 'prism', '~> 1.3'
-  spec.add_development_dependency 'rake', '~> 13.2'
-  spec.add_development_dependency 'rbs', '~> 3.6'
+  spec.add_development_dependency 'rake', '~> 13.3'
+  spec.add_development_dependency 'rbs', '~> 3.10'
   spec.add_development_dependency 'rspec', '~> 3.13'
-  spec.add_development_dependency 'rubocop', '~> 1.76.0'
-  spec.add_development_dependency 'steep', '~> 1.7'
+  spec.add_development_dependency 'rubocop', '~> 1.86'
+  spec.add_development_dependency 'steep', '~> 1.10'
   spec.add_development_dependency 'yard', '~> 0.9'
 end

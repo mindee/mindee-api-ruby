@@ -3,16 +3,16 @@
 require 'json'
 require 'mindee'
 
-describe Mindee::V2::Product::Ocr::Ocr, :v2 do
+describe Mindee::V2::Product::OCR::OCR, :v2 do
   let(:ocr_data_dir) { File.join(V2_PRODUCT_DATA_DIR, 'ocr') }
 
   it 'parses a single page OCR response properly' do
     json_path = File.join(ocr_data_dir, 'ocr_single.json')
     json_sample = JSON.parse(File.read(json_path))
 
-    response = Mindee::V2::Product::Ocr::OcrResponse.new(json_sample)
+    response = Mindee::V2::Product::OCR::OCRResponse.new(json_sample)
 
-    expect(response.inference).to be_a(Mindee::V2::Product::Ocr::OcrInference)
+    expect(response.inference).to be_a(Mindee::V2::Product::OCR::OCRInference)
     expect(response.inference.result.pages).not_to be_empty
     expect(response.inference.result.pages.size).to eq(1)
 
@@ -66,11 +66,11 @@ describe Mindee::V2::Product::Ocr::Ocr, :v2 do
     json_path = File.join(ocr_data_dir, 'ocr_multiple.json')
     json_sample = JSON.parse(File.read(json_path))
 
-    response = Mindee::V2::Product::Ocr::OcrResponse.new(json_sample)
+    response = Mindee::V2::Product::OCR::OCRResponse.new(json_sample)
 
-    expect(response.inference).to be_a(Mindee::V2::Product::Ocr::OcrInference)
-    expect(response.inference.result).to be_a(Mindee::V2::Product::Ocr::OcrResult)
-    expect(response.inference.result.pages[0]).to be_a(Mindee::V2::Product::Ocr::OcrPage)
+    expect(response.inference).to be_a(Mindee::V2::Product::OCR::OCRInference)
+    expect(response.inference.result).to be_a(Mindee::V2::Product::OCR::OCRResult)
+    expect(response.inference.result.pages[0]).to be_a(Mindee::V2::Product::OCR::OCRPage)
     expect(response.inference.result.pages.size).to eq(3)
 
     page_zero_words = response.inference.result.pages[0].words

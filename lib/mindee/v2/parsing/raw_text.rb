@@ -16,8 +16,10 @@ module Mindee
           end
         end
 
+        # String representation.
+        # @return [String]
         def to_s
-          "#{@pages.map(&:to_s).join("\n\n")}\n"
+          "#{@pages.join("\n\n")}\n"
         end
       end
     end

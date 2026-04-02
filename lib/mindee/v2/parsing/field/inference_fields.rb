@@ -73,7 +73,7 @@ module Mindee
 
             indent ||= @indent_level
             padding = '  ' * indent
-            lines = []
+            lines = [] # @type var lines: Array[String]
 
             each do |field_key, field_value|
               line = "#{padding}:#{field_key}:"

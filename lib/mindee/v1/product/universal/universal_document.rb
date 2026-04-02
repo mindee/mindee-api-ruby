@@ -10,6 +10,7 @@ module Mindee
         # Universal Document V1 prediction
         class UniversalDocument < Mindee::V1::Product::Universal::UniversalPrediction
           include Mindee::V1::Parsing::Standard
+
           # @param raw_prediction [Hash]
           def initialize(raw_prediction)
             super

@@ -11,6 +11,7 @@ module Mindee
           # Bank Account Details API version 2.0 document data.
           class BankAccountDetailsV2Document < Mindee::V1::Parsing::Common::Prediction
             include Mindee::V1::Parsing::Standard
+
             # Full extraction of the account holders names.
             # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :account_holders_names

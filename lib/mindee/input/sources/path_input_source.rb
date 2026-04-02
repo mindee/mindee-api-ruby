@@ -11,7 +11,7 @@ module Mindee
         # @param filepath [String]
         # @param repair_pdf [bool]
         def initialize(filepath, repair_pdf: false)
-          io_stream = File.open(filepath, 'rb')
+          io_stream = File.new(filepath, 'rb')
           super(io_stream, File.basename(filepath), repair_pdf: repair_pdf)
         end
       end

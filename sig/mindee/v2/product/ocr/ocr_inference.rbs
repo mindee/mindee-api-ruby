@@ -1,9 +1,9 @@
 module Mindee
   module V2
     module Product
-      module Ocr
-        class OcrInference
-          attr_reader result: OcrResult
+      module OCR
+        class OCRInference
+          attr_reader result: OCRResult
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
           def to_s: -> String

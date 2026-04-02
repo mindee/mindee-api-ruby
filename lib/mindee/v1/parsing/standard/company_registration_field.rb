@@ -21,21 +21,21 @@ module Mindee
           # @return [String] The formatted table line, as a string.
           def to_table_line
             printable = printable_values
-            format('| %<type>-15s | %<value>-20s ', type: printable['type'], value: printable['value'])
+            format('| %<type>-15s | %<value>-20s ', type: printable[:type], value: printable[:value])
           end
 
           # @return [String]
           def to_s
             printable = printable_values
-            format('Type: %<type>s, Value: %<value>s', type: printable['type'], value: printable['value'])
+            format('Type: %<type>s, Value: %<value>s', type: printable[:type], value: printable[:value])
           end
 
           # Hashed representation of the values.
           # @return [Hash] Hash of the values.
           def printable_values
-            printable = {}
-            printable['type'] = type
-            printable['value'] = value
+            printable = {} # @type var printable: Hash[Symbol, String]
+            printable[:type] = type
+            printable[:value] = value.to_s
             printable
           end
         end

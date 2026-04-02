@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'set'
 require 'origami'
 require_relative 'pdf_tools'
 

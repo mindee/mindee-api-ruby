@@ -13,7 +13,7 @@ module Mindee
 
           def unit_price: -> Float
 
-          def printable_values: -> Hash[String | Symbol, untyped]
+          def printable_values: -> Hash[Symbol, String]
 
           def table_printable_values: -> Hash[String | Symbol, untyped]
 

@@ -10,6 +10,7 @@ module Mindee
         # Receipt API version 5.4 document data.
         class ReceiptV5Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # The purchase category of the receipt.
           # @return [Mindee::V1::Parsing::Standard::ClassificationField]
           attr_reader :category

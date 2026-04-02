@@ -9,6 +9,7 @@ module Mindee
         # Multi Receipts Detector API version 1.1 document data.
         class MultiReceiptsDetectorV1Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # Positions of the receipts on the document.
           # @return [Array<Mindee::V1::Parsing::Standard::PositionField>]
           attr_reader :receipts

@@ -49,7 +49,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            out_h = {}
+            out_h = {} # @type var out_h: Hash[Symbol, String]
             out_h[:code] = @code.nil? ? '' : @code
             out_h[:base] = @base.nil? ? '' : print_float(@base)
             out_h[:rate] = @rate.nil? ? '' : print_float(@rate).to_s
