@@ -94,7 +94,8 @@ module Mindee
         ExtractedImage.new(
           Input::Source::BytesInputSource.new(buffer.read.to_s, file_name),
           page_id,
-          element_id
+          element_id,
+          preserve_input_filename: true
         )
       end
 

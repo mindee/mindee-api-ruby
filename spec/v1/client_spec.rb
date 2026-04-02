@@ -68,7 +68,7 @@ describe Mindee::V1::Client do
       local_resp = Mindee::Input::LocalResponse.new("#{V1_DATA_DIR}/geometry/polygon.json")
       expect do
         mindee_client.load_prediction(Mindee::V1::Product::Invoice::InvoiceV4, local_resp)
-      end.to raise_error Mindee::Errors::MindeeInputError
+      end.to raise_error Mindee::Error::MindeeInputError
     end
 
     it 'should not validate improper async parameters' do
@@ -106,7 +106,7 @@ describe Mindee::V1::Client do
           account_name: 'account_name',
           version: 'version'
         )
-      end.to raise_error Mindee::Errors::MindeeConfigurationError
+      end.to raise_error Mindee::Error::MindeeConfigurationError
 
       expect do
         mindee_client.send(
@@ -116,7 +116,7 @@ describe Mindee::V1::Client do
           account_name: 'account_name',
           version: 'version'
         )
-      end.to raise_error Mindee::Errors::MindeeConfigurationError
+      end.to raise_error Mindee::Error::MindeeConfigurationError
     end
   end
 end

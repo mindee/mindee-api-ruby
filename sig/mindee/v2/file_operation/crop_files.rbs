@@ -1,0 +1,9 @@
+module Mindee
+  module V2
+    module FileOperation
+      class CropFiles < Array[Image::ExtractedImage]
+        def save_all_to_disk: (String | Pathname, ?prefix: String, ?file_format: String?) -> void
+      end
+    end
+  end
+end

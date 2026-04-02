@@ -13,7 +13,7 @@ describe Mindee::HTTP::ErrorHandler do
       doc_class = Mindee::V1::Product::Receipt::ReceiptV5
       expect do
         mindee_client1.parse(input_source, doc_class, options: { all_words: false, close_file: true })
-      end.to raise_error Mindee::Errors::MindeeHTTPClientError
+      end.to raise_error Mindee::Error::MindeeHTTPClientError
     end
 
     it 'should make an invalid API async enqueue call raising an exception' do
@@ -23,7 +23,7 @@ describe Mindee::HTTP::ErrorHandler do
       doc_class = Mindee::V1::Product::Invoice::InvoiceV4
       expect do
         mindee_client1.enqueue(input_source, doc_class)
-      end.to raise_error Mindee::Errors::MindeeHTTPClientError
+      end.to raise_error Mindee::Error::MindeeHTTPClientError
     end
 
     it 'should make an invalid API async parse call raising an exception' do
@@ -31,7 +31,7 @@ describe Mindee::HTTP::ErrorHandler do
       doc_class = Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1
       expect do
         mindee_client1.parse_queued('invalid-job-id', doc_class)
-      end.to raise_error Mindee::Errors::MindeeHTTPClientError
+      end.to raise_error Mindee::Error::MindeeHTTPClientError
     end
   end
 end

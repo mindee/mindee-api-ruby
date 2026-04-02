@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mindee
-  module Errors
+  module Error
     # Base class for all custom mindee errors.
     class MindeeError < StandardError; end
 

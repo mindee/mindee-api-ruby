@@ -18,23 +18,29 @@ module Mindee
       attr_reader :buffer
 
       # Internal name for the file.
-      attr_reader :internal_file_name
+      attr_reader :filename
 
       # Initializes the ExtractedImage with a buffer and an internal file name.
       #
-      # @param input_source [LocalInputSource] Local source for input.
+      # @param input_source [LocalInputSource, BytesInputSource] Local source for input.
       # @param page_id [Integer] ID of the page the element was found on.
       # @param element_id [Integer, nil] ID of the element in a page.
-      def initialize(input_source, page_id, element_id)
+      # @param preserve_input_filename [Boolean] If true, keep the input source filename as-is.
+      def initialize(input_source, page_id, element_id, preserve_input_filename: false)
         @buffer = StringIO.new(input_source.io_stream.read.to_s)
         @buffer.rewind
-        extension = if input_source.pdf?
-                      '.jpg'
+
+        @filename = if preserve_input_filename
+                      input_source.filename.to_s
                     else
-                      File.extname(input_source.filename)
+                      extension = if input_source.pdf?
+                                    '.jpg'
+                                  else
+                                    File.extname(input_source.filename)
+                                  end
+                      base_name = File.basename(input_source.filename, File.extname(input_source.filename))
+                      "#{base_name}_p#{page_id}_#{element_id}#{extension}"
                     end
-        base_name = File.basename(input_source.filename, File.extname(input_source.filename))
-        @internal_file_name = "#{base_name}_p#{page_id}_#{element_id}#{extension}"
         @page_id = page_id
         @element_id = element_id.nil? ? 0 : element_id
       end
@@ -48,7 +54,7 @@ module Mindee
       def write_to_file(output_path, file_format = nil)
         resolved_path = Pathname.new(File.expand_path(output_path))
         if file_format.nil?
-          raise Errors::MindeeImageError, 'Invalid file format.' if resolved_path.extname.delete('.').empty?
+          raise Error::MindeeImageError, 'Invalid file format.' if resolved_path.extname.delete('.').empty?
 
           file_format = resolved_path.extname.delete('.').upcase
         end
@@ -59,8 +65,8 @@ module Mindee
           image.write resolved_path.to_s
           logger.info("File saved successfully to '#{resolved_path}'")
         rescue StandardError
-          raise Errors::MindeeImageError, "Could not save file '#{output_path}'. " \
-                                          'Is the provided file path valid?.'
+          raise Error::MindeeImageError, "Could not save file '#{output_path}'. " \
+                                         'Is the provided file path valid?.'
         end
       end
 
@@ -69,7 +75,14 @@ module Mindee
       # @return [FileInputSource] A BufferInput source.
       def as_source
         @buffer.rewind
-        Mindee::Input::Source::BytesInputSource.new(@buffer.read || '', @internal_file_name)
+        Mindee::Input::Source::BytesInputSource.new(@buffer.read || '', @filename)
+      end
+
+      # Return the file as a Mindee-compatible BufferInput source.
+      #
+      # @return [FileInputSource] A BufferInput source.
+      def as_input_source
+        as_source
       end
     end
   end

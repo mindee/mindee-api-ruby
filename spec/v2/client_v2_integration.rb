@@ -124,7 +124,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
 
       expect do
         client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e| expect(e.status).to eq(422) }
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e| expect(e.status).to eq(422) }
     end
 
     it 'raises MindeeHTTPErrorV2 (422) on invalid webhook id' do
@@ -138,7 +138,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
 
       expect do
         client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, params)
-      end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(422)
         expect(e.code).to start_with('422-')
         expect(e.detail).to_not be_nil
@@ -159,7 +159,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
 
       expect do
         client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(422)
         expect(e.code).to start_with('422-')
         expect(e.detail).to_not be_nil
@@ -173,7 +173,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
     it 'raises MindeeHTTPErrorV2 on invalid job id' do
       expect do
         client.get_result(Mindee::V2::Product::Extraction::Extraction, 'INVALID_JOB_ID')
-      end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(422)
         expect(e.code).to start_with('422-')
         expect(e.detail).to_not be_nil
@@ -200,7 +200,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
           file_alias: 'rb_integration_test'
         )
         client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      end.to raise_error(Mindee::Errors::MindeeHTTPErrorV2) { |e|
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
         expect(e.status).to eq(404)
         expect(e.code).to start_with('404-')
         expect(e.detail).to_not be_nil

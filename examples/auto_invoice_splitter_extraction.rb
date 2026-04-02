@@ -22,7 +22,7 @@ def parse_single_page(mindee_client, input_source)
 end
 
 def parse_multi_page(mindee_client, input_source)
-  pdf_extractor = Mindee::PDF::PDFExtractor::PDFExtractor.new(input_source)
+  pdf_extractor = Mindee::PDF::PDFExtractor.new(input_source)
   invoice_splitter_response = mindee_client.parse(
     input_source,
     Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1,

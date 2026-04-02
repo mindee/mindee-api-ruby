@@ -3,7 +3,7 @@
 require_relative 'mindee_error'
 
 module Mindee
-  module Errors
+  module Error
     # API HttpError
     class MindeeHTTPError < MindeeError
       # @return [String]

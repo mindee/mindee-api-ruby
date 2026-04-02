@@ -1,7 +1,7 @@
-# lib/mindee/errors/mindee_http_error.rb
+# lib/mindee/error/mindee_http_error.rb
 module Mindee
-  module Errors
-    class MindeeHTTPError < Errors::MindeeError
+  module Error
+    class MindeeHTTPError < Error::MindeeError
       attr_reader api_code: Integer
       attr_reader api_details: String
       attr_reader api_message: String
