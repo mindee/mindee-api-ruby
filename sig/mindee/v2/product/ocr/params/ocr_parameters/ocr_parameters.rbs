@@ -1,12 +1,12 @@
 module Mindee
   module V2
     module Product
-      module Ocr
+      module OCR
         module Params
-          class OcrParameters
+          class OCRParameters
             def self.slug: -> String
 
-            def self.from_hash: (params: Hash[String | Symbol, untyped]) -> OcrParameters
+            def self.from_hash: (params: Hash[String | Symbol, untyped]) -> OCRParameters
 
             def initialize: (
                 String,

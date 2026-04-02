@@ -25,7 +25,7 @@ V2_PRODUCTS = {
   },
   'ocr' => {
     description: 'OCR Utility',
-    response_class: Mindee::V2::Product::Ocr::Ocr,
+    response_class: Mindee::V2::Product::OCR::OCR,
   },
   'split' => {
     description: 'Split Utility',

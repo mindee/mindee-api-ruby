@@ -3,7 +3,9 @@
 module Mindee
   module V2
     module Product
+      # Split module.
       module Split
+        # Split parameters.
         module Params
           # Parameters accepted by the split utility v2 endpoint.
           class SplitParameters < Mindee::Input::BaseParameters

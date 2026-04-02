@@ -86,6 +86,13 @@ module Mindee
       module Universal
       end
     end
+
+    # V1-specific products.
+    module Product
+      # French products.
+      module FR
+      end
+    end
   end
 
   # V2-specific module.
@@ -94,6 +101,7 @@ module Mindee
     module HTTP
     end
 
+    # File operations.
     module FileOperation
       # Crop operations.
       module Crop

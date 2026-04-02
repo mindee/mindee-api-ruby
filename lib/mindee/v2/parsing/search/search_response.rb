@@ -18,6 +18,8 @@ module Mindee
             @pagination_metadata = PaginationMetadata.new(server_response['pagination'])
           end
 
+          # String representation.
+          # @return [String]
           def to_s
             [
               'Models',

@@ -6,6 +6,7 @@ require_relative 'params/extraction_parameters'
 module Mindee
   module V2
     module Product
+      # Extraction module.
       module Extraction
         # Extraction product.
         # Note: currently a placeholder for the `Inference` class.
