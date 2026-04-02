@@ -31,7 +31,7 @@ module Mindee
           check_api_key
           response = workflow_execution_req_post(input_source, opts)
           if response.nil?
-            raise Mindee::Errors::MindeeHTTPError.new(
+            raise Mindee::Error::MindeeHTTPError.new(
               { code: 0, details: 'Server response was nil.', message: 'Unknown error.' }, @url, 0
             )
           end
@@ -83,9 +83,9 @@ module Mindee
         def check_api_key
           return unless @api_key.nil? || @api_key.empty?
 
-          raise Errors::MindeeConfigurationError, "Missing API key. Check your Client Configuration.\n" \
-                                                  "You can set this using the '#{HTTP::API_KEY_ENV_NAME}'" \
-                                                  'environment variable.'
+          raise Error::MindeeConfigurationError, "Missing API key. Check your Client Configuration.\n" \
+                                                 "You can set this using the '#{HTTP::API_KEY_ENV_NAME}'" \
+                                                 'environment variable.'
         end
       end
     end

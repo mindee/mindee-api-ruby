@@ -13,7 +13,7 @@ module Mindee
       def self.extract_receipts(input_source, inference)
         images = []
         unless inference.prediction.receipts
-          raise Errors::MindeeInputError,
+          raise Error::MindeeInputError,
                 'No possible receipts candidates found for Multi-Receipts extraction.'
         end
 

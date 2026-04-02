@@ -18,7 +18,7 @@ module Mindee
             super
 
             unless server_response.key?('items') && server_response['items'].is_a?(Array)
-              raise Errors::MindeeError,
+              raise Error::MindeeError,
                     "Expected \"items\" to be an array in #{server_response.to_json}."
             end
 

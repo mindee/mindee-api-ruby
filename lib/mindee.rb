@@ -7,7 +7,7 @@ require 'mindee/v2'
 
 module Mindee
   # Mindee internal error module.
-  module Errors
+  module Error
   end
 
   # Custom extraction module
@@ -92,6 +92,16 @@ module Mindee
   module V2
     # Mindee internal http module.
     module HTTP
+    end
+
+    module FileOperation
+      # Crop operations.
+      module Crop
+      end
+
+      # Split operations.
+      module Split
+      end
     end
 
     # Product-specific module.

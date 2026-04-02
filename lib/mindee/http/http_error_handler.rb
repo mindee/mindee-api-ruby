@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
-require_relative '../errors/mindee_http_error'
+require_relative '../error/mindee_http_error'
 
 module Mindee
   module HTTP
@@ -81,11 +81,11 @@ module Mindee
         error_obj = create_error_obj(parsed_hash)
         case code
         when 400..499
-          Errors::MindeeHTTPClientError.new(error_obj || {}, url, code)
+          Error::MindeeHTTPClientError.new(error_obj || {}, url, code)
         when 500..599
-          Errors::MindeeHTTPServerError.new(error_obj || {}, url, code)
+          Error::MindeeHTTPServerError.new(error_obj || {}, url, code)
         else
-          Errors::MindeeHTTPError.new(error_obj || {}, url, code)
+          Error::MindeeHTTPError.new(error_obj || {}, url, code)
         end
       end
 
@@ -94,11 +94,11 @@ module Mindee
       def generate_v2_error(hashed_response)
         code = hashed_response[:code].to_i
         if hashed_response.key?(:status)
-          Errors::MindeeHTTPErrorV2.new(hashed_response.transform_keys(&:to_s))
+          Error::MindeeHTTPErrorV2.new(hashed_response.transform_keys(&:to_s))
         elsif code < 200 || code > 399
-          Errors::MindeeHTTPErrorV2.new({ 'status' => code, 'detail' => 'No details available.' })
+          Error::MindeeHTTPErrorV2.new({ 'status' => code, 'detail' => 'No details available.' })
         else
-          Errors::MindeeHTTPErrorV2.new({ 'status' => -1, 'detail' => 'Unknown Error.' })
+          Error::MindeeHTTPErrorV2.new({ 'status' => -1, 'detail' => 'Unknown Error.' })
         end
       end
     end

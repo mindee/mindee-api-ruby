@@ -69,7 +69,7 @@ module Mindee
 
         if enqueue_response.job.id.nil? || enqueue_response.job.id.empty?
           logger.error("Failed enqueueing:\n#{enqueue_response.raw_http}")
-          raise Mindee::Errors::MindeeError, 'Enqueueing of the document failed.'
+          raise Mindee::Error::MindeeError, 'Enqueueing of the document failed.'
         end
 
         job_id = enqueue_response.job.id
@@ -99,13 +99,13 @@ module Mindee
 
         error = poll_results.job.error
         unless error.nil?
-          err_to_raise = Mindee::Errors::MindeeHTTPErrorV2.new(error)
+          err_to_raise = Mindee::Error::MindeeHTTPErrorV2.new(error)
           # NOTE: purposefully decoupled from the line above, otherwise rubocop thinks `error` is a `message` param.
           raise err_to_raise
         end
 
         sec_count = normalized_params.polling_options.delay_sec * retry_counter
-        raise Mindee::Errors::MindeeError,
+        raise Mindee::Error::MindeeError,
               "Asynchronous parsing request timed out after #{sec_count} seconds"
       end
 
