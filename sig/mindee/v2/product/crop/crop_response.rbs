@@ -13,6 +13,8 @@ module Mindee
 
           def _params_type: -> singleton(Params::CropParameters)
 
+          def extract_from_file: (Input::Source::LocalInputSource) -> FileOperation::CropFiles
+
           def to_s: -> String
           def self._params_type: () -> singleton(Params::CropParameters)
           def self.slug: () -> String

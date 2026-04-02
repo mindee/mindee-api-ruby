@@ -44,7 +44,7 @@ module Mindee
           def initialize(product_class, http_response, raw_http)
             logger.debug('Handling API response')
             @raw_http = raw_http
-            raise Errors::MindeeAPIError, 'Invalid response format.' unless http_response.key?('api_request')
+            raise Error::MindeeAPIError, 'Invalid response format.' unless http_response.key?('api_request')
 
             @api_request = Mindee::V1::Parsing::Common::ApiRequest.new(http_response['api_request'])
 

@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-describe Mindee::PDF::PDFExtractor::ExtractedPDF do
+describe Mindee::PDF::ExtractedPDF do
   let(:output_dir) { File.join(V1_DATA_DIR, 'output') }
   let(:valid_pdf_path) { "#{V1_PRODUCT_DATA_DIR}/invoices/invoice.pdf" }
   let(:invalid_pdf_path) { "#{FILE_TYPES_DIR}/receipt.txt" }
@@ -12,7 +12,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
     allow(File).to receive(:directory?).and_return(false)
     allow(File).to receive(:exist?).and_return(true)
     allow(File).to receive(:extname).and_return('.pdf')
-    allow(File).to receive(:write)
+    allow(File).to receive(:binwrite)
   end
 
   describe '#initialize' do
@@ -32,7 +32,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
 
       expect do
         pdf_wrapper.page_count
-      end.to raise_error Mindee::Errors::MindeePDFError, %r{Could not retrieve page count}
+      end.to raise_error Mindee::Error::MindeePDFError, %r{Could not retrieve page count}
     end
 
     it 'returns the correct page count for a valid PDF' do
@@ -47,10 +47,12 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
   describe '#write_to_file' do
     it 'writes the PDF bytes to a specified file path' do
       pdf_stream = File.open(valid_pdf_path, 'r')
+      expected_pdf_content = pdf_stream.read
+      pdf_stream.rewind
       pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
       expect { pdf_wrapper.write_to_file(output_path) }.not_to raise_error
-      expect(File).to have_received(:write).with(output_path, pdf_stream)
+      expect(File).to have_received(:binwrite).with(output_path, expected_pdf_content)
     end
 
     it 'raises an error if the output path is a directory' do
@@ -60,7 +62,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
 
       expect do
         pdf_wrapper.write_to_file(output_path)
-      end.to raise_error Mindee::Errors::MindeePDFError, %r{Provided path is not a file}
+      end.to raise_error Mindee::Error::MindeePDFError, %r{Provided path is not a file}
     end
 
     it 'raises an error if the save path is invalid' do
@@ -70,7 +72,7 @@ describe Mindee::PDF::PDFExtractor::ExtractedPDF do
 
       expect do
         pdf_wrapper.write_to_file(output_path)
-      end.to raise_error Mindee::Errors::MindeePDFError, %r{Invalid save path provided}
+      end.to raise_error Mindee::Error::MindeePDFError, %r{Invalid save path provided}
     end
   end
 

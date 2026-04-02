@@ -51,11 +51,11 @@ module Mindee
 
         # Checks API key for a value.
         # @return
-        # @raise [Errors::MindeeAPIError] Raises if the api key is empty or nil.
+        # @raise [Error::MindeeAPIError] Raises if the api key is empty or nil.
         def check_api_key
           return unless @api_key.nil? || @api_key.to_s.empty?
 
-          raise Errors::MindeeAPIError,
+          raise Error::MindeeAPIError,
                 "Missing API key. check your Client Configuration.\nYou can set this using the " \
                 "'#{MINDEE_V2_API_KEY_ENV_NAME}' environment variable."
         end

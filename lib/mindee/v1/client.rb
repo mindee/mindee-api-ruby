@@ -251,14 +251,14 @@ module Mindee
       def enqueue_and_parse(input_source, product_class, endpoint, options)
         validate_async_params(options.initial_delay_sec, options.delay_sec, options.max_retries)
         enqueue_res = enqueue(input_source, product_class, endpoint: endpoint, options: options)
-        job = enqueue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
+        job = enqueue_res.job or raise Error::MindeeAPIError, 'Expected job to be present'
         job_id = job.id
 
         sleep(options.initial_delay_sec)
         polling_attempts = 1
         logger.debug("Successfully enqueued document with job id: '#{job_id}'")
         queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
-        queue_res_job = queue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
+        queue_res_job = queue_res.job or raise Error::MindeeAPIError, 'Expected job to be present'
         valid_statuses = [
           Mindee::V1::Parsing::Common::JobStatus::WAITING,
           Mindee::V1::Parsing::Common::JobStatus::PROCESSING,
@@ -268,13 +268,13 @@ module Mindee
           logger.debug("Polling server for parsing result with job id: '#{job_id}'. Attempt #{polling_attempts}")
           sleep(options.delay_sec)
           queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
-          queue_res_job = queue_res.job or raise Errors::MindeeAPIError, 'Expected job to be present'
+          queue_res_job = queue_res.job or raise Error::MindeeAPIError, 'Expected job to be present'
           polling_attempts += 1
         end
 
         if queue_res_job.status != Mindee::V1::Parsing::Common::JobStatus::COMPLETED
           elapsed = options.initial_delay_sec + (polling_attempts * options.delay_sec.to_f)
-          raise Errors::MindeeAPIError,
+          raise Error::MindeeAPIError,
                 "Asynchronous parsing request timed out after #{elapsed} seconds (#{polling_attempts} tries)"
         end
 
@@ -325,14 +325,14 @@ module Mindee
       # @param local_response [Mindee::Input::LocalResponse]
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
       def load_prediction(product_class, local_response)
-        raise Errors::MindeeAPIError, 'Expected LocalResponse to not be nil.' if local_response.nil?
+        raise Error::MindeeAPIError, 'Expected LocalResponse to not be nil.' if local_response.nil?
 
         response_hash = local_response.as_hash || {}
-        raise Errors::MindeeAPIError, 'Expected LocalResponse#as_hash to return a hash.' if response_hash.nil?
+        raise Error::MindeeAPIError, 'Expected LocalResponse#as_hash to return a hash.' if response_hash.nil?
 
         Mindee::V1::Parsing::Common::ApiResponse.new(product_class, response_hash, response_hash.to_json)
-      rescue KeyError, Errors::MindeeAPIError
-        raise Errors::MindeeInputError, 'No prediction found in local response.'
+      rescue KeyError, Error::MindeeAPIError
+        raise Error::MindeeInputError, 'No prediction found in local response.'
       end
 
       # Load a document from an absolute path, as a string.
@@ -430,7 +430,7 @@ module Mindee
       # @return [Mindee::V1::HTTP::Endpoint]
       def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
         if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::V1::Product::Universal::Universal
-          raise Mindee::Errors::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
+          raise Mindee::Error::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
         end
 
         endpoint_name = fix_endpoint_name(product_class, endpoint_name)

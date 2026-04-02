@@ -5,7 +5,7 @@ class Object
 end
 
 module Mindee
-  module Errors
+  module Error
   end
 
   module Extraction

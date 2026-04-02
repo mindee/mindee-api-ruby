@@ -4,7 +4,7 @@ require_relative 'mindee_error'
 require_relative '../v2/parsing/error_item'
 
 module Mindee
-  module Errors
+  module Error
     # API V2 HttpError
     class MindeeHTTPErrorV2 < MindeeError
       # @return [Integer] The HTTP status code returned by the server.

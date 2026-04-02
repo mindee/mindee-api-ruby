@@ -2,7 +2,7 @@
 
 require_relative '../../input'
 require_relative '../../http'
-require_relative '../../errors'
+require_relative '../../error'
 
 module Mindee
   module V2
@@ -22,7 +22,7 @@ module Mindee
         # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
         # @param params [Input::BaseParameters]
         # @return [Mindee::V2::Parsing::JobResponse]
-        # @raise [Mindee::Errors::MindeeHttpErrorV2]
+        # @raise [Mindee::Error::MindeeHttpErrorV2]
         def req_post_enqueue(input_source, params)
           @settings.check_api_key
           response = enqueue(
@@ -91,14 +91,14 @@ module Mindee
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
             return http.request(req)
           end
-          raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
+          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
         end
 
         # @param resource [String] Resource to check.
         # @return [Boolean]
         def uri?(resource)
           uri = URI.parse(resource)
-          throw Mindee::Errors::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
+          throw Mindee::Error::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
           uri.scheme == 'https'
         rescue URI::BadURIError, URI::InvalidURIError
           false
@@ -160,7 +160,7 @@ module Mindee
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
             return http.request(req)
           end
-          raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
+          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
         end
 
         # Polls the API for the result of an inference.
@@ -222,7 +222,7 @@ module Mindee
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
             return http.request(req)
           end
-          raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
+          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
         end
       end
     end

@@ -2,7 +2,7 @@
 
 require 'mindee'
 require 'mindee/input/sources'
-require 'mindee/errors'
+require 'mindee/error'
 require 'pdf-reader'
 
 require_relative '../../data'
@@ -102,7 +102,7 @@ describe Mindee::Input::Source do
         mindee_client.source_from_path(
           "#{FILE_TYPES_DIR}/pdf/broken_unfixable.pdf", repair_pdf: true
         )
-      end.to raise_error Mindee::Errors::MindeePDFError
+      end.to raise_error Mindee::Error::MindeePDFError
     end
   end
 

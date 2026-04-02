@@ -69,7 +69,7 @@ module Mindee
             Mindee::HTTP::ResponseValidation.clean_request!(response)
           end
 
-          raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+          raise Error::MindeeError, 'Could not resolve server response.' if response.nil?
 
           error = Mindee::HTTP::ErrorHandler.handle_error(@url_name, response)
           raise error
@@ -89,7 +89,7 @@ module Mindee
             Mindee::HTTP::ResponseValidation.clean_request!(response)
           end
 
-          raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+          raise Error::MindeeError, 'Could not resolve server response.' if response.nil?
 
           raise Mindee::HTTP::ErrorHandler.handle_error(@url_name, response)
         end
@@ -139,7 +139,7 @@ module Mindee
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
             return http.request(req)
           end
-          raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
+          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
         end
 
         # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
@@ -176,7 +176,7 @@ module Mindee
           Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @request_timeout) do |http|
             return http.request(req)
           end
-          raise Mindee::Errors::MindeeError, 'Could not resolve server response.'
+          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
         end
 
         # @param job_id [String]
@@ -195,7 +195,7 @@ module Mindee
             http.request(req)
           end
 
-          raise Errors::MindeeError, 'Could not resolve server response.' if response.nil?
+          raise Error::MindeeError, 'Could not resolve server response.' if response.nil?
 
           if response.code.to_i > 299 && response.code.to_i < 400
             req = Net::HTTP::Get.new(response['location'], headers)
@@ -210,7 +210,7 @@ module Mindee
         def check_api_key
           return unless @api_key.nil? || @api_key.empty?
 
-          raise Errors::MindeeAPIError,
+          raise Error::MindeeAPIError,
                 "Missing API key for product \"'#{@url_name}' v#{@version}\" (belonging to \"#{@owner}\"), " \
                 "check your Client Configuration.\nYou can set this using the " \
                 "'#{HTTP::API_KEY_ENV_NAME}' environment variable."

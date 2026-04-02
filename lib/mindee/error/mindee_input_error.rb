@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Mindee
-  module Errors
-    # Base class for errors relating to input documents.
+  module Error
+    # Base class for error relating to input documents.
     class MindeeInputError < MindeeError; end
 
     # Errors relating to sources (documents) handling.

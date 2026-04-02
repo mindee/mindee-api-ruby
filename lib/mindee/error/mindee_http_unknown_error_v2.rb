@@ -3,7 +3,7 @@
 require_relative 'mindee_error'
 
 module Mindee
-  module Errors
+  module Error
     # Unknown HTTP error for the V2 API.
     class MindeeHTTPUnknownErrorV2 < MindeeHTTPErrorV2
       def initialize(http_error)
