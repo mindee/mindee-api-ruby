@@ -27,7 +27,7 @@ module Mindee
           # Apply the split range inference to a file and return a single extracted PDF.
           #
           # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
-          # @return [Image::ExtractedImage]
+          # @return [PDF::ExtractedPDF]
           def extract_from_file(input_source)
             FileOperation::Split.extract_single_split(input_source, @page_range)
           end

@@ -31,10 +31,7 @@ module Mindee
           # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
           # @return [FileOperation::CropFiles] List of extracted PDFs
           def extract_from_file(input_source)
-            crop_files = @inference.result.crops.map do |crop|
-              crop.extract_from_file(input_source)
-            end
-            FileOperation::CropFiles.new(crop_files)
+            FileOperation::Crop.extract_crops(input_source, @inference.result.crops)
           end
         end
       end
