@@ -21,7 +21,7 @@ input_source = Mindee::Input::Source::PathInputSource.new(input_path)
 
 # Send for processing
 response = mindee_client.enqueue_and_get_result(
-    Mindee::V2::Product::OCR::Ocr,
+    Mindee::V2::Product::OCR::OCR,
     input_source,
     ocr_params
 )
