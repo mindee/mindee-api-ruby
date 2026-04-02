@@ -30,7 +30,7 @@ Consult the
 
 ## Additional Information
 
-**<a href="https://github.com/mindee/mindee-api-ruby>Source Code</a>**
+**<a href="https://github.com/mindee/mindee-api-ruby">Source Code</a>**
 
 **<a href="https://mindee.github.io/mindee-api-ruby/">Reference Documentation</a>**
 
