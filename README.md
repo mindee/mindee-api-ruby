@@ -15,7 +15,7 @@ https://app.mindee.com
 It uses **API version 2**.
 
 Consult the
-**[V2 Documentation](https://docs.mindee.com/integrations/client-libraries-sdk)**
+**<a href="https://docs.mindee.com/integrations/client-libraries-sdk">V2 Documentation</a>**
 
 
 ### V1
@@ -26,17 +26,17 @@ https://platform.mindee.com/
 It uses **API version 1**.
 
 Consult the
-[V1 Documentation](https://docs.mindee.com/v1/libraries/ruby-sdk)
+<a href="https://docs.mindee.com/v1/libraries/ruby-sdk">V1 Documentation</a>
 
 ## Additional Information
 
-**[Source Code](https://github.com/mindee/mindee-api-ruby)**
+**<a href="https://github.com/mindee/mindee-api-ruby>Source Code</a>**
 
-**[Reference Documentation](https://mindee.github.io/mindee-api-ruby/)**
+**<a href="https://mindee.github.io/mindee-api-ruby/">Reference Documentation</a>**
 
-**[Feedback](https://feedback.mindee.com/)**
+**<a href="https://feedback.mindee.com/">Feedback</a>**
 
 ### License
 Copyright © Mindee
 
-Available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
