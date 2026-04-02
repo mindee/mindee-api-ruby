@@ -19,7 +19,7 @@ module Mindee
 
           def start_year: -> String
 
-          def printable_values: -> Hash[String | Symbol, untyped]
+          def printable_values: -> Hash[Symbol, String]
 
           def table_printable_values: -> Hash[String | Symbol, untyped]
 

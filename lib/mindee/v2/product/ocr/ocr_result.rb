@@ -5,17 +5,17 @@ require_relative 'ocr_page'
 module Mindee
   module V2
     module Product
-      module Ocr
+      module OCR
         # Result of a ocr utility inference.
-        class OcrResult
-          # @return [Array<OcrPage>] List of OCR results for each page in the document.
+        class OCRResult
+          # @return [Array<OCRPage>] List of OCR results for each page in the document.
           attr_reader :pages
 
           # @param server_response [Hash] Hash representation of the JSON returned by the service.
           def initialize(server_response)
             @pages = if server_response.key?('pages')
                        server_response['pages'].map do |pages|
-                         OcrPage.new(pages)
+                         OCRPage.new(pages)
                        end
                      end
           end

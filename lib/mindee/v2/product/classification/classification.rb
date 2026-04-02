@@ -6,6 +6,7 @@ require_relative 'params/classification_parameters'
 module Mindee
   module V2
     module Product
+      # Classification module.
       module Classification
         # Classification product.
         class Classification < BaseProduct

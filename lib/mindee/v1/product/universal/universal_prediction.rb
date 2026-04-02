@@ -11,6 +11,7 @@ module Mindee
           include Mindee::V1::Parsing::Common
           include Mindee::V1::Parsing::Standard
           include Mindee::V1::Parsing::Universal
+
           # All value fields in the document
           # @return [Hash<Symbol, Mindee::V1::Parsing::Universal::UniversalListField>]
           attr_reader :fields

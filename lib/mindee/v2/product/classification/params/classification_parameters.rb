@@ -4,6 +4,7 @@ module Mindee
   module V2
     module Product
       module Classification
+        # Classification parameters.
         module Params
           # Parameters accepted by the classification utility v2 endpoint.
           class ClassificationParameters < Mindee::Input::BaseParameters

@@ -32,7 +32,7 @@ module Mindee
           # @return [Array<SimpleField>] Simple fields contained in the list.
           # @raise [TypeError] If the fields are not SimpleField.
           def simple_items
-            fields = []
+            fields = [] # @type var fields: Array[SimpleField]
             @items.each do |item|
               raise TypeError, "Invalid field type detected: #{item.class}" unless item.is_a?(SimpleField)
 
@@ -45,7 +45,7 @@ module Mindee
           # @return [Array<ObjectField>] Object fields contained in the list.
           # @raise [TypeError] If the fields are not ObjectField.
           def object_items
-            fields = []
+            fields = [] # @type var fields: Array[ObjectField]
             @items.each do |item|
               raise TypeError, "Invalid field type detected: #{item.class}" unless item.is_a?(ObjectField)
 

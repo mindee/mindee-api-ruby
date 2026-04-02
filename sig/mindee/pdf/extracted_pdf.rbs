@@ -5,7 +5,7 @@ module Mindee
       attr_reader pdf_bytes: StringIO
       attr_reader filename: String
 
-      def initialize: (StringIO, String) -> void
+      def initialize: (StringIO | File, String) -> void
 
       def page_count: -> Integer
 

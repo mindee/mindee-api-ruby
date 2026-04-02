@@ -9,6 +9,7 @@ module Mindee
         # List of page groups. Each group represents a single invoice within a multi-invoice document.
         class InvoiceSplitterV1InvoicePageGroup < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # List of page indexes that belong to the same invoice (group).
           # @return [Array<Integer>]
           attr_reader :page_indexes
@@ -23,14 +24,14 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:page_indexes] = format_for_display(@page_indexes)
             printable
           end
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:page_indexes] = @page_indexes.join(', ')
             printable
           end

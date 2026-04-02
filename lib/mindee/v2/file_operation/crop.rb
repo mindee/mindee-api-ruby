@@ -35,7 +35,7 @@ module Mindee
             polygons[crop.location.page] << crop.location.polygon
           end
 
-          images = []
+          images = [] # @type var images: Array[Image::ExtractedImage]
           polygons.each_with_index do |page_polygons, page_index|
             extracted = Mindee::Image::ImageExtractor.extract_multiple_images_from_source(
               input_source, page_index, page_polygons

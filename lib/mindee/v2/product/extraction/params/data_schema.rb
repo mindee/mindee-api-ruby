@@ -6,6 +6,7 @@ module Mindee
   module V2
     module Product
       module Extraction
+        # Extraction parameters.
         module Params
           # Modify the Data Schema.
           class DataSchema

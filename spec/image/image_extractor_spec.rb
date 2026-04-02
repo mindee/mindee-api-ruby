@@ -6,6 +6,7 @@ require_relative '../data'
 
 describe Mindee::Image do
   include Mindee::Image
+
   let(:barcode_path) do
     File.join(V1_DATA_DIR, 'products', 'barcode_reader', 'default_sample.jpg')
   end

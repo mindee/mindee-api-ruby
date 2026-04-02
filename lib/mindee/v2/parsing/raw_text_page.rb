@@ -13,6 +13,8 @@ module Mindee
           @content = server_response['content']
         end
 
+        # String representation.
+        # @return [String]
         def to_s
           @content
         end

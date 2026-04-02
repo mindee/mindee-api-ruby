@@ -3,10 +3,11 @@
 module Mindee
   module V1
     module Product
-    module MultiReceiptsDetector
-      class MultiReceiptsDetectorV1 < Parsing::Common::Inference
-        def initialize: (Hash[String | Symbol, untyped]) -> void
-      end
+      module MultiReceiptsDetector
+        class MultiReceiptsDetectorV1 < Parsing::Common::Inference
+          attr_reader prediction: MultiReceiptsDetectorV1Document
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
       end
     end
   end

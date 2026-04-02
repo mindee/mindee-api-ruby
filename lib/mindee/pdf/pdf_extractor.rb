@@ -40,7 +40,7 @@ module Mindee
       # @param page_indexes [Array<Array<Integer>>] List of page number to use for merging in the original Pdf.
       # @return [Array<Mindee::PDF::ExtractedPDF>] The buffer containing the new Pdf.
       def extract_sub_documents(page_indexes)
-        extracted_pdfs = []
+        extracted_pdfs = [] # @type var extracted_pdfs: Array[Mindee::PDF::ExtractedPDF]
         extension = File.extname(@filename)
         basename = File.basename(@filename, extension)
         page_indexes.each do |page_index_list|
@@ -54,7 +54,7 @@ module Mindee
                     "Index #{page_index} is out of range."
             end
           end
-          formatted_max_index = format('%03d', page_index_list[page_index_list.length - 1] + 1).to_s
+          formatted_max_index = format('%03d', page_index_list[-1] + 1).to_s
           field_filename = "#{basename}_#{format('%03d',
                                                  page_index_list[0] + 1)}-#{formatted_max_index}#{extension}"
           extracted_pdf = Mindee::PDF::ExtractedPDF.new(cut_pages(page_index_list),
@@ -74,15 +74,15 @@ module Mindee
       def extract_invoices(page_indexes, strict: false)
         raise Error::MindeePDFError, 'No indexes provided.' if page_indexes.empty?
 
-        if page_indexes[0].is_a?(Array) && page_indexes[0].all? { |i| i.is_a?(Integer) }
+        if page_indexes[0].is_a?(Array) && page_indexes[0].all?(Integer)
           page_indexes_as_array = page_indexes # @type var page_indexes : Array[Array[Integer]]
           return extract_sub_documents(page_indexes_as_array)
         end
         p_ids = page_indexes # @type var page_indexes: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups
         return extract_sub_documents(p_ids.map(&:page_indexes)) unless strict
 
-        correct_page_indexes = []
-        current_list = []
+        correct_page_indexes = [] # @type var correct_page_indexes: Array[Array[Integer]]
+        current_list = [] # @type var current_list: Array[Integer]
         previous_confidence = nil
         p_ids.each_with_index do |p_i, i|
           page_index = p_i # @type var page_index: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup

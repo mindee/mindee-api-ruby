@@ -9,6 +9,7 @@ module Mindee
         # Barcode Reader API version 1.0 document data.
         class BarcodeReaderV1Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # List of decoded 1D barcodes.
           # @return [Array<Mindee::V1::Parsing::Standard::StringField>]
           attr_reader :codes_1d

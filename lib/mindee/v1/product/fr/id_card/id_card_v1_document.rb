@@ -10,6 +10,7 @@ module Mindee
           # Carte Nationale d'Identité API version 1.1 document data.
           class IdCardV1Document < Mindee::V1::Parsing::Common::Prediction
             include Mindee::V1::Parsing::Standard
+
             # The name of the issuing authority.
             # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :authority

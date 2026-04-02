@@ -1,8 +1,8 @@
 module Mindee
   module V2
     module Product
-      module Ocr
-        class OcrWord
+      module OCR
+        class OCRWord
           attr_reader content: String
           attr_reader polygon: Geometry::Polygon
 

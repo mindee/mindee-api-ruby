@@ -22,7 +22,7 @@ module Mindee
 
             # @return [String]
             def to_s
-              @croppings.map(&:to_s).join("\n           ")
+              @croppings.join("\n           ")
             end
           end
         end

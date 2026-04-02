@@ -2,7 +2,7 @@
 module Mindee
   module V1
     module Extraction
-      def self.extract_receipts: (untyped, untyped) -> Array[untyped]
+      def self.extract_receipts: (Input::Source::LocalInputSource, Product::MultiReceiptsDetector::MultiReceiptsDetectorV1) -> Array[Image::ExtractedImage]
     end
   end
 end
