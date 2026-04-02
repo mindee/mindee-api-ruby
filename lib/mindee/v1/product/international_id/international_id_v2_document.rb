@@ -9,6 +9,7 @@ module Mindee
         # International ID API version 2.2 document data.
         class InternationalIdV2Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # The physical address of the document holder.
           # @return [Mindee::V1::Parsing::Standard::StringField]
           attr_reader :address

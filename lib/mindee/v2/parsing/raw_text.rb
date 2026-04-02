@@ -17,7 +17,7 @@ module Mindee
         end
 
         def to_s
-          "#{@pages.map(&:to_s).join("\n\n")}\n"
+          "#{@pages.join("\n\n")}\n"
         end
       end
     end

@@ -11,6 +11,7 @@ module Mindee
           # Bank Statement API version 2.0 document data.
           class BankStatementV2Document < Mindee::V1::Parsing::Common::Prediction
             include Mindee::V1::Parsing::Standard
+
             # The unique identifier for a customer's account in the bank's system.
             # @return [Mindee::V1::Parsing::Standard::StringField]
             attr_reader :account_number

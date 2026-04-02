@@ -10,6 +10,7 @@ module Mindee
           # The list of values that represent the financial transactions recorded in a bank statement.
           class BankStatementV2Transaction < Mindee::V1::Parsing::Standard::FeatureField
             include Mindee::V1::Parsing::Standard
+
             # The monetary amount of the transaction.
             # @return [Float]
             attr_reader :amount
@@ -32,7 +33,7 @@ module Mindee
 
             # @return [Hash]
             def printable_values
-              printable = {}
+              printable = {} # @type var printable: Hash[Symbol, String]
               printable[:amount] =
                 @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
               printable[:date] = format_for_display(@date)
@@ -42,7 +43,7 @@ module Mindee
 
             # @return [Hash]
             def table_printable_values
-              printable = {}
+              printable = {} # @type var printable: Hash[Symbol, String]
               printable[:amount] =
                 @amount.nil? ? '' : Parsing::Standard::BaseField.float_to_string(@amount)
               printable[:date] = format_for_display(@date, 10)

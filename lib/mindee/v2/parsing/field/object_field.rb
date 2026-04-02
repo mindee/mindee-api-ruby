@@ -111,22 +111,25 @@ module Mindee
           # Get all simple fields.
           # @return [Hash<String, SimpleField>] Simple fields contained in the object.
           def simple_fields
-            # @type var fields: Hash<String, SimpleField>
-            @fields.select { |_, value| value.is_a?(SimpleField) }
+            # @type var result: Hash[String, SimpleField]
+            result = @fields.select { |_, value| value.is_a?(SimpleField) } # rubocop:disable Style/RedundantAssignment
+            result
           end
 
           # Get all list fields.
           # @return [Hash<String, ListField>] List fields contained in the object.
           def list_fields
-            # @type var fields: Hash<String, ListField>
-            @fields.select { |_, value| value.is_a?(ListField) }
+            # @type var result: Hash[String, ListField]
+            result = @fields.select { |_, value| value.is_a?(ListField) } # rubocop:disable Style/RedundantAssignment
+            result
           end
 
           # Get all object fields.
           # @return [Hash<String, ObjectField>] Object fields contained in the object.
           def object_fields
-            # @type var fields: Hash<String, ObjectField>
-            @fields.select { |_, value| value.is_a?(ObjectField) }
+            # @type var result: Hash[String, ObjectField]
+            result = @fields.select { |_, value| value.is_a?(ObjectField) } # rubocop:disable Style/RedundantAssignment
+            result
           end
         end
       end

@@ -9,6 +9,7 @@ module Mindee
         # The list of certificates obtained by the candidate.
         class ResumeV1Certificate < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # The grade obtained for the certificate.
           # @return [String]
           attr_reader :grade
@@ -35,7 +36,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:grade] = format_for_display(@grade)
             printable[:name] = format_for_display(@name)
             printable[:provider] = format_for_display(@provider)
@@ -45,7 +46,7 @@ module Mindee
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:grade] = format_for_display(@grade, 10)
             printable[:name] = format_for_display(@name, 30)
             printable[:provider] = format_for_display(@provider, 25)

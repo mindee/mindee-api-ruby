@@ -5,8 +5,8 @@ module Mindee
     module Product
     module MultiReceiptsDetector
       class MultiReceiptsDetectorV1Document < Parsing::Common::Prediction
+        attr_reader receipts:(Array[Parsing::Standard::PositionField])
         def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
-        def receipts: -> (Array[Parsing::Standard::PositionField])
         def to_s: -> String
       end
       end

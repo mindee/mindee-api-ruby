@@ -10,6 +10,7 @@ module Mindee
           # Full extraction of BBAN, including: branch code, bank code, account and key.
           class BankAccountDetailsV2Bban < Mindee::V1::Parsing::Standard::FeatureField
             include Mindee::V1::Parsing::Standard
+
             # The BBAN bank code outputted as a string.
             # @return [String]
             attr_reader :bban_bank_code
@@ -36,7 +37,7 @@ module Mindee
 
             # @return [Hash]
             def printable_values
-              printable = {}
+              printable = {} # @type var printable: Hash[Symbol, String]
               printable[:bban_bank_code] = format_for_display(@bban_bank_code)
               printable[:bban_branch_code] = format_for_display(@bban_branch_code)
               printable[:bban_key] = format_for_display(@bban_key)

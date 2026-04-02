@@ -10,6 +10,7 @@ module Mindee
         # Invoice Splitter API version 1.4 document data.
         class InvoiceSplitterV1Document < Mindee::V1::Parsing::Common::Prediction
           include Mindee::V1::Parsing::Standard
+
           # List of page groups. Each group represents a single invoice within a multi-invoice document.
           # @return [Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups]
           attr_reader :invoice_page_groups

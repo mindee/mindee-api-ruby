@@ -76,7 +76,7 @@ module Mindee
           url = "#{@settings.base_url}/v2/search/models"
           uri = URI(url)
 
-          query_params = {}
+          query_params = {} # @type var query_params: Hash[Symbol, String | nil]
           query_params[:name] = model_name if model_name
           query_params[:model_type] = model_type if model_type
           uri.query = URI.encode_www_form(query_params) unless query_params.empty?

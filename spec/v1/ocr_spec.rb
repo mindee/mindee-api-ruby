@@ -7,6 +7,7 @@ require_relative '../data'
 
 describe Mindee::V1::Parsing::Common do
   include Mindee::V1::Parsing::Common
+
   context 'An OCR extraction' do
     json_data = load_json(V1_OCR_DIR, 'complete.json')
     it 'should extract ocr data from a document' do

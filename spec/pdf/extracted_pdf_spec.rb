@@ -17,62 +17,71 @@ describe Mindee::PDF::ExtractedPDF do
 
   describe '#initialize' do
     it 'initializes with valid pdf bytes and filename' do
-      pdf_stream = File.open(valid_pdf_path, 'r')
-      extracted_pdf = described_class.new(pdf_stream, 'invoice.pdf')
+      File.open(valid_pdf_path, 'r') do |pdf_stream|
+        extracted_pdf = described_class.new(pdf_stream, 'invoice.pdf')
+        expect(extracted_pdf.pdf_bytes).to be_a(StringIO)
+        pdf_stream.rewind
+        extracted_pdf.pdf_bytes.rewind
+        expect(extracted_pdf.pdf_bytes.read).to eq(pdf_stream.read)
 
-      expect(extracted_pdf.pdf_bytes).to eq(pdf_stream)
-      expect(extracted_pdf.filename).to eq('invoice.pdf')
+        expect(extracted_pdf.filename).to eq('invoice.pdf')
+      end
     end
   end
 
   describe '#page_count' do
     it 'raises an error for invalid PDF content' do
-      jpg_stream = File.open(invalid_pdf_path, 'r')
-      pdf_wrapper = described_class.new(jpg_stream, 'dummy.pdf')
+      File.open(invalid_pdf_path, 'r') do |jpg_stream|
+        pdf_wrapper = described_class.new(jpg_stream, 'dummy.pdf')
 
-      expect do
-        pdf_wrapper.page_count
-      end.to raise_error Mindee::Error::MindeePDFError, %r{Could not retrieve page count}
+        expect do
+          pdf_wrapper.page_count
+        end.to raise_error Mindee::Error::MindeePDFError, %r{Could not retrieve page count}
+      end
     end
 
     it 'returns the correct page count for a valid PDF' do
-      pdf_stream = File.open(valid_pdf_path, 'r')
-      allow(Mindee::PDF::PDFProcessor).to receive(:open_pdf).and_return(double(pages: [1, 2, 3]))
-      pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
+      File.open(valid_pdf_path, 'r') do |pdf_stream|
+        allow(Mindee::PDF::PDFProcessor).to receive(:open_pdf).and_return(double(pages: [1, 2, 3]))
+        pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
-      expect(pdf_wrapper.page_count).to eq(3)
+        expect(pdf_wrapper.page_count).to eq(3)
+      end
     end
   end
 
   describe '#write_to_file' do
     it 'writes the PDF bytes to a specified file path' do
-      pdf_stream = File.open(valid_pdf_path, 'r')
-      expected_pdf_content = pdf_stream.read
-      pdf_stream.rewind
-      pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
+      File.open(valid_pdf_path, 'r') do |pdf_stream|
+        expected_pdf_content = pdf_stream.read
+        pdf_stream.rewind
+        pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
-      expect { pdf_wrapper.write_to_file(output_path) }.not_to raise_error
-      expect(File).to have_received(:binwrite).with(output_path, expected_pdf_content)
+        expect { pdf_wrapper.write_to_file(output_path) }.not_to raise_error
+        expect(File).to have_received(:binwrite).with(output_path, expected_pdf_content)
+      end
     end
 
     it 'raises an error if the output path is a directory' do
       allow(File).to receive(:directory?).and_return(true)
-      pdf_stream = File.open(valid_pdf_path, 'r')
-      pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
+      File.open(valid_pdf_path, 'r') do |pdf_stream|
+        pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
-      expect do
-        pdf_wrapper.write_to_file(output_path)
-      end.to raise_error Mindee::Error::MindeePDFError, %r{Provided path is not a file}
+        expect do
+          pdf_wrapper.write_to_file(output_path)
+        end.to raise_error Mindee::Error::MindeePDFError, %r{Provided path is not a file}
+      end
     end
 
     it 'raises an error if the save path is invalid' do
       allow(File).to receive(:exist?).and_return(false)
-      pdf_stream = File.open(valid_pdf_path, 'r')
-      pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
+      File.open(valid_pdf_path, 'r') do |pdf_stream|
+        pdf_wrapper = described_class.new(pdf_stream, 'invoice.pdf')
 
-      expect do
-        pdf_wrapper.write_to_file(output_path)
-      end.to raise_error Mindee::Error::MindeePDFError, %r{Invalid save path provided}
+        expect do
+          pdf_wrapper.write_to_file(output_path)
+        end.to raise_error Mindee::Error::MindeePDFError, %r{Invalid save path provided}
+      end
     end
   end
 

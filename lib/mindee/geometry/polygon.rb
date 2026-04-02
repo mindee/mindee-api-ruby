@@ -7,7 +7,7 @@ module Mindee
     class Polygon < Array
       # @param server_response [Hash] Raw server response hash.
       def initialize(server_response)
-        points = []
+        points = [] # @type var points: Array[Mindee::Geometry::Point]
         server_response.map do |point|
           points << Point.new(point[0], point[1])
         end
@@ -30,7 +30,7 @@ module Mindee
 
       # @return [String] Polygon as a string.
       def to_s
-        "(#{map(&:to_s).join(', ')})"
+        "(#{join(', ')})"
       end
     end
   end

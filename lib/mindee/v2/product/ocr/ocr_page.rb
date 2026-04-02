@@ -23,7 +23,7 @@ module Mindee
           # @return [String]
           def to_s
             ocr_words = "\n"
-            ocr_words += @words.map(&:to_s).join("\n\n") if @words&.any?
+            ocr_words += @words.join("\n\n") if @words&.any?
             "OCR Words\n======#{ocr_words}\n\n:Content: #{@content}"
           end
         end

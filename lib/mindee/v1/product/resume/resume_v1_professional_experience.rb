@@ -9,6 +9,7 @@ module Mindee
         # The list of the candidate's professional experiences.
         class ResumeV1ProfessionalExperience < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # The type of contract for the professional experience.
           # @return [String]
           attr_reader :contract_type
@@ -55,7 +56,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:contract_type] = format_for_display(@contract_type)
             printable[:department] = format_for_display(@department)
             printable[:description] = format_for_display(@description)
@@ -70,7 +71,7 @@ module Mindee
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:contract_type] = format_for_display(@contract_type, 15)
             printable[:department] = format_for_display(@department, 10)
             printable[:description] = format_for_display(@description, 36)

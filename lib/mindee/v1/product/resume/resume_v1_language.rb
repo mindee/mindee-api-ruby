@@ -9,6 +9,7 @@ module Mindee
         # The list of languages that the candidate is proficient in.
         class ResumeV1Language < Mindee::V1::Parsing::Standard::FeatureField
           include Mindee::V1::Parsing::Standard
+
           # The language's ISO 639 code.
           # @return [String]
           attr_reader :language
@@ -27,7 +28,7 @@ module Mindee
 
           # @return [Hash]
           def printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:language] = format_for_display(@language)
             printable[:level] = format_for_display(@level)
             printable
@@ -35,7 +36,7 @@ module Mindee
 
           # @return [Hash]
           def table_printable_values
-            printable = {}
+            printable = {} # @type var printable: Hash[Symbol, String]
             printable[:language] = format_for_display(@language, nil)
             printable[:level] = format_for_display(@level, 20)
             printable
