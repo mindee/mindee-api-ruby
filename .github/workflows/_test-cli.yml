@@ -24,7 +24,7 @@ jobs:
           - os: "windows-latest"
             rid: "win-x64"
         ruby:
-          - "3.0"
+          - "3.2"
           - "4.0"
     runs-on: ${{ matrix.os_config.os }}
     steps:
