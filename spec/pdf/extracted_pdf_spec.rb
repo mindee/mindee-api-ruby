@@ -4,7 +4,7 @@ require 'mindee'
 
 describe 'Mindee::PDF::ExtractedPDF', :full_deps do
   # Workaround for mindee-lite
-  if Mindee::Dependency.heavy_available?
+  if Mindee::Dependency.all_deps_available?
     let(:described_class) do
       Mindee::PDF::ExtractedPDF
     end

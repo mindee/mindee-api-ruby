@@ -1,13 +1,13 @@
 module Mindee
   module Dependency
-    MINDEE_LITE_LOAD_ERROR: String
+    MINDEE_DEPENDENCIES_LOAD_ERROR: String
 
-    self.@heavy_available: bool
+    self.@all_deps_available: bool
 
-    def self.check_heavy_dependencies: -> bool
+    def self.check_all_dependencies: -> bool
 
-    def self.heavy_available?: -> bool
-    def self.require_heavy!: -> void
+    def self.all_deps_available?: -> bool
+    def self.require_full_deps!: -> void
 
   end
 end

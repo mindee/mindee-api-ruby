@@ -5,8 +5,8 @@ require 'marcel'
 require 'fileutils'
 
 require_relative '../../dependency'
-require_relative '../../pdf' if Mindee::Dependency.heavy_available?
-require_relative '../../image' if Mindee::Dependency.heavy_available?
+require_relative '../../pdf' if Mindee::Dependency.all_deps_available?
+require_relative '../../image' if Mindee::Dependency.all_deps_available?
 
 module Mindee
   module Input
@@ -143,8 +143,8 @@ module Mindee
         # Defaults to one for images.
         # @return [Integer]
         def page_count
-          unless Mindee::Dependency.heavy_available?
-            raise NotImplementedError, Mindee::Dependency::MINDEE_LITE_LOAD_ERROR
+          unless Mindee::Dependency.all_deps_available?
+            raise NotImplementedError, Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR
           end
           return 1 unless pdf?
 
@@ -163,8 +163,8 @@ module Mindee
         # @param [bool] disable_source_text If the PDF has source text, whether to re-apply it to the original or
         #   not. Needs force_source_text to work.
         def compress!(quality: 85, max_width: nil, max_height: nil, force_source_text: false, disable_source_text: true)
-          unless Mindee::Dependency.heavy_available?
-            raise NotImplementedError, Mindee::Dependency::MINDEE_LITE_LOAD_ERROR
+          unless Mindee::Dependency.all_deps_available?
+            raise NotImplementedError, Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR
           end
 
           buffer = if pdf?
@@ -189,8 +189,8 @@ module Mindee
         # Checks whether the file has source text if it is a pdf. `false` otherwise
         # @return [bool] `true` if the file is a PDF and has source text.
         def source_text?
-          unless Mindee::Dependency.heavy_available?
-            raise NotImplementedError, Mindee::Dependency::MINDEE_LITE_LOAD_ERROR
+          unless Mindee::Dependency.all_deps_available?
+            raise NotImplementedError, Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR
           end
 
           Mindee::PDF::PDFTools.source_text?(@io_stream)
