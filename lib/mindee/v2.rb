@@ -2,6 +2,6 @@
 
 require_relative 'v2/client'
 require_relative 'v2/http'
-require_relative 'v2/file_operation'
+require_relative 'v2/file_operation' if Mindee::Dependency.all_deps_available?
 require_relative 'v2/parsing'
 require_relative 'v2/product'

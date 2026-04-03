@@ -5,7 +5,7 @@ require 'mindee/input/sources'
 require 'mindee/v1/extraction'
 require_relative '../../data'
 
-describe 'multi-receipts extraction' do
+describe 'multi-receipts extraction', :all_deps do
   let(:empty_inference) do
     double('Inference', prediction: double('Prediction', receipts: nil), pages: [])
   end
@@ -15,7 +15,7 @@ describe 'multi-receipts extraction' do
   end
 
   let(:empty_input_source) do
-    double('InputSource', count_pages: 0)
+    double('InputSource', page_count: 0)
   end
   let(:multi_receipts_single_page_path) do
     File.join(V1_DATA_DIR, 'products', 'multi_receipts_detector', 'default_sample.jpg')

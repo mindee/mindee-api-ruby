@@ -1,0 +1,13 @@
+module Mindee
+  module Dependency
+    MINDEE_DEPENDENCIES_LOAD_ERROR: String
+
+    self.@all_deps_available: bool
+
+    def self.check_all_dependencies: -> bool
+
+    def self.all_deps_available?: -> bool
+    def self.require_all_deps!: -> void
+
+  end
+end

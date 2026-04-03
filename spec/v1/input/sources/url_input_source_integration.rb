@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee'
+require 'tempfile'
 
 describe Mindee::Input::Source::URLInputSource do
   let(:client) { Mindee::V1::Client.new(api_key: ENV.fetch('MINDEE_API_KEY')) }

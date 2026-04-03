@@ -1,0 +1,40 @@
+#
+# Run lite unit tests.
+#
+name: Unit Tests - Minimal Dependencies
+
+on:
+  workflow_call:
+
+env:
+  MINDEE_GEM_NAME: mindee-lite
+
+jobs:
+  tests:
+    name: Run Unit Tests
+    timeout-minutes: 30
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-24.04"
+          - "macos-latest"
+        ruby:
+          - "3.2"
+          - "4.0"
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        submodules: recursive
+
+    - name: set up Ruby ${{ matrix.ruby }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+
+    - name: Run Rspec
+      env:
+        MINDEE_LOG_LEVEL: DEBUG
+      run: |
+        bundle exec rake spec

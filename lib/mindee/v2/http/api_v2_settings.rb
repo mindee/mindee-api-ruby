@@ -6,7 +6,7 @@ module Mindee
   module V2
     module HTTP
       # API client for version 2.
-      class ApiSettings
+      class ApiV2Settings
         # V2 API key's default environment key name.
         MINDEE_V2_API_KEY_ENV_NAME = 'MINDEE_V2_API_KEY'
         # V2 API key's default value.

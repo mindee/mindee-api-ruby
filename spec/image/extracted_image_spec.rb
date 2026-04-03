@@ -3,10 +3,16 @@
 require 'mindee'
 require 'pathname'
 require 'fileutils'
-require 'mini_magick'
 require_relative '../data'
 
-describe Mindee::Image::ExtractedImage do
+describe 'Mindee::Image::ExtractedImage', :all_deps do
+  require 'mini_magick' if Mindee::Dependency.all_deps_available?
+  # Workaround for mindee-lite
+  if Mindee::Dependency.all_deps_available?
+    let(:described_class) do
+      Mindee::Image::ExtractedImage
+    end
+  end
   let(:file_path) do
     File.join(V1_DATA_DIR, 'products', 'invoices', 'default_sample.jpg')
   end

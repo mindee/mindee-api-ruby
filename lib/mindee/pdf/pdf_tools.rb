@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Mindee::Dependency.require_all_deps!
 require 'origami'
 
 module Mindee

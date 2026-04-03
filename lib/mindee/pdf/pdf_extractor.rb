@@ -7,6 +7,10 @@ module Mindee
     class PDFExtractor
       # @param local_input [Mindee::Input::Source::LocalInputSource]
       def initialize(local_input)
+        unless Mindee::Dependency.all_deps_available?
+          raise NotImplementedError, Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR
+        end
+
         @filename = local_input.filename
         if local_input.pdf?
           @source_pdf = local_input.io_stream
