@@ -1,0 +1,35 @@
+module Mindee
+  module V1
+    module Product
+      module Invoice
+        class InvoiceV4LineItem < Parsing::Standard::FeatureField
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+
+          def description: -> String
+
+          def product_code: -> String
+
+          def quantity: -> Float
+
+          def tax_amount: -> Float
+
+          def tax_rate: -> Float
+
+          def total_amount: -> Float
+
+          def unit_measure: -> String
+
+          def unit_price: -> Float
+
+          def printable_values: -> Hash[Symbol, String]
+
+          def table_printable_values: -> Hash[String | Symbol, untyped]
+
+          def to_table_line: -> String
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

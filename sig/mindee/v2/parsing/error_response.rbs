@@ -1,0 +1,20 @@
+# lib/mindee/v2/parsing/error_response.rb
+module Mindee
+  module V2
+    module Parsing
+      class ErrorResponse
+        attr_reader detail: String
+        attr_reader status: Integer
+        attr_reader code: String
+        attr_reader title: String
+        attr_reader errors: Array[ErrorItem]
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+
+        def as_hash: -> Hash[Symbol, String | Integer]
+
+        def to_s: -> String
+      end
+    end
+  end
+end

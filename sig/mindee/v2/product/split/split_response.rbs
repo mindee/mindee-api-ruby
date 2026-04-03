@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Product
       module Split
-        class SplitResponse
+        class SplitResponse < Parsing::BaseResponse[SplitInference]
           self.@slug: String
           self.@_params_type: singleton(Params::SplitParameters)
 
@@ -12,6 +12,8 @@ module Mindee
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
           def _params_type: -> singleton(Params::SplitParameters)
+
+          def extract_from_file: (Mindee::Input::Source::LocalInputSource) -> FileOperation::SplitFiles
 
           def to_s: -> String
           def self._params_type: () -> singleton(Params::SplitParameters)

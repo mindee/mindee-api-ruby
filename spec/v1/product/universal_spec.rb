@@ -5,13 +5,13 @@ require 'mindee'
 
 require_relative '../../data'
 
-StringField = Mindee::Parsing::Standard.const_get(:StringField)
-PositionField = Mindee::Parsing::Standard.const_get(:PositionField)
-UniversalListField = Mindee::Parsing::Universal.const_get(:UniversalListField)
-UniversalObjectField = Mindee::Parsing::Universal.const_get(:UniversalObjectField)
-Universal = Mindee::Product::Universal.const_get(:Universal)
-UniversalPage = Mindee::Product::Universal.const_get(:UniversalPage)
-Document = Mindee::Parsing::Common.const_get(:Document)
+StringField = Mindee::V1::Parsing::Standard.const_get(:StringField)
+PositionField = Mindee::V1::Parsing::Standard.const_get(:PositionField)
+UniversalListField = Mindee::V1::Parsing::Universal.const_get(:UniversalListField)
+UniversalObjectField = Mindee::V1::Parsing::Universal.const_get(:UniversalObjectField)
+Universal = Mindee::V1::Product::Universal.const_get(:Universal)
+UniversalPage = Mindee::V1::Product::Universal.const_get(:UniversalPage)
+Document = Mindee::V1::Parsing::Common.const_get(:Document)
 
 describe 'International ID v1 document' do
   let(:international_id_v1_complete_doc) do

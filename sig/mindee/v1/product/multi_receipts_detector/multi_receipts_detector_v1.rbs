@@ -1,0 +1,14 @@
+# lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1.rb
+
+module Mindee
+  module V1
+    module Product
+      module MultiReceiptsDetector
+        class MultiReceiptsDetectorV1 < Parsing::Common::Inference
+          attr_reader prediction: MultiReceiptsDetectorV1Document
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
+      end
+    end
+  end
+end

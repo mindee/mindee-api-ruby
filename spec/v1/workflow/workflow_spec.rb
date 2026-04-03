@@ -4,7 +4,7 @@ require 'json'
 require 'mindee'
 require_relative '../../data'
 
-describe Mindee::Client do
+describe Mindee::V1::Client do
   describe 'execute_workflow' do
     it 'should deserialize response correctly when sending a document to an execution' do
       json_file_path = "#{V1_DATA_DIR}/workflows/success.json"
@@ -14,7 +14,7 @@ describe Mindee::Client do
 
       allow(Net::HTTP).to receive(:start).and_return(mocked_response)
 
-      mocked_execution = Mindee::Parsing::Common::WorkflowResponse.new(
+      mocked_execution = Mindee::V1::Parsing::Common::WorkflowResponse.new(
         Universal,
         JSON.parse(mocked_response.body, object_class: Hash),
         mocked_response.body
@@ -46,7 +46,7 @@ describe Mindee::Client do
 
       allow(Net::HTTP).to receive(:start).and_return(mocked_response)
 
-      mocked_execution = Mindee::Parsing::Common::WorkflowResponse.new(
+      mocked_execution = Mindee::V1::Parsing::Common::WorkflowResponse.new(
         Universal,
         JSON.parse(mocked_response.body, object_class: Hash),
         mocked_response.body

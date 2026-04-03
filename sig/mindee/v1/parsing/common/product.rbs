@@ -1,0 +1,16 @@
+# lib/mindee/v1/parsing/common/product.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        class Product
+          attr_reader name: String
+          attr_reader type: String?
+          attr_reader version: String
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+        end
+      end
+    end
+  end
+end

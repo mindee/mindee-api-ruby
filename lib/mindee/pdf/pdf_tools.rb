@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Mindee::Dependency.require_all_deps!
 require 'origami'
 
 module Mindee
@@ -53,10 +54,28 @@ module Mindee
         text_operators.any? { |op| data.include?(op) }
       end
 
+      # Checks whether a stream contains a PDF header near the beginning.
+      # @param [StringIO] io_stream Binary-encoded stream.
+      # @param [Integer] maximum_offset Maximum allowed offset to find '%PDF-'.
+      # @return [bool] `true` when the stream appears to be a PDF.
+      def self.pdf_header?(io_stream, maximum_offset: 500)
+        initial_pos = nil
+        initial_pos = io_stream.pos if io_stream.respond_to?(:pos)
+        io_stream.seek(0)
+        io_stream.gets('%PDF-')
+        !(io_stream.eof? || io_stream.pos > maximum_offset)
+      rescue TypeError, IOError, SystemCallError
+        false
+      ensure
+        io_stream.seek(initial_pos) if !initial_pos.nil? && io_stream.respond_to?(:seek)
+      end
+
       # Checks whether the file has source_text. Sends false if the file isn't a PDF.
       # @param [StringIO] pdf_data Abinary-encoded stream representing the PDF file.
       # @return [bool] `true` if the pdf has source text, false otherwise.
       def self.source_text?(pdf_data)
+        return false unless pdf_header?(pdf_data)
+
         begin
           pdf_data.rewind
           pdf = Origami::PDF.read(pdf_data)

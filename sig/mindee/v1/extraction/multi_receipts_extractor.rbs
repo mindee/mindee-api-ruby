@@ -1,0 +1,8 @@
+# lib/mindee/v1/extraction/multi_receipts_extractor.rb
+module Mindee
+  module V1
+    module Extraction
+      def self.extract_receipts: (Input::Source::LocalInputSource, Product::MultiReceiptsDetector::MultiReceiptsDetectorV1) -> Array[Image::ExtractedImage]
+    end
+  end
+end

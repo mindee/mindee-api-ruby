@@ -1,0 +1,20 @@
+# lib/mindee/v1/parsing/common/ocr/mvision_v1.rb
+module Mindee
+  module V1
+    module Parsing
+      module Common
+        module OCR
+          class MVisionV1
+            def pages: -> [ ]
+
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+
+            def to_s: -> String
+
+            def reconstruct_vertically: (Array[Geometry::Point], Integer, Float) -> OCRLine
+          end
+        end
+      end
+    end
+  end
+end

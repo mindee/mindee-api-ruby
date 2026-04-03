@@ -1,0 +1,13 @@
+# lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1.rb
+
+module Mindee
+  module V1
+    module Product
+    module InvoiceSplitter
+      class InvoiceSplitterV1 < Parsing::Common::Inference
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+      end
+    end
+  end
+end

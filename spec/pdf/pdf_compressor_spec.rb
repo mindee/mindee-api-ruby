@@ -4,7 +4,7 @@ require 'mindee'
 
 require_relative '../data'
 
-describe Mindee::PDF::PDFCompressor do
+describe 'Mindee::PDF::PDFCompressor', :all_deps do
   describe 'The PDF text detection method' do
     it 'should detect text pdf in a PDF file.' do
       text_input = Mindee::Input::Source::PathInputSource.new("#{FILE_TYPES_DIR}/pdf/multipage.pdf")
@@ -20,6 +20,7 @@ describe Mindee::PDF::PDFCompressor do
 
     it 'should not detect text pdf in an image file.' do
       image_input = Mindee::Input::Source::PathInputSource.new("#{FILE_TYPES_DIR}/receipt.jpg")
+      expect(Origami::PDF).not_to receive(:read)
       expect(Mindee::PDF::PDFTools.source_text?(image_input.io_stream)).to be(false)
     end
   end
@@ -44,16 +45,17 @@ describe Mindee::PDF::PDFCompressor do
         50 => "#{ROOT_DATA_DIR}/output/compressed_direct_50.pdf",
         10 => "#{ROOT_DATA_DIR}/output/compressed_direct_10.pdf",
       }
-      pdf = File.open(input_file_path)
-      output_file_paths.each_pair do |key, value|
-        compressed_pdf = Mindee::PDF::PDFCompressor.compress_pdf(pdf, quality: key)
-        compressed_pdf.rewind
-        File.write(value, compressed_pdf.read)
+      File.open(input_file_path) do |pdf|
+        output_file_paths.each_pair do |key, value|
+          compressed_pdf = Mindee::PDF::PDFCompressor.compress_pdf(pdf, quality: key)
+          compressed_pdf.rewind
+          File.write(value, compressed_pdf.read)
+        end
+        expect(File.size(input_file_path)).to be > File.size(output_file_paths[85])
+        expect(File.size(output_file_paths[75])).to be < File.size(output_file_paths[85])
+        expect(File.size(output_file_paths[50])).to be < File.size(output_file_paths[75])
+        expect(File.size(output_file_paths[10])).to be < File.size(output_file_paths[50])
       end
-      expect(File.size(input_file_path)).to be > File.size(output_file_paths[85])
-      expect(File.size(output_file_paths[75])).to be < File.size(output_file_paths[85])
-      expect(File.size(output_file_paths[50])).to be < File.size(output_file_paths[75])
-      expect(File.size(output_file_paths[10])).to be < File.size(output_file_paths[50])
     end
 
     after(:each) do

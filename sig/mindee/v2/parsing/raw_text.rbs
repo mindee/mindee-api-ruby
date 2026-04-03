@@ -1,0 +1,12 @@
+# lib/mindee/v2/parsing/raw_text.rb
+module Mindee
+  module V2
+    module Parsing
+      class RawText
+        attr_reader pages: Array[RawTextPage]
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

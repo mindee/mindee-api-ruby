@@ -4,9 +4,9 @@ require 'json'
 require 'mindee'
 require_relative '../../data'
 
-describe Mindee::Client do
+describe Mindee::V1::Client do
   describe 'execute_workflow call to API' do
-    let(:client) { Mindee::Client.new }
+    let(:client) { Mindee::V1::Client.new }
     let(:sample_input) do
       Mindee::Input::Source::PathInputSource.new(
         File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')
@@ -16,7 +16,7 @@ describe Mindee::Client do
     it 'should return a valid response' do
       current_date_time = Time.now.strftime('%Y-%m-%d-%H:%M:%S')
       document_alias = "ruby-#{current_date_time}"
-      priority = Mindee::Parsing::Common::ExecutionPriority::LOW
+      priority = Mindee::V1::Parsing::Common::ExecutionPriority::LOW
 
       response = client.execute_workflow(
         sample_input,
@@ -33,7 +33,7 @@ describe Mindee::Client do
       options = { workflow_id: workflow_id, rag: true }
       response = client.parse(
         sample_input,
-        Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
         options: options
       )
       expect(response.document.to_s).to_not be_empty
@@ -44,7 +44,7 @@ describe Mindee::Client do
       options = { workflow_id: workflow_id }
       response = client.parse(
         sample_input,
-        Mindee::Product::FinancialDocument::FinancialDocumentV1,
+        Mindee::V1::Product::FinancialDocument::FinancialDocumentV1,
         options: options
       )
       expect(response.document.to_s).to_not be_empty

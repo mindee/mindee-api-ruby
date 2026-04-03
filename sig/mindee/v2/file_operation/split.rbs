@@ -1,0 +1,11 @@
+module Mindee
+  module V2
+    module FileOperation
+      module Split
+        def self.extract_single_split: (Input::Source::LocalInputSource, Array[Integer]) -> PDF::ExtractedPDF
+
+        def self.extract_splits: (Input::Source::LocalInputSource, Array[Array[Integer]]) -> SplitFiles
+      end
+    end
+  end
+end

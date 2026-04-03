@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Mindee::Dependency.require_all_deps!
 require 'mini_magick'
 require 'origami'
 require 'stringio'
@@ -47,7 +48,7 @@ module Mindee
       # @param [Array<Geometry::Point, Geometry::Polygon, Geometry::Quadrilateral>] polygons
       # @return [Array<Image::ExtractedImage>] Extracted Images.
       def self.extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
-        extracted_elements = []
+        extracted_elements = [] # @type var extracted_elements: Array[Image::ExtractedImage]
 
         polygons.each_with_index do |polygon, element_id|
           polygon = ImageUtils.normalize_polygon(polygon)
@@ -94,7 +95,8 @@ module Mindee
         ExtractedImage.new(
           Input::Source::BytesInputSource.new(buffer.read.to_s, file_name),
           page_id,
-          element_id
+          element_id,
+          preserve_input_filename: true
         )
       end
 

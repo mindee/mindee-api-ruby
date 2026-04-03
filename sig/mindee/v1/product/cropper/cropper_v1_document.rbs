@@ -1,0 +1,14 @@
+# lib/mindee/v1/product/cropper/cropper_v1_document.rb
+
+module Mindee
+  module V1
+    module Product
+    module Cropper
+      class CropperV1Document < Parsing::Common::Prediction
+        def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+        def to_s: -> String
+      end
+      end
+    end
+  end
+end

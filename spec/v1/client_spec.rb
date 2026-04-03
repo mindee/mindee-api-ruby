@@ -4,9 +4,9 @@ require 'mindee'
 
 require_relative '../data'
 
-describe Mindee::Client do
+describe Mindee::V1::Client do
   context 'A client' do
-    mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
+    mindee_client = Mindee::V1::Client.new(api_key: 'invalid-api-key')
 
     it 'should open PDF files from a path' do
       input_source = mindee_client.source_from_path("#{V1_DATA_DIR}/products/invoices/invoice.pdf")
@@ -16,9 +16,10 @@ describe Mindee::Client do
     end
 
     it 'should open PDF files from a file handle' do
-      file = File.open("#{V1_DATA_DIR}/products/invoices/invoice_10p.pdf", 'rb')
-      input_source = mindee_client.source_from_file(file, 'invoice_10p.pdf')
-      expect(input_source).to respond_to(:read_contents)
+      File.open("#{V1_DATA_DIR}/products/invoices/invoice_10p.pdf", 'rb') do |file|
+        input_source = mindee_client.source_from_file(file, 'invoice_10p.pdf')
+        expect(input_source).to respond_to(:read_contents)
+      end
     end
 
     it 'should open PDF files from raw bytes' do
@@ -41,9 +42,10 @@ describe Mindee::Client do
     end
 
     it 'should open JPG files from a file handle' do
-      file = File.open("#{FILE_TYPES_DIR}/receipt.jpg", 'rb')
-      input_source = mindee_client.source_from_file(file, 'receipt.jpg')
-      expect(input_source).to respond_to(:read_contents)
+      File.open("#{FILE_TYPES_DIR}/receipt.jpg", 'rb') do |file|
+        input_source = mindee_client.source_from_file(file, 'receipt.jpg')
+        expect(input_source).to respond_to(:read_contents)
+      end
     end
 
     it 'should open JPG files from raw bytes' do
@@ -60,15 +62,15 @@ describe Mindee::Client do
 
     it 'should load a local response' do
       local_resp = Mindee::Input::LocalResponse.new("#{V1_DATA_DIR}/products/invoices/response_v4/complete.json")
-      mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
+      mindee_client.load_prediction(Mindee::V1::Product::Invoice::InvoiceV4, local_resp)
       expect(mindee_client).to_not be_nil
     end
 
     it 'should not load an invalid local response' do
       local_resp = Mindee::Input::LocalResponse.new("#{V1_DATA_DIR}/geometry/polygon.json")
       expect do
-        mindee_client.load_prediction(Mindee::Product::Invoice::InvoiceV4, local_resp)
-      end.to raise_error Mindee::Errors::MindeeInputError
+        mindee_client.load_prediction(Mindee::V1::Product::Invoice::InvoiceV4, local_resp)
+      end.to raise_error Mindee::Error::MindeeInputError
     end
 
     it 'should not validate improper async parameters' do
@@ -77,21 +79,21 @@ describe Mindee::Client do
       expect do
         mindee_client.parse(
           input_source,
-          Mindee::Product::Invoice::InvoiceV4,
+          Mindee::V1::Product::Invoice::InvoiceV4,
           options: { max_retries: 0 }
         )
       end.to raise_error ArgumentError
       expect do
         mindee_client.parse(
           input_source,
-          Mindee::Product::Invoice::InvoiceV4,
+          Mindee::V1::Product::Invoice::InvoiceV4,
           options: { initial_delay_sec: 0.5 }
         )
       end.to raise_error ArgumentError
       expect do
         mindee_client.parse(
           input_source,
-          Mindee::Product::Invoice::InvoiceV4,
+          Mindee::V1::Product::Invoice::InvoiceV4,
           options: { delay_sec: 0.5 }
         )
       end.to raise_error ArgumentError
@@ -101,22 +103,22 @@ describe Mindee::Client do
       expect do
         mindee_client.send(
           :initialize_endpoint,
-          Mindee::Product::Universal::Universal,
+          Mindee::V1::Product::Universal::Universal,
           endpoint_name: '',
           account_name: 'account_name',
           version: 'version'
         )
-      end.to raise_error Mindee::Errors::MindeeConfigurationError
+      end.to raise_error Mindee::Error::MindeeConfigurationError
 
       expect do
         mindee_client.send(
           :initialize_endpoint,
-          Mindee::Product::Universal::Universal,
+          Mindee::V1::Product::Universal::Universal,
           endpoint_name: '',
           account_name: 'account_name',
           version: 'version'
         )
-      end.to raise_error Mindee::Errors::MindeeConfigurationError
+      end.to raise_error Mindee::Error::MindeeConfigurationError
     end
   end
 end

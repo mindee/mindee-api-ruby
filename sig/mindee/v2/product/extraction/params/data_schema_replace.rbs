@@ -1,0 +1,21 @@
+# lib/mindee/v2/product/extraction/params/data_schema_replace.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module Params
+          class DataSchemaReplace
+            attr_reader fields: Array[DataSchemaField]
+
+            def initialize: (Hash[Symbol, untyped]) -> void
+
+            def to_hash: () -> Hash[Symbol, untyped]
+
+            def to_string: () -> String
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,10 @@
+module Mindee
+  module V2
+    module FileOperation
+      module Crop
+        def self.extract_single_crop: (Input::Source::LocalInputSource, Parsing::Field::FieldLocation) -> Image::ExtractedImage
+        def self.extract_crops: (Input::Source::LocalInputSource, Array[Product::Crop::CropItem]) -> CropFiles
+      end
+    end
+  end
+end

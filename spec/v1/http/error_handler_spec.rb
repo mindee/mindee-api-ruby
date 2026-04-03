@@ -16,7 +16,7 @@ describe Mindee::HTTP::ErrorHandler do
       error400 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error400
-      end.to raise_error Mindee::Errors::MindeeHTTPClientError
+      end.to raise_error Mindee::Error::MindeeHTTPClientError
       expect(error400.status_code).to eq(400)
       expect(error400.api_code).to eq('SomeCode')
       expect(error400.api_message).to eq('Some scary message here')
@@ -29,7 +29,7 @@ describe Mindee::HTTP::ErrorHandler do
       error401 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error401
-      end.to raise_error Mindee::Errors::MindeeHTTPClientError
+      end.to raise_error Mindee::Error::MindeeHTTPClientError
       expect(error401.status_code).to eq(401)
       expect(error401.api_code).to eq('Unauthorized')
       expect(error401.api_message).to eq('Authorization required')
@@ -42,7 +42,7 @@ describe Mindee::HTTP::ErrorHandler do
       error429 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error429
-      end.to raise_error Mindee::Errors::MindeeHTTPClientError
+      end.to raise_error Mindee::Error::MindeeHTTPClientError
       expect(error429.status_code).to eq(429)
       expect(error429.api_code).to eq('TooManyRequests')
       expect(error429.api_message).to eq('Too many requests')
@@ -55,7 +55,7 @@ describe Mindee::HTTP::ErrorHandler do
       error500 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error500
-      end.to raise_error Mindee::Errors::MindeeHTTPServerError
+      end.to raise_error Mindee::Error::MindeeHTTPServerError
       expect(error500.status_code).to eq(500)
       expect(error500.api_code).to eq('failure')
       expect(error500.api_message).to eq('Inference failed')
@@ -68,7 +68,7 @@ describe Mindee::HTTP::ErrorHandler do
       error500 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error500
-      end.to raise_error Mindee::Errors::MindeeHTTPServerError
+      end.to raise_error Mindee::Error::MindeeHTTPServerError
       expect(error500.status_code).to eq(500)
       expect(error500.api_code).to eq('UnknownError')
       expect(error500.api_message).to eq('Server sent back an unexpected reply.')
@@ -86,7 +86,7 @@ describe Mindee::HTTP::ErrorHandler do
       error500 = Mindee::HTTP::ErrorHandler.handle_error('dummy-url', error_obj)
       expect do
         raise error500
-      end.to raise_error Mindee::Errors::MindeeHTTPServerError
+      end.to raise_error Mindee::Error::MindeeHTTPServerError
       expect(error500.status_code).to eq(500)
       expect(error500.api_code).to eq('ServerError')
       expect(error500.api_message).to eq('An error occurred')

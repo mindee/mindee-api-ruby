@@ -10,7 +10,7 @@ AllCops:
     - local_test/*
     - Steepfile
 
-  TargetRubyVersion: 3.0.0
+  TargetRubyVersion: 3.2
   SuggestExtensions: false
 
 Gemspec/DevelopmentDependencies:
@@ -37,7 +37,8 @@ Metrics/MethodLength:
 
 Metrics/ClassLength:
   Max: 200
-
+Metrics/ModuleLength:
+  Max: 200
 Metrics/ParameterLists:
   Max: 8
 

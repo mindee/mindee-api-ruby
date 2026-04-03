@@ -1,0 +1,20 @@
+# lib/mindee/v2/parsing/search/pagination_metadata.rbs
+
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class PaginationMetadata
+          attr_reader page: Integer
+          attr_reader per_page: Integer
+          attr_reader total_items: Integer
+          attr_reader total_pages: Integer
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

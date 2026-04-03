@@ -3,9 +3,9 @@
 module Mindee
   module V2
     module Product
-      module Ocr
+      module OCR
         # OCR result for a single word extracted from the document page.
-        class OcrWord
+        class OCRWord
           # @return [String] Text content of the word.
           attr_reader :content
           # @return [Mindee::Geometry::Polygon] Position information as a list of points in clockwise order.

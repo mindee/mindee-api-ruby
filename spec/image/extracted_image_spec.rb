@@ -3,10 +3,16 @@
 require 'mindee'
 require 'pathname'
 require 'fileutils'
-require 'mini_magick'
 require_relative '../data'
 
-describe Mindee::Image::ExtractedImage do
+describe 'Mindee::Image::ExtractedImage', :all_deps do
+  require 'mini_magick' if Mindee::Dependency.all_deps_available?
+  # Workaround for mindee-lite
+  if Mindee::Dependency.all_deps_available?
+    let(:described_class) do
+      Mindee::Image::ExtractedImage
+    end
+  end
   let(:file_path) do
     File.join(V1_DATA_DIR, 'products', 'invoices', 'default_sample.jpg')
   end
@@ -23,7 +29,7 @@ describe Mindee::Image::ExtractedImage do
 
       expect(extracted_image.page_id).to eq(page_id)
       expect(extracted_image.element_id).to eq(element_id)
-      expect(extracted_image.internal_file_name).to eq('default_sample_p1_42.jpg')
+      expect(extracted_image.filename).to eq('default_sample_p1_42.jpg')
 
       # NOTE: ruby messes up the formatting of binary strings, I don't think it worth it to correct this behavior, but
       # the result is that we have to remove them from the comparisons.
@@ -47,7 +53,7 @@ describe Mindee::Image::ExtractedImage do
 
       extracted_image = described_class.new(input_source, page_id, element_id)
 
-      expect(extracted_image.internal_file_name).to eq('default_sample_p1_42.jpg')
+      expect(extracted_image.filename).to eq('default_sample_p1_42.jpg')
     end
   end
 
@@ -68,7 +74,7 @@ describe Mindee::Image::ExtractedImage do
 
       expect do
         extracted_image.write_to_file(invalid_output_path)
-      end.to raise_error(Mindee::Errors::MindeeImageError, %r{Invalid file format})
+      end.to raise_error(Mindee::Error::MindeeImageError, %r{Invalid file format})
     end
 
     it 'raises an error if the file cannot be saved' do
@@ -77,7 +83,7 @@ describe Mindee::Image::ExtractedImage do
 
       expect do
         extracted_image.write_to_file(invalid_output_path)
-      end.to raise_error(Mindee::Errors::MindeeImageError)
+      end.to raise_error(Mindee::Error::MindeeImageError)
     end
   end
 
@@ -108,7 +114,7 @@ describe Mindee::Image::ExtractedImage do
       Tempfile.create(['output', '.jpg']) do |tempfile|
         expect do
           extracted_image.write_to_file(tempfile.path, 'jpg')
-        end.to raise_error(Mindee::Errors::MindeeImageError, %r{Could not save file})
+        end.to raise_error(Mindee::Error::MindeeImageError, %r{Could not save file})
       end
     end
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../parsing/base_response'
+require_relative '../../input/base_parameters'
 
 module Mindee
   module V2

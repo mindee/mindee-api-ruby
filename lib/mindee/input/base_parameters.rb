@@ -31,7 +31,7 @@ module Mindee
         polling_options: nil,
         close_file: true
       )
-        raise Errors::MindeeInputError, 'Model ID is required.' if model_id.empty? || model_id.nil?
+        raise Error::MindeeInputError, 'Model ID is required.' if model_id.empty? || model_id.nil?
 
         @model_id = model_id
         @file_alias = file_alias
@@ -54,6 +54,9 @@ module Mindee
         self.class.slug
       end
 
+      # Load from a hash
+      # @param [Hash] params Parameters to provide as a hash.
+      # @return [BaseParameters]
       def self.from_hash(params: {})
         load_from_hash(params: params)
         new(
@@ -72,7 +75,7 @@ module Mindee
         params.transform_keys!(&:to_sym)
 
         if params.empty? || params[:model_id].nil? || params[:model_id].empty?
-          raise Errors::MindeeInputError, 'Model ID is required.'
+          raise Error::MindeeInputError, 'Model ID is required.'
         end
 
         polling_options_input = params.fetch(:page_options, PollingOptions.new)

@@ -7,17 +7,17 @@ require_relative 'ocr_inference'
 module Mindee
   module V2
     module Product
-      module Ocr
+      module OCR
         # HTTP response wrapper that embeds a V2 Inference.
-        class OcrResponse < Mindee::V2::Parsing::BaseResponse
-          # @return [OcrInference] Parsed inference payload.
+        class OCRResponse < Mindee::V2::Parsing::BaseResponse
+          # @return [OCRInference] Parsed inference payload.
           attr_reader :inference
 
           # @param server_response [Hash] Hash parsed from the API JSON response.
           def initialize(server_response)
             super
 
-            @inference = OcrInference.new(server_response['inference'])
+            @inference = OCRInference.new(server_response['inference'])
           end
 
           # String representation.

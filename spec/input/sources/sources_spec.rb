@@ -2,8 +2,8 @@
 
 require 'mindee'
 require 'mindee/input/sources'
-require 'mindee/errors'
-require 'pdf-reader'
+require 'mindee/error'
+require 'pdf-reader' if Mindee::Dependency.all_deps_available?
 
 require_relative '../../data'
 
@@ -15,7 +15,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpg')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
@@ -23,7 +23,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpga')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
       expect(input_source.pdf?).to eq(false)
     end
 
@@ -33,7 +33,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tif')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
@@ -41,11 +41,11 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tiff')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
       expect(input_source.pdf?).to eq(false)
     end
 
-    it 'should load a HEIC from a path' do
+    it 'should load a HEIC from a path', :all_deps do
       input_source = Mindee::Input::Source::PathInputSource.new(
         File.join(FILE_TYPES_DIR, 'receipt.heic')
       )
@@ -56,7 +56,7 @@ describe Mindee::Input::Source do
     end
   end
 
-  context 'A PDF input file' do
+  context 'A PDF input file', :all_deps do
     it 'should load a multi-page PDF from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
         File.join(V1_DATA_DIR, 'products/invoices/invoice.pdf')
@@ -85,7 +85,7 @@ describe Mindee::Input::Source do
   end
 
   context 'A broken fixable PDF' do
-    mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
+    mindee_client = Mindee::V1::Client.new(api_key: 'invalid-api-key')
     it 'Should not raise a mime error' do
       expect do
         mindee_client.source_from_path(
@@ -96,18 +96,18 @@ describe Mindee::Input::Source do
   end
 
   context 'A broken unfixable PDF' do
-    mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
+    mindee_client = Mindee::V1::Client.new(api_key: 'invalid-api-key')
     it 'Should raise an error' do
       expect do
         mindee_client.source_from_path(
           "#{FILE_TYPES_DIR}/pdf/broken_unfixable.pdf", repair_pdf: true
         )
-      end.to raise_error Mindee::Errors::MindeePDFError
+      end.to raise_error Mindee::Error::MindeePDFError
     end
   end
 
   context 'A broken fixable invoice PDF' do
-    mindee_client = Mindee::Client.new(api_key: 'invalid-api-key')
+    mindee_client = Mindee::V1::Client.new(api_key: 'invalid-api-key')
     it 'Should send correct results' do
       source_doc_original = mindee_client.source_from_path("#{V1_DATA_DIR}/products/invoices/invoice.pdf")
       expect do

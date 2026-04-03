@@ -6,7 +6,7 @@ module Mindee
       def self.to_blob: () -> String
       def self.extract_multiple_images_from_source: (Input::Source::LocalInputSource, Integer, Array[Array[Geometry::Point] |Geometry::Polygon | Geometry::Quadrilateral]) -> Array[ExtractedImage]
       def self.extract_images_from_polygons: (Input::Source::LocalInputSource, StringIO | File, Integer, Array[Array[Geometry::Point] | Geometry::Polygon | Geometry::Quadrilateral]) -> Array[ExtractedImage]
-      def self.create_extracted_image: (StringIO | File, String, Integer, Integer) -> void
+      def self.create_extracted_image: (StringIO | File, String, Integer, Integer) -> ExtractedImage
       def self.load_input_source_pdf_page_as_stringio: (Input::Source::LocalInputSource, Integer) -> (StringIO | File)
     end
   end

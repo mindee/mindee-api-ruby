@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require 'mindee/product'
+require 'mindee/v1/product'
 require 'mindee/input/sources'
 require_relative '../data'
 
-describe Mindee::Image do
+describe Mindee::Image, :all_deps do
   include Mindee::Image
+
   let(:barcode_path) do
     File.join(V1_DATA_DIR, 'products', 'barcode_reader', 'default_sample.jpg')
   end
@@ -17,7 +18,7 @@ describe Mindee::Image do
   context 'an image extractor' do
     it 'extracts barcode images correctly' do
       json_data = JSON.parse(File.read(barcode_json_path))
-      inference = Mindee::Product::BarcodeReader::BarcodeReaderV1.new(json_data['document']['inference'])
+      inference = Mindee::V1::Product::BarcodeReader::BarcodeReaderV1.new(json_data['document']['inference'])
       barcodes1 = inference.prediction.codes_1d.map(&:polygon)
       barcodes2 = inference.prediction.codes_2d.map(&:polygon)
       input_source = Mindee::Input::Source::PathInputSource.new(barcode_path)

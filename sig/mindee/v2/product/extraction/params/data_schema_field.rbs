@@ -1,0 +1,29 @@
+# lib/mindee/v2/product/extraction/params/data_schema_field.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module Params
+          class DataSchemaField
+            attr_reader title: String
+            attr_reader name: String
+            attr_reader is_array: bool
+            attr_reader type: String
+            attr_reader classification_values: String | nil
+            attr_reader unique_values: bool | nil
+            attr_reader description: String | nil
+            attr_reader guidelines: String | nil
+            attr_reader nested_fields: Array[Hash[String | Symbol, untyped]] | nil
+
+            def initialize: (Hash[Symbol, untyped]) -> void
+
+            def to_hash: () -> Hash[Symbol, untyped]
+
+            def to_string: () -> String
+          end
+        end
+      end
+    end
+  end
+end

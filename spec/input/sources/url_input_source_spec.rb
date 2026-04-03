@@ -19,7 +19,7 @@ describe Mindee::Input::Source::URLInputSource do
 
     context 'with invalid URL' do
       it 'raises an error for invalid URLs' do
-        expect { described_class.new(invalid_url) }.to raise_error(Mindee::Errors::MindeeInputError)
+        expect { described_class.new(invalid_url) }.to raise_error(Mindee::Error::MindeeInputError)
       end
     end
   end
@@ -60,7 +60,7 @@ describe Mindee::Input::Source::URLInputSource do
       it 'raises an error' do
         expect do
           url_input_source.as_local_input_source
-        end.to raise_error(Mindee::Errors::MindeeAPIError, %r{Failed to download file})
+        end.to raise_error(Mindee::Error::MindeeAPIError, %r{Failed to download file})
       end
     end
   end
@@ -105,7 +105,7 @@ describe Mindee::Input::Source::URLInputSource do
       it 'raises an error' do
         expect do
           url_input_source.write_to_file('/tmp')
-        end.to raise_error(Mindee::Errors::MindeeAPIError, %r{Failed to download file})
+        end.to raise_error(Mindee::Error::MindeeAPIError, %r{Failed to download file})
       end
     end
   end

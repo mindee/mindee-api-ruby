@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
-require 'mindee/client'
-require 'mindee/client_v2'
-require 'mindee/page_options'
 require 'mindee/logging'
+require 'mindee/page_options'
+require 'mindee/v1'
+require 'mindee/v2'
 
 module Mindee
+  # Dependency management
+  module Dependency
+  end
+
   # Mindee internal error module.
-  module Errors
+  module Error
   end
 
   # Custom extraction module
@@ -43,25 +47,6 @@ module Mindee
   module Logging
   end
 
-  # Parsing internals and fields.
-  module Parsing
-    # Common fields and functions.
-    module Common
-    end
-
-    # Standard fields and functions.
-    module Standard
-    end
-
-    # Universal fields and functions.
-    module Universal
-    end
-
-    # V2-specific module.
-    module V2
-    end
-  end
-
   # Document input-related internals.
   module Input
   end
@@ -85,10 +70,61 @@ module Mindee
     end
   end
 
+  # V1-specific module.
+  module V1
+    # HTTP module for V1.
+    module HTTP
+    end
+
+    # Parsing internals and fields.
+    module Parsing
+      # Common fields and functions.
+      module Common
+      end
+
+      # Standard fields and functions.
+      module Standard
+      end
+
+      # Universal fields and functions.
+      module Universal
+      end
+    end
+
+    # V1-specific products.
+    module Product
+      # French products.
+      module FR
+      end
+    end
+  end
+
   # V2-specific module.
   module V2
+    # Mindee internal http module.
+    module HTTP
+    end
+
+    # File operations.
+    module FileOperation
+      # Crop operations.
+      module Crop
+      end
+
+      # Split operations.
+      module Split
+      end
+    end
+
     # Product-specific module.
     module Product
+    end
+
+    # V2 parsing module.
+    module Parsing
+      # V2 search module.
+      module Search
+      end
     end
   end
 end

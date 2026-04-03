@@ -1,0 +1,13 @@
+# lib/mindee/v2/parsing/error_item.rb
+module Mindee
+  module V2
+    module Parsing
+      class ErrorItem
+        attr_reader pointer: String
+        attr_reader detail: String | nil
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

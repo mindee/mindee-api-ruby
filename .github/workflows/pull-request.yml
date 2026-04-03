@@ -8,17 +8,29 @@ permissions:
   pull-requests: read
 
 jobs:
-  static_analysis:
+  static-analysis:
     uses: ./.github/workflows/_static-analysis.yml
-  test_units:
+  test-unit:
     uses: ./.github/workflows/_test-units.yml
-    needs: static_analysis
+    needs: static-analysis
     secrets: inherit
-  test_integrations:
-    uses: ./.github/workflows/_test-integrations.yml
-    needs: test_units
+  test-unit-lite:
+    uses: ./.github/workflows/_test-units.yml
+    needs: static-analysis
     secrets: inherit
-  test_code_samples:
-    uses: ./.github/workflows/_test-code-samples.yml
-    needs: test_units
+  test-integration:
+    uses: ./.github/workflows/_test-integration.yml
+    needs: test-unit
+    secrets: inherit
+  test-integration-lite:
+    uses: ./.github/workflows/_test-integration-lite.yml
+    needs: test-unit-lite
+    secrets: inherit
+  test-smoke:
+    uses: ./.github/workflows/_test-smoke.yml
+    needs: test-unit
+    secrets: inherit
+  test-cli:
+    uses: ./.github/workflows/_test-cli.yml
+    needs: test-unit
     secrets: inherit

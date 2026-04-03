@@ -1,0 +1,20 @@
+# lib/mindee/v1/parsing/standard/company_registration_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class CompanyRegistrationField < BaseField
+          attr_reader type: String
+
+          def initialize: (Hash[String | Symbol, untyped], Integer?, ?reconstructed: false) -> void
+
+          def to_table_line: -> String
+
+          def to_s: -> String
+
+          def printable_values: -> Hash[Symbol, string]
+        end
+      end
+    end
+  end
+end

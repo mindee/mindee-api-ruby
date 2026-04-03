@@ -27,7 +27,7 @@ module Mindee
                   end
           @file.rewind
         else
-          raise Errors::MindeeInputError, "Incompatible type for input '#{input_file.class}'."
+          raise Error::MindeeInputError, "Incompatible type for input '#{input_file.class}'."
         end
       end
 
@@ -38,7 +38,7 @@ module Mindee
         file_str = @file.read or raise 'File could not be read'
         JSON.parse(file_str, object_class: Hash)
       rescue JSON::ParserError
-        raise Errors::MindeeInputError, "File is not a valid dict. #{file_str}"
+        raise Error::MindeeInputError, "File is not a valid dict. #{file_str}"
       end
 
       # Processes the secret key
@@ -57,7 +57,7 @@ module Mindee
           mac = OpenSSL::HMAC.hexdigest(algorithm, self.class.process_secret_key(secret_key),
                                         @file.read || raise('File could not be read'))
         rescue StandardError
-          raise Errors::MindeeInputError, 'Could not get HMAC signature from payload.'
+          raise Error::MindeeInputError, 'Could not get HMAC signature from payload.'
         end
         mac
       end
@@ -70,12 +70,10 @@ module Mindee
       end
 
       # Deserializes a loaded response
-      # @param response_class [Parsing::V2::CommonResponse] class to return.
-      # @return [Parsing::V2::JobResponse, Mindee::V2::Parsing::CommonResponse]
+      # @param response_class [Class<V2::Parsing::BaseResponse>] class to return.
+      # @return [V2::Parsing::JobResponse, Mindee::V2::Parsing::BaseResponse]
       def deserialize_response(response_class)
-        response_class.new(as_hash) # : Mindee::Parsing::V2::JobResponse | Mindee::Parsing::V2::InferenceResponse
-      rescue StandardError
-        raise Errors::MindeeInputError, 'Invalid response provided.'
+        response_class.new(as_hash) # : Mindee::V2::Parsing::JobResponse | Mindee::V2::Parsing::BaseResponse
       end
     end
   end

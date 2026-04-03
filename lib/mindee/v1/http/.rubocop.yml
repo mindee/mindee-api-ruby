@@ -1,0 +1,7 @@
+inherit_from: ../../../../.rubocop.yml
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10

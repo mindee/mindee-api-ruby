@@ -1,0 +1,26 @@
+# lib/mindee/v1/parsing/standard/position_field.rb
+module Mindee
+  module V1
+    module Parsing
+      module Standard
+        class PositionField
+          def polygon: -> Geometry::Polygon
+
+          def value: -> Geometry::Polygon
+
+          def quadrangle: -> Geometry::Quadrilateral
+
+          def rectangle: -> Geometry::Quadrilateral
+
+          def bounding_box: -> Geometry::Quadrilateral
+
+          def initialize: (Hash[String | Symbol, untyped], Integer?) -> void
+
+          def to_s: -> String
+
+          def to_quadrilateral: (Hash[String | Symbol, Array[untyped]], String) -> Geometry::Quadrilateral?
+        end
+      end
+    end
+  end
+end

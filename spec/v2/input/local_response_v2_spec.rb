@@ -11,8 +11,8 @@ def assert_local_response(local_response)
            dummy_secret_key, 'invalid signature'
          )).to be(false)
   expect(local_response.get_hmac_signature(dummy_secret_key)).to eq(signature)
-  inference_response = local_response.deserialize_response(Mindee::Parsing::V2::InferenceResponse)
-  expect(inference_response).to be_a(Mindee::Parsing::V2::InferenceResponse)
+  inference_response = local_response.deserialize_response(Mindee::V2::Product::Extraction::ExtractionResponse)
+  expect(inference_response).to be_a(Mindee::V2::Product::Extraction::ExtractionResponse)
   expect(inference_response).not_to be_nil
   expect(inference_response.inference).not_to be_nil
 end
@@ -50,14 +50,14 @@ describe Mindee::Input::LocalResponse do
     it 'should trigger an error when something invalid is passed' do
       expect do
         Mindee::Input::LocalResponse.new(123)
-      end.to raise_error Mindee::Errors::MindeeInputError
+      end.to raise_error Mindee::Error::MindeeInputError
     end
 
     it 'should trigger an error when the payload is not hashable' do
       local_response = Mindee::Input::LocalResponse.new('Your mother was a hamster.')
       expect do
         local_response.as_hash
-      end.to raise_error Mindee::Errors::MindeeInputError
+      end.to raise_error Mindee::Error::MindeeInputError
     end
   end
 end

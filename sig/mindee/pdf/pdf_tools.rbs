@@ -8,6 +8,8 @@ module Mindee
       Height: Integer | Float
       Width: Integer | Float
 
+      def self.pdf_header?: (StringIO | File) -> bool
+
       def to_io_stream: (?Hash[Symbol, untyped]) -> StringIO
       def intents_as_pdfa1: () -> void
       def delinearize!: () -> void

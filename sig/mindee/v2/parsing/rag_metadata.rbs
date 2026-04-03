@@ -1,0 +1,13 @@
+# lib/mindee/v2/parsing/rag_metadata.rb
+
+module Mindee
+  module V2
+    module Parsing
+      class RAGMetadata
+        attr_accessor retrieved_document_id: string | nil
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

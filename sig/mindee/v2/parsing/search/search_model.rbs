@@ -1,0 +1,19 @@
+# lib/mindee/v2/parsing/search/search_model.rb
+
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class SearchModel
+          attr_reader id: String
+          attr_reader model_type: String
+          attr_reader name: String
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

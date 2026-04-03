@@ -25,6 +25,14 @@ module Mindee
           def to_s
             @inference.to_s
           end
+
+          # Apply the crop inference to a file and return a list of extracted images.
+          #
+          # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
+          # @return [FileOperation::CropFiles] List of extracted PDFs
+          def extract_from_file(input_source)
+            FileOperation::Crop.extract_crops(input_source, @inference.result.crops)
+          end
         end
       end
     end

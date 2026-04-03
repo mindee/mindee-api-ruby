@@ -1,0 +1,26 @@
+module Mindee
+  module V2
+    module Parsing
+      class DataSchemaActiveOption
+        attr_reader replace: bool
+
+        def initialize: (Hash[Symbol | string, untyped]) -> void
+
+        def to_s: () -> String
+      end
+
+      class InferenceActiveOptions
+        attr_reader confidence: bool
+        attr_reader polygon: bool
+        attr_reader rag: bool
+        attr_reader raw_text: bool
+        attr_reader text_context: bool
+        attr_reader data_schema: DataSchemaActiveOption
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+
+        def to_s: () -> String
+      end
+    end
+  end
+end
