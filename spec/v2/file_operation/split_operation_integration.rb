@@ -5,7 +5,7 @@ require 'mindee/v2/file_operation'
 require 'mindee/v2/product'
 require 'fileutils'
 
-describe Mindee::V2::Product::Split::Split, :integration, :v2 do
+describe Mindee::V2::Product::Split::Split, :integration, :v2, :all_deps do
   let(:split_sample) do
     File.join(V2_PRODUCT_DATA_DIR, 'split', 'default_sample.pdf')
   end

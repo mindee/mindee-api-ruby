@@ -1,4 +1,4 @@
-# lib/mindee/v2/http/mindee_api.rbs
+# lib/mindee/v2/http/mindee_api_v2.rbs
 module Mindee
   module V2
     module HTTP
@@ -14,8 +14,8 @@ module Mindee
         def params_type: () -> singleton(Input::BaseParameters)
       end
 
-      class MindeeApi
-        attr_reader settings: ApiSettings
+      class MindeeApiV2
+        attr_reader settings: ApiV2Settings
 
         def initialize: (?api_key: String?) -> void
 

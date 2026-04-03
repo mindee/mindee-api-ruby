@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # spec/image_utils_spec.rb
-require 'mini_magick'
 require 'stringio'
 require 'mindee'
 
-describe Mindee::Image::ImageUtils do
+describe 'Mindee::Image::ImageUtils', :all_deps do
+  require 'mini_magick' if Mindee::Dependency.all_deps_available?
   let(:sample_image_path) { "#{FILE_TYPES_DIR}/receipt.jpg" }
   let(:sample_image) { MiniMagick::Image.open(sample_image_path) }
 

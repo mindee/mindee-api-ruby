@@ -4,7 +4,7 @@ require 'mindee'
 
 require_relative '../data'
 
-describe Mindee::Image::ImageCompressor do
+describe Mindee::Image::ImageCompressor, :all_deps do
   describe 'Image Quality Compression' do
     let(:input_receipt_path) { "#{FILE_TYPES_DIR}/receipt.jpg" }
     let(:output_dir) { "#{ROOT_DATA_DIR}/output/" }

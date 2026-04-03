@@ -10,19 +10,27 @@ permissions:
 jobs:
   static-analysis:
     uses: ./.github/workflows/_static-analysis.yml
-  test-units:
+  test-unit:
     uses: ./.github/workflows/_test-units.yml
     needs: static-analysis
     secrets: inherit
-  test-integrations:
-    uses: ./.github/workflows/_test-integrations.yml
-    needs: test-units
+  test-unit-lite:
+    uses: ./.github/workflows/_test-units.yml
+    needs: static-analysis
+    secrets: inherit
+  test-integration:
+    uses: ./.github/workflows/_test-integration.yml
+    needs: test-unit
+    secrets: inherit
+  test-integration-lite:
+    uses: ./.github/workflows/_test-integration-lite.yml
+    needs: test-unit-lite
     secrets: inherit
   test-smoke:
     uses: ./.github/workflows/_test-smoke.yml
-    needs: test-units
+    needs: test-unit
     secrets: inherit
   test-cli:
     uses: ./.github/workflows/_test-cli.yml
-    needs: test-units
+    needs: test-unit
     secrets: inherit

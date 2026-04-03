@@ -1,7 +1,7 @@
 #
-# Run unit tests.
+# Run full unit tests.
 #
-name: Tests
+name: Unit Tests - All Dependencies
 
 on:
   workflow_call:
@@ -15,7 +15,6 @@ jobs:
       matrix:
         os:
           - "ubuntu-24.04"
-          - "ubuntu-22.04"
           - "macos-latest"
         ruby:
           - "3.2"
