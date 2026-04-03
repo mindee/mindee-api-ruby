@@ -4,7 +4,7 @@ require 'mindee/v1/product'
 require 'mindee/input/sources'
 require_relative '../data'
 
-describe Mindee::Image, :full_deps do
+describe Mindee::Image, :all_deps do
   include Mindee::Image
 
   let(:barcode_path) do

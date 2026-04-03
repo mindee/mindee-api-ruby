@@ -1,7 +1,7 @@
 #
 # Run lite unit tests.
 #
-name: Unit Tests (Lite)
+name: Unit Tests - Minimal Dependencies
 
 on:
   workflow_call:

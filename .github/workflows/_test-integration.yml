@@ -1,7 +1,7 @@
 #
 # Run integration tests.
 #
-name: Integration Tests (Full)
+name: Integration Tests - All Dependencies
 
 on:
   workflow_call:

@@ -18,7 +18,7 @@ module Mindee
       check_all_dependencies
     end
 
-    def self.require_full_deps!
+    def self.require_all_deps!
       raise LoadError, MINDEE_DEPENDENCIES_LOAD_ERROR unless all_deps_available?
     end
 

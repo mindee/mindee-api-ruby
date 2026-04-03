@@ -7,7 +7,7 @@ module Mindee
     def self.check_all_dependencies: -> bool
 
     def self.all_deps_available?: -> bool
-    def self.require_full_deps!: -> void
+    def self.require_all_deps!: -> void
 
   end
 end

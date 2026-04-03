@@ -1,7 +1,7 @@
 #
 # Run full unit tests.
 #
-name: Unit Tests (Full)
+name: Unit Tests - All Dependencies
 
 on:
   workflow_call:

@@ -5,7 +5,7 @@ require_relative '../../data'
 require_relative '../../test_utilities'
 
 if Mindee::Dependency.all_deps_available? # Can't be bypassed by tag as otherwise it will try to load the PDF module.
-  describe 'PDF Invoice Extraction (Strict Mode)', :full_deps do
+  describe 'PDF Invoice Extraction (Strict Mode)', :all_deps do
     let(:invoice_splitter_5p_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'invoice_5p.pdf') }
 
     def prepare_invoice_return(rst_file_path, invoice_prediction)

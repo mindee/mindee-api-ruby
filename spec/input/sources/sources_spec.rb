@@ -45,7 +45,7 @@ describe Mindee::Input::Source do
       expect(input_source.pdf?).to eq(false)
     end
 
-    it 'should load a HEIC from a path', :full_deps do
+    it 'should load a HEIC from a path', :all_deps do
       input_source = Mindee::Input::Source::PathInputSource.new(
         File.join(FILE_TYPES_DIR, 'receipt.heic')
       )
@@ -56,7 +56,7 @@ describe Mindee::Input::Source do
     end
   end
 
-  context 'A PDF input file', :full_deps do
+  context 'A PDF input file', :all_deps do
     it 'should load a multi-page PDF from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
         File.join(V1_DATA_DIR, 'products/invoices/invoice.pdf')

@@ -5,7 +5,7 @@ require 'mindee/input/sources'
 require 'mindee/v1/extraction'
 require_relative '../../data'
 
-describe 'multi-receipts extraction', :full_deps do
+describe 'multi-receipts extraction', :all_deps do
   let(:empty_inference) do
     double('Inference', prediction: double('Prediction', receipts: nil), pages: [])
   end

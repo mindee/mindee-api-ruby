@@ -5,7 +5,7 @@ require 'pathname'
 require 'fileutils'
 require_relative '../data'
 
-describe 'Mindee::Image::ExtractedImage', :full_deps do
+describe 'Mindee::Image::ExtractedImage', :all_deps do
   require 'mini_magick' if Mindee::Dependency.all_deps_available?
   # Workaround for mindee-lite
   if Mindee::Dependency.all_deps_available?

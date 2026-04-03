@@ -1,7 +1,7 @@
 #
 # Run integration tests.
 #
-name: Integration Tests (Lite)
+name: Integration Tests - Minimal Dependencies
 
 on:
   workflow_call:

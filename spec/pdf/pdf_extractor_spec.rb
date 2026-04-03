@@ -2,7 +2,7 @@
 
 require 'mindee'
 
-describe 'Invoice extraction', :full_deps do
+describe 'Invoice extraction', :all_deps do
   let(:invoice_default_sample_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoices', 'default_sample.jpg') }
   let(:invoice_splitter_5p_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'invoice_5p.pdf') }
   let(:loaded_prediction_path) { File.join(V1_PRODUCT_DATA_DIR, 'invoice_splitter', 'response_v1', 'complete.json') }

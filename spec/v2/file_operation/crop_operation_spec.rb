@@ -6,7 +6,7 @@ require 'mindee'
 require 'mindee/v2/file_operation'
 require 'mindee/v2/product'
 
-describe Mindee::V2::FileOperation::Crop, :v2, :full_deps do
+describe Mindee::V2::FileOperation::Crop, :v2, :all_deps do
   let(:crops_single_page_path) do
     File.join(V2_PRODUCT_DATA_DIR, 'crop', 'default_sample.jpg')
   end

@@ -14,7 +14,7 @@ rescue LoadError
 end
 
 task default: :spec
-exclusion_opts = is_lite_mode ? ['--tag', '~full_deps'] : []
+exclusion_opts = is_lite_mode ? ['--tag', '~all_deps'] : []
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = exclusion_opts
 end
