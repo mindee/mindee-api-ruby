@@ -19,11 +19,11 @@ jobs:
     needs: static-analysis
     secrets: inherit
   test-integration:
-    uses: _test-integration.yml
+    uses: ./.github/workflows/_test-integration.yml
     needs: test-unit
     secrets: inherit
   test-integration-lite:
-    uses: _test-integration-lite.yml
+    uses: ./.github/workflows/_test-integration-lite.yml
     needs: test-unit-lite
     secrets: inherit
   test-smoke:
