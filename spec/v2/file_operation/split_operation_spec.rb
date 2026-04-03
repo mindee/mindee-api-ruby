@@ -4,7 +4,7 @@ require 'json'
 require 'mindee'
 require 'mindee/v2/product'
 
-describe Mindee::V2::Product::Split::SplitResponse, :v2 do
+describe Mindee::V2::Product::Split::SplitResponse, :v2, :all_deps do
   let(:splits_default) do
     File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'financial_document', 'default_sample.jpg')
   end

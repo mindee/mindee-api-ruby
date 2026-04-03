@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+Mindee::Dependency.require_all_deps!
 require 'pdf-reader'
+
 # Shorthand for pdf-reader's PDF namespace, to avoid mixups with the local Origami fork.
 PDFReader = PDF
 
