@@ -6,6 +6,10 @@ require 'mindee/v1'
 require 'mindee/v2'
 
 module Mindee
+  # Dependency management
+  module Dependency
+  end
+
   # Mindee internal error module.
   module Error
   end

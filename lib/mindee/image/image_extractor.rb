@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Mindee::Dependency.require_heavy!
 require 'mini_magick'
 require 'origami'
 require 'stringio'

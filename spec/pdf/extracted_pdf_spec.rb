@@ -2,7 +2,13 @@
 
 require 'mindee'
 
-describe Mindee::PDF::ExtractedPDF do
+describe 'Mindee::PDF::ExtractedPDF', :full_deps do
+  # Workaround for mindee-lite
+  if Mindee::Dependency.heavy_available?
+    let(:described_class) do
+      Mindee::PDF::ExtractedPDF
+    end
+  end
   let(:output_dir) { File.join(V1_DATA_DIR, 'output') }
   let(:valid_pdf_path) { "#{V1_PRODUCT_DATA_DIR}/invoices/invoice.pdf" }
   let(:invalid_pdf_path) { "#{FILE_TYPES_DIR}/receipt.txt" }

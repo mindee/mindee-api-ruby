@@ -4,7 +4,7 @@ require 'mindee'
 
 require_relative '../data'
 
-describe Mindee::PDF::PDFCompressor do
+describe 'Mindee::PDF::PDFCompressor', :full_deps do
   describe 'The PDF text detection method' do
     it 'should detect text pdf in a PDF file.' do
       text_input = Mindee::Input::Source::PathInputSource.new("#{FILE_TYPES_DIR}/pdf/multipage.pdf")

@@ -1,8 +1,8 @@
-# lib/mindee/v2/http/api_settings.rb
+# lib/mindee/v2/http/api_v2_settings.rb
 module Mindee
   module V2
     module HTTP
-      class ApiSettings
+      class ApiV2Settings
         MINDEE_V2_API_KEY_ENV_NAME: String
         MINDEE_V2_API_KEY_DEFAULT: String?
         MINDEE_V2_BASE_URL_ENV_NAME: String

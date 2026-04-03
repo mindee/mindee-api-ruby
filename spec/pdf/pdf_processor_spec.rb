@@ -4,7 +4,7 @@ require 'mindee'
 
 require_relative '../data'
 
-describe Mindee::PDF do
+describe 'Mindee::PDF', :full_deps do
   def open_pdf(io_stream)
     pdf_parser = Origami::PDF::LinearParser.new({})
     io_stream.seek(0)

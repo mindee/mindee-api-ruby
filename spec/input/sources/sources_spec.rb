@@ -3,7 +3,7 @@
 require 'mindee'
 require 'mindee/input/sources'
 require 'mindee/error'
-require 'pdf-reader'
+require 'pdf-reader' if Mindee::Dependency.heavy_available?
 
 require_relative '../../data'
 
@@ -15,7 +15,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpg')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.heavy_available?
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
@@ -23,7 +23,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpga')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.heavy_available?
       expect(input_source.pdf?).to eq(false)
     end
 
@@ -33,7 +33,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tif')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.heavy_available?
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
@@ -41,11 +41,11 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tiff')
-      expect(input_source.page_count).to eq(1)
+      expect(input_source.page_count).to eq(1) if Mindee::Dependency.heavy_available?
       expect(input_source.pdf?).to eq(false)
     end
 
-    it 'should load a HEIC from a path' do
+    it 'should load a HEIC from a path', :full_deps do
       input_source = Mindee::Input::Source::PathInputSource.new(
         File.join(FILE_TYPES_DIR, 'receipt.heic')
       )
@@ -56,7 +56,7 @@ describe Mindee::Input::Source do
     end
   end
 
-  context 'A PDF input file' do
+  context 'A PDF input file', :full_deps do
     it 'should load a multi-page PDF from a path' do
       input_source = Mindee::Input::Source::PathInputSource.new(
         File.join(V1_DATA_DIR, 'products/invoices/invoice.pdf')

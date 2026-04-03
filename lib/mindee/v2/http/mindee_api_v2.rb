@@ -8,13 +8,13 @@ module Mindee
   module V2
     module HTTP
       # API client for version 2.
-      class MindeeApi
-        # @return [ApiSettings]
+      class MindeeApiV2
+        # @return [ApiV2Settings]
         attr_reader :settings
 
         # @param api_key [String, nil]
         def initialize(api_key: nil)
-          @settings = ApiSettings.new(api_key: api_key)
+          @settings = ApiV2Settings.new(api_key: api_key)
         end
 
         # Sends a file to the queue.

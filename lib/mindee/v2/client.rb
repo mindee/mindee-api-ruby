@@ -10,12 +10,12 @@ module Mindee
   module V2
     # Mindee V2 API Client.
     class Client
-      # @return [V2::HTTP::MindeeApi]
+      # @return [V2::HTTP::MindeeApiV2]
       private attr_reader :mindee_api
 
       # @param api_key [String]
       def initialize(api_key: '')
-        @mindee_api = Mindee::V2::HTTP::MindeeApi.new(api_key: api_key)
+        @mindee_api = Mindee::V2::HTTP::MindeeApiV2.new(api_key: api_key)
       end
 
       # Retrieves a result from a given queue or URL to the result.
