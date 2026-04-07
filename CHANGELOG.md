@@ -1,6 +1,6 @@
 # Mindee Ruby API Library Changelog
 
-## v5.0.0.beta1 - 2026-04-03
+## v5.0.0.beta1 - 2026-04-07
 ### ¡Breaking Changes!
 * :boom: :recycle: update V1 & V2 syntaxes to match other SDKs
   * :recycle: move V1 client to V1 module
