@@ -6,7 +6,7 @@
 <title>
   Module: Mindee::PDF::PDFProcessor
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -305,19 +305,19 @@
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
 79
 80
 81
 82
-83</pre>
+83
+84
+85
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processor.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processor.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_page'>get_page</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_doc'>pdf_doc</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stream'>stream</span> <span class='op'>=</span> <span class='const'>StringIO</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -358,7 +358,7 @@
         <span class='name'>page_indexes</span>
       
       
-        <span class='type'>(<tt>Array</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
       
@@ -369,7 +369,7 @@
         <span class='name'>all_pages</span>
       
       
-        <span class='type'>(<tt>Array</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
       
@@ -408,7 +408,7 @@
 
     <span class='id identifier rubyid_pages_to_keep'>pages_to_keep</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_page'>page</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_all_pages'>all_pages</span><span class='period'>.</span><span class='id identifier rubyid_to_set'>to_set</span> <span class='op'>-</span> <span class='id identifier rubyid_pages_to_keep'>pages_to_keep</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_all_pages'>all_pages</span><span class='period'>.</span><span class='id identifier rubyid_to_set'>to_set</span> <span class='op'>-</span> <span class='id identifier rubyid_pages_to_keep'>pages_to_keep</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -439,7 +439,7 @@
         <span class='name'>page_indexes</span>
       
       
-        <span class='type'>(<tt>Array[Integer]</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
       
@@ -450,7 +450,7 @@
         <span class='name'>all_pages</span>
       
       
-        <span class='type'>(<tt>Array</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
       
@@ -550,12 +550,22 @@
 64
 65
 66
-67</pre>
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_processor.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_open_pdf'>open_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="PDFTools.html" title="Mindee::PDF::PDFTools (module)">PDFTools</a></span></span><span class='period'>.</span><span class='id identifier rubyid_pdf_header?'><span class='object_link'><a href="PDFTools.html#pdf_header%3F-class_method" title="Mindee::PDF::PDFTools.pdf_header? (method)">pdf_header?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>InvalidPDFError</span><span class='comma'>,</span>
+          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Input stream does not contain a PDF header.</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
+
   <span class='id identifier rubyid_pdf_parser'>pdf_parser</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>PDF</span><span class='op'>::</span><span class='const'>LinearParser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>verbosity:</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>Parser</span><span class='op'>::</span><span class='const'>VERBOSE_QUIET</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_seek'>seek</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pdf_parser'>pdf_parser</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='rparen'>)</span>
@@ -655,7 +665,7 @@
   <span class='id identifier rubyid_pages_count'>pages_count</span> <span class='op'>=</span> <span class='id identifier rubyid_current_pdf'>current_pdf</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_current_pdf'>current_pdf</span><span class='period'>.</span><span class='id identifier rubyid_to_io_stream'>to_io_stream</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_on_min_pages'>on_min_pages</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_pages_count'>pages_count</span>
 
-  <span class='id identifier rubyid_all_pages'>all_pages</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_pages_count'>pages_count</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
+  <span class='id identifier rubyid_all_pages'>all_pages</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='int'>0</span><span class='op'>..</span><span class='lparen'>(</span><span class='id identifier rubyid_pages_count'>pages_count</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>==</span> <span class='symbol'>:KEEP_ONLY</span>
     <span class='id identifier rubyid_pages_to_remove'>pages_to_remove</span> <span class='op'>=</span> <span class='id identifier rubyid_indexes_from_keep'>indexes_from_keep</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='comma'>,</span> <span class='id identifier rubyid_all_pages'>all_pages</span><span class='rparen'>)</span>
@@ -678,9 +688,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:49 2025 by
+  Generated on Wed Apr  8 08:43:03 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Module: Mindee::PDF::PDFTools
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -200,6 +200,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Determines the appropriate filter for an image based on its properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pdf_header%3F-class_method" title="pdf_header? (class method)">.<strong>pdf_header?</strong>(io_stream, maximum_offset: 500)  &#x21d2; bool </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks whether a stream contains a PDF header near the beginning.</p>
 </div></span>
   
 </li>
@@ -461,14 +485,14 @@
       <pre class="lines">
 
 
-138
-139
-140
-141
-142</pre>
+159
+160
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 138</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_content_to_page'>add_content_to_page</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_xobject_name'>xobject_name</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>q\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_width'>width</span><span class='embexpr_end'>}</span><span class='tstring_content'> 0 0 </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_height'>height</span><span class='embexpr_end'>}</span><span class='tstring_content'> 0 0 cm\n/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_xobject_name'>xobject_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> Do\nQ\n</span><span class='tstring_end'>&quot;</span></span>
@@ -508,7 +532,7 @@
         <span class='name'>image</span>
       
       
-        <span class='type'>(<tt>Minimagick::Image</tt>)</span>
+        <span class='type'>(<tt>MiniMagick::Image</tt>)</span>
       
       
       
@@ -546,13 +570,13 @@
       <pre class="lines">
 
 
-89
-90
-91
-92</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_xobject'>create_xobject</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_image_io'>image_io</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Image/ImageUtils.html" title="Mindee::Image::ImageUtils (module)">ImageUtils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_image_to_stringio'><span class='object_link'><a href="../Image/ImageUtils.html#image_to_stringio-class_method" title="Mindee::Image::ImageUtils.image_to_stringio (method)">image_to_stringio</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
@@ -627,17 +651,17 @@
       <pre class="lines">
 
 
-123
-124
-125
-126
-127
-128
-129
-130</pre>
+144
+145
+146
+147
+148
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_determine_colorspace'>determine_colorspace</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_colorspace'>colorspace</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>colorspace</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -716,17 +740,17 @@
       <pre class="lines">
 
 
-110
-111
-112
-113
-114
-115
-116
-117</pre>
+131
+132
+133
+134
+135
+136
+137
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_determine_filter'>determine_filter</span><span class='lparen'>(</span><span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_filter'>filter</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>properties</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>filter</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -735,6 +759,119 @@
   <span class='kw'>when</span> <span class='tstring'><span class='regexp_beg'>%r{</span><span class='tstring_content'>LZW</span><span class='regexp_end'>}i</span></span> <span class='kw'>then</span> <span class='symbol'>:LZWDecode</span>
   <span class='kw'>else</span> <span class='symbol'>:DCTDecode</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pdf_header?-class_method">
+  
+    .<strong>pdf_header?</strong>(io_stream, maximum_offset: 500)  &#x21d2; <tt>bool</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks whether a stream contains a PDF header near the beginning.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>io_stream</span>
+      
+      
+        <span class='type'>(<tt>StringIO</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Binary-encoded stream.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>maximum_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>500</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Maximum allowed offset to find ‘%PDF-’.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>bool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><code>true</code> when the stream appears to be a PDF.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pdf_header?'>pdf_header?</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='comma'>,</span> <span class='label'>maximum_offset:</span> <span class='int'>500</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_initial_pos'>initial_pos</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_initial_pos'>initial_pos</span> <span class='op'>=</span> <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_pos'>pos</span> <span class='kw'>if</span> <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:pos</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_seek'>seek</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_gets'>gets</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%PDF-</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='op'>!</span><span class='lparen'>(</span><span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_eof?'>eof?</span> <span class='op'>||</span> <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_pos'>pos</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_maximum_offset'>maximum_offset</span><span class='rparen'>)</span>
+<span class='kw'>rescue</span> <span class='const'>TypeError</span><span class='comma'>,</span> <span class='const'>IOError</span><span class='comma'>,</span> <span class='const'>SystemCallError</span>
+  <span class='kw'>false</span>
+<span class='kw'>ensure</span>
+  <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_seek'>seek</span><span class='lparen'>(</span><span class='id identifier rubyid_initial_pos'>initial_pos</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_initial_pos'>initial_pos</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_io_stream'>io_stream</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:seek</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -767,7 +904,7 @@
         <span class='name'>image_data</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>MiniMagick::Image</tt>, <tt>StringIO</tt>)</span>
       
       
       
@@ -853,26 +990,26 @@
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177</pre>
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_image_xobject'>process_image_xobject</span><span class='lparen'>(</span><span class='id identifier rubyid_image_data'>image_data</span><span class='comma'>,</span> <span class='id identifier rubyid_image_quality'>image_quality</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_compressed_data'>compressed_data</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Image/ImageCompressor.html" title="Mindee::Image::ImageCompressor (module)">ImageCompressor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_compress_image'><span class='object_link'><a href="../Image/ImageCompressor.html#compress_image-class_method" title="Mindee::Image::ImageCompressor.compress_image (method)">compress_image</a></span></span><span class='lparen'>(</span>
@@ -974,13 +1111,13 @@
       <pre class="lines">
 
 
-149
-150
-151
-152</pre>
+170
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_page_dimensions'>set_page_dimensions</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_page'>page</span><span class='lbracket'>[</span><span class='symbol'>:MediaBox</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rbracket'>]</span>
@@ -1053,16 +1190,16 @@
       <pre class="lines">
 
 
-98
-99
-100
-101
-102
-103
-104</pre>
+119
+120
+121
+122
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_xobject_properties'>set_xobject_properties</span><span class='lparen'>(</span><span class='id identifier rubyid_xobject'>xobject</span><span class='comma'>,</span> <span class='id identifier rubyid_image'>image</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_xobject'>xobject</span><span class='period'>.</span><span class='id identifier rubyid_dictionary'>dictionary</span><span class='lbracket'>[</span><span class='symbol'>:BitsPerComponent</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>8</span>
@@ -1127,7 +1264,7 @@
       
         &mdash;
         <div class='inline'>
-<p>True if the pdf has source text, false otherwise.</p>
+<p><code>true</code> if the pdf has source text, false otherwise.</p>
 </div>
       
     </li>
@@ -1140,35 +1277,39 @@
       <pre class="lines">
 
 
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
 76
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_source_text?'>source_text?</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_pdf_header?'>pdf_header?</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
+
   <span class='kw'>begin</span>
     <span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='period'>.</span><span class='id identifier rubyid_rewind'>rewind</span>
     <span class='id identifier rubyid_pdf'>pdf</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>PDF</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
@@ -1248,7 +1389,7 @@
       
         &mdash;
         <div class='inline'>
-<p>True if a text operator is found in the stream.</p>
+<p><code>true</code> if a text operator is found in the stream.</p>
 </div>
       
     </li>
@@ -1261,16 +1402,16 @@
       <pre class="lines">
 
 
-46
-47
-48
 49
 50
 51
-52</pre>
+52
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stream_has_text?'>stream_has_text?</span><span class='lparen'>(</span><span class='id identifier rubyid_stream'>stream</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_stream'>stream</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
@@ -1356,9 +1497,6 @@
       <pre class="lines">
 
 
-16
-17
-18
 19
 20
 21
@@ -1380,10 +1518,13 @@
 37
 38
 39
-40</pre>
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_tools.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_io_stream'>to_io_stream</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -1420,9 +1561,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:48 2025 by
+  Generated on Wed Apr  8 08:43:03 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

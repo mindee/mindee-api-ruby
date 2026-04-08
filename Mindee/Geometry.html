@@ -6,7 +6,7 @@
 <title>
   Module: Mindee::Geometry
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -187,7 +187,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Creates the bounding bounding box for a given set of points.</p>
+<p>Creates the bounding box for a given set of points.</p>
 </div></span>
   
 </li>
@@ -260,30 +260,6 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Get the maximum and minimum Y value given a sequence of points.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#polygon_from_prediction-class_method" title="polygon_from_prediction (class method)">.<strong>polygon_from_prediction</strong>(prediction)  &#x21d2; Mindee::Geometry::Polygon </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Transform a prediction into a Polygon.</p>
 </div></span>
   
 </li>
@@ -419,6 +395,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>bool</p>
+</div>
+      
     </li>
   
 </ul>
@@ -429,22 +410,22 @@
       <pre class="lines">
 
 
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98</pre>
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_below?'>below?</span><span class='lparen'>(</span><span class='id identifier rubyid_candidate'>candidate</span><span class='comma'>,</span> <span class='id identifier rubyid_anchor'>anchor</span><span class='comma'>,</span> <span class='id identifier rubyid_margin_left'>margin_left</span><span class='comma'>,</span> <span class='id identifier rubyid_margin_right'>margin_right</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_y'><span class='object_link'><a href="#get_min_max_y-class_method" title="Mindee::Geometry.get_min_max_y (method)">get_min_max_y</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_candidate'>candidate</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_min'><span class='object_link'><a href="Geometry/MinMax.html#min-instance_method" title="Mindee::Geometry::MinMax#min (method)">min</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="" title="Mindee::Geometry (module)">Geometry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_y'><span class='object_link'><a href="#get_min_max_y-class_method" title="Mindee::Geometry.get_min_max_y (method)">get_min_max_y</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_anchor'>anchor</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_min'><span class='object_link'><a href="Geometry/MinMax.html#min-instance_method" title="Mindee::Geometry::MinMax#min (method)">min</a></span></span>
@@ -518,14 +499,14 @@
       <pre class="lines">
 
 
-36
-37
-38
-39
-40</pre>
+23
+24
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_bbox'>get_bbox</span><span class='lparen'>(</span><span class='id identifier rubyid_vertices'>vertices</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x_coords'>x_coords</span> <span class='op'>=</span> <span class='id identifier rubyid_vertices'>vertices</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:x</span><span class='rparen'>)</span>
@@ -549,7 +530,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Creates the bounding bounding box for a given set of points</p>
+<p>Creates the bounding box for a given set of points</p>
 
 
   </div>
@@ -591,18 +572,18 @@
       <pre class="lines">
 
 
-45
-46
-47
-48
-49
-50
-51
-52
-53</pre>
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_bounding_box'>get_bounding_box</span><span class='lparen'>(</span><span class='id identifier rubyid_vertices'>vertices</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x_min'>x_min</span><span class='comma'>,</span> <span class='id identifier rubyid_y_min'>y_min</span><span class='comma'>,</span> <span class='id identifier rubyid_x_max'>x_max</span><span class='comma'>,</span> <span class='id identifier rubyid_y_max'>y_max</span> <span class='op'>=</span> <span class='id identifier rubyid_get_bbox'>get_bbox</span><span class='lparen'>(</span><span class='id identifier rubyid_vertices'>vertices</span><span class='rparen'>)</span>
@@ -672,15 +653,15 @@
       <pre class="lines">
 
 
-58
-59
-60
-61
-62
-63</pre>
+45
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_centroid'>get_centroid</span><span class='lparen'>(</span><span class='id identifier rubyid_points'>points</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vertices_count'>vertices_count</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
@@ -747,13 +728,13 @@
       <pre class="lines">
 
 
-76
-77
-78
-79</pre>
+63
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_x'>get_min_max_x</span><span class='lparen'>(</span><span class='id identifier rubyid_points'>points</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_coords'>coords</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:x</span><span class='rparen'>)</span>
@@ -818,98 +799,17 @@
       <pre class="lines">
 
 
-68
-69
-70
-71</pre>
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_min_max_y'>get_min_max_y</span><span class='lparen'>(</span><span class='id identifier rubyid_points'>points</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_coords'>coords</span> <span class='op'>=</span> <span class='id identifier rubyid_points'>points</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:y</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Geometry/MinMax.html" title="Mindee::Geometry::MinMax (class)">MinMax</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Geometry/MinMax.html#initialize-instance_method" title="Mindee::Geometry::MinMax#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_coords'>coords</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='comma'>,</span> <span class='id identifier rubyid_coords'>coords</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="polygon_from_prediction-class_method">
-  
-    .<strong>polygon_from_prediction</strong>(prediction)  &#x21d2; <tt><span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Transform a prediction into a Polygon.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>prediction</span>
-      
-      
-        <span class='type'>(<tt>Hash</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Mindee::Geometry::Polygon</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-23
-24
-25
-26
-27
-28
-29
-30
-31</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/utils.rb', line 23</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_polygon_from_prediction'>polygon_from_prediction</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_polygon'>polygon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Geometry/Polygon.html" title="Mindee::Geometry::Polygon (class)">Polygon</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_polygon'>polygon</span> <span class='kw'>if</span> <span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-
-  <span class='id identifier rubyid_prediction'>prediction</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_point'>point</span><span class='op'>|</span>
-    <span class='id identifier rubyid_polygon'>polygon</span> <span class='op'>&lt;&lt;</span> <span class='const'><span class='object_link'><a href="Geometry/Point.html" title="Mindee::Geometry::Point (class)">Point</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Geometry/Point.html#initialize-instance_method" title="Mindee::Geometry::Point#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_point'>point</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_polygon'>polygon</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1004,9 +904,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:49 2025 by
+  Generated on Wed Apr  8 08:43:03 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Class: Mindee::Input::Source::URLInputSource
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -286,7 +286,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Errors/MindeeInputError.html" title="Mindee::Errors::MindeeInputError (class)">Errors::MindeeInputError</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Error/MindeeInputError.html" title="Mindee::Error::MindeeInputError (class)">Error::MindeeInputError</a></span></tt>)</span>
       
       
       
@@ -312,7 +312,7 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/input/sources/url_input_source.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Errors/MindeeInputError.html" title="Mindee::Errors::MindeeInputError (class)">MindeeInputError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>URL must be HTTPS</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_url'>url</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Error/MindeeInputError.html" title="Mindee::Error::MindeeInputError (class)">MindeeInputError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>URL must be HTTPS</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_url'>url</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://</span><span class='tstring_end'>&#39;</span></span>
 
   <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>URL input: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_url'>url</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
@@ -701,9 +701,9 @@
 
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_make_request'>make_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='comma'>,</span> <span class='id identifier rubyid_request'>request</span><span class='comma'>,</span> <span class='id identifier rubyid_max_redirects'>max_redirects</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='int'>299</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Errors/MindeeAPIError.html" title="Mindee::Errors::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Failed to download file: HTTP status code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Error/MindeeAPIError.html" title="Mindee::Error::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Failed to download file: HTTP status code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&lt;</span> <span class='int'>200</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Errors/MindeeAPIError.html" title="Mindee::Errors::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Failed to download file: Invalid response code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Error/MindeeAPIError.html" title="Mindee::Error::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Failed to download file: Invalid response code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
@@ -903,9 +903,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:52 2025 by
+  Generated on Wed Apr  8 08:43:07 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

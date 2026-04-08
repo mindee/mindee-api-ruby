@@ -6,7 +6,7 @@
 <title>
   Module: Mindee::HTTP::ErrorHandler
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -152,6 +152,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Extracts the HTTP error from the response hash, or the job error if there is one.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#generate_v2_error-class_method" title="generate_v2_error (class method)">.<strong>generate_v2_error</strong>(hashed_response)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates an appropriate HTTP error exception for a V2 API response, based on retrieved http error code.</p>
 </div></span>
   
 </li>
@@ -326,7 +350,7 @@
                 <span class='kw'>end</span>
 
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_error_obj'>error_obj</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='op'>:</span> <span class='id identifier rubyid_error_obj'>error_obj</span>
+  <span class='id identifier rubyid_error_obj'>error_obj</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -399,6 +423,81 @@
     <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_dig'>dig</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_request</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='kw'>elsif</span> <span class='op'>!</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_dig'>dig</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>job</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
     <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_dig'>dig</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>job</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>error</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="generate_v2_error-class_method">
+  
+    .<strong>generate_v2_error</strong>(hashed_response)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates an appropriate HTTP error exception for a V2 API response, based on retrieved http error code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hashed_response</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>dictionary response retrieved by the server</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/http/http_error_handler.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_generate_v2_error'>generate_v2_error</span><span class='lparen'>(</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_code'>code</span> <span class='op'>=</span> <span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='lbracket'>[</span><span class='symbol'>:code</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='symbol'>:status</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeHTTPErrorV2.html" title="Mindee::Error::MindeeHTTPErrorV2 (class)">MindeeHTTPErrorV2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Error/MindeeHTTPErrorV2.html#initialize-instance_method" title="Mindee::Error::MindeeHTTPErrorV2#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_hashed_response'>hashed_response</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_s</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_code'>code</span> <span class='op'>&lt;</span> <span class='int'>200</span> <span class='op'>||</span> <span class='id identifier rubyid_code'>code</span> <span class='op'>&gt;</span> <span class='int'>399</span>
+    <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeHTTPErrorV2.html" title="Mindee::Error::MindeeHTTPErrorV2 (class)">MindeeHTTPErrorV2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Error/MindeeHTTPErrorV2.html#initialize-instance_method" title="Mindee::Error::MindeeHTTPErrorV2#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>status</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>detail</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>No details available.</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeHTTPErrorV2.html" title="Mindee::Error::MindeeHTTPErrorV2 (class)">MindeeHTTPErrorV2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Error/MindeeHTTPErrorV2.html#initialize-instance_method" title="Mindee::Error::MindeeHTTPErrorV2#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>status</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>detail</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Unknown Error.</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -499,11 +598,11 @@
   <span class='id identifier rubyid_error_obj'>error_obj</span> <span class='op'>=</span> <span class='id identifier rubyid_create_error_obj'>create_error_obj</span><span class='lparen'>(</span><span class='id identifier rubyid_parsed_hash'>parsed_hash</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_code'>code</span>
   <span class='kw'>when</span> <span class='int'>400</span><span class='op'>..</span><span class='int'>499</span>
-    <span class='const'><span class='object_link'><a href="../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MindeeHTTPClientError.html" title="Mindee::Errors::MindeeHTTPClientError (class)">MindeeHTTPClientError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/MindeeHTTPError.html#initialize-instance_method" title="Mindee::Errors::MindeeHTTPError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_error_obj'>error_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeHTTPClientError.html" title="Mindee::Error::MindeeHTTPClientError (class)">MindeeHTTPClientError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Error/MindeeHTTPError.html#initialize-instance_method" title="Mindee::Error::MindeeHTTPError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_error_obj'>error_obj</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='int'>500</span><span class='op'>..</span><span class='int'>599</span>
-    <span class='const'><span class='object_link'><a href="../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MindeeHTTPServerError.html" title="Mindee::Errors::MindeeHTTPServerError (class)">MindeeHTTPServerError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/MindeeHTTPError.html#initialize-instance_method" title="Mindee::Errors::MindeeHTTPError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_error_obj'>error_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeHTTPServerError.html" title="Mindee::Error::MindeeHTTPServerError (class)">MindeeHTTPServerError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Error/MindeeHTTPError.html#initialize-instance_method" title="Mindee::Error::MindeeHTTPError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_error_obj'>error_obj</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='kw'>else</span>
-    <span class='const'><span class='object_link'><a href="../Errors.html" title="Mindee::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MindeeHTTPError.html" title="Mindee::Errors::MindeeHTTPError (class)">MindeeHTTPError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/MindeeHTTPError.html#initialize-instance_method" title="Mindee::Errors::MindeeHTTPError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_error_obj'>error_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeHTTPError.html" title="Mindee::Error::MindeeHTTPError (class)">MindeeHTTPError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Error/MindeeHTTPError.html#initialize-instance_method" title="Mindee::Error::MindeeHTTPError#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_error_obj'>error_obj</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -516,9 +615,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:49 2025 by
+  Generated on Wed Apr  8 08:43:03 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

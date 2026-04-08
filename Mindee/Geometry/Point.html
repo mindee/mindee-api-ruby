@@ -6,7 +6,7 @@
 <title>
   Class: Mindee::Geometry::Point
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -129,6 +129,8 @@
   
   
     
+      <span class="note title readonly">readonly</span>
+    
     
   
   
@@ -153,6 +155,8 @@
   
   
   
+    
+      <span class="note title readonly">readonly</span>
     
     
   
@@ -223,6 +227,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>A new instance of Point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Point as a string.</p>
 </div></span>
   
 </li>
@@ -309,11 +337,11 @@
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="x=-instance_method"></span>
+      <span id=""></span>
       <div class="method_details first">
   <h3 class="signature first" id="x-instance_method">
   
-    #<strong>x</strong>  &#x21d2; <tt>Float</tt> 
+    #<strong>x</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -363,11 +391,11 @@
 </div>
     
       
-      <span id="y=-instance_method"></span>
+      <span id=""></span>
       <div class="method_details ">
   <h3 class="signature " id="y-instance_method">
   
-    #<strong>y</strong>  &#x21d2; <tt>Float</tt> 
+    #<strong>y</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -489,14 +517,73 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Point as a string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Point as a string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/geometry/point.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(</span><span class='embexpr_beg'>#{</span><span class='ivar'>@x</span><span class='embexpr_end'>}</span><span class='tstring_content'>,</span><span class='embexpr_beg'>#{</span><span class='ivar'>@y</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:50 2025 by
+  Generated on Wed Apr  8 08:43:04 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

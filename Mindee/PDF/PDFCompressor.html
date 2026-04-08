@@ -6,7 +6,7 @@
 <title>
   Module: Mindee::PDF::PDFCompressor
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -338,8 +338,6 @@
       <pre class="lines">
 
 
-16
-17
 18
 19
 20
@@ -362,10 +360,12 @@
 37
 38
 39
-40</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_compress_pdf'>compress_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='comma'>,</span> <span class='label'>quality:</span> <span class='int'>85</span><span class='comma'>,</span> <span class='label'>force_source_text_compression:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>disable_source_text:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="PDFTools.html" title="Mindee::PDF::PDFTools (module)">PDFTools</a></span></span><span class='period'>.</span><span class='id identifier rubyid_source_text?'><span class='object_link'><a href="PDFTools.html#source_text%3F-class_method" title="Mindee::PDF::PDFTools.source_text? (method)">source_text?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
@@ -493,8 +493,6 @@
       <pre class="lines">
 
 
-58
-59
 60
 61
 62
@@ -502,10 +500,12 @@
 64
 65
 66
-67</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_output_pdf'>create_output_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_pages'>pages</span><span class='comma'>,</span> <span class='id identifier rubyid_disable_source_text'>disable_source_text</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_output_pdf'>output_pdf</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>PDF</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -584,8 +584,6 @@
       <pre class="lines">
 
 
-72
-73
 74
 75
 76
@@ -606,10 +604,12 @@
 91
 92
 93
-94</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inject_text'>inject_text</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='comma'>,</span> <span class='id identifier rubyid_pages'>pages</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_reader'>reader</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../top-level-namespace.html#PDFReader-constant" title="PDFReader (constant)">PDFReader</a></span></span><span class='op'>::</span><span class='const'>Reader</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf_data'>pdf_data</span><span class='rparen'>)</span>
@@ -746,8 +746,6 @@
       <pre class="lines">
 
 
-102
-103
 104
 105
 106
@@ -760,10 +758,12 @@
 113
 114
 115
-116</pre>
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_pdf_page'>process_pdf_page</span><span class='lparen'>(</span><span class='id identifier rubyid_page_stream'>page_stream</span><span class='comma'>,</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='comma'>,</span> <span class='id identifier rubyid_image_quality'>image_quality</span><span class='comma'>,</span> <span class='id identifier rubyid_media_box'>media_box</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new_page'>new_page</span> <span class='op'>=</span> <span class='const'>Origami</span><span class='op'>::</span><span class='const'>Page</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -865,15 +865,15 @@
       <pre class="lines">
 
 
-46
-47
 48
 49
 50
-51</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_compressor.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_pdf_pages'>process_pdf_pages</span><span class='lparen'>(</span><span class='id identifier rubyid_pdf'>pdf</span><span class='comma'>,</span> <span class='id identifier rubyid_quality'>quality</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_pdf'>pdf</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='period'>.</span><span class='id identifier rubyid_with_index'>with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='op'>|</span>
@@ -891,9 +891,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun  4 16:10:49 2025 by
+  Generated on Wed Apr  8 08:43:03 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.1.7).
+  0.9.38 (ruby-3.2.11).
 </div>
 
     </div>

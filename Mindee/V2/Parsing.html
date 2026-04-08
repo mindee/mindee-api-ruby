@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Mindee::V2::Parsing
+  
+    &mdash; Documentation by YARD 0.9.38
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Mindee::V2::Parsing";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Mindee::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">Parsing</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Mindee::V2::Parsing
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/mindee.rb<span class="defines">,<br />
+  lib/mindee/v2/parsing/job.rb,<br /> lib/mindee/v2/parsing/raw_text.rb,<br /> lib/mindee/v2/parsing/error_item.rb,<br /> lib/mindee/v2/parsing/job_webhook.rb,<br /> lib/mindee/v2/parsing/job_response.rb,<br /> lib/mindee/v2/parsing/rag_metadata.rb,<br /> lib/mindee/v2/parsing/base_response.rb,<br /> lib/mindee/v2/parsing/inference_job.rb,<br /> lib/mindee/v2/parsing/raw_text_page.rb,<br /> lib/mindee/v2/parsing/base_inference.rb,<br /> lib/mindee/v2/parsing/error_response.rb,<br /> lib/mindee/v2/parsing/inference_file.rb,<br /> lib/mindee/v2/parsing/common_response.rb,<br /> lib/mindee/v2/parsing/inference_model.rb,<br /> lib/mindee/v2/parsing/field/base_field.rb,<br /> lib/mindee/v2/parsing/field/list_field.rb,<br /> lib/mindee/v2/parsing/field/object_field.rb,<br /> lib/mindee/v2/parsing/field/simple_field.rb,<br /> lib/mindee/v2/parsing/search/search_model.rb,<br /> lib/mindee/v2/parsing/field/field_location.rb,<br /> lib/mindee/v2/parsing/search/search_models.rb,<br /> lib/mindee/v2/parsing/field/field_confidence.rb,<br /> lib/mindee/v2/parsing/field/inference_fields.rb,<br /> lib/mindee/v2/parsing/search/search_response.rb,<br /> lib/mindee/v2/parsing/inference_active_options.rb,<br /> lib/mindee/v2/parsing/search/pagination_metadata.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>V2 parsing module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Parsing/Field.html" title="Mindee::V2::Parsing::Field (module)">Field</a></span>, <span class='object_link'><a href="Parsing/Search.html" title="Mindee::V2::Parsing::Search (module)">Search</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Parsing/BaseInference.html" title="Mindee::V2::Parsing::BaseInference (class)">BaseInference</a></span>, <span class='object_link'><a href="Parsing/BaseResponse.html" title="Mindee::V2::Parsing::BaseResponse (class)">BaseResponse</a></span>, <span class='object_link'><a href="Parsing/CommonResponse.html" title="Mindee::V2::Parsing::CommonResponse (class)">CommonResponse</a></span>, <span class='object_link'><a href="Parsing/DataSchemaActiveOption.html" title="Mindee::V2::Parsing::DataSchemaActiveOption (class)">DataSchemaActiveOption</a></span>, <span class='object_link'><a href="Parsing/ErrorItem.html" title="Mindee::V2::Parsing::ErrorItem (class)">ErrorItem</a></span>, <span class='object_link'><a href="Parsing/ErrorResponse.html" title="Mindee::V2::Parsing::ErrorResponse (class)">ErrorResponse</a></span>, <span class='object_link'><a href="Parsing/InferenceActiveOptions.html" title="Mindee::V2::Parsing::InferenceActiveOptions (class)">InferenceActiveOptions</a></span>, <span class='object_link'><a href="Parsing/InferenceFile.html" title="Mindee::V2::Parsing::InferenceFile (class)">InferenceFile</a></span>, <span class='object_link'><a href="Parsing/InferenceJob.html" title="Mindee::V2::Parsing::InferenceJob (class)">InferenceJob</a></span>, <span class='object_link'><a href="Parsing/InferenceModel.html" title="Mindee::V2::Parsing::InferenceModel (class)">InferenceModel</a></span>, <span class='object_link'><a href="Parsing/Job.html" title="Mindee::V2::Parsing::Job (class)">Job</a></span>, <span class='object_link'><a href="Parsing/JobResponse.html" title="Mindee::V2::Parsing::JobResponse (class)">JobResponse</a></span>, <span class='object_link'><a href="Parsing/JobWebhook.html" title="Mindee::V2::Parsing::JobWebhook (class)">JobWebhook</a></span>, <span class='object_link'><a href="Parsing/RAGMetadata.html" title="Mindee::V2::Parsing::RAGMetadata (class)">RAGMetadata</a></span>, <span class='object_link'><a href="Parsing/RawText.html" title="Mindee::V2::Parsing::RawText (class)">RawText</a></span>, <span class='object_link'><a href="Parsing/RawTextPage.html" title="Mindee::V2::Parsing::RawTextPage (class)">RawTextPage</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Wed Apr  8 08:43:03 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.38 (ruby-3.2.11).
+</div>
+
+    </div>
+  </body>
+</html>
