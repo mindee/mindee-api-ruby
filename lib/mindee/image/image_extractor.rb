@@ -37,35 +37,32 @@ module Mindee
         new_stream = load_input_source_pdf_page_as_stringio(input_source, page_id)
         new_stream.seek(0)
 
-        extract_images_from_polygons(input_source, new_stream, page_id, polygons)
+        extract_images_from_polygons(input_source, page_id, polygons)
       end
 
       # Extracts images from their positions on a file (as polygons).
       #
       # @param [Input::Source::LocalInputSource] input_source Local input source.
-      # @param [StringIO] pdf_stream Buffer of the PDF.
       # @param [Integer] page_id Page ID.
       # @param [Array<Geometry::Point, Geometry::Polygon, Geometry::Quadrilateral>] polygons
       # @return [Array<Image::ExtractedImage>] Extracted Images.
-      def self.extract_images_from_polygons(input_source, pdf_stream, page_id, polygons)
+      def self.extract_images_from_polygons(input_source, page_id, polygons)
         extracted_elements = [] # @type var extracted_elements: Array[Image::ExtractedImage]
 
         polygons.each_with_index do |polygon, element_id|
           polygon = ImageUtils.normalize_polygon(polygon)
+          input_source.io_stream.rewind
+          pdf_stream = StringIO.new(input_source.io_stream.read.to_s)
           page_content = ImageUtils.read_page_content(pdf_stream)
+          points = [
+            polygon.top_left,
+            polygon.bottom_right,
+            polygon.top_right,
+            polygon.bottom_left,
+          ]
 
-          min_max_x = Geometry.get_min_max_x([
-                                               polygon.top_left,
-                                               polygon.bottom_right,
-                                               polygon.top_right,
-                                               polygon.bottom_left,
-                                             ])
-          min_max_y = Geometry.get_min_max_y([
-                                               polygon.top_left,
-                                               polygon.bottom_right,
-                                               polygon.top_right,
-                                               polygon.bottom_left,
-                                             ])
+          min_max_x = Geometry.get_min_max_x(points)
+          min_max_y = Geometry.get_min_max_y(points)
           file_extension = ImageUtils.determine_file_extension(input_source)
           cropped_image = ImageUtils.crop_image(page_content, min_max_x, min_max_y)
           if file_extension == 'pdf'
