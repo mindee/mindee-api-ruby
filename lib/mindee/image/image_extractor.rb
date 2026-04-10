@@ -49,10 +49,11 @@ module Mindee
       def self.extract_images_from_polygons(input_source, page_id, polygons)
         extracted_elements = [] # @type var extracted_elements: Array[Image::ExtractedImage]
 
+        input_source.io_stream.rewind
+        pdf_stream = StringIO.new(input_source.io_stream.read.to_s)
+        input_source.io_stream.rewind
         polygons.each_with_index do |polygon, element_id|
           polygon = ImageUtils.normalize_polygon(polygon)
-          input_source.io_stream.rewind
-          pdf_stream = StringIO.new(input_source.io_stream.read.to_s)
           page_content = ImageUtils.read_page_content(pdf_stream)
           points = [
             polygon.top_left,
