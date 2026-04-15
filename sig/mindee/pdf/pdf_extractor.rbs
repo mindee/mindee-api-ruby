@@ -13,7 +13,7 @@ module Mindee
 
       def extract_sub_documents: (Array[Array[Integer]]) -> Array[ExtractedPDF]
 
-      def extract_invoices: (Array[V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup] | Array[Array[Integer]], ?strict: bool) -> Array[ExtractedPDF]
+      def extract_invoices: (Array[Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup] | Array[Array[Integer]], ?strict: bool) -> Array[ExtractedPDF]
     end
   end
 end

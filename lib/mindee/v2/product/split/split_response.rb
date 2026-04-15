@@ -26,7 +26,7 @@ module Mindee
             @inference.to_s
           end
 
-          # Extracts the crops from the input source.
+          # Splits the input PDF.
           # @param input_source [Mindee::Input::Source::LocalInputSource] Path to the file or a File object.
           # @return [FileOperation::SplitFiles]
           def extract_from_file(input_source)

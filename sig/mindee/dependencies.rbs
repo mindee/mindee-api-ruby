@@ -1,5 +1,5 @@
 module Mindee
-  module Dependency
+  module Dependencies
     MINDEE_DEPENDENCIES_LOAD_ERROR: String
 
     self.@all_deps_available: bool

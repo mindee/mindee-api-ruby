@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee'
-require 'mindee/v2/file_operation'
+require 'mindee/v2/file_operations'
 require 'mindee/v2/product'
 
 describe Mindee::V2::FileOperation::Crop, :integration, :v2, :all_deps do

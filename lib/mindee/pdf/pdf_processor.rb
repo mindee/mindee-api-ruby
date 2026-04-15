@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Mindee::Dependency.require_all_deps!
+Mindee::Dependencies.require_all_deps!
 require 'origami'
 require_relative 'pdf_tools'
 

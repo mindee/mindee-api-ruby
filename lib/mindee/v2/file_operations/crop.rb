@@ -17,11 +17,11 @@ module Mindee
           ).first
         end
 
-        # Extracts individual receipts from multi-receipts documents.
+        # Extracts multiple crop zones from an image.
         #
         # @param input_source [LocalInputSource] Local Input Source to extract sub-receipts from.
         # @param crops [Array<CropItem>] List of crops.
-        # @return [CropFiles] Individual extracted receipts as an array of ExtractedImage.
+        # @return [CropFiles] Individual extracted zones as an array of ExtractedImage.
         # @raise [MindeeError] if the crops array is empty.
         def self.extract_crops(input_source, crops)
           if crops.nil? || crops.empty?
