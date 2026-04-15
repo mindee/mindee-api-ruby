@@ -1,5 +1,13 @@
 # Mindee Ruby API Library Changelog
 
+## v5.0.0.rc1 - 2026-04-15
+### ¡Breaking Changes!
+* :recycle: :boom: change `FileOperation` module name to `FileOperations`
+* :recycle: :boom: change `Dependency` module name to `Dependencies`
+### Fixes
+* :wrench: fix many typing issues
+
+
 ## v5.0.0.beta1 - 2026-04-07
 ### ¡Breaking Changes!
 * :boom: :recycle: update V1 & V2 syntaxes to match other SDKs
@@ -25,7 +33,6 @@
     * :coffin: Driver License V1
     * :coffin: FR Energy Bill V1
     * :coffin: Nutrition Facts V1
-
 ### Changes
 * :sparkles: :arrow_up: add support for mindee-lite gem
 * :sparkles: add support for crop operation
@@ -34,7 +41,6 @@
 * :sparkles: add support for V2 CLI
 * :wrench: :arrow_up: add better tooling and pre-commit hook
 * :arrow_up: and bump all dependencies
-
 ### Fixes
 * :bug: fix webhook IDs not sending properly
 * :bug: fix miscellaneous issues leading to saved `ExtractedPDF` instances having invalid names
