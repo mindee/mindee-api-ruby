@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::PDF::PDFCompressor
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::PDF::PDFCompressor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,16 +79,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/pdf/pdf_compressor.rb</dd>
+    <dd>lib/mindee/pdf/pdf_compressor.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Image compressor module to handle PDF compression.</p>
-
+    <p>Image compressor module to handle PDF compression.</p>
 
   </div>
 </div>
@@ -126,9 +126,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Compresses each page of a provided PDF stream.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Compresses each page of a provided PDF stream.</p></div></span>
   
 </li>
 
@@ -150,9 +148,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates the output PDF with processed pages.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates the output PDF with processed pages.</p></div></span>
   
 </li>
 
@@ -174,9 +170,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extracts text from a source text PDF, and injects it into a newly-created one.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extracts text from a source text PDF, and injects it into a newly-created one.</p></div></span>
   
 </li>
 
@@ -198,9 +192,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Takes in a page stream, rasterizes it into a JPEG image, and applies the result onto a new Origami PDF page.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Takes in a page stream, rasterizes it into a JPEG image, and applies the result onto a new Origami PDF page.</p></div></span>
   
 </li>
 
@@ -222,14 +214,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Processes all pages in the PDF.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Processes all pages in the PDF.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -249,9 +240,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Compresses each page of a provided PDF stream. Skips if force_source_text isn’t set and source text is detected.</p>
-
+    <p>Compresses each page of a provided PDF stream. Skips if force_source_text isn't set and source text is detected.</p>
 
   </div>
 </div>
@@ -269,9 +258,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>StringIO handle of the file.</p>
-</div>
+        <div class='inline'><p>StringIO handle of the file.</p></div>
       
     </li>
   
@@ -287,9 +274,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Compression quality (70-100 for most JPG images in the test dataset).</p>
-</div>
+        <div class='inline'><p>Compression quality (70-100 for most JPG images in the test dataset).</p></div>
       
     </li>
   
@@ -305,9 +290,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>If true, attempts to re-write detected text.</p>
-</div>
+        <div class='inline'><p>If true, attempts to re-write detected text.</p></div>
       
     </li>
   
@@ -323,9 +306,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>If true, doesn’t re-apply source text to the original PDF.</p>
-</div>
+        <div class='inline'><p>If true, doesn't re-apply source text to the original PDF.</p></div>
       
     </li>
   
@@ -408,9 +389,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Creates the output PDF with processed pages.</p>
-
+    <p>Creates the output PDF with processed pages.</p>
 
   </div>
 </div>
@@ -428,9 +407,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Processed pages.</p>
-</div>
+        <div class='inline'><p>Processed pages.</p></div>
       
     </li>
   
@@ -444,9 +421,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Whether to disable source text.</p>
-</div>
+        <div class='inline'><p>Whether to disable source text.</p></div>
       
     </li>
   
@@ -460,9 +435,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Original PDF data.</p>
-</div>
+        <div class='inline'><p>Original PDF data.</p></div>
       
     </li>
   
@@ -479,9 +452,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Output PDF object.</p>
-</div>
+        <div class='inline'><p>Output PDF object.</p></div>
       
     </li>
   
@@ -533,9 +504,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extracts text from a source text PDF, and injects it into a newly-created one.</p>
-
+    <p>Extracts text from a source text PDF, and injects it into a newly-created one.</p>
 
   </div>
 </div>
@@ -553,9 +522,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Stream representation of the PDF.</p>
-</div>
+        <div class='inline'><p>Stream representation of the PDF.</p></div>
       
     </li>
   
@@ -569,9 +536,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Array of pages containing the rasterized version of the initial pages.</p>
-</div>
+        <div class='inline'><p>Array of pages containing the rasterized version of the initial pages.</p></div>
       
     </li>
   
@@ -650,9 +615,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Takes in a page stream, rasterizes it into a JPEG image, and applies the result onto a new Origami PDF page.</p>
-
+    <p>Takes in a page stream, rasterizes it into a JPEG image, and applies the result onto a new Origami PDF page.</p>
 
   </div>
 </div>
@@ -670,9 +633,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Stream representation of a single page from the initial PDF.</p>
-</div>
+        <div class='inline'><p>Stream representation of a single page from the initial PDF.</p></div>
       
     </li>
   
@@ -686,9 +647,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Index of the current page. Technically not needed, but left for debugging purposes.</p>
-</div>
+        <div class='inline'><p>Index of the current page. Technically not needed, but left for debugging purposes.</p></div>
       
     </li>
   
@@ -702,9 +661,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Quality to apply to the rasterized page.</p>
-</div>
+        <div class='inline'><p>Quality to apply to the rasterized page.</p></div>
       
     </li>
   
@@ -718,9 +675,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Extracted media box from the page. Can be nil.</p>
-</div>
+        <div class='inline'><p>Extracted media box from the page. Can be nil.</p></div>
       
     </li>
   
@@ -796,9 +751,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Processes all pages in the PDF.</p>
-
+    <p>Processes all pages in the PDF.</p>
 
   </div>
 </div>
@@ -816,9 +769,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The Origami PDF object to process.</p>
-</div>
+        <div class='inline'><p>The Origami PDF object to process.</p></div>
       
     </li>
   
@@ -832,9 +783,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Compression quality.</p>
-</div>
+        <div class='inline'><p>Compression quality.</p></div>
       
     </li>
   
@@ -851,9 +800,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Processed pages.</p>
-</div>
+        <div class='inline'><p>Processed pages.</p></div>
       
     </li>
   
@@ -891,9 +838,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

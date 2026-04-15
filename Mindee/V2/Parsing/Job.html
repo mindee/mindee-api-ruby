@@ -6,13 +6,13 @@
 <title>
   Class: Mindee::V2::Parsing::Job
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V2::Parsing::Job";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,16 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/v2/parsing/job.rb</dd>
+    <dd>lib/mindee/v2/parsing/job.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Metadata returned when polling a job (asynchronous request).</p>
-
+    <p>Metadata returned when polling a job (asynchronous request).</p>
 
   </div>
 </div>
@@ -139,9 +139,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Optional alias for the file.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Optional alias for the file.</p></div></span>
   
 </li>
 
@@ -168,9 +166,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Date and time of the Job completion.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Date and time of the Job completion.</p></div></span>
   
 </li>
 
@@ -197,9 +193,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Date and time of the Job creation.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Date and time of the Job creation.</p></div></span>
   
 </li>
 
@@ -226,9 +220,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Error details when the job failed.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Error details when the job failed.</p></div></span>
   
 </li>
 
@@ -255,9 +247,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Name of the processed file.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Name of the processed file.</p></div></span>
   
 </li>
 
@@ -284,9 +274,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Unique job identifier.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Unique job identifier.</p></div></span>
   
 </li>
 
@@ -313,9 +301,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Identifier of the model used.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Identifier of the model used.</p></div></span>
   
 </li>
 
@@ -342,9 +328,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>URL to query for updated status.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>URL to query for updated status.</p></div></span>
   
 </li>
 
@@ -371,9 +355,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>URL that redirects to the final result once ready.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>URL that redirects to the final result once ready.</p></div></span>
   
 </li>
 
@@ -400,9 +382,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Current status (submitted, processing, done, …).</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Current status (submitted, processing, done, …).</p></div></span>
   
 </li>
 
@@ -429,9 +409,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Webhooks triggered by the job.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Webhooks triggered by the job.</p></div></span>
   
 </li>
 
@@ -468,9 +446,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>rubocop:disable Metrics/CyclomaticComplexity.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>rubocop:disable Metrics/CyclomaticComplexity.</p></div></span>
   
 </li>
 
@@ -492,14 +468,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>String representation.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>String representation.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -516,9 +491,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>rubocop:disable Metrics/CyclomaticComplexity</p>
-
+    <p>rubocop:disable Metrics/CyclomaticComplexity</p>
 
   </div>
 </div>
@@ -536,9 +509,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Parsed JSON payload from the API.</p>
-</div>
+        <div class='inline'><p>Parsed JSON payload from the API.</p></div>
       
     </li>
   
@@ -635,9 +606,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Optional alias for the file.</p>
-
+    <p>Returns Optional alias for the file.</p>
 
   </div>
 </div>
@@ -654,9 +623,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional alias for the file.</p>
-</div>
+        <div class='inline'><p>Optional alias for the file.</p></div>
       
     </li>
   
@@ -696,9 +663,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Date and time of the Job completion. Filled once processing is finished.</p>
-
+    <p>Returns Date and time of the Job completion. Filled once processing is finished.</p>
 
   </div>
 </div>
@@ -715,9 +680,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Date and time of the Job completion. Filled once processing is finished.</p>
-</div>
+        <div class='inline'><p>Date and time of the Job completion. Filled once processing is finished.</p></div>
       
     </li>
   
@@ -757,9 +720,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Date and time of the Job creation.</p>
-
+    <p>Returns Date and time of the Job creation.</p>
 
   </div>
 </div>
@@ -776,9 +737,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Date and time of the Job creation.</p>
-</div>
+        <div class='inline'><p>Date and time of the Job creation.</p></div>
       
     </li>
   
@@ -818,9 +777,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Error details when the job failed.</p>
-
+    <p>Returns Error details when the job failed.</p>
 
   </div>
 </div>
@@ -837,9 +794,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Error details when the job failed.</p>
-</div>
+        <div class='inline'><p>Error details when the job failed.</p></div>
       
     </li>
   
@@ -879,9 +834,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Name of the processed file.</p>
-
+    <p>Returns Name of the processed file.</p>
 
   </div>
 </div>
@@ -898,9 +851,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Name of the processed file.</p>
-</div>
+        <div class='inline'><p>Name of the processed file.</p></div>
       
     </li>
   
@@ -940,9 +891,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Unique job identifier.</p>
-
+    <p>Returns Unique job identifier.</p>
 
   </div>
 </div>
@@ -959,9 +908,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Unique job identifier.</p>
-</div>
+        <div class='inline'><p>Unique job identifier.</p></div>
       
     </li>
   
@@ -1001,9 +948,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Identifier of the model used.</p>
-
+    <p>Returns Identifier of the model used.</p>
 
   </div>
 </div>
@@ -1020,9 +965,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Identifier of the model used.</p>
-</div>
+        <div class='inline'><p>Identifier of the model used.</p></div>
       
     </li>
   
@@ -1062,9 +1005,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns URL to query for updated status.</p>
-
+    <p>Returns URL to query for updated status.</p>
 
   </div>
 </div>
@@ -1081,9 +1022,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>URL to query for updated status.</p>
-</div>
+        <div class='inline'><p>URL to query for updated status.</p></div>
       
     </li>
   
@@ -1123,9 +1062,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns URL that redirects to the final result once ready.</p>
-
+    <p>Returns URL that redirects to the final result once ready.</p>
 
   </div>
 </div>
@@ -1142,9 +1079,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>URL that redirects to the final result once ready.</p>
-</div>
+        <div class='inline'><p>URL that redirects to the final result once ready.</p></div>
       
     </li>
   
@@ -1184,9 +1119,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Current status (submitted, processing, done, …).</p>
-
+    <p>Returns Current status (submitted, processing, done, …).</p>
 
   </div>
 </div>
@@ -1203,9 +1136,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Current status (submitted, processing, done, …).</p>
-</div>
+        <div class='inline'><p>Current status (submitted, processing, done, …).</p></div>
       
     </li>
   
@@ -1245,9 +1176,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Webhooks triggered by the job.</p>
-
+    <p>Returns Webhooks triggered by the job.</p>
 
   </div>
 </div>
@@ -1264,9 +1193,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Webhooks triggered by the job.</p>
-</div>
+        <div class='inline'><p>Webhooks triggered by the job.</p></div>
       
     </li>
   
@@ -1311,9 +1238,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>String representation.</p>
-
+    <p>String representation.</p>
 
   </div>
 </div>
@@ -1407,9 +1332,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:04 2026 by
+  Generated on Wed Apr 15 11:18:41 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::V2
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V2";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/v2/client.rb,<br /> lib/mindee/v2/parsing/job.rb,<br /> lib/mindee/v2/product/ocr/ocr.rb,<br /> lib/mindee/v2/parsing/raw_text.rb,<br /> lib/mindee/v2/product/crop/crop.rb,<br /> lib/mindee/v2/http/mindee_api_v2.rb,<br /> lib/mindee/v2/parsing/error_item.rb,<br /> lib/mindee/v2/file_operation/crop.rb,<br /> lib/mindee/v2/parsing/job_webhook.rb,<br /> lib/mindee/v2/product/split/split.rb,<br /> lib/mindee/v2/file_operation/split.rb,<br /> lib/mindee/v2/http/api_v2_settings.rb,<br /> lib/mindee/v2/parsing/job_response.rb,<br /> lib/mindee/v2/parsing/rag_metadata.rb,<br /> lib/mindee/v2/product/base_product.rb,<br /> lib/mindee/v2/product/ocr/ocr_page.rb,<br /> lib/mindee/v2/product/ocr/ocr_word.rb,<br /> lib/mindee/v2/parsing/base_response.rb,<br /> lib/mindee/v2/parsing/inference_job.rb,<br /> lib/mindee/v2/parsing/raw_text_page.rb,<br /> lib/mindee/v2/parsing/base_inference.rb,<br /> lib/mindee/v2/parsing/error_response.rb,<br /> lib/mindee/v2/parsing/inference_file.rb,<br /> lib/mindee/v2/product/crop/crop_item.rb,<br /> lib/mindee/v2/product/ocr/ocr_result.rb,<br /> lib/mindee/v2/parsing/common_response.rb,<br /> lib/mindee/v2/parsing/inference_model.rb,<br /> lib/mindee/v2/parsing/field/base_field.rb,<br /> lib/mindee/v2/parsing/field/list_field.rb,<br /> lib/mindee/v2/product/crop/crop_result.rb,<br /> lib/mindee/v2/product/ocr/ocr_response.rb,<br /> lib/mindee/v2/file_operation/crop_files.rb,<br /> lib/mindee/v2/product/ocr/ocr_inference.rb,<br /> lib/mindee/v2/product/split/split_range.rb,<br /> lib/mindee/v2/file_operation/split_files.rb,<br /> lib/mindee/v2/parsing/field/object_field.rb,<br /> lib/mindee/v2/parsing/field/simple_field.rb,<br /> lib/mindee/v2/product/crop/crop_response.rb,<br /> lib/mindee/v2/product/split/split_result.rb,<br /> lib/mindee/v2/parsing/search/search_model.rb,<br /> lib/mindee/v2/product/crop/crop_inference.rb,<br /> lib/mindee/v2/parsing/field/field_location.rb,<br /> lib/mindee/v2/parsing/search/search_models.rb,<br /> lib/mindee/v2/product/split/split_response.rb,<br /> lib/mindee/v2/product/extraction/extraction.rb,<br /> lib/mindee/v2/product/split/split_inference.rb,<br /> lib/mindee/v2/parsing/field/field_confidence.rb,<br /> lib/mindee/v2/parsing/field/inference_fields.rb,<br /> lib/mindee/v2/parsing/search/search_response.rb,<br /> lib/mindee/v2/parsing/inference_active_options.rb,<br /> lib/mindee/v2/product/ocr/params/ocr_parameters.rb,<br /> lib/mindee/v2/parsing/search/pagination_metadata.rb,<br /> lib/mindee/v2/product/crop/params/crop_parameters.rb,<br /> lib/mindee/v2/product/extraction/extraction_result.rb,<br /> lib/mindee/v2/product/classification/classification.rb,<br /> lib/mindee/v2/product/extraction/params/data_schema.rb,<br /> lib/mindee/v2/product/split/params/split_parameters.rb,<br /> lib/mindee/v2/product/extraction/extraction_response.rb,<br /> lib/mindee/v2/product/extraction/extraction_inference.rb,<br /> lib/mindee/v2/product/extraction/params/data_schema_field.rb,<br /> lib/mindee/v2/product/classification/classification_result.rb,<br /> lib/mindee/v2/product/extraction/params/data_schema_replace.rb,<br /> lib/mindee/v2/product/classification/classification_response.rb,<br /> lib/mindee/v2/product/classification/classification_inference.rb,<br /> lib/mindee/v2/product/extraction/params/extraction_parameters.rb,<br /> lib/mindee/v2/product/classification/classification_classifier.rb,<br /> lib/mindee/v2/product/classification/params/classification_parameters.rb</span>
+    <dd>lib/mindee.rb<span class="defines">,<br>
+  lib/mindee/v2/client.rb,<br> lib/mindee/v2/parsing/job.rb,<br> lib/mindee/v2/product/ocr/ocr.rb,<br> lib/mindee/v2/parsing/raw_text.rb,<br> lib/mindee/v2/product/crop/crop.rb,<br> lib/mindee/v2/http/mindee_api_v2.rb,<br> lib/mindee/v2/parsing/error_item.rb,<br> lib/mindee/v2/parsing/job_webhook.rb,<br> lib/mindee/v2/product/split/split.rb,<br> lib/mindee/v2/file_operations/crop.rb,<br> lib/mindee/v2/http/api_v2_settings.rb,<br> lib/mindee/v2/parsing/job_response.rb,<br> lib/mindee/v2/parsing/rag_metadata.rb,<br> lib/mindee/v2/product/base_product.rb,<br> lib/mindee/v2/product/ocr/ocr_page.rb,<br> lib/mindee/v2/product/ocr/ocr_word.rb,<br> lib/mindee/v2/file_operations/split.rb,<br> lib/mindee/v2/parsing/base_response.rb,<br> lib/mindee/v2/parsing/inference_job.rb,<br> lib/mindee/v2/parsing/raw_text_page.rb,<br> lib/mindee/v2/parsing/base_inference.rb,<br> lib/mindee/v2/parsing/error_response.rb,<br> lib/mindee/v2/parsing/inference_file.rb,<br> lib/mindee/v2/product/crop/crop_item.rb,<br> lib/mindee/v2/product/ocr/ocr_result.rb,<br> lib/mindee/v2/parsing/common_response.rb,<br> lib/mindee/v2/parsing/inference_model.rb,<br> lib/mindee/v2/parsing/field/base_field.rb,<br> lib/mindee/v2/parsing/field/list_field.rb,<br> lib/mindee/v2/product/crop/crop_result.rb,<br> lib/mindee/v2/product/ocr/ocr_response.rb,<br> lib/mindee/v2/product/ocr/ocr_inference.rb,<br> lib/mindee/v2/product/split/split_range.rb,<br> lib/mindee/v2/file_operations/crop_files.rb,<br> lib/mindee/v2/parsing/field/object_field.rb,<br> lib/mindee/v2/parsing/field/simple_field.rb,<br> lib/mindee/v2/product/crop/crop_response.rb,<br> lib/mindee/v2/product/split/split_result.rb,<br> lib/mindee/v2/file_operations/split_files.rb,<br> lib/mindee/v2/parsing/search/search_model.rb,<br> lib/mindee/v2/product/crop/crop_inference.rb,<br> lib/mindee/v2/parsing/field/field_location.rb,<br> lib/mindee/v2/parsing/search/search_models.rb,<br> lib/mindee/v2/product/split/split_response.rb,<br> lib/mindee/v2/product/extraction/extraction.rb,<br> lib/mindee/v2/product/split/split_inference.rb,<br> lib/mindee/v2/parsing/field/field_confidence.rb,<br> lib/mindee/v2/parsing/field/inference_fields.rb,<br> lib/mindee/v2/parsing/search/search_response.rb,<br> lib/mindee/v2/parsing/inference_active_options.rb,<br> lib/mindee/v2/product/ocr/params/ocr_parameters.rb,<br> lib/mindee/v2/parsing/search/pagination_metadata.rb,<br> lib/mindee/v2/product/crop/params/crop_parameters.rb,<br> lib/mindee/v2/product/extraction/extraction_result.rb,<br> lib/mindee/v2/product/classification/classification.rb,<br> lib/mindee/v2/product/extraction/params/data_schema.rb,<br> lib/mindee/v2/product/split/params/split_parameters.rb,<br> lib/mindee/v2/product/extraction/extraction_response.rb,<br> lib/mindee/v2/product/extraction/extraction_inference.rb,<br> lib/mindee/v2/product/extraction/params/data_schema_field.rb,<br> lib/mindee/v2/product/classification/classification_result.rb,<br> lib/mindee/v2/product/extraction/params/data_schema_replace.rb,<br> lib/mindee/v2/product/classification/classification_response.rb,<br> lib/mindee/v2/product/classification/classification_inference.rb,<br> lib/mindee/v2/product/extraction/params/extraction_parameters.rb,<br> lib/mindee/v2/product/classification/classification_classifier.rb,<br> lib/mindee/v2/product/classification/params/classification_parameters.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>V2-specific module.</p>
-
+    <p>V2-specific module.</p>
 
   </div>
 </div>
@@ -120,9 +120,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

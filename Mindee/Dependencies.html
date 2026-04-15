@@ -4,18 +4,18 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Module: Mindee::Dependency
+  Module: Mindee::Dependencies
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
-  pathId = "Mindee::Dependency";
+  pathId = "Mindee::Dependencies";
   relpath = '../';
 </script>
 
@@ -33,13 +33,14 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
     <a href="../_index.html">Index (D)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../Mindee.html" title="Mindee (module)">Mindee</a></span></span>
      &raquo; 
-    <span class="title">Dependency</span>
+    <span class="title">Dependencies</span>
   
 </div>
 
@@ -59,7 +60,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Module: Mindee::Dependency
+      <div id="content"><h1>Module: Mindee::Dependencies
   
   
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/dependency.rb</span>
+    <dd>lib/mindee.rb<span class="defines">,<br>
+  lib/mindee/dependencies.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Centralized check for optional heavy dependencies</p>
-
+    <p>Centralized check for optional heavy dependencies</p>
 
   </div>
 </div>
@@ -196,6 +196,7 @@
 
       
     </ul>
+    
   
 
 
@@ -246,7 +247,7 @@
 19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/dependency.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/dependencies.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'>all_deps_available?</span>
   <span class='id identifier rubyid_check_all_dependencies'>check_all_dependencies</span>
@@ -281,7 +282,7 @@
 13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/dependency.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/dependencies.rb', line 6</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_check_all_dependencies'>check_all_dependencies</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>origami</span><span class='tstring_end'>&#39;</span></span>
@@ -338,10 +339,10 @@
 23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/dependency.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/dependencies.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_require_all_deps!'>require_all_deps!</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>LoadError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_all_deps_available?'>all_deps_available?</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>LoadError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependencies::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_all_deps_available?'>all_deps_available?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -353,9 +354,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:02 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

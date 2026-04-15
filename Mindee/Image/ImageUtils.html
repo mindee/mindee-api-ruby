@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::Image::ImageUtils
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::Image::ImageUtils";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee.rb<span class="defines">,<br />
+    <dd>lib/mindee.rb<span class="defines">,<br>
   lib/mindee/image/image_utils.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Miscellaneous image operations.</p>
-
+    <p>Miscellaneous image operations.</p>
 
   </div>
 </div>
@@ -128,9 +128,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Computes the Height &amp; Width from a page’s media box.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Computes the Height &amp; Width from a page's media box.</p></div></span>
   
 </li>
 
@@ -152,9 +150,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Computes the new dimensions for a given SKBitmap, and returns a scaled down version of it relative to the provided bounds.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Computes the new dimensions for a given SKBitmap, and returns a scaled down version of it relative to the provided bounds.</p></div></span>
   
 </li>
 
@@ -176,9 +172,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Compresses the quality of the provided MiniMagick image.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Compresses the quality of the provided MiniMagick image.</p></div></span>
   
 </li>
 
@@ -200,9 +194,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Crops a MiniMagick Image from a the given bounding box.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Crops a MiniMagick Image from a the given bounding box.</p></div></span>
   
 </li>
 
@@ -224,9 +216,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Retrieves the file extension from the main file to apply it to the extracted images.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Retrieves the file extension from the main file to apply it to the extracted images.</p></div></span>
   
 </li>
 
@@ -248,9 +238,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Converts a StringIO containing an image into a MiniMagick image.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Converts a StringIO containing an image into a MiniMagick image.</p></div></span>
   
 </li>
 
@@ -272,9 +260,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Retrieves the bounding box of a polygon.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Retrieves the bounding box of a polygon.</p></div></span>
   
 </li>
 
@@ -296,9 +282,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Transforms a PDF into a MagickImage.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Transforms a PDF into a MagickImage.</p></div></span>
   
 </li>
 
@@ -320,9 +304,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Loads a buffer into a MiniMagick Image.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Loads a buffer into a MiniMagick Image.</p></div></span>
   
 </li>
 
@@ -344,9 +326,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Resizes a provided MiniMagick Image with the given width &amp; height, if present.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Resizes a provided MiniMagick Image with the given width &amp; height, if present.</p></div></span>
   
 </li>
 
@@ -368,9 +348,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Mostly here so that IDEs don’t get confused on the type (@type annotation fails sometimes.).</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Mostly here so that IDEs don't get confused on the type (@type annotation fails sometimes.).</p></div></span>
   
 </li>
 
@@ -392,14 +370,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Writes a MiniMagick::Image to a buffer.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Writes a MiniMagick::Image to a buffer.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -419,9 +396,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Computes the Height &amp; Width from a page’s media box. Falls back to the size of the initial image.</p>
-
+    <p>Computes the Height &amp; Width from a page's media box. Falls back to the size of the initial image.</p>
 
   </div>
 </div>
@@ -439,9 +414,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The initial image that will fit into the page.</p>
-</div>
+        <div class='inline'><p>The initial image that will fit into the page.</p></div>
       
     </li>
   
@@ -518,9 +491,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Computes the new dimensions for a given SKBitmap, and returns a scaled down version of it relative to the provided bounds.</p>
-
+    <p>Computes the new dimensions for a given SKBitmap, and returns a scaled down version of it relative to the
+provided bounds.</p>
 
   </div>
 </div>
@@ -538,9 +510,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Input MiniMagick image.</p>
-</div>
+        <div class='inline'><p>Input MiniMagick image.</p></div>
       
     </li>
   
@@ -556,9 +526,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum width. If not specified, the horizontal ratio will remain the same.</p>
-</div>
+        <div class='inline'><p>Maximum width. If not specified, the horizontal ratio will remain the same.</p></div>
       
     </li>
   
@@ -574,9 +542,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum height. If not specified, the vertical ratio will remain the same.</p>
-</div>
+        <div class='inline'><p>Maximum height. If not specified, the vertical ratio will remain the same.</p></div>
       
     </li>
   
@@ -652,9 +618,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Compresses the quality of the provided MiniMagick image.</p>
-
+    <p>Compresses the quality of the provided MiniMagick image.</p>
 
   </div>
 </div>
@@ -672,9 +636,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>MiniMagick image handle.</p>
-</div>
+        <div class='inline'><p>MiniMagick image handle.</p></div>
       
     </li>
   
@@ -688,9 +650,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Quality to apply to the image. This is independent of a JPG’s base quality.</p>
-</div>
+        <div class='inline'><p>Quality to apply to the image. This is independent of a JPG's base quality.</p></div>
       
     </li>
   
@@ -729,9 +689,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Crops a MiniMagick Image from a the given bounding box.</p>
-
+    <p>Crops a MiniMagick Image from a the given bounding box.</p>
 
   </div>
 </div>
@@ -749,9 +707,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Input Image.</p>
-</div>
+        <div class='inline'><p>Input Image.</p></div>
       
     </li>
   
@@ -765,9 +721,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>minimum &amp; maximum values for the x coordinates.</p>
-</div>
+        <div class='inline'><p>minimum &amp; maximum values for the x coordinates.</p></div>
       
     </li>
   
@@ -781,9 +735,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>minimum &amp; maximum values for the y coordinates.</p>
-</div>
+        <div class='inline'><p>minimum &amp; maximum values for the y coordinates.</p></div>
       
     </li>
   
@@ -838,9 +790,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.</p>
-
+    <p>Retrieves the file extension from the main file to apply it to the extracted images. Note: coerces pdf as jpg.</p>
 
   </div>
 </div>
@@ -858,9 +808,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Local input source.</p>
-</div>
+        <div class='inline'><p>Local input source.</p></div>
       
     </li>
   
@@ -877,9 +825,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>A valid file extension.</p>
-</div>
+        <div class='inline'><p>A valid file extension.</p></div>
       
     </li>
   
@@ -925,9 +871,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Converts a StringIO containing an image into a MiniMagick image.</p>
-
+    <p>Converts a StringIO containing an image into a MiniMagick image.</p>
 
   </div>
 </div>
@@ -945,9 +889,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the input image.</p>
-</div>
+        <div class='inline'><p>the input image.</p></div>
       
     </li>
   
@@ -963,9 +905,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Format parameter, left open for the future, but should be JPEG for current use-cases.</p>
-</div>
+        <div class='inline'><p>Format parameter, left open for the future, but should be JPEG for current use-cases.</p></div>
       
     </li>
   
@@ -1027,9 +967,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Retrieves the bounding box of a polygon.</p>
-
+    <p>Retrieves the bounding box of a polygon.</p>
 
   </div>
 </div>
@@ -1097,9 +1035,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Transforms a PDF into a MagickImage. This is currently used for single-page PDFs.</p>
-
+    <p>Transforms a PDF into a MagickImage. This is currently used for single-page PDFs.</p>
 
   </div>
 </div>
@@ -1117,9 +1053,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Input stream.</p>
-</div>
+        <div class='inline'><p>Input stream.</p></div>
       
     </li>
   
@@ -1133,9 +1067,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Quality to apply to the image.</p>
-</div>
+        <div class='inline'><p>Quality to apply to the image.</p></div>
       
     </li>
   
@@ -1193,9 +1125,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Loads a buffer into a MiniMagick Image.</p>
-
+    <p>Loads a buffer into a MiniMagick Image.</p>
 
   </div>
 </div>
@@ -1213,9 +1143,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Buffer containg the PDF</p>
-</div>
+        <div class='inline'><p>Buffer containg the PDF</p></div>
       
     </li>
   
@@ -1232,9 +1160,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a valid MiniMagick image handle.</p>
-</div>
+        <div class='inline'><p>a valid MiniMagick image handle.</p></div>
       
     </li>
   
@@ -1274,9 +1200,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Resizes a provided MiniMagick Image with the given width &amp; height, if present.</p>
-
+    <p>Resizes a provided MiniMagick Image with the given width &amp; height, if present.</p>
 
   </div>
 </div>
@@ -1294,9 +1218,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>MiniMagick image handle.</p>
-</div>
+        <div class='inline'><p>MiniMagick image handle.</p></div>
       
     </li>
   
@@ -1310,9 +1232,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Width to comply with.</p>
-</div>
+        <div class='inline'><p>Width to comply with.</p></div>
       
     </li>
   
@@ -1326,9 +1246,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Height to comply with.</p>
-</div>
+        <div class='inline'><p>Height to comply with.</p></div>
       
     </li>
   
@@ -1379,9 +1297,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Mostly here so that IDEs don’t get confused on the type (@type annotation fails sometimes.)</p>
-
+    <p>Mostly here so that IDEs don't get confused on the type (@type annotation fails sometimes.)</p>
 
   </div>
 </div>
@@ -1399,9 +1315,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The input image</p>
-</div>
+        <div class='inline'><p>The input image</p></div>
       
     </li>
   
@@ -1469,9 +1383,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Writes a MiniMagick::Image to a buffer.</p>
-
+    <p>Writes a MiniMagick::Image to a buffer.</p>
 
   </div>
 </div>
@@ -1489,9 +1401,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a valid MiniMagick image.</p>
-</div>
+        <div class='inline'><p>a valid MiniMagick image.</p></div>
       
     </li>
   
@@ -1535,9 +1445,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

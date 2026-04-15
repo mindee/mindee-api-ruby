@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::V2::FileOperation::Crop
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V2::FileOperation::Crop";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/v2/file_operation/crop.rb</span>
+    <dd>lib/mindee.rb<span class="defines">,<br>
+  lib/mindee/v2/file_operations/crop.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Crop operations.</p>
-
+    <p>Crop operations.</p>
 
   </div>
 </div>
@@ -128,9 +128,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extracts individual receipts from multi-receipts documents.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extracts multiple crop zones from an image.</p></div></span>
   
 </li>
 
@@ -152,14 +150,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extracts a single crop as complete PDFs from the document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extracts a single crop as complete PDFs from the document.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -179,9 +176,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extracts individual receipts from multi-receipts documents.</p>
-
+    <p>Extracts multiple crop zones from an image.</p>
 
   </div>
 </div>
@@ -199,9 +194,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Local Input Source to extract sub-receipts from.</p>
-</div>
+        <div class='inline'><p>Local Input Source to extract sub-receipts from.</p></div>
       
     </li>
   
@@ -215,9 +208,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>List of crops.</p>
-</div>
+        <div class='inline'><p>List of crops.</p></div>
       
     </li>
   
@@ -234,9 +225,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Individual extracted receipts as an array of ExtractedImage.</p>
-</div>
+        <div class='inline'><p>Individual extracted zones as an array of ExtractedImage.</p></div>
       
     </li>
   
@@ -252,9 +241,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>if the crops array is empty.</p>
-</div>
+        <div class='inline'><p>if the crops array is empty.</p></div>
       
     </li>
   
@@ -290,7 +277,7 @@
 47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operation/crop.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operations/crop.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extract_crops'>extract_crops</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_crops'>crops</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_crops'>crops</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_crops'>crops</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -330,9 +317,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extracts a single crop as complete PDFs from the document.</p>
-
+    <p>Extracts a single crop as complete PDFs from the document.</p>
 
   </div>
 </div>
@@ -350,9 +335,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Local Input Source to extract sub-receipts from.</p>
-</div>
+        <div class='inline'><p>Local Input Source to extract sub-receipts from.</p></div>
       
     </li>
   
@@ -366,9 +349,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Crop to extract.</p>
-</div>
+        <div class='inline'><p>Crop to extract.</p></div>
       
     </li>
   
@@ -402,7 +383,7 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operation/crop.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operations/crop.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extract_single_crop'>extract_single_crop</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_crop'>crop</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_polygons'>polygons</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_crop'>crop</span><span class='period'>.</span><span class='id identifier rubyid_polygon'>polygon</span><span class='rbracket'>]</span>
@@ -420,9 +401,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

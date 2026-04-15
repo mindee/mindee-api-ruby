@@ -6,13 +6,13 @@
 <title>
   Class: Mindee::V2::FileOperation::SplitFiles
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V2::FileOperation::SplitFiles";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,16 +97,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/v2/file_operation/split_files.rb</dd>
+    <dd>lib/mindee/v2/file_operations/split_files.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Collection of split files.</p>
-
+    <p>Collection of split files.</p>
 
   </div>
 </div>
@@ -144,14 +144,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Save all extracted splits to disk.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Save all extracted splits to disk.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -172,9 +171,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Save all extracted splits to disk.</p>
-
+    <p>Save all extracted splits to disk.</p>
 
   </div>
 </div>
@@ -192,9 +189,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Path to save the extracted splits to.</p>
-</div>
+        <div class='inline'><p>Path to save the extracted splits to.</p></div>
       
     </li>
   
@@ -210,9 +205,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Prefix to add to the filename, defaults to ‘split’.</p>
-</div>
+        <div class='inline'><p>Prefix to add to the filename, defaults to 'split'.</p></div>
       
     </li>
   
@@ -237,7 +230,7 @@
 21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operation/split_files.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operations/split_files.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_save_all_to_disk'>save_all_to_disk</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>split</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='const'>FileUtils</span><span class='period'>.</span><span class='id identifier rubyid_mkdir_p'>mkdir_p</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
@@ -259,9 +252,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:07 2026 by
+  Generated on Wed Apr 15 11:18:43 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

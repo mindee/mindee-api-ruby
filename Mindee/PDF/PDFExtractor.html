@@ -6,13 +6,13 @@
 <title>
   Class: Mindee::PDF::PDFExtractor
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::PDF::PDFExtractor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,16 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/pdf/pdf_extractor.rb</dd>
+    <dd>lib/mindee/pdf/pdf_extractor.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Pdf extraction class.</p>
-
+    <p>Pdf extraction class.</p>
 
   </div>
 </div>
@@ -142,9 +142,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new Pdf from pages and save it into a buffer.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates a new Pdf from pages and save it into a buffer.</p></div></span>
   
 </li>
 
@@ -166,9 +164,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extracts invoices as complete PDFs from the document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extracts invoices as complete PDFs from the document.</p></div></span>
   
 </li>
 
@@ -190,9 +186,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extract the sub-documents from the main pdf, based on the given list of page indexes.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extract the sub-documents from the main pdf, based on the given list of page indexes.</p></div></span>
   
 </li>
 
@@ -216,9 +210,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of PDFExtractor.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>A new instance of PDFExtractor.</p></div></span>
   
 </li>
 
@@ -240,14 +232,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Retrieves the page count for the Pdf object.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Retrieves the page count for the Pdf object.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -264,9 +255,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of PDFExtractor.</p>
-
+    <p>Returns a new instance of PDFExtractor.</p>
 
   </div>
 </div>
@@ -315,8 +304,8 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_extractor.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_local_input'>local_input</span><span class='rparen'>)</span>
-  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../Dependency.html#all_deps_available%3F-class_method" title="Mindee::Dependency.all_deps_available? (method)">all_deps_available?</a></span></span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dependency.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../Dependencies.html#all_deps_available%3F-class_method" title="Mindee::Dependencies.all_deps_available? (method)">all_deps_available?</a></span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dependencies.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependencies::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
   <span class='kw'>end</span>
 
   <span class='ivar'>@filename</span> <span class='op'>=</span> <span class='id identifier rubyid_local_input'>local_input</span><span class='period'>.</span><span class='id identifier rubyid_filename'>filename</span>
@@ -353,9 +342,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new Pdf from pages and save it into a buffer.</p>
-
+    <p>Creates a new Pdf from pages and save it into a buffer.</p>
 
   </div>
 </div>
@@ -373,9 +360,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>List of page number to use for merging in the original Pdf.</p>
-</div>
+        <div class='inline'><p>List of page number to use for merging in the original Pdf.</p></div>
       
     </li>
   
@@ -392,9 +377,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The buffer containing the new Pdf.</p>
-</div>
+        <div class='inline'><p>The buffer containing the new Pdf.</p></div>
       
     </li>
   
@@ -440,9 +423,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extracts invoices as complete PDFs from the document.</p>
-
+    <p>Extracts invoices as complete PDFs from the document.</p>
 
   </div>
 </div>
@@ -554,14 +535,14 @@
     <span class='id identifier rubyid_page_indexes_as_array'>page_indexes_as_array</span> <span class='op'>=</span> <span class='id identifier rubyid_page_indexes'>page_indexes</span> <span class='comment'># @type var page_indexes : Array[Array[Integer]]
 </span>    <span class='kw'>return</span> <span class='id identifier rubyid_extract_sub_documents'>extract_sub_documents</span><span class='lparen'>(</span><span class='id identifier rubyid_page_indexes_as_array'>page_indexes_as_array</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_p_ids'>p_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_page_indexes'>page_indexes</span> <span class='comment'># @type var page_indexes: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups
+  <span class='id identifier rubyid_p_ids'>p_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_page_indexes'>page_indexes</span> <span class='comment'># @type var page_indexes: Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups
 </span>  <span class='kw'>return</span> <span class='id identifier rubyid_extract_sub_documents'>extract_sub_documents</span><span class='lparen'>(</span><span class='id identifier rubyid_p_ids'>p_ids</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:page_indexes</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_strict'>strict</span>
 
   <span class='id identifier rubyid_correct_page_indexes'>correct_page_indexes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='comment'># @type var correct_page_indexes: Array[Array[Integer]]
 </span>  <span class='id identifier rubyid_current_list'>current_list</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='comment'># @type var current_list: Array[Integer]
 </span>  <span class='id identifier rubyid_previous_confidence'>previous_confidence</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_p_ids'>p_ids</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p_i'>p_i</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
-    <span class='id identifier rubyid_page_index'>page_index</span> <span class='op'>=</span> <span class='id identifier rubyid_p_i'>p_i</span> <span class='comment'># @type var page_index: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup
+    <span class='id identifier rubyid_page_index'>page_index</span> <span class='op'>=</span> <span class='id identifier rubyid_p_i'>p_i</span> <span class='comment'># @type var page_index: Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup
 </span>    <span class='id identifier rubyid_confidence'>confidence</span> <span class='op'>=</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='period'>.</span><span class='id identifier rubyid_confidence'>confidence</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
     <span class='id identifier rubyid_page_list'>page_list</span> <span class='op'>=</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='period'>.</span><span class='id identifier rubyid_page_indexes'>page_indexes</span>
 
@@ -597,9 +578,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extract the sub-documents from the main pdf, based on the given list of page indexes.</p>
-
+    <p>Extract the sub-documents from the main pdf, based on the given list of page indexes.</p>
 
   </div>
 </div>
@@ -617,9 +596,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>List of page number to use for merging in the original Pdf.</p>
-</div>
+        <div class='inline'><p>List of page number to use for merging in the original Pdf.</p></div>
       
     </li>
   
@@ -636,9 +613,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The buffer containing the new Pdf.</p>
-</div>
+        <div class='inline'><p>The buffer containing the new Pdf.</p></div>
       
     </li>
   
@@ -718,9 +693,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Retrieves the page count for the Pdf object.</p>
-
+    <p>Retrieves the page count for the Pdf object.</p>
 
   </div>
 </div>
@@ -766,9 +739,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:04 2026 by
+  Generated on Wed Apr 15 11:18:41 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

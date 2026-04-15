@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::Geometry
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::Geometry";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/geometry/point.rb<span class="defines">,<br />
-  lib/mindee/geometry/utils.rb,<br /> lib/mindee/geometry/min_max.rb,<br /> lib/mindee/geometry/polygon.rb,<br /> lib/mindee/geometry/quadrilateral.rb</span>
+    <dd>lib/mindee/geometry/point.rb<span class="defines">,<br>
+  lib/mindee/geometry/utils.rb,<br> lib/mindee/geometry/min_max.rb,<br> lib/mindee/geometry/polygon.rb,<br> lib/mindee/geometry/quadrilateral.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Various helper functions &amp; classes for geometry.</p>
-
+    <p>Various helper functions &amp; classes for geometry.</p>
 
   </div>
 </div>
@@ -138,9 +138,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Checks whether a set of coordinates is below another on the page, with a slight margin for the lateral value.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Checks whether a set of coordinates is below another on the page, with a slight margin for the lateral value.</p></div></span>
   
 </li>
 
@@ -162,9 +160,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Gets the points of a bounding box for a given set of points.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Gets the points of a bounding box for a given set of points.</p></div></span>
   
 </li>
 
@@ -186,9 +182,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates the bounding box for a given set of points.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates the bounding box for a given set of points.</p></div></span>
   
 </li>
 
@@ -210,9 +204,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the central point (centroid) given a sequence of points.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Get the central point (centroid) given a sequence of points.</p></div></span>
   
 </li>
 
@@ -234,9 +226,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the maximum and minimum X value given a sequence of points.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Get the maximum and minimum X value given a sequence of points.</p></div></span>
   
 </li>
 
@@ -258,9 +248,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the maximum and minimum Y value given a sequence of points.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Get the maximum and minimum Y value given a sequence of points.</p></div></span>
   
 </li>
 
@@ -282,14 +270,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Transform a prediction into a Quadrilateral.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Transform a prediction into a Quadrilateral.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -309,9 +296,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Checks whether a set of coordinates is below another on the page, with a slight margin for the lateral value.</p>
-
+    <p>Checks whether a set of coordinates is below another on the page, with a slight margin for the lateral value.</p>
 
   </div>
 </div>
@@ -329,9 +314,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>andidate [Array&lt;Mindee::Geometry::Point] Polygon to check</p>
-</div>
+        <div class='inline'><p>andidate [Array&lt;Mindee::Geometry::Point] Polygon to check</p></div>
       
     </li>
   
@@ -345,9 +328,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>nchor [Array&lt;Mindee::Geometry::Point] Reference polygon</p>
-</div>
+        <div class='inline'><p>nchor [Array&lt;Mindee::Geometry::Point] Reference polygon</p></div>
       
     </li>
   
@@ -361,9 +342,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Margin tolerance on the left of the anchor</p>
-</div>
+        <div class='inline'><p>Margin tolerance on the left of the anchor</p></div>
       
     </li>
   
@@ -377,9 +356,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Margin tolerance on the right of the anchor</p>
-</div>
+        <div class='inline'><p>Margin tolerance on the right of the anchor</p></div>
       
     </li>
   
@@ -396,9 +373,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>bool</p>
-</div>
+        <div class='inline'><p>bool</p></div>
       
     </li>
   
@@ -456,9 +431,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Gets the points of a bounding box for a given set of points</p>
-
+    <p>Gets the points of a bounding box for a given set of points</p>
 
   </div>
 </div>
@@ -529,9 +502,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Creates the bounding box for a given set of points</p>
-
+    <p>Creates the bounding box for a given set of points</p>
 
   </div>
 </div>
@@ -610,9 +581,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the central point (centroid) given a sequence of points.</p>
-
+    <p>Get the central point (centroid) given a sequence of points.</p>
 
   </div>
 </div>
@@ -685,9 +654,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the maximum and minimum X value given a sequence of points.</p>
-
+    <p>Get the maximum and minimum X value given a sequence of points.</p>
 
   </div>
 </div>
@@ -756,9 +723,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the maximum and minimum Y value given a sequence of points.</p>
-
+    <p>Get the maximum and minimum Y value given a sequence of points.</p>
 
   </div>
 </div>
@@ -827,9 +792,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Transform a prediction into a Quadrilateral.</p>
-
+    <p>Transform a prediction into a Quadrilateral.</p>
 
   </div>
 </div>
@@ -904,9 +867,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

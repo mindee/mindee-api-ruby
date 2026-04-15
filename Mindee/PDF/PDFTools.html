@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::PDF::PDFTools
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::PDF::PDFTools";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,16 +79,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/pdf/pdf_tools.rb</dd>
+    <dd>lib/mindee/pdf/pdf_tools.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Collection of miscellaneous PDF operations,as well as some monkey-patching for Origami.</p>
-
+    <p>Collection of miscellaneous PDF operations,as well as some monkey-patching for Origami.</p>
 
   </div>
 </div>
@@ -126,9 +126,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Adds a content stream to the specified PDF page to display an image XObject.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Adds a content stream to the specified PDF page to display an image XObject.</p></div></span>
   
 </li>
 
@@ -150,9 +148,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates an image XObject from the provided image.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates an image XObject from the provided image.</p></div></span>
   
 </li>
 
@@ -174,9 +170,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Determines the colorspace for an image based on its metadata.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Determines the colorspace for an image based on its metadata.</p></div></span>
   
 </li>
 
@@ -198,9 +192,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Determines the appropriate filter for an image based on its properties.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Determines the appropriate filter for an image based on its properties.</p></div></span>
   
 </li>
 
@@ -222,9 +214,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Checks whether a stream contains a PDF header near the beginning.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Checks whether a stream contains a PDF header near the beginning.</p></div></span>
   
 </li>
 
@@ -246,9 +236,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Processes an image into an image XObject for PDF embedding.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Processes an image into an image XObject for PDF embedding.</p></div></span>
   
 </li>
 
@@ -270,9 +258,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Sets the dimensions for the specified PDF page.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Sets the dimensions for the specified PDF page.</p></div></span>
   
 </li>
 
@@ -294,9 +280,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Sets properties on the provided image XObject based on image metadata.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Sets properties on the provided image XObject based on image metadata.</p></div></span>
   
 </li>
 
@@ -318,9 +302,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Checks whether the file has source_text.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Checks whether the file has source_text.</p></div></span>
   
 </li>
 
@@ -342,14 +324,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Checks a PDFs stream content for text operators See <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf">opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf</a> page 243-251.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Checks a PDFs stream content for text operators See <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf">https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf</a> page 243-251.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -375,14 +356,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Converts the current PDF document into a binary-encoded StringIO stream.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Converts the current PDF document into a binary-encoded StringIO stream.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -402,9 +382,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Adds a content stream to the specified PDF page to display an image XObject.</p>
-
+    <p>Adds a content stream to the specified PDF page to display an image XObject.</p>
 
   </div>
 </div>
@@ -422,9 +400,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The PDF page to which content will be added.</p>
-</div>
+        <div class='inline'><p>The PDF page to which content will be added.</p></div>
       
     </li>
   
@@ -438,9 +414,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The name identifying the XObject.</p>
-</div>
+        <div class='inline'><p>The name identifying the XObject.</p></div>
       
     </li>
   
@@ -454,9 +428,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The width for the transformation matrix.</p>
-</div>
+        <div class='inline'><p>The width for the transformation matrix.</p></div>
       
     </li>
   
@@ -470,9 +442,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The height for the transformation matrix.</p>
-</div>
+        <div class='inline'><p>The height for the transformation matrix.</p></div>
       
     </li>
   
@@ -515,11 +485,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Creates an image XObject from the provided image.</p>
-
-<p>Converts the given image to a binary stream using Mindee’s image utilities, then creates an Origami::Graphics::ImageXObject with a JPEG filter.</p>
-
+    <p>Creates an image XObject from the provided image.</p>
+<p>Converts the given image to a binary stream using Mindee's image utilities, then creates
+an Origami::Graphics::ImageXObject with a JPEG filter.</p>
 
   </div>
 </div>
@@ -537,9 +505,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>An image object with the necessary data and structure.</p>
-</div>
+        <div class='inline'><p>An image object with the necessary data and structure.</p></div>
       
     </li>
   
@@ -556,9 +522,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The created image XObject.</p>
-</div>
+        <div class='inline'><p>The created image XObject.</p></div>
       
     </li>
   
@@ -598,9 +562,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Determines the colorspace for an image based on its metadata.</p>
-
+    <p>Determines the colorspace for an image based on its metadata.</p>
 
   </div>
 </div>
@@ -618,9 +580,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The image data hash.</p>
-</div>
+        <div class='inline'><p>The image data hash.</p></div>
       
     </li>
   
@@ -637,9 +597,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>One of :DeviceCMYK, :DeviceGray or :DeviceRGB.</p>
-</div>
+        <div class='inline'><p>One of :DeviceCMYK, :DeviceGray or :DeviceRGB.</p></div>
       
     </li>
   
@@ -687,9 +645,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Determines the appropriate filter for an image based on its properties.</p>
-
+    <p>Determines the appropriate filter for an image based on its properties.</p>
 
   </div>
 </div>
@@ -707,9 +663,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The image data hash containing properties.</p>
-</div>
+        <div class='inline'><p>The image data hash containing properties.</p></div>
       
     </li>
   
@@ -726,9 +680,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>One of :FlateDecode, :LZWDecode or :DCTDecode.</p>
-</div>
+        <div class='inline'><p>One of :FlateDecode, :LZWDecode or :DCTDecode.</p></div>
       
     </li>
   
@@ -776,9 +728,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Checks whether a stream contains a PDF header near the beginning.</p>
-
+    <p>Checks whether a stream contains a PDF header near the beginning.</p>
 
   </div>
 </div>
@@ -796,9 +746,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Binary-encoded stream.</p>
-</div>
+        <div class='inline'><p>Binary-encoded stream.</p></div>
       
     </li>
   
@@ -814,9 +762,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum allowed offset to find ‘%PDF-’.</p>
-</div>
+        <div class='inline'><p>Maximum allowed offset to find '%PDF-'.</p></div>
       
     </li>
   
@@ -833,9 +779,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p><code>true</code> when the stream appears to be a PDF.</p>
-</div>
+        <div class='inline'><p><code>true</code> when the stream appears to be a PDF.</p></div>
       
     </li>
   
@@ -889,9 +833,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Processes an image into an image XObject for PDF embedding.</p>
-
+    <p>Processes an image into an image XObject for PDF embedding.</p>
 
   </div>
 </div>
@@ -909,9 +851,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The raw image data.</p>
-</div>
+        <div class='inline'><p>The raw image data.</p></div>
       
     </li>
   
@@ -925,9 +865,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The quality setting for image compression.</p>
-</div>
+        <div class='inline'><p>The quality setting for image compression.</p></div>
       
     </li>
   
@@ -941,9 +879,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The desired width of the output image.</p>
-</div>
+        <div class='inline'><p>The desired width of the output image.</p></div>
       
     </li>
   
@@ -957,9 +893,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The desired height of the output image.</p>
-</div>
+        <div class='inline'><p>The desired height of the output image.</p></div>
       
     </li>
   
@@ -976,9 +910,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The resulting image XObject.</p>
-</div>
+        <div class='inline'><p>The resulting image XObject.</p></div>
       
     </li>
   
@@ -1044,9 +976,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Sets the dimensions for the specified PDF page.</p>
-
+    <p>Sets the dimensions for the specified PDF page.</p>
 
   </div>
 </div>
@@ -1064,9 +994,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The PDF page whose dimensions are being set.</p>
-</div>
+        <div class='inline'><p>The PDF page whose dimensions are being set.</p></div>
       
     </li>
   
@@ -1080,9 +1008,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The target width of the page.</p>
-</div>
+        <div class='inline'><p>The target width of the page.</p></div>
       
     </li>
   
@@ -1096,9 +1022,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The target height of the page.</p>
-</div>
+        <div class='inline'><p>The target height of the page.</p></div>
       
     </li>
   
@@ -1139,9 +1063,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Sets properties on the provided image XObject based on image metadata.</p>
-
+    <p>Sets properties on the provided image XObject based on image metadata.</p>
 
   </div>
 </div>
@@ -1159,9 +1081,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The image XObject to update.</p>
-</div>
+        <div class='inline'><p>The image XObject to update.</p></div>
       
     </li>
   
@@ -1175,9 +1095,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>A hash containing image metadata (such as width, height, properties, etc.).</p>
-</div>
+        <div class='inline'><p>A hash containing image metadata (such as width, height, properties, etc.).</p></div>
       
     </li>
   
@@ -1224,9 +1142,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Checks whether the file has source_text. Sends false if the file isn’t a PDF.</p>
-
+    <p>Checks whether the file has source_text. Sends false if the file isn't a PDF.</p>
 
   </div>
 </div>
@@ -1244,9 +1160,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Abinary-encoded stream representing the PDF file.</p>
-</div>
+        <div class='inline'><p>Abinary-encoded stream representing the PDF file.</p></div>
       
     </li>
   
@@ -1263,9 +1177,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p><code>true</code> if the pdf has source text, false otherwise.</p>
-</div>
+        <div class='inline'><p><code>true</code> if the pdf has source text, false otherwise.</p></div>
       
     </li>
   
@@ -1349,9 +1261,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Checks a PDFs stream content for text operators See <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf">opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf</a> page 243-251.</p>
-
+    <p>Checks a PDFs stream content for text operators
+See <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf">https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf</a> page 243-251.</p>
 
   </div>
 </div>
@@ -1369,9 +1280,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Stream object from a PDFs page.</p>
-</div>
+        <div class='inline'><p>Stream object from a PDFs page.</p></div>
       
     </li>
   
@@ -1388,9 +1297,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p><code>true</code> if a text operator is found in the stream.</p>
-</div>
+        <div class='inline'><p><code>true</code> if a text operator is found in the stream.</p></div>
       
     </li>
   
@@ -1442,9 +1349,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Converts the current PDF document into a binary-encoded StringIO stream.</p>
-
+    <p>Converts the current PDF document into a binary-encoded StringIO stream.</p>
 
   </div>
 </div>
@@ -1464,9 +1369,13 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional settings to override default processing flags. - :delinearize [bool] (default: true) Whether to convert a linearized PDF to its full form. - :recompile [bool] (default: true) Whether to recompile the PDF after processing. - :decrypt [bool] (default: false) Whether to attempt to decrypt the PDF. - Other keys such as :intent, :rebuild_xrefs, :noindent, and :obfuscate may be modified automatically.</p>
-</div>
+        <div class='inline'><p>Optional settings to override default processing flags.</p>
+<ul>
+<li>:delinearize [bool] (default: true) Whether to convert a linearized PDF to its full form.</li>
+<li>:recompile [bool] (default: true) Whether to recompile the PDF after processing.</li>
+<li>:decrypt [bool] (default: false) Whether to attempt to decrypt the PDF.</li>
+<li>Other keys such as :intent, :rebuild_xrefs, :noindent, and :obfuscate may be modified automatically.</li>
+</ul></div>
       
     </li>
   
@@ -1483,9 +1392,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>A binary-encoded stream representing the processed PDF.</p>
-</div>
+        <div class='inline'><p>A binary-encoded stream representing the processed PDF.</p></div>
       
     </li>
   
@@ -1561,9 +1468,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

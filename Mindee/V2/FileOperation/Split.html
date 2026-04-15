@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::V2::FileOperation::Split
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V2::FileOperation::Split";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/v2/file_operation/split.rb</span>
+    <dd>lib/mindee.rb<span class="defines">,<br>
+  lib/mindee/v2/file_operations/split.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Split operations.</p>
-
+    <p>Split operations.</p>
 
   </div>
 </div>
@@ -128,9 +128,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extracts a single split as a complete PDF from the document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extracts a single split as a complete PDF from the document.</p></div></span>
   
 </li>
 
@@ -152,14 +150,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Extracts splits as complete PDFs from the document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Extracts splits as complete PDFs from the document.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 
@@ -179,9 +176,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extracts a single split as a complete PDF from the document.</p>
-
+    <p>Extracts a single split as a complete PDF from the document.</p>
 
   </div>
 </div>
@@ -199,9 +194,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Input source to split.</p>
-</div>
+        <div class='inline'><p>Input source to split.</p></div>
       
     </li>
   
@@ -215,9 +208,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>List of pages to keep.</p>
-</div>
+        <div class='inline'><p>List of pages to keep.</p></div>
       
     </li>
   
@@ -234,9 +225,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Extracted PDF</p>
-</div>
+        <div class='inline'><p>Extracted PDF</p></div>
       
     </li>
   
@@ -253,7 +242,7 @@
 15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operation/split.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operations/split.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extract_single_split'>extract_single_split</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_split'>split</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_extract_splits'>extract_splits</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_split'>split</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -274,9 +263,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Extracts splits as complete PDFs from the document.</p>
-
+    <p>Extracts splits as complete PDFs from the document.</p>
 
   </div>
 </div>
@@ -294,9 +281,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Input source to split.</p>
-</div>
+        <div class='inline'><p>Input source to split.</p></div>
       
     </li>
   
@@ -310,9 +295,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>List of sub-lists of pages to keep.</p>
-</div>
+        <div class='inline'><p>List of sub-lists of pages to keep.</p></div>
       
     </li>
   
@@ -329,9 +312,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>A list of extracted invoices.</p>
-</div>
+        <div class='inline'><p>A list of extracted invoices.</p></div>
       
     </li>
   
@@ -347,9 +328,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>if no indexes are provided.</p>
-</div>
+        <div class='inline'><p>if no indexes are provided.</p></div>
       
     </li>
   
@@ -374,7 +353,7 @@
 33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operation/split.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operations/split.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extract_splits'>extract_splits</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_splits'>splits</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Error/MindeeError.html" title="Mindee::Error::MindeeError (class)">MindeeError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>No indexes provided.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_splits'>splits</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_splits'>splits</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -397,9 +376,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

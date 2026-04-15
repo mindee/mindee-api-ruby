@@ -6,13 +6,13 @@
 <title>
   Class: Mindee::Input::Source::URLInputSource
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::Input::Source::URLInputSource";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,16 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/input/sources/url_input_source.rb</dd>
+    <dd>lib/mindee/input/sources/url_input_source.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Load a remote document from a file url.</p>
-
+    <p>Load a remote document from a file url.</p>
 
   </div>
 </div>
@@ -174,9 +174,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Downloads the file from the url, and returns a BytesInputSource wrapper object for it.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Downloads the file from the url, and returns a BytesInputSource wrapper object for it.</p></div></span>
   
 </li>
 
@@ -198,9 +196,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Fetches the file content from the URL.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Fetches the file content from the URL.</p></div></span>
   
 </li>
 
@@ -224,9 +220,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of URLInputSource.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>A new instance of URLInputSource.</p></div></span>
   
 </li>
 
@@ -248,14 +242,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Downloads the file from the URL and saves it to the specified path.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Downloads the file from the URL and saves it to the specified path.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -272,9 +265,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of URLInputSource.</p>
-
+    <p>Returns a new instance of URLInputSource.</p>
 
   </div>
 </div>
@@ -400,9 +391,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Downloads the file from the url, and returns a BytesInputSource wrapper object for it.</p>
-
+    <p>Downloads the file from the url, and returns a BytesInputSource wrapper object for it.</p>
 
   </div>
 </div>
@@ -422,9 +411,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional name to give to the file.</p>
-</div>
+        <div class='inline'><p>Optional name to give to the file.</p></div>
       
     </li>
   
@@ -440,9 +427,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional username for authentication.</p>
-</div>
+        <div class='inline'><p>Optional username for authentication.</p></div>
       
     </li>
   
@@ -458,9 +443,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional password for authentication.</p>
-</div>
+        <div class='inline'><p>Optional password for authentication.</p></div>
       
     </li>
   
@@ -476,9 +459,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional token for JWT-based authentication.</p>
-</div>
+        <div class='inline'><p>Optional token for JWT-based authentication.</p></div>
       
     </li>
   
@@ -494,9 +475,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum amount of redirects to follow.</p>
-</div>
+        <div class='inline'><p>Maximum amount of redirects to follow.</p></div>
       
     </li>
   
@@ -513,9 +492,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The full path of the saved file.</p>
-</div>
+        <div class='inline'><p>The full path of the saved file.</p></div>
       
     </li>
   
@@ -563,9 +540,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Fetches the file content from the URL.</p>
-
+    <p>Fetches the file content from the URL.</p>
 
   </div>
 </div>
@@ -585,9 +560,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional username for authentication.</p>
-</div>
+        <div class='inline'><p>Optional username for authentication.</p></div>
       
     </li>
   
@@ -603,9 +576,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional password for authentication.</p>
-</div>
+        <div class='inline'><p>Optional password for authentication.</p></div>
       
     </li>
   
@@ -621,9 +592,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional token for JWT-based authentication.</p>
-</div>
+        <div class='inline'><p>Optional token for JWT-based authentication.</p></div>
       
     </li>
   
@@ -639,9 +608,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum amount of redirects to follow.</p>
-</div>
+        <div class='inline'><p>Maximum amount of redirects to follow.</p></div>
       
     </li>
   
@@ -658,9 +625,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The downloaded file content.</p>
-</div>
+        <div class='inline'><p>The downloaded file content.</p></div>
       
     </li>
   
@@ -724,9 +689,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Downloads the file from the URL and saves it to the specified path.</p>
-
+    <p>Downloads the file from the URL and saves it to the specified path.</p>
 
   </div>
 </div>
@@ -744,9 +707,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Path to save the file to.</p>
-</div>
+        <div class='inline'><p>Path to save the file to.</p></div>
       
     </li>
   
@@ -762,9 +723,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional name to give to the file.</p>
-</div>
+        <div class='inline'><p>Optional name to give to the file.</p></div>
       
     </li>
   
@@ -780,9 +739,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional username for authentication.</p>
-</div>
+        <div class='inline'><p>Optional username for authentication.</p></div>
       
     </li>
   
@@ -798,9 +755,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional password for authentication.</p>
-</div>
+        <div class='inline'><p>Optional password for authentication.</p></div>
       
     </li>
   
@@ -816,9 +771,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Optional token for JWT-based authentication.</p>
-</div>
+        <div class='inline'><p>Optional token for JWT-based authentication.</p></div>
       
     </li>
   
@@ -834,9 +787,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum amount of redirects to follow.</p>
-</div>
+        <div class='inline'><p>Maximum amount of redirects to follow.</p></div>
       
     </li>
   
@@ -853,9 +804,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The full path of the saved file.</p>
-</div>
+        <div class='inline'><p>The full path of the saved file.</p></div>
       
     </li>
   
@@ -903,9 +852,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:07 2026 by
+  Generated on Wed Apr 15 11:18:43 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

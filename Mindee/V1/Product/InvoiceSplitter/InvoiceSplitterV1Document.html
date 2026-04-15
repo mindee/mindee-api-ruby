@@ -6,13 +6,13 @@
 <title>
   Class: Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1Document
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1Document";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -101,16 +102,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_document.rb</dd>
+    <dd>lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_document.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Invoice Splitter API version 1.4 document data.</p>
-
+    <p>Invoice Splitter API version 1.4 document data.</p>
 
   </div>
 </div>
@@ -150,9 +150,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>List of page groups.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>List of page groups.</p></div></span>
   
 </li>
 
@@ -189,9 +187,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of InvoiceSplitterV1Document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>A new instance of InvoiceSplitterV1Document.</p></div></span>
   
 </li>
 
@@ -219,9 +215,12 @@
 
       
     </ul>
+    
   
 
 
+  
+  
   
   
   
@@ -247,9 +246,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of InvoiceSplitterV1Document.</p>
-
+    <p>Returns a new instance of InvoiceSplitterV1Document.</p>
 
   </div>
 </div>
@@ -300,7 +297,7 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_prediction'>prediction</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
-  <span class='ivar'>@invoice_page_groups</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::V1::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../InvoiceSplitter.html" title="Mindee::V1::Product::InvoiceSplitter (module)">InvoiceSplitter</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="InvoiceSplitterV1InvoicePageGroups.html" title="Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups (class)">InvoiceSplitterV1InvoicePageGroups</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="InvoiceSplitterV1InvoicePageGroups.html#initialize-instance_method" title="Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='ivar'>@invoice_page_groups</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="InvoiceSplitterV1InvoicePageGroups.html" title="Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups (class)">InvoiceSplitterV1InvoicePageGroups</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="InvoiceSplitterV1InvoicePageGroups.html#initialize-instance_method" title="Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups#initialize (method)">new</a></span></span><span class='lparen'>(</span>
     <span class='id identifier rubyid_prediction'>prediction</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invoice_page_groups</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_page_id'>page_id</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -327,9 +324,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>List of page groups. Each group represents a single invoice within a multi-invoice document.</p>
-
+    <p>List of page groups. Each group represents a single invoice within a multi-invoice document.</p>
 
   </div>
 </div>
@@ -442,9 +437,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:12 2026 by
+  Generated on Wed Apr 15 11:18:46 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

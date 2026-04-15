@@ -6,13 +6,13 @@
 <title>
   Class: Mindee::Input::Source::LocalInputSource
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::Input::Source::LocalInputSource";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,16 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee/input/sources/local_input_source.rb</dd>
+    <dd>lib/mindee/input/sources/local_input_source.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Base class for loading documents.</p>
-
+    <p>Base class for loading documents.</p>
 
   </div>
 </div>
@@ -232,14 +232,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Attempt to fix the PDF data in the given stream.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Attempt to fix the PDF data in the given stream.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -265,9 +264,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Cuts a PDF file according to provided options.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Cuts a PDF file according to provided options.</p></div></span>
   
 </li>
 
@@ -289,9 +286,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Compresses the file, according to the provided info.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Compresses the file, according to the provided info.</p></div></span>
   
 </li>
 
@@ -313,9 +308,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Attempts to fix the PDF data in the file.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Attempts to fix the PDF data in the file.</p></div></span>
   
 </li>
 
@@ -339,9 +332,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of LocalInputSource.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>A new instance of LocalInputSource.</p></div></span>
   
 </li>
 
@@ -363,9 +354,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the page count for a document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Returns the page count for a document.</p></div></span>
   
 </li>
 
@@ -387,9 +376,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Shorthand for PDF mimetype validation.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Shorthand for PDF mimetype validation.</p></div></span>
   
 </li>
 
@@ -411,9 +398,7 @@
   
 
   
-    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'>
-<p>Use <span class='object_link'><a href="#apply_page_options-instance_method" title="Mindee::Input::Source::LocalInputSource#apply_page_options (method)">#apply_page_options</a></span> instead.</p>
-</div></span>
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'><p>Use <span class='object_link'><a href="#apply_page_options-instance_method" title="Mindee::Input::Source::LocalInputSource#apply_page_options (method)">#apply_page_options</a></span> instead.</p></div></span>
   
 </li>
 
@@ -435,9 +420,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Reads a document.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Reads a document.</p></div></span>
   
 </li>
 
@@ -459,9 +442,7 @@
   
 
   
-    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'>
-<p>See <span class='object_link'><a href="#fix_pdf!-instance_method" title="Mindee::Input::Source::LocalInputSource#fix_pdf! (method)">#fix_pdf!</a></span> or #self#self.fix_pdf instead.</p>
-</div></span>
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'><p>See <span class='object_link'><a href="#fix_pdf!-instance_method" title="Mindee::Input::Source::LocalInputSource#fix_pdf! (method)">#fix_pdf!</a></span> or #self#self.fix_pdf instead.</p></div></span>
   
 </li>
 
@@ -483,9 +464,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Checks whether the file has source text if it is a pdf.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Checks whether the file has source text if it is a pdf.</p></div></span>
   
 </li>
 
@@ -507,14 +486,13 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Write the file to a given path.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Write the file to a given path.</p></div></span>
   
 </li>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -531,9 +509,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of LocalInputSource.</p>
-
+    <p>Returns a new instance of LocalInputSource.</p>
 
   </div>
 </div>
@@ -836,9 +812,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Attempt to fix the PDF data in the given stream.</p>
-
+    <p>Attempt to fix the PDF data in the given stream.</p>
 
   </div>
 </div>
@@ -856,9 +830,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The stream to fix.</p>
-</div>
+        <div class='inline'><p>The stream to fix.</p></div>
       
     </li>
   
@@ -874,9 +846,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum offset to look for the PDF header.</p>
-</div>
+        <div class='inline'><p>Maximum offset to look for the PDF header.</p></div>
       
     </li>
   
@@ -893,9 +863,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The fixed stream.</p>
-</div>
+        <div class='inline'><p>The fixed stream.</p></div>
       
     </li>
   
@@ -962,9 +930,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Cuts a PDF file according to provided options.</p>
-
+    <p>Cuts a PDF file according to provided options.</p>
 
   </div>
 </div>
@@ -982,21 +948,17 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Page cutting/merge options:</p>
-<ul><li>
-<p><code>:page_indexes</code> Zero-based list of page indexes.</p>
-</li><li>
-<p><code>:operation</code> Operation to apply on the document, given the ‘page_indexes specified:</p>
-<ul><li>
-<p><code>:KEEP_ONLY</code> - keep only the specified pages, and remove all others.</p>
-</li><li>
-<p><code>:REMOVE</code> - remove the specified pages, and keep all others.</p>
-</li></ul>
-</li><li>
-<p><code>:on_min_pages</code> Apply the operation only if document has at least this many pages.</p>
-</li></ul>
-</div>
+        <div class='inline'><p>Page cutting/merge options:</p>
+<ul>
+<li><code>:page_indexes</code> Zero-based list of page indexes.</li>
+<li>
+<code>:operation</code> Operation to apply on the document, given the `page_indexes specified:
+<pre class="code ruby"><code class="ruby">* `:KEEP_ONLY` - keep only the specified pages, and remove all others.
+* `:REMOVE` - remove the specified pages, and keep all others.
+</code></pre>
+</li>
+<li><code>:on_min_pages</code> Apply the operation only if document has at least this many pages.</li>
+</ul></div>
       
     </li>
   
@@ -1037,9 +999,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Compresses the file, according to the provided info.</p>
-
+    <p>Compresses the file, according to the provided info.</p>
 
   </div>
 </div>
@@ -1059,9 +1019,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Quality of the output file.</p>
-</div>
+        <div class='inline'><p>Quality of the output file.</p></div>
       
     </li>
   
@@ -1077,9 +1035,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum width (Ignored for PDFs).</p>
-</div>
+        <div class='inline'><p>Maximum width (Ignored for PDFs).</p></div>
       
     </li>
   
@@ -1095,9 +1051,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum height (Ignored for PDFs).</p>
-</div>
+        <div class='inline'><p>Maximum height (Ignored for PDFs).</p></div>
       
     </li>
   
@@ -1113,9 +1067,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Whether to force the operation on PDFs with source text. This will attempt to re-render PDF text over the rasterized original. If disabled, ignored the operation. WARNING: this operation is strongly discouraged.</p>
-</div>
+        <div class='inline'><p>Whether to force the operation on PDFs with source text.
+This will attempt to re-render PDF text over the rasterized original. If disabled, ignored the operation.
+WARNING: this operation is strongly discouraged.</p></div>
       
     </li>
   
@@ -1131,9 +1085,8 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>If the PDF has source text, whether to re-apply it to the original or not. Needs force_source_text to work.</p>
-</div>
+        <div class='inline'><p>If the PDF has source text, whether to re-apply it to the original or
+not. Needs force_source_text to work.</p></div>
       
     </li>
   
@@ -1174,8 +1127,8 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/input/sources/local_input_source.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_compress!'>compress!</span><span class='lparen'>(</span><span class='label'>quality:</span> <span class='int'>85</span><span class='comma'>,</span> <span class='label'>max_width:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_height:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>force_source_text:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>disable_source_text:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../../Dependency.html#all_deps_available%3F-class_method" title="Mindee::Dependency.all_deps_available? (method)">all_deps_available?</a></span></span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../../Dependencies.html#all_deps_available%3F-class_method" title="Mindee::Dependencies.all_deps_available? (method)">all_deps_available?</a></span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependencies::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_buffer'>buffer</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_pdf?'>pdf?</span>
@@ -1212,9 +1165,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p>
-<p>Attempts to fix the PDF data in the file.</p>
-
+    <p class="note returns_void">This method returns an undefined value.</p><p>Attempts to fix the PDF data in the file.</p>
 
   </div>
 </div>
@@ -1234,9 +1185,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Maximum offset to look for the PDF header.</p>
-</div>
+        <div class='inline'><p>Maximum offset to look for the PDF header.</p></div>
       
     </li>
   
@@ -1292,9 +1241,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the page count for a document. Defaults to one for images.</p>
-
+    <p>Returns the page count for a document.
+Defaults to one for images.</p>
 
   </div>
 </div>
@@ -1335,8 +1283,8 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/input/sources/local_input_source.rb', line 145</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_page_count'>page_count</span>
-  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../../Dependency.html#all_deps_available%3F-class_method" title="Mindee::Dependency.all_deps_available? (method)">all_deps_available?</a></span></span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../../Dependencies.html#all_deps_available%3F-class_method" title="Mindee::Dependencies.all_deps_available? (method)">all_deps_available?</a></span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependencies::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
   <span class='kw'>end</span>
   <span class='kw'>return</span> <span class='int'>1</span> <span class='kw'>unless</span> <span class='id identifier rubyid_pdf?'>pdf?</span>
 
@@ -1360,9 +1308,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Shorthand for PDF mimetype validation.</p>
-
+    <p>Shorthand for PDF mimetype validation.</p>
 
   </div>
 </div>
@@ -1414,9 +1360,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'>
-<p>Use <span class='object_link'><a href="#apply_page_options-instance_method" title="Mindee::Input::Source::LocalInputSource#apply_page_options (method)">#apply_page_options</a></span> instead.</p>
-</div></div>
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'><p>Use <span class='object_link'><a href="#apply_page_options-instance_method" title="Mindee::Input::Source::LocalInputSource#apply_page_options (method)">#apply_page_options</a></span> instead.</p></div></div>
 
 
   </div>
@@ -1463,9 +1407,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Reads a document.</p>
-
+    <p>Reads a document.</p>
 
   </div>
 </div>
@@ -1546,9 +1488,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'>
-<p>See <span class='object_link'><a href="#fix_pdf!-instance_method" title="Mindee::Input::Source::LocalInputSource#fix_pdf! (method)">#fix_pdf!</a></span> or Mindee::Input::Source::LocalInputSource#self#self.fix_pdf instead.</p>
-</div></div>
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'><p>See <span class='object_link'><a href="#fix_pdf!-instance_method" title="Mindee::Input::Source::LocalInputSource#fix_pdf! (method)">#fix_pdf!</a></span> or Mindee::Input::Source::LocalInputSource#self#self.fix_pdf instead.</p></div></div>
 
 
   </div>
@@ -1588,9 +1528,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Checks whether the file has source text if it is a pdf. <code>false</code> otherwise</p>
-
+    <p>Checks whether the file has source text if it is a pdf. <code>false</code> otherwise</p>
 
   </div>
 </div>
@@ -1607,9 +1545,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p><code>true</code> if the file is a PDF and has source text.</p>
-</div>
+        <div class='inline'><p><code>true</code> if the file is a PDF and has source text.</p></div>
       
     </li>
   
@@ -1633,8 +1569,8 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/input/sources/local_input_source.rb', line 191</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_text?'>source_text?</span>
-  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../../Dependency.html#all_deps_available%3F-class_method" title="Mindee::Dependency.all_deps_available? (method)">all_deps_available?</a></span></span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html" title="Mindee::Dependency (module)">Dependency</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependency.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all_deps_available?'><span class='object_link'><a href="../../Dependencies.html#all_deps_available%3F-class_method" title="Mindee::Dependencies.all_deps_available? (method)">all_deps_available?</a></span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html" title="Mindee::Dependencies (module)">Dependencies</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dependencies.html#MINDEE_DEPENDENCIES_LOAD_ERROR-constant" title="Mindee::Dependencies::MINDEE_DEPENDENCIES_LOAD_ERROR (constant)">MINDEE_DEPENDENCIES_LOAD_ERROR</a></span></span>
   <span class='kw'>end</span>
 
   <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../PDF.html" title="Mindee::PDF (module)">PDF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../PDF/PDFTools.html" title="Mindee::PDF::PDFTools (module)">PDFTools</a></span></span><span class='period'>.</span><span class='id identifier rubyid_source_text?'><span class='object_link'><a href="../../PDF/PDFTools.html#source_text%3F-class_method" title="Mindee::PDF::PDFTools.source_text? (method)">source_text?</a></span></span><span class='lparen'>(</span><span class='ivar'>@io_stream</span><span class='rparen'>)</span>
@@ -1655,9 +1591,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Write the file to a given path. Uses the initial file name by default.</p>
-
+    <p>Write the file to a given path. Uses the initial file name by default.</p>
 
   </div>
 </div>
@@ -1675,9 +1609,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Path to write the file to.</p>
-</div>
+        <div class='inline'><p>Path to write the file to.</p></div>
       
     </li>
   
@@ -1730,9 +1662,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:08 2026 by
+  Generated on Wed Apr 15 11:18:43 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>

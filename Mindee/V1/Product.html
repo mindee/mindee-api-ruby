@@ -6,13 +6,13 @@
 <title>
   Module: Mindee::V1::Product
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.41
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Mindee::V1::Product";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/mindee.rb<span class="defines">,<br />
-  lib/mindee/v1/product/resume/resume_v1.rb,<br /> lib/mindee/v1/product/cropper/cropper_v1.rb,<br /> lib/mindee/v1/product/invoice/invoice_v4.rb,<br /> lib/mindee/v1/product/receipt/receipt_v5.rb,<br /> lib/mindee/v1/product/universal/universal.rb,<br /> lib/mindee/v1/product/passport/passport_v1.rb,<br /> lib/mindee/v1/product/fr/id_card/id_card_v1.rb,<br /> lib/mindee/v1/product/fr/id_card/id_card_v2.rb,<br /> lib/mindee/v1/product/resume/resume_v1_page.rb,<br /> lib/mindee/v1/product/cropper/cropper_v1_page.rb,<br /> lib/mindee/v1/product/invoice/invoice_v4_page.rb,<br /> lib/mindee/v1/product/receipt/receipt_v5_page.rb,<br /> lib/mindee/v1/product/universal/universal_page.rb,<br /> lib/mindee/v1/product/passport/passport_v1_page.rb,<br /> lib/mindee/v1/product/resume/resume_v1_document.rb,<br /> lib/mindee/v1/product/resume/resume_v1_language.rb,<br /> lib/mindee/v1/product/fr/id_card/id_card_v1_page.rb,<br /> lib/mindee/v1/product/fr/id_card/id_card_v2_page.rb,<br /> lib/mindee/v1/product/resume/resume_v1_education.rb,<br /> lib/mindee/v1/product/resume/resume_v1_languages.rb,<br /> lib/mindee/v1/product/cropper/cropper_v1_document.rb,<br /> lib/mindee/v1/product/invoice/invoice_v4_document.rb,<br /> lib/mindee/v1/product/receipt/receipt_v5_document.rb,<br /> lib/mindee/v1/product/resume/resume_v1_educations.rb,<br /> lib/mindee/v1/product/invoice/invoice_v4_line_item.rb,<br /> lib/mindee/v1/product/receipt/receipt_v5_line_item.rb,<br /> lib/mindee/v1/product/resume/resume_v1_certificate.rb,<br /> lib/mindee/v1/product/universal/universal_document.rb,<br /> lib/mindee/v1/product/invoice/invoice_v4_line_items.rb,<br /> lib/mindee/v1/product/passport/passport_v1_document.rb,<br /> lib/mindee/v1/product/receipt/receipt_v5_line_items.rb,<br /> lib/mindee/v1/product/resume/resume_v1_certificates.rb,<br /> lib/mindee/v1/product/fr/id_card/id_card_v1_document.rb,<br /> lib/mindee/v1/product/fr/id_card/id_card_v2_document.rb,<br /> lib/mindee/v1/product/universal/universal_prediction.rb,<br /> lib/mindee/v1/product/barcode_reader/barcode_reader_v1.rb,<br /> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2.rb,<br /> lib/mindee/v1/product/international_id/international_id_v2.rb,<br /> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1.rb,<br /> lib/mindee/v1/product/resume/resume_v1_social_networks_url.rb,<br /> lib/mindee/v1/product/barcode_reader/barcode_reader_v1_page.rb,<br /> lib/mindee/v1/product/resume/resume_v1_social_networks_urls.rb,<br /> lib/mindee/v1/product/financial_document/financial_document_v1.rb,<br /> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_page.rb,<br /> lib/mindee/v1/product/resume/resume_v1_professional_experience.rb,<br /> lib/mindee/v1/product/barcode_reader/barcode_reader_v1_document.rb,<br /> lib/mindee/v1/product/international_id/international_id_v2_page.rb,<br /> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_page.rb,<br /> lib/mindee/v1/product/resume/resume_v1_professional_experiences.rb,<br /> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_document.rb,<br /> lib/mindee/v1/product/financial_document/financial_document_v1_page.rb,<br /> lib/mindee/v1/product/international_id/international_id_v2_document.rb,<br /> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_document.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v1.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2.rb,<br /> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_transaction.rb,<br /> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_transactions.rb,<br /> lib/mindee/v1/product/financial_document/financial_document_v1_document.rb,<br /> lib/mindee/v1/product/financial_document/financial_document_v1_line_item.rb,<br /> lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1.rb,<br /> lib/mindee/v1/product/financial_document/financial_document_v1_line_items.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v1_page.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2_bban.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2_page.rb,<br /> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_invoice_page_group.rb,<br /> lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1_page.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v1_document.rb,<br /> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2_document.rb,<br /> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_invoice_page_groups.rb,<br /> lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1_document.rb</span>
+    <dd>lib/mindee.rb<span class="defines">,<br>
+  lib/mindee/v1/product/resume/resume_v1.rb,<br> lib/mindee/v1/product/cropper/cropper_v1.rb,<br> lib/mindee/v1/product/invoice/invoice_v4.rb,<br> lib/mindee/v1/product/receipt/receipt_v5.rb,<br> lib/mindee/v1/product/universal/universal.rb,<br> lib/mindee/v1/product/passport/passport_v1.rb,<br> lib/mindee/v1/product/fr/id_card/id_card_v1.rb,<br> lib/mindee/v1/product/fr/id_card/id_card_v2.rb,<br> lib/mindee/v1/product/resume/resume_v1_page.rb,<br> lib/mindee/v1/product/cropper/cropper_v1_page.rb,<br> lib/mindee/v1/product/invoice/invoice_v4_page.rb,<br> lib/mindee/v1/product/receipt/receipt_v5_page.rb,<br> lib/mindee/v1/product/universal/universal_page.rb,<br> lib/mindee/v1/product/passport/passport_v1_page.rb,<br> lib/mindee/v1/product/resume/resume_v1_document.rb,<br> lib/mindee/v1/product/resume/resume_v1_language.rb,<br> lib/mindee/v1/product/fr/id_card/id_card_v1_page.rb,<br> lib/mindee/v1/product/fr/id_card/id_card_v2_page.rb,<br> lib/mindee/v1/product/resume/resume_v1_education.rb,<br> lib/mindee/v1/product/resume/resume_v1_languages.rb,<br> lib/mindee/v1/product/cropper/cropper_v1_document.rb,<br> lib/mindee/v1/product/invoice/invoice_v4_document.rb,<br> lib/mindee/v1/product/receipt/receipt_v5_document.rb,<br> lib/mindee/v1/product/resume/resume_v1_educations.rb,<br> lib/mindee/v1/product/invoice/invoice_v4_line_item.rb,<br> lib/mindee/v1/product/receipt/receipt_v5_line_item.rb,<br> lib/mindee/v1/product/resume/resume_v1_certificate.rb,<br> lib/mindee/v1/product/universal/universal_document.rb,<br> lib/mindee/v1/product/invoice/invoice_v4_line_items.rb,<br> lib/mindee/v1/product/passport/passport_v1_document.rb,<br> lib/mindee/v1/product/receipt/receipt_v5_line_items.rb,<br> lib/mindee/v1/product/resume/resume_v1_certificates.rb,<br> lib/mindee/v1/product/fr/id_card/id_card_v1_document.rb,<br> lib/mindee/v1/product/fr/id_card/id_card_v2_document.rb,<br> lib/mindee/v1/product/universal/universal_prediction.rb,<br> lib/mindee/v1/product/barcode_reader/barcode_reader_v1.rb,<br> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2.rb,<br> lib/mindee/v1/product/international_id/international_id_v2.rb,<br> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1.rb,<br> lib/mindee/v1/product/resume/resume_v1_social_networks_url.rb,<br> lib/mindee/v1/product/barcode_reader/barcode_reader_v1_page.rb,<br> lib/mindee/v1/product/resume/resume_v1_social_networks_urls.rb,<br> lib/mindee/v1/product/financial_document/financial_document_v1.rb,<br> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_page.rb,<br> lib/mindee/v1/product/resume/resume_v1_professional_experience.rb,<br> lib/mindee/v1/product/barcode_reader/barcode_reader_v1_document.rb,<br> lib/mindee/v1/product/international_id/international_id_v2_page.rb,<br> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_page.rb,<br> lib/mindee/v1/product/resume/resume_v1_professional_experiences.rb,<br> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_document.rb,<br> lib/mindee/v1/product/financial_document/financial_document_v1_page.rb,<br> lib/mindee/v1/product/international_id/international_id_v2_document.rb,<br> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_document.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v1.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2.rb,<br> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_transaction.rb,<br> lib/mindee/v1/product/fr/bank_statement/bank_statement_v2_transactions.rb,<br> lib/mindee/v1/product/financial_document/financial_document_v1_document.rb,<br> lib/mindee/v1/product/financial_document/financial_document_v1_line_item.rb,<br> lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1.rb,<br> lib/mindee/v1/product/financial_document/financial_document_v1_line_items.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v1_page.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2_bban.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2_page.rb,<br> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_invoice_page_group.rb,<br> lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1_page.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v1_document.rb,<br> lib/mindee/v1/product/fr/bank_account_details/bank_account_details_v2_document.rb,<br> lib/mindee/v1/product/invoice_splitter/invoice_splitter_v1_invoice_page_groups.rb,<br> lib/mindee/v1/product/multi_receipts_detector/multi_receipts_detector_v1_document.rb</span>
+
 </dd>
   </dl>
   
@@ -87,9 +89,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>V1-specific products.</p>
-
+    <p>V1-specific products.</p>
 
   </div>
 </div>
@@ -118,9 +118,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Apr  8 08:43:03 2026 by
+  Generated on Wed Apr 15 11:18:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.2.11).
+  0.9.41 (ruby-3.2.11).
 </div>
 
     </div>
