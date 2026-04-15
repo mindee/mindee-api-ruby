@@ -3,7 +3,7 @@
 require 'mindee'
 require 'mindee/input/sources'
 require 'mindee/error'
-require 'pdf-reader' if Mindee::Dependency.all_deps_available?
+require 'pdf-reader' if Mindee::Dependencies.all_deps_available?
 
 require_relative '../../data'
 
@@ -15,7 +15,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpg')
-      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
+      expect(input_source.page_count).to eq(1) if Mindee::Dependencies.all_deps_available?
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
@@ -23,7 +23,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/jpeg')
       expect(input_source.filename).to eq('receipt.jpga')
-      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
+      expect(input_source.page_count).to eq(1) if Mindee::Dependencies.all_deps_available?
       expect(input_source.pdf?).to eq(false)
     end
 
@@ -33,7 +33,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tif')
-      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
+      expect(input_source.page_count).to eq(1) if Mindee::Dependencies.all_deps_available?
       expect(input_source.pdf?).to eq(false)
 
       input_source = Mindee::Input::Source::PathInputSource.new(
@@ -41,7 +41,7 @@ describe Mindee::Input::Source do
       )
       expect(input_source.file_mimetype).to eq('image/tiff')
       expect(input_source.filename).to eq('receipt.tiff')
-      expect(input_source.page_count).to eq(1) if Mindee::Dependency.all_deps_available?
+      expect(input_source.page_count).to eq(1) if Mindee::Dependencies.all_deps_available?
       expect(input_source.pdf?).to eq(false)
     end
 

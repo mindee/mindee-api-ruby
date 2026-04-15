@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'mini_magick' if Mindee::Dependency.all_deps_available?
+require 'mini_magick' if Mindee::Dependencies.all_deps_available?
 require 'mindee'
-require 'mindee/v2/file_operation'
+require 'mindee/v2/file_operations'
 require 'mindee/v2/product'
 
 describe Mindee::V2::FileOperation::Crop, :v2, :all_deps do

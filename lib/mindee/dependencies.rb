@@ -2,7 +2,7 @@
 
 module Mindee
   # Centralized check for optional heavy dependencies
-  module Dependency
+  module Dependencies
     def self.check_all_dependencies
       require 'origami'
       require 'mini_magick'

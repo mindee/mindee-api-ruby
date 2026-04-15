@@ -7,7 +7,7 @@ require 'mindee/v2'
 
 module Mindee
   # Dependency management
-  module Dependency
+  module Dependencies
   end
 
   # Mindee internal error module.

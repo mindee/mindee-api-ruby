@@ -19,7 +19,7 @@ module Mindee
           # @param page_id [Integer, nil]
           def initialize(prediction, page_id)
             super
-            @invoice_page_groups = Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups.new(
+            @invoice_page_groups = InvoiceSplitterV1InvoicePageGroups.new(
               prediction['invoice_page_groups'], page_id
             )
           end

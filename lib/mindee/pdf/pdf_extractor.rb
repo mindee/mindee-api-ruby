@@ -7,8 +7,8 @@ module Mindee
     class PDFExtractor
       # @param local_input [Mindee::Input::Source::LocalInputSource]
       def initialize(local_input)
-        unless Mindee::Dependency.all_deps_available?
-          raise NotImplementedError, Mindee::Dependency::MINDEE_DEPENDENCIES_LOAD_ERROR
+        unless Mindee::Dependencies.all_deps_available?
+          raise NotImplementedError, Mindee::Dependencies::MINDEE_DEPENDENCIES_LOAD_ERROR
         end
 
         @filename = local_input.filename
@@ -82,14 +82,14 @@ module Mindee
           page_indexes_as_array = page_indexes # @type var page_indexes : Array[Array[Integer]]
           return extract_sub_documents(page_indexes_as_array)
         end
-        p_ids = page_indexes # @type var page_indexes: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups
+        p_ids = page_indexes # @type var page_indexes: Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroups
         return extract_sub_documents(p_ids.map(&:page_indexes)) unless strict
 
         correct_page_indexes = [] # @type var correct_page_indexes: Array[Array[Integer]]
         current_list = [] # @type var current_list: Array[Integer]
         previous_confidence = nil
         p_ids.each_with_index do |p_i, i|
-          page_index = p_i # @type var page_index: Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup
+          page_index = p_i # @type var page_index: Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1InvoicePageGroup
           confidence = page_index.confidence.to_f
           page_list = page_index.page_indexes
 
