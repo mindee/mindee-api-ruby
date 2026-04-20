@@ -1,5 +1,47 @@
 # Mindee Ruby API Library Changelog
 
+## v5.0.0 - 2026-04-20
+### ¡Breaking Changes!
+* :boom: :recycle: update V1 & V2 syntaxes to match other SDKs
+    * :recycle: move V1 client to V1 module
+    * :recycle: move V2 client to V2 module
+    * :recycle: move legacy products to 'V1' module
+    * :recycle: add parsing and extraction to v1 module
+    * :recycle: move V1 HTTP to V1 module
+    * :recycle: move V2 HTTP module to V2 namespace
+    * :recycle: move data schema to extraction parameters namespace
+* :arrow_up: :boom: drop support for ruby < 3.2
+* :recycle: :boom: change raw_http attribute in responses to be actual json strings
+* :recycle: :boom: make logging configurable and default output to stderr
+* :recycle: :boom: remove useless `PDFExtractor` module
+* :recycle: :boom: change `Errors` module to `Error`
+* :recycle: :boom: change Ocr modules and classes to OCR to keep consistency
+* :recycle: :boom: change `FileOperation` module name to `FileOperations`
+* :recycle: :boom: change `Dependency` module name to `Dependencies`
+* :boom: remove support for the following V1 products:
+    * :coffin: US Bank Check V1
+    * :coffin: Bill of Lading V1
+    * :coffin: Business Card V1
+    * :coffin: FR Carte Grise V1
+    * :coffin: Delivery Notes V1
+    * :coffin: Driver License V1
+    * :coffin: FR Energy Bill V1
+    * :coffin: Nutrition Facts V1
+### Changes
+* :sparkles: :arrow_up: add support for mindee-lite gem
+* :sparkles: add support for crop operation
+* :sparkles: add support for split operation
+* :sparkles: add support for model search
+* :sparkles: add support for V2 CLI
+* :wrench: :arrow_up: add better tooling and pre-commit hook
+* :arrow_up: and bump all dependencies
+### Fixes
+* :wrench: fix many typing issues
+* :bug: fix webhook IDs not sending properly
+* :bug: fix miscellaneous issues leading to saved `ExtractedPDF` instances having invalid names
+* :recycle: fix miscellaneous typing issues relating to `ExtractedPDF` and `ExtractedImage` classes
+
+
 ## v5.0.0.rc1 - 2026-04-15
 ### ¡Breaking Changes!
 * :recycle: :boom: change `FileOperation` module name to `FileOperations`
