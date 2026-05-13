@@ -40,3 +40,10 @@ response = mindee_client.enqueue_and_get_result(
 
 # Print a brief summary of the parsed data
 puts response.inference
+
+# Access the result fields
+fields = response.inference.result.fields
+
+# fields.get_simple_field('my_simple_field')
+# fields.get_list_field('my_list_field')
+# fields.get_object_field('my_object_field')
