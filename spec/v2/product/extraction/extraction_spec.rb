@@ -124,11 +124,11 @@ describe 'extraction' do
       expect(line_items).to be_a(list_field)
       first_line_item = line_items.object_items[0]
       expect(first_line_item).to be_a(object_field)
-      expect(first_line_item.get_simple_field('quantity').value).to eq(1.0)
+      expect(first_line_item.get_simple_field('quantity').float_value).to eq(1.0)
 
       base_field = tax_item_obj.fields.get_simple_field('base')
       expect(base_field).to be_a(simple_field)
-      expect(base_field.value).to eq(31.5)
+      expect(base_field.float_value).to eq(31.5)
 
       expect(fields).to have_key('supplier_address')
       supplier_address = fields.get_object_field('supplier_address')
@@ -138,14 +138,14 @@ describe 'extraction' do
 
       country_field = supplier_address.fields.get_simple_field('country')
       expect(country_field).to be_a(simple_field)
-      expect(country_field.value).to eq('USA')
+      expect(country_field.string_value).to eq('USA')
       expect(country_field.to_s).to eq('USA')
 
       customer_addr = fields.get_object_field('customer_address')
       expect(customer_addr).to be_a(object_field)
       city_field = customer_addr.fields.get_simple_field('city')
       expect(city_field).to be_a(simple_field)
-      expect(city_field.value).to eq('New York')
+      expect(city_field.string_value).to eq('New York')
 
       expect(inference.result.raw_text).to be_nil
     end
@@ -213,25 +213,32 @@ describe 'extraction' do
       field_simple_string = fields.get_simple_field('field_simple_string')
       expect(field_simple_string).to be_a(simple_field)
       expect(field_simple_string.value).to eq('field_simple_string-value')
+      expect(field_simple_string.string_value).to eq('field_simple_string-value')
       expect(field_simple_string.confidence).to eq(field_confidence::CERTAIN)
       expect(field_simple_string.to_s).to eq('field_simple_string-value')
 
       field_simple_int = fields.get_simple_field('field_simple_int')
       expect(field_simple_int).to be_a(simple_field)
       expect(field_simple_int.value).to be_a(Float)
+      expect(field_simple_int.float_value).to eq(12.0)
 
       field_simple_float = fields.get_simple_field('field_simple_float')
       expect(field_simple_float).to be_a(simple_field)
       expect(field_simple_float.value).to be_a(Float)
+      expect(field_simple_float.value).to eq(1.1)
 
       field_simple_bool = fields.get_simple_field('field_simple_bool')
       expect(field_simple_bool).to be_a(simple_field)
       expect(field_simple_bool.value).to eq(true)
+      expect(field_simple_bool.boolean_value).to eq(true)
       expect(field_simple_bool.to_s).to eq('True')
 
       field_simple_null = fields.get_simple_field('field_simple_null')
       expect(field_simple_null).to be_a(simple_field)
       expect(field_simple_null.value).to be_nil
+      expect(field_simple_null.string_value).to be_nil
+      expect(field_simple_null.float_value).to be_nil
+      expect(field_simple_null.boolean_value).to be_nil
       expect(field_simple_null.to_s).to eq('')
     end
 

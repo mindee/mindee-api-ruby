@@ -66,7 +66,7 @@ describe Mindee::V2::Product::Split::Split, :v2 do
     extraction_response0 = split0.extraction_response
     expect(extraction_response0).not_to be_nil
     expect(
-      extraction_response0.inference.result.fields.get_simple_field('supplier_phone_number').value
+      extraction_response0.inference.result.fields.get_simple_field('supplier_phone_number').string_value
     ).to eq('05 05 44 44 90')
 
     split1 = splits[1]
@@ -75,7 +75,7 @@ describe Mindee::V2::Product::Split::Split, :v2 do
     extraction_response1 = split1.extraction_response
     expect(extraction_response1).not_to be_nil
     expect(
-      extraction_response1.inference.result.fields.get_simple_field('supplier_phone_number').value
+      extraction_response1.inference.result.fields.get_simple_field('supplier_phone_number').string_value
     ).to eq('416-555-1212')
   end
 end

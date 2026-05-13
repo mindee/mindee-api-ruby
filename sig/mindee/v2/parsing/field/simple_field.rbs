@@ -4,9 +4,13 @@ module Mindee
     module Parsing
       module Field
         class SimpleField < BaseField
-          attr_reader value: String | Integer | Float | bool | nil
+          attr_reader value: String | Float | bool | nil
 
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
+          def boolean_value: -> (bool | nil)
+          def float_value: -> (Float | nil)
+          def string_value: -> (String | nil)
+
           def to_s: -> String
           def format_numeric_value: (Integer | Float) -> String
         end

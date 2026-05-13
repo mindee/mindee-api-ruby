@@ -112,7 +112,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       fields = result.fields
       expect(fields).not_to be_nil
       expect(fields['supplier_name']).not_to be_nil
-      expect(fields['supplier_name'].value).to eq('John Smith')
+      expect(fields['supplier_name'].string_value).to eq('John Smith')
     end
   end
   context 'An error' do
@@ -266,7 +266,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       fields = result.fields
       expect(fields).not_to be_nil
       expect(fields['test_replace']).not_to be_nil
-      expect(fields['test_replace'].value).to eq('a test value')
+      expect(fields['test_replace'].string_value).to eq('a test value')
     end
   end
 end
