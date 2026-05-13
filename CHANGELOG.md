@@ -1,5 +1,11 @@
 # Mindee Ruby API Library Changelog
 
+## v5.1.0 - 2026-05-13
+### Changes
+* :sparkles: Add support for extraction in crop, split, and classify products
+* :sparkles: add typed accessors for SimpleField
+
+
 ## v5.0.0 - 2026-04-20
 ### ¡Breaking Changes!
 * :boom: :recycle: update V1 & V2 syntaxes to match other SDKs
