@@ -3,8 +3,9 @@ module Mindee
     module Product
       module Crop
         class CropItem
+          attr_reader extraction_response: Extraction::ExtractionResponse
           attr_reader object_type: String
-          attr_reader location: Mindee::V2::Parsing::Field::FieldLocation
+          attr_reader location: Parsing::Field::FieldLocation
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
 

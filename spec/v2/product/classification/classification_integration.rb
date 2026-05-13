@@ -14,7 +14,7 @@ describe Mindee::V2::Product::Classification, :integration, :v2 do
 
   it 'processes classification default sample correctly' do
     input_source = Mindee::Input::Source::PathInputSource.new(
-      File.join(V2_PRODUCT_DATA_DIR, 'classification', 'default_invoice.jpg')
+      File.join(V2_PRODUCT_DATA_DIR, 'classification', 'default_sample.jpg')
     )
 
     params = { model_id: classification_model_id }
@@ -26,7 +26,7 @@ describe Mindee::V2::Product::Classification, :integration, :v2 do
     )
 
     expect(response.inference).not_to be_nil
-    expect(response.inference.file.name).to eq('default_invoice.jpg')
+    expect(response.inference.file.name).to eq('default_sample.jpg')
     expect(response.inference.result.classification).not_to be_nil
     expect(response.inference.result.classification.document_type).to eq('invoice')
   end

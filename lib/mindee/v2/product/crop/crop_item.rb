@@ -10,11 +10,17 @@ module Mindee
           attr_reader :object_type
           # @return [V2::Parsing::Field::FieldLocation] Coordinates of the detected object on the document.
           attr_reader :location
+          attr_reader :extraction_response
 
           # @param server_response [Hash] Hash representation of the JSON returned by the service.
           def initialize(server_response)
             @object_type = server_response['object_type']
             @location = Mindee::V2::Parsing::Field::FieldLocation.new(server_response['location'])
+            # rubocop:disable Style/GuardClause
+            unless server_response['extraction_response'].nil?
+              @extraction_response = V2::Product::Extraction::ExtractionResponse.new(server_response['extraction_response'])
+            end
+            # rubocop:enable Style/GuardClause
           end
 
           # String representation.
