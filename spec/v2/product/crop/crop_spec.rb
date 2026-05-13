@@ -100,7 +100,7 @@ describe Mindee::V2::Product::Crop::Crop do
     extraction_response0 = crop0.extraction_response
     expect(extraction_response0).not_to be_nil
     expect(
-      extraction_response0.inference.result.fields.get_simple_field('supplier_name').value
+      extraction_response0.inference.result.fields.get_simple_field('supplier_name').string_value
     ).to eq('CHEZ ALAIN MIAM MIAM')
 
     crop1 = crops[1]
@@ -110,7 +110,7 @@ describe Mindee::V2::Product::Crop::Crop do
     extraction_response1 = crop1.extraction_response
     expect(extraction_response1).not_to be_nil
     expect(
-      extraction_response1.inference.result.fields.get_simple_field('supplier_name').value
+      extraction_response1.inference.result.fields.get_simple_field('supplier_name').string_value
     ).to eq('La cerise sur la pizza')
   end
 end

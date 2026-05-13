@@ -30,7 +30,7 @@ describe Mindee::V2::Product::Classification::Classification, :v2 do
 
     expect(classification.extraction_response).to be_a(Mindee::V2::Product::Extraction::ExtractionResponse)
     expect(
-      classification.extraction_response.inference.result.fields.get_simple_field('customer_name').value
+      classification.extraction_response.inference.result.fields.get_simple_field('customer_name').string_value
     ).to eq('Jiro Doi')
   end
 end
