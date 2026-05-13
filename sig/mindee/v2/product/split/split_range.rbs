@@ -3,6 +3,7 @@ module Mindee
     module Product
       module Split
         class SplitRange
+          attr_reader extraction_response: Extraction::ExtractionResponse
           attr_reader page_range: Array[Integer]
           attr_reader document_type: String
 

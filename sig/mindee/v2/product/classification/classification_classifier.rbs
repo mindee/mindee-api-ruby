@@ -6,6 +6,7 @@ module Mindee
       module Classification
         class ClassificationClassifier
           attr_reader document_type: String
+          attr_reader extraction_response: Extraction::ExtractionResponse
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
         end

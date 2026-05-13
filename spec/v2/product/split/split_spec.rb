@@ -24,7 +24,6 @@ describe Mindee::V2::Product::Split::Split, :v2 do
   it 'parses multiple splits properly' do
     json_path = File.join(split_data_dir, 'split_multiple.json')
     json_sample = JSON.parse(File.read(json_path))
-
     response = Mindee::V2::Product::Split::SplitResponse.new(json_sample)
 
     expect(response.inference).to be_a(Mindee::V2::Product::Split::SplitInference)
@@ -32,22 +31,51 @@ describe Mindee::V2::Product::Split::Split, :v2 do
     expect(response.inference.result.splits[0]).to be_a(Mindee::V2::Product::Split::SplitRange)
     expect(response.inference.result.splits.size).to eq(3)
 
-    split_zero = response.inference.result.splits[0]
-    expect(split_zero.page_range.size).to eq(2)
-    expect(split_zero.page_range[0]).to eq(0)
-    expect(split_zero.page_range[1]).to eq(0)
-    expect(split_zero.document_type).to eq('invoice')
+    split0 = response.inference.result.splits[0]
+    expect(split0.page_range.size).to eq(2)
+    expect(split0.page_range[0]).to eq(0)
+    expect(split0.page_range[1]).to eq(0)
+    expect(split0.document_type).to eq('passport')
 
-    split_one = response.inference.result.splits[1]
-    expect(split_one.page_range.size).to eq(2)
-    expect(split_one.page_range[0]).to eq(1)
-    expect(split_one.page_range[1]).to eq(3)
-    expect(split_one.document_type).to eq('invoice')
+    split1 = response.inference.result.splits[1]
+    expect(split1.page_range.size).to eq(2)
+    expect(split1.page_range[0]).to eq(1)
+    expect(split1.page_range[1]).to eq(3)
+    expect(split1.document_type).to eq('invoice')
 
-    split_two = response.inference.result.splits[2]
-    expect(split_two.page_range.size).to eq(2)
-    expect(split_two.page_range[0]).to eq(4)
-    expect(split_two.page_range[1]).to eq(4)
-    expect(split_two.document_type).to eq('invoice')
+    split2 = response.inference.result.splits[2]
+    expect(split2.page_range.size).to eq(2)
+    expect(split2.page_range[0]).to eq(4)
+    expect(split2.page_range[1]).to eq(4)
+    expect(split2.document_type).to eq('receipt')
+  end
+
+  it 'should load extraction properties' do
+    json_path = File.join(split_data_dir, 'default_sample_extraction.json')
+    json_sample = JSON.parse(File.read(json_path))
+    response = Mindee::V2::Product::Split::SplitResponse.new(json_sample)
+
+    expect(response.inference).to be_a(Mindee::V2::Product::Split::SplitInference)
+
+    splits = response.inference.result.splits
+    expect(splits.size).to eq(2)
+
+    split0 = splits[0]
+    expect(split0.document_type).to eq('invoice')
+    expect(split0.page_range[0]).to eq(0)
+    extraction_response0 = split0.extraction_response
+    expect(extraction_response0).not_to be_nil
+    expect(
+      extraction_response0.inference.result.fields.get_simple_field('supplier_phone_number').value
+    ).to eq('05 05 44 44 90')
+
+    split1 = splits[1]
+    expect(split1.document_type).to eq('invoice')
+    expect(split1.page_range[0]).to eq(1)
+    extraction_response1 = split1.extraction_response
+    expect(extraction_response1).not_to be_nil
+    expect(
+      extraction_response1.inference.result.fields.get_simple_field('supplier_phone_number').value
+    ).to eq('416-555-1212')
   end
 end
