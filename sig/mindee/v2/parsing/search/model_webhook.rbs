@@ -1,0 +1,19 @@
+# lib/mindee/v2/parsing/search/model_webhook.rb
+
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class ModelWebhook
+          attr_reader id: String
+          attr_reader name: String
+          attr_reader url: String
+
+          def initialize: (Hash[String | Symbol, untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

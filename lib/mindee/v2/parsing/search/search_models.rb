@@ -20,6 +20,7 @@ module Mindee
                 "* :Name: #{model.name}",
                 "  :ID: #{model.id}",
                 "  :Model Type: #{model.model_type}",
+                "  :Webhooks: #{model.webhooks.size}",
               ]
             end
 

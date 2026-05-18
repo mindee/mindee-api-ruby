@@ -8,6 +8,7 @@ module Mindee
           attr_reader id: String
           attr_reader model_type: String
           attr_reader name: String
+          attr_reader webhooks: Array[ModelWebhook]
 
           def initialize: (Hash[String|Symbol, untyped]) -> void
 

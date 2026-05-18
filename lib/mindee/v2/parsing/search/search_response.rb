@@ -24,10 +24,10 @@ module Mindee
             [
               'Models',
               '######',
-              models.to_s,
+              @models.to_s,
               'Pagination Metadata',
               '###################',
-              pagination_metadata.to_s,
+              @pagination_metadata.to_s,
               '',
             ].join("\n")
           end
