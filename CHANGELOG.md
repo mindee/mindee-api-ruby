@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v5.2.0 - 2026-05-19
+### Changes
+* :sparkles: add webhook info to model searches
+
+
 ## v5.1.0 - 2026-05-13
 ### Changes
 * :sparkles: Add support for extraction in crop, split, and classify products
