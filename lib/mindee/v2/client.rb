@@ -63,7 +63,7 @@ module Mindee
         product,
         input_source,
         params,
-        polling_options: nil
+        polling_options = nil
       )
         enqueue_response = enqueue(product, input_source, params)
         normalized_params = normalize_parameters(product.params_type, params, polling_options: polling_options)
