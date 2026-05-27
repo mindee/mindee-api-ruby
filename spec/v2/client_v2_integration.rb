@@ -30,11 +30,15 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
         polygon: false,
         confidence: false,
         file_alias: 'rb_integration_test',
-        polling_options: polling,
         text_context: 'this is a test'
       )
 
-      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
+      response = client.enqueue_and_get_result(
+        Mindee::V2::Product::Extraction::Extraction,
+        input,
+        inference_params,
+        polling
+      )
 
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil

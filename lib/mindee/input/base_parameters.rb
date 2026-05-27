@@ -22,7 +22,7 @@ module Mindee
       # @param [String] model_id ID of the model
       # @param [String, nil] file_alias File alias, if applicable.
       # @param [Array<String>, nil] webhook_ids List of webhook IDs to propagate the API response to.
-      # @param [Hash, nil] polling_options Options for polling. Set only if having timeout issues.
+      # @param [Hash, PollingOptions, nil] polling_options Options for polling. Set only if having timeout issues.
       # @param [Boolean, nil] close_file Whether to close the file after parsing.
       def initialize(
         model_id,
@@ -38,6 +38,13 @@ module Mindee
         @webhook_ids = webhook_ids || []
         @polling_options = get_clean_polling_options(polling_options)
         @close_file = close_file.nil? || close_file
+      end
+
+      # Sets polling options after normalizing hash inputs.
+      # @param [Hash, PollingOptions, nil] polling_options
+      # @return [PollingOptions]
+      def polling_options=(polling_options)
+        @polling_options = get_clean_polling_options(polling_options)
       end
 
       # @return [String] Slug for the endpoint.
