@@ -57,14 +57,16 @@ module Mindee
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
       # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+      # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @return [Parsing::BaseResponse]
       def enqueue_and_get_result(
         product,
         input_source,
-        params
+        params,
+        polling_options = nil
       )
         enqueue_response = enqueue(product, input_source, params)
-        normalized_params = normalize_parameters(product.params_type, params)
+        normalized_params = normalize_parameters(product.params_type, params, polling_options: polling_options)
         normalized_params.validate_async_params
 
         if enqueue_response.job.id.nil? || enqueue_response.job.id.empty?
@@ -121,8 +123,14 @@ module Mindee
 
       # If needed, converts the parsing options provided as a hash into a proper BaseParameters subclass object.
       # @param params [Hash, Class<BaseParameters>] Params.
+      # @param polling_options [Hash, PollingOptions, nil] Polling options.
       # @return [BaseParameters]
-      def normalize_parameters(param_class, params)
+      def normalize_parameters(param_class, params, polling_options: nil)
+        if params.is_a?(Hash)
+          params[:polling_options] = polling_options if polling_options
+        elsif params.is_a?(Mindee::Input::BaseParameters) && !polling_options.nil?
+          params.polling_options = polling_options
+        end
         return param_class.from_hash(params: params) if params.is_a?(Hash)
 
         params

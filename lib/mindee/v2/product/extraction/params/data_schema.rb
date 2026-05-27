@@ -13,7 +13,7 @@ module Mindee
             # @return [Mindee::V2::Product::Extraction::Params::DataSchemaReplace]
             attr_reader :replace
 
-            # @param data_schema [Hash, String]
+            # @param data_schema [Hash, DataSchema, String]
             def initialize(data_schema)
               case data_schema
               when String

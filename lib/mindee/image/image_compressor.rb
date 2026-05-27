@@ -9,7 +9,7 @@ module Mindee
       # @param image [MiniMagick::Image, StringIO] Input image.
       # @param quality [Integer, nil] Quality of the final file.
       # @param max_width [Integer, nil] Maximum width. If not specified, the horizontal ratio will remain the same.
-      # @param max_height [Integer] Maximum height. If not specified, the vertical ratio will remain the same.
+      # @param max_height [Integer, nil] Maximum height. If not specified, the vertical ratio will remain the same.
       # @return [StringIO]
       def self.compress_image(image, quality: 85, max_width: nil, max_height: nil)
         processed_image = ImageUtils.to_image(image)
