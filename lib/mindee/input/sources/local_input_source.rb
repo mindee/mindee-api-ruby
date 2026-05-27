@@ -83,12 +83,14 @@ module Mindee
         # @return [StringIO] The fixed stream.
         # @raise [Mindee::Error::MindeePDFError]
         def self.fix_pdf(stream, maximum_offset: 500)
-          out_stream = StringIO.new
+          out_stream = StringIO.new(''.b)
           stream.gets('%PDF-')
           raise Error::MindeePDFError if stream.eof? || stream.pos > maximum_offset
 
           stream.pos = stream.pos - 5
-          out_stream << stream.read
+          out_stream.write(stream.read.to_s.b)
+          out_stream.rewind
+          out_stream
         end
 
         # Cuts a PDF file according to provided options.
