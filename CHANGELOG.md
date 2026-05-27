@@ -1,5 +1,10 @@
 # Mindee Ruby API Library Changelog
 
+## v5.2.1 - 2026-05-27
+### Changes
+* :recycle: add polling options as a dedicated parameter (#252)
+
+
 ## v5.2.0 - 2026-05-19
 ### Changes
 * :sparkles: add webhook info to model searches
