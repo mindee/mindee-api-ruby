@@ -6,7 +6,7 @@
 <title>
   Class: Mindee::Input::BaseParameters
   
-    &mdash; Documentation by YARD 0.9.43
+    &mdash; Documentation by YARD 0.9.44
   
 </title>
 
@@ -214,8 +214,6 @@
   
   
   
-    
-      <span class="note title readonly">readonly</span>
     
     
   
@@ -513,7 +511,7 @@
         <span class='name'>polling_options</span>
       
       
-        <span class='type'>(<tt>Hash</tt>, <tt>nil</tt>)</span>
+        <span class='type'>(<tt>Hash</tt>, <tt><span class='object_link'><a href="PollingOptions.html" title="Mindee::Input::PollingOptions (class)">PollingOptions</a></span></tt>, <tt>nil</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>nil</tt>)</em>
@@ -778,11 +776,11 @@
 </div>
     
       
-      <span id=""></span>
+      <span id="polling_options=-instance_method"></span>
       <div class="method_details ">
   <h3 class="signature " id="polling_options-instance_method">
   
-    #<strong>polling_options</strong>  &#x21d2; <tt><span class='object_link'><a href="PollingOptions.html" title="Mindee::Input::PollingOptions (class)">PollingOptions</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>polling_options</strong>  &#x21d2; <tt><span class='object_link'><a href="PollingOptions.html" title="Mindee::Input::PollingOptions (class)">PollingOptions</a></span></tt> 
   
 
   
@@ -955,19 +953,19 @@
       <pre class="lines">
 
 
-60
-61
-62
-63
-64
-65
-66
 67
 68
-69</pre>
+69
+70
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_hash'>from_hash</span><span class='lparen'>(</span><span class='label'>params:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_load_from_hash'>load_from_hash</span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
@@ -1041,13 +1039,6 @@
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80
 81
 82
 83
@@ -1058,10 +1049,17 @@
 88
 89
 90
-91</pre>
+91
+92
+93
+94
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_load_from_hash'>load_from_hash</span><span class='lparen'>(</span><span class='label'>params:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys!'>transform_keys!</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_sym</span><span class='rparen'>)</span>
@@ -1126,16 +1124,16 @@
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50</pre>
+51
+52
+53
+54
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_slug'>slug</span>
   <span class='kw'>if</span> <span class='kw'>self</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="" title="Mindee::Input::BaseParameters (class)">BaseParameters</a></span></span>
@@ -1210,15 +1208,15 @@
       <pre class="lines">
 
 
-96
-97
-98
-99
-100
-101</pre>
+103
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_append_form_data'>append_form_data</span><span class='lparen'>(</span><span class='id identifier rubyid_form_data'>form_data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_form_data'>form_data</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>file_alias</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='ivar'>@file_alias</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@file_alias</span>
@@ -1271,12 +1269,12 @@
       <pre class="lines">
 
 
-53
-54
-55</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_slug'>slug</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_slug'>slug</span>
@@ -1323,13 +1321,6 @@
       <pre class="lines">
 
 
-104
-105
-106
-107
-108
-109
-110
 111
 112
 113
@@ -1340,10 +1331,17 @@
 118
 119
 120
-121</pre>
+121
+122
+123
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/input/base_parameters.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_async_params'>validate_async_params</span>
   <span class='id identifier rubyid_min_delay_sec'>min_delay_sec</span> <span class='op'>=</span> <span class='int'>1</span>
@@ -1373,9 +1371,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue May 19 13:15:34 2026 by
+  Generated on Wed May 27 13:18:17 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.43 (ruby-3.2.11).
+  0.9.44 (ruby-3.2.11).
 </div>
 
     </div>
