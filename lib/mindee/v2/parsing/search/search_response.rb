@@ -6,16 +6,16 @@ module Mindee
       module Search
         # Models search response.
         class SearchResponse < CommonResponse
-          # @return [Search::Search] Parsed search payload.
+          # @return [Search::SearchModels] Parsed search payload.
           attr_reader :models
-          # @return [Search::Search] Pagination metadata.
-          attr_reader :pagination_metadata
+          # @return [Search::Pagination] Pagination metadata.
+          attr_reader :pagination
 
           def initialize(server_response)
             super
 
-            @models = Search::SearchModels.new(server_response['models'])
-            @pagination_metadata = PaginationMetadata.new(server_response['pagination'])
+            @models = SearchModels.new(server_response['models'])
+            @pagination = Pagination.new(server_response['pagination'])
           end
 
           # String representation.
@@ -27,7 +27,7 @@ module Mindee
               @models.to_s,
               'Pagination Metadata',
               '###################',
-              @pagination_metadata.to_s,
+              @pagination.to_s,
               '',
             ].join("\n")
           end

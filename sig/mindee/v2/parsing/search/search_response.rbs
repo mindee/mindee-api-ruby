@@ -5,7 +5,7 @@ module Mindee
       module Search
         class SearchResponse
           attr_reader models: Array[SearchResponse]
-          attr_reader pagination_metadata: PaginationMetadata
+          attr_reader pagination: Pagination
 
           def initialize: (Hash[String|Symbol, untyped]) -> void
 

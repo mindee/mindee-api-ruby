@@ -1,10 +1,10 @@
-# lib/mindee/v2/parsing/search/pagination_metadata.rbs
+# lib/mindee/v2/parsing/search/pagination.rbs
 
 module Mindee
   module V2
     module Parsing
       module Search
-        class PaginationMetadata
+        class Pagination
           attr_reader page: Integer
           attr_reader per_page: Integer
           attr_reader total_items: Integer
