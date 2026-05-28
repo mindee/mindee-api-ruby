@@ -1,0 +1,13 @@
+# lib/mindee/v2/parsing/search/search_models.rb
+
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        # Array of search models.
+        class SearchModels < Array[SearchModel]
+        end
+      end
+    end
+  end
+end
