@@ -8,17 +8,17 @@ module Mindee
         class SearchResponse < CommonResponse
           # @return [Search::SearchModels] Parsed search payload.
           attr_reader :models
-          # @return [Search::Pagination] Pagination metadata.
+          # @return [Search::PaginationMetadata] Pagination metadata.
           attr_reader :pagination
-          # @return [Search::Pagination] Pagination metadata.
+          # @return [Search::PaginationMetadata] Pagination metadata.
           attr_reader :pagination_metadata
 
           def initialize(server_response)
             super
 
             @models = SearchModels.new(server_response['models'])
-            @pagination = Pagination.new(server_response['pagination'])
-            @pagination_metadata = PaginationMetadata.new(server_response['pagination'])
+            @pagination = PaginationMetadata.new(server_response['pagination'])
+            @pagination_metadata = @pagination
           end
 
           # String representation.
