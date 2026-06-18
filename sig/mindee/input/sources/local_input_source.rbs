@@ -23,6 +23,12 @@ module Mindee
         def write_to_file: (String?) -> void
         def compress!: (?quality: Integer, ?max_width: Integer?, ?max_height: Integer?, ?force_source_text: bool, ?disable_source_text: bool) -> Integer
         def source_text?: -> bool?
+
+        private
+
+        def detect_mime_type: (bool) -> String
+
+        def heif_mimetype_from_extension: -> String?
       end
       def self.convert_to_unicode_escape: (String) -> String
     end

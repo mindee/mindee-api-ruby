@@ -54,6 +54,24 @@ describe Mindee::Input::Source do
       expect(input_source.page_count).to eq(1)
       expect(input_source.pdf?).to eq(false)
     end
+
+    it 'should load a HEIC from a path', :all_deps do
+      input_source = Mindee::Input::Source::PathInputSource.new(
+        File.join(FILE_TYPES_DIR, 'receipt.heif')
+      )
+      expect(input_source.file_mimetype).to eq('image/heif')
+      expect(input_source.filename).to eq('receipt.heif')
+      expect(input_source.page_count).to eq(1)
+      expect(input_source.pdf?).to eq(false)
+
+      input_source2 = Mindee::Input::Source::PathInputSource.new(
+        File.join(FILE_TYPES_DIR, 'receipt.jpg.heif')
+      )
+      expect(input_source2.file_mimetype).to eq('image/heif')
+      expect(input_source2.filename).to eq('receipt.jpg.heif')
+      expect(input_source2.page_count).to eq(1)
+      expect(input_source2.pdf?).to eq(false)
+    end
   end
 
   context 'A PDF input file', :all_deps do

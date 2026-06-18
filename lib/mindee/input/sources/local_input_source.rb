@@ -16,6 +16,7 @@ module Mindee
       ALLOWED_MIME_TYPES = [
         'application/pdf',
         'image/heic',
+        'image/heif',
         'image/png',
         'image/jpeg',
         'image/tiff',
@@ -37,11 +38,7 @@ module Mindee
         def initialize(io_stream, filename, repair_pdf: false)
           @io_stream = io_stream
           @filename = filename
-          @file_mimetype = if repair_pdf
-                             Marcel::MimeType.for @io_stream
-                           else
-                             Marcel::MimeType.for @io_stream, name: @filename
-                           end
+          @file_mimetype = detect_mime_type(repair_pdf)
           if ALLOWED_MIME_TYPES.include? @file_mimetype
             logger.debug("Loaded new input #{@filename} from #{self.class}")
             return
@@ -196,6 +193,28 @@ module Mindee
           end
 
           Mindee::PDF::PDFTools.source_text?(@io_stream)
+        end
+
+        private
+
+        # Checks the mimetype for the file. If it is a PDF, it will attempt to repair it if repair_pdf is true.
+        # @param repair_pdf [bool] Whether to attempt to repair the PDF.
+        # @return [String] The mimetype of the file.
+        def detect_mime_type(repair_pdf)
+          return Marcel::MimeType.for(@io_stream) if repair_pdf
+
+          heif_mimetype_from_extension || Marcel::MimeType.for(@io_stream, name: @filename)
+        end
+
+        # Checks the file extension for a HEIF mimetype.
+        # @return [String, nil] The mimetype if found, nil otherwise.
+        def heif_mimetype_from_extension
+          case File.extname(@filename.to_s).downcase
+          when '.heic'
+            'image/heic'
+          when '.heif'
+            'image/heif'
+          end
         end
       end
 
