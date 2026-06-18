@@ -40,6 +40,15 @@ if [ "$RID" = "win-x64" ]; then
   CLI_PATH="${CLI_PATH}.exe"
 fi
 
+echo "--- Test main menu includes v1 command"
+HELP_OUTPUT=$("$CLI_PATH" 2>&1 || true)
+if echo "$HELP_OUTPUT" | grep -q "v1"; then
+  echo "Main menu includes v1"
+else
+  echo "Error: v1 command missing from main menu"
+  exit 1
+fi
+
 PRODUCTS="financial-document receipt invoice invoice-splitter"
 PRODUCTS_SIZE=4
 i=1
