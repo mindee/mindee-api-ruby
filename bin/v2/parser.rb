@@ -19,10 +19,11 @@ module MindeeCLI
     # @return [Parser]
     attr_reader :search_parser
 
-    def initialize(arguments)
+    def initialize(arguments, command_prefix: 'mindee v2')
       @arguments = arguments
+      @command_prefix = command_prefix
       @options_parser = OptionParser.new do |opts|
-        opts.banner = 'Usage: mindee v2 command [options]'
+        opts.banner = "Usage: #{@command_prefix} command [options]"
       end
       @product_parser = init_product_parser
       @search_parser = init_search_parser
@@ -67,6 +68,8 @@ module MindeeCLI
       else
         abort("#{e.message}\n\n#{@product_parser[command].help}")
       end
+    rescue Mindee::Error::MindeeError => e
+      abort(format_cli_error(e))
     end
 
     private
@@ -83,9 +86,21 @@ module MindeeCLI
       abort(error_msg)
     end
 
+    def format_cli_error(error)
+      if error.is_a?(Mindee::Error::MindeeHTTPErrorV2) && error.status.to_i == 401
+        "CLI error: Missing credentials. Provide an API key using '--key' or " \
+          "the 'MINDEE_V2_API_KEY' environment variable."
+      elsif error.is_a?(Mindee::Error::MindeeAPIError) && error.message.include?('Missing API key')
+        "CLI error: Missing API key. Provide it using '--key' or " \
+          "the 'MINDEE_V2_API_KEY' environment variable."
+      else
+        "CLI error: #{error.message}"
+      end
+    end
+
     def init_search_parser
       OptionParser.new do |options_parser|
-        options_parser.banner = 'Usage: mindee v2 search-models [options]'
+        options_parser.banner = "Usage: #{@command_prefix} search-models [options]"
         init_common_options(options_parser)
         options_parser.on('-n [NAME]', '--name [NAME]',
                           'Search for partial matches in model name. Note: case insensitive') do |v|
@@ -159,7 +174,7 @@ module MindeeCLI
       v2_product_parser = {}
       V2_PRODUCTS.each do |product_key, product_values|
         v2_product_parser[product_key] = OptionParser.new do |options_parser|
-          options_parser.banner = "Usage: mindee v2 #{product_key} [options] file"
+          options_parser.banner = "Usage: #{@command_prefix} #{product_key} [options] file"
           options_parser.on('-m MODEL_ID', '--model-id MODEL_ID', 'Model ID') { |v| @options[:model_id] = v }
           options_parser.on('-a ALIAS', '--alias ALIAS', 'Add a file alias to the response') do |v|
             @options[:alias] = v

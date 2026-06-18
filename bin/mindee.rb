@@ -6,24 +6,29 @@ require 'optparse'
 require_relative 'v1/parser'
 require_relative 'v2/parser'
 
-def setup_main_parser
-  v1_parser = MindeeCLI::V1Parser.new(ARGV)
-  v2_parser = MindeeCLI::V2Parser.new(ARGV)
-  main_parser = OptionParser.new do |opts|
-    opts.banner = "Usage: mindee [command]"
-    opts.separator "Commands:"
-    opts.separator "  v1    Use Version 1 of the Mindee API"
-    opts.separator "  v2    Use Version 2 of the Mindee API"
-  end
-  main_command = ARGV.shift
+def root_help
+  help = "Usage: mindee command [options]\n\nAvailable commands:\n"
+  help += "  #{'v1'.ljust(50)}Use Version 1 of the Mindee API\n"
+  help += "  #{'search-models'.ljust(50)}Search for available models for this API key\n"
 
-  case main_command
-  when 'v1'
-    v1_parser.execute
-  when 'v2'
-    v2_parser.execute
+  V2_PRODUCTS.each do |product_key, product_values|
+    help += "  #{product_key.ljust(50)}#{product_values[:description]}\n"
+  end
+
+  help
+end
+
+def setup_main_parser
+  main_command = ARGV.first
+
+  if main_command == 'v1'
+    ARGV.shift
+    MindeeCLI::V1Parser.new(ARGV).execute
+  elsif main_command.nil? || %w[help -h --help].include?(main_command)
+    abort(root_help)
   else
-    abort(main_parser.help)
+    ARGV.shift if main_command == 'v2'
+    MindeeCLI::V2Parser.new(ARGV, command_prefix: 'mindee').execute
   end
 end
 

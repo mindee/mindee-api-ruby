@@ -21,32 +21,32 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
   context 'search-models command' do
     ['classification', 'crop', 'extraction', 'ocr', 'split'].each do |model_type|
       it "returns model list for type #{model_type}" do
-        stdout, stderr, status = run_cli('v2', 'search-models', '-t', model_type)
+        stdout, stderr, status = run_cli('search-models', '-t', model_type)
         expect(status.success?).to eq(true), stderr
         expect(stdout.strip).not_to be_empty
       end
     end
 
     it 'returns no models for non-existent name' do
-      stdout, stderr, status = run_cli('v2', 'search-models', '-n', 'supercalifragilisticexpialidocious')
+      stdout, stderr, status = run_cli('search-models', '-n', 'supercalifragilisticexpialidocious')
       expect(status.success?).to eq(true), stderr
       expect(stdout.strip).to eq('')
     end
 
     it 'returns models for name filter' do
-      stdout, stderr, status = run_cli('v2', 'search-models', '-n', 'findoc')
+      stdout, stderr, status = run_cli('search-models', '-n', 'findoc')
       expect(status.success?).to eq(true), stderr
       expect(stdout.strip).not_to be_empty
     end
 
     it 'returns models for name and model_type filters' do
-      stdout, stderr, status = run_cli('v2', 'search-models', '-n', 'findoc', '-t', 'extraction')
+      stdout, stderr, status = run_cli('search-models', '-n', 'findoc', '-t', 'extraction')
       expect(status.success?).to eq(true), stderr
       expect(stdout.strip).not_to be_empty
     end
 
     it 'returns HTTP 422 on invalid model type' do
-      stdout, stderr, status = run_cli('v2', 'search-models', '-t', 'invalid')
+      stdout, stderr, status = run_cli('search-models', '-t', 'invalid')
       expect(status.success?).to eq(false)
       expect("#{stdout}\n#{stderr}").to include('HTTP 422')
     end
@@ -54,7 +54,7 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
 
   context 'product commands' do
     it 'runs extraction from an URL source' do
-      stdout, stderr, status = run_cli('v2', 'extraction', '-m', findoc_model_id, blank_pdf_url)
+      stdout, stderr, status = run_cli('extraction', '-m', findoc_model_id, blank_pdf_url)
       expect(status.success?).to eq(true), stderr
       expect(stdout.strip).not_to be_empty
     end
@@ -66,7 +66,7 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
       'split' => -> { split_model_id },
     }.each do |command, model_id_proc|
       it "runs #{command} with default args" do
-        stdout, stderr, status = run_cli('v2', command, '-m', instance_exec(&model_id_proc), test_file)
+        stdout, stderr, status = run_cli(command, '-m', instance_exec(&model_id_proc), test_file)
         expect(status.success?).to eq(true), stderr
         expect(stdout.strip).not_to be_empty
       end
@@ -82,7 +82,7 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
       ['-t', 'toto'],
     ].each do |option_args|
       it "runs extraction with #{option_args.join(' ')}" do
-        stdout, stderr, status = run_cli('v2', 'extraction', '-m', findoc_model_id, test_file, *option_args)
+        stdout, stderr, status = run_cli('extraction', '-m', findoc_model_id, test_file, *option_args)
         expect(status.success?).to eq(true), stderr
         expect(stdout.strip).not_to be_empty
       end

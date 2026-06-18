@@ -36,7 +36,7 @@ else
 fi
 
 echo "--- Test model list retrieval (all models)"
-MODELS=$("$CLI_PATH" v2 search-models)
+MODELS=$("$CLI_PATH" search-models)
 if [ -z "$MODELS" ]; then
   echo "Error: no models found"
   exit 1
@@ -45,7 +45,7 @@ else
 fi
 
 echo "--- Test extraction with no additional args"
-SUMMARY_OUTPUT=$("$CLI_PATH" v2 extraction -m "$MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID" "$TEST_FILE")
+SUMMARY_OUTPUT=$("$CLI_PATH" extraction -m "$MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID" "$TEST_FILE")
 if [ -z "$SUMMARY_OUTPUT" ]; then
   echo "Error: no extraction output"
   exit 1
