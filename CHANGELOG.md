@@ -1,5 +1,12 @@
 # Mindee Ruby API Library Changelog
 
+## v5.2.2 - 2026-06-18
+### Changes
+* :recycle: refactor CLI to conform with other client libraries
+* :recycle: add secondary accessor for search model pagination to match json return
+* :recycle: ensure HEIF images are detected as such and properly handled
+
+
 ## v5.2.1 - 2026-05-27
 ### Changes
 * :recycle: add polling options as a dedicated parameter (#252)
