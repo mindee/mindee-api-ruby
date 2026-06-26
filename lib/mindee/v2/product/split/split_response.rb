@@ -28,7 +28,7 @@ module Mindee
 
           # Splits the input PDF.
           # @param input_source [Mindee::Input::Source::LocalInputSource] Path to the file or a File object.
-          # @return [FileOperation::SplitFiles]
+          # @return [PDF::ExtractedPDFs]
           def extract_from_file(input_source)
             splits = @inference.result.splits.map(&:page_range)
             FileOperation::Split.extract_splits(input_source, splits)

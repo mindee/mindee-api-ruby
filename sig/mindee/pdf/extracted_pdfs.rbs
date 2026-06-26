@@ -1,0 +1,8 @@
+# lib/mindee/pdf/extracted_pdfs.rb
+module Mindee
+  module PDF
+    class ExtractedPDFs < Array[ExtractedPDF]
+      def save_all_to_disk: (String | Pathname) -> void
+    end
+  end
+end

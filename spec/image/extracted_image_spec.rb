@@ -87,11 +87,11 @@ describe 'Mindee::Image::ExtractedImage', :all_deps do
     end
   end
 
-  describe '#as_source' do
+  describe '#as_input_source' do
     it 'returns a BytesInputSource with the correct content and filename' do
       extracted_image = described_class.new(input_source, page_id, element_id)
 
-      source = extracted_image.as_source
+      source = extracted_image.as_input_source
 
       expect(source).to be_a(Mindee::Input::Source::BytesInputSource)
       expect(source.filename).to eq('default_sample_p1_42.jpg')

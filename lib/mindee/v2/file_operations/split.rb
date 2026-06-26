@@ -18,7 +18,7 @@ module Mindee
         #
         # @param input_source [LocalInputSource] Input source to split.
         # @param splits [Array<Array<Integer>>] List of sub-lists of pages to keep.
-        # @return [SplitFiles] A list of extracted invoices.
+        # @return [PDF::ExtractedPDFs] A list of extracted invoices.
         # @raise [MindeeError] if no indexes are provided.
         def self.extract_splits(input_source, splits)
           raise Mindee::Error::MindeeError, 'No indexes provided.' if splits.nil? || splits.empty?
@@ -29,7 +29,7 @@ module Mindee
             (split[0]..split[1]).to_a
           end
 
-          SplitFiles.new(pdf_extractor.extract_sub_documents(page_groups))
+          pdf_extractor.extract_sub_documents(page_groups)
         end
       end
     end

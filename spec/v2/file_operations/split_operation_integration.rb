@@ -27,8 +27,8 @@ describe Mindee::V2::Product::Split::Split, :integration, :v2, :all_deps do
   end
 
   after(:all) do
-    FileUtils.rm_f("#{OUTPUT_DIR}/split_001.pdf")
-    FileUtils.rm_f("#{OUTPUT_DIR}/split_002.pdf")
+    FileUtils.rm_f("#{OUTPUT_DIR}/default_sample_001-001.pdf")
+    FileUtils.rm_f("#{OUTPUT_DIR}/default_sample_002-002.pdf")
   end
 
   # Validates the parsed financial document response properties.
@@ -70,8 +70,8 @@ describe Mindee::V2::Product::Split::Split, :integration, :v2, :all_deps do
 
     extracted_pdfs.save_all_to_disk(OUTPUT_DIR)
 
-    extracted_pdfs.each_with_index do |pdf, i|
-      local_input = Mindee::Input::Source::PathInputSource.new(File.join(OUTPUT_DIR, format('split_%03d.pdf', i + 1)))
+    extracted_pdfs.each do |pdf|
+      local_input = Mindee::Input::Source::PathInputSource.new(File.join(OUTPUT_DIR, pdf.filename))
       begin
         expect(local_input.page_count).to eq(pdf.page_count)
       ensure

@@ -124,23 +124,6 @@ module Mindee
         MiniMagick::Image.read(pdf_stream)
       end
 
-      # Crops a MiniMagick Image from a the given bounding box.
-      #
-      # @param [MiniMagick::Image] image Input Image.
-      # @param [Mindee::Geometry::MinMax] min_max_x minimum & maximum values for the x coordinates.
-      # @param [Mindee::Geometry::MinMax] min_max_y minimum & maximum values for the y coordinates.
-      def self.crop_image(image, min_max_x, min_max_y)
-        width = image[:width].to_i
-        height = image[:height].to_i
-
-        image.format('jpg')
-        new_width = (min_max_x.max - min_max_x.min) * width
-        new_height = (min_max_y.max - min_max_y.min) * height
-        image.crop("#{new_width}x#{new_height}+#{min_max_x.min * width}+#{min_max_y.min * height}")
-
-        image
-      end
-
       # Writes a MiniMagick::Image to a buffer.
       #
       # @param [MiniMagick::Image] image a valid MiniMagick image.

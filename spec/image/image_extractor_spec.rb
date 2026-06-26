@@ -31,7 +31,7 @@ describe Mindee::Image, :all_deps do
       expect(extracted_barcodes_1d.size).to eq(1)
       expect(extracted_barcodes_2d.size).to eq(2)
 
-      expect(extracted_barcodes_1d[0].as_source.filename).to end_with('jpg')
+      expect(extracted_barcodes_1d[0].as_input_source.filename).to end_with('jpg')
       extracted_barcodes_1d[0].buffer.rewind
       image_buffer1 = MiniMagick::Image.read(extracted_barcodes_1d[0].buffer)
       expect(image_buffer1.dimensions).to eq([353, 199])
@@ -39,12 +39,12 @@ describe Mindee::Image, :all_deps do
       extracted_barcodes_2d[0].buffer.rewind
       image_buffer2 = MiniMagick::Image.read(extracted_barcodes_2d[0].buffer)
       expect(image_buffer2.dimensions).to eq([214, 216])
-      expect(extracted_barcodes_2d[0].as_source.filename).to end_with('jpg')
+      expect(extracted_barcodes_2d[0].as_input_source.filename).to end_with('jpg')
 
       extracted_barcodes_2d[0].buffer.rewind
       image_buffer3 = MiniMagick::Image.read(extracted_barcodes_2d[1].buffer)
       expect(image_buffer3.dimensions).to eq([193, 201])
-      expect(extracted_barcodes_2d[1].as_source.filename).to end_with('jpg')
+      expect(extracted_barcodes_2d[1].as_input_source.filename).to end_with('jpg')
     end
   end
 end

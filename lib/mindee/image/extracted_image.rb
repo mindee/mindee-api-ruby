@@ -73,13 +73,6 @@ module Mindee
       # Return the file as a Mindee-compatible BufferInput source.
       #
       # @return [FileInputSource] A BufferInput source.
-      def as_source
-        as_input_source
-      end
-
-      # Return the file as a Mindee-compatible BufferInput source.
-      #
-      # @return [FileInputSource] A BufferInput source.
       def as_input_source
         @buffer.rewind
         Mindee::Input::Source::BytesInputSource.new(@buffer.read || '', @filename)
