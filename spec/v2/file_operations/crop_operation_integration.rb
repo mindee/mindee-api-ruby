@@ -22,8 +22,8 @@ describe Mindee::V2::FileOperation::Crop, :integration, :v2, :all_deps do
   end
 
   after(:all) do
-    FileUtils.rm_f("#{OUTPUT_DIR}/crop_001.jpg")
-    FileUtils.rm_f("#{OUTPUT_DIR}/crop_002.jpg")
+    FileUtils.rm_f("#{OUTPUT_DIR}/default_sample.jpg_page0-0.jpg")
+    FileUtils.rm_f("#{OUTPUT_DIR}/default_sample.jpg_page0-1.jpg")
   end
 
   # Validates the parsed financial document response properties.
@@ -65,7 +65,7 @@ describe Mindee::V2::FileOperation::Crop, :integration, :v2, :all_deps do
 
     extracted_images.save_all_to_disk(OUTPUT_DIR)
 
-    expect(File.size(File.join(OUTPUT_DIR, 'crop_001.jpg'))).to be_between(560_000, 700_000)
-    expect(File.size(File.join(OUTPUT_DIR, 'crop_002.jpg'))).to be_between(580_000, 700_000)
+    expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-0.jpg'))).to be_between(560_000, 700_000)
+    expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-1.jpg'))).to be_between(580_000, 700_000)
   end
 end

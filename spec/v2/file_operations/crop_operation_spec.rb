@@ -30,6 +30,7 @@ describe Mindee::V2::FileOperation::Crop, :v2, :all_deps do
 
     extracted_crops = described_class.extract_crops(input_sample, doc.inference.result.crops)
 
+    expect(extracted_crops).to be_a(Mindee::Image::ExtractedImages)
     expect(extracted_crops.size).to eq(1)
 
     expect(extracted_crops[0].page_id).to eq(0)
@@ -46,6 +47,7 @@ describe Mindee::V2::FileOperation::Crop, :v2, :all_deps do
 
     extracted_crops = described_class.extract_crops(input_sample, doc.inference.result.crops)
 
+    expect(extracted_crops).to be_a(Mindee::Image::ExtractedImages)
     expect(extracted_crops.size).to eq(2)
 
     expect(extracted_crops[0].page_id).to eq(0)

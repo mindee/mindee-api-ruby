@@ -7,6 +7,7 @@ require 'stringio'
 require 'tempfile'
 require_relative '../input/sources'
 require_relative 'extracted_image'
+require_relative 'extracted_images'
 
 module Mindee
   # Image Extraction Module.
@@ -32,12 +33,12 @@ module Mindee
       # @param [Input::Source::LocalInputSource] input_source
       # @param [Integer] page_id ID of the Page to extract from.
       # @param [Array<Array<Geometry::Point>>, Array<Geometry::Quadrilateral>] polygons List of coordinates to extract.
-      # @return [Array<Image::ExtractedImage>] Extracted Images.
+      # @return [Image::ExtractedImages] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
         new_stream = load_input_source_pdf_page_as_stringio(input_source, page_id)
         new_stream.seek(0)
 
-        extract_images_from_polygons(input_source, page_id, polygons)
+        ExtractedImages.new(extract_images_from_polygons(input_source, page_id, polygons))
       end
 
       # Extracts images from their positions on a file (as polygons).
@@ -45,9 +46,9 @@ module Mindee
       # @param [Input::Source::LocalInputSource] input_source Local input source.
       # @param [Integer] page_id Page ID.
       # @param [Array<Geometry::Point, Geometry::Polygon, Geometry::Quadrilateral>] polygons
-      # @return [Array<Image::ExtractedImage>] Extracted Images.
+      # @return [Image::ExtractedImages] Extracted Images.
       def self.extract_images_from_polygons(input_source, page_id, polygons)
-        extracted_elements = [] # @type var extracted_elements: Array[Image::ExtractedImage]
+        extracted_elements = ExtractedImages.new # @type var extracted_elements: Image::ExtractedImages
 
         input_source.io_stream.rewind
         pdf_stream = StringIO.new(input_source.io_stream.read.to_s)

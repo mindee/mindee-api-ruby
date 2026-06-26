@@ -21,7 +21,7 @@ module Mindee
         #
         # @param input_source [LocalInputSource] Local Input Source to extract sub-receipts from.
         # @param crops [Array<CropItem>] List of crops.
-        # @return [CropFiles] Individual extracted zones as an array of ExtractedImage.
+        # @return [Image::ExtractedImages] Individual extracted zones as an array of ExtractedImage.
         # @raise [MindeeError] if the crops array is empty.
         def self.extract_crops(input_source, crops)
           if crops.nil? || crops.empty?
@@ -35,15 +35,16 @@ module Mindee
             polygons[crop.location.page] << crop.location.polygon
           end
 
-          images = [] # @type var images: Array[Image::ExtractedImage]
+          images = Mindee::Image::ExtractedImages.new
           polygons.each_with_index do |page_polygons, page_index|
-            extracted = Mindee::Image::ImageExtractor.extract_multiple_images_from_source(
-              input_source, page_index, page_polygons
+            images.concat(
+              Mindee::Image::ImageExtractor.extract_multiple_images_from_source(
+                input_source, page_index, page_polygons
+              )
             )
-            images.concat(extracted)
           end
 
-          CropFiles.new(images)
+          images
         end
       end
     end
