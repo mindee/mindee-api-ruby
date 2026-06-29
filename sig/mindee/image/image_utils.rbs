@@ -11,7 +11,6 @@ module Mindee
       def self.pdf_to_magick_image: (StringIO | File, Integer) -> MiniMagick::Image
       def self.normalize_polygon: (Geometry::Quadrilateral | Geometry::Polygon | Array[Geometry::Point]) -> Geometry::Quadrilateral
       def self.read_page_content: (StringIO | File) -> (MiniMagick::Image)
-      def self.crop_image: (MiniMagick::Image, Geometry::MinMax, Geometry::MinMax) -> (MiniMagick::Image)
       def self.write_image_to_buffer: (MiniMagick::Image, StringIO) -> void
       def self.determine_file_extension: (Input::Source::LocalInputSource) -> String?
     end

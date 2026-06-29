@@ -3,7 +3,7 @@ module Mindee
     module FileOperation
       module Crop
         def self.extract_single_crop: (Input::Source::LocalInputSource, Parsing::Field::FieldLocation) -> Image::ExtractedImage
-        def self.extract_crops: (Input::Source::LocalInputSource, Array[Product::Crop::CropItem]) -> CropFiles
+        def self.extract_crops: (Input::Source::LocalInputSource, Array[Product::Crop::CropItem]) -> Image::ExtractedImages
       end
     end
   end

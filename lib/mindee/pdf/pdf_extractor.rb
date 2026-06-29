@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Mindee
-  # Pdf Extraction Module.
+  # PDF Extraction Module.
   module PDF
-    # Pdf extraction class.
+    # PDF extraction class.
     class PDFExtractor
       # @param local_input [Mindee::Input::Source::LocalInputSource]
       def initialize(local_input)
@@ -23,15 +23,15 @@ module Mindee
         end
       end
 
-      # Retrieves the page count for the Pdf object.
+      # Retrieves the page count for the PDF object.
       # @return [Integer]
       def page_count
         Mindee::PDF::PDFProcessor.open_pdf(@source_pdf).pages.size
       end
 
-      # Creates a new Pdf from pages and save it into a buffer.
-      # @param page_indexes [Array<Integer>] List of page number to use for merging in the original Pdf.
-      # @return [StringIO] The buffer containing the new Pdf.
+      # Creates a new PDF from pages and save it into a buffer.
+      # @param page_indexes [Array<Integer>] List of page number to use for merging in the original PDF.
+      # @return [StringIO] The buffer containing the new PDF.
       def cut_pages(page_indexes)
         options = PageOptions.new(params: {
                                     page_indexes: page_indexes,
@@ -41,10 +41,10 @@ module Mindee
       end
 
       # Extract the sub-documents from the main pdf, based on the given list of page indexes.
-      # @param page_indexes [Array<Array<Integer>>] List of page number to use for merging in the original Pdf.
-      # @return [Array<Mindee::PDF::ExtractedPDF>] The buffer containing the new Pdf.
+      # @param page_indexes [Array<Array<Integer>>] List of page number to use for merging in the original PDF.
+      # @return [Mindee::PDF::ExtractedPDFs] The buffer containing the new PDF.
       def extract_sub_documents(page_indexes)
-        extracted_pdfs = [] # @type var extracted_pdfs: Array[Mindee::PDF::ExtractedPDF]
+        extracted_pdfs = ExtractedPDFs.new # @type var extracted_pdfs: Mindee::PDF::ExtractedPDFs
         extension = File.extname(@filename)
         basename = File.basename(@filename, extension)
         page_indexes.each do |page_index_list|
@@ -74,7 +74,7 @@ module Mindee
       # Extracts invoices as complete PDFs from the document.
       # @param page_indexes [Array<Array<Integer>, InvoiceSplitterV1InvoicePageGroup>]
       # @param strict [bool]
-      # @return [Array<Mindee::PDF::ExtractedPDF>]
+      # @return [Mindee::PDF::ExtractedPDFs]
       def extract_invoices(page_indexes, strict: false)
         raise Error::MindeePDFError, 'No indexes provided.' if page_indexes.empty?
 

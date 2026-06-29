@@ -4,7 +4,7 @@ module Mindee
       module Split
         def self.extract_single_split: (Input::Source::LocalInputSource, Array[Integer]) -> PDF::ExtractedPDF
 
-        def self.extract_splits: (Input::Source::LocalInputSource, Array[Array[Integer]]) -> SplitFiles
+        def self.extract_splits: (Input::Source::LocalInputSource, Array[Array[Integer]]) -> PDF::ExtractedPDFs
       end
     end
   end

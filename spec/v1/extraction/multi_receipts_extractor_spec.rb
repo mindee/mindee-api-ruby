@@ -47,37 +47,37 @@ describe 'multi-receipts extraction', :all_deps do
       image_buffer0 = MiniMagick::Image.read(extracted_receipts[0].buffer)
       # NOTE: this varies from other SDKs due to different image processing.
       expect(image_buffer0.dimensions).to eq([341, 504])
-      expect(extracted_receipts[0].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[0].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[1].page_id).to eq(1)
       expect(extracted_receipts[1].element_id).to eq(1)
       image_buffer1 = MiniMagick::Image.read(extracted_receipts[1].buffer)
       expect(image_buffer1.dimensions).to eq([461, 908])
-      expect(extracted_receipts[1].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[1].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[2].page_id).to eq(1)
       expect(extracted_receipts[2].element_id).to eq(2)
       image_buffer2 = MiniMagick::Image.read(extracted_receipts[2].buffer)
       expect(image_buffer2.dimensions).to eq([472, 790])
-      expect(extracted_receipts[2].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[2].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[3].page_id).to eq(1)
       expect(extracted_receipts[3].element_id).to eq(3)
       image_buffer3 = MiniMagick::Image.read(extracted_receipts[3].buffer)
       expect(image_buffer3.dimensions).to eq([464, 1200])
-      expect(extracted_receipts[3].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[3].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[4].page_id).to eq(1)
       expect(extracted_receipts[4].element_id).to eq(4)
       image_buffer4 = MiniMagick::Image.read(extracted_receipts[4].buffer)
       expect(image_buffer4.dimensions).to eq([530, 944])
-      expect(extracted_receipts[4].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[4].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[5].page_id).to eq(1)
       expect(extracted_receipts[5].element_id).to eq(5)
       image_buffer5 = MiniMagick::Image.read(extracted_receipts[5].buffer)
       expect(image_buffer5.dimensions).to eq([366, 593])
-      expect(extracted_receipts[5].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[5].as_input_source.filename).to end_with('jpg')
     end
   end
 
@@ -94,31 +94,31 @@ describe 'multi-receipts extraction', :all_deps do
       expect(extracted_receipts[0].element_id).to eq(0)
       image_buffer0 = MiniMagick::Image.read(extracted_receipts[0].buffer)
       expect(image_buffer0.dimensions).to eq([198, 566])
-      expect(extracted_receipts[0].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[0].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[1].page_id).to eq(1)
       expect(extracted_receipts[1].element_id).to eq(1)
       image_buffer1 = MiniMagick::Image.read(extracted_receipts[1].buffer)
       expect(image_buffer1.dimensions).to eq([205, 382])
-      expect(extracted_receipts[1].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[1].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[2].page_id).to eq(1)
       expect(extracted_receipts[2].element_id).to eq(2)
       image_buffer2 = MiniMagick::Image.read(extracted_receipts[2].buffer)
       expect(image_buffer2.dimensions).to eq([195, 232])
-      expect(extracted_receipts[2].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[2].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[3].page_id).to eq(2)
       expect(extracted_receipts[3].element_id).to eq(0)
       image_buffer3 = MiniMagick::Image.read(extracted_receipts[3].buffer)
       expect(image_buffer3.dimensions).to eq([213, 355])
-      expect(extracted_receipts[3].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[3].as_input_source.filename).to end_with('jpg')
 
       expect(extracted_receipts[4].page_id).to eq(2)
       expect(extracted_receipts[4].element_id).to eq(1)
       image_buffer4 = MiniMagick::Image.read(extracted_receipts[4].buffer)
       expect(image_buffer4.dimensions).to eq([212, 516])
-      expect(extracted_receipts[4].as_source.filename).to end_with('jpg')
+      expect(extracted_receipts[4].as_input_source.filename).to end_with('jpg')
     end
   end
 

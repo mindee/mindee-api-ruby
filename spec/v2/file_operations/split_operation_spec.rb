@@ -28,6 +28,7 @@ describe Mindee::V2::Product::Split::SplitResponse, :v2, :all_deps do
 
     extracted_splits = doc.extract_from_file(input_sample)
 
+    expect(extracted_splits).to be_a(Mindee::PDF::ExtractedPDFs)
     expect(extracted_splits.size).to eq(1)
 
     expect(extracted_splits[0].page_count).to eq(1)
@@ -40,6 +41,7 @@ describe Mindee::V2::Product::Split::SplitResponse, :v2, :all_deps do
 
     extracted_splits = doc.extract_from_file(input_sample)
 
+    expect(extracted_splits).to be_a(Mindee::PDF::ExtractedPDFs)
     expect(extracted_splits.size).to eq(3)
 
     expect(extracted_splits[0].page_count).to eq(1)

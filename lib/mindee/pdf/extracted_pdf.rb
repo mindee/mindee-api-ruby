@@ -3,7 +3,7 @@
 module Mindee
   # PDF Extraction Module.
   module PDF
-    # An extracted sub-Pdf.
+    # An extracted sub-PDF.
     class ExtractedPDF
       # Byte contents of the pdf
       # @return [StringIO]

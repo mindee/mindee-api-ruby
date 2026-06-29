@@ -14,7 +14,6 @@ module Mindee
         ?preserve_input_filename: bool
       ) -> Integer
       def write_to_file: (String, ?String?) -> void
-      def as_source: -> Input::Source::BytesInputSource
       def as_input_source: -> Input::Source::BytesInputSource
     end
   end

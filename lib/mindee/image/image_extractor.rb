@@ -7,16 +7,17 @@ require 'stringio'
 require 'tempfile'
 require_relative '../input/sources'
 require_relative 'extracted_image'
+require_relative 'extracted_images'
 
 module Mindee
   # Image Extraction Module.
   module Image
     # Image Extraction wrapper class.
     module ImageExtractor
-      # Attaches an image as a new page in a PdfDocument object.
+      # Attaches an image as a new page in a PDFDocument object.
       #
       # @param [StringIO] input_buffer Input buffer. Only supports JPEG.
-      # @return [Origami::PDF] A PdfDocument handle.
+      # @return [Origami::PDF] A PDFDocument handle.
       def self.attach_image_as_new_file(input_buffer, format: 'jpg')
         magick_image = MiniMagick::Image.read(input_buffer)
         # NOTE: We force format consolidation to a single format to avoid frames being interpreted as the final output.
@@ -32,12 +33,12 @@ module Mindee
       # @param [Input::Source::LocalInputSource] input_source
       # @param [Integer] page_id ID of the Page to extract from.
       # @param [Array<Array<Geometry::Point>>, Array<Geometry::Quadrilateral>] polygons List of coordinates to extract.
-      # @return [Array<Image::ExtractedImage>] Extracted Images.
+      # @return [Image::ExtractedImages] Extracted Images.
       def self.extract_multiple_images_from_source(input_source, page_id, polygons)
         new_stream = load_input_source_pdf_page_as_stringio(input_source, page_id)
         new_stream.seek(0)
 
-        extract_images_from_polygons(input_source, page_id, polygons)
+        ExtractedImages.new(extract_images_from_polygons(input_source, page_id, polygons))
       end
 
       # Extracts images from their positions on a file (as polygons).
@@ -45,9 +46,9 @@ module Mindee
       # @param [Input::Source::LocalInputSource] input_source Local input source.
       # @param [Integer] page_id Page ID.
       # @param [Array<Geometry::Point, Geometry::Polygon, Geometry::Quadrilateral>] polygons
-      # @return [Array<Image::ExtractedImage>] Extracted Images.
+      # @return [Image::ExtractedImages] Extracted Images.
       def self.extract_images_from_polygons(input_source, page_id, polygons)
-        extracted_elements = [] # @type var extracted_elements: Array[Image::ExtractedImage]
+        extracted_elements = ExtractedImages.new # @type var extracted_elements: Image::ExtractedImages
 
         input_source.io_stream.rewind
         pdf_stream = StringIO.new(input_source.io_stream.read.to_s)
@@ -65,7 +66,7 @@ module Mindee
           min_max_x = Geometry.get_min_max_x(points)
           min_max_y = Geometry.get_min_max_y(points)
           file_extension = ImageUtils.determine_file_extension(input_source)
-          cropped_image = ImageUtils.crop_image(page_content, min_max_x, min_max_y)
+          cropped_image = crop_image(page_content, min_max_x, min_max_y)
           if file_extension == 'pdf'
             cropped_image.format('jpg')
           else
@@ -102,7 +103,7 @@ module Mindee
       #
       # @param input_file [LocalInputSource] Local input.
       # @param [Integer] page_id Page ID.
-      # @return [StringIO] A valid PdfDocument handle.
+      # @return [StringIO] A valid PDFDocument handle.
       def self.load_input_source_pdf_page_as_stringio(input_file, page_id)
         input_file.io_stream.rewind
         if input_file.pdf?
@@ -110,6 +111,23 @@ module Mindee
         else
           input_file.io_stream
         end
+      end
+
+      # Crops a MiniMagick Image from the given bounding box.
+      #
+      # @param [MiniMagick::Image] image Input Image.
+      # @param [Mindee::Geometry::MinMax] min_max_x minimum & maximum values for the x coordinates.
+      # @param [Mindee::Geometry::MinMax] min_max_y minimum & maximum values for the y coordinates.
+      def self.crop_image(image, min_max_x, min_max_y)
+        width = image[:width].to_i
+        height = image[:height].to_i
+
+        image.format('jpg')
+        new_width = (min_max_x.max - min_max_x.min) * width
+        new_height = (min_max_y.max - min_max_y.min) * height
+        image.crop("#{new_width}x#{new_height}+#{min_max_x.min * width}+#{min_max_y.min * height}")
+
+        image
       end
     end
   end

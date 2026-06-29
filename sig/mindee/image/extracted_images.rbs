@@ -1,0 +1,8 @@
+# lib/mindee/image/extracted_images.rb
+module Mindee
+  module Image
+    class ExtractedImages < Array[ExtractedImage]
+      def save_all_to_disk: (String | Pathname) -> void
+    end
+  end
+end
