@@ -1,0 +1,14 @@
+module Mindee
+  module V2
+    module Parsing
+      class FailedInferenceResponse
+        attr_reader created_at: Time
+        attr_reader error: ::Mindee::V2::Parsing::ErrorResponse
+        attr_reader file_alias: String
+        attr_reader file_name: String
+        attr_reader inference_id: String
+        attr_reader model_id: String
+      end
+    end
+  end
+end
