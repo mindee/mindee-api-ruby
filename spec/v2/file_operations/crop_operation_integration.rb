@@ -3,8 +3,9 @@
 require 'mindee'
 require 'mindee/v2/file_operations'
 require 'mindee/v2/product'
+require 'fileutils'
 
-describe Mindee::V2::FileOperation::Crop, :integration, :v2, :all_deps do
+describe Mindee::V2::Product::Crop::Crop, :integration, :v2, :all_deps do
   let(:crop_sample) do
     File.join(V2_PRODUCT_DATA_DIR, 'crop', 'default_sample.jpg')
   end
@@ -47,7 +48,7 @@ describe Mindee::V2::FileOperation::Crop, :integration, :v2, :all_deps do
 
     expect(response.inference.result.crops.size).to eq(2)
 
-    extracted_images = described_class.extract_crops(crop_input, response.inference.result.crops)
+    extracted_images = response.inference.result.extract_from_input_source(crop_input)
 
     expect(extracted_images.size).to eq(2)
     expect(extracted_images[0].filename).to eq('default_sample.jpg_page0-0.jpg')
@@ -67,5 +68,7 @@ describe Mindee::V2::FileOperation::Crop, :integration, :v2, :all_deps do
 
     expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-0.jpg'))).to be_between(560_000, 700_000)
     expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-1.jpg'))).to be_between(580_000, 700_000)
+  ensure
+    crop_input.close if crop_input.respond_to?(:close)
   end
 end
