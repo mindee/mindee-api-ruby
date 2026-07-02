@@ -6,6 +6,7 @@ module Mindee
           attr_reader crops: Array[CropItem]
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
+          def extract_from_input_source: (Input::Source::LocalInputSource) -> Image::ExtractedImages
           def to_s: -> String
         end
       end

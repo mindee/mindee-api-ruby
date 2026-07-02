@@ -52,7 +52,7 @@ describe Mindee::V2::Product::Split::Split, :integration, :v2, :all_deps do
 
     expect(response.inference.file.page_count).to eq(2)
 
-    extracted_pdfs = response.extract_from_file(split_input)
+    extracted_pdfs = response.inference.result.extract_from_input_source(split_input)
 
     expect(extracted_pdfs.size).to eq(2)
     expect(extracted_pdfs[0].filename).to eq('default_sample_001-001.pdf')

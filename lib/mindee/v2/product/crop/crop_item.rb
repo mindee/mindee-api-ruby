@@ -33,7 +33,7 @@ module Mindee
           #
           # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
           # @return [ExtractedImage]
-          def extract_from_file(input_source)
+          def extract_from_input_source(input_source)
             Image::ImageExtractor.extract_multiple_images_from_source(
               input_source, @location.page, [@location.polygon]
             )[0]

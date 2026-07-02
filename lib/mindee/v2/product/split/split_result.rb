@@ -20,6 +20,13 @@ module Mindee
                       end
           end
 
+          # Splits the input PDF.
+          # @param input_source [Mindee::Input::Source::LocalInputSource] Path to the file or a File object.
+          # @return [PDF::ExtractedPDFs]
+          def extract_from_input_source(input_source)
+            FileOperation::Split.extract_splits(input_source, splits.map(&:page_range))
+          end
+
           # String representation.
           # @return [String]
           def to_s
