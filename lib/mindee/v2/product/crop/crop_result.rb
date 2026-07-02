@@ -20,6 +20,14 @@ module Mindee
                      end
           end
 
+          # Apply the crop inference to a file and return a list of extracted images.
+          #
+          # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
+          # @return [Image::ExtractedImages] List of extracted images
+          def extract_from_input_source(input_source)
+            FileOperation::Crop.extract_crops(input_source, @inference.result.crops)
+          end
+
           # String representation.
           # @return [String]
           def to_s

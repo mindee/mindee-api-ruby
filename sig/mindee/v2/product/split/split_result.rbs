@@ -5,7 +5,10 @@ module Mindee
         class SplitResult
           attr_reader splits: Array[SplitRange]
 
+          def extract_from_input_source: (Mindee::Input::Source::LocalInputSource) -> PDF::ExtractedPDFs
+
           def initialize: (Hash[String | Symbol, untyped]) -> void
+
           def to_s: -> String
         end
       end

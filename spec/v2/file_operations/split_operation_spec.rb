@@ -26,7 +26,7 @@ describe Mindee::V2::Product::Split::SplitResponse, :v2, :all_deps do
     response_hash = JSON.parse(File.read(splits_single_page_json_path))
     doc = described_class.new(response_hash)
 
-    extracted_splits = doc.extract_from_file(input_sample)
+    extracted_splits = doc.extract_from_input_source(input_sample)
 
     expect(extracted_splits).to be_a(Mindee::PDF::ExtractedPDFs)
     expect(extracted_splits.size).to eq(1)
@@ -39,7 +39,7 @@ describe Mindee::V2::Product::Split::SplitResponse, :v2, :all_deps do
     response_hash = JSON.parse(File.read(splits_multi_page_json_path))
     doc = described_class.new(response_hash)
 
-    extracted_splits = doc.extract_from_file(input_sample)
+    extracted_splits = doc.extract_from_input_source(input_sample)
 
     expect(extracted_splits).to be_a(Mindee::PDF::ExtractedPDFs)
     expect(extracted_splits.size).to eq(3)
