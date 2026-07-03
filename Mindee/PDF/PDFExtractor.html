@@ -104,7 +104,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Pdf extraction class.</p>
+    <p>PDF extraction class.</p>
 
   </div>
 </div>
@@ -143,7 +143,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a new Pdf from pages and save it into a buffer.</p></div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates a new PDF from pages and save it into a buffer.</p></div></span>
   
 </li>
 
@@ -151,7 +151,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#extract_invoices-instance_method" title="#extract_invoices (instance method)">#<strong>extract_invoices</strong>(page_indexes, strict: false)  &#x21d2; Array&lt;Mindee::PDF::ExtractedPDF&gt; </a>
+      <a href="#extract_invoices-instance_method" title="#extract_invoices (instance method)">#<strong>extract_invoices</strong>(page_indexes, strict: false)  &#x21d2; Mindee::PDF::ExtractedPDFs </a>
     
 
     
@@ -173,7 +173,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#extract_sub_documents-instance_method" title="#extract_sub_documents (instance method)">#<strong>extract_sub_documents</strong>(page_indexes)  &#x21d2; Array&lt;Mindee::PDF::ExtractedPDF&gt; </a>
+      <a href="#extract_sub_documents-instance_method" title="#extract_sub_documents (instance method)">#<strong>extract_sub_documents</strong>(page_indexes)  &#x21d2; Mindee::PDF::ExtractedPDFs </a>
     
 
     
@@ -233,7 +233,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Retrieves the page count for the Pdf object.</p></div></span>
+    <span class="summary_desc"><div class='inline'><p>Retrieves the page count for the PDF object.</p></div></span>
   
 </li>
 
@@ -343,7 +343,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Pdf from pages and save it into a buffer.</p>
+    <p>Creates a new PDF from pages and save it into a buffer.</p>
 
   </div>
 </div>
@@ -361,7 +361,7 @@
       
       
         &mdash;
-        <div class='inline'><p>List of page number to use for merging in the original Pdf.</p></div>
+        <div class='inline'><p>List of page number to use for merging in the original PDF.</p></div>
       
     </li>
   
@@ -378,7 +378,7 @@
       
       
         &mdash;
-        <div class='inline'><p>The buffer containing the new Pdf.</p></div>
+        <div class='inline'><p>The buffer containing the new PDF.</p></div>
       
     </li>
   
@@ -416,7 +416,7 @@
       <div class="method_details ">
   <h3 class="signature " id="extract_invoices-instance_method">
   
-    #<strong>extract_invoices</strong>(page_indexes, strict: false)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ExtractedPDF.html" title="Mindee::PDF::ExtractedPDF (class)">Mindee::PDF::ExtractedPDF</a></span>&gt;</tt> 
+    #<strong>extract_invoices</strong>(page_indexes, strict: false)  &#x21d2; <tt><span class='object_link'><a href="ExtractedPDFs.html" title="Mindee::PDF::ExtractedPDFs (class)">Mindee::PDF::ExtractedPDFs</a></span></tt> 
   
 
   
@@ -464,7 +464,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ExtractedPDF.html" title="Mindee::PDF::ExtractedPDF (class)">Mindee::PDF::ExtractedPDF</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="ExtractedPDFs.html" title="Mindee::PDF::ExtractedPDFs (class)">Mindee::PDF::ExtractedPDFs</a></span></tt>)</span>
       
       
       
@@ -571,7 +571,7 @@
       <div class="method_details ">
   <h3 class="signature " id="extract_sub_documents-instance_method">
   
-    #<strong>extract_sub_documents</strong>(page_indexes)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ExtractedPDF.html" title="Mindee::PDF::ExtractedPDF (class)">Mindee::PDF::ExtractedPDF</a></span>&gt;</tt> 
+    #<strong>extract_sub_documents</strong>(page_indexes)  &#x21d2; <tt><span class='object_link'><a href="ExtractedPDFs.html" title="Mindee::PDF::ExtractedPDFs (class)">Mindee::PDF::ExtractedPDFs</a></span></tt> 
   
 
   
@@ -597,7 +597,7 @@
       
       
         &mdash;
-        <div class='inline'><p>List of page number to use for merging in the original Pdf.</p></div>
+        <div class='inline'><p>List of page number to use for merging in the original PDF.</p></div>
       
     </li>
   
@@ -609,12 +609,12 @@
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ExtractedPDF.html" title="Mindee::PDF::ExtractedPDF (class)">Mindee::PDF::ExtractedPDF</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="ExtractedPDFs.html" title="Mindee::PDF::ExtractedPDFs (class)">Mindee::PDF::ExtractedPDFs</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>The buffer containing the new Pdf.</p></div>
+        <div class='inline'><p>The buffer containing the new PDF.</p></div>
       
     </li>
   
@@ -655,7 +655,7 @@
       <pre class="code"><span class="info file"># File 'lib/mindee/pdf/pdf_extractor.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extract_sub_documents'>extract_sub_documents</span><span class='lparen'>(</span><span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_extracted_pdfs'>extracted_pdfs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='comment'># @type var extracted_pdfs: Array[Mindee::PDF::ExtractedPDF]
+  <span class='id identifier rubyid_extracted_pdfs'>extracted_pdfs</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ExtractedPDFs.html" title="Mindee::PDF::ExtractedPDFs (class)">ExtractedPDFs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='comment'># @type var extracted_pdfs: Mindee::PDF::ExtractedPDFs
 </span>  <span class='id identifier rubyid_extension'>extension</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_extname'>extname</span><span class='lparen'>(</span><span class='ivar'>@filename</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_basename'>basename</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='ivar'>@filename</span><span class='comma'>,</span> <span class='id identifier rubyid_extension'>extension</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_page_indexes'>page_indexes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page_index_list'>page_index_list</span><span class='op'>|</span>
@@ -694,7 +694,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the page count for the Pdf object.</p>
+    <p>Retrieves the page count for the PDF object.</p>
 
   </div>
 </div>
@@ -740,7 +740,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 18 16:32:18 2026 by
+  Generated on Fri Jul  3 14:56:08 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-3.2.11).
 </div>

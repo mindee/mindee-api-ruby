@@ -170,28 +170,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#extract_from_file-instance_method" title="#extract_from_file (instance method)">#<strong>extract_from_file</strong>(input_source)  &#x21d2; FileOperation::CropFiles </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Apply the crop inference to a file and return a list of extracted images.</p></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(server_response)  &#x21d2; CropResponse </a>
     
 
@@ -387,80 +365,7 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="extract_from_file-instance_method">
-  
-    #<strong>extract_from_file</strong>(input_source)  &#x21d2; <tt><span class='object_link'><a href="../../FileOperation/CropFiles.html" title="Mindee::V2::FileOperation::CropFiles (class)">FileOperation::CropFiles</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Apply the crop inference to a file and return a list of extracted images.</p>
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>input_source</span>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Input/Source/LocalInputSource.html" title="Mindee::Input::Source::LocalInputSource (class)">Mindee::Input::Source::LocalInputSource</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Local file to extract from</p></div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../FileOperation/CropFiles.html" title="Mindee::V2::FileOperation::CropFiles (class)">FileOperation::CropFiles</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>List of extracted PDFs</p></div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-33
-34
-35</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/product/crop/crop_response.rb', line 33</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_extract_from_file'>extract_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../../FileOperation.html" title="Mindee::V2::FileOperation (module)">FileOperation</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../FileOperation/Crop.html" title="Mindee::V2::FileOperation::Crop (module)">Crop</a></span></span><span class='period'>.</span><span class='id identifier rubyid_extract_crops'><span class='object_link'><a href="../../FileOperation/Crop.html#extract_crops-class_method" title="Mindee::V2::FileOperation::Crop.extract_crops (method)">extract_crops</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='ivar'>@inference</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_crops'>crops</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="to_s-instance_method">
+  <h3 class="signature first" id="to_s-instance_method">
   
     #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
   
@@ -516,7 +421,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 18 16:32:19 2026 by
+  Generated on Fri Jul  3 14:56:10 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-3.2.11).
 </div>

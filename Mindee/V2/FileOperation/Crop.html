@@ -115,7 +115,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#extract_crops-class_method" title="extract_crops (class method)">.<strong>extract_crops</strong>(input_source, crops)  &#x21d2; CropFiles </a>
+      <a href="#extract_crops-class_method" title="extract_crops (class method)">.<strong>extract_crops</strong>(input_source, crops)  &#x21d2; Image::ExtractedImages </a>
     
 
     
@@ -169,7 +169,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="extract_crops-class_method">
   
-    .<strong>extract_crops</strong>(input_source, crops)  &#x21d2; <tt><span class='object_link'><a href="CropFiles.html" title="Mindee::V2::FileOperation::CropFiles (class)">CropFiles</a></span></tt> 
+    .<strong>extract_crops</strong>(input_source, crops)  &#x21d2; <tt><span class='object_link'><a href="../../Image/ExtractedImages.html" title="Mindee::Image::ExtractedImages (class)">Image::ExtractedImages</a></span></tt> 
   
 
   
@@ -221,7 +221,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="CropFiles.html" title="Mindee::V2::FileOperation::CropFiles (class)">CropFiles</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Image/ExtractedImages.html" title="Mindee::Image::ExtractedImages (class)">Image::ExtractedImages</a></span></tt>)</span>
       
       
       
@@ -275,7 +275,8 @@
 44
 45
 46
-47</pre>
+47
+48</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/v2/file_operations/crop.rb', line 26</span>
@@ -292,15 +293,16 @@
     <span class='id identifier rubyid_polygons'>polygons</span><span class='lbracket'>[</span><span class='id identifier rubyid_crop'>crop</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_page'>page</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_crop'>crop</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_polygon'>polygon</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_images'>images</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='comment'># @type var images: Array[Image::ExtractedImage]
-</span>  <span class='id identifier rubyid_polygons'>polygons</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page_polygons'>page_polygons</span><span class='comma'>,</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='op'>|</span>
-    <span class='id identifier rubyid_extracted'>extracted</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Image/ImageExtractor.html" title="Mindee::Image::ImageExtractor (module)">ImageExtractor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_extract_multiple_images_from_source'><span class='object_link'><a href="../../Image/ImageExtractor.html#extract_multiple_images_from_source-class_method" title="Mindee::Image::ImageExtractor.extract_multiple_images_from_source (method)">extract_multiple_images_from_source</a></span></span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='comma'>,</span> <span class='id identifier rubyid_page_polygons'>page_polygons</span>
+  <span class='id identifier rubyid_images'>images</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Image/ExtractedImages.html" title="Mindee::Image::ExtractedImages (class)">ExtractedImages</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_polygons'>polygons</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page_polygons'>page_polygons</span><span class='comma'>,</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='op'>|</span>
+    <span class='id identifier rubyid_images'>images</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span>
+      <span class='const'><span class='object_link'><a href="../../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Image.html" title="Mindee::Image (module)">Image</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Image/ImageExtractor.html" title="Mindee::Image::ImageExtractor (module)">ImageExtractor</a></span></span><span class='period'>.</span><span class='id identifier rubyid_extract_multiple_images_from_source'><span class='object_link'><a href="../../Image/ImageExtractor.html#extract_multiple_images_from_source-class_method" title="Mindee::Image::ImageExtractor.extract_multiple_images_from_source (method)">extract_multiple_images_from_source</a></span></span><span class='lparen'>(</span>
+        <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_page_index'>page_index</span><span class='comma'>,</span> <span class='id identifier rubyid_page_polygons'>page_polygons</span>
+      <span class='rparen'>)</span>
     <span class='rparen'>)</span>
-    <span class='id identifier rubyid_images'>images</span><span class='period'>.</span><span class='id identifier rubyid_concat'>concat</span><span class='lparen'>(</span><span class='id identifier rubyid_extracted'>extracted</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
-  <span class='const'><span class='object_link'><a href="CropFiles.html" title="Mindee::V2::FileOperation::CropFiles (class)">CropFiles</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_images'>images</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_images'>images</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -402,7 +404,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 18 16:32:17 2026 by
+  Generated on Fri Jul  3 14:56:08 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-3.2.11).
 </div>
