@@ -34,7 +34,7 @@ module Mindee
           #
           # @param input_source [Mindee::Input::Source::LocalInputSource] Local file to extract from
           # @return [PDF::ExtractedPDF]
-          def extract_from_file(input_source)
+          def extract_from_input_source(input_source)
             FileOperation::Split.extract_single_split(input_source, @page_range)
           end
         end

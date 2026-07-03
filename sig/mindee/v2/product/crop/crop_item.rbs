@@ -9,7 +9,7 @@ module Mindee
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
-          def extract_from_file: (Input::Source::LocalInputSource) -> Image::ExtractedImage
+          def extract_from_input_source: (Input::Source::LocalInputSource) -> Image::ExtractedImage
 
           def to_s: -> String
         end
