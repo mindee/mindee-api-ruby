@@ -141,7 +141,7 @@ module MindeeCLI
     # Initialize common options for search and product commands.
     # @param options_parser [OptionParser]
     def init_common_options(options_parser)
-      options_parser.on('-k [KEY]', '--key [KEY]', 'API key for the endpoint') { |v| @options[:api_key] = v }
+      options_parser.on('-k [KEY]', '--key [KEY]', 'Mindee V2 API key.') { |v| @options[:api_key] = v }
       options_parser.on('-o FORMAT', '--output-format FORMAT', ['raw', 'full', 'summary'],
                         'Format of the output (raw, full, summary). Default: summary') do |format|
         @options[:output_format] = format
