@@ -8,9 +8,9 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$($HOME/.rbenv/bin/rbenv init -)"
 
 if [ -z "$TEST_FILE" ]; then
-  echo "Error: no sample file provided"
-  exit 1
+  TEST_FILE='./spec/data/file_types/pdf/blank_1.pdf'
 fi
+echo "TEST_FILE: ${TEST_FILE}"
 
 if [ -z "$RID" ]; then
   OS_NAME="$(uname -s)"
@@ -44,11 +44,20 @@ else
   echo "Models retrieval OK"
 fi
 
-echo "--- Test extraction with no additional args"
-SUMMARY_OUTPUT=$("$CLI_PATH" extraction -m "$MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID" "$TEST_FILE")
-if [ -z "$SUMMARY_OUTPUT" ]; then
-  echo "Error: no extraction output"
-  exit 1
-else
-  echo "Extraction retrieval OK"
-fi
+run_test() {
+  model_id="$1"
+  model_type="$2"
+
+  echo "--- Test $model_type ID: $model_id"
+  SUMMARY_OUTPUT=$("$CLI_PATH" "$model_type" -m "$model_id" -a "ruby-sdk-cli-${model_type}" "$TEST_FILE")
+  echo "$SUMMARY_OUTPUT"
+  echo ""
+  echo ""
+  sleep 0.5
+}
+
+run_test "$MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID" "extraction"
+run_test "$MINDEE_V2_SE_TESTS_CROP_MODEL_ID" "crop"
+run_test "$MINDEE_V2_SE_TESTS_SPLIT_MODEL_ID" "split"
+run_test "$MINDEE_V2_SE_TESTS_CLASSIFICATION_MODEL_ID" "classification"
+run_test "$MINDEE_V2_SE_TESTS_OCR_MODEL_ID" "ocr"

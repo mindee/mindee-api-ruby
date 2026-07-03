@@ -179,6 +179,10 @@ module MindeeCLI
           options_parser.on('-a ALIAS', '--alias ALIAS', 'Add a file alias to the response') do |v|
             @options[:alias] = v
           end
+          options_parser.on('-w WEBHOOK_ID', '--webhook-id WEBHOOK_ID',
+                            'Specify a webhook by ID. May be used multiple times.') do |v|
+            (@options[:webhook_ids] ||= []) << v
+          end
           init_common_options(options_parser)
           options_parser.on('-F', '--fix-pdf', 'Attempt to repair PDF before enqueueing') do
             @options[:repair_pdf] = true
@@ -190,10 +194,10 @@ module MindeeCLI
     end
 
     # @return [Hash]
-    def setup_product_params
+    def setup_product_params(product_command)
       params = { model_id: @options[:model_id] }
       @options.each_pair do |key, value|
-        params[key] = value if V2_PRODUCTS['extraction'].include?(key)
+        params[key] = value if V2_PRODUCTS[product_command].include?(key) || %i[alias webhook_ids].include?(key)
       end
       params
     end
@@ -205,7 +209,7 @@ module MindeeCLI
       mindee_client = Mindee::V2::Client.new(api_key: options[:api_key])
       response_class = V2_PRODUCTS[product_command][:response_class]
       input_source = setup_input_source(options)
-      params = setup_product_params
+      params = setup_product_params(product_command)
 
       mindee_client.enqueue_and_get_result(
         response_class,
