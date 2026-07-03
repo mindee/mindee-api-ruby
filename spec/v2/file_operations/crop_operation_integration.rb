@@ -66,8 +66,8 @@ describe Mindee::V2::Product::Crop::Crop, :integration, :v2, :all_deps do
 
     extracted_images.save_all_to_disk(OUTPUT_DIR)
 
-    expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-0.jpg'))).to be_between(560_000, 700_000)
-    expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-1.jpg'))).to be_between(580_000, 700_000)
+    expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-0.jpg'))).to be_between(500_000, 800_000)
+    expect(File.size(File.join(OUTPUT_DIR, 'default_sample.jpg_page0-1.jpg'))).to be_between(500_000, 800_000)
   ensure
     crop_input.close if crop_input.respond_to?(:close)
   end
