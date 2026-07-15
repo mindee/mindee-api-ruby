@@ -46,7 +46,7 @@ module Mindee
             # @param [String, nil] file_alias File alias, if applicable.
             # @param [Array<String>, nil] webhook_ids
             # @param [String, nil] text_context
-            # @param [Hash, PollingOptions, nil] polling_options
+            # @param [Hash, Input::PollingOptions, nil] polling_options
             # @param [Boolean, nil] close_file
             # @param [DataSchemaField, String, Hash nil] data_schema
             def initialize(

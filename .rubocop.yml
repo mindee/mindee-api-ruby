@@ -47,3 +47,7 @@ Metrics/AbcSize:
 
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
+
+Style/ArrayIntersect:
+  Exclude:
+    - 'lib/mindee/pdf/pdf_tools.rb'
