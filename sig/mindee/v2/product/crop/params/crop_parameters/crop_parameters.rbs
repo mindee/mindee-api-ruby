@@ -12,7 +12,7 @@ module Mindee
                 String,
                 ?file_alias: String?,
                 ?webhook_ids: Array[String]?,
-                ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions?,
+                ?polling_options: Hash[Symbol | String, untyped] | Input::PollingOptions | nil,
                 ?close_file: bool?
               ) -> void
           end

@@ -95,6 +95,7 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil
+      expect(response.inference.file.alias).to eq('rb_integration_test')
     end
 
     it 'parses a filled single-page image successfully' do

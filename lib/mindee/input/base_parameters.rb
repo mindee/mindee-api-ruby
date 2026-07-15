@@ -101,7 +101,7 @@ module Mindee
       # @param [Array] form_data Array of form fields
       # @return [Array]
       def append_form_data(form_data)
-        form_data.push(['file_alias', @file_alias]) if @file_alias
+        form_data.push(['alias', @file_alias]) if @file_alias
         webhook_ids = @webhook_ids || []
         form_data.push(['webhook_ids', webhook_ids.join(',')]) unless @webhook_ids.nil? || webhook_ids.empty?
         form_data

@@ -203,7 +203,7 @@ module Mindee
                         [['file', file_data, file_metadata]] # : Array[Array[untyped]]
                       end
           form_data.push(['model_id', params.model_id])
-          form_data.push ['file_alias', params.file_alias] if params.file_alias
+          form_data.push ['alias', params.file_alias] if params.file_alias
           if params.is_a?(V2::Product::Extraction::Params::ExtractionParameters)
             form_data = enqueue_form_options(form_data, params)
           end
