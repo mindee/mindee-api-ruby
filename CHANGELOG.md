@@ -1,12 +1,17 @@
 # Mindee Ruby API Library Changelog
 
+## v5.3.1 - 2026-07-15
+### Fixes
+* :bug: fix file alias being sent as an invalid parameter
+
+
 ## v5.3.0 - 2026-07-03
-### Changes:
+### Changes
 * :memo: add SKILL file
 * :recycle: use generic array types for images, PDFs
 * :sparkles: allow passing webhooks to the CLI
 * :sparkles: add webhook error response
-### Fixes:
+### Fixes
 * :bug: fix for extraction method naming
 
 ## v5.2.2 - 2026-06-18
