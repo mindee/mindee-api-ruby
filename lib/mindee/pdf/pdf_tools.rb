@@ -51,7 +51,7 @@ module Mindee
         return false if data.nil? || data.empty?
 
         text_operators = ['Tc', 'Tw', 'Th', 'TL', 'Tf', 'Tk', 'Tr', 'Tm', 'T*', 'Tj', 'TJ', "'", '"']
-        text_operators.intersect?(data)
+        text_operators.any? { |op| data.include?(op) }
       end
 
       # Checks whether a stream contains a PDF header near the beginning.
