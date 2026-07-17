@@ -1,0 +1,15 @@
+# lib/http/cancellation_token.rb
+
+module Mindee
+  module Http
+    class CancellationToken
+      @is_cancelled: bool
+
+      attr_reader is_canceled: bool
+
+      def canceled?: -> bool
+      def initialize: -> void
+      def cancel: -> void
+    end
+  end
+end
