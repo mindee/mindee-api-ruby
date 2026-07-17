@@ -1,7 +1,7 @@
 # lib/http/cancellation_token.rb
 
 module Mindee
-  module Http
+  module HTTP
     class CancellationToken
       @is_cancelled: bool
 

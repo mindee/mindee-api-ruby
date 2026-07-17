@@ -121,4 +121,58 @@ describe Mindee::V1::Client do
       end.to raise_error Mindee::Error::MindeeConfigurationError
     end
   end
+
+  context 'Cancellation token' do
+    let(:client) { Mindee::V1::Client.new(api_key: 'dummy-key') }
+    let(:input_source) { Mindee::Input::Source::PathInputSource.new(File.join(FILE_TYPES_DIR, 'receipt.jpg')) }
+    let(:product_class) { Mindee::V1::Product::InvoiceSplitter::InvoiceSplitterV1 }
+    let(:endpoint) do
+      Mindee::V1::HTTP::Endpoint.new('mindee', 'invoice_splitter_async', '1', api_key: 'dummy-key')
+    end
+    let(:opts) { Mindee::V1::ParseOptions.new(params: { initial_delay_sec: 2, delay_sec: 1.5, max_retries: 2 }) }
+
+    let(:mock_enqueue_res) do
+      data = load_json(V1_ASYNC_DIR, 'post_success.json')
+      Mindee::V1::Parsing::Common::ApiResponse.new(product_class, data, JSON.generate(data))
+    end
+    let(:mock_processing_res) do
+      data = load_json(V1_ASYNC_DIR, 'get_processing.json')
+      Mindee::V1::Parsing::Common::ApiResponse.new(product_class, data, JSON.generate(data))
+    end
+
+    before do
+      allow(client).to receive(:sleep)
+      allow(client).to receive(:enqueue).and_return(mock_enqueue_res)
+      allow(client).to receive(:parse_queued).and_return(mock_processing_res)
+    end
+
+    it 'raises MindeeError when token is cancelled before first poll' do
+      token = Mindee::HTTP::CancellationToken.new
+      token.cancel
+
+      expect do
+        client.send(:enqueue_and_parse, input_source, product_class, endpoint, opts, token)
+      end.to raise_error(Mindee::Error::MindeeError, %r{canceled})
+    end
+
+    it 'raises MindeeError when token is cancelled during poll loop' do
+      token = Mindee::HTTP::CancellationToken.new
+      call_count = 0
+      allow(client).to receive(:parse_queued) do
+        call_count += 1
+        token.cancel if call_count == 1
+        mock_processing_res
+      end
+
+      expect do
+        client.send(:enqueue_and_parse, input_source, product_class, endpoint, opts, token)
+      end.to raise_error(Mindee::Error::MindeeError, %r{canceled})
+    end
+
+    it 'raises timeout error (not cancel error) when no token is passed' do
+      expect do
+        client.send(:enqueue_and_parse, input_source, product_class, endpoint, opts)
+      end.to raise_error(Mindee::Error::MindeeAPIError, %r{timed out})
+    end
+  end
 end

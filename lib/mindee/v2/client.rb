@@ -58,12 +58,15 @@ module Mindee
       #   The source of the input document (local file or URL).
       # @param params [Hash, Input::BaseParameters] Parameters for the inference.
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
+      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def enqueue_and_get_result(
         product,
         input_source,
         params,
-        polling_options = nil
+        polling_options = nil,
+        cancellation_token = nil
       )
         enqueue_response = enqueue(product, input_source, params)
         normalized_params = normalize_parameters(product.params_type, params, polling_options: polling_options)
@@ -76,6 +79,8 @@ module Mindee
 
         job_id = enqueue_response.job.id
         logger.debug("Successfully enqueued document with job id: #{job_id}.")
+
+        raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
 
         sleep(normalized_params.polling_options.initial_delay_sec)
         retry_counter = 1
@@ -94,6 +99,8 @@ module Mindee
             "Job status: #{poll_results.job.status}."
           )
 
+          raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
+
           sleep(normalized_params.polling_options.delay_sec)
           poll_results = get_job(job_id)
           retry_counter += 1
@@ -110,6 +117,7 @@ module Mindee
         raise Mindee::Error::MindeeError,
               "Asynchronous parsing request timed out after #{sec_count} seconds"
       end
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       # Searches for a list of available models for the given API key.
       # @param model_name [String]

@@ -87,8 +87,8 @@ module Mindee
             end
           end
 
-          # less than or equality of two FieldConfidence instances.
-          # # @param other [String, Integer, FieldConfidence] The other confidence to compare.
+          # Less than or equality of two FieldConfidence instances.
+          # @param other [String, Integer, FieldConfidence] The other confidence to compare.
           def <=(other)
             if other.is_a?(FieldConfidence)
               to_i <= val_to_i(other.value)
@@ -101,12 +101,47 @@ module Mindee
             end
           end
 
+          # Greater than comparison of two FieldConfidence instances.
+          # @param other [String, Integer, FieldConfidence] The other confidence to compare.
+          def >(other)
+            if other.is_a?(FieldConfidence)
+              to_i > val_to_i(other.value)
+            elsif other.is_a?(String)
+              to_i > val_to_i(other)
+            elsif other.is_a?(Integer)
+              to_i > other
+            else
+              raise ArgumentError, "Invalid type: #{other.class}"
+            end
+          end
+
+          # Less than comparison of two FieldConfidence instances.
+          # @param other [String, Integer, FieldConfidence] The other confidence to compare.
+          def <(other)
+            if other.is_a?(FieldConfidence)
+              to_i < val_to_i(other.value)
+            elsif other.is_a?(String)
+              to_i < val_to_i(other)
+            elsif other.is_a?(Integer)
+              to_i < other
+            else
+              raise ArgumentError, "Invalid type: #{other.class}"
+            end
+          end
+
           # rubocop:enable Style/CaseLikeIf
 
           # Aliases for the comparison operators.
           alias eql? ==
+          alias equal? ==
           alias gteql? >=
+          alias greater_than_or_equal? >=
           alias lteql? <=
+          alias less_than_or_equal? <=
+          alias gt? >
+          alias greater_than? >
+          alias lt? <
+          alias less_than? <
 
           protected
 
