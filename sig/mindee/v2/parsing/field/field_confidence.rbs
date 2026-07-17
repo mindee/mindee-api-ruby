@@ -20,6 +20,15 @@ module Mindee
           def lteql? : (String | Integer | FieldConfidence) -> bool
           def >=: (String | Integer | FieldConfidence) -> bool
           def gteql?: (String | Integer | FieldConfidence) -> bool
+          def greater_than_or_equal?: (String | Integer | FieldConfidence) -> bool
+          def >: (String | Integer | FieldConfidence) -> bool
+          def gt?: (String | Integer | FieldConfidence) -> bool
+          def greater_than?: (String | Integer | FieldConfidence) -> bool
+          def <: (String | Integer | FieldConfidence) -> bool
+          def lt?: (String | Integer | FieldConfidence) -> bool
+          def less_than?: (String | Integer | FieldConfidence) -> bool
+          def less_than_or_equal?: (String | Integer | FieldConfidence) -> bool
+          def equal?: (String | Integer | FieldConfidence) -> bool
           def inspect: -> String
 
           def val_to_i: (String) -> Integer

@@ -219,6 +219,7 @@ module Mindee
         Mindee::V1::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity
       # Enqueue a document for async parsing and automatically try to retrieve it
       #
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
@@ -247,12 +248,22 @@ module Mindee
       #   * `:delay_sec` [Numeric] Delay between polling attempts. Defaults to 1.5.
       #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
       # @param endpoint [Mindee::V1::HTTP::Endpoint] Endpoint of the API.
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
-      def enqueue_and_parse(input_source, product_class, endpoint, options)
+      # rubocop:disable Metrics/PerceivedComplexity
+      def enqueue_and_parse(
+        input_source,
+        product_class,
+        endpoint,
+        options,
+        cancellation_token = nil
+      )
         validate_async_params(options.initial_delay_sec, options.delay_sec, options.max_retries)
         enqueue_res = enqueue(input_source, product_class, endpoint: endpoint, options: options)
         job = enqueue_res.job or raise Error::MindeeAPIError, 'Expected job to be present'
         job_id = job.id
+
+        raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
 
         sleep(options.initial_delay_sec)
         polling_attempts = 1
@@ -266,6 +277,8 @@ module Mindee
         # @type var valid_statuses: Array[(:waiting | :processing | :completed | :failed)]
         while valid_statuses.include?(queue_res_job.status) && polling_attempts < options.max_retries
           logger.debug("Polling server for parsing result with job id: '#{job_id}'. Attempt #{polling_attempts}")
+          raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
+
           sleep(options.delay_sec)
           queue_res = parse_queued(job_id, product_class, endpoint: endpoint)
           queue_res_job = queue_res.job or raise Error::MindeeAPIError, 'Expected job to be present'
@@ -280,7 +293,9 @@ module Mindee
 
         queue_res
       end
+      # rubocop:enable Metrics/PerceivedComplexity
 
+      # rubocop:enable Metrics/CyclomaticComplexity
       # Sends a document to a workflow.
       #
       # Accepts options either as a Hash or as a WorkflowOptions struct.

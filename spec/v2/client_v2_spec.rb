@@ -119,5 +119,63 @@ describe Mindee::V2::Client do
       resp.job.completed_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
     ).to eq('2026-04-20T18:32:02.734312')
   end
+  context 'Cancellation token' do
+    let(:processing_json) { File.read(File.join(V2_DATA_DIR, 'job', 'ok_processing.json')) }
+
+    let(:mock_enqueue_res) do
+      Mindee::V2::Parsing::JobResponse.new(JSON.parse(processing_json, object_class: Hash))
+    end
+    let(:mock_processing_res) do
+      Mindee::V2::Parsing::JobResponse.new(JSON.parse(processing_json, object_class: Hash))
+    end
+    let(:params) do
+      Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
+        'dummy-model',
+        polling_options: Mindee::Input::PollingOptions.new(initial_delay_sec: 2, delay_sec: 1.5, max_retries: 2)
+      )
+    end
+
+    before do
+      allow(client).to receive(:sleep)
+      allow(client).to receive(:enqueue).and_return(mock_enqueue_res)
+      allow(client).to receive(:get_job).and_return(mock_processing_res)
+    end
+
+    it 'raises MindeeError when token is cancelled before first poll' do
+      token = Mindee::HTTP::CancellationToken.new
+      token.cancel
+
+      expect do
+        client.enqueue_and_get_result(
+          Mindee::V2::Product::Extraction::Extraction, input_doc, params, nil, token
+        )
+      end.to raise_error(Mindee::Error::MindeeError, %r{canceled})
+    end
+
+    it 'raises MindeeError when token is cancelled during poll loop' do
+      token = Mindee::HTTP::CancellationToken.new
+      call_count = 0
+      allow(client).to receive(:get_job) do
+        call_count += 1
+        token.cancel if call_count == 1
+        mock_processing_res
+      end
+
+      expect do
+        client.enqueue_and_get_result(
+          Mindee::V2::Product::Extraction::Extraction, input_doc, params, nil, token
+        )
+      end.to raise_error(Mindee::Error::MindeeError, %r{canceled})
+    end
+
+    it 'raises timeout error (not cancel error) when no token is passed' do
+      expect do
+        client.enqueue_and_get_result(
+          Mindee::V2::Product::Extraction::Extraction, input_doc, params
+        )
+      end.to raise_error(Mindee::Error::MindeeError, %r{timed out})
+    end
+  end
+
   ENV.delete('MINDEE_V2_BASE_URL')
 end
