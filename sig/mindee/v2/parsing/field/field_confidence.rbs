@@ -28,7 +28,7 @@ module Mindee
           def lt?: (String | Integer | FieldConfidence) -> bool
           def less_than?: (String | Integer | FieldConfidence) -> bool
           def less_than_or_equal?: (String | Integer | FieldConfidence) -> bool
-          def equal?: (String | Integer | FieldConfidence) -> bool
+          def equal_value?: (String | Integer | FieldConfidence) -> bool
           def inspect: -> String
 
           def val_to_i: (String) -> Integer

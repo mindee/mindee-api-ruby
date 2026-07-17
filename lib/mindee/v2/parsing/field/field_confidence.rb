@@ -133,7 +133,7 @@ module Mindee
 
           # Aliases for the comparison operators.
           alias eql? ==
-          alias equal? ==
+          alias equal_value? ==
           alias gteql? >=
           alias greater_than_or_equal? >=
           alias lteql? <=

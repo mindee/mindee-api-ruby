@@ -3,7 +3,7 @@
 module Mindee
   module HTTP
     class CancellationToken
-      @is_cancelled: bool
+      @is_canceled: bool
 
       attr_reader is_canceled: bool
 
