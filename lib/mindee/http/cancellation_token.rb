@@ -7,17 +7,17 @@ module Mindee
       private attr_reader :is_canceled
 
       def initialize
-        @is_cancelled = false
+        @is_canceled = false
       end
 
       # Cancel the token.
       def cancel
-        @is_cancelled = true
+        @is_canceled = true
       end
 
       # Check if the token is canceled.
       def canceled?
-        @is_cancelled
+        @is_canceled
       end
     end
   end

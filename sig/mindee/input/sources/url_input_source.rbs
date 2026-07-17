@@ -3,6 +3,8 @@ module Mindee
   module Input
     module Source
       class URLInputSource
+        DISALLOWED_RANGES: Array[IPAddr]
+
         def url: -> String
         def logger: () -> Logger
         def initialize: (String) -> void
@@ -14,6 +16,9 @@ module Mindee
         def make_request: (URI::Generic, Net::HTTP::Get, Integer) -> Net::HTTPRedirection
         def get_file_extension: (String) -> String?
         def generate_file_name: (?extension: String?) -> String
+        def validate_url!: (String) -> void
+        def resolved_addresses: (String) -> Array[IPAddr]
+        def literal_ip?: (String) -> bool
       end
     end
   end

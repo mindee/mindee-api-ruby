@@ -3,6 +3,8 @@
 require 'net/http'
 require 'uri'
 require 'fileutils'
+require 'ipaddr'
+require 'resolv'
 require_relative '../../logging'
 
 module Mindee
@@ -10,14 +12,27 @@ module Mindee
     module Source
       # Load a remote document from a file url.
       class URLInputSource
+        # IP ranges that must not be the target of a source URL (SSRF protection).
+        DISALLOWED_RANGES = [
+          IPAddr.new('127.0.0.0/8'), # IPv4 loopback
+          IPAddr.new('::1/128'), # IPv6 loopback
+          IPAddr.new('169.254.0.0/16'), # IPv4 link-local
+          IPAddr.new('fe80::/10'), # IPv6 link-local
+          IPAddr.new('10.0.0.0/8'),     # RFC 1918
+          IPAddr.new('172.16.0.0/12'),  # RFC 1918
+          IPAddr.new('192.168.0.0/16'), # RFC 1918
+          IPAddr.new('0.0.0.0/8'),      # "this" network
+          IPAddr.new('224.0.0.0/4'),    # IPv4 multicast
+          IPAddr.new('ff00::/8'),        # IPv6 multicast
+          IPAddr.new('fc00::/7'),        # IPv6 unique-local
+          IPAddr.new('100.64.0.0/10'), # Carrier-grade NAT (RFC 6598)
+        ].freeze
         # @return [String]
         attr_reader :url
 
         def initialize(url)
-          raise Error::MindeeInputError, 'URL must be HTTPS' unless url.start_with? 'https://'
-
+          validate_url!(url)
           logger.debug("URL input: #{url}")
-
           @url = url
         end
 
@@ -85,6 +100,62 @@ module Mindee
 
         private
 
+        # Validates the URL against SSRF risks before it is stored or fetched.
+        # Checks scheme, embedded credentials, loopback hostnames, and resolved addresses.
+        # @param url [String]
+        # @raise [Error::MindeeInputError]
+        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+        def validate_url!(url)
+          uri = URI.parse(url)
+
+          raise Error::MindeeInputError, 'Only HTTPS source URLs are allowed' unless uri.scheme&.downcase == 'https'
+
+          userinfo = uri.userinfo
+          raise Error::MindeeInputError, 'Source URLs must not embed user credentials' if userinfo && !userinfo.empty?
+
+          host = uri.hostname
+          raise Error::MindeeInputError, 'Source URL is missing a host' if host.nil? || host.empty?
+
+          lower_host = host.downcase
+          if lower_host == 'localhost' || lower_host.end_with?('.localhost') ||
+             lower_host == 'ip6-localhost' || lower_host == 'ip6-loopback'
+            raise Error::MindeeInputError, "Loopback hostnames are not allowed: #{host}"
+          end
+
+          resolved_addresses(host).each do |addr|
+            if DISALLOWED_RANGES.any? { |range| range.include?(addr) }
+              raise Error::MindeeInputError,
+                    "Source URL host resolves to a disallowed address: #{addr}"
+            end
+          end
+        rescue URI::InvalidURIError
+          raise Error::MindeeInputError, "Invalid URL: #{url}"
+        end
+        # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+        # Resolves a host to an array of IPAddr objects.
+        # Handles literal IP addresses directly without a DNS round-trip.
+        # @param host [String]
+        # @return [Array<IPAddr>]
+        # @raise [Error::MindeeInputError] if the host cannot be resolved.
+        def resolved_addresses(host)
+          return [IPAddr.new(host)] if literal_ip?(host)
+
+          addrs = Resolv.getaddresses(host)
+          raise Error::MindeeInputError, "Unable to resolve source URL host: #{host}" if addrs.empty?
+
+          addrs.map { |a| IPAddr.new(a) }
+        end
+
+        # Returns true if the string is a valid literal IPv4 or IPv6 address.
+        # @param host [String]
+        def literal_ip?(host)
+          IPAddr.new(host)
+          true
+        rescue IPAddr::InvalidAddressError, IPAddr::AddressFamilyError
+          false
+        end
+
         def extract_filename_from_url(uri)
           filename = File.basename(uri.path.to_s)
           filename.empty? ? '' : filename
@@ -105,6 +176,7 @@ module Mindee
               location = response['location']
               raise Error::MindeeInputError, 'No location in redirection header.' if location.nil?
 
+              validate_url!(location)
               new_uri = URI.parse(location)
               request = Net::HTTP::Get.new(new_uri)
               make_request(new_uri, request, max_redirects - 1)

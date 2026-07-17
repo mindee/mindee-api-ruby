@@ -18,10 +18,12 @@ target :lib do
   # Use the stubs located at sig/custom/<library_name>.rbs instead.
   library 'date'
   library 'fileutils'
+  library 'ipaddr'
   library 'logger'
   library 'json'
   library 'openssl'
   library 'pathname'
+  library 'resolv'
   library 'tempfile'
   library 'time'
   library 'uri'
