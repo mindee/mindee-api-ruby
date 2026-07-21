@@ -242,11 +242,11 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#<=-instance_method" title="#&lt;= (instance method)">#<strong>&lt;=</strong>(other)  &#x21d2; Object </a>
+      <a href="#<-instance_method" title="#&lt; (instance method)">#<strong>&lt;</strong>(other)  &#x21d2; Object </a>
     
 
     
-      (also: #lteql?)
+      (also: #lt?, #less_than?)
     
   </span>
   
@@ -258,7 +258,31 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>less than or equality of two FieldConfidence instances.</p></div></span>
+    <span class="summary_desc"><div class='inline'><p>Less than comparison of two FieldConfidence instances.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#<=-instance_method" title="#&lt;= (instance method)">#<strong>&lt;=</strong>(other)  &#x21d2; Object </a>
+    
+
+    
+      (also: #lteql?, #less_than_or_equal?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Less than or equality of two FieldConfidence instances.</p></div></span>
   
 </li>
 
@@ -270,7 +294,7 @@
     
 
     
-      (also: #eql?)
+      (also: #eql?, #equal?)
     
   </span>
   
@@ -290,11 +314,35 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#>-instance_method" title="#&gt; (instance method)">#<strong>&gt;</strong>(other)  &#x21d2; Object </a>
+    
+
+    
+      (also: #gt?, #greater_than?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Greater than comparison of two FieldConfidence instances.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#>=-instance_method" title="#&gt;= (instance method)">#<strong>&gt;=</strong>(other)  &#x21d2; Object </a>
     
 
     
-      (also: #gteql?)
+      (also: #gteql?, #greater_than_or_equal?)
     
   </span>
   
@@ -571,27 +619,121 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="<=-instance_method">
+  <h3 class="signature first" id="<-instance_method">
   
-    #<strong>&lt;=</strong>(other)  &#x21d2; <tt>Object</tt> 
+    #<strong>&lt;</strong>(other)  &#x21d2; <tt>Object</tt> 
   
 
   
     <span class="aliases">Also known as:
-    <span class="names"><span id='lteql?-instance_method'>lteql?</span></span>
+    <span class="names"><span id='lt?-instance_method'>lt?</span>, <span id='less_than?-instance_method'>less_than?</span></span>
     </span>
   
 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>less than or equality of two FieldConfidence instances.</p>
-<h1 id="_param_other__String__Integer__FieldConfidence__The_other_confidence_to_compare_">@param other [String, Integer, FieldConfidence] The other confidence to compare.</h1>
+    <p>Less than comparison of two FieldConfidence instances.</p>
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>, <tt><span class='object_link'><a href="" title="Mindee::V2::Parsing::Field::FieldConfidence (class)">FieldConfidence</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The other confidence to compare.</p></div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/parsing/field/field_confidence.rb', line 120</span>
+
+<span class='kw'>def</span> <span class='op'>&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Mindee::V2::Parsing::Field::FieldConfidence (class)">FieldConfidence</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_val_to_i'>val_to_i</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_val_to_i'>val_to_i</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_other'>other</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid type: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="<=-instance_method">
+  
+    #<strong>&lt;=</strong>(other)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='lteql?-instance_method'>lteql?</span>, <span id='less_than_or_equal?-instance_method'>less_than_or_equal?</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Less than or equality of two FieldConfidence instances.</p>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>, <tt><span class='object_link'><a href="" title="Mindee::V2::Parsing::Field::FieldConfidence (class)">FieldConfidence</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The other confidence to compare.</p></div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -638,7 +780,7 @@
 
   
     <span class="aliases">Also known as:
-    <span class="names"><span id='eql?-instance_method'>eql?</span></span>
+    <span class="names"><span id='eql?-instance_method'>eql?</span>, <span id='equal?-instance_method'>equal?</span></span>
     </span>
   
 
@@ -724,6 +866,83 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id=">-instance_method">
+  
+    #<strong>&gt;</strong>(other)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='gt?-instance_method'>gt?</span>, <span id='greater_than?-instance_method'>greater_than?</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Greater than comparison of two FieldConfidence instances.</p>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>, <tt><span class='object_link'><a href="" title="Mindee::V2::Parsing::Field::FieldConfidence (class)">FieldConfidence</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The other confidence to compare.</p></div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/parsing/field/field_confidence.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='op'>&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Mindee::V2::Parsing::Field::FieldConfidence (class)">FieldConfidence</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_val_to_i'>val_to_i</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_val_to_i'>val_to_i</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_other'>other</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid type: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id=">=-instance_method">
   
     #<strong>&gt;=</strong>(other)  &#x21d2; <tt>Object</tt> 
@@ -731,7 +950,7 @@
 
   
     <span class="aliases">Also known as:
-    <span class="names"><span id='gteql?-instance_method'>gteql?</span></span>
+    <span class="names"><span id='gteql?-instance_method'>gteql?</span>, <span id='greater_than_or_equal?-instance_method'>greater_than_or_equal?</span></span>
     </span>
   
 
@@ -970,7 +1189,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jul 15 15:47:28 2026 by
+  Generated on Tue Jul 21 15:36:06 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-3.2.11).
 </div>

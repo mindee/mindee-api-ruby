@@ -174,7 +174,7 @@ See: <a href="https://developers.mindee.com/docs">https://developers.mindee.com/
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#enqueue_and_parse-instance_method" title="#enqueue_and_parse (instance method)">#<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint, options)  &#x21d2; Mindee::V1::Parsing::Common::ApiResponse </a>
+      <a href="#enqueue_and_parse-instance_method" title="#enqueue_and_parse (instance method)">#<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint, options, cancellation_token = nil)  &#x21d2; Mindee::V1::Parsing::Common::ApiResponse </a>
     
 
     
@@ -188,7 +188,7 @@ See: <a href="https://developers.mindee.com/docs">https://developers.mindee.com/
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Enqueue a document for async parsing and automatically try to retrieve it.</p></div></span>
+    <span class="summary_desc"><div class='inline'><p>rubocop:disable Metrics/CyclomaticComplexity Enqueue a document for async parsing and automatically try to retrieve it.</p></div></span>
   
 </li>
 
@@ -210,7 +210,7 @@ See: <a href="https://developers.mindee.com/docs">https://developers.mindee.com/
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sends a document to a workflow.</p></div></span>
+    <span class="summary_desc"><div class='inline'><p>rubocop:enable Metrics/CyclomaticComplexity Sends a document to a workflow.</p></div></span>
   
 </li>
 
@@ -578,17 +578,17 @@ standard (off the shelf) endpoint.</p></div>
       <pre class="lines">
 
 
-391
-392
-393
-394
-395
-396
-397
-398</pre>
+406
+407
+408
+409
+410
+411
+412
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 391</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 406</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_endpoint'>create_endpoint</span><span class='lparen'>(</span><span class='label'>endpoint_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>account_name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_initialize_endpoint'>initialize_endpoint</span><span class='lparen'>(</span>
@@ -761,7 +761,7 @@ This performs a cropping operation on the server and will increase response time
       <div class="method_details ">
   <h3 class="signature " id="enqueue_and_parse-instance_method">
   
-    #<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint, options)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::V1::Parsing::Common::ApiResponse (class)">Mindee::V1::Parsing::Common::ApiResponse</a></span></tt> 
+    #<strong>enqueue_and_parse</strong>(input_source, product_class, endpoint, options, cancellation_token = nil)  &#x21d2; <tt><span class='object_link'><a href="Parsing/Common/ApiResponse.html" title="Mindee::V1::Parsing::Common::ApiResponse (class)">Mindee::V1::Parsing::Common::ApiResponse</a></span></tt> 
   
 
   
@@ -769,7 +769,9 @@ This performs a cropping operation on the server and will increase response time
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enqueue a document for async parsing and automatically try to retrieve it</p>
+    <p>rubocop:disable Metrics/CyclomaticComplexity
+Enqueue a document for async parsing and automatically try to retrieve it</p>
+<p>rubocop:disable Metrics/PerceivedComplexity</p>
 
   </div>
 </div>
@@ -859,6 +861,22 @@ This performs a cropping operation on the server and will increase response time
       
     </li>
   
+    <li>
+      
+        <span class='name'>cancellation_token</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../HTTP/CancellationToken.html" title="Mindee::HTTP::CancellationToken (class)">Mindee::HTTP::CancellationToken</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Token for cancellation.</p></div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -874,6 +892,19 @@ This performs a cropping operation on the server and will increase response time
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Error/MindeeError.html" title="Mindee::Error::MindeeError (class)">Mindee::Error::MindeeError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -881,9 +912,6 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-251
-252
-253
 254
 255
 256
@@ -912,16 +940,37 @@ This performs a cropping operation on the server and will increase response time
 279
 280
 281
-282</pre>
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 251</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 254</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_enqueue_and_parse'>enqueue_and_parse</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_enqueue_and_parse'>enqueue_and_parse</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_cancellation_token'>cancellation_token</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='rparen'>)</span>
   <span class='id identifier rubyid_validate_async_params'>validate_async_params</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_initial_delay_sec'>initial_delay_sec</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delay_sec'>delay_sec</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_max_retries'>max_retries</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_enqueue_res'>enqueue_res</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue_res'>enqueue_res</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='kw'>or</span> <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeAPIError.html" title="Mindee::Error::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Expected job to be present</span><span class='tstring_end'>&#39;</span></span>
   <span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeError.html" title="Mindee::Error::MindeeError (class)">MindeeError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Enqueueing of the document was canceled.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_cancellation_token'>cancellation_token</span><span class='op'>&amp;.</span><span class='id identifier rubyid_canceled?'>canceled?</span>
 
   <span class='id identifier rubyid_sleep'>sleep</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_initial_delay_sec'>initial_delay_sec</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_polling_attempts'>polling_attempts</span> <span class='op'>=</span> <span class='int'>1</span>
@@ -935,6 +984,8 @@ This performs a cropping operation on the server and will increase response time
   <span class='comment'># @type var valid_statuses: Array[(:waiting | :processing | :completed | :failed)]
 </span>  <span class='kw'>while</span> <span class='id identifier rubyid_valid_statuses'>valid_statuses</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_queue_res_job'>queue_res_job</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_polling_attempts'>polling_attempts</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_max_retries'>max_retries</span>
     <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Polling server for parsing result with job id: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_job_id'>job_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;. Attempt </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_polling_attempts'>polling_attempts</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeError.html" title="Mindee::Error::MindeeError (class)">MindeeError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Enqueueing of the document was canceled.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_cancellation_token'>cancellation_token</span><span class='op'>&amp;.</span><span class='id identifier rubyid_canceled?'>canceled?</span>
+
     <span class='id identifier rubyid_sleep'>sleep</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delay_sec'>delay_sec</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_queue_res'>queue_res</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_queued'>parse_queued</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_queue_res_job'>queue_res_job</span> <span class='op'>=</span> <span class='id identifier rubyid_queue_res'>queue_res</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span> <span class='kw'>or</span> <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeAPIError.html" title="Mindee::Error::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Expected job to be present</span><span class='tstring_end'>&#39;</span></span>
@@ -965,7 +1016,8 @@ This performs a cropping operation on the server and will increase response time
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends a document to a workflow.</p>
+    <p>rubocop:enable Metrics/CyclomaticComplexity
+Sends a document to a workflow.</p>
 <p>Accepts options either as a Hash or as a WorkflowOptions struct.</p>
 <p>requiring authentication.</p>
 <ul>
@@ -1072,25 +1124,25 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 305</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 320</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_workflow'>execute_workflow</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_workflow_id'>workflow_id</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="WorkflowOptions.html" title="Mindee::V1::WorkflowOptions (class)">WorkflowOptions</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="WorkflowOptions.html" title="Mindee::V1::WorkflowOptions (class)">WorkflowOptions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WorkflowOptions.html#initialize-instance_method" title="Mindee::V1::WorkflowOptions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>params:</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -1179,19 +1231,19 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336</pre>
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 327</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load_prediction'>load_prediction</span><span class='lparen'>(</span><span class='id identifier rubyid_product_class'>product_class</span><span class='comma'>,</span> <span class='id identifier rubyid_local_response'>local_response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeAPIError.html" title="Mindee::Error::MindeeAPIError (class)">MindeeAPIError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Expected LocalResponse to not be nil.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_local_response'>local_response</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1568,12 +1620,12 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-360
-361
-362</pre>
+375
+376
+377</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 375</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_b64string'>source_from_b64string</span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source/Base64InputSource.html" title="Mindee::Input::Source::Base64InputSource (class)">Base64InputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Input/Source/Base64InputSource.html#initialize-instance_method" title="Mindee::Input::Source::Base64InputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_base64_string'>base64_string</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1668,12 +1720,12 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-351
-352
-353</pre>
+366
+367
+368</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 351</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 366</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_bytes'>source_from_bytes</span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source/BytesInputSource.html" title="Mindee::Input::Source::BytesInputSource (class)">BytesInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Input/Source/BytesInputSource.html#initialize-instance_method" title="Mindee::Input::Source::BytesInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_bytes'>input_bytes</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1768,12 +1820,12 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-369
-370
-371</pre>
+384
+385
+386</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 369</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 384</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_file'>source_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source/FileInputSource.html" title="Mindee::Input::Source::FileInputSource (class)">FileInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Input/Source/FileInputSource.html#initialize-instance_method" title="Mindee::Input::Source::FileInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_file'>input_file</span><span class='comma'>,</span> <span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1854,12 +1906,12 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-342
-343
-344</pre>
+357
+358
+359</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 342</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_path'>source_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source/PathInputSource.html" title="Mindee::Input::Source::PathInputSource (class)">PathInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Input/Source/PathInputSource.html#initialize-instance_method" title="Mindee::Input::Source::PathInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_path'>input_path</span><span class='comma'>,</span> <span class='label'>repair_pdf:</span> <span class='id identifier rubyid_repair_pdf'>repair_pdf</span><span class='rparen'>)</span>
@@ -1924,12 +1976,12 @@ This performs a cropping operation on the server and will increase response time
       <pre class="lines">
 
 
-376
-377
-378</pre>
+391
+392
+393</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v1/client.rb', line 391</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_from_url'>source_from_url</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Input.html" title="Mindee::Input (module)">Input</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source.html" title="Mindee::Input::Source (module)">Source</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Input/Source/URLInputSource.html" title="Mindee::Input::Source::URLInputSource (class)">URLInputSource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Input/Source/URLInputSource.html#initialize-instance_method" title="Mindee::Input::Source::URLInputSource#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
@@ -1944,7 +1996,7 @@ This performs a cropping operation on the server and will increase response time
 </div>
 
       <div id="footer">
-  Generated on Wed Jul 15 15:47:25 2026 by
+  Generated on Tue Jul 21 15:36:04 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-3.2.11).
 </div>

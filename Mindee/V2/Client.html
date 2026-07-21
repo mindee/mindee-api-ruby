@@ -151,7 +151,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#enqueue_and_get_result-instance_method" title="#enqueue_and_get_result (instance method)">#<strong>enqueue_and_get_result</strong>(product, input_source, params, polling_options = nil)  &#x21d2; Parsing::BaseResponse </a>
+      <a href="#enqueue_and_get_result-instance_method" title="#enqueue_and_get_result (instance method)">#<strong>enqueue_and_get_result</strong>(product, input_source, params, polling_options = nil, cancellation_token = nil)  &#x21d2; Parsing::BaseResponse </a>
     
 
     
@@ -447,7 +447,7 @@
       <div class="method_details ">
   <h3 class="signature " id="enqueue_and_get_result-instance_method">
   
-    #<strong>enqueue_and_get_result</strong>(product, input_source, params, polling_options = nil)  &#x21d2; <tt><span class='object_link'><a href="Parsing/BaseResponse.html" title="Mindee::V2::Parsing::BaseResponse (class)">Parsing::BaseResponse</a></span></tt> 
+    #<strong>enqueue_and_get_result</strong>(product, input_source, params, polling_options = nil, cancellation_token = nil)  &#x21d2; <tt><span class='object_link'><a href="Parsing/BaseResponse.html" title="Mindee::V2::Parsing::BaseResponse (class)">Parsing::BaseResponse</a></span></tt> 
   
 
   
@@ -456,6 +456,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Enqueues to an asynchronous endpoint and automatically polls for a response.</p>
+<p>rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity</p>
 
   </div>
 </div>
@@ -521,6 +522,22 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>cancellation_token</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../HTTP/CancellationToken.html" title="Mindee::HTTP::CancellationToken (class)">Mindee::HTTP::CancellationToken</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Token for cancellation.</p></div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -556,8 +573,6 @@
       <pre class="lines">
 
 
-62
-63
 64
 65
 66
@@ -606,16 +621,24 @@
 109
 110
 111
-112</pre>
+112
+113
+114
+115
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/client.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/client.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enqueue_and_get_result'>enqueue_and_get_result</span><span class='lparen'>(</span>
   <span class='id identifier rubyid_product'>product</span><span class='comma'>,</span>
   <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span>
   <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
-  <span class='id identifier rubyid_polling_options'>polling_options</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_polling_options'>polling_options</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_cancellation_token'>cancellation_token</span> <span class='op'>=</span> <span class='kw'>nil</span>
 <span class='rparen'>)</span>
   <span class='id identifier rubyid_enqueue_response'>enqueue_response</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue'>enqueue</span><span class='lparen'>(</span><span class='id identifier rubyid_product'>product</span><span class='comma'>,</span> <span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_normalized_params'>normalized_params</span> <span class='op'>=</span> <span class='id identifier rubyid_normalize_parameters'>normalize_parameters</span><span class='lparen'>(</span><span class='id identifier rubyid_product'>product</span><span class='period'>.</span><span class='id identifier rubyid_params_type'>params_type</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='label'>polling_options:</span> <span class='id identifier rubyid_polling_options'>polling_options</span><span class='rparen'>)</span>
@@ -628,6 +651,8 @@
 
   <span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='id identifier rubyid_enqueue_response'>enqueue_response</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
   <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Successfully enqueued document with job id: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_job_id'>job_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeError.html" title="Mindee::Error::MindeeError (class)">MindeeError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Enqueueing of the document was canceled.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_cancellation_token'>cancellation_token</span><span class='op'>&amp;.</span><span class='id identifier rubyid_canceled?'>canceled?</span>
 
   <span class='id identifier rubyid_sleep'>sleep</span><span class='lparen'>(</span><span class='id identifier rubyid_normalized_params'>normalized_params</span><span class='period'>.</span><span class='id identifier rubyid_polling_options'>polling_options</span><span class='period'>.</span><span class='id identifier rubyid_initial_delay_sec'>initial_delay_sec</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_retry_counter'>retry_counter</span> <span class='op'>=</span> <span class='int'>1</span>
@@ -645,6 +670,8 @@
       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Attempt n°</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_retry_counter'>retry_counter</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_normalized_params'>normalized_params</span><span class='period'>.</span><span class='id identifier rubyid_polling_options'>polling_options</span><span class='period'>.</span><span class='id identifier rubyid_max_retries'>max_retries</span><span class='embexpr_end'>}</span><span class='tstring_content'>.\n</span><span class='tstring_end'>&quot;</span></span> \
       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job status: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_poll_results'>poll_results</span><span class='period'>.</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
     <span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Mindee.html" title="Mindee (module)">Mindee</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error.html" title="Mindee::Error (module)">Error</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Error/MindeeError.html" title="Mindee::Error::MindeeError (class)">MindeeError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Enqueueing of the document was canceled.</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_cancellation_token'>cancellation_token</span><span class='op'>&amp;.</span><span class='id identifier rubyid_canceled?'>canceled?</span>
 
     <span class='id identifier rubyid_sleep'>sleep</span><span class='lparen'>(</span><span class='id identifier rubyid_normalized_params'>normalized_params</span><span class='period'>.</span><span class='id identifier rubyid_polling_options'>polling_options</span><span class='period'>.</span><span class='id identifier rubyid_delay_sec'>delay_sec</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_poll_results'>poll_results</span> <span class='op'>=</span> <span class='id identifier rubyid_get_job'>get_job</span><span class='lparen'>(</span><span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span>
@@ -884,12 +911,12 @@
       <pre class="lines">
 
 
-118
-119
-120</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/client.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/client.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_models'>search_models</span><span class='lparen'>(</span><span class='id identifier rubyid_model_name'>model_name</span><span class='comma'>,</span> <span class='id identifier rubyid_model_type'>model_type</span><span class='rparen'>)</span>
   <span class='ivar'>@mindee_api</span><span class='period'>.</span><span class='id identifier rubyid_search_models'>search_models</span><span class='lparen'>(</span><span class='id identifier rubyid_model_name'>model_name</span><span class='comma'>,</span> <span class='id identifier rubyid_model_type'>model_type</span><span class='rparen'>)</span>
@@ -904,7 +931,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jul 15 15:47:26 2026 by
+  Generated on Tue Jul 21 15:36:04 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-3.2.11).
 </div>
