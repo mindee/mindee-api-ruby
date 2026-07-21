@@ -1,5 +1,11 @@
 # Mindee Ruby API Library Changelog
 
+## v5.4.0 - 2026-07-21
+### Changes
+* :sparkles: add field confidence comparators
+* :sparkles: add support for cancellation token
+
+
 ## v5.3.1 - 2026-07-15
 ### Fixes
 * :bug: fix file alias being sent as an invalid parameter
