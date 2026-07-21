@@ -106,25 +106,25 @@ describe Mindee::V2::Parsing::Field::FieldConfidence do
       end
     end
 
-    describe '#equal_value? / #eql?' do
+    describe '#equal? / #eql?' do
       it 'returns true for equal confidence values' do
-        expect(high.equal_value?(described_class.new('High'))).to be true
+        expect(high.equal?(described_class.new('High'))).to be true
         expect(high.eql?(described_class.new('High'))).to be true
       end
 
       it 'returns false for different confidence values' do
-        expect(high.equal_value?(medium)).to be false
+        expect(high.equal?(medium)).to be false
         expect(high.eql?(low)).to be false
       end
 
       it 'compares against a String' do
-        expect(high.equal_value?('High')).to be true
-        expect(high.equal_value?('Medium')).to be false
+        expect(high.equal?('High')).to be true
+        expect(high.equal?('Medium')).to be false
       end
 
       it 'compares against an Integer' do
-        expect(high.equal_value?(3)).to be true
-        expect(high.equal_value?(2)).to be false
+        expect(high.equal?(3)).to be true
+        expect(high.equal?(2)).to be false
       end
     end
   end
