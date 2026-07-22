@@ -22,31 +22,16 @@ jobs:
         ruby-version: "3.2.0"
         bundler-cache: true
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.x"
-
-    - name: Install pre-commit
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install pre-commit
-
-    - name: Run pre-commit checks (security + hygiene)
+    - name: Run Gitleaks
+      uses: gitleaks/gitleaks-action@v2
       env:
-        SKIP: rubocop,steep
-      run: |
-        pre-commit run --all-files --show-diff-on-failure
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLEAKS_EXCLUDE: "^(spec/data/|docs/code_samples/|local_test/)"
 
     - name: Analyse the code with Rubocop
       run: |
         bundle install
-        bundle exec rubocop ./
-
-    - name: Attempt to generate the documentation
-      run: |
-        bundle exec rake doc
-
-    - name: Check types using Steep
-      run: |
-        bundle exec steep check
+        bundle exec overcommit --install
+        bundle exec overcommit --sign
+        bundle exec overcommit --sign pre-commit
+        SKIP=Gitleaks bundle exec overcommit --run

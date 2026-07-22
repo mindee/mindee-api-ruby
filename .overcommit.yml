@@ -1,0 +1,46 @@
+PreCommit:
+  MergeConflicts:
+    enabled: true
+
+  YamlSyntax:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+
+  FileSize:
+    enabled: true
+    byte_limit: 1048576
+
+  RuboCop:
+    enabled: true
+    required_executable: 'bundle'
+    command: ['bundle', 'exec', 'rubocop', '--force-exclusion', '--no-server']
+
+  CustomScript:
+    enabled: true
+    description: 'Run Steep type checking'
+    required_executable: 'bundle'
+    command: ['bundle', 'exec', 'steep', 'check']
+
+  Gitleaks:
+    enabled: true
+    required_executable: 'gitleaks'
+  CommitMsg:
+    enabled: false
+    CapitalizedSubject:
+      enabled: false
+    TextWidth:
+      enabled: false
+    TrailingPeriod:
+      enabled: false
+    SingleLineSubject:
+      enabled: false
+    EmptyMessage:
+      enabled: false
+
+PrePush:
+  BundleAudit:
+    enabled: true
+    required_executable: 'bundle'
+    command: ['sh', '-c', 'bundle exec bundle-audit check']
