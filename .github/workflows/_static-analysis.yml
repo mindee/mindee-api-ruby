@@ -23,10 +23,10 @@ jobs:
         bundler-cache: true
 
     - name: Run Gitleaks
-      uses: gitleaks/gitleaks-action@v2
+      uses: gitleaks/gitleaks-action@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITLEAKS_EXCLUDE: "^(spec/data/|docs/code_samples/|local_test/)"
+        GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
     - name: Analyse the code with Rubocop
       run: |
