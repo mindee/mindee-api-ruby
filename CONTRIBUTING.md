@@ -68,6 +68,134 @@ Please follow these steps to have your contribution considered by the maintainer
 
 While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
 
+## Development Setup
+
+### 1. Ruby
+
+[`rbenv`](https://github.com/rbenv/rbenv) is the recommended way to manage Ruby versions:
+
+```shell
+# Finalize the rbenv install (should work with both bash & zsh)
+~/.rbenv/bin/rbenv init
+# And then run
+eval "$(~/.rbenv/bin/rbenv init - bash)"
+```
+
+### 2. Clone the repository
+
+Test data lives in a submodule, so make sure to clone recursively:
+
+```shell
+git clone --recurse-submodules git@github.com:mindee/mindee-api-ruby.git ~/work/mindee/mindee-api-ruby
+cd ~/work/mindee/mindee-api-ruby
+```
+
+If you already cloned without `--recurse-submodules`, run `git submodule update --init --recursive`.
+
+### 3. Install dependencies
+
+On Debian/Ubuntu:
+
+```shell
+sudo apt install zlib1g-dev libssl-dev libreadline-dev libedit-dev libyaml-dev imagemagick
+```
+
+`imagemagick` is required at runtime by `mini_magick`, the rest are needed to build Ruby itself.
+
+```shell
+# Ruby 3.3.0 is the minimum version supported by the SDK
+rbenv install 3.3.0
+rbenv global 3.3.0
+```
+
+### 4. Install code dependencies
+
+```shell
+bundle config set --local path vendor
+bundle install
+```
+
+### 5. Validate the install works by running unit tests
+
+```shell
+bundle exec rake spec
+```
+
+## Local Quality Checks
+
+We use [`overcommit`](https://github.com/sds/overcommit) to run quality and security checks before
+changes are committed and pushed. It is a development dependency of the gem, so `bundle install`
+already installed it. The hooks are configured in [`.overcommit.yml`](.overcommit.yml), and
+repository-local custom hooks live in [`.git-hooks`](.git-hooks).
+
+The same checks run in CI, see
+[`.github/workflows/_static-analysis.yml`](.github/workflows/_static-analysis.yml).
+
+### Install `gitleaks`
+
+The `Gitleaks` pre-commit hook shells out to the
+[`gitleaks`](https://github.com/gitleaks/gitleaks) binary, which is not a gem and must be installed
+separately:
+
+```shell
+brew install gitleaks
+```
+
+Otherwise, grab a binary from the
+[releases page](https://github.com/gitleaks/gitleaks/releases) and put it on your `PATH`.
+
+### Install the hooks
+
+Run this once, after cloning:
+
+```shell
+bundle exec overcommit --install
+bundle exec overcommit --sign
+bundle exec overcommit --sign pre-commit
+```
+
+`--install` writes the git hook stubs into `.git/hooks`, and the `--sign` calls tell overcommit you
+trust the current contents of `.overcommit.yml` and of the custom hooks in `.git-hooks`.
+
+### What runs, and when
+
+* **pre-commit:** merge conflict markers, YAML syntax, trailing whitespace, file size, `rubocop`,
+  `steep check` (type checking) and `gitleaks` (secret scanning).
+* **pre-push:** `bundle-audit` (dependency vulnerability check).
+
+### Run the hooks manually
+
+```shell
+bundle exec overcommit --list-hooks         # show which hooks are enabled
+bundle exec overcommit --run                # run the pre-commit hooks on all tracked files
+bundle exec overcommit --run pre_push       # run the pre-push hooks
+bundle exec overcommit --diff main          # run the pre-commit hooks on the diff against main
+```
+
+### Skipping hooks
+
+Skip one or more hooks for a single run, by name:
+
+```shell
+SKIP=Gitleaks,Steep git commit
+```
+
+To bypass overcommit entirely (please use sparingly, CI runs the same checks):
+
+```shell
+OVERCOMMIT_DISABLE=1 git commit
+```
+
+### Troubleshooting
+
+If overcommit refuses to run and warns that the configuration or the hooks have changed, review the
+diff and then re-sign:
+
+```shell
+bundle exec overcommit --sign
+bundle exec overcommit --sign pre-commit
+```
+
 ## Styleguides
 
 ### Git Commit Messages
