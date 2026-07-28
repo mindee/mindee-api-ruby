@@ -10,6 +10,7 @@ permissions:
 jobs:
   static-analysis:
     uses: ./.github/workflows/_static-analysis.yml
+    secrets: inherit
   test-unit:
     uses: ./.github/workflows/_test-units.yml
     needs: static-analysis
