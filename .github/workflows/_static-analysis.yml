@@ -15,6 +15,9 @@ jobs:
     - uses: actions/checkout@v5
       with:
         submodules: recursive
+        # Gitleaks scans the commit range of the event, so it needs the full
+        # history rather than the default shallow clone.
+        fetch-depth: 0
 
     - name: set up Ruby
       uses: ruby/setup-ruby@v1
@@ -22,31 +25,18 @@ jobs:
         ruby-version: "3.2.0"
         bundler-cache: true
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.x"
-
-    - name: Install pre-commit
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install pre-commit
-
-    - name: Run pre-commit checks (security + hygiene)
+    - name: Run Gitleaks
+      uses: gitleaks/gitleaks-action@v3
       env:
-        SKIP: rubocop,steep
-      run: |
-        pre-commit run --all-files --show-diff-on-failure
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
     - name: Analyse the code with Rubocop
       run: |
+        git config user.email "ci@github-actions"
+        git config user.name "GitHub Actions"
         bundle install
-        bundle exec rubocop ./
-
-    - name: Attempt to generate the documentation
-      run: |
-        bundle exec rake doc
-
-    - name: Check types using Steep
-      run: |
-        bundle exec steep check
+        bundle exec overcommit --install
+        bundle exec overcommit --sign
+        bundle exec overcommit --sign pre-commit
+        SKIP=Gitleaks bundle exec overcommit --run

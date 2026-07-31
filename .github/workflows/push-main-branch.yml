@@ -8,6 +8,7 @@ on:
 jobs:
   static-analysis:
     uses: mindee/mindee-api-ruby/.github/workflows/_static-analysis.yml@main
+    secrets: inherit
   test-units:
     uses: mindee/mindee-api-ruby/.github/workflows/_test-units.yml@main
     needs: static-analysis
