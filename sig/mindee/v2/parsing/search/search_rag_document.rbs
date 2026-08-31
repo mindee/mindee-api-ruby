@@ -1,0 +1,23 @@
+# lib/mindee/v2/parsing/search/search_rag_document.rb
+
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class SearchRAGDocument
+          attr_reader created_at: Time
+          attr_reader filename: String
+          attr_reader id: String
+          attr_reader last_match_at: Time?
+          attr_reader model_id: String
+          attr_reader status: String
+          attr_reader total_matches: Integer
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

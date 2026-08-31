@@ -18,12 +18,16 @@ module Mindee
           # @return [Integer] Total number of pages.
           attr_reader :total_pages
 
+          # @return [Integer, nil] Total items without filters applied, if provided.
+          attr_reader :total_items_unfiltered
+
           # @param raw_response [Hash] The parsed JSON payload mapping to pagination metadata.
           def initialize(raw_response)
             @per_page = raw_response['per_page']
             @page = raw_response['page']
             @total_items = raw_response['total_items']
             @total_pages = raw_response['total_pages']
+            @total_items_unfiltered = raw_response['total_items_unfiltered']
           end
 
           # String representation of the pagination metadata.

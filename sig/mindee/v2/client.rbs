@@ -15,15 +15,18 @@ module Mindee
 
       def get_job: (String job_id) -> V2::Parsing::JobResponse
 
-      def enqueue: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params) -> V2::Parsing::JobResponse
+      def enqueue: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | ClientOptions::BaseParameters params) -> V2::Parsing::JobResponse
 
-      def enqueue_and_get_result: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | Input::BaseParameters params, ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil) -> T
+      def enqueue_and_get_result: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | ClientOptions::BaseParameters params, ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil) -> T
 
+      def search: [T] (HTTP::_SearchParameters[T] params) -> T
+
+      # Deprecated: use `search` instead.
       def search_models: (String?, String?) -> Mindee::V2::Parsing::Search::SearchResponse
 
       def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
 
-      def normalize_parameters: (singleton(Input::BaseParameters) param_class, Hash[String | Symbol, untyped] | Input::BaseParameters params, ?polling_options: Hash[String | Symbol, untyped] | Input::PollingOptions | nil) -> Input::BaseParameters
+      def normalize_parameters: (singleton(ClientOptions::BaseParameters) param_class, Hash[String | Symbol, untyped] | ClientOptions::BaseParameters params, ?polling_options: Hash[String | Symbol, untyped] | Input::PollingOptions | nil) -> ClientOptions::BaseParameters
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../parsing/base_response'
-require_relative '../../input/base_parameters'
+require_relative '../client_options/base_parameters'
 
 module Mindee
   module V2
@@ -11,7 +11,7 @@ module Mindee
         # @return [String] The slug of the endpoint used for this response
         @slug = ''
         # @return [Class<BaseParameters>] The class of the parameters used for this response
-        @params_type = Mindee::Input::BaseParameters
+        @params_type = Mindee::V2::ClientOptions::BaseParameters
         # @return [Class<BaseResponse>] The class of the response used for this product
         @response_type = Mindee::V2::Parsing::BaseResponse
 

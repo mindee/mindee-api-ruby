@@ -3,7 +3,7 @@ module Mindee
     module Product
       module Classification
         module Params
-          class ClassificationParameters
+          class ClassificationParameters < ClientOptions::BaseParameters
             def self.slug: -> String
 
             def self.from_hash: (params: Hash[String | Symbol, untyped]) -> ClassificationParameters

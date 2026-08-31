@@ -1,0 +1,17 @@
+# lib/mindee/v2/search/rag_documents/rag_document_search_response.rb
+
+module Mindee
+  module V2
+    module Search
+      module RAGDocuments
+        class RAGDocumentSearchResponse < V2::Parsing::Search::BaseSearchResponse
+          attr_reader rag_documents: V2::Parsing::Search::SearchRAGDocuments
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def body_lines: -> Array[String]
+        end
+      end
+    end
+  end
+end

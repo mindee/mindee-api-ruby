@@ -3,7 +3,7 @@ module Mindee
     module Product
       module Extraction
         module Params
-          class ExtractionParameters < Input::BaseParameters
+          class ExtractionParameters < ClientOptions::BaseParameters
 
             def self.slug: -> String
 

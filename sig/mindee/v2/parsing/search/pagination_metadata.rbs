@@ -8,6 +8,7 @@ module Mindee
           attr_reader page: Integer
           attr_reader per_page: Integer
           attr_reader total_items: Integer
+          attr_reader total_items_unfiltered: Integer?
           attr_reader total_pages: Integer
 
           def initialize: (Hash[String|Symbol, untyped]) -> void

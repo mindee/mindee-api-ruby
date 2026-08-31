@@ -3,13 +3,13 @@ module Mindee
     module Product
       class BaseProduct
         self.@slug: String
-        self.@params_type: singleton(Input::BaseParameters)
+        self.@params_type: singleton(ClientOptions::BaseParameters)
         self.@response_type: singleton(Parsing::BaseResponse)
 
-        def self._params_type: () -> singleton(Input::BaseParameters)
+        def self._params_type: () -> singleton(ClientOptions::BaseParameters)
 
         attr_reader self.slug: String
-        attr_reader self.params_type: singleton(Input::BaseParameters)
+        attr_reader self.params_type: singleton(ClientOptions::BaseParameters)
         attr_reader self.response_type: singleton(Parsing::BaseResponse)
 
         def initialize: -> void

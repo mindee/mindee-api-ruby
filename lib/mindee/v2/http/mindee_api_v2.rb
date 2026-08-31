@@ -17,13 +17,13 @@ module Mindee
           @settings = ApiV2Settings.new(api_key: api_key)
         end
 
-        # Sends a file to the queue.
+        # Send a file to the asynchronous processing queue for inference processing.
         #
         # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
-        # @param params [Input::BaseParameters]
+        # @param params [ClientOptions::BaseParameters]
         # @return [Mindee::V2::Parsing::JobResponse]
         # @raise [Mindee::Error::MindeeHttpErrorV2]
-        def req_post_enqueue(input_source, params)
+        def req_post_product_enqueue(input_source, params)
           @settings.check_api_key
           response = enqueue(
             input_source,
@@ -57,7 +57,17 @@ module Mindee
           Mindee::V2::Parsing::JobResponse.new(process_response(response))
         end
 
+        # Search for resources matching the given criteria.
+        # @param params [ClientOptions::BaseSearchParameters] Search parameters.
+        # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching
+        #   resources.
+        def req_search(params)
+          @settings.check_api_key
+          params.response_class.new(process_response(search_req_get(params)))
+        end
+
         # Retrieves a list of models.
+        # @deprecated Use {#req_search} instead.
         # @param model_name [String, nil]
         # @param model_type [String, nil]
         # @return [Mindee::V2::Parsing::Search::SearchResponse]
@@ -67,6 +77,28 @@ module Mindee
         end
 
         private
+
+        # Performs the GET request for a search.
+        # @param params [ClientOptions::BaseSearchParameters] Search parameters.
+        # @return [Net::HTTPResponse]
+        def search_req_get(params)
+          uri = URI("#{@settings.base_url}/v2/search/#{params.slug}")
+
+          query_params = params.request_parameters
+          uri.query = URI.encode_www_form(query_params) unless query_params.empty?
+
+          headers = {
+            'Authorization' => @settings.api_key,
+            'User-Agent' => @settings.user_agent,
+          }
+          req = Net::HTTP::Get.new(uri, headers)
+          req['Transfer-Encoding'] = 'chunked'
+
+          Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
+            return http.request(req)
+          end
+          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
+        end
 
         # Retrieves a list of models.
         # @param model_name [String, nil]
@@ -191,7 +223,7 @@ module Mindee
         end
 
         # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-        # @param params [Input::BaseParameters] Inference options.
+        # @param params [ClientOptions::BaseParameters] Inference options.
         # @return [Net::HTTPResponse, nil]
         def enqueue(input_source, params)
           uri = URI("#{@settings.base_url}/v2/products/#{params.slug}/enqueue")

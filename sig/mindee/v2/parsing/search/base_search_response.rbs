@@ -1,0 +1,17 @@
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        class BaseSearchResponse < CommonResponse
+          attr_reader pagination: PaginationMetadata
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def body_lines: -> Array[String]
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

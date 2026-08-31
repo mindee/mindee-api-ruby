@@ -37,7 +37,7 @@ module Mindee
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
-      # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+      # @param params [Hash, ClientOptions::BaseParameters] Parameters for the inference.
       # @return [Mindee::V2::Parsing::JobResponse]
       def enqueue(
         product,
@@ -48,7 +48,7 @@ module Mindee
         normalized_params.validate_async_params
         logger.debug("Enqueueing document to model '#{normalized_params.model_id}'.")
 
-        @mindee_api.req_post_enqueue(input_source, normalized_params)
+        @mindee_api.req_post_product_enqueue(input_source, normalized_params)
       end
 
       # Enqueues to an asynchronous endpoint and automatically polls for a response.
@@ -56,7 +56,7 @@ module Mindee
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
-      # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+      # @param params [Hash, ClientOptions::BaseParameters] Parameters for the inference.
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
@@ -119,7 +119,15 @@ module Mindee
       end
       # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
+      # Search for resources matching the given criteria.
+      # @param params [ClientOptions::BaseSearchParameters] Search parameters.
+      # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching resources.
+      def search(params)
+        @mindee_api.req_search(params)
+      end
+
       # Searches for a list of available models for the given API key.
+      # @deprecated Use {#search} instead.
       # @param model_name [String]
       # @param model_type [String]
       # @return [Mindee::V2::Parsing::Search::SearchResponse]
@@ -136,7 +144,7 @@ module Mindee
       def normalize_parameters(param_class, params, polling_options: nil)
         if params.is_a?(Hash)
           params[:polling_options] = polling_options if polling_options
-        elsif params.is_a?(Mindee::Input::BaseParameters) && !polling_options.nil?
+        elsif params.is_a?(Mindee::V2::ClientOptions::BaseParameters) && !polling_options.nil?
           params.polling_options = polling_options
         end
         return param_class.from_hash(params: params) if params.is_a?(Hash)
