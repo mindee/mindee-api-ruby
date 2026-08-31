@@ -9,6 +9,8 @@ module Mindee
 
           def body_lines: -> Array[String]
 
+          def pagination_metadata: -> PaginationMetadata
+
           def to_s: -> String
         end
       end

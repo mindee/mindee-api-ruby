@@ -1,4 +1,4 @@
-# lib/mindee/input/base_parameters.rb
+# lib/mindee/v2/client_options/base_parameters.rb
 
 module Mindee
   module V2

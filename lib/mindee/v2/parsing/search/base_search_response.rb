@@ -21,6 +21,11 @@ module Mindee
             raise NotImplementedError, 'body_lines must be implemented in subclasses'
           end
 
+          # @deprecated Use {#pagination} instead.
+          def pagination_metadata
+            pagination
+          end
+
           # String representation of the search response.
           # @return [String]
           def to_s
