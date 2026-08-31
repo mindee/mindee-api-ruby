@@ -33,7 +33,7 @@ module Mindee
           polling_options: nil,
           close_file: true
         )
-          raise Error::MindeeInputError, 'Model ID is required.' if model_id.empty? || model_id.nil?
+          raise Error::MindeeInputError, 'Model ID is required.' if model_id.nil? || model_id.empty?
 
           @model_id = model_id
           @file_alias = file_alias

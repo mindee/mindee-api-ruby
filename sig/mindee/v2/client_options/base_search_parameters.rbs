@@ -11,8 +11,8 @@ module Mindee
 
         def slug: -> String
         def self.slug: -> String
-        def response_class: -> singleton(V2::Parsing::Search::SearchResponse)
-        def self.response_class: -> singleton(V2::Parsing::Search::SearchResponse)
+        def response_class: -> singleton(V2::Parsing::Search::BaseSearchResponse)
+        def self.response_class: -> singleton(V2::Parsing::Search::BaseSearchResponse)
       end
     end
   end
