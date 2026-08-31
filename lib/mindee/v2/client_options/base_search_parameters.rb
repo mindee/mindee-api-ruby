@@ -12,12 +12,11 @@ module Mindee
 
         # @param page [Integer, nil] 1-based page index.
         # @param per_page [Integer, nil] Number of items per page.
-        # rubocop:disable Lint/MissingSuper
+        # rubocop:disable-next Lint/MissingSuper
         def initialize(page: nil, per_page: nil)
           @page = page
           @per_page = per_page
         end
-        # rubocop:enable Lint/MissingSuper
 
         # Return the parameters for the request.
         # @return [Hash{String => String, Array<String>}]

@@ -13,11 +13,10 @@ module Mindee
           # @param server_response [Hash] Hash representation of the JSON returned by the service.
           def initialize(server_response)
             @document_type = server_response['document_type']
-            # rubocop:disable Style/GuardClause
+            # rubocop:disable-next Style/GuardClause
             unless server_response['extraction_response'].nil?
               @extraction_response = V2::Product::Extraction::ExtractionResponse.new(server_response['extraction_response'])
             end
-            # rubocop:enable Style/GuardClause
           end
 
           # @return [String] String representation.

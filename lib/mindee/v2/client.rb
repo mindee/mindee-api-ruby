@@ -60,7 +60,7 @@ module Mindee
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:disable-next Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def enqueue_and_get_result(
         product,
         input_source,
@@ -117,7 +117,6 @@ module Mindee
         raise Mindee::Error::MindeeError,
               "Asynchronous parsing request timed out after #{sec_count} seconds"
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       # Search for resources matching the given criteria.
       # @param params [ClientOptions::BaseSearchParameters] Search parameters.

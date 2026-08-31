@@ -250,7 +250,7 @@ module Mindee
       # @param endpoint [Mindee::V1::HTTP::Endpoint] Endpoint of the API.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
-      # rubocop:disable Metrics/PerceivedComplexity
+      # rubocop:disable-next Metrics/PerceivedComplexity
       def enqueue_and_parse(
         input_source,
         product_class,
@@ -293,7 +293,6 @@ module Mindee
 
         queue_res
       end
-      # rubocop:enable Metrics/PerceivedComplexity
 
       # rubocop:enable Metrics/CyclomaticComplexity
       # Sends a document to a workflow.
