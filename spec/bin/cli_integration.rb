@@ -21,7 +21,7 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
   context 'search-models command' do
     ['classification', 'crop', 'extraction', 'ocr', 'split'].each do |model_type|
       it "returns model list for type #{model_type}" do
-        stdout, stderr, status = run_cli('search-models', '-t', model_type)
+        stdout, stderr, status = run_cli('search-models', '-m', model_type)
         expect(status.success?).to eq(true), stderr
         expect(stdout.strip).not_to be_empty
       end
@@ -40,13 +40,13 @@ describe 'Mindee CLI V2', :integration, :v2, order: :defined do
     end
 
     it 'returns models for name and model_type filters' do
-      stdout, stderr, status = run_cli('search-models', '-n', 'findoc', '-t', 'extraction')
+      stdout, stderr, status = run_cli('search-models', '-n', 'findoc', '-m', 'extraction')
       expect(status.success?).to eq(true), stderr
       expect(stdout.strip).not_to be_empty
     end
 
     it 'returns HTTP 422 on invalid model type' do
-      stdout, stderr, status = run_cli('search-models', '-t', 'invalid')
+      stdout, stderr, status = run_cli('search-models', '-m', 'invalid')
       expect(status.success?).to eq(false)
       expect("#{stdout}\n#{stderr}").to include('HTTP 422')
     end

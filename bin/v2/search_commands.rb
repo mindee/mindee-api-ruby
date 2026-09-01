@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee'
+require_relative 'products'
 
 module MindeeCLI
   # Search-related commands for the V2 CLI.
@@ -8,13 +9,13 @@ module MindeeCLI
     # NOTE: keep command names as string instead of symbols due to kebab-case.
     V2_SEARCH_COMMANDS = {
       'search-models' => {
-        description: 'Search for available models for this API key',
-        parser: :search_parser,
-        runner: :search,
+        description: 'Search available models.',
+        parser: :search_models_parser,
+        runner: :search_models,
         summary: :models,
       },
       'search-rag-docs' => {
-        description: 'Search available RAG documents for a given model',
+        description: 'Search available RAG documents for a given model.',
         parser: :search_rag_docs_parser,
         runner: :search_rag_documents,
         summary: :rag_documents,
@@ -41,16 +42,17 @@ module MindeeCLI
     end
 
     # @return [OptionParser]
-    def init_search_parser
+    def init_search_models_parser
       OptionParser.new do |options_parser|
         options_parser.banner = "Usage: #{@command_prefix} search-models [options]"
         init_common_options(options_parser)
         options_parser.on('-n [NAME]', '--name [NAME]',
-                          'Search for partial matches in model name. Note: case insensitive') do |v|
+                          'Filter by model name partial match (case insensitive).') do |v|
           @options[:model_name] = v
         end
-        options_parser.on('-t [NAME]', '--type [NAME]',
-                          'Search for EXACT matches in model type. Note: case sensitive') do |v|
+        options_parser.on('-m [MODEL_TYPE]', '--model-type [MODEL_TYPE]',
+                          'Filter by exact model type (case sensitive).',
+                          "Available options: #{V2_PRODUCTS.keys.join(', ')}") do |v|
           @options[:model_type] = v
         end
       end
@@ -65,7 +67,7 @@ module MindeeCLI
           @options[:model_id] = v
         end
         options_parser.on('-f [FILENAME]', '--filename [FILENAME]',
-                          'Filter by file name partial match. Note: case insensitive') do |v|
+                          'Filter by file name partial match (case insensitive).') do |v|
           @options[:filename] = v
         end
       end
@@ -73,7 +75,7 @@ module MindeeCLI
 
     # @param options [Hash]
     # @return [Mindee::V2::Search::Models::ModelSearchResponse]
-    def search(options)
+    def search_models(options)
       mindee_client = Mindee::V2::Client.new(api_key: options[:api_key])
       mindee_client.search(
         Mindee::V2::Search::Models::ModelSearchParameters.new(

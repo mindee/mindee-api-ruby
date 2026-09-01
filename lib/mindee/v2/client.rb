@@ -127,11 +127,11 @@ module Mindee
 
       # Returns a list of models matching a criteria for the given API key.
       # @deprecated Use {#search} instead.
-      # @param model_name [String]
-      # @param model_type [String]
-      # @return [Mindee::V2::Parsing::Search::SearchResponse]
+      # @param model_name [String, nil]
+      # @param model_type [String, nil]
+      # @return [Mindee::V2::Search::Models::ModelSearchResponse]
       def search_models(model_name, model_type)
-        @mindee_api.search_models_obsolete(model_name, model_type)
+        search(Search::Models::ModelSearchParameters.new(name: model_name, model_type: model_type))
       end
 
       private

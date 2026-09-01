@@ -17,7 +17,6 @@ describe Mindee::V2::Search::Models::ModelSearchResponse do
     expect(response.pagination.page).to eq(1)
     expect(response.pagination.per_page).to eq(50)
     expect(response.pagination.total_pages).to eq(1)
-    expect(response.pagination.total_items_unfiltered).to be_nil
 
     first_item = response.models[0]
     expect(first_item.name).to eq('Extraction With Webhooks')

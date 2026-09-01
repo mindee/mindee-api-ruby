@@ -22,7 +22,7 @@ module Mindee
       def search: [T] (HTTP::_SearchParameters[T] params) -> T
 
       # Deprecated: use `search` instead.
-      def search_models: (String?, String?) -> Mindee::V2::Parsing::Search::SearchResponse
+      def search_models: (String?, String?) -> Mindee::V2::Search::Models::ModelSearchResponse
 
       def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
 

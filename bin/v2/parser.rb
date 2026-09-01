@@ -20,7 +20,7 @@ module MindeeCLI
     attr_reader :product_parser
 
     # @return [Parser]
-    attr_reader :search_parser
+    attr_reader :search_models_parser
 
     # @return [Parser]
     attr_reader :search_rag_docs_parser
@@ -32,7 +32,7 @@ module MindeeCLI
         opts.banner = "Usage: #{@command_prefix} command [options]"
       end
       @product_parser = init_product_parser
-      @search_parser = init_search_parser
+      @search_models_parser = init_search_models_parser
       @search_rag_docs_parser = init_search_rag_docs_parser
     end
 

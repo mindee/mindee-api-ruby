@@ -43,8 +43,6 @@ module Mindee
 
         def req_get_search: [T] (_SearchParameters[T] params) -> T
 
-        def search_models_obsolete: (String?, String?) -> Parsing::Search::SearchResponse
-
         private
 
         def search_req_get: (_SearchParameters[untyped] params) -> Net::HTTPResponse
@@ -54,8 +52,6 @@ module Mindee
         def req_get_job_url: (String) -> V2::Parsing::JobResponse
 
         def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
-
-        def req_get_search_models: (String?, String?) -> Net::HTTPResponse
 
         def uri?: (String) -> bool
       end

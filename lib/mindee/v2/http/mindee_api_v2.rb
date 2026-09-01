@@ -66,16 +66,6 @@ module Mindee
           params.response_class.new(process_response(search_req_get(params)))
         end
 
-        # Retrieves a list of models available for a given API key.
-        # @deprecated Use {#req_get_search} instead.
-        # @param model_name [String, nil]
-        # @param model_type [String, nil]
-        # @return [Mindee::V2::Parsing::Search::SearchResponse]
-        def search_models_obsolete(model_name, model_type)
-          Mindee::V2::Parsing::Search::SearchResponse.new(process_response(req_get_search_models(model_name,
-                                                                                                 model_type)))
-        end
-
         private
 
         # Performs the GET request for a search.
@@ -85,32 +75,6 @@ module Mindee
           uri = URI("#{@settings.base_url}/v2/search/#{params.slug}")
 
           query_params = params.request_parameters
-          uri.query = URI.encode_www_form(query_params) unless query_params.empty?
-
-          headers = {
-            'Authorization' => @settings.api_key,
-            'User-Agent' => @settings.user_agent,
-          }
-          req = Net::HTTP::Get.new(uri, headers)
-          req['Transfer-Encoding'] = 'chunked'
-
-          Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
-            return http.request(req)
-          end
-          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
-        end
-
-        # Retrieves a list of models.
-        # @param model_name [String, nil]
-        # @param model_type [String, nil]
-        # @return [Net::HTTPResponse]
-        def req_get_search_models(model_name, model_type)
-          url = "#{@settings.base_url}/v2/search/models"
-          uri = URI(url)
-
-          query_params = {} # @type var query_params: Hash[Symbol, String | nil]
-          query_params[:name] = model_name if model_name
-          query_params[:model_type] = model_type if model_type
           uri.query = URI.encode_www_form(query_params) unless query_params.empty?
 
           headers = {

@@ -12,6 +12,7 @@ module Mindee
 
           def self.slug: -> String
           def self.response_class: -> singleton(RAGDocumentSearchResponse)
+          def response_class: -> singleton(RAGDocumentSearchResponse)
 
           def request_parameters: -> Hash[String, String | Array[String]]
         end

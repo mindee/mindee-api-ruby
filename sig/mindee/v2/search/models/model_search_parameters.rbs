@@ -12,6 +12,7 @@ module Mindee
 
           def self.slug: -> String
           def self.response_class: -> singleton(ModelSearchResponse)
+          def response_class: -> singleton(ModelSearchResponse)
 
           def request_parameters: -> Hash[String, String | Array[String]]
         end
