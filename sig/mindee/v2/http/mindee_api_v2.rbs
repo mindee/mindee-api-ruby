@@ -41,10 +41,9 @@ module Mindee
 
         def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> Net::HTTPResponse?
 
-        def req_search: [T] (_SearchParameters[T] params) -> T
+        def req_get_search: [T] (_SearchParameters[T] params) -> T
 
-        # Deprecated: use `req_search` instead.
-        def search_models: (String?, String?) -> Mindee::V2::Parsing::Search::SearchResponse
+        def search_models_obsolete: (String?, String?) -> Parsing::Search::SearchResponse
 
         private
 

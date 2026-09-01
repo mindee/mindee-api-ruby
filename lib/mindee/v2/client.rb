@@ -122,7 +122,7 @@ module Mindee
       # @param params [ClientOptions::BaseSearchParameters] Search parameters.
       # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching resources.
       def search(params)
-        @mindee_api.req_search(params)
+        @mindee_api.req_get_search(params)
       end
 
       # Returns a list of models matching a criteria for the given API key.
@@ -131,7 +131,7 @@ module Mindee
       # @param model_type [String]
       # @return [Mindee::V2::Parsing::Search::SearchResponse]
       def search_models(model_name, model_type)
-        @mindee_api.search_models(model_name, model_type)
+        @mindee_api.search_models_obsolete(model_name, model_type)
       end
 
       private

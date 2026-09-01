@@ -61,17 +61,17 @@ module Mindee
         # @param params [ClientOptions::BaseSearchParameters] Search parameters.
         # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching
         #   resources.
-        def req_search(params)
+        def req_get_search(params)
           @settings.check_api_key
           params.response_class.new(process_response(search_req_get(params)))
         end
 
         # Retrieves a list of models available for a given API key.
-        # @deprecated Use {#req_search} instead.
+        # @deprecated Use {#req_get_search} instead.
         # @param model_name [String, nil]
         # @param model_type [String, nil]
         # @return [Mindee::V2::Parsing::Search::SearchResponse]
-        def search_models(model_name, model_type)
+        def search_models_obsolete(model_name, model_type)
           Mindee::V2::Parsing::Search::SearchResponse.new(process_response(req_get_search_models(model_name,
                                                                                                  model_type)))
         end
