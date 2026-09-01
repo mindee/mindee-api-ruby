@@ -219,10 +219,15 @@ module MindeeCLI
     end
 
     # @param options [Hash]
-    # @return [Mindee::V2::Parsing::Search::SearchResponse]
+    # @return [Mindee::V2::Search::Models::ModelSearchResponse]
     def search(options)
       mindee_client = Mindee::V2::Client.new(api_key: options[:api_key])
-      mindee_client.search_models(options[:model_name], options[:model_type])
+      mindee_client.search(
+        Mindee::V2::Search::Models::ModelSearchParameters.new(
+          name: options[:model_name],
+          model_type: options[:model_type]
+        )
+      )
     end
 
     # @param options [Hash]

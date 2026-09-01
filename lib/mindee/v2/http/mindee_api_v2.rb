@@ -20,7 +20,7 @@ module Mindee
         # Send a file to the asynchronous processing queue for inference processing.
         #
         # @param input_source [Input::Source::LocalInputSource, Input::Source::URLInputSource]
-        # @param params [ClientOptions::BaseParameters]
+        # @param params [ClientOptions::BaseProductParameters]
         # @return [Mindee::V2::Parsing::JobResponse]
         # @raise [Mindee::Error::MindeeHttpErrorV2]
         def req_post_product_enqueue(input_source, params)
@@ -66,7 +66,7 @@ module Mindee
           params.response_class.new(process_response(search_req_get(params)))
         end
 
-        # Retrieves a list of models.
+        # Retrieves a list of models available for a given API key.
         # @deprecated Use {#req_search} instead.
         # @param model_name [String, nil]
         # @param model_type [String, nil]
@@ -223,7 +223,7 @@ module Mindee
         end
 
         # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-        # @param params [ClientOptions::BaseParameters] Inference options.
+        # @param params [ClientOptions::BaseProductParameters] Inference options.
         # @return [Net::HTTPResponse, nil]
         def enqueue(input_source, params)
           uri = URI("#{@settings.base_url}/v2/products/#{params.slug}/enqueue")

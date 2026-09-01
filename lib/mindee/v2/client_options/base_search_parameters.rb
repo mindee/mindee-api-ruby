@@ -3,7 +3,7 @@
 module Mindee
   module V2
     module ClientOptions
-      # Base parameters for searches
+      # Base parameters for searches.
       class BaseSearchParameters
         # @return [Integer, nil] 1-based page index.
         attr_reader :page

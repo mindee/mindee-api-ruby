@@ -4,8 +4,9 @@ module Mindee
   module V2
     module Parsing
       module Search
-        # Array of search models.
+        # List of search models.
         class SearchModels < Array
+          # @param prediction [Array<Hash>] The parsed JSON payload mapping to the search models.
           def initialize(prediction)
             super(prediction.map { |entry| SearchModel.new(entry) })
           end

@@ -4,7 +4,7 @@ module Mindee
   module V2
     module ClientOptions
       # Base class for parameters accepted by all V2 endpoints.
-      class BaseParameters
+      class BaseProductParameters
         # @return [String] ID of the model (required).
         attr_reader :model_id
 
@@ -51,8 +51,8 @@ module Mindee
 
         # @return [String] Slug for the endpoint.
         def self.slug
-          if self == BaseParameters
-            raise NotImplementedError, 'Cannot access `slug` directly on the BaseParameters class.'
+          if self == BaseProductParameters
+            raise NotImplementedError, 'Cannot access `slug` directly on the BaseProductParameters class.'
           end
 
           ''
@@ -65,7 +65,7 @@ module Mindee
 
         # Load from a hash
         # @param [Hash] params Parameters to provide as a hash.
-        # @return [BaseParameters]
+        # @return [BaseProductParameters]
         def self.from_hash(params: {})
           load_from_hash(params: params)
           new(

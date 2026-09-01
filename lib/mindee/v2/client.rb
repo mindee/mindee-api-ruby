@@ -37,7 +37,7 @@ module Mindee
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
-      # @param params [Hash, ClientOptions::BaseParameters] Parameters for the inference.
+      # @param params [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
       # @return [Mindee::V2::Parsing::JobResponse]
       def enqueue(
         product,
@@ -56,7 +56,7 @@ module Mindee
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
-      # @param params [Hash, ClientOptions::BaseParameters] Parameters for the inference.
+      # @param params [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
@@ -125,7 +125,7 @@ module Mindee
         @mindee_api.req_search(params)
       end
 
-      # Searches for a list of available models for the given API key.
+      # Returns a list of models matching a criteria for the given API key.
       # @deprecated Use {#search} instead.
       # @param model_name [String]
       # @param model_type [String]
@@ -143,7 +143,7 @@ module Mindee
       def normalize_parameters(param_class, params, polling_options: nil)
         if params.is_a?(Hash)
           params[:polling_options] = polling_options if polling_options
-        elsif params.is_a?(Mindee::V2::ClientOptions::BaseParameters) && !polling_options.nil?
+        elsif params.is_a?(Mindee::V2::ClientOptions::BaseProductParameters) && !polling_options.nil?
           params.polling_options = polling_options
         end
         return param_class.from_hash(params: params) if params.is_a?(Hash)

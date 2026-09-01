@@ -11,7 +11,7 @@ module Mindee
 
         def response_type: () -> _ResponseFactory[T]
 
-        def params_type: () -> singleton(ClientOptions::BaseParameters)
+        def params_type: () -> singleton(ClientOptions::BaseProductParameters)
       end
 
       interface _SearchParameters[T]
@@ -29,7 +29,7 @@ module Mindee
 
         def req_get_result: [T] (_ProductClass[T] product, String resource) -> T
 
-        def req_post_product_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseParameters) -> V2::Parsing::JobResponse
+        def req_post_product_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> V2::Parsing::JobResponse
 
         def req_get_job: (String) -> V2::Parsing::JobResponse
 
@@ -39,7 +39,7 @@ module Mindee
 
         def result_req_get: [T] (String, _ProductClass[T] product) -> Net::HTTPResponse
 
-        def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseParameters) -> Net::HTTPResponse?
+        def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> Net::HTTPResponse?
 
         def req_search: [T] (_SearchParameters[T] params) -> T
 

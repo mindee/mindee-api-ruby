@@ -6,17 +6,19 @@ module Mindee
       module Search
         # Base class for search responses.
         class BaseSearchResponse < CommonResponse
-          # Pagination metadata for the search results.
+          # Pagination metadata.
           # @return [Mindee::V2::Parsing::Search::PaginationMetadata]
           attr_reader :pagination
 
+          # @param http_response [Hash] The parsed JSON payload from the API.
           def initialize(http_response)
             super
 
             @pagination = PaginationMetadata.new(http_response['pagination'])
           end
 
-          # List of strings representing the search response.
+          # Lines composing the response-specific body (header + items).
+          # @return [Array<String>]
           def body_lines
             raise NotImplementedError, 'body_lines must be implemented in subclasses'
           end

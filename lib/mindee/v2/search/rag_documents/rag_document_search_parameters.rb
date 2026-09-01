@@ -18,6 +18,8 @@ module Mindee
           # @param per_page [Integer, nil] Number of items per page.
           def initialize(model_id:, filename: nil, page: nil, per_page: nil)
             super(page: page, per_page: per_page)
+            raise Error::MindeeInputError, 'Model ID is required.' if model_id.nil? || model_id.empty?
+
             @model_id = model_id
             @filename = filename
           end

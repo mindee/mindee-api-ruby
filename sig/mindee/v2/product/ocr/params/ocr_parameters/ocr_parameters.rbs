@@ -3,7 +3,7 @@ module Mindee
     module Product
       module OCR
         module Params
-          class OCRParameters < ClientOptions::BaseParameters
+          class OCRParameters < ClientOptions::BaseProductParameters
             def self.slug: -> String
 
             def self.from_hash: (params: Hash[String | Symbol, untyped]) -> OCRParameters

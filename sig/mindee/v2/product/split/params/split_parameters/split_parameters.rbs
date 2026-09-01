@@ -3,7 +3,7 @@ module Mindee
     module Product
       module Split
         module Params
-          class SplitParameters < ClientOptions::BaseParameters
+          class SplitParameters < ClientOptions::BaseProductParameters
             def self.slug: -> String
 
             def self.from_hash: (params: Hash[String | Symbol, untyped]) -> SplitParameters

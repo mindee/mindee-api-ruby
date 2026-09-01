@@ -7,7 +7,7 @@ module Mindee
         # Classification parameters.
         module Params
           # Parameters accepted by the classification utility v2 endpoint.
-          class ClassificationParameters < Mindee::V2::ClientOptions::BaseParameters
+          class ClassificationParameters < Mindee::V2::ClientOptions::BaseProductParameters
             # @return [String] Slug for the endpoint.
             def self.slug
               'classification'

@@ -16,7 +16,7 @@ module Mindee
             @rag_documents = Mindee::V2::Parsing::Search::SearchRAGDocuments.new(raw_response['rag_documents'])
           end
 
-          # List of strings representing the search response.
+          # Lines composing the response-specific body (header + items).
           # @return [Array<String>]
           def body_lines
             ['RAG Documents', '#############', @rag_documents.to_s]

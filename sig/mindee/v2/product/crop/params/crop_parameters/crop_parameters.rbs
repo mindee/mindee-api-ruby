@@ -3,7 +3,7 @@ module Mindee
     module Product
       module Crop
         module Params
-          class CropParameters < ClientOptions::BaseParameters
+          class CropParameters < ClientOptions::BaseProductParameters
             def self.slug: -> String
 
             def self.from_hash: (params: Hash[String | Symbol, untyped]) -> CropParameters

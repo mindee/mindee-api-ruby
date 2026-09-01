@@ -16,7 +16,7 @@ module Mindee
             @models = Mindee::V2::Parsing::Search::SearchModels.new(raw_response['models'])
           end
 
-          # List of strings representing the search response.
+          # Lines composing the response-specific body (header + items).
           # @return [Array<String>]
           def body_lines
             ['Models', '######', @models.to_s]

@@ -1,12 +1,12 @@
-# lib/mindee/v2/client_options/base_parameters.rb
+# lib/mindee/v2/client_options/base_product_parameters.rb
 
 module Mindee
   module V2
     module ClientOptions
-      class BaseParameters
+      class BaseProductParameters
         attr_reader self.slug: String
 
-        def self.from_hash: (params: Hash[String | Symbol, untyped]) -> BaseParameters
+        def self.from_hash: (params: Hash[String | Symbol, untyped]) -> BaseProductParameters
 
         def self.load_from_hash: (params: Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
 
