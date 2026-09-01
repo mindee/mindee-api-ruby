@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Parsing
       module Search
-        # Pagination metadata associated with model search.
+        # Pagination metadata associated with searches.
         class PaginationMetadata
           # @return [Integer] Number of items per page.
           attr_reader :per_page
