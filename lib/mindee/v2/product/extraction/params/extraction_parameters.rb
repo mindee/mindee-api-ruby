@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../input/base_parameters'
+require_relative '../../../client_options/base_product_parameters'
 require_relative 'data_schema'
 
 module Mindee
@@ -9,7 +9,7 @@ module Mindee
       module Extraction
         module Params
           # Parameters accepted by the extraction v2 endpoint.
-          class ExtractionParameters < Mindee::Input::BaseParameters
+          class ExtractionParameters < Mindee::V2::ClientOptions::BaseProductParameters
             # @return [Boolean, nil] Enhance extraction accuracy with Retrieval-Augmented Generation.
             attr_reader :rag
 

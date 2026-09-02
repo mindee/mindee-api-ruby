@@ -5,35 +5,8 @@ module Mindee
     module Parsing
       module Search
         # Models search response.
-        class SearchResponse < CommonResponse
-          # @return [Search::SearchModels] Parsed search payload.
-          attr_reader :models
-          # @return [Search::PaginationMetadata] Pagination metadata.
-          attr_reader :pagination
-          # @return [Search::PaginationMetadata] Pagination metadata.
-          attr_reader :pagination_metadata
-
-          def initialize(server_response)
-            super
-
-            @models = SearchModels.new(server_response['models'])
-            @pagination = PaginationMetadata.new(server_response['pagination'])
-            @pagination_metadata = @pagination
-          end
-
-          # String representation.
-          # @return [String]
-          def to_s
-            [
-              'Models',
-              '######',
-              @models.to_s,
-              'Pagination Metadata',
-              '###################',
-              @pagination.to_s,
-              '',
-            ].join("\n")
-          end
+        # @deprecated Use {Mindee::V2::Search::Models::ModelSearchResponse} instead.
+        class SearchResponse < Mindee::V2::Search::Models::ModelSearchResponse
         end
       end
     end

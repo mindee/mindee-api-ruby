@@ -1,0 +1,22 @@
+# lib/mindee/v2/search/rag_documents/rag_document_search_parameters.rb
+
+module Mindee
+  module V2
+    module Search
+      module RAGDocuments
+        class RAGDocumentSearchParameters < ClientOptions::BaseSearchParameters
+          attr_reader filename: String?
+          attr_reader model_id: String
+
+          def initialize: (model_id: String, ?filename: String?, ?page: Integer?, ?per_page: Integer?) -> void
+
+          def self.slug: -> String
+          def self.response_class: -> singleton(RAGDocumentSearchResponse)
+          def response_class: -> singleton(RAGDocumentSearchResponse)
+
+          def request_parameters: -> Hash[String, String | Array[String]]
+        end
+      end
+    end
+  end
+end

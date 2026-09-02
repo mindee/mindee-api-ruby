@@ -1,0 +1,22 @@
+# lib/mindee/v2/search/models/model_search_parameters.rb
+
+module Mindee
+  module V2
+    module Search
+      module Models
+        class ModelSearchParameters < ClientOptions::BaseSearchParameters
+          attr_reader model_type: String?
+          attr_reader name: String?
+
+          def initialize: (?name: String?, ?model_type: String?, ?page: Integer?, ?per_page: Integer?) -> void
+
+          def self.slug: -> String
+          def self.response_class: -> singleton(ModelSearchResponse)
+          def response_class: -> singleton(ModelSearchResponse)
+
+          def request_parameters: -> Hash[String, String | Array[String]]
+        end
+      end
+    end
+  end
+end

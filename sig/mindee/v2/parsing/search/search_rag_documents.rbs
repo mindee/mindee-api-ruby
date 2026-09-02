@@ -1,0 +1,16 @@
+# lib/mindee/v2/parsing/search/search_rag_documents.rb
+
+module Mindee
+  module V2
+    module Parsing
+      module Search
+        # List of RAG documents.
+        class SearchRAGDocuments < Array[SearchRAGDocument]
+          def initialize: (Array[Hash[String|Symbol, untyped]]) -> void
+
+          def to_s: -> String
+        end
+      end
+    end
+  end
+end

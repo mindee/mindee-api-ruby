@@ -2,11 +2,14 @@
 
 require 'mindee'
 require_relative 'products'
+require_relative 'search_commands'
 
 module MindeeCLI
   # Mindee Command Line Interface
   # V2 CLI class.
   class V2Parser
+    include V2SearchCommands
+
     # @return [Array<String>]
     attr_reader :arguments
 
@@ -17,7 +20,10 @@ module MindeeCLI
     attr_reader :product_parser
 
     # @return [Parser]
-    attr_reader :search_parser
+    attr_reader :search_models_parser
+
+    # @return [Parser]
+    attr_reader :search_rag_docs_parser
 
     def initialize(arguments, command_prefix: 'mindee v2')
       @arguments = arguments
@@ -26,26 +32,18 @@ module MindeeCLI
         opts.banner = "Usage: #{@command_prefix} command [options]"
       end
       @product_parser = init_product_parser
-      @search_parser = init_search_parser
+      @search_models_parser = init_search_models_parser
+      @search_rag_docs_parser = init_search_rag_docs_parser
     end
 
     # Summarize and print the result of the command.
     # @param command [String]
     def print_result(command)
-      if command == 'search-models'
-        @search_parser.parse!(@arguments)
-        result = search(@options)
-        summarized_result = output_format == :full ? result.to_s : result.models.to_s
-      else
-        @product_parser[command].parse!(@arguments)
-        @options[:file_path] = @arguments.shift
-        if @options[:file_path].nil?
-          warn 'file missing'
-          abort(@product_parser[command].help)
-        end
-        result = send(command, @options)
-        summarized_result = output_format == :full ? result.inference.to_s : result.inference.result.to_s
-      end
+      result, summarized_result = if V2_SEARCH_COMMANDS.key?(command)
+                                    run_search(command)
+                                  else
+                                    run_product(command)
+                                  end
 
       if output_format == :raw
         puts JSON.pretty_generate(raw_payload(result.raw_http))
@@ -63,22 +61,41 @@ module MindeeCLI
       validate_command!(command)
       print_result(command)
     rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
-      if command == 'search-models'
-        abort("#{e.message}\n\n#{@search_parser.help}")
-      else
-        abort("#{e.message}\n\n#{@product_parser[command].help}")
-      end
+      abort("#{e.message}\n\n#{command_parser(command).help}")
     rescue Mindee::Error::MindeeError => e
       abort(format_cli_error(e))
     end
 
     private
 
+    # Parse the arguments and run the given product command.
+    # @param command [String]
+    # @return [Array(Mindee::V2::Parsing::BaseResponse, String)] Response and its summary.
+    def run_product(command)
+      @product_parser[command].parse!(@arguments)
+      @options[:file_path] = @arguments.shift
+      if @options[:file_path].nil?
+        warn 'file missing'
+        abort(@product_parser[command].help)
+      end
+      result = send(command, @options)
+      summarized_result = output_format == :full ? result.inference.to_s : result.inference.result.to_s
+      [result, summarized_result]
+    end
+
+    # @param command [String]
+    # @return [OptionParser]
+    def command_parser(command)
+      V2_SEARCH_COMMANDS.key?(command) ? search_parser_for(command) : @product_parser[command]
+    end
+
     def validate_command!(command)
-      return if V2_PRODUCTS.include?(command) || command == 'search-models'
+      return if V2_PRODUCTS.include?(command) || V2_SEARCH_COMMANDS.key?(command)
 
       error_msg = "#{@options_parser.help}\nAvailable commands:\n"
-      error_msg += "  #{'search-models'.ljust(50)}Search for available models for this API key\n"
+      V2_SEARCH_COMMANDS.each do |search_command, search_values|
+        error_msg += "  #{search_command.ljust(50)}#{search_values[:description]}\n"
+      end
 
       V2_PRODUCTS.each do |product_key, product_values|
         error_msg += "  #{product_key.to_s.ljust(50)}#{product_values[:description]}\n"
@@ -95,21 +112,6 @@ module MindeeCLI
           "the 'MINDEE_V2_API_KEY' environment variable."
       else
         "CLI error: #{error.message}"
-      end
-    end
-
-    def init_search_parser
-      OptionParser.new do |options_parser|
-        options_parser.banner = "Usage: #{@command_prefix} search-models [options]"
-        init_common_options(options_parser)
-        options_parser.on('-n [NAME]', '--name [NAME]',
-                          'Search for partial matches in model name. Note: case insensitive') do |v|
-          @options[:model_name] = v
-        end
-        options_parser.on('-t [NAME]', '--type [NAME]',
-                          'Search for EXACT matches in model type. Note: case sensitive') do |v|
-          @options[:model_type] = v
-        end
       end
     end
 
@@ -216,13 +218,6 @@ module MindeeCLI
         input_source,
         params
       )
-    end
-
-    # @param options [Hash]
-    # @return [Mindee::V2::Parsing::Search::SearchResponse]
-    def search(options)
-      mindee_client = Mindee::V2::Client.new(api_key: options[:api_key])
-      mindee_client.search_models(options[:model_name], options[:model_type])
     end
 
     # @param options [Hash]

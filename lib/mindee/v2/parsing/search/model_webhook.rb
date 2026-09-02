@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Parsing
       module Search
-        # Individual webhook information.
+        # Information about a model's webhook.
         class ModelWebhook
           # @return [String] ID of the webhook.
           attr_reader :id
@@ -15,14 +15,14 @@ module Mindee
           # @return [String] URL of the webhook.
           attr_reader :url
 
-          # @param payload [Hash] The parsed JSON payload mapping to the search model.
+          # @param payload [Hash] The parsed JSON payload mapping to the webhook.
           def initialize(payload)
             @id = payload['id']
             @name = payload['name']
             @url = payload['url']
           end
 
-          # String representation of the model.
+          # String representation of the webhook.
           # @return [String]
           def to_s
             [

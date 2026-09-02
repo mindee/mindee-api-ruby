@@ -8,7 +8,7 @@ module Mindee
         # Split parameters.
         module Params
           # Parameters accepted by the split utility v2 endpoint.
-          class SplitParameters < Mindee::Input::BaseParameters
+          class SplitParameters < Mindee::V2::ClientOptions::BaseProductParameters
             # @return [String] Slug for the endpoint.
             def self.slug
               'split'

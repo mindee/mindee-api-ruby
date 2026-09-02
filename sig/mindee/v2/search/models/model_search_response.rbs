@@ -1,0 +1,17 @@
+# lib/mindee/v2/search/models/model_search_response.rb
+
+module Mindee
+  module V2
+    module Search
+      module Models
+        class ModelSearchResponse < V2::Parsing::Search::BaseSearchResponse
+          attr_reader models: V2::Parsing::Search::SearchModels
+
+          def initialize: (Hash[String|Symbol, untyped]) -> void
+
+          def body_lines: -> Array[String]
+        end
+      end
+    end
+  end
+end

@@ -37,7 +37,7 @@ module Mindee
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
-      # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+      # @param params [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
       # @return [Mindee::V2::Parsing::JobResponse]
       def enqueue(
         product,
@@ -48,7 +48,7 @@ module Mindee
         normalized_params.validate_async_params
         logger.debug("Enqueueing document to model '#{normalized_params.model_id}'.")
 
-        @mindee_api.req_post_enqueue(input_source, normalized_params)
+        @mindee_api.req_post_product_enqueue(input_source, normalized_params)
       end
 
       # Enqueues to an asynchronous endpoint and automatically polls for a response.
@@ -56,11 +56,11 @@ module Mindee
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
-      # @param params [Hash, Input::BaseParameters] Parameters for the inference.
+      # @param params [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:disable-next Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def enqueue_and_get_result(
         product,
         input_source,
@@ -117,14 +117,21 @@ module Mindee
         raise Mindee::Error::MindeeError,
               "Asynchronous parsing request timed out after #{sec_count} seconds"
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
-      # Searches for a list of available models for the given API key.
-      # @param model_name [String]
-      # @param model_type [String]
-      # @return [Mindee::V2::Parsing::Search::SearchResponse]
+      # Search for resources matching the given criteria.
+      # @param params [ClientOptions::BaseSearchParameters] Search parameters.
+      # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching resources.
+      def search(params)
+        @mindee_api.req_get_search(params)
+      end
+
+      # Returns a list of models matching a criteria for the given API key.
+      # @deprecated Use {#search} instead.
+      # @param model_name [String, nil] Name filter.
+      # @param model_type [String, nil] Model type filter.
+      # @return [Mindee::V2::Search::Models::ModelSearchResponse]
       def search_models(model_name, model_type)
-        @mindee_api.search_models(model_name, model_type)
+        search(Search::Models::ModelSearchParameters.new(name: model_name, model_type: model_type))
       end
 
       private
@@ -136,7 +143,7 @@ module Mindee
       def normalize_parameters(param_class, params, polling_options: nil)
         if params.is_a?(Hash)
           params[:polling_options] = polling_options if polling_options
-        elsif params.is_a?(Mindee::Input::BaseParameters) && !polling_options.nil?
+        elsif params.is_a?(Mindee::V2::ClientOptions::BaseProductParameters) && !polling_options.nil?
           params.polling_options = polling_options
         end
         return param_class.from_hash(params: params) if params.is_a?(Hash)

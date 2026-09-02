@@ -1,0 +1,19 @@
+module Mindee
+  module V2
+    module ClientOptions
+      class BaseSearchParameters
+        attr_reader page: Integer?
+        attr_reader per_page: Integer?
+
+        def initialize: (?page: Integer?, ?per_page: Integer?) -> void
+
+        def request_parameters: -> Hash[String, String | Array[String]]
+
+        def slug: -> String
+        def self.slug: -> String
+        def response_class: -> singleton(V2::Parsing::Search::BaseSearchResponse)
+        def self.response_class: -> singleton(V2::Parsing::Search::BaseSearchResponse)
+      end
+    end
+  end
+end

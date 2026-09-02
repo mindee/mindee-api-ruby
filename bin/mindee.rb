@@ -9,7 +9,10 @@ require_relative 'v2/parser'
 def root_help
   help = "Usage: mindee command [options]\n\nAvailable commands:\n"
   help += "  #{'v1'.ljust(50)}Use Version 1 of the Mindee API\n"
-  help += "  #{'search-models'.ljust(50)}Search for available models for this API key\n"
+
+  MindeeCLI::V2SearchCommands::V2_SEARCH_COMMANDS.each do |search_command, search_values|
+    help += "  #{search_command.ljust(50)}#{search_values[:description]}\n"
+  end
 
   V2_PRODUCTS.each do |product_key, product_values|
     help += "  #{product_key.ljust(50)}#{product_values[:description]}\n"
