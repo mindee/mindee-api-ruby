@@ -57,7 +57,7 @@ module Mindee
           Mindee::V2::Parsing::JobResponse.new(process_response(response))
         end
 
-        # Search for resources matching the given criteria.
+        # Retrieves a list of resources with the given criteria.
         # @param params [ClientOptions::BaseSearchParameters] Search parameters.
         # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching
         #   resources.

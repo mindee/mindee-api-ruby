@@ -127,8 +127,8 @@ module Mindee
 
       # Returns a list of models matching a criteria for the given API key.
       # @deprecated Use {#search} instead.
-      # @param model_name [String, nil]
-      # @param model_type [String, nil]
+      # @param model_name [String, nil] Name filter.
+      # @param model_type [String, nil] Model type filter.
       # @return [Mindee::V2::Search::Models::ModelSearchResponse]
       def search_models(model_name, model_type)
         search(Search::Models::ModelSearchParameters.new(name: model_name, model_type: model_type))

@@ -34,7 +34,7 @@ module Mindee
             RAGDocumentSearchResponse
           end
 
-          # Return the parameters for the request.
+          # Gets the request parameters for the search request.
           # @return [Hash{String => String, Array<String>}]
           def request_parameters
             params = super

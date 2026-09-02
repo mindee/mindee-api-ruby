@@ -23,7 +23,9 @@ module Mindee
             raise NotImplementedError, 'body_lines must be implemented in subclasses'
           end
 
+          # Pagination metadata (Obsolete).
           # @deprecated Use {#pagination} instead.
+          # @return [Mindee::V2::Parsing::Search::PaginationMetadata]
           def pagination_metadata
             pagination
           end
