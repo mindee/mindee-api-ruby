@@ -63,15 +63,6 @@ module Mindee
         #   resources.
         def req_get_search(params)
           @settings.check_api_key
-          params.response_class.new(process_response(search_req_get(params)))
-        end
-
-        private
-
-        # Performs the GET request for a search.
-        # @param params [ClientOptions::BaseSearchParameters] Search parameters.
-        # @return [Net::HTTPResponse]
-        def search_req_get(params)
           uri = URI("#{@settings.base_url}/v2/search/#{params.slug}")
 
           query_params = params.request_parameters
@@ -84,11 +75,14 @@ module Mindee
           req = Net::HTTP::Get.new(uri, headers)
           req['Transfer-Encoding'] = 'chunked'
 
-          Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
-            return http.request(req)
+          response = Net::HTTP.start(uri.hostname, uri.port,
+                                     use_ssl: true, read_timeout: @settings.request_timeout) do |http|
+            http.request(req)
           end
-          raise Mindee::Error::MindeeError, 'Could not resolve server response.'
+          params.response_class.new(process_response(response))
         end
+
+        private
 
         # @param resource [String] Resource to check.
         # @return [Boolean]

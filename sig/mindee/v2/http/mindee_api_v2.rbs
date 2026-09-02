@@ -45,8 +45,6 @@ module Mindee
 
         private
 
-        def search_req_get: (_SearchParameters[untyped] params) -> Net::HTTPResponse
-
         def enqueue_form_options: (Array[Array[untyped]], V2::Product::Extraction::Params::ExtractionParameters) -> Array[Array[untyped]]
 
         def req_get_job_url: (String) -> V2::Parsing::JobResponse

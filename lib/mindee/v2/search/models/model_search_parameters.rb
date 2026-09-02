@@ -32,7 +32,7 @@ module Mindee
             ModelSearchResponse
           end
 
-          # Return the parameters for the request.
+          # Gets the request parameters for the upload request.
           # @return [Hash{String => String, Array<String>}]
           def request_parameters
             params = super

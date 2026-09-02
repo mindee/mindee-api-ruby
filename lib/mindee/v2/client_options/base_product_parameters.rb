@@ -5,13 +5,16 @@ module Mindee
     module ClientOptions
       # Base class for parameters accepted by all V2 endpoints.
       class BaseProductParameters
-        # @return [String] ID of the model (required).
+        # @return [String] Model ID to use for the inference. Required.
         attr_reader :model_id
 
-        # @return [String, nil] Optional alias for the file.
+        # @return [String, nil] Optional: a free-form string to tag the request with your own identifier.
+        # For example, an internal document ID, reference number, or database key.
+        # If set, it will be included in the job and result responses.
         attr_reader :file_alias
 
-        # @return [Array<String>, nil] Optional list of Webhooks IDs to propagate the API response to.
+        # @return [Array<String>, nil] Webhook IDs to call after all processing is finished.
+        # If empty, no webhooks will be used.
         attr_reader :webhook_ids
 
         # @return [Input::PollingOptions] Options for polling. Set only if having timeout issues.
