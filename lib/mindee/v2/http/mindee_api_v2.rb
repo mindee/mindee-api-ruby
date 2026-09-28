@@ -73,10 +73,11 @@ module Mindee
             'User-Agent' => @settings.user_agent,
           }
           req = Net::HTTP::Get.new(uri, headers)
-          req['Transfer-Encoding'] = 'chunked'
 
           response = Net::HTTP.start(uri.hostname, uri.port,
-                                     use_ssl: true, read_timeout: @settings.request_timeout) do |http|
+                                     use_ssl: true,
+                                     open_timeout: @settings.request_timeout,
+                                     read_timeout: @settings.request_timeout) do |http|
             http.request(req)
           end
           params.response_class.new(process_response(response))
@@ -145,9 +146,11 @@ module Mindee
             'User-Agent' => @settings.user_agent,
           }
           req = Net::HTTP::Get.new(uri, headers)
-          req['Transfer-Encoding'] = 'chunked'
 
-          Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
+          Net::HTTP.start(uri.hostname, uri.port,
+                          use_ssl: true,
+                          open_timeout: @settings.request_timeout,
+                          read_timeout: @settings.request_timeout) do |http|
             return http.request(req)
           end
           raise Mindee::Error::MindeeError, 'Could not resolve server response.'
@@ -208,7 +211,10 @@ module Mindee
           req.set_form(form_data, 'multipart/form-data')
           req['Transfer-Encoding'] = 'chunked'
 
-          Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: @settings.request_timeout) do |http|
+          Net::HTTP.start(uri.hostname, uri.port,
+                          use_ssl: true,
+                          open_timeout: @settings.request_timeout,
+                          read_timeout: @settings.request_timeout) do |http|
             return http.request(req)
           end
           raise Mindee::Error::MindeeError, 'Could not resolve server response.'

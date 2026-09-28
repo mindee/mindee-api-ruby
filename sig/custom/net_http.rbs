@@ -6,7 +6,7 @@ module Net
   class BufferedIO
   end
   class HTTP
-    def self.start: [T] (String?, Integer?, use_ssl: bool?, ?read_timeout: Integer) { (HTTP) -> T } -> T
+    def self.start: [T] (String?, Integer?, use_ssl: bool?, ?open_timeout: Integer, ?read_timeout: Integer) { (HTTP) -> T } -> T
 
     def request: (untyped) -> untyped
 
