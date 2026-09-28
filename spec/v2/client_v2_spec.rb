@@ -119,6 +119,29 @@ describe Mindee::V2::Client do
       resp.job.completed_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
     ).to eq('2026-04-20T18:32:02.734312')
   end
+  it 'poll builds a real Net::HTTP::Get request without a Transfer-Encoding header' do
+    job_json = File.read(File.join(V2_DATA_DIR, 'job', 'ok_processing.json'))
+    captured_request = nil
+    captured_options = nil
+
+    http_double = instance_double(Net::HTTP)
+    allow(http_double).to receive(:request) do |req|
+      captured_request = req
+      build_mock_http_response(job_json, 200)
+    end
+    allow(Net::HTTP).to receive(:start) do |_host, _port, **options, &block|
+      captured_options = options
+      block.call(http_double)
+    end
+
+    api.send(:poll, "#{base_url}/v2/jobs/123e4567-e89b-12d3-a456-426614174000")
+
+    expect(captured_request).to be_a(Net::HTTP::Get)
+    expect(captured_request['Transfer-Encoding']).to be_nil
+    expect(captured_options[:open_timeout]).to eq(api.settings.request_timeout)
+    expect(captured_options[:read_timeout]).to eq(api.settings.request_timeout)
+  end
+
   context 'Cancellation token' do
     let(:processing_json) { File.read(File.join(V2_DATA_DIR, 'job', 'ok_processing.json')) }
 
