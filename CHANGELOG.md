@@ -1,5 +1,13 @@
 # Mindee Ruby API Library Changelog
 
+## v5.5.0 - 2026-09-30
+### Changes
+* :sparkles: add support for RAG search
+* :wrench: switching over from pre-commit to ruby-only solution
+### Fixes
+* :bug: fix V2 hangs on GET
+
+
 ## v5.4.0 - 2026-07-21
 ### Changes
 * :sparkles: add field confidence comparators
