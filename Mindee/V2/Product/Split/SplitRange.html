@@ -336,8 +336,7 @@
 21
 22
 23
-24
-25</pre>
+24</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/mindee/v2/product/split/split_range.rb', line 17</span>
@@ -345,12 +344,11 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_server_response'>server_response</span><span class='rparen'>)</span>
   <span class='ivar'>@page_range</span> <span class='op'>=</span> <span class='id identifier rubyid_server_response'>server_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_range</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@document_type</span> <span class='op'>=</span> <span class='id identifier rubyid_server_response'>server_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>document_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-  <span class='comment'># rubocop:disable Style/GuardClause
+  <span class='comment'># rubocop:disable-next Style/GuardClause
 </span>  <span class='kw'>unless</span> <span class='id identifier rubyid_server_response'>server_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>extraction_response</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='ivar'>@extraction_response</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../V2.html" title="Mindee::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Product.html" title="Mindee::V2::Product (module)">Product</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Extraction.html" title="Mindee::V2::Product::Extraction (module)">Extraction</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Extraction/ExtractionResponse.html" title="Mindee::V2::Product::Extraction::ExtractionResponse (class)">ExtractionResponse</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Extraction/ExtractionResponse.html#initialize-instance_method" title="Mindee::V2::Product::Extraction::ExtractionResponse#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_server_response'>server_response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>extraction_response</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
-  <span class='comment'># rubocop:enable Style/GuardClause
-</span><span class='kw'>end</span></pre>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -580,12 +578,12 @@ second integer indicates the end page.</p></div>
       <pre class="lines">
 
 
+36
 37
-38
-39</pre>
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/product/split/split_range.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/product/split/split_range.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extract_from_input_source'>extract_from_input_source</span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../FileOperation.html" title="Mindee::V2::FileOperation (module)">FileOperation</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../FileOperation/Split.html" title="Mindee::V2::FileOperation::Split (module)">Split</a></span></span><span class='period'>.</span><span class='id identifier rubyid_extract_single_split'><span class='object_link'><a href="../../FileOperation/Split.html#extract_single_split-class_method" title="Mindee::V2::FileOperation::Split.extract_single_split (method)">extract_single_split</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_input_source'>input_source</span><span class='comma'>,</span> <span class='ivar'>@page_range</span><span class='rparen'>)</span>
@@ -632,12 +630,12 @@ second integer indicates the end page.</p></div>
       <pre class="lines">
 
 
+28
 29
-30
-31</pre>
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/mindee/v2/product/split/split_range.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/mindee/v2/product/split/split_range.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>* :Page Range: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@page_range</span><span class='embexpr_end'>}</span><span class='tstring_content'>\n  :Document Type: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@document_type</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -652,7 +650,7 @@ second integer indicates the end page.</p></div>
 </div>
 
       <div id="footer">
-  Generated on Tue Jul 21 15:36:05 2026 by
+  Generated on Wed Sep 30 13:39:55 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-3.2.11).
 </div>
