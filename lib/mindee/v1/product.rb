@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'product/barcode_reader/barcode_reader_v1'
 require_relative 'product/cropper/cropper_v1'
 require_relative 'product/financial_document/financial_document_v1'
-require_relative 'product/fr/bank_account_details/bank_account_details_v1'
 require_relative 'product/fr/bank_account_details/bank_account_details_v2'
 require_relative 'product/fr/bank_statement/bank_statement_v2'
-require_relative 'product/fr/id_card/id_card_v1'
 require_relative 'product/fr/id_card/id_card_v2'
 require_relative 'product/international_id/international_id_v2'
 require_relative 'product/invoice/invoice_v4'
