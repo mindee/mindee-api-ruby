@@ -12,6 +12,7 @@ describe Mindee::V1::Client do
         File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')
       )
     end
+    let(:workflow_id) { ENV.fetch('WORKFLOW_ID') }
 
     it 'should poll a workflow with RAG' do
       options = { workflow_id: workflow_id, rag: true }
