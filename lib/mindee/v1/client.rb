@@ -294,45 +294,6 @@ module Mindee
         queue_res
       end
 
-      # rubocop:enable Metrics/CyclomaticComplexity
-      # Sends a document to a workflow.
-      #
-      # Accepts options either as a Hash or as a WorkflowOptions struct.
-      #
-      # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
-      # @param workflow_id [String]
-      # @param options [Hash, WorkflowOptions] Options to configure workflow behavior.  Possible keys:
-      #   * `document_alias` [String, nil] Alias to give to the document.
-      #   * `priority` [Symbol, nil] Priority to give to the document.
-      #   * `full_text` [bool] Whether to include the full OCR text response in compatible APIs.
-      #   * `rag` [bool, nil] Whether to enable Retrieval-Augmented Generation.
-      #
-      #   * `public_url` [String, nil] A unique, encrypted URL for accessing the document validation interface without
-      # requiring authentication.
-      #   * `page_options` [Hash, nil] Page cutting/merge options:
-      #     * `:page_indexes` Zero-based list of page indexes.
-      #       * `:operation` Operation to apply on the document, given the `page_indexes specified:
-      #          * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-      #          * `:REMOVE` - remove the specified pages, and keep all others.
-      #      * `:on_min_pages` Apply the operation only if document has at least this many pages.
-      # @return [Mindee::V1::Parsing::Common::WorkflowResponse]
-      def execute_workflow(input_source, workflow_id, options: {})
-        opts = options.is_a?(WorkflowOptions) ? options : WorkflowOptions.new(params: options)
-        if opts.respond_to?(:page_options) && input_source.is_a?(Input::Source::LocalInputSource)
-          process_pdf_if_required(input_source, opts)
-        end
-
-        workflow_endpoint = V1::HTTP::WorkflowEndpoint.new(workflow_id, api_key: @api_key.to_s)
-        logger.debug("Sending document to workflow '#{workflow_id}'")
-
-        prediction, raw_http = workflow_endpoint.execute_workflow(
-          input_source,
-          opts
-        )
-
-        Mindee::V1::Parsing::Common::WorkflowResponse.new(V1::Product::Universal::Universal, prediction, raw_http)
-      end
-
       # Load a prediction.
       #
       # @param product_class [Mindee::Inference] class of the product
