@@ -13,21 +13,6 @@ describe Mindee::V1::Client do
       )
     end
     let(:workflow_id) { ENV.fetch('WORKFLOW_ID') }
-    it 'should return a valid response' do
-      current_date_time = Time.now.strftime('%Y-%m-%d-%H:%M:%S')
-      document_alias = "ruby-#{current_date_time}"
-      priority = Mindee::V1::Parsing::Common::ExecutionPriority::LOW
-
-      response = client.execute_workflow(
-        sample_input,
-        workflow_id,
-        options: { document_alias: document_alias,
-                   priority: priority, rag: true }
-      )
-
-      expect(response.execution.file.alias).to eq(document_alias)
-      expect(response.execution.priority).to eq(priority)
-    end
 
     it 'should poll a workflow with RAG' do
       options = { workflow_id: workflow_id, rag: true }

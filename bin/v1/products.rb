@@ -7,12 +7,6 @@ V1_PRODUCTS = {
     sync: true,
     async: true,
   },
-  'barcode-reader' => {
-    description: 'Barcode Reader',
-    doc_class: Mindee::V1::Product::BarcodeReader::BarcodeReaderV1,
-    sync: true,
-    async: false,
-  },
   'cropper' => {
     description: 'Cropper',
     doc_class: Mindee::V1::Product::Cropper::CropperV1,
