@@ -37,9 +37,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pdf-reader', '~> 2.15'
 
   spec.add_development_dependency 'bundle-audit', '~> 0.2.0'
-  spec.add_development_dependency 'overcommit', '~> 0.71'
   spec.add_development_dependency 'rbs', '~> 3.10'
-  spec.add_development_dependency 'rubocop', '~> 1.86'
+  spec.add_development_dependency 'rubocop', '~> 1.91.0'
   spec.add_development_dependency 'steep', '~> 1.10'
   spec.add_development_dependency 'yard', '~> 0.9'
 end

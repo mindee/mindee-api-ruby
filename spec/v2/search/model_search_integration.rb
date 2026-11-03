@@ -12,6 +12,12 @@ describe Mindee::V2::Search::Models::ModelSearchParameters, :integration, :v2 do
 
     expect(response).not_to be_nil
     expect(response.models).not_to be_empty
+    expect(response.models.length).to be >= 1
+    response.models.each do |model|
+      expect(model.id).not_to be_empty
+      expect(model.name).not_to be_empty
+      expect(model.model_type).not_to be_empty
+    end
     expect(response.pagination).not_to be_nil
     expect(response.pagination.total_items).to be >= 1
     expect(response.pagination.page).to eq(1)

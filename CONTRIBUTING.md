@@ -123,77 +123,37 @@ bundle exec rake spec
 
 ## Local Quality Checks
 
-We use [`overcommit`](https://github.com/sds/overcommit) to run quality and security checks before
-changes are committed and pushed. It is a development dependency of the gem, so `bundle install`
-already installed it. The hooks are configured in [`.overcommit.yml`](.overcommit.yml), and
-repository-local custom hooks live in [`.git-hooks`](.git-hooks).
+We use [`prek`](https://prek.j178.dev/) to run quality and security checks before changes are committed and pushed.
 
 The same checks run in CI, see
 [`.github/workflows/_static-analysis.yml`](.github/workflows/_static-analysis.yml).
 
-### Install `gitleaks`
-
-The `Gitleaks` pre-commit hook shells out to the
-[`gitleaks`](https://github.com/gitleaks/gitleaks) binary, which is not a gem and must be installed
-separately:
-
-```shell
-brew install gitleaks
-```
-
-Otherwise, grab a binary from the
-[releases page](https://github.com/gitleaks/gitleaks/releases) and put it on your `PATH`.
-
 ### Install the hooks
 
-Run this once, after cloning:
+https://prek.j178.dev/installation/
+
+Then install the hooks:
 
 ```shell
-bundle exec overcommit --install
-bundle exec overcommit --sign
-bundle exec overcommit --sign pre-commit
+prek install
 ```
 
-`--install` writes the git hook stubs into `.git/hooks`, and the `--sign` calls tell overcommit you
-trust the current contents of `.overcommit.yml` and of the custom hooks in `.git-hooks`.
-
-### What runs, and when
-
-* **pre-commit:** merge conflict markers, YAML syntax, trailing whitespace, file size, `rubocop`,
-  `steep check` (type checking) and `gitleaks` (secret scanning).
-* **pre-push:** `bundle-audit` (dependency vulnerability check).
+Now, when you run `git commit`, `prek` will automatically run the quality and security checks.
 
 ### Run the hooks manually
 
+If you need to run the hooks manually, use the following command:
+
 ```shell
-bundle exec overcommit --list-hooks         # show which hooks are enabled
-bundle exec overcommit --run                # run the pre-commit hooks on all tracked files
-bundle exec overcommit --run pre_push       # run the pre-push hooks
-bundle exec overcommit --diff main          # run the pre-commit hooks on the diff against main
+prek run --all-files
 ```
 
 ### Skipping hooks
 
-Skip one or more hooks for a single run, by name:
+Skip one or more hooks for a single run, by ID:
 
 ```shell
-SKIP=Gitleaks,Steep git commit
-```
-
-To bypass overcommit entirely (please use sparingly, CI runs the same checks):
-
-```shell
-OVERCOMMIT_DISABLE=1 git commit
-```
-
-### Troubleshooting
-
-If overcommit refuses to run and warns that the configuration or the hooks have changed, review the
-diff and then re-sign:
-
-```shell
-bundle exec overcommit --sign
-bundle exec overcommit --sign pre-commit
+PREK_SKIP=rubocop
 ```
 
 ## Styleguides

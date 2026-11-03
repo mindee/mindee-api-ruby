@@ -1,0 +1,45 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "check-yaml" },
+  { id = "check-merge-conflict" },
+  { id = "check-added-large-files", args = ["--maxkb=1024"] },
+]
+
+[[repos]]
+repo = "https://github.com/betterleaks/betterleaks"
+rev = "v1.9.0"
+hooks = [
+  { id = "betterleaks" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "rubocop",
+    name = "RuboCop",
+    entry = "bundle exec rubocop --force-exclusion --no-server",
+    language = "system",
+    types = ["ruby"]
+  },
+  {
+    id = "steep-check",
+    name = "Run Steep type checking",
+    entry = "bundle exec steep check",
+    language = "system",
+    pass_filenames = false
+  },
+  {
+    id = "bundle-audit",
+    name = "bundle-audit",
+    entry = "bundle exec bundle-audit check",
+    language = "system",
+    pass_filenames = false
+  },
+]
