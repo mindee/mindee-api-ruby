@@ -4,16 +4,19 @@ module Mindee
   module V2
     module Search
       module Models
-        # Search parameters for models.
+        # Search for models within the organization linked to the API key.
+        # All search filters are optional.
+        # If no search filters are given, all models belonging to the organization are returned.
+        # Results are paginated.
         class ModelSearchParameters < Mindee::V2::ClientOptions::BaseSearchParameters
-          # @return [String, nil] Case-insensitive search term for the model name.
+          # @return [String, nil] Filter models by partial name match, case-insensitive.
           attr_reader :name
 
-          # @return [String, nil] Case-insensitive search term for the model type.
+          # @return [String, nil] Filter by an exact model type.
           attr_reader :model_type
 
-          # @param name [String, nil] Case-insensitive search term for the model name.
-          # @param model_type [String, nil] Case-insensitive search term for the model type.
+          # @param name [String, nil] Filter models by partial name match, case-insensitive.
+          # @param model_type [String, nil] Filter by an exact model type.
           # @param page [Integer, nil] 1-based page index.
           # @param per_page [Integer, nil] Number of items per page.
           def initialize(name: nil, model_type: nil, page: nil, per_page: nil)

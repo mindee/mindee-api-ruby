@@ -3,7 +3,7 @@ module Mindee
     module Product
       module Crop
         class CropItem
-          attr_reader extraction_response: Extraction::ExtractionResponse
+          attr_reader extraction_response: Extraction::ExtractionResponse | nil
           attr_reader object_type: String
           attr_reader location: Parsing::Field::FieldLocation
 

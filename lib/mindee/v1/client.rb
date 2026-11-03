@@ -219,7 +219,6 @@ module Mindee
         Mindee::V1::Parsing::Common::ApiResponse.new(product_class, prediction, raw_http)
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity
       # Enqueue a document for async parsing and automatically try to retrieve it
       #
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
@@ -250,7 +249,7 @@ module Mindee
       # @param endpoint [Mindee::V1::HTTP::Endpoint] Endpoint of the API.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
-      # rubocop:disable-next Metrics/PerceivedComplexity
+      # rubocop:disable-next Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
       def enqueue_and_parse(
         input_source,
         product_class,

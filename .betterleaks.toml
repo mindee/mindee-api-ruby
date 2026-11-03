@@ -1,0 +1,15 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "RBS type signatures are not secrets"
+condition = "AND"
+regexTarget = "match"
+paths = ['''^sig/.*\.rbs$''']
+regexes = ['''password:\s*String\??''']
+
+[[allowlists]]
+description = "Dummy HMAC secret used in LocalResponse unit tests"
+condition = "AND"
+paths = ['''^spec/.*\.rb$''']
+regexes = ['''ogNjY44MhvKPGTtVsI8zG82JqWQa68woYQH''']
