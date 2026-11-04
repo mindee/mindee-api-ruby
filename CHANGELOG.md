@@ -1,5 +1,11 @@
 # Mindee Ruby API Library Changelog
 
+## v5.6.0 - 2026-11-04
+### Changes
+* coffin: remove dead v1 products and workflow methods
+* :sparkles: add get by URL methods
+
+
 ## v5.5.0 - 2026-09-30
 ### Changes
 * :sparkles: add support for RAG search
