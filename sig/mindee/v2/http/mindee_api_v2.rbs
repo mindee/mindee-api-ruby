@@ -27,17 +27,19 @@ module Mindee
 
         def initialize: (?api_key: String?) -> void
 
-        def req_get_result: [T] (_ProductClass[T] product, String resource) -> T
+        def req_get_result_by_id: [T] (_ProductClass[T] product, String inference_id) -> T
 
         def req_post_product_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> V2::Parsing::JobResponse
 
-        def req_get_job: (String) -> V2::Parsing::JobResponse
+        def req_get_job_by_id: (String job_id) -> V2::Parsing::JobResponse
+
+        def req_get_job_by_url: (String url) -> V2::Parsing::JobResponse
+
+        def req_get_result_by_url: [T] (_ProductClass[T] product, String url) -> T
 
         def process_response: (Net::HTTPResponse?) -> Hash[String | Symbol, untyped]
 
         def poll: (String) -> Net::HTTPResponse
-
-        def result_req_get: [T] (String, _ProductClass[T] product) -> Net::HTTPResponse
 
         def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> Net::HTTPResponse?
 
@@ -47,11 +49,7 @@ module Mindee
 
         def enqueue_form_options: (Array[Array[untyped]], V2::Product::Extraction::Params::ExtractionParameters) -> Array[Array[untyped]]
 
-        def req_get_job_url: (String) -> V2::Parsing::JobResponse
-
-        def req_get_result_url: [T] (_ResponseFactory[T] result_class, String url) -> T
-
-        def uri?: (String) -> bool
+        def validate_https_url!: (String) -> void
       end
     end
   end

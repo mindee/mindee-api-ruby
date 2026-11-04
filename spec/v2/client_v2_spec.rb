@@ -119,6 +119,7 @@ describe Mindee::V2::Client do
       resp.job.completed_at.strftime('%Y-%m-%dT%H:%M:%S.%6N')
     ).to eq('2026-04-20T18:32:02.734312')
   end
+
   it 'poll builds a real Net::HTTP::Get request without a Transfer-Encoding header' do
     job_json = File.read(File.join(V2_DATA_DIR, 'job', 'ok_processing.json'))
     captured_request = nil
@@ -161,7 +162,7 @@ describe Mindee::V2::Client do
     before do
       allow(client).to receive(:sleep)
       allow(client).to receive(:enqueue).and_return(mock_enqueue_res)
-      allow(client).to receive(:get_job).and_return(mock_processing_res)
+      allow(client).to receive(:get_job_by_url).and_return(mock_processing_res)
     end
 
     it 'raises MindeeError when token is cancelled before first poll' do
@@ -178,7 +179,7 @@ describe Mindee::V2::Client do
     it 'raises MindeeError when token is cancelled during poll loop' do
       token = Mindee::HTTP::CancellationToken.new
       call_count = 0
-      allow(client).to receive(:get_job) do
+      allow(client).to receive(:get_job_by_url) do
         call_count += 1
         token.cancel if call_count == 1
         mock_processing_res
