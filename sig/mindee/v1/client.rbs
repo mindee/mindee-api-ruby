@@ -19,18 +19,6 @@ module Mindee
       def initialize: (params: Hash[String | Symbol, untyped]) -> void
     end
 
-    class WorkflowOptions
-      attr_accessor document_alias: (String?)
-      attr_accessor priority: (Symbol?)
-      attr_accessor full_text: bool
-      attr_accessor rag: bool?
-      attr_accessor public_url: (String?)
-      attr_accessor page_options: (PageOptions)
-      attr_accessor close_file: bool
-
-      def initialize: (params: Hash[String | Symbol, untyped]) -> void
-    end
-
     class Client
       @api_key: String?
 
@@ -66,7 +54,7 @@ module Mindee
 
       def normalize_parse_options: ((Hash[String | Symbol, untyped] | ParseOptions)) -> ParseOptions
 
-      def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions | WorkflowOptions) -> void
+      def process_pdf_if_required: (Input::Source::LocalInputSource, ParseOptions ) -> void
 
       def initialize_endpoint: (singleton(V1::Parsing::Common::Inference), ?endpoint_name: String, ?account_name: String, ?version: String) -> V1::HTTP::Endpoint
 
