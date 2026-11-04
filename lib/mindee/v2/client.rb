@@ -18,22 +18,7 @@ module Mindee
         @mindee_api = Mindee::V2::HTTP::MindeeApiV2.new(api_key: api_key)
       end
 
-      # Retrieves a result from a given queue or URL to the result.
-      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
-      # @param resource [String] ID of the inference or URL to the result.
-      # @return [Mindee::V2::Parsing::BaseResponse]
-      def get_result(product, resource)
-        @mindee_api.req_get_result(product, resource)
-      end
-
-      # Retrieves an inference from a given queue or URL to the job.
-      # @param job_id [String] ID of the job.
-      # @return [Mindee::V2::Parsing::JobResponse]
-      def get_job(job_id)
-        @mindee_api.req_get_job(job_id)
-      end
-
-      # Enqueue a document for async parsing.
+      # Send a file to the asynchronous processing queue for inference.
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
@@ -51,8 +36,40 @@ module Mindee
         @mindee_api.req_post_product_enqueue(input_source, normalized_params)
       end
 
-      # Enqueues to an asynchronous endpoint and automatically polls for a response.
-      #
+      # Get the status of an inference that was previously enqueued.
+      # Can be used for polling.
+      # @param url [String] HTTPS URL to the job.
+      # @return [Mindee::V2::Parsing::JobResponse]
+      def get_job_by_url(url)
+        @mindee_api.req_get_job_by_url(url)
+      end
+
+      # Get the result of an inference that was previously enqueued.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @param url [String] HTTPS URL to the result.
+      # @return [Mindee::V2::Parsing::BaseResponse]
+      def get_result_by_url(product, url)
+        @mindee_api.req_get_result_by_url(product, url)
+      end
+
+      # Get the result of an inference that was previously enqueued.
+      # Prefer using `get_result_by_url` using the result URL returned by the Job.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @param resource [String] ID of the inference or URL to the result.
+      # @return [Mindee::V2::Parsing::BaseResponse]
+      def get_result(product, resource)
+        @mindee_api.req_get_result_by_id(product, resource)
+      end
+
+      # Get the status of an inference that was previously enqueued.
+      # Prefer using `get_job_by_url` with the polling URL returned by enqueue.
+      # @param job_id [String] ID of the job.
+      # @return [Mindee::V2::Parsing::JobResponse]
+      def get_job(job_id)
+        @mindee_api.req_get_job_by_id(job_id)
+      end
+
+      # Send a file to the inference queue and return the results when complete.
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
@@ -60,7 +77,7 @@ module Mindee
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
-      # rubocop:disable-next Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:disable-next Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
       def enqueue_and_get_result(
         product,
         input_source,
@@ -84,29 +101,31 @@ module Mindee
 
         sleep(normalized_params.polling_options.initial_delay_sec)
         retry_counter = 1
-        poll_results = get_job(job_id)
+        polling_url = enqueue_response.job.polling_url
+
+        job_response = get_job_by_url(polling_url)
 
         while retry_counter < normalized_params.polling_options.max_retries
-          if poll_results.job.status == 'Failed'
+          if job_response.job.status == 'Failed'
             break
-          elsif !poll_results.job.result_url.nil?
-            return get_result(product, poll_results.job.result_url)
+          elsif !job_response.job.result_url.nil?
+            return get_result_by_url(product, job_response.job.result_url)
           end
 
           logger.debug(
             "Successfully enqueued inference with job id: #{job_id}.\n" \
             "Attempt n°#{retry_counter}/#{normalized_params.polling_options.max_retries}.\n" \
-            "Job status: #{poll_results.job.status}."
+            "Job status: #{job_response.job.status}."
           )
 
           raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
 
           sleep(normalized_params.polling_options.delay_sec)
-          poll_results = get_job(job_id)
+          job_response = get_job_by_url(polling_url)
           retry_counter += 1
         end
 
-        error = poll_results.job.error
+        error = job_response.job.error
         unless error.nil?
           err_to_raise = Mindee::Error::MindeeHTTPErrorV2.new(error)
           # NOTE: purposefully decoupled from the line above, otherwise rubocop thinks `error` is a `message` param.

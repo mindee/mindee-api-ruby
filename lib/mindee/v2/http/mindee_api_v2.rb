@@ -33,28 +33,42 @@ module Mindee
         end
 
         # Retrieves a result from a given queue.
-        # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
-        # @param resource [String] ID of the inference or URL to the result.
+        # @param product [Class<Mindee::V2::Product::BaseProduct>]
+        # @param inference_id [String] ID of the inference or URL to the result.
         # @return [Mindee::V2::Parsing::BaseResponse]
-        def req_get_result(product, resource)
-          return req_get_result_url(product.response_type, resource) if uri?(resource)
-
-          @settings.check_api_key
-          response = result_req_get(
-            resource,
-            product
-          )
-          product.response_type.new(process_response(response))
+        def req_get_result_by_id(product, inference_id)
+          req_get_result_by_url(product, "#{@settings.base_url}/v2/products/#{product.slug}/results/#{inference_id}")
         end
 
         # Retrieves a queued job.
         #
         # @param job_id [String] ID of the job or URL to the job.
         # @return [Mindee::V2::Parsing::JobResponse]
-        def req_get_job(job_id)
+        def req_get_job_by_id(job_id)
+          req_get_job_by_url("#{@settings.base_url}/v2/jobs/#{job_id}")
+        end
+
+        # Retrieves a queued job from its polling URL.
+        #
+        # @param url [String] HTTPS URL to the job.
+        # @return [Mindee::V2::Parsing::JobResponse]
+        def req_get_job_by_url(url)
+          validate_https_url!(url)
           @settings.check_api_key
-          response = poll("#{@settings.base_url}/v2/jobs/#{job_id}")
+          response = poll(url)
           Mindee::V2::Parsing::JobResponse.new(process_response(response))
+        end
+
+        # Retrieves a result from its URL.
+        #
+        # @param product [Class<Mindee::V2::Product::BaseProduct>]
+        # @param url [String] HTTPS URL to the result.
+        # @return [Mindee::V2::Parsing::BaseResponse]
+        def req_get_result_by_url(product, url)
+          validate_https_url!(url)
+          @settings.check_api_key
+          response = poll(url)
+          product.response_type.new(process_response(response))
         end
 
         # Retrieves a list of resources with the given criteria.
@@ -85,35 +99,15 @@ module Mindee
 
         private
 
-        # @param resource [String] Resource to check.
-        # @return [Boolean]
-        def uri?(resource)
-          uri = URI.parse(resource)
-          throw Mindee::Error::MindeeError, 'HTTP is not supported.' if uri.scheme == 'http'
-          uri.scheme == 'https'
+        # Validates that a URL uses HTTPS and includes a host.
+        #
+        # @param url [String]
+        # @return [void]
+        def validate_https_url!(url)
+          uri = URI.parse(url)
+          raise Mindee::Error::MindeeError, "Invalid URL: #{url}" unless uri.scheme == 'https' && !uri.host.to_s.empty?
         rescue URI::BadURIError, URI::InvalidURIError
-          false
-        end
-
-        # Retrieves a queued job.
-        #
-        # @param url [String]
-        # @return [Mindee::V2::Parsing::JobResponse]
-        def req_get_job_url(url)
-          @settings.check_api_key
-          response = poll(url)
-          Mindee::V2::Parsing::JobResponse.new(process_response(response))
-        end
-
-        # Retrieves a queued job.
-        #
-        # @param result_class [Class<Mindee::V2::Parsing::BaseResponse>]
-        # @param url [String]
-        # @return [Mindee::V2::Parsing::BaseResponse]
-        def req_get_result_url(result_class, url)
-          @settings.check_api_key
-          response = poll(url)
-          result_class.new(process_response(response))
+          raise Mindee::Error::MindeeError, "Invalid URL: #{url}"
         end
 
         # Converts an HTTP response to a parsed response object.
@@ -154,15 +148,6 @@ module Mindee
             return http.request(req)
           end
           raise Mindee::Error::MindeeError, 'Could not resolve server response.'
-        end
-
-        # Polls the API for the result of an inference.
-        #
-        # @param queue_id [String] ID of the queue.
-        # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
-        # @return [Net::HTTPResponse]
-        def result_req_get(queue_id, product)
-          poll("#{@settings.base_url}/v2/products/#{product.slug}/results/#{queue_id}")
         end
 
         # Handle parameters for the enqueue form
