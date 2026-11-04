@@ -54,39 +54,6 @@ module Mindee
       end
     end
 
-    # Class for configuration options in workflow executions.
-    #
-    # @!attribute document_alias [String, nil] Alias to give to the document.
-    # @!attribute priority [Symbol, nil] Priority to give to the document.
-    # @!attribute full_text [bool] Whether to include the full OCR text response in compatible APIs.
-    #   This performs a full OCR operation on the server and may increase response time.
-    # @!attribute public_url [String, nil] A unique, encrypted URL for accessing the document validation interface
-    # without requiring authentication.
-    # @!attribute rag [bool, nil] Whether to enable Retrieval-Augmented Generation.
-    # @!attribute page_options [PageOptions, Hash, nil] Page cutting/merge options:
-    #   * `:page_indexes` Zero-based list of page indexes.
-    #   * `:operation` Operation to apply on the document, given the specified page indexes:
-    #       * `:KEEP_ONLY` - keep only the specified pages, and remove all others.
-    #       * `:REMOVE` - remove the specified pages, and keep all others.
-    #   * `:on_min_pages` Apply the operation only if the document has at least this many pages.
-    # @!attribute close_file [bool, nil] Whether to close the file after sending it. Defaults to true.
-    class WorkflowOptions
-      attr_accessor :document_alias, :priority, :full_text, :public_url, :page_options, :rag, :close_file
-
-      def initialize(params: {})
-        params = params.transform_keys(&:to_sym)
-        @document_alias = params.fetch(:document_alias, nil)
-        @priority = params.fetch(:priority, nil)
-        @full_text = params.fetch(:full_text, false)
-        @public_url = params.fetch(:public_url, nil)
-        @rag = params.fetch(:rag, nil)
-        raw_page_options = params.fetch(:page_options, nil)
-        raw_page_options = PageOptions.new(params: raw_page_options) unless raw_page_options.is_a?(PageOptions)
-        @page_options = raw_page_options
-        @close_file = params.fetch(:close_file, true)
-      end
-    end
-
     # Mindee API Client.
     # See: https://developers.mindee.com/docs
     class Client
