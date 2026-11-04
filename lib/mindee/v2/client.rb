@@ -62,7 +62,7 @@ module Mindee
       end
 
       # Get the status of an inference that was previously enqueued.
-      # Prefer using `GetJobFromUrlAsync` using the polling URL returned by the enqueue.
+      # Prefer using `get_job_by_url` with the polling URL returned by enqueue.
       # @param job_id [String] ID of the job.
       # @return [Mindee::V2::Parsing::JobResponse]
       def get_job(job_id)
