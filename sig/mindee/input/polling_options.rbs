@@ -8,7 +8,7 @@ module Mindee
 
       def initialize: (?initial_delay_sec: Float, ?delay_sec: Float, ?max_retries: Integer) -> void
 
-      def self.from_hash: (polling_options: Hash[String | Symbol, untyped]) -> PollingOptions
+      def self.from_hash: (?polling_options: Hash[String | Symbol, untyped]) -> PollingOptions
 
       private
 
