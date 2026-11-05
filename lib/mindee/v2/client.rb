@@ -100,6 +100,16 @@ module Mindee
                           else
                             raise ArgumentError, "Expected Hash or BaseProductParameters, got #{params.class}"
                           end
+
+        polling_options_instance = case polling_options
+                                   when Mindee::Input::PollingOptions
+                                     polling_options
+                                   when Hash
+                                     Mindee::Input::PollingOptions.from_hash(polling_options: polling_options)
+                                   else
+                                     Mindee::Input::PollingOptions.new
+                                   end
+
         enqueue_response = enqueue(product, input_source, params_instance)
 
         if enqueue_response.job.id.nil? || enqueue_response.job.id.empty?
@@ -111,15 +121,6 @@ module Mindee
         logger.debug("Successfully enqueued document with job id: #{job_id}.")
 
         raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
-
-        polling_options_instance = case polling_options
-                                   when Mindee::Input::PollingOptions
-                                     polling_options
-                                   when Hash
-                                     Mindee::Input::PollingOptions.from_hash(polling_options: polling_options)
-                                   else
-                                     Mindee::Input::PollingOptions.new
-                                   end
 
         poll_on_job(product, enqueue_response, polling_options_instance, cancellation_token)
       end
@@ -156,11 +157,12 @@ module Mindee
       )
         sleep(polling_options.initial_delay_sec)
         try_counter = 1
+        max_retries = polling_options.max_retries
         polling_url = initial_response.job.polling_url
 
         job_response = get_job_by_url(polling_url)
 
-        while try_counter < polling_options.max_retries
+        while try_counter < max_retries
           if job_response.job.status == 'Failed'
             break
           elsif !job_response.job.result_url.nil?
@@ -168,7 +170,7 @@ module Mindee
           end
 
           logger.debug(
-            "Poll attempt #{try_counter + 1} of #{polling_options.max_retries}."
+            "Poll attempt #{try_counter + 1} of #{max_retries}."
           )
 
           raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
