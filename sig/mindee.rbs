@@ -5,21 +5,22 @@ class Object
 end
 
 module Mindee
+  Base64InputSource: singleton(Input::Source::Base64InputSource)
+  BytesInputSource: singleton(Input::Source::BytesInputSource)
+  FileInputSource: singleton(Input::Source::FileInputSource)
+  PathInputSource: singleton(Input::Source::PathInputSource)
+  URLInputSource: singleton(Input::Source::URLInputSource)
+
+  module Dependencies
+  end
+
   module Error
   end
 
-  module Extraction
+  module Geometry
   end
 
   module HTTP
-  end
-
-  module PDF
-  end
-
-  module Input
-    module Source
-    end
   end
 
   module Image
@@ -33,30 +34,62 @@ module Mindee
   module Logging
   end
 
-  module Parsing
-    module Common
-    end
-
-    module Standard
-    end
-
-    module Universal
+  module Input
+    module Source
     end
   end
 
+  module Logging
+  end
+
+  module PDF
+  end
+
   module V1
-    module Product
-      module EU
+    module Extraction
+    end
+
+    module HTTP
+    end
+
+    module Parsing
+      module Common
       end
 
+      module Standard
+      end
+
+      module Universal
+      end
+    end
+
+    module Product
       module FR
       end
+    end
+  end
 
-      module IND
+  module V2
+    module FileOperation
+      module Crop
       end
 
-      module US
+      module Split
       end
+    end
+
+    module HTTP
+    end
+
+    module Parsing
+      module Search
+      end
+    end
+
+    module Product
+    end
+
+    module Search
     end
   end
 end

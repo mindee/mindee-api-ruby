@@ -30,7 +30,7 @@ extraction_params = {
 }
 
 # Load a file from disk
-input_source = Mindee::Input::Source::PathInputSource.new(input_path)
+input_source = Mindee::PathInputSource.new(input_path)
 
 # Send for processing
 response = mindee_client.enqueue(

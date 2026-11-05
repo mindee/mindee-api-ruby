@@ -21,8 +21,8 @@ jobs:
     uses: ./.github/workflows/_test-units.yml
     needs: [ betterleaks, static-analysis ]
     secrets: inherit
-  test-unit-lite:
-    uses: ./.github/workflows/_test-units.yml
+  test-units-lite:
+    uses: ./.github/workflows/_test-units-lite.yml
     needs: [ betterleaks, static-analysis ]
     secrets: inherit
   test-integration:
@@ -31,7 +31,7 @@ jobs:
     secrets: inherit
   test-integration-lite:
     uses: ./.github/workflows/_test-integration-lite.yml
-    needs: test-unit-lite
+    needs: test-units-lite
     secrets: inherit
   test-smoke:
     uses: ./.github/workflows/_test-smoke.yml
