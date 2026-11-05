@@ -17,23 +17,17 @@ module Mindee
         # If empty, no webhooks will be used.
         attr_reader :webhook_ids
 
-        # @return [Input::PollingOptions] Options for polling. Set only if having timeout issues.
-        attr_reader :polling_options
-
         # @return [Boolean, nil] Whether to close the file after parsing.
         attr_reader :close_file
 
         # @param [String] model_id ID of the model
         # @param [String, nil] file_alias File alias, if applicable.
         # @param [Array<String>, nil] webhook_ids List of webhook IDs to propagate the API response to.
-        # @param [Hash, Input::PollingOptions, nil] polling_options Options for polling. Set only if having timeout
-        # issues.
         # @param [Boolean, nil] close_file Whether to close the file after parsing.
         def initialize(
           model_id,
           file_alias: nil,
           webhook_ids: nil,
-          polling_options: nil,
           close_file: true
         )
           raise Error::MindeeInputError, 'Model ID is required.' if model_id.nil? || model_id.empty?
@@ -41,15 +35,7 @@ module Mindee
           @model_id = model_id
           @file_alias = file_alias
           @webhook_ids = webhook_ids || []
-          @polling_options = get_clean_polling_options(polling_options)
           @close_file = close_file.nil? || close_file
-        end
-
-        # Sets polling options after normalizing hash inputs.
-        # @param [Hash, Input::PollingOptions, nil] polling_options
-        # @return [Input::PollingOptions]
-        def polling_options=(polling_options)
-          @polling_options = get_clean_polling_options(polling_options)
         end
 
         # @return [String] Slug for the endpoint.
@@ -75,7 +61,6 @@ module Mindee
             params[:model_id],
             file_alias: params[:file_alias],
             webhook_ids: params[:webhook_ids],
-            polling_options: params[:polling_options],
             close_file: params[:close_file]
           )
         end
@@ -90,15 +75,6 @@ module Mindee
             raise Error::MindeeInputError, 'Model ID is required.'
           end
 
-          polling_options_input = params.fetch(:page_options, Input::PollingOptions.new)
-          if polling_options_input.is_a?(Hash)
-            polling_options_input = polling_options_input.transform_keys(&:to_sym)
-            Input::PollingOptions.new(
-              initial_delay_sec: polling_options_input.fetch(:initial_delay_sec, 2.0),
-              delay_sec: polling_options_input.fetch(:delay_sec, 1.5),
-              max_retries: polling_options_input.fetch(:max_retries, 80)
-            )
-          end
           params
         end
 
@@ -110,51 +86,6 @@ module Mindee
           webhook_ids = @webhook_ids || []
           form_data.push(['webhook_ids', webhook_ids.join(',')]) unless @webhook_ids.nil? || webhook_ids.empty?
           form_data
-        end
-
-        # Validates the parameters for async auto-polling
-        def validate_async_params
-          min_delay_sec = 1
-          min_initial_delay_sec = 1
-          min_retries = 2
-
-          if @polling_options.delay_sec < min_delay_sec
-            raise ArgumentError,
-                  "Cannot set auto-poll delay to less than #{min_delay_sec} second(s)"
-          end
-          if @polling_options.initial_delay_sec < min_initial_delay_sec
-            raise ArgumentError,
-                  "Cannot set initial parsing delay to less than #{min_initial_delay_sec} second(s)"
-          end
-          return unless @polling_options.max_retries < min_retries
-
-          raise ArgumentError,
-                "Cannot set auto-poll retries to less than #{min_retries}"
-        end
-
-        private
-
-        # Cleans a proper polling options object potentially from a hash.
-        # @param [Hash, Input::PollingOptions, nil] polling_options Polling options.
-        # @return [Input::PollingOptions] Valid polling options object.
-        def get_clean_polling_options(polling_options)
-          return Input::PollingOptions.new if polling_options.is_a?(Input::PollingOptions)
-
-          if polling_options.is_a?(Hash)
-            polling_options = polling_options.transform_keys(&:to_sym)
-            output_polling_options = Input::PollingOptions.new(
-              initial_delay_sec: polling_options.fetch(:initial_delay_sec, 2.0),
-              delay_sec: polling_options.fetch(:delay_sec, 1.5),
-              max_retries: polling_options.fetch(:max_retries, 80)
-            )
-          else
-            output_polling_options = if polling_options.is_a?(Input::PollingOptions)
-                                       polling_options || Input::PollingOptions.new
-                                     else
-                                       Input::PollingOptions.new
-                                     end
-          end
-          output_polling_options
         end
       end
     end

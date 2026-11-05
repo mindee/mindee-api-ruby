@@ -10,34 +10,34 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
   let(:api_key) { ENV.fetch('MINDEE_V2_API_KEY') }
   let(:model_id) { ENV.fetch('MINDEE_V2_SE_TESTS_FINDOC_MODEL_ID') }
   let(:blank_pdf_url) { ENV.fetch('MINDEE_V2_SE_TESTS_BLANK_PDF_URL') }
-
   let(:client) { Mindee::V2::Client.new(api_key: api_key) }
+
   context 'An input file' do
     it 'parses an empty multi-page PDF successfully' do
       src_path = File.join(FILE_TYPES_DIR, 'pdf', 'multipage_cut-2.pdf')
-      input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'multipage_cut-2.pdf')
+      input = Mindee::Input::Source::FileInputSource.new(
+        File.open(src_path, 'rb'), 'multipage_cut-2.pdf'
+      )
 
-      polling = Mindee::Input::PollingOptions.new(
+      polling_options = Mindee::Input::PollingOptions.new(
         initial_delay_sec: 3.0,
         delay_sec: 1.5,
         max_retries: 80
       )
-
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        model_id,
+      extraction_params = {
+        model_id: model_id,
         rag: false,
         raw_text: true,
         polygon: false,
         confidence: false,
         file_alias: 'rb_integration_test',
-        text_context: 'this is a test'
-      )
-
+        text_context: 'this is a test',
+      }
       response = client.enqueue_and_get_result(
         Mindee::V2::Product::Extraction::Extraction,
         input,
-        inference_params,
-        polling
+        extraction_params,
+        polling_options
       )
 
       expect(response).not_to be_nil
@@ -72,46 +72,26 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       expect(result.fields).not_to be_nil
     end
 
-    it 'parses with legacy polling options successfully' do
-      src_path = File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')
-      input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'multipage_cut-2.pdf')
-
-      polling = Mindee::Input::PollingOptions.new(
-        initial_delay_sec: 3.0,
-        delay_sec: 1.5,
-        max_retries: 80
-      )
-
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        model_id,
-        rag: false,
-        raw_text: true,
-        polygon: false,
-        confidence: false,
-        file_alias: 'rb_integration_test',
-        polling_options: polling,
-        text_context: 'this is a test'
-      )
-      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      expect(response).not_to be_nil
-      expect(response.inference).not_to be_nil
-      expect(response.inference.file.file_alias).to eq('rb_integration_test')
-    end
-
     it 'parses a filled single-page image successfully' do
       src_path = File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')
-      input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'default_sample.jpg')
+      input = Mindee::Input::Source::FileInputSource.new(
+        File.open(src_path, 'rb'), 'default_sample.jpg'
+      )
 
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        model_id,
+      extraction_params = {
+        model_id: model_id,
         raw_text: false,
         polygon: false,
         confidence: false,
         rag: false,
-        file_alias: 'rb_integration_test'
-      )
+        file_alias: 'rb_integration_test',
+      }
 
-      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
+      response = client.enqueue_and_get_result(
+        Mindee::V2::Product::Extraction::Extraction,
+        input,
+        extraction_params
+      )
       expect(response).not_to be_nil
 
       file = response.inference.file
@@ -150,31 +130,31 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       src_path = File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf')
       input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'blank_1.pdf')
 
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new('INVALID_MODEL_ID')
+      extraction_params = { model_id: 'INVALID_MODEL_ID' }
 
       expect do
-        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e| expect(e.status).to eq(422) }
+        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, extraction_params)
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err| expect(err.status).to eq(422) }
     end
 
     it 'raises MindeeHTTPErrorV2 (422) on invalid webhook id' do
       src_path = File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf')
       input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'blank_1.pdf')
 
-      params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        model_id,
-        webhook_ids: ['INVALID_WEBHOOK_ID']
-      )
+      extraction_params = {
+        model_id: model_id,
+        webhook_ids: ['INVALID_WEBHOOK_ID'],
+      }
 
       expect do
-        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, params)
-      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-        expect(e.status).to eq(422)
-        expect(e.code).to start_with('422-')
-        expect(e.detail).to_not be_nil
-        expect(e.title).to_not be_nil
-        expect(e.errors).to be_an_instance_of(Array)
-        expect(e.errors.count).to be_positive
+        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, extraction_params)
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+        expect(err.status).to eq(422)
+        expect(err.code).to start_with('422-')
+        expect(err.detail).to_not be_nil
+        expect(err.title).to_not be_nil
+        expect(err.errors).to be_an_instance_of(Array)
+        expect(err.errors.count).to be_positive
       }
     end
 
@@ -182,34 +162,34 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       src_path = File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf')
       input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'blank_1.pdf')
 
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        model_id,
-        webhook_ids: ['fc405e37-4ba4-4d03-aeba-533a8d1f0f21', 'fc405e37-4ba4-4d03-aeba-533a8d1f0f21']
-      )
+      extraction_params = {
+        model_id: model_id,
+        webhook_ids: ['fc405e37-4ba4-4d03-aeba-533a8d1f0f21', 'fc405e37-4ba4-4d03-aeba-533a8d1f0f21'],
+      }
 
       expect do
-        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-        expect(e.status).to eq(422)
-        expect(e.code).to start_with('422-')
-        expect(e.detail).to_not be_nil
-        expect(e.title).to_not be_nil
-        expect(e.errors).to be_an_instance_of(Array)
-        expect(e.errors.count).to be_positive
-        expect(e.errors[0]).to be_an_instance_of(Mindee::V2::Parsing::ErrorItem)
+        client.enqueue(Mindee::V2::Product::Extraction::Extraction, input, extraction_params)
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+        expect(err.status).to eq(422)
+        expect(err.code).to start_with('422-')
+        expect(err.detail).to_not be_nil
+        expect(err.title).to_not be_nil
+        expect(err.errors).to be_an_instance_of(Array)
+        expect(err.errors.count).to be_positive
+        expect(err.errors[0]).to be_an_instance_of(Mindee::V2::Parsing::ErrorItem)
       }
     end
 
     it 'raises MindeeHTTPErrorV2 on invalid job id' do
       expect do
         client.get_result(Mindee::V2::Product::Extraction::Extraction, 'INVALID_JOB_ID')
-      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-        expect(e.status).to eq(422)
-        expect(e.code).to start_with('422-')
-        expect(e.detail).to_not be_nil
-        expect(e.title).to_not be_nil
-        expect(e.errors).to be_an_instance_of(Array)
-        expect(e.errors.count).to be_positive
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+        expect(err.status).to eq(422)
+        expect(err.code).to start_with('422-')
+        expect(err.detail).to_not be_nil
+        expect(err.title).to_not be_nil
+        expect(err.errors).to be_an_instance_of(Array)
+        expect(err.errors.count).to be_positive
       }
     end
 
@@ -221,21 +201,21 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
           'default_sample.jpg'
         )
 
-        inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-          'fc405e37-4ba4-4d03-aeba-533a8d1f0f21',
+        extraction_params = {
+          model_id: 'fc405e37-4ba4-4d03-aeba-533a8d1f0f21',
           raw_text: false,
           polygon: false,
           confidence: false,
           rag: false,
-          file_alias: 'rb_integration_test'
-        )
-        client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
-      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-        expect(e.status).to eq(404)
-        expect(e.code).to start_with('404-')
-        expect(e.detail).to_not be_nil
-        expect(e.title).to_not be_nil
-        expect(e.errors).to be_an_instance_of(Array)
+          file_alias: 'rb_integration_test',
+        }
+        client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, extraction_params)
+      end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+        expect(err.status).to eq(404)
+        expect(err.code).to start_with('404-')
+        expect(err.detail).to_not be_nil
+        expect(err.title).to_not be_nil
+        expect(err.errors).to be_an_instance_of(Array)
       }
     end
   end
@@ -244,9 +224,12 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
     it 'parses an URL input source without errors' do
       url_input = Mindee::Input::Source::URLInputSource.new(blank_pdf_url)
 
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(model_id)
+      extraction_params = { model_id: model_id }
 
-      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, url_input, inference_params)
+      response = client.enqueue_and_get_result(
+        Mindee::V2::Product::Extraction::Extraction,
+        url_input, extraction_params
+      )
 
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil
@@ -255,21 +238,28 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
 
   context 'A Data Schema Override' do
     it 'Overrides successfully' do
-      data_schema_replace = File.read(File.join(V2_PRODUCT_DATA_DIR, 'extraction',
-                                                'data_schema_replace_param.json'))
-      input = Mindee::Input::Source::PathInputSource.new(File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf'))
+      data_schema_replace = File.read(
+        File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'data_schema_replace_param.json')
+      )
+      input = Mindee::Input::Source::PathInputSource.new(
+        File.join(FILE_TYPES_DIR, 'pdf', 'blank_1.pdf')
+      )
 
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        model_id,
+      extraction_params = {
+        model_id: model_id,
         raw_text: false,
         polygon: false,
         confidence: false,
         rag: false,
         file_alias: 'rb_integration_data_schema_replace',
-        data_schema: data_schema_replace
-      )
+        data_schema: data_schema_replace,
+      }
 
-      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
+      response = client.enqueue_and_get_result(
+        Mindee::V2::Product::Extraction::Extraction,
+        input,
+        extraction_params
+      )
       expect(response).not_to be_nil
 
       model = response.inference.model

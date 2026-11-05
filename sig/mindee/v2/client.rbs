@@ -19,18 +19,35 @@ module Mindee
 
       def get_job_by_url: (String url) -> V2::Parsing::JobResponse
 
-      def enqueue: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params) -> V2::Parsing::JobResponse
+      def enqueue: [T] (
+          HTTP::_ProductClass[T] product,
+          Input::Source::LocalInputSource | Input::Source::URLInputSource input_source,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params
+        ) -> V2::Parsing::JobResponse
 
-      def enqueue_and_get_result: [T] (HTTP::_ProductClass[T] product, Input::Source::LocalInputSource | Input::Source::URLInputSource, Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params, ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil) -> T
+      def enqueue_and_get_result: [T] (
+          HTTP::_ProductClass[T] product,
+          Input::Source::LocalInputSource | Input::Source::URLInputSource input_source,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params,
+          ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil polling_options,
+          ?Mindee::HTTP::CancellationToken | nil cancellation_token
+        ) -> T
 
       def search: [T] (HTTP::_SearchParameters[T] params) -> T
 
       # Deprecated: use `search` instead.
-      def search_models: (String?, String?) -> Mindee::V2::Search::Models::ModelSearchResponse
+      def search_models: (String?, String?) -> Search::Models::ModelSearchResponse
 
       def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
 
-      def normalize_parameters: (singleton(ClientOptions::BaseProductParameters) param_class, Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params, ?polling_options: Hash[String | Symbol, untyped] | Input::PollingOptions | nil) -> ClientOptions::BaseProductParameters
+      private
+
+      def poll_on_job: [T] (
+          HTTP::_ProductClass[T] product,
+          V2::Parsing::JobResponse initial_response,
+          Input::PollingOptions polling_options,
+          Mindee::HTTP::CancellationToken | nil cancellation_token
+        ) -> T
     end
   end
 end

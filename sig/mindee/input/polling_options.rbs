@@ -6,7 +6,13 @@ module Mindee
       attr_reader initial_delay_sec: Integer | Float
       attr_reader max_retries: Integer
 
-      def initialize: (?initial_delay_sec: Float, ?delay_sec: Float, ?max_retries: Integer) -> Integer
+      def initialize: (?initial_delay_sec: Float, ?delay_sec: Float, ?max_retries: Integer) -> void
+
+      def self.from_hash: (?polling_options: Hash[String | Symbol, untyped]) -> PollingOptions
+
+      private
+
+      def validate_settings: -> void
     end
   end
 end

@@ -58,12 +58,12 @@ describe Mindee::V2::Product::Split::Split, :integration, :v2, :all_deps do
     expect(extracted_pdfs[0].filename).to eq('default_sample_001-001.pdf')
     expect(extracted_pdfs[1].filename).to eq('default_sample_002-002.pdf')
 
-    findoc_params = { model_id: findoc_model_id, close_file: false }
+    extraction_params = { model_id: findoc_model_id, close_file: false }
 
     invoice0 = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Extraction::Extraction,
       extracted_pdfs[0].as_input_source,
-      findoc_params
+      extraction_params
     )
 
     check_findoc_return(invoice0)

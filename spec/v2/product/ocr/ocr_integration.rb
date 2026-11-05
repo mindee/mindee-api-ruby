@@ -17,12 +17,12 @@ describe Mindee::V2::Product::OCR, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'ocr', 'default_sample.jpg')
     )
 
-    params = { model_id: ocr_model_id }
+    ocr_params = { model_id: ocr_model_id }
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::OCR::OCR,
       input_source,
-      params
+      ocr_params
     )
 
     expect(response.inference).not_to be_nil

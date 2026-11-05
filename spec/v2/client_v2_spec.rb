@@ -154,8 +154,7 @@ describe Mindee::V2::Client do
     end
     let(:params) do
       Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        'dummy-model',
-        polling_options: Mindee::Input::PollingOptions.new(initial_delay_sec: 2, delay_sec: 1.5, max_retries: 2)
+        'dummy-model'
       )
     end
 
@@ -171,7 +170,11 @@ describe Mindee::V2::Client do
 
       expect do
         client.enqueue_and_get_result(
-          Mindee::V2::Product::Extraction::Extraction, input_doc, params, nil, token
+          Mindee::V2::Product::Extraction::Extraction,
+          input_doc,
+          params,
+          Mindee::Input::PollingOptions.new(initial_delay_sec: 2, delay_sec: 1.5, max_retries: 2),
+          token
         )
       end.to raise_error(Mindee::Error::MindeeError, %r{canceled})
     end

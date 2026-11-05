@@ -14,23 +14,12 @@ module Mindee
   module Error
   end
 
-  # Custom extraction module
-  module Extraction
+  # Custom geometry module
+  module Geometry
   end
 
   # Mindee internal http module.
   module HTTP
-  end
-
-  # PDF-specific operations.
-  module PDF
-  end
-
-  # Document handling.
-  module Input
-    # Document source handling.
-    module Source
-    end
   end
 
   module Image
@@ -43,35 +32,27 @@ module Mindee
     end
   end
 
+  # Document handling.
+  module Input
+    # Document source handling.
+    module Source
+    end
+  end
+
   # Logging
   module Logging
   end
 
-  # Document input-related internals.
-  module Input
-  end
-
-  # Collection of all internal products.
-  module Product
-    # Europe-specific products.
-    module EU
-    end
-
-    # France-specific products.
-    module FR
-    end
-
-    # Indian-specific products.
-    module IND
-    end
-
-    # US-specific products.
-    module US
-    end
+  # PDF-specific operations.
+  module PDF
   end
 
   # V1-specific module.
   module V1
+    # Custom extraction for V1.
+    module Extraction
+    end
+
     # HTTP module for V1.
     module HTTP
     end
@@ -101,10 +82,6 @@ module Mindee
 
   # V2-specific module.
   module V2
-    # Mindee internal http module.
-    module HTTP
-    end
-
     # File operations.
     module FileOperation
       # Crop operations.
@@ -116,8 +93,8 @@ module Mindee
       end
     end
 
-    # Product-specific module.
-    module Product
+    # HTTP module for V2.
+    module HTTP
     end
 
     # V2 parsing module.
@@ -125,6 +102,14 @@ module Mindee
       # V2 search module.
       module Search
       end
+    end
+
+    # Product-specific module.
+    module Product
+    end
+
+    # V2 search module.
+    module Search
     end
   end
 end

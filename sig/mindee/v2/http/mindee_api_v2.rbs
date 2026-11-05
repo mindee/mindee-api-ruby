@@ -29,7 +29,10 @@ module Mindee
 
         def req_get_result_by_id: [T] (_ProductClass[T] product, String inference_id) -> T
 
-        def req_post_product_enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> V2::Parsing::JobResponse
+        def req_post_product_enqueue: (
+          Input::Source::LocalInputSource | Input::Source::URLInputSource,
+          ClientOptions::BaseProductParameters
+        ) -> V2::Parsing::JobResponse
 
         def req_get_job_by_id: (String job_id) -> V2::Parsing::JobResponse
 
@@ -41,13 +44,14 @@ module Mindee
 
         def poll: (String) -> Net::HTTPResponse
 
-        def enqueue: (Input::Source::LocalInputSource | Input::Source::URLInputSource, ClientOptions::BaseProductParameters) -> Net::HTTPResponse?
+        def enqueue: (
+          Input::Source::LocalInputSource | Input::Source::URLInputSource,
+          ClientOptions::BaseProductParameters
+        ) -> Net::HTTPResponse?
 
         def req_get_search: [T] (_SearchParameters[T] params) -> T
 
         private
-
-        def enqueue_form_options: (Array[Array[untyped]], V2::Product::Extraction::Params::ExtractionParameters) -> Array[Array[untyped]]
 
         def validate_https_url!: (String) -> void
       end

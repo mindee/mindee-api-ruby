@@ -46,7 +46,6 @@ module Mindee
             # @param [String, nil] file_alias File alias, if applicable.
             # @param [Array<String>, nil] webhook_ids
             # @param [String, nil] text_context
-            # @param [Hash, Input::PollingOptions, nil] polling_options
             # @param [Boolean, nil] close_file
             # @param [DataSchemaField, String, Hash nil] data_schema
             def initialize(
@@ -58,7 +57,6 @@ module Mindee
               file_alias: nil,
               webhook_ids: nil,
               text_context: nil,
-              polling_options: nil,
               close_file: true,
               data_schema: nil
             )
@@ -66,7 +64,6 @@ module Mindee
                 model_id,
                 file_alias: file_alias,
                 webhook_ids: webhook_ids,
-                polling_options: polling_options,
                 close_file: close_file
               )
 
@@ -108,13 +105,16 @@ module Mindee
               model_id = new_params.fetch(:model_id)
 
               ExtractionParameters.new(
-                model_id, rag: rag,
-                          raw_text: raw_text,
-                          polygon: polygon,
-                          confidence: confidence,
-                          file_alias: params.fetch(:file_alias, nil),
-                          webhook_ids: params.fetch(:webhook_ids, nil),
-                          close_file: params.fetch(:close_file, true)
+                model_id,
+                rag: rag,
+                raw_text: raw_text,
+                polygon: polygon,
+                confidence: confidence,
+                file_alias: params.fetch(:file_alias, nil),
+                webhook_ids: params.fetch(:webhook_ids, nil),
+                text_context: base_params.fetch(:text_context, nil),
+                data_schema: base_params.fetch(:data_schema, nil),
+                close_file: params.fetch(:close_file, true)
               )
             end
           end

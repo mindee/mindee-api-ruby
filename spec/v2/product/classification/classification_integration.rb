@@ -17,12 +17,12 @@ describe Mindee::V2::Product::Classification, :integration, :v2 do
       File.join(V2_PRODUCT_DATA_DIR, 'classification', 'default_sample.jpg')
     )
 
-    params = { model_id: classification_model_id }
+    classification_params = { model_id: classification_model_id }
 
     response = v2_client.enqueue_and_get_result(
       Mindee::V2::Product::Classification::Classification,
       input_source,
-      params
+      classification_params
     )
 
     expect(response.inference).not_to be_nil

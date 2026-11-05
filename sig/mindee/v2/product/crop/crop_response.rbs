@@ -8,7 +8,7 @@ module Mindee
           self.@slug: String
           self.@_params_type: singleton(Params::CropParameters)
 
-          attr_reader inference: Mindee::V2::Product::Crop::CropInference
+          attr_reader inference: CropInference
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
           def _params_type: -> singleton(Params::CropParameters)

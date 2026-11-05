@@ -1,23 +1,29 @@
 root = true
 
+# All files
 [*]
-charset = utf-8
-end_of_line = lf
+indent_style = space
 insert_final_newline = true
+end_of_line = lf
+charset = utf-8
 trim_trailing_whitespace = true
-[*.md]
+
+# Config files
+[*.{yml,yaml,toml}]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# Markdown files
+[*.{md,markdown}]
 trim_trailing_whitespace = false
 
 [*.{rb,rake,gemspec,rbs,ru}]
-indent_style = space
-indent_size = 2
-
-[*.{yml,yaml,json,toml}]
-indent_style = space
 indent_size = 2
 
 [*.sh]
-indent_style = space
 indent_size = 2
 
 [Makefile]
