@@ -9,7 +9,10 @@ module Mindee
           attr_reader locations: Array[FieldLocation]
 
           def initialize: (Hash[String | Symbol, untyped], ?Integer) -> void
-          def self.create_field: (Hash[String | Symbol, untyped], ?Integer) -> (ListField | Field::ObjectField | Field::SimpleField)
+          def self.create_field: (
+            Hash[String | Symbol, untyped],
+            ?Integer
+          ) -> (ListField | Field::ObjectField | Field::SimpleField)
         end
       end
     end

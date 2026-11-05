@@ -30,13 +30,13 @@ module Mindee
           Input::Source::LocalInputSource | Input::Source::URLInputSource input_source,
           Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params,
           ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil polling_options,
-          Mindee::HTTP::CancellationToken | nil cancellation_token
+          ?Mindee::HTTP::CancellationToken | nil cancellation_token
         ) -> T
 
       def search: [T] (HTTP::_SearchParameters[T] params) -> T
 
       # Deprecated: use `search` instead.
-      def search_models: (String?, String?) -> Mindee::V2::Search::Models::ModelSearchResponse
+      def search_models: (String?, String?) -> Search::Models::ModelSearchResponse
 
       def validate_async_params: (Integer | Float, Integer | Float, Integer) -> void
 

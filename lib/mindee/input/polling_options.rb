@@ -25,12 +25,11 @@ module Mindee
 
       # Loads from a Hash.
       def self.from_hash(polling_options: {})
-        polling_options = polling_options.transform_keys(&:to_sym)
-        new(
-          initial_delay_sec: polling_options[:initial_delay_sec],
-          delay_sec: polling_options[:delay_sec],
-          max_retries: polling_options[:max_retries]
-        )
+        polling_options = polling_options
+                          .transform_keys(&:to_sym)
+                          .slice(:initial_delay_sec, :delay_sec, :max_retries)
+                          .compact
+        new(**polling_options)
       end
 
       private

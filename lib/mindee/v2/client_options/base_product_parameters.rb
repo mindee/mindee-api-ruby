@@ -17,9 +17,6 @@ module Mindee
         # If empty, no webhooks will be used.
         attr_reader :webhook_ids
 
-        # @return [Input::PollingOptions] Options for polling. Set only if having timeout issues.
-        attr_reader :polling_options
-
         # @return [Boolean, nil] Whether to close the file after parsing.
         attr_reader :close_file
 

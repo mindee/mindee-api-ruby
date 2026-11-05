@@ -8,7 +8,7 @@ module Mindee
           self.@slug: String
           self.@_params_type: singleton(Params::ClassificationParameters)
 
-          attr_reader inference: Mindee::V2::Product::Classification::ClassificationInference
+          attr_reader inference: ClassificationInference
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
           def _params_type: -> singleton(Params::ClassificationParameters)
