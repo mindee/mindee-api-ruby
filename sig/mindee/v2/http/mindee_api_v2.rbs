@@ -53,11 +53,6 @@ module Mindee
 
         private
 
-        def enqueue_form_options: (
-          Array[Array[untyped]],
-          V2::Product::Extraction::Params::ExtractionParameters
-        ) -> Array[Array[untyped]]
-
         def validate_https_url!: (String) -> void
       end
     end

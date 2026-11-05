@@ -150,24 +150,6 @@ module Mindee
           raise Mindee::Error::MindeeError, 'Could not resolve server response.'
         end
 
-        # Handle parameters for the enqueue form
-        # @param form_data [Array] Array of form fields
-        # @param params [V2::Product::Extraction::Params::ExtractionParameters] Inference options.
-        def enqueue_form_options(form_data, params)
-          form_data.push(['rag', params.rag.to_s]) unless params.rag.nil?
-          form_data.push(['raw_text', params.raw_text.to_s]) unless params.raw_text.nil?
-          form_data.push(['polygon', params.polygon.to_s]) unless params.polygon.nil?
-          form_data.push(['confidence', params.confidence.to_s]) unless params.confidence.nil?
-          form_data.push ['text_context', params.text_context] if params.text_context
-          form_data.push ['data_schema', params.data_schema.to_s] if params.data_schema
-          unless params.webhook_ids.nil? || params.webhook_ids.empty?
-            params.webhook_ids.each do |webhook_id|
-              form_data.push ['webhook_ids[]', webhook_id]
-            end
-          end
-          form_data
-        end
-
         # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
         # @param params [ClientOptions::BaseProductParameters] Inference options.
         # @return [Net::HTTPResponse, nil]
@@ -181,10 +163,6 @@ module Mindee
                         [['file', file_data, file_metadata]] # : Array[Array[untyped]]
                       end
           form_data.push(['model_id', params.model_id])
-          if params.is_a?(V2::Product::Extraction::Params::ExtractionParameters)
-            form_data = enqueue_form_options(form_data, params)
-          end
-
           form_data = params.append_form_data(form_data)
 
           headers = {
