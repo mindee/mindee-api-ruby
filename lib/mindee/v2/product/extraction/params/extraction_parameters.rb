@@ -105,13 +105,16 @@ module Mindee
               model_id = new_params.fetch(:model_id)
 
               ExtractionParameters.new(
-                model_id, rag: rag,
-                          raw_text: raw_text,
-                          polygon: polygon,
-                          confidence: confidence,
-                          file_alias: params.fetch(:file_alias, nil),
-                          webhook_ids: params.fetch(:webhook_ids, nil),
-                          close_file: params.fetch(:close_file, true)
+                model_id,
+                rag: rag,
+                raw_text: raw_text,
+                polygon: polygon,
+                confidence: confidence,
+                file_alias: params.fetch(:file_alias, nil),
+                webhook_ids: params.fetch(:webhook_ids, nil),
+                text_context: base_params.fetch(:text_context, nil),
+                data_schema: base_params.fetch(:data_schema, nil),
+                close_file: params.fetch(:close_file, true)
               )
             end
           end

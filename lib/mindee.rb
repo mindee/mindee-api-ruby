@@ -51,25 +51,6 @@ module Mindee
   module Input
   end
 
-  # Collection of all internal products.
-  module Product
-    # Europe-specific products.
-    module EU
-    end
-
-    # France-specific products.
-    module FR
-    end
-
-    # Indian-specific products.
-    module IND
-    end
-
-    # US-specific products.
-    module US
-    end
-  end
-
   # V1-specific module.
   module V1
     # HTTP module for V1.
@@ -125,6 +106,10 @@ module Mindee
       # V2 search module.
       module Search
       end
+    end
+
+    # V2 search module.
+    module Search
     end
   end
 end
