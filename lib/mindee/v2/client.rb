@@ -29,11 +29,18 @@ module Mindee
         input_source,
         params
       )
-        normalized_params = normalize_parameters(product.params_type, params)
-        normalized_params.validate_async_params
-        logger.debug("Enqueueing document to model '#{normalized_params.model_id}'.")
+        params_instance = case params
+                          when Hash
+                            product.params_type.from_hash(params: params)
+                          when Mindee::V2::ClientOptions::BaseProductParameters
+                            params
+                          else
+                            raise ArgumentError, "Expected Hash or BaseProductParameters, got #{params.class}"
+                          end
 
-        @mindee_api.req_post_product_enqueue(input_source, normalized_params)
+        logger.debug("Enqueueing document to model '#{params_instance.model_id}'.")
+
+        @mindee_api.req_post_product_enqueue(input_source, params_instance)
       end
 
       # Get the status of an inference that was previously enqueued.
@@ -70,14 +77,14 @@ module Mindee
       end
 
       # Send a file to the inference queue and return the results when complete.
-      # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
       # @param input_source [Mindee::Input::Source::LocalInputSource, Mindee::Input::Source::URLInputSource]
       #   The source of the input document (local file or URL).
       # @param params [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
-      # rubocop:disable-next Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+      # rubocop:disable-next Metrics/CyclomaticComplexity
       def enqueue_and_get_result(
         product,
         input_source,
@@ -85,9 +92,15 @@ module Mindee
         polling_options = nil,
         cancellation_token = nil
       )
-        enqueue_response = enqueue(product, input_source, params)
-        normalized_params = normalize_parameters(product.params_type, params, polling_options: polling_options)
-        normalized_params.validate_async_params
+        params_instance = case params
+                          when Hash
+                            product.params_type.from_hash(params: params)
+                          when Mindee::V2::ClientOptions::BaseProductParameters
+                            params
+                          else
+                            raise ArgumentError, "Expected Hash or BaseProductParameters, got #{params.class}"
+                          end
+        enqueue_response = enqueue(product, input_source, params_instance)
 
         if enqueue_response.job.id.nil? || enqueue_response.job.id.empty?
           logger.error("Failed enqueueing:\n#{enqueue_response.raw_http}")
@@ -99,42 +112,16 @@ module Mindee
 
         raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
 
-        sleep(normalized_params.polling_options.initial_delay_sec)
-        retry_counter = 1
-        polling_url = enqueue_response.job.polling_url
+        polling_options_instance = case polling_options
+                                   when Mindee::Input::PollingOptions
+                                     polling_options
+                                   when Hash
+                                     Mindee::Input::PollingOptions.from_hash(polling_options: polling_options)
+                                   else
+                                     Mindee::Input::PollingOptions.new
+                                   end
 
-        job_response = get_job_by_url(polling_url)
-
-        while retry_counter < normalized_params.polling_options.max_retries
-          if job_response.job.status == 'Failed'
-            break
-          elsif !job_response.job.result_url.nil?
-            return get_result_by_url(product, job_response.job.result_url)
-          end
-
-          logger.debug(
-            "Successfully enqueued inference with job id: #{job_id}.\n" \
-            "Attempt n°#{retry_counter}/#{normalized_params.polling_options.max_retries}.\n" \
-            "Job status: #{job_response.job.status}."
-          )
-
-          raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
-
-          sleep(normalized_params.polling_options.delay_sec)
-          job_response = get_job_by_url(polling_url)
-          retry_counter += 1
-        end
-
-        error = job_response.job.error
-        unless error.nil?
-          err_to_raise = Mindee::Error::MindeeHTTPErrorV2.new(error)
-          # NOTE: purposefully decoupled from the line above, otherwise rubocop thinks `error` is a `message` param.
-          raise err_to_raise
-        end
-
-        sec_count = normalized_params.polling_options.delay_sec * retry_counter
-        raise Mindee::Error::MindeeError,
-              "Asynchronous parsing request timed out after #{sec_count} seconds"
+        poll_on_job(product, enqueue_response, polling_options_instance, cancellation_token)
       end
 
       # Search for resources matching the given criteria.
@@ -155,19 +142,52 @@ module Mindee
 
       private
 
-      # If needed, converts the parsing options provided as a hash into a proper BaseParameters subclass object.
-      # @param params [Hash, Class<BaseParameters>] Params.
-      # @param polling_options [Hash, PollingOptions, nil] Polling options.
-      # @return [BaseParameters]
-      def normalize_parameters(param_class, params, polling_options: nil)
-        if params.is_a?(Hash)
-          params[:polling_options] = polling_options if polling_options
-        elsif params.is_a?(Mindee::V2::ClientOptions::BaseProductParameters) && !polling_options.nil?
-          params.polling_options = polling_options
-        end
-        return param_class.from_hash(params: params) if params.is_a?(Hash)
+      # Polls a job until it is processed or the maximum number of tries is reached.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>]
+      # @param initial_response [V2::Parsing::JobResponse]
+      # @param polling_options [Input::PollingOptions]
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
+      # @return [Parsing::BaseResponse]
+      def poll_on_job(
+        product,
+        initial_response,
+        polling_options,
+        cancellation_token
+      )
+        sleep(polling_options.initial_delay_sec)
+        try_counter = 1
+        polling_url = initial_response.job.polling_url
 
-        params
+        job_response = get_job_by_url(polling_url)
+
+        while try_counter < polling_options.max_retries
+          if job_response.job.status == 'Failed'
+            break
+          elsif !job_response.job.result_url.nil?
+            return get_result_by_url(product, job_response.job.result_url)
+          end
+
+          logger.debug(
+            "Poll attempt #{try_counter + 1} of #{polling_options.max_retries}."
+          )
+
+          raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
+
+          sleep(polling_options.delay_sec)
+          job_response = get_job_by_url(polling_url)
+          try_counter += 1
+        end
+
+        error = job_response.job.error
+        unless error.nil?
+          err_to_raise = Mindee::Error::MindeeHTTPErrorV2.new(error)
+          # NOTE: purposefully decoupled from the line above, otherwise rubocop thinks `error` is a `message` param.
+          raise err_to_raise
+        end
+
+        sec_count = polling_options.delay_sec * try_counter
+        raise Mindee::Error::MindeeError,
+              "Asynchronous parsing request timed out after #{sec_count} seconds"
       end
     end
   end

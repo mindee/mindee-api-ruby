@@ -76,23 +76,26 @@ describe 'Mindee::V2::Client – integration tests (V2)', :integration, order: :
       src_path = File.join(V1_PRODUCT_DATA_DIR, 'financial_document', 'default_sample.jpg')
       input = Mindee::Input::Source::FileInputSource.new(File.open(src_path, 'rb'), 'multipage_cut-2.pdf')
 
-      polling = Mindee::Input::PollingOptions.new(
-        initial_delay_sec: 3.0,
-        delay_sec: 1.5,
-        max_retries: 80
-      )
-
-      inference_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
+      model_params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
         model_id,
         rag: false,
         raw_text: true,
         polygon: false,
         confidence: false,
         file_alias: 'rb_integration_test',
-        polling_options: polling,
         text_context: 'this is a test'
       )
-      response = client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input, inference_params)
+      polling_options = Mindee::Input::PollingOptions.new(
+        initial_delay_sec: 3.0,
+        delay_sec: 1.5,
+        max_retries: 80
+      )
+      response = client.enqueue_and_get_result(
+        Mindee::V2::Product::Extraction::Extraction,
+        input,
+        model_params,
+        polling_options
+      )
       expect(response).not_to be_nil
       expect(response.inference).not_to be_nil
       expect(response.inference.file.file_alias).to eq('rb_integration_test')
