@@ -89,7 +89,13 @@ module Mindee
       #   * `:max_retries` [Integer] Maximum number of retries. Defaults to 80.
       # @param enqueue [bool] Whether to enqueue the file.
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
-      def parse(input_source, product_class, endpoint: nil, options: {}, enqueue: true)
+      def parse(
+        input_source,
+        product_class,
+        endpoint: nil,
+        options: {},
+        enqueue: true
+      )
         opts = normalize_parse_options(options)
         process_pdf_if_required(input_source, opts) if input_source.is_a?(Input::Source::LocalInputSource)
         endpoint ||= initialize_endpoint(product_class)
@@ -122,7 +128,12 @@ module Mindee
       #   * `:cropper` [bool, nil] Whether to include cropper results for each page.
       #       This performs a cropping operation on the server and will increase response time.
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
-      def parse_sync(input_source, product_class, endpoint, options)
+      def parse_sync(
+        input_source,
+        product_class,
+        endpoint,
+        options
+      )
         logger.debug("Parsing document as '#{endpoint.url_root}'")
 
         prediction, raw_http = endpoint.predict(
@@ -159,7 +170,12 @@ module Mindee
       #   * `:workflow_id` [String, nil] ID of the workflow to use.
       # @param endpoint [Mindee::V1::HTTP::Endpoint] Endpoint of the API.
       # @return [Mindee::V1::Parsing::Common::ApiResponse]
-      def enqueue(input_source, product_class, endpoint: nil, options: {})
+      def enqueue(
+        input_source,
+        product_class,
+        endpoint: nil,
+        options: {}
+      )
         opts = normalize_parse_options(options)
         endpoint ||= initialize_endpoint(product_class)
         logger.debug("Enqueueing document as '#{endpoint.url_root}'")
@@ -369,7 +385,12 @@ module Mindee
       #  standard (off the shelf) endpoint.
       # @param version [String] For custom endpoints, version of the product.
       # @return [Mindee::V1::HTTP::Endpoint]
-      def initialize_endpoint(product_class, endpoint_name: '', account_name: '', version: '')
+      def initialize_endpoint(
+        product_class,
+        endpoint_name: '',
+        account_name: '',
+        version: ''
+      )
         if (endpoint_name.nil? || endpoint_name.empty?) && product_class == Mindee::V1::Product::Universal::Universal
           raise Mindee::Error::MindeeConfigurationError, 'Missing argument endpoint_name when using custom class'
         end
@@ -421,7 +442,7 @@ module Mindee
                       opts.page_options.on_min_pages &&
                       input_source.pdf?
 
-        input_source.process_pdf(opts.page_options)
+        input_source.apply_page_options(opts.page_options)
       end
 
       private :parse_sync, :validate_async_params, :initialize_endpoint, :fix_endpoint_name, :fix_version,
