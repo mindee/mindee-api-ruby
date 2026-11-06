@@ -14,7 +14,7 @@ module Mindee
           def self.response_class: -> singleton(ModelSearchResponse)
           def response_class: -> singleton(ModelSearchResponse)
 
-          def request_parameters: -> Hash[Symbol, String | Array[String]]
+          def request_parameters: -> Hash[String, String | Array[String]]
         end
       end
     end

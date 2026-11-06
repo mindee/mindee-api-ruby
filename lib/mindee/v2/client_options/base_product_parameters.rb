@@ -78,12 +78,15 @@ module Mindee
           params
         end
 
-        # Appends base form data to the provided array.
-        # @return [Hash]
+        # Gets the base request parameters for the endpoint.
+        # @return [Hash{String => String, Array<String>}]
         def request_parameters
-          form_data = { model_id: @model_id }
-          form_data[:alias] = @file_alias if @file_alias
-          form_data[:webhook_ids] = @webhook_ids.join(',') if @webhook_ids&.any?
+          form_data = {} # : Hash[String, String | Array[String]]
+          form_data['model_id'] = @model_id
+          file_alias = @file_alias
+          form_data['alias'] = file_alias if file_alias
+          webhook_ids = @webhook_ids
+          form_data['webhook_ids'] = webhook_ids.join(',') if webhook_ids && !webhook_ids.empty?
           form_data
         end
       end

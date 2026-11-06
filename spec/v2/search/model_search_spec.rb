@@ -33,3 +33,14 @@ describe Mindee::V2::Search::Models::ModelSearchResponse do
     expect(last_item.id).to eq('e14e0923-ee55-ee55-a335-8d2110917d7b')
   end
 end
+
+describe Mindee::V2::Search::Models::ModelSearchParameters do
+  it 'builds request parameters' do
+    search_parameters = described_class.new(name: 'my-model', model_type: 'extraction', page: 2, per_page: 10)
+    request_parameters = search_parameters.request_parameters
+    expect(request_parameters['page']).to eq('2')
+    expect(request_parameters['per_page']).to eq('10')
+    expect(request_parameters['name']).to eq('my-model')
+    expect(request_parameters['model_type']).to eq('extraction')
+  end
+end

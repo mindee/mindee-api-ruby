@@ -7,7 +7,7 @@ module Mindee
 
         def initialize: (?page: Integer?, ?per_page: Integer?) -> void
 
-        def request_parameters: -> Hash[Symbol, String | Array[String]]
+        def request_parameters: -> Hash[String, String | Array[String]]
 
         def slug: -> String
         def self.slug: -> String

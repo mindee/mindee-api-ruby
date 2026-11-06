@@ -24,7 +24,7 @@ module Mindee
             ?close_file: bool?
           ) -> void
 
-        def request_parameters: -> Hash[Symbol, String | Array[String]]
+        def request_parameters: -> Hash[String, String | Array[String]]
       end
     end
   end

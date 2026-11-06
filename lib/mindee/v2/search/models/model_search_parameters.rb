@@ -44,7 +44,6 @@ module Mindee
             model_type = @model_type
             params['name'] = name unless name.nil?
             params['model_type'] = model_type unless model_type.nil?
-
             params
           end
         end

@@ -156,12 +156,13 @@ module Mindee
         def enqueue(input_source, params)
           uri = URI("#{@settings.base_url}/v2/products/#{params.slug}/enqueue")
 
-          form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                        { url: input_source.url }
-                      else
-                        file_data, file_metadata = input_source.read_contents(close: params.close_file)
-                        { file: [file_data, file_metadata] }
-                      end
+          form_data = {} # : Hash[String, untyped]
+          if input_source.is_a?(Mindee::Input::Source::URLInputSource)
+            form_data['url'] = input_source.url
+          else
+            file_data, file_metadata = input_source.read_contents(close: params.close_file)
+            form_data['file'] = [file_data, file_metadata]
+          end
           form_data.merge!(params.request_parameters)
 
           headers = {
