@@ -45,4 +45,28 @@ describe Mindee::V2::Product::Extraction::Params::ExtractionParameters do
       end
     end
   end
+
+  describe 'request_parameters' do
+    it 'returns hash with correct parameters' do
+      param = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
+        'dummy-model',
+        text_context: 'sample context',
+        webhook_ids: ['hook-1', 'hook-2'],
+        file_alias: 'my_file',
+        rag: true,
+        raw_text: false,
+        polygon: true,
+        confidence: false
+      )
+      params = param.request_parameters
+      expect(params[:model_id]).to eq('dummy-model')
+      expect(params[:alias]).to eq('my_file')
+      expect(params[:webhook_ids]).to eq('hook-1,hook-2')
+      expect(params[:text_context]).to eq('sample context')
+      expect(params[:rag]).to eq('true')
+      expect(params[:raw_text]).to eq('false')
+      expect(params[:polygon]).to eq('true')
+      expect(params[:confidence]).to eq('false')
+    end
+  end
 end

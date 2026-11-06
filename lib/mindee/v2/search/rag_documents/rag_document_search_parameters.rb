@@ -35,13 +35,13 @@ module Mindee
           end
 
           # Gets the request parameters for the search request.
-          # @return [Hash{String => String, Array<String>}]
+          # @return [Hash{Symbol => String, Array<String>}]
           def request_parameters
             params = super
 
-            params['model_id'] = @model_id
+            params[:model_id] = @model_id
             filename = @filename
-            params['filename'] = filename unless filename.nil?
+            params[:filename] = filename unless filename.nil?
 
             params
           end
