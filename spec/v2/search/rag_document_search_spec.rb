@@ -46,3 +46,18 @@ describe Mindee::V2::Search::RAGDocuments::RAGDocumentSearchResponse do
     expect(third_item.status).to eq('Active')
   end
 end
+
+describe Mindee::V2::Search::RAGDocuments::RAGDocumentSearchParameters do
+  it 'builds request parameters' do
+    search_params = described_class.new(model_id: 'my-model-id', filename: 'test.pdf', page: 1, per_page: 25)
+    params = search_params.request_parameters
+    expect(params).to eq(
+      {
+        page: '1',
+        per_page: '25',
+        model_id: 'my-model-id',
+        filename: 'test.pdf',
+      }
+    )
+  end
+end

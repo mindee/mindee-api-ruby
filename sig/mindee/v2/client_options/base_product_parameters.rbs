@@ -24,7 +24,7 @@ module Mindee
             ?close_file: bool?
           ) -> void
 
-        def append_form_data: (Array[Array[untyped]]) -> Array[Array[untyped]]
+        def request_parameters: -> Hash[Symbol, String | Array[String]]
       end
     end
   end

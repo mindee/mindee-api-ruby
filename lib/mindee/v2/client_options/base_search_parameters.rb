@@ -18,11 +18,11 @@ module Mindee
         end
 
         # Gets the request parameters for the search request.
-        # @return [Hash{String => String, Array<String>}]
+        # @return [Hash{Symbol => String, Array<String>}]
         def request_parameters
-          params = {} # : Hash[String, String | Array[String]]
-          params['page'] = @page.to_s unless @page.nil?
-          params['per_page'] = @per_page.to_s unless @per_page.nil?
+          params = {} # : Hash[Symbol, String | Array[String]]
+          params[:page] = @page.to_s unless @page.nil?
+          params[:per_page] = @per_page.to_s unless @per_page.nil?
           params
         end
 
