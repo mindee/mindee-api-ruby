@@ -157,13 +157,12 @@ module Mindee
           uri = URI("#{@settings.base_url}/v2/products/#{params.slug}/enqueue")
 
           form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                        [['url', input_source.url]] # : Array[Array[untyped]]
+                        { url: input_source.url }
                       else
                         file_data, file_metadata = input_source.read_contents(close: params.close_file)
-                        [['file', file_data, file_metadata]] # : Array[Array[untyped]]
+                        { file: [file_data, file_metadata] }
                       end
-          form_data.push(['model_id', params.model_id])
-          form_data = params.append_form_data(form_data)
+          form_data.merge!(params.request_parameters)
 
           headers = {
             'Authorization' => @settings.api_key,

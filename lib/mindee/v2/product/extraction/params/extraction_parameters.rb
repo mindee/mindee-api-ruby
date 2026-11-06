@@ -77,17 +77,16 @@ module Mindee
             end
 
             # Appends inference-specific form data to the provided array.
-            # @param [Array] form_data Array of form fields
-            # @return [Array]
-            def append_form_data(form_data)
+            # @return [Hash]
+            def request_parameters
               new_form_data = super
 
-              new_form_data.push(['rag', @rag.to_s]) unless @rag.nil?
-              new_form_data.push(['raw_text', @raw_text.to_s]) unless @raw_text.nil?
-              new_form_data.push(['polygon', @polygon.to_s]) unless @polygon.nil?
-              new_form_data.push(['confidence', @confidence.to_s]) unless @confidence.nil?
-              new_form_data.push(['text_context', @text_context]) if @text_context
-              new_form_data.push(['data_schema', @data_schema.to_s]) if @data_schema
+              new_form_data[:rag]          = @rag.to_s         unless @rag.nil?
+              new_form_data[:raw_text]     = @raw_text.to_s    unless @raw_text.nil?
+              new_form_data[:polygon]      = @polygon.to_s     unless @polygon.nil?
+              new_form_data[:confidence]   = @confidence.to_s  unless @confidence.nil?
+              new_form_data[:text_context] = @text_context     if @text_context
+              new_form_data[:data_schema]  = @data_schema.to_s if @data_schema
 
               new_form_data
             end
