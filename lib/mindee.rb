@@ -112,6 +112,13 @@ module Mindee
     module Search
     end
   end
+
+  # Aliases for deeply nested classes
+  Base64InputSource = Mindee::Input::Source::Base64InputSource
+  BytesInputSource = Mindee::Input::Source::BytesInputSource
+  FileInputSource = Mindee::Input::Source::FileInputSource
+  PathInputSource = Mindee::Input::Source::PathInputSource
+  URLInputSource = Mindee::Input::Source::URLInputSource
 end
 
 # Shorthand to call the logger from anywhere.

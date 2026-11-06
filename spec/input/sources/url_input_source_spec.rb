@@ -3,7 +3,7 @@
 require 'mindee'
 require_relative '../../http/mock_http_response'
 
-describe Mindee::Input::Source::URLInputSource do
+describe Mindee::URLInputSource do
   let(:valid_url) { 'https://validurl/some/file.jpg' }
   let(:valid_url_no_filename) { 'https://validurl/some/' }
   let(:invalid_url) { 'http://invalidurl/some/file.jpg' }
@@ -50,7 +50,7 @@ describe Mindee::Input::Source::URLInputSource do
 
       it 'handles authentication' do
         result = url_input_source.as_local_input_source(username: 'user', password: 'pass')
-        expect(result).to be_a(Mindee::Input::Source::BytesInputSource)
+        expect(result).to be_a(Mindee::BytesInputSource)
       end
     end
 
