@@ -32,7 +32,6 @@ module Mindee
         # @return [ErrorResponse, nil] Error details when the job failed.
         attr_reader :error
 
-        # rubocop:disable Metrics/CyclomaticComplexity
         # @param server_response [Hash] Parsed JSON payload from the API.
         def initialize(server_response)
           raise ArgumentError, 'server_response must be a Hash' unless server_response.is_a?(Hash)
@@ -56,7 +55,6 @@ module Mindee
             @webhooks.push JobWebhook.new(webhook)
           end
         end
-        # rubocop:enable Metrics/CyclomaticComplexity
 
         # String representation.
         # @return [String]
