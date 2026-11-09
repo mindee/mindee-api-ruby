@@ -84,7 +84,6 @@ module Mindee
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
       # @return [Parsing::BaseResponse]
-      # rubocop:disable-next Metrics/CyclomaticComplexity
       def enqueue_and_get_result(
         product,
         input_source,
@@ -122,7 +121,13 @@ module Mindee
 
         raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
 
-        poll_on_job(product, enqueue_response, polling_options_instance, cancellation_token)
+        poll_for_product_result(
+          product,
+          enqueue_response,
+          polling_options_instance,
+          false,
+          cancellation_token
+        )
       end
 
       # Search for resources matching the given criteria.
@@ -143,53 +148,125 @@ module Mindee
 
       private
 
+      # Checks if all webhooks associated with a job have finished processing.
+      # @param job_response [Mindee::V2::Parsing::JobResponse]
+      # @return [Boolean]
+      def check_webhooks_done?(job_response)
+        are_webhooks_done = job_response.job.webhooks.nil? ||
+                            job_response.job.webhooks.all? { |w| w.status != 'Processing' }
+
+        if are_webhooks_done
+          logger.debug('All webhooks are completed.')
+          return true
+        end
+
+        logger.debug('Not all webhooks are completed.')
+        false
+      end
+
+      # Wait and retry logic for polling operations.
+      # @param try_counter [Integer] Current retry attempt index.
+      # @param max_retries [Integer] Maximum number of retries.
+      # @param polling_options [Input::PollingOptions] Options for polling.
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
+      def throttle_polling_attempt(
+        try_counter,
+        max_retries,
+        polling_options,
+        cancellation_token = nil
+      )
+        if try_counter >= max_retries
+          logger.debug('Not waiting, max retries reached.')
+          return
+        end
+
+        raise Mindee::Error::MindeeError, 'Polling was canceled.' if cancellation_token&.canceled?
+
+        logger.debug("Waiting #{polling_options.delay_sec} seconds before next attempt...")
+        sleep(polling_options.delay_sec)
+      end
+
       # Polls a job until it is processed or the maximum number of tries is reached.
-      # @param product [Class<Mindee::V2::Product::BaseProduct>]
-      # @param initial_response [V2::Parsing::JobResponse]
+      # @param initial_response [Mindee::V2::Parsing::JobResponse]
       # @param polling_options [Input::PollingOptions]
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
-      # @return [Parsing::BaseResponse]
+      # @return [Parsing::JobResponse]
       def poll_on_job(
-        product,
         initial_response,
         polling_options,
-        cancellation_token
+        wait_for_webhooks = false,
+        cancellation_token = nil
       )
+        logger.debug(
+          "Waiting #{polling_options.initial_delay_sec} seconds before attempting to retrieve the result..."
+        )
         sleep(polling_options.initial_delay_sec)
-        try_counter = 1
+
+        try_counter = 0
         max_retries = polling_options.max_retries
         polling_url = initial_response.job.polling_url
 
-        job_response = get_job_by_url(polling_url)
-
         while try_counter < max_retries
-          if job_response.job.status == 'Failed'
-            break
-          elsif !job_response.job.result_url.nil?
-            return get_result_by_url(product, job_response.job.result_url)
-          end
+          raise Mindee::Error::MindeeError, 'Polling was canceled.' if cancellation_token&.canceled?
 
           logger.debug(
-            "Poll attempt #{try_counter + 1} of #{max_retries}."
+            "Poll attempt #{try_counter + 1} of #{max_retries}"
           )
 
-          raise Mindee::Error::MindeeError, 'Enqueueing of the document was canceled.' if cancellation_token&.canceled?
-
-          sleep(polling_options.delay_sec)
           job_response = get_job_by_url(polling_url)
+
+          if job_response.job.status == 'Processed'
+            logger.debug(
+              "Job ID #{job_response.job.id} completed processing at: #{job_response.job.completed_at}"
+            )
+
+            return job_response if !wait_for_webhooks || check_webhooks_done?(job_response)
+          end
+
+          if job_response.job.status == 'Failed'
+            if job_response.job.error
+              raise Mindee::Error::MindeeHTTPErrorV2.new(job_response.job.error),
+                    "Parsing failed for job #{job_response.job.id}"
+            end
+
+            raise Mindee::Error::MindeeError,
+                  "Parsing failed for job #{job_response.job.id}: No error detail available."
+          end
+
           try_counter += 1
+          throttle_polling_attempt(try_counter, max_retries, polling_options, cancellation_token)
         end
 
-        error = job_response.job.error
-        unless error.nil?
-          err_to_raise = Mindee::Error::MindeeHTTPErrorV2.new(error)
-          # NOTE: purposefully decoupled from the line above, otherwise rubocop thinks `error` is a `message` param.
-          raise err_to_raise
+        raise Mindee::Error::MindeeError, "Couldn't retrieve the result after #{try_counter} tries."
+      end
+
+      # Poll until the inference results are retrieved or the max number of attempts is reached.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>]
+      # @param enqueue_response [V2::Parsing::JobResponse]
+      # @param polling_options [Input::PollingOptions]
+      # @param wait_for_webhooks [Boolean]
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil]
+      # @return [Mindee::V2::Parsing::BaseResponse]
+      def poll_for_product_result(
+        product,
+        enqueue_response,
+        polling_options,
+        wait_for_webhooks = false,
+        cancellation_token = nil
+      )
+        job_response = poll_on_job(
+          enqueue_response,
+          polling_options,
+          wait_for_webhooks,
+          cancellation_token
+        )
+
+        if job_response.job.result_url.nil? || job_response.job.result_url.strip.empty?
+          raise Mindee::Error::MindeeError,
+                'The result URL is undefined. This is a server error, try again later or contact support.'
         end
 
-        sec_count = polling_options.delay_sec * try_counter
-        raise Mindee::Error::MindeeError,
-              "Asynchronous parsing request timed out after #{sec_count} seconds"
+        get_result_by_url(product, job_response.job.result_url)
       end
     end
   end

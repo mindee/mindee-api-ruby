@@ -42,12 +42,29 @@ module Mindee
 
       private
 
-      def poll_on_job: [T] (
+      def check_webhooks_done?: (V2::Parsing::JobResponse job_response) -> bool
+
+      def poll_for_product_result: [T] (
           HTTP::_ProductClass[T] product,
+          V2::Parsing::JobResponse enqueu_response,
+          Input::PollingOptions polling_options,
+          ?bool wait_for_webhooks,
+          ?(Mindee::HTTP::CancellationToken | nil) cancellation_token
+      ) -> T
+
+      def poll_on_job: (
           V2::Parsing::JobResponse initial_response,
           Input::PollingOptions polling_options,
+          ?bool wait_for_webhooks,
+          ?(Mindee::HTTP::CancellationToken | nil) cancellation_token
+        ) -> V2::Parsing::JobResponse
+
+      def throttle_polling_attempt: (
+          Integer try_counter,
+          Integer max_retries,
+          Input::PollingOptions polling_options,
           Mindee::HTTP::CancellationToken | nil cancellation_token
-        ) -> T
+        ) -> void
     end
   end
 end
