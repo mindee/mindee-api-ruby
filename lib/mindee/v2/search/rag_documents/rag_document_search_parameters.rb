@@ -42,7 +42,6 @@ module Mindee
             params['model_id'] = @model_id
             filename = @filename
             params['filename'] = filename unless filename.nil?
-
             params
           end
         end

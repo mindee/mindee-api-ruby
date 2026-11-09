@@ -156,14 +156,19 @@ module Mindee
         def enqueue(input_source, params)
           uri = URI("#{@settings.base_url}/v2/products/#{params.slug}/enqueue")
 
-          form_data = if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-                        [['url', input_source.url]] # : Array[Array[untyped]]
-                      else
-                        file_data, file_metadata = input_source.read_contents(close: params.close_file)
-                        [['file', file_data, file_metadata]] # : Array[Array[untyped]]
-                      end
-          form_data.push(['model_id', params.model_id])
-          form_data = params.append_form_data(form_data)
+          form_data = {} # : Hash[String, untyped]
+          if input_source.is_a?(Mindee::Input::Source::URLInputSource)
+            form_data['url'] = input_source.url
+          else
+            file_data, file_metadata = input_source.read_contents(close: params.close_file)
+            form_data['file'] = [file_data, file_metadata]
+          end
+          form_data.merge!(params.request_parameters)
+
+          # Convert hash to the array format required by Net::HTTP multipart
+          form_data_list = form_data.map do |k, v|
+            v.is_a?(Array) ? [k.to_s, *v] : [k.to_s, v]
+          end
 
           headers = {
             'Authorization' => @settings.api_key,
@@ -171,7 +176,7 @@ module Mindee
           }
           req = Net::HTTP::Post.new(uri, headers)
 
-          req.set_form(form_data, 'multipart/form-data')
+          req.set_form(form_data_list, 'multipart/form-data')
           req['Transfer-Encoding'] = 'chunked'
 
           Net::HTTP.start(uri.hostname, uri.port,

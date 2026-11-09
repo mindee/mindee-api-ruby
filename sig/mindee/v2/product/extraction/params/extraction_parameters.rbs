@@ -28,7 +28,7 @@ module Mindee
               ) -> void
 
             def self.from_hash: (params: Hash[String | Symbol, untyped]) -> ExtractionParameters
-            def append_form_data: (Array[Array[untyped]]) -> Array[Array[untyped]]
+            def request_parameters: -> Hash[String, String | Array[String]]
           end
         end
       end
