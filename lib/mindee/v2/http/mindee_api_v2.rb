@@ -165,13 +165,18 @@ module Mindee
           end
           form_data.merge!(params.request_parameters)
 
+          # Convert hash to the array format required by Net::HTTP multipart
+          form_data_list = form_data.map do |k, v|
+            v.is_a?(Array) ? [k.to_s, *v] : [k.to_s, v]
+          end
+
           headers = {
             'Authorization' => @settings.api_key,
             'User-Agent' => @settings.user_agent,
           }
           req = Net::HTTP::Post.new(uri, headers)
 
-          req.set_form(form_data, 'multipart/form-data')
+          req.set_form(form_data_list, 'multipart/form-data')
           req['Transfer-Encoding'] = 'chunked'
 
           Net::HTTP.start(uri.hostname, uri.port,
