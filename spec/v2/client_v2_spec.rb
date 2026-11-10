@@ -200,7 +200,7 @@ describe Mindee::V2::Client do
         client.enqueue_and_get_result(
           Mindee::V2::Product::Extraction::Extraction, input_doc, params
         )
-      end.to raise_error(Mindee::Error::MindeeError, %r{timed out})
+      end.to raise_error(Mindee::Error::MindeeError, %r{Couldn't retrieve})
     end
   end
 
