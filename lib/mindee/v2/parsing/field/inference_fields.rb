@@ -63,8 +63,6 @@ module Mindee
             field
           end
 
-          # rubocop:disable Metrics/CyclomaticComplexity
-          # rubocop:disable Metrics/PerceivedComplexity
           # Convert the fields to a string representation.
           # @param indent [Integer, nil] Optional indentation level.
           # @return [String] String representation of all fields.
@@ -96,8 +94,6 @@ module Mindee
 
             lines.join("\n").rstrip
           end
-          # rubocop:enable Metrics/CyclomaticComplexity
-          # rubocop:enable Metrics/PerceivedComplexity
         end
       end
     end

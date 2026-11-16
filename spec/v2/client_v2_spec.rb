@@ -55,9 +55,9 @@ describe Mindee::V2::Client do
         text_context: 'Hello my name is mud.'
       )
       client.enqueue(Mindee::V2::Product::Extraction::Extraction, input_doc, params)
-    end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-      expect(e.status).to eq(400)
-      expect(e.detail).to eq('Unsupported content.')
+    end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+      expect(err.status).to eq(400)
+      expect(err.detail).to eq('Unsupported content.')
     }
   end
 
@@ -66,9 +66,9 @@ describe Mindee::V2::Client do
       stub_next_request_with(:enqueue, hash: JSON.generate(json400))
       params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new('dummy-model')
       client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input_doc, params)
-    end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-      expect(e.status).to eq(400)
-      expect(e.detail).to eq('Unsupported content.')
+    end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+      expect(err.status).to eq(400)
+      expect(err.detail).to eq('Unsupported content.')
     }
   end
 
@@ -79,9 +79,9 @@ describe Mindee::V2::Client do
       stub_next_request_with(:enqueue, hash: JSON.generate(error_hash))
       params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new('dummy-model')
       client.enqueue(Mindee::V2::Product::Extraction::Extraction, input_doc, params)
-    end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |e|
-      expect(e.status).to eq(413)
-      expect(e.detail).to include('File exceeds size limit')
+    end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
+      expect(err.status).to eq(413)
+      expect(err.detail).to include('File exceeds size limit')
     }
   end
 
@@ -200,7 +200,7 @@ describe Mindee::V2::Client do
         client.enqueue_and_get_result(
           Mindee::V2::Product::Extraction::Extraction, input_doc, params
         )
-      end.to raise_error(Mindee::Error::MindeeError, %r{timed out})
+      end.to raise_error(Mindee::Error::MindeeError, %r{Couldn't retrieve})
     end
   end
 

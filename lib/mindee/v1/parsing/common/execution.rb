@@ -46,8 +46,6 @@ module Mindee
           # @return [String]
           attr_reader :workflow_id
 
-          # rubocop:disable Metrics/CyclomaticComplexity
-
           # @param product_class [Mindee::Inference]
           # @param http_response [Hash]
           def initialize(product_class, http_response)
@@ -69,8 +67,6 @@ module Mindee
             @uploaded_at = Time.iso8601(http_response['uploaded_at']) if http_response['uploaded_at']
             @workflow_id = http_response['workflow_id']
           end
-
-          # rubocop:enable Metrics/CyclomaticComplexity
         end
       end
     end
