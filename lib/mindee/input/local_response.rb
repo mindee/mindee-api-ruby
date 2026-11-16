@@ -70,8 +70,8 @@ module Mindee
       end
 
       # Deserializes a loaded response
-      # @param response_class [Class<V2::Parsing::BaseResponse>] class to return.
-      # @return [V2::Parsing::JobResponse, Mindee::V2::Parsing::BaseResponse]
+      # @param response_class [Class<V2::Parsing::BaseInferenceResponse>] class to return.
+      # @return [V2::Parsing::JobResponse, Mindee::V2::Parsing::BaseInferenceResponse]
       def deserialize_response(response_class)
         response_class.new(as_hash) # : Mindee::V2::Parsing::JobResponse | Mindee::V2::Parsing::BaseResponse
       end

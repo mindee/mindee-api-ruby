@@ -25,6 +25,19 @@ module Net
       def basic_auth: (untyped, untyped) -> void
       def []=: (?untyped, ?untyped) -> bool
     end
+
+    # Stub for the HTTP PATCH request class.
+    class Patch
+      def initialize: (untyped, ?Hash[String, String?]?) -> void
+      def new: (untyped, untyped) -> void
+      def body=: (untyped) -> void
+    end
+
+    # Stub for the HTTP DELETE request class.
+    class Delete
+      def initialize: (untyped, ?Hash[String, String?]?) -> void
+      def new: (untyped, untyped) -> void
+    end
   end
 
   class HTTPResponse

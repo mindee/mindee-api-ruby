@@ -3,14 +3,18 @@ module Mindee
     module Product
       class BaseProduct
         self.@slug: String
-        self.@params_type: singleton(ClientOptions::BaseProductParameters)
-        self.@response_type: singleton(Parsing::BaseResponse)
+        self.@parameters_class: singleton(ClientOptions::BaseProductParameters)
+        self.@response_class: singleton(Parsing::BaseInferenceResponse)
+        self.@annotation_response_class: singleton(Parsing::BaseRagAnnotationResponse)
+        self.@annotation_parameters_class: singleton(ClientOptions::BaseAnnotationParameters)
+        self.@rag_document_upload_class: singleton(ClientOptions::BaseRagDocumentUploadParameters)
 
-        def self._params_type: () -> singleton(ClientOptions::BaseProductParameters)
+        def self._parameters_class: () -> singleton(ClientOptions::BaseProductParameters)
 
         attr_reader self.slug: String
-        attr_reader self.params_type: singleton(ClientOptions::BaseProductParameters)
-        attr_reader self.response_type: singleton(Parsing::BaseResponse)
+        attr_reader self.parameters_class: singleton(ClientOptions::BaseProductParameters)
+        attr_reader self.response_class: singleton(Parsing::BaseInferenceResponse)
+        attr_reader self.annotation_response_class: singleton(Parsing::BaseRagAnnotationResponse)
 
         def initialize: -> void
       end

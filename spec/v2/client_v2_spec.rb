@@ -48,7 +48,7 @@ describe Mindee::V2::Client do
 
   it 'enqueue(path) raises MindeeHTTPErrorV2 on 4xx' do
     expect do
-      stub_next_request_with(:enqueue, hash: JSON.generate(json400))
+      stub_next_request_with(:send_post_request, hash: JSON.generate(json400))
       params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
         'dummy-model',
         raw_text: false,
@@ -63,7 +63,7 @@ describe Mindee::V2::Client do
 
   it 'enqueue_and_get_inference(path) raises MindeeHTTPErrorV2 on 4xx' do
     expect do
-      stub_next_request_with(:enqueue, hash: JSON.generate(json400))
+      stub_next_request_with(:send_post_request, hash: JSON.generate(json400))
       params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new('dummy-model')
       client.enqueue_and_get_result(Mindee::V2::Product::Extraction::Extraction, input_doc, params)
     end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
@@ -76,7 +76,7 @@ describe Mindee::V2::Client do
     error_hash = json400.merge({ status: 413, detail: 'File exceeds size limit' })
 
     expect do
-      stub_next_request_with(:enqueue, hash: JSON.generate(error_hash))
+      stub_next_request_with(:send_post_request, hash: JSON.generate(error_hash))
       params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new('dummy-model')
       client.enqueue(Mindee::V2::Product::Extraction::Extraction, input_doc, params)
     end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
@@ -88,7 +88,7 @@ describe Mindee::V2::Client do
   it 'get_job(job_id) returns a fully-formed JobResponse' do
     json_path = File.join(V2_DATA_DIR, 'job', 'ok_processing.json')
     parsed = File.read(json_path)
-    stub_next_request_with(:poll, hash: parsed, status_code: 200)
+    stub_next_request_with(:send_get_request, hash: parsed, status_code: 200)
 
     resp = client.get_job('123e4567-e89b-12d3-a456-426614174000')
     expect(resp).to be_a(Mindee::V2::Parsing::JobResponse)
@@ -103,7 +103,7 @@ describe Mindee::V2::Client do
   it 'should deserialize a job properly' do
     json_path = File.join(V2_DATA_DIR, 'job', 'ok_processed_webhooks_ok.json')
     parsed = File.read(json_path)
-    stub_next_request_with(:poll, hash: parsed, status_code: 200)
+    stub_next_request_with(:send_get_request, hash: parsed, status_code: 200)
 
     resp = client.get_job('123e4567-e89b-12d3-a456-426614174000')
     expect(resp).to be_a(Mindee::V2::Parsing::JobResponse)
@@ -135,7 +135,7 @@ describe Mindee::V2::Client do
       block.call(http_double)
     end
 
-    api.send(:poll, "#{base_url}/v2/jobs/123e4567-e89b-12d3-a456-426614174000")
+    api.send(:send_get_request, URI("#{base_url}/v2/jobs/123e4567-e89b-12d3-a456-426614174000"))
 
     expect(captured_request).to be_a(Net::HTTP::Get)
     expect(captured_request['Transfer-Encoding']).to be_nil

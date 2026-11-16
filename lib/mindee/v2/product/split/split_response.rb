@@ -9,7 +9,7 @@ module Mindee
     module Product
       module Split
         # HTTP response wrapper that embeds a V2 Inference.
-        class SplitResponse < Mindee::V2::Parsing::BaseResponse
+        class SplitResponse < Mindee::V2::Parsing::BaseInferenceResponse
           # @return [SplitInference] Parsed inference payload.
           attr_reader :inference
 

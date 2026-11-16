@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'parsing/common_response'
+require_relative 'parsing/base_response'
+require_relative 'parsing/base_inference_response'
+require_relative 'parsing/base_rag_annotation_response'
 require_relative 'parsing/error_response'
 require_relative 'parsing/field'
 require_relative 'parsing/inference_file'

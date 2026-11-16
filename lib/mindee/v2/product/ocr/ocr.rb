@@ -11,8 +11,8 @@ module Mindee
         # OCR product.
         class OCR < BaseProduct
           @slug = 'ocr'
-          @params_type = Mindee::V2::Product::OCR::Params::OCRParameters
-          @response_type = Mindee::V2::Product::OCR::OCRResponse
+          @parameters_class = Mindee::V2::Product::OCR::Params::OCRParameters
+          @response_class = Mindee::V2::Product::OCR::OCRResponse
         end
       end
     end

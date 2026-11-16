@@ -1,0 +1,30 @@
+# lib/mindee/v2/product/extraction/rag_documents/params/rag_document_annotation_parameters.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module RagDocuments
+          module Params
+            class RagDocumentAnnotationParameters < Mindee::V2::ClientOptions::BaseAnnotationParameters
+              attr_reader status: String?
+              attr_reader annotation: RagAnnotation?
+
+              def initialize: (
+                  String document_id,
+                  ?status: String?,
+                  ?annotation: RagAnnotation | String | Hash[String | Symbol, untyped]?
+                ) -> void
+
+              def request_parameters: -> Hash[String, untyped]
+
+              private
+
+              def parse_annotation: (RagAnnotation | String | Hash[String | Symbol, untyped]?) -> RagAnnotation?
+            end
+          end
+        end
+      end
+    end
+  end
+end

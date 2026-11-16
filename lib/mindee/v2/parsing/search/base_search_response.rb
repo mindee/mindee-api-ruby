@@ -5,7 +5,7 @@ module Mindee
     module Parsing
       module Search
         # Base class for search responses.
-        class BaseSearchResponse < CommonResponse
+        class BaseSearchResponse < BaseResponse
           # Pagination metadata.
           # @return [Mindee::V2::Parsing::Search::PaginationMetadata]
           attr_reader :pagination

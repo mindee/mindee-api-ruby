@@ -9,7 +9,7 @@ module Mindee
     module Product
       module OCR
         # HTTP response wrapper that embeds a V2 Inference.
-        class OCRResponse < Mindee::V2::Parsing::BaseResponse
+        class OCRResponse < Mindee::V2::Parsing::BaseInferenceResponse
           # @return [OCRInference] Parsed inference payload.
           attr_reader :inference
 

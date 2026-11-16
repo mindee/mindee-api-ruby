@@ -31,7 +31,7 @@ module Mindee
       )
         params_instance = case params
                           when Hash
-                            product.params_type.from_hash(params: params)
+                            product.parameters_class.from_hash(params: params)
                           when Mindee::V2::ClientOptions::BaseProductParameters
                             params
                           else
@@ -54,7 +54,7 @@ module Mindee
       # Get the result of an inference that was previously enqueued.
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param url [String] HTTPS URL to the result.
-      # @return [Mindee::V2::Parsing::BaseResponse]
+      # @return [Mindee::V2::Parsing::BaseInferenceResponse]
       def get_result_by_url(product, url)
         @mindee_api.req_get_result_by_url(product, url)
       end
@@ -63,7 +63,7 @@ module Mindee
       # Prefer using `get_result_by_url` using the result URL returned by the Job.
       # @param product [Class<Mindee::V2::Product::BaseProduct>] The return class.
       # @param resource [String] ID of the inference or URL to the result.
-      # @return [Mindee::V2::Parsing::BaseResponse]
+      # @return [Mindee::V2::Parsing::BaseInferenceResponse]
       def get_result(product, resource)
         @mindee_api.req_get_result_by_id(product, resource)
       end
@@ -83,7 +83,7 @@ module Mindee
       # @param params [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
       # @param polling_options [Hash, PollingOptions, nil] Parameters for polling.
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
-      # @return [Parsing::BaseResponse]
+      # @return [Parsing::BaseInferenceResponse]
       def enqueue_and_get_result(
         product,
         input_source,
@@ -93,7 +93,7 @@ module Mindee
       )
         params_instance = case params
                           when Hash
-                            product.params_type.from_hash(params: params)
+                            product.parameters_class.from_hash(params: params)
                           when Mindee::V2::ClientOptions::BaseProductParameters
                             params
                           else
@@ -246,7 +246,7 @@ module Mindee
       # @param polling_options [Input::PollingOptions]
       # @param wait_for_webhooks [Boolean]
       # @param cancellation_token [Mindee::HTTP::CancellationToken, nil]
-      # @return [Mindee::V2::Parsing::BaseResponse]
+      # @return [Mindee::V2::Parsing::BaseInferenceResponse]
       def poll_for_product_result(
         product,
         enqueue_response,

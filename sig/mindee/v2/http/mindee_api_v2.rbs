@@ -9,9 +9,11 @@ module Mindee
       interface _ProductClass[T]
         def slug: () -> String
 
-        def response_type: () -> _ResponseFactory[T]
+        def response_class: () -> _ResponseFactory[T]
 
-        def params_type: () -> singleton(ClientOptions::BaseProductParameters)
+        def parameters_class: () -> singleton(ClientOptions::BaseProductParameters)
+
+        def annotation_response_class: () -> singleton(Parsing::BaseRagAnnotationResponse)
       end
 
       interface _SearchParameters[T]
@@ -42,16 +44,28 @@ module Mindee
 
         def process_response: (Net::HTTPResponse?) -> Hash[String | Symbol, untyped]
 
-        def poll: (String) -> Net::HTTPResponse
-
-        def enqueue: (
-          Input::Source::LocalInputSource | Input::Source::URLInputSource,
-          ClientOptions::BaseProductParameters
-        ) -> Net::HTTPResponse?
-
         def req_get_search: [T] (_SearchParameters[T] params) -> T
 
+        def req_get_rag_annotation: (_ProductClass[untyped] product, String document_id) -> Parsing::BaseRagAnnotationResponse
+
+        def req_post_rag_document: (
+          _ProductClass[untyped] product,
+          ClientOptions::BaseRagDocumentUploadParameters parameters,
+          Input::Source::LocalInputSource input_source
+        ) -> Parsing::BaseRagAnnotationResponse
+
+        def req_patch_rag_annotation: (
+          _ProductClass[untyped] product,
+          ClientOptions::BaseAnnotationParameters parameters
+        ) -> Parsing::BaseRagAnnotationResponse
+
+        def req_delete_rag_document: (_ProductClass[untyped] product, String document_id) -> bool
+
         private
+
+        def send_get_request: (URI::Generic uri) -> Net::HTTPResponse
+
+        def send_post_request: (URI::Generic uri, Hash[String, untyped] form_data) -> Net::HTTPResponse
 
         def validate_https_url!: (String) -> void
       end

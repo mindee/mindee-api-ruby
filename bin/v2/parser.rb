@@ -70,7 +70,7 @@ module MindeeCLI
 
     # Parse the arguments and run the given product command.
     # @param command [String]
-    # @return [Array(Mindee::V2::Parsing::BaseResponse, String)] Response and its summary.
+    # @return [Array(Mindee::V2::Parsing::BaseInferenceResponse, String)] Response and its summary.
     def run_product(command)
       @product_parser[command].parse!(@arguments)
       @options[:file_path] = @arguments.shift

@@ -9,7 +9,7 @@ module Mindee
     module Product
       module Crop
         # HTTP response wrapper that embeds a V2 Inference.
-        class CropResponse < Mindee::V2::Parsing::BaseResponse
+        class CropResponse < Mindee::V2::Parsing::BaseInferenceResponse
           # @return [CropInference] Parsed inference payload.
           attr_reader :inference
 

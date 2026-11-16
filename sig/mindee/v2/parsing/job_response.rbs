@@ -2,7 +2,7 @@
 module Mindee
   module V2
     module Parsing
-      class JobResponse < CommonResponse
+      class JobResponse < BaseResponse
         attr_reader job: Job
 
         def initialize: (Hash[String | Symbol, untyped]) -> void

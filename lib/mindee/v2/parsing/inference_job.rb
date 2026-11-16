@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'common_response'
 require_relative 'job'
 
 module Mindee

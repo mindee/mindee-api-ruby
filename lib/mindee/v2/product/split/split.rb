@@ -10,8 +10,8 @@ module Mindee
         # Split product.
         class Split < BaseProduct
           @slug = 'split'
-          @params_type = Mindee::V2::Product::Split::Params::SplitParameters
-          @response_type = Mindee::V2::Product::Split::SplitResponse
+          @parameters_class = Mindee::V2::Product::Split::Params::SplitParameters
+          @response_class = Mindee::V2::Product::Split::SplitResponse
         end
       end
     end

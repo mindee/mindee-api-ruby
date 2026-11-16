@@ -4,17 +4,17 @@ module Mindee
   module V2
     module Product
       module Extraction
-        class ExtractionResponse < Parsing::BaseResponse[ExtractionInference]
-          self.@_params_type: singleton(Params::ExtractionParameters)
+        class ExtractionResponse < Parsing::BaseInferenceResponse[ExtractionInference]
+          self.@_parameters_class: singleton(Params::ExtractionParameters)
           self.@slug: String
 
           attr_reader inference: ExtractionInference
 
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
-          def _params_type: -> singleton(Params::ExtractionParameters)
+          def _parameters_class: -> singleton(Params::ExtractionParameters)
 
-          def self._params_type: () -> singleton(Params::ExtractionParameters)
+          def self._parameters_class: () -> singleton(Params::ExtractionParameters)
 
           def to_s: -> String
         end

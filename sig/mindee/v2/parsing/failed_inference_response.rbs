@@ -1,7 +1,7 @@
 module Mindee
   module V2
     module Parsing
-      class FailedInferenceResponse
+      class FailedInferenceResponse < BaseResponse
         def initialize: (Hash[String | Symbol, untyped]) -> void
         attr_reader created_at: Time
         attr_reader error: ::Mindee::V2::Parsing::ErrorResponse

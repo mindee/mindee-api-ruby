@@ -1,0 +1,21 @@
+# lib/mindee/v2/product/extraction/rag_documents/annotated_list_field.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module RagDocuments
+          class AnnotatedListField < AnnotatedBaseField
+            attr_reader items: Array[AnnotatedListField | AnnotatedObjectField | AnnotatedSimpleField]
+
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+            def simple_items: () -> Array[AnnotatedSimpleField]
+            def object_items: () -> Array[AnnotatedObjectField]
+            def to_s: () -> String
+            def to_h: () -> Hash[String, untyped]
+          end
+        end
+      end
+    end
+  end
+end

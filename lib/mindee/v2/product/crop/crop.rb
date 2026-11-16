@@ -11,8 +11,8 @@ module Mindee
         # Crop product.
         class Crop < BaseProduct
           @slug = 'crop'
-          @params_type = Mindee::V2::Product::Crop::Params::CropParameters
-          @response_type = Mindee::V2::Product::Crop::CropResponse
+          @parameters_class = Mindee::V2::Product::Crop::Params::CropParameters
+          @response_class = Mindee::V2::Product::Crop::CropResponse
         end
       end
     end

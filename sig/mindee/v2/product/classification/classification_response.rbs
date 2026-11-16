@@ -4,17 +4,17 @@ module Mindee
   module V2
     module Product
       module Classification
-        class ClassificationResponse < Parsing::BaseResponse[ClassificationInference]
+        class ClassificationResponse < Parsing::BaseInferenceResponse[ClassificationInference]
           self.@slug: String
-          self.@_params_type: singleton(Params::ClassificationParameters)
+          self.@_parameters_class: singleton(Params::ClassificationParameters)
 
           attr_reader inference: ClassificationInference
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
-          def _params_type: -> singleton(Params::ClassificationParameters)
+          def _parameters_class: -> singleton(Params::ClassificationParameters)
 
           def to_s: -> String
-          def self._params_type: () -> singleton(Params::ClassificationParameters)
+          def self._parameters_class: () -> singleton(Params::ClassificationParameters)
           def self.slug: () -> String
         end
       end
