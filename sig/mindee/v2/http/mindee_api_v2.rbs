@@ -6,17 +6,25 @@ module Mindee
         def new: (Hash[String | Symbol, untyped]) -> T
       end
 
-      interface _ProductClass[T]
+      interface _ProductClass[T < Parsing::BaseResponse]
         def slug: () -> String
 
         def response_class: () -> _ResponseFactory[T]
 
         def parameters_class: () -> singleton(ClientOptions::BaseProductParameters)
-
-        def annotation_response_class: () -> singleton(Parsing::BaseRagAnnotationResponse)
       end
 
-      interface _SearchParameters[T]
+      interface _RagProductClass[T < Parsing::BaseRagAnnotationResponse]
+        def slug: () -> String
+
+        def annotation_response_class: () -> _ResponseFactory[T]
+
+        def annotation_parameters_class: () -> singleton(ClientOptions::BaseAnnotationParameters)
+
+        def rag_document_upload_class: () -> singleton(ClientOptions::BaseRagDocumentUploadParameters)
+      end
+
+      interface _SearchParameters[T < Parsing::Search::BaseSearchResponse]
         def slug: () -> String
 
         def response_class: () -> _ResponseFactory[T]
@@ -29,7 +37,7 @@ module Mindee
 
         def initialize: (?api_key: String?) -> void
 
-        def req_get_result_by_id: [T] (_ProductClass[T] product, String inference_id) -> T
+        def req_get_result_by_id: [T < Parsing::BaseResponse] (_ProductClass[T] product, String inference_id) -> T
 
         def req_post_product_enqueue: (
           Input::Source::LocalInputSource | Input::Source::URLInputSource,
@@ -40,26 +48,26 @@ module Mindee
 
         def req_get_job_by_url: (String url) -> V2::Parsing::JobResponse
 
-        def req_get_result_by_url: [T] (_ProductClass[T] product, String url) -> T
+        def req_get_result_by_url: [T < Parsing::BaseResponse] (_ProductClass[T] product, String url) -> T
 
         def process_response: (Net::HTTPResponse?) -> Hash[String | Symbol, untyped]
 
-        def req_get_search: [T] (_SearchParameters[T] params) -> T
+        def req_get_search: [T < Parsing::Search::BaseSearchResponse] (_SearchParameters[T] params) -> T
 
-        def req_get_rag_annotation: (_ProductClass[untyped] product, String document_id) -> Parsing::BaseRagAnnotationResponse
+        def req_get_rag_annotation: [T < Parsing::BaseRagAnnotationResponse] (_RagProductClass[T] product, String document_id) -> T
 
-        def req_post_rag_document: (
-          _ProductClass[untyped] product,
+        def req_post_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          _RagProductClass[T] product,
           ClientOptions::BaseRagDocumentUploadParameters parameters,
           Input::Source::LocalInputSource input_source
-        ) -> Parsing::BaseRagAnnotationResponse
+        ) -> T
 
-        def req_patch_rag_annotation: (
-          _ProductClass[untyped] product,
+        def req_patch_rag_annotation: [T < Parsing::BaseRagAnnotationResponse] (
+          _RagProductClass[T] product,
           ClientOptions::BaseAnnotationParameters parameters
-        ) -> Parsing::BaseRagAnnotationResponse
+        ) -> T
 
-        def req_delete_rag_document: (_ProductClass[untyped] product, String document_id) -> bool
+        def req_delete_rag_document: (_RagProductClass[untyped] | _ProductClass[untyped] product, String document_id) -> bool
 
         private
 

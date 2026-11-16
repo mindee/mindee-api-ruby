@@ -49,11 +49,11 @@ describe Mindee::V2::Client do
   it 'enqueue(path) raises MindeeHTTPErrorV2 on 4xx' do
     expect do
       stub_next_request_with(:send_post_request, hash: JSON.generate(json400))
-      params = Mindee::V2::Product::Extraction::Params::ExtractionParameters.new(
-        'dummy-model',
+      params = {
+        model_id: 'dummy-model',
         raw_text: false,
-        text_context: 'Hello my name is mud.'
-      )
+        text_context: 'Hello my name is mud.',
+      }
       client.enqueue(Mindee::V2::Product::Extraction::Extraction, input_doc, params)
     end.to raise_error(Mindee::Error::MindeeHTTPErrorV2) { |err|
       expect(err.status).to eq(400)

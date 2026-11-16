@@ -6,8 +6,8 @@ module Mindee
       module Extraction
         module RagDocuments
           class AnnotatedBaseField
-            attr_reader selected: bool
-            attr_reader guidelines: String?
+            attr_accessor selected: bool
+            attr_accessor guidelines: String?
 
             def initialize: (?bool?, ?String?) -> void
             def to_h: () -> Hash[String, untyped]

@@ -11,21 +11,21 @@ module Mindee
 
       def initialize: (?api_key: String) -> void
 
-      def get_result: [T] (HTTP::_ProductClass[T] product, String resource) -> T
+      def get_result: [T < Parsing::BaseResponse] (HTTP::_ProductClass[T] product, String resource) -> T
 
       def get_job: (String job_id) -> V2::Parsing::JobResponse
 
-      def get_result_by_url: [T] (HTTP::_ProductClass[T] product, String url) -> T
+      def get_result_by_url: [T < Parsing::BaseResponse] (HTTP::_ProductClass[T] product, String url) -> T
 
       def get_job_by_url: (String url) -> V2::Parsing::JobResponse
 
-      def enqueue: [T] (
+      def enqueue: [T < Parsing::BaseResponse] (
           HTTP::_ProductClass[T] product,
           Input::Source::LocalInputSource | Input::Source::URLInputSource input_source,
           Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params
         ) -> V2::Parsing::JobResponse
 
-      def enqueue_and_get_result: [T] (
+      def enqueue_and_get_result: [T < Parsing::BaseResponse] (
           HTTP::_ProductClass[T] product,
           Input::Source::LocalInputSource | Input::Source::URLInputSource input_source,
           Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters params,
@@ -33,7 +33,50 @@ module Mindee
           ?Mindee::HTTP::CancellationToken | nil cancellation_token
         ) -> T
 
-      def search: [T] (HTTP::_SearchParameters[T] params) -> T
+      def upload_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          Input::Source::LocalInputSource input_source,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseRagDocumentUploadParameters params
+        ) -> T
+
+      def upload_and_get_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          Input::Source::LocalInputSource input_source,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseRagDocumentUploadParameters params,
+          ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil polling_options,
+          ?Mindee::HTTP::CancellationToken | nil cancellation_token
+        ) -> T
+
+      def get_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          String document_id
+        ) -> T
+
+      def get_ready_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          String document_id,
+          ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil polling_options,
+          ?Mindee::HTTP::CancellationToken | nil cancellation_token
+        ) -> T
+
+      def update_rag_annotation: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseAnnotationParameters params
+        ) -> T
+
+      def update_and_get_rag_annotation: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseAnnotationParameters params,
+          ?Hash[String | Symbol, untyped] | Input::PollingOptions | nil polling_options,
+          ?Mindee::HTTP::CancellationToken | nil cancellation_token
+        ) -> T
+
+      def delete_rag_document: (
+          HTTP::_RagProductClass[untyped] | HTTP::_ProductClass[untyped] product,
+          String document_id
+        ) -> bool
+
+      def search: [T < Parsing::Search::BaseSearchResponse] (HTTP::_SearchParameters[T] params) -> T
 
       # Deprecated: use `search` instead.
       def search_models: (String?, String?) -> Search::Models::ModelSearchResponse
@@ -42,15 +85,41 @@ module Mindee
 
       private
 
+      def resolve_product_parameters: (
+          HTTP::_ProductClass[untyped] product,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseProductParameters parameters,
+        ) -> ClientOptions::BaseProductParameters
+
+      def resolve_rag_upload_parameters: (
+          HTTP::_RagProductClass[untyped] product,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseRagDocumentUploadParameters parameters
+        ) -> ClientOptions::BaseRagDocumentUploadParameters
+
+      def resolve_rag_annotation_parameters: (
+          HTTP::_RagProductClass[untyped] product,
+          Hash[String | Symbol, untyped] | ClientOptions::BaseAnnotationParameters parameters
+        ) -> ClientOptions::BaseAnnotationParameters
+
+      def resolve_polling_options: (
+          Hash[String | Symbol, untyped] | Input::PollingOptions | nil polling_options
+        ) -> Input::PollingOptions
+
       def check_webhooks_done?: (V2::Parsing::JobResponse job_response) -> bool
 
-      def poll_for_product_result: [T] (
+      def poll_for_product_result: [T < Parsing::BaseResponse] (
           HTTP::_ProductClass[T] product,
           V2::Parsing::JobResponse enqueu_response,
           Input::PollingOptions polling_options,
           ?bool wait_for_webhooks,
           ?(Mindee::HTTP::CancellationToken | nil) cancellation_token
-      ) -> T
+        ) -> T
+
+      def poll_for_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          HTTP::_RagProductClass[T] product,
+          T initial_response,
+          Input::PollingOptions polling_options,
+          ?(Mindee::HTTP::CancellationToken | nil) cancellation_token
+        ) -> T
 
       def poll_on_job: (
           V2::Parsing::JobResponse initial_response,

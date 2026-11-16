@@ -8,6 +8,10 @@ module Mindee
 
         def initialize: (String model_id) -> void
 
+        def self.from_hash: (?params: Hash[String | Symbol, untyped]) -> BaseRagDocumentUploadParameters
+
+        def self.load_from_hash: (?params: Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
+
         def request_parameters: -> Hash[String, String]
       end
     end

@@ -11,7 +11,7 @@ module Mindee
           class AnnotatedSimpleField < AnnotatedBaseField
             # Field value, one of: string, boolean, number, null.
             # @return [String, Boolean, Numeric, nil]
-            attr_reader :value
+            attr_accessor :value
 
             # Default constructor.
             # @param server_response [Hash[String | Symbol, untyped]]

@@ -6,7 +6,7 @@ module Mindee
       module Extraction
         module RagDocuments
           class AnnotatedObjectField < AnnotatedBaseField
-            attr_reader fields: AnnotatedFields
+            attr_accessor fields: AnnotatedFields
 
             def initialize: (Hash[String | Symbol, untyped]) -> void
             def get_simple_field: (String) -> AnnotatedSimpleField

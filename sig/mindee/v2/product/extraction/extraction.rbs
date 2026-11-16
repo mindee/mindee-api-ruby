@@ -8,6 +8,8 @@ module Mindee
           self.@parameters_class: singleton(Params::ExtractionParameters)
           self.@response_class: singleton(ExtractionResponse)
           self.@annotation_response_class: singleton(RagDocuments::ExtractionRagAnnotationResponse)
+          self.@annotation_parameters_class: singleton(RagDocuments::Params::RagDocumentAnnotationParameters)
+          self.@rag_document_upload_class: singleton(RagDocuments::Params::RagDocumentUploadParameters)
           self.@slug: String
         end
       end

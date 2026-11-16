@@ -32,12 +32,24 @@ module Mindee
                 @annotation = parse_annotation(annotation)
               end
 
+              # Load from a hash
+              # @param [Hash] params Parameters to provide as a hash.
+              # @return [RagDocumentAnnotationParameters]
+              def self.from_hash(params: {})
+                load_from_hash(params: params)
+                new(
+                  params[:document_id],
+                  status: params[:status],
+                  annotation: params[:annotation]
+                )
+              end
+
               # Gets the request parameters for the annotation request.
               # @return [Hash[String, untyped]]
               def request_parameters
                 parameters = {} # : Hash[String, untyped]
                 parameters['status'] = @status if @status
-                parameters['annotation'] = @annotation.to_json if @annotation
+                parameters['annotation'] = @annotation.to_h if @annotation
                 parameters
               end
 

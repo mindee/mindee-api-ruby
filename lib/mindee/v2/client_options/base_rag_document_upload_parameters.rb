@@ -18,6 +18,27 @@ module Mindee
           @model_id = trimmed_id
         end
 
+        # Load from a hash
+        # @param [Hash] params Parameters to provide as a hash.
+        # @return [BaseRagDocumentUploadParameters]
+        def self.from_hash(params: {})
+          load_from_hash(params: params)
+          new(params[:model_id])
+        end
+
+        # Loads parameters from a Hash.
+        # @param [Hash] params Parameters to provide as a hash.
+        # @return [Hash]
+        def self.load_from_hash(params: {})
+          params.transform_keys!(&:to_sym)
+
+          if params.empty? || params[:model_id].nil? || params[:model_id].to_s.strip.empty?
+            raise Error::MindeeInputError, 'Model ID is required.'
+          end
+
+          params
+        end
+
         # Gets the request parameters for the upload request.
         # @return [Hash[String, String]]
         def request_parameters

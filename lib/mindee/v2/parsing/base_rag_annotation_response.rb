@@ -7,7 +7,7 @@ module Mindee
   module V2
     module Parsing
       # Base class for all RAG document responses from the V2 API.
-      class BaseRagAnnotationResponse < BaseInferenceResponse
+      class BaseRagAnnotationResponse < Mindee::V2::Parsing::BaseResponse
         # Unique identifier of the RAG document.
         # @return [String]
         attr_reader :id

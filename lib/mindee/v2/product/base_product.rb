@@ -33,7 +33,9 @@ module Mindee
           attr_reader :parameters_class,
                       :slug,
                       :response_class,
-                      :annotation_response_class
+                      :annotation_response_class,
+                      :annotation_parameters_class,
+                      :rag_document_upload_class
         end
       end
     end

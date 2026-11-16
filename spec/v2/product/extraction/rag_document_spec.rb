@@ -9,9 +9,9 @@ require 'mindee/v2/product/extraction/rag_documents/params/rag_document_upload_p
 require 'mindee/v2/product/extraction/rag_documents/params/rag_document_annotation_parameters'
 
 describe Mindee::V2::Product::Extraction::RagDocuments do
-  let(:expected_annotation_str) do
+  let(:expected_annotation) do
     raw_json = File.read(File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'rag_documents', 'test_annotation.json'))
-    JSON.generate(JSON.parse(raw_json))
+    JSON.parse(raw_json)
   end
 
   def get_response(relative_path)
@@ -46,7 +46,7 @@ describe Mindee::V2::Product::Extraction::RagDocuments do
     req_params = parameters.request_parameters
 
     expect(req_params['status']).to eq('Active')
-    expect(req_params['annotation']).to eq(expected_annotation_str)
+    expect(req_params['annotation']).to eq(expected_annotation)
   end
 
   it 'should init PATCH parameters from an annotation instance' do
@@ -66,7 +66,7 @@ describe Mindee::V2::Product::Extraction::RagDocuments do
 
     req_params = parameters.request_parameters
     expect(req_params['status']).to eq('Active')
-    expect(req_params['annotation']).to eq(expected_annotation_str)
+    expect(req_params['annotation']).to eq(expected_annotation)
   end
 
   it 'should init PATCH parameters from an annotation string' do
@@ -79,7 +79,7 @@ describe Mindee::V2::Product::Extraction::RagDocuments do
 
     req_params = parameters.request_parameters
     expect(req_params['status']).to eq('Active')
-    expect(req_params['annotation']).to eq(expected_annotation_str)
+    expect(req_params['annotation']).to eq(expected_annotation)
   end
 
   it 'should load a POST response from a JSON string' do

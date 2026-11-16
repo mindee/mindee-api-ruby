@@ -16,6 +16,8 @@ module Mindee
                   ?annotation: RagAnnotation | String | Hash[String | Symbol, untyped]?
                 ) -> void
 
+              def self.from_hash: (?params: Hash[String | Symbol, untyped]) -> RagDocumentAnnotationParameters
+
               def request_parameters: -> Hash[String, untyped]
 
               private

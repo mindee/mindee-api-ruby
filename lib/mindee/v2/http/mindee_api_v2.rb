@@ -30,7 +30,7 @@ module Mindee
 
           form_data = {} # : Hash[String, untyped]
           if input_source.is_a?(Mindee::Input::Source::URLInputSource)
-            form_data['uri'] = input_source.url
+            form_data['url'] = input_source.url
           else
             file_data, file_metadata = input_source.read_contents(close: params.close_file)
             form_data['file'] = [file_data, file_metadata]

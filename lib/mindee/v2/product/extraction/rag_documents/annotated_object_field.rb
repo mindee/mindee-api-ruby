@@ -14,7 +14,7 @@ module Mindee
           class AnnotatedObjectField < AnnotatedBaseField
             # Nested fields carried by this object.
             # @return [AnnotatedFields]
-            attr_reader :fields
+            attr_accessor :fields
 
             # Default constructor.
             # @param server_response [Hash[String | Symbol, untyped]]

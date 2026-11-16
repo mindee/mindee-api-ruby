@@ -15,6 +15,8 @@ module Mindee
         attr_reader self.parameters_class: singleton(ClientOptions::BaseProductParameters)
         attr_reader self.response_class: singleton(Parsing::BaseInferenceResponse)
         attr_reader self.annotation_response_class: singleton(Parsing::BaseRagAnnotationResponse)
+        attr_reader self.annotation_parameters_class: singleton(ClientOptions::BaseAnnotationParameters)
+        attr_reader self.rag_document_upload_class: singleton(ClientOptions::BaseRagDocumentUploadParameters)
 
         def initialize: -> void
       end

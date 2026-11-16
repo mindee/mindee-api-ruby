@@ -9,6 +9,7 @@ require_relative '../logging'
 module Mindee
   module V2
     # Mindee V2 API Client.
+    # rubocop:disable-next Metrics/ClassLength
     class Client
       # @return [V2::HTTP::MindeeApiV2]
       private attr_reader :mindee_api
@@ -29,15 +30,7 @@ module Mindee
         input_source,
         params
       )
-        params_instance = case params
-                          when Hash
-                            product.parameters_class.from_hash(params: params)
-                          when Mindee::V2::ClientOptions::BaseProductParameters
-                            params
-                          else
-                            raise ArgumentError, "Expected Hash or BaseProductParameters, got #{params.class}"
-                          end
-
+        params_instance = resolve_product_parameters(product, params)
         logger.debug("Enqueueing document to model '#{params_instance.model_id}'.")
 
         @mindee_api.req_post_product_enqueue(input_source, params_instance)
@@ -91,23 +84,8 @@ module Mindee
         polling_options = nil,
         cancellation_token = nil
       )
-        params_instance = case params
-                          when Hash
-                            product.parameters_class.from_hash(params: params)
-                          when Mindee::V2::ClientOptions::BaseProductParameters
-                            params
-                          else
-                            raise ArgumentError, "Expected Hash or BaseProductParameters, got #{params.class}"
-                          end
-
-        polling_options_instance = case polling_options
-                                   when Mindee::Input::PollingOptions
-                                     polling_options
-                                   when Hash
-                                     Mindee::Input::PollingOptions.from_hash(polling_options: polling_options)
-                                   else
-                                     Mindee::Input::PollingOptions.new
-                                   end
+        params_instance = resolve_product_parameters(product, params)
+        polling_options_instance = resolve_polling_options(polling_options)
 
         enqueue_response = enqueue(product, input_source, params_instance)
 
@@ -130,6 +108,127 @@ module Mindee
         )
       end
 
+      # Not recommended for general use, prefer {#upload_and_get_rag_document_poll}.
+      # You will need to poll until the document is ready for use.
+      # Add a document to the RAG database.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param input_source [Mindee::Input::Source::LocalInputSource] The file to upload.
+      # @param params [Hash, ClientOptions::BaseRagDocumentUploadParameters] Upload parameters.
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      def upload_rag_document(
+        product,
+        input_source,
+        params
+      )
+        params_instance = resolve_rag_upload_parameters(product, params)
+        logger.info('Adding a document to the RAG database')
+        @mindee_api.req_post_rag_document(product, params_instance, input_source)
+      end
+
+      # Add a document to the RAG database and return the initial annotation.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param input_source [Mindee::Input::Source::LocalInputSource] The file to upload.
+      # @param params [Hash, ClientOptions::BaseRagDocumentUploadParameters] Upload parameters.
+      # @param polling_options [Hash, Input::PollingOptions, nil] Parameters for polling.
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      def upload_and_get_rag_document(
+        product,
+        input_source,
+        params,
+        polling_options = nil,
+        cancellation_token = nil
+      )
+        params_instance = resolve_rag_upload_parameters(product, params)
+        initial_response = upload_rag_document(product, input_source, params_instance)
+
+        poll_for_rag_document(
+          product,
+          initial_response,
+          resolve_polling_options(polling_options),
+          cancellation_token
+        )
+      end
+
+      # Not recommended for general use, prefer {#get_ready_rag_document_poll}.
+      # You will need to poll until the document is ready for use.
+      # Get a document's info and annotations from the RAG database.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param document_id [String] The document's ID.
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      def get_rag_document(product, document_id)
+        logger.info("Getting RAG document ID: #{document_id}")
+        @mindee_api.req_get_rag_annotation(product, document_id)
+      end
+
+      # Get a document's info and annotations from the RAG database.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param document_id [String] The document's ID.
+      # @param polling_options [Hash, Input::PollingOptions, nil] Parameters for polling.
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      def get_ready_rag_document(
+        product,
+        document_id,
+        polling_options = nil,
+        cancellation_token = nil
+      )
+        initial_response = get_rag_document(product, document_id)
+        return initial_response unless initial_response.status == 'Processing'
+
+        poll_for_rag_document(
+          product,
+          initial_response,
+          resolve_polling_options(polling_options),
+          cancellation_token
+        )
+      end
+
+      # Not recommended for general use, prefer {#update_and_get_rag_annotation}.
+      # You will need to poll until the document is ready for use.
+      # Update a document's annotations in the RAG database.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param params [Hash, ClientOptions::BaseAnnotationParameters] Annotation parameters.
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      def update_rag_annotation(product, params)
+        params_instance = resolve_rag_annotation_parameters(product, params)
+        logger.info("Updating RAG document ID: #{params_instance.document_id}")
+        @mindee_api.req_patch_rag_annotation(product, params_instance)
+      end
+
+      # Update a document's annotations in the RAG database.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param params [Hash, ClientOptions::BaseAnnotationParameters] Annotation parameters.
+      # @param polling_options [Hash, Input::PollingOptions, nil] Parameters for polling.
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil] Token for cancellation.
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      def update_and_get_rag_annotation(
+        product,
+        params,
+        polling_options = nil,
+        cancellation_token = nil
+      )
+        params_instance = resolve_rag_annotation_parameters(product, params)
+        initial_response = update_rag_annotation(product, params_instance)
+        return initial_response unless initial_response.status == 'Processing'
+
+        poll_for_rag_document(
+          product,
+          initial_response,
+          resolve_polling_options(polling_options),
+          cancellation_token
+        )
+      end
+
+      # Delete a document from the RAG database.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param document_id [String] The document's ID.
+      # @return [Boolean]
+      def delete_rag_document(product, document_id)
+        logger.info("Deleting RAG document ID: #{document_id}")
+        @mindee_api.req_delete_rag_document(product, document_id)
+      end
+
       # Search for resources matching the given criteria.
       # @param params [ClientOptions::BaseSearchParameters] Search parameters.
       # @return [Mindee::V2::Parsing::Search::BaseSearchResponse] A search response containing the matching resources.
@@ -147,6 +246,65 @@ module Mindee
       end
 
       private
+
+      # Normalizes product parameters from an instance or hash.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param parameters [Hash, ClientOptions::BaseProductParameters] Parameters for the inference.
+      # @return [ClientOptions::BaseProductParameters]
+      def resolve_product_parameters(product, parameters)
+        case parameters
+        when Hash
+          product.parameters_class.from_hash(params: parameters)
+        when Mindee::V2::ClientOptions::BaseProductParameters
+          parameters
+        else
+          raise ArgumentError, "Expected Hash or BaseProductParameters, got #{parameters.class}"
+        end
+      end
+
+      # Normalizes RAG upload parameters from an instance or hash.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param parameters [Hash, ClientOptions::BaseRagDocumentUploadParameters] Parameters for the upload.
+      # @return [ClientOptions::BaseRagDocumentUploadParameters]
+      def resolve_rag_upload_parameters(product, parameters)
+        case parameters
+        when Hash
+          product.rag_document_upload_class.from_hash(params: parameters)
+        when Mindee::V2::ClientOptions::BaseRagDocumentUploadParameters
+          parameters
+        else
+          raise ArgumentError, "Expected Hash or BaseRagDocumentUploadParameters, got #{parameters.class}"
+        end
+      end
+
+      # Normalizes RAG annotation parameters from an instance or hash.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>] The product class.
+      # @param parameters [Hash, ClientOptions::BaseAnnotationParameters] Parameters for the annotation.
+      # @return [ClientOptions::BaseAnnotationParameters]
+      def resolve_rag_annotation_parameters(product, parameters)
+        case parameters
+        when Hash
+          product.annotation_parameters_class.from_hash(params: parameters)
+        when Mindee::V2::ClientOptions::BaseAnnotationParameters
+          parameters
+        else
+          raise ArgumentError, "Expected Hash or BaseAnnotationParameters, got #{parameters.class}"
+        end
+      end
+
+      # Normalizes polling options from an instance, hash, or nil.
+      # @param polling_options [Hash, Input::PollingOptions, nil]
+      # @return [Input::PollingOptions]
+      def resolve_polling_options(polling_options)
+        case polling_options
+        when Mindee::Input::PollingOptions
+          polling_options
+        when Hash
+          Mindee::Input::PollingOptions.from_hash(polling_options: polling_options)
+        else
+          Mindee::Input::PollingOptions.new
+        end
+      end
 
       # Checks if all webhooks associated with a job have finished processing.
       # @param job_response [Mindee::V2::Parsing::JobResponse]
@@ -267,6 +425,53 @@ module Mindee
         end
 
         get_result_by_url(product, job_response.job.result_url)
+      end
+
+      # Poll until the RAG document is finished processing or the max number of attempts is reached.
+      # @param product [Class<Mindee::V2::Product::BaseProduct>]
+      # @param initial_response [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      # @param polling_options [Input::PollingOptions]
+      # @param cancellation_token [Mindee::HTTP::CancellationToken, nil]
+      # @return [Mindee::V2::Parsing::BaseRagAnnotationResponse]
+      # @raise [Mindee::Error::MindeeError] Thrown when max_retries is reached and the annotation isn't ready.
+      def poll_for_rag_document(
+        product,
+        initial_response,
+        polling_options,
+        cancellation_token = nil
+      )
+        logger.info("Polling for RAG document ID: #{initial_response.id}")
+
+        logger.debug(
+          "Waiting #{polling_options.initial_delay_sec} seconds before attempting to retrieve the result..."
+        )
+        sleep(polling_options.initial_delay_sec)
+
+        try_counter = 0
+        max_retries = polling_options.max_retries
+        document_id = initial_response.id
+
+        while try_counter < max_retries
+          raise Mindee::Error::MindeeError, 'Polling was canceled.' if cancellation_token&.canceled?
+
+          logger.debug(
+            "Poll attempt #{try_counter + 1} of #{max_retries}"
+          )
+
+          response = @mindee_api.req_get_rag_annotation(product, document_id)
+          try_counter += 1
+
+          case response.status
+          when 'Processing'
+            throttle_polling_attempt(try_counter, max_retries, polling_options, cancellation_token)
+          when 'Failed'
+            raise Mindee::Error::MindeeError, 'RAG failed without an error payload.'
+          else
+            return response
+          end
+        end
+
+        raise Mindee::Error::MindeeError, "RAG polling not complete after #{try_counter} attempts."
       end
     end
   end

@@ -14,7 +14,7 @@ module Mindee
           class AnnotatedListField < AnnotatedBaseField
             # Items contained in the list.
             # @return [Array[AnnotatedListField | AnnotatedObjectField | AnnotatedSimpleField]]
-            attr_reader :items
+            attr_accessor :items
 
             # Default constructor.
             # @param server_response [Hash[String | Symbol, untyped]]

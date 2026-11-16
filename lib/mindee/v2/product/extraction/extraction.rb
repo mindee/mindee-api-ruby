@@ -18,6 +18,8 @@ module Mindee
           @parameters_class = Product::Extraction::Params::ExtractionParameters
           @response_class = Product::Extraction::ExtractionResponse
           @annotation_response_class = Product::Extraction::RagDocuments::ExtractionRagAnnotationResponse
+          @annotation_parameters_class = Product::Extraction::RagDocuments::Params::RagDocumentAnnotationParameters
+          @rag_document_upload_class = Product::Extraction::RagDocuments::Params::RagDocumentUploadParameters
         end
       end
     end

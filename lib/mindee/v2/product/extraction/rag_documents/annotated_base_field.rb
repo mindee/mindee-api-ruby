@@ -11,11 +11,11 @@ module Mindee
           class AnnotatedBaseField
             # When true, use the RAG information for the final result. When false, use the Data Schema information.
             # @return [Boolean]
-            attr_reader :selected
+            attr_accessor :selected
 
             # Guidelines or instructions for processing this field.
             # @return [String, nil]
-            attr_reader :guidelines
+            attr_accessor :guidelines
 
             # Default constructor.
             # @param selected [Boolean, nil] When true, use the RAG information for the final result.

@@ -6,7 +6,7 @@ module Mindee
       module Extraction
         module RagDocuments
           class AnnotatedSimpleField < AnnotatedBaseField
-            attr_reader value: (String | bool | Numeric)?
+            attr_accessor value: (String | bool | Numeric)?
 
             def initialize: (Hash[String | Symbol, untyped]) -> void
             def to_h: () -> Hash[String, untyped]

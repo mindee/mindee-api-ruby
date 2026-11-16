@@ -3,7 +3,7 @@
 module Mindee
   module V2
     module Parsing
-      class BaseRagAnnotationResponse < BaseInferenceResponse[untyped]
+      class BaseRagAnnotationResponse < BaseResponse
         attr_reader id: String
         attr_reader filename: String
         attr_reader created_at: Time
