@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mindee/v2/parsing'
+require 'mindee/v2/parsing/error_item'
 require 'mindee/input/local_response'
 require_relative '../../data'
 
