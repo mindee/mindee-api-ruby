@@ -11,7 +11,6 @@ module Mindee
             def get_object_field: (String) -> AnnotatedObjectField
             def get_list_field: (String) -> AnnotatedListField
             def to_h: () -> Hash[String, untyped]
-            def to_json: (?untyped) -> String
           end
         end
       end

@@ -2,7 +2,9 @@ module Mindee
   module V2
     module Product
       module Classification
-        class Classification < BaseProduct
+        class Classification < Product::BaseProduct
+          def self.parameters_class: () -> singleton(Params::ClassificationParameters)
+          def self.response_class: () -> singleton(ClassificationResponse)
         end
       end
     end

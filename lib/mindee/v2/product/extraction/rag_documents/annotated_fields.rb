@@ -63,12 +63,6 @@ module Mindee
             def to_h
               transform_values(&:to_h)
             end
-
-            # Serializes the fields to API format.
-            # @return [String]
-            def to_json(state = nil)
-              to_h.to_json(state)
-            end
           end
         end
       end

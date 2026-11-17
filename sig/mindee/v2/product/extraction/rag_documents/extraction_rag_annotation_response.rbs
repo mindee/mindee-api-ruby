@@ -5,7 +5,7 @@ module Mindee
     module Product
       module Extraction
         module RagDocuments
-          class ExtractionRagAnnotationResponse < Mindee::V2::Parsing::BaseRagAnnotationResponse
+          class ExtractionRagAnnotationResponse < Parsing::BaseRagAnnotationResponse
             attr_reader model_id: String
             attr_reader total_matches: Integer
             attr_reader last_match_at: Time?

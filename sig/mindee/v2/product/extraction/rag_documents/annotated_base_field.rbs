@@ -11,8 +11,9 @@ module Mindee
 
             def initialize: (?bool?, ?String?) -> void
             def to_h: () -> Hash[String, untyped]
-            def to_json: (?untyped) -> String
-            def self.create_annotated_field: (Hash[String | Symbol, untyped]) -> (AnnotatedListField | AnnotatedObjectField | AnnotatedSimpleField)
+            def self.create_annotated_field: (
+              Hash[String | Symbol, untyped]
+            ) -> (AnnotatedListField | AnnotatedObjectField | AnnotatedSimpleField)
           end
         end
       end

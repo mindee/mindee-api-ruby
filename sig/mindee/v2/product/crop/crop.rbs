@@ -2,7 +2,9 @@ module Mindee
   module V2
     module Product
       module Crop
-        class Crop < BaseProduct
+        class Crop < Product::BaseProduct
+          def self.parameters_class: () -> singleton(Params::CropParameters)
+          def self.response_class: () -> singleton(CropResponse)
         end
       end
     end

@@ -35,12 +35,6 @@ module Mindee
               }
             end
 
-            # Serializes the field to API JSON format.
-            # @return [String]
-            def to_json(state = nil)
-              to_h.to_json(state)
-            end
-
             # Factory method to create appropriate field types.
             # @param server_response [Hash] Raw prediction hash.
             # @return [AnnotatedBaseField] Appropriate field instance.

@@ -2,13 +2,6 @@ module Mindee
   module V2
     module Product
       class BaseProduct
-        self.@slug: String
-        self.@parameters_class: singleton(ClientOptions::BaseProductParameters)
-        self.@response_class: singleton(Parsing::BaseInferenceResponse)
-        self.@annotation_response_class: singleton(Parsing::BaseRagAnnotationResponse)
-        self.@annotation_parameters_class: singleton(ClientOptions::BaseAnnotationParameters)
-        self.@rag_document_upload_class: singleton(ClientOptions::BaseRagDocumentUploadParameters)
-
         def self._parameters_class: () -> singleton(ClientOptions::BaseProductParameters)
 
         attr_reader self.slug: String

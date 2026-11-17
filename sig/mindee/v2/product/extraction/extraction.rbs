@@ -4,13 +4,12 @@ module Mindee
   module V2
     module Product
       module Extraction
-        class Extraction
-          self.@parameters_class: singleton(Params::ExtractionParameters)
-          self.@response_class: singleton(ExtractionResponse)
-          self.@annotation_response_class: singleton(RagDocuments::ExtractionRagAnnotationResponse)
-          self.@annotation_parameters_class: singleton(RagDocuments::Params::RagDocumentAnnotationParameters)
-          self.@rag_document_upload_class: singleton(RagDocuments::Params::RagDocumentUploadParameters)
-          self.@slug: String
+        class Extraction < Product::BaseProduct
+          def self.parameters_class: () -> singleton(Params::ExtractionParameters)
+          def self.response_class: () -> singleton(ExtractionResponse)
+          def self.annotation_response_class: () -> singleton(RagDocuments::ExtractionRagAnnotationResponse)
+          def self.annotation_parameters_class: () -> singleton(RagDocuments::Params::RagDocumentAnnotationParameters)
+          def self.rag_document_upload_class: () -> singleton(RagDocuments::Params::RagDocumentUploadParameters)
         end
       end
     end

@@ -2,7 +2,9 @@ module Mindee
   module V2
     module Product
       module OCR
-        class OCR < BaseProduct
+        class OCR < Product::BaseProduct
+          def self.parameters_class: () -> singleton(Params::OCRParameters)
+          def self.response_class: () -> singleton(OCRResponse)
         end
       end
     end

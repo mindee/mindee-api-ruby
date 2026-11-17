@@ -10,7 +10,6 @@ module Mindee
 
             def initialize: (Hash[String | Symbol, untyped]) -> void
             def to_h: () -> Hash[String, untyped]
-            def to_json: (?untyped) -> String
           end
         end
       end
