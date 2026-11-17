@@ -31,10 +31,32 @@ module Mindee
                     end
         end
 
-        # String representation.
+        # To make the error prettier to display.
         # @return [String]
         def to_s
-          "HTTP #{@status} - #{@title} :: #{@code} - #{@detail}"
+          result = [
+            'Error Details',
+            '=============',
+            ":HTTP Status: #{@status}",
+            ":Title: #{@title}",
+            ":Code: #{@code}",
+            ":Detail: #{@detail}",
+          ]
+
+          if @errors && !@errors.empty?
+            result << ''
+            result << 'Error Items'
+            result << '-----------'
+
+            @errors.each_with_index do |error, i|
+              result << "**Error #{i + 1}:**"
+              result << "  :Pointer: #{error.pointer}"
+              result << "  :Detail: #{error.detail}"
+              result << '' if i < @errors.length - 1
+            end
+          end
+
+          "#{result.join("\n")}\n"
         end
 
         # Hash representation
