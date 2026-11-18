@@ -11,8 +11,8 @@ module Mindee
         # Classification product.
         class Classification < BaseProduct
           @slug = 'classification'
-          @params_type = Mindee::V2::Product::Classification::Params::ClassificationParameters
-          @response_type = Mindee::V2::Product::Classification::ClassificationResponse
+          @parameters_class = Mindee::V2::Product::Classification::Params::ClassificationParameters
+          @response_class = Mindee::V2::Product::Classification::ClassificationResponse
         end
       end
     end

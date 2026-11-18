@@ -1,0 +1,18 @@
+# lib/mindee/v2/product/extraction/rag_documents/rag_annotation.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module RagDocuments
+          class RagAnnotation
+            attr_reader fields: AnnotatedFields
+
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+            def to_h: () -> Hash[String, untyped]
+          end
+        end
+      end
+    end
+  end
+end

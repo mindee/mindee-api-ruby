@@ -2,6 +2,9 @@
 
 require_relative 'extraction_response'
 require_relative 'params/extraction_parameters'
+require_relative 'rag_documents/extraction_rag_annotation_response'
+require_relative 'rag_documents/params/rag_document_annotation_parameters'
+require_relative 'rag_documents/params/rag_document_upload_parameters'
 
 module Mindee
   module V2
@@ -12,8 +15,11 @@ module Mindee
         # Note: currently a placeholder for the `Inference` class.
         class Extraction < Product::BaseProduct
           @slug = 'extraction'
-          @params_type = Product::Extraction::Params::ExtractionParameters
-          @response_type = Product::Extraction::ExtractionResponse
+          @parameters_class = Product::Extraction::Params::ExtractionParameters
+          @response_class = Product::Extraction::ExtractionResponse
+          @annotation_response_class = Product::Extraction::RagDocuments::ExtractionRagAnnotationResponse
+          @annotation_parameters_class = Product::Extraction::RagDocuments::Params::RagDocumentAnnotationParameters
+          @rag_document_upload_class = Product::Extraction::RagDocuments::Params::RagDocumentUploadParameters
         end
       end
     end

@@ -1,0 +1,20 @@
+# lib/mindee/v2/product/extraction/rag_documents/extraction_rag_annotation_response.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module RagDocuments
+          class ExtractionRagAnnotationResponse < Parsing::BaseRagAnnotationResponse
+            attr_reader model_id: String
+            attr_reader total_matches: Integer
+            attr_reader last_match_at: Time?
+            attr_reader annotation: RagAnnotation?
+
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+          end
+        end
+      end
+    end
+  end
+end

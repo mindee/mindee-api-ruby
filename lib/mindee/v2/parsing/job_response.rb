@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'common_response'
+require_relative 'base_response'
 require_relative 'job'
 
 module Mindee
   module V2
     module Parsing
       # HTTP response wrapper that embeds a V2 job.
-      class JobResponse < CommonResponse
+      class JobResponse < BaseResponse
         # @return [Job] Parsed job payload.
         attr_reader :job
 

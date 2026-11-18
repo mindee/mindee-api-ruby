@@ -2,7 +2,7 @@ module Mindee
   module V2
     module Parsing
       module Search
-        class BaseSearchResponse < CommonResponse
+        class BaseSearchResponse < BaseResponse
           attr_reader pagination: PaginationMetadata
 
           def initialize: (Hash[String|Symbol, untyped]) -> void

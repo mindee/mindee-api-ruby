@@ -9,7 +9,7 @@ require 'mindee/v2/product/extraction/params/extraction_parameters'
 describe Mindee::V2::Product::Extraction::Params::ExtractionParameters do
   let(:replace_path) { File.join(V2_PRODUCT_DATA_DIR, 'extraction', 'data_schema_replace_param.json') }
   let(:data_schema_dict) { JSON.parse(File.read(replace_path)) }
-  let(:data_schema_string) { data_schema_dict.to_json }
+  let(:data_schema_string) { data_schema_dict.to_h.to_json }
   let(:data_schema_instance) { Mindee::V2::Product::Extraction::Params::DataSchema.new(data_schema_dict) }
 
   it 'should init with minimum values' do

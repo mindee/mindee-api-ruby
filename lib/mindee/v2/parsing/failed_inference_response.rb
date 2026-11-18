@@ -4,7 +4,7 @@ module Mindee
   module V2
     module Parsing
       # "Webhook payload returned when an inference fails before producing a result.
-      class FailedInferenceResponse < Mindee::V2::Parsing::CommonResponse
+      class FailedInferenceResponse < Mindee::V2::Parsing::BaseResponse
         # @return [String] UUID of the failed inference.
         attr_reader :inference_id
         # @return [String] UUID of the model used.

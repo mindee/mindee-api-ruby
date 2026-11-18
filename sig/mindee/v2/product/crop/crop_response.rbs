@@ -4,17 +4,17 @@ module Mindee
   module V2
     module Product
       module Crop
-        class CropResponse < Parsing::BaseResponse[CropInference]
+        class CropResponse < Parsing::BaseInferenceResponse[CropInference]
           self.@slug: String
-          self.@_params_type: singleton(Params::CropParameters)
+          self.@_parameters_class: singleton(Params::CropParameters)
 
           attr_reader inference: CropInference
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
-          def _params_type: -> singleton(Params::CropParameters)
+          def _parameters_class: -> singleton(Params::CropParameters)
 
           def to_s: -> String
-          def self._params_type: () -> singleton(Params::CropParameters)
+          def self._parameters_class: () -> singleton(Params::CropParameters)
           def self.slug: () -> String
         end
       end

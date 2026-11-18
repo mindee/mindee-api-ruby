@@ -2,7 +2,9 @@ module Mindee
   module V2
     module Product
       module Split
-        class Split < BaseProduct
+        class Split < Product::BaseProduct
+          def self.parameters_class: () -> singleton(Params::SplitParameters)
+          def self.response_class: () -> singleton(SplitResponse)
         end
       end
     end

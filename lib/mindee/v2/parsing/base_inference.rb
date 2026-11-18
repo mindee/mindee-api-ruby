@@ -7,7 +7,7 @@ module Mindee
   module V2
     module Parsing
       # Base class for V2 inference responses.
-      class BaseInference < Mindee::V2::Product::BaseProduct
+      class BaseInference
         # @return [InferenceJob] Metadata about the job.
         attr_reader :job
         # @return [V2::Parsing::InferenceModel] Model info for the inference.
@@ -20,7 +20,6 @@ module Mindee
         def initialize(http_response)
           raise ArgumentError, 'Server response must be a Hash' unless http_response.is_a?(Hash)
 
-          super()
           @model = Mindee::V2::Parsing::InferenceModel.new(http_response['model'])
           @file = Mindee::V2::Parsing::InferenceFile.new(http_response['file'])
           @id = http_response['id']

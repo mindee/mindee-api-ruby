@@ -1,0 +1,19 @@
+# lib/mindee/v2/client_options/base_rag_document_upload_parameters.rb
+
+module Mindee
+  module V2
+    module ClientOptions
+      class BaseRagDocumentUploadParameters
+        attr_reader model_id: String
+
+        def initialize: (String model_id) -> void
+
+        def self.from_hash: (?params: Hash[String | Symbol, untyped]) -> BaseRagDocumentUploadParameters
+
+        def self.load_from_hash: (?params: Hash[String | Symbol, untyped]) -> Hash[String | Symbol, untyped]
+
+        def request_parameters: -> Hash[String, String]
+      end
+    end
+  end
+end

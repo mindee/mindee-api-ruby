@@ -1,0 +1,16 @@
+# lib/mindee/v2/product/extraction/rag_documents/params/rag_document_upload_parameters.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module RagDocuments
+          module Params
+            class RagDocumentUploadParameters < Mindee::V2::ClientOptions::BaseRagDocumentUploadParameters
+            end
+          end
+        end
+      end
+    end
+  end
+end

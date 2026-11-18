@@ -6,15 +6,25 @@ module Mindee
         def new: (Hash[String | Symbol, untyped]) -> T
       end
 
-      interface _ProductClass[T]
+      interface _ProductClass[T < Parsing::BaseResponse]
         def slug: () -> String
 
-        def response_type: () -> _ResponseFactory[T]
+        def response_class: () -> _ResponseFactory[T]
 
-        def params_type: () -> singleton(ClientOptions::BaseProductParameters)
+        def parameters_class: () -> singleton(ClientOptions::BaseProductParameters)
       end
 
-      interface _SearchParameters[T]
+      interface _RagProductClass[T < Parsing::BaseRagAnnotationResponse]
+        def slug: () -> String
+
+        def annotation_response_class: () -> _ResponseFactory[T]
+
+        def annotation_parameters_class: () -> singleton(ClientOptions::BaseAnnotationParameters)
+
+        def rag_document_upload_class: () -> singleton(ClientOptions::BaseRagDocumentUploadParameters)
+      end
+
+      interface _SearchParameters[T < Parsing::Search::BaseSearchResponse]
         def slug: () -> String
 
         def response_class: () -> _ResponseFactory[T]
@@ -27,7 +37,7 @@ module Mindee
 
         def initialize: (?api_key: String?) -> void
 
-        def req_get_result_by_id: [T] (_ProductClass[T] product, String inference_id) -> T
+        def req_get_result_by_id: [T < Parsing::BaseResponse] (_ProductClass[T] product, String inference_id) -> T
 
         def req_post_product_enqueue: (
           Input::Source::LocalInputSource | Input::Source::URLInputSource,
@@ -38,20 +48,32 @@ module Mindee
 
         def req_get_job_by_url: (String url) -> V2::Parsing::JobResponse
 
-        def req_get_result_by_url: [T] (_ProductClass[T] product, String url) -> T
+        def req_get_result_by_url: [T < Parsing::BaseResponse] (_ProductClass[T] product, String url) -> T
 
         def process_response: (Net::HTTPResponse?) -> Hash[String | Symbol, untyped]
 
-        def poll: (String) -> Net::HTTPResponse
+        def req_get_search: [T < Parsing::Search::BaseSearchResponse] (_SearchParameters[T] params) -> T
 
-        def enqueue: (
-          Input::Source::LocalInputSource | Input::Source::URLInputSource,
-          ClientOptions::BaseProductParameters
-        ) -> Net::HTTPResponse?
+        def req_get_rag_annotation: [T < Parsing::BaseRagAnnotationResponse] (_RagProductClass[T] product, String document_id) -> T
 
-        def req_get_search: [T] (_SearchParameters[T] params) -> T
+        def req_post_rag_document: [T < Parsing::BaseRagAnnotationResponse] (
+          _RagProductClass[T] product,
+          ClientOptions::BaseRagDocumentUploadParameters parameters,
+          Input::Source::LocalInputSource input_source
+        ) -> T
+
+        def req_patch_rag_annotation: [T < Parsing::BaseRagAnnotationResponse] (
+          _RagProductClass[T] product,
+          ClientOptions::BaseAnnotationParameters parameters
+        ) -> T
+
+        def req_delete_rag_document: (_RagProductClass[untyped] | _ProductClass[untyped] product, String document_id) -> bool
 
         private
+
+        def send_get_request: (URI::Generic uri) -> Net::HTTPResponse
+
+        def send_post_request: (URI::Generic uri, Hash[String, untyped] form_data) -> Net::HTTPResponse
 
         def validate_https_url!: (String) -> void
       end

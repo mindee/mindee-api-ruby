@@ -7,12 +7,12 @@ module Mindee
     module Product
       module Extraction
         # HTTP response wrapper that embeds a V2 Inference.
-        class ExtractionResponse < Mindee::V2::Parsing::BaseResponse
+        class ExtractionResponse < Mindee::V2::Parsing::BaseInferenceResponse
           # @return [ExtractionInference] Parsed inference payload.
           attr_reader :inference
 
           @slug = 'extraction'
-          @_params_type = Params::ExtractionParameters
+          @_parameters_class = Params::ExtractionParameters
 
           def initialize(server_response)
             super

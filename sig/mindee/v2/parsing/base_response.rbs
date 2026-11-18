@@ -3,8 +3,10 @@
 module Mindee
   module V2
     module Parsing
-      class BaseResponse[T] < CommonResponse
-        attr_reader inference: T
+      class BaseResponse
+        attr_reader raw_http: String
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
       end
     end
   end

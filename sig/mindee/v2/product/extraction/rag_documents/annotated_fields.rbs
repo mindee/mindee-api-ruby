@@ -1,0 +1,19 @@
+# lib/mindee/v2/product/extraction/rag_documents/annotated_fields.rb
+
+module Mindee
+  module V2
+    module Product
+      module Extraction
+        module RagDocuments
+          class AnnotatedFields < Hash[String, AnnotatedListField | AnnotatedObjectField | AnnotatedSimpleField]
+            def initialize: (Hash[String | Symbol, untyped]) -> void
+            def get_simple_field: (String) -> AnnotatedSimpleField
+            def get_object_field: (String) -> AnnotatedObjectField
+            def get_list_field: (String) -> AnnotatedListField
+            def to_h: () -> Hash[String, untyped]
+          end
+        end
+      end
+    end
+  end
+end

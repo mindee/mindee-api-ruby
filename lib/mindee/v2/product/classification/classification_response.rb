@@ -9,7 +9,7 @@ module Mindee
     module Product
       module Classification
         # HTTP response wrapper that embeds a V2 Inference.
-        class ClassificationResponse < Mindee::V2::Parsing::BaseResponse
+        class ClassificationResponse < Mindee::V2::Parsing::BaseInferenceResponse
           # @return [ClassificationInference] Parsed inference payload.
           attr_reader :inference
 

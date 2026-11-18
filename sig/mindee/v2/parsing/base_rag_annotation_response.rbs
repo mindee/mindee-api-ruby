@@ -1,0 +1,16 @@
+# lib/mindee/v2/parsing/base_rag_annotation_response.rb
+
+module Mindee
+  module V2
+    module Parsing
+      class BaseRagAnnotationResponse < BaseResponse
+        attr_reader id: String
+        attr_reader filename: String
+        attr_reader created_at: Time
+        attr_reader status: String
+
+        def initialize: (Hash[String | Symbol, untyped]) -> void
+      end
+    end
+  end
+end

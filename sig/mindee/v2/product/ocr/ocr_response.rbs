@@ -4,17 +4,17 @@ module Mindee
   module V2
     module Product
       module OCR
-        class OCRResponse < Parsing::BaseResponse[OCRInference]
+        class OCRResponse < Parsing::BaseInferenceResponse[OCRInference]
           self.@slug: String
-          self.@_params_type: singleton(Params::OCRParameters)
+          self.@_parameters_class: singleton(Params::OCRParameters)
 
           attr_reader inference: Mindee::V2::Product::OCR::OCRInference
           def initialize: (Hash[String | Symbol, untyped]) -> void
 
-          def _params_type: -> singleton(Params::OCRParameters)
+          def _parameters_class: -> singleton(Params::OCRParameters)
 
           def to_s: -> String
-          def self._params_type: () -> singleton(Params::OCRParameters)
+          def self._parameters_class: () -> singleton(Params::OCRParameters)
           def self.slug: () -> String
         end
       end
