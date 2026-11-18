@@ -8,6 +8,7 @@ module Mindee
           attr_reader iban: String?
           attr_reader routing_number: String?
           attr_reader swift: String?
+          attr_reader sort_code: String?
 
           def initialize: (Hash[String | Symbol, untyped], Integer?, ?reconstructed: bool) -> void
 
