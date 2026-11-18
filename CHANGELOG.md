@@ -1,10 +1,19 @@
 # Mindee Ruby API Library Changelog
 
+## v5.7.0 - 2026-11-18
+### Changes
+* :sparkles: simplify access to input sources
+* :sparkles: better printing of error responses
+* :sparkles: add RAG document management
+* :sparkles: add sort_code to v1 invoice and findoc
+* :bookmark: Version 5.7.0
+* :recycle: use hashes for request parameters
+* :recycle: rework polling
+
 ## v5.6.0 - 2026-11-04
 ### Changes
 * coffin: remove dead v1 products and workflow methods
 * :sparkles: add get by URL methods
-
 
 ## v5.5.0 - 2026-09-30
 ### Changes
@@ -13,17 +22,14 @@
 ### Fixes
 * :bug: fix V2 hangs on GET
 
-
 ## v5.4.0 - 2026-07-21
 ### Changes
 * :sparkles: add field confidence comparators
 * :sparkles: add support for cancellation token
 
-
 ## v5.3.1 - 2026-07-15
 ### Fixes
 * :bug: fix file alias being sent as an invalid parameter
-
 
 ## v5.3.0 - 2026-07-03
 ### Changes
@@ -40,22 +46,18 @@
 * :recycle: add secondary accessor for search model pagination to match json return
 * :recycle: ensure HEIF images are detected as such and properly handled
 
-
 ## v5.2.1 - 2026-05-27
 ### Changes
 * :recycle: add polling options as a dedicated parameter (#252)
-
 
 ## v5.2.0 - 2026-05-19
 ### Changes
 * :sparkles: add webhook info to model searches
 
-
 ## v5.1.0 - 2026-05-13
 ### Changes
 * :sparkles: Add support for extraction in crop, split, and classify products
 * :sparkles: add typed accessors for SimpleField
-
 
 ## v5.0.0 - 2026-04-20
 ### ¡Breaking Changes!
@@ -98,14 +100,12 @@
 * :bug: fix miscellaneous issues leading to saved `ExtractedPDF` instances having invalid names
 * :recycle: fix miscellaneous typing issues relating to `ExtractedPDF` and `ExtractedImage` classes
 
-
 ## v5.0.0.rc1 - 2026-04-15
 ### ¡Breaking Changes!
 * :recycle: :boom: change `FileOperation` module name to `FileOperations`
 * :recycle: :boom: change `Dependency` module name to `Dependencies`
 ### Fixes
 * :wrench: fix many typing issues
-
 
 ## v5.0.0.beta1 - 2026-04-07
 ### ¡Breaking Changes!
@@ -145,7 +145,6 @@
 * :bug: fix miscellaneous issues leading to saved `ExtractedPDF` instances having invalid names
 * :recycle: fix miscellaneous typing issues relating to `ExtractedPDF` and `ExtractedImage` classes
 
-
 ## v4.13.0 - 2026-03-03
 ### Changes
 * :sparkles: add support for V2 Classification product
@@ -158,32 +157,26 @@
 ### Fixes
 * :recycle: fix tests file paths
 
-
 ## v4.12.0 - 2026-02-25
 ### Changes
 * :sparkles: add job information to inference
 * :sparkles: add more inference info
 
-
 ## v4.11.0 - 2026-02-11
 ### Changes
 * :sparkles: add complementary accessors for ObjectField
-
 
 ## v4.10.1 - 2026-02-05
 ### Fixes
 * :bug: fix NoMethodError in JobWebhook when error is nil (#222) (Co-authored-by: haris_delalic <haris.delalic@datamolino.com>)
 
-
 ## v4.10.0 - 2025-12-19
 ### Changes
 :sparkles: add support for dataschema parameter
 
-
 ## v4.9.0 - 2025-12-02
 ### Changes
 * :sparkles: add support for text_context parameter
-
 
 ## v4.8.0 - 2025-11-18
 ### Changes
@@ -192,16 +185,13 @@
 ### Fixes
 * :recycle: harmonize test structure with other libraries
 
-
 ## v4.7.2 - 2025-10-13
 ### Changes
 * :recycle: harmonize getting page count from a local input source
 
-
 ## v4.7.1 - 2025-09-19
 ### Fixes
 * :sparkles: add missing `to_s` method on raw_text
-
 
 ## v4.7.0 - 2025-09-18
 Including RC changes and fixes.
@@ -218,11 +208,9 @@ Including RC changes and fixes.
 * :bug: fix many presumably immutable fields having non-readonly parameters
 * :bug: fix broken `resources` accessor in `ApiRequest` object
 
-
 ## v4.7.0-rc3 - 2025-08-29
 ### Fixes
 * :bug: fix user agent not being able to access version number
-
 
 ## v4.7.0-rc2 - 2025-08-20
 ### Changes
@@ -230,7 +218,6 @@ Including RC changes and fixes.
 ### Fixes
 * :recycle: update existing PDF fixing syntax
 * :memo: fix typos & documentation
-
 
 ## v4.7.0-rc1 - 2025-08-13
 ### Changes
@@ -242,11 +229,9 @@ Including RC changes and fixes.
 * :bug: fix many presumably immutable fields having non-readonly parameters
 * :bug: fix broken `resources` accessor in `ApiRequest` object
 
-
 ## v4.6.0 - 2025-06-03
 ### Changes
 * :sparkles: add support for address fields
-
 
 ## v4.5.0 - 2025-05-27
 ### Changes
@@ -256,12 +241,10 @@ Including RC changes and fixes.
 ### Fixes
 * :recycle: switch to 'Transfer-Encoding: chunked' to prevent Net::HTTP from writing temporary files
 
-
 ## v4.4.1 - 2025-05-13
 ### Fixes
 * :bug: fix bad option in CLI
 * :bug: don't open the PDF unless needed
-
 
 ## v4.4.0 - 2025-04-23
 ### Changes
@@ -271,28 +254,23 @@ Including RC changes and fixes.
 * :recycle: fix misc typing issues
 * :bug: fix improper return format for `raw_http`
 
-
 ## v4.3.0 - 2025-04-08
 ### Changes
 * :sparkles: add support for Financial Document V1.12
 * :sparkles: add support for Invoices V4.10
 * :sparkles: add support for US Healthcare Cards V1.2
 
-
 ## v4.2.0 - 2025-03-28
 ### Changes
 * :coffin: remove support for US W9
-
 
 ## v4.1.2 - 2025-03-26
 ### Fixes
 * :wrench: loosen version restrictions on most dependencies
 
-
 ## v4.1.1 - 2025-03-25
 ### Fixes
 * :wrench: loosen pinning on base64 dependency
-
 
 ## v4.1.0 - 2025-03-25
 ### Changes
@@ -301,7 +279,6 @@ Including RC changes and fixes.
 * :sparkles: add support for RAG in workflow executions
 ### Fixes
 * :recycle: update CLI syntax for easier product creation
-
 
 ## v4.0.0 - 2025-02-27
 ### ¡Breaking Changes!
@@ -325,22 +302,18 @@ Including RC changes and fixes.
 * :bug: fix miscellaneous bugs relating to pdf extraction
 * :bug: fix improper saving mechanism
 
-
 ## v3.20.0 - 2025-02-26
 ### Changes
 * :sparkles: add support for FR Banks Statement V2
-
 
 ## v3.19.1 - 2025-01-21
 ### Changes
 * :bug: fix extras failing at document level if missing from prediction
 
-
 ## v3.19.0 - 2025-01-14
 ### Changes
 * :sparkles: add support for US Mail V3
 * :recycle: increase async retry timers
-
 
 ## v3.18.0 - 2024-12-13
 ### Changes
@@ -348,7 +321,6 @@ Including RC changes and fixes.
 * :coffin: remove support for (FR) Carte Vitale V1 in favor of French Health Card V1
 ### Fixes
 * :bug: fix tax-extraction script
-
 
 ## v3.17.0 - 2024-11-28
 ### Changes
@@ -367,7 +339,6 @@ Including RC changes and fixes.
 ### Fixes
 * :recycle: adjust default values for async delays
 
-
 ## v3.15.0 - 2024-10-29
 ### Changes
 * :sparkles: add support for image compression
@@ -377,14 +348,12 @@ Including RC changes and fixes.
 * :memo: fix rubocop directives unexpectedly appearing in Yard documentation
 * :arrow_up: bump version for mini_magick
 
-
 ## v3.14.0 - 2024-10-11
 ### Changes
 * :sparkles: add support for Financial Document v1.10
 * :sparkles: add support for Invoice v4.8
 ### Fixes
 * :bug: fix multi-receipts extraction not working as intended
-
 
 ## v3.13.0 - 2024-09-18
 ### Changes
@@ -402,7 +371,6 @@ Including RC changes and fixes.
 * :memo: fix a few documentation errors & typos
 * :wrench: updated CI dependencies
 
-
 ## v3.12.0 - 2024-07-24
 ### Changes
 * :sparkles: add support for Multi-Receipts Extraction
@@ -411,11 +379,9 @@ Including RC changes and fixes.
 * :sparkles: add support for Financial Document V1.9
 * :recycle: update display for company registration fields
 
-
 ## v3.11.0 - 2024-06-10
 ### Changes
 * :sparkles: add custom tax extraction feature (#76)
-
 
 ## v3.10.0 - 2024-05-31
 ### Changes
@@ -425,17 +391,14 @@ Including RC changes and fixes.
 ### Fixes
 * :recycle: tweak display for LocaleField
 
-
 ## v3.9.0 - 2024-05-16
 ### Changes
 * :sparkles: update financial document to v1.7 & receipts to v5.2
-
 
 ## v3.8.0 - 2024-05-02
 ### Changes
 * :recycle: update products to newer syntax
 * :sparkles: update financial document to v1.6 & invoice to v4.6
-
 
 ## v3.7.0 - 2024-03-28
 ### Changes
@@ -443,18 +406,15 @@ Including RC changes and fixes.
 ### Fixes
 * :bug: fix invalid error codes
 
-
 ## v3.6.1 - 2024-03-07
 ### Changes
 * :recycle: update error handling to account for future evolutions
 * :memo: update miscellaneous product documentations
 * :memo: add used environment variables to readme
 
-
 ## v3.6.0 - 2024-02-21
 ### Changes
 * :sparkles: add support for resume V1
-
 
 ## v3.5.0 - 2024-02-16
 ### Changes
@@ -474,19 +434,16 @@ Including RC changes and fixes.
 * :bug: fix CLI breaking for custom products
 * :bug: fix encoding issue that prevented UNICODE file names from being properly sent to the server
 
-
 ## v3.4.0 - 2024-01-30
 ### Changes
 * :arrow_up: update invoices to v4.4
 * :sparkles: add support for `raw_value` in string fields
-
 
 ## v3.3.1 - 2023-12-15
 ### Changes
 * :recycle: tweak async delays & retry
 * :recycle: tweak default async sample delays & retry
 * :memo: update md doc & fix typos
-
 
 ## v3.3.0 - 2023-11-17
 ### Changes
@@ -495,7 +452,6 @@ Including RC changes and fixes.
 * :arrow_up: update tests, docs & display format for some products
 ### Fixes
 * :bug: fix page id not working on newer custom models
-
 
 ## v3.2.0 - 2023-09-15
 ### Changes
@@ -511,11 +467,9 @@ Including RC changes and fixes.
 ### Fixes
 * :bug: fix display issues with `PositionField`
 
-
 ## v3.1.1 - 2023-08-10
 ### Fixes
 * :bug: fixed non-pdf files being improperly handled by Ruby requests
-
 
 ## v3.1.0 - 2023-08-08
 ### Changes
@@ -526,7 +480,6 @@ Including RC changes and fixes.
 * :bug: fix `all_words` display (#47)
 * :bug: fix empty `position_field` (#47)
 * :bug: fix byte repacking issues for PDF files (#45)
-
 
 ## v3.0.0 - 2023-06-29
 ### ¡Breaking Changes!
@@ -553,17 +506,14 @@ Including RC changes and fixes.
 * :bug: fix: pages now use the proper `orientation` property
 * :zap: optimize: only a single endpoint is now created on document upload
 
-
 ## v2.2.1 - 2023-05-22
 ### Fixes
 * :bug: added base attribute to tax field
-
 
 ## v2.2.0 - 2023-05-16
 ### Changes
 * :sparkles: add support for Receipts v5
 * :pushpin: more specific dependency pinning; update some dependencies
-
 
 ## v2.1.1 - 2023-04-21
 ### Changes
@@ -572,12 +522,10 @@ Including RC changes and fixes.
 * :memo: publish documentation
 * :memo: add code samples
 
-
 ## v2.1.0 - 2023-01-30
 ### Changes
 * :sparkles: Add financial document v1 support (Co-authored-by: Oriol Gual)
 * :sparkles: Add Proof of Address v1 support
-
 
 ## v2.0.0 - 2023-01-13
 ### ¡Breaking Changes!
@@ -595,26 +543,21 @@ Including RC changes and fixes.
 * :white_check_mark: add testing on Ruby 3.2
 * :sparkles: allow setting the request timeout from env
 
-
 ## v1.2.0 - 2022-12-26
 ### Changes
 * :arrow_up: switch to origamindee => adds support for Ruby 3
-
 
 ## v1.1.2 - 2022-12-23
 ### Changes
 * :recycle: use of `append_page` is better for adding pages to a new PDF
 
-
 ## v1.1.1 - 2022-08-08
 ### Fixes
 * :bug: Fix for missing attribute accessor
 
-
 ## v1.1.0 - 2022-08-04
 ### Changes
 * :sparkles: Add support for custom API classification field (#5)
-
 
 ## v1.0.0 - 2022-07-28
 * :tada: First release!
