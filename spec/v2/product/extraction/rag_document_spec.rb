@@ -3,10 +3,7 @@
 require 'json'
 require_relative '../../../data'
 
-require 'mindee/v2/product/extraction/rag_documents/extraction_rag_annotation_response'
-require 'mindee/v2/product/extraction/rag_documents/rag_annotation'
-require 'mindee/v2/product/extraction/rag_documents/params/rag_document_upload_parameters'
-require 'mindee/v2/product/extraction/rag_documents/params/rag_document_annotation_parameters'
+require 'mindee/v2/product/extraction/rag_documents'
 
 describe Mindee::V2::Product::Extraction::RagDocuments do
   let(:expected_annotation) do

@@ -2,6 +2,7 @@
 .vscode/
 .idea/
 *.iml
+.junie
 
 # Ruby
 *.gem
