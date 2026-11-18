@@ -89,12 +89,18 @@ describe Mindee::V2::Product::Extraction::RagDocuments do
   end
 
   it 'should load a GET response from a JSON string' do
-    response = get_response('extraction/rag_documents/get_response_draft.json')
+    file_path = 'extraction/rag_documents/get_response_draft.json'
+    response = get_response(file_path)
 
     expect(response).not_to be_nil
     expect(response.id).to eq('cc831599-c545-48b7-aa27-6d7ccd5b8d32')
     expect(response.status).to eq('Draft')
     expect(response.annotation).not_to be_nil
+
+    response_dict = JSON.parse(File.read(File.join(V2_PRODUCT_DATA_DIR, file_path)))
+    actual = response.annotation.to_h
+    expected = response_dict['annotation']
+    expect(actual.keys).to eq(expected.keys)
 
     fields = response.annotation.fields
     expect(fields).not_to be_nil
